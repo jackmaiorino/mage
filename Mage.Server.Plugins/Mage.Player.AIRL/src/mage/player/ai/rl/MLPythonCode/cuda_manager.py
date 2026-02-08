@@ -8,14 +8,18 @@ class CUDAManager:
 
     def __init__(self, py_role="learner"):
         self.py_role = py_role
-        
+
+        # OOM tracking
+        self._oom_count = 0
+
         # Auto-batching config
         self.auto_batch_enable = bool(int(os.getenv('AUTO_BATCH_ENABLE', '1')))
         self.auto_avoid_paging = bool(int(os.getenv('AUTO_AVOID_PAGING', '1')))
-        self.auto_target_used_frac = float(os.getenv('AUTO_TARGET_USED_FRAC', '0.85'))
+        self.auto_target_used_frac = float(
+            os.getenv('AUTO_TARGET_USED_FRAC', '0.85'))
         self.auto_min_free_mb = float(os.getenv('AUTO_MIN_FREE_MB', '1024'))
         self.auto_mem_ema_alpha = float(os.getenv('AUTO_MEM_EMA_ALPHA', '0.2'))
-        
+
         # Memory tracking
         self._infer_mb_per_sample = None
         self._train_mb_per_step = None
@@ -26,9 +30,23 @@ class CUDAManager:
     def is_cuda_oom(self, e: Exception) -> bool:
         try:
             msg = str(e).lower()
-            return ("cuda out of memory" in msg) or ("cublas_status_alloc_failed" in msg)
+            is_oom = ("cuda out of memory" in msg) or (
+                "cublas_status_alloc_failed" in msg)
+            if is_oom:
+                self._oom_count += 1
+                logger.warning(
+                    LogCategory.GPU_MEMORY, "CUDA OOM detected (total: %d): %s", self._oom_count, str(e)[:200])
+            return is_oom
         except Exception:
             return False
+
+    def get_oom_count(self) -> int:
+        """Get total number of CUDA OOM errors encountered."""
+        return self._oom_count
+
+    def reset_oom_count(self):
+        """Reset OOM counter."""
+        self._oom_count = 0
 
     def cuda_cleanup_after_oom(self):
         try:
@@ -61,7 +79,8 @@ class CUDAManager:
         if info is None:
             return None
         free_mb, total_mb = info
-        frac_headroom = max(0.0, (1.0 - float(self.auto_target_used_frac))) * float(total_mb)
+        frac_headroom = max(
+            0.0, (1.0 - float(self.auto_target_used_frac))) * float(total_mb)
         desired = max(float(self.auto_min_free_mb), float(frac_headroom))
         self._autobatch_last_desired_free_mb = float(desired)
         return desired
@@ -90,10 +109,12 @@ class CUDAManager:
         a = 0.2 if not (0.0 < a <= 1.0) else a
         if kind == "infer":
             cur = self._infer_mb_per_sample
-            self._infer_mb_per_sample = per if cur is None else (a * per + (1.0 - a) * float(cur))
+            self._infer_mb_per_sample = per if cur is None else (
+                a * per + (1.0 - a) * float(cur))
         elif kind == "train":
             cur = self._train_mb_per_step
-            self._train_mb_per_step = per if cur is None else (a * per + (1.0 - a) * float(cur))
+            self._train_mb_per_step = per if cur is None else (
+                a * per + (1.0 - a) * float(cur))
 
     def measure_peak_extra_mb(self, fn):
         """

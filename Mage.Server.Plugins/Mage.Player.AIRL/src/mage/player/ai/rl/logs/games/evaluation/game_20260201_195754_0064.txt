@@ -1,0 +1,2496 @@
+================================================================================
+GAME LOG: game_20260201_195754_0064
+Started: 2026-02-01T19:57:54.497078800
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Jund Wildfire.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.758 Q_mull=-0.009 hand=[Mountain; Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078328
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.500139 - RL
+     [1] 0.499861 - Benchmark-skill6
+
+VALUE SCORE: 1.070996
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.500141 - RL
+     [1] 0.499859 - Benchmark-skill6
+
+VALUE SCORE: 1.071271
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.004005 - Cast Chain Lightning
+     [2] 0.078220 - Cast Lightning Bolt
+ >>> [3] 0.873188 - Cast Clockwork Percussionist
+     [4] 0.035679 - Cast Goblin Tomb Raider
+     [5] 0.008903 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.073656
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073656
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073656
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.326461 - RL
+ >>> [1] 0.326896 - Benchmark-skill6
+     [2] 0.346644 - Clockwork Percussionist (you)
+
+VALUE SCORE: 1.046380
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.326459 - RL
+ >>> [1] 0.326890 - Benchmark-skill6
+     [2] 0.346651 - Clockwork Percussionist (you)
+
+VALUE SCORE: 1.046690
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.826613 - Play Mountain
+     [2] 0.000003 - Cast Chain Lightning
+     [3] 0.000061 - Cast Lightning Bolt
+     [4] 0.000028 - Cast Goblin Tomb Raider
+     [5] 0.000008 - Cast Voldaren Epicure
+     [6] 0.173288 - Play Great Furnace
+
+VALUE SCORE: 1.049600
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.326465 - RL
+ >>> [1] 0.326969 - Benchmark-skill6
+     [2] 0.346565 - Clockwork Percussionist (you)
+
+VALUE SCORE: 1.040051
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Chain Lightning; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Chain Lightning; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.326463 - RL
+     [1] 0.326964 - Benchmark-skill6
+ >>> [2] 0.346573 - Clockwork Percussionist (you)
+
+VALUE SCORE: 1.040372
+SELECTED: Clockwork Percussionist (you)
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000032 - Pass
+     [1] 0.030143 - Cast Chain Lightning
+ >>> [2] 0.614375 - Cast Lightning Bolt
+     [3] 0.278269 - Cast Goblin Tomb Raider
+     [4] 0.077181 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.043539
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Chain Lightning; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.326463 - RL
+ >>> [1] 0.326964 - Benchmark-skill6
+     [2] 0.346573 - Clockwork Percussionist (you)
+
+VALUE SCORE: 1.040372
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.326267 - RL
+     [1] 0.328075 - Benchmark-skill6
+ >>> [2] 0.345658 - Clockwork Percussionist (you)
+
+VALUE SCORE: 1.015529
+SELECTED: Clockwork Percussionist (you)
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000090 - Pass
+     [1] 0.074811 - Cast Chain Lightning
+ >>> [2] 0.709796 - Cast Goblin Tomb Raider
+     [3] 0.215303 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.019498
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Drossforge Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} dies, exile the top card of your library. You may play it until the end of your next turn.) (controller=RL)
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: [Experimental Synthesizer]
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: [Experimental Synthesizer]
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 1.019498
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Great Furnace; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Great Furnace; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.342383 - Goblin Tomb Raider (you)
+     [1] 0.327309 - RL
+ >>> [2] 0.330308 - Benchmark-skill6
+
+VALUE SCORE: 0.995673
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Great Furnace; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000015 - Cast Chain Lightning
+     [2] 0.000049 - Cast Voldaren Epicure
+ >>> [3] 0.999876 - Play Great Furnace
+     [4] 0.000059 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.999796
+SELECTED: Play Great Furnace
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.343017 - Goblin Tomb Raider (you)
+     [1] 0.326925 - RL
+ >>> [2] 0.330059 - Benchmark-skill6
+
+VALUE SCORE: 0.987913
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000172 - Pass
+     [1] 0.120213 - Cast Chain Lightning
+     [2] 0.398969 - Cast Voldaren Epicure
+ >>> [3] 0.480646 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.992383
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure]
+-> Permanents: [Mountain; Mountain,tapped; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000172 - Pass
+
+VALUE SCORE: 0.992383
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Voldaren Epicure]
+-> Permanents: [Mountain; Mountain,tapped; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: [Voldaren Epicure]
+-> Permanents: [Mountain; Mountain,tapped; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.343202 - Goblin Tomb Raider (you)
+     [1] 0.326589 - RL
+ >>> [2] 0.330209 - Benchmark-skill6
+
+VALUE SCORE: 0.952632
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure]
+-> Permanents: [Mountain; Mountain,tapped; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000345 - Pass
+     [1] 0.204413 - Cast Chain Lightning
+ >>> [2] 0.795243 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.958075
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Chain Lightning]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000345 - Pass
+
+VALUE SCORE: 0.958075
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.218936 - Voldaren Epicure (you)
+ >>> [1] 0.268554 - Goblin Tomb Raider (you)
+     [2] 0.254225 - RL
+     [3] 0.258284 - Benchmark-skill6
+
+VALUE SCORE: 0.872744
+SELECTED: Goblin Tomb Raider (you)
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000395 - Pass
+     [1] 0.154744 - Cast Chain Lightning
+ >>> [2] 0.844861 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.877961
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace,tapped; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000395 - Pass
+
+VALUE SCORE: 0.877961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Great Furnace,tapped; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000395 - Pass
+
+VALUE SCORE: 0.877961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Great Furnace,tapped; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000395 - Pass
+
+VALUE SCORE: 0.877961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000395 - Pass
+
+VALUE SCORE: 0.877961
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000395 - Pass
+
+VALUE SCORE: 0.877961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000395 - Pass
+
+VALUE SCORE: 0.877961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000395 - Pass
+
+VALUE SCORE: 0.877961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000395 - Pass
+
+VALUE SCORE: 0.877961
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.220319 - Voldaren Epicure (you)
+     [1] 0.267259 - Goblin Tomb Raider (you)
+     [2] 0.254454 - RL
+ >>> [3] 0.257968 - Benchmark-skill6
+
+VALUE SCORE: 0.962921
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999435 - Play Great Furnace
+     [2] 0.000306 - Cast Lightning Bolt
+     [3] 0.000259 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.967477
+SELECTED: Play Great Furnace
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure; Great Furnace]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure; Great Furnace]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.220180 - Voldaren Epicure (you)
+ >>> [1] 0.267327 - Goblin Tomb Raider (you)
+     [2] 0.254448 - RL
+     [3] 0.258045 - Benchmark-skill6
+
+VALUE SCORE: 0.955410
+SELECTED: Goblin Tomb Raider (you)
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure; Great Furnace]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000042 - Pass
+ >>> [1] 0.541329 - Cast Lightning Bolt
+     [2] 0.458629 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.958889
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Voldaren Epicure; Great Furnace]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220180 - Voldaren Epicure (you)
+     [1] 0.267327 - Goblin Tomb Raider (you)
+     [2] 0.254448 - RL
+     [3] 0.258045 - Benchmark-skill6
+
+VALUE SCORE: 0.955410
+SELECTED: Voldaren Epicure (you)
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Goblin Tomb Raider; Great Furnace; Experimental Synthesizer; Great Furnace]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning; Lightning Bolt; Voldaren Epicure]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000100 - Pass
+ >>> [1] 0.999900 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.932041
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [2] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+  - [3] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace,tapped; Great Furnace,tapped]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning; Lightning Bolt; Voldaren Epicure; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [1] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+  - [2] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace,tapped; Great Furnace,tapped]
+-> Graveyard: [Lightning Bolt; Clockwork Percussionist; Chain Lightning; Lightning Bolt; Voldaren Epicure; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+  - [1] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace,tapped; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace,tapped; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Great Furnace,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Great Furnace,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Great Furnace,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Great Furnace,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.932041
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Great Furnace; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Great Furnace; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Nihil Spellbomb]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000188 - Pass
+ >>> [1] 0.999812 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.932886
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [2] Goblin Tomb Raider (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [1] Goblin Tomb Raider (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Great Furnace,tapped; Samurai Token]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Great Furnace,tapped; Samurai Token; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped,attacking; Great Furnace; Great Furnace,tapped; Samurai Token,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped,attacking; Great Furnace; Great Furnace,tapped; Samurai Token,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped; Great Furnace; Great Furnace,tapped; Samurai Token; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped; Great Furnace; Great Furnace,tapped; Samurai Token; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped; Great Furnace; Great Furnace,tapped; Samurai Token; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped; Great Furnace; Great Furnace,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb; Cast Down]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped; Great Furnace; Great Furnace,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb; Cast Down]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped; Great Furnace; Great Furnace,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb; Cast Down]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 0.932886
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Great Furnace; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb; Cast Down]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Great Furnace; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb; Cast Down]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.908739
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider; Great Furnace; Great Furnace; Goblin Tomb Raider; Mountain]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb; Cast Down]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.908739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped,attacking; Great Furnace; Great Furnace; Goblin Tomb Raider,tapped,attacking; Mountain]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb; Cast Down]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.908739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Goblin Tomb Raider,tapped,attacking; Great Furnace; Great Furnace; Goblin Tomb Raider,tapped,attacking; Mountain]
+-> Graveyard: []
+-> Exile: [Chain Lightning; Voldaren Epicure; Experimental Synthesizer; Lightning Bolt; Lightning Bolt; Clockwork Percussionist]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Krark-Clan Shaman; Nihil Spellbomb; Nihil Spellbomb; Cast Down]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.908739
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-skill6
+Turns: 6
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 82
+Ended: 2026-02-01T20:00:35.696102100
+================================================================================

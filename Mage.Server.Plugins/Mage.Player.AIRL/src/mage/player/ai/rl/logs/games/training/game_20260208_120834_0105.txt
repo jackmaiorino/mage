@@ -1,0 +1,1584 @@
+================================================================================
+GAME LOG: game_20260208_120834_0105
+Started: 2026-02-08T12:08:34.047183900
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=4 decision=MULLIGAN Q_keep=-0.097 Q_mull=0.819 hand=[Mountain; Mountain; Mountain; Mountain; Rally at the Hornburg; Galvanic Blast; Clockwork Percussionist]
+LONDON_BOTTOM: player=PlayerRL1 mulligansTaken=1 handSize=7 bottomN=1 kept=[Lightning Bolt; Mountain; Mountain; Clockwork Percussionist; Chain Lightning; Voldaren Epicure] bottomed=[Goblin Bushwhacker]
+LONDON_BOTTOM_PROBS: player=PlayerRL1 cards=[Lightning Bolt (0.142); Mountain (0.149); Mountain (0.149); Clockwork Percussionist (0.136); Chain Lightning (0.141); Voldaren Epicure (0.141); Goblin Bushwhacker (0.141)]
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=1 handSize=6 lands=2 decision=KEEP Q_keep=0.168 Q_mull=0.107 hand=[Mountain; Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.129028 - Pass
+ >>> [1] 0.870972 - Play Mountain
+
+VALUE SCORE: -0.031581
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.371358 - Pass
+     [1] 0.002134 - Cast Chain Lightning
+     [2] 0.001150 - Cast Lightning Bolt
+     [3] 0.480768 - Cast Clockwork Percussionist
+     [4] 0.144590 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.028690
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996915 - Pass
+     [1] 0.003085 - Cast Lightning Bolt
+
+VALUE SCORE: -0.028406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.382528 - Pass
+     [1] 0.002212 - Cast Chain Lightning
+     [2] 0.001169 - Cast Lightning Bolt
+     [3] 0.472406 - Cast Clockwork Percussionist
+     [4] 0.141685 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.031967
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996683 - Pass
+     [1] 0.003317 - Cast Lightning Bolt
+
+VALUE SCORE: -0.170083
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996709 - Pass
+     [1] 0.003291 - Cast Lightning Bolt
+
+VALUE SCORE: -0.158629
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996639 - Pass
+     [1] 0.003360 - Cast Lightning Bolt
+
+VALUE SCORE: -0.214368
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996653 - Pass
+     [1] 0.003347 - Cast Lightning Bolt
+
+VALUE SCORE: -0.215546
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996664 - Pass
+     [1] 0.003336 - Cast Lightning Bolt
+
+VALUE SCORE: -0.220948
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.146206 - Pass
+     [1] 0.642910 - Play Mountain
+     [2] 0.001192 - Cast Chain Lightning
+     [3] 0.000471 - Cast Lightning Bolt
+ >>> [4] 0.159500 - Cast Clockwork Percussionist
+     [5] 0.049527 - Cast Voldaren Epicure
+     [6] 0.000193 - Cast Galvanic Blast
+
+VALUE SCORE: -0.165470
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Mountain; Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.205671 - Pass
+ >>> [1] 0.794329 - Play Mountain
+
+VALUE SCORE: -0.236267
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.736396 - Pass
+     [1] 0.007590 - Cast Chain Lightning
+     [2] 0.002618 - Cast Lightning Bolt
+     [3] 0.252301 - Cast Voldaren Epicure
+     [4] 0.001095 - Cast Galvanic Blast
+
+VALUE SCORE: -0.239743
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994995 - Pass
+     [1] 0.003542 - Cast Lightning Bolt
+     [2] 0.001464 - Cast Galvanic Blast
+
+VALUE SCORE: -0.299351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995044 - Pass
+     [1] 0.003508 - Cast Lightning Bolt
+     [2] 0.001448 - Cast Galvanic Blast
+
+VALUE SCORE: -0.303198
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.744611 - Pass
+     [1] 0.008864 - Cast Chain Lightning
+     [2] 0.002641 - Cast Lightning Bolt
+     [3] 0.242794 - Cast Voldaren Epicure
+     [4] 0.001091 - Cast Galvanic Blast
+
+VALUE SCORE: -0.312001
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994740 - Pass
+     [1] 0.003702 - Cast Lightning Bolt
+     [2] 0.001558 - Cast Galvanic Blast
+
+VALUE SCORE: -0.340638
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993970 - Pass
+     [1] 0.004210 - Cast Lightning Bolt
+     [2] 0.001820 - Cast Galvanic Blast
+
+VALUE SCORE: -0.465663
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993812 - Pass
+     [1] 0.004306 - Cast Lightning Bolt
+     [2] 0.001882 - Cast Galvanic Blast
+
+VALUE SCORE: -0.418040
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994207 - Pass
+     [1] 0.004043 - Cast Lightning Bolt
+     [2] 0.001750 - Cast Galvanic Blast
+
+VALUE SCORE: -0.522048
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994211 - Pass
+     [1] 0.004040 - Cast Lightning Bolt
+     [2] 0.001749 - Cast Galvanic Blast
+
+VALUE SCORE: -0.524081
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994211 - Pass
+     [1] 0.004040 - Cast Lightning Bolt
+     [2] 0.001749 - Cast Galvanic Blast
+
+VALUE SCORE: -0.533378
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.561302 - Pass
+     [1] 0.009285 - Cast Chain Lightning
+     [2] 0.002295 - Cast Lightning Bolt
+     [3] 0.186547 - Cast Voldaren Epicure
+     [4] 0.000981 - Cast Galvanic Blast
+     [5] 0.239591 - Cast Reckless Impulse
+
+VALUE SCORE: -0.401812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994244 - Pass
+     [1] 0.004037 - Cast Lightning Bolt
+     [2] 0.001720 - Cast Galvanic Blast
+
+VALUE SCORE: -0.397009
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.559151 - Pass
+     [1] 0.009209 - Cast Chain Lightning
+     [2] 0.002269 - Cast Lightning Bolt
+     [3] 0.187571 - Cast Voldaren Epicure
+     [4] 0.000966 - Cast Galvanic Blast
+ >>> [5] 0.240834 - Cast Reckless Impulse
+
+VALUE SCORE: -0.396758
+SELECTED: Cast Reckless Impulse
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Reckless Impulse]
+-> Exile: [Great Furnace; Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.463733 - Pass
+     [1] 0.536267 - Play Great Furnace
+
+VALUE SCORE: -0.516397
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Reckless Impulse]
+-> Exile: [Great Furnace; Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Reckless Impulse]
+-> Exile: [Great Furnace; Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Reckless Impulse]
+-> Exile: [Great Furnace; Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Reckless Impulse]
+-> Exile: [Great Furnace; Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Reckless Impulse]
+-> Exile: [Great Furnace; Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: [Reckless Impulse]
+-> Exile: [Great Furnace; Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: [Reckless Impulse]
+-> Exile: [Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Great Furnace]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: [Reckless Impulse]
+-> Exile: [Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.158282 - Pass
+     [1] 0.002890 - Cast Chain Lightning
+     [2] 0.000709 - Cast Lightning Bolt
+     [3] 0.053969 - Cast Voldaren Epicure
+     [4] 0.000318 - Cast Galvanic Blast
+     [5] 0.281051 - Play Great Furnace
+ >>> [6] 0.502782 - Cast Burning-Tree Emissary
+
+VALUE SCORE: -0.382503
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.395797 - Pass
+     [1] 0.009530 - Cast Chain Lightning
+     [2] 0.001691 - Cast Lightning Bolt
+     [3] 0.132327 - Cast Voldaren Epicure
+     [4] 0.000762 - Cast Galvanic Blast
+     [5] 0.459893 - Play Great Furnace
+
+VALUE SCORE: -0.498560
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Great Furnace]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.459990 - Pass
+ >>> [1] 0.540010 - Play Great Furnace
+
+VALUE SCORE: -0.497324
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Great Furnace]
+-> Graveyard: [Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.733281 - Pass
+     [1] 0.018669 - Cast Chain Lightning
+     [2] 0.003230 - Cast Lightning Bolt
+     [3] 0.243334 - Cast Voldaren Epicure
+     [4] 0.001486 - Cast Galvanic Blast
+
+VALUE SCORE: -0.506568
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Great Furnace]
+-> Graveyard: [Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Great Furnace]
+-> Graveyard: [Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993820 - Pass
+     [1] 0.004248 - Cast Lightning Bolt
+     [2] 0.001933 - Cast Galvanic Blast
+
+VALUE SCORE: -0.499346
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} dies, exile the top card of your library. You may play it until the end of your next turn.) (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993696 - Pass
+     [1] 0.004334 - Cast Lightning Bolt
+     [2] 0.001970 - Cast Galvanic Blast
+
+VALUE SCORE: -0.442390
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: [Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993445 - Pass
+     [1] 0.004483 - Cast Lightning Bolt
+     [2] 0.002072 - Cast Galvanic Blast
+
+VALUE SCORE: -0.520746
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: [Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Voldaren Epicure]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993464 - Pass
+     [1] 0.004464 - Cast Lightning Bolt
+     [2] 0.002072 - Cast Galvanic Blast
+
+VALUE SCORE: -0.514220
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: [Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994198 - Pass
+     [1] 0.004161 - Cast Lightning Bolt
+     [2] 0.001642 - Cast Galvanic Blast
+
+VALUE SCORE: -0.610777
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: [Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994108 - Pass
+     [1] 0.004199 - Cast Lightning Bolt
+     [2] 0.001693 - Cast Galvanic Blast
+
+VALUE SCORE: -0.595922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: [Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994195 - Pass
+     [1] 0.004199 - Cast Lightning Bolt
+     [2] 0.001606 - Cast Galvanic Blast
+
+VALUE SCORE: -0.615658
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: [Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994209 - Pass
+     [1] 0.004185 - Cast Lightning Bolt
+     [2] 0.001606 - Cast Galvanic Blast
+
+VALUE SCORE: -0.613468
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: [Burning-Tree Emissary]
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994510 - Pass
+     [1] 0.004053 - Cast Lightning Bolt
+     [2] 0.001437 - Cast Galvanic Blast
+
+VALUE SCORE: -0.655677
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191324 - Pass
+     [1] 0.006400 - Cast Chain Lightning
+     [2] 0.000805 - Cast Lightning Bolt
+     [3] 0.058605 - Cast Voldaren Epicure
+     [4] 0.000327 - Cast Galvanic Blast
+     [5] 0.742539 - Cast Burning-Tree Emissary
+
+VALUE SCORE: -0.588485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994108 - Pass
+     [1] 0.004177 - Cast Lightning Bolt
+     [2] 0.001715 - Cast Galvanic Blast
+
+VALUE SCORE: -0.579296
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192286 - Pass
+     [1] 0.006358 - Cast Chain Lightning
+     [2] 0.000821 - Cast Lightning Bolt
+     [3] 0.059668 - Cast Voldaren Epicure
+     [4] 0.000339 - Cast Galvanic Blast
+     [5] 0.740529 - Cast Burning-Tree Emissary
+
+VALUE SCORE: -0.576652
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Mountain]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992307 - Pass
+     [1] 0.005195 - Cast Lightning Bolt
+     [2] 0.002498 - Cast Galvanic Blast
+
+VALUE SCORE: -0.397618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Bot-Skill1)
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991601 - Pass
+     [1] 0.005596 - Cast Lightning Bolt
+     [2] 0.002803 - Cast Galvanic Blast
+
+VALUE SCORE: -0.457306
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Mountain,tapped; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991671 - Pass
+     [1] 0.005555 - Cast Lightning Bolt
+     [2] 0.002774 - Cast Galvanic Blast
+
+VALUE SCORE: -0.462688
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Voldaren Epicure,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992887 - Pass
+     [1] 0.005002 - Cast Lightning Bolt
+     [2] 0.002111 - Cast Galvanic Blast
+
+VALUE SCORE: -0.564825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Chain Lightning; Lightning Bolt; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Great Furnace]
+-> Graveyard: [Reckless Impulse; Clockwork Percussionist]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Voldaren Epicure,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992887 - Pass
+     [1] 0.005002 - Cast Lightning Bolt
+     [2] 0.002111 - Cast Galvanic Blast
+
+VALUE SCORE: -0.564825
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 5
+Reason: Episode 150200 - Win
+Total Decisions Logged: 53
+Ended: 2026-02-08T12:12:28.411766700
+================================================================================

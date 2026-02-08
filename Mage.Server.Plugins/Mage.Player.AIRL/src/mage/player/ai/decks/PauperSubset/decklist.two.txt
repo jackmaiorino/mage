@@ -1,0 +1,4 @@
+# Two-deck subset for quick eval/benchmark smoke tests.
+# Paths resolved relative to this file.
+../Pauper/Deck - Mono-Blue Terror.dek
+../Pauper/Deck - Mono-Red Burn.dek

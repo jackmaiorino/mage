@@ -39,6 +39,7 @@ public class PythonMLBridge implements AutoCloseable {
     // Historical default was 30s, but in multi-process setups that makes startup look "hung".
     // We rely on connectToPythonGateway retry logic for real readiness.
     private static final int PYTHON_STARTUP_WAIT_MS = parseStartupWaitMs();
+
     private static int parseStartupWaitMs() {
         try {
             String v = System.getenv("PYTHON_STARTUP_WAIT_MS");
@@ -156,7 +157,8 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
-     * Create an additional non-singleton bridge instance (for multi-process setups).
+     * Create an additional non-singleton bridge instance (for multi-process
+     * setups).
      */
     public static PythonMLBridge createAdditionalBridge(int py4jPort, String pyRole, boolean workerMode) {
         return new PythonMLBridge(py4jPort, pyRole, workerMode);
@@ -704,10 +706,25 @@ public class PythonMLBridge implements AutoCloseable {
             float[][] candidateFeatures,
             int[] candidateMask,
             String policyKey) {
+        return scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask,
+                policyKey, "action", 0, 0, 0);
+    }
+
+    public PythonMLBatchManager.PredictionResult scoreCandidates(
+            StateSequenceBuilder.SequenceOutput state,
+            int[] candidateActionIds,
+            float[][] candidateFeatures,
+            int[] candidateMask,
+            String policyKey,
+            String headId,
+            int pickIndex,
+            int minTargets,
+            int maxTargets) {
         MetricsCollector.getInstance().recordInferenceRequest();
         long startNs = System.nanoTime();
         CompletableFuture<PythonMLBatchManager.PredictionResult> future
-                = batchManager.scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask, policyKey);
+                = batchManager.scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask,
+                        policyKey, headId, pickIndex, minTargets, maxTargets);
         try {
             int timeoutMs = parseIntEnv("PY_SCORE_TIMEOUT_MS", 60000);
             if (timeoutMs > 0) {
@@ -886,9 +903,33 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
-     * Record game result for value head quality tracking and auto-GAE.
-     * This is called after each game ends to track whether the value head
-     * correctly predicts wins (positive) vs losses (negative).
+     * Get training health statistics (GPU OOMs, etc.).
+     */
+    public java.util.Map<String, Integer> getHealthStats() {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+        synchronized (py4jLock) {
+            return entryPoint.getHealthStats();
+        }
+    }
+
+    /**
+     * Reset training health statistics counters.
+     */
+    public void resetHealthStats() {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+        synchronized (py4jLock) {
+            entryPoint.resetHealthStats();
+        }
+    }
+
+    /**
+     * Record game result for value head quality tracking and auto-GAE. This is
+     * called after each game ends to track whether the value head correctly
+     * predicts wins (positive) vs losses (negative).
      *
      * @param lastValuePrediction The final value prediction from the model
      * @param won True if the RL player won the game
@@ -908,8 +949,8 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
-     * Get current value head quality metrics from Python.
-     * Returns a map with 'accuracy', 'avg_win', 'avg_loss', 'samples', 'use_gae'.
+     * Get current value head quality metrics from Python. Returns a map with
+     * 'accuracy', 'avg_win', 'avg_loss', 'samples', 'use_gae'.
      */
     public java.util.Map<String, Object> getValueHeadMetrics() {
         if (!isInitialized) {
@@ -930,8 +971,8 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
-     * Train the model with a batch of states and immediate rewards.
-     * GAE (Generalized Advantage Estimation) will be computed in Python.
+     * Train the model with a batch of states and immediate rewards. GAE
+     * (Generalized Advantage Estimation) will be computed in Python.
      */
     public void train(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> rewards) {
         if (!isInitialized) {
@@ -947,8 +988,9 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
-     * Train on a concatenated multi-episode batch. The dones vector marks episode ends (1=end).
-     * This is used by the learner thread to increase GPU utilization and reduce per-episode overhead.
+     * Train on a concatenated multi-episode batch. The dones vector marks
+     * episode ends (1=end). This is used by the learner thread to increase GPU
+     * utilization and reduce per-episode overhead.
      */
     public void trainMulti(
             List<StateSequenceBuilder.TrainingData> trainingData,
@@ -1036,8 +1078,8 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
-     * Acquire GPU lock (for learner training burst).
-     * Holds lock until releaseGPULock() is called.
+     * Acquire GPU lock (for learner training burst). Holds lock until
+     * releaseGPULock() is called.
      */
     public void acquireGPULock() {
         if (!isInitialized) {

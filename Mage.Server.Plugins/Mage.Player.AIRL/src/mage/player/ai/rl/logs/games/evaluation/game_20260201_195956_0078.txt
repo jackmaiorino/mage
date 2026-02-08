@@ -1,0 +1,1571 @@
+================================================================================
+GAME LOG: game_20260201_195956_0078
+Started: 2026-02-01T19:59:56.776886
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Jund Wildfire.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=-0.016 Q_mull=-0.306 hand=[Island; Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker; Harrier Strix]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.987077
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.004998 - Pass
+ >>> [1] 0.995002 - Cast Harrier Strix
+
+VALUE SCORE: 0.982576
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.504995 - Harrier Strix (you)
+ >>> [1] 0.495005 - Island (you)
+
+VALUE SCORE: 0.974293
+SELECTED: Island (you)
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004998 - Pass
+
+VALUE SCORE: 0.982576
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004998 - Pass
+
+VALUE SCORE: 0.982576
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004998 - Pass
+
+VALUE SCORE: 0.982576
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004998 - Pass
+
+VALUE SCORE: 0.982576
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004998 - Pass
+
+VALUE SCORE: 0.982576
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004998 - Pass
+
+VALUE SCORE: 0.982576
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004998 - Pass
+
+VALUE SCORE: 0.982576
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.955054
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island; Harrier Strix; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000293 - Pass
+     [1] 0.093270 - Cast Snap
+ >>> [2] 0.906437 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.949855
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000293 - Pass
+
+VALUE SCORE: 0.949855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000293 - Pass
+
+VALUE SCORE: 0.949855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000293 - Pass
+
+VALUE SCORE: 0.949855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000293 - Pass
+
+VALUE SCORE: 0.949855
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000293 - Pass
+
+VALUE SCORE: 0.949855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000293 - Pass
+
+VALUE SCORE: 0.949855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000293 - Pass
+
+VALUE SCORE: 0.949855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000293 - Pass
+
+VALUE SCORE: 0.949855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000293 - Pass
+
+VALUE SCORE: 0.949855
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Dispel]
+-> Permanents: [Island; Harrier Strix; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Dispel]
+-> Permanents: [Island; Harrier Strix; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.513757 - Harrier Strix (you)
+     [1] 0.486243 - Moon-Circuit Hacker (you)
+
+VALUE SCORE: 0.904916
+SELECTED: Harrier Strix (you)
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell; Dispel]
+-> Permanents: [Island; Harrier Strix; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Snap; Counterspell; Dispel]
+-> Permanents: [Island; Harrier Strix; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+ >>> [1] 0.999201 - Cast Of One Mind
+     [2] 0.000796 - Cast Snap
+
+VALUE SCORE: 0.908314
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Counterspell; Dispel; Counterspell; Humbling Elder]
+-> Permanents: [Island; Harrier Strix; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+ >>> [1] 0.944114 - Cast Of One Mind
+     [2] 0.055883 - Cast Humbling Elder
+
+VALUE SCORE: 0.896021
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder]
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder]
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking]
+-> Graveyard: [Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder]
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking]
+-> Graveyard: [Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-skill6)
+  - [1] Fanatical Offering (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped]
+-> Graveyard: [Lembas]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-skill6)
+  - [1] Fanatical Offering (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped]
+-> Graveyard: [Lembas]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped]
+-> Graveyard: [Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.896021
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island; Harrier Strix; Island; Moon-Circuit Hacker]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Fanatical Offering]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Humbling Elder; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island; Harrier Strix; Island; Moon-Circuit Hacker]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000063 - Pass
+ >>> [1] 0.692815 - Cast Humbling Elder
+     [2] 0.303366 - Cast Faerie Miscreant
+     [3] 0.003756 - Cast Harrier Strix
+
+VALUE SCORE: 0.826849
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [2] Humbling Elder (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Humbling Elder; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island; Harrier Strix; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000085 - Pass
+ >>> [1] 0.999915 - Cast Humbling Elder
+
+VALUE SCORE: 0.830401
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [2] Humbling Elder (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Moon-Circuit Hacker; Humbling Elder]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [1] Humbling Elder (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Moon-Circuit Hacker; Humbling Elder]
+-> Graveyard: [Of One Mind; Of One Mind; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Moon-Circuit Hacker; Humbling Elder]
+-> Graveyard: []
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Moon-Circuit Hacker; Humbling Elder; Humbling Elder]
+-> Graveyard: []
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Humbling Elder; Humbling Elder]
+-> Graveyard: []
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Humbling Elder; Humbling Elder]
+-> Graveyard: []
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix; Faerie Miscreant]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Twisted Landscape,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix; Faerie Miscreant]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix; Faerie Miscreant]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix; Faerie Miscreant]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape; Map Token; Vault of Whispers,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix; Faerie Miscreant]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix; Faerie Miscreant]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.160026 - Faerie Miscreant
+ >>> [1] 0.160026 - Faerie Miscreant
+     [2] 0.190339 - Counterspell
+     [3] 0.138098 - Harrier Strix
+     [4] 0.161172 - Dispel
+     [5] 0.190339 - Counterspell
+
+VALUE SCORE: 0.140902
+SELECTED: Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.830401
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island; Harrier Strix; Island; Moon-Circuit Hacker; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island; Harrier Strix; Island; Moon-Circuit Hacker; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Twisted Landscape; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000119 - Pass
+     [1] 0.405380 - Cast Faerie Miscreant
+     [2] 0.004875 - Cast Harrier Strix
+ >>> [3] 0.589625 - Cast Faerie Seer
+
+VALUE SCORE: 0.760715
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-skill6)
+  - [1] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix; Island; Moon-Circuit Hacker; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000119 - Pass
+
+VALUE SCORE: 0.760715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix; Island; Moon-Circuit Hacker; Humbling Elder; Humbling Elder]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar; Swamp,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000119 - Pass
+
+VALUE SCORE: 0.760715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix; Island; Moon-Circuit Hacker; Humbling Elder; Humbling Elder; Faerie Seer]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar; Swamp,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000119 - Pass
+
+VALUE SCORE: 0.760715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix; Island; Moon-Circuit Hacker; Humbling Elder; Humbling Elder; Faerie Seer]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar; Swamp,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.364758 - STOP
+     [1] 0.323262 - Snap
+ >>> [2] 0.311980 - Moon-Circuit Hacker
+
+VALUE SCORE: 0.743725
+SELECTED: Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Precombat Main (CARD_PICK 1 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Counterspell; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Harrier Strix; Island; Moon-Circuit Hacker; Humbling Elder; Humbling Elder; Faerie Seer]
+-> Graveyard: [Ninja of the Deep Hours; Faerie Miscreant]
+-> Exile: [Of One Mind; Snap; Of One Mind]
+[Benchmark-skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Mountain,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar; Swamp,tapped]
+-> Graveyard: [Fanatical Offering; Nihil Spellbomb; Fanatical Offering; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.530156 - STOP
+     [1] 0.469844 - Snap
+
+VALUE SCORE: 0.743725
+SELECTED: STOP
+

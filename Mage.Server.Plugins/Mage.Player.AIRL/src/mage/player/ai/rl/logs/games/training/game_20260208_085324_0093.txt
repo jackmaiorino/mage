@@ -1,0 +1,2014 @@
+================================================================================
+GAME LOG: game_20260208_085324_0093
+Started: 2026-02-08T08:53:24.774960100
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=1 decision=MULLIGAN Q_keep=-0.013 Q_mull=0.056 hand=[Mountain; Fireblast; Fiery Temper; Grab the Prize; Lightning Bolt; Masked Meower; Masked Meower]
+LONDON_BOTTOM: player=PlayerRL1 mulligansTaken=1 handSize=7 bottomN=1 kept=[Lightning Bolt; Lava Dart; Mountain; Mountain; Mountain; Grab the Prize] bottomed=[Mountain]
+LONDON_BOTTOM_PROBS: player=PlayerRL1 cards=[Lightning Bolt (0.140); Lava Dart (0.143); Mountain (0.145); Mountain (0.145); Mountain (0.145); Grab the Prize (0.140); Mountain (0.145)]
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=1 handSize=6 lands=3 decision=KEEP Q_keep=0.107 Q_mull=0.082 hand=[Mountain; Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.063809 - Pass
+ >>> [1] 0.936191 - Play Mountain
+
+VALUE SCORE: -0.237222
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995258 - Pass
+     [1] 0.001718 - Cast Lava Dart
+     [2] 0.003024 - Cast Lightning Bolt
+
+VALUE SCORE: -0.238640
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995161 - Pass
+     [1] 0.001755 - Cast Lava Dart
+     [2] 0.003085 - Cast Lightning Bolt
+
+VALUE SCORE: -0.238845
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995170 - Pass
+     [1] 0.001751 - Cast Lava Dart
+     [2] 0.003079 - Cast Lightning Bolt
+
+VALUE SCORE: -0.238469
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995422 - Pass
+     [1] 0.001663 - Cast Lava Dart
+     [2] 0.002915 - Cast Lightning Bolt
+
+VALUE SCORE: -0.233249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995397 - Pass
+     [1] 0.001671 - Cast Lava Dart
+     [2] 0.002931 - Cast Lightning Bolt
+
+VALUE SCORE: -0.228751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995406 - Pass
+     [1] 0.001668 - Cast Lava Dart
+     [2] 0.002926 - Cast Lightning Bolt
+
+VALUE SCORE: -0.228322
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lava Dart; Lightning Bolt; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.064903 - Pass
+ >>> [1] 0.898052 - Play Mountain
+     [2] 0.000137 - Cast Lava Dart
+     [3] 0.000235 - Cast Lightning Bolt
+     [4] 0.036674 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.273166
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Grab the Prize; Lava Dart; Lightning Bolt; Voldaren Epicure]
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.437222 - Pass
+ >>> [1] 0.315949 - Cast Grab the Prize
+     [2] 0.000912 - Cast Lava Dart
+     [3] 0.001567 - Cast Lightning Bolt
+     [4] 0.244350 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.273248
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999123 - Pass
+     [1] 0.000877 - Cast Fireblast
+
+VALUE SCORE: -0.383605
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999109 - Pass
+     [1] 0.000891 - Cast Fireblast
+
+VALUE SCORE: -0.380166
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999098 - Pass
+     [1] 0.000902 - Cast Fireblast
+
+VALUE SCORE: -0.377279
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999323 - Pass
+     [1] 0.000677 - Cast Fireblast
+
+VALUE SCORE: -0.337876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999360 - Pass
+     [1] 0.000640 - Cast Fireblast
+
+VALUE SCORE: -0.333720
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999361 - Pass
+     [1] 0.000639 - Cast Fireblast
+
+VALUE SCORE: -0.333360
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.070472 - Pass
+     [1] 0.000170 - Cast Lava Dart
+     [2] 0.000287 - Cast Lightning Bolt
+     [3] 0.037912 - Cast Voldaren Epicure
+     [4] 0.000071 - Cast Fireblast
+ >>> [5] 0.891088 - Play Mountain
+
+VALUE SCORE: -0.288829
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Voldaren Epicure; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.655627 - Pass
+     [1] 0.001534 - Cast Lava Dart
+     [2] 0.002588 - Cast Lightning Bolt
+ >>> [3] 0.339621 - Cast Voldaren Epicure
+     [4] 0.000629 - Cast Fireblast
+
+VALUE SCORE: -0.288509
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Bot-Skill1)
+  - [1] Voldaren Epicure (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Mountain; Grab the Prize]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992563 - Pass
+     [1] 0.002594 - Cast Lava Dart
+     [2] 0.003841 - Cast Lightning Bolt
+     [3] 0.001002 - Cast Fireblast
+
+VALUE SCORE: -0.432285
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992893 - Pass
+     [1] 0.002467 - Cast Lava Dart
+     [2] 0.003696 - Cast Lightning Bolt
+     [3] 0.000944 - Cast Fireblast
+
+VALUE SCORE: -0.423996
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993011 - Pass
+     [1] 0.002425 - Cast Lava Dart
+     [2] 0.003639 - Cast Lightning Bolt
+     [3] 0.000925 - Cast Fireblast
+
+VALUE SCORE: -0.421109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993221 - Pass
+     [1] 0.002351 - Cast Lava Dart
+     [2] 0.003539 - Cast Lightning Bolt
+     [3] 0.000889 - Cast Fireblast
+
+VALUE SCORE: -0.413308
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995049 - Pass
+     [1] 0.001687 - Cast Lava Dart
+     [2] 0.002681 - Cast Lightning Bolt
+     [3] 0.000583 - Cast Fireblast
+
+VALUE SCORE: -0.323368
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995079 - Pass
+     [1] 0.001677 - Cast Lava Dart
+     [2] 0.002667 - Cast Lightning Bolt
+     [3] 0.000577 - Cast Fireblast
+
+VALUE SCORE: -0.319953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995045 - Pass
+     [1] 0.001690 - Cast Lava Dart
+     [2] 0.002684 - Cast Lightning Bolt
+     [3] 0.000580 - Cast Fireblast
+
+VALUE SCORE: -0.318925
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.079746 - Pass
+     [1] 0.000202 - Cast Lava Dart
+     [2] 0.000332 - Cast Lightning Bolt
+     [3] 0.000083 - Cast Fireblast
+ >>> [4] 0.919637 - Play Mountain
+
+VALUE SCORE: -0.301548
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992347 - Pass
+     [1] 0.002511 - Cast Lava Dart
+     [2] 0.004119 - Cast Lightning Bolt
+     [3] 0.001023 - Cast Fireblast
+
+VALUE SCORE: -0.304312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992535 - Pass
+     [1] 0.002453 - Cast Lava Dart
+     [2] 0.004025 - Cast Lightning Bolt
+     [3] 0.000986 - Cast Fireblast
+
+VALUE SCORE: -0.299293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992554 - Pass
+     [1] 0.002447 - Cast Lava Dart
+     [2] 0.004015 - Cast Lightning Bolt
+     [3] 0.000983 - Cast Fireblast
+
+VALUE SCORE: -0.298876
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Mental Note (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994486 - Pass
+     [1] 0.001898 - Cast Lava Dart
+     [2] 0.002959 - Cast Lightning Bolt
+     [3] 0.000657 - Cast Fireblast
+
+VALUE SCORE: -0.326868
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994018 - Pass
+     [1] 0.002293 - Cast Lava Dart
+     [2] 0.002917 - Cast Lightning Bolt
+     [3] 0.000771 - Cast Fireblast
+
+VALUE SCORE: -0.465026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994633 - Pass
+     [1] 0.002027 - Cast Lava Dart
+     [2] 0.002676 - Cast Lightning Bolt
+     [3] 0.000663 - Cast Fireblast
+
+VALUE SCORE: -0.433846
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994149 - Pass
+     [1] 0.002216 - Cast Lava Dart
+     [2] 0.002896 - Cast Lightning Bolt
+     [3] 0.000739 - Cast Fireblast
+
+VALUE SCORE: -0.442772
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994171 - Pass
+     [1] 0.002207 - Cast Lava Dart
+     [2] 0.002887 - Cast Lightning Bolt
+     [3] 0.000735 - Cast Fireblast
+
+VALUE SCORE: -0.442011
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994080 - Pass
+     [1] 0.002225 - Cast Lava Dart
+     [2] 0.002948 - Cast Lightning Bolt
+     [3] 0.000746 - Cast Fireblast
+
+VALUE SCORE: -0.440316
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Highway Robbery]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Highway Robbery]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.144375 - Pass
+     [1] 0.000427 - Cast Lava Dart
+     [2] 0.000593 - Cast Lightning Bolt
+     [3] 0.000161 - Cast Fireblast
+     [4] 0.152664 - Cast Highway Robbery
+ >>> [5] 0.701780 - Plot {1}{R}
+
+VALUE SCORE: -0.451345
+SELECTED: Plot {1}{R}
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991271 - Pass
+     [1] 0.003512 - Cast Lava Dart
+     [2] 0.003948 - Cast Lightning Bolt
+     [3] 0.001269 - Cast Fireblast
+
+VALUE SCORE: -0.551744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991312 - Pass
+     [1] 0.003494 - Cast Lava Dart
+     [2] 0.003932 - Cast Lightning Bolt
+     [3] 0.001262 - Cast Fireblast
+
+VALUE SCORE: -0.551244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991353 - Pass
+     [1] 0.003459 - Cast Lava Dart
+     [2] 0.003936 - Cast Lightning Bolt
+     [3] 0.001252 - Cast Fireblast
+
+VALUE SCORE: -0.546668
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993799 - Pass
+     [1] 0.002393 - Cast Lava Dart
+     [2] 0.003009 - Cast Lightning Bolt
+     [3] 0.000800 - Cast Fireblast
+
+VALUE SCORE: -0.466889
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992598 - Pass
+     [1] 0.003185 - Cast Lava Dart
+     [2] 0.003186 - Cast Lightning Bolt
+     [3] 0.001031 - Cast Fireblast
+
+VALUE SCORE: -0.551635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993204 - Pass
+     [1] 0.003226 - Cast Lava Dart
+     [2] 0.002597 - Cast Lightning Bolt
+     [3] 0.000973 - Cast Fireblast
+
+VALUE SCORE: -0.639996
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993807 - Pass
+     [1] 0.003069 - Cast Lava Dart
+     [2] 0.002216 - Cast Lightning Bolt
+     [3] 0.000909 - Cast Fireblast
+
+VALUE SCORE: -0.662234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993797 - Pass
+     [1] 0.003068 - Cast Lava Dart
+     [2] 0.002233 - Cast Lightning Bolt
+     [3] 0.000902 - Cast Fireblast
+
+VALUE SCORE: -0.667481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993516 - Pass
+     [1] 0.003214 - Cast Lava Dart
+     [2] 0.002314 - Cast Lightning Bolt
+     [3] 0.000956 - Cast Fireblast
+
+VALUE SCORE: -0.684608
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993482 - Pass
+     [1] 0.003235 - Cast Lava Dart
+     [2] 0.002317 - Cast Lightning Bolt
+     [3] 0.000965 - Cast Fireblast
+
+VALUE SCORE: -0.689536
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.498602 - Pass
+     [1] 0.002122 - Cast Lava Dart
+     [2] 0.001952 - Cast Lightning Bolt
+     [3] 0.000735 - Cast Fireblast
+     [4] 0.002695 - Cast Fiery Temper
+     [5] 0.493894 - Cast Highway Robbery using Plot
+
+VALUE SCORE: -0.623374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985210 - Pass
+     [1] 0.004179 - Cast Lava Dart
+     [2] 0.003851 - Cast Lightning Bolt
+     [3] 0.001446 - Cast Fireblast
+     [4] 0.005313 - Cast Fiery Temper
+
+VALUE SCORE: -0.623017
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.507715 - Pass
+     [1] 0.002202 - Cast Lava Dart
+     [2] 0.001984 - Cast Lightning Bolt
+     [3] 0.000765 - Cast Fireblast
+     [4] 0.002768 - Cast Fiery Temper
+     [5] 0.484566 - Cast Highway Robbery using Plot
+
+VALUE SCORE: -0.636184
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.988847 - Pass
+     [1] 0.003262 - Cast Lava Dart
+     [2] 0.002885 - Cast Lightning Bolt
+     [3] 0.001000 - Cast Fireblast
+     [4] 0.004006 - Cast Fiery Temper
+
+VALUE SCORE: -0.659691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989819 - Pass
+     [1] 0.003280 - Cast Lava Dart
+     [2] 0.002300 - Cast Lightning Bolt
+     [3] 0.000968 - Cast Fireblast
+     [4] 0.003633 - Cast Fiery Temper
+
+VALUE SCORE: -0.731808
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989699 - Pass
+     [1] 0.003338 - Cast Lava Dart
+     [2] 0.002306 - Cast Lightning Bolt
+     [3] 0.000991 - Cast Fireblast
+     [4] 0.003666 - Cast Fiery Temper
+
+VALUE SCORE: -0.747718
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.989728 - Pass
+     [1] 0.003356 - Cast Lava Dart
+     [2] 0.002271 - Cast Lightning Bolt
+     [3] 0.001007 - Cast Fireblast
+ >>> [4] 0.003638 - Cast Fiery Temper
+
+VALUE SCORE: -0.769065
+SELECTED: Cast Fiery Temper
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6 (Bot-Skill1 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=PlayerRL1)
+[PlayerRL1], life = 9
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.234842 - Bot-Skill1
+ >>> [1] 0.271616 - Tolarian Terror (Bot-Skill1)
+     [2] 0.260745 - Cryptic Serpent (Bot-Skill1)
+     [3] 0.232797 - PlayerRL1
+
+VALUE SCORE: -0.796471
+SELECTED: Tolarian Terror (Bot-Skill1)
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999089 - Pass
+     [1] 0.000911 - Cast Fireblast
+
+VALUE SCORE: -0.780490
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper]
+-> Exile: [Highway Robbery]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.545902 - Pass
+     [1] 0.003011 - Cast Lava Dart
+     [2] 0.002481 - Cast Lightning Bolt
+     [3] 0.001097 - Cast Fireblast
+ >>> [4] 0.447509 - Cast Highway Robbery using Plot
+
+VALUE SCORE: -0.697263
+SELECTED: Cast Highway Robbery using Plot
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt; Voldaren Epicure]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Lava Dart; Highway Robbery]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.602537 - Pass
+     [1] 0.002960 - Cast Lava Dart
+     [2] 0.002442 - Cast Lightning Bolt
+     [3] 0.001040 - Cast Fireblast
+ >>> [4] 0.243776 - Cast Voldaren Epicure
+     [5] 0.147244 - Flashback sacrifice a Mountain
+
+VALUE SCORE: -0.689620
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Bot-Skill1)
+  - [1] Voldaren Epicure (controller=PlayerRL1)
+[PlayerRL1], life = 9
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Lava Dart; Highway Robbery]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.836279 - Pass
+     [1] 0.002973 - Cast Lava Dart
+     [2] 0.002030 - Cast Lightning Bolt
+     [3] 0.000984 - Cast Fireblast
+     [4] 0.157734 - Flashback sacrifice a Mountain
+
+VALUE SCORE: -0.755838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Lava Dart; Highway Robbery; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.829883 - Pass
+     [1] 0.003162 - Cast Lava Dart
+     [2] 0.002215 - Cast Lightning Bolt
+     [3] 0.001053 - Cast Fireblast
+ >>> [4] 0.163687 - Flashback sacrifice a Mountain
+
+VALUE SCORE: -0.749074
+SELECTED: Flashback sacrifice a Mountain
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7 (PlayerRL1 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=PlayerRL1)
+[PlayerRL1], life = 9
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Highway Robbery; Voldaren Epicure]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.233360 - Bot-Skill1
+     [1] 0.275187 - Tolarian Terror (Bot-Skill1)
+     [2] 0.260965 - Cryptic Serpent (Bot-Skill1)
+ >>> [3] 0.230488 - PlayerRL1
+
+VALUE SCORE: -0.751724
+SELECTED: PlayerRL1
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Highway Robbery; Voldaren Epicure; Mountain]
+-> Exile: [Lava Dart]
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991987 - Pass
+     [1] 0.003936 - Cast Lava Dart
+     [2] 0.002762 - Cast Lightning Bolt
+     [3] 0.001315 - Cast Fireblast
+
+VALUE SCORE: -0.750449
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Highway Robbery; Voldaren Epicure; Mountain]
+-> Exile: [Lava Dart]
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991989 - Pass
+     [1] 0.003938 - Cast Lava Dart
+     [2] 0.002761 - Cast Lightning Bolt
+     [3] 0.001312 - Cast Fireblast
+
+VALUE SCORE: -0.749290
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Highway Robbery; Voldaren Epicure; Mountain]
+-> Exile: [Lava Dart]
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Island; Tolarian Terror,tapped; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992015 - Pass
+     [1] 0.003926 - Cast Lava Dart
+     [2] 0.002752 - Cast Lightning Bolt
+     [3] 0.001307 - Cast Fireblast
+
+VALUE SCORE: -0.749187
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Highway Robbery; Voldaren Epicure; Mountain]
+-> Exile: [Lava Dart]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Highway Robbery; Voldaren Epicure; Mountain]
+-> Exile: [Lava Dart]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992331 - Pass
+     [1] 0.003710 - Cast Lava Dart
+     [2] 0.002817 - Cast Lightning Bolt
+     [3] 0.001143 - Cast Fireblast
+
+VALUE SCORE: -0.713340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Highway Robbery; Voldaren Epicure; Mountain]
+-> Exile: [Lava Dart]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993425 - Pass
+     [1] 0.003323 - Cast Lava Dart
+     [2] 0.002257 - Cast Lightning Bolt
+     [3] 0.000995 - Cast Fireblast
+
+VALUE SCORE: -0.756692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Lava Dart; Lightning Bolt; Fireblast; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Mountain; Grab the Prize; Voldaren Epicure; Fiery Temper; Highway Robbery; Voldaren Epicure; Mountain]
+-> Exile: [Lava Dart]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Island]
+-> Graveyard: [Counterspell; Mental Note; Ponder; Lorien Revealed; Brainstorm; Thought Scour; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993489 - Pass
+     [1] 0.003300 - Cast Lava Dart
+     [2] 0.002228 - Cast Lightning Bolt
+     [3] 0.000984 - Cast Fireblast
+
+VALUE SCORE: -0.756656
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 7
+Reason: Episode 147800 - Win
+Total Decisions Logged: 65
+Ended: 2026-02-08T09:00:40.461734800
+================================================================================

@@ -33,6 +33,7 @@ logger.info(LogCategory.SYSTEM_INIT,
 logger.info(LogCategory.SYSTEM_INIT,
             f"Created temporary directory for shared memory: {TEMP_DIR}")
 
+
 def _maybe_set_cuda_memory_fraction():
     """
     Hard-cap CUDA allocator to avoid silent paging/spill into shared memory.
@@ -628,6 +629,10 @@ class PythonEntryPoint:
             candidate_ids_bytes,
             candidate_mask_bytes,
             "train",
+            "action",
+            0,
+            0,
+            0,
             batch_size,
             seq_len,
             d_model,
@@ -643,6 +648,10 @@ class PythonEntryPoint:
                                   candidate_ids_bytes,
                                   candidate_mask_bytes,
                                   policy_key,
+                                  head_id,
+                                  pick_index,
+                                  min_targets,
+                                  max_targets,
                                   batch_size,
                                   seq_len,
                                   d_model,
@@ -699,7 +708,8 @@ class PythonEntryPoint:
 
                 with torch.inference_mode():
                     probs, value = model.score_candidates(
-                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
+                        head_id, int(pick_index), int(min_targets), int(max_targets))
 
                 probs_np = probs.detach().cpu().numpy()
                 value_np = value.detach().cpu().numpy()
@@ -1177,10 +1187,12 @@ class PythonEntryPoint:
                     logger.info(LogCategory.MODEL_TRAIN,
                                 "Warmup ended: unfroze encoder params")
 
-            use_amp = bool(self.amp_enable) and torch.cuda.is_available() and str(device).startswith("cuda")
+            use_amp = bool(self.amp_enable) and torch.cuda.is_available() and str(
+                device).startswith("cuda")
             autocast_ctx = torch.autocast(
                 device_type="cuda", dtype=self.amp_dtype) if use_amp else nullcontext()
-            scaler = self.amp_scaler if (use_amp and bool(self.amp_use_scaler) and self.amp_scaler is not None) else None
+            scaler = self.amp_scaler if (use_amp and bool(
+                self.amp_use_scaler) and self.amp_scaler is not None) else None
 
             self.optimizer.zero_grad(set_to_none=True)
 
@@ -1697,10 +1709,12 @@ class PythonEntryPoint:
             # GPU lock is acquired by Java learner loop, not here
             # (Learner holds lock for entire training burst)
             try:
-                use_amp = bool(self.amp_enable) and torch.cuda.is_available() and str(device).startswith("cuda")
+                use_amp = bool(self.amp_enable) and torch.cuda.is_available() and str(
+                    device).startswith("cuda")
                 autocast_ctx = torch.autocast(
                     device_type="cuda", dtype=self.amp_dtype) if use_amp else nullcontext()
-                scaler = self.amp_scaler if (use_amp and bool(self.amp_use_scaler) and self.amp_scaler is not None) else None
+                scaler = self.amp_scaler if (use_amp and bool(
+                    self.amp_use_scaler) and self.amp_scaler is not None) else None
 
                 self.optimizer.zero_grad(set_to_none=True)
 
@@ -2646,6 +2660,18 @@ class PythonEntryPoint:
         result.put('train_steps', int(self.mulligan_train_step_counter))
         result.put('train_samples', int(self.mulligan_train_sample_counter))
         return result
+
+    def getHealthStats(self):
+        """Get training health statistics (OOMs, errors, etc.)"""
+        from py4j.java_gateway import java_import
+        java_import(gateway.jvm, 'java.util.HashMap')
+        result = gateway.jvm.HashMap()
+        result.put('gpu_oom_count', int(self.cuda_mgr.get_oom_count()))
+        return result
+
+    def resetHealthStats(self):
+        """Reset health statistics counters."""
+        self.cuda_mgr.reset_oom_count()
 
     def recordGameResult(self, lastValuePrediction, won):
         """

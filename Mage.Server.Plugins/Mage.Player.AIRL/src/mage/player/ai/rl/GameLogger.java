@@ -18,9 +18,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class GameLogger {
 
     private static final AtomicInteger gameCounter = new AtomicInteger(0);
-    private static final String BASE_LOG_DIR = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl";
-    private static final String TRAIN_LOG_DIR = BASE_LOG_DIR + "/traininggamelogs";
-    private static final String EVAL_LOG_DIR = BASE_LOG_DIR + "/evalgamelogs";
+    private static final String TRAIN_LOG_DIR = RLLogPaths.TRAINING_GAME_LOGS_DIR;
+    private static final String EVAL_LOG_DIR = RLLogPaths.EVAL_GAME_LOGS_DIR;
     private static final int LINE_WIDTH = 80;
 
     private final BufferedWriter writer;
@@ -48,6 +47,11 @@ public class GameLogger {
             // Create log directory if it doesn't exist
             Path logDir = Paths.get(resolveLogDir());
             Files.createDirectories(logDir);
+
+            // Clean up old game logs (keep only 50 most recent for training)
+            if (isTrainingMode()) {
+                cleanupOldGameLogs(logDir, 50);
+            }
 
             // Generate unique game ID
             int gameNum = gameCounter.incrementAndGet();
@@ -88,6 +92,51 @@ public class GameLogger {
             }
         }
         return TRAIN_LOG_DIR;
+    }
+
+    private static boolean isTrainingMode() {
+        String mode = System.getenv("MODE");
+        if (mode == null) {
+            return true; // Default to training mode
+        }
+        String m = mode.trim().toLowerCase();
+        return !("eval".equals(m) || "benchmark".equals(m));
+    }
+
+    /**
+     * Clean up old game logs, keeping only the most recent N files.
+     * Files are sorted by last modified time (oldest first).
+     */
+    private static void cleanupOldGameLogs(Path logDir, int maxFiles) {
+        try {
+            List<Path> logFiles = Files.list(logDir)
+                    .filter(p -> p.toString().endsWith(".txt"))
+                    .filter(p -> p.getFileName().toString().startsWith("game_"))
+                    .sorted((a, b) -> {
+                        try {
+                            long timeA = Files.getLastModifiedTime(a).toMillis();
+                            long timeB = Files.getLastModifiedTime(b).toMillis();
+                            return Long.compare(timeA, timeB); // oldest first
+                        } catch (IOException e) {
+                            return 0;
+                        }
+                    })
+                    .collect(java.util.stream.Collectors.toList());
+
+            // Delete oldest files if we exceed the limit
+            int toDelete = logFiles.size() - maxFiles + 1; // +1 for the file we're about to create
+            if (toDelete > 0) {
+                for (int i = 0; i < toDelete && i < logFiles.size(); i++) {
+                    try {
+                        Files.delete(logFiles.get(i));
+                    } catch (IOException e) {
+                        System.err.println("Failed to delete old game log: " + logFiles.get(i) + " - " + e.getMessage());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Failed to cleanup old game logs: " + e.getMessage());
+        }
     }
 
     private static String repeatChar(char c, int n) {
@@ -154,6 +203,33 @@ public class GameLogger {
             float valueScore,
             String selectedAction
     ) {
+        int idx = -1;
+        if (selectedAction != null && options != null) {
+            for (int i = 0; i < options.size(); i++) {
+                if (selectedAction.equals(options.get(i))) {
+                    idx = i;
+                    break;
+                }
+            }
+        }
+        logDecision(playerName, activePlayerName, phase, turn, gameState, options, actionProbs, valueScore, idx, selectedAction);
+    }
+
+    /**
+     * Log a decision point with an explicit selected index (preferred).
+     */
+    public void logDecision(
+            String playerName,
+            String activePlayerName,
+            String phase,
+            int turn,
+            String gameState,
+            List<String> options,
+            float[] actionProbs,
+            float valueScore,
+            int selectedIndex,
+            String selectedAction
+    ) {
         if (!enabled) {
             return;
         }
@@ -184,7 +260,7 @@ public class GameLogger {
             writer.write("OPTIONS & SCORES:");
             writer.newLine();
             for (int i = 0; i < options.size() && i < actionProbs.length; i++) {
-                String marker = options.get(i).equals(selectedAction) ? " >>> " : "     ";
+                String marker = (i == selectedIndex) ? " >>> " : "     ";
                 writer.write(String.format("%s[%d] %.6f - %s",
                         marker, i, actionProbs[i], options.get(i)));
                 writer.newLine();
@@ -193,7 +269,11 @@ public class GameLogger {
 
             writer.write(String.format("VALUE SCORE: %.6f", valueScore));
             writer.newLine();
-            writer.write(String.format("SELECTED: %s", selectedAction));
+            String selectedLine = selectedAction;
+            if (selectedIndex >= 0 && options != null && selectedIndex < options.size()) {
+                selectedLine = options.get(selectedIndex);
+            }
+            writer.write(String.format("SELECTED: %s", selectedLine));
             writer.newLine();
             writer.newLine();
 

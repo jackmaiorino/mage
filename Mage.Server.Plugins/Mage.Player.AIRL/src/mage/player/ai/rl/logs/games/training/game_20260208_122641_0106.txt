@@ -1,0 +1,2785 @@
+================================================================================
+GAME LOG: game_20260208_122641_0106
+Started: 2026-02-08T12:26:41.114768200
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=4 decision=KEEP Q_keep=0.214 Q_mull=0.103 hand=[Mountain; Swamp; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Swamp; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Swamp; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.035084 - Pass
+     [1] 0.286114 - Play Mountain
+ >>> [2] 0.380823 - Play Swamp
+     [3] 0.297979 - Play Twisted Landscape
+
+VALUE SCORE: -0.056489
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.057260 - Pass
+     [1] 0.462873 - Play Mountain
+ >>> [2] 0.479867 - Play Twisted Landscape
+
+VALUE SCORE: -0.057559
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.439770 - Pass
+     [1] 0.555802 - Cast Lembas
+     [2] 0.004428 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.055914
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989995 - Pass
+     [1] 0.010005 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.059109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Lembas; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.437415 - Pass
+ >>> [1] 0.558164 - Cast Lembas
+     [2] 0.004421 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.058767
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Postcombat Main (CARD_PICK 0 min=0 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.505850 - STOP
+ >>> [1] 0.494150 - Krark-Clan Shaman
+
+VALUE SCORE: -0.056826
+SELECTED: Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp; Twisted Landscape; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Twisted Landscape; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp; Twisted Landscape; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.050004 - Pass
+     [1] 0.403785 - Play Mountain
+ >>> [2] 0.416815 - Play Twisted Landscape
+     [3] 0.031055 - Cast Fanatical Offering
+     [4] 0.039983 - Cast Ichor Wellspring
+     [5] 0.000516 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [6] 0.057842 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.067705
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp; Twisted Landscape; Lembas; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.144024 - Pass
+     [1] 0.089007 - Cast Fanatical Offering
+     [2] 0.483616 - Cast Refurbished Familiar
+     [3] 0.115213 - Cast Ichor Wellspring
+     [4] 0.001496 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [5] 0.166644 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.065634
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+  - [1] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=PlayerRL1)
+  - [2] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: [Lembas]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989640 - Pass
+     [1] 0.010360 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.052359
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=PlayerRL1)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: [Lembas]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989640 - Pass
+     [1] 0.010360 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.052359
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989707 - Pass
+     [1] 0.010293 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.054130
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989712 - Pass
+     [1] 0.010288 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.053583
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989683 - Pass
+     [1] 0.010317 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.054721
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989683 - Pass
+     [1] 0.010317 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.054400
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Bot-Skill1)
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Bot-Skill1)
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989144 - Pass
+     [1] 0.010856 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.006136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.988915 - Pass
+     [1] 0.011085 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.009777
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.988919 - Pass
+     [1] 0.011081 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.009439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.988868 - Pass
+     [1] 0.011132 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.011070
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Mountain; Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.102312 - Pass
+ >>> [1] 0.812558 - Play Mountain
+     [2] 0.000326 - Cast Toxin Analysis
+     [3] 0.083668 - Cast Ichor Wellspring
+     [4] 0.001137 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.092331
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Refurbished Familiar; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.191245 - Pass
+     [1] 0.000620 - Cast Toxin Analysis
+ >>> [2] 0.648437 - Cast Refurbished Familiar
+     [3] 0.157535 - Cast Ichor Wellspring
+     [4] 0.002162 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.096209
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Outlaw Medic; Island]
+-> Graveyard: [Lorien Revealed; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Bot-Skill1)
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic; Island,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Bot-Skill1)
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic; Island,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic; Island,tapped; The Modern Age]
+-> Graveyard: [Lorien Revealed; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped,attacking; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 23
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped,attacking; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 21
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis; Forest]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape; Mountain; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 21
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis; Forest]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape; Mountain; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 21
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.043570 - Pass
+     [1] 0.027226 - Cast Fanatical Offering
+     [2] 0.000165 - Cast Toxin Analysis
+     [3] 0.035527 - Cast Ichor Wellspring
+ >>> [4] 0.892922 - Play Forest
+     [5] 0.000590 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.151215
+SELECTED: Play Forest
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape; Mountain; Refurbished Familiar; Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 21
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.097065 - Pass
+     [1] 0.061423 - Cast Fanatical Offering
+     [2] 0.000399 - Cast Toxin Analysis
+ >>> [3] 0.759938 - Cast Writhing Chrysalis
+     [4] 0.079796 - Cast Ichor Wellspring
+     [5] 0.001379 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.164914
+SELECTED: Cast Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=PlayerRL1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 21
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980483 - Pass
+     [1] 0.019517 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.230108
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 21
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.558597 - Pass
+     [1] 0.430492 - Cast Ichor Wellspring
+     [2] 0.010911 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.225168
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar,tapped,attacking; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 21
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977025 - Pass
+     [1] 0.022975 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.277963
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar,tapped,attacking; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 21
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977025 - Pass
+     [1] 0.022975 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.277963
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Ichor Wellspring; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.574425 - Pass
+ >>> [1] 0.411979 - Cast Ichor Wellspring
+     [2] 0.013597 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.279299
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=PlayerRL1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107902 - Pass
+     [1] 0.073723 - Cast Fanatical Offering
+     [2] 0.000512 - Cast Toxin Analysis
+     [3] 0.813065 - Cast Writhing Chrysalis
+     [4] 0.003278 - Cast Cleansing Wildfire
+     [5] 0.001520 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.156315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape; Mountain; Refurbished Familiar,tapped,attacking; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.599579 - Pass
+     [1] 0.387071 - Cast Fanatical Offering
+     [2] 0.003119 - Cast Toxin Analysis
+     [3] 0.010232 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.215823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape; Mountain; Refurbished Familiar,tapped,attacking; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.597875 - Pass
+     [1] 0.388742 - Cast Fanatical Offering
+     [2] 0.003134 - Cast Toxin Analysis
+     [3] 0.010248 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.219028
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Writhing Chrysalis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Twisted Landscape; Mountain; Refurbished Familiar,tapped; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.107060 - Pass
+     [1] 0.069760 - Cast Fanatical Offering
+     [2] 0.000602 - Cast Toxin Analysis
+ >>> [3] 0.816248 - Cast Writhing Chrysalis
+     [4] 0.004188 - Cast Cleansing Wildfire
+     [5] 0.002143 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.278858
+SELECTED: Cast Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+  - [1] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=PlayerRL1)
+  - [2] Writhing Chrysalis (controller=PlayerRL1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island,tapped; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.964097 - Pass
+     [1] 0.035903 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.387714
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=PlayerRL1)
+  - [1] Writhing Chrysalis (controller=PlayerRL1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island,tapped; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963875 - Pass
+     [1] 0.036125 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.390279
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=PlayerRL1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island,tapped; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.959494 - Pass
+     [1] 0.040506 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.389250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island,tapped; The Modern Age; Citadel Gate; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.960804 - Pass
+     [1] 0.039196 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.389756
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Twisted Landscape; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.931007 - Pass
+ >>> [1] 0.068993 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.483905
+SELECTED: {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (Bot-Skill1 turn), Precombat Main (CARD_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=PlayerRL1)
+  - [1] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.266435 - Forest
+     [1] 0.256052 - Mountain
+     [2] 0.238756 - Swamp
+     [3] 0.238756 - Swamp
+
+VALUE SCORE: -0.482004
+SELECTED: Forest
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; The Modern Age; Citadel Gate; Citadel Gate]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guardian of the Guildpact (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped,attacking; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,blocking; Forest,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped,attacking; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Mountain,tapped; Refurbished Familiar,tapped; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Drossforge Bridge]
+-> Permanents: [Swamp; Twisted Landscape; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Drossforge Bridge]
+-> Permanents: [Swamp; Twisted Landscape; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.357015 - Pass
+     [1] 0.136524 - Cast Fanatical Offering
+     [2] 0.005095 - Cast Toxin Analysis
+     [3] 0.038273 - Cast Cleansing Wildfire
+     [4] 0.427462 - Play Drossforge Bridge
+ >>> [5] 0.035630 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.458503
+SELECTED: {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=PlayerRL1)
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Drossforge Bridge]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.262717 - Forest
+     [1] 0.260318 - Mountain
+     [2] 0.238483 - Swamp
+     [3] 0.238483 - Swamp
+
+VALUE SCORE: -0.453239
+SELECTED: Forest
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Drossforge Bridge]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.360767 - Pass
+     [1] 0.140030 - Cast Fanatical Offering
+     [2] 0.004579 - Cast Toxin Analysis
+     [3] 0.036314 - Cast Cleansing Wildfire
+ >>> [4] 0.458309 - Play Drossforge Bridge
+
+VALUE SCORE: -0.455670
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.686345 - Pass
+     [1] 0.225274 - Cast Fanatical Offering
+     [2] 0.009718 - Cast Toxin Analysis
+     [3] 0.078663 - Cast Cleansing Wildfire
+
+VALUE SCORE: -0.462853
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Forest,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.784804 - Pass
+     [1] 0.205138 - Cast Fanatical Offering
+     [2] 0.010058 - Cast Toxin Analysis
+
+VALUE SCORE: -0.531349
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Forest,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,blocking; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.780357 - Pass
+     [1] 0.209280 - Cast Fanatical Offering
+     [2] 0.010364 - Cast Toxin Analysis
+
+VALUE SCORE: -0.523235
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Island,tapped; Guardian of the Guildpact]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.707430 - Pass
+     [1] 0.198841 - Cast Fanatical Offering
+     [2] 0.009788 - Cast Toxin Analysis
+     [3] 0.083941 - Cast Cleansing Wildfire
+
+VALUE SCORE: -0.499059
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; Citadel Gate; Citadel Gate; Vector Glider; Island; Guardian of the Guildpact; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island; Citadel Gate; Citadel Gate; Vector Glider; Island; Guardian of the Guildpact; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.802922 - Pass
+     [1] 0.187149 - Cast Fanatical Offering
+     [2] 0.009929 - Cast Toxin Analysis
+
+VALUE SCORE: -0.527483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped,attacking; Island; Citadel Gate; Citadel Gate; Vector Glider,tapped,attacking; Island; Guardian of the Guildpact,tapped,attacking; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.819942 - Pass
+     [1] 0.170589 - Cast Fanatical Offering
+     [2] 0.009469 - Cast Toxin Analysis
+
+VALUE SCORE: -0.601192
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped,attacking; Island; Citadel Gate; Citadel Gate; Vector Glider,tapped,attacking; Island; Guardian of the Guildpact,tapped,attacking; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.819730 - Pass
+     [1] 0.170907 - Cast Fanatical Offering
+     [2] 0.009363 - Cast Toxin Analysis
+
+VALUE SCORE: -0.599777
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Fanatical Offering; Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 2 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island; Guardian of the Guildpact,tapped; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.819273 - Pass
+ >>> [1] 0.171127 - Cast Fanatical Offering
+     [2] 0.009601 - Cast Toxin Analysis
+
+VALUE SCORE: -0.603463
+SELECTED: Cast Fanatical Offering
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Bot-Skill1)
+  - [1] Fanatical Offering (controller=PlayerRL1)
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar; Forest,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest,tapped]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Nihil Spellbomb]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Nihil Spellbomb]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.348649 - Pass
+     [1] 0.006618 - Cast Toxin Analysis
+     [2] 0.045748 - Cast Cleansing Wildfire
+ >>> [3] 0.598985 - Cast Nihil Spellbomb
+
+VALUE SCORE: -0.485670
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.866849 - Pass
+     [1] 0.116343 - Cast Cleansing Wildfire
+     [2] 0.016808 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.499874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar,tapped,attacking; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984695 - Pass
+     [1] 0.015305 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.599402
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar,tapped,attacking; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985018 - Pass
+     [1] 0.014982 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.598971
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar,tapped; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 6
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.866564 - Pass
+     [1] 0.120071 - Cast Cleansing Wildfire
+     [2] 0.013366 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.600426
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar,tapped; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 6
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider; Island,tapped; Guardian of the Guildpact; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar,tapped; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 6
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider; Island,tapped; Guardian of the Guildpact; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981345 - Pass
+     [1] 0.018655 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.609325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar,tapped; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 6
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider; Island,tapped; Guardian of the Guildpact; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980849 - Pass
+     [1] 0.019151 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.638223
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar,tapped; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 6
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped,attacking; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped,attacking; Island,tapped; Guardian of the Guildpact,tapped,attacking; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978561 - Pass
+     [1] 0.021439 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.675273
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar,tapped; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 6
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped,attacking; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped,attacking; Island,tapped; Guardian of the Guildpact,tapped,attacking; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978561 - Pass
+     [1] 0.021439 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.675273
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Mountain; Refurbished Familiar,tapped; Forest; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977207 - Pass
+     [1] 0.022793 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.684539
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar; Forest; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.846376 - Pass
+     [1] 0.016490 - Cast Toxin Analysis
+     [2] 0.120232 - Cast Cleansing Wildfire
+     [3] 0.016902 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.523717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar,tapped,attacking; Forest; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Eldrazi Spawn Token,tapped,attacking; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.962082 - Pass
+     [1] 0.018620 - Cast Toxin Analysis
+     [2] 0.019298 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.626437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Toxin Analysis; Cleansing Wildfire; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Swamp; Mountain; Refurbished Familiar,tapped,attacking; Forest; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Eldrazi Spawn Token,tapped,attacking; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Forest; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape; Twisted Landscape; Drossforge Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Sea Gate; Outlaw Medic,tapped; Island,tapped; Citadel Gate; Citadel Gate; Vector Glider,tapped; Island,tapped; Guardian of the Guildpact,tapped; Citadel Gate; Basilisk Gate,tapped]
+-> Graveyard: [Lorien Revealed; Thraben Charm; Journey to Nowhere; Counterspell; Lorien Revealed; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.961419 - Pass
+     [1] 0.018947 - Cast Toxin Analysis
+     [2] 0.019634 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.628948
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: PlayerRL1
+Loser: Bot-Skill1
+Turns: 9
+Reason: Episode 150400 - Win
+Total Decisions Logged: 97
+Ended: 2026-02-08T12:30:15.761886300
+================================================================================

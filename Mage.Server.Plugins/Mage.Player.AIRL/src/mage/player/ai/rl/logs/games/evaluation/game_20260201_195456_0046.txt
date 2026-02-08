@@ -1,0 +1,2395 @@
+================================================================================
+GAME LOG: game_20260201_195456_0046
+Started: 2026-02-01T19:54:56.565944
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.200 Q_mull=-0.179 hand=[Citadel Gate; Sea Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000272 - Pass
+     [1] 0.195002 - Play Citadel Gate
+ >>> [2] 0.804726 - Play Sea Gate
+
+VALUE SCORE: 0.178769
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000272 - Pass
+
+VALUE SCORE: 0.178769
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000272 - Pass
+
+VALUE SCORE: 0.178769
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000272 - Pass
+
+VALUE SCORE: 0.178769
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000272 - Pass
+
+VALUE SCORE: 0.178769
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000272 - Pass
+
+VALUE SCORE: 0.178769
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000272 - Pass
+
+VALUE SCORE: 0.178769
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001195 - Pass
+ >>> [1] 0.998805 - Play Citadel Gate
+
+VALUE SCORE: 0.178507
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001195 - Pass
+
+VALUE SCORE: 0.178507
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001195 - Pass
+
+VALUE SCORE: 0.178507
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001195 - Pass
+
+VALUE SCORE: 0.178507
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001195 - Pass
+
+VALUE SCORE: 0.178507
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001195 - Pass
+
+VALUE SCORE: 0.178507
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001195 - Pass
+
+VALUE SCORE: 0.178507
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.013369 - Pass
+ >>> [1] 0.986631 - Cast The Modern Age
+
+VALUE SCORE: 0.180254
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-skill6)
+  - [1] The Modern Age (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013369 - Pass
+
+VALUE SCORE: 0.180254
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013369 - Pass
+
+VALUE SCORE: 0.180254
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013369 - Pass
+
+VALUE SCORE: 0.180254
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013369 - Pass
+
+VALUE SCORE: 0.180254
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013369 - Pass
+
+VALUE SCORE: 0.180254
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013369 - Pass
+
+VALUE SCORE: 0.180254
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013369 - Pass
+
+VALUE SCORE: 0.180254
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands; Preordain]
+-> Permanents: [Sea Gate; Citadel Gate]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands; Preordain]
+-> Permanents: [Sea Gate; Citadel Gate]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.015923 - Pass
+ >>> [1] 0.984077 - Cast Preordain
+
+VALUE SCORE: 0.182798
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 4 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.345842 - STOP
+     [1] 0.342836 - Sacred Cat
+     [2] 0.311322 - Sea Gate
+
+VALUE SCORE: 0.166706
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands; Sea Gate]
+-> Permanents: [Sea Gate,tapped; Citadel Gate]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000230 - Pass
+ >>> [1] 0.999770 - Play Sea Gate
+
+VALUE SCORE: 0.176348
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000230 - Pass
+
+VALUE SCORE: 0.176348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000230 - Pass
+
+VALUE SCORE: 0.176348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000230 - Pass
+
+VALUE SCORE: 0.176348
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000230 - Pass
+
+VALUE SCORE: 0.176348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000230 - Pass
+
+VALUE SCORE: 0.176348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000230 - Pass
+
+VALUE SCORE: 0.176348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000230 - Pass
+
+VALUE SCORE: 0.176348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000230 - Pass
+
+VALUE SCORE: 0.176348
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands; Sacred Cat]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands; Sacred Cat]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.066505 - Pass
+     [1] 0.006878 - Cast Prismatic Strands
+ >>> [2] 0.926617 - Cast Sacred Cat
+
+VALUE SCORE: 0.176085
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.066505 - Pass
+
+VALUE SCORE: 0.176085
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.066505 - Pass
+
+VALUE SCORE: 0.176085
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.066505 - Pass
+
+VALUE SCORE: 0.176085
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000080 - Pass
+ >>> [1] 0.974710 - Cast Counterspell
+     [2] 0.025210 - Cast Spell Pierce
+
+VALUE SCORE: 1.012394
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 1.012394
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 1.012394
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 1.012394
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 1.012394
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 1.012394
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands; Preordain]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands; Preordain]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.019305 - Pass
+     [1] 0.000856 - Cast Prismatic Strands
+ >>> [2] 0.979839 - Cast Preordain
+
+VALUE SCORE: 0.098981
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 6 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.347570 - STOP
+     [1] 0.312426 - Thraben Charm
+     [2] 0.340003 - Sacred Cat
+
+VALUE SCORE: 0.057408
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands; Sacred Cat]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.178237 - Pass
+ >>> [1] 0.821763 - Cast Sacred Cat
+
+VALUE SCORE: 0.068576
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.178237 - Pass
+
+VALUE SCORE: 0.068576
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.178237 - Pass
+
+VALUE SCORE: 0.068576
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.178237 - Pass
+
+VALUE SCORE: 0.068576
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.004059 - Pass
+ >>> [1] 0.995941 - Cast Spell Pierce
+
+VALUE SCORE: 0.948733
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+  - [1] Spell Pierce (controller=RL)
+  - [2] Deem Inferior (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004059 - Pass
+
+VALUE SCORE: 0.948733
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spell Pierce (controller=RL)
+  - [1] Deem Inferior (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004059 - Pass
+
+VALUE SCORE: 0.948733
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Island,tapped]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004059 - Pass
+
+VALUE SCORE: 0.948733
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004059 - Pass
+
+VALUE SCORE: 0.948733
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004059 - Pass
+
+VALUE SCORE: 0.948733
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,blocking; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004059 - Pass
+
+VALUE SCORE: 0.948733
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004059 - Pass
+
+VALUE SCORE: 0.948733
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.251952 - Tolarian Terror (Benchmark-skill6)
+ >>> [1] 0.255641 - Tolarian Terror (Benchmark-skill6)
+     [2] 0.251848 - Cryptic Serpent (Benchmark-skill6)
+     [3] 0.240558 - Sacred Cat (you)
+
+VALUE SCORE: -0.029963
+SELECTED: Tolarian Terror (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.119533 - Pass
+     [1] 0.002956 - Cast Prismatic Strands
+     [2] 0.016956 - Cast Thraben Charm
+ >>> [3] 0.860555 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.009574
+SELECTED: Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119533 - Pass
+
+VALUE SCORE: -0.009574
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119533 - Pass
+
+VALUE SCORE: -0.009574
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119533 - Pass
+
+VALUE SCORE: -0.009574
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119533 - Pass
+
+VALUE SCORE: -0.009574
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119533 - Pass
+
+VALUE SCORE: -0.009574
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Sacred Cat]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119533 - Pass
+
+VALUE SCORE: -0.009574
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat,blocking; Sacred Cat,blocking]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119533 - Pass
+
+VALUE SCORE: -0.009574
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119533 - Pass
+
+VALUE SCORE: -0.009574
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; The Modern Age]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; The Modern Age]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.252859 - Tolarian Terror (Benchmark-skill6)
+     [1] 0.245255 - Cryptic Serpent (Benchmark-skill6)
+ >>> [2] 0.252859 - Tolarian Terror (Benchmark-skill6)
+     [3] 0.249027 - Cryptic Serpent (Benchmark-skill6)
+
+VALUE SCORE: 0.008914
+SELECTED: Tolarian Terror (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm; The Modern Age]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm; The Modern Age]
+-> Permanents: [Sea Gate; Citadel Gate; Sea Gate]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.014905 - Pass
+     [1] 0.000419 - Cast Prismatic Strands
+     [2] 0.002297 - Cast Thraben Charm
+ >>> [3] 0.863522 - Cast The Modern Age
+     [4] 0.118857 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: 0.027439
+SELECTED: Cast The Modern Age
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 3 items
+  - [0] Spell Pierce (controller=RL)
+  - [1] Thought Scour (controller=Benchmark-skill6)
+  - [2] The Modern Age (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Spell Pierce (controller=RL)
+  - [1] Thought Scour (controller=Benchmark-skill6)
+  - [2] The Modern Age (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.513107 - Thought Scour
+     [1] 0.486893 - The Modern Age
+
+VALUE SCORE: -0.127927
+SELECTED: Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Thought Scour (controller=Benchmark-skill6)
+  - [1] The Modern Age (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Spell Pierce; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.259331 - Pass
+ >>> [1] 0.740669 - Cast Spell Pierce
+
+VALUE SCORE: -0.111201
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Spell Pierce (controller=RL)
+  - [1] Thought Scour (controller=Benchmark-skill6)
+  - [2] The Modern Age (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.513107 - Thought Scour
+     [1] 0.486893 - The Modern Age
+
+VALUE SCORE: -0.127927
+SELECTED: Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] Mental Note (controller=Benchmark-skill6)
+  - [1] Spell Pierce (controller=RL)
+  - [2] Thought Scour (controller=Benchmark-skill6)
+  - [3] The Modern Age (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Spell Pierce (controller=RL)
+  - [1] Thought Scour (controller=Benchmark-skill6)
+  - [2] The Modern Age (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Murmuring Mystic; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Murmuring Mystic; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Thraben Charm]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Murmuring Mystic; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce; Prismatic Strands]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Murmuring Mystic; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce; Prismatic Strands]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Murmuring Mystic; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce; Prismatic Strands]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Murmuring Mystic; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce; Prismatic Strands]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Mental Note; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce; Prismatic Strands]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror; Cryptic Serpent]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce; Prismatic Strands]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror; Cryptic Serpent; Murmuring Mystic]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce; Prismatic Strands]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [The Modern Age; Preordain; Counterspell; Preordain; Spell Pierce; Sacred Cat; Spell Pierce; Prismatic Strands]
+-> Exile: [Sacred Cat]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic]
+-> Graveyard: [Counterspell; Brainstorm; Mental Note; Dispel; Thought Scour; Thought Scour; Lorien Revealed; Deem Inferior; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259331 - Pass
+
+VALUE SCORE: -0.111201
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 83
+Ended: 2026-02-01T19:57:54.299114500
+================================================================================

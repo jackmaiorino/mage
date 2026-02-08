@@ -1,0 +1,3271 @@
+================================================================================
+GAME LOG: game_20260208_110338_0101
+Started: 2026-02-08T11:03:38.737607200
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=3 decision=KEEP Q_keep=0.084 Q_mull=0.076 hand=[Citadel Gate; Idyllic Beachfront; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Idyllic Beachfront; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Idyllic Beachfront; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.035383 - Pass
+     [1] 0.200139 - Play Citadel Gate
+ >>> [2] 0.205913 - Play Idyllic Beachfront
+     [3] 0.558565 - Play Sea Gate
+
+VALUE SCORE: -0.263334
+SELECTED: Play Idyllic Beachfront
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age; Azorius Guildgate]
+-> Permanents: [Idyllic Beachfront]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age; Azorius Guildgate]
+-> Permanents: [Idyllic Beachfront]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.031004 - Pass
+     [1] 0.173649 - Play Citadel Gate
+     [2] 0.472555 - Play Sea Gate
+ >>> [3] 0.322792 - Play Azorius Guildgate
+
+VALUE SCORE: -0.284238
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Sea Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.042352 - Pass
+     [1] 0.228310 - Play Citadel Gate
+ >>> [2] 0.629862 - Play Sea Gate
+     [3] 0.034273 - Cast Journey to Nowhere
+     [4] 0.064981 - Cast The Modern Age
+     [5] 0.000221 - Cast Thraben Charm
+
+VALUE SCORE: -0.271801
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.298796 - Pass
+     [1] 0.241098 - Cast Journey to Nowhere
+ >>> [2] 0.458509 - Cast The Modern Age
+     [3] 0.001597 - Cast Thraben Charm
+
+VALUE SCORE: -0.273076
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spell Pierce (controller=Bot-Skill1)
+  - [1] The Modern Age (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age]
+-> Graveyard: [Spell Pierce]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Citadel Gate; Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.125085 - Pass
+ >>> [1] 0.513838 - Play Citadel Gate
+     [2] 0.096525 - Cast Journey to Nowhere
+     [3] 0.205576 - Cast The Modern Age
+     [4] 0.000798 - Cast Thraben Charm
+     [5] 0.058178 - Cast Outlaw Medic
+
+VALUE SCORE: -0.335237
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.257112 - Pass
+ >>> [1] 0.197954 - Cast Journey to Nowhere
+     [2] 0.425972 - Cast The Modern Age
+     [3] 0.001656 - Cast Thraben Charm
+     [4] 0.117306 - Cast Outlaw Medic
+
+VALUE SCORE: -0.329191
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Sea Gate; The Modern Age; Sea Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Sea Gate; The Modern Age; Sea Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic; Sacred Cat]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; The Modern Age; Thraben Charm; Outlaw Medic; Sacred Cat]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.218386 - Pass
+ >>> [1] 0.326144 - Cast The Modern Age
+     [2] 0.001314 - Cast Thraben Charm
+     [3] 0.108460 - Cast Outlaw Medic
+     [4] 0.345697 - Cast Sacred Cat
+
+VALUE SCORE: -0.272808
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=Bot-Skill1)
+  - [1] The Modern Age (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm; Outlaw Medic; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979008 - Pass
+     [1] 0.012923 - Cast Counterspell
+     [2] 0.008069 - Cast Thraben Charm
+
+VALUE SCORE: -0.411054
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm; Outlaw Medic; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980125 - Pass
+     [1] 0.012617 - Cast Counterspell
+     [2] 0.007258 - Cast Thraben Charm
+
+VALUE SCORE: -0.344553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm; Outlaw Medic; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992839 - Pass
+     [1] 0.007162 - Cast Thraben Charm
+
+VALUE SCORE: -0.336954
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Citadel Gate]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.157869 - Pass
+     [1] 0.001138 - Cast Thraben Charm
+     [2] 0.236802 - Cast Sacred Cat
+ >>> [3] 0.604191 - Play Citadel Gate
+
+VALUE SCORE: -0.336183
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.407237 - Pass
+     [1] 0.002995 - Cast Thraben Charm
+     [2] 0.589767 - Cast Sacred Cat
+
+VALUE SCORE: -0.337417
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992728 - Pass
+     [1] 0.007272 - Cast Thraben Charm
+
+VALUE SCORE: -0.336348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.407227 - Pass
+     [1] 0.002976 - Cast Thraben Charm
+ >>> [2] 0.589797 - Cast Sacred Cat
+
+VALUE SCORE: -0.335732
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Sea Gate; The Modern Age; Sea Gate; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Counterspell; Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990591 - Pass
+     [1] 0.009409 - Cast Thraben Charm
+
+VALUE SCORE: -0.397556
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Thraben Charm; Island; Basilisk Gate]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.167437 - Pass
+     [1] 0.001616 - Cast Thraben Charm
+     [2] 0.630896 - Play Island
+ >>> [3] 0.200051 - Play Basilisk Gate
+
+VALUE SCORE: -0.397474
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987608 - Pass
+     [1] 0.012392 - Cast Thraben Charm
+
+VALUE SCORE: -0.424048
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987629 - Pass
+     [1] 0.012371 - Cast Thraben Charm
+
+VALUE SCORE: -0.424607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987454 - Pass
+     [1] 0.012546 - Cast Thraben Charm
+
+VALUE SCORE: -0.427310
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993472 - Pass
+     [1] 0.006528 - Cast Thraben Charm
+
+VALUE SCORE: -0.273514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992635 - Pass
+     [1] 0.007365 - Cast Thraben Charm
+
+VALUE SCORE: -0.339614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992597 - Pass
+     [1] 0.007403 - Cast Thraben Charm
+
+VALUE SCORE: -0.340200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992537 - Pass
+     [1] 0.007463 - Cast Thraben Charm
+
+VALUE SCORE: -0.341775
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=PlayerRL1)
+[PlayerRL1], life = 18
+-> Hand: [Thraben Charm; Island; Azorius Guildgate]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=PlayerRL1)
+[PlayerRL1], life = 18
+-> Hand: [Thraben Charm; Island; Azorius Guildgate]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Citadel Gate; Sacred Cat; Basilisk Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982345 - Pass
+     [1] 0.017655 - Cast Thraben Charm
+
+VALUE SCORE: -0.463152
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Thraben Charm; Island; Azorius Guildgate]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate; Vector Glider]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.368391 - Pass
+     [1] 0.008171 - Cast Thraben Charm
+     [2] 0.286743 - Play Island
+ >>> [3] 0.336696 - Play Azorius Guildgate
+
+VALUE SCORE: -0.497835
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977168 - Pass
+     [1] 0.022832 - Cast Thraben Charm
+
+VALUE SCORE: -0.509249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped,attacking; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976877 - Pass
+     [1] 0.023123 - Cast Thraben Charm
+
+VALUE SCORE: -0.516110
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped,attacking; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976877 - Pass
+     [1] 0.023123 - Cast Thraben Charm
+
+VALUE SCORE: -0.516110
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976290 - Pass
+     [1] 0.023710 - Cast Thraben Charm
+
+VALUE SCORE: -0.555872
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981859 - Pass
+     [1] 0.018141 - Cast Thraben Charm
+
+VALUE SCORE: -0.482732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982635 - Pass
+     [1] 0.017365 - Cast Thraben Charm
+
+VALUE SCORE: -0.474553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983921 - Pass
+     [1] 0.016079 - Cast Thraben Charm
+
+VALUE SCORE: -0.460517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982749 - Pass
+     [1] 0.017251 - Cast Thraben Charm
+
+VALUE SCORE: -0.502434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Basilisk Gate; Vector Glider,blocking; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982574 - Pass
+     [1] 0.017426 - Cast Thraben Charm
+
+VALUE SCORE: -0.503123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Basilisk Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982209 - Pass
+     [1] 0.017791 - Cast Thraben Charm
+
+VALUE SCORE: -0.503356
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Lorien Revealed]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate; Vector Glider; Azorius Guildgate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Lorien Revealed]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate; Vector Glider; Azorius Guildgate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.478461 - Pass
+     [1] 0.014018 - Cast Thraben Charm
+     [2] 0.246957 - Play Island
+ >>> [3] 0.219160 - Cast Lorien Revealed
+     [4] 0.041403 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.548534
+SELECTED: Cast Lorien Revealed
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Brainstorm; Heap Gate]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider; Azorius Guildgate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.318543 - Pass
+     [1] 0.009447 - Cast Thraben Charm
+     [2] 0.168550 - Play Island
+     [3] 0.061862 - Cast Outlaw Medic
+ >>> [4] 0.052522 - Cast Brainstorm
+     [5] 0.389075 - Play Heap Gate
+
+VALUE SCORE: -0.553583
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8 (PlayerRL1 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Sacred Cat; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.145119 - Island
+ >>> [1] 0.138975 - Sacred Cat
+     [2] 0.133760 - Outlaw Medic
+     [3] 0.160266 - Journey to Nowhere
+     [4] 0.145119 - Island
+     [5] 0.143461 - Heap Gate
+     [6] 0.133300 - Thraben Charm
+
+VALUE SCORE: -0.560916
+SELECTED: Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 8 (PlayerRL1 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.168709 - Island
+     [1] 0.154943 - Outlaw Medic
+ >>> [2] 0.186242 - Journey to Nowhere
+     [3] 0.168709 - Island
+     [4] 0.166561 - Heap Gate
+     [5] 0.154837 - Thraben Charm
+
+VALUE SCORE: -0.578950
+SELECTED: Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.348953 - Pass
+     [1] 0.192156 - Play Island
+     [2] 0.458891 - Play Heap Gate
+
+VALUE SCORE: -0.566134
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.352053 - Pass
+     [1] 0.185999 - Play Island
+     [2] 0.461948 - Play Heap Gate
+
+VALUE SCORE: -0.593609
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Squadron Hawk; Basilisk Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Squadron Hawk; Basilisk Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped,attacking; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped,attacking; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate; Vector Glider; Azorius Guildgate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Outlaw Medic; Heap Gate; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate; Vector Glider; Azorius Guildgate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.312845 - Pass
+     [1] 0.010807 - Cast Thraben Charm
+     [2] 0.162218 - Play Island
+ >>> [3] 0.062728 - Cast Outlaw Medic
+     [4] 0.410025 - Play Heap Gate
+     [5] 0.041377 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.599714
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Heap Gate; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider; Azorius Guildgate; Outlaw Medic]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.268122 - Pass
+     [1] 0.010001 - Cast Thraben Charm
+     [2] 0.190958 - Play Island
+ >>> [3] 0.491929 - Play Heap Gate
+     [4] 0.038990 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.623928
+SELECTED: Play Heap Gate
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate,tapped; Vector Glider; Azorius Guildgate; Outlaw Medic; Heap Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.664278 - Pass
+     [1] 0.025890 - Cast Thraben Charm
+     [2] 0.112802 - Cast Journey to Nowhere
+ >>> [3] 0.197029 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.627735
+SELECTED: {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.803523 - Pass
+     [1] 0.032802 - Cast Thraben Charm
+     [2] 0.163674 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.629234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.959434 - Pass
+     [1] 0.040566 - Cast Thraben Charm
+
+VALUE SCORE: -0.636871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.959434 - Pass
+     [1] 0.040566 - Cast Thraben Charm
+
+VALUE SCORE: -0.636871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791996 - Pass
+     [1] 0.034060 - Cast Thraben Charm
+     [2] 0.173945 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.639784
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971345 - Pass
+     [1] 0.028655 - Cast Thraben Charm
+
+VALUE SCORE: -0.547996
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Bot-Skill1)
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965491 - Pass
+     [1] 0.034509 - Cast Thraben Charm
+
+VALUE SCORE: -0.620856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Bot-Skill1)
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic; Squadron Hawk]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.964572 - Pass
+     [1] 0.035428 - Cast Thraben Charm
+
+VALUE SCORE: -0.623451
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.966081 - Pass
+     [1] 0.033919 - Cast Thraben Charm
+
+VALUE SCORE: -0.617122
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped,attacking; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963964 - Pass
+     [1] 0.036036 - Cast Thraben Charm
+
+VALUE SCORE: -0.654898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic,blocking; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped,attacking; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963424 - Pass
+     [1] 0.036576 - Cast Thraben Charm
+
+VALUE SCORE: -0.654740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Thraben Charm; Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.962823 - Pass
+ >>> [1] 0.037177 - Cast Thraben Charm
+
+VALUE SCORE: -0.662551
+SELECTED: Cast Thraben Charm
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9 (Bot-Skill1 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=PlayerRL1)
+[PlayerRL1], life = 2
+-> Hand: [Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Outlaw Medic; Heap Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.159632 - Sacred Cat (you)
+     [1] 0.154590 - Outlaw Medic (Bot-Skill1)
+     [2] 0.185998 - Vector Glider (you)
+ >>> [3] 0.155328 - Outlaw Medic (you)
+     [4] 0.158455 - Squadron Hawk (Bot-Skill1)
+     [5] 0.185998 - Vector Glider (Bot-Skill1)
+
+VALUE SCORE: -0.676309
+SELECTED: Outlaw Medic (you)
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} dies, draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 2
+-> Hand: [Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Island; Island; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Island; Island; Journey to Nowhere; Sacred Cat; Sea Gate]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate; Vector Glider; Azorius Guildgate; Heap Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Island; Island; Journey to Nowhere; Sacred Cat; Sea Gate]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate; Vector Glider; Azorius Guildgate; Heap Gate]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.094214 - Pass
+     [1] 0.118540 - Play Island
+     [2] 0.018831 - Cast Journey to Nowhere
+     [3] 0.181574 - Cast Sacred Cat
+ >>> [4] 0.554288 - Play Sea Gate
+     [5] 0.032553 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.658482
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Island; Island; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat; Basilisk Gate; Vector Glider; Azorius Guildgate; Heap Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.243781 - Pass
+     [1] 0.060388 - Cast Journey to Nowhere
+     [2] 0.607903 - Cast Sacred Cat
+     [3] 0.087928 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.661014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Island; Island; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped,attacking; Basilisk Gate; Vector Glider,tapped,attacking; Azorius Guildgate; Heap Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.732552 - Pass
+     [1] 0.267448 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.671494
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Island; Island; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped,attacking; Basilisk Gate; Vector Glider,tapped,attacking; Azorius Guildgate; Heap Gate; Sea Gate,tapped]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.732552 - Pass
+ >>> [1] 0.267448 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.671494
+SELECTED: {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Island; Island; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped,attacking; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Island; Island; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Idyllic Beachfront; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Treasure Token]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.245483 - Pass
+     [1] 0.067110 - Cast Journey to Nowhere
+ >>> [2] 0.687407 - Cast Sacred Cat
+
+VALUE SCORE: -0.676151
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Island; Island; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Treasure Token; Sacred Cat]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.774898 - Pass
+ >>> [1] 0.225102 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.679683
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 10 (PlayerRL1 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=PlayerRL1)
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.155877 - Sacred Cat (you)
+     [1] 0.157019 - Outlaw Medic (Bot-Skill1)
+     [2] 0.156302 - Sacred Cat (you)
+     [3] 0.183860 - Vector Glider (you)
+     [4] 0.163081 - Squadron Hawk (Bot-Skill1)
+     [5] 0.183860 - Vector Glider (Bot-Skill1)
+
+VALUE SCORE: -0.684471
+SELECTED: Sacred Cat (you)
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 10 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=PlayerRL1)
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 10 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: [Sacred Cat]
+[Bot-Skill1], life = 13
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: [Sacred Cat]
+[Bot-Skill1], life = 13
+-> Hand: 8 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: [Sacred Cat]
+[Bot-Skill1], life = 13
+-> Hand: 8 cards
+-> Permanents: [Island,tapped; Sea Gate; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Bot-Skill1)
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: [Sacred Cat]
+[Bot-Skill1], life = 13
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Bot-Skill1)
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: [Sacred Cat]
+[Bot-Skill1], life = 13
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic; Squadron Hawk]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: [Sacred Cat]
+[Bot-Skill1], life = 13
+-> Hand: 8 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider; Sea Gate; Citadel Gate,tapped; Squadron Hawk; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 10 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: [Sacred Cat]
+[Bot-Skill1], life = 13
+-> Hand: 8 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped,attacking; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 10 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Island; Island]
+-> Permanents: [Idyllic Beachfront,tapped; Azorius Guildgate; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Vector Glider,tapped; Azorius Guildgate; Heap Gate,tapped; Sea Gate,tapped; Sacred Cat,blocking; Journey to Nowhere]
+-> Graveyard: [The Modern Age; Outlaw Medic; Counterspell; Lorien Revealed; Brainstorm; Thraben Charm; Outlaw Medic]
+-> Exile: [Sacred Cat]
+[Bot-Skill1], life = 13
+-> Hand: 8 cards
+-> Permanents: [Island,tapped; Sea Gate,tapped; Sea Gate; Basilisk Gate,tapped; Vector Glider,tapped,attacking; Sea Gate; Citadel Gate,tapped; Squadron Hawk,tapped,attacking; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking]
+-> Graveyard: [Spell Pierce; Outlaw Medic; Thraben Charm; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 10
+Reason: Episode 149400 - Win
+Total Decisions Logged: 115
+Ended: 2026-02-08T11:07:19.237949800
+================================================================================

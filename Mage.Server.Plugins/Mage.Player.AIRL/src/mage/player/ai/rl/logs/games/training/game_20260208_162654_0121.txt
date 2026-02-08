@@ -1,0 +1,3543 @@
+================================================================================
+GAME LOG: game_20260208_162654_0121
+Started: 2026-02-08T16:26:54.444866
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=4 decision=KEEP Q_keep=0.405 Q_mull=0.166 hand=[Drossforge Bridge; Drossforge Bridge; Great Furnace; Seat of the Synod; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Seat of the Synod; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Seat of the Synod; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.010242 - Pass
+     [1] 0.269862 - Play Drossforge Bridge
+     [2] 0.278918 - Play Great Furnace
+ >>> [3] 0.440978 - Play Seat of the Synod
+
+VALUE SCORE: -0.057312
+SELECTED: Play Seat of the Synod
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Seat of the Synod]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Seat of the Synod]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Seat of the Synod]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Seat of the Synod]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Seat of the Synod]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Seat of the Synod]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Seat of the Synod]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.018765 - Pass
+     [1] 0.481783 - Play Drossforge Bridge
+ >>> [2] 0.499452 - Play Great Furnace
+
+VALUE SCORE: -0.069789
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.415868 - Pass
+     [1] 0.584131 - Cast Ichor Wellspring
+
+VALUE SCORE: -0.073510
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.413398 - Pass
+     [1] 0.586602 - Cast Ichor Wellspring
+
+VALUE SCORE: -0.076206
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod; Nihil Spellbomb]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod; Nihil Spellbomb]
+-> Permanents: [Seat of the Synod; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.031552 - Pass
+ >>> [1] 0.755718 - Play Drossforge Bridge
+     [2] 0.044304 - Cast Ichor Wellspring
+     [3] 0.168426 - Cast Nihil Spellbomb
+
+VALUE SCORE: -0.101765
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod; Nihil Spellbomb]
+-> Permanents: [Seat of the Synod; Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.126355 - Pass
+     [1] 0.180120 - Cast Ichor Wellspring
+ >>> [2] 0.693525 - Cast Nihil Spellbomb
+
+VALUE SCORE: -0.099143
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Great Furnace; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998602 - Pass
+     [1] 0.001398 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.101892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Great Furnace; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998586 - Pass
+     [1] 0.001414 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.105783
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Great Furnace; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998590 - Pass
+     [1] 0.001410 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.105202
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Great Furnace; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Great Furnace; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998923 - Pass
+     [1] 0.001076 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.127867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Great Furnace; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998683 - Pass
+     [1] 0.001317 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.189353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Great Furnace; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998712 - Pass
+     [1] 0.001288 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.186498
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998793 - Pass
+     [1] 0.001207 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.138271
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998786 - Pass
+     [1] 0.001214 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.138928
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998748 - Pass
+     [1] 0.001252 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.145678
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.024689 - Pass
+ >>> [1] 0.465830 - Play Drossforge Bridge
+     [2] 0.033746 - Cast Ichor Wellspring
+     [3] 0.182725 - Cast Refurbished Familiar
+     [4] 0.292964 - Cast Black Mage's Rod
+     [5] 0.000046 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.230770
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045822 - Pass
+     [1] 0.061372 - Cast Ichor Wellspring
+     [2] 0.340511 - Cast Refurbished Familiar
+     [3] 0.552211 - Cast Black Mage's Rod
+     [4] 0.000084 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.247229
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998168 - Pass
+     [1] 0.001832 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.246933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.045706 - Pass
+     [1] 0.061168 - Cast Ichor Wellspring
+ >>> [2] 0.340259 - Cast Refurbished Familiar
+     [3] 0.552784 - Cast Black Mage's Rod
+     [4] 0.000084 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.246712
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998058 - Pass
+     [1] 0.001942 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.277378
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998206 - Pass
+     [1] 0.001794 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.270753
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998469 - Pass
+     [1] 0.001531 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.163752
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998183 - Pass
+     [1] 0.001817 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.183607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998447 - Pass
+     [1] 0.001553 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.159846
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998354 - Pass
+     [1] 0.001646 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.163095
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997985 - Pass
+     [1] 0.002015 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.256374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997985 - Pass
+     [1] 0.002015 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.256374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997925 - Pass
+     [1] 0.002075 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.265556
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar; Mistvault Bridge]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar; Mistvault Bridge]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.029695 - Pass
+     [1] 0.037933 - Cast Ichor Wellspring
+     [2] 0.143548 - Cast Myr Enforcer
+     [3] 0.346017 - Cast Black Mage's Rod
+     [4] 0.213665 - Cast Refurbished Familiar
+ >>> [5] 0.229081 - Play Mistvault Bridge
+     [6] 0.000060 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.271843
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod; Refurbished Familiar]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.039252 - Pass
+     [1] 0.048366 - Cast Ichor Wellspring
+     [2] 0.200373 - Cast Myr Enforcer
+     [3] 0.438268 - Cast Black Mage's Rod
+ >>> [4] 0.273649 - Cast Refurbished Familiar
+     [5] 0.000093 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.312742
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997362 - Pass
+     [1] 0.002638 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.343173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Seat of the Synod; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.053018 - Pass
+     [1] 0.062261 - Cast Ichor Wellspring
+     [2] 0.291644 - Cast Myr Enforcer
+ >>> [3] 0.592940 - Cast Black Mage's Rod
+     [4] 0.000137 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.334194
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+  - [1] Black Mage's Rod (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996854 - Pass
+     [1] 0.003146 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.398340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997241 - Pass
+     [1] 0.002759 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.365308
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997327 - Pass
+     [1] 0.002672 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.359542
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142346 - Pass
+     [1] 0.857235 - Cast Myr Enforcer
+     [2] 0.000419 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.367652
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996584 - Pass
+     [1] 0.003416 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.419548
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996584 - Pass
+     [1] 0.003416 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.419548
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.134012 - Pass
+ >>> [1] 0.865523 - Cast Myr Enforcer
+     [2] 0.000465 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.420456
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994785 - Pass
+     [1] 0.005215 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.495934
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980776 - Pass
+     [1] 0.019224 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.672346
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980164 - Pass
+     [1] 0.019836 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.698026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 22
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981069 - Pass
+     [1] 0.018931 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.693075
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983865 - Pass
+     [1] 0.016135 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.682382
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983865 - Pass
+     [1] 0.016135 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.682382
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 26
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982970 - Pass
+     [1] 0.017030 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.683367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 26
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982303 - Pass
+     [1] 0.017697 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.683362
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Thoughtcast]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 26
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Thoughtcast]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 26
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.177342 - Pass
+     [1] 0.218761 - Cast Ichor Wellspring
+ >>> [2] 0.602349 - Cast Thoughtcast
+     [3] 0.000776 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.000772 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.341360
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+  - [1] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=PlayerRL1)
+  - [2] Thoughtcast (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992679 - Pass
+     [1] 0.007321 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.451382
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=PlayerRL1)
+  - [1] Thoughtcast (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994671 - Pass
+     [1] 0.005329 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.402847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Bot-Skill1)
+  - [1] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=PlayerRL1)
+  - [2] Thoughtcast (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993333 - Pass
+     [1] 0.006667 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.428358
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=PlayerRL1)
+  - [1] Thoughtcast (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 30
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993526 - Pass
+     [1] 0.006474 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.425970
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 29
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993703 - Pass
+     [1] 0.006297 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.418181
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 29
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.336527 - Pass
+     [1] 0.382211 - Cast Ichor Wellspring
+     [2] 0.278717 - Cast Krark-Clan Shaman
+     [3] 0.001307 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.001239 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.318861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Hero Token; Myr Enforcer,tapped,attacking]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 29
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991733 - Pass
+     [1] 0.008267 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.497981
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Hero Token; Myr Enforcer,tapped,attacking]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 29
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991713 - Pass
+     [1] 0.008287 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.493128
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.358969 - Pass
+     [1] 0.332081 - Cast Ichor Wellspring
+     [2] 0.300095 - Cast Krark-Clan Shaman
+     [3] 0.005749 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.003106 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.483903
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal; Quirion Ranger; Wellwisher; Timberwatch Elf,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal; Quirion Ranger; Wellwisher; Timberwatch Elf,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980992 - Pass
+     [1] 0.019007 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.633118
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976963 - Pass
+     [1] 0.023037 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.677997
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977452 - Pass
+     [1] 0.022548 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.677116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal,tapped,attacking; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978865 - Pass
+     [1] 0.021135 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.700634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal,tapped,attacking; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978865 - Pass
+     [1] 0.021135 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.700634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal,tapped,attacking; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977580 - Pass
+     [1] 0.022420 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.703267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token,blocking; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal,tapped,attacking; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977221 - Pass
+     [1] 0.022779 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.703744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981315 - Pass
+     [1] 0.018685 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.697282
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring; Mistvault Bridge]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring; Mistvault Bridge]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.118180 - Pass
+     [1] 0.144386 - Cast Ichor Wellspring
+     [2] 0.103417 - Cast Krark-Clan Shaman
+ >>> [3] 0.633384 - Play Mistvault Bridge
+     [4] 0.000302 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.000331 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.235833
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod; Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.342476 - Pass
+ >>> [1] 0.373596 - Cast Ichor Wellspring
+     [2] 0.280534 - Cast Krark-Clan Shaman
+     [3] 0.001850 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.001545 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.338475
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+  - [1] Ichor Wellspring (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992367 - Pass
+     [1] 0.007633 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.417971
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993481 - Pass
+     [1] 0.006519 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.405238
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+  - [1] Ichor Wellspring (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992160 - Pass
+     [1] 0.007840 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.420471
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge,tapped]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991159 - Pass
+     [1] 0.008841 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.431544
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Krark-Clan Shaman; Ichor Wellspring]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991415 - Pass
+     [1] 0.008585 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.431519
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Krark-Clan Shaman; Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.331278 - Pass
+ >>> [1] 0.305246 - Cast Krark-Clan Shaman
+     [2] 0.360892 - Cast Ichor Wellspring
+     [3] 0.002584 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.428842
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.967604 - Pass
+     [1] 0.010220 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.022176 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.454109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.956389 - Pass
+     [1] 0.011956 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.031655 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.608609
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 25
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.956389 - Pass
+     [1] 0.011956 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.031655 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.608609
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 17
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.954799 - Pass
+     [1] 0.012437 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.032764 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.616151
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 17
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 17
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.932237 - Pass
+     [1] 0.020165 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.047598 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.669111
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.927773 - Pass
+     [1] 0.020874 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.051353 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.697493
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Seat of the Synod,tapped; Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.923018 - Pass
+     [1] 0.022612 - {T}, Sacrifice {this}: Exile target player's graveyard.
+ >>> [2] 0.054370 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.701804
+SELECTED: Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast; Seat of the Synod]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.939287 - Pass
+     [1] 0.017760 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.042952 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.661837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast; Seat of the Synod]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.939785 - Pass
+     [1] 0.017648 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.042568 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.658849
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+-> Graveyard: [Thoughtcast; Seat of the Synod]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Wellwisher,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.935376 - Pass
+     [1] 0.018955 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.045670 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.667387
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983029 - Pass
+     [1] 0.016971 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.627048
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981816 - Pass
+     [1] 0.018184 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.668195
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981816 - Pass
+     [1] 0.018184 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.668195
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Silverbluff Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979067 - Pass
+     [1] 0.020933 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.675864
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Silverbluff Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Silverbluff Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.028550 - Pass
+     [1] 0.042715 - Cast Ichor Wellspring
+ >>> [2] 0.743820 - Play Silverbluff Bridge
+     [3] 0.184741 - Play Vault of Whispers
+     [4] 0.000080 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.000095 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.251623
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.429610 - Pass
+     [1] 0.566160 - Cast Ichor Wellspring
+     [2] 0.002147 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [3] 0.002083 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.347961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Myr Enforcer,tapped,attacking; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990310 - Pass
+     [1] 0.009690 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.482043
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Myr Enforcer,tapped,attacking; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 21
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990417 - Pass
+     [1] 0.009583 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.486314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.486767 - Pass
+     [1] 0.498813 - Cast Ichor Wellspring
+     [2] 0.009375 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [3] 0.005046 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.497970
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985185 - Pass
+     [1] 0.014815 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.637752
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984240 - Pass
+     [1] 0.015760 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.652573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984527 - Pass
+     [1] 0.015473 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.652890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984112 - Pass
+     [1] 0.015888 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.662832
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983743 - Pass
+     [1] 0.016257 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.701416
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983743 - Pass
+     [1] 0.016257 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.701416
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Ichor Wellspring; Vault of Whispers]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983513 - Pass
+     [1] 0.016487 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.710758
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Ichor Wellspring; Vault of Whispers; Galvanic Blast]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Ichor Wellspring; Vault of Whispers; Galvanic Blast]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.119612 - Pass
+     [1] 0.150368 - Cast Ichor Wellspring
+ >>> [2] 0.729260 - Play Vault of Whispers
+     [3] 0.000145 - Cast Galvanic Blast
+     [4] 0.000286 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.000330 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.314189
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Drossforge Bridge; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.467755 - Pass
+ >>> [1] 0.527072 - Cast Ichor Wellspring
+     [2] 0.000805 - Cast Galvanic Blast
+     [3] 0.002325 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.002044 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.409070
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990172 - Pass
+     [1] 0.002587 - Cast Galvanic Blast
+     [2] 0.007241 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.441510
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Refurbished Familiar; Black Mage's Rod; Myr Enforcer; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983792 - Pass
+     [1] 0.002192 - Cast Galvanic Blast
+     [2] 0.008042 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [3] 0.005974 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.427441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Myr Enforcer,tapped,attacking; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987319 - Pass
+     [1] 0.002640 - Cast Galvanic Blast
+     [2] 0.010041 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.613904
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Myr Enforcer,tapped,attacking; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 13
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987319 - Pass
+     [1] 0.002640 - Cast Galvanic Blast
+     [2] 0.010041 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.613904
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 5
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.961749 - Pass
+     [1] 0.002577 - Cast Galvanic Blast
+     [2] 0.025739 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [3] 0.009935 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.619348
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 5
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 5
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975108 - Pass
+     [1] 0.004914 - Cast Galvanic Blast
+     [2] 0.019978 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.671097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 5
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975188 - Pass
+     [1] 0.004568 - Cast Galvanic Blast
+     [2] 0.020244 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.699614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 5
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973323 - Pass
+     [1] 0.004814 - Cast Galvanic Blast
+     [2] 0.021864 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.708909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 5
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975741 - Pass
+     [1] 0.004167 - Cast Galvanic Blast
+     [2] 0.020093 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.735636
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 5
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975720 - Pass
+     [1] 0.004161 - Cast Galvanic Blast
+     [2] 0.020120 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.737862
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 5
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974192 - Pass
+     [1] 0.004378 - Cast Galvanic Blast
+     [2] 0.021430 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.741694
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 9 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb; Drossforge Bridge; Refurbished Familiar,tapped; Mistvault Bridge; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer,tapped; Mistvault Bridge; Ichor Wellspring; Silverbluff Bridge; Vault of Whispers,tapped; Ichor Wellspring]
+-> Graveyard: [Thoughtcast; Seat of the Synod; Krark-Clan Shaman]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 5
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede; Winding Way; Wellwisher]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974192 - Pass
+     [1] 0.004378 - Cast Galvanic Blast
+     [2] 0.021430 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.741694
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 9
+Reason: Episode 153400 - Win
+Total Decisions Logged: 124
+Ended: 2026-02-08T16:34:25.642912200
+================================================================================

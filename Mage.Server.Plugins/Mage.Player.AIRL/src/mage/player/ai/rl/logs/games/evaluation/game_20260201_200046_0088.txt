@@ -1,0 +1,917 @@
+================================================================================
+GAME LOG: game_20260201_200046_0088
+Started: 2026-02-01T20:00:46.145015300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Elves.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=0 decision=MULLIGAN Q_keep=0.036 Q_mull=1.506 hand=[Lorien Revealed; Mental Note; Mental Note; Thought Scour; Thought Scour; Cryptic Serpent; Murmuring Mystic]
+LONDON_BOTTOM: player=RL mulligansTaken=1 handSize=7 bottomN=1 kept=[Sleep of the Dead; Thought Scour; Island; Deem Inferior; Brainstorm; Dispel] bottomed=[Ponder]
+MULLIGAN_DECISION: player=RL mulligansTaken=1 handSize=6 lands=1 decision=MULLIGAN Q_keep=0.199 Q_mull=0.336 hand=[Island; Deem Inferior; Brainstorm; Dispel; Sleep of the Dead; Thought Scour]
+LONDON_BOTTOM: player=RL mulligansTaken=2 handSize=7 bottomN=1 kept=[Tolarian Terror; Island; Island; Island; Brainstorm; Ponder] bottomed=[Ponder]
+LONDON_BOTTOM: player=RL mulligansTaken=2 handSize=6 bottomN=1 kept=[Tolarian Terror; Island; Island; Island; Brainstorm] bottomed=[Ponder]
+MULLIGAN_DECISION: player=RL mulligansTaken=2 handSize=5 lands=3 decision=KEEP Q_keep=0.801 Q_mull=-0.495 hand=[Island; Island; Island; Brainstorm; Tolarian Terror]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Brainstorm; Tolarian Terror]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Brainstorm; Tolarian Terror]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.125405
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Brainstorm; Tolarian Terror]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.002353 - Pass
+ >>> [1] 0.997647 - Cast Brainstorm
+
+VALUE SCORE: 1.123826
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Island; Tolarian Terror; Dispel; Counterspell; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.172646 - Dispel
+     [1] 0.184160 - Tolarian Terror
+ >>> [2] 0.160508 - Island
+     [3] 0.160466 - Counterspell
+ >>> [4] 0.160508 - Island
+     [5] 0.161711 - Cryptic Serpent
+
+VALUE SCORE: 1.120248
+SELECTED: Island
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Counterspell; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.205656 - Dispel
+     [1] 0.219372 - Tolarian Terror
+ >>> [2] 0.191148 - Counterspell
+     [3] 0.191199 - Island
+     [4] 0.192625 - Cryptic Serpent
+
+VALUE SCORE: 1.120443
+SELECTED: Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123826
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123826
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent; Counterspell]
+-> Permanents: [Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Tolarian Terror; Dispel; Cryptic Serpent; Counterspell]
+-> Permanents: [Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.104791
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Counterspell]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.104791
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Counterspell]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.104791
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Counterspell]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.104791
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Counterspell]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Counterspell]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000153 - Pass
+ >>> [1] 0.999847 - Cast Counterspell
+
+VALUE SCORE: 0.869766
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000153 - Pass
+
+VALUE SCORE: 0.869766
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000153 - Pass
+
+VALUE SCORE: 0.869766
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000153 - Pass
+
+VALUE SCORE: 0.869766
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000153 - Pass
+
+VALUE SCORE: 0.869766
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.082829
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped]
+-> Graveyard: [Generous Ent; Elvish Mystic]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Elvish Mystic; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: [Generous Ent; Elvish Mystic; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: [Generous Ent; Elvish Mystic; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: [Generous Ent; Elvish Mystic; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: [Generous Ent; Elvish Mystic; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: [Generous Ent; Elvish Mystic; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: [Generous Ent; Elvish Mystic; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Dispel; Cryptic Serpent; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: [Generous Ent; Elvish Mystic; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.082829
+SELECTED: Pass
+

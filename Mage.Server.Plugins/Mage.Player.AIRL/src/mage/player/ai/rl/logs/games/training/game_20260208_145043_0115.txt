@@ -1,0 +1,1374 @@
+================================================================================
+GAME LOG: game_20260208_145043_0115
+Started: 2026-02-08T14:50:43.185181100
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.096 Q_mull=0.086 hand=[Slagwoods Bridge; Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.095435 - Pass
+ >>> [1] 0.904565 - Play Slagwoods Bridge
+
+VALUE SCORE: -0.074731
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.377764 - Pass
+ >>> [1] 0.622236 - Cast Nyxborn Hydra
+
+VALUE SCORE: -0.201060
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Bot-Skill1)
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Bot-Skill1)
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Experimental Synthesizer (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Nyxborn Hydra,blocking]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Experimental Synthesizer]
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Makeshift Munitions; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Experimental Synthesizer (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: [Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: [Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: [Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: [Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: [Goblin Tomb Raider]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: [Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: [Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Lembas; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: [Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions; Lembas]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions; Lembas]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=Bot-Skill1)
+  - [1] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions; Lembas]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions; Lembas]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions; Lembas]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions; Lembas]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider,tapped,attacking; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Cast Down; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Fanatical Offering; Ichor Wellspring; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+-> Graveyard: [Nyxborn Hydra; Makeshift Munitions; Lembas]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider,tapped,attacking; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 5
+Reason: Episode 152200 - Win
+Total Decisions Logged: 49
+Ended: 2026-02-08T14:50:52.989303300
+================================================================================

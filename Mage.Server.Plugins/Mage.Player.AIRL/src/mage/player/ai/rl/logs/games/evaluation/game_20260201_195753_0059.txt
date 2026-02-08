@@ -1,0 +1,2436 @@
+================================================================================
+GAME LOG: game_20260201_195753_0059
+Started: 2026-02-01T19:57:53.012768600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Elves.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=4 decision=KEEP Q_keep=0.801 Q_mull=0.622 hand=[Mountain; Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary; Goblin Bushwhacker]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078308
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.001424 - Cast Experimental Synthesizer
+ >>> [2] 0.998576 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 1.073634
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073634
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073634
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.266903 - Quirion Ranger (Benchmark-skill6)
+     [1] 0.236465 - Goblin Bushwhacker (you)
+     [2] 0.248297 - RL
+ >>> [3] 0.248335 - Benchmark-skill6
+
+VALUE SCORE: 1.050062
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary; Lightning Bolt]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary; Lightning Bolt]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999914 - Play Mountain
+     [2] 0.000012 - Cast Experimental Synthesizer
+     [3] 0.000074 - Cast Lightning Bolt
+
+VALUE SCORE: 1.052685
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.266663 - Quirion Ranger (Benchmark-skill6)
+     [1] 0.236651 - Goblin Bushwhacker (you)
+ >>> [2] 0.248301 - RL
+     [3] 0.248385 - Benchmark-skill6
+
+VALUE SCORE: 1.044364
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary; Lightning Bolt]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.008406 - Cast Experimental Synthesizer
+ >>> [2] 0.940811 - Cast Burning-Tree Emissary
+     [3] 0.050781 - Cast Lightning Bolt
+
+VALUE SCORE: 1.047213
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 1.047213
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.213663 - Quirion Ranger (Benchmark-skill6)
+     [1] 0.191194 - Goblin Bushwhacker (you)
+     [2] 0.194054 - Burning-Tree Emissary (you)
+     [3] 0.200337 - RL
+ >>> [4] 0.200752 - Benchmark-skill6
+
+VALUE SCORE: 1.000287
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000054 - Pass
+     [1] 0.153544 - Cast Experimental Synthesizer
+ >>> [2] 0.846403 - Cast Lightning Bolt
+
+VALUE SCORE: 1.004005
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.213663 - Quirion Ranger (Benchmark-skill6)
+     [1] 0.191194 - Goblin Bushwhacker (you)
+     [2] 0.194054 - Burning-Tree Emissary (you)
+ >>> [3] 0.200337 - RL
+     [4] 0.200752 - Benchmark-skill6
+
+VALUE SCORE: 1.000287
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.004005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.004005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.004005
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.004005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.004005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.004005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.004005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.004005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.004005
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.828276 - Play Mountain
+     [2] 0.000010 - Cast Experimental Synthesizer
+     [3] 0.171714 - Play Great Furnace
+
+VALUE SCORE: 1.037280
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Experimental Synthesizer; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000317 - Pass
+ >>> [1] 0.999683 - Cast Experimental Synthesizer
+
+VALUE SCORE: 1.030257
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Experimental Synthesizer]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000317 - Pass
+
+VALUE SCORE: 1.030257
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Experimental Synthesizer]
+-> Graveyard: [Lightning Bolt]
+-> Exile: [Rally at the Hornburg]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000026 - Pass
+ >>> [1] 0.999974 - Cast Rally at the Hornburg
+
+VALUE SCORE: 1.004729
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Mountain,tapped; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 1.004729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 1.004729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 1.004729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 1.004729
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 1.004729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 1.004729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 1.004729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 1.004729
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace; Rally at the Hornburg]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Mountain; Great Furnace; Rally at the Hornburg]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.834678 - Play Mountain
+     [2] 0.165156 - Play Great Furnace
+     [3] 0.000125 - Cast Rally at the Hornburg
+     [4] 0.000041 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.981186
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace; Rally at the Hornburg]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000019 - Pass
+ >>> [1] 0.756517 - Cast Rally at the Hornburg
+     [2] 0.243464 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.971464
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.971464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.971464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.971464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.971464
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.971464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.971464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.971464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.971464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.971464
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.156829 - Play Great Furnace
+ >>> [2] 0.843134 - Play Mountain
+     [3] 0.000037 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.913900
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Experimental Synthesizer; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000088 - Pass
+ >>> [1] 0.999912 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.902263
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.902263
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.148037 - Play Great Furnace
+ >>> [2] 0.851963 - Play Mountain
+
+VALUE SCORE: 0.867908
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.867908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token,attacking; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.867908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token,attacking; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,blocking; Masked Vandal,blocking]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.867908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.867908
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.867908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.867908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.867908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token,blocking; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.867908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,tapped; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.867908
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,tapped; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,tapped; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Great Furnace
+
+VALUE SCORE: 0.858058
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain; Great Furnace]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,tapped; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token,attacking; Mountain; Great Furnace]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,tapped; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token,attacking; Mountain; Great Furnace]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,tapped; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain; Great Furnace]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal,tapped; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain; Great Furnace]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Fyndhorn Elves; Masked Vandal; Masked Vandal; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain; Great Furnace]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Fyndhorn Elves; Masked Vandal; Masked Vandal; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain; Great Furnace]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain; Great Furnace]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+-> Graveyard: [Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal,tapped,attacking; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+-> Graveyard: [Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token,blocking; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal,tapped,attacking; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+-> Graveyard: [Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+-> Graveyard: [Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.858058
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+-> Graveyard: [Winding Way]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+-> Graveyard: [Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.148930 - Play Great Furnace
+ >>> [2] 0.851070 - Play Mountain
+
+VALUE SCORE: 0.862869
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain; Mountain]
+-> Graveyard: [Lightning Bolt; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Great Furnace]
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Fyndhorn Elves; Masked Vandal; Masked Vandal,tapped; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+-> Graveyard: [Winding Way]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.862869
+SELECTED: Pass
+

@@ -1,0 +1,1259 @@
+================================================================================
+GAME LOG: game_20260201_200036_0086
+Started: 2026-02-01T20:00:36.317877100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Caw-Gates.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=3 decision=KEEP Q_keep=0.917 Q_mull=-0.245 hand=[Island; Island; Island; Deem Inferior; Brainstorm; Cryptic Serpent; Cryptic Serpent]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Deem Inferior; Brainstorm; Cryptic Serpent; Cryptic Serpent]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Deem Inferior; Brainstorm; Cryptic Serpent; Cryptic Serpent]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.124944
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Brainstorm; Cryptic Serpent; Cryptic Serpent]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.002353 - Pass
+ >>> [1] 0.997647 - Cast Brainstorm
+
+VALUE SCORE: 1.123348
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour; Ponder]
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.133221 - Thought Scour
+     [1] 0.120843 - Island
+     [2] 0.130015 - Deem Inferior
+     [3] 0.121760 - Cryptic Serpent
+     [4] 0.121760 - Cryptic Serpent
+     [5] 0.120843 - Island
+ >>> [6] 0.129798 - Ponder
+     [7] 0.121760 - Cryptic Serpent
+
+VALUE SCORE: 1.119724
+SELECTED: Ponder
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour]
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.153091 - Thought Scour
+ >>> [1] 0.138872 - Island
+     [2] 0.149407 - Deem Inferior
+     [3] 0.139920 - Cryptic Serpent
+     [4] 0.139920 - Cryptic Serpent
+ >>> [5] 0.138872 - Island
+     [6] 0.139920 - Cryptic Serpent
+
+VALUE SCORE: 1.119949
+SELECTED: Island
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123348
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002353 - Pass
+
+VALUE SCORE: 1.123348
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island]
+-> Permanents: [Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island]
+-> Permanents: [Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.499664 - Benchmark-skill6
+ >>> [1] 0.500336 - RL
+
+VALUE SCORE: 1.121764
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour; Island]
+-> Permanents: [Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour; Island]
+-> Permanents: [Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999981 - Play Island
+     [2] 0.000019 - Cast Thought Scour
+
+VALUE SCORE: 1.122908
+SELECTED: Play Island
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.499670 - Benchmark-skill6
+     [1] 0.500330 - RL
+
+VALUE SCORE: 1.119933
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Thought Scour; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000205 - Pass
+ >>> [1] 0.999795 - Cast Thought Scour
+
+VALUE SCORE: 1.121119
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.499670 - Benchmark-skill6
+ >>> [1] 0.500330 - RL
+
+VALUE SCORE: 1.119933
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Ponder]
+-> Permanents: [Island,tapped; Island]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+ >>> [1] 0.999991 - Cast Ponder
+
+VALUE SCORE: 1.117418
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.117418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.117418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.117418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.117418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.117418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.117418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Island; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island; Island]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999915 - Play Island
+     [2] 0.000085 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.119203
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.974033 - Cast Cryptic Serpent
+     [2] 0.025966 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.117289
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.117289
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.117289
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.117289
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.117289
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.117289
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.117289
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed; Island]
+-> Permanents: [Island; Island; Island; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed; Island]
+-> Permanents: [Island; Island; Island; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000040 - Cast Deem Inferior
+     [2] 0.003140 - Cast Cryptic Serpent
+     [3] 0.000083 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [4] 0.996738 - Play Island
+
+VALUE SCORE: 1.115273
+SELECTED: Play Island
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Deep Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Lorien Revealed]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deep Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Lorien Revealed]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.499705 - Benchmark-skill6
+     [1] 0.500295 - RL
+
+VALUE SCORE: 1.111678
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.012056 - Cast Deem Inferior
+ >>> [2] 0.962189 - Cast Cryptic Serpent
+     [3] 0.000717 - Cast Deep Analysis
+     [4] 0.025037 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.113202
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Deep Analysis; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000050 - Pass
+ >>> [1] 0.999950 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.103869
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Precombat Main (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.024762 - Brainstorm
+     [1] 0.024762 - Brainstorm
+     [2] 0.024762 - Brainstorm
+     [3] 0.019492 - Counterspell
+     [4] 0.019492 - Counterspell
+     [5] 0.019492 - Counterspell
+     [6] 0.019492 - Counterspell
+     [7] 0.021394 - Cryptic Serpent
+     [8] 0.019391 - Deem Inferior
+     [9] 0.019391 - Deem Inferior
+     [10] 0.019391 - Deem Inferior
+     [11] 0.021659 - Deep Analysis
+     [12] 0.020505 - Dispel
+     [13] 0.020505 - Dispel
+     [14] 0.022702 - Island
+     [15] 0.022702 - Island
+     [16] 0.022702 - Island
+     [17] 0.022702 - Island
+     [18] 0.022702 - Island
+     [19] 0.022702 - Island
+     [20] 0.022702 - Island
+     [21] 0.022702 - Island
+     [22] 0.022702 - Island
+     [23] 0.022702 - Island
+     [24] 0.022702 - Island
+     [25] 0.022702 - Island
+     [26] 0.021450 - Lorien Revealed
+     [27] 0.021450 - Lorien Revealed
+     [28] 0.021450 - Lorien Revealed
+ >>> [29] 0.021614 - Mental Note
+ >>> [30] 0.021614 - Mental Note
+ >>> [31] 0.021614 - Mental Note
+ >>> [32] 0.021614 - Mental Note
+     [33] 0.022858 - Murmuring Mystic
+     [34] 0.022858 - Murmuring Mystic
+     [35] 0.022343 - Ponder
+     [36] 0.022343 - Ponder
+     [37] 0.023052 - Sleep of the Dead
+     [38] 0.023052 - Sleep of the Dead
+     [39] 0.021076 - Thought Scour
+     [40] 0.021076 - Thought Scour
+     [41] 0.021076 - Thought Scour
+     [42] 0.020638 - Tolarian Terror
+     [43] 0.020638 - Tolarian Terror
+     [44] 0.020638 - Tolarian Terror
+     [45] 0.020638 - Tolarian Terror
+
+VALUE SCORE: 1.100571
+SELECTED: Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Deep Analysis; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000050 - Pass
+
+VALUE SCORE: 1.103869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Deep Analysis; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000050 - Pass
+
+VALUE SCORE: 1.103869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Deep Analysis; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000050 - Pass
+
+VALUE SCORE: 1.103869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Deep Analysis; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000050 - Pass
+
+VALUE SCORE: 1.103869
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Deep Analysis; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Deep Analysis; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000050 - Pass
+
+VALUE SCORE: 1.103869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Cryptic Serpent; Deep Analysis; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Brainstorm; Ponder; Thought Scour; Ponder; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000050 - Pass
+
+VALUE SCORE: 1.103869
+SELECTED: Pass
+

@@ -69,6 +69,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
     // Track RL player activation failures (these pollute training signal)
     private static final java.util.concurrent.atomic.AtomicInteger RL_ACTIVATION_FAILURES = new java.util.concurrent.atomic.AtomicInteger(0);
+    private static final java.util.concurrent.atomic.AtomicInteger SIMULATION_TRAINING_SKIPPED = new java.util.concurrent.atomic.AtomicInteger(0);
 
     // Track valid alternative cost choices discovered during simulation
     // Key: source card UUID, Value: set of valid choice indices (e.g., "1" for option 1, "2" for option 2)
@@ -83,6 +84,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private MulliganModel mulliganModel;
     protected StateSequenceBuilder.SequenceOutput currentState;
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
+    private final java.util.Map<StateSequenceBuilder.ActionType, Integer> decisionCountsByHead;
     private Ability currentAbility;
     private int mulligansTaken = 0;
     private int currentEpisode = -1; // For mulligan logging
@@ -265,11 +267,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.model = model;
         this.mulliganModel = new MulliganModel(model);
         this.trainingBuffer = new ArrayList<>();
+        this.decisionCountsByHead = new java.util.HashMap<>();
         this.greedyMode = greedy;
         this.trainingEnabled = trainingEnabled;
         this.policyKey = (policyKey == null || policyKey.trim().isEmpty()) ? "train" : policyKey;
         // Auto-targeting disabled via getStrictChooseMode override
-        RLTrainer.threadLocalLogger.get().info("ComputerPlayerRL initialized for " + name
+        // Avoid terminal spam during eval/benchmark. Enable by raising log level if needed.
+        RLTrainer.threadLocalLogger.get().debug("ComputerPlayerRL initialized for " + name
                 + (greedy ? " [GREEDY]" : "")
                 + (this.trainingEnabled ? "" : " [NO-TRAIN]")
                 + ("train".equals(this.policyKey) ? "" : " [" + this.policyKey + "]"));
@@ -285,6 +289,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.model = player.model;
         this.mulliganModel = player.mulliganModel;
         this.trainingBuffer = new ArrayList<>();
+        this.decisionCountsByHead = new java.util.HashMap<>();
         this.currentAbility = player.currentAbility;
         this.abilitySourceToExcludeFromMana = null; // Don't copy - each activation sets its own
         this.tapTargetCostReservations = new HashSet<>(); // Don't copy - each activation sets its own
@@ -365,10 +370,26 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         // Get model predictions - single call for both policy and value
-        RLTrainer.threadLocalLogger.get().info("About to call model.scoreCandidates() with candidateCount: " + candidateCount);
+        String headId = headForActionType(actionType);
+        int pickIndex = 0; // Phase-1: single-shot scoring (sequential picking comes later)
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info("About to call model.scoreCandidates() with candidateCount: " + candidateCount);
+        }
         mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction
-                = model.scoreCandidates(baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey);
-        RLTrainer.threadLocalLogger.get().info("Successfully received candidate scoring result");
+                = model.scoreCandidates(
+                        baseState,
+                        candidateActionIds,
+                        candidateFeatures,
+                        candidateMask,
+                        policyKey,
+                        headId,
+                        pickIndex,
+                        minTargets,
+                        maxTargets
+                );
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info("Successfully received candidate scoring result");
+        }
         float[] actionProbs = prediction.policyScores; // length = maxCandidates
         float valueScore = prediction.valueScores;
 
@@ -408,8 +429,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
         }
 
-        RLTrainer.threadLocalLogger.get().info("Action probabilities: " + Arrays.toString(maskedProbs));
-        RLTrainer.threadLocalLogger.get().info("Value score: " + valueScore);
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info("Action probabilities: " + Arrays.toString(maskedProbs));
+            RLTrainer.threadLocalLogger.get().info("Value score: " + valueScore);
+        }
 
         // Store for game logging
         this.lastActionProbs = maskedProbs.clone();
@@ -489,6 +512,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         // Record training data for decisions (store full action + joint log-prob)
         if (trainingEnabled && !selectedIndices.isEmpty()) {
+            if (game != null && game.isSimulation()) {
+                // Never record training from simulation copies (alt-cost testing, playable checks, etc).
+                SIMULATION_TRAINING_SKIPPED.incrementAndGet();
+                return selectedIndices;
+            }
             int[] chosenIndices = new int[maxCandidates];
             Arrays.fill(chosenIndices, -1);
             int chosenCount = Math.min(selectedIndices.size(), maxCandidates);
@@ -511,6 +539,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     stepReward
             );
             trainingBuffer.add(td);
+            
+            // Track decision count by head
+            decisionCountsByHead.put(actionType, decisionCountsByHead.getOrDefault(actionType, 0) + 1);
+            
             if (actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN) {
                 mulliganTraceJsonl(
                         "bottom_td_recorded",
@@ -523,6 +555,21 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         return selectedIndices;
+    }
+
+    private static String headForActionType(StateSequenceBuilder.ActionType t) {
+        if (t == null) {
+            return "action";
+        }
+        switch (t) {
+            case SELECT_TARGETS:
+                return "target";
+            case LONDON_MULLIGAN:
+            case SELECT_CARD:
+                return "card_select";
+            default:
+                return "action";
+        }
     }
 
     private static int toVocabId(String key) {
@@ -935,109 +982,179 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         // Special case: London mulligan card selection
+        // TODO: I don't think this check is sufficient to say its a mulligan
         if (source == null && outcome == Outcome.Discard && target instanceof mage.target.common.TargetCardInHand) {
             return chooseLondonMulliganCards(target, game);
         }
-
-        if (USE_ENGINE_CHOICES) {
-            boolean result = super.chooseTarget(outcome, target, source, game);
-            if (result && !target.getTargets().isEmpty()) {
-                for (UUID targetId : target.getTargets()) {
-                    String targetName = describeTargetWithOwner(targetId, game);
-                    RLTrainer.threadLocalLogger.get().info(
-                            "Player " + getName() + " chose target (engine): " + targetName + " (" + targetId + ")"
-                            + " for ability: " + (source != null ? source.toString() : "null source")
-                    );
-                }
-            }
-            return result;
-        }
-        // Other game setup flows with null source:
-        // defer to base implementation until we add RL support for those cases.
-        if (source == null) {
-            return super.chooseTarget(outcome, target, source, game);
-        }
-        // Determine which player must choose the targets (abilityController may differ)
+        // RL-only target selection. No engine fallback.
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
 
-        // Build list of possible targets that are legal
-        List<UUID> possibleTargetsList = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
-        final UUID ctrlId = abilityControllerId; // make effectively final for lambda
-        possibleTargetsList.removeIf(id -> !target.canTarget(ctrlId, id, source, game));
+        int minTargets = Math.max(0, target.getMinNumberOfTargets());
+        int maxTargets = Math.max(0, target.getMaxNumberOfTargets());
 
-        // Reorder targets deterministically: self first (index 0), primary opponent second (index 1)
-        if (!possibleTargetsList.isEmpty()) {
-            UUID selfId = this.getId();
-            UUID primaryOpponentId = null;
-            if (!game.getOpponents(selfId).isEmpty()) {
-                primaryOpponentId = game.getOpponents(selfId).iterator().next();
+        java.util.HashSet<UUID> chosen = new java.util.HashSet<>();
+        int chosenCount = 0;
+        while (chosenCount < maxTargets) {
+            java.util.List<UUID> possible = new java.util.ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+            final UUID ctrlId = abilityControllerId;
+            possible.removeIf(id -> id == null || chosen.contains(id) || !target.canTarget(ctrlId, id, source, game));
+
+            boolean allowStop = chosenCount >= minTargets;
+            if (allowStop) {
+                possible.add(0, null); // STOP sentinel
             }
 
-            List<UUID> reordered = new ArrayList<>(possibleTargetsList.size());
-            if (possibleTargetsList.contains(selfId)) {
-                reordered.add(selfId);
+            if (possible.isEmpty()) {
+                break;
             }
-            if (primaryOpponentId != null && possibleTargetsList.contains(primaryOpponentId)) {
-                reordered.add(primaryOpponentId);
-            }
-            for (UUID tid : possibleTargetsList) {
-                if (!reordered.contains(tid)) {
-                    reordered.add(tid);
+
+            UUID picked = null;
+            if (possible.size() == 1) {
+                picked = possible.get(0);
+            } else {
+                try {
+                    TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
+                    StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+                    final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+                    final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
+
+                    int candidateCount = Math.min(possible.size(), maxCandidates);
+                    int[] candidateActionIds = new int[maxCandidates];
+                    float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
+                    int[] candidateMask = new int[maxCandidates];
+                    for (int i = 0; i < candidateCount; i++) {
+                        candidateMask[i] = 1;
+                        UUID cand = possible.get(i);
+                        candidateActionIds[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source, cand);
+                        candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source, cand, candFeatDim);
+                    }
+
+                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+                            baseState,
+                            candidateActionIds,
+                            candidateFeatures,
+                            candidateMask,
+                            policyKey,
+                            "target",
+                            chosenCount,
+                            minTargets,
+                            maxTargets
+                    );
+                    float[] actionProbs = prediction.policyScores;
+                    float valueScore = prediction.valueScores;
+
+                    int chosenIdx = candidateCount - 1;
+                    if (greedyMode) {
+                        float best = -1.0f;
+                        for (int i = 0; i < candidateCount; i++) {
+                            float p = actionProbs[i];
+                            if (Float.isNaN(p) || Float.isInfinite(p) || p < 0.0f) {
+                                p = 0.0f;
+                            }
+                            if (p > best) {
+                                best = p;
+                                chosenIdx = i;
+                            }
+                        }
+                    } else {
+                        // Sample from returned probabilities (already masked/renormalized by Python)
+                        float r = new java.util.Random().nextFloat();
+                        float cdf = 0.0f;
+                        for (int i = 0; i < candidateCount; i++) {
+                            float p = actionProbs[i];
+                            if (Float.isNaN(p) || Float.isInfinite(p) || p < 0.0f) {
+                                p = 0.0f;
+                            }
+                            cdf += p;
+                            if (r <= cdf) {
+                                chosenIdx = i;
+                                break;
+                            }
+                        }
+                    }
+                    picked = possible.get(chosenIdx);
+
+                    // Track decision count by head
+                    decisionCountsByHead.put(StateSequenceBuilder.ActionType.SELECT_TARGETS, 
+                        decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.SELECT_TARGETS, 0) + 1);
+
+                    // Gamelog: target-pick decision
+                    try {
+                        GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+                        if (gameLogger != null && gameLogger.isEnabled()) {
+                            int turn = game.getTurnNum();
+                            if (turn != lastLoggedTurn) {
+                                String activePlayerName = game.getActivePlayerId() != null
+                                        ? game.getPlayer(game.getActivePlayerId()).getName()
+                                        : "Unknown";
+                                gameLogger.logTurnStart(turn, activePlayerName, formatGameState(game));
+                                lastLoggedTurn = turn;
+                            }
+                            String phase = game.getStep() != null ? game.getStep().getType().toString() : "Unknown";
+                            String activePlayerName = game.getActivePlayerId() != null
+                                    ? game.getPlayer(game.getActivePlayerId()).getName()
+                                    : "Unknown";
+                            List<String> optionNames = new ArrayList<>();
+                            for (int i = 0; i < candidateCount; i++) {
+                                UUID tid = possible.get(i);
+                                optionNames.add(tid == null ? "STOP" : describeTargetWithOwner(tid, game));
+                            }
+                            String selectedName = picked == null ? "STOP" : describeTargetWithOwner(picked, game);
+                            gameLogger.logDecision(
+                                    this.getName(),
+                                    activePlayerName,
+                                    phase + " (TARGET_PICK " + chosenCount + " min=" + minTargets + " max=" + maxTargets + ")",
+                                    turn,
+                                    formatGameState(game),
+                                    optionNames,
+                                    Arrays.copyOf(actionProbs, candidateCount),
+                                    valueScore,
+                                    chosenIdx,
+                                    selectedName
+                            );
+                        }
+                    } catch (Exception ignored) {
+                    }
+                } catch (Exception e) {
+                    // Deterministic internal fallback (no engine)
+                    picked = possible.get(0);
                 }
             }
-            possibleTargetsList = reordered;
-        }
 
-        // Log all possible legal targets before the RL decision, similar to ability logging
-        if (RLTrainer.threadLocalLogger.get().isInfoEnabled()) {
-            StringBuilder sb = new StringBuilder("Possible targets: ");
-            for (int i = 0; i < possibleTargetsList.size(); i++) {
-                UUID tid = possibleTargetsList.get(i);
-                sb.append("[").append(i).append("] ").append(describeTargetWithOwner(tid, game));
-                if (i < possibleTargetsList.size() - 1) {
-                    sb.append("; ");
-                }
+            if (picked == null) { // STOP
+                break;
             }
-            RLTrainer.threadLocalLogger.get().info(sb.toString());
-        }
-        // If engine thinks no choice is required, fall back to original behaviour
-        if (possibleTargetsList.isEmpty()) {
-            return super.chooseTarget(outcome, target, source, game);
+            target.addTarget(picked, source, game);
+            chosen.add(picked);
+            chosenCount++;
         }
 
-        int maxTargets = Math.min(target.getMaxNumberOfTargets(), possibleTargetsList.size());
-        int minTargets = target.getMinNumberOfTargets();
-
-        // If only one option or zero required, just pick automatically
-        if (possibleTargetsList.size() == 1 || maxTargets == 0) {
-            target.addTarget(possibleTargetsList.get(0), source, game);
-        } else {
-            // Ask the RL policy which indices to choose
-            List<Integer> chosenIdx = genericChoose(possibleTargetsList, maxTargets, minTargets,
-                    StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source);
-            for (int idx : chosenIdx) {
-                target.addTarget(possibleTargetsList.get(idx), source, game);
+        // Ensure minimum targets if required (deterministic fill, no engine)
+        while (chosenCount < minTargets) {
+            java.util.List<UUID> possible = new java.util.ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+            final UUID ctrlId = abilityControllerId;
+            possible.removeIf(id -> id == null || chosen.contains(id) || !target.canTarget(ctrlId, id, source, game));
+            if (possible.isEmpty()) {
+                break;
             }
+            UUID picked = possible.get(0);
+            target.addTarget(picked, source, game);
+            chosen.add(picked);
+            chosenCount++;
         }
 
-        // Logging
-        for (UUID targetId : target.getTargets()) {
-            String targetName = describeTargetWithOwner(targetId, game);
-            RLTrainer.threadLocalLogger.get().info(
-                    "Player " + getName() + " chose target: " + targetName + " (" + targetId + ")"
-                    + " for ability: " + (source != null ? source.toString() : "null source")
-            );
-        }
-        return true;
+        return chosenCount >= minTargets;
     }
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         boolean result = super.choose(outcome, target, source, game);
-        if (result && !target.getTargets().isEmpty()) {
+        // Avoid terminal spam during eval/benchmark: targets are logged via GameLogger decisions.
+        // Keep the old terminal diagnostics only when explicitly enabled.
+        if (ACTIVATION_DIAG && result && target != null && !target.getTargets().isEmpty()) {
             for (UUID targetId : target.getTargets()) {
                 String targetName = describeTargetWithOwner(targetId, game);
                 RLTrainer.threadLocalLogger.get().info(
@@ -1051,17 +1168,219 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        boolean result = super.chooseTarget(outcome, cards, target, source, game);
-        if (result && !target.getTargets().isEmpty()) {
-            for (UUID targetId : target.getTargets()) {
-                String targetName = describeTargetWithOwner(targetId, game);
-                RLTrainer.threadLocalLogger.get().info(
-                        "Player " + getName() + " chose target from cards: " + targetName + " (" + targetId + ")"
-                        + " for ability: " + (source != null ? source.toString() : "null source")
-                );
+        // RL-only selection from a provided visible card set. No engine fallback.
+        if (cards == null || target == null) {
+            return false;
+        }
+        
+        // CRITICAL: Filter cards by target's filter (e.g., Islandcycling only shows Islands)
+        List<Card> filteredCards;
+        if (target.getFilter() != null) {
+            // Use the target's filter to get only valid cards
+            filteredCards = new ArrayList<>(cards.getCards(target.getFilter(), this.getId(), source, game));
+        } else {
+            filteredCards = new ArrayList<>(cards.getCards(game));
+        }
+        
+        if (filteredCards.isEmpty()) {
+            return false;
+        }
+
+        // Deduplicate by card name for zones where cards have no state
+        // Battlefield cards have state (tapped/untapped, counters, etc.) that matters
+        boolean shouldDedupe = false;
+        if (!filteredCards.isEmpty()) {
+            Card firstCard = filteredCards.get(0);
+            if (firstCard != null) {
+                // Dedupe library and hand - cards are stateless (no tapped/untapped, counters, etc.)
+                // Don't dedupe battlefield (state matters) or graveyard (timestamp/order matters)
+                mage.constants.Zone zone = game.getState().getZone(firstCard.getId());
+                shouldDedupe = (zone == mage.constants.Zone.LIBRARY || zone == mage.constants.Zone.HAND);
             }
         }
-        return result;
+
+        List<Card> choices;
+        if (shouldDedupe) {
+            // Deduplicate by card name - model doesn't need to distinguish between Island #1 and Island #14
+            java.util.LinkedHashMap<String, Card> uniqueCards = new java.util.LinkedHashMap<>();
+            for (Card card : filteredCards) {
+                if (card != null) {
+                    String cardName = card.getName();
+                    if (!uniqueCards.containsKey(cardName)) {
+                        uniqueCards.put(cardName, card);
+                    }
+                }
+            }
+            choices = new ArrayList<>(uniqueCards.values());
+        } else {
+            // Keep all cards - state matters (e.g., tapped vs untapped creatures)
+            choices = filteredCards;
+        }
+        
+        if (choices.isEmpty()) {
+            return false;
+        }
+
+        int minTargets = Math.max(0, target.getMinNumberOfTargets());
+        int maxTargets = Math.max(0, target.getMaxNumberOfTargets());
+        maxTargets = Math.min(maxTargets, choices.size());
+        minTargets = Math.min(minTargets, choices.size());
+
+        java.util.HashSet<UUID> chosen = new java.util.HashSet<>();
+        int chosenCount = 0;
+        while (chosenCount < maxTargets) {
+            List<Card> remaining = new ArrayList<>();
+            for (Card c : choices) {
+                if (c != null && !chosen.contains(c.getId())) {
+                    remaining.add(c);
+                }
+            }
+            if (remaining.isEmpty()) {
+                break;
+            }
+
+            boolean allowStop = chosenCount >= minTargets;
+            if (allowStop) {
+                remaining.add(0, null); // STOP sentinel
+            }
+
+            Card picked = null;
+            if (remaining.size() == 1) {
+                picked = remaining.get(0);
+            } else {
+                try {
+                    TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
+                    StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+                    final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+                    final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
+
+                    int candidateCount = Math.min(remaining.size(), maxCandidates);
+                    int[] candidateActionIds = new int[maxCandidates];
+                    float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
+                    int[] candidateMask = new int[maxCandidates];
+                    for (int i = 0; i < candidateCount; i++) {
+                        candidateMask[i] = 1;
+                        Card cand = remaining.get(i);
+                        UUID cid = cand == null ? null : cand.getId();
+                        candidateActionIds[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.SELECT_CARD, game, source, cid);
+                        candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_CARD, game, source, cid, candFeatDim);
+                    }
+
+                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+                            baseState,
+                            candidateActionIds,
+                            candidateFeatures,
+                            candidateMask,
+                            policyKey,
+                            "card_select",
+                            chosenCount,
+                            minTargets,
+                            maxTargets
+                    );
+                    float[] actionProbs = prediction.policyScores;
+                    float valueScore = prediction.valueScores;
+                    int chosenIdx = candidateCount - 1;
+                    if (greedyMode) {
+                        float best = -1.0f;
+                        for (int i = 0; i < candidateCount; i++) {
+                            float p = actionProbs[i];
+                            if (Float.isNaN(p) || Float.isInfinite(p) || p < 0.0f) {
+                                p = 0.0f;
+                            }
+                            if (p > best) {
+                                best = p;
+                                chosenIdx = i;
+                            }
+                        }
+                    } else {
+                        float r = new java.util.Random().nextFloat();
+                        float cdf = 0.0f;
+                        for (int i = 0; i < candidateCount; i++) {
+                            float p = actionProbs[i];
+                            if (Float.isNaN(p) || Float.isInfinite(p) || p < 0.0f) {
+                                p = 0.0f;
+                            }
+                            cdf += p;
+                            if (r <= cdf) {
+                                chosenIdx = i;
+                                break;
+                            }
+                        }
+                    }
+                    picked = remaining.get(chosenIdx);
+
+                    // Track decision count by head
+                    decisionCountsByHead.put(StateSequenceBuilder.ActionType.SELECT_CARD, 
+                        decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.SELECT_CARD, 0) + 1);
+
+                    // Gamelog: card-pick decision
+                    try {
+                        GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+                        if (gameLogger != null && gameLogger.isEnabled()) {
+                            int turn = game.getTurnNum();
+                            if (turn != lastLoggedTurn) {
+                                String activePlayerName = game.getActivePlayerId() != null
+                                        ? game.getPlayer(game.getActivePlayerId()).getName()
+                                        : "Unknown";
+                                gameLogger.logTurnStart(turn, activePlayerName, formatGameState(game));
+                                lastLoggedTurn = turn;
+                            }
+                            String phase = game.getStep() != null ? game.getStep().getType().toString() : "Unknown";
+                            String activePlayerName = game.getActivePlayerId() != null
+                                    ? game.getPlayer(game.getActivePlayerId()).getName()
+                                    : "Unknown";
+                            List<String> optionNames = new ArrayList<>();
+                            for (int i = 0; i < candidateCount; i++) {
+                                Card c = remaining.get(i);
+                                optionNames.add(c == null ? "STOP" : c.getName());
+                            }
+                            String selectedName = picked == null ? "STOP" : picked.getName();
+                            gameLogger.logDecision(
+                                    this.getName(),
+                                    activePlayerName,
+                                    phase + " (CARD_PICK " + chosenCount + " min=" + minTargets + " max=" + maxTargets + ")",
+                                    turn,
+                                    formatGameState(game),
+                                    optionNames,
+                                    Arrays.copyOf(actionProbs, candidateCount),
+                                    valueScore,
+                                    chosenIdx,
+                                    selectedName
+                            );
+                        }
+                    } catch (Exception ignored) {
+                    }
+                } catch (Exception e) {
+                    picked = remaining.get(0);
+                }
+            }
+
+            if (picked == null) { // STOP
+                break;
+            }
+
+            target.addTarget(picked.getId(), source, game);
+            chosen.add(picked.getId());
+            chosenCount++;
+        }
+
+        while (chosenCount < minTargets) {
+            Card fallback = null;
+            for (Card c : choices) {
+                if (c != null && !chosen.contains(c.getId())) {
+                    fallback = c;
+                    break;
+                }
+            }
+            if (fallback == null) {
+                break;
+            }
+            target.addTarget(fallback.getId(), source, game);
+            chosen.add(fallback.getId());
+            chosenCount++;
+        }
+
+        return chosenCount >= minTargets;
     }
 
     @Override
@@ -1190,7 +1509,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         boolean result = super.choose(outcome, choice, game);
         if (result && choice.isChosen()) {
-            RLTrainer.threadLocalLogger.get().info(
+            RLTrainer.threadLocalLogger.get().debug(
                     "Player " + getName() + " chose: " + choice.getChoiceKey() + " -> " + choice.getChoice()
             );
         }
@@ -1204,7 +1523,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             for (UUID targetId : target.getTargets()) {
                 int amount = target.getTargetAmount(targetId);
                 String targetName = describeTargetWithOwner(targetId, game);
-                RLTrainer.threadLocalLogger.get().info(
+                RLTrainer.threadLocalLogger.get().debug(
                         "Player " + getName() + " chose target amount: " + targetName + " (" + targetId + "), amount: " + amount
                         + " for ability: " + (source != null ? source.toString() : "null source")
                 );
@@ -1219,7 +1538,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         if (result && !target.getTargets().isEmpty()) {
             for (UUID targetId : target.getTargets()) {
                 String targetName = describeTargetWithOwner(targetId, game);
-                RLTrainer.threadLocalLogger.get().info(
+                RLTrainer.threadLocalLogger.get().debug(
                         "Player " + getName() + " chose target with options: " + targetName + " (" + targetId + ")"
                         + " for ability: " + (source != null ? source.toString() : "null source")
                 );
@@ -1663,7 +1982,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         + "\"handSize\":" + hand.size() + ","
                         + "\"numToPutBack\":" + numToPutBack
                 );
-                return super.chooseTarget(Outcome.Discard, target, null, game);
+                // RL-only fallback (no engine): bottom as many as possible from current hand.
+                int k = Math.min(hand.size(), Math.max(0, numToPutBack));
+                for (int i = hand.size() - k; i < hand.size(); i++) {
+                    target.addTarget(hand.get(i).getId(), null, game);
+                }
+                return true;
             }
 
             // Rank all cards; genericChoose will record a LONDON_MULLIGAN TrainingData immediately (if trainingEnabled).
@@ -1682,10 +2006,23 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 target.addTarget(hand.get(cardIndex).getId(), null, game);
             }
 
+            // Build detailed card list with probabilities
             StringBuilder keptCards = new StringBuilder();
             StringBuilder bottomedCards = new StringBuilder();
+            StringBuilder cardProbs = new StringBuilder();
+            cardProbs.append("[");
+            
             for (int i = 0; i < hand.size(); i++) {
                 Card card = hand.get(rankedIndices.get(i));
+                float prob = (lastActionProbs != null && i < lastActionProbs.length) ? lastActionProbs[rankedIndices.get(i)] : 0.0f;
+                
+                // Add to cardProbs list (all cards with probabilities)
+                if (i > 0) {
+                    cardProbs.append("; ");
+                }
+                cardProbs.append(String.format("%s (%.3f)", card.getName(), prob));
+                
+                // Add to kept or bottomed list
                 if (i < hand.size() - numToPutBack) {
                     if (keptCards.length() > 0) {
                         keptCards.append("; ");
@@ -1698,6 +2035,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     bottomedCards.append(card.getName());
                 }
             }
+            cardProbs.append("]");
 
             if (MULLIGAN_TRACE) {
                 mulliganTrainingLog(String.format(
@@ -1735,6 +2073,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                             trunc(keptCards.toString(), 400),
                             trunc(bottomedCards.toString(), 400)
                     ));
+                    gameLogger.log(String.format(
+                            "LONDON_BOTTOM_PROBS: player=%s cards=%s",
+                            getName(),
+                            trunc(cardProbs.toString(), 500)
+                    ));
                 }
             } catch (Exception ignored) {
                 // don't fail bottoming for logging
@@ -1749,8 +2092,18 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     "\"method\":\"chooseLondonMulliganCards\","
                     + "\"exception\":\"" + jsonEscape(e.getClass().getSimpleName() + ": " + e.getMessage()) + "\""
             );
-            // Fallback: use parent implementation (random or heuristic)
-            return super.chooseTarget(Outcome.Discard, target, null, game);
+            // RL-only fallback (no engine): deterministically bottom from end of hand.
+            try {
+                List<Card> hand = new ArrayList<>(getHand().getCards(game));
+                int numToPutBack = target != null ? target.getMinNumberOfTargets() : 0;
+                int k = Math.min(hand.size(), Math.max(0, numToPutBack));
+                for (int i = hand.size() - k; i < hand.size(); i++) {
+                    target.addTarget(hand.get(i).getId(), null, game);
+                }
+                return true;
+            } catch (Exception ignored) {
+                return false;
+            }
         }
     }
 
@@ -1816,7 +2169,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 pass(game);
                 return false;
             case PRECOMBAT_MAIN:
-                printBattleField(game, "Sim PRIORITY on MAIN 1");
+                if (ACTIVATION_DIAG) {
+                    printBattleField(game, "Sim PRIORITY on MAIN 1");
+                }
                 currentAbility = calculateRLAction(game);
                 act(game, (ActivatedAbility) currentAbility);
                 return true;
@@ -1824,13 +2179,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 pass(game);
                 return false;
             case DECLARE_ATTACKERS:
-                printBattleField(game, "Sim PRIORITY on DECLARE ATTACKERS");
+                if (ACTIVATION_DIAG) {
+                    printBattleField(game, "Sim PRIORITY on DECLARE ATTACKERS");
+                }
                 currentAbility = calculateRLAction(game);
                 act(game, (ActivatedAbility) currentAbility);
                 pass(game);
                 return true;
             case DECLARE_BLOCKERS:
-                printBattleField(game, "Sim PRIORITY on DECLARE BLOCKERS");
+                if (ACTIVATION_DIAG) {
+                    printBattleField(game, "Sim PRIORITY on DECLARE BLOCKERS");
+                }
                 currentAbility = calculateRLAction(game);
                 act(game, (ActivatedAbility) currentAbility);
                 pass(game);
@@ -1841,7 +2200,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 pass(game);
                 return false;
             case POSTCOMBAT_MAIN:
-                printBattleField(game, "Sim PRIORITY on MAIN 2");
+                if (ACTIVATION_DIAG) {
+                    printBattleField(game, "Sim PRIORITY on MAIN 2");
+                }
                 currentAbility = calculateRLAction(game);
                 act(game, (ActivatedAbility) currentAbility);
                 return true;
@@ -1854,7 +2215,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     protected void printBattleField(Game game, String info) {
-        if (RLTrainer.threadLocalLogger.get().isInfoEnabled()) {
+        if (ACTIVATION_DIAG) {
             // Clear the console line
             System.out.print("\033[2K"); // ANSI escape code to clear the current line
             // Move the cursor up one line
@@ -2004,10 +2365,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // of holding priority
     protected void act(Game game, ActivatedAbility ability) {
         if (ability == null) {
-            RLTrainer.threadLocalLogger.get().info("Model opted to pass priority");
+            if (ACTIVATION_DIAG) {
+                RLTrainer.threadLocalLogger.get().info("Model opted to pass priority");
+            }
             pass(game);
         } else {
-            RLTrainer.threadLocalLogger.get().info(String.format("===> SELECTED ACTION for %s: %s", getName(), ability));
+            if (ACTIVATION_DIAG) {
+                RLTrainer.threadLocalLogger.get().info(String.format("===> SELECTED ACTION for %s: %s", getName(), ability));
+            }
 
             // Double-check canActivate status right before activation
             if (ACTIVATION_DIAG) {
@@ -2341,13 +2706,23 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         forcedAlternativeChoice.remove();
         choiceTrackingData.remove();
 
-        Game sim = game.createSimulationForAI();
-        if (ACTIVATION_DIAG) {
-            RLTrainer.threadLocalLogger.get().info(
-                    "ALTCOST-TEST: Created simulation, about to activate..."
-            );
+        // IMPORTANT: simulation activation may trigger target/choice callbacks.
+        // Do not pollute per-game gamelogs with simulation-internal prompts.
+        GameLogger prevGameLogger = RLTrainer.threadLocalGameLogger.get();
+        RLTrainer.threadLocalGameLogger.set(GameLogger.create(false));
+        Game sim = null;
+        boolean defaultWorks = false;
+        try {
+            sim = game.createSimulationForAI();
+            if (ACTIVATION_DIAG) {
+                RLTrainer.threadLocalLogger.get().info(
+                        "ALTCOST-TEST: Created simulation, about to activate..."
+                );
+            }
+            defaultWorks = sim.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim);
+        } finally {
+            RLTrainer.threadLocalGameLogger.set(prevGameLogger);
         }
-        boolean defaultWorks = sim.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim);
 
         if (ACTIVATION_DIAG) {
             RLTrainer.threadLocalLogger.get().info(
@@ -2394,8 +2769,16 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 forcedAlternativeChoice.set(option);
                 choiceTrackingData.remove();
 
-                Game sim2 = game.createSimulationForAI();
-                boolean works = sim2.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim2);
+                // Disable gamelog during simulation (see above).
+                GameLogger prev2 = RLTrainer.threadLocalGameLogger.get();
+                RLTrainer.threadLocalGameLogger.set(GameLogger.create(false));
+                boolean works = false;
+                try {
+                    Game sim2 = game.createSimulationForAI();
+                    works = sim2.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim2);
+                } finally {
+                    RLTrainer.threadLocalGameLogger.set(prev2);
+                }
                 if (works) {
                     validChoices.add(option);
                     if (ACTIVATION_DIAG) {
@@ -2489,10 +2872,51 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // Finally, ensure PassAbility maps to index 0
         flattenedOptions.add(0, new PassAbility());
 
+        // If Pass is the only option, genericChoose() will short-circuit and we won't record lastActionProbs,
+        // which makes the gamelog look like turns are skipped. Log pass-only priority steps explicitly.
+        if (flattenedOptions.size() == 1) {
+            GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+            if (gameLogger.isEnabled()) {
+                String phase = (game.getStep() != null && game.getStep().getType() != null)
+                        ? game.getStep().getType().toString()
+                        : "Unknown";
+                int turn = game.getTurnNum();
+                if (turn != lastLoggedTurn) {
+                    String activePlayerName = game.getActivePlayerId() != null
+                            ? game.getPlayer(game.getActivePlayerId()).getName()
+                            : "Unknown";
+                    gameLogger.logTurnStart(turn, activePlayerName, formatGameState(game));
+                    lastLoggedTurn = turn;
+                }
+                List<String> optionNames = java.util.Collections.singletonList("Pass");
+                float[] probs = new float[]{1.0f};
+                this.lastActionProbs = probs;
+                this.lastValueScore = 0.0f;
+                String activePlayerName = game.getActivePlayerId() != null
+                        ? game.getPlayer(game.getActivePlayerId()).getName()
+                        : "Unknown";
+                gameLogger.logDecision(
+                        this.getName(),
+                        activePlayerName,
+                        phase,
+                        turn,
+                        formatGameState(game),
+                        optionNames,
+                        probs,
+                        0.0f,
+                        0,
+                        "Pass"
+                );
+            }
+            return flattenedOptions.get(0);
+        }
+
         // Get model's choice of actions
         List<Integer> targetsToSet = genericChoose(flattenedOptions, 1, 1, StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL, game, null);
 
-        RLTrainer.threadLocalLogger.get().info("Playable options: " + flattenedOptions);
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info("Playable options: " + flattenedOptions);
+        }
 
         // Log to detailed game logger if enabled
         GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
@@ -2532,6 +2956,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     optionNames,
                     lastActionProbs,
                     lastValueScore,
+                    selectedIndex,
                     selectedAction
             );
         }
@@ -2545,6 +2970,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return new ArrayList<>();
         }
         return new ArrayList<>(trainingBuffer);
+    }
+
+    public java.util.Map<StateSequenceBuilder.ActionType, Integer> getDecisionCountsByHead() {
+        return new java.util.HashMap<>(decisionCountsByHead);
     }
 
     public PythonModel getModel() {
@@ -2632,6 +3061,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
      */
     public static int getRLActivationFailureCount() {
         return RL_ACTIVATION_FAILURES.get();
+    }
+
+    public static int getSimulationTrainingSkippedCount() {
+        return SIMULATION_TRAINING_SKIPPED.get();
     }
 
     /**

@@ -1,0 +1,2790 @@
+================================================================================
+GAME LOG: game_20260201_195456_0032
+Started: 2026-02-01T19:54:56.370879200
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Elves.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=MULLIGAN Q_keep=-0.254 Q_mull=0.273 hand=[Island; Sea Gate; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Squadron Hawk; Sacred Cat]
+LONDON_BOTTOM: player=RL mulligansTaken=1 handSize=7 bottomN=1 kept=[Sea Gate; Squadron Hawk; Azorius Guildgate; Brainstorm; The Modern Age; Outlaw Medic] bottomed=[Heap Gate]
+MULLIGAN_DECISION: player=RL mulligansTaken=1 handSize=6 lands=2 decision=KEEP Q_keep=0.417 Q_mull=-0.110 hand=[Azorius Guildgate; Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Azorius Guildgate; Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Azorius Guildgate; Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.993050 - Play Azorius Guildgate
+     [2] 0.006948 - Play Sea Gate
+
+VALUE SCORE: 0.179200
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.179200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.179200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.179200
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.179200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.179200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.179200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.179200
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk; Basilisk Gate]
+-> Permanents: [Azorius Guildgate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk; Basilisk Gate]
+-> Permanents: [Azorius Guildgate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000282 - Pass
+ >>> [1] 0.749930 - Play Sea Gate
+     [2] 0.004296 - Cast Brainstorm
+     [3] 0.245491 - Play Basilisk Gate
+
+VALUE SCORE: 0.172308
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Brainstorm; Outlaw Medic; Squadron Hawk; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.061308 - Pass
+ >>> [1] 0.938692 - Cast Brainstorm
+
+VALUE SCORE: 0.167818
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 20
+-> Hand: [The Modern Age; Outlaw Medic; Squadron Hawk; Basilisk Gate; Counterspell; Island; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.143712 - Basilisk Gate
+ >>> [1] 0.137962 - Outlaw Medic
+     [2] 0.127209 - Squadron Hawk
+     [3] 0.163130 - Counterspell
+     [4] 0.143712 - Basilisk Gate
+     [5] 0.144047 - Island
+     [6] 0.140228 - The Modern Age
+
+VALUE SCORE: 0.162770
+SELECTED: Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Island; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.166735 - Basilisk Gate
+     [1] 0.147573 - Squadron Hawk
+     [2] 0.189210 - Counterspell
+     [3] 0.166735 - Basilisk Gate
+ >>> [4] 0.167088 - Island
+     [5] 0.162659 - The Modern Age
+
+VALUE SCORE: 0.163142
+SELECTED: Island
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.061308 - Pass
+
+VALUE SCORE: 0.167818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.061308 - Pass
+
+VALUE SCORE: 0.167818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.061308 - Pass
+
+VALUE SCORE: 0.167818
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.061308 - Pass
+
+VALUE SCORE: 0.167818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.061308 - Pass
+
+VALUE SCORE: 0.167818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.061308 - Pass
+
+VALUE SCORE: 0.167818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.061308 - Pass
+
+VALUE SCORE: 0.167818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.061308 - Pass
+
+VALUE SCORE: 0.167818
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate; Island]
+-> Permanents: [Azorius Guildgate; Sea Gate]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate; Island]
+-> Permanents: [Azorius Guildgate; Sea Gate]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000049 - Pass
+     [1] 0.003032 - Cast The Modern Age
+     [2] 0.000604 - Cast Squadron Hawk
+     [3] 0.042308 - Play Basilisk Gate
+ >>> [4] 0.954007 - Play Island
+
+VALUE SCORE: 0.164176
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [The Modern Age; Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.013539 - Pass
+ >>> [1] 0.823925 - Cast The Modern Age
+     [2] 0.162536 - Cast Squadron Hawk
+
+VALUE SCORE: 0.161392
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate; Idyllic Beachfront]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Counterspell; Basilisk Gate; Idyllic Beachfront]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013539 - Pass
+
+VALUE SCORE: 0.161392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Basilisk Gate; Idyllic Beachfront; Island]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; The Modern Age]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000034 - Pass
+     [1] 0.000337 - Cast Squadron Hawk
+     [2] 0.020608 - Play Basilisk Gate
+ >>> [3] 0.516986 - Play Idyllic Beachfront
+     [4] 0.462035 - Play Island
+
+VALUE SCORE: 0.141156
+SELECTED: Play Idyllic Beachfront
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Basilisk Gate; Basilisk Gate; Island]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; The Modern Age; Idyllic Beachfront,tapped]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.097304 - Pass
+ >>> [1] 0.902696 - Cast Squadron Hawk
+
+VALUE SCORE: 0.130788
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.097304 - Pass
+
+VALUE SCORE: 0.130788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.022362 - STOP
+     [1] 0.019161 - Azorius Guildgate
+     [2] 0.021171 - Basilisk Gate
+     [3] 0.021171 - Basilisk Gate
+     [4] 0.020877 - Brainstorm
+     [5] 0.020877 - Brainstorm
+     [6] 0.023118 - Citadel Gate
+     [7] 0.023118 - Citadel Gate
+     [8] 0.023118 - Citadel Gate
+     [9] 0.023118 - Citadel Gate
+     [10] 0.018533 - Counterspell
+     [11] 0.018533 - Counterspell
+     [12] 0.018533 - Counterspell
+     [13] 0.019663 - Guardian of the Guildpact
+     [14] 0.022475 - Heap Gate
+     [15] 0.022475 - Heap Gate
+     [16] 0.021779 - Island
+     [17] 0.021779 - Island
+ >>> [18] 0.018873 - Journey to Nowhere
+ >>> [19] 0.018873 - Journey to Nowhere
+ >>> [20] 0.018873 - Journey to Nowhere
+ >>> [21] 0.018873 - Journey to Nowhere
+     [22] 0.017472 - Lorien Revealed
+     [23] 0.017472 - Lorien Revealed
+     [24] 0.017472 - Lorien Revealed
+     [25] 0.017643 - Outlaw Medic
+     [26] 0.019992 - Preordain
+     [27] 0.019992 - Preordain
+     [28] 0.021220 - Prismatic Strands
+     [29] 0.021220 - Prismatic Strands
+     [30] 0.021220 - Prismatic Strands
+     [31] 0.021220 - Prismatic Strands
+     [32] 0.022150 - Sacred Cat
+     [33] 0.022150 - Sacred Cat
+     [34] 0.022150 - Sacred Cat
+     [35] 0.022150 - Sacred Cat
+     [36] 0.020530 - Sea Gate
+     [37] 0.020530 - Sea Gate
+     [38] 0.020530 - Sea Gate
+     [39] 0.019634 - Spell Pierce
+     [40] 0.019634 - Spell Pierce
+     [41] 0.020098 - Squadron Hawk
+     [42] 0.020098 - Squadron Hawk
+     [43] 0.020098 - Squadron Hawk
+     [44] 0.019000 - The Modern Age
+     [45] 0.019000 - The Modern Age
+     [46] 0.019000 - The Modern Age
+     [47] 0.020486 - Thraben Charm
+     [48] 0.020486 - Thraben Charm
+
+VALUE SCORE: 0.111866
+SELECTED: Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main (CARD_PICK 1 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.022792 - STOP
+     [1] 0.019530 - Azorius Guildgate
+     [2] 0.021578 - Basilisk Gate
+     [3] 0.021578 - Basilisk Gate
+     [4] 0.021279 - Brainstorm
+     [5] 0.021279 - Brainstorm
+     [6] 0.023563 - Citadel Gate
+     [7] 0.023563 - Citadel Gate
+     [8] 0.023563 - Citadel Gate
+     [9] 0.023563 - Citadel Gate
+     [10] 0.018889 - Counterspell
+     [11] 0.018889 - Counterspell
+     [12] 0.018889 - Counterspell
+     [13] 0.020041 - Guardian of the Guildpact
+     [14] 0.022907 - Heap Gate
+     [15] 0.022907 - Heap Gate
+     [16] 0.022198 - Island
+     [17] 0.022198 - Island
+     [18] 0.019236 - Journey to Nowhere
+     [19] 0.019236 - Journey to Nowhere
+     [20] 0.019236 - Journey to Nowhere
+     [21] 0.017809 - Lorien Revealed
+     [22] 0.017809 - Lorien Revealed
+     [23] 0.017809 - Lorien Revealed
+     [24] 0.017982 - Outlaw Medic
+     [25] 0.020376 - Preordain
+     [26] 0.020376 - Preordain
+     [27] 0.021628 - Prismatic Strands
+     [28] 0.021628 - Prismatic Strands
+     [29] 0.021628 - Prismatic Strands
+     [30] 0.021628 - Prismatic Strands
+     [31] 0.022576 - Sacred Cat
+     [32] 0.022576 - Sacred Cat
+     [33] 0.022576 - Sacred Cat
+     [34] 0.022576 - Sacred Cat
+     [35] 0.020925 - Sea Gate
+     [36] 0.020925 - Sea Gate
+     [37] 0.020925 - Sea Gate
+ >>> [38] 0.020012 - Spell Pierce
+ >>> [39] 0.020012 - Spell Pierce
+     [40] 0.020484 - Squadron Hawk
+     [41] 0.020484 - Squadron Hawk
+     [42] 0.020484 - Squadron Hawk
+     [43] 0.019366 - The Modern Age
+     [44] 0.019366 - The Modern Age
+     [45] 0.019366 - The Modern Age
+     [46] 0.020880 - Thraben Charm
+     [47] 0.020880 - Thraben Charm
+
+VALUE SCORE: 0.111866
+SELECTED: Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main (CARD_PICK 2 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.023258 - STOP
+     [1] 0.019929 - Azorius Guildgate
+     [2] 0.022019 - Basilisk Gate
+     [3] 0.022019 - Basilisk Gate
+     [4] 0.021713 - Brainstorm
+     [5] 0.021713 - Brainstorm
+     [6] 0.024044 - Citadel Gate
+     [7] 0.024044 - Citadel Gate
+     [8] 0.024044 - Citadel Gate
+     [9] 0.024044 - Citadel Gate
+     [10] 0.019275 - Counterspell
+     [11] 0.019275 - Counterspell
+     [12] 0.019275 - Counterspell
+     [13] 0.020450 - Guardian of the Guildpact
+     [14] 0.023375 - Heap Gate
+     [15] 0.023375 - Heap Gate
+     [16] 0.022651 - Island
+     [17] 0.022651 - Island
+     [18] 0.019628 - Journey to Nowhere
+     [19] 0.019628 - Journey to Nowhere
+     [20] 0.019628 - Journey to Nowhere
+     [21] 0.018172 - Lorien Revealed
+     [22] 0.018172 - Lorien Revealed
+     [23] 0.018172 - Lorien Revealed
+     [24] 0.018349 - Outlaw Medic
+     [25] 0.020792 - Preordain
+     [26] 0.020792 - Preordain
+     [27] 0.022070 - Prismatic Strands
+     [28] 0.022070 - Prismatic Strands
+     [29] 0.022070 - Prismatic Strands
+     [30] 0.022070 - Prismatic Strands
+     [31] 0.023037 - Sacred Cat
+     [32] 0.023037 - Sacred Cat
+     [33] 0.023037 - Sacred Cat
+     [34] 0.023037 - Sacred Cat
+ >>> [35] 0.021352 - Sea Gate
+ >>> [36] 0.021352 - Sea Gate
+ >>> [37] 0.021352 - Sea Gate
+     [38] 0.020420 - Spell Pierce
+     [39] 0.020903 - Squadron Hawk
+     [40] 0.020903 - Squadron Hawk
+     [41] 0.020903 - Squadron Hawk
+     [42] 0.019761 - The Modern Age
+     [43] 0.019761 - The Modern Age
+     [44] 0.019761 - The Modern Age
+     [45] 0.021306 - Thraben Charm
+     [46] 0.021306 - Thraben Charm
+
+VALUE SCORE: 0.111866
+SELECTED: Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Spell Pierce; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.097304 - Pass
+
+VALUE SCORE: 0.130788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Spell Pierce; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.097304 - Pass
+
+VALUE SCORE: 0.130788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Spell Pierce; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.097304 - Pass
+
+VALUE SCORE: 0.130788
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Spell Pierce; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Spell Pierce; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.016052 - Pass
+ >>> [1] 0.983948 - Cast Spell Pierce
+
+VALUE SCORE: 0.735730
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-skill6)
+  - [1] Spell Pierce (controller=RL)
+  - [2] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016052 - Pass
+
+VALUE SCORE: 0.735730
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spell Pierce (controller=RL)
+  - [1] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016052 - Pass
+
+VALUE SCORE: 0.735730
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016052 - Pass
+
+VALUE SCORE: 0.735730
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016052 - Pass
+
+VALUE SCORE: 0.735730
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016052 - Pass
+
+VALUE SCORE: 0.735730
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate,tapped; Island,tapped; The Modern Age; Idyllic Beachfront,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016052 - Pass
+
+VALUE SCORE: 0.735730
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; The Modern Age; Idyllic Beachfront; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; The Modern Age; Idyllic Beachfront; Squadron Hawk]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016052 - Pass
+
+VALUE SCORE: 0.735730
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Island; Journey to Nowhere; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk; Vector Glider]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000099 - Pass
+     [1] 0.036930 - Play Basilisk Gate
+ >>> [2] 0.830851 - Play Island
+     [3] 0.000760 - Cast Journey to Nowhere
+     [4] 0.105565 - Play Sea Gate
+     [5] 0.025795 - Play Citadel Gate
+
+VALUE SCORE: 0.100761
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Journey to Nowhere; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk; Vector Glider; Island]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.115414 - Pass
+ >>> [1] 0.884586 - Cast Journey to Nowhere
+
+VALUE SCORE: 0.087131
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk; Vector Glider; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.155092 - Fyndhorn Elves (Benchmark-skill6)
+     [1] 0.188410 - Nyxborn Hydra (Benchmark-skill6)
+     [2] 0.149577 - Squadron Hawk (you)
+     [3] 0.153497 - Wellwisher (Benchmark-skill6)
+ >>> [4] 0.177542 - Vector Glider (you)
+     [5] 0.175881 - Priest of Titania (Benchmark-skill6)
+
+VALUE SCORE: 0.040865
+SELECTED: Vector Glider (you)
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk; Vector Glider; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped,attacking; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped,attacking; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.115414 - Pass
+
+VALUE SCORE: 0.087131
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Heap Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Heap Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk; Island; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000024 - Pass
+     [1] 0.009058 - Play Basilisk Gate
+     [2] 0.026293 - Play Sea Gate
+     [3] 0.006420 - Play Citadel Gate
+ >>> [4] 0.958204 - Play Heap Gate
+
+VALUE SCORE: 0.085696
+SELECTED: Play Heap Gate
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999857 - Pass
+     [1] 0.000143 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.068464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped,attacking; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999863 - Pass
+     [1] 0.000137 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.057643
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped,attacking; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999863 - Pass
+     [1] 0.000137 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.057643
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (RL turn), Combat Damage (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped,attacking; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.020473 - Azorius Guildgate
+     [1] 0.022559 - Basilisk Gate
+     [2] 0.022559 - Basilisk Gate
+     [3] 0.022522 - Brainstorm
+     [4] 0.022522 - Brainstorm
+     [5] 0.024829 - Citadel Gate
+     [6] 0.024829 - Citadel Gate
+     [7] 0.024829 - Citadel Gate
+     [8] 0.019976 - Counterspell
+     [9] 0.019976 - Counterspell
+     [10] 0.019976 - Counterspell
+     [11] 0.021155 - Guardian of the Guildpact
+     [12] 0.024199 - Heap Gate
+     [13] 0.023602 - Island
+     [14] 0.023602 - Island
+     [15] 0.020115 - Journey to Nowhere
+     [16] 0.020115 - Journey to Nowhere
+     [17] 0.020115 - Journey to Nowhere
+     [18] 0.019678 - Journey to Nowhere
+     [19] 0.018714 - Lorien Revealed
+     [20] 0.018714 - Lorien Revealed
+     [21] 0.018714 - Lorien Revealed
+     [22] 0.019006 - Outlaw Medic
+     [23] 0.021219 - Preordain
+     [24] 0.021219 - Preordain
+     [25] 0.022911 - Prismatic Strands
+     [26] 0.022911 - Prismatic Strands
+     [27] 0.022911 - Prismatic Strands
+     [28] 0.022911 - Prismatic Strands
+     [29] 0.023697 - Sacred Cat
+     [30] 0.023697 - Sacred Cat
+     [31] 0.023697 - Sacred Cat
+     [32] 0.023697 - Sacred Cat
+ >>> [33] 0.022328 - Sea Gate
+ >>> [34] 0.022328 - Sea Gate
+ >>> [35] 0.022328 - Sea Gate
+     [36] 0.020908 - Spell Pierce
+     [37] 0.020908 - Spell Pierce
+     [38] 0.021284 - Squadron Hawk
+     [39] 0.021284 - Squadron Hawk
+     [40] 0.021284 - Squadron Hawk
+     [41] 0.020605 - The Modern Age
+     [42] 0.020605 - The Modern Age
+     [43] 0.020605 - The Modern Age
+     [44] 0.021941 - Thraben Charm
+     [45] 0.021941 - Thraben Charm
+
+VALUE SCORE: 0.057497
+SELECTED: Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999870 - Pass
+     [1] 0.000130 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.037151
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998316 - Pass
+     [1] 0.001684 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.693804
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998439 - Pass
+     [1] 0.001561 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.680561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998448 - Pass
+     [1] 0.001552 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.679625
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998644 - Pass
+     [1] 0.001356 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.656275
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998644 - Pass
+     [1] 0.001356 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.656275
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk,tapped; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998783 - Pass
+     [1] 0.001217 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.637343
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Basilisk Gate; Basilisk Gate; Sea Gate; Citadel Gate; Sea Gate; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk; Island; Journey to Nowhere; Heap Gate]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000972 - Pass
+     [1] 0.208695 - Play Basilisk Gate
+ >>> [2] 0.612859 - Play Sea Gate
+     [3] 0.170032 - Play Citadel Gate
+     [4] 0.007442 - Cast Journey to Nowhere
+     [5] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.008041
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate; Sea Gate; Island; Idyllic Beachfront; Squadron Hawk; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.111138 - Pass
+ >>> [1] 0.888851 - Cast Journey to Nowhere
+     [2] 0.000011 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.061773
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 7
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.116125 - Fyndhorn Elves (Benchmark-skill6)
+     [1] 0.133513 - Avenging Hunter (Benchmark-skill6)
+     [2] 0.139448 - Nyxborn Hydra (Benchmark-skill6)
+ >>> [3] 0.108687 - Squadron Hawk (you)
+     [4] 0.115012 - Wellwisher (Benchmark-skill6)
+     [5] 0.113995 - Wellwisher (Benchmark-skill6)
+     [6] 0.139621 - Timberwatch Elf (Benchmark-skill6)
+     [7] 0.133599 - Priest of Titania (Benchmark-skill6)
+
+VALUE SCORE: -0.152648
+SELECTED: Squadron Hawk (you)
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 7
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Squadron Hawk; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999909 - Pass
+     [1] 0.000091 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.152648
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999909 - Pass
+     [1] 0.000091 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.150937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999909 - Pass
+     [1] 0.000091 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.150030
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999909 - Pass
+     [1] 0.000091 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.152009
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998809 - Pass
+     [1] 0.001191 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.633119
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998901 - Pass
+     [1] 0.001099 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.619694
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998793 - Pass
+     [1] 0.001207 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.636478
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania; Llanowar Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998900 - Pass
+     [1] 0.001100 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.620241
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania; Llanowar Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999089 - Pass
+     [1] 0.000911 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.586643
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 31
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania; Llanowar Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999088 - Pass
+     [1] 0.000912 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.586845
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 31
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Nyxborn Hydra,tapped,attacking; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Priest of Titania; Llanowar Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999249 - Pass
+     [1] 0.000751 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.551116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Sea Gate; Island,tapped; Idyllic Beachfront; Island; Journey to Nowhere; Heap Gate; Sea Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Outlaw Medic; Counterspell; Spell Pierce]
+-> Exile: [Squadron Hawk; The Modern Age]
+[Benchmark-skill6], life = 31
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Nyxborn Hydra,tapped,attacking; Wellwisher,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Nyxborn Hydra; Timberwatch Elf,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Priest of Titania; Llanowar Elves]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999249 - Pass
+     [1] 0.000751 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.551116
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Elves.dek
+Total Decisions Logged: 93
+Ended: 2026-02-01T19:58:42.964864500
+================================================================================

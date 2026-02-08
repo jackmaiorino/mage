@@ -1,0 +1,2538 @@
+================================================================================
+GAME LOG: game_20260201_195455_0021
+Started: 2026-02-01T19:54:55.950431500
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Elves.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=3 decision=KEEP Q_keep=0.670 Q_mull=-0.297 hand=[Drossforge Bridge; Twisted Landscape; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.031538 - Play Drossforge Bridge
+ >>> [2] 0.968460 - Play Twisted Landscape
+
+VALUE SCORE: 0.212933
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998786 - Pass
+     [1] 0.001214 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.204502
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998786 - Pass
+     [1] 0.001214 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.204580
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998788 - Pass
+     [1] 0.001212 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.204376
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941059 - Pass
+     [1] 0.058941 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.877609
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941299 - Pass
+     [1] 0.058701 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.877060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941293 - Pass
+     [1] 0.058707 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.877096
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941390 - Pass
+     [1] 0.058610 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.876872
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Twisted Landscape; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.028870 - Play Drossforge Bridge
+ >>> [2] 0.971128 - Play Twisted Landscape
+     [3] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.200466
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998891 - Pass
+     [1] 0.001109 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.192784
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998890 - Pass
+     [1] 0.001110 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.192852
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998892 - Pass
+     [1] 0.001108 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.192673
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944571 - Pass
+     [1] 0.055429 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.869409
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944956 - Pass
+     [1] 0.055044 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.868491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944954 - Pass
+     [1] 0.055046 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.868521
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945040 - Pass
+     [1] 0.054960 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.868308
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000073 - Pass
+ >>> [1] 0.999927 - Play Drossforge Bridge
+     [2] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.184519
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998999 - Pass
+     [1] 0.001001 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.181472
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998999 - Pass
+     [1] 0.001001 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.181521
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999000 - Pass
+     [1] 0.001000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.181401
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.950494 - Pass
+     [1] 0.049506 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.854906
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953273 - Pass
+     [1] 0.046727 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.846525
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.957048 - Pass
+     [1] 0.042952 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.835543
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.957174 - Pass
+     [1] 0.042826 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.835058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.957173 - Pass
+     [1] 0.042827 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.835087
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.957236 - Pass
+     [1] 0.042764 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.834885
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.231649 - Elvish Mystic (Benchmark-skill6)
+ >>> [1] 0.230246 - Elvish Mystic (Benchmark-skill6)
+     [2] 0.270105 - Timberwatch Elf (Benchmark-skill6)
+     [3] 0.268000 - Timberwatch Elf (Benchmark-skill6)
+
+VALUE SCORE: 0.168324
+SELECTED: Elvish Mystic (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Cast Down; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Cast Down; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.155596 - Drossforge Bridge (you)
+     [1] 0.182160 - Snow-Covered Forest (Benchmark-skill6)
+     [2] 0.182160 - Snow-Covered Forest (Benchmark-skill6)
+     [3] 0.148962 - Twisted Landscape (you)
+     [4] 0.182160 - Snow-Covered Forest (Benchmark-skill6)
+     [5] 0.148962 - Twisted Landscape (you)
+
+VALUE SCORE: 0.168408
+SELECTED: Drossforge Bridge (you)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000370 - Pass
+     [1] 0.008817 - Cast Cast Down
+     [2] 0.000684 - Cast Cleansing Wildfire
+     [3] 0.000019 - Cast Makeshift Munitions
+ >>> [4] 0.990109 - Cast Refurbished Familiar
+     [5] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.169377
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: [Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: [Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: [Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: [Avenging Hunter]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: [Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf]
+-> Graveyard: [Avenging Hunter; Lead the Stampede; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf,tapped]
+-> Graveyard: [Avenging Hunter; Lead the Stampede; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped]
+-> Graveyard: [Avenging Hunter; Lead the Stampede; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal]
+-> Graveyard: [Avenging Hunter; Lead the Stampede; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal]
+-> Graveyard: [Lead the Stampede; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Lead the Stampede; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Lead the Stampede; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Lead the Stampede; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000370 - Pass
+
+VALUE SCORE: 0.169377
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Lead the Stampede; Winding Way]
+-> Exile: [Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Lead the Stampede; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999090 - Pass
+     [1] 0.000910 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.170325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped,attacking]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Lead the Stampede; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999100 - Pass
+     [1] 0.000900 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.169265
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped,attacking]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Lead the Stampede; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999100 - Pass
+     [1] 0.000900 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.169265
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Lead the Stampede; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999107 - Pass
+     [1] 0.000893 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.168350
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Winding Way]
+-> Exile: [Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.958244 - Pass
+     [1] 0.041756 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.831789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.961540 - Pass
+     [1] 0.038460 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.821010
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963219 - Pass
+     [1] 0.036781 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.814441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Timberwatch Elf,tapped]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.961373 - Pass
+     [1] 0.038627 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.820067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963512 - Pass
+     [1] 0.036488 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.812012
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963690 - Pass
+     [1] 0.036310 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.811347
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963690 - Pass
+     [1] 0.036310 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.811347
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963694 - Pass
+     [1] 0.036306 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.811366
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963749 - Pass
+     [1] 0.036251 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.811143
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999029 - Pass
+     [1] 0.000971 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.179002
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped,attacking]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999037 - Pass
+     [1] 0.000963 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.178111
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped,attacking]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999037 - Pass
+     [1] 0.000963 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.178111
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: []
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999044 - Pass
+     [1] 0.000956 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.177177
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965836 - Pass
+     [1] 0.034164 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.805449
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.968567 - Pass
+     [1] 0.031433 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.793917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969549 - Pass
+     [1] 0.030451 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.788842
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal; Llanowar Elves]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972868 - Pass
+     [1] 0.027132 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.771095
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal; Llanowar Elves; Avenging Hunter]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973003 - Pass
+     [1] 0.026997 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.770380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal; Llanowar Elves; Avenging Hunter]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973003 - Pass
+     [1] 0.026997 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.770380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal; Llanowar Elves; Avenging Hunter]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973003 - Pass
+     [1] 0.026997 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.770380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977195 - Pass
+     [1] 0.022805 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.746651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped,attacking; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977626 - Pass
+     [1] 0.022374 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.743801
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped,attacking; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977626 - Pass
+     [1] 0.022374 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.743801
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977812 - Pass
+     [1] 0.022188 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.742345
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999182 - Pass
+     [1] 0.000818 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.157584
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped,attacking]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999191 - Pass
+     [1] 0.000809 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.156301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped,attacking]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999191 - Pass
+     [1] 0.000809 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.156301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (RL turn), Combat Damage (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped,attacking]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.020507 - Blood Fountain
+     [1] 0.021029 - Cast Down
+     [2] 0.021029 - Cast Down
+     [3] 0.019095 - Cleansing Wildfire
+     [4] 0.019095 - Cleansing Wildfire
+     [5] 0.019095 - Cleansing Wildfire
+     [6] 0.021696 - Drossforge Bridge
+     [7] 0.021696 - Drossforge Bridge
+     [8] 0.021696 - Drossforge Bridge
+     [9] 0.020259 - Eviscerator's Insight
+     [10] 0.023619 - Fanatical Offering
+     [11] 0.023619 - Fanatical Offering
+     [12] 0.023619 - Fanatical Offering
+     [13] 0.021700 - Forest
+     [14] 0.021700 - Forest
+     [15] 0.022625 - Ichor Wellspring
+     [16] 0.022625 - Ichor Wellspring
+     [17] 0.022625 - Ichor Wellspring
+     [18] 0.018732 - Krark-Clan Shaman
+     [19] 0.018732 - Krark-Clan Shaman
+     [20] 0.021730 - Lembas
+     [21] 0.021730 - Lembas
+     [22] 0.021730 - Lembas
+     [23] 0.020429 - Mountain
+     [24] 0.020429 - Mountain
+     [25] 0.021504 - Nihil Spellbomb
+     [26] 0.021504 - Nihil Spellbomb
+     [27] 0.021504 - Nihil Spellbomb
+     [28] 0.021504 - Nihil Spellbomb
+     [29] 0.021409 - Pulse of Murasa
+     [30] 0.022167 - Refurbished Familiar
+     [31] 0.022167 - Refurbished Familiar
+     [32] 0.021257 - Slagwoods Bridge
+     [33] 0.021257 - Slagwoods Bridge
+     [34] 0.021257 - Slagwoods Bridge
+     [35] 0.021257 - Slagwoods Bridge
+     [36] 0.022765 - Swamp
+     [37] 0.022765 - Swamp
+     [38] 0.022765 - Swamp
+     [39] 0.022488 - Toxin Analysis
+     [40] 0.022488 - Toxin Analysis
+     [41] 0.019688 - Twisted Landscape
+     [42] 0.019688 - Twisted Landscape
+ >>> [43] 0.022639 - Vault of Whispers
+     [44] 0.019029 - Writhing Chrysalis
+     [45] 0.019029 - Writhing Chrysalis
+     [46] 0.019029 - Writhing Chrysalis
+
+VALUE SCORE: 0.156250
+SELECTED: Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cast Down; Vault of Whispers]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.000018 - Pass
+ >>> [1] 0.999982 - Play Vault of Whispers
+     [2] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.147597
+SELECTED: Play Vault of Whispers
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (RL turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.103221 - Elvish Mystic (Benchmark-skill6)
+     [1] 0.103951 - Masked Vandal (Benchmark-skill6)
+     [2] 0.103221 - Elvish Mystic (Benchmark-skill6)
+     [3] 0.100855 - Fyndhorn Elves (Benchmark-skill6)
+     [4] 0.120177 - Timberwatch Elf (Benchmark-skill6)
+     [5] 0.120177 - Timberwatch Elf (Benchmark-skill6)
+     [6] 0.130238 - Refurbished Familiar (you)
+ >>> [7] 0.101267 - Llanowar Elves (Benchmark-skill6)
+     [8] 0.116893 - Avenging Hunter (Benchmark-skill6)
+
+VALUE SCORE: 0.141028
+SELECTED: Llanowar Elves (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (RL turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.103221 - Elvish Mystic (Benchmark-skill6)
+     [1] 0.103951 - Masked Vandal (Benchmark-skill6)
+     [2] 0.103221 - Elvish Mystic (Benchmark-skill6)
+     [3] 0.100855 - Fyndhorn Elves (Benchmark-skill6)
+     [4] 0.120177 - Timberwatch Elf (Benchmark-skill6)
+     [5] 0.120177 - Timberwatch Elf (Benchmark-skill6)
+ >>> [6] 0.130238 - Refurbished Familiar (you)
+     [7] 0.101267 - Llanowar Elves (Benchmark-skill6)
+     [8] 0.116893 - Avenging Hunter (Benchmark-skill6)
+
+VALUE SCORE: 0.141028
+SELECTED: Refurbished Familiar (you)
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape; Refurbished Familiar,tapped; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.000413 - Pass
+     [1] 0.009369 - Cast Cast Down
+ >>> [2] 0.990169 - Cast Refurbished Familiar
+     [3] 0.000049 - Cast Fanatical Offering
+     [4] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.143615
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape,tapped; Refurbished Familiar,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999350 - Pass
+     [1] 0.000650 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.121565
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape,tapped; Refurbished Familiar,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way; Lead the Stampede]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999330 - Pass
+     [1] 0.000670 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.127418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape,tapped; Refurbished Familiar,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf; Fyndhorn Elves; Masked Vandal; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way; Lead the Stampede]
+-> Exile: [Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape,tapped; Refurbished Familiar,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf; Fyndhorn Elves; Masked Vandal; Llanowar Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way; Lead the Stampede]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983670 - Pass
+     [1] 0.016330 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.697965
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape,tapped; Refurbished Familiar,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf; Fyndhorn Elves; Masked Vandal,tapped,attacking; Llanowar Elves; Avenging Hunter,tapped,attacking; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way; Lead the Stampede]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985424 - Pass
+     [1] 0.014576 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.680528
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape,tapped; Refurbished Familiar,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal,tapped,attacking; Llanowar Elves; Avenging Hunter,tapped,attacking; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way; Lead the Stampede]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986640 - Pass
+     [1] 0.013360 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.667185
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape,tapped; Refurbished Familiar,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal,tapped,attacking; Llanowar Elves; Avenging Hunter,tapped,attacking; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way; Lead the Stampede]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986722 - Pass
+     [1] 0.013278 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.666169
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cast Down; Cleansing Wildfire; Makeshift Munitions; Nyxborn Hydra; Krark-Clan Shaman; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Twisted Landscape,tapped; Refurbished Familiar,tapped; Vault of Whispers,tapped; Refurbished Familiar,blocking]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Drossforge Bridge]
+[Benchmark-skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest; Elvish Mystic; Timberwatch Elf,tapped; Fyndhorn Elves; Masked Vandal,tapped,attacking; Llanowar Elves; Avenging Hunter,tapped,attacking; Snow-Covered Forest]
+-> Graveyard: [Winding Way; Winding Way; Lead the Stampede]
+-> Exile: [Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986760 - Pass
+     [1] 0.013240 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.665731
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Elves.dek
+Total Decisions Logged: 85
+Ended: 2026-02-01T19:59:16.605776400
+================================================================================

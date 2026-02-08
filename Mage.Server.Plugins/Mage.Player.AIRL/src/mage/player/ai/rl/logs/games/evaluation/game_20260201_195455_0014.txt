@@ -1,0 +1,1750 @@
+================================================================================
+GAME LOG: game_20260201_195455_0014
+Started: 2026-02-01T19:54:55.551866300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono-Red Burn.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.397 Q_mull=0.118 hand=[Great Furnace; Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Krark-Clan Shaman]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999996 - Play Great Furnace
+
+VALUE SCORE: 0.480988
+SELECTED: Play Great Furnace
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.506164 - Benchmark-skill6
+     [1] 0.493836 - RL
+
+VALUE SCORE: 0.472233
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.033441 - Pass
+     [1] 0.032683 - Cast Galvanic Blast
+ >>> [2] 0.933876 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.475368
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999973 - Pass
+     [1] 0.000027 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.443237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999973 - Pass
+     [1] 0.000027 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.443260
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999973 - Pass
+     [1] 0.000027 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.443026
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.133105
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.133210
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.132833
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.343765 - Krark-Clan Shaman (you)
+     [1] 0.332190 - Benchmark-skill6
+     [2] 0.324045 - RL
+
+VALUE SCORE: 0.467535
+SELECTED: Krark-Clan Shaman (you)
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.512042 - Pass
+     [1] 0.487941 - Cast Galvanic Blast
+     [2] 0.000017 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.470062
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.344471 - Krark-Clan Shaman (you)
+     [1] 0.331846 - Benchmark-skill6
+     [2] 0.323683 - RL
+
+VALUE SCORE: 0.465225
+SELECTED: Krark-Clan Shaman (you)
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.515598 - Pass
+     [1] 0.484400 - Cast Galvanic Blast
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.467692
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Declare Blockers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.344471 - Krark-Clan Shaman (you)
+ >>> [1] 0.331846 - Benchmark-skill6
+     [2] 0.323683 - RL
+
+VALUE SCORE: 0.465225
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.515598 - Pass
+     [1] 0.484400 - Cast Galvanic Blast
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.467692
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.344316 - Krark-Clan Shaman (you)
+ >>> [1] 0.332123 - Benchmark-skill6
+     [2] 0.323561 - RL
+
+VALUE SCORE: 0.463890
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.517385 - Pass
+     [1] 0.482614 - Cast Galvanic Blast
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.466327
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.346238 - Krark-Clan Shaman (you)
+ >>> [1] 0.333373 - Benchmark-skill6
+     [2] 0.320389 - RL
+
+VALUE SCORE: 0.141548
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.875277 - Pass
+     [1] 0.124722 - Cast Galvanic Blast
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.143865
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.346238 - Krark-Clan Shaman (you)
+ >>> [1] 0.333372 - Benchmark-skill6
+     [2] 0.320390 - RL
+
+VALUE SCORE: 0.141657
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.875278 - Pass
+     [1] 0.124721 - Cast Galvanic Blast
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.143966
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Benchmark-skill6 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.346241 - Krark-Clan Shaman (you)
+     [1] 0.333373 - Benchmark-skill6
+ >>> [2] 0.320386 - RL
+
+VALUE SCORE: 0.141238
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Great Furnace; Krark-Clan Shaman,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.875779 - Pass
+     [1] 0.124220 - Cast Galvanic Blast
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.143566
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.343804 - Krark-Clan Shaman (you)
+     [1] 0.332312 - Benchmark-skill6
+ >>> [2] 0.323884 - RL
+
+VALUE SCORE: 0.474758
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Galvanic Blast; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.496324 - Pass
+ >>> [1] 0.503659 - Cast Galvanic Blast
+     [2] 0.000017 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.477042
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.343804 - Krark-Clan Shaman (you)
+     [1] 0.332312 - Benchmark-skill6
+     [2] 0.323884 - RL
+
+VALUE SCORE: 0.474758
+SELECTED: Krark-Clan Shaman (you)
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.496324 - Pass
+
+VALUE SCORE: 0.477042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.496324 - Pass
+
+VALUE SCORE: 0.477042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.496324 - Pass
+
+VALUE SCORE: 0.477042
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.496324 - Pass
+
+VALUE SCORE: 0.477042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-skill6)
+  - [1] Fireblast (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.496324 - Pass
+
+VALUE SCORE: 0.477042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.496324 - Pass
+
+VALUE SCORE: 0.477042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.496324 - Pass
+
+VALUE SCORE: 0.477042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.496324 - Pass
+
+VALUE SCORE: 0.477042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.496324 - Pass
+
+VALUE SCORE: 0.477042
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar; Drossforge Bridge]
+-> Permanents: [Great Furnace]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar; Drossforge Bridge]
+-> Permanents: [Great Furnace]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+ >>> [1] 0.999995 - Play Drossforge Bridge
+
+VALUE SCORE: 0.431616
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.431616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.431616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.431616
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-skill6)
+  - [1] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-skill6)
+  - [1] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.431616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.431616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.431616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped,attacking; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.431616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped,attacking; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.431616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.431616
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Great Furnace; Drossforge Bridge]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.332564 - Benchmark-skill6
+ >>> [1] 0.328096 - RL
+     [2] 0.339339 - Guttersnipe (Benchmark-skill6)
+
+VALUE SCORE: 0.423253
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar; Galvanic Blast]
+-> Permanents: [Great Furnace; Drossforge Bridge]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Refurbished Familiar; Galvanic Blast]
+-> Permanents: [Great Furnace; Drossforge Bridge]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000071 - Pass
+     [1] 0.002146 - Cast Blood Fountain
+     [2] 0.000201 - Cast Toxin Analysis
+     [3] 0.007062 - Cast Ichor Wellspring
+ >>> [4] 0.990469 - Cast Refurbished Familiar
+     [5] 0.000052 - Cast Galvanic Blast
+
+VALUE SCORE: 0.428100
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 7
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.428100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When this card is exiled this way, you may cast it by paying {R} instead of putting it into your graveyard.) (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: [Fiery Temper]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.428100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-skill6)
+  - [1] Fiery Temper (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.428100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Benchmark-skill6)
+[RL], life = 5
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.428100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.428100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.428100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Guttersnipe,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.428100
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-skill6)
+  - [1] Fiery Temper (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Guttersnipe; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-skill6)
+  - [1] Fiery Temper (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Thoughtcast; Blood Fountain; Toxin Analysis; Myr Enforcer; Ichor Wellspring; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Guttersnipe; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Fireblast; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.428100
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 5
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 55
+Ended: 2026-02-01T19:56:26.144919300
+================================================================================

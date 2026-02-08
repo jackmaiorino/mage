@@ -1,0 +1,4405 @@
+================================================================================
+GAME LOG: game_20260201_195456_0034
+Started: 2026-02-01T19:54:56.432140300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Caw-Gates.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=MULLIGAN Q_keep=0.563 Q_mull=0.581 hand=[Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Elvish Mystic; Fyndhorn Elves]
+LONDON_BOTTOM: player=RL mulligansTaken=1 handSize=7 bottomN=1 kept=[Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest] bottomed=[Snow-Covered Forest]
+MULLIGAN_DECISION: player=RL mulligansTaken=1 handSize=6 lands=2 decision=KEEP Q_keep=0.800 Q_mull=-0.232 hand=[Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Fyndhorn Elves; Nyxborn Hydra]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.895002
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.069333 - Cast Elvish Mystic
+ >>> [2] 0.929953 - Cast Fyndhorn Elves
+     [3] 0.000710 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.891653
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891653
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891653
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891653
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891653
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891653
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891653
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Elvish Mystic; Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999986 - Play Snow-Covered Forest
+     [2] 0.000008 - Cast Priest of Titania
+     [3] 0.000004 - Cast Elvish Mystic
+     [4] 0.000000 - Cast Nyxborn Hydra
+     [5] 0.000000 - Cast Nyxborn Hydra using bestow
+     [6] 0.000002 - Cast Wellwisher
+
+VALUE SCORE: 0.887636
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Elvish Mystic; Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000016 - Pass
+ >>> [1] 0.553543 - Cast Priest of Titania
+     [2] 0.311715 - Cast Elvish Mystic
+     [3] 0.003183 - Cast Nyxborn Hydra
+     [4] 0.000512 - Cast Nyxborn Hydra using bestow
+     [5] 0.131031 - Cast Wellwisher
+
+VALUE SCORE: 0.884570
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Elvish Mystic; Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000053 - Pass
+ >>> [1] 0.989887 - Cast Elvish Mystic
+     [2] 0.010061 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.878792
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.878792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.878792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.878792
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.878792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.878792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 9 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.878792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 9 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.878792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 9 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.878792
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Prismatic Strands; The Modern Age]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Prismatic Strands; The Modern Age]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.270085 - Priest of Titania (you)
+ >>> [1] 0.236546 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.245571 - Fyndhorn Elves (you)
+     [3] 0.247798 - Elvish Mystic (you)
+
+VALUE SCORE: 0.845306
+SELECTED: Squadron Hawk (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Prismatic Strands; The Modern Age]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Prismatic Strands; The Modern Age]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000132 - Pass
+     [1] 0.016953 - Cast Nyxborn Hydra
+     [2] 0.003233 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.654755 - Cast Wellwisher
+     [4] 0.324927 - Cast Masked Vandal
+
+VALUE SCORE: 0.846928
+SELECTED: Cast Wellwisher
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Prismatic Strands; The Modern Age]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Prismatic Strands; The Modern Age]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.213974 - Priest of Titania (you)
+     [1] 0.187370 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.207734 - Wellwisher (you)
+ >>> [3] 0.194580 - Fyndhorn Elves (you)
+     [4] 0.196342 - Elvish Mystic (you)
+
+VALUE SCORE: 0.836912
+SELECTED: Fyndhorn Elves (you)
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Prismatic Strands; The Modern Age]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000399 - Pass
+     [1] 0.047791 - Cast Nyxborn Hydra
+     [2] 0.009379 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.942431 - Cast Masked Vandal
+
+VALUE SCORE: 0.838564
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Prismatic Strands (controller=Benchmark-skill6)
+  - [1] Masked Vandal (controller=RL)
+[RL], life = 20
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000399 - Pass
+
+VALUE SCORE: 0.838564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=RL)
+[RL], life = 20
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000399 - Pass
+
+VALUE SCORE: 0.838564
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Wellwisher; Masked Vandal]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Wellwisher; Masked Vandal]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.177900 - Priest of Titania (you)
+     [1] 0.155761 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.173658 - Wellwisher (you)
+ >>> [3] 0.166620 - Masked Vandal (you)
+     [4] 0.161827 - Fyndhorn Elves (you)
+     [5] 0.164234 - Elvish Mystic (you)
+
+VALUE SCORE: 0.825680
+SELECTED: Masked Vandal (you)
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Wellwisher; Masked Vandal]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.007523 - Pass
+ >>> [1] 0.824448 - Cast Nyxborn Hydra
+     [2] 0.168030 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.827082
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Wellwisher; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped,attacking; Wellwisher; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped,attacking; Wellwisher; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007523 - Pass
+
+VALUE SCORE: 0.827082
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.174352 - Priest of Titania (you)
+     [1] 0.186584 - Nyxborn Hydra (you)
+     [2] 0.151819 - Squadron Hawk (Benchmark-skill6)
+ >>> [3] 0.168885 - Wellwisher (you)
+     [4] 0.158456 - Fyndhorn Elves (you)
+     [5] 0.159904 - Elvish Mystic (you)
+
+VALUE SCORE: 0.817409
+SELECTED: Wellwisher (you)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.008190 - Pass
+ >>> [1] 0.819041 - Cast Nyxborn Hydra
+     [2] 0.172764 - Cast Nyxborn Hydra using bestow
+     [3] 0.000005 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.818752
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+     [1] 0.000524 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age]
+-> Graveyard: [The Modern Age]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Squadron Hawk]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999476 - Pass
+
+VALUE SCORE: 0.801374
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.000518 - Pass
+ >>> [1] 0.999482 - Cast Masked Vandal
+     [2] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.800734
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.498203 - The Modern Age (Benchmark-skill6)
+ >>> [1] 0.501797 - Journey to Nowhere (Benchmark-skill6)
+
+VALUE SCORE: 0.792573
+SELECTED: Journey to Nowhere (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999501 - Pass
+     [1] 0.000499 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.792573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999501 - Pass
+     [1] 0.000499 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.792573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped,attacking; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999521 - Pass
+     [1] 0.000479 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.786800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped,attacking; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999521 - Pass
+     [1] 0.000479 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.786800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999540 - Pass
+     [1] 0.000460 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.780187
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+  - [1] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed]
+-> Exile: [Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+  - [1] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999977 - Pass
+     [1] 0.000023 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.139164
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999977 - Pass
+     [1] 0.000024 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.143939
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island; Island]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999980 - Pass
+     [1] 0.000020 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.123546
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999984 - Pass
+     [1] 0.000016 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.086153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999984 - Pass
+     [1] 0.000016 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.084227
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999984 - Pass
+     [1] 0.000016 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.074581
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999984 - Pass
+     [1] 0.000016 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.074581
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.067326
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.000025 - Pass
+ >>> [1] 0.999975 - Cast Avenging Hunter
+     [2] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.753458
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal; Avenging Hunter]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999668 - Pass
+     [1] 0.000332 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.730895
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal; Avenging Hunter]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999668 - Pass
+     [1] 0.000332 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.730895
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal; Avenging Hunter]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999668 - Pass
+     [1] 0.000332 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.730895
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (RL turn), Precombat Main (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal; Avenging Hunter]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.022613 - Avenging Hunter
+     [1] 0.022613 - Avenging Hunter
+     [2] 0.022613 - Avenging Hunter
+     [3] 0.020447 - Elvish Mystic
+     [4] 0.020447 - Elvish Mystic
+     [5] 0.020447 - Elvish Mystic
+     [6] 0.018991 - Fyndhorn Elves
+     [7] 0.018991 - Fyndhorn Elves
+     [8] 0.018459 - Generous Ent
+     [9] 0.018459 - Generous Ent
+     [10] 0.018459 - Generous Ent
+     [11] 0.018459 - Generous Ent
+     [12] 0.021474 - Lead the Stampede
+     [13] 0.021474 - Lead the Stampede
+     [14] 0.021474 - Lead the Stampede
+     [15] 0.021474 - Lead the Stampede
+     [16] 0.018750 - Llanowar Elves
+     [17] 0.018750 - Llanowar Elves
+     [18] 0.020162 - Masked Vandal
+     [19] 0.020162 - Masked Vandal
+     [20] 0.020853 - Nyxborn Hydra
+     [21] 0.020853 - Nyxborn Hydra
+     [22] 0.020909 - Priest of Titania
+     [23] 0.020909 - Priest of Titania
+     [24] 0.020909 - Priest of Titania
+     [25] 0.019344 - Quirion Ranger
+     [26] 0.019344 - Quirion Ranger
+     [27] 0.019344 - Quirion Ranger
+     [28] 0.019344 - Quirion Ranger
+     [29] 0.021722 - Snow-Covered Forest
+     [30] 0.021722 - Snow-Covered Forest
+     [31] 0.021722 - Snow-Covered Forest
+     [32] 0.021722 - Snow-Covered Forest
+     [33] 0.021722 - Snow-Covered Forest
+     [34] 0.021722 - Snow-Covered Forest
+     [35] 0.021722 - Snow-Covered Forest
+     [36] 0.021722 - Snow-Covered Forest
+     [37] 0.021722 - Snow-Covered Forest
+     [38] 0.021722 - Snow-Covered Forest
+     [39] 0.021722 - Snow-Covered Forest
+ >>> [40] 0.019890 - Timberwatch Elf
+ >>> [41] 0.019890 - Timberwatch Elf
+ >>> [42] 0.019890 - Timberwatch Elf
+ >>> [43] 0.019890 - Timberwatch Elf
+     [44] 0.017154 - Wellwisher
+     [45] 0.019455 - Winding Way
+     [46] 0.019455 - Winding Way
+     [47] 0.019455 - Winding Way
+     [48] 0.019455 - Winding Way
+
+VALUE SCORE: 0.730895
+SELECTED: Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal; Avenging Hunter]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.000016 - Pass
+ >>> [1] 0.999984 - Cast Timberwatch Elf
+     [2] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.735643
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999667 - Pass
+     [1] 0.000333 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.732027
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped,attacking; Masked Vandal,tapped,attacking; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999685 - Pass
+     [1] 0.000315 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.723137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped,attacking; Masked Vandal,tapped,attacking; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped; Sacred Cat,blocking]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999692 - Pass
+     [1] 0.000308 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.719120
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal,tapped; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; The Modern Age; Island,tapped; Island,tapped]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; Sacred Cat]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999683 - Pass
+     [1] 0.000317 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.724029
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal,tapped; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; The Modern Age; Island; Island]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; Sacred Cat]
+-> Exile: [Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal,tapped; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; The Modern Age; Island; Island]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; Sacred Cat]
+-> Exile: [Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999983 - Pass
+     [1] 0.000017 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.100469
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal,tapped; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; Island; Island; Vector Glider; Basilisk Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.043317
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal,tapped; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999987 - Pass
+     [1] 0.000013 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.128336
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal,tapped; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999987 - Pass
+     [1] 0.000013 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.134722
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Nyxborn Hydra,tapped; Masked Vandal,tapped; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999987 - Pass
+     [1] 0.000013 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.152255
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,blocking; Nyxborn Hydra,tapped; Masked Vandal,tapped; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: []
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999987 - Pass
+     [1] 0.000013 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.155262
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal,tapped; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.167264
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, put two +1/+1 counters on target creature. <i>(Forge)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (RL turn), Upkeep (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, put two +1/+1 counters on target creature. <i>(Forge)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.093625 - Priest of Titania (you)
+     [1] 0.081467 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.089811 - Wellwisher (you)
+     [3] 0.102803 - Vector Glider (Benchmark-skill6)
+     [4] 0.094158 - Timberwatch Elf (you)
+ >>> [5] 0.082964 - Sacred Cat (Benchmark-skill6)
+     [6] 0.084491 - Fyndhorn Elves (you)
+     [7] 0.097192 - Avenging Hunter (you)
+     [8] 0.101061 - Nyxborn Hydra (you)
+     [9] 0.085590 - Elvish Mystic (you)
+     [10] 0.086838 - Masked Vandal (you)
+
+VALUE SCORE: 0.730536
+SELECTED: Sacred Cat (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 16
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 16
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.093604 - Priest of Titania (you)
+     [1] 0.081445 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.089775 - Wellwisher (you)
+     [3] 0.102774 - Vector Glider (Benchmark-skill6)
+ >>> [4] 0.094158 - Timberwatch Elf (you)
+     [5] 0.083222 - Sacred Cat (Benchmark-skill6)
+     [6] 0.084451 - Fyndhorn Elves (you)
+     [7] 0.097149 - Avenging Hunter (you)
+     [8] 0.101031 - Nyxborn Hydra (you)
+     [9] 0.085570 - Elvish Mystic (you)
+     [10] 0.086820 - Masked Vandal (you)
+
+VALUE SCORE: 0.729047
+SELECTED: Timberwatch Elf (you)
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.001763 - Pass
+ >>> [1] 0.998235 - Cast Winding Way
+     [2] 0.000001 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.000001 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.729047
+SELECTED: Cast Winding Way
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Elvish Mystic; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Elvish Mystic; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.093542 - Priest of Titania (you)
+     [1] 0.081437 - Squadron Hawk (Benchmark-skill6)
+ >>> [2] 0.089793 - Wellwisher (you)
+     [3] 0.102724 - Vector Glider (Benchmark-skill6)
+     [4] 0.094286 - Timberwatch Elf (you)
+     [5] 0.083145 - Sacred Cat (Benchmark-skill6)
+     [6] 0.084333 - Fyndhorn Elves (you)
+     [7] 0.097113 - Avenging Hunter (you)
+     [8] 0.101018 - Nyxborn Hydra (you)
+     [9] 0.085716 - Elvish Mystic (you)
+     [10] 0.086892 - Masked Vandal (you)
+
+VALUE SCORE: 0.733621
+SELECTED: Wellwisher (you)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.093534 - Priest of Titania (you)
+     [1] 0.081432 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.089810 - Wellwisher (you)
+     [3] 0.102724 - Vector Glider (Benchmark-skill6)
+     [4] 0.094244 - Timberwatch Elf (you)
+     [5] 0.083151 - Sacred Cat (Benchmark-skill6)
+ >>> [6] 0.084355 - Fyndhorn Elves (you)
+     [7] 0.097139 - Avenging Hunter (you)
+     [8] 0.101019 - Nyxborn Hydra (you)
+     [9] 0.085708 - Elvish Mystic (you)
+     [10] 0.086885 - Masked Vandal (you)
+
+VALUE SCORE: 0.735948
+SELECTED: Fyndhorn Elves (you)
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000020 - Pass
+     [1] 0.037580 - Cast Wellwisher
+     [2] 0.001106 - Cast Nyxborn Hydra
+     [3] 0.000294 - Cast Nyxborn Hydra using bestow
+     [4] 0.110029 - Cast Elvish Mystic
+ >>> [5] 0.850971 - Cast Avenging Hunter
+     [6] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+     [7] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.735948
+SELECTED: Cast Avenging Hunter
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.085153 - Priest of Titania (you)
+ >>> [1] 0.074291 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.081822 - Wellwisher (you)
+     [3] 0.093692 - Vector Glider (Benchmark-skill6)
+     [4] 0.086242 - Timberwatch Elf (you)
+     [5] 0.075816 - Sacred Cat (Benchmark-skill6)
+     [6] 0.076597 - Fyndhorn Elves (you)
+     [7] 0.088444 - Avenging Hunter (you)
+     [8] 0.092146 - Nyxborn Hydra (you)
+     [9] 0.078042 - Elvish Mystic (you)
+     [10] 0.079310 - Masked Vandal (you)
+     [11] 0.088444 - Avenging Hunter (you)
+
+VALUE SCORE: 0.719039
+SELECTED: Squadron Hawk (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999012 - Pass
+     [1] 0.000306 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000682 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.719039
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.085153 - Priest of Titania (you)
+     [1] 0.074291 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.081822 - Wellwisher (you)
+     [3] 0.093692 - Vector Glider (Benchmark-skill6)
+     [4] 0.086242 - Timberwatch Elf (you)
+     [5] 0.075816 - Sacred Cat (Benchmark-skill6)
+     [6] 0.076597 - Fyndhorn Elves (you)
+     [7] 0.088444 - Avenging Hunter (you)
+     [8] 0.092146 - Nyxborn Hydra (you)
+     [9] 0.078042 - Elvish Mystic (you)
+ >>> [10] 0.079310 - Masked Vandal (you)
+     [11] 0.088444 - Avenging Hunter (you)
+
+VALUE SCORE: 0.719039
+SELECTED: Masked Vandal (you)
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999012 - Pass
+     [1] 0.000306 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000682 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.719039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, target player loses 5 life. <i>(Trap!)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.504992 - Benchmark-skill6
+ >>> [1] 0.495008 - RL
+
+VALUE SCORE: 0.719039
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability (When you enter this room, target player loses 5 life. <i>(Trap!)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability (When you enter this room, target player loses 5 life. <i>(Trap!)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.085153 - Priest of Titania (you)
+     [1] 0.074291 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.081822 - Wellwisher (you)
+     [3] 0.093692 - Vector Glider (Benchmark-skill6)
+     [4] 0.086242 - Timberwatch Elf (you)
+     [5] 0.075816 - Sacred Cat (Benchmark-skill6)
+     [6] 0.076597 - Fyndhorn Elves (you)
+     [7] 0.088444 - Avenging Hunter (you)
+ >>> [8] 0.092146 - Nyxborn Hydra (you)
+     [9] 0.078042 - Elvish Mystic (you)
+     [10] 0.079310 - Masked Vandal (you)
+     [11] 0.088444 - Avenging Hunter (you)
+
+VALUE SCORE: 0.719039
+SELECTED: Nyxborn Hydra (you)
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, target player loses 5 life. <i>(Trap!)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999012 - Pass
+     [1] 0.000306 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000682 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.719039
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 11
+-> Hand: [Wellwisher; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 11
+-> Hand: [Wellwisher; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.085167 - Priest of Titania (you)
+     [1] 0.074293 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.081804 - Wellwisher (you)
+     [3] 0.093688 - Vector Glider (Benchmark-skill6)
+     [4] 0.086288 - Timberwatch Elf (you)
+     [5] 0.075814 - Sacred Cat (Benchmark-skill6)
+     [6] 0.076576 - Fyndhorn Elves (you)
+     [7] 0.088420 - Avenging Hunter (you)
+ >>> [8] 0.092145 - Nyxborn Hydra (you)
+     [9] 0.078063 - Elvish Mystic (you)
+     [10] 0.079322 - Masked Vandal (you)
+     [11] 0.088420 - Avenging Hunter (you)
+
+VALUE SCORE: 0.716172
+SELECTED: Nyxborn Hydra (you)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.085154 - Priest of Titania (you)
+     [1] 0.074291 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.081821 - Wellwisher (you)
+     [3] 0.093692 - Vector Glider (Benchmark-skill6)
+     [4] 0.086245 - Timberwatch Elf (you)
+ >>> [5] 0.075816 - Sacred Cat (Benchmark-skill6)
+     [6] 0.076596 - Fyndhorn Elves (you)
+     [7] 0.088442 - Avenging Hunter (you)
+     [8] 0.092146 - Nyxborn Hydra (you)
+     [9] 0.078044 - Elvish Mystic (you)
+     [10] 0.079311 - Masked Vandal (you)
+     [11] 0.088442 - Avenging Hunter (you)
+
+VALUE SCORE: 0.718876
+SELECTED: Sacred Cat (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Wellwisher; Nyxborn Hydra; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000145 - Pass
+     [1] 0.246546 - Cast Wellwisher
+     [2] 0.007375 - Cast Nyxborn Hydra
+     [3] 0.002024 - Cast Nyxborn Hydra using bestow
+ >>> [4] 0.743910 - Cast Elvish Mystic
+     [5] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+     [6] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.718876
+SELECTED: Cast Elvish Mystic
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 11
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 11
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.079003 - Priest of Titania (you)
+ >>> [1] 0.068906 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.086888 - Vector Glider (Benchmark-skill6)
+     [3] 0.080076 - Timberwatch Elf (you)
+     [4] 0.072592 - Elvish Mystic (you)
+     [5] 0.070989 - Fyndhorn Elves (you)
+     [6] 0.081978 - Avenging Hunter (you)
+     [7] 0.073575 - Masked Vandal (you)
+     [8] 0.081978 - Avenging Hunter (you)
+     [9] 0.075842 - Wellwisher (you)
+     [10] 0.070305 - Sacred Cat (Benchmark-skill6)
+     [11] 0.085450 - Nyxborn Hydra (you)
+     [12] 0.072417 - Elvish Mystic (you)
+
+VALUE SCORE: 0.712920
+SELECTED: Squadron Hawk (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.078988 - Priest of Titania (you)
+     [1] 0.068902 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.086888 - Vector Glider (Benchmark-skill6)
+     [3] 0.080035 - Timberwatch Elf (you)
+     [4] 0.072582 - Elvish Mystic (you)
+     [5] 0.071012 - Fyndhorn Elves (you)
+     [6] 0.081998 - Avenging Hunter (you)
+     [7] 0.073567 - Masked Vandal (you)
+     [8] 0.081998 - Avenging Hunter (you)
+     [9] 0.075863 - Wellwisher (you)
+     [10] 0.070309 - Sacred Cat (Benchmark-skill6)
+     [11] 0.085456 - Nyxborn Hydra (you)
+     [12] 0.072401 - Elvish Mystic (you)
+
+VALUE SCORE: 0.715656
+SELECTED: Priest of Titania (you)
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000574 - Pass
+ >>> [1] 0.962577 - Cast Wellwisher
+     [2] 0.028881 - Cast Nyxborn Hydra
+     [3] 0.007968 - Cast Nyxborn Hydra using bestow
+     [4] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+     [5] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.715656
+SELECTED: Cast Wellwisher
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.073448 - Priest of Titania (you)
+     [1] 0.064048 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.080765 - Vector Glider (Benchmark-skill6)
+     [3] 0.074465 - Timberwatch Elf (you)
+     [4] 0.070479 - Wellwisher (you)
+ >>> [5] 0.067479 - Elvish Mystic (you)
+     [6] 0.065976 - Fyndhorn Elves (you)
+     [7] 0.076182 - Avenging Hunter (you)
+     [8] 0.068399 - Masked Vandal (you)
+     [9] 0.076182 - Avenging Hunter (you)
+     [10] 0.070479 - Wellwisher (you)
+     [11] 0.065351 - Sacred Cat (Benchmark-skill6)
+     [12] 0.079426 - Nyxborn Hydra (you)
+ >>> [13] 0.067321 - Elvish Mystic (you)
+
+VALUE SCORE: 0.710195
+SELECTED: Elvish Mystic (you)
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999063 - Pass
+     [1] 0.000290 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000647 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.710195
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped,attacking; Masked Vandal; Avenging Hunter,tapped,attacking; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 7 (RL turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped,attacking; Masked Vandal; Avenging Hunter,tapped,attacking; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.073490 - Priest of Titania (you)
+     [1] 0.064037 - Squadron Hawk (Benchmark-skill6)
+ >>> [2] 0.080761 - Vector Glider (Benchmark-skill6)
+     [3] 0.074582 - Timberwatch Elf (you)
+     [4] 0.070404 - Wellwisher (you)
+     [5] 0.067489 - Elvish Mystic (you)
+     [6] 0.065928 - Fyndhorn Elves (you)
+     [7] 0.076119 - Avenging Hunter (you)
+     [8] 0.068424 - Masked Vandal (you)
+     [9] 0.076110 - Avenging Hunter (you)
+     [10] 0.070404 - Wellwisher (you)
+     [11] 0.065342 - Sacred Cat (Benchmark-skill6)
+     [12] 0.079562 - Nyxborn Hydra (you)
+     [13] 0.067348 - Elvish Mystic (you)
+
+VALUE SCORE: 0.700879
+SELECTED: Vector Glider (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped,attacking; Masked Vandal; Avenging Hunter,tapped,attacking; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider; Basilisk Gate; Sacred Cat]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999121 - Pass
+     [1] 0.000272 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000607 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.700879
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped,attacking; Masked Vandal; Avenging Hunter,tapped,attacking; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider,blocking; Basilisk Gate; Sacred Cat,blocking]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 7 (RL turn), Declare Blockers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped,attacking; Masked Vandal; Avenging Hunter,tapped,attacking; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider,blocking; Basilisk Gate; Sacred Cat,blocking]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.073545 - Priest of Titania (you)
+     [1] 0.064045 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.080770 - Vector Glider (Benchmark-skill6)
+     [3] 0.074657 - Timberwatch Elf (you)
+     [4] 0.070345 - Wellwisher (you)
+ >>> [5] 0.067486 - Elvish Mystic (you)
+     [6] 0.065906 - Fyndhorn Elves (you)
+     [7] 0.076109 - Avenging Hunter (you)
+     [8] 0.068431 - Masked Vandal (you)
+     [9] 0.076077 - Avenging Hunter (you)
+     [10] 0.070345 - Wellwisher (you)
+     [11] 0.065348 - Sacred Cat (Benchmark-skill6)
+     [12] 0.079577 - Nyxborn Hydra (you)
+ >>> [13] 0.067361 - Elvish Mystic (you)
+
+VALUE SCORE: 0.692922
+SELECTED: Elvish Mystic (you)
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 7 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped,attacking; Masked Vandal; Avenging Hunter,tapped,attacking; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Vector Glider,blocking; Basilisk Gate; Sacred Cat,blocking]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999169 - Pass
+     [1] 0.000259 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000572 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.692922
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Basilisk Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 7 (RL turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Basilisk Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.085775 - Priest of Titania (you)
+     [1] 0.074964 - Squadron Hawk (Benchmark-skill6)
+ >>> [2] 0.082773 - Wellwisher (you)
+     [3] 0.086747 - Timberwatch Elf (you)
+ >>> [4] 0.082773 - Wellwisher (you)
+     [5] 0.078991 - Elvish Mystic (you)
+     [6] 0.077397 - Fyndhorn Elves (you)
+     [7] 0.089345 - Avenging Hunter (you)
+     [8] 0.093019 - Nyxborn Hydra (you)
+     [9] 0.078713 - Elvish Mystic (you)
+     [10] 0.080010 - Masked Vandal (you)
+     [11] 0.089492 - Avenging Hunter (you)
+
+VALUE SCORE: 0.746381
+SELECTED: Wellwisher (you)
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island; Island,tapped; Basilisk Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998812 - Pass
+     [1] 0.000362 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000825 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.746381
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; Island; Island,tapped; Basilisk Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 7 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; Island; Island,tapped; Basilisk Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.090201 - Priest of Titania (you)
+     [1] 0.074464 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.076947 - Wellwisher (you)
+     [3] 0.092648 - Timberwatch Elf (you)
+     [4] 0.076947 - Wellwisher (you)
+     [5] 0.079581 - Elvish Mystic (you)
+     [6] 0.077549 - Fyndhorn Elves (you)
+ >>> [7] 0.090159 - Avenging Hunter (you)
+     [8] 0.094161 - Nyxborn Hydra (you)
+     [9] 0.080133 - Elvish Mystic (you)
+     [10] 0.078283 - Masked Vandal (you)
+ >>> [11] 0.088928 - Avenging Hunter (you)
+
+VALUE SCORE: -0.031533
+SELECTED: Avenging Hunter (you)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; Island; Island,tapped; Basilisk Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; Island; Island,tapped; Basilisk Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000012 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000009 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.031533
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; Island; Island,tapped; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 7 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; Island; Island,tapped; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.083970 - Priest of Titania (you)
+     [1] 0.069259 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.086250 - Timberwatch Elf (you)
+     [3] 0.069259 - Squadron Hawk (Benchmark-skill6)
+     [4] 0.071631 - Wellwisher (you)
+ >>> [5] 0.074072 - Elvish Mystic (you)
+     [6] 0.072184 - Fyndhorn Elves (you)
+     [7] 0.083890 - Avenging Hunter (you)
+     [8] 0.072889 - Masked Vandal (you)
+     [9] 0.082746 - Avenging Hunter (you)
+     [10] 0.071631 - Wellwisher (you)
+     [11] 0.087637 - Nyxborn Hydra (you)
+ >>> [12] 0.074583 - Elvish Mystic (you)
+
+VALUE SCORE: -0.037543
+SELECTED: Elvish Mystic (you)
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Squadron Hawk; Journey to Nowhere; Island; Island; Island,tapped; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; Squadron Hawk; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000012 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000009 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.037543
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 7 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+  - [1] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.090652 - Priest of Titania (you)
+     [1] 0.073055 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.077401 - Wellwisher (you)
+     [3] 0.093114 - Timberwatch Elf (you)
+     [4] 0.077401 - Wellwisher (you)
+     [5] 0.079458 - Elvish Mystic (you)
+ >>> [6] 0.077472 - Fyndhorn Elves (you)
+     [7] 0.089721 - Avenging Hunter (you)
+     [8] 0.093841 - Nyxborn Hydra (you)
+     [9] 0.080031 - Elvish Mystic (you)
+     [10] 0.079418 - Masked Vandal (you)
+     [11] 0.088436 - Avenging Hunter (you)
+
+VALUE SCORE: -0.146474
+SELECTED: Fyndhorn Elves (you)
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000013 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000008 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.146474
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 7 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.090767 - Priest of Titania (you)
+     [1] 0.072061 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.077520 - Wellwisher (you)
+ >>> [3] 0.093204 - Timberwatch Elf (you)
+     [4] 0.077520 - Wellwisher (you)
+     [5] 0.079496 - Elvish Mystic (you)
+     [6] 0.077529 - Fyndhorn Elves (you)
+     [7] 0.089824 - Avenging Hunter (you)
+     [8] 0.093861 - Nyxborn Hydra (you)
+     [9] 0.080069 - Elvish Mystic (you)
+     [10] 0.079615 - Masked Vandal (you)
+     [11] 0.088535 - Avenging Hunter (you)
+
+VALUE SCORE: -0.155573
+SELECTED: Timberwatch Elf (you)
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000013 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000008 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.155573
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 7 (Benchmark-skill6 turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090648 - Priest of Titania (you)
+     [1] 0.072885 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.077544 - Wellwisher (you)
+     [3] 0.093136 - Timberwatch Elf (you)
+     [4] 0.077544 - Wellwisher (you)
+     [5] 0.079328 - Elvish Mystic (you)
+     [6] 0.077386 - Fyndhorn Elves (you)
+     [7] 0.089769 - Avenging Hunter (you)
+     [8] 0.093569 - Nyxborn Hydra (you)
+     [9] 0.079879 - Elvish Mystic (you)
+     [10] 0.079808 - Masked Vandal (you)
+     [11] 0.088503 - Avenging Hunter (you)
+
+VALUE SCORE: -0.175534
+SELECTED: Priest of Titania (you)
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000013 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000008 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.175534
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 7 (Benchmark-skill6 turn), Declare Blockers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.090648 - Priest of Titania (you)
+ >>> [1] 0.072885 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.077544 - Wellwisher (you)
+     [3] 0.093136 - Timberwatch Elf (you)
+     [4] 0.077544 - Wellwisher (you)
+     [5] 0.079328 - Elvish Mystic (you)
+     [6] 0.077386 - Fyndhorn Elves (you)
+     [7] 0.089769 - Avenging Hunter (you)
+     [8] 0.093569 - Nyxborn Hydra (you)
+     [9] 0.079879 - Elvish Mystic (you)
+     [10] 0.079808 - Masked Vandal (you)
+     [11] 0.088503 - Avenging Hunter (you)
+
+VALUE SCORE: -0.175535
+SELECTED: Squadron Hawk (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Journey to Nowhere; Island,tapped; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000013 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000008 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.175535
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 6
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 7 (Benchmark-skill6 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 6
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.090607 - Priest of Titania (you)
+     [1] 0.073393 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.077348 - Wellwisher (you)
+     [3] 0.093084 - Timberwatch Elf (you)
+     [4] 0.077348 - Wellwisher (you)
+     [5] 0.079464 - Elvish Mystic (you)
+     [6] 0.077483 - Fyndhorn Elves (you)
+     [7] 0.089694 - Avenging Hunter (you)
+ >>> [8] 0.093865 - Nyxborn Hydra (you)
+     [9] 0.080035 - Elvish Mystic (you)
+     [10] 0.079264 - Masked Vandal (you)
+     [11] 0.088415 - Avenging Hunter (you)
+
+VALUE SCORE: -0.136934
+SELECTED: Nyxborn Hydra (you)
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 7 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra,tapped; Masked Vandal; Avenging Hunter,tapped; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999980 - Pass
+     [1] 0.000012 - {T}: You gain 1 life for each Elf on the battlefield.
+     [2] 0.000008 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.136934
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 6
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 6
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.085933 - Priest of Titania (you)
+     [1] 0.074823 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.082823 - Wellwisher (you)
+     [3] 0.086301 - Timberwatch Elf (you)
+     [4] 0.082823 - Wellwisher (you)
+ >>> [5] 0.078787 - Elvish Mystic (you)
+     [6] 0.077791 - Fyndhorn Elves (you)
+     [7] 0.089565 - Avenging Hunter (you)
+     [8] 0.092900 - Nyxborn Hydra (you)
+ >>> [9] 0.078787 - Elvish Mystic (you)
+     [10] 0.079902 - Masked Vandal (you)
+     [11] 0.089565 - Avenging Hunter (you)
+
+VALUE SCORE: 0.763482
+SELECTED: Elvish Mystic (you)
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 6
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 6
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.085929 - Priest of Titania (you)
+     [1] 0.074822 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.082833 - Wellwisher (you)
+     [3] 0.086273 - Timberwatch Elf (you)
+     [4] 0.082833 - Wellwisher (you)
+     [5] 0.078782 - Elvish Mystic (you)
+     [6] 0.077800 - Fyndhorn Elves (you)
+     [7] 0.089579 - Avenging Hunter (you)
+     [8] 0.092894 - Nyxborn Hydra (you)
+     [9] 0.078782 - Elvish Mystic (you)
+ >>> [10] 0.079895 - Masked Vandal (you)
+     [11] 0.089579 - Avenging Hunter (you)
+
+VALUE SCORE: 0.765245
+SELECTED: Masked Vandal (you)
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Nyxborn Hydra; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic; Wellwisher]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.011613 - Pass
+ >>> [1] 0.793472 - Cast Nyxborn Hydra
+     [2] 0.194853 - Cast Nyxborn Hydra using bestow
+     [3] 0.000045 - Cast Wellwisher
+     [4] 0.000005 - {T}: You gain 1 life for each Elf on the battlefield.
+     [5] 0.000011 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.765245
+SELECTED: Cast Nyxborn Hydra
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 6
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=RL)
+[RL], life = 6
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.078482 - Priest of Titania (you)
+     [1] 0.068545 - Squadron Hawk (Benchmark-skill6)
+     [2] 0.079411 - Timberwatch Elf (you)
+     [3] 0.075701 - Wellwisher (you)
+     [4] 0.072001 - Elvish Mystic (you)
+     [5] 0.085375 - Nyxborn Hydra (you)
+     [6] 0.070816 - Fyndhorn Elves (you)
+ >>> [7] 0.081811 - Avenging Hunter (you)
+     [8] 0.073240 - Masked Vandal (you)
+ >>> [9] 0.081811 - Avenging Hunter (you)
+     [10] 0.075701 - Wellwisher (you)
+     [11] 0.085104 - Nyxborn Hydra (you)
+     [12] 0.072001 - Elvish Mystic (you)
+
+VALUE SCORE: 0.739433
+SELECTED: Avenging Hunter (you)
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra; Masked Vandal; Avenging Hunter; Timberwatch Elf; Avenging Hunter; Elvish Mystic,tapped; Wellwisher; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995843 - Pass
+     [1] 0.003034 - Cast Wellwisher
+     [2] 0.000344 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.000779 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.739433
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped,attacking; Nyxborn Hydra,tapped,attacking; Masked Vandal,tapped,attacking; Avenging Hunter,tapped,attacking; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking; Elvish Mystic,tapped; Wellwisher,tapped,attacking; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995843 - Pass
+
+VALUE SCORE: 0.739433
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 8 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Wellwisher,tapped,attacking; Nyxborn Hydra,tapped,attacking; Masked Vandal,tapped,attacking; Avenging Hunter,tapped,attacking; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking; Elvish Mystic,tapped; Wellwisher,tapped,attacking; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Winding Way]
+-> Exile: [Masked Vandal]
+[Benchmark-skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; Journey to Nowhere; Island,tapped; Island,tapped; Basilisk Gate; Heap Gate]
+-> Graveyard: [The Modern Age; Counterspell; Lorien Revealed; The Modern Age]
+-> Exile: [Prismatic Strands; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995843 - Pass
+
+VALUE SCORE: 0.739433
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-skill6
+Turns: 8
+Reason: Benchmark: Deck - Elves.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 130
+Ended: 2026-02-01T19:59:56.747480800
+================================================================================

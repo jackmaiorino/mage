@@ -69,6 +69,44 @@ public class PythonMLBatchManager {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> scheduler.shutdown()));
     }
 
+    private static final class BatchKey {
+
+        final String policyKey;
+        final String headId;
+        final int pickIndex;
+        final int minTargets;
+        final int maxTargets;
+
+        BatchKey(String policyKey, String headId, int pickIndex, int minTargets, int maxTargets) {
+            this.policyKey = policyKey;
+            this.headId = headId;
+            this.pickIndex = pickIndex;
+            this.minTargets = minTargets;
+            this.maxTargets = maxTargets;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            BatchKey other = (BatchKey) o;
+            return pickIndex == other.pickIndex
+                    && minTargets == other.minTargets
+                    && maxTargets == other.maxTargets
+                    && java.util.Objects.equals(policyKey, other.policyKey)
+                    && java.util.Objects.equals(headId, other.headId);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(policyKey, headId, pickIndex, minTargets, maxTargets);
+        }
+    }
+
     // Thin holder for pending candidate-scoring request
     private static class PredictRequest {
 
@@ -78,6 +116,10 @@ public class PythonMLBatchManager {
         final float[][] candidateFeatures;   // [MAX_CANDIDATES][CAND_FEAT_DIM]
         final int[] candidateMask;           // [MAX_CANDIDATES] 1=valid,0=pad
         final String policyKey;             // "train" or "snap:<id>"
+        final String headId;               // "action" | "target" | "card_select"
+        final int pickIndex;
+        final int minTargets;
+        final int maxTargets;
         final java.util.concurrent.CompletableFuture<PredictionResult> future;
 
         PredictRequest(java.util.UUID id,
@@ -86,6 +128,10 @@ public class PythonMLBatchManager {
                 float[][] candidateFeatures,
                 int[] candidateMask,
                 String policyKey,
+                String headId,
+                int pickIndex,
+                int minTargets,
+                int maxTargets,
                 java.util.concurrent.CompletableFuture<PredictionResult> future) {
             this.id = id;
             this.state = state;
@@ -93,6 +139,10 @@ public class PythonMLBatchManager {
             this.candidateFeatures = candidateFeatures;
             this.candidateMask = candidateMask;
             this.policyKey = policyKey;
+            this.headId = headId;
+            this.pickIndex = pickIndex;
+            this.minTargets = minTargets;
+            this.maxTargets = maxTargets;
             this.future = future;
         }
     }
@@ -102,7 +152,11 @@ public class PythonMLBatchManager {
             int[] candidateActionIds,
             float[][] candidateFeatures,
             int[] candidateMask,
-            String policyKey) {
+            String policyKey,
+            String headId,
+            int pickIndex,
+            int minTargets,
+            int maxTargets) {
         java.util.UUID id = java.util.UUID.randomUUID();
         java.util.concurrent.CompletableFuture<PredictionResult> future = new java.util.concurrent.CompletableFuture<>();
         pendingPredictions.put(id, future);
@@ -112,10 +166,16 @@ public class PythonMLBatchManager {
         if (policyKey == null || policyKey.trim().isEmpty()) {
             policyKey = "train";
         }
+        if (headId == null || headId.trim().isEmpty()) {
+            headId = "action";
+        }
 
         boolean flushNow = false;
         synchronized (lock) {
-            predictionQueue.add(new PredictRequest(id, state, candidateActionIds, candidateFeatures, candidateMask, policyKey, future));
+            predictionQueue.add(new PredictRequest(
+                    id, state, candidateActionIds, candidateFeatures, candidateMask,
+                    policyKey, headId, pickIndex, minTargets, maxTargets, future
+            ));
             logger.info("Added request to queue. Queue size: " + predictionQueue.size() + ", MAX_BATCH_SIZE: " + MAX_BATCH_SIZE);
 
             if (predictionQueue.size() >= MAX_BATCH_SIZE) {
@@ -141,7 +201,16 @@ public class PythonMLBatchManager {
             int[] candidateActionIds,
             float[][] candidateFeatures,
             int[] candidateMask) {
-        return scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask, "train");
+        return scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask, "train", "action", 0, 0, 0);
+    }
+
+    public java.util.concurrent.CompletableFuture<PredictionResult> scoreCandidates(
+            StateSequenceBuilder.SequenceOutput state,
+            int[] candidateActionIds,
+            float[][] candidateFeatures,
+            int[] candidateMask,
+            String policyKey) {
+        return scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask, policyKey, "action", 0, 0, 0);
     }
 
     // Called by scheduler – must handle race with manual flush
@@ -171,13 +240,15 @@ public class PythonMLBatchManager {
         }
 
         try {
-            java.util.Map<String, java.util.List<PredictRequest>> byPolicy = new java.util.HashMap<>();
+            java.util.Map<BatchKey, java.util.List<PredictRequest>> byKey = new java.util.HashMap<>();
             for (PredictRequest req : batch) {
-                String key = (req.policyKey == null || req.policyKey.trim().isEmpty()) ? "train" : req.policyKey;
-                byPolicy.computeIfAbsent(key, k -> new java.util.ArrayList<>()).add(req);
+                String pk = (req.policyKey == null || req.policyKey.trim().isEmpty()) ? "train" : req.policyKey;
+                String hid = (req.headId == null || req.headId.trim().isEmpty()) ? "action" : req.headId;
+                BatchKey key = new BatchKey(pk, hid, req.pickIndex, req.minTargets, req.maxTargets);
+                byKey.computeIfAbsent(key, k -> new java.util.ArrayList<>()).add(req);
             }
 
-            for (java.util.Map.Entry<String, java.util.List<PredictRequest>> entry : byPolicy.entrySet()) {
+            for (java.util.Map.Entry<BatchKey, java.util.List<PredictRequest>> entry : byKey.entrySet()) {
                 flushQueueForPolicy(entry.getKey(), entry.getValue());
             }
 
@@ -190,7 +261,13 @@ public class PythonMLBatchManager {
         }
     }
 
-    private void flushQueueForPolicy(String policyKey, java.util.List<PredictRequest> batch) {
+    private void flushQueueForPolicy(BatchKey key, java.util.List<PredictRequest> batch) {
+        String policyKey = key != null && key.policyKey != null ? key.policyKey : "train";
+        String headId = key != null && key.headId != null ? key.headId : "action";
+        int pickIndex = key != null ? key.pickIndex : 0;
+        int minTargets = key != null ? key.minTargets : 0;
+        int maxTargetsKey = key != null ? key.maxTargets : 0;
+
         // Build flat tensors
         int batchSize = batch.size();
         int seqLen = batch.get(0).state.getSequence().length;
@@ -240,6 +317,10 @@ public class PythonMLBatchManager {
                         candIdsBytes,
                         candMaskBytes,
                         policyKey,
+                        headId,
+                        pickIndex,
+                        minTargets,
+                        maxTargetsKey,
                         batchSize,
                         seqLen,
                         dModel,

@@ -1,12 +1,23 @@
 package mage.cards;
 
+import java.util.List;
+import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.PlayLandAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -14,9 +25,6 @@ import mage.game.GameState;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 import mage.util.SubTypes;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author JayDi85 - originally from ModalDoubleFaceCard
@@ -44,7 +52,7 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
     }
 
     public DoubleFacedCardHalf getRightHalfCard() {
-        return leftHalfCard;
+        return rightHalfCard;
     }
 
     public void setParts(DoubleFacedCardHalf leftHalfCard, DoubleFacedCardHalf rightHalfCard) {
@@ -207,7 +215,6 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         return super.cast(game, fromZone, ability, controllerId);
     }
 
-
     @Override
     public List<SuperType> getSuperType(Game game) {
         // CardImpl's constructor can call some code on init, so you must check left/right before
@@ -294,7 +301,7 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
             allAbilites.addAll(leftHalfCard.getAbilities(game));
         }
         if (showRightSide) {
-            for (Ability ability: rightHalfCard.getAbilities(game)) {
+            for (Ability ability : rightHalfCard.getAbilities(game)) {
                 if (isIgnoreTransformSpellAbility(ability)) {
                     continue;
                 }
@@ -320,7 +327,7 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         }
 
         if (showRightSide) {
-            for (Ability ability: rightHalfCard.getAbilities()) {
+            for (Ability ability : rightHalfCard.getAbilities()) {
                 if (isIgnoreTransformSpellAbility(ability)) {
                     continue;
                 }

@@ -1,0 +1,349 @@
+================================================================================
+GAME LOG: game_20260201_200155_0097
+Started: 2026-02-01T20:01:55.827225100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Mono-Red Burn.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.755 Q_mull=0.686 hand=[Island; Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.124945
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.124945
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.124945
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.124945
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994712 - Pass
+     [1] 0.005288 - Cast Dispel
+
+VALUE SCORE: 0.152050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994712 - Pass
+
+VALUE SCORE: 0.152050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994712 - Pass
+
+VALUE SCORE: 0.152050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994712 - Pass
+
+VALUE SCORE: 0.152050
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic; Island]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic; Island]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.102695
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.102695
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.102695
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel; Sleep of the Dead; Cryptic Serpent; Tolarian Terror; Murmuring Mystic; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.102695
+SELECTED: Pass
+

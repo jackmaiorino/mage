@@ -1,0 +1,2047 @@
+================================================================================
+GAME LOG: game_20260201_195455_0016
+Started: 2026-02-01T19:54:55.599649200
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono Red Rally.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=4 decision=KEEP Q_keep=0.340 Q_mull=-0.361 hand=[Drossforge Bridge; Great Furnace; Great Furnace; Silverbluff Bridge; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Silverbluff Bridge; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Silverbluff Bridge; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.131865 - Play Drossforge Bridge
+     [2] 0.148525 - Play Great Furnace
+ >>> [3] 0.719609 - Play Silverbluff Bridge
+
+VALUE SCORE: 0.481147
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481147
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481147
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481147
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481147
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481147
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481147
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481147
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481147
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.462821 - Play Drossforge Bridge
+ >>> [2] 0.536761 - Play Great Furnace
+     [3] 0.000415 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.400916
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Nihil Spellbomb; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.008208 - Pass
+ >>> [1] 0.991792 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.395580
+SELECTED: Cast Nihil Spellbomb
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.493293 - RL
+     [1] 0.506707 - Benchmark-skill6
+
+VALUE SCORE: 0.366440
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.071963 - Pass
+ >>> [1] 0.928037 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.366440
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.493293 - RL
+     [1] 0.506707 - Benchmark-skill6
+
+VALUE SCORE: 0.366440
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 2 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071963 - Pass
+
+VALUE SCORE: 0.366440
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Great Furnace; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+     [1] 0.450101 - Play Drossforge Bridge
+ >>> [2] 0.496176 - Play Great Furnace
+     [3] 0.053717 - Play Seat of the Synod
+
+VALUE SCORE: 0.249434
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.249434
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod; Vault of Whispers]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod; Vault of Whispers]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.157124 - Play Drossforge Bridge
+     [2] 0.019167 - Play Seat of the Synod
+ >>> [3] 0.823705 - Play Vault of Whispers
+
+VALUE SCORE: 0.130740
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Refurbished Familiar; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace; Vault of Whispers]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000192 - Pass
+     [1] 0.001129 - Cast Reckoner's Bargain
+ >>> [2] 0.986432 - Cast Refurbished Familiar
+     [3] 0.012248 - Cast Myr Enforcer
+
+VALUE SCORE: 0.117596
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000192 - Pass
+
+VALUE SCORE: 0.117596
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Myr Enforcer; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.014655 - Pass
+ >>> [1] 0.985345 - Cast Myr Enforcer
+
+VALUE SCORE: 0.107618
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014655 - Pass
+
+VALUE SCORE: 0.107618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014655 - Pass
+
+VALUE SCORE: 0.107618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014655 - Pass
+
+VALUE SCORE: 0.107618
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014655 - Pass
+
+VALUE SCORE: 0.107618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014655 - Pass
+
+VALUE SCORE: 0.107618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014655 - Pass
+
+VALUE SCORE: 0.107618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014655 - Pass
+
+VALUE SCORE: 0.107618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014655 - Pass
+
+VALUE SCORE: 0.107618
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace; Vault of Whispers; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Drossforge Bridge; Reckoner's Bargain; Seat of the Synod; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace; Vault of Whispers; Refurbished Familiar; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.882515 - Play Drossforge Bridge
+     [2] 0.000121 - Cast Reckoner's Bargain
+     [3] 0.116877 - Play Seat of the Synod
+     [4] 0.000485 - Cast Myr Enforcer
+
+VALUE SCORE: 0.399854
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Reckoner's Bargain; Seat of the Synod; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace; Vault of Whispers; Refurbished Familiar; Myr Enforcer; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.002924 - Pass
+     [1] 0.199786 - Cast Reckoner's Bargain
+ >>> [2] 0.797291 - Cast Myr Enforcer
+
+VALUE SCORE: 0.381997
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Silverbluff Bridge; Great Furnace; Great Furnace; Vault of Whispers; Refurbished Familiar; Myr Enforcer; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.014297 - Pass
+ >>> [1] 0.985703 - Cast Reckoner's Bargain
+
+VALUE SCORE: 0.372920
+SELECTED: Cast Reckoner's Bargain
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.079563 - Human Soldier Token (Benchmark-skill6)
+     [1] 0.080392 - Goblin Tomb Raider (Benchmark-skill6)
+     [2] 0.075003 - Myr Enforcer (you)
+     [3] 0.090631 - Refurbished Familiar (you)
+     [4] 0.078232 - Benchmark-skill6
+ >>> [5] 0.064453 - Voldaren Epicure (Benchmark-skill6)
+     [6] 0.073870 - Clockwork Percussionist (Benchmark-skill6)
+     [7] 0.075003 - Myr Enforcer (you)
+     [8] 0.079563 - Human Soldier Token (Benchmark-skill6)
+     [9] 0.076851 - Goblin Bushwhacker (Benchmark-skill6)
+     [10] 0.077440 - RL
+     [11] 0.073870 - Clockwork Percussionist (Benchmark-skill6)
+     [12] 0.075129 - Burning-Tree Emissary (Benchmark-skill6)
+
+VALUE SCORE: 0.323581
+SELECTED: Voldaren Epicure (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.585466 - Pass
+     [1] 0.414534 - Cast Galvanic Blast
+
+VALUE SCORE: 0.333071
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.079309 - Human Soldier Token (Benchmark-skill6)
+     [1] 0.080246 - Goblin Tomb Raider (Benchmark-skill6)
+     [2] 0.075113 - Myr Enforcer (you)
+     [3] 0.091154 - Refurbished Familiar (you)
+ >>> [4] 0.078050 - Benchmark-skill6
+     [5] 0.064540 - Voldaren Epicure (Benchmark-skill6)
+     [6] 0.073614 - Clockwork Percussionist (Benchmark-skill6)
+     [7] 0.075631 - Myr Enforcer (you)
+     [8] 0.079309 - Human Soldier Token (Benchmark-skill6)
+     [9] 0.076979 - Goblin Bushwhacker (Benchmark-skill6)
+     [10] 0.077206 - RL
+     [11] 0.073614 - Clockwork Percussionist (Benchmark-skill6)
+     [12] 0.075235 - Burning-Tree Emissary (Benchmark-skill6)
+
+VALUE SCORE: 0.301744
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.598330 - Pass
+     [1] 0.401670 - Cast Galvanic Blast
+
+VALUE SCORE: 0.311901
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Declare Blockers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.079309 - Human Soldier Token (Benchmark-skill6)
+ >>> [1] 0.080246 - Goblin Tomb Raider (Benchmark-skill6)
+     [2] 0.075113 - Myr Enforcer (you)
+     [3] 0.091154 - Refurbished Familiar (you)
+     [4] 0.078050 - Benchmark-skill6
+     [5] 0.064540 - Voldaren Epicure (Benchmark-skill6)
+     [6] 0.073614 - Clockwork Percussionist (Benchmark-skill6)
+     [7] 0.075631 - Myr Enforcer (you)
+     [8] 0.079309 - Human Soldier Token (Benchmark-skill6)
+     [9] 0.076979 - Goblin Bushwhacker (Benchmark-skill6)
+     [10] 0.077206 - RL
+     [11] 0.073614 - Clockwork Percussionist (Benchmark-skill6)
+     [12] 0.075235 - Burning-Tree Emissary (Benchmark-skill6)
+
+VALUE SCORE: 0.301744
+SELECTED: Goblin Tomb Raider (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.598330 - Pass
+     [1] 0.401670 - Cast Galvanic Blast
+
+VALUE SCORE: 0.311901
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (RL turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.079127 - Human Soldier Token (Benchmark-skill6)
+     [1] 0.080147 - Goblin Tomb Raider (Benchmark-skill6)
+     [2] 0.075161 - Myr Enforcer (you)
+     [3] 0.091326 - Refurbished Familiar (you)
+     [4] 0.078539 - Benchmark-skill6
+     [5] 0.064577 - Voldaren Epicure (Benchmark-skill6)
+     [6] 0.073454 - Clockwork Percussionist (Benchmark-skill6)
+     [7] 0.075694 - Myr Enforcer (you)
+ >>> [8] 0.079127 - Human Soldier Token (Benchmark-skill6)
+     [9] 0.077079 - Goblin Bushwhacker (Benchmark-skill6)
+     [10] 0.077042 - RL
+     [11] 0.073454 - Clockwork Percussionist (Benchmark-skill6)
+     [12] 0.075275 - Burning-Tree Emissary (Benchmark-skill6)
+
+VALUE SCORE: 0.286924
+SELECTED: Human Soldier Token (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.607041 - Pass
+     [1] 0.392959 - Cast Galvanic Blast
+
+VALUE SCORE: 0.297155
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.081756 - Human Soldier Token (Benchmark-skill6)
+     [1] 0.077990 - Goblin Tomb Raider (Benchmark-skill6)
+     [2] 0.076358 - Myr Enforcer (you)
+     [3] 0.088952 - Refurbished Familiar (you)
+ >>> [4] 0.075609 - Benchmark-skill6
+     [5] 0.064853 - Voldaren Epicure (Benchmark-skill6)
+     [6] 0.076482 - Clockwork Percussionist (Benchmark-skill6)
+     [7] 0.076188 - Myr Enforcer (you)
+     [8] 0.081756 - Human Soldier Token (Benchmark-skill6)
+     [9] 0.074245 - Goblin Bushwhacker (Benchmark-skill6)
+     [10] 0.074615 - RL
+     [11] 0.076482 - Clockwork Percussionist (Benchmark-skill6)
+     [12] 0.074715 - Burning-Tree Emissary (Benchmark-skill6)
+
+VALUE SCORE: 0.633851
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.049020 - Pass
+ >>> [1] 0.950980 - Cast Galvanic Blast
+
+VALUE SCORE: 0.652219
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+-> Graveyard: [Great Furnace; Reckoner's Bargain]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.081756 - Human Soldier Token (Benchmark-skill6)
+     [1] 0.077990 - Goblin Tomb Raider (Benchmark-skill6)
+ >>> [2] 0.076358 - Myr Enforcer (you)
+     [3] 0.088952 - Refurbished Familiar (you)
+     [4] 0.075609 - Benchmark-skill6
+     [5] 0.064853 - Voldaren Epicure (Benchmark-skill6)
+     [6] 0.076482 - Clockwork Percussionist (Benchmark-skill6)
+ >>> [7] 0.076188 - Myr Enforcer (you)
+     [8] 0.081756 - Human Soldier Token (Benchmark-skill6)
+     [9] 0.074245 - Goblin Bushwhacker (Benchmark-skill6)
+     [10] 0.074615 - RL
+     [11] 0.076482 - Clockwork Percussionist (Benchmark-skill6)
+     [12] 0.074715 - Burning-Tree Emissary (Benchmark-skill6)
+
+VALUE SCORE: 0.633851
+SELECTED: Myr Enforcer (you)
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Great Furnace; Reckoner's Bargain; Galvanic Blast; Myr Enforcer]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049020 - Pass
+
+VALUE SCORE: 0.652219
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Experimental Synthesizer (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Great Furnace; Reckoner's Bargain; Galvanic Blast; Myr Enforcer]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049020 - Pass
+
+VALUE SCORE: 0.652219
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Great Furnace; Reckoner's Bargain; Galvanic Blast; Myr Enforcer]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker; Clockwork Percussionist; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049020 - Pass
+
+VALUE SCORE: 0.652219
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Great Furnace; Reckoner's Bargain; Galvanic Blast; Myr Enforcer]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Blood Token; Clockwork Percussionist; Goblin Tomb Raider; Goblin Bushwhacker; Clockwork Percussionist; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: [Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049020 - Pass
+
+VALUE SCORE: 0.652219
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Great Furnace; Reckoner's Bargain; Galvanic Blast; Myr Enforcer]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Voldaren Epicure,tapped,attacking; Blood Token; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Clockwork Percussionist,tapped,attacking; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: [Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049020 - Pass
+
+VALUE SCORE: 0.652219
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Seat of the Synod; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge,tapped; Great Furnace,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Great Furnace; Reckoner's Bargain; Galvanic Blast; Myr Enforcer]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Voldaren Epicure,tapped,attacking; Blood Token; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Clockwork Percussionist,tapped,attacking; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Reckless Impulse]
+-> Exile: [Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049020 - Pass
+
+VALUE SCORE: 0.652219
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 5
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 68
+Ended: 2026-02-01T19:56:17.120583
+================================================================================

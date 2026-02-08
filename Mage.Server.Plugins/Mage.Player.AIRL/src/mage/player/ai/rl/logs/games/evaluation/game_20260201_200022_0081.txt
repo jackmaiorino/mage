@@ -1,0 +1,1340 @@
+================================================================================
+GAME LOG: game_20260201_200022_0081
+Started: 2026-02-01T20:00:22.832709600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=4 decision=KEEP Q_keep=0.647 Q_mull=0.460 hand=[Island; Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.987096
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987096
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987096
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987096
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987096
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987096
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987096
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.981976
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000273 - Pass
+ >>> [1] 0.999727 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.977190
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000273 - Pass
+
+VALUE SCORE: 0.977190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000273 - Pass
+
+VALUE SCORE: 0.977190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000273 - Pass
+
+VALUE SCORE: 0.977190
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000273 - Pass
+
+VALUE SCORE: 0.977190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000273 - Pass
+
+VALUE SCORE: 0.977190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000273 - Pass
+
+VALUE SCORE: 0.977190
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Island; Faerie Miscreant]
+-> Permanents: [Island; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Ninja of the Deep Hours; Island; Faerie Miscreant]
+-> Permanents: [Island; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999893 - Play Island
+     [2] 0.000107 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.971685
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Ninja of the Deep Hours; Island; Faerie Miscreant]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.976291 - Cast Of One Mind
+     [2] 0.023707 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.966331
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Island; Faerie Miscreant; Humbling Elder; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.966331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Island; Faerie Miscreant; Humbling Elder; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.966331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Island; Faerie Miscreant; Humbling Elder; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.966331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Faerie Miscreant; Humbling Elder; Counterspell; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.966331
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Faerie Miscreant; Humbling Elder; Counterspell; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Faerie Miscreant; Humbling Elder; Counterspell; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.966331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Faerie Miscreant; Humbling Elder; Counterspell; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.966331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Faerie Miscreant; Humbling Elder; Counterspell; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.966331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Faerie Miscreant; Humbling Elder; Counterspell; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.966331
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Faerie Miscreant; Humbling Elder; Counterspell; Faerie Seer; Island]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Faerie Miscreant; Humbling Elder; Counterspell; Faerie Seer; Island]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999482 - Play Island
+     [2] 0.000105 - Cast Faerie Miscreant
+     [3] 0.000279 - Cast Humbling Elder
+     [4] 0.000134 - Cast Faerie Seer
+
+VALUE SCORE: 0.940789
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Faerie Miscreant; Humbling Elder; Counterspell; Faerie Seer; Island]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Island]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000018 - Pass
+     [1] 0.205031 - Cast Faerie Miscreant
+ >>> [2] 0.534868 - Cast Humbling Elder
+     [3] 0.260083 - Cast Faerie Seer
+
+VALUE SCORE: 0.932688
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Faerie Miscreant; Counterspell; Faerie Seer; Island]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Island,tapped; Humbling Elder]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000042 - Pass
+     [1] 0.439033 - Cast Faerie Miscreant
+ >>> [2] 0.560925 - Cast Faerie Seer
+
+VALUE SCORE: 0.918754
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Faerie Miscreant; Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker; Island; Island,tapped; Humbling Elder; Faerie Seer]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000042 - Pass
+
+VALUE SCORE: 0.918754
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Faerie Miscreant; Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker; Island; Island,tapped; Humbling Elder; Faerie Seer]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.345376 - STOP
+     [1] 0.320733 - Island
+ >>> [2] 0.333891 - Humbling Elder
+
+VALUE SCORE: 0.903693
+SELECTED: Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (RL turn), Precombat Main (CARD_PICK 1 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Faerie Miscreant; Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker; Island; Island,tapped; Humbling Elder; Faerie Seer]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.518498 - STOP
+ >>> [1] 0.481502 - Island
+
+VALUE SCORE: 0.903693
+SELECTED: Island
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Faerie Miscreant; Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker; Island; Island,tapped; Humbling Elder; Faerie Seer]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000102 - Pass
+ >>> [1] 0.999898 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.903693
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Brainstorm; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island]
+-> Graveyard: [Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island]
+-> Graveyard: [Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+-> Graveyard: [Thought Scour; Ponder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.903693
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island; Faerie Seer]
+-> Permanents: [Island; Island; Island; Island; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Island; Faerie Seer]
+-> Permanents: [Island; Island; Island; Island; Humbling Elder; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999871 - Play Island
+     [2] 0.000129 - Cast Faerie Seer
+
+VALUE SCORE: 0.923379
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island; Faerie Seer]
+-> Permanents: [Island; Island; Island; Island; Humbling Elder; Faerie Seer; Faerie Miscreant; Island]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000073 - Pass
+ >>> [1] 0.999927 - Cast Faerie Seer
+
+VALUE SCORE: 0.913295
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Humbling Elder; Faerie Seer; Faerie Miscreant; Island; Faerie Seer]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.913295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Humbling Elder; Faerie Seer; Faerie Miscreant; Island; Faerie Seer]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.355678 - STOP
+     [1] 0.300327 - Moon-Circuit Hacker
+     [2] 0.343995 - Humbling Elder
+
+VALUE SCORE: 0.896444
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Humbling Elder; Faerie Seer; Faerie Miscreant; Island; Faerie Seer]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.913295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Faerie Seer]
+-> Graveyard: [Of One Mind; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Ponder; Tolarian Terror; Mental Note; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.913295
+SELECTED: Pass
+

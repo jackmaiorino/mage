@@ -1,0 +1,1033 @@
+================================================================================
+GAME LOG: game_20260201_195456_0043
+Started: 2026-02-01T19:54:56.560943300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Mono Red Rally.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=MULLIGAN Q_keep=0.112 Q_mull=0.530 hand=[Idyllic Beachfront; Sea Gate; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Brainstorm; Squadron Hawk]
+LONDON_BOTTOM: player=RL mulligansTaken=1 handSize=7 bottomN=1 kept=[Spell Pierce; Journey to Nowhere; Counterspell; Outlaw Medic; The Modern Age; Sacred Cat] bottomed=[Citadel Gate]
+MULLIGAN_DECISION: player=RL mulligansTaken=1 handSize=6 lands=0 decision=MULLIGAN Q_keep=0.167 Q_mull=0.201 hand=[Counterspell; Journey to Nowhere; The Modern Age; Spell Pierce; Outlaw Medic; Sacred Cat]
+LONDON_BOTTOM: player=RL mulligansTaken=2 handSize=7 bottomN=1 kept=[Brainstorm; Idyllic Beachfront; Lorien Revealed; Citadel Gate; Spell Pierce; Spell Pierce] bottomed=[Counterspell]
+LONDON_BOTTOM: player=RL mulligansTaken=2 handSize=6 bottomN=1 kept=[Brainstorm; Idyllic Beachfront; Lorien Revealed; Citadel Gate; Spell Pierce] bottomed=[Spell Pierce]
+MULLIGAN_DECISION: player=RL mulligansTaken=2 handSize=5 lands=2 decision=MULLIGAN Q_keep=-0.292 Q_mull=0.468 hand=[Citadel Gate; Idyllic Beachfront; Lorien Revealed; Brainstorm; Spell Pierce]
+LONDON_BOTTOM: player=RL mulligansTaken=3 handSize=7 bottomN=1 kept=[Prismatic Strands; Prismatic Strands; The Modern Age; Basilisk Gate; Azorius Guildgate; Azorius Guildgate] bottomed=[Outlaw Medic]
+LONDON_BOTTOM: player=RL mulligansTaken=3 handSize=6 bottomN=1 kept=[Prismatic Strands; Prismatic Strands; The Modern Age; Basilisk Gate; Azorius Guildgate] bottomed=[Azorius Guildgate]
+LONDON_BOTTOM: player=RL mulligansTaken=3 handSize=5 bottomN=1 kept=[Prismatic Strands; Prismatic Strands; The Modern Age; Basilisk Gate] bottomed=[Azorius Guildgate]
+MULLIGAN_DECISION: player=RL mulligansTaken=3 handSize=4 lands=1 decision=MULLIGAN Q_keep=-0.028 Q_mull=0.508 hand=[Basilisk Gate; Prismatic Strands; Prismatic Strands; The Modern Age]
+LONDON_BOTTOM: player=RL mulligansTaken=4 handSize=7 bottomN=1 kept=[Journey to Nowhere; Journey to Nowhere; Guardian of the Guildpact; Citadel Gate; Spell Pierce; Sacred Cat] bottomed=[Sacred Cat]
+LONDON_BOTTOM: player=RL mulligansTaken=4 handSize=6 bottomN=1 kept=[Journey to Nowhere; Journey to Nowhere; Guardian of the Guildpact; Citadel Gate; Spell Pierce] bottomed=[Sacred Cat]
+LONDON_BOTTOM: player=RL mulligansTaken=4 handSize=5 bottomN=1 kept=[Journey to Nowhere; Journey to Nowhere; Guardian of the Guildpact; Citadel Gate] bottomed=[Spell Pierce]
+LONDON_BOTTOM: player=RL mulligansTaken=4 handSize=4 bottomN=1 kept=[Journey to Nowhere; Journey to Nowhere; Guardian of the Guildpact] bottomed=[Citadel Gate]
+MULLIGAN_DECISION: player=RL mulligansTaken=4 handSize=3 lands=0 decision=MULLIGAN Q_keep=-0.292 Q_mull=0.632 hand=[Journey to Nowhere; Journey to Nowhere; Guardian of the Guildpact]
+LONDON_BOTTOM: player=RL mulligansTaken=5 handSize=7 bottomN=1 kept=[Prismatic Strands; Prismatic Strands; Basilisk Gate; Idyllic Beachfront; Spell Pierce; Counterspell] bottomed=[Outlaw Medic]
+LONDON_BOTTOM: player=RL mulligansTaken=5 handSize=6 bottomN=1 kept=[Prismatic Strands; Prismatic Strands; Basilisk Gate; Idyllic Beachfront; Spell Pierce] bottomed=[Counterspell]
+LONDON_BOTTOM: player=RL mulligansTaken=5 handSize=5 bottomN=1 kept=[Prismatic Strands; Prismatic Strands; Basilisk Gate; Idyllic Beachfront] bottomed=[Spell Pierce]
+LONDON_BOTTOM: player=RL mulligansTaken=5 handSize=4 bottomN=1 kept=[Prismatic Strands; Prismatic Strands; Basilisk Gate] bottomed=[Idyllic Beachfront]
+LONDON_BOTTOM: player=RL mulligansTaken=5 handSize=3 bottomN=1 kept=[Prismatic Strands; Prismatic Strands] bottomed=[Basilisk Gate]
+MULLIGAN_DECISION: player=RL mulligansTaken=5 handSize=2 lands=0 decision=MULLIGAN Q_keep=-0.427 Q_mull=0.143 hand=[Prismatic Strands; Prismatic Strands]
+LONDON_BOTTOM: player=RL mulligansTaken=6 handSize=7 bottomN=1 kept=[Sea Gate; Prismatic Strands; The Modern Age; Squadron Hawk; Squadron Hawk; Thraben Charm] bottomed=[Counterspell]
+LONDON_BOTTOM: player=RL mulligansTaken=6 handSize=6 bottomN=1 kept=[Sea Gate; Prismatic Strands; The Modern Age; Squadron Hawk; Squadron Hawk] bottomed=[Thraben Charm]
+LONDON_BOTTOM: player=RL mulligansTaken=6 handSize=5 bottomN=1 kept=[Sea Gate; Prismatic Strands; The Modern Age; Squadron Hawk] bottomed=[Squadron Hawk]
+LONDON_BOTTOM: player=RL mulligansTaken=6 handSize=4 bottomN=1 kept=[Sea Gate; Prismatic Strands; The Modern Age] bottomed=[Squadron Hawk]
+LONDON_BOTTOM: player=RL mulligansTaken=6 handSize=3 bottomN=1 kept=[Sea Gate; Prismatic Strands] bottomed=[The Modern Age]
+LONDON_BOTTOM: player=RL mulligansTaken=6 handSize=2 bottomN=1 kept=[Sea Gate] bottomed=[Prismatic Strands]
+MULLIGAN_DECISION: player=RL mulligansTaken=6 handSize=1 lands=1 decision=MULLIGAN Q_keep=-0.553 Q_mull=0.433 hand=[Sea Gate]
+LONDON_BOTTOM: player=RL mulligansTaken=7 handSize=7 bottomN=1 kept=[Basilisk Gate; Lorien Revealed; Island; Squadron Hawk; Citadel Gate; Sacred Cat] bottomed=[Counterspell]
+LONDON_BOTTOM: player=RL mulligansTaken=7 handSize=6 bottomN=1 kept=[Basilisk Gate; Lorien Revealed; Island; Squadron Hawk; Citadel Gate] bottomed=[Sacred Cat]
+LONDON_BOTTOM: player=RL mulligansTaken=7 handSize=5 bottomN=1 kept=[Basilisk Gate; Lorien Revealed; Island; Squadron Hawk] bottomed=[Citadel Gate]
+LONDON_BOTTOM: player=RL mulligansTaken=7 handSize=4 bottomN=1 kept=[Basilisk Gate; Lorien Revealed; Island] bottomed=[Squadron Hawk]
+LONDON_BOTTOM: player=RL mulligansTaken=7 handSize=3 bottomN=1 kept=[Basilisk Gate; Lorien Revealed] bottomed=[Island]
+LONDON_BOTTOM: player=RL mulligansTaken=7 handSize=2 bottomN=1 kept=[Basilisk Gate] bottomed=[Lorien Revealed]
+LONDON_BOTTOM: player=RL mulligansTaken=7 handSize=1 bottomN=1 kept=[] bottomed=[Basilisk Gate]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505177 - Pass
+
+VALUE SCORE: 0.106953
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Thraben Charm; Brainstorm; Sea Gate]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Thraben Charm; Brainstorm; Sea Gate]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001738 - Pass
+ >>> [1] 0.998262 - Play Sea Gate
+
+VALUE SCORE: 0.048006
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001738 - Pass
+
+VALUE SCORE: 0.048006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001738 - Pass
+
+VALUE SCORE: 0.048006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Clockwork Percussionist,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001738 - Pass
+
+VALUE SCORE: 0.048006
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 6
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 6
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001738 - Pass
+
+VALUE SCORE: 0.048006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-skill6)
+[RL], life = 6
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist; Clockwork Percussionist]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001738 - Pass
+
+VALUE SCORE: 0.048006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider; Mountain,tapped; Voldaren Epicure; Blood Token; Clockwork Percussionist; Clockwork Percussionist]
+-> Graveyard: [Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001738 - Pass
+
+VALUE SCORE: 0.048006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Clockwork Percussionist,tapped,attacking; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: [Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001738 - Pass
+
+VALUE SCORE: 0.048006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Clockwork Percussionist,tapped,attacking; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: [Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001738 - Pass
+
+VALUE SCORE: 0.048006
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 4
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 35
+Ended: 2026-02-01T19:56:14.723601300
+================================================================================

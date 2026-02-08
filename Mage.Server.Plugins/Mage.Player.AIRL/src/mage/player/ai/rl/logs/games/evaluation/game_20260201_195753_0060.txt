@@ -1,0 +1,2320 @@
+================================================================================
+GAME LOG: game_20260201_195753_0060
+Started: 2026-02-01T19:57:53.698470900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Elves.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=MULLIGAN Q_keep=0.074 Q_mull=0.895 hand=[Mountain; Mountain; Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Goblin Tomb Raider; Voldaren Epicure]
+LONDON_BOTTOM: player=RL mulligansTaken=1 handSize=7 bottomN=1 kept=[Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer] bottomed=[Clockwork Percussionist]
+MULLIGAN_DECISION: player=RL mulligansTaken=1 handSize=6 lands=0 decision=KEEP Q_keep=0.410 Q_mull=-0.160 hand=[Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.140459 - Pass
+
+VALUE SCORE: 0.847793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.140459 - Pass
+
+VALUE SCORE: 0.847793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.140459 - Pass
+
+VALUE SCORE: 0.847793
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.140459 - Pass
+
+VALUE SCORE: 0.847793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.140459 - Pass
+
+VALUE SCORE: 0.847793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.140459 - Pass
+
+VALUE SCORE: 0.847793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.140459 - Pass
+
+VALUE SCORE: 0.847793
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker; Mountain]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker; Mountain]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.053361
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.328116 - Elvish Mystic (Benchmark-skill6)
+ >>> [1] 0.335994 - Benchmark-skill6
+     [2] 0.335891 - RL
+
+VALUE SCORE: 1.044964
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.328116 - Elvish Mystic (Benchmark-skill6)
+     [1] 0.335994 - Benchmark-skill6
+ >>> [2] 0.335891 - RL
+
+VALUE SCORE: 1.044964
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.001449 - Cast Experimental Synthesizer
+     [2] 0.000034 - Cast Galvanic Blast
+ >>> [3] 0.998516 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 1.047857
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.047857
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.159504 - Elvish Mystic (Benchmark-skill6)
+     [1] 0.158353 - Goblin Bushwhacker (you)
+     [2] 0.165975 - Benchmark-skill6
+     [3] 0.165866 - RL
+     [4] 0.172410 - Priest of Titania (Benchmark-skill6)
+     [5] 0.177892 - Quirion Ranger (Benchmark-skill6)
+
+VALUE SCORE: 1.035457
+SELECTED: Elvish Mystic (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.159504 - Elvish Mystic (Benchmark-skill6)
+     [1] 0.158353 - Goblin Bushwhacker (you)
+     [2] 0.165975 - Benchmark-skill6
+ >>> [3] 0.165866 - RL
+     [4] 0.172410 - Priest of Titania (Benchmark-skill6)
+     [5] 0.177892 - Quirion Ranger (Benchmark-skill6)
+
+VALUE SCORE: 1.035457
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.001452 - Cast Experimental Synthesizer
+     [2] 0.000034 - Cast Galvanic Blast
+ >>> [3] 0.998514 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 1.038705
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.038705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.038705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.038705
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.038705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.038705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.038705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.038705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.038705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.038705
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.138057 - Elvish Mystic (Benchmark-skill6)
+     [1] 0.137066 - Goblin Bushwhacker (you)
+     [2] 0.143645 - Benchmark-skill6
+     [3] 0.143537 - RL
+     [4] 0.137066 - Goblin Bushwhacker (you)
+     [5] 0.146747 - Priest of Titania (Benchmark-skill6)
+     [6] 0.153883 - Quirion Ranger (Benchmark-skill6)
+
+VALUE SCORE: 1.032855
+SELECTED: Elvish Mystic (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.138057 - Elvish Mystic (Benchmark-skill6)
+     [1] 0.137066 - Goblin Bushwhacker (you)
+     [2] 0.143645 - Benchmark-skill6
+     [3] 0.143537 - RL
+     [4] 0.137066 - Goblin Bushwhacker (you)
+     [5] 0.146747 - Priest of Titania (Benchmark-skill6)
+     [6] 0.153883 - Quirion Ranger (Benchmark-skill6)
+
+VALUE SCORE: 1.032855
+SELECTED: Elvish Mystic (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.001455 - Cast Experimental Synthesizer
+     [2] 0.000034 - Cast Galvanic Blast
+ >>> [3] 0.998510 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 1.036106
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.036106
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.095083 - Goblin Bushwhacker (you)
+     [1] 0.095765 - Elvish Mystic (Benchmark-skill6)
+ >>> [2] 0.095083 - Goblin Bushwhacker (you)
+     [3] 0.099545 - Benchmark-skill6
+     [4] 0.102935 - Llanowar Elves (Benchmark-skill6)
+     [5] 0.099315 - RL
+     [6] 0.109563 - Avenging Hunter (Benchmark-skill6)
+ >>> [7] 0.095083 - Goblin Bushwhacker (you)
+     [8] 0.101862 - Priest of Titania (Benchmark-skill6)
+     [9] 0.105766 - Quirion Ranger (Benchmark-skill6)
+
+VALUE SCORE: 0.993697
+SELECTED: Goblin Bushwhacker (you)
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.095083 - Goblin Bushwhacker (you)
+     [1] 0.095765 - Elvish Mystic (Benchmark-skill6)
+     [2] 0.095083 - Goblin Bushwhacker (you)
+     [3] 0.099545 - Benchmark-skill6
+     [4] 0.102935 - Llanowar Elves (Benchmark-skill6)
+     [5] 0.099315 - RL
+ >>> [6] 0.109563 - Avenging Hunter (Benchmark-skill6)
+     [7] 0.095083 - Goblin Bushwhacker (you)
+     [8] 0.101862 - Priest of Titania (Benchmark-skill6)
+     [9] 0.105766 - Quirion Ranger (Benchmark-skill6)
+
+VALUE SCORE: 0.993697
+SELECTED: Avenging Hunter (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000184 - Pass
+ >>> [1] 0.544826 - Cast Experimental Synthesizer
+     [2] 0.011820 - Cast Galvanic Blast
+     [3] 0.443171 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.997751
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000184 - Pass
+
+VALUE SCORE: 0.997751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Goblin Tomb Raider]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000184 - Pass
+
+VALUE SCORE: 0.997751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Goblin Tomb Raider]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000184 - Pass
+
+VALUE SCORE: 0.997751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Goblin Tomb Raider]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Priest of Titania,tapped; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000184 - Pass
+
+VALUE SCORE: 0.997751
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Goblin Tomb Raider]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Goblin Tomb Raider]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000184 - Pass
+
+VALUE SCORE: 0.997751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Goblin Tomb Raider]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000184 - Pass
+
+VALUE SCORE: 0.997751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Goblin Tomb Raider]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000184 - Pass
+
+VALUE SCORE: 0.997751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,blocking; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Goblin Tomb Raider]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000184 - Pass
+
+VALUE SCORE: 0.997751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: [Goblin Tomb Raider]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000184 - Pass
+
+VALUE SCORE: 0.997751
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.094014 - Goblin Bushwhacker (you)
+     [1] 0.102932 - Timberwatch Elf (Benchmark-skill6)
+     [2] 0.096021 - Elvish Mystic (Benchmark-skill6)
+     [3] 0.098472 - Benchmark-skill6
+     [4] 0.101822 - Llanowar Elves (Benchmark-skill6)
+     [5] 0.098790 - RL
+     [6] 0.107624 - Avenging Hunter (Benchmark-skill6)
+     [7] 0.094014 - Goblin Bushwhacker (you)
+     [8] 0.102193 - Priest of Titania (Benchmark-skill6)
+ >>> [9] 0.104118 - Quirion Ranger (Benchmark-skill6)
+
+VALUE SCORE: 0.970774
+SELECTED: Quirion Ranger (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.094014 - Goblin Bushwhacker (you)
+     [1] 0.102932 - Timberwatch Elf (Benchmark-skill6)
+     [2] 0.096021 - Elvish Mystic (Benchmark-skill6)
+     [3] 0.098472 - Benchmark-skill6
+     [4] 0.101822 - Llanowar Elves (Benchmark-skill6)
+     [5] 0.098790 - RL
+ >>> [6] 0.107624 - Avenging Hunter (Benchmark-skill6)
+     [7] 0.094014 - Goblin Bushwhacker (you)
+     [8] 0.102193 - Priest of Titania (Benchmark-skill6)
+     [9] 0.104118 - Quirion Ranger (Benchmark-skill6)
+
+VALUE SCORE: 0.970774
+SELECTED: Avenging Hunter (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000106 - Pass
+     [1] 0.006322 - Cast Galvanic Blast
+     [2] 0.256400 - Cast Voldaren Epicure
+ >>> [3] 0.737172 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.975099
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (RL turn), Combat Damage (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.020676 - Burning-Tree Emissary
+     [1] 0.020676 - Burning-Tree Emissary
+     [2] 0.020676 - Burning-Tree Emissary
+     [3] 0.020448 - Chain Lightning
+     [4] 0.020448 - Chain Lightning
+     [5] 0.018111 - Clockwork Percussionist
+     [6] 0.018111 - Clockwork Percussionist
+     [7] 0.018111 - Clockwork Percussionist
+     [8] 0.018111 - Clockwork Percussionist
+ >>> [9] 0.020960 - End the Festivities
+     [10] 0.018641 - Experimental Synthesizer
+     [11] 0.018641 - Experimental Synthesizer
+     [12] 0.020212 - Galvanic Blast
+     [13] 0.020212 - Galvanic Blast
+     [14] 0.018138 - Goblin Bushwhacker
+     [15] 0.019137 - Goblin Tomb Raider
+     [16] 0.019137 - Goblin Tomb Raider
+     [17] 0.019137 - Goblin Tomb Raider
+     [18] 0.024564 - Great Furnace
+     [19] 0.024564 - Great Furnace
+     [20] 0.024564 - Great Furnace
+     [21] 0.024564 - Great Furnace
+     [22] 0.020348 - Lightning Bolt
+     [23] 0.020348 - Lightning Bolt
+     [24] 0.020348 - Lightning Bolt
+     [25] 0.020348 - Lightning Bolt
+     [26] 0.019859 - Mountain
+     [27] 0.019859 - Mountain
+     [28] 0.019859 - Mountain
+     [29] 0.019859 - Mountain
+     [30] 0.019859 - Mountain
+     [31] 0.019859 - Mountain
+     [32] 0.019859 - Mountain
+     [33] 0.019859 - Mountain
+     [34] 0.019859 - Mountain
+     [35] 0.019859 - Mountain
+     [36] 0.019859 - Mountain
+     [37] 0.019859 - Mountain
+     [38] 0.019859 - Mountain
+     [39] 0.021694 - Rally at the Hornburg
+     [40] 0.021694 - Rally at the Hornburg
+     [41] 0.021694 - Rally at the Hornburg
+     [42] 0.019668 - Reckless Impulse
+     [43] 0.019668 - Reckless Impulse
+     [44] 0.019668 - Reckless Impulse
+     [45] 0.019668 - Reckless Impulse
+     [46] 0.022949 - Voldaren Epicure
+     [47] 0.022949 - Voldaren Epicure
+     [48] 0.022949 - Voldaren Epicure
+
+VALUE SCORE: 0.932040
+SELECTED: End the Festivities
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; End the Festivities]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; End the Festivities]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Avenging Hunter; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; End the Festivities]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Avenging Hunter; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; End the Festivities]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Avenging Hunter; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; End the Festivities]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Avenging Hunter; Snow-Covered Forest; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; End the Festivities]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Snow-Covered Forest; Timberwatch Elf,tapped; Wellwisher]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; End the Festivities]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Snow-Covered Forest; Timberwatch Elf,tapped; Wellwisher]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; End the Festivities]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Snow-Covered Forest; Timberwatch Elf,tapped; Wellwisher]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Rally at the Hornburg; Galvanic Blast; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; End the Festivities]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,blocking; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider,tapped]
+-> Graveyard: [Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Priest of Titania; Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Snow-Covered Forest; Timberwatch Elf,tapped; Wellwisher]
+-> Graveyard: [Generous Ent; Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.975099
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 6
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Elves.dek
+Total Decisions Logged: 74
+Ended: 2026-02-01T20:00:48.119346400
+================================================================================

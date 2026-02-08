@@ -1,4 +1,4 @@
-$env:MTG_AI_LOG_LEVEL="INFO"
+$env:MTG_AI_LOG_LEVEL="WARNING"
 $env:METRICS_PORT=9090
 
 # Inference workers (each = 1 Python proc + 1 model replica on GPU)
@@ -66,6 +66,8 @@ $env:MULLIGAN_DEVICE="cpu"
 # Full gamelogs for every benchmark game.
 # GameLogger now defaults to /evalgamelogs when MODE=benchmark.
 $env:GAME_LOGGING="1"
+$env:RL_ACTIVATION_DIAG="0"
+$env:RL_SILENCE_THREAD_LOGGER="1"
 
 # Run
 .\scripts\rl-benchmark.ps1 -GamesPerMatchup 2 -LogEvery 10 -BenchmarkThreads 50 `

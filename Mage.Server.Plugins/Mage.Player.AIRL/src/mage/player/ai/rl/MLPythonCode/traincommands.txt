@@ -25,7 +25,7 @@ $env:MODEL_SYNC_EVERY_MS=5000
 
 # Java-side inference batching (performance)
 $env:PY_BATCH_MAX_SIZE=30
-$env:PY_BATCH_TIMEOUT_MS=1000   # Increased from 5 to accumulate more samples
+$env:PY_BATCH_TIMEOUT_MS=10   # Increased from 5 to accumulate more samples
 $env:PY_BATCH_LOG_LEVEL="WARNING"
 
 # Python-side auto-batching (avoid paging/shared RAM)
@@ -65,11 +65,8 @@ $env:MULLIGAN_DEVICE="cpu"
 
 # League type
 $env:OPPONENT_SAMPLER="league"
-$env:BOT_FLOOR="0"
-$env:SELFPLAY_START_P="1"
-$env:SELFPLAY_END_P="1"
-$env:SNAPSHOT_OPPONENT_PROB="0"
+$env:GAME_TIMEOUT_SEC=600
 
 # Run
-.\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -TotalEpisodes 100000 -NumGameRunners 50 `
+.\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -TotalEpisodes 1000000 -NumGameRunners 50 `
   -DeckListFile "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.txt"

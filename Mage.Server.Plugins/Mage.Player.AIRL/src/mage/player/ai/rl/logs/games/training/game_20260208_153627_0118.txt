@@ -1,0 +1,2841 @@
+================================================================================
+GAME LOG: game_20260208_153627_0118
+Started: 2026-02-08T15:36:27.642370500
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.284 Q_mull=0.134 hand=[Mountain; Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Voldaren Epicure]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.040382 - Pass
+ >>> [1] 0.959618 - Play Mountain
+
+VALUE SCORE: -0.030246
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.494518 - Pass
+     [1] 0.000436 - Cast Lightning Bolt
+     [2] 0.261632 - Cast Goblin Bushwhacker
+     [3] 0.243414 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.028350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999119 - Pass
+     [1] 0.000881 - Cast Lightning Bolt
+
+VALUE SCORE: -0.028234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.497957 - Pass
+     [1] 0.000431 - Cast Lightning Bolt
+     [2] 0.260011 - Cast Goblin Bushwhacker
+ >>> [3] 0.241601 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.029784
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Great Furnace]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Great Furnace]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.025753 - Pass
+ >>> [1] 0.519515 - Play Mountain
+     [2] 0.000027 - Cast Lightning Bolt
+     [3] 0.011612 - Cast Goblin Bushwhacker
+     [4] 0.426867 - Play Great Furnace
+     [5] 0.016227 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.112754
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Great Furnace]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.365523 - Pass
+     [1] 0.243579 - Cast Reckless Impulse
+     [2] 0.000387 - Cast Lightning Bolt
+     [3] 0.161595 - Cast Goblin Bushwhacker
+ >>> [4] 0.228916 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.118074
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.690809 - Pass
+     [1] 0.000727 - Cast Lightning Bolt
+     [2] 0.308464 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.105451
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped,attacking; Mountain]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998920 - Pass
+     [1] 0.001080 - Cast Lightning Bolt
+
+VALUE SCORE: -0.110281
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped,attacking; Mountain]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998930 - Pass
+     [1] 0.001070 - Cast Lightning Bolt
+
+VALUE SCORE: -0.112237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.694085 - Pass
+     [1] 0.000757 - Cast Lightning Bolt
+ >>> [2] 0.305158 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.126980
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Burning-Tree Emissary; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.154575 - Pass
+     [1] 0.107619 - Cast Reckless Impulse
+     [2] 0.000184 - Cast Lightning Bolt
+     [3] 0.070032 - Cast Goblin Bushwhacker
+ >>> [4] 0.667590 - Cast Burning-Tree Emissary
+
+VALUE SCORE: -0.132280
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.471349 - Pass
+     [1] 0.347545 - Cast Reckless Impulse
+     [2] 0.000756 - Cast Lightning Bolt
+     [3] 0.180350 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.259365
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped,attacking; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped,attacking; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.058728 - Pass
+     [1] 0.046084 - Cast Reckless Impulse
+     [2] 0.000111 - Cast Lightning Bolt
+     [3] 0.023066 - Cast Goblin Bushwhacker
+ >>> [4] 0.872010 - Play Mountain
+
+VALUE SCORE: -0.295824
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain]
+-> Graveyard: [Great Furnace]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.455858 - Pass
+ >>> [1] 0.360578 - Cast Reckless Impulse
+     [2] 0.000933 - Cast Lightning Bolt
+     [3] 0.182631 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.297441
+SELECTED: Cast Reckless Impulse
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.705662 - Pass
+     [1] 0.002297 - Cast Lightning Bolt
+ >>> [2] 0.292041 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.430398
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Great Furnace; Mountain]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Mountain]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: [Mountain]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.049633 - Pass
+     [1] 0.000164 - Cast Lightning Bolt
+     [2] 0.021872 - Cast Goblin Bushwhacker
+     [3] 0.408346 - Play Great Furnace
+ >>> [4] 0.519986 - Play Mountain
+
+VALUE SCORE: -0.392576
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker; Mountain]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.685819 - Pass
+     [1] 0.002481 - Cast Lightning Bolt
+ >>> [2] 0.311700 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.391242
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995135 - Pass
+     [1] 0.004865 - Cast Lightning Bolt
+
+VALUE SCORE: -0.428692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995055 - Pass
+     [1] 0.004945 - Cast Lightning Bolt
+
+VALUE SCORE: -0.426298
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995000 - Pass
+     [1] 0.005000 - Cast Lightning Bolt
+
+VALUE SCORE: -0.424575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994839 - Pass
+     [1] 0.005161 - Cast Lightning Bolt
+
+VALUE SCORE: -0.424469
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island; Island; Faerie Miscreant; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island; Island; Faerie Miscreant; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996592 - Pass
+     [1] 0.003408 - Cast Lightning Bolt
+
+VALUE SCORE: -0.458477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Faerie Miscreant,tapped,attacking; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994967 - Pass
+     [1] 0.005033 - Cast Lightning Bolt
+
+VALUE SCORE: -0.527208
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Faerie Miscreant,tapped,attacking; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994967 - Pass
+     [1] 0.005033 - Cast Lightning Bolt
+
+VALUE SCORE: -0.527208
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993767 - Pass
+     [1] 0.006233 - Cast Lightning Bolt
+
+VALUE SCORE: -0.541950
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Great Furnace; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.133875 - Pass
+     [1] 0.000775 - Cast Lightning Bolt
+ >>> [2] 0.859561 - Play Great Furnace
+     [3] 0.005788 - Play Mountain
+
+VALUE SCORE: -0.425549
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993211 - Pass
+     [1] 0.006789 - Cast Lightning Bolt
+
+VALUE SCORE: -0.430993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped,attacking; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992040 - Pass
+     [1] 0.007960 - Cast Lightning Bolt
+
+VALUE SCORE: -0.464092
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped,attacking; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992001 - Pass
+     [1] 0.007999 - Cast Lightning Bolt
+
+VALUE SCORE: -0.465312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990707 - Pass
+     [1] 0.009293 - Cast Lightning Bolt
+
+VALUE SCORE: -0.534139
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985382 - Pass
+     [1] 0.014618 - Cast Lightning Bolt
+
+VALUE SCORE: -0.729891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986057 - Pass
+     [1] 0.013943 - Cast Lightning Bolt
+
+VALUE SCORE: -0.728054
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986396 - Pass
+     [1] 0.013604 - Cast Lightning Bolt
+
+VALUE SCORE: -0.722563
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island; Faerie Miscreant,tapped,attacking; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983599 - Pass
+     [1] 0.016401 - Cast Lightning Bolt
+
+VALUE SCORE: -0.724109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island; Faerie Miscreant,tapped,attacking; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983687 - Pass
+     [1] 0.016313 - Cast Lightning Bolt
+
+VALUE SCORE: -0.721640
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982385 - Pass
+     [1] 0.017615 - Cast Lightning Bolt
+
+VALUE SCORE: -0.719443
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.887377 - Pass
+     [1] 0.010238 - Cast Lightning Bolt
+     [2] 0.102385 - Play Mountain
+
+VALUE SCORE: -0.482528
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.988457 - Pass
+     [1] 0.011543 - Cast Lightning Bolt
+
+VALUE SCORE: -0.486141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 9
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.988457 - Pass
+     [1] 0.011543 - Cast Lightning Bolt
+
+VALUE SCORE: -0.486141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.882456 - Pass
+     [1] 0.010455 - Cast Lightning Bolt
+     [2] 0.107089 - Play Mountain
+
+VALUE SCORE: -0.491519
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982774 - Pass
+     [1] 0.017226 - Cast Lightning Bolt
+
+VALUE SCORE: -0.680316
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island,tapped; Humbling Elder; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977214 - Pass
+     [1] 0.022786 - Cast Lightning Bolt
+
+VALUE SCORE: -0.652898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island; Faerie Miscreant,tapped,attacking; Island; Island,tapped; Humbling Elder,tapped,attacking; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972887 - Pass
+     [1] 0.027113 - Cast Lightning Bolt
+
+VALUE SCORE: -0.647565
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island; Faerie Miscreant,tapped,attacking; Island; Island,tapped; Humbling Elder,tapped,attacking; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972887 - Pass
+     [1] 0.027113 - Cast Lightning Bolt
+
+VALUE SCORE: -0.647565
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971445 - Pass
+     [1] 0.028555 - Cast Lightning Bolt
+
+VALUE SCORE: -0.650634
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain; Burning-Tree Emissary]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain; Burning-Tree Emissary]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.078623 - Pass
+     [1] 0.001211 - Cast Lightning Bolt
+     [2] 0.017072 - Play Mountain
+ >>> [3] 0.903094 - Cast Burning-Tree Emissary
+
+VALUE SCORE: -0.605393
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=PlayerRL1)
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984993 - Pass
+     [1] 0.015007 - Cast Lightning Bolt
+
+VALUE SCORE: -0.689759
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.785663 - Pass
+     [1] 0.011844 - Cast Lightning Bolt
+     [2] 0.202493 - Play Mountain
+
+VALUE SCORE: -0.690404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985093 - Pass
+     [1] 0.014907 - Cast Lightning Bolt
+
+VALUE SCORE: -0.694844
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island,tapped; Humbling Elder,tapped; Moon-Circuit Hacker,blocking; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984996 - Pass
+     [1] 0.015004 - Cast Lightning Bolt
+
+VALUE SCORE: -0.696384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Faerie Miscreant,tapped; Island; Island,tapped; Humbling Elder,tapped; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791911 - Pass
+     [1] 0.011293 - Cast Lightning Bolt
+     [2] 0.196796 - Play Mountain
+
+VALUE SCORE: -0.686049
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island; Island; Faerie Miscreant; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island; Island; Faerie Miscreant; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982438 - Pass
+     [1] 0.017562 - Cast Lightning Bolt
+
+VALUE SCORE: -0.677836
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Faerie Miscreant,tapped,attacking; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978900 - Pass
+     [1] 0.021100 - Cast Lightning Bolt
+
+VALUE SCORE: -0.657998
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Faerie Miscreant,tapped,attacking; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979902 - Pass
+     [1] 0.020098 - Cast Lightning Bolt
+
+VALUE SCORE: -0.665946
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978837 - Pass
+     [1] 0.021163 - Cast Lightning Bolt
+
+VALUE SCORE: -0.663326
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain; Goblin Tomb Raider]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain; Goblin Tomb Raider]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.233045 - Pass
+     [1] 0.003662 - Cast Lightning Bolt
+     [2] 0.057728 - Play Mountain
+ >>> [3] 0.705564 - Cast Goblin Tomb Raider
+
+VALUE SCORE: -0.602597
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.753521 - Pass
+     [1] 0.011570 - Cast Lightning Bolt
+     [2] 0.234909 - Play Mountain
+
+VALUE SCORE: -0.699724
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984560 - Pass
+     [1] 0.015440 - Cast Lightning Bolt
+
+VALUE SCORE: -0.715156
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 7
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984560 - Pass
+     [1] 0.015440 - Cast Lightning Bolt
+
+VALUE SCORE: -0.715156
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island; Island; Faerie Miscreant,tapped; Island; Island; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.741115 - Pass
+     [1] 0.011453 - Cast Lightning Bolt
+     [2] 0.247432 - Play Mountain
+
+VALUE SCORE: -0.724099
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island,tapped; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island,tapped; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.976008 - Pass
+ >>> [1] 0.023992 - Cast Lightning Bolt
+
+VALUE SCORE: -0.725481
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9 (Bot-Skill1 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Lightning Bolt (controller=PlayerRL1)
+  - [1] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Faerie Miscreant; Island; Island,tapped; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.082997 - Bot-Skill1
+     [1] 0.093692 - Voldaren Epicure (you)
+     [2] 0.097860 - Harrier Strix (Bot-Skill1)
+     [3] 0.094160 - Goblin Tomb Raider (you)
+     [4] 0.082071 - PlayerRL1
+ >>> [5] 0.090724 - Faerie Miscreant (Bot-Skill1)
+     [6] 0.093896 - Goblin Bushwhacker (you)
+     [7] 0.091201 - Spellstutter Sprite (Bot-Skill1)
+     [8] 0.094090 - Humbling Elder (Bot-Skill1)
+     [9] 0.093896 - Goblin Bushwhacker (you)
+     [10] 0.085413 - Burning-Tree Emissary (you)
+
+VALUE SCORE: -0.756301
+SELECTED: Faerie Miscreant (Bot-Skill1)
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary; Lightning Bolt]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Island; Island,tapped; Humbling Elder; Island; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977919 - Pass
+     [1] 0.022081 - Cast Lightning Bolt
+
+VALUE SCORE: -0.753712
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary; Lightning Bolt]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Harrier Strix; Spellstutter Sprite; Island,tapped; Island; Island; Island,tapped; Humbling Elder; Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977039 - Pass
+     [1] 0.022961 - Cast Lightning Bolt
+
+VALUE SCORE: -0.773239
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary; Lightning Bolt]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island; Island; Island,tapped; Humbling Elder,tapped,attacking; Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977033 - Pass
+     [1] 0.022967 - Cast Lightning Bolt
+
+VALUE SCORE: -0.786463
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary; Lightning Bolt]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island; Island; Island,tapped; Humbling Elder,tapped,attacking; Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977033 - Pass
+     [1] 0.022967 - Cast Lightning Bolt
+
+VALUE SCORE: -0.786463
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lightning Bolt; Mountain; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary; Lightning Bolt]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Island; Island,tapped; Humbling Elder,tapped; Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976579 - Pass
+     [1] 0.023421 - Cast Lightning Bolt
+
+VALUE SCORE: -0.788385
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lightning Bolt; Mountain; Mountain; Galvanic Blast]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary; Lightning Bolt]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Island; Island,tapped; Humbling Elder,tapped; Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 10 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lightning Bolt; Mountain; Mountain; Galvanic Blast]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Great Furnace; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary; Lightning Bolt]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Island; Island,tapped; Humbling Elder,tapped; Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.728728 - Pass
+     [1] 0.012315 - Cast Lightning Bolt
+     [2] 0.253642 - Play Mountain
+     [3] 0.005315 - Cast Galvanic Blast
+
+VALUE SCORE: -0.728579
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 10 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lightning Bolt; Mountain; Mountain; Galvanic Blast]
+-> Permanents: [Mountain; Voldaren Epicure,tapped,attacking; Mountain; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace; Burning-Tree Emissary,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary; Lightning Bolt]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Island; Island,tapped; Humbling Elder,tapped; Island; Island; Moon-Circuit Hacker; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974046 - Pass
+     [1] 0.018136 - Cast Lightning Bolt
+     [2] 0.007817 - Cast Galvanic Blast
+
+VALUE SCORE: -0.744707
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 10 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lightning Bolt; Mountain; Mountain; Galvanic Blast]
+-> Permanents: [Mountain; Voldaren Epicure,tapped,attacking; Mountain; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace; Burning-Tree Emissary,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Great Furnace; Reckless Impulse; Burning-Tree Emissary; Lightning Bolt]
+-> Exile: []
+[Bot-Skill1], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Harrier Strix,tapped; Spellstutter Sprite,tapped; Island,tapped; Island; Island; Island,tapped; Humbling Elder,tapped; Island; Island; Moon-Circuit Hacker,blocking; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974621 - Pass
+     [1] 0.017743 - Cast Lightning Bolt
+     [2] 0.007637 - Cast Galvanic Blast
+
+VALUE SCORE: -0.744033
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: PlayerRL1
+Loser: Bot-Skill1
+Turns: 10
+Reason: Episode 152800 - Win
+Total Decisions Logged: 99
+Ended: 2026-02-08T15:41:47.848957400
+================================================================================

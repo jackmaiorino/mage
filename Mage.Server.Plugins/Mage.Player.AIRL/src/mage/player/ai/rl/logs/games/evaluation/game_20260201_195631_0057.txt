@@ -1,0 +1,2955 @@
+================================================================================
+GAME LOG: game_20260201_195631_0057
+Started: 2026-02-01T19:56:31.851378600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Caw-Gates.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.810 Q_mull=0.111 hand=[Mountain; Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary; Clockwork Percussionist]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary; Clockwork Percussionist]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary; Clockwork Percussionist]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078411
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Burning-Tree Emissary; Clockwork Percussionist]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Burning-Tree Emissary; Clockwork Percussionist]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.499858 - Benchmark-skill6
+ >>> [1] 0.500142 - RL
+
+VALUE SCORE: 1.071362
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary; Clockwork Percussionist]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.012764 - Cast Experimental Synthesizer
+     [2] 0.081172 - Cast Lightning Bolt
+ >>> [3] 0.906061 - Cast Clockwork Percussionist
+
+VALUE SCORE: 1.073744
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073744
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073744
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.326602 - Benchmark-skill6
+     [1] 0.347044 - Clockwork Percussionist (you)
+     [2] 0.326355 - RL
+
+VALUE SCORE: 1.063368
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999877 - Play Mountain
+     [2] 0.000012 - Cast Experimental Synthesizer
+     [3] 0.000076 - Cast Lightning Bolt
+     [4] 0.000034 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.066000
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.326667 - Benchmark-skill6
+     [1] 0.346980 - Clockwork Percussionist (you)
+     [2] 0.326353 - RL
+
+VALUE SCORE: 1.057626
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.094337 - Cast Rally at the Hornburg
+     [2] 0.007506 - Cast Experimental Synthesizer
+     [3] 0.047338 - Cast Lightning Bolt
+ >>> [4] 0.829416 - Cast Burning-Tree Emissary
+     [5] 0.021402 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.060500
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.060500
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.248647 - Benchmark-skill6
+     [1] 0.240603 - Burning-Tree Emissary (you)
+     [2] 0.262754 - Clockwork Percussionist (you)
+     [3] 0.247996 - RL
+
+VALUE SCORE: 1.013733
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000015 - Pass
+ >>> [1] 0.578902 - Cast Rally at the Hornburg
+     [2] 0.044860 - Cast Experimental Synthesizer
+     [3] 0.259251 - Cast Lightning Bolt
+     [4] 0.116972 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.017598
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 1.017598
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 1.017598
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 1.017598
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 1.017598
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 1.017598
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 1.017598
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 1.017598
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 1.017598
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.158599 - Human Soldier Token (you)
+     [1] 0.158599 - Human Soldier Token (you)
+     [2] 0.138608 - Benchmark-skill6
+ >>> [3] 0.133898 - Burning-Tree Emissary (you)
+     [4] 0.145631 - Clockwork Percussionist (you)
+     [5] 0.127265 - Sacred Cat (Benchmark-skill6)
+     [6] 0.137401 - RL
+
+VALUE SCORE: 0.996350
+SELECTED: Burning-Tree Emissary (you)
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.013013 - Cast Experimental Synthesizer
+     [2] 0.078574 - Cast Lightning Bolt
+     [3] 0.034118 - Cast Goblin Tomb Raider
+ >>> [4] 0.874291 - Cast Clockwork Percussionist
+
+VALUE SCORE: 1.001068
+SELECTED: Cast Clockwork Percussionist
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.138303 - Human Soldier Token (you)
+     [1] 0.138303 - Human Soldier Token (you)
+     [2] 0.121265 - Benchmark-skill6
+     [3] 0.117087 - Burning-Tree Emissary (you)
+ >>> [4] 0.126910 - Clockwork Percussionist (you)
+     [5] 0.111143 - Sacred Cat (Benchmark-skill6)
+ >>> [6] 0.126910 - Clockwork Percussionist (you)
+     [7] 0.120079 - RL
+
+VALUE SCORE: 0.968626
+SELECTED: Clockwork Percussionist (you)
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+     [1] 0.108875 - Cast Experimental Synthesizer
+ >>> [2] 0.620448 - Cast Lightning Bolt
+     [3] 0.270640 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.974014
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.138303 - Human Soldier Token (you)
+     [1] 0.138303 - Human Soldier Token (you)
+     [2] 0.121265 - Benchmark-skill6
+     [3] 0.117087 - Burning-Tree Emissary (you)
+     [4] 0.126910 - Clockwork Percussionist (you)
+     [5] 0.111143 - Sacred Cat (Benchmark-skill6)
+     [6] 0.126910 - Clockwork Percussionist (you)
+ >>> [7] 0.120079 - RL
+
+VALUE SCORE: 0.968626
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.974014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.974014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Sacred Cat,blocking; Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.974014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.974014
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.974014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.974014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.974014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.974014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.974014
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider; Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Goblin Tomb Raider; Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000099 - Pass
+     [1] 0.290498 - Cast Experimental Synthesizer
+ >>> [2] 0.700899 - Cast Goblin Tomb Raider
+     [3] 0.008504 - Cast Reckless Impulse
+
+VALUE SCORE: 0.952540
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Experimental Synthesizer; Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000355 - Pass
+ >>> [1] 0.999645 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.919536
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Chain Lightning; Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000355 - Pass
+
+VALUE SCORE: 0.919536
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.122437 - Human Soldier Token (you)
+     [1] 0.099713 - Sacred Cat (Benchmark-skill6)
+     [2] 0.122437 - Human Soldier Token (you)
+     [3] 0.099755 - Squadron Hawk (Benchmark-skill6)
+ >>> [4] 0.109682 - Benchmark-skill6
+     [5] 0.113539 - Goblin Tomb Raider (you)
+     [6] 0.112399 - Clockwork Percussionist (you)
+     [7] 0.112399 - Clockwork Percussionist (you)
+     [8] 0.107640 - RL
+
+VALUE SCORE: 0.865128
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Chain Lightning]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Chain Lightning]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.001798 - Pass
+     [1] 0.125702 - Cast Reckless Impulse
+ >>> [2] 0.872500 - Cast Chain Lightning
+
+VALUE SCORE: 0.872603
+SELECTED: Cast Chain Lightning
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=RL)
+[RL], life = 17
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.122437 - Human Soldier Token (you)
+     [1] 0.099713 - Sacred Cat (Benchmark-skill6)
+     [2] 0.122437 - Human Soldier Token (you)
+     [3] 0.099755 - Squadron Hawk (Benchmark-skill6)
+     [4] 0.109682 - Benchmark-skill6
+     [5] 0.113539 - Goblin Tomb Raider (you)
+     [6] 0.112399 - Clockwork Percussionist (you)
+     [7] 0.112399 - Clockwork Percussionist (you)
+ >>> [8] 0.107640 - RL
+
+VALUE SCORE: 0.865128
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 9
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Sacred Cat,blocking; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk; Island]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate; Squadron Hawk; Island,tapped]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate; Squadron Hawk; Island,tapped]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk; Island,tapped; Squadron Hawk; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001798 - Pass
+
+VALUE SCORE: 0.872603
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Reckless Impulse
+ >>> [2] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.874655
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000105 - Pass
+     [1] 0.007219 - Cast Reckless Impulse
+ >>> [2] 0.992677 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.859517
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate; Journey to Nowhere; Basilisk Gate; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate; Journey to Nowhere; Basilisk Gate; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Island,tapped; Squadron Hawk,tapped,attacking]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Island,tapped; Squadron Hawk,tapped,attacking]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Lightning Bolt; Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000105 - Pass
+
+VALUE SCORE: 0.859517
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.122059 - Human Soldier Token (you)
+ >>> [1] 0.122059 - Human Soldier Token (you)
+     [2] 0.099170 - Squadron Hawk (Benchmark-skill6)
+     [3] 0.110384 - Benchmark-skill6
+     [4] 0.113938 - Goblin Tomb Raider (you)
+     [5] 0.099170 - Squadron Hawk (Benchmark-skill6)
+     [6] 0.112248 - Clockwork Percussionist (you)
+     [7] 0.112248 - Clockwork Percussionist (you)
+     [8] 0.108725 - RL
+
+VALUE SCORE: 0.824544
+SELECTED: Human Soldier Token (you)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse; Lightning Bolt]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse; Lightning Bolt]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000090 - Pass
+     [1] 0.005727 - Cast Reckless Impulse
+ >>> [2] 0.994183 - Cast Lightning Bolt
+
+VALUE SCORE: 0.831856
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.122059 - Human Soldier Token (you)
+     [1] 0.122059 - Human Soldier Token (you)
+ >>> [2] 0.099170 - Squadron Hawk (Benchmark-skill6)
+     [3] 0.110384 - Benchmark-skill6
+     [4] 0.113938 - Goblin Tomb Raider (you)
+ >>> [5] 0.099170 - Squadron Hawk (Benchmark-skill6)
+     [6] 0.112248 - Clockwork Percussionist (you)
+     [7] 0.112248 - Clockwork Percussionist (you)
+     [8] 0.108725 - RL
+
+VALUE SCORE: 0.824544
+SELECTED: Squadron Hawk (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spell Pierce (controller=Benchmark-skill6)
+  - [1] Lightning Bolt (controller=RL)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate; Squadron Hawk; Island,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate; Squadron Hawk; Island,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk; Island,tapped]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 7 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000090 - Pass
+
+VALUE SCORE: 0.831856
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Reckless Impulse; Rally at the Hornburg]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Reckless Impulse; Rally at the Hornburg]
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000033 - Pass
+     [1] 0.001934 - Cast Reckless Impulse
+ >>> [2] 0.998033 - Cast Rally at the Hornburg
+
+VALUE SCORE: 0.793240
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Clockwork Percussionist; Goblin Tomb Raider; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000033 - Pass
+
+VALUE SCORE: 0.793240
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000033 - Pass
+
+VALUE SCORE: 0.793240
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Chain Lightning; Experimental Synthesizer; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Squadron Hawk,tapped; Island,tapped; Squadron Hawk,blocking]
+-> Graveyard: [Brainstorm; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000033 - Pass
+
+VALUE SCORE: 0.793240
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-skill6
+Turns: 8
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 101
+Ended: 2026-02-01T20:00:36.282954100
+================================================================================

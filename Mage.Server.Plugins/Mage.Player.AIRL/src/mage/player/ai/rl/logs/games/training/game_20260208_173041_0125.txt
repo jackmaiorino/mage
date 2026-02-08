@@ -1,0 +1,2615 @@
+================================================================================
+GAME LOG: game_20260208_173041_0125
+Started: 2026-02-08T17:30:41.496182400
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=0 decision=MULLIGAN Q_keep=0.030 Q_mull=0.083 hand=[Prismatic Strands; Prismatic Strands; Prismatic Strands; Counterspell; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+LONDON_BOTTOM: player=PlayerRL1 mulligansTaken=1 handSize=7 bottomN=1 kept=[Journey to Nowhere; Basilisk Gate; Citadel Gate; Preordain; Citadel Gate; The Modern Age] bottomed=[Heap Gate]
+LONDON_BOTTOM_PROBS: player=PlayerRL1 cards=[Journey to Nowhere (0.129); Basilisk Gate (0.141); Citadel Gate (0.143); Preordain (0.157); Citadel Gate (0.143); The Modern Age (0.147); Heap Gate (0.141)]
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=1 handSize=6 lands=3 decision=KEEP Q_keep=0.222 Q_mull=0.129 hand=[Basilisk Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.031449 - Pass
+     [1] 0.227131 - Play Basilisk Gate
+ >>> [2] 0.741421 - Play Citadel Gate
+
+VALUE SCORE: -0.227550
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain; Sea Gate]
+-> Permanents: [Citadel Gate]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain; Sea Gate]
+-> Permanents: [Citadel Gate]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.012537 - Pass
+     [1] 0.082512 - Play Basilisk Gate
+     [2] 0.259741 - Play Citadel Gate
+ >>> [3] 0.645210 - Play Sea Gate
+
+VALUE SCORE: -0.303609
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Citadel Gate; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Citadel Gate; Journey to Nowhere; The Modern Age; Preordain; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.035299 - Pass
+     [1] 0.203879 - Play Basilisk Gate
+ >>> [2] 0.597908 - Play Citadel Gate
+     [3] 0.050906 - Cast Journey to Nowhere
+     [4] 0.066152 - Cast The Modern Age
+     [5] 0.045856 - Cast Preordain
+
+VALUE SCORE: -0.410324
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Journey to Nowhere; The Modern Age; Preordain; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.176616 - Pass
+     [1] 0.256087 - Cast Journey to Nowhere
+ >>> [2] 0.336316 - Cast The Modern Age
+     [3] 0.230981 - Cast Preordain
+
+VALUE SCORE: -0.408545
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Journey to Nowhere; Preordain; Journey to Nowhere]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island,tapped; Faerie Miscreant; Faerie Seer; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm; Counterspell]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Brainstorm; Counterspell]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.643417 - Pass
+ >>> [1] 0.356583 - Cast Brainstorm
+
+VALUE SCORE: -0.404892
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=PlayerRL1)
+  - [1] stack ability (II - Draw a card, then discard a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Counterspell; Sea Gate; Azorius Guildgate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.141118 - Basilisk Gate
+     [1] 0.134041 - Preordain
+ >>> [2] 0.151548 - Azorius Guildgate
+     [3] 0.140512 - Counterspell
+     [4] 0.136067 - Sea Gate
+     [5] 0.155596 - Journey to Nowhere
+     [6] 0.141118 - Basilisk Gate
+
+VALUE SCORE: -0.367658
+SELECTED: Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=PlayerRL1)
+  - [1] stack ability (II - Draw a card, then discard a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Basilisk Gate; Preordain; Journey to Nowhere; Counterspell; Sea Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age]
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.166358 - Basilisk Gate
+     [1] 0.157669 - Preordain
+     [2] 0.165454 - Counterspell
+     [3] 0.160520 - Sea Gate
+     [4] 0.183641 - Journey to Nowhere
+     [5] 0.166358 - Basilisk Gate
+
+VALUE SCORE: -0.404206
+SELECTED: Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Journey to Nowhere; Counterspell; Sea Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age]
+-> Graveyard: [Journey to Nowhere; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Sea Gate; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.020930 - Pass
+ >>> [1] 0.861166 - Play Sea Gate
+     [2] 0.117904 - Play Basilisk Gate
+
+VALUE SCORE: -0.408652
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Humbling Elder,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate; The Modern Age; Sea Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=PlayerRL1)
+[PlayerRL1], life = 13
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate; Azorius Guildgate]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; The Modern Age; Sea Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=PlayerRL1)
+[PlayerRL1], life = 13
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate; Azorius Guildgate]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; The Modern Age; Sea Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate; Azorius Guildgate]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.027949 - Pass
+     [1] 0.037852 - Cast Preordain
+     [2] 0.140159 - Play Basilisk Gate
+ >>> [3] 0.794041 - Play Azorius Guildgate
+
+VALUE SCORE: -0.483681
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Preordain; Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.420011 - Pass
+ >>> [1] 0.579989 - Cast Preordain
+
+VALUE SCORE: -0.491388
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=0 max=2) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=PlayerRL1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.335552 - STOP
+     [1] 0.347111 - Guardian of the Guildpact
+ >>> [2] 0.317336 - Lorien Revealed
+
+VALUE SCORE: -0.503014
+SELECTED: Lorien Revealed
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (PlayerRL1 turn), Precombat Main (CARD_PICK 1 min=0 max=2) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=PlayerRL1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.491163 - STOP
+     [1] 0.508837 - Guardian of the Guildpact
+
+VALUE SCORE: -0.535187
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Guardian of the Guildpact]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Guardian of the Guildpact]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Guardian of the Guildpact]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Humbling Elder]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Guardian of the Guildpact]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Guardian of the Guildpact]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Guardian of the Guildpact]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Guardian of the Guildpact]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Guardian of the Guildpact; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider; Azorius Guildgate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Guardian of the Guildpact; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider; Azorius Guildgate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.107412 - Pass
+     [1] 0.537720 - Play Basilisk Gate
+ >>> [2] 0.190787 - Cast Guardian of the Guildpact
+     [3] 0.164081 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.517468
+SELECTED: Cast Guardian of the Guildpact
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Basilisk Gate; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped; Guardian of the Guildpact]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.169150 - Pass
+ >>> [1] 0.830850 - Play Basilisk Gate
+
+VALUE SCORE: -0.454346
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.382972 - Pass
+     [1] 0.617028 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.465515
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped,attacking; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped,attacking; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate; Journey to Nowhere]
+-> Permanents: [Citadel Gate; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.379310 - Pass
+ >>> [1] 0.620690 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.497828
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (PlayerRL1 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=PlayerRL1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.175866 - Faerie Seer (Bot-Skill1)
+     [1] 0.213686 - Humbling Elder (Bot-Skill1)
+     [2] 0.213686 - Humbling Elder (Bot-Skill1)
+     [3] 0.208940 - Vector Glider (you)
+     [4] 0.187822 - Faerie Miscreant (Bot-Skill1)
+
+VALUE SCORE: -0.468872
+SELECTED: Faerie Seer (Bot-Skill1)
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=PlayerRL1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Faerie Seer; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Humbling Elder; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Humbling Elder; Island,tapped]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Humbling Elder; Island,tapped]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Humbling Elder; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Humbling Elder; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant,tapped,attacking; Humbling Elder; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours,tapped,attacking]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours,tapped; Island,tapped]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Basilisk Gate]
+-> Permanents: [Citadel Gate,tapped; Sea Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Vector Glider,tapped; Azorius Guildgate,tapped; Guardian of the Guildpact; Basilisk Gate,tapped; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Basilisk Gate; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider; Azorius Guildgate; Guardian of the Guildpact; Basilisk Gate; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Basilisk Gate; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider; Azorius Guildgate; Guardian of the Guildpact; Basilisk Gate; Journey to Nowhere]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.210104 - Pass
+ >>> [1] 0.784085 - Play Basilisk Gate
+     [2] 0.005811 - Cast Thraben Charm
+
+VALUE SCORE: -0.633814
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider; Azorius Guildgate; Guardian of the Guildpact; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965903 - Pass
+     [1] 0.034096 - Cast Thraben Charm
+
+VALUE SCORE: -0.595752
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped,attacking; Azorius Guildgate; Guardian of the Guildpact,tapped,attacking; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963790 - Pass
+     [1] 0.036210 - Cast Thraben Charm
+
+VALUE SCORE: -0.610265
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped,attacking; Azorius Guildgate; Guardian of the Guildpact,tapped,attacking; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.964075 - Pass
+     [1] 0.035925 - Cast Thraben Charm
+
+VALUE SCORE: -0.610039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965046 - Pass
+     [1] 0.034954 - Cast Thraben Charm
+
+VALUE SCORE: -0.636756
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.903818 - Pass
+     [1] 0.044829 - Cast Counterspell
+     [2] 0.051353 - Cast Thraben Charm
+
+VALUE SCORE: -0.548790
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.949539 - Pass
+     [1] 0.050461 - Cast Thraben Charm
+
+VALUE SCORE: -0.521540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.922223 - Pass
+     [1] 0.077777 - Cast Thraben Charm
+
+VALUE SCORE: -0.648332
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.922223 - Pass
+     [1] 0.077777 - Cast Thraben Charm
+
+VALUE SCORE: -0.648332
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Harrier Strix,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.910126 - Pass
+     [1] 0.089874 - Cast Thraben Charm
+
+VALUE SCORE: -0.698584
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm; Outlaw Medic]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider; Azorius Guildgate; Guardian of the Guildpact; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Harrier Strix,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm; Outlaw Medic]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider; Azorius Guildgate; Guardian of the Guildpact; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Harrier Strix,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.362783 - Pass
+     [1] 0.024767 - Cast Thraben Charm
+     [2] 0.612449 - Cast Outlaw Medic
+
+VALUE SCORE: -0.738615
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm; Outlaw Medic]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped,attacking; Azorius Guildgate; Guardian of the Guildpact,tapped,attacking; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Harrier Strix,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.926032 - Pass
+     [1] 0.073968 - Cast Thraben Charm
+
+VALUE SCORE: -0.754673
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm; Outlaw Medic]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped,attacking; Azorius Guildgate; Guardian of the Guildpact,tapped,attacking; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Harrier Strix,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.926032 - Pass
+     [1] 0.073968 - Cast Thraben Charm
+
+VALUE SCORE: -0.754673
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm; Outlaw Medic]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Harrier Strix,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.337251 - Pass
+     [1] 0.028496 - Cast Thraben Charm
+ >>> [2] 0.634252 - Cast Outlaw Medic
+
+VALUE SCORE: -0.769200
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate,tapped; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Harrier Strix,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.906165 - Pass
+     [1] 0.093835 - Cast Thraben Charm
+
+VALUE SCORE: -0.780401
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate,tapped; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island; Humbling Elder; Island; Harrier Strix; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate,tapped; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island; Humbling Elder; Island; Harrier Strix; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.897107 - Pass
+     [1] 0.046867 - Cast Counterspell
+     [2] 0.056027 - Cast Thraben Charm
+
+VALUE SCORE: -0.547361
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spellstutter Sprite (controller=Bot-Skill1)
+  - [1] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate,tapped; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 10
+-> Hand: 0 cards
+-> Permanents: [Island; Humbling Elder; Island; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.863537 - Pass
+     [1] 0.058658 - Cast Counterspell
+     [2] 0.077804 - Cast Thraben Charm
+
+VALUE SCORE: -0.640967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate,tapped; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 10
+-> Hand: 0 cards
+-> Permanents: [Island; Humbling Elder; Island; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.919767 - Pass
+     [1] 0.080233 - Cast Thraben Charm
+
+VALUE SCORE: -0.631107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate,tapped; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 10
+-> Hand: 0 cards
+-> Permanents: [Island; Humbling Elder; Island; Humbling Elder; Island,tapped; Harrier Strix; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.920637 - Pass
+     [1] 0.079363 - Cast Thraben Charm
+
+VALUE SCORE: -0.628494
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate,tapped; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate,tapped; Outlaw Medic]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 10
+-> Hand: 0 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.902434 - Pass
+     [1] 0.097566 - Cast Thraben Charm
+
+VALUE SCORE: -0.722712
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Counterspell; Thraben Charm]
+-> Permanents: [Citadel Gate; Sea Gate; Citadel Gate,tapped; Sea Gate; Vector Glider,tapped; Azorius Guildgate; Guardian of the Guildpact,tapped; Basilisk Gate; Journey to Nowhere; Basilisk Gate,tapped; Outlaw Medic,blocking]
+-> Graveyard: [Journey to Nowhere; Brainstorm; Journey to Nowhere; Preordain]
+-> Exile: []
+[Bot-Skill1], life = 10
+-> Hand: 0 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: [Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.903206 - Pass
+     [1] 0.096794 - Cast Thraben Charm
+
+VALUE SCORE: -0.718598
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 8
+Reason: Episode 154200 - Win
+Total Decisions Logged: 93
+Ended: 2026-02-08T17:33:24.236552300
+================================================================================

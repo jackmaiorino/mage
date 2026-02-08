@@ -1,0 +1,928 @@
+================================================================================
+GAME LOG: game_20260201_200053_0091
+Started: 2026-02-01T20:00:53.342782
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Jund Wildfire.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.680 Q_mull=0.053 hand=[Island; Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Thought Scour]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Thought Scour]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Thought Scour]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.125011
+SELECTED: Play Island
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.500336 - RL
+ >>> [1] 0.499664 - Benchmark-skill6
+
+VALUE SCORE: 1.122284
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Thought Scour]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000188 - Pass
+     [1] 0.079827 - Cast Brainstorm
+ >>> [2] 0.919985 - Cast Thought Scour
+
+VALUE SCORE: 1.123418
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.500336 - RL
+     [1] 0.499664 - Benchmark-skill6
+
+VALUE SCORE: 1.122284
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Deep Analysis; Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 1.123418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Deep Analysis; Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 1.123418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Deep Analysis; Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 1.123418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Deep Analysis; Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Deep Analysis; Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 1.123418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Deep Analysis; Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 1.123418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Deep Analysis; Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 1.123418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Deep Analysis; Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000188 - Pass
+
+VALUE SCORE: 1.123418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior; Deep Analysis]
+-> Permanents: [Island]
+-> Graveyard: [Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior; Deep Analysis]
+-> Permanents: [Island]
+-> Graveyard: [Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999998 - Play Island
+     [2] 0.000002 - Cast Brainstorm
+
+VALUE SCORE: 1.118619
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Sleep of the Dead; Sleep of the Dead; Deem Inferior; Deep Analysis]
+-> Permanents: [Island; Island]
+-> Graveyard: [Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.002400 - Pass
+ >>> [1] 0.997600 - Cast Brainstorm
+
+VALUE SCORE: 1.116760
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Lorien Revealed; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.116951 - Cryptic Serpent
+     [1] 0.124877 - Deem Inferior
+     [2] 0.131638 - Deep Analysis
+     [3] 0.116435 - Sleep of the Dead
+     [4] 0.124877 - Deem Inferior
+     [5] 0.116435 - Sleep of the Dead
+     [6] 0.133188 - Mental Note
+     [7] 0.135599 - Lorien Revealed
+
+VALUE SCORE: 1.112855
+SELECTED: Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Lorien Revealed]
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Thought Scour]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.141412 - Deem Inferior
+     [1] 0.149071 - Deep Analysis
+ >>> [2] 0.131857 - Sleep of the Dead
+     [3] 0.141412 - Deem Inferior
+ >>> [4] 0.131857 - Sleep of the Dead
+     [5] 0.150827 - Mental Note
+     [6] 0.153563 - Lorien Revealed
+
+VALUE SCORE: 1.113139
+SELECTED: Sleep of the Dead
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Lorien Revealed]
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+     [1] 0.237757 - Cast Mental Note
+ >>> [2] 0.762205 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.113822
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Precombat Main (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.022694 - Brainstorm
+     [1] 0.022694 - Brainstorm
+     [2] 0.022694 - Brainstorm
+     [3] 0.017889 - Counterspell
+     [4] 0.017889 - Counterspell
+     [5] 0.017889 - Counterspell
+     [6] 0.017889 - Counterspell
+ >>> [7] 0.019655 - Cryptic Serpent
+ >>> [8] 0.019655 - Cryptic Serpent
+ >>> [9] 0.019655 - Cryptic Serpent
+ >>> [10] 0.019655 - Cryptic Serpent
+     [11] 0.017758 - Deem Inferior
+     [12] 0.017758 - Deem Inferior
+     [13] 0.019864 - Deep Analysis
+     [14] 0.018799 - Dispel
+     [15] 0.018799 - Dispel
+     [16] 0.020819 - Island
+     [17] 0.020819 - Island
+     [18] 0.020819 - Island
+     [19] 0.020819 - Island
+     [20] 0.020819 - Island
+     [21] 0.020819 - Island
+     [22] 0.020819 - Island
+     [23] 0.020819 - Island
+     [24] 0.020819 - Island
+     [25] 0.020819 - Island
+     [26] 0.020819 - Island
+     [27] 0.020819 - Island
+     [28] 0.020819 - Island
+     [29] 0.020819 - Island
+     [30] 0.019679 - Lorien Revealed
+     [31] 0.019679 - Lorien Revealed
+     [32] 0.019679 - Lorien Revealed
+     [33] 0.019799 - Mental Note
+     [34] 0.019799 - Mental Note
+     [35] 0.019799 - Mental Note
+     [36] 0.020974 - Murmuring Mystic
+     [37] 0.020974 - Murmuring Mystic
+     [38] 0.020510 - Ponder
+     [39] 0.020510 - Ponder
+     [40] 0.020510 - Ponder
+     [41] 0.020510 - Ponder
+     [42] 0.021155 - Sleep of the Dead
+     [43] 0.019355 - Thought Scour
+     [44] 0.019355 - Thought Scour
+     [45] 0.019355 - Thought Scour
+     [46] 0.018915 - Tolarian Terror
+     [47] 0.018915 - Tolarian Terror
+     [48] 0.018915 - Tolarian Terror
+     [49] 0.018915 - Tolarian Terror
+
+VALUE SCORE: 1.111176
+SELECTED: Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.113822
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.113822
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.113822
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.113822
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Vault of Whispers,tapped]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.113822
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Vault of Whispers,tapped; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.113822
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Vault of Whispers,tapped; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.113822
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Vault of Whispers,tapped; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.113822
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent; Lorien Revealed]
+-> Permanents: [Island; Island]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Vault of Whispers,tapped; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent; Lorien Revealed]
+-> Permanents: [Island; Island]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Vault of Whispers,tapped; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000055 - Pass
+     [1] 0.265788 - Cast Mental Note
+ >>> [2] 0.734157 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.069560
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Precombat Main (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Vault of Whispers,tapped; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.023058 - Brainstorm
+     [1] 0.023058 - Brainstorm
+     [2] 0.023058 - Brainstorm
+     [3] 0.018133 - Counterspell
+     [4] 0.018133 - Counterspell
+     [5] 0.018133 - Counterspell
+     [6] 0.018133 - Counterspell
+     [7] 0.020048 - Cryptic Serpent
+     [8] 0.020048 - Cryptic Serpent
+     [9] 0.020048 - Cryptic Serpent
+     [10] 0.020048 - Cryptic Serpent
+     [11] 0.018127 - Deem Inferior
+     [12] 0.018127 - Deem Inferior
+     [13] 0.020256 - Deep Analysis
+     [14] 0.019188 - Dispel
+     [15] 0.019188 - Dispel
+     [16] 0.021263 - Island
+     [17] 0.021263 - Island
+     [18] 0.021263 - Island
+     [19] 0.021263 - Island
+     [20] 0.021263 - Island
+     [21] 0.021263 - Island
+     [22] 0.021263 - Island
+     [23] 0.021263 - Island
+     [24] 0.021263 - Island
+     [25] 0.021263 - Island
+     [26] 0.021263 - Island
+     [27] 0.021263 - Island
+     [28] 0.021263 - Island
+     [29] 0.021263 - Island
+     [30] 0.019938 - Lorien Revealed
+     [31] 0.019938 - Lorien Revealed
+     [32] 0.020246 - Mental Note
+     [33] 0.020246 - Mental Note
+     [34] 0.020246 - Mental Note
+     [35] 0.021552 - Murmuring Mystic
+     [36] 0.021552 - Murmuring Mystic
+     [37] 0.020857 - Ponder
+     [38] 0.020857 - Ponder
+     [39] 0.020857 - Ponder
+     [40] 0.020857 - Ponder
+     [41] 0.021630 - Sleep of the Dead
+ >>> [42] 0.019746 - Thought Scour
+ >>> [43] 0.019746 - Thought Scour
+ >>> [44] 0.019746 - Thought Scour
+     [45] 0.019379 - Tolarian Terror
+     [46] 0.019379 - Tolarian Terror
+     [47] 0.019379 - Tolarian Terror
+     [48] 0.019379 - Tolarian Terror
+
+VALUE SCORE: 1.066110
+SELECTED: Thought Scour
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Vault of Whispers,tapped; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Sleep of the Dead; Deem Inferior; Deep Analysis; Mental Note; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Thought Scour; Brainstorm; Lorien Revealed; Lorien Revealed]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Vault of Whispers,tapped; Nihil Spellbomb]
+-> Graveyard: [Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.499922 - RL
+ >>> [1] 0.500078 - Benchmark-skill6
+
+VALUE SCORE: 1.063467
+SELECTED: Benchmark-skill6
+

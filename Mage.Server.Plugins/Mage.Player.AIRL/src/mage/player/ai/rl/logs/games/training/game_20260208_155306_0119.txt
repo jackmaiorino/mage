@@ -1,0 +1,2936 @@
+================================================================================
+GAME LOG: game_20260208_155306_0119
+Started: 2026-02-08T15:53:06.312924100
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.221 Q_mull=0.121 hand=[Twisted Landscape; Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Twisted Landscape; Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Twisted Landscape; Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.047583 - Pass
+ >>> [1] 0.952417 - Play Twisted Landscape
+
+VALUE SCORE: -0.018931
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997258 - Pass
+     [1] 0.002742 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.010433
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997268 - Pass
+     [1] 0.002732 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.009146
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997226 - Pass
+     [1] 0.002774 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.015495
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997950 - Pass
+     [1] 0.002050 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.204672
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997936 - Pass
+     [1] 0.002064 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.193679
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997941 - Pass
+     [1] 0.002059 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.194703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997944 - Pass
+     [1] 0.002056 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.195792
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar; Swamp]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar; Swamp]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.036979 - Pass
+ >>> [1] 0.962884 - Play Swamp
+     [2] 0.000137 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.103134
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.665114 - Pass
+     [1] 0.001640 - Cast Cast Down
+     [2] 0.330776 - Cast Blood Fountain
+     [3] 0.002470 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.101571
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993756 - Pass
+     [1] 0.002492 - Cast Cast Down
+     [2] 0.003752 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.108831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.663837 - Pass
+     [1] 0.001704 - Cast Cast Down
+     [2] 0.331894 - Cast Blood Fountain
+     [3] 0.002564 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.116701
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996210 - Pass
+     [1] 0.001478 - Cast Cast Down
+     [2] 0.002312 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.125100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995325 - Pass
+     [1] 0.001761 - Cast Cast Down
+     [2] 0.002914 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.071132
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995432 - Pass
+     [1] 0.001722 - Cast Cast Down
+     [2] 0.002846 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.079558
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995442 - Pass
+     [1] 0.001718 - Cast Cast Down
+     [2] 0.002840 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.080345
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995446 - Pass
+     [1] 0.001716 - Cast Cast Down
+     [2] 0.002837 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.081170
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar; Twisted Landscape]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar; Twisted Landscape]
+-> Permanents: [Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.069936 - Pass
+     [1] 0.000300 - Cast Cast Down
+     [2] 0.037169 - Cast Blood Fountain
+ >>> [3] 0.892123 - Play Twisted Landscape
+     [4] 0.000472 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.262465
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Blood Fountain; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.648988 - Pass
+     [1] 0.002794 - Cast Cast Down
+ >>> [2] 0.343779 - Cast Blood Fountain
+     [3] 0.004439 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.260325
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Blood Fountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993162 - Pass
+     [1] 0.006838 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.251638
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.591986 - Pass
+     [1] 0.005340 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.402673 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.316410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.592181 - Pass
+     [1] 0.005540 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.402279 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.324245
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.591829 - Pass
+     [1] 0.005757 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [2] 0.402413 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.333447
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991826 - Pass
+     [1] 0.008174 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.286243
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996317 - Pass
+     [1] 0.003683 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.080315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995951 - Pass
+     [1] 0.004049 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.039477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996420 - Pass
+     [1] 0.003580 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.053136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996627 - Pass
+     [1] 0.003373 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.130012
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996309 - Pass
+     [1] 0.003691 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.065336
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996309 - Pass
+     [1] 0.003691 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.065336
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996279 - Pass
+     [1] 0.003721 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.062009
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Blood Fountain]
+-> Graveyard: [Refurbished Familiar]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.572704 - Pass
+     [1] 0.002792 - Cast Cast Down
+ >>> [2] 0.419948 - Cast Fanatical Offering
+     [3] 0.004555 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.278670
+SELECTED: Cast Fanatical Offering
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.235009 - Pass
+ >>> [1] 0.763373 - Cast Nihil Spellbomb
+     [2] 0.001618 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.219185
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+  - [1] Nihil Spellbomb (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997279 - Pass
+     [1] 0.002721 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.156675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997261 - Pass
+     [1] 0.002739 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.158789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997208 - Pass
+     [1] 0.002792 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.163623
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998127 - Pass
+     [1] 0.001873 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.034105
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998181 - Pass
+     [1] 0.001819 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.020587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998001 - Pass
+     [1] 0.001999 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.050540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998001 - Pass
+     [1] 0.001999 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.050540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997719 - Pass
+     [1] 0.002281 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.096177
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.326247 - Pass
+     [1] 0.002758 - Cast Cast Down
+     [2] 0.209446 - Cast Fanatical Offering
+     [3] 0.454576 - Cast Eviscerator's Insight
+     [4] 0.004932 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.002040 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.363100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327168 - Pass
+     [1] 0.002782 - Cast Cast Down
+     [2] 0.208685 - Cast Fanatical Offering
+     [3] 0.454336 - Cast Eviscerator's Insight
+     [4] 0.004985 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.002044 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.361954
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.326159 - Pass
+     [1] 0.002807 - Cast Cast Down
+     [2] 0.208506 - Cast Fanatical Offering
+     [3] 0.455447 - Cast Eviscerator's Insight
+     [4] 0.005034 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.002046 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.361481
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.310808 - Pass
+     [1] 0.001445 - Cast Cast Down
+     [2] 0.172214 - Cast Fanatical Offering
+     [3] 0.511979 - Cast Eviscerator's Insight
+     [4] 0.002857 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.000696 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.106189
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+-> Graveyard: [Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.315415 - Pass
+     [1] 0.002374 - Cast Cast Down
+     [2] 0.158932 - Cast Fanatical Offering
+     [3] 0.517449 - Cast Eviscerator's Insight
+     [4] 0.004903 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.000927 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.154297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.319338 - Pass
+     [1] 0.002444 - Cast Cast Down
+     [2] 0.158410 - Cast Fanatical Offering
+     [3] 0.513783 - Cast Eviscerator's Insight
+     [4] 0.005065 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.000959 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.155875
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Timberwatch Elf]
+-> Graveyard: [Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.319809 - Pass
+     [1] 0.003336 - Cast Cast Down
+     [2] 0.148207 - Cast Fanatical Offering
+     [3] 0.520589 - Cast Eviscerator's Insight
+     [4] 0.006993 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.001066 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.243304
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Eviscerator's Insight; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Map Token; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Timberwatch Elf]
+-> Graveyard: [Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.318671 - Pass
+     [1] 0.002873 - Cast Cast Down
+     [2] 0.149928 - Cast Fanatical Offering
+ >>> [3] 0.521589 - Cast Eviscerator's Insight
+     [4] 0.005990 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.000949 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.231414
+SELECTED: Cast Eviscerator's Insight
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Lembas; Mountain]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Timberwatch Elf]
+-> Graveyard: [Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969793 - Pass
+     [1] 0.026275 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.003931 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.275788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Lembas; Mountain]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Timberwatch Elf]
+-> Graveyard: [Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965868 - Pass
+     [1] 0.029779 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.004353 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.292448
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Lembas; Mountain]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.936347 - Pass
+     [1] 0.056562 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.007091 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.334823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Lembas; Mountain]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.903799 - Pass
+     [1] 0.086398 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.009803 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.355517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Lembas; Mountain]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.915138 - Pass
+     [1] 0.075962 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.008900 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.345689
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Lembas; Mountain; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Lembas; Mountain; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.081292 - Pass
+     [1] 0.001572 - Cast Cast Down
+     [2] 0.042650 - Cast Fanatical Offering
+     [3] 0.117914 - Cast Lembas
+ >>> [4] 0.493073 - Play Mountain
+     [5] 0.259813 - Play Slagwoods Bridge
+     [6] 0.002905 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [7] 0.000781 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.424546
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Nihil Spellbomb; Mountain]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.320429 - Pass
+     [1] 0.007724 - Cast Cast Down
+     [2] 0.160790 - Cast Fanatical Offering
+ >>> [3] 0.493292 - Cast Lembas
+     [4] 0.014296 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.003469 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.432544
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+  - [1] Lembas (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.931960 - Pass
+     [1] 0.057139 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.010901 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.477056
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.949836 - Pass
+     [1] 0.040757 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.009407 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.422903
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Bot-Skill1)
+  - [1] Lembas (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.931248 - Pass
+     [1] 0.057761 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.010991 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.474718
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.934162 - Pass
+     [1] 0.055193 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.010645 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.468795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Lembas]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361368 - Pass
+     [1] 0.019961 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.003893 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [3] 0.614778 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.461727
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=0 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Lembas]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.525170 - STOP
+ >>> [1] 0.474830 - Cleansing Wildfire
+
+VALUE SCORE: -0.461727
+SELECTED: Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Lembas]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.365898 - Pass
+     [1] 0.018223 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.003593 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [3] 0.612287 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.453135
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Lembas]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.376156 - Pass
+     [1] 0.016230 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.003219 - {T}, Sacrifice {this}: Exile target player's graveyard.
+ >>> [3] 0.604394 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.427719
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990614 - Pass
+     [1] 0.009386 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.434421
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990829 - Pass
+     [1] 0.009171 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.432462
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990872 - Pass
+     [1] 0.009128 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.431929
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest; Wellwisher; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Snow-Covered Forest; Wellwisher; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992145 - Pass
+     [1] 0.007855 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.277469
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985260 - Pass
+     [1] 0.014740 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.440961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985499 - Pass
+     [1] 0.014501 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.437368
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982552 - Pass
+     [1] 0.017448 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.479757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982552 - Pass
+     [1] 0.017448 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.479757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980446 - Pass
+     [1] 0.019554 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.515796
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Nihil Spellbomb; Mountain]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Nihil Spellbomb; Mountain]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.207731 - Pass
+     [1] 0.003207 - Cast Cast Down
+     [2] 0.096766 - Cast Fanatical Offering
+ >>> [3] 0.684573 - Play Slagwoods Bridge
+     [4] 0.006141 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.001582 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.381956
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Nihil Spellbomb; Mountain; Slagwoods Bridge,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.662797 - Pass
+     [1] 0.011707 - Cast Cast Down
+     [2] 0.297515 - Cast Fanatical Offering
+     [3] 0.022734 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.005247 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.385896
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Fanatical Offering; Writhing Chrysalis; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Nihil Spellbomb; Mountain; Slagwoods Bridge,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.663191 - Pass
+     [1] 0.011596 - Cast Cast Down
+ >>> [2] 0.297478 - Cast Fanatical Offering
+     [3] 0.022536 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.005199 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.385139
+SELECTED: Cast Fanatical Offering
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+  - [1] Fanatical Offering (controller=PlayerRL1)
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.929310 - Pass
+     [1] 0.059609 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.011081 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.457624
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=PlayerRL1)
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.949937 - Pass
+     [1] 0.040683 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.009380 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.406461
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+  - [1] Fanatical Offering (controller=PlayerRL1)
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.932227 - Pass
+     [1] 0.056979 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.010794 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.454395
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=PlayerRL1)
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.896114 - Pass
+     [1] 0.090347 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.013539 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.512399
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.931147 - Pass
+     [1] 0.059638 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.009215 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.465924
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233353 - Pass
+     [1] 0.749438 - Cast Nihil Spellbomb
+     [2] 0.014909 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.002300 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.465346
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Wellwisher; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Wellwisher; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.918504 - Pass
+     [1] 0.069964 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.011532 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.278765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.797944 - Pass
+     [1] 0.186056 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.015999 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.474747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.800236 - Pass
+     [1] 0.183868 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.015896 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.469676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791166 - Pass
+     [1] 0.192861 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.015973 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.498764
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.793606 - Pass
+     [1] 0.190544 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.015850 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.492661
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain,tapped; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.776729 - Pass
+     [1] 0.206350 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.016921 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.523560
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Nihil Spellbomb; Mountain; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Twisted Landscape; Swamp; Twisted Landscape; Nihil Spellbomb; Mountain; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.194637 - Pass
+     [1] 0.002755 - Cast Cast Down
+     [2] 0.083073 - Cast Fanatical Offering
+     [3] 0.548177 - Cast Nihil Spellbomb
+     [4] 0.011968 - Cast Cleansing Wildfire
+     [5] 0.152720 - Cast Makeshift Munitions
+ >>> [6] 0.005452 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [7] 0.001218 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.369262
+SELECTED: {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=PlayerRL1)
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Swamp; Twisted Landscape; Nihil Spellbomb; Mountain; Map Token]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.211370 - Forest
+     [1] 0.211370 - Forest
+     [2] 0.199658 - Mountain
+ >>> [3] 0.188801 - Swamp
+     [4] 0.188801 - Swamp
+
+VALUE SCORE: -0.363607
+SELECTED: Swamp
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Nihil Spellbomb; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Swamp; Twisted Landscape; Nihil Spellbomb; Mountain; Map Token; Swamp,tapped]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.194129 - Pass
+     [1] 0.002096 - Cast Cast Down
+     [2] 0.081251 - Cast Fanatical Offering
+ >>> [3] 0.558488 - Cast Nihil Spellbomb
+     [4] 0.009891 - Cast Cleansing Wildfire
+     [5] 0.148948 - Cast Makeshift Munitions
+     [6] 0.004268 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [7] 0.000929 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.335058
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain; Map Token; Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.537389 - Pass
+     [1] 0.030077 - Cast Cleansing Wildfire
+     [2] 0.416210 - Cast Makeshift Munitions
+     [3] 0.013571 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.002753 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.330064
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain; Map Token; Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971340 - Pass
+     [1] 0.023797 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.004863 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.326861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Swamp,tapped; Twisted Landscape; Nihil Spellbomb; Mountain; Map Token; Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.541553 - Pass
+     [1] 0.029755 - Cast Cleansing Wildfire
+ >>> [2] 0.412633 - Cast Makeshift Munitions
+     [3] 0.013359 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.002699 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.324454
+SELECTED: Cast Makeshift Munitions
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped; Map Token; Swamp,tapped; Nihil Spellbomb; Makeshift Munitions]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania,tapped; Quirion Ranger,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991961 - Pass
+     [1] 0.008039 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.392751
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped; Map Token; Swamp,tapped; Nihil Spellbomb; Makeshift Munitions]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Wellwisher; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped; Map Token; Swamp,tapped; Nihil Spellbomb; Makeshift Munitions]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves; Nyxborn Hydra; Nyxborn Hydra; Priest of Titania; Quirion Ranger; Wellwisher; Timberwatch Elf; Priest of Titania]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986452 - Pass
+     [1] 0.013548 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.262081
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped; Map Token; Swamp,tapped; Nihil Spellbomb; Makeshift Munitions]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981915 - Pass
+     [1] 0.018085 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.466942
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Cast Down; Cast Down; Cast Down; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb; Mountain,tapped; Map Token; Swamp,tapped; Nihil Spellbomb; Makeshift Munitions]
+-> Graveyard: [Refurbished Familiar; Blood Fountain; Fanatical Offering; Eviscerator's Insight; Writhing Chrysalis; Slagwoods Bridge; Fanatical Offering; Writhing Chrysalis; Twisted Landscape]
+-> Exile: []
+[Bot-Skill1], life = 26
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped,attacking; Quirion Ranger,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Lead the Stampede; Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982007 - Pass
+     [1] 0.017993 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.460758
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 8
+Reason: Episode 153000 - Win
+Total Decisions Logged: 100
+Ended: 2026-02-08T15:59:51.322452400
+================================================================================

@@ -1,0 +1,3515 @@
+================================================================================
+GAME LOG: game_20260201_195754_0061
+Started: 2026-02-01T19:57:54.306624400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Grixis Affinity.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.603 Q_mull=-0.795 hand=[Mountain; Reckless Impulse; Galvanic Blast; Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Reckless Impulse; Galvanic Blast; Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Reckless Impulse; Galvanic Blast; Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078475
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.499858 - Benchmark-skill6
+     [1] 0.500142 - RL
+
+VALUE SCORE: 1.071405
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.499858 - Benchmark-skill6
+ >>> [1] 0.500142 - RL
+
+VALUE SCORE: 1.071432
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000032 - Pass
+     [1] 0.002691 - Cast Galvanic Blast
+ >>> [2] 0.684853 - Cast Lightning Bolt
+     [3] 0.312424 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.073812
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.499858 - Benchmark-skill6
+     [1] 0.500142 - RL
+
+VALUE SCORE: 1.071432
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000032 - Pass
+
+VALUE SCORE: 1.073812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000032 - Pass
+
+VALUE SCORE: 1.073812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000032 - Pass
+
+VALUE SCORE: 1.073812
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000032 - Pass
+
+VALUE SCORE: 1.073812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000032 - Pass
+
+VALUE SCORE: 1.073812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000032 - Pass
+
+VALUE SCORE: 1.073812
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.500843 - Benchmark-skill6
+     [1] 0.499157 - RL
+
+VALUE SCORE: 1.047940
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000088 - Pass
+     [1] 0.006766 - Cast Galvanic Blast
+ >>> [2] 0.780841 - Cast Goblin Tomb Raider
+     [3] 0.212305 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.050824
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 1.050824
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 1.050824
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 1.050824
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 1.050824
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 1.050824
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 1.050824
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 1.050824
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241096 - Benchmark-skill6
+     [1] 0.268348 - Krark-Clan Shaman (Benchmark-skill6)
+     [2] 0.240080 - RL
+     [3] 0.250476 - Goblin Tomb Raider (you)
+
+VALUE SCORE: 1.025830
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000411 - Pass
+     [1] 0.028723 - Cast Galvanic Blast
+ >>> [2] 0.970865 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.029057
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000411 - Pass
+
+VALUE SCORE: 1.029057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000411 - Pass
+
+VALUE SCORE: 1.029057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000411 - Pass
+
+VALUE SCORE: 1.029057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000411 - Pass
+
+VALUE SCORE: 1.029057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000411 - Pass
+
+VALUE SCORE: 1.029057
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000411 - Pass
+
+VALUE SCORE: 1.029057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000411 - Pass
+
+VALUE SCORE: 1.029057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000411 - Pass
+
+VALUE SCORE: 1.029057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000411 - Pass
+
+VALUE SCORE: 1.029057
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.217856 - Voldaren Epicure (you)
+ >>> [1] 0.252386 - Benchmark-skill6
+     [2] 0.279620 - Krark-Clan Shaman (Benchmark-skill6)
+     [3] 0.250138 - RL
+
+VALUE SCORE: 0.985544
+SELECTED: Benchmark-skill6
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Galvanic Blast
+     [2] 0.000010 - Cast Voldaren Epicure
+ >>> [3] 0.999972 - Play Mountain
+     [4] 0.000018 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.989797
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.217687 - Voldaren Epicure (you)
+     [1] 0.252518 - Benchmark-skill6
+ >>> [2] 0.279623 - Krark-Clan Shaman (Benchmark-skill6)
+     [3] 0.250172 - RL
+
+VALUE SCORE: 0.976173
+SELECTED: Krark-Clan Shaman (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.000254 - Cast Reckless Impulse
+     [2] 0.000178 - Cast Galvanic Blast
+ >>> [3] 0.980499 - Cast Burning-Tree Emissary
+     [4] 0.007071 - Cast Voldaren Epicure
+     [5] 0.011995 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.980730
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.980730
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.174073 - Voldaren Epicure (you)
+     [1] 0.203880 - Benchmark-skill6
+     [2] 0.195877 - Burning-Tree Emissary (you)
+ >>> [3] 0.224623 - Krark-Clan Shaman (Benchmark-skill6)
+     [4] 0.201547 - RL
+
+VALUE SCORE: 0.917745
+SELECTED: Krark-Clan Shaman (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.000231 - Cast Reckless Impulse
+     [2] 0.000163 - Cast Galvanic Blast
+ >>> [3] 0.982163 - Cast Burning-Tree Emissary
+     [4] 0.007795 - Cast Voldaren Epicure
+     [5] 0.009645 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.923614
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.923614
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.145473 - Voldaren Epicure (you)
+     [1] 0.170479 - Benchmark-skill6
+ >>> [2] 0.163904 - Burning-Tree Emissary (you)
+     [3] 0.187782 - Krark-Clan Shaman (Benchmark-skill6)
+     [4] 0.168459 - RL
+ >>> [5] 0.163904 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.909829
+SELECTED: Burning-Tree Emissary (you)
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000191 - Pass
+     [1] 0.012937 - Cast Reckless Impulse
+     [2] 0.009080 - Cast Galvanic Blast
+     [3] 0.444756 - Cast Voldaren Epicure
+ >>> [4] 0.533035 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.915903
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.146014 - Voldaren Epicure (you)
+     [1] 0.170318 - Benchmark-skill6
+     [2] 0.163548 - Burning-Tree Emissary (you)
+     [3] 0.188014 - Krark-Clan Shaman (Benchmark-skill6)
+ >>> [4] 0.168559 - RL
+     [5] 0.163548 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.946788
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000065 - Pass
+     [1] 0.150436 - Cast Voldaren Epicure
+ >>> [2] 0.849499 - Cast Lightning Bolt
+
+VALUE SCORE: 0.952080
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.146014 - Voldaren Epicure (you)
+     [1] 0.170318 - Benchmark-skill6
+     [2] 0.163548 - Burning-Tree Emissary (you)
+ >>> [3] 0.188014 - Krark-Clan Shaman (Benchmark-skill6)
+     [4] 0.168559 - RL
+     [5] 0.163548 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.946788
+SELECTED: Krark-Clan Shaman (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.952080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.952080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.952080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.952080
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.952080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.952080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.952080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.952080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.952080
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Reckless Impulse
+     [2] 0.000012 - Cast Voldaren Epicure
+ >>> [3] 0.999987 - Play Mountain
+
+VALUE SCORE: 0.911698
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Voldaren Epicure]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Burning-Tree Emissary; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000423 - Pass
+     [1] 0.027237 - Cast Reckless Impulse
+ >>> [2] 0.972340 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.898683
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Mountain; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000423 - Pass
+
+VALUE SCORE: 0.898683
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Mountain; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000662 - Pass
+     [1] 0.034416 - Cast Reckless Impulse
+ >>> [2] 0.964922 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.809636
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Mountain; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000276 - Pass
+ >>> [1] 0.999724 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.821310
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.821310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.821310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token,blocking]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.821310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.821310
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.821310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.821310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.821310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.821310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped; Mountain,tapped; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.821310
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Burning-Tree Emissary; Mountain; Voldaren Epicure; Goblin Tomb Raider]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000034 - Pass
+ >>> [1] 0.999966 - Cast Rally at the Hornburg
+
+VALUE SCORE: 0.867483
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,blocking]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.867483
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.107737 - Voldaren Epicure (you)
+     [1] 0.126879 - Benchmark-skill6
+     [2] 0.107737 - Voldaren Epicure (you)
+     [3] 0.123314 - RL
+     [4] 0.130815 - Goblin Tomb Raider (you)
+     [5] 0.125954 - Myr Enforcer (Benchmark-skill6)
+ >>> [6] 0.138782 - Human Soldier Token (you)
+ >>> [7] 0.138782 - Human Soldier Token (you)
+
+VALUE SCORE: 0.740570
+SELECTED: Human Soldier Token (you)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.036480 - Pass
+ >>> [1] 0.963520 - Cast Galvanic Blast
+
+VALUE SCORE: 0.746823
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.107737 - Voldaren Epicure (you)
+     [1] 0.126879 - Benchmark-skill6
+     [2] 0.107737 - Voldaren Epicure (you)
+     [3] 0.123314 - RL
+     [4] 0.130815 - Goblin Tomb Raider (you)
+ >>> [5] 0.125954 - Myr Enforcer (Benchmark-skill6)
+     [6] 0.138782 - Human Soldier Token (you)
+     [7] 0.138782 - Human Soldier Token (you)
+
+VALUE SCORE: 0.740570
+SELECTED: Myr Enforcer (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036480 - Pass
+
+VALUE SCORE: 0.746823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036480 - Pass
+
+VALUE SCORE: 0.746823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036480 - Pass
+
+VALUE SCORE: 0.746823
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036480 - Pass
+
+VALUE SCORE: 0.746823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036480 - Pass
+
+VALUE SCORE: 0.746823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036480 - Pass
+
+VALUE SCORE: 0.746823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036480 - Pass
+
+VALUE SCORE: 0.746823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036480 - Pass
+
+VALUE SCORE: 0.746823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036480 - Pass
+
+VALUE SCORE: 0.746823
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.715020
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.715020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.715020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.715020
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.715020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer; Refurbished Familiar; Ichor Wellspring]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.715020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer; Refurbished Familiar; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.715020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.715020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure,blocking; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.715020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast; Voldaren Epicure]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.715020
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Clockwork Percussionist]
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast; Voldaren Epicure]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Clockwork Percussionist]
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast; Voldaren Epicure]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Nihil Spellbomb; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000021 - Pass
+ >>> [1] 0.999979 - Cast Clockwork Percussionist
+
+VALUE SCORE: 0.522314
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [2] Clockwork Percussionist (controller=RL)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast; Voldaren Epicure]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [1] Clockwork Percussionist (controller=RL)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Lightning Bolt; Reckless Impulse; Burning-Tree Emissary; Rally at the Hornburg; Burning-Tree Emissary; Galvanic Blast; Voldaren Epicure]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=RL)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure; Goblin Tomb Raider; Human Soldier Token; Human Soldier Token; Mountain; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Mountain; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Mountain; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Mistvault Bridge,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Ichor Wellspring; Mistvault Bridge]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Ichor Wellspring; Mistvault Bridge]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=Benchmark-skill6)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis; Ichor Wellspring]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Voldaren Epicure,tapped; Goblin Tomb Raider,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token; Krark-Clan Shaman]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis; Ichor Wellspring; Vault of Whispers]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} dies, exile the top card of your library. You may play it until the end of your next turn.) (controller=RL)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Goblin Tomb Raider,tapped; Mountain]
+-> Graveyard: [Voldaren Epicure; Clockwork Percussionist]
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure]
+[Benchmark-skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis; Ichor Wellspring; Vault of Whispers; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Goblin Tomb Raider,tapped; Mountain]
+-> Graveyard: [Voldaren Epicure; Clockwork Percussionist]
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure; Chain Lightning]
+[Benchmark-skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis; Ichor Wellspring; Vault of Whispers; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Voldaren Epicure; Clockwork Percussionist; Goblin Tomb Raider]
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure; Chain Lightning]
+[Benchmark-skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token; Vault of Whispers,tapped]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis; Ichor Wellspring; Vault of Whispers; Krark-Clan Shaman]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Voldaren Epicure; Clockwork Percussionist; Goblin Tomb Raider]
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure; Chain Lightning]
+[Benchmark-skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer; Refurbished Familiar; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis; Ichor Wellspring; Vault of Whispers; Krark-Clan Shaman; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 9 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Voldaren Epicure; Clockwork Percussionist; Goblin Tomb Raider]
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure; Chain Lightning]
+[Benchmark-skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis; Ichor Wellspring; Vault of Whispers; Krark-Clan Shaman; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 9 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Voldaren Epicure; Clockwork Percussionist; Goblin Tomb Raider]
+-> Exile: [Lightning Bolt; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary; Rally at the Hornburg; Reckless Impulse; Burning-Tree Emissary; Galvanic Blast; Lightning Bolt; Voldaren Epicure; Chain Lightning]
+[Benchmark-skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Black Mage's Rod; Black Mage's Rod; Blood Fountain; Blood Token; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Refurbished Familiar; Clue Token; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Galvanic Blast; Krark-Clan Shaman; Nihil Spellbomb; Toxin Analysis; Ichor Wellspring; Vault of Whispers; Krark-Clan Shaman; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.522314
+SELECTED: Pass
+

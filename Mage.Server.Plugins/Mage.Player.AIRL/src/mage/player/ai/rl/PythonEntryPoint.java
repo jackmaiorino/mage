@@ -89,6 +89,10 @@ public interface PythonEntryPoint {
             byte[] candidateIdsBytes,
             byte[] candidateMaskBytes,
             String policyKey,
+            String headId,
+            int pickIndex,
+            int minTargets,
+            int maxTargets,
             int batchSize,
             int seqLen,
             int dModel,
@@ -193,6 +197,16 @@ public interface PythonEntryPoint {
      * (int) and 'train_samples' (int).
      */
     java.util.Map<String, Integer> getMulliganModelTrainingStats();
+
+    /**
+     * Get training health statistics. Returns a map with 'gpu_oom_count' (int).
+     */
+    java.util.Map<String, Integer> getHealthStats();
+
+    /**
+     * Reset training health statistics counters.
+     */
+    void resetHealthStats();
 
     /**
      * Record game result for value head quality tracking and auto-GAE. This is

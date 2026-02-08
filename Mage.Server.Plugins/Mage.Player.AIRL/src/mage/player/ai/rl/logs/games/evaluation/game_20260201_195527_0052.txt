@@ -1,0 +1,3325 @@
+================================================================================
+GAME LOG: game_20260201_195527_0052
+Started: 2026-02-01T19:55:27.251060800
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.215 Q_mull=0.122 hand=[Twisted Landscape; Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Twisted Landscape; Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Twisted Landscape; Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.999998 - Play Twisted Landscape
+
+VALUE SCORE: 0.212987
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.017812 - Pass
+ >>> [1] 0.982166 - Cast Nihil Spellbomb
+     [2] 0.000022 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.204542
+SELECTED: Cast Nihil Spellbomb
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.508781 - Benchmark-skill6
+ >>> [1] 0.491219 - RL
+
+VALUE SCORE: 0.184483
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.225791 - Pass
+ >>> [1] 0.774209 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.184483
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.508781 - Benchmark-skill6
+ >>> [1] 0.491219 - RL
+
+VALUE SCORE: 0.184483
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225791 - Pass
+
+VALUE SCORE: 0.184483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225791 - Pass
+
+VALUE SCORE: 0.184483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225791 - Pass
+
+VALUE SCORE: 0.184483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225791 - Pass
+
+VALUE SCORE: 0.184483
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225791 - Pass
+
+VALUE SCORE: 0.184483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225791 - Pass
+
+VALUE SCORE: 0.184483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225791 - Pass
+
+VALUE SCORE: 0.184483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225791 - Pass
+
+VALUE SCORE: 0.184483
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000052 - Cast Nihil Spellbomb
+ >>> [2] 0.999947 - Play Slagwoods Bridge
+     [3] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.190587
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.021573 - Pass
+ >>> [1] 0.978407 - Cast Nihil Spellbomb
+     [2] 0.000020 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.172935
+SELECTED: Cast Nihil Spellbomb
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.509120 - Benchmark-skill6
+     [1] 0.490880 - RL
+
+VALUE SCORE: 0.157215
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.278004 - Pass
+ >>> [1] 0.721996 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.157215
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.509120 - Benchmark-skill6
+     [1] 0.490880 - RL
+
+VALUE SCORE: 0.157215
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278004 - Pass
+
+VALUE SCORE: 0.157215
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278004 - Pass
+
+VALUE SCORE: 0.157215
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278004 - Pass
+
+VALUE SCORE: 0.157215
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278004 - Pass
+
+VALUE SCORE: 0.157215
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278004 - Pass
+
+VALUE SCORE: 0.157215
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278004 - Pass
+
+VALUE SCORE: 0.157215
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278004 - Pass
+
+VALUE SCORE: 0.157215
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 2 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278004 - Pass
+
+VALUE SCORE: 0.157215
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278004 - Pass
+
+VALUE SCORE: 0.157215
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 19
+-> Hand: [Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 19
+-> Hand: [Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.259585 - Island (Benchmark-skill6)
+     [1] 0.248477 - Slagwoods Bridge (you)
+ >>> [2] 0.259585 - Island (Benchmark-skill6)
+     [3] 0.232353 - Twisted Landscape (you)
+
+VALUE SCORE: 0.176223
+SELECTED: Island (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Nihil Spellbomb; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.016759 - Pass
+     [1] 0.033366 - Cast Cleansing Wildfire
+ >>> [2] 0.843447 - Cast Nihil Spellbomb
+     [3] 0.106412 - Cast Krark-Clan Shaman
+     [4] 0.000016 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.177643
+SELECTED: Cast Nihil Spellbomb
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Nihil Spellbomb]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Nihil Spellbomb]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.508985 - Benchmark-skill6
+ >>> [1] 0.491015 - RL
+
+VALUE SCORE: 0.161391
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Nihil Spellbomb]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.107317 - Pass
+ >>> [1] 0.580983 - Cast Krark-Clan Shaman
+     [2] 0.311700 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.161391
+SELECTED: Cast Krark-Clan Shaman
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb; Krark-Clan Shaman]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb; Krark-Clan Shaman]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.509188 - Benchmark-skill6
+     [1] 0.490812 - RL
+
+VALUE SCORE: 0.144694
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb; Krark-Clan Shaman]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.289560 - Pass
+ >>> [1] 0.710439 - {T}, Sacrifice {this}: Exile target player's graveyard.
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.144693
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb; Krark-Clan Shaman]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.509188 - Benchmark-skill6
+ >>> [1] 0.490812 - RL
+
+VALUE SCORE: 0.144693
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.147386
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.148288
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.148361
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.148138
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999364 - Pass
+     [1] 0.000636 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.872563
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999381 - Pass
+     [1] 0.000619 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.869482
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Moon-Circuit Hacker; Island,tapped]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999497 - Pass
+     [1] 0.000503 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.844540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999504 - Pass
+     [1] 0.000496 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.842974
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999582 - Pass
+     [1] 0.000418 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.821407
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 3 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999582 - Pass
+     [1] 0.000418 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.821407
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999607 - Pass
+     [1] 0.000393 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.813846
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Forest]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Forest]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.205843 - Island (Benchmark-skill6)
+ >>> [1] 0.197593 - Slagwoods Bridge (you)
+     [2] 0.205843 - Island (Benchmark-skill6)
+     [3] 0.205843 - Island (Benchmark-skill6)
+     [4] 0.184878 - Twisted Landscape (you)
+
+VALUE SCORE: 0.182857
+SELECTED: Slagwoods Bridge (you)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis; Forest]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis; Forest]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000027 - Pass
+     [1] 0.000060 - Cast Cleansing Wildfire
+ >>> [2] 0.999912 - Play Forest
+     [3] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.184989
+SELECTED: Play Forest
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Krark-Clan Shaman; Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Krark-Clan Shaman; Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.173353 - Island (Benchmark-skill6)
+     [1] 0.165726 - Slagwoods Bridge (you)
+ >>> [2] 0.173353 - Island (Benchmark-skill6)
+     [3] 0.159443 - Forest (you)
+ >>> [4] 0.173353 - Island (Benchmark-skill6)
+     [5] 0.154773 - Twisted Landscape (you)
+
+VALUE SCORE: 0.165448
+SELECTED: Island (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Cleansing Wildfire; Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Krark-Clan Shaman; Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.340280 - Pass
+ >>> [1] 0.659420 - Cast Cleansing Wildfire
+     [2] 0.000298 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.167438
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Krark-Clan Shaman; Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.173353 - Island (Benchmark-skill6)
+     [1] 0.165726 - Slagwoods Bridge (you)
+     [2] 0.173353 - Island (Benchmark-skill6)
+ >>> [3] 0.159443 - Forest (you)
+     [4] 0.173353 - Island (Benchmark-skill6)
+     [5] 0.154773 - Twisted Landscape (you)
+
+VALUE SCORE: 0.165448
+SELECTED: Forest (you)
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4 (RL turn), Precombat Main (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.019297 - Blood Fountain
+     [1] 0.019705 - Cast Down
+     [2] 0.019705 - Cast Down
+     [3] 0.019705 - Cast Down
+     [4] 0.019705 - Cast Down
+     [5] 0.017887 - Cleansing Wildfire
+     [6] 0.017887 - Cleansing Wildfire
+     [7] 0.017887 - Cleansing Wildfire
+     [8] 0.020333 - Drossforge Bridge
+     [9] 0.020333 - Drossforge Bridge
+     [10] 0.020333 - Drossforge Bridge
+     [11] 0.020333 - Drossforge Bridge
+     [12] 0.019042 - Eviscerator's Insight
+ >>> [13] 0.022158 - Fanatical Offering
+ >>> [14] 0.022158 - Fanatical Offering
+ >>> [15] 0.022158 - Fanatical Offering
+ >>> [16] 0.022158 - Fanatical Offering
+     [17] 0.020352 - Forest
+     [18] 0.021197 - Ichor Wellspring
+     [19] 0.021197 - Ichor Wellspring
+     [20] 0.021197 - Ichor Wellspring
+     [21] 0.017557 - Krark-Clan Shaman
+     [22] 0.017557 - Krark-Clan Shaman
+     [23] 0.020353 - Lembas
+     [24] 0.020353 - Lembas
+     [25] 0.020353 - Lembas
+     [26] 0.019998 - Makeshift Munitions
+     [27] 0.019139 - Mountain
+     [28] 0.019139 - Mountain
+     [29] 0.020242 - Nihil Spellbomb
+     [30] 0.021229 - Nyxborn Hydra
+     [31] 0.020119 - Pulse of Murasa
+     [32] 0.020722 - Refurbished Familiar
+     [33] 0.020722 - Refurbished Familiar
+     [34] 0.020722 - Refurbished Familiar
+     [35] 0.019969 - Slagwoods Bridge
+     [36] 0.019969 - Slagwoods Bridge
+     [37] 0.019969 - Slagwoods Bridge
+     [38] 0.021382 - Swamp
+     [39] 0.021382 - Swamp
+     [40] 0.021382 - Swamp
+     [41] 0.021099 - Toxin Analysis
+     [42] 0.021099 - Toxin Analysis
+     [43] 0.018587 - Twisted Landscape
+     [44] 0.018587 - Twisted Landscape
+     [45] 0.018587 - Twisted Landscape
+     [46] 0.021209 - Vault of Whispers
+     [47] 0.017949 - Writhing Chrysalis
+     [48] 0.017949 - Writhing Chrysalis
+     [49] 0.017949 - Writhing Chrysalis
+
+VALUE SCORE: 0.160725
+SELECTED: Fanatical Offering
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999170 - Pass
+     [1] 0.000825 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160852
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999170 - Pass
+     [1] 0.000825 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160932
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999172 - Pass
+     [1] 0.000823 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160653
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Moon-Circuit Hacker; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Moon-Circuit Hacker; Island; Faerie Miscreant]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.952649 - Pass
+     [1] 0.046861 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000489 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.848011
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spellstutter Sprite (controller=Benchmark-skill6)
+  - [1] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.961336 - Pass
+     [1] 0.038267 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000397 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.821290
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.961799 - Pass
+     [1] 0.037809 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000392 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.819748
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.961799 - Pass
+     [1] 0.037809 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000392 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.819748
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972100 - Pass
+     [1] 0.027612 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000288 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.780714
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Krark-Clan Shaman,blocking]
+-> Graveyard: [Forest; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972355 - Pass
+     [1] 0.027360 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000285 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.779545
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972415 - Pass
+     [1] 0.027585 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.780110
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.206449 - Island (Benchmark-skill6)
+     [1] 0.196948 - Slagwoods Bridge (you)
+ >>> [2] 0.206449 - Island (Benchmark-skill6)
+ >>> [3] 0.206449 - Island (Benchmark-skill6)
+     [4] 0.183704 - Twisted Landscape (you)
+
+VALUE SCORE: 0.154929
+SELECTED: Island (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.355594 - Pass
+ >>> [1] 0.644120 - Cast Cleansing Wildfire
+     [2] 0.000286 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.157496
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.206449 - Island (Benchmark-skill6)
+     [1] 0.196948 - Slagwoods Bridge (you)
+     [2] 0.206449 - Island (Benchmark-skill6)
+     [3] 0.206449 - Island (Benchmark-skill6)
+ >>> [4] 0.183704 - Twisted Landscape (you)
+
+VALUE SCORE: 0.154929
+SELECTED: Twisted Landscape (you)
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5 (RL turn), Precombat Main (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.020074 - Blood Fountain
+     [1] 0.020451 - Cast Down
+     [2] 0.020451 - Cast Down
+     [3] 0.020451 - Cast Down
+     [4] 0.020451 - Cast Down
+     [5] 0.018656 - Cleansing Wildfire
+     [6] 0.018656 - Cleansing Wildfire
+     [7] 0.021214 - Drossforge Bridge
+     [8] 0.021214 - Drossforge Bridge
+     [9] 0.021214 - Drossforge Bridge
+     [10] 0.021214 - Drossforge Bridge
+     [11] 0.019693 - Eviscerator's Insight
+     [12] 0.023050 - Fanatical Offering
+     [13] 0.023050 - Fanatical Offering
+     [14] 0.023050 - Fanatical Offering
+     [15] 0.021314 - Forest
+     [16] 0.022151 - Ichor Wellspring
+     [17] 0.022151 - Ichor Wellspring
+     [18] 0.022151 - Ichor Wellspring
+     [19] 0.018343 - Krark-Clan Shaman
+     [20] 0.018343 - Krark-Clan Shaman
+     [21] 0.021257 - Lembas
+     [22] 0.021257 - Lembas
+     [23] 0.021257 - Lembas
+     [24] 0.020686 - Makeshift Munitions
+     [25] 0.019973 - Mountain
+     [26] 0.019973 - Mountain
+     [27] 0.021049 - Nihil Spellbomb
+     [28] 0.022041 - Nyxborn Hydra
+     [29] 0.020851 - Pulse of Murasa
+     [30] 0.021718 - Refurbished Familiar
+     [31] 0.021718 - Refurbished Familiar
+     [32] 0.021718 - Refurbished Familiar
+     [33] 0.020764 - Slagwoods Bridge
+     [34] 0.020764 - Slagwoods Bridge
+     [35] 0.020764 - Slagwoods Bridge
+ >>> [36] 0.022228 - Swamp
+ >>> [37] 0.022228 - Swamp
+ >>> [38] 0.022228 - Swamp
+     [39] 0.022065 - Toxin Analysis
+     [40] 0.022065 - Toxin Analysis
+     [41] 0.019361 - Twisted Landscape
+     [42] 0.019361 - Twisted Landscape
+     [43] 0.019361 - Twisted Landscape
+     [44] 0.022067 - Vault of Whispers
+     [45] 0.018634 - Writhing Chrysalis
+     [46] 0.018634 - Writhing Chrysalis
+     [47] 0.018634 - Writhing Chrysalis
+
+VALUE SCORE: 0.139466
+SELECTED: Swamp
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.355594 - Pass
+
+VALUE SCORE: 0.157496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.355594 - Pass
+
+VALUE SCORE: 0.157496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.355594 - Pass
+
+VALUE SCORE: 0.157496
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island,tapped; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island,tapped; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.355594 - Pass
+
+VALUE SCORE: 0.157496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island,tapped; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.355594 - Pass
+
+VALUE SCORE: 0.157496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.355594 - Pass
+
+VALUE SCORE: 0.157496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.355594 - Pass
+
+VALUE SCORE: 0.157496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.355594 - Pass
+
+VALUE SCORE: 0.157496
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.133721 - Pass
+     [1] 0.018826 - Cast Fanatical Offering
+ >>> [2] 0.847453 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.153412
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.132848
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.133045
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.132600
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999730 - Pass
+     [1] 0.000270 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.771172
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999734 - Pass
+     [1] 0.000266 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.769455
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999818 - Pass
+     [1] 0.000182 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.717410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999818 - Pass
+     [1] 0.000182 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.717410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999838 - Pass
+     [1] 0.000162 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.700955
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Eviscerator's Insight]
+-> Permanents: [Slagwoods Bridge; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Eviscerator's Insight]
+-> Permanents: [Slagwoods Bridge; Swamp; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.186985 - Pass
+     [1] 0.021341 - Cast Fanatical Offering
+ >>> [2] 0.791673 - Cast Eviscerator's Insight
+     [3] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.136439
+SELECTED: Cast Eviscerator's Insight
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.186985 - Pass
+
+VALUE SCORE: 0.136439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.186985 - Pass
+
+VALUE SCORE: 0.136439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.186985 - Pass
+
+VALUE SCORE: 0.136439
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.186985 - Pass
+
+VALUE SCORE: 0.136439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.186985 - Pass
+
+VALUE SCORE: 0.136439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.186985 - Pass
+
+VALUE SCORE: 0.136439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.186985 - Pass
+
+VALUE SCORE: 0.136439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman,blocking]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.186985 - Pass
+
+VALUE SCORE: 0.136439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.186985 - Pass
+
+VALUE SCORE: 0.136439
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.164368 - Faerie Seer (Benchmark-skill6)
+ >>> [1] 0.167949 - Spellstutter Sprite (Benchmark-skill6)
+     [2] 0.154095 - Moon-Circuit Hacker (Benchmark-skill6)
+     [3] 0.171480 - Faerie Miscreant (Benchmark-skill6)
+     [4] 0.174159 - Humbling Elder (Benchmark-skill6)
+ >>> [5] 0.167949 - Spellstutter Sprite (Benchmark-skill6)
+
+VALUE SCORE: 0.115986
+SELECTED: Spellstutter Sprite (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.801265 - Pass
+     [1] 0.198735 - Cast Toxin Analysis
+
+VALUE SCORE: 0.120584
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8 (RL turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.164373 - Faerie Seer (Benchmark-skill6)
+     [1] 0.167948 - Spellstutter Sprite (Benchmark-skill6)
+     [2] 0.154095 - Moon-Circuit Hacker (Benchmark-skill6)
+     [3] 0.171475 - Faerie Miscreant (Benchmark-skill6)
+     [4] 0.174160 - Humbling Elder (Benchmark-skill6)
+     [5] 0.167948 - Spellstutter Sprite (Benchmark-skill6)
+
+VALUE SCORE: 0.116234
+SELECTED: Faerie Seer (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.801046 - Pass
+     [1] 0.198954 - Cast Toxin Analysis
+
+VALUE SCORE: 0.120817
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8 (RL turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.164367 - Faerie Seer (Benchmark-skill6)
+     [1] 0.167946 - Spellstutter Sprite (Benchmark-skill6)
+ >>> [2] 0.154099 - Moon-Circuit Hacker (Benchmark-skill6)
+     [3] 0.171484 - Faerie Miscreant (Benchmark-skill6)
+     [4] 0.174158 - Humbling Elder (Benchmark-skill6)
+     [5] 0.167946 - Spellstutter Sprite (Benchmark-skill6)
+
+VALUE SCORE: 0.115639
+SELECTED: Moon-Circuit Hacker (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.801622 - Pass
+     [1] 0.198378 - Cast Toxin Analysis
+
+VALUE SCORE: 0.120259
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=RL)
+  - [1] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=RL)
+  - [1] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.154327 - Faerie Seer (Benchmark-skill6)
+ >>> [1] 0.184451 - Spellstutter Sprite (Benchmark-skill6)
+     [2] 0.146154 - Moon-Circuit Hacker (Benchmark-skill6)
+     [3] 0.172862 - Faerie Miscreant (Benchmark-skill6)
+     [4] 0.157754 - Humbling Elder (Benchmark-skill6)
+ >>> [5] 0.184451 - Spellstutter Sprite (Benchmark-skill6)
+
+VALUE SCORE: 0.767981
+SELECTED: Spellstutter Sprite (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Toxin Analysis; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.012761 - Pass
+ >>> [1] 0.987239 - Cast Toxin Analysis
+
+VALUE SCORE: 0.788837
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=RL)
+  - [1] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.154327 - Faerie Seer (Benchmark-skill6)
+     [1] 0.184451 - Spellstutter Sprite (Benchmark-skill6)
+ >>> [2] 0.146154 - Moon-Circuit Hacker (Benchmark-skill6)
+     [3] 0.172862 - Faerie Miscreant (Benchmark-skill6)
+     [4] 0.157754 - Humbling Elder (Benchmark-skill6)
+     [5] 0.184451 - Spellstutter Sprite (Benchmark-skill6)
+
+VALUE SCORE: 0.767981
+SELECTED: Moon-Circuit Hacker (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Dispel (controller=Benchmark-skill6)
+  - [1] Toxin Analysis (controller=RL)
+  - [2] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012761 - Pass
+
+VALUE SCORE: 0.788837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman; Toxin Analysis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Dispel]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012761 - Pass
+
+VALUE SCORE: 0.788837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman; Toxin Analysis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer; Faerie Seer]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Dispel]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012761 - Pass
+
+VALUE SCORE: 0.788837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman; Toxin Analysis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Island,tapped; Faerie Miscreant; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite; Moon-Circuit Hacker; Saiba Cryptomancer; Faerie Seer]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Dispel]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012761 - Pass
+
+VALUE SCORE: 0.788837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman; Toxin Analysis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Saiba Cryptomancer,tapped,attacking; Faerie Seer]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Dispel]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012761 - Pass
+
+VALUE SCORE: 0.788837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 8 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Refurbished Familiar; Writhing Chrysalis; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Forest; Cleansing Wildfire; Krark-Clan Shaman; Twisted Landscape; Cleansing Wildfire; Slagwoods Bridge; Eviscerator's Insight; Krark-Clan Shaman; Toxin Analysis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Saiba Cryptomancer,tapped,attacking; Faerie Seer]
+-> Graveyard: [Snap; Moon-Circuit Hacker; Dispel]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012761 - Pass
+
+VALUE SCORE: 0.788837
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 107
+Ended: 2026-02-01T20:00:12.279385
+================================================================================

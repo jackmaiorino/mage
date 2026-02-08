@@ -1,0 +1,3239 @@
+================================================================================
+GAME LOG: game_20260208_063422_0084
+Started: 2026-02-08T06:34:22.299021500
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=0 decision=MULLIGAN Q_keep=0.060 Q_mull=0.073 hand=[Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal; Nyxborn Hydra; Quirion Ranger; Quirion Ranger]
+LONDON_BOTTOM: player=PlayerRL1 mulligansTaken=1 handSize=7 bottomN=1 kept=[Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Quirion Ranger; Masked Vandal; Snow-Covered Forest] bottomed=[Winding Way]
+LONDON_BOTTOM_PROBS: player=PlayerRL1 cards=[Timberwatch Elf (0.151); Priest of Titania (0.136); Snow-Covered Forest (0.139); Quirion Ranger (0.147); Masked Vandal (0.153); Snow-Covered Forest (0.139); Winding Way (0.134)]
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=1 handSize=6 lands=2 decision=KEEP Q_keep=0.657 Q_mull=0.207 hand=[Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania; Quirion Ranger]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.005706 - Pass
+ >>> [1] 0.994294 - Play Snow-Covered Forest
+
+VALUE SCORE: -0.017355
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.277280 - Pass
+ >>> [1] 0.722720 - Cast Quirion Ranger
+
+VALUE SCORE: -0.017978
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997184 - Pass
+     [1] 0.002816 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.017470
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997186 - Pass
+     [1] 0.002814 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.017100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997188 - Pass
+     [1] 0.002812 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.016773
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995742 - Pass
+     [1] 0.004258 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.250707
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Priest of Titania; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.006937 - Pass
+ >>> [1] 0.993064 - Play Snow-Covered Forest
+
+VALUE SCORE: -0.151043
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Timberwatch Elf; Masked Vandal; Priest of Titania; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.133113 - Pass
+     [1] 0.297388 - Cast Masked Vandal
+ >>> [2] 0.569500 - Cast Priest of Titania
+
+VALUE SCORE: -0.151514
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Quirion Ranger]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Masked Vandal; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.197619 - Pass
+ >>> [1] 0.453294 - Cast Masked Vandal
+     [2] 0.349087 - Cast Wellwisher
+
+VALUE SCORE: -0.384731
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.248274 - Pass
+ >>> [1] 0.410711 - Cast Wellwisher
+     [2] 0.341015 - Cast Nyxborn Hydra
+
+VALUE SCORE: -0.454040
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.377145 - Pass
+     [1] 0.503289 - Cast Nyxborn Hydra
+     [2] 0.119565 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.352327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.758329 - Pass
+     [1] 0.241671 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.350441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.376418 - Pass
+ >>> [1] 0.503687 - Cast Nyxborn Hydra
+     [2] 0.119895 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.350105
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.214364 - Pass
+     [1] 0.062954 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.722682 - Cast Quirion Ranger
+
+VALUE SCORE: -0.449629
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.772263 - Pass
+     [1] 0.222067 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.005670 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.458541
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.772149 - Pass
+     [1] 0.222278 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.005573 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.446796
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.772149 - Pass
+     [1] 0.222278 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.005573 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.446796
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.770730 - Pass
+     [1] 0.223829 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.005441 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.439170
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Bot-Skill1)
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Bot-Skill1)
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.734746 - Pass
+     [1] 0.259309 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.005945 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.455806
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Bot-Skill1)
+[PlayerRL1], life = 12
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.735101 - Pass
+     [1] 0.259187 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.005712 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.445200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.764251 - Pass
+     [1] 0.223980 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.011769 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.638038
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.773680 - Pass
+     [1] 0.211091 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.015229 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.687435
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.772891 - Pass
+     [1] 0.213325 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.013784 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.672013
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.780574 - Pass
+ >>> [1] 0.202630 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.016796 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.706438
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (Bot-Skill1 turn), Precombat Main (CARD_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=PlayerRL1)
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.090909 - Snow-Covered Forest
+     [1] 0.090909 - Snow-Covered Forest
+     [2] 0.090909 - Snow-Covered Forest
+     [3] 0.090909 - Snow-Covered Forest
+     [4] 0.090909 - Snow-Covered Forest
+ >>> [5] 0.090909 - Snow-Covered Forest
+     [6] 0.090909 - Snow-Covered Forest
+     [7] 0.090909 - Snow-Covered Forest
+     [8] 0.090909 - Snow-Covered Forest
+     [9] 0.090909 - Snow-Covered Forest
+     [10] 0.090909 - Snow-Covered Forest
+
+VALUE SCORE: -0.694900
+SELECTED: Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979282 - Pass
+     [1] 0.020718 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.694900
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979442 - Pass
+     [1] 0.020558 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.693791
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979496 - Pass
+     [1] 0.020504 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.693190
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest; Winding Way]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest; Winding Way]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.023750 - Pass
+ >>> [1] 0.966945 - Play Snow-Covered Forest
+     [2] 0.008997 - Cast Winding Way
+     [3] 0.000308 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.567000
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.503864 - Pass
+ >>> [1] 0.302176 - Cast Timberwatch Elf
+     [2] 0.186873 - Cast Winding Way
+     [3] 0.007086 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.573239
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981439 - Pass
+     [1] 0.018561 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.608211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981005 - Pass
+     [1] 0.018995 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.609370
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981005 - Pass
+     [1] 0.018995 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.609370
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980761 - Pass
+     [1] 0.019239 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.611191
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Bot-Skill1)
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Bot-Skill1)
+[PlayerRL1], life = 10
+-> Hand: [Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974369 - Pass
+     [1] 0.025631 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.749692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974421 - Pass
+     [1] 0.025579 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.747694
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974824 - Pass
+     [1] 0.025176 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.739442
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974840 - Pass
+     [1] 0.025160 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.739152
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Timberwatch Elf; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Timberwatch Elf; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.393666 - Pass
+ >>> [1] 0.193988 - Cast Timberwatch Elf
+     [2] 0.132330 - Cast Winding Way
+     [3] 0.269585 - Cast Lead the Stampede
+     [4] 0.006918 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [5] 0.003513 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.624928
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.966135 - Pass
+     [1] 0.021379 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.012486 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.677164
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977299 - Pass
+     [1] 0.022701 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.716793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 8 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977299 - Pass
+     [1] 0.022701 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.716793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 7
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977411 - Pass
+     [1] 0.022589 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.726501
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 7
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 7
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973707 - Pass
+     [1] 0.026293 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.720372
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Bot-Skill1)
+[PlayerRL1], life = 7
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973812 - Pass
+     [1] 0.026188 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.719735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973966 - Pass
+     [1] 0.026034 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.716352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974087 - Pass
+     [1] 0.025913 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.715263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973861 - Pass
+     [1] 0.026139 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.722398
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Winding Way; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Winding Way; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.018974 - Pass
+     [1] 0.007018 - Cast Winding Way
+     [2] 0.016792 - Cast Lead the Stampede
+ >>> [3] 0.956972 - Play Snow-Covered Forest
+     [4] 0.000173 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [5] 0.000072 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.520033
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.478725 - Pass
+ >>> [1] 0.162195 - Cast Winding Way
+     [2] 0.349884 - Cast Lead the Stampede
+     [3] 0.006320 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [4] 0.002876 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.581284
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Masked Vandal; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.264358 - Pass
+ >>> [1] 0.425218 - Cast Masked Vandal
+     [2] 0.306534 - Cast Wellwisher
+     [3] 0.002725 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [4] 0.001165 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.534921
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=PlayerRL1)
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Generous Ent; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979047 - Pass
+     [1] 0.014328 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.006625 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.580850
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985023 - Pass
+     [1] 0.010518 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.004459 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.513076
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980516 - Pass
+     [1] 0.019484 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.644732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980516 - Pass
+     [1] 0.019484 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.644732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979664 - Pass
+     [1] 0.020336 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.654906
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972778 - Pass
+     [1] 0.027222 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.741367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972802 - Pass
+     [1] 0.027198 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.740174
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972714 - Pass
+     [1] 0.027286 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.751402
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 10 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Masked Vandal; Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.226926 - Pass
+     [1] 0.175755 - Cast Lead the Stampede
+ >>> [2] 0.342291 - Cast Masked Vandal
+     [3] 0.252320 - Cast Wellwisher
+     [4] 0.001922 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [5] 0.000787 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.505525
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 10 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.487078 - Pass
+     [1] 0.483536 - Cast Wellwisher
+     [2] 0.020363 - Cast Masked Vandal
+     [3] 0.006226 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [4] 0.002797 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.565450
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 10 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977376 - Pass
+     [1] 0.022624 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.696546
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 10 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977376 - Pass
+     [1] 0.022624 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.696546
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 10 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.538419 - Pass
+     [1] 0.427783 - Cast Wellwisher
+ >>> [2] 0.020741 - Cast Masked Vandal
+     [3] 0.013057 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.728204
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 10 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975322 - Pass
+     [1] 0.024678 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.718742
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 3
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.966619 - Pass
+     [1] 0.033381 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.854676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.964366 - Pass
+     [1] 0.035634 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.857565
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When this card is exiled this way, you may cast it by paying {R} instead of putting it into your graveyard.) (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting]
+-> Exile: [Lava Dart; Fiery Temper]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.961148 - Pass
+     [1] 0.038852 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.856877
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.956192 - Pass
+     [1] 0.043808 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.862477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.956220 - Pass
+     [1] 0.043780 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.861240
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.956119 - Pass
+     [1] 0.043881 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.859056
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 11 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest; Masked Vandal; Masked Vandal]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.454462 - Pass
+     [1] 0.212387 - Cast Lead the Stampede
+     [2] 0.311620 - Cast Wellwisher
+     [3] 0.012512 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [4] 0.009021 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.738904
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 11 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972117 - Pass
+     [1] 0.027883 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.791705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 11 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972117 - Pass
+     [1] 0.027883 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.791705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 11 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Lead the Stampede; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 4
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.455560 - Pass
+ >>> [1] 0.234988 - Cast Lead the Stampede
+     [2] 0.296147 - Cast Wellwisher
+     [3] 0.013304 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.814962
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 11 (PlayerRL1 turn), Postcombat Main (CARD_PICK 0 min=0 max=5) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=PlayerRL1)
+[PlayerRL1], life = 1
+-> Hand: [Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 4
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.175118 - STOP
+     [1] 0.159495 - Masked Vandal
+     [2] 0.179792 - Wellwisher
+     [3] 0.160677 - Elvish Mystic
+     [4] 0.160677 - Elvish Mystic
+     [5] 0.164242 - Timberwatch Elf
+
+VALUE SCORE: -0.825807
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 11 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 1
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way; Lead the Stampede]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 4
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.968152 - Pass
+     [1] 0.031848 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.817202
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way; Lead the Stampede]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 4
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 11 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way; Lead the Stampede]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 4
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Faithless Looting; Fiery Temper]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.955944 - Pass
+     [1] 0.044056 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.833936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 11 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way; Lead the Stampede]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 4
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Fiery Temper; Lava Dart]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953134 - Pass
+     [1] 0.046866 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.851947
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 11 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 1
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+-> Graveyard: [Quirion Ranger; Priest of Titania; Masked Vandal; Wellwisher; Winding Way; Lead the Stampede]
+-> Exile: [Generous Ent]
+[Bot-Skill1], life = 4
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Lightning Bolt; Lightning Bolt; Fiery Temper; Faithless Looting; Grab the Prize; Mountain; Highway Robbery; Grab the Prize; Mountain; Highway Robbery; Fiery Temper; Mountain; Mountain; Mountain; Fireblast; Masked Meower; Grab the Prize; Mountain; Fiery Temper; Sneaky Snacker; Mountain; Mountain]
+-> Exile: [Lava Dart; Faithless Looting]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953757 - Pass
+     [1] 0.046243 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.837972
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 11
+Reason: Episode 146000 - Win
+Total Decisions Logged: 112
+Ended: 2026-02-08T06:38:46.426682600
+================================================================================

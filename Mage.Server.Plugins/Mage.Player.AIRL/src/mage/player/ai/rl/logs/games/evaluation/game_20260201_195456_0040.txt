@@ -1,0 +1,2610 @@
+================================================================================
+GAME LOG: game_20260201_195456_0040
+Started: 2026-02-01T19:54:56.551050300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Mono Red Rally.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=MULLIGAN Q_keep=-0.025 Q_mull=1.115 hand=[Basilisk Gate; Idyllic Beachfront; Lorien Revealed; Thraben Charm; Brainstorm; Spell Pierce; Outlaw Medic]
+LONDON_BOTTOM: player=RL mulligansTaken=1 handSize=7 bottomN=1 kept=[Spell Pierce; Prismatic Strands; Squadron Hawk; Journey to Nowhere; Island; Counterspell] bottomed=[Citadel Gate]
+MULLIGAN_DECISION: player=RL mulligansTaken=1 handSize=6 lands=1 decision=MULLIGAN Q_keep=-0.047 Q_mull=0.309 hand=[Island; Prismatic Strands; Counterspell; Journey to Nowhere; Spell Pierce; Squadron Hawk]
+LONDON_BOTTOM: player=RL mulligansTaken=2 handSize=7 bottomN=1 kept=[Sea Gate; Prismatic Strands; Journey to Nowhere; Island; Squadron Hawk; Sacred Cat] bottomed=[Counterspell]
+LONDON_BOTTOM: player=RL mulligansTaken=2 handSize=6 bottomN=1 kept=[Sea Gate; Prismatic Strands; Journey to Nowhere; Island; Squadron Hawk] bottomed=[Sacred Cat]
+MULLIGAN_DECISION: player=RL mulligansTaken=2 handSize=5 lands=2 decision=KEEP Q_keep=0.262 Q_mull=0.254 hand=[Island; Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000041 - Pass
+ >>> [1] 0.875016 - Play Island
+     [2] 0.124943 - Play Sea Gate
+
+VALUE SCORE: 0.179588
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.179588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.179588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.179588
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.179588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.179588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.179588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.179588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.179588
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000680 - Pass
+ >>> [1] 0.801769 - Play Sea Gate
+     [2] 0.197551 - Play Citadel Gate
+
+VALUE SCORE: 0.134034
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Burning-Tree Emissary; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Burning-Tree Emissary; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Burning-Tree Emissary; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000680 - Pass
+
+VALUE SCORE: 0.134034
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate; Heap Gate]
+-> Permanents: [Island; Sea Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate; Heap Gate]
+-> Permanents: [Island; Sea Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000038 - Pass
+     [1] 0.006746 - Play Citadel Gate
+ >>> [2] 0.993216 - Play Heap Gate
+
+VALUE SCORE: 0.077160
+SELECTED: Play Heap Gate
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Sea Gate; Heap Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.065959 - Pass
+ >>> [1] 0.499783 - Cast Journey to Nowhere
+     [2] 0.434248 - Cast Squadron Hawk
+     [3] 0.000010 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.067313
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 17
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.304959 - Voldaren Epicure (Benchmark-skill6)
+ >>> [1] 0.372564 - Burning-Tree Emissary (Benchmark-skill6)
+     [2] 0.322477 - Clockwork Percussionist (Benchmark-skill6)
+
+VALUE SCORE: 0.017876
+SELECTED: Burning-Tree Emissary (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 17
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.065959 - Pass
+
+VALUE SCORE: 0.067313
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate; Outlaw Medic]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Prismatic Strands; Squadron Hawk; Citadel Gate; Outlaw Medic]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.003565 - Pass
+     [1] 0.023818 - Cast Squadron Hawk
+ >>> [2] 0.640663 - Play Citadel Gate
+     [3] 0.331954 - Cast Outlaw Medic
+     [4] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.046198
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Prismatic Strands; Squadron Hawk; Outlaw Medic]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.010586 - Pass
+     [1] 0.068315 - Cast Squadron Hawk
+ >>> [2] 0.921097 - Cast Outlaw Medic
+     [3] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.011938
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=Benchmark-skill6)
+[RL], life = 9
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=Benchmark-skill6)
+[RL], life = 9
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider]
+-> Graveyard: [Galvanic Blast]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-skill6)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-skill6)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,blocking]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010586 - Pass
+
+VALUE SCORE: 0.011938
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Prismatic Strands; Squadron Hawk; Basilisk Gate]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Prismatic Strands; Squadron Hawk; Basilisk Gate]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.005555 - Pass
+     [1] 0.000100 - Cast Prismatic Strands
+     [2] 0.033131 - Cast Squadron Hawk
+ >>> [3] 0.961214 - Play Basilisk Gate
+     [4] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.041367
+SELECTED: Play Basilisk Gate
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.183469 - Voldaren Epicure (Benchmark-skill6)
+     [1] 0.192067 - Clockwork Percussionist (Benchmark-skill6)
+     [2] 0.233927 - Goblin Tomb Raider (Benchmark-skill6)
+     [3] 0.207068 - Outlaw Medic (you)
+ >>> [4] 0.183469 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.075719
+SELECTED: Voldaren Epicure (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Prismatic Strands; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.149932 - Pass
+     [1] 0.002587 - Cast Prismatic Strands
+ >>> [2] 0.847467 - Cast Squadron Hawk
+     [3] 0.000015 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.075719
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands]
+-> Permanents: [Island,tapped; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999909 - Pass
+     [1] 0.000091 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.152815
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands]
+-> Permanents: [Island,tapped; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.021606 - STOP
+     [1] 0.018024 - Azorius Guildgate
+     [2] 0.018024 - Azorius Guildgate
+     [3] 0.019251 - Basilisk Gate
+     [4] 0.019251 - Basilisk Gate
+     [5] 0.019251 - Basilisk Gate
+     [6] 0.019767 - Brainstorm
+     [7] 0.019767 - Brainstorm
+     [8] 0.019767 - Brainstorm
+     [9] 0.021543 - Citadel Gate
+     [10] 0.021543 - Citadel Gate
+     [11] 0.021543 - Citadel Gate
+     [12] 0.018036 - Counterspell
+     [13] 0.018036 - Counterspell
+     [14] 0.018036 - Counterspell
+     [15] 0.018036 - Counterspell
+ >>> [16] 0.018401 - Guardian of the Guildpact
+     [17] 0.021176 - Heap Gate
+     [18] 0.019722 - Idyllic Beachfront
+     [19] 0.021134 - Island
+     [20] 0.021134 - Island
+     [21] 0.021134 - Island
+     [22] 0.017611 - Journey to Nowhere
+     [23] 0.017611 - Journey to Nowhere
+     [24] 0.017611 - Journey to Nowhere
+     [25] 0.016741 - Lorien Revealed
+     [26] 0.016741 - Lorien Revealed
+     [27] 0.016741 - Lorien Revealed
+     [28] 0.016840 - Outlaw Medic
+     [29] 0.017917 - Preordain
+     [30] 0.017917 - Preordain
+     [31] 0.020371 - Prismatic Strands
+     [32] 0.020371 - Prismatic Strands
+     [33] 0.020371 - Prismatic Strands
+     [34] 0.020336 - Sacred Cat
+     [35] 0.020336 - Sacred Cat
+     [36] 0.020336 - Sacred Cat
+     [37] 0.020336 - Sacred Cat
+     [38] 0.020588 - Sea Gate
+     [39] 0.020588 - Sea Gate
+     [40] 0.020588 - Sea Gate
+     [41] 0.018252 - Spell Pierce
+     [42] 0.018252 - Spell Pierce
+     [43] 0.018547 - Squadron Hawk
+     [44] 0.018547 - Squadron Hawk
+     [45] 0.018547 - Squadron Hawk
+     [46] 0.018909 - The Modern Age
+     [47] 0.018909 - The Modern Age
+     [48] 0.018909 - The Modern Age
+     [49] 0.018909 - The Modern Age
+     [50] 0.019043 - Thraben Charm
+     [51] 0.019043 - Thraben Charm
+
+VALUE SCORE: -0.152815
+SELECTED: Guardian of the Guildpact
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Precombat Main (CARD_PICK 1 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands]
+-> Permanents: [Island,tapped; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.022011 - STOP
+     [1] 0.018362 - Azorius Guildgate
+     [2] 0.018362 - Azorius Guildgate
+     [3] 0.019612 - Basilisk Gate
+     [4] 0.019612 - Basilisk Gate
+     [5] 0.019612 - Basilisk Gate
+     [6] 0.020137 - Brainstorm
+     [7] 0.020137 - Brainstorm
+     [8] 0.020137 - Brainstorm
+     [9] 0.021947 - Citadel Gate
+     [10] 0.021947 - Citadel Gate
+     [11] 0.021947 - Citadel Gate
+     [12] 0.018374 - Counterspell
+     [13] 0.018374 - Counterspell
+     [14] 0.018374 - Counterspell
+     [15] 0.018374 - Counterspell
+     [16] 0.021573 - Heap Gate
+     [17] 0.020092 - Idyllic Beachfront
+     [18] 0.021531 - Island
+     [19] 0.021531 - Island
+     [20] 0.021531 - Island
+     [21] 0.017942 - Journey to Nowhere
+     [22] 0.017942 - Journey to Nowhere
+     [23] 0.017942 - Journey to Nowhere
+     [24] 0.017055 - Lorien Revealed
+     [25] 0.017055 - Lorien Revealed
+     [26] 0.017055 - Lorien Revealed
+     [27] 0.017155 - Outlaw Medic
+     [28] 0.018253 - Preordain
+     [29] 0.018253 - Preordain
+     [30] 0.020753 - Prismatic Strands
+     [31] 0.020753 - Prismatic Strands
+     [32] 0.020753 - Prismatic Strands
+     [33] 0.020717 - Sacred Cat
+     [34] 0.020717 - Sacred Cat
+     [35] 0.020717 - Sacred Cat
+     [36] 0.020717 - Sacred Cat
+     [37] 0.020974 - Sea Gate
+     [38] 0.020974 - Sea Gate
+     [39] 0.020974 - Sea Gate
+ >>> [40] 0.018594 - Spell Pierce
+ >>> [41] 0.018594 - Spell Pierce
+     [42] 0.018895 - Squadron Hawk
+     [43] 0.018895 - Squadron Hawk
+     [44] 0.018895 - Squadron Hawk
+     [45] 0.019264 - The Modern Age
+     [46] 0.019264 - The Modern Age
+     [47] 0.019264 - The Modern Age
+     [48] 0.019264 - The Modern Age
+     [49] 0.019400 - Thraben Charm
+     [50] 0.019400 - Thraben Charm
+
+VALUE SCORE: -0.152815
+SELECTED: Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Precombat Main (CARD_PICK 2 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands]
+-> Permanents: [Island,tapped; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.022428 - STOP
+     [1] 0.018709 - Azorius Guildgate
+     [2] 0.018709 - Azorius Guildgate
+     [3] 0.019984 - Basilisk Gate
+     [4] 0.019984 - Basilisk Gate
+     [5] 0.019984 - Basilisk Gate
+ >>> [6] 0.020519 - Brainstorm
+ >>> [7] 0.020519 - Brainstorm
+ >>> [8] 0.020519 - Brainstorm
+     [9] 0.022363 - Citadel Gate
+     [10] 0.022363 - Citadel Gate
+     [11] 0.022363 - Citadel Gate
+     [12] 0.018722 - Counterspell
+     [13] 0.018722 - Counterspell
+     [14] 0.018722 - Counterspell
+     [15] 0.018722 - Counterspell
+     [16] 0.021981 - Heap Gate
+     [17] 0.020472 - Idyllic Beachfront
+     [18] 0.021938 - Island
+     [19] 0.021938 - Island
+     [20] 0.021938 - Island
+     [21] 0.018281 - Journey to Nowhere
+     [22] 0.018281 - Journey to Nowhere
+     [23] 0.018281 - Journey to Nowhere
+     [24] 0.017378 - Lorien Revealed
+     [25] 0.017378 - Lorien Revealed
+     [26] 0.017378 - Lorien Revealed
+     [27] 0.017480 - Outlaw Medic
+     [28] 0.018598 - Preordain
+     [29] 0.018598 - Preordain
+     [30] 0.021146 - Prismatic Strands
+     [31] 0.021146 - Prismatic Strands
+     [32] 0.021146 - Prismatic Strands
+     [33] 0.021110 - Sacred Cat
+     [34] 0.021110 - Sacred Cat
+     [35] 0.021110 - Sacred Cat
+     [36] 0.021110 - Sacred Cat
+     [37] 0.021371 - Sea Gate
+     [38] 0.021371 - Sea Gate
+     [39] 0.021371 - Sea Gate
+     [40] 0.018946 - Spell Pierce
+     [41] 0.019253 - Squadron Hawk
+     [42] 0.019253 - Squadron Hawk
+     [43] 0.019253 - Squadron Hawk
+     [44] 0.019629 - The Modern Age
+     [45] 0.019629 - The Modern Age
+     [46] 0.019629 - The Modern Age
+     [47] 0.019629 - The Modern Age
+     [48] 0.019767 - Thraben Charm
+     [49] 0.019767 - Thraben Charm
+
+VALUE SCORE: -0.152815
+SELECTED: Brainstorm
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Brainstorm]
+-> Permanents: [Island,tapped; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Brainstorm]
+-> Permanents: [Island,tapped; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.155359 - Voldaren Epicure (Benchmark-skill6)
+     [1] 0.157522 - Squadron Hawk (you)
+     [2] 0.160470 - Clockwork Percussionist (Benchmark-skill6)
+     [3] 0.196994 - Goblin Tomb Raider (Benchmark-skill6)
+     [4] 0.174296 - Outlaw Medic (you)
+ >>> [5] 0.155359 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.164339
+SELECTED: Voldaren Epicure (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Brainstorm]
+-> Permanents: [Island,tapped; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.074221 - Pass
+ >>> [1] 0.925772 - Cast Brainstorm
+     [2] 0.000007 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.164339
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere; The Modern Age; Preordain]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.183063 - Guardian of the Guildpact
+     [1] 0.171743 - Journey to Nowhere
+ >>> [2] 0.165595 - Preordain
+     [3] 0.140215 - Spell Pierce
+     [4] 0.171935 - The Modern Age
+     [5] 0.167449 - Prismatic Strands
+
+VALUE SCORE: -0.207969
+SELECTED: Preordain
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.219403 - Guardian of the Guildpact
+     [1] 0.205754 - Journey to Nowhere
+     [2] 0.168001 - Spell Pierce
+ >>> [3] 0.206023 - The Modern Age
+     [4] 0.200820 - Prismatic Strands
+
+VALUE SCORE: -0.203997
+SELECTED: The Modern Age
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.156006 - Voldaren Epicure (Benchmark-skill6)
+ >>> [1] 0.156875 - Squadron Hawk (you)
+     [2] 0.159917 - Clockwork Percussionist (Benchmark-skill6)
+     [3] 0.197010 - Goblin Tomb Raider (Benchmark-skill6)
+     [4] 0.174186 - Outlaw Medic (you)
+     [5] 0.156006 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.203230
+SELECTED: Squadron Hawk (you)
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.074221 - Pass
+
+VALUE SCORE: -0.164339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped,attacking; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.074221 - Pass
+
+VALUE SCORE: -0.164339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped,attacking; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.074221 - Pass
+
+VALUE SCORE: -0.164339
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 7
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (RL turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 7
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.156140 - Voldaren Epicure (Benchmark-skill6)
+     [1] 0.156088 - Squadron Hawk (you)
+     [2] 0.159262 - Clockwork Percussionist (Benchmark-skill6)
+     [3] 0.196428 - Goblin Tomb Raider (Benchmark-skill6)
+ >>> [4] 0.175942 - Outlaw Medic (you)
+     [5] 0.156140 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.226556
+SELECTED: Outlaw Medic (you)
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.074221 - Pass
+
+VALUE SCORE: -0.164339
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.007092 - Pass
+ >>> [1] 0.992908 - Cast Spell Pierce
+
+VALUE SCORE: 0.715909
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007092 - Pass
+
+VALUE SCORE: 0.715909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007092 - Pass
+
+VALUE SCORE: 0.715909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007092 - Pass
+
+VALUE SCORE: 0.715909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Squadron Hawk]
+-> Graveyard: [Brainstorm; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007092 - Pass
+
+VALUE SCORE: 0.715909
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 5
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=RL)
+[RL], life = 5
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.154793 - Voldaren Epicure (Benchmark-skill6)
+     [1] 0.157910 - Squadron Hawk (you)
+     [2] 0.161073 - Clockwork Percussionist (Benchmark-skill6)
+     [3] 0.196923 - Goblin Tomb Raider (Benchmark-skill6)
+ >>> [4] 0.174508 - Outlaw Medic (you)
+     [5] 0.154793 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.130432
+SELECTED: Outlaw Medic (you)
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate; Squadron Hawk]
+-> Graveyard: [Brainstorm; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.024347 - Pass
+     [1] 0.000412 - Cast Prismatic Strands
+     [2] 0.033164 - Cast Guardian of the Guildpact
+     [3] 0.202022 - Cast Journey to Nowhere
+ >>> [4] 0.740052 - Cast The Modern Age
+     [5] 0.000002 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.130432
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 5
+-> Hand: [Prismatic Strands; Guardian of the Guildpact; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate,tapped; Squadron Hawk; The Modern Age]
+-> Graveyard: [Brainstorm; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983328 - Pass
+     [1] 0.016583 - Cast Prismatic Strands
+     [2] 0.000089 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.196043
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Journey to Nowhere; Preordain]
+-> Permanents: [Island,tapped; Sea Gate; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate,tapped; Squadron Hawk; The Modern Age]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.038735 - Pass
+     [1] 0.000655 - Cast Prismatic Strands
+     [2] 0.324138 - Cast Journey to Nowhere
+ >>> [3] 0.636469 - Cast Preordain
+     [4] 0.000004 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.209090
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=RL)
+[RL], life = 5
+-> Hand: [Prismatic Strands; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate,tapped; Squadron Hawk; The Modern Age]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.382029 - STOP
+     [1] 0.297229 - Outlaw Medic
+ >>> [2] 0.320741 - Azorius Guildgate
+
+VALUE SCORE: -0.253208
+SELECTED: Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (RL turn), Precombat Main (CARD_PICK 1 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=RL)
+[RL], life = 5
+-> Hand: [Prismatic Strands; Journey to Nowhere]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate,tapped; Squadron Hawk; The Modern Age]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.562421 - STOP
+ >>> [1] 0.437579 - Outlaw Medic
+
+VALUE SCORE: -0.253208
+SELECTED: Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate; Journey to Nowhere; Citadel Gate; Outlaw Medic; Basilisk Gate,tapped; Squadron Hawk; The Modern Age]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.090133 - Pass
+ >>> [1] 0.748551 - Cast Journey to Nowhere
+     [2] 0.161316 - Cast Sacred Cat
+
+VALUE SCORE: -0.250840
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 5
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate,tapped; Squadron Hawk; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.158943 - Voldaren Epicure (Benchmark-skill6)
+     [1] 0.154466 - Squadron Hawk (you)
+     [2] 0.157934 - Clockwork Percussionist (Benchmark-skill6)
+     [3] 0.195380 - Goblin Tomb Raider (Benchmark-skill6)
+ >>> [4] 0.174333 - Outlaw Medic (you)
+     [5] 0.158943 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.315133
+SELECTED: Outlaw Medic (you)
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 5
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Outlaw Medic; Basilisk Gate,tapped; Squadron Hawk; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped,attacking; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 5
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 5
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-skill6)
+[RL], life = 2
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Blood Token]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Blood Token; Goblin Bushwhacker]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Prismatic Strands; Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Basilisk Gate,tapped; Squadron Hawk,tapped; The Modern Age; Journey to Nowhere]
+-> Graveyard: [Brainstorm; Spell Pierce; Guardian of the Guildpact; Preordain]
+-> Exile: [Outlaw Medic]
+[Benchmark-skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker]
+-> Graveyard: [Galvanic Blast; Chain Lightning; Chain Lightning; Lightning Bolt]
+-> Exile: [Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090133 - Pass
+
+VALUE SCORE: -0.250840
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 6
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 85
+Ended: 2026-02-01T19:57:31.280742700
+================================================================================

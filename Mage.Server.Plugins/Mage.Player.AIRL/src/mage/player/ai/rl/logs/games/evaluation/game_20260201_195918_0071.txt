@@ -1,0 +1,2701 @@
+================================================================================
+GAME LOG: game_20260201_195918_0071
+Started: 2026-02-01T19:59:18.265054200
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Caw-Gates.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.747 Q_mull=0.304 hand=[Island; Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite; Faerie Miscreant]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.986434
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000087 - Pass
+ >>> [1] 0.999913 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.981990
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.981990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.981990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.981990
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.981990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.981990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.981990
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000073 - Pass
+ >>> [1] 0.999927 - Cast Faerie Seer
+
+VALUE SCORE: 0.961676
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.961676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.354236 - STOP
+     [1] 0.314308 - Snap
+     [2] 0.331456 - Island
+
+VALUE SCORE: 0.953680
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.961676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.961676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.961676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.961676
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.961676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.961676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000073 - Pass
+
+VALUE SCORE: 0.961676
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite; Island]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite; Island]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.930268
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000323 - Pass
+ >>> [1] 0.843733 - Cast Moon-Circuit Hacker
+     [2] 0.155944 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.925004
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000323 - Pass
+
+VALUE SCORE: 0.925004
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000323 - Pass
+
+VALUE SCORE: 0.925004
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000323 - Pass
+
+VALUE SCORE: 0.925004
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000323 - Pass
+
+VALUE SCORE: 0.925004
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000323 - Pass
+
+VALUE SCORE: 0.925004
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000323 - Pass
+
+VALUE SCORE: 0.925004
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000323 - Pass
+
+VALUE SCORE: 0.925004
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000323 - Pass
+
+VALUE SCORE: 0.925004
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.276902 - Faerie Miscreant (you)
+     [1] 0.244295 - Faerie Seer (you)
+     [2] 0.246673 - Sacred Cat (Benchmark-skill6)
+ >>> [3] 0.232129 - Moon-Circuit Hacker (you)
+
+VALUE SCORE: 0.850028
+SELECTED: Moon-Circuit Hacker (you)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.998019 - Cast Of One Mind
+     [2] 0.001122 - Cast Spellstutter Sprite
+     [3] 0.000854 - Cast Snap
+
+VALUE SCORE: 0.853862
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Seer; Island; Moon-Circuit Hacker]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.029048 - Cast Faerie Seer
+ >>> [2] 0.970948 - Cast Of One Mind
+
+VALUE SCORE: 0.839745
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking]
+-> Graveyard: [Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking]
+-> Graveyard: [Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,blocking]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate,tapped]
+-> Graveyard: [Sacred Cat]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age]
+-> Graveyard: []
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Seer,tapped; Island,tapped]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.839745
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Harrier Strix; Island]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Harrier Strix; Island]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.322341 - Sacred Cat (Benchmark-skill6)
+     [1] 0.357630 - Faerie Miscreant (you)
+     [2] 0.320029 - Faerie Seer (you)
+
+VALUE SCORE: 0.741938
+SELECTED: Sacred Cat (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix; Island]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix; Island]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000005 - Cast Spellstutter Sprite
+     [2] 0.000006 - Cast Snap
+     [3] 0.000171 - Cast Faerie Seer
+     [4] 0.000116 - Cast Faerie Miscreant
+     [5] 0.000001 - Cast Harrier Strix
+ >>> [6] 0.999701 - Play Island
+
+VALUE SCORE: 0.749539
+SELECTED: Play Island
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.322490 - Sacred Cat (Benchmark-skill6)
+     [1] 0.357266 - Faerie Miscreant (you)
+     [2] 0.320244 - Faerie Seer (you)
+
+VALUE SCORE: 0.726304
+SELECTED: Sacred Cat (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000141 - Pass
+     [1] 0.016885 - Cast Spellstutter Sprite
+     [2] 0.019119 - Cast Snap
+ >>> [3] 0.576545 - Cast Faerie Seer
+     [4] 0.382671 - Cast Faerie Miscreant
+     [5] 0.004638 - Cast Harrier Strix
+
+VALUE SCORE: 0.733830
+SELECTED: Cast Faerie Seer
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Snap (controller=RL)
+  - [1] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Island,tapped; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Snap (controller=RL)
+  - [1] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Island,tapped; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.244394 - Sacred Cat (Benchmark-skill6)
+ >>> [1] 0.270226 - Faerie Miscreant (you)
+     [2] 0.242690 - Faerie Seer (you)
+     [3] 0.242690 - Faerie Seer (you)
+
+VALUE SCORE: 0.703999
+SELECTED: Faerie Miscreant (you)
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Snap; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Island,tapped; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.004248 - Pass
+     [1] 0.449199 - Cast Spellstutter Sprite
+ >>> [2] 0.546553 - Cast Snap
+
+VALUE SCORE: 0.710293
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Snap (controller=RL)
+  - [1] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Seer; Island; Island,tapped; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.244394 - Sacred Cat (Benchmark-skill6)
+     [1] 0.270226 - Faerie Miscreant (you)
+ >>> [2] 0.242690 - Faerie Seer (you)
+ >>> [3] 0.242690 - Faerie Seer (you)
+
+VALUE SCORE: 0.703999
+SELECTED: Faerie Seer (you)
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island; Faerie Miscreant; Island; Island,tapped; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.009323 - Pass
+ >>> [1] 0.990677 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.711549
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Brainstorm (controller=Benchmark-skill6)
+  - [1] Spellstutter Sprite (controller=RL)
+  - [2] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped]
+-> Graveyard: [Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spellstutter Sprite (controller=RL)
+  - [1] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped]
+-> Graveyard: [Prismatic Strands; Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Prismatic Strands (controller=Benchmark-skill6)
+  - [1] Spellstutter Sprite (controller=RL)
+  - [2] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spellstutter Sprite (controller=RL)
+  - [1] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.359250 - STOP
+ >>> [1] 0.331322 - Island
+     [2] 0.309427 - Ninja of the Deep Hours
+
+VALUE SCORE: 0.665943
+SELECTED: Island
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Precombat Main (CARD_PICK 1 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.537255 - STOP
+ >>> [1] 0.462745 - Ninja of the Deep Hours
+
+VALUE SCORE: 0.665943
+SELECTED: Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,tapped; The Modern Age; Island,tapped]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate; Sea Gate; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Citadel Gate; Sea Gate; Sacred Cat; The Modern Age; Island]
+-> Graveyard: [Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; The Modern Age; Island; Island]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; The Modern Age; Island; Island,tapped; Sacred Cat]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009323 - Pass
+
+VALUE SCORE: 0.711549
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000090 - Cast Faerie Miscreant
+     [2] 0.000001 - Cast Harrier Strix
+     [3] 0.000156 - Cast Faerie Seer
+ >>> [4] 0.999752 - Play Island
+
+VALUE SCORE: 0.621885
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Ninja of the Deep Hours; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.000083 - Pass
+ >>> [1] 0.555431 - Cast Ninja of the Deep Hours
+     [2] 0.161234 - Cast Faerie Miscreant
+     [3] 0.002031 - Cast Harrier Strix
+     [4] 0.281221 - Cast Faerie Seer
+
+VALUE SCORE: 0.613811
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; The Modern Age; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-skill6)
+  - [1] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; The Modern Age; Island; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-skill6)
+  - [1] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; The Modern Age; Island; Island,tapped; Sacred Cat; Outlaw Medic]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; The Modern Age; Island; Island,tapped; Sacred Cat; Outlaw Medic; Treasure Token]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; Island; Island,tapped; Sacred Cat; Outlaw Medic; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; Island; Island,tapped; Sacred Cat; Outlaw Medic,tapped,attacking; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,blocking]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; Island; Island,tapped; Sacred Cat; Outlaw Medic,tapped,attacking; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; Island; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.613811
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; Island; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; Island; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000090 - Cast Faerie Miscreant
+     [2] 0.000001 - Cast Harrier Strix
+     [3] 0.000153 - Cast Faerie Seer
+ >>> [4] 0.999755 - Play Island
+
+VALUE SCORE: 0.627423
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix; Faerie Seer]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate; Sacred Cat; Island; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.000177 - Pass
+     [1] 0.365887 - Cast Faerie Miscreant
+     [2] 0.004595 - Cast Harrier Strix
+ >>> [3] 0.629342 - Cast Faerie Seer
+
+VALUE SCORE: 0.619177
+SELECTED: Cast Faerie Seer
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 3 items
+  - [0] Counterspell (controller=RL)
+  - [1] Counterspell (controller=Benchmark-skill6)
+  - [2] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Counterspell (controller=RL)
+  - [1] Counterspell (controller=Benchmark-skill6)
+  - [2] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.466835 - Faerie Seer
+     [1] 0.533165 - Counterspell
+
+VALUE SCORE: 0.586229
+SELECTED: Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-skill6)
+  - [1] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.000203 - Pass
+ >>> [1] 0.999797 - Cast Counterspell
+
+VALUE SCORE: 0.591244
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Counterspell (controller=RL)
+  - [1] Counterspell (controller=Benchmark-skill6)
+  - [2] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Island; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.466835 - Faerie Seer
+ >>> [1] 0.533165 - Counterspell
+
+VALUE SCORE: 0.586229
+SELECTED: Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000203 - Pass
+
+VALUE SCORE: 0.591244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000203 - Pass
+
+VALUE SCORE: 0.591244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.356513 - STOP
+     [1] 0.330389 - Island
+     [2] 0.313098 - Moon-Circuit Hacker
+
+VALUE SCORE: 0.569781
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.000376 - Pass
+ >>> [1] 0.986826 - Cast Faerie Miscreant
+     [2] 0.012798 - Cast Harrier Strix
+
+VALUE SCORE: 0.569781
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island,tapped; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.569781
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Harrier Strix; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island,tapped; Faerie Seer; Faerie Miscreant]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.025376 - Pass
+ >>> [1] 0.974624 - Cast Harrier Strix
+
+VALUE SCORE: 0.551596
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+     [0] 0.044928 - Island (you)
+     [1] 0.045370 - Sea Gate (Benchmark-skill6)
+     [2] 0.044928 - Island (you)
+     [3] 0.043789 - Sacred Cat (Benchmark-skill6)
+ >>> [4] 0.044410 - Ninja of the Deep Hours (you)
+     [5] 0.043789 - Sacred Cat (Benchmark-skill6)
+     [6] 0.041158 - Harrier Strix (you)
+     [7] 0.044692 - Citadel Gate (Benchmark-skill6)
+     [8] 0.047515 - Faerie Miscreant (you)
+     [9] 0.044928 - Island (you)
+     [10] 0.044928 - Island (Benchmark-skill6)
+     [11] 0.042757 - Faerie Seer (you)
+     [12] 0.044928 - Island (Benchmark-skill6)
+     [13] 0.053716 - Vector Glider (Benchmark-skill6)
+     [14] 0.049896 - Spellstutter Sprite (you)
+     [15] 0.043897 - Heap Gate (Benchmark-skill6)
+     [16] 0.047515 - Faerie Miscreant (you)
+     [17] 0.044928 - Island (you)
+     [18] 0.042757 - Faerie Seer (you)
+     [19] 0.046472 - Outlaw Medic (Benchmark-skill6)
+     [20] 0.044928 - Island (you)
+     [21] 0.047772 - Treasure Token (Benchmark-skill6)
+
+VALUE SCORE: 0.535770
+SELECTED: Ninja of the Deep Hours (you)
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.025376 - Pass
+
+VALUE SCORE: 0.551596
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.025376 - Pass
+
+VALUE SCORE: 0.551596
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Seer; Faerie Miscreant; Harrier Strix]
+-> Graveyard: [Of One Mind; Of One Mind; Moon-Circuit Hacker; Snap; Counterspell]
+-> Exile: []
+[Benchmark-skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Heap Gate,tapped; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat; Island,tapped; Island,tapped; Sacred Cat; Outlaw Medic,tapped; Treasure Token; Vector Glider]
+-> Graveyard: [Brainstorm; Guardian of the Guildpact; Brainstorm; Counterspell]
+-> Exile: [Sacred Cat; Prismatic Strands]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.025376 - Pass
+
+VALUE SCORE: 0.551596
+SELECTED: Pass
+

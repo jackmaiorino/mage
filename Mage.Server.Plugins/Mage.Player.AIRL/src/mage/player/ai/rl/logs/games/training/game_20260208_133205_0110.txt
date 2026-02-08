@@ -1,0 +1,1840 @@
+================================================================================
+GAME LOG: game_20260208_133205_0110
+Started: 2026-02-08T13:32:05.875548100
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.268 Q_mull=0.127 hand=[Forest; Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Forest; Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Forest; Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.049442 - Pass
+ >>> [1] 0.789445 - Play Forest
+     [2] 0.161113 - Play Slagwoods Bridge
+
+VALUE SCORE: -0.115035
+SELECTED: Play Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Slagwoods Bridge; Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.252409 - Pass
+ >>> [1] 0.747591 - Play Slagwoods Bridge
+
+VALUE SCORE: -0.218345
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down; Ichor Wellspring]
+-> Permanents: [Forest; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down; Ichor Wellspring]
+-> Permanents: [Forest; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.338164 - Pass
+     [1] 0.328554 - Cast Lembas
+     [2] 0.133540 - Cast Krark-Clan Shaman
+ >>> [3] 0.199742 - Cast Ichor Wellspring
+
+VALUE SCORE: -0.318735
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down; Twisted Landscape]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.182304 - Pass
+ >>> [1] 0.817696 - Play Twisted Landscape
+
+VALUE SCORE: -0.325289
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984502 - Pass
+     [1] 0.015498 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.328453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984513 - Pass
+     [1] 0.015487 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.327827
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984503 - Pass
+     [1] 0.015497 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.327515
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983468 - Pass
+     [1] 0.016532 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.134303
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982255 - Pass
+     [1] 0.017745 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.156216
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981619 - Pass
+     [1] 0.018381 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.139667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.981140 - Pass
+     [1] 0.018860 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.145397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974259 - Pass
+     [1] 0.025741 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.225745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973810 - Pass
+     [1] 0.026190 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.227686
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.393842 - Pass
+ >>> [1] 0.433112 - Cast Lembas
+     [2] 0.163955 - Cast Krark-Clan Shaman
+     [3] 0.009091 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.428533
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=0 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.509707 - STOP
+     [1] 0.490293 - Writhing Chrysalis
+
+VALUE SCORE: -0.441261
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.710281 - Pass
+     [1] 0.289719 - Cast Krark-Clan Shaman
+
+VALUE SCORE: -0.433713
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.710587 - Pass
+     [1] 0.289413 - Cast Krark-Clan Shaman
+
+VALUE SCORE: -0.433011
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Humbling Elder,tapped,attacking; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Humbling Elder,tapped,attacking; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Humbling Elder,tapped; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Humbling Elder,tapped; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Humbling Elder,tapped; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.248666 - Pass
+     [1] 0.321344 - Cast Lembas
+     [2] 0.097362 - Cast Krark-Clan Shaman
+     [3] 0.001680 - Cast Pulse of Murasa
+     [4] 0.013629 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.317319 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.548033
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 10
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Humbling Elder,tapped; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.427863 - Pass
+     [1] 0.002874 - Cast Pulse of Murasa
+     [2] 0.023350 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [3] 0.545913 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.547746
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=PlayerRL1)
+[PlayerRL1], life = 10
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Humbling Elder,tapped; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Humbling Elder,tapped; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Writhing Chrysalis; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Humbling Elder,tapped; Spellstutter Sprite; Humbling Elder; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.719742 - Pass
+     [1] 0.280258 - Cast Krark-Clan Shaman
+
+VALUE SCORE: -0.549186
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Moon-Circuit Hacker; Island; Humbling Elder; Spellstutter Sprite; Humbling Elder; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Moon-Circuit Hacker; Island; Humbling Elder; Spellstutter Sprite; Humbling Elder; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island; Humbling Elder,tapped,attacking; Spellstutter Sprite,tapped,attacking; Humbling Elder,tapped,attacking; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island; Humbling Elder,tapped,attacking; Spellstutter Sprite,tapped,attacking; Humbling Elder,tapped,attacking; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar; Slagwoods Bridge]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar; Slagwoods Bridge]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.244365 - Pass
+     [1] 0.301048 - Cast Lembas
+     [2] 0.101279 - Cast Krark-Clan Shaman
+     [3] 0.002607 - Cast Pulse of Murasa
+ >>> [4] 0.332822 - Play Slagwoods Bridge
+     [5] 0.017878 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.538261
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Lembas; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.341740 - Pass
+ >>> [1] 0.462277 - Cast Lembas
+     [2] 0.142080 - Cast Krark-Clan Shaman
+     [3] 0.005836 - Cast Pulse of Murasa
+     [4] 0.048067 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.561673
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=0 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.547840 - STOP
+     [1] 0.452160 - Toxin Analysis
+
+VALUE SCORE: -0.590768
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.699876 - Pass
+     [1] 0.300124 - Cast Krark-Clan Shaman
+
+VALUE SCORE: -0.581591
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Krark-Clan Shaman; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.700538 - Pass
+ >>> [1] 0.299462 - Cast Krark-Clan Shaman
+
+VALUE SCORE: -0.580717
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island; Humbling Elder,tapped; Spellstutter Sprite,tapped; Humbling Elder,tapped; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.968567 - Pass
+     [1] 0.031433 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.602974
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island; Humbling Elder; Spellstutter Sprite; Humbling Elder; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island; Humbling Elder; Spellstutter Sprite; Humbling Elder; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971358 - Pass
+     [1] 0.028642 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.358653
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island; Humbling Elder; Spellstutter Sprite; Island; Island; Island]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969650 - Pass
+     [1] 0.030350 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.352570
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island; Humbling Elder; Spellstutter Sprite; Island; Island; Island; Humbling Elder]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970590 - Pass
+     [1] 0.029410 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.344462
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island; Humbling Elder; Spellstutter Sprite; Island; Island; Island; Humbling Elder]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969355 - Pass
+     [1] 0.030645 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.341931
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island; Humbling Elder,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Island; Humbling Elder]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.950638 - Pass
+     [1] 0.049361 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.445411
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 5
+-> Hand: [Fanatical Offering; Fanatical Offering; Cast Down; Pulse of Murasa; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Twisted Landscape,tapped; Slagwoods Bridge,tapped; Lembas; Krark-Clan Shaman,blocking]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island; Humbling Elder,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Island; Humbling Elder]
+-> Graveyard: [Of One Mind; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Snap; Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.949536 - Pass
+     [1] 0.050464 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.451288
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 6
+Reason: Episode 151200 - Win
+Total Decisions Logged: 65
+Ended: 2026-02-08T13:33:53.201705200
+================================================================================

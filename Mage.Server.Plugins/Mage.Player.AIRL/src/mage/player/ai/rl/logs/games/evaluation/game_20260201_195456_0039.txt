@@ -1,0 +1,1728 @@
+================================================================================
+GAME LOG: game_20260201_195456_0039
+Started: 2026-02-01T19:54:56.539302200
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Grixis Affinity.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.374 Q_mull=0.012 hand=[Basilisk Gate; Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001044 - Pass
+ >>> [1] 0.998956 - Play Basilisk Gate
+
+VALUE SCORE: 0.178820
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Hunter's Blowgun (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Hunter's Blowgun (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Outlaw Medic; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001044 - Pass
+
+VALUE SCORE: 0.178820
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat; Island]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat; Island]
+-> Permanents: [Basilisk Gate]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000121 - Pass
+ >>> [1] 0.999879 - Play Island
+
+VALUE SCORE: 0.115043
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000121 - Pass
+
+VALUE SCORE: 0.115043
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000121 - Pass
+
+VALUE SCORE: 0.115043
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Nihil Spellbomb; Myr Enforcer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000121 - Pass
+
+VALUE SCORE: 0.115043
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer; Vault of Whispers,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Spell Pierce; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer; Vault of Whispers,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.090385 - Pass
+ >>> [1] 0.909615 - Cast Spell Pierce
+
+VALUE SCORE: 0.407109
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island,tapped]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer; Vault of Whispers,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island,tapped]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island,tapped]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island,tapped]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island,tapped]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Prismatic Strands]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Prismatic Strands]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Prismatic Strands]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Prismatic Strands]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer,tapped; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer; Vault of Whispers; Clue Token; Silverbluff Bridge]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp; Blood Fountain; Blood Token; Drossforge Bridge; Nihil Spellbomb; Myr Enforcer; Vault of Whispers; Clue Token; Silverbluff Bridge]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-skill6)
+  - [1] Reckoner's Bargain (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 24
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Clue Token; Silverbluff Bridge]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Clue Token; Silverbluff Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Clue Token; Silverbluff Bridge,tapped; Map Token]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Clue Token; Silverbluff Bridge,tapped; Map Token]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer,tapped; Clue Token; Silverbluff Bridge,tapped; Map Token; Vault of Whispers]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer,tapped; Clue Token; Silverbluff Bridge,tapped; Map Token; Vault of Whispers]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer,tapped; Clue Token; Silverbluff Bridge,tapped; Map Token; Vault of Whispers]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer,tapped; Clue Token; Silverbluff Bridge,tapped; Map Token; Vault of Whispers]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Guardian of the Guildpact; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer,tapped; Clue Token; Silverbluff Bridge,tapped; Map Token; Vault of Whispers]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp; Blood Fountain; Blood Token; Drossforge Bridge; Myr Enforcer; Clue Token; Silverbluff Bridge; Map Token; Vault of Whispers]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp; Blood Fountain; Blood Token; Drossforge Bridge; Myr Enforcer; Clue Token; Silverbluff Bridge; Map Token; Vault of Whispers]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Drossforge Bridge; Myr Enforcer,tapped,attacking; Clue Token; Silverbluff Bridge; Map Token; Vault of Whispers]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering; Great Furnace]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Map Token; Vault of Whispers,tapped]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering; Great Furnace]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-skill6)
+[RL], life = 6
+-> Hand: [Counterspell; Journey to Nowhere; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Map Token; Vault of Whispers,tapped]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering; Great Furnace]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Journey to Nowhere; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Map Token; Vault of Whispers,tapped]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering; Great Furnace; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Journey to Nowhere; Squadron Hawk; Sacred Cat; Sacred Cat; Journey to Nowhere; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island]
+-> Graveyard: [Outlaw Medic; Spell Pierce; Prismatic Strands; Guardian of the Guildpact]
+-> Exile: []
+[Benchmark-skill6], life = 25
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Map Token; Vault of Whispers,tapped]
+-> Graveyard: [Toxin Analysis; Nihil Spellbomb; Reckoner's Bargain; Vault of Whispers; Fanatical Offering; Great Furnace; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.090385 - Pass
+
+VALUE SCORE: 0.407109
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 61
+Ended: 2026-02-01T19:57:53.682440500
+================================================================================

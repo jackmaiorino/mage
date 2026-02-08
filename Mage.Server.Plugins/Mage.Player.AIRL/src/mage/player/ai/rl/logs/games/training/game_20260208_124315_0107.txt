@@ -1,0 +1,2313 @@
+================================================================================
+GAME LOG: game_20260208_124315_0107
+Started: 2026-02-08T12:43:15.530160400
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.311 Q_mull=0.129 hand=[Great Furnace; Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Clockwork Percussionist; Goblin Bushwhacker]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Great Furnace; Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Clockwork Percussionist; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Great Furnace; Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Clockwork Percussionist; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.053995 - Pass
+ >>> [1] 0.429081 - Play Great Furnace
+     [2] 0.516924 - Play Mountain
+
+VALUE SCORE: 0.015584
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Clockwork Percussionist; Goblin Bushwhacker]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.203952 - Pass
+     [1] 0.289540 - Cast End the Festivities
+     [2] 0.000519 - Cast Lightning Bolt
+ >>> [3] 0.390052 - Cast Clockwork Percussionist
+     [4] 0.115937 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 0.017628
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace; Clockwork Percussionist]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.082253 - Pass
+ >>> [1] 0.755557 - Play Mountain
+     [2] 0.116861 - Cast End the Festivities
+     [3] 0.000213 - Cast Lightning Bolt
+     [4] 0.045115 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.011436
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace; Clockwork Percussionist; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.123453 - Pass
+ >>> [1] 0.634310 - Cast Rally at the Hornburg
+     [2] 0.174840 - Cast End the Festivities
+     [3] 0.000319 - Cast Lightning Bolt
+     [4] 0.067078 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.009746
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg]
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Great Furnace; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [End the Festivities; Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Great Furnace; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.127531 - Pass
+ >>> [1] 0.180065 - Cast End the Festivities
+     [2] 0.000372 - Cast Lightning Bolt
+     [3] 0.063156 - Cast Goblin Bushwhacker
+     [4] 0.628187 - Cast Rally at the Hornburg
+     [5] 0.000689 - Cast Chain Lightning
+
+VALUE SCORE: -0.100635
+SELECTED: Cast End the Festivities
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Great Furnace; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.663768 - Pass
+     [1] 0.002028 - Cast Lightning Bolt
+     [2] 0.330402 - Cast Goblin Bushwhacker
+     [3] 0.003802 - Cast Chain Lightning
+
+VALUE SCORE: -0.110790
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Great Furnace; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996807 - Pass
+     [1] 0.003193 - Cast Lightning Bolt
+
+VALUE SCORE: -0.158828
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Great Furnace; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996770 - Pass
+     [1] 0.003230 - Cast Lightning Bolt
+
+VALUE SCORE: -0.169085
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Great Furnace; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 12
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.680311 - Pass
+     [1] 0.002249 - Cast Lightning Bolt
+     [2] 0.312726 - Cast Goblin Bushwhacker
+     [3] 0.004713 - Cast Chain Lightning
+
+VALUE SCORE: -0.179904
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Great Furnace; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Great Furnace; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996704 - Pass
+     [1] 0.003296 - Cast Lightning Bolt
+
+VALUE SCORE: -0.170671
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Great Furnace; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent; Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996736 - Pass
+     [1] 0.003264 - Cast Lightning Bolt
+
+VALUE SCORE: -0.167375
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning]
+-> Permanents: [Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.661883 - Pass
+     [1] 0.002079 - Cast Lightning Bolt
+     [2] 0.332138 - Cast Goblin Bushwhacker
+     [3] 0.003901 - Cast Chain Lightning
+
+VALUE SCORE: -0.107111
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996873 - Pass
+     [1] 0.003127 - Cast Lightning Bolt
+
+VALUE SCORE: -0.106539
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.665946 - Pass
+     [1] 0.002113 - Cast Lightning Bolt
+     [2] 0.327898 - Cast Goblin Bushwhacker
+     [3] 0.004044 - Cast Chain Lightning
+
+VALUE SCORE: -0.112310
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996950 - Pass
+     [1] 0.003050 - Cast Lightning Bolt
+
+VALUE SCORE: -0.061335
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996937 - Pass
+     [1] 0.003063 - Cast Lightning Bolt
+
+VALUE SCORE: -0.062919
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996895 - Pass
+     [1] 0.003105 - Cast Lightning Bolt
+
+VALUE SCORE: -0.068421
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996896 - Pass
+     [1] 0.003104 - Cast Lightning Bolt
+
+VALUE SCORE: -0.065441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996856 - Pass
+     [1] 0.003144 - Cast Lightning Bolt
+
+VALUE SCORE: -0.081737
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.360086 - Pass
+     [1] 0.001267 - Cast Lightning Bolt
+     [2] 0.165333 - Cast Goblin Bushwhacker
+     [3] 0.002691 - Cast Chain Lightning
+     [4] 0.470624 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.204341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996489 - Pass
+     [1] 0.003511 - Cast Lightning Bolt
+
+VALUE SCORE: -0.201936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.362759 - Pass
+     [1] 0.001277 - Cast Lightning Bolt
+     [2] 0.164741 - Cast Goblin Bushwhacker
+     [3] 0.002738 - Cast Chain Lightning
+     [4] 0.468485 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.201583
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996970 - Pass
+     [1] 0.003030 - Cast Lightning Bolt
+
+VALUE SCORE: -0.043538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996791 - Pass
+     [1] 0.003209 - Cast Lightning Bolt
+
+VALUE SCORE: -0.076189
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996745 - Pass
+     [1] 0.003254 - Cast Lightning Bolt
+
+VALUE SCORE: -0.078109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996507 - Pass
+     [1] 0.003493 - Cast Lightning Bolt
+
+VALUE SCORE: -0.111360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996507 - Pass
+     [1] 0.003493 - Cast Lightning Bolt
+
+VALUE SCORE: -0.111360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996343 - Pass
+     [1] 0.003657 - Cast Lightning Bolt
+
+VALUE SCORE: -0.184292
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Experimental Synthesizer; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.385585 - Pass
+     [1] 0.001522 - Cast Lightning Bolt
+     [2] 0.163026 - Cast Goblin Bushwhacker
+     [3] 0.003702 - Cast Chain Lightning
+ >>> [4] 0.446165 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.229428
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Mountain; Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.166879 - Pass
+     [1] 0.833121 - Play Mountain
+
+VALUE SCORE: -0.253673
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Mountain; Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Mountain; Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.171495 - Pass
+ >>> [1] 0.828505 - Play Mountain
+
+VALUE SCORE: -0.264407
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.696769 - Pass
+     [1] 0.003331 - Cast Lightning Bolt
+     [2] 0.290896 - Cast Goblin Bushwhacker
+     [3] 0.009004 - Cast Chain Lightning
+
+VALUE SCORE: -0.267076
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995745 - Pass
+     [1] 0.004255 - Cast Lightning Bolt
+
+VALUE SCORE: -0.267426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995795 - Pass
+     [1] 0.004205 - Cast Lightning Bolt
+
+VALUE SCORE: -0.262706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995779 - Pass
+     [1] 0.004221 - Cast Lightning Bolt
+
+VALUE SCORE: -0.271584
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Avenging Hunter]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995770 - Pass
+     [1] 0.004231 - Cast Lightning Bolt
+
+VALUE SCORE: -0.276379
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995821 - Pass
+     [1] 0.004179 - Cast Lightning Bolt
+
+VALUE SCORE: -0.274545
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lightning Bolt; Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.995404 - Pass
+ >>> [1] 0.004596 - Cast Lightning Bolt
+
+VALUE SCORE: -0.340856
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (Bot-Skill1 turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.098808 - Bot-Skill1
+     [1] 0.110518 - Human Soldier Token (you)
+     [2] 0.109676 - Priest of Titania (Bot-Skill1)
+     [3] 0.116155 - Clockwork Percussionist (you)
+     [4] 0.124075 - Masked Vandal (Bot-Skill1)
+ >>> [5] 0.119591 - Avenging Hunter (Bot-Skill1)
+     [6] 0.096511 - PlayerRL1
+     [7] 0.114149 - Nyxborn Hydra (Bot-Skill1)
+     [8] 0.110518 - Human Soldier Token (you)
+
+VALUE SCORE: -0.397510
+SELECTED: Avenging Hunter (Bot-Skill1)
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.235720 - Pass
+     [1] 0.085244 - Cast Goblin Bushwhacker
+     [2] 0.656166 - Cast Rally at the Hornburg
+     [3] 0.003916 - Cast Chain Lightning
+     [4] 0.001168 - Cast Lightning Bolt
+     [5] 0.017786 - Play Mountain
+
+VALUE SCORE: -0.381623
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995096 - Pass
+     [1] 0.004904 - Cast Lightning Bolt
+
+VALUE SCORE: -0.379834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Rally at the Hornburg; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.235125 - Pass
+     [1] 0.084617 - Cast Goblin Bushwhacker
+ >>> [2] 0.658115 - Cast Rally at the Hornburg
+     [3] 0.003783 - Cast Chain Lightning
+     [4] 0.001160 - Cast Lightning Bolt
+     [5] 0.017200 - Play Mountain
+
+VALUE SCORE: -0.381898
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.899329 - Pass
+     [1] 0.100671 - Play Mountain
+
+VALUE SCORE: -0.493794
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania; Avenging Hunter; Snow-Covered Forest,tapped]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania; Avenging Hunter; Snow-Covered Forest,tapped]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 13
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Clockwork Percussionist,blocking; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg; Clockwork Percussionist]
+-> Exile: [Great Furnace; Experimental Synthesizer]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain; Experimental Synthesizer]
+-> Permanents: [Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.486179 - Pass
+     [1] 0.172410 - Cast Goblin Bushwhacker
+     [2] 0.017511 - Cast Chain Lightning
+     [3] 0.003210 - Cast Lightning Bolt
+     [4] 0.092920 - Play Mountain
+ >>> [5] 0.227768 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.498378
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=PlayerRL1)
+[PlayerRL1], life = 4
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg; Clockwork Percussionist]
+-> Exile: [Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993571 - Pass
+     [1] 0.006429 - Cast Lightning Bolt
+
+VALUE SCORE: -0.551921
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg; Clockwork Percussionist]
+-> Exile: [Voldaren Epicure; Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.482845 - Pass
+     [1] 0.178589 - Cast Goblin Bushwhacker
+     [2] 0.021808 - Cast Chain Lightning
+     [3] 0.003146 - Cast Lightning Bolt
+     [4] 0.113934 - Play Mountain
+     [5] 0.199678 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.554004
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg; Clockwork Percussionist]
+-> Exile: [Voldaren Epicure; Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993557 - Pass
+     [1] 0.006443 - Cast Lightning Bolt
+
+VALUE SCORE: -0.553363
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg; Clockwork Percussionist]
+-> Exile: [Voldaren Epicure; Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+     [0] 0.484012 - Pass
+     [1] 0.178173 - Cast Goblin Bushwhacker
+     [2] 0.021616 - Cast Chain Lightning
+     [3] 0.003136 - Cast Lightning Bolt
+ >>> [4] 0.112445 - Play Mountain
+     [5] 0.200618 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.553042
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Goblin Bushwhacker; Chain Lightning; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; End the Festivities; Lightning Bolt; Rally at the Hornburg; Clockwork Percussionist]
+-> Exile: [Voldaren Epicure; Great Furnace]
+[Bot-Skill1], life = 12
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest]
+-> Graveyard: [Nyxborn Hydra; Fyndhorn Elves; Generous Ent]
+-> Exile: [Generous Ent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.540271 - Pass
+     [1] 0.208166 - Cast Goblin Bushwhacker
+     [2] 0.025684 - Cast Chain Lightning
+     [3] 0.003858 - Cast Lightning Bolt
+     [4] 0.222020 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.539583
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 8
+Reason: Episode 150600 - Win
+Total Decisions Logged: 80
+Ended: 2026-02-08T12:47:34.503162800
+================================================================================

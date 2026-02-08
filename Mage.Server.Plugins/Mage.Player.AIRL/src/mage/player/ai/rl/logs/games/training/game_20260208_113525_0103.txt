@@ -1,0 +1,2829 @@
+================================================================================
+GAME LOG: game_20260208_113525_0103
+Started: 2026-02-08T11:35:25.741598700
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=4 decision=KEEP Q_keep=0.481 Q_mull=0.226 hand=[Great Furnace; Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.075840 - Pass
+ >>> [1] 0.415188 - Play Great Furnace
+     [2] 0.508972 - Play Mountain
+
+VALUE SCORE: -0.140065
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.729042 - Pass
+     [1] 0.007563 - Cast Chain Lightning
+     [2] 0.263395 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.139867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.727609 - Pass
+     [1] 0.007456 - Cast Chain Lightning
+     [2] 0.264935 - Cast Goblin Bushwhacker
+
+VALUE SCORE: -0.125072
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.106188 - Pass
+ >>> [1] 0.736527 - Play Mountain
+     [2] 0.001157 - Cast Chain Lightning
+     [3] 0.040313 - Cast Goblin Bushwhacker
+     [4] 0.115816 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.135902
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.171091 - Pass
+     [1] 0.576254 - Cast Rally at the Hornburg
+     [2] 0.001871 - Cast Chain Lightning
+     [3] 0.064698 - Cast Goblin Bushwhacker
+     [4] 0.186086 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.129227
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.171549 - Pass
+     [1] 0.576305 - Cast Rally at the Hornburg
+     [2] 0.001852 - Cast Chain Lightning
+     [3] 0.064509 - Cast Goblin Bushwhacker
+     [4] 0.185785 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.121582
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; End the Festivities]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; End the Festivities]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071467 - Pass
+     [1] 0.503232 - Play Mountain
+     [2] 0.239583 - Cast Rally at the Hornburg
+     [3] 0.000824 - Cast Chain Lightning
+     [4] 0.027956 - Cast Goblin Bushwhacker
+     [5] 0.078041 - Cast Experimental Synthesizer
+     [6] 0.078897 - Cast End the Festivities
+
+VALUE SCORE: -0.136461
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; End the Festivities]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; End the Festivities]
+-> Permanents: [Great Furnace; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.071502 - Pass
+ >>> [1] 0.503164 - Play Mountain
+     [2] 0.239686 - Cast Rally at the Hornburg
+     [3] 0.000822 - Cast Chain Lightning
+     [4] 0.027906 - Cast Goblin Bushwhacker
+     [5] 0.078018 - Cast Experimental Synthesizer
+     [6] 0.078901 - Cast End the Festivities
+
+VALUE SCORE: -0.135438
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; End the Festivities]
+-> Permanents: [Great Furnace; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.145138 - Pass
+     [1] 0.483559 - Cast Rally at the Hornburg
+     [2] 0.001657 - Cast Chain Lightning
+     [3] 0.055728 - Cast Goblin Bushwhacker
+     [4] 0.156299 - Cast Experimental Synthesizer
+ >>> [5] 0.157619 - Cast End the Festivities
+
+VALUE SCORE: -0.122153
+SELECTED: Cast End the Festivities
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain]
+-> Graveyard: [End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.178071 - Pass
+     [1] 0.567773 - Cast Rally at the Hornburg
+     [2] 0.002248 - Cast Chain Lightning
+     [3] 0.066273 - Cast Goblin Bushwhacker
+     [4] 0.185634 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.156307
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain]
+-> Graveyard: [End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain]
+-> Graveyard: [End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain]
+-> Graveyard: [End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain]
+-> Graveyard: [End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Mountain; Mountain]
+-> Graveyard: [End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Mountain; Mountain]
+-> Graveyard: [End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.078935 - Pass
+ >>> [1] 0.543345 - Play Mountain
+     [2] 0.259877 - Cast Rally at the Hornburg
+     [3] 0.001024 - Cast Chain Lightning
+     [4] 0.031606 - Cast Goblin Bushwhacker
+     [5] 0.085214 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.150822
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain]
+-> Graveyard: [End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.174758 - Pass
+ >>> [1] 0.567949 - Cast Rally at the Hornburg
+     [2] 0.002348 - Cast Chain Lightning
+     [3] 0.069208 - Cast Goblin Bushwhacker
+     [4] 0.185738 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.149297
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Bot-Skill1)
+  - [1] Rally at the Hornburg (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [End the Festivities]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker; Experimental Synthesizer; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.473549 - Pass
+     [1] 0.012170 - Cast Chain Lightning
+     [2] 0.147163 - Cast Goblin Bushwhacker
+ >>> [3] 0.367118 - Cast Experimental Synthesizer
+
+VALUE SCORE: -0.367103
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.356276 - Pass
+     [1] 0.014453 - Cast Chain Lightning
+ >>> [2] 0.108967 - Cast Goblin Bushwhacker
+     [3] 0.520304 - Cast Goblin Tomb Raider
+
+VALUE SCORE: -0.441802
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island]
+-> Graveyard: [Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.309992 - Pass
+     [1] 0.032448 - Cast Chain Lightning
+     [2] 0.147889 - Cast Goblin Bushwhacker
+     [3] 0.335665 - Cast Goblin Tomb Raider
+     [4] 0.174006 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: -0.509159
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Chain Lightning; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.309790 - Pass
+ >>> [1] 0.031851 - Cast Chain Lightning
+     [2] 0.146292 - Cast Goblin Bushwhacker
+     [3] 0.336932 - Cast Goblin Tomb Raider
+     [4] 0.175136 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: -0.506520
+SELECTED: Cast Chain Lightning
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (PlayerRL1 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.503312 - Bot-Skill1
+ >>> [1] 0.496688 - PlayerRL1
+
+VALUE SCORE: -0.542324
+SELECTED: PlayerRL1
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (PlayerRL1 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Chain Lightning (controller=PlayerRL1)
+  - [1] Chain Lightning (controller=PlayerRL1)
+[PlayerRL1], life = 17
+-> Hand: [Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.501027 - Bot-Skill1
+     [1] 0.498973 - PlayerRL1
+
+VALUE SCORE: -0.627879
+SELECTED: Bot-Skill1
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Chain Lightning (controller=PlayerRL1)
+[PlayerRL1], life = 17
+-> Hand: [Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.345423 - Pass
+ >>> [1] 0.229519 - Cast Goblin Bushwhacker
+     [2] 0.425057 - Cast Goblin Tomb Raider
+
+VALUE SCORE: -0.616422
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Experimental Synthesizer; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.195941 - Pass
+     [1] 0.339845 - Cast Goblin Tomb Raider
+ >>> [2] 0.256160 - Cast Goblin Bushwhacker
+     [3] 0.208054 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: -0.647621
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.216900 - Pass
+     [1] 0.447755 - Cast Goblin Tomb Raider
+     [2] 0.335345 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: -0.684761
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.218850 - Pass
+ >>> [1] 0.448417 - Cast Goblin Tomb Raider
+     [2] 0.332733 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: -0.683879
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Bushwhacker,blocking; Goblin Bushwhacker,blocking; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Burning-Tree Emissary]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Experimental Synthesizer; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Tomb Raider; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: [Burning-Tree Emissary]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Experimental Synthesizer; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Tomb Raider; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.056666 - Pass
+ >>> [1] 0.846780 - Cast Burning-Tree Emissary
+     [2] 0.096554 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: -0.752815
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=PlayerRL1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider; Burning-Tree Emissary]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Tomb Raider; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain; Mountain,tapped; Experimental Synthesizer; Goblin Tomb Raider; Burning-Tree Emissary]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Tomb Raider; Goblin Bushwhacker; Goblin Bushwhacker]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.372867 - Pass
+ >>> [1] 0.627133 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: -0.769485
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=PlayerRL1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Burning-Tree Emissary]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Exile: [Goblin Tomb Raider; Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Burning-Tree Emissary; Samurai Token]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Exile: [Goblin Tomb Raider; Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.312349 - Pass
+ >>> [1] 0.687651 - Cast Goblin Tomb Raider
+
+VALUE SCORE: -0.770338
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider; Burning-Tree Emissary; Samurai Token; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Burning-Tree Emissary; Samurai Token; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Burning-Tree Emissary; Samurai Token; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,blocking; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token; Goblin Tomb Raider,tapped]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token; Goblin Tomb Raider,tapped]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token; Goblin Tomb Raider,tapped]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token; Goblin Tomb Raider,tapped]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island; Bird Illusion Token; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Brainstorm (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island; Bird Illusion Token; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary; Samurai Token]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 17
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Burning-Tree Emissary,blocking; Samurai Token,blocking]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider; Galvanic Blast]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Goblin Tomb Raider; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.312575 - Pass
+ >>> [1] 0.687425 - Cast Goblin Tomb Raider
+
+VALUE SCORE: -0.788189
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Deep Analysis (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Deep Analysis (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island,tapped]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deep Analysis (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Mental Note (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island,tapped; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island,tapped; Bird Illusion Token; Bird Illusion Token; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Tolarian Terror,tapped,attacking; Island,tapped; Bird Illusion Token; Bird Illusion Token; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped; Goblin Tomb Raider,blocking; Goblin Tomb Raider,blocking]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Tolarian Terror,tapped,attacking; Island,tapped; Bird Illusion Token; Bird Illusion Token; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: []
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain,tapped]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Tolarian Terror,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Galvanic Blast]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Tolarian Terror,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Galvanic Blast]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Tolarian Terror,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978532 - Pass
+     [1] 0.021468 - Cast Galvanic Blast
+
+VALUE SCORE: -0.798638
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Galvanic Blast]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Tolarian Terror,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978541 - Pass
+     [1] 0.021459 - Cast Galvanic Blast
+
+VALUE SCORE: -0.798578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Galvanic Blast]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Tolarian Terror,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978958 - Pass
+     [1] 0.021042 - Cast Galvanic Blast
+
+VALUE SCORE: -0.800328
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Galvanic Blast]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island; Bird Illusion Token; Bird Illusion Token; Island; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Galvanic Blast]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Island; Bird Illusion Token; Bird Illusion Token; Island; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976029 - Pass
+     [1] 0.023971 - Cast Galvanic Blast
+
+VALUE SCORE: -0.791438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Galvanic Blast]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic,tapped,attacking; Island; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Tolarian Terror,tapped,attacking; Island; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977653 - Pass
+     [1] 0.022347 - Cast Galvanic Blast
+
+VALUE SCORE: -0.799024
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Galvanic Blast]
+-> Permanents: [Great Furnace; Mountain; Mountain; Mountain]
+-> Graveyard: [End the Festivities; Rally at the Hornburg; Chain Lightning; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Burning-Tree Emissary; Goblin Tomb Raider; Goblin Tomb Raider]
+-> Exile: [Goblin Tomb Raider]
+[Bot-Skill1], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic,tapped,attacking; Island; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Tolarian Terror,tapped,attacking; Island; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island; Island]
+-> Graveyard: [Counterspell; Ponder; Lorien Revealed; Brainstorm; Deem Inferior; Thought Scour; Thought Scour; Brainstorm; Lorien Revealed; Deep Analysis; Cryptic Serpent; Mental Note]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978009 - Pass
+     [1] 0.021991 - Cast Galvanic Blast
+
+VALUE SCORE: -0.799125
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 9
+Reason: Episode 149800 - Win
+Total Decisions Logged: 100
+Ended: 2026-02-08T11:37:09.864406800
+================================================================================

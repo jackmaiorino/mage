@@ -79,6 +79,17 @@ class MTGTransformerModel(nn.Module):
             nn.Linear(d_model, d_model),
             nn.ReLU(),
         )
+        # Separate candidate-scoring heads (do not share final projection)
+        self.policy_query_target = nn.Sequential(
+            nn.LayerNorm(d_model),
+            nn.Linear(d_model, d_model),
+            nn.ReLU(),
+        )
+        self.policy_query_card_select = nn.Sequential(
+            nn.LayerNorm(d_model),
+            nn.Linear(d_model, d_model),
+            nn.ReLU(),
+        )
 
         # Legacy fixed-action actor head (kept for backwards compatibility / debugging)
         self.actor_norm = nn.LayerNorm(d_model)
@@ -180,7 +191,11 @@ class MTGTransformerModel(nn.Module):
                          token_ids: torch.Tensor,
                          candidate_features: torch.Tensor,
                          candidate_ids: torch.Tensor,
-                         candidate_mask: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+                         candidate_mask: torch.Tensor,
+                         head_id: str = "action",
+                         pick_index: int = 0,
+                         min_targets: int = 0,
+                         max_targets: int = 0) -> Tuple[torch.Tensor, torch.Tensor]:
         """Return (candidate_probs, value_scores)."""
         cls = self.encode_state(sequences, masks, token_ids)
         value_scores = self._process_value(cls)
@@ -190,9 +205,17 @@ class MTGTransformerModel(nn.Module):
         cand_ids = candidate_ids.clamp(min=0, max=self.action_vocab - 1).long()
         cand = cand_feat + self.action_id_emb(cand_ids)
 
-        query = self.policy_query(cls)
+        # Route head selection (ignore pick_index/min/max for now; plumbed for future conditioning)
+        hid = str(head_id).strip().lower() if head_id is not None else "action"
+        if hid == "target":
+            query = self.policy_query_target(cls)
+        elif hid == "card_select":
+            query = self.policy_query_card_select(cls)
+        else:
+            query = self.policy_query(cls)
 
-        scores = (cand * query.unsqueeze(1)).sum(dim=-1) / math.sqrt(self.d_model)
+        scores = (cand * query.unsqueeze(1)).sum(dim=-1) / \
+            math.sqrt(self.d_model)
         valid = candidate_mask.bool()
         # Numeric safety: if any score is NaN/Inf, treat it as invalid
         scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
@@ -278,7 +301,16 @@ class MTGTransformerModel(nn.Module):
     def load(self, path: str):
         """Load weights from file (ignores config—assumes same architecture)."""
         ckpt = torch.load(path, map_location='cpu')
-        self.load_state_dict(ckpt['state_dict'])
+        # Backward compatible loads: allow missing keys (e.g., newly added heads).
+        res = self.load_state_dict(ckpt['state_dict'], strict=False)
+        try:
+            if res.missing_keys or res.unexpected_keys:
+                logger.warning(
+                    "Non-strict load: missing_keys=%d unexpected_keys=%d",
+                    len(res.missing_keys), len(res.unexpected_keys)
+                )
+        except Exception:
+            pass
 
     # ------------------------------------------------------------------
     # Helper functions for policy and value heads (actor / critic)

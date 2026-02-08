@@ -1,0 +1,4288 @@
+================================================================================
+GAME LOG: game_20260201_195617_0055
+Started: 2026-02-01T19:56:17.147670300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Mono-Red Burn.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.381 Q_mull=-0.294 hand=[Forest; Pulse of Murasa; Nihil Spellbomb; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Nihil Spellbomb; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Nihil Spellbomb; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000030 - Pass
+ >>> [1] 0.999970 - Play Forest
+
+VALUE SCORE: 0.212520
+SELECTED: Play Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Nihil Spellbomb; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.019406 - Pass
+ >>> [1] 0.980594 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.191941
+SELECTED: Cast Nihil Spellbomb
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.491210 - RL
+ >>> [1] 0.508790 - Benchmark-skill6
+
+VALUE SCORE: 0.183812
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.227054 - Pass
+ >>> [1] 0.772946 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.183813
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.491210 - RL
+ >>> [1] 0.508790 - Benchmark-skill6
+
+VALUE SCORE: 0.183813
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.227054 - Pass
+
+VALUE SCORE: 0.183813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.227054 - Pass
+
+VALUE SCORE: 0.183813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.227054 - Pass
+
+VALUE SCORE: 0.183813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.227054 - Pass
+
+VALUE SCORE: 0.183813
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.227054 - Pass
+
+VALUE SCORE: 0.183813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.227054 - Pass
+
+VALUE SCORE: 0.183813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.227054 - Pass
+
+VALUE SCORE: 0.183813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.227054 - Pass
+
+VALUE SCORE: 0.183813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.227054 - Pass
+
+VALUE SCORE: 0.183813
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Nihil Spellbomb]
+-> Permanents: [Forest]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Nihil Spellbomb]
+-> Permanents: [Forest]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.023168 - Pass
+ >>> [1] 0.976832 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.163080
+SELECTED: Cast Nihil Spellbomb
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped; Nihil Spellbomb]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped; Nihil Spellbomb]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.490778 - RL
+ >>> [1] 0.509222 - Benchmark-skill6
+
+VALUE SCORE: 0.146899
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped; Nihil Spellbomb]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.295961 - Pass
+ >>> [1] 0.704039 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.146899
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped; Nihil Spellbomb]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.490778 - RL
+     [1] 0.509222 - Benchmark-skill6
+
+VALUE SCORE: 0.146899
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Nihil Spellbomb; Nihil Spellbomb]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 2 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Forest,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Mountain]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Mountain; Mountain]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Mountain; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower]
+-> Graveyard: [Lava Dart; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped,attacking]
+-> Graveyard: [Lava Dart; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped,attacking]
+-> Graveyard: [Lava Dart; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.295961 - Pass
+
+VALUE SCORE: 0.146899
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Slagwoods Bridge]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Slagwoods Bridge]
+-> Permanents: [Forest]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999996 - Play Slagwoods Bridge
+
+VALUE SCORE: 0.081729
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.081729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.081729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.081729
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.081729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.081729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.081729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.081729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.081729
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Ichor Wellspring]
+-> Permanents: [Forest; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Ichor Wellspring]
+-> Permanents: [Forest; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.094010 - Pass
+     [1] 0.340413 - Cast Krark-Clan Shaman
+ >>> [2] 0.565576 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.048340
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain; Mountain; Masked Meower; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain; Mountain; Masked Meower; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Blood Token; Mountain; Mountain; Masked Meower,tapped,attacking; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Blood Token; Mountain; Mountain; Masked Meower,tapped,attacking; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Masked Meower,tapped; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Sneaky Snacker; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-skill6)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Sneaky Snacker; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-skill6)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094010 - Pass
+
+VALUE SCORE: 0.048340
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Swamp]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Swamp]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.000018 - Pass
+     [1] 0.000064 - Cast Krark-Clan Shaman
+ >>> [2] 0.999918 - Play Swamp
+
+VALUE SCORE: -0.004842
+SELECTED: Play Swamp
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=RL)
+[RL], life = 4
+-> Hand: [Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=RL)
+[RL], life = 4
+-> Hand: [Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191771 - Masked Meower
+     [1] 0.160349 - Mountain
+     [2] 0.160349 - Mountain
+     [3] 0.160349 - Mountain
+     [4] 0.166833 - Writhing Chrysalis
+     [5] 0.160349 - Mountain
+
+VALUE SCORE: -0.034687
+SELECTED: Masked Meower
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.352580 - Sneaky Snacker (Benchmark-skill6)
+ >>> [1] 0.352053 - Guttersnipe (Benchmark-skill6)
+     [2] 0.295367 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.033901
+SELECTED: Guttersnipe (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.352586 - Sneaky Snacker (Benchmark-skill6)
+     [1] 0.352052 - Guttersnipe (Benchmark-skill6)
+     [2] 0.295362 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.034000
+SELECTED: Sneaky Snacker (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.001373 - Pass
+     [1] 0.034557 - Cast Pulse of Murasa
+     [2] 0.000125 - Cast Toxin Analysis
+ >>> [3] 0.941770 - Cast Refurbished Familiar
+     [4] 0.005071 - Cast Krark-Clan Shaman
+     [5] 0.017104 - Cast Cast Down
+
+VALUE SCORE: -0.021812
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001373 - Pass
+
+VALUE SCORE: -0.021812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.201100 - Pass
+ >>> [1] 0.798900 - Cast Krark-Clan Shaman
+
+VALUE SCORE: -0.100970
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.163660
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.162521
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.165195
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Sneaky Snacker; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Sneaky Snacker; Guttersnipe]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.017381
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Sneaky Snacker,tapped,attacking; Guttersnipe,tapped,attacking]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.002044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,blocking; Krark-Clan Shaman,blocking]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Sneaky Snacker,tapped,attacking; Guttersnipe,tapped,attacking]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.001016
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: -0.001016
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=RL)
+[RL], life = 4
+-> Hand: [Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering; Vault of Whispers]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=RL)
+[RL], life = 4
+-> Hand: [Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering; Vault of Whispers]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.123570 - Masked Meower
+     [1] 0.114874 - Sneaky Snacker
+     [2] 0.100843 - Mountain
+     [3] 0.100843 - Mountain
+     [4] 0.100843 - Mountain
+     [5] 0.106606 - Writhing Chrysalis
+     [6] 0.100843 - Mountain
+     [7] 0.133751 - Refurbished Familiar
+     [8] 0.117826 - Krark-Clan Shaman
+
+VALUE SCORE: 0.034766
+SELECTED: Masked Meower
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering; Vault of Whispers]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering; Vault of Whispers]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.552365 - Guttersnipe (Benchmark-skill6)
+     [1] 0.447635 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: 0.035207
+SELECTED: Guttersnipe (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Fanatical Offering; Vault of Whispers]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Fanatical Offering; Vault of Whispers]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.552369 - Guttersnipe (Benchmark-skill6)
+     [1] 0.447631 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: 0.035200
+SELECTED: Guttersnipe (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering; Vault of Whispers]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering; Vault of Whispers]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.000081 - Pass
+     [1] 0.002526 - Cast Pulse of Murasa
+     [2] 0.000009 - Cast Toxin Analysis
+     [3] 0.072253 - Cast Refurbished Familiar
+     [4] 0.001070 - Cast Cast Down
+     [5] 0.000004 - Cast Fanatical Offering
+ >>> [6] 0.924058 - Play Vault of Whispers
+
+VALUE SCORE: 0.038653
+SELECTED: Play Vault of Whispers
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=RL)
+[RL], life = 4
+-> Hand: [Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=RL)
+[RL], life = 4
+-> Hand: [Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.123399 - Masked Meower
+ >>> [1] 0.114887 - Sneaky Snacker
+     [2] 0.100970 - Mountain
+     [3] 0.100970 - Mountain
+     [4] 0.100970 - Mountain
+     [5] 0.106549 - Writhing Chrysalis
+     [6] 0.100970 - Mountain
+     [7] 0.133594 - Refurbished Familiar
+     [8] 0.117690 - Krark-Clan Shaman
+
+VALUE SCORE: 0.027503
+SELECTED: Sneaky Snacker
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.551888 - Guttersnipe (Benchmark-skill6)
+     [1] 0.448112 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: 0.027910
+SELECTED: Guttersnipe (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.551892 - Guttersnipe (Benchmark-skill6)
+ >>> [1] 0.448108 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: 0.027901
+SELECTED: Voldaren Epicure (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.001098 - Pass
+     [1] 0.033359 - Cast Pulse of Murasa
+     [2] 0.000115 - Cast Toxin Analysis
+ >>> [3] 0.951028 - Cast Refurbished Familiar
+     [4] 0.014351 - Cast Cast Down
+     [5] 0.000050 - Cast Fanatical Offering
+
+VALUE SCORE: 0.031807
+SELECTED: Cast Refurbished Familiar
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Pulse of Murasa (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Pulse of Murasa (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.123100 - Masked Meower
+ >>> [1] 0.114876 - Sneaky Snacker
+     [2] 0.101206 - Mountain
+     [3] 0.101206 - Mountain
+     [4] 0.101206 - Mountain
+     [5] 0.106412 - Writhing Chrysalis
+     [6] 0.101206 - Mountain
+     [7] 0.133302 - Refurbished Familiar
+     [8] 0.117486 - Krark-Clan Shaman
+
+VALUE SCORE: 0.013186
+SELECTED: Sneaky Snacker
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.339765 - Guttersnipe (Benchmark-skill6)
+     [1] 0.383401 - Refurbished Familiar (you)
+ >>> [2] 0.276834 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: 0.013628
+SELECTED: Voldaren Epicure (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Cast Down (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Cast Down (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.339769 - Guttersnipe (Benchmark-skill6)
+ >>> [1] 0.383397 - Refurbished Familiar (you)
+     [2] 0.276834 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: 0.013602
+SELECTED: Refurbished Familiar (you)
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.023130 - Pass
+ >>> [1] 0.675199 - Cast Pulse of Murasa
+     [2] 0.002343 - Cast Toxin Analysis
+     [3] 0.298321 - Cast Cast Down
+     [4] 0.001006 - Cast Fanatical Offering
+
+VALUE SCORE: 0.019172
+SELECTED: Cast Pulse of Murasa
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Pulse of Murasa (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Refurbished Familiar]
+-> Graveyard: [Writhing Chrysalis; Refurbished Familiar; Krark-Clan Shaman]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.123100 - Masked Meower
+     [1] 0.114876 - Sneaky Snacker
+     [2] 0.101206 - Mountain
+     [3] 0.101206 - Mountain
+     [4] 0.101206 - Mountain
+ >>> [5] 0.106412 - Writhing Chrysalis
+     [6] 0.101206 - Mountain
+     [7] 0.133302 - Refurbished Familiar
+     [8] 0.117486 - Krark-Clan Shaman
+
+VALUE SCORE: 0.013186
+SELECTED: Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023130 - Pass
+
+VALUE SCORE: 0.019172
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023130 - Pass
+
+VALUE SCORE: 0.019172
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023130 - Pass
+
+VALUE SCORE: 0.019172
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023130 - Pass
+
+VALUE SCORE: 0.019172
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023130 - Pass
+
+VALUE SCORE: 0.019172
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped,attacking; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023130 - Pass
+
+VALUE SCORE: 0.019172
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Refurbished Familiar,blocking]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Guttersnipe,tapped,attacking; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023130 - Pass
+
+VALUE SCORE: 0.019172
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023130 - Pass
+
+VALUE SCORE: 0.019172
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.000007 - Pass
+     [1] 0.000001 - Cast Toxin Analysis
+     [2] 0.005250 - Cast Refurbished Familiar
+     [3] 0.000083 - Cast Cast Down
+     [4] 0.000000 - Cast Fanatical Offering
+     [5] 0.006456 - Cast Writhing Chrysalis
+ >>> [6] 0.988203 - Play Slagwoods Bridge
+
+VALUE SCORE: 0.015018
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge,tapped]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.000626 - Pass
+     [1] 0.000057 - Cast Toxin Analysis
+     [2] 0.442154 - Cast Refurbished Familiar
+     [3] 0.007710 - Cast Cast Down
+     [4] 0.000024 - Cast Fanatical Offering
+ >>> [5] 0.549429 - Cast Writhing Chrysalis
+
+VALUE SCORE: -0.010360
+SELECTED: Cast Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=RL)
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000626 - Pass
+
+VALUE SCORE: -0.010360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000626 - Pass
+
+VALUE SCORE: -0.010360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000626 - Pass
+
+VALUE SCORE: -0.010360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000626 - Pass
+
+VALUE SCORE: -0.010360
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Benchmark-skill6)
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Benchmark-skill6)
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000626 - Pass
+
+VALUE SCORE: -0.010360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000626 - Pass
+
+VALUE SCORE: -0.010360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000626 - Pass
+
+VALUE SCORE: -0.010360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000626 - Pass
+
+VALUE SCORE: -0.010360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000626 - Pass
+
+VALUE SCORE: -0.010360
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 9
+-> Hand: [Refurbished Familiar; Cast Down; Fanatical Offering; Twisted Landscape]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 9
+-> Hand: [Refurbished Familiar; Cast Down; Fanatical Offering; Twisted Landscape]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.363503 - Eldrazi Spawn Token (you)
+ >>> [1] 0.363503 - Eldrazi Spawn Token (you)
+     [2] 0.272994 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.118215
+SELECTED: Eldrazi Spawn Token (you)
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Refurbished Familiar; Fanatical Offering; Twisted Landscape]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Refurbished Familiar; Fanatical Offering; Twisted Landscape]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.363508 - Eldrazi Spawn Token (you)
+ >>> [1] 0.363508 - Eldrazi Spawn Token (you)
+     [2] 0.272985 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.118290
+SELECTED: Eldrazi Spawn Token (you)
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Twisted Landscape]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering; Twisted Landscape]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+     [1] 0.000000 - Cast Toxin Analysis
+     [2] 0.002619 - Cast Refurbished Familiar
+     [3] 0.000065 - Cast Cast Down
+     [4] 0.000000 - Cast Fanatical Offering
+ >>> [5] 0.997239 - Play Twisted Landscape
+     [6] 0.000071 - Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>
+
+VALUE SCORE: -0.100118
+SELECTED: Play Twisted Landscape
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 9
+-> Hand: [Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 9
+-> Hand: [Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.363899 - Eldrazi Spawn Token (you)
+ >>> [1] 0.363899 - Eldrazi Spawn Token (you)
+     [2] 0.272202 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.158694
+SELECTED: Eldrazi Spawn Token (you)
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Refurbished Familiar; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.363906 - Eldrazi Spawn Token (you)
+     [1] 0.363906 - Eldrazi Spawn Token (you)
+ >>> [2] 0.272188 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.158954
+SELECTED: Voldaren Epicure (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.002564 - Pass
+     [1] 0.000180 - Cast Toxin Analysis
+ >>> [2] 0.969163 - Cast Refurbished Familiar
+     [3] 0.028014 - Cast Cast Down
+     [4] 0.000077 - Cast Fanatical Offering
+     [5] 0.000001 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.137863
+SELECTED: Cast Refurbished Familiar
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.265687 - Eldrazi Spawn Token (you)
+     [1] 0.270798 - Refurbished Familiar (you)
+ >>> [2] 0.265687 - Eldrazi Spawn Token (you)
+     [3] 0.197829 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.219568
+SELECTED: Eldrazi Spawn Token (you)
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Cast Down (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Cast Down (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.265689 - Eldrazi Spawn Token (you)
+     [1] 0.270807 - Refurbished Familiar (you)
+ >>> [2] 0.265689 - Eldrazi Spawn Token (you)
+     [3] 0.197814 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.219987
+SELECTED: Eldrazi Spawn Token (you)
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Cast Down; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.087689 - Pass
+     [1] 0.005809 - Cast Toxin Analysis
+ >>> [2] 0.903941 - Cast Cast Down
+     [3] 0.002515 - Cast Fanatical Offering
+     [4] 0.000046 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.198821
+SELECTED: Cast Cast Down
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Cast Down (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.265689 - Eldrazi Spawn Token (you)
+     [1] 0.270807 - Refurbished Familiar (you)
+ >>> [2] 0.265689 - Eldrazi Spawn Token (you)
+     [3] 0.197814 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.219987
+SELECTED: Eldrazi Spawn Token (you)
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999415 - Pass
+     [1] 0.000585 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.274295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.083742 - Pass
+ >>> [1] 0.916208 - Cast Nihil Spellbomb
+     [2] 0.000050 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.279385
+SELECTED: Cast Nihil Spellbomb
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.490815 - RL
+     [1] 0.509185 - Benchmark-skill6
+
+VALUE SCORE: -0.331937
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.445350 - Pass
+ >>> [1] 0.554650 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.331937
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar; Nihil Spellbomb]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.490815 - RL
+ >>> [1] 0.509185 - Benchmark-skill6
+
+VALUE SCORE: -0.331937
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Mountain; Mountain; Grab the Prize; Mountain; Fiery Temper; Mountain; Masked Meower; Sneaky Snacker; Sneaky Snacker; Guttersnipe; Fiery Temper]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.445350 - Pass
+
+VALUE SCORE: -0.331937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.445350 - Pass
+
+VALUE SCORE: -0.331937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 10 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.445350 - Pass
+
+VALUE SCORE: -0.331937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 10 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.445350 - Pass
+
+VALUE SCORE: -0.331937
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 10 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.445350 - Pass
+
+VALUE SCORE: -0.331937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 10 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.445350 - Pass
+
+VALUE SCORE: -0.331937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 10 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest,tapped; Slagwoods Bridge; Ichor Wellspring; Swamp,tapped; Vault of Whispers,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.445350 - Pass
+
+VALUE SCORE: -0.331937
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 9
+-> Hand: [Fanatical Offering; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 11 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 9
+-> Hand: [Fanatical Offering; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.360292 - Eldrazi Spawn Token (you)
+ >>> [1] 0.370875 - Refurbished Familiar (you)
+     [2] 0.268833 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.076334
+SELECTED: Refurbished Familiar (you)
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 11 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=RL)
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.360297 - Eldrazi Spawn Token (you)
+ >>> [1] 0.370875 - Refurbished Familiar (you)
+     [2] 0.268827 - Voldaren Epicure (Benchmark-skill6)
+
+VALUE SCORE: -0.076343
+SELECTED: Refurbished Familiar (you)
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 11 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Toxin Analysis; Fanatical Offering; Cast Down]
+-> Permanents: [Forest; Slagwoods Bridge; Ichor Wellspring; Swamp; Vault of Whispers; Slagwoods Bridge; Eldrazi Spawn Token; Twisted Landscape; Refurbished Familiar]
+-> Graveyard: [Refurbished Familiar; Krark-Clan Shaman; Pulse of Murasa; Refurbished Familiar; Writhing Chrysalis; Cast Down; Nihil Spellbomb]
+-> Exile: [Nihil Spellbomb; Nihil Spellbomb]
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: []
+-> Exile: [Lava Dart; Lava Dart; Sneaky Snacker; Guttersnipe; Sneaky Snacker; Mountain; Fiery Temper; Mountain; Mountain; Grab the Prize; Fiery Temper; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.076818 - Pass
+     [1] 0.006207 - Cast Toxin Analysis
+     [2] 0.002661 - Cast Fanatical Offering
+ >>> [3] 0.914275 - Cast Cast Down
+     [4] 0.000039 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.061397
+SELECTED: Cast Cast Down
+

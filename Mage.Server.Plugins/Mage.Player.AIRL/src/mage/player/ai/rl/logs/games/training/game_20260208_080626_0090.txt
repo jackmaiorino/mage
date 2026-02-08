@@ -1,0 +1,1523 @@
+================================================================================
+GAME LOG: game_20260208_080626_0090
+Started: 2026-02-08T08:06:26.505561400
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=1 decision=MULLIGAN Q_keep=-0.165 Q_mull=0.045 hand=[Twisted Landscape; Cast Down; Cast Down; Fanatical Offering; Ichor Wellspring; Makeshift Munitions; Nihil Spellbomb]
+LONDON_BOTTOM: player=PlayerRL1 mulligansTaken=1 handSize=7 bottomN=1 kept=[Makeshift Munitions; Swamp; Writhing Chrysalis; Krark-Clan Shaman; Refurbished Familiar; Swamp] bottomed=[Refurbished Familiar]
+LONDON_BOTTOM_PROBS: player=PlayerRL1 cards=[Makeshift Munitions (0.145); Swamp (0.142); Writhing Chrysalis (0.162); Krark-Clan Shaman (0.134); Refurbished Familiar (0.137); Swamp (0.142); Refurbished Familiar (0.137)]
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=1 handSize=6 lands=2 decision=KEEP Q_keep=0.154 Q_mull=0.111 hand=[Swamp; Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.062062 - Pass
+ >>> [1] 0.937938 - Play Swamp
+
+VALUE SCORE: -0.292497
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Twisted Landscape]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Twisted Landscape]
+-> Permanents: [Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.045435 - Pass
+     [1] 0.576774 - Play Swamp
+ >>> [2] 0.377792 - Play Twisted Landscape
+
+VALUE SCORE: -0.342325
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992036 - Pass
+     [1] 0.007964 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.329433
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992053 - Pass
+     [1] 0.007947 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.328515
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992170 - Pass
+     [1] 0.007830 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.321606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993975 - Pass
+     [1] 0.006026 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.179659
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992424 - Pass
+     [1] 0.007576 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.262364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992527 - Pass
+     [1] 0.007474 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.257303
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Swamp; Twisted Landscape,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.089558 - Pass
+ >>> [1] 0.909541 - Play Swamp
+     [2] 0.000901 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.384432
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990014 - Pass
+     [1] 0.009986 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.378001
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990038 - Pass
+     [1] 0.009962 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.377237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990042 - Pass
+     [1] 0.009958 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.376720
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Island; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Island; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993774 - Pass
+     [1] 0.006226 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.164369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Island; Harrier Strix; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993905 - Pass
+     [1] 0.006095 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.152718
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Island,tapped; Harrier Strix; Faerie Seer; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991980 - Pass
+     [1] 0.008020 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.239524
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Island,tapped; Harrier Strix; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992072 - Pass
+     [1] 0.007928 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.235402
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991720 - Pass
+     [1] 0.008280 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.217226
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991720 - Pass
+     [1] 0.008280 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.217226
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991614 - Pass
+     [1] 0.008386 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.218794
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986729 - Pass
+     [1] 0.013271 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.403428
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986771 - Pass
+     [1] 0.013229 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.402683
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986775 - Pass
+     [1] 0.013225 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.402166
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Island,tapped; Harrier Strix; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Island,tapped; Harrier Strix; Faerie Seer; Island; Humbling Elder]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993144 - Pass
+     [1] 0.006856 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.163725
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Island,tapped; Harrier Strix; Faerie Seer; Island; Humbling Elder; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993012 - Pass
+     [1] 0.006988 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.157405
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Faerie Seer,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992496 - Pass
+     [1] 0.007504 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.126666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Faerie Seer,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992536 - Pass
+     [1] 0.007464 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.119901
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992355 - Pass
+     [1] 0.007645 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.124377
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984559 - Pass
+     [1] 0.015441 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.380234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984524 - Pass
+     [1] 0.015476 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.377325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984506 - Pass
+     [1] 0.015494 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.373093
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Island; Harrier Strix; Faerie Seer; Island; Humbling Elder; Island,tapped; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Island; Harrier Strix; Faerie Seer; Island; Humbling Elder; Island,tapped; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992194 - Pass
+     [1] 0.007806 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.147127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Island; Harrier Strix; Faerie Seer; Island; Humbling Elder; Island,tapped; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992284 - Pass
+     [1] 0.007716 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.143431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Harrier Strix,tapped,attacking; Faerie Seer,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island,tapped; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991493 - Pass
+     [1] 0.008507 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.112844
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Harrier Strix,tapped,attacking; Faerie Seer,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island,tapped; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991524 - Pass
+     [1] 0.008476 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.106527
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island,tapped; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991282 - Pass
+     [1] 0.008718 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.107959
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa; Cast Down]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island,tapped; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa; Cast Down]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island,tapped; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969161 - Pass
+     [1] 0.011702 - Cast Cast Down
+     [2] 0.019137 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.390982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa; Cast Down]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island,tapped; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969217 - Pass
+     [1] 0.011698 - Cast Cast Down
+     [2] 0.019085 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.389329
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa; Cast Down]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Island; Harrier Strix,tapped; Faerie Seer,tapped; Island; Humbling Elder,tapped; Island,tapped; Island; Humbling Elder]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969202 - Pass
+     [1] 0.011706 - Cast Cast Down
+     [2] 0.019092 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.386839
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa; Cast Down]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Island; Harrier Strix; Faerie Seer; Island; Humbling Elder; Island; Island; Humbling Elder; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa; Cast Down]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Island; Harrier Strix; Faerie Seer; Island; Humbling Elder; Island; Island; Humbling Elder; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987363 - Pass
+     [1] 0.005128 - Cast Cast Down
+     [2] 0.007509 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.093107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa; Cast Down]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Harrier Strix,tapped,attacking; Faerie Seer,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island; Island; Humbling Elder,tapped,attacking; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985528 - Pass
+     [1] 0.005599 - Cast Cast Down
+     [2] 0.008873 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.051913
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 6
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering; Cleansing Wildfire; Pulse of Murasa; Cast Down]
+-> Permanents: [Swamp; Twisted Landscape; Swamp]
+-> Graveyard: [Writhing Chrysalis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Harrier Strix,tapped,attacking; Faerie Seer,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island; Island; Humbling Elder,tapped,attacking; Island]
+-> Graveyard: [Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985528 - Pass
+     [1] 0.005599 - Cast Cast Down
+     [2] 0.008873 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.051913
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 6
+Reason: Episode 147200 - Win
+Total Decisions Logged: 52
+Ended: 2026-02-08T08:07:56.523757400
+================================================================================

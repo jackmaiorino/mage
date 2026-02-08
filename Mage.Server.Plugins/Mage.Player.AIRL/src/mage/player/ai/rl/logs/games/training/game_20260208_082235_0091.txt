@@ -1,0 +1,2949 @@
+================================================================================
+GAME LOG: game_20260208_082235_0091
+Started: 2026-02-08T08:22:35.290794400
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.550 Q_mull=0.190 hand=[Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.024467 - Pass
+ >>> [1] 0.975533 - Play Snow-Covered Forest
+
+VALUE SCORE: -0.103015
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.185674 - Pass
+     [1] 0.075031 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.342091 - Cast Llanowar Elves
+     [3] 0.397205 - Cast Quirion Ranger
+
+VALUE SCORE: -0.104988
+SELECTED: Cast Llanowar Elves
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.099326 - Pass
+     [1] 0.034849 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.182956 - Cast Masked Vandal
+ >>> [3] 0.304101 - Cast Priest of Titania
+     [4] 0.228048 - Cast Quirion Ranger
+     [5] 0.150720 - Cast Fyndhorn Elves
+
+VALUE SCORE: -0.259473
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Fyndhorn Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.062609 - Pass
+     [1] 0.015118 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.094957 - Cast Masked Vandal
+     [3] 0.152530 - Cast Quirion Ranger
+ >>> [4] 0.077822 - Cast Fyndhorn Elves
+     [5] 0.596964 - Play Snow-Covered Forest
+
+VALUE SCORE: -0.509350
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.080400 - Pass
+     [1] 0.017416 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.112412 - Cast Masked Vandal
+     [3] 0.183399 - Cast Quirion Ranger
+     [4] 0.606373 - Play Snow-Covered Forest
+
+VALUE SCORE: -0.550828
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.821978 - Pass
+     [1] 0.178022 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.550377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.079998 - Pass
+     [1] 0.017585 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.113519 - Cast Masked Vandal
+     [3] 0.184659 - Cast Quirion Ranger
+ >>> [4] 0.604240 - Play Snow-Covered Forest
+
+VALUE SCORE: -0.557664
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.204089 - Pass
+     [1] 0.044061 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.285643 - Cast Masked Vandal
+     [3] 0.466207 - Cast Quirion Ranger
+
+VALUE SCORE: -0.565619
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.293254 - Pass
+     [1] 0.057167 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.649579 - Cast Quirion Ranger
+
+VALUE SCORE: -0.595562
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.820185 - Pass
+     [1] 0.158947 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.020867 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.590563
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975478 - Pass
+     [1] 0.024522 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.614578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975583 - Pass
+     [1] 0.024417 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.622582
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Spellstutter Sprite; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976522 - Pass
+     [1] 0.023478 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.630985
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Spellstutter Sprite; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976522 - Pass
+     [1] 0.023478 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.630985
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975043 - Pass
+     [1] 0.024957 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.630223
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.354049 - Pass
+ >>> [1] 0.127700 - Cast Generous Ent
+     [2] 0.067220 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.441437 - Cast Masked Vandal
+     [4] 0.009594 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.636792
+SELECTED: Cast Generous Ent
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Force Spike (controller=Bot-Skill1)
+  - [1] Generous Ent (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.833984 - Pass
+ >>> [1] 0.141871 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.024145 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.706281
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=PlayerRL1)
+  - [1] Force Spike (controller=Bot-Skill1)
+  - [2] Generous Ent (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.090909 - Snow-Covered Forest
+     [1] 0.090909 - Snow-Covered Forest
+     [2] 0.090909 - Snow-Covered Forest
+     [3] 0.090909 - Snow-Covered Forest
+     [4] 0.090909 - Snow-Covered Forest
+     [5] 0.090909 - Snow-Covered Forest
+     [6] 0.090909 - Snow-Covered Forest
+     [7] 0.090909 - Snow-Covered Forest
+     [8] 0.090909 - Snow-Covered Forest
+ >>> [9] 0.090909 - Snow-Covered Forest
+     [10] 0.090909 - Snow-Covered Forest
+
+VALUE SCORE: -0.713873
+SELECTED: Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Force Spike (controller=Bot-Skill1)
+  - [1] Generous Ent (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971029 - Pass
+     [1] 0.028971 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.710064
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Generous Ent (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971639 - Pass
+     [1] 0.028361 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.732090
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Generous Ent]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972050 - Pass
+     [1] 0.027950 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.731310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.199386 - Pass
+     [1] 0.794761 - Play Snow-Covered Forest
+     [2] 0.005853 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.736398
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971577 - Pass
+     [1] 0.028423 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.755866
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971689 - Pass
+     [1] 0.028311 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.756219
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.201061 - Pass
+ >>> [1] 0.793102 - Play Snow-Covered Forest
+     [2] 0.005838 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.755506
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent; Food Token; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.370233 - Pass
+ >>> [1] 0.467868 - Cast Masked Vandal
+     [2] 0.010885 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [3] 0.151013 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.755866
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent; Food Token; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970374 - Pass
+     [1] 0.029626 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.777843
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent; Food Token; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent; Food Token; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970492 - Pass
+     [1] 0.029508 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.781116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent; Food Token; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970334 - Pass
+     [1] 0.029666 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.771617
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent; Food Token; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970144 - Pass
+     [1] 0.029856 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.773159
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent; Food Token; Snow-Covered Forest,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970153 - Pass
+     [1] 0.029847 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.773035
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal; Quirion Ranger; Generous Ent; Food Token; Snow-Covered Forest; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal; Quirion Ranger; Generous Ent; Food Token; Snow-Covered Forest; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.357666 - Pass
+     [1] 0.469585 - Cast Masked Vandal
+     [2] 0.012662 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [3] 0.160086 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.692541
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent,tapped,attacking; Food Token; Snow-Covered Forest; Masked Vandal,tapped,attacking]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.651077 - Pass
+     [1] 0.022002 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+ >>> [2] 0.326920 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.759820
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.967703 - Pass
+     [1] 0.032297 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.758225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,blocking; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours,blocking]
+-> Graveyard: [Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.967317 - Pass
+     [1] 0.032683 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.758737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.426496 - Pass
+ >>> [1] 0.559493 - Cast Masked Vandal
+     [2] 0.014011 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.755329
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.967060 - Pass
+     [1] 0.032940 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.780519
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island,tapped]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island,tapped]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969304 - Pass
+     [1] 0.030696 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.784214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969767 - Pass
+     [1] 0.030233 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.781911
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.967265 - Pass
+     [1] 0.032734 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.807959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,blocking]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.967151 - Pass
+     [1] 0.032849 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.808268
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.967253 - Pass
+     [1] 0.032747 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.831898
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.695262 - Pass
+ >>> [1] 0.280552 - Cast Lead the Stampede
+     [2] 0.024185 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.775882
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=0 max=3) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.270166 - STOP
+ >>> [1] 0.251029 - Quirion Ranger
+     [2] 0.232683 - Nyxborn Hydra
+     [3] 0.246121 - Avenging Hunter
+
+VALUE SCORE: -0.794320
+SELECTED: Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (PlayerRL1 turn), Precombat Main (CARD_PICK 1 min=0 max=3) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.360579 - STOP
+ >>> [1] 0.310878 - Nyxborn Hydra
+     [2] 0.328542 - Avenging Hunter
+
+VALUE SCORE: -0.791489
+SELECTED: Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (PlayerRL1 turn), Precombat Main (CARD_PICK 2 min=0 max=3) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.523245 - STOP
+     [1] 0.476755 - Avenging Hunter
+
+VALUE SCORE: -0.791489
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Quirion Ranger; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.213449 - Pass
+     [1] 0.438075 - Cast Quirion Ranger
+ >>> [2] 0.337404 - Cast Nyxborn Hydra
+     [3] 0.004060 - Cast Nyxborn Hydra using bestow
+     [4] 0.007013 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.755942
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal; Nyxborn Hydra]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.312127 - Pass
+ >>> [1] 0.677117 - Cast Quirion Ranger
+     [2] 0.010756 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.792236
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal; Nyxborn Hydra; Quirion Ranger]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.966523 - Pass
+ >>> [1] 0.033477 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.792137
+SELECTED: Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (PlayerRL1 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=PlayerRL1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal; Nyxborn Hydra; Quirion Ranger]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.073270 - Masked Vandal (you)
+     [1] 0.062305 - Moon-Circuit Hacker (Bot-Skill1)
+     [2] 0.065772 - Spellstutter Sprite (Bot-Skill1)
+     [3] 0.073270 - Masked Vandal (you)
+     [4] 0.065621 - Faerie Miscreant (Bot-Skill1)
+     [5] 0.066812 - Llanowar Elves (you)
+     [6] 0.059798 - Generous Ent (you)
+     [7] 0.062791 - Quirion Ranger (you)
+     [8] 0.065218 - Ninja of the Deep Hours (Bot-Skill1)
+     [9] 0.062791 - Quirion Ranger (you)
+ >>> [10] 0.076951 - Fyndhorn Elves (you)
+     [11] 0.065621 - Faerie Miscreant (Bot-Skill1)
+     [12] 0.066390 - Nyxborn Hydra (you)
+     [13] 0.073270 - Masked Vandal (you)
+     [14] 0.060120 - Priest of Titania (you)
+
+VALUE SCORE: -0.792137
+SELECTED: Fyndhorn Elves (you)
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal; Nyxborn Hydra; Quirion Ranger]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.248397 - Pass
+ >>> [1] 0.743253 - Play Snow-Covered Forest
+     [2] 0.008351 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.773978
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.967625 - Pass
+     [1] 0.032375 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.771343
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.966788 - Pass
+     [1] 0.033212 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.818787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker,blocking]
+-> Graveyard: [Force Spike; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.966733 - Pass
+     [1] 0.033267 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.816208
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.966778 - Pass
+     [1] 0.033222 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.815527
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973210 - Pass
+     [1] 0.026790 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.752329
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973912 - Pass
+     [1] 0.026088 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.748398
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974256 - Pass
+     [1] 0.025744 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.747654
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974508 - Pass
+     [1] 0.025492 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.747722
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974517 - Pass
+     [1] 0.025483 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.747595
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest; Masked Vandal; Masked Vandal; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest; Masked Vandal; Masked Vandal; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.810494 - Pass
+     [1] 0.163255 - Cast Quirion Ranger
+     [2] 0.026251 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.660212
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969653 - Pass
+     [1] 0.030347 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.757747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,blocking; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours,blocking; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969856 - Pass
+     [1] 0.030144 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.758165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.782368 - Pass
+ >>> [1] 0.194506 - Cast Quirion Ranger
+     [2] 0.023126 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.767962
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970244 - Pass
+     [1] 0.029756 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.774515
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975949 - Pass
+     [1] 0.024051 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.763445
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer; Humbling Elder]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976182 - Pass
+     [1] 0.023818 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.761897
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer; Humbling Elder]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976435 - Pass
+     [1] 0.023565 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.762862
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Faerie Seer,tapped,attacking; Humbling Elder]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973850 - Pass
+     [1] 0.026150 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.789463
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 16
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Faerie Seer,tapped,attacking; Humbling Elder]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973850 - Pass
+     [1] 0.026150 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.789463
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Humbling Elder; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972708 - Pass
+     [1] 0.027292 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.816487
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest; Masked Vandal; Masked Vandal; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Humbling Elder; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest; Masked Vandal; Masked Vandal; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Humbling Elder; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.786834 - Pass
+ >>> [1] 0.165981 - Cast Nyxborn Hydra
+     [2] 0.021801 - Cast Nyxborn Hydra using bestow
+     [3] 0.025384 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.758733
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest,tapped; Masked Vandal; Masked Vandal; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Humbling Elder; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.967700 - Pass
+     [1] 0.032300 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.802853
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Humbling Elder; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965485 - Pass
+     [1] 0.034515 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.855013
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped,attacking; Quirion Ranger; Generous Ent,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Humbling Elder,blocking; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965299 - Pass
+     [1] 0.034701 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.856466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.964658 - Pass
+     [1] 0.035342 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.872829
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer; Island]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971520 - Pass
+     [1] 0.028480 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.809273
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971855 - Pass
+     [1] 0.028145 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.808152
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Faerie Seer; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.971855 - Pass
+     [1] 0.028145 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.808152
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Faerie Seer,tapped,attacking; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969432 - Pass
+     [1] 0.030568 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.835177
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Nyxborn Hydra,blocking; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Faerie Seer,tapped,attacking; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.968896 - Pass
+     [1] 0.031104 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.838194
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Masked Vandal,tapped; Quirion Ranger; Generous Ent,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Masked Vandal,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Lead the Stampede; Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969296 - Pass
+     [1] 0.030704 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.858189
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest; Masked Vandal; Masked Vandal; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Priest of Titania; Fyndhorn Elves; Masked Vandal; Quirion Ranger; Generous Ent; Snow-Covered Forest; Masked Vandal; Masked Vandal; Quirion Ranger; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.413575 - Pass
+     [1] 0.573181 - Cast Fyndhorn Elves
+     [2] 0.013244 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.780189
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped,attacking; Priest of Titania,tapped,attacking; Fyndhorn Elves,tapped,attacking; Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Generous Ent,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976560 - Pass
+     [1] 0.023440 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.862393
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped,attacking; Priest of Titania,tapped,attacking; Fyndhorn Elves,tapped,attacking; Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Generous Ent,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Lead the Stampede; Nyxborn Hydra]
+-> Exile: []
+[Bot-Skill1], life = 8
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Faerie Seer,tapped; Island; Faerie Seer,blocking]
+-> Graveyard: [Force Spike; Harrier Strix; Moon-Circuit Hacker; Faerie Miscreant; Humbling Elder]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976531 - Pass
+     [1] 0.023469 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.860606
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: PlayerRL1
+Loser: Bot-Skill1
+Turns: 9
+Reason: Episode 147400 - Win
+Total Decisions Logged: 103
+Ended: 2026-02-08T08:27:07.450918100
+================================================================================

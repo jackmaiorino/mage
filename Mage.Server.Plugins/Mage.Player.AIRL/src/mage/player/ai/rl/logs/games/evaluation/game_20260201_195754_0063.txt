@@ -1,0 +1,2590 @@
+================================================================================
+GAME LOG: game_20260201_195754_0063
+Started: 2026-02-01T19:57:54.482157400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Jund Wildfire.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=3 decision=KEEP Q_keep=1.098 Q_mull=0.472 hand=[Mountain; Mountain; Mountain; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078375
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.499859 - Benchmark-skill6
+     [1] 0.500141 - RL
+
+VALUE SCORE: 1.071296
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Experimental Synthesizer; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000169 - Pass
+ >>> [1] 0.571773 - Cast Experimental Synthesizer
+     [2] 0.014285 - Cast Galvanic Blast
+     [3] 0.413773 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.073706
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000169 - Pass
+
+VALUE SCORE: 1.073706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000169 - Pass
+
+VALUE SCORE: 1.073706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000169 - Pass
+
+VALUE SCORE: 1.073706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000169 - Pass
+
+VALUE SCORE: 1.073706
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000169 - Pass
+
+VALUE SCORE: 1.073706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000169 - Pass
+
+VALUE SCORE: 1.073706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000169 - Pass
+
+VALUE SCORE: 1.073706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000169 - Pass
+
+VALUE SCORE: 1.073706
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Burning-Tree Emissary; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Burning-Tree Emissary; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.500042 - Benchmark-skill6
+ >>> [1] 0.499958 - RL
+
+VALUE SCORE: 1.052527
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.500042 - Benchmark-skill6
+ >>> [1] 0.499958 - RL
+
+VALUE SCORE: 1.052527
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999990 - Play Mountain
+     [2] 0.000000 - Cast Galvanic Blast
+     [3] 0.000009 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.055245
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Burning-Tree Emissary; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Burning-Tree Emissary; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.500088 - Benchmark-skill6
+ >>> [1] 0.499912 - RL
+
+VALUE SCORE: 1.046691
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.500088 - Benchmark-skill6
+ >>> [1] 0.499912 - RL
+
+VALUE SCORE: 1.046691
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Burning-Tree Emissary; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.000214 - Cast Galvanic Blast
+ >>> [2] 0.993043 - Cast Burning-Tree Emissary
+     [3] 0.006740 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.049605
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 1.049605
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.337334 - Benchmark-skill6
+ >>> [1] 0.336643 - RL
+     [2] 0.326023 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 1.001926
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.337334 - Benchmark-skill6
+     [1] 0.336643 - RL
+     [2] 0.326023 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 1.001926
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000425 - Pass
+     [1] 0.026590 - Cast Galvanic Blast
+ >>> [2] 0.972986 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.005686
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [2] Voldaren Epicure (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000425 - Pass
+
+VALUE SCORE: 1.005686
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-skill6)
+  - [1] Voldaren Epicure (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000425 - Pass
+
+VALUE SCORE: 1.005686
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000425 - Pass
+
+VALUE SCORE: 1.005686
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000425 - Pass
+
+VALUE SCORE: 1.005686
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000276 - Pass
+ >>> [1] 0.999724 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.970764
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.970764
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.970764
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.970764
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.970764
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.970764
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.970764
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.970764
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000276 - Pass
+
+VALUE SCORE: 0.970764
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Rally at the Hornburg; Great Furnace]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Rally at the Hornburg; Great Furnace]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.260989 - Benchmark-skill6
+     [1] 0.226744 - Voldaren Epicure (you)
+     [2] 0.260158 - RL
+ >>> [3] 0.252109 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.999873
+SELECTED: Burning-Tree Emissary (you)
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Rally at the Hornburg; Great Furnace]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Rally at the Hornburg; Great Furnace]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.260989 - Benchmark-skill6
+     [1] 0.226744 - Voldaren Epicure (you)
+ >>> [2] 0.260158 - RL
+     [3] 0.252109 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.999873
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg; Great Furnace]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg; Great Furnace]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000001 - Cast Galvanic Blast
+     [2] 0.000767 - Cast Rally at the Hornburg
+ >>> [3] 0.999232 - Play Great Furnace
+
+VALUE SCORE: 1.003926
+SELECTED: Play Great Furnace
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.261074 - Benchmark-skill6
+     [1] 0.226572 - Voldaren Epicure (you)
+ >>> [2] 0.260148 - RL
+     [3] 0.252205 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.991730
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.261074 - Benchmark-skill6
+     [1] 0.226572 - Voldaren Epicure (you)
+ >>> [2] 0.260148 - RL
+     [3] 0.252205 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.991730
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast; Rally at the Hornburg]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000020 - Pass
+     [1] 0.001252 - Cast Galvanic Blast
+ >>> [2] 0.747392 - Cast Rally at the Hornburg
+     [3] 0.251336 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.996101
+SELECTED: Cast Rally at the Hornburg
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.164065 - Benchmark-skill6
+     [1] 0.186477 - Human Soldier Token (you)
+     [2] 0.141097 - Voldaren Epicure (you)
+     [3] 0.186477 - Human Soldier Token (you)
+     [4] 0.162994 - RL
+ >>> [5] 0.158890 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.909572
+SELECTED: Burning-Tree Emissary (you)
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.164065 - Benchmark-skill6
+     [1] 0.186477 - Human Soldier Token (you)
+     [2] 0.141097 - Voldaren Epicure (you)
+     [3] 0.186477 - Human Soldier Token (you)
+ >>> [4] 0.162994 - RL
+     [5] 0.158890 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.909572
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.020222 - Pass
+ >>> [1] 0.979778 - Cast Galvanic Blast
+
+VALUE SCORE: 0.916050
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.164065 - Benchmark-skill6
+     [1] 0.186477 - Human Soldier Token (you)
+     [2] 0.141097 - Voldaren Epicure (you)
+     [3] 0.186477 - Human Soldier Token (you)
+ >>> [4] 0.162994 - RL
+     [5] 0.158890 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.909572
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020222 - Pass
+
+VALUE SCORE: 0.916050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Voldaren Epicure,tapped,attacking; Great Furnace,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020222 - Pass
+
+VALUE SCORE: 0.916050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Voldaren Epicure,tapped,attacking; Great Furnace,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020222 - Pass
+
+VALUE SCORE: 0.916050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020222 - Pass
+
+VALUE SCORE: 0.916050
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring]
+-> Graveyard: [Nihil Spellbomb]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020222 - Pass
+
+VALUE SCORE: 0.916050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020222 - Pass
+
+VALUE SCORE: 0.916050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020222 - Pass
+
+VALUE SCORE: 0.916050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020222 - Pass
+
+VALUE SCORE: 0.916050
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 18
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 18
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.164716 - Benchmark-skill6
+     [1] 0.186483 - Human Soldier Token (you)
+     [2] 0.140927 - Voldaren Epicure (you)
+     [3] 0.186483 - Human Soldier Token (you)
+ >>> [4] 0.163207 - RL
+     [5] 0.158183 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.931858
+SELECTED: RL
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Mountain]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Mountain]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Galvanic Blast
+ >>> [2] 0.999947 - Play Mountain
+     [3] 0.000053 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.937541
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.164796 - Benchmark-skill6
+     [1] 0.186374 - Human Soldier Token (you)
+     [2] 0.140868 - Voldaren Epicure (you)
+     [3] 0.186374 - Human Soldier Token (you)
+     [4] 0.163211 - RL
+ >>> [5] 0.158376 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.921209
+SELECTED: Burning-Tree Emissary (you)
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000099 - Pass
+     [1] 0.004800 - Cast Galvanic Blast
+ >>> [2] 0.995101 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.925394
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.165953 - Benchmark-skill6
+     [1] 0.185048 - Human Soldier Token (you)
+ >>> [2] 0.140607 - Voldaren Epicure (you)
+     [3] 0.185048 - Human Soldier Token (you)
+     [4] 0.163515 - RL
+     [5] 0.159829 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.831426
+SELECTED: Voldaren Epicure (you)
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 18
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain,tapped; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.029744 - Pass
+ >>> [1] 0.970256 - Cast Galvanic Blast
+
+VALUE SCORE: 0.836384
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.165953 - Benchmark-skill6
+ >>> [1] 0.185048 - Human Soldier Token (you)
+     [2] 0.140607 - Voldaren Epicure (you)
+ >>> [3] 0.185048 - Human Soldier Token (you)
+     [4] 0.163515 - RL
+     [5] 0.159829 - Burning-Tree Emissary (you)
+
+VALUE SCORE: 0.831426
+SELECTED: Human Soldier Token (you)
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-skill6)
+  - [1] Galvanic Blast (controller=RL)
+  - [2] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Mountain,tapped]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Voldaren Epicure,tapped,attacking; Great Furnace,tapped; Human Soldier Token,tapped,attacking; Mountain,tapped; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Voldaren Epicure,tapped,attacking; Great Furnace,tapped; Human Soldier Token,tapped,attacking; Mountain,tapped; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Mountain; Ichor Wellspring; Clue Token; Swamp,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace,tapped; Human Soldier Token,tapped; Mountain,tapped; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029744 - Pass
+
+VALUE SCORE: 0.836384
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.937314
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.937314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped,attacking; Voldaren Epicure,tapped,attacking; Great Furnace; Human Soldier Token,tapped,attacking; Mountain; Samurai Token,attacking; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.937314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped,attacking; Voldaren Epicure,tapped,attacking; Great Furnace; Human Soldier Token,tapped,attacking; Mountain; Samurai Token,attacking; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.937314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace; Human Soldier Token,tapped; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.937314
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace; Human Soldier Token,tapped; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace; Human Soldier Token,tapped; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.937314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace; Human Soldier Token,tapped; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Map Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.937314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace; Human Soldier Token,tapped; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Map Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.937314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped; Voldaren Epicure,tapped; Great Furnace; Human Soldier Token,tapped; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Map Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.937314
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Map Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Map Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.917819
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary; Voldaren Epicure; Great Furnace; Human Soldier Token; Mountain; Samurai Token; Mountain; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Map Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.917819
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped,attacking; Voldaren Epicure,tapped,attacking; Great Furnace; Human Soldier Token,tapped,attacking; Mountain; Samurai Token,attacking; Mountain; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Map Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.917819
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Burning-Tree Emissary,tapped,attacking; Voldaren Epicure,tapped,attacking; Great Furnace; Human Soldier Token,tapped,attacking; Mountain; Samurai Token,attacking; Mountain; Mountain]
+-> Graveyard: [Mountain; Rally at the Hornburg; Galvanic Blast; Experimental Synthesizer; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Mountain,tapped; Ichor Wellspring; Swamp; Map Token; Twisted Landscape]
+-> Graveyard: [Nihil Spellbomb; Toxin Analysis; Twisted Landscape; Slagwoods Bridge; Fanatical Offering]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.917819
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-skill6
+Turns: 6
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 83
+Ended: 2026-02-01T20:00:41.403060900
+================================================================================

@@ -1,0 +1,2825 @@
+================================================================================
+GAME LOG: game_20260201_195455_0009
+Started: 2026-02-01T19:54:55.469559400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.612 Q_mull=-0.167 hand=[Snow-Covered Forest; Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Fyndhorn Elves; Nyxborn Hydra]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894649
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.069313 - Cast Elvish Mystic
+ >>> [2] 0.929973 - Cast Fyndhorn Elves
+     [3] 0.000710 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.891305
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891305
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891305
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891305
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891305
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891305
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891305
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891305
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891305
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.508973 - Fyndhorn Elves (you)
+     [1] 0.491027 - Faerie Seer (Benchmark-skill6)
+
+VALUE SCORE: 0.860878
+SELECTED: Fyndhorn Elves (you)
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra; Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra; Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999996 - Play Snow-Covered Forest
+     [2] 0.000000 - Cast Winding Way
+     [3] 0.000004 - Cast Elvish Mystic
+     [4] 0.000000 - Cast Nyxborn Hydra
+     [5] 0.000000 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.862583
+SELECTED: Play Snow-Covered Forest
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way; Elvish Mystic; Elvish Mystic; Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way; Elvish Mystic; Elvish Mystic; Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.508983 - Fyndhorn Elves (you)
+ >>> [1] 0.491017 - Faerie Seer (Benchmark-skill6)
+
+VALUE SCORE: 0.857572
+SELECTED: Faerie Seer (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Elvish Mystic; Elvish Mystic; Nyxborn Hydra; Winding Way]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000061 - Pass
+     [1] 0.070746 - Cast Winding Way
+ >>> [2] 0.918066 - Cast Elvish Mystic
+     [3] 0.009460 - Cast Nyxborn Hydra
+     [4] 0.001667 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.859235
+SELECTED: Cast Elvish Mystic
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way; Elvish Mystic; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way; Elvish Mystic; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.339690 - Elvish Mystic (you)
+     [1] 0.336093 - Fyndhorn Elves (you)
+     [2] 0.324216 - Faerie Seer (Benchmark-skill6)
+
+VALUE SCORE: 0.853148
+SELECTED: Elvish Mystic (you)
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Elvish Mystic; Nyxborn Hydra; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000063 - Pass
+     [1] 0.071613 - Cast Winding Way
+ >>> [2] 0.917225 - Cast Elvish Mystic
+     [3] 0.009417 - Cast Nyxborn Hydra
+     [4] 0.001682 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.854848
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Nyxborn Hydra; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.006852 - Pass
+ >>> [1] 0.993148 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.850795
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006852 - Pass
+
+VALUE SCORE: 0.850795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006852 - Pass
+
+VALUE SCORE: 0.850795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006852 - Pass
+
+VALUE SCORE: 0.850795
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006852 - Pass
+
+VALUE SCORE: 0.850795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006852 - Pass
+
+VALUE SCORE: 0.850795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006852 - Pass
+
+VALUE SCORE: 0.850795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006852 - Pass
+
+VALUE SCORE: 0.850795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 2 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006852 - Pass
+
+VALUE SCORE: 0.850795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Winding Way; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006852 - Pass
+
+VALUE SCORE: 0.850795
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Winding Way; Elvish Mystic; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Winding Way; Elvish Mystic; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000068 - Pass
+     [1] 0.068143 - Cast Winding Way
+ >>> [2] 0.808998 - Cast Elvish Mystic
+     [3] 0.122791 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.835229
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Winding Way; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000359 - Pass
+     [1] 0.357726 - Cast Winding Way
+ >>> [2] 0.641915 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.830942
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (RL turn), Precombat Main (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=RL)
+[RL], life = 19
+-> Hand: [Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.021804 - Avenging Hunter
+     [1] 0.021804 - Avenging Hunter
+     [2] 0.021804 - Avenging Hunter
+     [3] 0.021804 - Avenging Hunter
+     [4] 0.019630 - Elvish Mystic
+     [5] 0.019630 - Elvish Mystic
+     [6] 0.018207 - Fyndhorn Elves
+     [7] 0.018207 - Fyndhorn Elves
+     [8] 0.017831 - Generous Ent
+     [9] 0.017831 - Generous Ent
+     [10] 0.017831 - Generous Ent
+     [11] 0.020603 - Lead the Stampede
+     [12] 0.020603 - Lead the Stampede
+     [13] 0.020603 - Lead the Stampede
+     [14] 0.020603 - Lead the Stampede
+     [15] 0.017899 - Llanowar Elves
+     [16] 0.017899 - Llanowar Elves
+     [17] 0.019390 - Masked Vandal
+     [18] 0.019390 - Masked Vandal
+     [19] 0.019390 - Masked Vandal
+     [20] 0.019390 - Masked Vandal
+     [21] 0.019938 - Nyxborn Hydra
+     [22] 0.019938 - Nyxborn Hydra
+     [23] 0.019938 - Nyxborn Hydra
+     [24] 0.019849 - Priest of Titania
+     [25] 0.019849 - Priest of Titania
+     [26] 0.019849 - Priest of Titania
+     [27] 0.019849 - Priest of Titania
+     [28] 0.018399 - Quirion Ranger
+     [29] 0.018399 - Quirion Ranger
+     [30] 0.018399 - Quirion Ranger
+     [31] 0.018399 - Quirion Ranger
+     [32] 0.020791 - Snow-Covered Forest
+     [33] 0.020791 - Snow-Covered Forest
+     [34] 0.020791 - Snow-Covered Forest
+     [35] 0.020791 - Snow-Covered Forest
+     [36] 0.020791 - Snow-Covered Forest
+     [37] 0.020791 - Snow-Covered Forest
+     [38] 0.020791 - Snow-Covered Forest
+     [39] 0.020791 - Snow-Covered Forest
+     [40] 0.020791 - Snow-Covered Forest
+     [41] 0.020791 - Snow-Covered Forest
+     [42] 0.020791 - Snow-Covered Forest
+ >>> [43] 0.018963 - Timberwatch Elf
+ >>> [44] 0.018963 - Timberwatch Elf
+ >>> [45] 0.018963 - Timberwatch Elf
+ >>> [46] 0.018963 - Timberwatch Elf
+     [47] 0.016640 - Wellwisher
+     [48] 0.016640 - Wellwisher
+     [49] 0.018600 - Winding Way
+     [50] 0.018600 - Winding Way
+
+VALUE SCORE: 0.827118
+SELECTED: Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000970 - Pass
+ >>> [1] 0.999030 - Cast Winding Way
+
+VALUE SCORE: 0.831416
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000970 - Pass
+
+VALUE SCORE: 0.831416
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000970 - Pass
+
+VALUE SCORE: 0.831416
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000970 - Pass
+
+VALUE SCORE: 0.831416
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Seer; Island; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Seer; Island; Spellstutter Sprite; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000970 - Pass
+
+VALUE SCORE: 0.831416
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000970 - Pass
+
+VALUE SCORE: 0.831416
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000970 - Pass
+
+VALUE SCORE: 0.831416
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000970 - Pass
+
+VALUE SCORE: 0.831416
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+     [2] 0.000023 - Cast Timberwatch Elf
+     [3] 0.000036 - Cast Fyndhorn Elves
+ >>> [4] 0.999941 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.805259
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Winding Way; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.004064 - Cast Winding Way
+     [2] 0.395587 - Cast Timberwatch Elf
+ >>> [3] 0.600345 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.801947
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Winding Way; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+     [1] 0.010113 - Cast Winding Way
+ >>> [2] 0.989875 - Cast Timberwatch Elf
+
+VALUE SCORE: 0.797614
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-skill6)
+  - [1] Timberwatch Elf (controller=RL)
+[RL], life = 17
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped]
+-> Graveyard: [Snap]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.797614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Snow-Covered Forest; Winding Way; Timberwatch Elf]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped]
+-> Graveyard: [Snap; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001227 - Pass
+ >>> [1] 0.998773 - Cast Winding Way
+
+VALUE SCORE: 0.783466
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped]
+-> Graveyard: [Snap; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped]
+-> Graveyard: [Snap; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped]
+-> Graveyard: [Snap; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Snap; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Snap; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite; Island,tapped; Island,tapped]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001227 - Pass
+
+VALUE SCORE: 0.783466
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Fyndhorn Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Fyndhorn Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000031 - Cast Fyndhorn Elves
+ >>> [2] 0.999969 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.796976
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000007 - Pass
+ >>> [1] 0.999993 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.793757
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Island; Island; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Island; Island; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Island; Island; Faerie Seer; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite; Island,tapped; Island,tapped; Faerie Seer; Faerie Seer]
+-> Graveyard: [Snap; Counterspell; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite; Island,tapped; Island,tapped; Faerie Seer; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer,tapped,attacking; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer,tapped,attacking; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Snow-Covered Forest; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.793757
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.793353
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Island; Island,tapped; Faerie Seer; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Island; Island,tapped; Faerie Seer; Faerie Seer; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Island; Island,tapped; Faerie Seer; Faerie Seer; Island; Saiba Cryptomancer]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Island,tapped; Island,tapped; Faerie Seer; Faerie Seer; Island; Saiba Cryptomancer]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Island,tapped; Island,tapped; Faerie Seer; Faerie Seer; Island; Saiba Cryptomancer; Harrier Strix]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Island,tapped; Island,tapped; Faerie Seer; Faerie Seer; Island; Saiba Cryptomancer; Harrier Strix]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer,tapped,attacking; Faerie Seer,tapped,attacking; Island; Saiba Cryptomancer; Harrier Strix]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Faerie Seer,tapped,attacking; Faerie Seer,tapped,attacking; Island; Saiba Cryptomancer; Harrier Strix]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.793353
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.813887 - Pass
+     [1] 0.186113 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.796662
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.813887 - Pass
+
+VALUE SCORE: 0.796662
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.814092 - Pass
+     [1] 0.185908 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.796529
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer; Island; Spellstutter Sprite; Island; Island; Faerie Seer; Faerie Seer; Island; Saiba Cryptomancer; Harrier Strix; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer; Island; Spellstutter Sprite; Island; Island; Faerie Seer; Faerie Seer; Island; Saiba Cryptomancer; Harrier Strix; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.814092 - Pass
+
+VALUE SCORE: 0.796529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Faerie Seer,tapped,attacking; Island; Saiba Cryptomancer; Harrier Strix,tapped,attacking; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.814092 - Pass
+
+VALUE SCORE: 0.796529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Nyxborn Hydra,blocking; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Faerie Seer,tapped,attacking; Island; Saiba Cryptomancer; Harrier Strix,tapped,attacking; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.814092 - Pass
+
+VALUE SCORE: 0.796529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Lead the Stampede; Winding Way; Nyxborn Hydra]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.814092 - Pass
+
+VALUE SCORE: 0.796529
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000808 - Pass
+     [1] 0.000166 - Cast Fyndhorn Elves
+ >>> [2] 0.999026 - Cast Lead the Stampede
+
+VALUE SCORE: 0.785908
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Force Spike (controller=Benchmark-skill6)
+  - [1] Lead the Stampede (controller=RL)
+[RL], life = 3
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000808 - Pass
+
+VALUE SCORE: 0.785908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=RL)
+[RL], life = 3
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000808 - Pass
+
+VALUE SCORE: 0.785908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=RL)
+[RL], life = 3
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.187429 - STOP
+     [1] 0.154031 - Generous Ent
+     [2] 0.180939 - Snow-Covered Forest
+     [3] 0.154031 - Generous Ent
+ >>> [4] 0.162498 - Winding Way
+     [5] 0.161072 - Quirion Ranger
+
+VALUE SCORE: 0.770716
+SELECTED: Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8 (RL turn), Precombat Main (CARD_PICK 1 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=RL)
+[RL], life = 3
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.223795 - STOP
+     [1] 0.183917 - Generous Ent
+ >>> [2] 0.216047 - Snow-Covered Forest
+     [3] 0.183917 - Generous Ent
+     [4] 0.192325 - Quirion Ranger
+
+VALUE SCORE: 0.770716
+SELECTED: Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8 (RL turn), Precombat Main (CARD_PICK 2 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=RL)
+[RL], life = 3
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.285470 - STOP
+ >>> [1] 0.234602 - Generous Ent
+ >>> [2] 0.234602 - Generous Ent
+     [3] 0.245327 - Quirion Ranger
+
+VALUE SCORE: 0.770716
+SELECTED: Generous Ent
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way; Snow-Covered Forest; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Fyndhorn Elves
+     [2] 0.000000 - Cast Winding Way
+ >>> [3] 1.000000 - Play Snow-Covered Forest
+     [4] 0.000000 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.765284
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Elvish Mystic; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000140 - Pass
+     [1] 0.000023 - Cast Fyndhorn Elves
+     [2] 0.121712 - Cast Winding Way
+ >>> [3] 0.667131 - Cast Generous Ent
+     [4] 0.210993 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.761454
+SELECTED: Cast Generous Ent
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Generous Ent]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.761454
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.761454
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.761454
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Island; Faerie Seer,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Harrier Strix,tapped; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.761454
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island; Spellstutter Sprite; Island; Island; Faerie Seer; Faerie Seer; Island; Saiba Cryptomancer; Harrier Strix; Island; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island; Spellstutter Sprite; Island; Island; Faerie Seer; Faerie Seer; Island; Saiba Cryptomancer; Harrier Strix; Island; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.761454
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Generous Ent; Food Token]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Faerie Seer,tapped,attacking; Island; Saiba Cryptomancer,tapped,attacking; Harrier Strix,tapped,attacking; Island; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.761454
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fyndhorn Elves; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Generous Ent,blocking; Food Token]
+-> Graveyard: [Generous Ent; Winding Way; Timberwatch Elf; Winding Way; Nyxborn Hydra; Lead the Stampede]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Faerie Seer,tapped,attacking; Island; Saiba Cryptomancer,tapped,attacking; Harrier Strix,tapped,attacking; Island; Island]
+-> Graveyard: [Snap; Counterspell; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.761454
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Elves.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 98
+Ended: 2026-02-01T19:57:54.447041900
+================================================================================

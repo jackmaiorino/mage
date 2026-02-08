@@ -18,7 +18,7 @@ public class MulliganLogger {
 
     private static final Logger logger = LoggerFactory.getLogger(MulliganLogger.class);
 
-    private static final String DEFAULT_LOG_PATH = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_stats.csv";
+    private static final String DEFAULT_LOG_PATH = RLLogPaths.MULLIGAN_STATS_PATH;
     private static final ReentrantLock fileLock = new ReentrantLock();
 
     private final String logPath;

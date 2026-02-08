@@ -1,0 +1,1548 @@
+================================================================================
+GAME LOG: game_20260201_195956_0077
+Started: 2026-02-01T19:59:56.241248600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Jund Wildfire.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=3 decision=KEEP Q_keep=0.663 Q_mull=-0.576 hand=[Island; Island; Island; Of One Mind; Of One Mind; Force Spike; Faerie Miscreant]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Of One Mind; Force Spike; Faerie Miscreant]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Of One Mind; Of One Mind; Force Spike; Faerie Miscreant]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.988203
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike; Faerie Miscreant]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000087 - Pass
+ >>> [1] 0.999913 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.983838
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983838
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983838
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Of One Mind; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.905597
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.905597
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant,tapped,attacking; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.905597
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant,tapped,attacking; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.905597
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.905597
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant,tapped; Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.047504 - Pass
+ >>> [1] 0.952496 - Cast Force Spike
+
+VALUE SCORE: 0.170411
+SELECTED: Cast Force Spike
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Force Spike]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.047504 - Pass
+
+VALUE SCORE: 0.170411
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Force Spike]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.047504 - Pass
+
+VALUE SCORE: 0.170411
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Force Spike]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.047504 - Pass
+
+VALUE SCORE: 0.170411
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Island; Island]
+-> Permanents: [Island; Faerie Miscreant; Island]
+-> Graveyard: [Force Spike]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Island; Island]
+-> Permanents: [Island; Faerie Miscreant; Island]
+-> Graveyard: [Force Spike]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.830196
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Island; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Island]
+-> Graveyard: [Force Spike]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+ >>> [1] 0.999995 - Cast Of One Mind
+
+VALUE SCORE: 0.820116
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.820116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.820116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.820116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.820116
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.820116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.820116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.820116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000005 - Pass
+
+VALUE SCORE: 0.820116
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Island]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Island; Spellstutter Sprite; Faerie Seer; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Island]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.005143 - Cast Of One Mind
+ >>> [2] 0.994696 - Play Island
+     [3] 0.000006 - Cast Spellstutter Sprite
+     [4] 0.000155 - Cast Faerie Seer
+
+VALUE SCORE: 0.836485
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Island; Spellstutter Sprite; Faerie Seer; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Island]
+-> Graveyard: [Force Spike; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+ >>> [1] 0.969694 - Cast Of One Mind
+     [2] 0.001039 - Cast Spellstutter Sprite
+     [3] 0.029263 - Cast Faerie Seer
+
+VALUE SCORE: 0.825783
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Faerie Seer; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000195 - Pass
+ >>> [1] 0.999805 - Cast Faerie Seer
+
+VALUE SCORE: 0.780089
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000195 - Pass
+
+VALUE SCORE: 0.780089
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.364207 - STOP
+     [1] 0.313376 - Ninja of the Deep Hours
+     [2] 0.322417 - Saiba Cryptomancer
+
+VALUE SCORE: 0.754519
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000195 - Pass
+
+VALUE SCORE: 0.780089
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000195 - Pass
+
+VALUE SCORE: 0.780089
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000195 - Pass
+
+VALUE SCORE: 0.780089
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000195 - Pass
+
+VALUE SCORE: 0.780089
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000195 - Pass
+
+VALUE SCORE: 0.780089
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000195 - Pass
+
+VALUE SCORE: 0.780089
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000195 - Pass
+
+VALUE SCORE: 0.780089
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000195 - Pass
+
+VALUE SCORE: 0.780089
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel; Saiba Cryptomancer]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Island; Spellstutter Sprite; Dispel; Saiba Cryptomancer]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Island; Faerie Seer]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999460 - Play Island
+     [2] 0.000005 - Cast Spellstutter Sprite
+     [3] 0.000534 - Cast Saiba Cryptomancer
+
+VALUE SCORE: 0.804933
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Spellstutter Sprite; Island; Spellstutter Sprite; Dispel; Saiba Cryptomancer]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Island; Faerie Seer; Island]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Twisted Landscape; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000059 - Pass
+     [1] 0.010611 - Cast Spellstutter Sprite
+ >>> [2] 0.989330 - Cast Saiba Cryptomancer
+
+VALUE SCORE: 0.791030
+SELECTED: Cast Saiba Cryptomancer
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-skill6)
+  - [1] Saiba Cryptomancer (controller=RL)
+[RL], life = 20
+-> Hand: [Spellstutter Sprite; Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island; Island; Faerie Seer; Island]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.006965 - Pass
+ >>> [1] 0.993035 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.757811
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} enters, counter target spell with mana value X or less, where X is the number of Faeries you control.) (controller=RL)
+  - [1] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-skill6)
+  - [2] Saiba Cryptomancer (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island; Faerie Seer; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006965 - Pass
+
+VALUE SCORE: 0.757811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island; Faerie Seer; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006965 - Pass
+
+VALUE SCORE: 0.757811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island; Faerie Seer; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006965 - Pass
+
+VALUE SCORE: 0.757811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Island; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006965 - Pass
+
+VALUE SCORE: 0.757811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Island; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006965 - Pass
+
+VALUE SCORE: 0.757811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006965 - Pass
+
+VALUE SCORE: 0.757811
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Twisted Landscape]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Twisted Landscape]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995855 - Pass
+     [1] 0.004145 - Cast Dispel
+
+VALUE SCORE: 0.157476
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 21
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995855 - Pass
+
+VALUE SCORE: 0.157476
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 21
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995855 - Pass
+
+VALUE SCORE: 0.157476
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 21
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995855 - Pass
+
+VALUE SCORE: 0.157476
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel; Ninja of the Deep Hours]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Island; Faerie Seer; Island; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 21
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Spellstutter Sprite; Dispel; Ninja of the Deep Hours]
+-> Permanents: [Island; Faerie Miscreant; Island; Island; Island; Faerie Seer; Island; Spellstutter Sprite]
+-> Graveyard: [Force Spike; Of One Mind; Of One Mind; Saiba Cryptomancer]
+-> Exile: []
+[Benchmark-skill6], life = 21
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999616 - Play Island
+     [2] 0.000005 - Cast Spellstutter Sprite
+     [3] 0.000379 - Cast Ninja of the Deep Hours
+
+VALUE SCORE: 0.727112
+SELECTED: Play Island
+

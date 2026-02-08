@@ -1,0 +1,348 @@
+================================================================================
+GAME LOG: game_20260201_200156_0099
+Started: 2026-02-01T20:01:56.965410500
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Red Burn.dek vs oppDeck=Deck - Caw-Gates.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.323 Q_mull=-0.196 hand=[Mountain; Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower; Voldaren Epicure]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower; Voldaren Epicure]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+ >>> [1] 0.999988 - Play Mountain
+
+VALUE SCORE: 0.182000
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=RL)
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Masked Meower; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=RL)
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Masked Meower; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.490429 - RL
+     [1] 0.509571 - Benchmark-skill6
+
+VALUE SCORE: 0.160295
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower; Voldaren Epicure]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.008218 - Pass
+     [1] 0.004510 - Cast Lava Dart
+     [2] 0.483199 - Cast Masked Meower
+ >>> [3] 0.504074 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.165369
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower]
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008218 - Pass
+
+VALUE SCORE: 0.165369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008218 - Pass
+
+VALUE SCORE: 0.165369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008218 - Pass
+
+VALUE SCORE: 0.165369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008218 - Pass
+
+VALUE SCORE: 0.165369
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008218 - Pass
+
+VALUE SCORE: 0.165369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008218 - Pass
+
+VALUE SCORE: 0.165369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Lava Dart; Masked Meower]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008218 - Pass
+
+VALUE SCORE: 0.165369
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=RL)
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Masked Meower; Lightning Bolt]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=RL)
+[RL], life = 20
+-> Hand: [Fireblast; Grab the Prize; Highway Robbery; Masked Meower; Lightning Bolt]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.345814 - RL
+     [1] 0.359821 - Benchmark-skill6
+     [2] 0.294365 - Voldaren Epicure (you)
+
+VALUE SCORE: 0.143794
+SELECTED: RL
+

@@ -1,0 +1,2930 @@
+================================================================================
+GAME LOG: game_20260201_195830_0066
+Started: 2026-02-01T19:58:30.875247
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=4 decision=KEEP Q_keep=0.925 Q_mull=0.346 hand=[Great Furnace; Mountain; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.174160 - Play Great Furnace
+ >>> [2] 0.825839 - Play Mountain
+
+VALUE SCORE: 1.078415
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000295 - Pass
+ >>> [1] 0.999705 - Cast Experimental Synthesizer
+
+VALUE SCORE: 1.073749
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000295 - Pass
+
+VALUE SCORE: 1.073749
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Reckless Impulse]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000295 - Pass
+
+VALUE SCORE: 1.073749
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Reckless Impulse]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000295 - Pass
+
+VALUE SCORE: 1.073749
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Reckless Impulse]
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000295 - Pass
+
+VALUE SCORE: 1.073749
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Reckless Impulse]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Reckless Impulse]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000295 - Pass
+
+VALUE SCORE: 1.073749
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: [Reckless Impulse]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000295 - Pass
+
+VALUE SCORE: 1.073749
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer,tapped]
+-> Graveyard: []
+-> Exile: [Reckless Impulse]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000295 - Pass
+
+VALUE SCORE: 1.073749
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer,tapped]
+-> Graveyard: []
+-> Exile: [Reckless Impulse]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000295 - Pass
+
+VALUE SCORE: 1.073749
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer,tapped]
+-> Graveyard: []
+-> Exile: [Reckless Impulse]
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000295 - Pass
+
+VALUE SCORE: 1.073749
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Mountain; Rally at the Hornburg; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Experimental Synthesizer]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.171787 - Play Great Furnace
+ >>> [2] 0.828213 - Play Mountain
+
+VALUE SCORE: 1.061134
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Rally at the Hornburg; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000024 - Pass
+ >>> [1] 0.997153 - Cast Rally at the Hornburg
+     [2] 0.002823 - Cast Reckless Impulse
+
+VALUE SCORE: 1.055328
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.055328
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.162794 - Play Great Furnace
+ >>> [2] 0.837206 - Play Mountain
+     [3] 0.000000 - Cast Reckless Impulse
+
+VALUE SCORE: 0.972097
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token; Mountain]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000080 - Pass
+     [1] 0.007056 - Cast Reckless Impulse
+ >>> [2] 0.992864 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.961204
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 0.961204
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 0.961204
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 0.961204
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 0.961204
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Seer]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 0.961204
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Seer; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 0.961204
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 0.961204
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 0.961204
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Lightning Bolt]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000080 - Pass
+
+VALUE SCORE: 0.961204
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.126194 - Human Soldier Token (you)
+     [1] 0.096755 - Faerie Seer (Benchmark-skill6)
+     [2] 0.095672 - Moon-Circuit Hacker (Benchmark-skill6)
+     [3] 0.110373 - RL
+     [4] 0.126194 - Human Soldier Token (you)
+     [5] 0.112370 - Faerie Miscreant (Benchmark-skill6)
+     [6] 0.100420 - Harrier Strix (Benchmark-skill6)
+     [7] 0.110478 - Benchmark-skill6
+ >>> [8] 0.121543 - Samurai Token (you)
+
+VALUE SCORE: 0.914295
+SELECTED: Samurai Token (you)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Mountain; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.158046 - Play Great Furnace
+     [2] 0.000000 - Cast Reckless Impulse
+ >>> [3] 0.841903 - Play Mountain
+     [4] 0.000050 - Cast Lightning Bolt
+
+VALUE SCORE: 0.920276
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.126039 - Human Soldier Token (you)
+     [1] 0.096749 - Faerie Seer (Benchmark-skill6)
+     [2] 0.095648 - Moon-Circuit Hacker (Benchmark-skill6)
+     [3] 0.110385 - RL
+     [4] 0.126039 - Human Soldier Token (you)
+ >>> [5] 0.112354 - Faerie Miscreant (Benchmark-skill6)
+     [6] 0.100326 - Harrier Strix (Benchmark-skill6)
+     [7] 0.110540 - Benchmark-skill6
+     [8] 0.121920 - Samurai Token (you)
+
+VALUE SCORE: 0.901699
+SELECTED: Faerie Miscreant (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000065 - Pass
+     [1] 0.005175 - Cast Reckless Impulse
+ >>> [2] 0.994760 - Cast Lightning Bolt
+
+VALUE SCORE: 0.907777
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.126039 - Human Soldier Token (you)
+     [1] 0.096749 - Faerie Seer (Benchmark-skill6)
+     [2] 0.095648 - Moon-Circuit Hacker (Benchmark-skill6)
+     [3] 0.110385 - RL
+     [4] 0.126039 - Human Soldier Token (you)
+     [5] 0.112354 - Faerie Miscreant (Benchmark-skill6)
+     [6] 0.100326 - Harrier Strix (Benchmark-skill6)
+ >>> [7] 0.110540 - Benchmark-skill6
+     [8] 0.121920 - Samurai Token (you)
+
+VALUE SCORE: 0.901699
+SELECTED: Benchmark-skill6
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.013543 - Pass
+ >>> [1] 0.986457 - Cast Reckless Impulse
+
+VALUE SCORE: 0.876400
+SELECTED: Cast Reckless Impulse
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.124699 - Human Soldier Token (you)
+     [1] 0.097116 - Faerie Seer (Benchmark-skill6)
+     [2] 0.095104 - Moon-Circuit Hacker (Benchmark-skill6)
+ >>> [3] 0.110483 - RL
+     [4] 0.124699 - Human Soldier Token (you)
+     [5] 0.112279 - Faerie Miscreant (Benchmark-skill6)
+     [6] 0.099621 - Harrier Strix (Benchmark-skill6)
+     [7] 0.111714 - Benchmark-skill6
+     [8] 0.124285 - Samurai Token (you)
+
+VALUE SCORE: 0.805956
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000419 - Pass
+ >>> [1] 0.984377 - Cast Experimental Synthesizer
+     [2] 0.015205 - Cast Galvanic Blast
+
+VALUE SCORE: 0.808871
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Galvanic Blast; Experimental Synthesizer]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token,attacking; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Samurai Token,attacking; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Moon-Circuit Hacker,blocking; Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Seer; Island,tapped; Island,tapped]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Seer; Island,tapped; Island,tapped]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Faerie Miscreant; Island,tapped; Faerie Seer; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Experimental Synthesizer; Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000419 - Pass
+
+VALUE SCORE: 0.808871
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 13
+-> Hand: [Great Furnace; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 13
+-> Hand: [Great Furnace; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.141403 - Human Soldier Token (you)
+     [1] 0.109153 - Faerie Seer (Benchmark-skill6)
+     [2] 0.124815 - RL
+     [3] 0.141403 - Human Soldier Token (you)
+     [4] 0.126671 - Faerie Miscreant (Benchmark-skill6)
+ >>> [5] 0.112973 - Harrier Strix (Benchmark-skill6)
+     [6] 0.125174 - Benchmark-skill6
+     [7] 0.118410 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.862991
+SELECTED: Harrier Strix (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Great Furnace; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Great Furnace; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999937 - Play Great Furnace
+     [2] 0.000002 - Cast Reckless Impulse
+     [3] 0.000060 - Cast Experimental Synthesizer
+     [4] 0.000001 - Cast Galvanic Blast
+
+VALUE SCORE: 0.865584
+SELECTED: Play Great Furnace
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.141278 - Human Soldier Token (you)
+     [1] 0.109295 - Faerie Seer (Benchmark-skill6)
+ >>> [2] 0.124863 - RL
+     [3] 0.141278 - Human Soldier Token (you)
+     [4] 0.126781 - Faerie Miscreant (Benchmark-skill6)
+     [5] 0.113014 - Harrier Strix (Benchmark-skill6)
+     [6] 0.125313 - Benchmark-skill6
+     [7] 0.118177 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.850423
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000327 - Pass
+     [1] 0.026165 - Cast Reckless Impulse
+ >>> [2] 0.957814 - Cast Experimental Synthesizer
+     [3] 0.015694 - Cast Galvanic Blast
+
+VALUE SCORE: 0.853104
+SELECTED: Cast Experimental Synthesizer
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.140906 - Human Soldier Token (you)
+     [1] 0.109690 - Faerie Seer (Benchmark-skill6)
+ >>> [2] 0.125078 - RL
+     [3] 0.140906 - Human Soldier Token (you)
+     [4] 0.126953 - Faerie Miscreant (Benchmark-skill6)
+     [5] 0.112921 - Harrier Strix (Benchmark-skill6)
+     [6] 0.125819 - Benchmark-skill6
+     [7] 0.117727 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.812786
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.023046 - Pass
+ >>> [1] 0.976953 - Cast Galvanic Blast
+
+VALUE SCORE: 0.815917
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.140906 - Human Soldier Token (you)
+     [1] 0.109690 - Faerie Seer (Benchmark-skill6)
+     [2] 0.125078 - RL
+     [3] 0.140906 - Human Soldier Token (you)
+     [4] 0.126953 - Faerie Miscreant (Benchmark-skill6)
+ >>> [5] 0.112921 - Harrier Strix (Benchmark-skill6)
+     [6] 0.125819 - Benchmark-skill6
+     [7] 0.117727 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.812786
+SELECTED: Harrier Strix (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023046 - Pass
+
+VALUE SCORE: 0.815917
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.158743 - Human Soldier Token (you)
+     [1] 0.123680 - Faerie Seer (Benchmark-skill6)
+     [2] 0.141084 - RL
+     [3] 0.158743 - Human Soldier Token (you)
+ >>> [4] 0.143128 - Faerie Miscreant (Benchmark-skill6)
+     [5] 0.141946 - Benchmark-skill6
+     [6] 0.132676 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.808897
+SELECTED: Faerie Miscreant (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000102 - Pass
+     [1] 0.007873 - Cast Reckless Impulse
+     [2] 0.004293 - Cast Galvanic Blast
+ >>> [3] 0.987732 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.812026
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Seer; Island; Island; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Seer; Island; Island; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-skill6)
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Faerie Seer; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Faerie Seer; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain,tapped; Great Furnace,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: [Galvanic Blast]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000102 - Pass
+
+VALUE SCORE: 0.812026
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 11
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.123277 - Human Soldier Token (you)
+     [1] 0.095538 - Faerie Seer (Benchmark-skill6)
+     [2] 0.109315 - RL
+     [3] 0.122604 - Samurai Token (you)
+     [4] 0.123277 - Human Soldier Token (you)
+     [5] 0.110840 - Faerie Miscreant (Benchmark-skill6)
+ >>> [6] 0.102863 - Ninja of the Deep Hours (Benchmark-skill6)
+     [7] 0.109423 - Benchmark-skill6
+ >>> [8] 0.102863 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.844482
+SELECTED: Ninja of the Deep Hours (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse; Galvanic Blast]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Reckless Impulse; Galvanic Blast]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.007195 - Pass
+ >>> [1] 0.626365 - Cast Reckless Impulse
+     [2] 0.366440 - Cast Galvanic Blast
+
+VALUE SCORE: 0.851231
+SELECTED: Cast Reckless Impulse
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: [Mountain; Experimental Synthesizer]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: [Mountain; Experimental Synthesizer]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.122309 - Human Soldier Token (you)
+     [1] 0.096080 - Faerie Seer (Benchmark-skill6)
+     [2] 0.109626 - RL
+     [3] 0.124498 - Samurai Token (you)
+     [4] 0.122309 - Human Soldier Token (you)
+     [5] 0.111120 - Faerie Miscreant (Benchmark-skill6)
+ >>> [6] 0.101896 - Ninja of the Deep Hours (Benchmark-skill6)
+     [7] 0.110266 - Benchmark-skill6
+ >>> [8] 0.101896 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.770628
+SELECTED: Ninja of the Deep Hours (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: [Mountain; Experimental Synthesizer]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Galvanic Blast
+ >>> [2] 0.999992 - Play Mountain
+     [3] 0.000008 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.776835
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: [Experimental Synthesizer]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=RL)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: [Experimental Synthesizer]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.122112 - Human Soldier Token (you)
+     [1] 0.096168 - Faerie Seer (Benchmark-skill6)
+ >>> [2] 0.109640 - RL
+     [3] 0.124911 - Samurai Token (you)
+     [4] 0.122112 - Human Soldier Token (you)
+     [5] 0.111263 - Faerie Miscreant (Benchmark-skill6)
+     [6] 0.101702 - Ninja of the Deep Hours (Benchmark-skill6)
+     [7] 0.110387 - Benchmark-skill6
+     [8] 0.101702 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.756381
+SELECTED: RL
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: [Experimental Synthesizer]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000350 - Pass
+     [1] 0.014351 - Cast Galvanic Blast
+ >>> [2] 0.985299 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.762211
+SELECTED: Cast Experimental Synthesizer
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Mountain; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 6 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Mountain; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121633 - Human Soldier Token (you)
+     [1] 0.096397 - Faerie Seer (Benchmark-skill6)
+     [2] 0.109693 - RL
+     [3] 0.125714 - Samurai Token (you)
+ >>> [4] 0.121633 - Human Soldier Token (you)
+     [5] 0.111464 - Faerie Miscreant (Benchmark-skill6)
+     [6] 0.101354 - Ninja of the Deep Hours (Benchmark-skill6)
+     [7] 0.110757 - Benchmark-skill6
+     [8] 0.101354 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.712541
+SELECTED: Human Soldier Token (you)
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 11
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Mountain; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.026225 - Pass
+ >>> [1] 0.973775 - Cast Galvanic Blast
+
+VALUE SCORE: 0.721067
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 6 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Galvanic Blast (controller=RL)
+  - [1] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Mountain; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.121633 - Human Soldier Token (you)
+     [1] 0.096397 - Faerie Seer (Benchmark-skill6)
+     [2] 0.109693 - RL
+     [3] 0.125714 - Samurai Token (you)
+     [4] 0.121633 - Human Soldier Token (you)
+     [5] 0.111464 - Faerie Miscreant (Benchmark-skill6)
+ >>> [6] 0.101354 - Ninja of the Deep Hours (Benchmark-skill6)
+     [7] 0.110757 - Benchmark-skill6
+ >>> [8] 0.101354 - Ninja of the Deep Hours (Benchmark-skill6)
+
+VALUE SCORE: 0.712541
+SELECTED: Ninja of the Deep Hours (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Miscreant; Island; Faerie Seer; Island; Island; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Miscreant; Island; Faerie Seer; Island; Island; Island,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spellstutter Sprite (controller=Benchmark-skill6)
+  - [1] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Faerie Seer; Island; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Faerie Seer; Island; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Spellstutter Sprite]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Faerie Seer; Island; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Spellstutter Sprite]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island; Island; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Humbling Elder; Spellstutter Sprite]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island; Island; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Humbling Elder; Spellstutter Sprite]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder; Spellstutter Sprite]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder; Spellstutter Sprite; Island,tapped]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=Benchmark-skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder; Spellstutter Sprite; Island,tapped; Saiba Cryptomancer]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain; Mountain,tapped; Human Soldier Token; Human Soldier Token; Mountain,tapped; Mountain; Great Furnace,tapped; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder; Spellstutter Sprite; Island,tapped; Saiba Cryptomancer]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.026225 - Pass
+
+VALUE SCORE: 0.721067
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder; Spellstutter Sprite; Island,tapped; Saiba Cryptomancer]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours; Of One Mind]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Human Soldier Token; Mountain; Mountain; Great Furnace; Samurai Token; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Experimental Synthesizer; Lightning Bolt; Reckless Impulse; Experimental Synthesizer; Reckless Impulse; Galvanic Blast]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder; Spellstutter Sprite; Island,tapped; Saiba Cryptomancer]
+-> Graveyard: [Moon-Circuit Hacker; Harrier Strix; Of One Mind; Ninja of the Deep Hours; Of One Mind]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999976 - Play Mountain
+     [2] 0.000024 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.749630
+SELECTED: Play Mountain
+

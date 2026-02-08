@@ -1,0 +1,4445 @@
+================================================================================
+GAME LOG: game_20260201_195456_0050
+Started: 2026-02-01T19:54:56.643215400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Jund Wildfire.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=3 decision=MULLIGAN Q_keep=0.223 Q_mull=0.619 hand=[Basilisk Gate; Citadel Gate; Sea Gate; Lorien Revealed; Spell Pierce; Outlaw Medic; Squadron Hawk]
+LONDON_BOTTOM: player=RL mulligansTaken=1 handSize=7 bottomN=1 kept=[Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Island; Thraben Charm] bottomed=[Counterspell]
+MULLIGAN_DECISION: player=RL mulligansTaken=1 handSize=6 lands=2 decision=KEEP Q_keep=0.342 Q_mull=-0.253 hand=[Island; Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000042 - Pass
+ >>> [1] 0.875217 - Play Island
+     [2] 0.124742 - Play Sea Gate
+
+VALUE SCORE: 0.179162
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000042 - Pass
+
+VALUE SCORE: 0.179162
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000042 - Pass
+
+VALUE SCORE: 0.179162
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000042 - Pass
+
+VALUE SCORE: 0.179162
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000042 - Pass
+
+VALUE SCORE: 0.179162
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000042 - Pass
+
+VALUE SCORE: 0.179162
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000042 - Pass
+
+VALUE SCORE: 0.179162
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000042 - Pass
+
+VALUE SCORE: 0.179162
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000042 - Pass
+
+VALUE SCORE: 0.179162
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000340 - Pass
+ >>> [1] 0.806623 - Play Sea Gate
+     [2] 0.193037 - Play Citadel Gate
+
+VALUE SCORE: 0.162634
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000340 - Pass
+
+VALUE SCORE: 0.162634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000340 - Pass
+
+VALUE SCORE: 0.162634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000340 - Pass
+
+VALUE SCORE: 0.162634
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000340 - Pass
+
+VALUE SCORE: 0.162634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000340 - Pass
+
+VALUE SCORE: 0.162634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000340 - Pass
+
+VALUE SCORE: 0.162634
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate]
+-> Permanents: [Island; Sea Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000340 - Pass
+
+VALUE SCORE: 0.162634
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Citadel Gate; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001807 - Pass
+ >>> [1] 0.998193 - Play Citadel Gate
+
+VALUE SCORE: 0.161855
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001807 - Pass
+
+VALUE SCORE: 0.161855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001807 - Pass
+
+VALUE SCORE: 0.161855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001807 - Pass
+
+VALUE SCORE: 0.161855
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge; Twisted Landscape,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge; Twisted Landscape,tapped]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001807 - Pass
+
+VALUE SCORE: 0.161855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001807 - Pass
+
+VALUE SCORE: 0.161855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.190466 - Journey to Nowhere
+     [1] 0.195041 - Thraben Charm
+ >>> [2] 0.204264 - Prismatic Strands
+     [3] 0.205964 - Guardian of the Guildpact
+ >>> [4] 0.204264 - Prismatic Strands
+
+VALUE SCORE: 0.162820
+SELECTED: Prismatic Strands
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001807 - Pass
+
+VALUE SCORE: 0.161855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001807 - Pass
+
+VALUE SCORE: 0.161855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001807 - Pass
+
+VALUE SCORE: 0.161855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001807 - Pass
+
+VALUE SCORE: 0.161855
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Guardian of the Guildpact; Preordain]
+-> Permanents: [Island; Sea Gate; Citadel Gate]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Guardian of the Guildpact; Preordain]
+-> Permanents: [Island; Sea Gate; Citadel Gate]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.527223 - Refurbished Familiar (Benchmark-skill6)
+ >>> [1] 0.472777 - Krark-Clan Shaman (Benchmark-skill6)
+
+VALUE SCORE: 0.111275
+SELECTED: Krark-Clan Shaman (Benchmark-skill6)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Preordain]
+-> Permanents: [Island; Sea Gate; Citadel Gate]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Preordain]
+-> Permanents: [Island; Sea Gate; Citadel Gate]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.027572 - Pass
+     [1] 0.000734 - Cast Prismatic Strands
+     [2] 0.207805 - Cast Journey to Nowhere
+     [3] 0.003974 - Cast Thraben Charm
+ >>> [4] 0.759917 - Cast Preordain
+
+VALUE SCORE: 0.114965
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.350485 - STOP
+ >>> [1] 0.325512 - Brainstorm
+     [2] 0.324003 - Sea Gate
+
+VALUE SCORE: 0.092600
+SELECTED: Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Precombat Main (CARD_PICK 1 min=0 max=2) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate]
+-> Graveyard: [Prismatic Strands]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.519631 - STOP
+ >>> [1] 0.480369 - Sea Gate
+
+VALUE SCORE: 0.092600
+SELECTED: Sea Gate
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Guardian of the Guildpact; Heap Gate]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Guardian of the Guildpact; Heap Gate]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.527544 - Refurbished Familiar (Benchmark-skill6)
+ >>> [1] 0.472456 - Krark-Clan Shaman (Benchmark-skill6)
+
+VALUE SCORE: 0.097781
+SELECTED: Krark-Clan Shaman (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Heap Gate]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000030 - Pass
+     [1] 0.000225 - Cast Journey to Nowhere
+     [2] 0.000004 - Cast Thraben Charm
+ >>> [3] 0.999741 - Play Heap Gate
+
+VALUE SCORE: 0.102759
+SELECTED: Play Heap Gate
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate; Heap Gate]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate; Heap Gate]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.527757 - Refurbished Familiar (Benchmark-skill6)
+ >>> [1] 0.472243 - Krark-Clan Shaman (Benchmark-skill6)
+
+VALUE SCORE: 0.087434
+SELECTED: Krark-Clan Shaman (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate; Heap Gate]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.114001 - Pass
+     [1] 0.002781 - Cast Prismatic Strands
+ >>> [2] 0.867834 - Cast Journey to Nowhere
+     [3] 0.015366 - Cast Thraben Charm
+     [4] 0.000018 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.093250
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.528008 - Refurbished Familiar (Benchmark-skill6)
+     [1] 0.471992 - Krark-Clan Shaman (Benchmark-skill6)
+
+VALUE SCORE: 0.067122
+SELECTED: Refurbished Familiar (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape,tapped; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Twisted Landscape; Krark-Clan Shaman]
+-> Graveyard: [Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman; Makeshift Munitions]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped,attacking; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped,attacking; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114001 - Pass
+
+VALUE SCORE: 0.093250
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact; Sea Gate]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact; Sea Gate]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000931 - Pass
+     [1] 0.000024 - Cast Prismatic Strands
+     [2] 0.000132 - Cast Thraben Charm
+     [3] 0.001794 - Cast Guardian of the Guildpact
+ >>> [4] 0.997118 - Play Sea Gate
+     [5] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.105008
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate,tapped]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.329306 - Pass
+     [1] 0.007984 - Cast Prismatic Strands
+     [2] 0.044365 - Cast Thraben Charm
+ >>> [3] 0.618294 - Cast Guardian of the Guildpact
+     [4] 0.000050 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.085369
+SELECTED: Cast Guardian of the Guildpact
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.574984 - Pass
+     [1] 0.425016 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: 0.006485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.574113 - Pass
+     [1] 0.425887 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: 0.007161
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Drossforge Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.576384 - Pass
+     [1] 0.423616 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: 0.005544
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge; Krark-Clan Shaman; Makeshift Munitions; Swamp; Drossforge Bridge; Mountain,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact]
+-> Graveyard: [Prismatic Strands; Preordain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge; Krark-Clan Shaman; Makeshift Munitions; Swamp; Drossforge Bridge; Mountain,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.453338 - Pass
+ >>> [1] 0.546662 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: 0.094967
+SELECTED: Flashback tap an untapped white creature you control
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge; Krark-Clan Shaman; Makeshift Munitions; Swamp; Drossforge Bridge; Mountain,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.453338 - Pass
+
+VALUE SCORE: 0.094967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-skill6)
+  - [1] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge; Krark-Clan Shaman; Makeshift Munitions; Swamp; Mountain,tapped; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.453338 - Pass
+
+VALUE SCORE: 0.094967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge; Krark-Clan Shaman; Makeshift Munitions; Swamp; Mountain,tapped; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.453338 - Pass
+
+VALUE SCORE: 0.094967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.453338 - Pass
+
+VALUE SCORE: 0.094967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.453338 - Pass
+
+VALUE SCORE: 0.094967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.453338 - Pass
+
+VALUE SCORE: 0.094967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped,attacking; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.453338 - Pass
+
+VALUE SCORE: 0.094967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped,attacking; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.453338 - Pass
+
+VALUE SCORE: 0.094967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate,tapped; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.453338 - Pass
+
+VALUE SCORE: 0.094967
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm; Idyllic Beachfront]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm; Idyllic Beachfront]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000140 - Pass
+     [1] 0.000003 - Cast Prismatic Strands
+     [2] 0.000018 - Cast Thraben Charm
+ >>> [3] 0.999838 - Play Idyllic Beachfront
+     [4] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.072583
+SELECTED: Play Idyllic Beachfront
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.875488 - Pass
+     [1] 0.018559 - Cast Prismatic Strands
+     [2] 0.105841 - Cast Thraben Charm
+     [3] 0.000112 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.040092
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.881677 - Pass
+     [1] 0.017454 - Cast Prismatic Strands
+     [2] 0.100762 - Cast Thraben Charm
+     [3] 0.000107 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.016304
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.881677 - Pass
+     [1] 0.017454 - Cast Prismatic Strands
+     [2] 0.100762 - Cast Thraben Charm
+     [3] 0.000107 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.016304
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Drossforge Bridge,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.882855 - Pass
+     [1] 0.017111 - Cast Prismatic Strands
+     [2] 0.099931 - Cast Thraben Charm
+     [3] 0.000104 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.007084
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp; Blood Fountain; Drossforge Bridge; Krark-Clan Shaman; Makeshift Munitions; Swamp; Mountain; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp; Blood Fountain; Drossforge Bridge; Krark-Clan Shaman; Makeshift Munitions; Swamp; Mountain; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.847608 - Pass
+     [1] 0.024336 - Cast Prismatic Strands
+     [2] 0.127894 - Cast Thraben Charm
+     [3] 0.000161 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.123877
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Eviscerator's Insight (controller=Benchmark-skill6)
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped,attacking; Makeshift Munitions; Swamp; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.869548 - Pass
+     [1] 0.020195 - Cast Prismatic Strands
+     [2] 0.110120 - Cast Thraben Charm
+     [3] 0.000137 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.086614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped,attacking; Makeshift Munitions; Swamp; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.866356 - Pass
+     [1] 0.020782 - Cast Prismatic Strands
+     [2] 0.112723 - Cast Thraben Charm
+     [3] 0.000140 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.093441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped,attacking; Makeshift Munitions; Swamp; Mountain,tapped; Lembas; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.866356 - Pass
+     [1] 0.020782 - Cast Prismatic Strands
+     [2] 0.112723 - Cast Thraben Charm
+     [3] 0.000140 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.093441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Lembas]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.869304 - Pass
+     [1] 0.020170 - Cast Prismatic Strands
+     [2] 0.110392 - Cast Thraben Charm
+     [3] 0.000134 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.084041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.867986 - Pass
+     [1] 0.020436 - Cast Prismatic Strands
+     [2] 0.111442 - Cast Thraben Charm
+     [3] 0.000136 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.088155
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.875895 - Pass
+     [1] 0.019047 - Cast Prismatic Strands
+     [2] 0.104931 - Cast Thraben Charm
+     [3] 0.000128 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.066648
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm; Island]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm; Island]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000168 - Pass
+     [1] 0.000004 - Cast Prismatic Strands
+     [2] 0.000021 - Cast Thraben Charm
+ >>> [3] 0.999807 - Play Island
+     [4] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.059111
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.876507 - Pass
+     [1] 0.018453 - Cast Prismatic Strands
+     [2] 0.104924 - Cast Thraben Charm
+     [3] 0.000116 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.042443
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.882504 - Pass
+     [1] 0.017503 - Cast Prismatic Strands
+     [2] 0.099881 - Cast Thraben Charm
+     [3] 0.000112 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.020503
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.882504 - Pass
+     [1] 0.017503 - Cast Prismatic Strands
+     [2] 0.099881 - Cast Thraben Charm
+     [3] 0.000112 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.020503
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Lembas; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.883727 - Pass
+     [1] 0.017185 - Cast Prismatic Strands
+     [2] 0.098979 - Cast Thraben Charm
+     [3] 0.000109 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.012068
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-skill6)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman; Makeshift Munitions; Swamp; Mountain,tapped; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Lembas]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-skill6)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman; Makeshift Munitions; Swamp; Mountain,tapped; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Lembas]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.861102 - Pass
+     [1] 0.021726 - Cast Prismatic Strands
+     [2] 0.117027 - Cast Thraben Charm
+     [3] 0.000146 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.103728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-skill6)
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman; Makeshift Munitions; Swamp; Mountain,tapped; Mountain]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.859823 - Pass
+     [1] 0.021986 - Cast Prismatic Strands
+     [2] 0.118044 - Cast Thraben Charm
+     [3] 0.000148 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.106880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.862251 - Pass
+     [1] 0.021485 - Cast Prismatic Strands
+     [2] 0.116120 - Cast Thraben Charm
+     [3] 0.000143 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.100425
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped,attacking; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.863745 - Pass
+     [1] 0.021185 - Cast Prismatic Strands
+     [2] 0.114930 - Cast Thraben Charm
+     [3] 0.000141 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.096346
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped,attacking; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.863744 - Pass
+     [1] 0.021185 - Cast Prismatic Strands
+     [2] 0.114930 - Cast Thraben Charm
+     [3] 0.000141 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.096346
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.864747 - Pass
+     [1] 0.020980 - Cast Prismatic Strands
+     [2] 0.114134 - Cast Thraben Charm
+     [3] 0.000139 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.093418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Thraben Charm; The Modern Age]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Thraben Charm; The Modern Age]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.024149 - Pass
+     [1] 0.000570 - Cast Prismatic Strands
+     [2] 0.003162 - Cast Thraben Charm
+ >>> [3] 0.972115 - Cast The Modern Age
+     [4] 0.000004 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.082594
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Prismatic Strands; Thraben Charm]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island,tapped; The Modern Age]
+-> Graveyard: [Preordain]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.875040 - Pass
+     [1] 0.018725 - Cast Prismatic Strands
+     [2] 0.106117 - Cast Thraben Charm
+     [3] 0.000118 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.048934
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thraben Charm; Brainstorm]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island,tapped; The Modern Age]
+-> Graveyard: [Preordain; Prismatic Strands]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.059774 - Pass
+     [1] 0.007136 - Cast Thraben Charm
+ >>> [2] 0.882499 - Cast Brainstorm
+     [3] 0.050584 - Flashback tap an untapped white creature you control
+     [4] 0.000008 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.041006
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 16
+-> Hand: [Thraben Charm; Sacred Cat; Heap Gate; Squadron Hawk]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Preordain; Prismatic Strands]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.235398 - Heap Gate
+     [1] 0.253056 - Sacred Cat
+     [2] 0.274521 - Thraben Charm
+ >>> [3] 0.237025 - Squadron Hawk
+
+VALUE SCORE: 0.002105
+SELECTED: Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 16
+-> Hand: [Thraben Charm; Sacred Cat; Heap Gate]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Preordain; Prismatic Strands]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.308632 - Heap Gate
+     [1] 0.331603 - Sacred Cat
+ >>> [2] 0.359765 - Thraben Charm
+
+VALUE SCORE: 0.004977
+SELECTED: Thraben Charm
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sacred Cat; Heap Gate]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; The Modern Age]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000038 - Pass
+     [1] 0.000084 - Cast Sacred Cat
+ >>> [2] 0.999851 - Play Heap Gate
+     [3] 0.000027 - Flashback tap an untapped white creature you control
+     [4] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.012665
+SELECTED: Play Heap Gate
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sacred Cat]
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.269618 - Pass
+ >>> [1] 0.567388 - Cast Sacred Cat
+     [2] 0.162964 - Flashback tap an untapped white creature you control
+     [3] 0.000030 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.013448
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.675087 - Pass
+     [1] 0.324845 - Flashback tap an untapped white creature you control
+     [2] 0.000068 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.052818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.719969 - Pass
+     [1] 0.279961 - Flashback tap an untapped white creature you control
+     [2] 0.000070 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.080041
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.795708 - Pass
+     [1] 0.204220 - Flashback tap an untapped white creature you control
+     [2] 0.000073 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.157937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Sacred Cat]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999908 - Pass
+     [1] 0.000092 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.145348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Sacred Cat]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999908 - Pass
+     [1] 0.000092 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.145348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Sacred Cat]
+-> Exile: [Prismatic Strands]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.261762 - Pass
+ >>> [1] 0.738214 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+     [2] 0.000024 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.156206
+SELECTED: Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp; Mountain,tapped; Mountain,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.859651 - Pass
+     [1] 0.140349 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.257320
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.870932 - Pass
+     [1] 0.129068 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.282350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Krark-Clan Shaman,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.870932 - Pass
+
+VALUE SCORE: -0.282350
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.870932 - Pass
+
+VALUE SCORE: -0.282350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.870932 - Pass
+
+VALUE SCORE: -0.282350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.870932 - Pass
+
+VALUE SCORE: -0.282350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.870932 - Pass
+
+VALUE SCORE: -0.282350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.870932 - Pass
+
+VALUE SCORE: -0.282350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 8 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Island,tapped; Sea Gate; Citadel Gate,tapped; Heap Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.870932 - Pass
+
+VALUE SCORE: -0.282350
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.669811 - Pass
+     [1] 0.068798 - Cast Thraben Charm
+     [2] 0.261324 - Flashback tap an untapped white creature you control
+     [3] 0.000067 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.072795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.681742 - Pass
+     [1] 0.069601 - Cast Thraben Charm
+     [2] 0.248590 - Flashback tap an untapped white creature you control
+     [3] 0.000067 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.085253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.909611 - Pass
+     [1] 0.090302 - Cast Thraben Charm
+     [2] 0.000087 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.108496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.909611 - Pass
+     [1] 0.090302 - Cast Thraben Charm
+     [2] 0.000087 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.108496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain,tapped; Swamp,tapped; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.909796 - Pass
+     [1] 0.090117 - Cast Thraben Charm
+     [2] 0.000087 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.118784
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain; Mountain; Swamp; Refurbished Familiar; Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain; Mountain; Swamp; Refurbished Familiar; Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.897768 - Pass
+     [1] 0.102111 - Cast Thraben Charm
+     [2] 0.000121 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.044772
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain; Mountain; Swamp; Refurbished Familiar,tapped,attacking; Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.898892 - Pass
+     [1] 0.100988 - Cast Thraben Charm
+     [2] 0.000120 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.039159
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain; Mountain; Swamp; Refurbished Familiar,tapped,attacking; Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.898892 - Pass
+     [1] 0.100988 - Cast Thraben Charm
+     [2] 0.000120 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.039159
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain; Mountain; Swamp; Refurbished Familiar,tapped; Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.899647 - Pass
+     [1] 0.100234 - Cast Thraben Charm
+     [2] 0.000118 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.035072
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 13
+-> Hand: [Thraben Charm; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain; Mountain; Swamp; Refurbished Familiar,tapped; Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 13
+-> Hand: [Thraben Charm; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain; Mountain; Swamp; Refurbished Familiar,tapped; Twisted Landscape; Slagwoods Bridge,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.608809 - Pass
+     [1] 0.065256 - Cast Thraben Charm
+     [2] 0.325867 - Flashback tap an untapped white creature you control
+     [3] 0.000068 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.017272
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+  - [1] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 13
+-> Hand: [Thraben Charm; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.588611 - Pass
+     [1] 0.064466 - Cast Thraben Charm
+     [2] 0.346856 - Flashback tap an untapped white creature you control
+     [3] 0.000067 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.007378
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 12
+-> Hand: [Thraben Charm; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped; Twisted Landscape]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.588836 - Pass
+     [1] 0.064478 - Cast Thraben Charm
+     [2] 0.346619 - Flashback tap an untapped white creature you control
+     [3] 0.000067 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.007530
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-skill6)
+  - [1] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 12
+-> Hand: [Thraben Charm; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.584001 - Pass
+     [1] 0.064300 - Cast Thraben Charm
+     [2] 0.351631 - Flashback tap an untapped white creature you control
+     [3] 0.000067 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.005257
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 12
+-> Hand: [Thraben Charm; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; The Modern Age; Heap Gate]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.627703 - Pass
+     [1] 0.066695 - Cast Thraben Charm
+     [2] 0.305537 - Flashback tap an untapped white creature you control
+     [3] 0.000066 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.039266
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; Heap Gate; Vector Glider]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; Heap Gate; Vector Glider]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.461967 - Vector Glider (you)
+ >>> [1] 0.538033 - Refurbished Familiar (Benchmark-skill6)
+
+VALUE SCORE: -0.087857
+SELECTED: Refurbished Familiar (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Squadron Hawk]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront; Island; Heap Gate; Vector Glider]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.141962 - Pass
+     [1] 0.014708 - Cast Thraben Charm
+ >>> [2] 0.786071 - Cast Squadron Hawk
+     [3] 0.057246 - Flashback tap an untapped white creature you control
+     [4] 0.000014 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.071429
+SELECTED: Cast Squadron Hawk
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=RL)
+  - [1] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=RL)
+  - [1] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.329643 - Vector Glider (you)
+ >>> [1] 0.389656 - Refurbished Familiar (Benchmark-skill6)
+     [2] 0.280701 - Squadron Hawk (you)
+
+VALUE SCORE: -0.154498
+SELECTED: Refurbished Familiar (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.721219 - Pass
+     [1] 0.073617 - Cast Thraben Charm
+     [2] 0.205098 - Flashback tap an untapped white creature you control
+     [3] 0.000065 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.142604
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 10 (RL turn), Precombat Main (CARD_PICK 0 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.026897 - STOP
+     [1] 0.022503 - Azorius Guildgate
+     [2] 0.022503 - Azorius Guildgate
+     [3] 0.024083 - Basilisk Gate
+     [4] 0.024083 - Basilisk Gate
+     [5] 0.024083 - Basilisk Gate
+     [6] 0.024083 - Basilisk Gate
+     [7] 0.024630 - Brainstorm
+     [8] 0.024630 - Brainstorm
+     [9] 0.026919 - Citadel Gate
+     [10] 0.026919 - Citadel Gate
+     [11] 0.026919 - Citadel Gate
+ >>> [12] 0.022544 - Counterspell
+ >>> [13] 0.022544 - Counterspell
+ >>> [14] 0.022544 - Counterspell
+ >>> [15] 0.022544 - Counterspell
+     [16] 0.026344 - Island
+     [17] 0.026344 - Island
+     [18] 0.022034 - Journey to Nowhere
+     [19] 0.022034 - Journey to Nowhere
+     [20] 0.022034 - Journey to Nowhere
+     [21] 0.020879 - Lorien Revealed
+     [22] 0.020879 - Lorien Revealed
+     [23] 0.020879 - Lorien Revealed
+     [24] 0.021023 - Outlaw Medic
+     [25] 0.021023 - Outlaw Medic
+     [26] 0.022445 - Preordain
+     [27] 0.025434 - Prismatic Strands
+     [28] 0.025434 - Prismatic Strands
+     [29] 0.025468 - Sacred Cat
+     [30] 0.025468 - Sacred Cat
+     [31] 0.025468 - Sacred Cat
+     [32] 0.025748 - Sea Gate
+     [33] 0.025748 - Sea Gate
+     [34] 0.022871 - Spell Pierce
+     [35] 0.022871 - Spell Pierce
+     [36] 0.023269 - Squadron Hawk
+     [37] 0.023269 - Squadron Hawk
+     [38] 0.023582 - The Modern Age
+     [39] 0.023582 - The Modern Age
+     [40] 0.023582 - The Modern Age
+     [41] 0.023858 - Thraben Charm
+
+VALUE SCORE: -0.142604
+SELECTED: Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 10 (RL turn), Precombat Main (CARD_PICK 1 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.027517 - STOP
+     [1] 0.023022 - Azorius Guildgate
+     [2] 0.023022 - Azorius Guildgate
+     [3] 0.024639 - Basilisk Gate
+     [4] 0.024639 - Basilisk Gate
+     [5] 0.024639 - Basilisk Gate
+     [6] 0.024639 - Basilisk Gate
+     [7] 0.025198 - Brainstorm
+     [8] 0.025198 - Brainstorm
+     [9] 0.027540 - Citadel Gate
+     [10] 0.027540 - Citadel Gate
+     [11] 0.027540 - Citadel Gate
+     [12] 0.023064 - Counterspell
+     [13] 0.023064 - Counterspell
+     [14] 0.023064 - Counterspell
+     [15] 0.026951 - Island
+     [16] 0.026951 - Island
+     [17] 0.022543 - Journey to Nowhere
+     [18] 0.022543 - Journey to Nowhere
+     [19] 0.022543 - Journey to Nowhere
+     [20] 0.021361 - Lorien Revealed
+     [21] 0.021361 - Lorien Revealed
+     [22] 0.021361 - Lorien Revealed
+     [23] 0.021508 - Outlaw Medic
+     [24] 0.021508 - Outlaw Medic
+     [25] 0.022963 - Preordain
+     [26] 0.026021 - Prismatic Strands
+     [27] 0.026021 - Prismatic Strands
+ >>> [28] 0.026055 - Sacred Cat
+ >>> [29] 0.026055 - Sacred Cat
+ >>> [30] 0.026055 - Sacred Cat
+     [31] 0.026342 - Sea Gate
+     [32] 0.026342 - Sea Gate
+     [33] 0.023399 - Spell Pierce
+     [34] 0.023399 - Spell Pierce
+     [35] 0.023805 - Squadron Hawk
+     [36] 0.023805 - Squadron Hawk
+     [37] 0.024126 - The Modern Age
+     [38] 0.024126 - The Modern Age
+     [39] 0.024126 - The Modern Age
+     [40] 0.024409 - Thraben Charm
+
+VALUE SCORE: -0.142604
+SELECTED: Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 10 (RL turn), Precombat Main (CARD_PICK 2 min=0 max=3) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: [Thraben Charm]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.028253 - STOP
+     [1] 0.023637 - Azorius Guildgate
+     [2] 0.023637 - Azorius Guildgate
+     [3] 0.025298 - Basilisk Gate
+     [4] 0.025298 - Basilisk Gate
+     [5] 0.025298 - Basilisk Gate
+     [6] 0.025298 - Basilisk Gate
+     [7] 0.025872 - Brainstorm
+     [8] 0.025872 - Brainstorm
+ >>> [9] 0.028276 - Citadel Gate
+ >>> [10] 0.028276 - Citadel Gate
+ >>> [11] 0.028276 - Citadel Gate
+     [12] 0.023681 - Counterspell
+     [13] 0.023681 - Counterspell
+     [14] 0.023681 - Counterspell
+     [15] 0.027672 - Island
+     [16] 0.027672 - Island
+     [17] 0.023146 - Journey to Nowhere
+     [18] 0.023146 - Journey to Nowhere
+     [19] 0.023146 - Journey to Nowhere
+     [20] 0.021932 - Lorien Revealed
+     [21] 0.021932 - Lorien Revealed
+     [22] 0.021932 - Lorien Revealed
+     [23] 0.022084 - Outlaw Medic
+     [24] 0.022084 - Outlaw Medic
+     [25] 0.023577 - Preordain
+     [26] 0.026717 - Prismatic Strands
+     [27] 0.026717 - Prismatic Strands
+     [28] 0.026753 - Sacred Cat
+     [29] 0.026753 - Sacred Cat
+     [30] 0.027046 - Sea Gate
+     [31] 0.027046 - Sea Gate
+     [32] 0.024025 - Spell Pierce
+     [33] 0.024025 - Spell Pierce
+     [34] 0.024442 - Squadron Hawk
+     [35] 0.024442 - Squadron Hawk
+     [36] 0.024772 - The Modern Age
+     [37] 0.024772 - The Modern Age
+     [38] 0.024772 - The Modern Age
+     [39] 0.025062 - Thraben Charm
+
+VALUE SCORE: -0.142604
+SELECTED: Citadel Gate
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell; Sacred Cat; Citadel Gate]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell; Sacred Cat; Citadel Gate]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.327426 - Vector Glider (you)
+     [1] 0.393362 - Refurbished Familiar (Benchmark-skill6)
+ >>> [2] 0.279212 - Squadron Hawk (you)
+
+VALUE SCORE: -0.206407
+SELECTED: Squadron Hawk (you)
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Counterspell; Sacred Cat; Citadel Gate]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.007935 - Pass
+     [1] 0.000812 - Cast Thraben Charm
+     [2] 0.013619 - Cast Sacred Cat
+ >>> [3] 0.975827 - Play Citadel Gate
+     [4] 0.001806 - Flashback tap an untapped white creature you control
+     [5] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.190130
+SELECTED: Play Citadel Gate
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell; Sacred Cat]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell; Sacred Cat]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.325097 - Vector Glider (you)
+     [1] 0.396846 - Refurbished Familiar (Benchmark-skill6)
+     [2] 0.278057 - Squadron Hawk (you)
+
+VALUE SCORE: -0.257624
+SELECTED: Vector Glider (you)
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Counterspell; Sacred Cat]
+-> Permanents: [Island; Sea Gate; Citadel Gate; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.339665 - Pass
+     [1] 0.035249 - Cast Thraben Charm
+ >>> [2] 0.562925 - Cast Sacred Cat
+     [3] 0.062129 - Flashback tap an untapped white creature you control
+     [4] 0.000031 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.241509
+SELECTED: Cast Sacred Cat
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 10 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.246808 - Vector Glider (you)
+ >>> [1] 0.303255 - Refurbished Familiar (Benchmark-skill6)
+     [2] 0.211231 - Squadron Hawk (you)
+     [3] 0.238706 - Sacred Cat (you)
+
+VALUE SCORE: -0.295218
+SELECTED: Refurbished Familiar (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 10 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.794084 - Pass
+     [1] 0.083621 - Cast Thraben Charm
+     [2] 0.122219 - Flashback tap an untapped white creature you control
+     [3] 0.000076 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.283021
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 10 (RL turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.246533 - Vector Glider (you)
+     [1] 0.302848 - Refurbished Familiar (Benchmark-skill6)
+     [2] 0.211039 - Squadron Hawk (you)
+     [3] 0.239579 - Sacred Cat (you)
+
+VALUE SCORE: -0.309321
+SELECTED: Vector Glider (you)
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 10 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.802379 - Pass
+     [1] 0.084655 - Cast Thraben Charm
+     [2] 0.112886 - Flashback tap an untapped white creature you control
+     [3] 0.000080 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.298152
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 10 (RL turn), Declare Blockers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.246533 - Vector Glider (you)
+     [1] 0.302848 - Refurbished Familiar (Benchmark-skill6)
+     [2] 0.211039 - Squadron Hawk (you)
+     [3] 0.239579 - Sacred Cat (you)
+
+VALUE SCORE: -0.309321
+SELECTED: Vector Glider (you)
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 10 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped,attacking; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.802379 - Pass
+     [1] 0.084655 - Cast Thraben Charm
+     [2] 0.112886 - Flashback tap an untapped white creature you control
+     [3] 0.000080 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.298152
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 10 (RL turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thraben Charm (controller=RL)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.246205 - Vector Glider (you)
+ >>> [1] 0.302906 - Refurbished Familiar (Benchmark-skill6)
+     [2] 0.210956 - Squadron Hawk (you)
+     [3] 0.239932 - Sacred Cat (you)
+
+VALUE SCORE: -0.315855
+SELECTED: Refurbished Familiar (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 10 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp; Refurbished Familiar,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.806632 - Pass
+     [1] 0.085064 - Cast Thraben Charm
+     [2] 0.108222 - Flashback tap an untapped white creature you control
+     [3] 0.000082 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.305030
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=RL)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape; Refurbished Familiar]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 10 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=RL)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape; Refurbished Familiar]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.357375 - Vector Glider (you)
+ >>> [1] 0.306215 - Squadron Hawk (you)
+     [2] 0.336410 - Sacred Cat (you)
+
+VALUE SCORE: -0.152333
+SELECTED: Squadron Hawk (you)
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape; Refurbished Familiar]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #142 - Turn 10 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp; Mountain,tapped; Mountain; Swamp]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape; Refurbished Familiar]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.751059 - Pass
+     [1] 0.070594 - Cast Thraben Charm
+     [2] 0.178277 - Flashback tap an untapped white creature you control
+     [3] 0.000070 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.135285
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=RL)
+  - [1] Cast Down (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape; Refurbished Familiar]
+-> Exile: [Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #143 - Turn 10 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=RL)
+  - [1] Cast Down (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape; Refurbished Familiar]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.356340 - Vector Glider (you)
+     [1] 0.305138 - Squadron Hawk (you)
+ >>> [2] 0.338522 - Sacred Cat (you)
+
+VALUE SCORE: -0.208725
+SELECTED: Sacred Cat (you)
+
+--------------------------------------------------------------------------------
+DECISION #144 - Turn 10 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Counterspell]
+-> Permanents: [Island; Sea Gate; Citadel Gate,tapped; Heap Gate; Journey to Nowhere; Sea Gate; Guardian of the Guildpact,tapped; Idyllic Beachfront,tapped; Island,tapped; Heap Gate; Vector Glider; Squadron Hawk; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Preordain; Prismatic Strands; Brainstorm; Squadron Hawk]
+-> Exile: [Prismatic Strands; Sacred Cat]
+[Benchmark-skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Swamp; Makeshift Munitions; Swamp,tapped; Mountain,tapped; Mountain; Swamp,tapped]
+-> Graveyard: [Drossforge Bridge; Twisted Landscape; Drossforge Bridge; Drossforge Bridge; Eviscerator's Insight; Cast Down; Blood Fountain; Krark-Clan Shaman; Slagwoods Bridge; Twisted Landscape; Refurbished Familiar]
+-> Exile: [Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.033570 - Pass
+     [1] 0.003167 - Cast Thraben Charm
+ >>> [2] 0.957044 - Cast Counterspell
+     [3] 0.006216 - Flashback tap an untapped white creature you control
+     [4] 0.000003 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.191903
+SELECTED: Cast Counterspell
+

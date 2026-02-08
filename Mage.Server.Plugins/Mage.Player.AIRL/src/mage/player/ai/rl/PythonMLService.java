@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
+
 public class PythonMLService implements PythonModel {
 
     private static final Logger logger = Logger.getLogger(PythonMLService.class.getName());
@@ -78,6 +79,7 @@ public class PythonMLService implements PythonModel {
     private volatile long lastLearnerAutoBatchPollMs = 0L;
 
     private static final class InferSlot {
+
         final PythonMLBridge bridge;
         volatile long lastReloadMs;
         volatile long lastSeenLatestMtime;
@@ -94,6 +96,7 @@ public class PythonMLService implements PythonModel {
     }
 
     private static final class TrainItem {
+
         final List<StateSequenceBuilder.TrainingData> data;
         final List<Double> rewards;
 
@@ -196,7 +199,7 @@ public class PythonMLService implements PythonModel {
                     // Process all available episodes in queue while holding GPU lock
                     boolean hasMoreWork = true;
                     TrainItem currentFirst = first;
-                    
+
                     while (hasMoreWork && running) {
                         // Drain a small bundle of episodes to amortize Python overhead and better use the GPU.
                         List<StateSequenceBuilder.TrainingData> mergedData = new ArrayList<>();
@@ -310,7 +313,11 @@ public class PythonMLService implements PythonModel {
             int[] candidateActionIds,
             float[][] candidateFeatures,
             int[] candidateMask,
-            String policyKey) {
+            String policyKey,
+            String headId,
+            int pickIndex,
+            int minTargets,
+            int maxTargets) {
         InferSlot slot = pickInferenceBridge();
         PythonMLBridge b = (slot == null) ? learner : slot.bridge;
 
@@ -331,7 +338,10 @@ public class PythonMLService implements PythonModel {
                 }
             }
         }
-        PythonMLBatchManager.PredictionResult r = b.scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask, policyKey);
+        PythonMLBatchManager.PredictionResult r = b.scoreCandidates(
+                state, candidateActionIds, candidateFeatures, candidateMask,
+                policyKey, headId, pickIndex, minTargets, maxTargets
+        );
 
         // Poll auto-batching telemetry from inference workers occasionally (best-effort).
         if (!singleBackend && slot != null) {
@@ -365,12 +375,18 @@ public class PythonMLService implements PythonModel {
             long trainOom = toLong(m.get("train_splits_oom"));
 
             long[] last = autoBatchLastCounts.computeIfAbsent(worker, k -> new long[6]);
-            long dInferCap = delta(inferCap, last[0]); last[0] = inferCap;
-            long dInferPaging = delta(inferPaging, last[1]); last[1] = inferPaging;
-            long dInferOom = delta(inferOom, last[2]); last[2] = inferOom;
-            long dTrainCap = delta(trainCap, last[3]); last[3] = trainCap;
-            long dTrainPaging = delta(trainPaging, last[4]); last[4] = trainPaging;
-            long dTrainOom = delta(trainOom, last[5]); last[5] = trainOom;
+            long dInferCap = delta(inferCap, last[0]);
+            last[0] = inferCap;
+            long dInferPaging = delta(inferPaging, last[1]);
+            last[1] = inferPaging;
+            long dInferOom = delta(inferOom, last[2]);
+            last[2] = inferOom;
+            long dTrainCap = delta(trainCap, last[3]);
+            last[3] = trainCap;
+            long dTrainPaging = delta(trainPaging, last[4]);
+            last[4] = trainPaging;
+            long dTrainOom = delta(trainOom, last[5]);
+            last[5] = trainOom;
 
             MetricsCollector.getInstance().recordAutoBatchDeltas(
                     dInferCap, dInferPaging, dInferOom,
@@ -409,15 +425,31 @@ public class PythonMLService implements PythonModel {
     }
 
     private static long toLong(Object o) {
-        if (o == null) return 0L;
-        if (o instanceof Number) return ((Number) o).longValue();
-        try { return Long.parseLong(String.valueOf(o)); } catch (Exception ignored) { return 0L; }
+        if (o == null) {
+            return 0L;
+        }
+        if (o instanceof Number) {
+            return ((Number) o).longValue();
+        }
+        try {
+            return Long.parseLong(String.valueOf(o));
+        } catch (Exception ignored) {
+            return 0L;
+        }
     }
 
     private static double toDouble(Object o) {
-        if (o == null) return 0.0;
-        if (o instanceof Number) return ((Number) o).doubleValue();
-        try { return Double.parseDouble(String.valueOf(o)); } catch (Exception ignored) { return 0.0; }
+        if (o == null) {
+            return 0.0;
+        }
+        if (o instanceof Number) {
+            return ((Number) o).doubleValue();
+        }
+        try {
+            return Double.parseDouble(String.valueOf(o));
+        } catch (Exception ignored) {
+            return 0.0;
+        }
     }
 
     @Override
@@ -490,6 +522,16 @@ public class PythonMLService implements PythonModel {
     }
 
     @Override
+    public Map<String, Integer> getHealthStats() {
+        return learner.getHealthStats();
+    }
+
+    @Override
+    public void resetHealthStats() {
+        learner.resetHealthStats();
+    }
+
+    @Override
     public void recordGameResult(float lastValuePrediction, boolean won) {
         learner.recordGameResult(lastValuePrediction, won);
     }
@@ -529,4 +571,3 @@ public class PythonMLService implements PythonModel {
         }
     }
 }
-

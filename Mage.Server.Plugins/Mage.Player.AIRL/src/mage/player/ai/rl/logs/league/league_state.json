@@ -1,0 +1,8 @@
+{
+  "promoted": false,
+  "lastTickEpisode": 150000,
+  "championPolicyKey": "recent",
+  "recent": [],
+  "pool": [],
+  "baselineWr": {"snap:league_ep_5000.pt": 0.27976190476190477, "snap:league_ep_10000.pt": 0.16071428571428573, "snap:league_ep_15000.pt": 0.25, "snap:league_ep_20000.pt": 0.11904761904761904, "snap:league_ep_25000.pt": 0.023809523809523808, "snap:league_ep_30000.pt": 0.3273809523809524, "snap:league_ep_35000.pt": 0.16666666666666666, "snap:league_ep_40000.pt": 0.16666666666666666, "snap:league_ep_45000.pt": 0.35714285714285715, "snap:league_ep_50000.pt": 0.125, "snap:league_ep_55000.pt": 0.27976190476190477, "snap:league_ep_60000.pt": 0.06547619047619048, "snap:league_ep_70000.pt": 0.2261904761904762, "snap:league_ep_75000.pt": 0.06547619047619048, "snap:league_ep_80000.pt": 0.06547619047619048, "snap:league_ep_85000.pt": 0.27976190476190477, "snap:league_ep_90000.pt": 0.24404761904761904, "snap:league_ep_95000.pt": 0.05952380952380952, "snap:league_ep_100000.pt": 0.011904761904761904, "snap:league_ep_105000.pt": 0.17261904761904762, "snap:league_ep_110000.pt": 0.23809523809523808, "snap:league_ep_115000.pt": 0.22023809523809523, "snap:league_ep_120000.pt": 0.041666666666666664, "snap:league_ep_125000.pt": 0.2857142857142857, "snap:league_ep_130000.pt": 0.25595238095238093, "snap:league_ep_135000.pt": 0.08928571428571429, "snap:league_ep_140000.pt": 0.2857142857142857, "snap:league_ep_145000.pt": 0.20833333333333334, "snap:league_ep_150000.pt": 0.35119047619047616}
+}

@@ -1,0 +1,2048 @@
+================================================================================
+GAME LOG: game_20260201_195916_0070
+Started: 2026-02-01T19:59:16.633966100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Mono-Red Burn.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.472 Q_mull=-0.011 hand=[Mountain; Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Goblin Bushwhacker]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Goblin Bushwhacker]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078429
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Goblin Bushwhacker]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.001424 - Cast Experimental Synthesizer
+ >>> [2] 0.998575 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 1.073762
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073762
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073762
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073762
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073762
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073762
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073762
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073762
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999988 - Play Mountain
+     [2] 0.000012 - Cast Experimental Synthesizer
+
+VALUE SCORE: 1.024119
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000024 - Pass
+ >>> [1] 0.925982 - Cast Rally at the Hornburg
+     [2] 0.002332 - Cast Reckless Impulse
+     [3] 0.071662 - Cast Experimental Synthesizer
+
+VALUE SCORE: 1.017239
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.017239
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.017239
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.017239
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.017239
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.017239
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.017239
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.017239
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000024 - Pass
+
+VALUE SCORE: 1.017239
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer; Clockwork Percussionist]
+-> Permanents: [Mountain; Mountain; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer; Clockwork Percussionist]
+-> Permanents: [Mountain; Mountain; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.157100 - Cast Rally at the Hornburg
+     [2] 0.000406 - Cast Reckless Impulse
+     [3] 0.012166 - Cast Experimental Synthesizer
+ >>> [4] 0.830324 - Cast Clockwork Percussionist
+
+VALUE SCORE: 1.024952
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Mountain; Human Soldier Token; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000331 - Pass
+ >>> [1] 0.999669 - Cast Experimental Synthesizer
+
+VALUE SCORE: 1.002166
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000331 - Pass
+
+VALUE SCORE: 1.002166
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.968185
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Experimental Synthesizer]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000348 - Pass
+ >>> [1] 0.999652 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.960753
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Mountain,tapped; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Meower; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Sneaky Snacker; Masked Meower]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Sneaky Snacker; Masked Meower]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When this card is exiled this way, you may cast it by paying {R} instead of putting it into your graveyard.) (controller=Benchmark-skill6)
+  - [1] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Sneaky Snacker; Masked Meower; Guttersnipe; Faithless Looting]
+-> Exile: [Fiery Temper]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Sneaky Snacker; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000348 - Pass
+
+VALUE SCORE: 0.960753
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000163 - Cast Rally at the Hornburg
+     [2] 0.000000 - Cast Reckless Impulse
+ >>> [3] 0.999836 - Play Mountain
+
+VALUE SCORE: 0.870484
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer; Mountain]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000025 - Pass
+ >>> [1] 0.784527 - Cast Rally at the Hornburg
+     [2] 0.001537 - Cast Reckless Impulse
+     [3] 0.213910 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.856294
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.856294
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.856294
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.856294
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.856294
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.856294
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped,attacking; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.856294
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped,attacking; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.856294
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.856294
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000076 - Pass
+     [1] 0.004798 - Cast Reckless Impulse
+     [2] 0.356218 - Cast Goblin Tomb Raider
+ >>> [3] 0.638908 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.832709
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 18
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000076 - Pass
+
+VALUE SCORE: 0.832709
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: [Mountain]
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.725940
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token; Samurai Token; Mountain]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000334 - Pass
+ >>> [1] 0.999665 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.712867
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Mountain,tapped; Human Soldier Token; Human Soldier Token; Samurai Token; Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Mountain; Sneaky Snacker; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Sneaky Snacker]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-skill6)
+[RL], life = 18
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Mountain; Sneaky Snacker; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Sneaky Snacker]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-skill6)
+[RL], life = 16
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Sneaky Snacker; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped,attacking; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped,attacking; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Experimental Synthesizer; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000334 - Pass
+
+VALUE SCORE: 0.712867
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token; Samurai Token; Mountain; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Clockwork Percussionist; Experimental Synthesizer; Mountain; Human Soldier Token; Human Soldier Token; Samurai Token; Mountain; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000202 - Pass
+     [1] 0.010427 - Cast Reckless Impulse
+     [2] 0.000745 - Play Mountain
+ >>> [3] 0.988626 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.670228
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Samurai Token; Mountain,tapped; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000202 - Pass
+
+VALUE SCORE: 0.670228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Samurai Token; Mountain,tapped; Goblin Tomb Raider; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999253 - Pass
+     [1] 0.000747 - Play Mountain
+
+VALUE SCORE: 0.517139
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Samurai Token,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999253 - Pass
+
+VALUE SCORE: 0.517139
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped,attacking; Clockwork Percussionist,tapped,attacking; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Samurai Token,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999253 - Pass
+
+VALUE SCORE: 0.517139
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Mountain; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999624 - Pass
+     [1] 0.000376 - Play Mountain
+
+VALUE SCORE: 0.228131
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker; Mountain,tapped; Mountain,tapped; Sneaky Snacker]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker; Mountain,tapped; Mountain,tapped; Sneaky Snacker]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999624 - Pass
+
+VALUE SCORE: 0.228131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker; Mountain,tapped; Mountain,tapped; Sneaky Snacker; Guttersnipe; Mountain,tapped]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999624 - Pass
+
+VALUE SCORE: 0.228131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-skill6)
+[RL], life = 14
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker; Mountain,tapped; Mountain,tapped; Sneaky Snacker; Guttersnipe; Mountain,tapped; Voldaren Epicure]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999624 - Pass
+
+VALUE SCORE: 0.228131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker; Mountain,tapped; Mountain,tapped; Sneaky Snacker; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999624 - Pass
+
+VALUE SCORE: 0.228131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped,attacking; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped,attacking; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999624 - Pass
+
+VALUE SCORE: 0.228131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped,attacking; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped,attacking; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999624 - Pass
+
+VALUE SCORE: 0.228131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Human Soldier Token,tapped; Clockwork Percussionist,tapped; Mountain; Human Soldier Token,tapped; Human Soldier Token,tapped; Samurai Token; Mountain,tapped; Goblin Tomb Raider,tapped; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: [Burning-Tree Emissary]
+[Benchmark-skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999624 - Pass
+
+VALUE SCORE: 0.228131
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Reckless Impulse; Mountain; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Samurai Token; Mountain; Goblin Tomb Raider; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Reckless Impulse; Mountain; Burning-Tree Emissary]
+-> Permanents: [Mountain; Mountain; Human Soldier Token; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Samurai Token; Mountain; Goblin Tomb Raider; Samurai Token]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000027 - Pass
+     [1] 0.000886 - Cast Reckless Impulse
+     [2] 0.000064 - Play Mountain
+ >>> [3] 0.999023 - Cast Burning-Tree Emissary
+
+VALUE SCORE: 0.367057
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 9
+-> Hand: [Reckless Impulse; Mountain]
+-> Permanents: [Mountain,tapped; Mountain; Human Soldier Token; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Samurai Token; Mountain,tapped; Goblin Tomb Raider; Samurai Token; Burning-Tree Emissary]
+-> Graveyard: [Rally at the Hornburg; Goblin Bushwhacker; Rally at the Hornburg; Experimental Synthesizer; Experimental Synthesizer]
+-> Exile: []
+[Benchmark-skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token]
+-> Graveyard: [Lightning Bolt; Mountain; Mountain; Fireblast; Masked Meower; Guttersnipe; Faithless Looting; Fiery Temper; Grab the Prize]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.367057
+SELECTED: Pass
+

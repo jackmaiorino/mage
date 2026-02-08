@@ -1,0 +1,1223 @@
+================================================================================
+GAME LOG: game_20260201_195456_0027
+Started: 2026-02-01T19:54:56.238928800
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Mono Red Rally.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.426 Q_mull=-0.223 hand=[Forest; Mountain; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Mountain; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Mountain; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000013 - Pass
+     [1] 0.443596 - Play Forest
+ >>> [2] 0.556391 - Play Mountain
+
+VALUE SCORE: 0.212481
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000013 - Pass
+
+VALUE SCORE: 0.212481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000013 - Pass
+
+VALUE SCORE: 0.212481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000013 - Pass
+
+VALUE SCORE: 0.212481
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000013 - Pass
+
+VALUE SCORE: 0.212481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000013 - Pass
+
+VALUE SCORE: 0.212481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000013 - Pass
+
+VALUE SCORE: 0.212481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000013 - Pass
+
+VALUE SCORE: 0.212481
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Forest; Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions]
+-> Permanents: [Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000046 - Pass
+ >>> [1] 0.999954 - Play Forest
+
+VALUE SCORE: 0.179779
+SELECTED: Play Forest
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions]
+-> Permanents: [Mountain; Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions]
+-> Permanents: [Mountain; Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.351031 - Forest (you)
+ >>> [1] 0.325848 - Mountain (Benchmark-skill6)
+     [2] 0.323121 - Mountain (you)
+
+VALUE SCORE: 0.165432
+SELECTED: Mountain (Benchmark-skill6)
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Cleansing Wildfire; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions]
+-> Permanents: [Mountain; Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.361537 - Pass
+ >>> [1] 0.622183 - Cast Cleansing Wildfire
+     [2] 0.016280 - Cast Makeshift Munitions
+
+VALUE SCORE: 0.166606
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions]
+-> Permanents: [Mountain; Forest]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.351031 - Forest (you)
+     [1] 0.325848 - Mountain (Benchmark-skill6)
+ >>> [2] 0.323121 - Mountain (you)
+
+VALUE SCORE: 0.165432
+SELECTED: Mountain (you)
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Precombat Main (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.018623 - Blood Fountain
+     [1] 0.019047 - Cast Down
+     [2] 0.019047 - Cast Down
+     [3] 0.019047 - Cast Down
+ >>> [4] 0.017325 - Cleansing Wildfire
+ >>> [5] 0.017325 - Cleansing Wildfire
+ >>> [6] 0.017325 - Cleansing Wildfire
+     [7] 0.019698 - Drossforge Bridge
+     [8] 0.019698 - Drossforge Bridge
+     [9] 0.019698 - Drossforge Bridge
+     [10] 0.019698 - Drossforge Bridge
+     [11] 0.018376 - Eviscerator's Insight
+     [12] 0.021425 - Fanatical Offering
+     [13] 0.021425 - Fanatical Offering
+     [14] 0.021425 - Fanatical Offering
+     [15] 0.021425 - Fanatical Offering
+     [16] 0.019660 - Forest
+     [17] 0.020478 - Ichor Wellspring
+     [18] 0.020478 - Ichor Wellspring
+     [19] 0.020478 - Ichor Wellspring
+     [20] 0.016919 - Krark-Clan Shaman
+     [21] 0.016919 - Krark-Clan Shaman
+     [22] 0.016919 - Krark-Clan Shaman
+     [23] 0.019645 - Lembas
+     [24] 0.019645 - Lembas
+     [25] 0.019645 - Lembas
+     [26] 0.018566 - Mountain
+     [27] 0.019482 - Nihil Spellbomb
+     [28] 0.019482 - Nihil Spellbomb
+     [29] 0.019482 - Nihil Spellbomb
+     [30] 0.019482 - Nihil Spellbomb
+     [31] 0.020663 - Nyxborn Hydra
+     [32] 0.019950 - Refurbished Familiar
+     [33] 0.019950 - Refurbished Familiar
+     [34] 0.019312 - Slagwoods Bridge
+     [35] 0.019312 - Slagwoods Bridge
+     [36] 0.019312 - Slagwoods Bridge
+     [37] 0.019312 - Slagwoods Bridge
+     [38] 0.020644 - Swamp
+     [39] 0.020644 - Swamp
+     [40] 0.020644 - Swamp
+     [41] 0.020402 - Toxin Analysis
+     [42] 0.020402 - Toxin Analysis
+     [43] 0.017922 - Twisted Landscape
+     [44] 0.017922 - Twisted Landscape
+     [45] 0.017922 - Twisted Landscape
+     [46] 0.017922 - Twisted Landscape
+     [47] 0.020431 - Vault of Whispers
+     [48] 0.017362 - Writhing Chrysalis
+     [49] 0.017362 - Writhing Chrysalis
+     [50] 0.017362 - Writhing Chrysalis
+     [51] 0.017362 - Writhing Chrysalis
+
+VALUE SCORE: 0.162716
+SELECTED: Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-skill6)
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-skill6)
+[RL], life = 15
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-skill6)
+[RL], life = 12
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-skill6)
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Mountain,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Mountain,tapped; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Pulse of Murasa; Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-skill6)
+[RL], life = 4
+-> Hand: [Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Mountain; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-skill6)
+[RL], life = 4
+-> Hand: [Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Mountain; Clockwork Percussionist]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Benchmark-skill6)
+[RL], life = 4
+-> Hand: [Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Mountain,tapped; Clockwork Percussionist; Mountain]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast; Reckless Impulse]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Mountain,tapped; Clockwork Percussionist; Mountain; Goblin Tomb Raider]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast; Reckless Impulse]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast; Reckless Impulse]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Benchmark-skill6 turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Cast Down; Refurbished Familiar; Refurbished Familiar; Makeshift Munitions; Fanatical Offering; Lembas; Ichor Wellspring]
+-> Permanents: [Forest]
+-> Graveyard: [Mountain; Cleansing Wildfire; Pulse of Murasa]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain; Goblin Tomb Raider,tapped,attacking]
+-> Graveyard: [Rally at the Hornburg; Lightning Bolt; Galvanic Blast; Reckless Impulse]
+-> Exile: [Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361537 - Pass
+
+VALUE SCORE: 0.166606
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-skill6
+Loser: RL
+Turns: 4
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 41
+Ended: 2026-02-01T19:55:27.203285500
+================================================================================

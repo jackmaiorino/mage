@@ -1,0 +1,2151 @@
+================================================================================
+GAME LOG: game_20260201_195456_0022
+Started: 2026-02-01T19:54:56.010653300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Elves.dek
+MULLIGAN_DECISION: player=RL mulligansTaken=0 handSize=7 lands=3 decision=KEEP Q_keep=0.439 Q_mull=0.102 hand=[Drossforge Bridge; Mountain; Vault of Whispers; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Vault of Whispers; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Vault of Whispers; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+     [1] 0.114088 - Play Drossforge Bridge
+     [2] 0.268639 - Play Mountain
+ >>> [3] 0.617267 - Play Vault of Whispers
+
+VALUE SCORE: 0.213019
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.213019
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.213019
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.213019
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.213019
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.213019
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.213019
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Vault of Whispers]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mountain; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Vault of Whispers]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000017 - Pass
+     [1] 0.298555 - Play Drossforge Bridge
+ >>> [2] 0.701429 - Play Mountain
+
+VALUE SCORE: 0.211366
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.493357 - Vault of Whispers (you)
+ >>> [1] 0.506643 - Mountain (you)
+
+VALUE SCORE: 0.190911
+SELECTED: Mountain (you)
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Vault of Whispers; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.036295 - Pass
+     [1] 0.007055 - Cast Fanatical Offering
+ >>> [2] 0.650670 - Cast Ichor Wellspring
+     [3] 0.229620 - Cast Krark-Clan Shaman
+     [4] 0.076360 - Cast Cleansing Wildfire
+
+VALUE SCORE: 0.192542
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036295 - Pass
+
+VALUE SCORE: 0.192542
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036295 - Pass
+
+VALUE SCORE: 0.192542
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036295 - Pass
+
+VALUE SCORE: 0.192542
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036295 - Pass
+
+VALUE SCORE: 0.192542
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036295 - Pass
+
+VALUE SCORE: 0.192542
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036295 - Pass
+
+VALUE SCORE: 0.192542
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036295 - Pass
+
+VALUE SCORE: 0.192542
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.494212 - Vault of Whispers (you)
+     [1] 0.505788 - Mountain (you)
+
+VALUE SCORE: 0.204478
+SELECTED: Vault of Whispers (you)
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000049 - Pass
+ >>> [1] 0.828352 - Play Drossforge Bridge
+     [2] 0.000011 - Cast Fanatical Offering
+     [3] 0.171133 - Cast Refurbished Familiar
+     [4] 0.000343 - Cast Krark-Clan Shaman
+     [5] 0.000112 - Cast Cleansing Wildfire
+
+VALUE SCORE: 0.206070
+SELECTED: Play Drossforge Bridge
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.363010 - Drossforge Bridge (you)
+     [1] 0.314358 - Vault of Whispers (you)
+ >>> [2] 0.322631 - Mountain (you)
+
+VALUE SCORE: 0.199735
+SELECTED: Mountain (you)
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000291 - Pass
+     [1] 0.000063 - Cast Fanatical Offering
+ >>> [2] 0.996989 - Cast Refurbished Familiar
+     [3] 0.002005 - Cast Krark-Clan Shaman
+     [4] 0.000651 - Cast Cleansing Wildfire
+
+VALUE SCORE: 0.201236
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mountain; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000291 - Pass
+
+VALUE SCORE: 0.201236
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Krark-Clan Shaman; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mountain; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.120480 - Pass
+ >>> [1] 0.879520 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.206700
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.184440
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.184502
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.184347
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999805 - Pass
+     [1] 0.000195 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.720398
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999805 - Pass
+     [1] 0.000195 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.720476
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999806 - Pass
+     [1] 0.000194 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.720172
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Refurbished Familiar; Mountain]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Refurbished Familiar; Mountain]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.361334 - Drossforge Bridge (you)
+     [1] 0.315497 - Vault of Whispers (you)
+     [2] 0.323169 - Mountain (you)
+
+VALUE SCORE: 0.209474
+SELECTED: Drossforge Bridge (you)
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar; Mountain]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar; Mountain]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000021 - Pass
+     [1] 0.000005 - Cast Fanatical Offering
+     [2] 0.000049 - Cast Cleansing Wildfire
+     [3] 0.078107 - Cast Refurbished Familiar
+ >>> [4] 0.921818 - Play Mountain
+     [5] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.210923
+SELECTED: Play Mountain
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.272406 - Drossforge Bridge (you)
+     [1] 0.237655 - Vault of Whispers (you)
+     [2] 0.244969 - Mountain (you)
+     [3] 0.244969 - Mountain (you)
+
+VALUE SCORE: 0.188317
+SELECTED: Drossforge Bridge (you)
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000325 - Pass
+     [1] 0.000062 - Cast Fanatical Offering
+     [2] 0.000677 - Cast Cleansing Wildfire
+ >>> [3] 0.998936 - Cast Refurbished Familiar
+     [4] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.189657
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.846117 - Pass
+     [1] 0.153878 - Cast Fanatical Offering
+     [2] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.186301
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.272038 - Drossforge Bridge (you)
+     [1] 0.239060 - Vault of Whispers (you)
+ >>> [2] 0.244451 - Mountain (you)
+ >>> [3] 0.244451 - Mountain (you)
+
+VALUE SCORE: 0.192262
+SELECTED: Mountain (you)
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Cleansing Wildfire; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.297797 - Pass
+     [1] 0.059949 - Cast Fanatical Offering
+ >>> [2] 0.642252 - Cast Cleansing Wildfire
+     [3] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.193733
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Vault of Whispers,tapped; Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar]
+-> Graveyard: []
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.272038 - Drossforge Bridge (you)
+ >>> [1] 0.239060 - Vault of Whispers (you)
+     [2] 0.244451 - Mountain (you)
+     [3] 0.244451 - Mountain (you)
+
+VALUE SCORE: 0.192262
+SELECTED: Vault of Whispers (you)
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (RL turn), Precombat Main (CARD_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.019820 - Blood Fountain
+     [1] 0.020300 - Cast Down
+     [2] 0.020300 - Cast Down
+     [3] 0.020300 - Cast Down
+     [4] 0.020300 - Cast Down
+     [5] 0.018447 - Cleansing Wildfire
+     [6] 0.018447 - Cleansing Wildfire
+     [7] 0.018447 - Cleansing Wildfire
+     [8] 0.020940 - Drossforge Bridge
+     [9] 0.020940 - Drossforge Bridge
+     [10] 0.020940 - Drossforge Bridge
+     [11] 0.019609 - Eviscerator's Insight
+     [12] 0.022847 - Fanatical Offering
+     [13] 0.022847 - Fanatical Offering
+     [14] 0.022847 - Fanatical Offering
+     [15] 0.020871 - Forest
+     [16] 0.020871 - Forest
+     [17] 0.021803 - Ichor Wellspring
+     [18] 0.021803 - Ichor Wellspring
+     [19] 0.018005 - Krark-Clan Shaman
+     [20] 0.018005 - Krark-Clan Shaman
+     [21] 0.020872 - Lembas
+     [22] 0.020872 - Lembas
+     [23] 0.020872 - Lembas
+     [24] 0.020723 - Makeshift Munitions
+     [25] 0.020743 - Nihil Spellbomb
+     [26] 0.020743 - Nihil Spellbomb
+     [27] 0.020743 - Nihil Spellbomb
+     [28] 0.020743 - Nihil Spellbomb
+     [29] 0.020765 - Pulse of Murasa
+     [30] 0.021183 - Refurbished Familiar
+     [31] 0.021183 - Refurbished Familiar
+     [32] 0.020567 - Slagwoods Bridge
+     [33] 0.020567 - Slagwoods Bridge
+     [34] 0.020567 - Slagwoods Bridge
+     [35] 0.020567 - Slagwoods Bridge
+     [36] 0.022006 - Swamp
+     [37] 0.022006 - Swamp
+     [38] 0.022006 - Swamp
+     [39] 0.021683 - Toxin Analysis
+     [40] 0.021683 - Toxin Analysis
+     [41] 0.019073 - Twisted Landscape
+     [42] 0.019073 - Twisted Landscape
+     [43] 0.019073 - Twisted Landscape
+     [44] 0.019073 - Twisted Landscape
+ >>> [45] 0.018482 - Writhing Chrysalis
+ >>> [46] 0.018482 - Writhing Chrysalis
+ >>> [47] 0.018482 - Writhing Chrysalis
+ >>> [48] 0.018482 - Writhing Chrysalis
+
+VALUE SCORE: 0.174069
+SELECTED: Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000442 - Pass
+ >>> [1] 0.999558 - Cast Refurbished Familiar
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160925
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.157066
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.163477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160941
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160941
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.158876
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.532991
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.533118
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain,tapped; Refurbished Familiar; Writhing Chrysalis,tapped; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.532831
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (RL turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.211896 - Refurbished Familiar (you)
+     [1] 0.211896 - Refurbished Familiar (you)
+     [2] 0.172698 - Writhing Chrysalis (you)
+     [3] 0.211896 - Refurbished Familiar (you)
+ >>> [4] 0.191613 - Krark-Clan Shaman (you)
+
+VALUE SCORE: 0.203763
+SELECTED: Krark-Clan Shaman (you)
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.576089 - Pass
+     [1] 0.134753 - Cast Fanatical Offering
+     [2] 0.289153 - Cast Toxin Analysis
+     [3] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.205121
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (RL turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.211753 - Refurbished Familiar (you)
+     [1] 0.211753 - Refurbished Familiar (you)
+     [2] 0.173203 - Writhing Chrysalis (you)
+     [3] 0.211753 - Refurbished Familiar (you)
+ >>> [4] 0.191539 - Krark-Clan Shaman (you)
+
+VALUE SCORE: 0.198290
+SELECTED: Krark-Clan Shaman (you)
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.586405 - Pass
+     [1] 0.130336 - Cast Fanatical Offering
+     [2] 0.283258 - Cast Toxin Analysis
+     [3] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.199868
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (RL turn), Declare Blockers (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.211753 - Refurbished Familiar (you)
+     [1] 0.211753 - Refurbished Familiar (you)
+ >>> [2] 0.173203 - Writhing Chrysalis (you)
+     [3] 0.211753 - Refurbished Familiar (you)
+     [4] 0.191539 - Krark-Clan Shaman (you)
+
+VALUE SCORE: 0.198290
+SELECTED: Writhing Chrysalis (you)
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.586405 - Pass
+     [1] 0.130336 - Cast Fanatical Offering
+     [2] 0.283258 - Cast Toxin Analysis
+     [3] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.199868
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (RL turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.211739 - Refurbished Familiar (you)
+ >>> [1] 0.211739 - Refurbished Familiar (you)
+     [2] 0.173231 - Writhing Chrysalis (you)
+ >>> [3] 0.211739 - Refurbished Familiar (you)
+     [4] 0.191552 - Krark-Clan Shaman (you)
+
+VALUE SCORE: 0.193891
+SELECTED: Refurbished Familiar (you)
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (RL turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.592615 - Pass
+     [1] 0.127452 - Cast Fanatical Offering
+     [2] 0.279933 - Cast Toxin Analysis
+     [3] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.195711
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.209578 - Refurbished Familiar (you)
+ >>> [1] 0.209578 - Refurbished Familiar (you)
+     [2] 0.176527 - Writhing Chrysalis (you)
+ >>> [3] 0.209578 - Refurbished Familiar (you)
+     [4] 0.194738 - Krark-Clan Shaman (you)
+
+VALUE SCORE: 0.583066
+SELECTED: Refurbished Familiar (you)
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.035523 - Pass
+     [1] 0.288702 - Cast Fanatical Offering
+ >>> [2] 0.675775 - Cast Toxin Analysis
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.609913
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Benchmark-skill6 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=RL)
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.209578 - Refurbished Familiar (you)
+     [1] 0.209578 - Refurbished Familiar (you)
+ >>> [2] 0.176527 - Writhing Chrysalis (you)
+     [3] 0.209578 - Refurbished Familiar (you)
+     [4] 0.194738 - Krark-Clan Shaman (you)
+
+VALUE SCORE: 0.583066
+SELECTED: Writhing Chrysalis (you)
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped; Clue Token]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire; Toxin Analysis]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000338 - Pass
+ >>> [1] 0.999662 - {2}, Sacrifice this artifact: Draw a card.
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.550028
+SELECTED: {2}, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5 (Benchmark-skill6 turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Twisted Landscape]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain,tapped; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire; Toxin Analysis]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.507787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5 (Benchmark-skill6 turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Twisted Landscape]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain,tapped; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire; Toxin Analysis]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.507914
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5 (Benchmark-skill6 turn), Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Twisted Landscape]
+-> Permanents: [Mountain,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Mountain,tapped; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Refurbished Familiar,tapped]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire; Toxin Analysis]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.507627
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Twisted Landscape; Twisted Landscape]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire; Toxin Analysis]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Twisted Landscape; Twisted Landscape]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire; Toxin Analysis]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.000000 - Cast Fanatical Offering
+ >>> [2] 0.999998 - Play Twisted Landscape
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.203171
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (RL turn), Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Twisted Landscape]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Mountain; Refurbished Familiar; Writhing Chrysalis; Refurbished Familiar; Twisted Landscape]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire; Toxin Analysis]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.828242 - Pass
+     [1] 0.170859 - Cast Fanatical Offering
+     [2] 0.000893 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.193539
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (RL turn), Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Twisted Landscape]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking; Twisted Landscape]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire; Toxin Analysis]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.837365 - Pass
+     [1] 0.161784 - Cast Fanatical Offering
+     [2] 0.000850 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.186784
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (RL turn), Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Twisted Landscape]
+-> Permanents: [Mountain; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Mountain; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking; Twisted Landscape]
+-> Graveyard: [Vault of Whispers; Cleansing Wildfire; Toxin Analysis]
+-> Exile: []
+[Benchmark-skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Generous Ent; Avenging Hunter; Lead the Stampede]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.837365 - Pass
+     [1] 0.161784 - Cast Fanatical Offering
+     [2] 0.000850 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.186784
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-skill6
+Turns: 6
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Elves.dek
+Total Decisions Logged: 66
+Ended: 2026-02-01T19:56:31.819378200
+================================================================================

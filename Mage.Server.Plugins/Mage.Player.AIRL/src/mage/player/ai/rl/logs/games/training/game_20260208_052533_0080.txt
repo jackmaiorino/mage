@@ -1,0 +1,3471 @@
+================================================================================
+GAME LOG: game_20260208_052533_0080
+Started: 2026-02-08T05:25:33.263833300
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=1 decision=KEEP Q_keep=0.170 Q_mull=0.102 hand=[Drossforge Bridge; Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Drossforge Bridge; Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.123456 - Pass
+ >>> [1] 0.876544 - Play Drossforge Bridge
+
+VALUE SCORE: -0.209588
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993885 - Pass
+     [1] 0.006115 - Cast Toxin Analysis
+
+VALUE SCORE: -0.241900
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994033 - Pass
+     [1] 0.005967 - Cast Toxin Analysis
+
+VALUE SCORE: -0.237724
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994034 - Pass
+     [1] 0.005966 - Cast Toxin Analysis
+
+VALUE SCORE: -0.237692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994141 - Pass
+     [1] 0.005859 - Cast Toxin Analysis
+
+VALUE SCORE: -0.232720
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas; Twisted Landscape]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas; Twisted Landscape]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.118081 - Pass
+     [1] 0.000946 - Cast Toxin Analysis
+     [2] 0.880972 - Play Twisted Landscape
+
+VALUE SCORE: -0.315378
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas; Twisted Landscape]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992221 - Pass
+     [1] 0.007779 - Cast Toxin Analysis
+
+VALUE SCORE: -0.318189
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas; Twisted Landscape]
+-> Permanents: [Drossforge Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.118615 - Pass
+     [1] 0.000928 - Cast Toxin Analysis
+ >>> [2] 0.880457 - Play Twisted Landscape
+
+VALUE SCORE: -0.318080
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Lembas; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge; Twisted Landscape]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.430038 - Pass
+     [1] 0.003106 - Cast Cast Down
+     [2] 0.017075 - Cast Cleansing Wildfire
+ >>> [3] 0.540340 - Cast Lembas
+     [4] 0.003262 - Cast Toxin Analysis
+     [5] 0.006179 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.322142
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Postcombat Main (CARD_PICK 0 min=0 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505411 - STOP
+     [1] 0.494589 - Swamp
+
+VALUE SCORE: -0.322037
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Swamp]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Swamp]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Swamp]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Swamp]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Swamp]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Swamp]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Swamp]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Swamp; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Swamp; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.071235 - Pass
+     [1] 0.000728 - Cast Cast Down
+     [2] 0.003733 - Cast Cleansing Wildfire
+     [3] 0.000685 - Cast Toxin Analysis
+     [4] 0.092516 - Cast Lembas
+ >>> [5] 0.473950 - Play Swamp
+     [6] 0.268417 - Play Slagwoods Bridge
+     [7] 0.001490 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [8] 0.087246 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.408503
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Lembas; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.267988 - Pass
+     [1] 0.002847 - Cast Cast Down
+     [2] 0.014617 - Cast Cleansing Wildfire
+     [3] 0.002403 - Cast Toxin Analysis
+     [4] 0.363038 - Cast Lembas
+     [5] 0.005966 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [6] 0.343140 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.401961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Lembas; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.428412 - Pass
+     [1] 0.004499 - Cast Cast Down
+     [2] 0.003786 - Cast Toxin Analysis
+     [3] 0.009380 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.553922 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.398548
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Lembas; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.263472 - Pass
+     [1] 0.002759 - Cast Cast Down
+     [2] 0.014224 - Cast Cleansing Wildfire
+     [3] 0.002321 - Cast Toxin Analysis
+     [4] 0.366863 - Cast Lembas
+     [5] 0.005719 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [6] 0.344642 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.397075
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990886 - Pass
+     [1] 0.009114 - Cast Toxin Analysis
+
+VALUE SCORE: -0.393768
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991680 - Pass
+     [1] 0.008320 - Cast Toxin Analysis
+
+VALUE SCORE: -0.349157
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991828 - Pass
+     [1] 0.008172 - Cast Toxin Analysis
+
+VALUE SCORE: -0.335372
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991863 - Pass
+     [1] 0.008137 - Cast Toxin Analysis
+
+VALUE SCORE: -0.334120
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Winding Way (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Winding Way (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest]
+-> Graveyard: [Generous Ent]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994430 - Pass
+     [1] 0.005570 - Cast Toxin Analysis
+
+VALUE SCORE: -0.187506
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Bot-Skill1)
+[PlayerRL1], life = 22
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993999 - Pass
+     [1] 0.006001 - Cast Toxin Analysis
+
+VALUE SCORE: -0.152404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994267 - Pass
+     [1] 0.005733 - Cast Toxin Analysis
+
+VALUE SCORE: -0.132110
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994119 - Pass
+     [1] 0.005881 - Cast Toxin Analysis
+
+VALUE SCORE: -0.133387
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 22
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994119 - Pass
+     [1] 0.005881 - Cast Toxin Analysis
+
+VALUE SCORE: -0.133387
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994609 - Pass
+     [1] 0.005391 - Cast Toxin Analysis
+
+VALUE SCORE: -0.157980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Bot-Skill1)
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994081 - Pass
+     [1] 0.005919 - Cast Toxin Analysis
+
+VALUE SCORE: -0.191133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994123 - Pass
+     [1] 0.005877 - Cast Toxin Analysis
+
+VALUE SCORE: -0.188753
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Slagwoods Bridge; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.151747 - Pass
+     [1] 0.001742 - Cast Cast Down
+     [2] 0.008760 - Cast Cleansing Wildfire
+     [3] 0.001490 - Cast Toxin Analysis
+     [4] 0.231108 - Cast Lembas
+ >>> [5] 0.601701 - Play Slagwoods Bridge
+     [6] 0.003452 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.402898
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.378842 - Pass
+     [1] 0.004553 - Cast Cast Down
+     [2] 0.022683 - Cast Cleansing Wildfire
+     [3] 0.003751 - Cast Toxin Analysis
+     [4] 0.581070 - Cast Lembas
+     [5] 0.009102 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.401039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.956143 - Pass
+     [1] 0.011474 - Cast Cast Down
+     [2] 0.009433 - Cast Toxin Analysis
+     [3] 0.022951 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.400787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.377959 - Pass
+     [1] 0.004530 - Cast Cast Down
+     [2] 0.022632 - Cast Cleansing Wildfire
+     [3] 0.003753 - Cast Toxin Analysis
+     [4] 0.582083 - Cast Lembas
+     [5] 0.009042 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.400855
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973216 - Pass
+     [1] 0.006853 - Cast Cast Down
+     [2] 0.005036 - Cast Toxin Analysis
+     [3] 0.014895 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.082540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped,attacking; Snow-Covered Forest; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Nyxborn Hydra; Fyndhorn Elves,tapped,attacking]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.964988 - Pass
+     [1] 0.009066 - Cast Cast Down
+     [2] 0.005339 - Cast Toxin Analysis
+     [3] 0.020608 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.162903
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 18
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped,attacking; Snow-Covered Forest; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Nyxborn Hydra; Fyndhorn Elves,tapped,attacking]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965071 - Pass
+     [1] 0.009040 - Cast Cast Down
+     [2] 0.005343 - Cast Toxin Analysis
+     [3] 0.020546 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.161359
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Bot-Skill1)
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953401 - Pass
+     [1] 0.012101 - Cast Cast Down
+     [2] 0.006639 - Cast Toxin Analysis
+     [3] 0.027859 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.190658
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953610 - Pass
+     [1] 0.012045 - Cast Cast Down
+     [2] 0.006584 - Cast Toxin Analysis
+     [3] 0.027761 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.187362
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.080825 - Pass
+     [1] 0.001120 - Cast Cast Down
+     [2] 0.005354 - Cast Cleansing Wildfire
+     [3] 0.000974 - Cast Toxin Analysis
+     [4] 0.487629 - Cast Writhing Chrysalis
+     [5] 0.118903 - Cast Lembas
+     [6] 0.000672 - Cast Pulse of Murasa
+     [7] 0.302320 - Play Slagwoods Bridge
+     [8] 0.002203 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.419735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.947884 - Pass
+     [1] 0.011692 - Cast Cast Down
+     [2] 0.010329 - Cast Toxin Analysis
+     [3] 0.007095 - Cast Pulse of Murasa
+     [4] 0.023001 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.406858
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Writhing Chrysalis; Lembas; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.077373 - Pass
+     [1] 0.000886 - Cast Cast Down
+     [2] 0.004521 - Cast Cleansing Wildfire
+     [3] 0.000834 - Cast Toxin Analysis
+ >>> [4] 0.478995 - Cast Writhing Chrysalis
+     [5] 0.111361 - Cast Lembas
+     [6] 0.000565 - Cast Pulse of Murasa
+     [7] 0.323749 - Play Slagwoods Bridge
+     [8] 0.001716 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.381718
+SELECTED: Cast Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=PlayerRL1)
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Lembas; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Lembas; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.170881 - Pass
+     [1] 0.250131 - Cast Lembas
+ >>> [2] 0.578989 - Play Slagwoods Bridge
+
+VALUE SCORE: -0.355844
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Lembas; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.405615 - Pass
+ >>> [1] 0.594385 - Cast Lembas
+
+VALUE SCORE: -0.347111
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=PlayerRL1)
+  - [1] Lembas (controller=PlayerRL1)
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=PlayerRL1)
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=0 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.474371 - STOP
+     [1] 0.525629 - Nihil Spellbomb
+
+VALUE SCORE: -0.360130
+SELECTED: STOP
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092375 - Pass
+     [1] 0.000937 - Cast Cast Down
+     [2] 0.004833 - Cast Cleansing Wildfire
+     [3] 0.001084 - Cast Toxin Analysis
+     [4] 0.000710 - Cast Pulse of Murasa
+     [5] 0.245765 - Cast Nihil Spellbomb
+     [6] 0.534012 - Cast Writhing Chrysalis
+     [7] 0.001719 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [8] 0.118565 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.303908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge; Lembas]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.430596 - Pass
+     [1] 0.004049 - Cast Cast Down
+     [2] 0.004644 - Cast Toxin Analysis
+     [3] 0.003048 - Cast Pulse of Murasa
+     [4] 0.007435 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [5] 0.550230 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.288622
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=PlayerRL1)
+  - [1] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 12
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973126 - Pass
+     [1] 0.009191 - Cast Cast Down
+     [2] 0.010693 - Cast Toxin Analysis
+     [3] 0.006990 - Cast Pulse of Murasa
+
+VALUE SCORE: -0.290901
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.973244 - Pass
+     [1] 0.009161 - Cast Cast Down
+     [2] 0.010638 - Cast Toxin Analysis
+     [3] 0.006956 - Cast Pulse of Murasa
+
+VALUE SCORE: -0.289896
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Nihil Spellbomb; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.267913 - Pass
+     [1] 0.002522 - Cast Cast Down
+     [2] 0.013254 - Cast Cleansing Wildfire
+     [3] 0.002928 - Cast Toxin Analysis
+     [4] 0.001915 - Cast Pulse of Murasa
+ >>> [5] 0.711467 - Cast Nihil Spellbomb
+
+VALUE SCORE: -0.289896
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925358 - Pass
+     [1] 0.009005 - Cast Cast Down
+     [2] 0.047479 - Cast Cleansing Wildfire
+     [3] 0.009955 - Cast Toxin Analysis
+     [4] 0.008202 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.288773
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969629 - Pass
+     [1] 0.010494 - Cast Cast Down
+     [2] 0.010776 - Cast Toxin Analysis
+     [3] 0.009101 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.329145
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra,blocking; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970293 - Pass
+     [1] 0.010015 - Cast Cast Down
+     [2] 0.010741 - Cast Toxin Analysis
+     [3] 0.008952 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.306703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924322 - Pass
+     [1] 0.009279 - Cast Cast Down
+     [2] 0.048813 - Cast Cleansing Wildfire
+     [3] 0.009546 - Cast Toxin Analysis
+     [4] 0.008039 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.329595
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Elvish Mystic; Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978392 - Pass
+     [1] 0.010092 - Cast Cast Down
+     [2] 0.006047 - Cast Toxin Analysis
+     [3] 0.005469 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.195003
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Elvish Mystic,tapped,attacking; Snow-Covered Forest; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Nyxborn Hydra; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970217 - Pass
+     [1] 0.016079 - Cast Cast Down
+     [2] 0.006872 - Cast Toxin Analysis
+     [3] 0.006833 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.310916
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 15
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Elvish Mystic,tapped,attacking; Snow-Covered Forest; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Nyxborn Hydra; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped,attacking]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970562 - Pass
+     [1] 0.015904 - Cast Cast Down
+     [2] 0.006789 - Cast Toxin Analysis
+     [3] 0.006745 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.316776
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Bot-Skill1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.959535 - Pass
+     [1] 0.023649 - Cast Cast Down
+     [2] 0.008173 - Cast Toxin Analysis
+     [3] 0.008643 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.413290
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963116 - Pass
+     [1] 0.021674 - Cast Cast Down
+     [2] 0.007442 - Cast Toxin Analysis
+     [3] 0.007768 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.412086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Bot-Skill1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953211 - Pass
+     [1] 0.029228 - Cast Cast Down
+     [2] 0.008366 - Cast Toxin Analysis
+     [3] 0.009195 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.476608
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Bot-Skill1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.951237 - Pass
+     [1] 0.030935 - Cast Cast Down
+     [2] 0.008465 - Cast Toxin Analysis
+     [3] 0.009362 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.495739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Bot-Skill1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.951237 - Pass
+     [1] 0.030935 - Cast Cast Down
+     [2] 0.008465 - Cast Toxin Analysis
+     [3] 0.009362 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.495739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.950692 - Pass
+     [1] 0.031403 - Cast Cast Down
+     [2] 0.008494 - Cast Toxin Analysis
+     [3] 0.009410 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.500751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946611 - Pass
+     [1] 0.034109 - Cast Cast Down
+     [2] 0.009092 - Cast Toxin Analysis
+     [3] 0.010188 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.504864
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Writhing Chrysalis; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.098085 - Pass
+     [1] 0.001937 - Cast Cast Down
+     [2] 0.008296 - Cast Cleansing Wildfire
+     [3] 0.001224 - Cast Toxin Analysis
+     [4] 0.000892 - Cast Pulse of Murasa
+ >>> [5] 0.575949 - Cast Writhing Chrysalis
+     [6] 0.308639 - Play Slagwoods Bridge
+     [7] 0.003802 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [8] 0.001176 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.564770
+SELECTED: Cast Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Bot-Skill1)
+  - [1] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=PlayerRL1)
+  - [2] Writhing Chrysalis (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975434 - Pass
+     [1] 0.012340 - Cast Toxin Analysis
+     [2] 0.012226 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.566696
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=PlayerRL1)
+  - [1] Writhing Chrysalis (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976840 - Pass
+     [1] 0.011685 - Cast Toxin Analysis
+     [2] 0.011475 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.563658
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Eldrazi Spawn Token; Eldrazi Spawn Token]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.952016 - Pass
+     [1] 0.024494 - Cast Cast Down
+     [2] 0.011671 - Cast Toxin Analysis
+     [3] 0.011819 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.558799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.277519 - Pass
+     [1] 0.006897 - Cast Cast Down
+     [2] 0.027978 - Cast Cleansing Wildfire
+     [3] 0.003266 - Cast Toxin Analysis
+ >>> [4] 0.681046 - Play Slagwoods Bridge
+     [5] 0.003294 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.554022
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.863715 - Pass
+     [1] 0.023428 - Cast Cast Down
+     [2] 0.092261 - Cast Cleansing Wildfire
+     [3] 0.010161 - Cast Toxin Analysis
+     [4] 0.010435 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.547092
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Toxin Analysis; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.951988 - Pass
+     [1] 0.025595 - Cast Cast Down
+ >>> [2] 0.011064 - Cast Toxin Analysis
+     [3] 0.011353 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.545664
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8 (PlayerRL1 turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.079154 - Nyxborn Hydra (Bot-Skill1)
+     [1] 0.088850 - Eldrazi Spawn Token (you)
+     [2] 0.072963 - Priest of Titania (Bot-Skill1)
+     [3] 0.090956 - Fyndhorn Elves (Bot-Skill1)
+     [4] 0.091218 - Fyndhorn Elves (Bot-Skill1)
+     [5] 0.082860 - Avenging Hunter (Bot-Skill1)
+     [6] 0.088850 - Eldrazi Spawn Token (you)
+     [7] 0.079146 - Nyxborn Hydra (Bot-Skill1)
+ >>> [8] 0.077084 - Quirion Ranger (Bot-Skill1)
+     [9] 0.089343 - Writhing Chrysalis (you)
+     [10] 0.089767 - Writhing Chrysalis (you)
+     [11] 0.069808 - Elvish Mystic (Bot-Skill1)
+
+VALUE SCORE: -0.554547
+SELECTED: Quirion Ranger (Bot-Skill1)
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped; Clue Token]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.560483 - Pass
+ >>> [1] 0.431691 - {2}, Sacrifice this artifact: Draw a card.
+     [2] 0.007826 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.551789
+SELECTED: {2}, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=PlayerRL1)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=PlayerRL1)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=PlayerRL1)
+  - [3] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987623 - Pass
+     [1] 0.012377 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.560361
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=PlayerRL1)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=PlayerRL1)
+  - [2] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987453 - Pass
+     [1] 0.012547 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.561536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=PlayerRL1)
+  - [1] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987372 - Pass
+     [1] 0.012628 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.562424
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987551 - Pass
+     [1] 0.012449 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.562832
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.988039 - Pass
+     [1] 0.011961 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.558587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped; Quirion Ranger; Nyxborn Hydra,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.988337 - Pass
+     [1] 0.011663 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.552493
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.989901 - Pass
+     [1] 0.010099 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.449663
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990058 - Pass
+     [1] 0.009942 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.442217
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990052 - Pass
+     [1] 0.009948 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.442171
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa; Drossforge Bridge; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa; Drossforge Bridge; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.176052 - Pass
+     [1] 0.001983 - Cast Cast Down
+     [2] 0.010029 - Cast Cleansing Wildfire
+     [3] 0.001337 - Cast Pulse of Murasa
+ >>> [4] 0.804855 - Play Drossforge Bridge
+     [5] 0.004018 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [6] 0.001726 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.428991
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Cleansing Wildfire; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.896599 - Pass
+     [1] 0.010831 - Cast Cast Down
+ >>> [2] 0.054189 - Cast Cleansing Wildfire
+     [3] 0.006896 - Cast Pulse of Murasa
+     [4] 0.022505 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.008980 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.422320
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9 (PlayerRL1 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.141074 - Drossforge Bridge (you)
+     [1] 0.157703 - Twisted Landscape (you)
+     [2] 0.134064 - Slagwoods Bridge (you)
+     [3] 0.140209 - Drossforge Bridge (you)
+     [4] 0.134064 - Slagwoods Bridge (you)
+     [5] 0.134064 - Slagwoods Bridge (you)
+     [6] 0.158821 - Swamp (you)
+
+VALUE SCORE: -0.435650
+SELECTED: Drossforge Bridge (you)
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped]
+-> Graveyard: [Toxin Analysis]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.176993 - Forest
+     [1] 0.176993 - Forest
+     [2] 0.167700 - Mountain
+     [3] 0.167700 - Mountain
+ >>> [4] 0.155307 - Swamp
+     [5] 0.155307 - Swamp
+
+VALUE SCORE: -0.428815
+SELECTED: Swamp
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire; Refurbished Familiar]
+-> Permanents: [Drossforge Bridge; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped; Swamp,tapped]
+-> Graveyard: [Toxin Analysis; Cleansing Wildfire]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.288940 - Pass
+     [1] 0.003270 - Cast Cast Down
+     [2] 0.001835 - Cast Pulse of Murasa
+     [3] 0.016958 - Cast Cleansing Wildfire
+ >>> [4] 0.679442 - Cast Refurbished Familiar
+     [5] 0.007178 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [6] 0.002377 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.385617
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=PlayerRL1)
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Toxin Analysis; Cleansing Wildfire]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.955703 - Pass
+     [1] 0.006800 - Cast Pulse of Murasa
+     [2] 0.028632 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.008865 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.402818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Toxin Analysis; Cleansing Wildfire]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra; Masked Vandal]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.895821 - Pass
+     [1] 0.006375 - Cast Pulse of Murasa
+     [2] 0.061483 - Cast Cleansing Wildfire
+     [3] 0.028027 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.008294 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.402474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Toxin Analysis; Cleansing Wildfire]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra; Masked Vandal]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.954636 - Pass
+     [1] 0.006768 - Cast Pulse of Murasa
+     [2] 0.029793 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.008803 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.401957
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 8
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Toxin Analysis; Cleansing Wildfire]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra; Masked Vandal]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.895927 - Pass
+     [1] 0.006348 - Cast Pulse of Murasa
+     [2] 0.061450 - Cast Cleansing Wildfire
+     [3] 0.028020 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.008255 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.401807
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Toxin Analysis; Cleansing Wildfire]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra; Masked Vandal]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Toxin Analysis; Cleansing Wildfire]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic; Quirion Ranger; Nyxborn Hydra; Fyndhorn Elves; Priest of Titania; Fyndhorn Elves; Avenging Hunter]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra; Masked Vandal]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.916088 - Pass
+     [1] 0.008128 - Cast Pulse of Murasa
+     [2] 0.066125 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.009659 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.473242
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis; Slagwoods Bridge; Drossforge Bridge,tapped; Swamp,tapped; Refurbished Familiar]
+-> Graveyard: [Toxin Analysis; Cleansing Wildfire]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped,attacking; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped,attacking; Fyndhorn Elves,tapped,attacking; Avenging Hunter,tapped,attacking]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra; Masked Vandal]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.868384 - Pass
+     [1] 0.010619 - Cast Pulse of Murasa
+     [2] 0.110190 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.010808 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.619955
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 3
+-> Hand: [Cast Down; Cast Down; Pulse of Murasa; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped; Twisted Landscape; Swamp,tapped; Slagwoods Bridge; Writhing Chrysalis,blocking; Slagwoods Bridge,tapped; Nihil Spellbomb; Writhing Chrysalis,blocking; Slagwoods Bridge; Drossforge Bridge,tapped; Swamp,tapped; Refurbished Familiar,blocking]
+-> Graveyard: [Toxin Analysis; Cleansing Wildfire]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Elvish Mystic,tapped,attacking; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped,attacking; Fyndhorn Elves,tapped,attacking; Avenging Hunter,tapped,attacking]
+-> Graveyard: [Generous Ent; Snow-Covered Forest; Winding Way; Nyxborn Hydra; Masked Vandal]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.867016 - Pass
+     [1] 0.011158 - Cast Pulse of Murasa
+     [2] 0.110319 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.011507 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.602746
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 9
+Reason: Episode 145200 - Win
+Total Decisions Logged: 118
+Ended: 2026-02-08T05:34:50.015039900
+================================================================================
