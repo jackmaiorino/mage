@@ -27,10 +27,10 @@ public class MulliganModel {
     private static final int FEATURE_SIZE = 1 + NUM_EXPLICIT + MAX_HAND_SIZE + MAX_DECK_SIZE; // 71
     private static final int TOKEN_ID_VOCAB = 65536; // Same as StateSequenceBuilder
 
-    // Epsilon-greedy exploration parameters
-    private static final double EPSILON_START = 0.3;    // Initial exploration rate (30%)
-    private static final double EPSILON_END = 0.05;     // Minimum exploration rate (5%)
-    private static final double EPSILON_DECAY = 0.995;  // Decay per episode
+    // Epsilon-greedy exploration parameters (linear decay)
+    private static final double EPSILON_START = EnvConfig.f64("MULLIGAN_EPSILON_START", 0.3);
+    private static final double EPSILON_END = EnvConfig.f64("MULLIGAN_EPSILON_END", 0.05);
+    private static final int EPSILON_DECAY_EPISODES = EnvConfig.i32("MULLIGAN_EPSILON_DECAY_EPISODES", 20000);
 
     // Optional keep floor early in training to avoid always-mull collapse
     private static final int KEEP_FLOOR_EPISODES = EnvConfig.i32("MULLIGAN_KEEP_FLOOR_EPISODES", 200);
@@ -41,12 +41,15 @@ public class MulliganModel {
     }
 
     /**
-     * Calculate epsilon for epsilon-greedy exploration during training. Decays
-     * from EPSILON_START to EPSILON_END over episodes. Note: episodeNum < 0
-     * uses deterministic behavior (not this epsilon).
+     * Calculate epsilon for epsilon-greedy exploration during training.
+     * Linear decay from EPSILON_START to EPSILON_END over EPSILON_DECAY_EPISODES.
      */
     private double calculateEpsilon(int episodeNum) {
-        return Math.max(EPSILON_END, EPSILON_START * Math.pow(EPSILON_DECAY, episodeNum));
+        if (episodeNum >= EPSILON_DECAY_EPISODES) {
+            return EPSILON_END;
+        }
+        double t = (double) episodeNum / (double) EPSILON_DECAY_EPISODES;
+        return EPSILON_START + (EPSILON_END - EPSILON_START) * t;
     }
 
     /**
@@ -54,7 +57,9 @@ public class MulliganModel {
      */
     public static class MulliganDecision {
 
-        public final boolean shouldMulligan;
+        public final boolean shouldMulligan; // Final decision (after overrides)
+        public final boolean wasOverridden; // Whether an override was applied
+        public final boolean originalModelDecision; // What the model wanted before override
         public final int mulliganNum;
         public final int[] handCardIds;
         public final int[] deckCardIds;
@@ -62,9 +67,11 @@ public class MulliganModel {
         public final float qMull;
         public final float[] features; // Full feature vector for training
 
-        public MulliganDecision(boolean shouldMulligan, int mulliganNum, int[] handCardIds,
-                int[] deckCardIds, float qKeep, float qMull, float[] features) {
+        public MulliganDecision(boolean shouldMulligan, boolean wasOverridden, boolean originalModelDecision,
+                int mulliganNum, int[] handCardIds, int[] deckCardIds, float qKeep, float qMull, float[] features) {
             this.shouldMulligan = shouldMulligan;
+            this.wasOverridden = wasOverridden;
+            this.originalModelDecision = originalModelDecision;
             this.mulliganNum = mulliganNum;
             this.handCardIds = handCardIds;
             this.deckCardIds = deckCardIds;
@@ -131,7 +138,34 @@ public class MulliganModel {
             }
         }
 
-        return new MulliganDecision(shouldMulligan, mulliganCount, handCardIds, deckCardIds, qKeep, qMull, features);
+        // Save the model's original decision before any hard overrides
+        boolean originalModelDecision = shouldMulligan;
+        boolean wasOverridden = false;
+
+        // Training-only hard override: force mulligan on trivially unkeepable hands.
+        // This protects the game/main model while the mulligan model learns.
+        // We record the ORIGINAL model decision for training, so bad keeps get punished.
+        // Overrides apply ONLY during training (episodeNum >= 0), not eval.
+        // - 0 lands: never keepable
+        // - All lands (no spells): never keepable
+        // - 1 land: allowed (Ponder/Brainstorm/Lorien can find lands)
+        if (episodeNum >= 0 && !shouldMulligan) {
+            int landCount = (int) features[1];
+            int handSize = 0;
+            for (int i = 0; i < MAX_HAND_SIZE; i++) {
+                if (features[1 + NUM_EXPLICIT + i] != 0) {
+                    handSize++;
+                }
+            }
+            // Override if: 0 lands OR all-lands (landCount == handSize, meaning no spells)
+            if (handSize >= 4 && (landCount == 0 || landCount >= handSize)) {
+                shouldMulligan = true;
+                wasOverridden = true;
+            }
+        }
+
+        return new MulliganDecision(shouldMulligan, wasOverridden, originalModelDecision, mulliganCount, 
+                handCardIds, deckCardIds, qKeep, qMull, features);
     }
 
     /**

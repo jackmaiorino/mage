@@ -492,8 +492,8 @@ public class PythonMLService implements PythonModel {
     }
 
     @Override
-    public void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, int batchSize) {
-        learner.trainMulligan(features, decisions, outcomes, gameLengths, batchSize);
+    public void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, byte[] earlyLandScores, byte[] overrides, int batchSize) {
+        learner.trainMulligan(features, decisions, outcomes, gameLengths, earlyLandScores, overrides, batchSize);
     }
 
     @Override

@@ -2197,9 +2197,9 @@ class PythonEntryPoint:
         """Release GPU lock (called by Java after training burst)."""
         self.gpu_lock.release(process_name=self.process_name)
 
-    def trainMulligan(self, features_bytes, decisions_bytes, outcomes_bytes, game_lengths_bytes, batch_size):
+    def trainMulligan(self, features_bytes, decisions_bytes, outcomes_bytes, game_lengths_bytes, early_land_scores_bytes, overrides_bytes, batch_size):
         """
-        Train mulligan model using Q-learning with survival-based reward shaping.
+        Train mulligan model using Q-learning with survival + land-drop reward shaping.
 
         Args:
             features_bytes: Raw bytes of mulligan features [batch_size * 71 * 4]
@@ -2207,12 +2207,16 @@ class PythonEntryPoint:
             decisions_bytes: Raw bytes of decisions (0=mulligan, 1=keep) [batch_size * 4]  
             outcomes_bytes: Raw bytes of game outcomes (1=win, 0=loss) [batch_size * 4]
             game_lengths_bytes: Raw bytes of game lengths in turns [batch_size * 4] for survival reward
+            early_land_scores_bytes: Raw bytes of early land scores [batch_size * 4] (0-1 on-curve fraction, -1 if no data)
+            overrides_bytes: Raw bytes of override flags [batch_size * 4] (1.0=overridden, 0.0=not overridden)
             batch_size: Number of decisions in this game
 
         Reward shaping:
         - Wins always get target=1.0
-        - Losses scaled by game survival: survival_alpha * min(turns/max_turns, 1.0)
-        - Short losses signal bad mulligan decisions (mana screw)
+        - Losses scaled by: survival_alpha * survival + land_drop_alpha * on_curve_score
+        - Short losses with missed land drops = strong negative signal
+        - Long losses with good land drops = hand was acceptable, lost for other reasons
+        - Overridden decisions (0-land keeps, all-land keeps) get forced target=0.0 regardless of game outcome
         """
         t_start = time.perf_counter()
         # Use lock to prevent concurrent training (avoids gradient conflicts)
@@ -2242,6 +2246,10 @@ class PythonEntryPoint:
                     outcomes_bytes, dtype='<f4').reshape(bs)
                 game_lengths_np = np.frombuffer(
                     game_lengths_bytes, dtype='<i4').reshape(bs).astype(np.float32)
+                early_land_np = np.frombuffer(
+                    early_land_scores_bytes, dtype='<f4').reshape(bs)
+                overrides_np = np.frombuffer(
+                    overrides_bytes, dtype='<f4').reshape(bs)
 
                 stored = 0
                 dropped_nonfinite = 0
@@ -2250,14 +2258,17 @@ class PythonEntryPoint:
                     d = float(decisions_np[i])
                     o = float(outcomes_np[i])
                     gl = float(game_lengths_np[i])
-                    if not np.isfinite(f).all() or not np.isfinite([d, o, gl]).all():
+                    els = float(early_land_np[i])
+                    ovr = float(overrides_np[i])
+                    if not np.isfinite(f).all() or not np.isfinite([d, o, gl, els, ovr]).all():
                         dropped_nonfinite += 1
                         continue
                     is_keep = bool(d > 0.5)
-                    # Store tuple: (features, action_keep(1/0), outcome, game_length, mulligan_num)
+                    was_overridden = bool(ovr > 0.5)
+                    # Store tuple: (features, action_keep(1/0), outcome, game_length, mulligan_num, early_land_score, was_overridden)
                     action_keep = 1 if is_keep else 0
                     mulligan_num = float(f[0]) if f.shape[0] > 0 else 0.0
-                    sample = (f, action_keep, o, gl, mulligan_num)
+                    sample = (f, action_keep, o, gl, mulligan_num, els, was_overridden)
                     if is_keep:
                         self._mull_replay_keep.append(sample)
                         self._mull_action_hist.append(1)
@@ -2400,6 +2411,8 @@ class PythonEntryPoint:
                 outcomes_mb = np.array([b[2] for b in batch], dtype=np.float32)
                 game_len_mb = np.array([b[3] for b in batch], dtype=np.float32)
                 mull_num_mb = np.array([b[4] for b in batch], dtype=np.float32)
+                early_land_mb = np.array([b[5] for b in batch], dtype=np.float32)
+                overridden_mb = np.array([b[6] for b in batch], dtype=np.float32)
 
                 mb_size = int(feats_mb.shape[0])
                 mb_keep_rate = float(
@@ -2415,7 +2428,7 @@ class PythonEntryPoint:
                         int(mb_size), int(feats_mb.shape[1])
                     )
                     return True
-                if not np.isfinite(feats_mb).all() or not np.isfinite(outcomes_mb).all() or not np.isfinite(game_len_mb).all() or not np.isfinite(mull_num_mb).all():
+                if not np.isfinite(feats_mb).all() or not np.isfinite(outcomes_mb).all() or not np.isfinite(game_len_mb).all() or not np.isfinite(mull_num_mb).all() or not np.isfinite(early_land_mb).all() or not np.isfinite(overridden_mb).all():
                     mulligan_logger.info(
                         LogCategory.MODEL_TRAIN,
                         "Mulligan replay skipped - reason=non_finite_minibatch mb=%d keep_rate=%.3f outcome_mean=%.3f",
@@ -2460,19 +2473,34 @@ class PythonEntryPoint:
                         q_taken = q_values.gather(
                             1, action_indices.unsqueeze(1)).squeeze(1)
 
-                        # Survival-based reward shaping:
+                        # Survival + land-drop reward shaping:
                         # Wins always get target=1.0
-                        # Losses get scaled by game length (short loss = bad mulligan signal)
+                        # Losses scaled by survival (game length) + early land drops (on-curve)
+                        # Overridden decisions (0-land keeps, all-land keeps) get forced target=0.0
                         survival_alpha = float(
                             os.getenv("MULLIGAN_SURVIVAL_ALPHA", "0.3"))
                         survival_max = float(
                             os.getenv("MULLIGAN_SURVIVAL_MAX_TURNS", "12"))
+                        land_drop_alpha = float(
+                            os.getenv("MULLIGAN_LAND_DROP_ALPHA", "0.2"))
                         game_len_t = torch.tensor(
                             game_len_mb, dtype=torch.float32, device=mdev)
                         survival = (game_len_t.clamp(
                             min=1.0, max=survival_max) / survival_max)
-                        targets = outcomes_t + \
-                            (1.0 - outcomes_t) * survival_alpha * survival
+                        # Early land score: 0-1 fraction of on-curve turns, -1 if no data
+                        early_land_t = torch.tensor(
+                            early_land_mb, dtype=torch.float32, device=mdev)
+                        has_land_data = (early_land_t >= 0.0).float()
+                        land_bonus = land_drop_alpha * early_land_t.clamp(min=0.0) * has_land_data
+                        # Standard shaped target
+                        shaped_targets = outcomes_t + \
+                            (1.0 - outcomes_t) * (survival_alpha * survival + land_bonus)
+                        # Override mask: 1.0 where overridden, 0.0 otherwise
+                        overridden_t = torch.tensor(
+                            overridden_mb, dtype=torch.float32, device=mdev)
+                        override_mask = (overridden_t > 0.5).float()
+                        # Final targets: 0.0 for overridden keeps, shaped target otherwise
+                        targets = override_mask * 0.0 + (1.0 - override_mask) * shaped_targets
 
                         if self._mull_target_clamp:
                             targets = targets.clamp(0.0, 1.0)

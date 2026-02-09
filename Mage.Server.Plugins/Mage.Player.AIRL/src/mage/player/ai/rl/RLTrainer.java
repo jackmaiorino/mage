@@ -66,6 +66,9 @@ public class RLTrainer {
     // Path that stores the cumulative number of episodes trained so far (persisted across runs)
     public static final String EPISODE_COUNT_PATH = EnvConfig.str("EPISODE_COUNTER_PATH",
             "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt");
+    // Mulligan model episode counter (separate from main model for independent exploration)
+    public static final String MULLIGAN_EPISODE_COUNT_PATH = EnvConfig.str("MULLIGAN_EPISODE_COUNTER_PATH",
+            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_episodes.txt");
     // Auto-detect optimal number of threads based on CPU cores
     private static final int DEFAULT_GAME_RUNNERS = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
     public static final int NUM_THREADS = EnvConfig.i32("NUM_THREADS", DEFAULT_GAME_RUNNERS);
@@ -78,6 +81,8 @@ public class RLTrainer {
 
     // Global episode counter to track total episodes across all threads
     private static final AtomicInteger EPISODE_COUNTER = new AtomicInteger(0);
+    // Separate mulligan model episode counter for independent exploration schedule
+    private static final AtomicInteger MULLIGAN_EPISODE_COUNTER = new AtomicInteger(0);
     private static final AtomicInteger ACTIVE_EPISODES = new AtomicInteger(0);
     private static final boolean TRAIN_DIAG = EnvConfig.bool("TRAIN_DIAG", false);
     private static final int TRAIN_DIAG_EVERY = EnvConfig.i32("TRAIN_DIAG_EVERY", 50);
@@ -1002,6 +1007,27 @@ public class RLTrainer {
                 logger.info("Episode counter reset via RESET_EPISODE_COUNTER");
             }
 
+            // ------------------ 1b. Load persisted mulligan episode count ------------------
+            int initialMulliganEpisodeCount = 0;
+            try {
+                Path mulEpPath = Paths.get(MULLIGAN_EPISODE_COUNT_PATH);
+                if (Files.exists(mulEpPath)) {
+                    String content = new String(Files.readAllBytes(mulEpPath), StandardCharsets.UTF_8).trim();
+                    int persisted = Integer.parseInt(content);
+                    MULLIGAN_EPISODE_COUNTER.set(persisted);
+                    initialMulliganEpisodeCount = persisted;
+                    logger.info("Loaded mulligan episode counter from file: " + persisted);
+                }
+            } catch (Exception e) {
+                logger.warn("Failed to read mulligan episode counter, starting from 0", e);
+            }
+            boolean resetMulliganCounter = EnvConfig.bool("RESET_MULLIGAN_EPISODE_COUNTER", false);
+            if (resetMulliganCounter || resetEpisodeCounter) {
+                MULLIGAN_EPISODE_COUNTER.set(0);
+                initialMulliganEpisodeCount = 0;
+                logger.info("Mulligan episode counter reset via RESET_MULLIGAN_EPISODE_COUNTER or RESET_EPISODE_COUNTER");
+            }
+
             if (EPISODE_COUNTER.get() >= NUM_EPISODES) {
                 logger.warn("No episodes to run: TOTAL_EPISODES=" + NUM_EPISODES
                         + " <= persisted counter=" + EPISODE_COUNTER.get()
@@ -1010,7 +1036,7 @@ public class RLTrainer {
                 return;
             }
 
-            // Add shutdown hook to save episode counter on Ctrl+C
+            // Add shutdown hook to save episode counters on Ctrl+C
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
                     int finalCount = EPISODE_COUNTER.get();
@@ -1019,6 +1045,14 @@ public class RLTrainer {
                     System.out.println("Shutdown hook: Saved episode counter = " + finalCount);
                 } catch (IOException e) {
                     System.err.println("Shutdown hook: Failed to save episode counter: " + e.getMessage());
+                }
+                try {
+                    int finalMulliganCount = MULLIGAN_EPISODE_COUNTER.get();
+                    Files.write(Paths.get(MULLIGAN_EPISODE_COUNT_PATH),
+                            String.valueOf(finalMulliganCount).getBytes(StandardCharsets.UTF_8));
+                    System.out.println("Shutdown hook: Saved mulligan episode counter = " + finalMulliganCount);
+                } catch (IOException e) {
+                    System.err.println("Shutdown hook: Failed to save mulligan episode counter: " + e.getMessage());
                 }
             }, "Episode-Counter-Shutdown-Hook"));
             logger.info("Registered shutdown hook for episode counter persistence");
@@ -1096,6 +1130,7 @@ public class RLTrainer {
 
                     while (EPISODE_COUNTER.get() < NUM_EPISODES) {
                         int epNumber = EPISODE_COUNTER.incrementAndGet();
+                        int mulliganEpNumber = MULLIGAN_EPISODE_COUNTER.incrementAndGet();
                         if (epNumber > NUM_EPISODES) {
                             break; // Another thread reached the target
                         }
@@ -1128,7 +1163,8 @@ public class RLTrainer {
                         threadLocalGameLogger.set(gameLogger);
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
-                        rlPlayer.setCurrentEpisode(epNumber); // Set episode for mulligan logging
+                        rlPlayer.setCurrentEpisode(epNumber); // Set main model episode for logging
+                        rlPlayer.setMulliganEpisode(mulliganEpNumber); // Set mulligan model episode for epsilon-greedy
                         game.addPlayer(rlPlayer, rlPlayerDeckThread);
                         match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
@@ -1353,11 +1389,12 @@ public class RLTrainer {
             if (heartbeat != null) {
                 heartbeat.shutdownNow();
             }
-            // ------------------ 2.  Persist updated episode counter ------------------
+            // ------------------ 2.  Persist updated episode counters ------------------
             try {
                 Files.write(Paths.get(EPISODE_COUNT_PATH), String.valueOf(EPISODE_COUNTER.get()).getBytes(StandardCharsets.UTF_8));
+                Files.write(Paths.get(MULLIGAN_EPISODE_COUNT_PATH), String.valueOf(MULLIGAN_EPISODE_COUNTER.get()).getBytes(StandardCharsets.UTF_8));
             } catch (IOException e) {
-                logger.error("Failed to persist episode counter", e);
+                logger.error("Failed to persist episode counters", e);
             }
 
         } catch (IOException | InterruptedException e) {
@@ -2640,6 +2677,7 @@ public class RLTrainer {
         try {
             List<float[]> features = rlPlayer.getMulliganFeatures();
             List<Float> decisions = rlPlayer.getMulliganDecisions();
+            List<Boolean> overrides = rlPlayer.getMulliganOverrides();
 
             if (features.isEmpty()) {
                 return; // No mulligan decisions this game
@@ -2675,8 +2713,23 @@ public class RLTrainer {
                 gameLengthsBuf.putInt(Math.max(1, gameTurns));
             }
 
+            // Pack early land scores for land-drop reward shaping
+            float earlyLandScore = rlPlayer.getEarlyLandScore();
+            java.nio.ByteBuffer earlyLandScoresBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+            for (int i = 0; i < batchSize; i++) {
+                earlyLandScoresBuf.putFloat(earlyLandScore);
+            }
+
+            // Pack override flags (1.0 = overridden, 0.0 = not overridden)
+            java.nio.ByteBuffer overridesBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+            for (Boolean override : overrides) {
+                overridesBuf.putFloat(override ? 1.0f : 0.0f);
+            }
+
             long keepN = decisions.stream().filter(d -> d != null && d > 0.5f).count();
-            logger.info(String.format("MULLIGAN TRAIN batch=%d keepN=%d mullN=%d turns=%d won=%s", batchSize, keepN, batchSize - keepN, gameTurns, won));
+            long overrideN = overrides.stream().filter(o -> o != null && o).count();
+            logger.info(String.format("MULLIGAN TRAIN batch=%d keepN=%d mullN=%d overrideN=%d turns=%d landScore=%.2f won=%s",
+                    batchSize, keepN, batchSize - keepN, overrideN, gameTurns, earlyLandScore, won));
 
             // Train the model
             sharedModel.trainMulligan(
@@ -2684,6 +2737,8 @@ public class RLTrainer {
                     decisionsBuf.array(),
                     outcomesBuf.array(),
                     gameLengthsBuf.array(),
+                    earlyLandScoresBuf.array(),
+                    overridesBuf.array(),
                     batchSize
             );
 

@@ -126,7 +126,7 @@ public interface PythonEntryPoint {
      * @param gameLengths Batch of game lengths in turns (int32 array) for survival reward
      * @param batchSize Size of the batch
      */
-    void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, int batchSize);
+    void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, byte[] earlyLandScores, byte[] overrides, int batchSize);
 
     /**
      * Save the mulligan model to disk.

@@ -203,6 +203,14 @@ if ($cleanMulligan) {
         $itemsToDelete += $mulliganModelFile
     }
 
+    # Mulligan episode counter
+    $mulliganEpisodesFile = Join-Path $modelsDir "mulligan_episodes.txt"
+    if (Test-Path $mulliganEpisodesFile) {
+        Write-Host "  Mulligan episode counter:" -ForegroundColor Yellow
+        Write-Host "    - mulligan_episodes.txt" -ForegroundColor Gray
+        $itemsToDelete += $mulliganEpisodesFile
+    }
+
     # Mulligan stats
     $statsDir = Join-Path $logsDir "stats"
     if (Test-Path $statsDir) {

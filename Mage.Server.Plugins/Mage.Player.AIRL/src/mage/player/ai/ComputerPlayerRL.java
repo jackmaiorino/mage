@@ -87,12 +87,20 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private final java.util.Map<StateSequenceBuilder.ActionType, Integer> decisionCountsByHead;
     private Ability currentAbility;
     private int mulligansTaken = 0;
-    private int currentEpisode = -1; // For mulligan logging
+    private int currentEpisode = -1; // Main model episode for logging
+    private int mulliganEpisode = -1; // Mulligan model episode for epsilon-greedy
     private int lastLoggedTurn = -1; // Track turn changes for game logging
+
+    // Track early-game land drops for mulligan reward shaping
+    private boolean rlPlayerHasHadATurn = false;
+    private int lastTrackedGameTurn = 0;
+    private int rlPlayerTurnsTracked = 0;
+    private int earlyLandHits = 0; // How many of first 3 turns were "on curve"
 
     // Track mulligan decisions for training
     private final List<float[]> mulliganFeatures = new ArrayList<>(); // Full feature vectors
     private final List<Float> mulliganDecisions = new ArrayList<>(); // 1.0=keep, 0.0=mulligan
+    private final List<Boolean> mulliganOverrides = new ArrayList<>(); // true=decision was overridden
     private final List<Integer> mulliganLandCounts = new ArrayList<>(); // For logging only
 
     // Duplicate-call protection for chooseMulligan (some engine flows call it multiple times).
@@ -292,6 +300,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.abilitySourceToExcludeFromMana = null; // Don't copy - each activation sets its own
         this.tapTargetCostReservations = new HashSet<>(); // Don't copy - each activation sets its own
         this.mulligansTaken = player.mulligansTaken;
+        this.mulliganEpisode = player.mulliganEpisode;
         this.lastMulliganHandFingerprint = player.lastMulliganHandFingerprint;
         this.lastMulliganHandSize = player.lastMulliganHandSize;
         this.lastMulliganDecisionShouldMulligan = player.lastMulliganDecisionShouldMulligan;
@@ -328,6 +337,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     public <T> List<Integer> genericChoose(List<T> candidates, int maxTargets, int minTargets, StateSequenceBuilder.ActionType actionType, Game game, Ability source) {
+        trackEarlyLands(game);
         // Candidate-based policy: score up to MAX_CANDIDATES candidates per decision.
         final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
         final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
@@ -979,6 +989,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // }
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        trackEarlyLands(game);
         // Special case: London mulligan card selection
         // TODO: I don't think this check is sufficient to say its a mulligan
         if (source == null && outcome == Outcome.Discard && target instanceof mage.target.common.TargetCardInHand) {
@@ -1802,11 +1813,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 return lastMulliganDecisionShouldMulligan;
             }
 
-            MulliganModel.MulliganDecision decision = mulliganModel.shouldMulliganWithFeatures(this, game, mulligansTaken, currentEpisode);
+            MulliganModel.MulliganDecision decision = mulliganModel.shouldMulliganWithFeatures(this, game, mulligansTaken, mulliganEpisode);
 
             int landCount = countLandsInHand(game);
             boolean trainingRecorded = false;
-            float actionTaken = decision.shouldMulligan ? 0.0f : 1.0f; // 0=mull, 1=keep (action taken)
+            float actionTaken = decision.shouldMulligan ? 0.0f : 1.0f; // 0=mull, 1=keep (action taken by engine)
+            // For training, record the ORIGINAL model decision (before override) so bad decisions get punished
+            float trainingLabel = decision.originalModelDecision ? 0.0f : 1.0f; // What the model wanted to do
 
             // Gamelog: mulligan decision details
             try {
@@ -1836,7 +1849,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
 
             mulliganTrainingLog(String.format(
-                    "MULLIGAN_DECISION ep=%d player=%s mulligansTaken=%d handSize=%d lands=%d decision=%s Q_keep=%.3f Q_mull=%.3f action=%.1f",
+                    "MULLIGAN_DECISION ep=%d player=%s mulligansTaken=%d handSize=%d lands=%d decision=%s Q_keep=%.3f Q_mull=%.3f action=%.1f%s",
                     currentEpisode,
                     getName(),
                     mulligansTaken,
@@ -1845,13 +1858,16 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     decision.shouldMulligan ? "MULLIGAN" : "KEEP",
                     decision.qKeep,
                     decision.qMull,
-                    actionTaken
+                    actionTaken,
+                    decision.wasOverridden ? " [OVERRIDDEN]" : ""
             ));
 
             // Record mulligan-model training label immediately (only if hand size is sane at this prompt).
+            // Use the ORIGINAL model decision (before override) so the model learns from its mistakes.
             if (trainingEnabled && handSizeNow > 0 && handSizeNow <= 7) {
                 mulliganFeatures.add(decision.features);
-                mulliganDecisions.add(actionTaken);
+                mulliganDecisions.add(trainingLabel); // Original model decision, not overridden action
+                mulliganOverrides.add(decision.wasOverridden); // Track if this decision was overridden
                 mulliganLandCounts.add(landCount);
                 trainingRecorded = true;
             } else if (trainingEnabled) {
@@ -2114,6 +2130,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return new ArrayList<>(mulliganDecisions);
     }
 
+    public List<Boolean> getMulliganOverrides() {
+        return new ArrayList<>(mulliganOverrides);
+    }
+
     public List<Integer> getMulliganLandCounts() {
         return new ArrayList<>(mulliganLandCounts);
     }
@@ -2121,7 +2141,71 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     public void clearMulliganData() {
         mulliganFeatures.clear();
         mulliganDecisions.clear();
+        mulliganOverrides.clear();
         mulliganLandCounts.clear();
+        // Reset early-land tracking for next game
+        rlPlayerHasHadATurn = false;
+        lastTrackedGameTurn = 0;
+        rlPlayerTurnsTracked = 0;
+        earlyLandHits = 0;
+    }
+
+    /**
+     * Track lands in play at the end of the RL player's first 3 turns.
+     * Call from any frequently-invoked decision method during gameplay.
+     * Records whether the player was "on curve" (had at least N lands after turn N).
+     */
+    private void trackEarlyLands(Game game) {
+        if (rlPlayerTurnsTracked >= 3 || game == null) {
+            return;
+        }
+        int turn = game.getTurnNum();
+        if (turn <= 0 || turn == lastTrackedGameTurn) {
+            return;
+        }
+        lastTrackedGameTurn = turn;
+
+        UUID activePlayer = game.getActivePlayerId();
+        if (activePlayer == null) {
+            return;
+        }
+
+        if (activePlayer.equals(playerId)) {
+            // RL player's turn — mark that we've had at least one turn
+            rlPlayerHasHadATurn = true;
+        } else if (rlPlayerHasHadATurn) {
+            // Opponent's turn and RL has had at least one turn → RL's previous turn just ended
+            rlPlayerTurnsTracked++;
+            int landsInPlay = countLandsInPlay(game);
+            // "On curve" = at least N lands after your Nth turn
+            if (landsInPlay >= rlPlayerTurnsTracked) {
+                earlyLandHits++;
+            }
+        }
+    }
+
+    /**
+     * Get early-game land score: fraction of first 3 turns that were "on curve."
+     * Returns 0-1 where 1.0 = hit all land drops on time.
+     */
+    public float getEarlyLandScore() {
+        if (rlPlayerTurnsTracked <= 0) {
+            return -1.0f; // No data (game ended before tracking)
+        }
+        return (float) earlyLandHits / (float) Math.min(rlPlayerTurnsTracked, 3);
+    }
+
+    /**
+     * Count lands this player controls on the battlefield.
+     */
+    private int countLandsInPlay(Game game) {
+        int count = 0;
+        for (Permanent p : game.getBattlefield().getAllActivePermanents(playerId)) {
+            if (p.isLand(game)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -2143,6 +2227,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     public void setCurrentEpisode(int episodeNum) {
         this.currentEpisode = episodeNum;
         this.lastLoggedTurn = -1; // Reset turn tracking for new game
+    }
+
+    /**
+     * Set the mulligan model episode number for epsilon-greedy exploration.
+     */
+    public void setMulliganEpisode(int episodeNum) {
+        this.mulliganEpisode = episodeNum;
     }
 
     protected boolean priorityPlay(Game game) {
