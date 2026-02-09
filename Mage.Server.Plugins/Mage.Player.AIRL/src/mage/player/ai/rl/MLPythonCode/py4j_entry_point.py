@@ -2197,22 +2197,22 @@ class PythonEntryPoint:
         """Release GPU lock (called by Java after training burst)."""
         self.gpu_lock.release(process_name=self.process_name)
 
-    def trainMulligan(self, features_bytes, decisions_bytes, outcomes_bytes, land_counts_bytes, batch_size):
+    def trainMulligan(self, features_bytes, decisions_bytes, outcomes_bytes, game_lengths_bytes, batch_size):
         """
-        Train mulligan model using Q-learning from game outcomes.
+        Train mulligan model using Q-learning with survival-based reward shaping.
 
         Args:
-            features_bytes: Raw bytes of mulligan features [batch_size * 68 * 4]
-                Format: [mulligan_num(1), hand_ids(7), deck_ids(60)] per sample
+            features_bytes: Raw bytes of mulligan features [batch_size * 71 * 4]
+                Format: [mulligan_num(1), land_count(1), creature_count(1), avg_cmc(1), hand_ids(7), deck_ids(60)]
             decisions_bytes: Raw bytes of decisions (0=mulligan, 1=keep) [batch_size * 4]  
             outcomes_bytes: Raw bytes of game outcomes (1=win, 0=loss) [batch_size * 4]
-            land_counts_bytes: Raw bytes of land counts [batch_size * 4] (unused in Q-learning)
+            game_lengths_bytes: Raw bytes of game lengths in turns [batch_size * 4] for survival reward
             batch_size: Number of decisions in this game
 
-        Q-Learning approach:
-        - For each decision, train only the Q-value of the action taken
-        - Target = game outcome (1.0 for win, 0.0 for loss)
-        - Per-decision weighting: each decision weighted by 1/batch_size
+        Reward shaping:
+        - Wins always get target=1.0
+        - Losses scaled by game survival: survival_alpha * min(turns/max_turns, 1.0)
+        - Short losses signal bad mulligan decisions (mana screw)
         """
         t_start = time.perf_counter()
         # Use lock to prevent concurrent training (avoids gradient conflicts)
@@ -2235,13 +2235,13 @@ class PythonEntryPoint:
                     return True
 
                 features_np = np.frombuffer(
-                    features_bytes, dtype='<f4').reshape(bs, 68)
+                    features_bytes, dtype='<f4').reshape(bs, 71)
                 decisions_np = np.frombuffer(
                     decisions_bytes, dtype='<f4').reshape(bs)
                 outcomes_np = np.frombuffer(
                     outcomes_bytes, dtype='<f4').reshape(bs)
-                land_counts_np = np.frombuffer(
-                    land_counts_bytes, dtype='<i4').reshape(bs).astype(np.float32)
+                game_lengths_np = np.frombuffer(
+                    game_lengths_bytes, dtype='<i4').reshape(bs).astype(np.float32)
 
                 stored = 0
                 dropped_nonfinite = 0
@@ -2249,15 +2249,15 @@ class PythonEntryPoint:
                     f = np.array(features_np[i], dtype=np.float32, copy=True)
                     d = float(decisions_np[i])
                     o = float(outcomes_np[i])
-                    lc = float(land_counts_np[i])
-                    if not np.isfinite(f).all() or not np.isfinite([d, o, lc]).all():
+                    gl = float(game_lengths_np[i])
+                    if not np.isfinite(f).all() or not np.isfinite([d, o, gl]).all():
                         dropped_nonfinite += 1
                         continue
                     is_keep = bool(d > 0.5)
-                    # Store tuple: (features, action_keep(1/0), outcome, land_count, mulligan_num)
+                    # Store tuple: (features, action_keep(1/0), outcome, game_length, mulligan_num)
                     action_keep = 1 if is_keep else 0
                     mulligan_num = float(f[0]) if f.shape[0] > 0 else 0.0
-                    sample = (f, action_keep, o, lc, mulligan_num)
+                    sample = (f, action_keep, o, gl, mulligan_num)
                     if is_keep:
                         self._mull_replay_keep.append(sample)
                         self._mull_action_hist.append(1)
@@ -2398,7 +2398,7 @@ class PythonEntryPoint:
                 action_keep_mb = np.array(
                     [b[1] for b in batch], dtype=np.int64)
                 outcomes_mb = np.array([b[2] for b in batch], dtype=np.float32)
-                land_mb = np.array([b[3] for b in batch], dtype=np.float32)
+                game_len_mb = np.array([b[3] for b in batch], dtype=np.float32)
                 mull_num_mb = np.array([b[4] for b in batch], dtype=np.float32)
 
                 mb_size = int(feats_mb.shape[0])
@@ -2408,14 +2408,14 @@ class PythonEntryPoint:
                     outcomes_mb.mean()) if mb_size > 0 else 0.0
 
                 # Validate minibatch before touching GPU
-                if feats_mb.shape[1] != 68:
+                if feats_mb.shape[1] != 71:
                     mulligan_logger.info(
                         LogCategory.MODEL_TRAIN,
                         "Mulligan replay skipped - reason=bad_features_shape mb=%d feat_dim=%d",
                         int(mb_size), int(feats_mb.shape[1])
                     )
                     return True
-                if not np.isfinite(feats_mb).all() or not np.isfinite(outcomes_mb).all() or not np.isfinite(land_mb).all() or not np.isfinite(mull_num_mb).all():
+                if not np.isfinite(feats_mb).all() or not np.isfinite(outcomes_mb).all() or not np.isfinite(game_len_mb).all() or not np.isfinite(mull_num_mb).all():
                     mulligan_logger.info(
                         LogCategory.MODEL_TRAIN,
                         "Mulligan replay skipped - reason=non_finite_minibatch mb=%d keep_rate=%.3f outcome_mean=%.3f",
@@ -2447,8 +2447,6 @@ class PythonEntryPoint:
                         action_keep_mb, dtype=torch.long, device=mdev)
                     outcomes_t = torch.tensor(
                         outcomes_mb, dtype=torch.float32, device=mdev)
-                    land_counts_t = torch.tensor(
-                        land_mb, dtype=torch.float32, device=mdev)
 
                     q_values = self.mulligan_model(features_t)  # [mb, 2]
                     if q_values is None or q_values.ndim != 2 or q_values.shape[0] != mb_size or q_values.shape[1] != 2:
@@ -2461,37 +2459,20 @@ class PythonEntryPoint:
                         action_indices = (action_keep_t <= 0).long()
                         q_taken = q_values.gather(
                             1, action_indices.unsqueeze(1)).squeeze(1)
-                        targets = outcomes_t
 
-                        # Mulligan cost shaping (applies to MULL actions)
-                        mull_base = float(
-                            os.getenv("MULLIGAN_COST_BASE", "0.02"))
-                        mull_max = float(
-                            os.getenv("MULLIGAN_COST_MAX", "0.15"))
-                        mull_num = features_t[:, 0].clamp(min=0.0)
-                        mull_cost = (mull_base * (mull_num + 1.0)
-                                     ).clamp(max=mull_max)
-                        is_mull = (action_indices == 1).float()
-                        targets = targets - is_mull * mull_cost
-
-                        # Land-count shaping for KEEP (annealed toward 0)
-                        land_init = float(
-                            os.getenv("MULLIGAN_LAND_SHAPING_INIT", "0.05"))
-                        land_decay_steps = float(
-                            os.getenv("MULLIGAN_LAND_SHAPING_DECAY_STEPS", "5000"))
-                        t = float(self.mulligan_train_step_counter)
-                        shaping_scale = max(
-                            0.0, 1.0 - (t / max(1.0, land_decay_steps)))
-                        shaping_scale = land_init * shaping_scale
-                        if shaping_scale > 0.0:
-                            lc = land_counts_t.clamp(min=0.0, max=7.0)
-                            is_keep = (action_indices == 0).float()
-                            good = ((lc >= 2.0) & (lc <= 3.0)).float()
-                            low = (lc <= 1.0).float()
-                            high = (lc >= 4.0).float()
-                            land_shaping = shaping_scale * \
-                                (good - 1.0 * low - 0.5 * high)
-                            targets = targets + is_keep * land_shaping
+                        # Survival-based reward shaping:
+                        # Wins always get target=1.0
+                        # Losses get scaled by game length (short loss = bad mulligan signal)
+                        survival_alpha = float(
+                            os.getenv("MULLIGAN_SURVIVAL_ALPHA", "0.3"))
+                        survival_max = float(
+                            os.getenv("MULLIGAN_SURVIVAL_MAX_TURNS", "12"))
+                        game_len_t = torch.tensor(
+                            game_len_mb, dtype=torch.float32, device=mdev)
+                        survival = (game_len_t.clamp(
+                            min=1.0, max=survival_max) / survival_max)
+                        targets = outcomes_t + \
+                            (1.0 - outcomes_t) * survival_alpha * survival
 
                         if self._mull_target_clamp:
                             targets = targets.clamp(0.0, 1.0)

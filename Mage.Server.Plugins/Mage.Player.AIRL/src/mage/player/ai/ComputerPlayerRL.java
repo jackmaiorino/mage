@@ -90,12 +90,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private int currentEpisode = -1; // For mulligan logging
     private int lastLoggedTurn = -1; // Track turn changes for game logging
 
-    // Track mulligan decisions for training (card-level)
-    private final List<Integer> mulliganNums = new ArrayList<>();
-    private final List<int[]> mulliganHandIds = new ArrayList<>();
-    private final List<int[]> mulliganDeckIds = new ArrayList<>();
+    // Track mulligan decisions for training
+    private final List<float[]> mulliganFeatures = new ArrayList<>(); // Full feature vectors
     private final List<Float> mulliganDecisions = new ArrayList<>(); // 1.0=keep, 0.0=mulligan
-    private final List<Integer> mulliganLandCounts = new ArrayList<>(); // Land counts for heuristic
+    private final List<Integer> mulliganLandCounts = new ArrayList<>(); // For logging only
 
     // Duplicate-call protection for chooseMulligan (some engine flows call it multiple times).
     // Dedupe based on current hand fingerprint (IDs) + size.
@@ -1852,11 +1850,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             // Record mulligan-model training label immediately (only if hand size is sane at this prompt).
             if (trainingEnabled && handSizeNow > 0 && handSizeNow <= 7) {
-                mulliganNums.add(decision.mulliganNum);
-                mulliganHandIds.add(decision.handCardIds);
-                mulliganDeckIds.add(decision.deckCardIds);
-                mulliganLandCounts.add(landCount);
+                mulliganFeatures.add(decision.features);
                 mulliganDecisions.add(actionTaken);
+                mulliganLandCounts.add(landCount);
                 trainingRecorded = true;
             } else if (trainingEnabled) {
                 mulliganTrainingLog(String.format(
@@ -2110,16 +2106,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     /**
      * Get mulligan training data and clear buffer.
      */
-    public List<Integer> getMulliganNums() {
-        return new ArrayList<>(mulliganNums);
-    }
-
-    public List<int[]> getMulliganHandIds() {
-        return new ArrayList<>(mulliganHandIds);
-    }
-
-    public List<int[]> getMulliganDeckIds() {
-        return new ArrayList<>(mulliganDeckIds);
+    public List<float[]> getMulliganFeatures() {
+        return new ArrayList<>(mulliganFeatures);
     }
 
     public List<Float> getMulliganDecisions() {
@@ -2131,9 +2119,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     public void clearMulliganData() {
-        mulliganNums.clear();
-        mulliganHandIds.clear();
-        mulliganDeckIds.clear();
+        mulliganFeatures.clear();
         mulliganDecisions.clear();
         mulliganLandCounts.clear();
     }

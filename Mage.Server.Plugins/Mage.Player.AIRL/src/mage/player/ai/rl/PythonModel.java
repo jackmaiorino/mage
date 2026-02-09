@@ -45,7 +45,7 @@ public interface PythonModel extends AutoCloseable {
      */
     float[] predictMulliganScores(float[] features);
 
-    void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] landCounts, int batchSize);
+    void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, int batchSize);
 
     void saveMulliganModel();
 

@@ -1,0 +1,3235 @@
+================================================================================
+GAME LOG: game_20260208_180859_0127
+Started: 2026-02-08T18:08:59.803793400
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=5 decision=KEEP Q_keep=0.406 Q_mull=0.175 hand=[Island; Island; Island; Island; Island; Faerie Miscreant; Humbling Elder]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Island; Faerie Miscreant; Humbling Elder]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Island; Faerie Miscreant; Humbling Elder]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.039175 - Pass
+ >>> [1] 0.960825 - Play Island
+
+VALUE SCORE: 0.013040
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Faerie Miscreant; Humbling Elder]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.091059 - Pass
+ >>> [1] 0.827390 - Cast Faerie Miscreant
+     [2] 0.081550 - Cast Humbling Elder
+
+VALUE SCORE: 0.009364
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder]
+-> Permanents: [Island,tapped]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder; Force Spike]
+-> Permanents: [Island]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Island; Humbling Elder; Force Spike]
+-> Permanents: [Island]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.043501 - Pass
+ >>> [1] 0.914858 - Play Island
+     [2] 0.041640 - Cast Humbling Elder
+
+VALUE SCORE: -0.044194
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Humbling Elder; Force Spike]
+-> Permanents: [Island; Island]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.507513 - Pass
+     [1] 0.492487 - Cast Humbling Elder
+
+VALUE SCORE: -0.046596
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Humbling Elder; Force Spike]
+-> Permanents: [Island; Island]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.507484 - Pass
+     [1] 0.492516 - Cast Humbling Elder
+
+VALUE SCORE: -0.046087
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Humbling Elder; Force Spike]
+-> Permanents: [Island; Island]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.507351 - Pass
+ >>> [1] 0.492649 - Cast Humbling Elder
+
+VALUE SCORE: -0.045547
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike]
+-> Permanents: [Island; Island,tapped; Humbling Elder]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike]
+-> Permanents: [Island; Island,tapped; Humbling Elder]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike]
+-> Permanents: [Island; Island,tapped; Humbling Elder]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike]
+-> Permanents: [Island; Island,tapped; Humbling Elder]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike]
+-> Permanents: [Island; Island,tapped; Humbling Elder]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Humbling Elder]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Humbling Elder]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039959 - Pass
+     [1] 0.960041 - Play Island
+
+VALUE SCORE: 0.018974
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.359478 - Pass
+     [1] 0.640522 - Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+VALUE SCORE: -0.001492
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Humbling Elder,tapped]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.040724 - Pass
+ >>> [1] 0.959276 - Play Island
+
+VALUE SCORE: -0.001524
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Humbling Elder,tapped; Island]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Humbling Elder,tapped; Island]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Humbling Elder,tapped; Island]
+-> Graveyard: [Faerie Miscreant]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983054 - Pass
+     [1] 0.016946 - Cast Force Spike
+
+VALUE SCORE: -0.370236
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Force Spike; Ninja of the Deep Hours; Of One Mind]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Force Spike; Ninja of the Deep Hours; Of One Mind]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.065010 - Pass
+ >>> [1] 0.822734 - Play Island
+     [2] 0.112256 - Cast Of One Mind
+
+VALUE SCORE: -0.257182
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Of One Mind]
+-> Permanents: [Island; Island; Island; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.177504 - Pass
+     [1] 0.502446 - Cast Ninja of the Deep Hours
+ >>> [2] 0.320051 - Cast Of One Mind
+
+VALUE SCORE: -0.264100
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Of One Mind]
+-> Permanents: [Island; Island; Island; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Of One Mind]
+-> Permanents: [Island; Island; Island; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.038531 - Pass
+ >>> [1] 0.797107 - Play Island
+     [2] 0.091547 - Cast Ninja of the Deep Hours
+     [3] 0.011233 - Cast Spellstutter Sprite
+     [4] 0.061583 - Cast Of One Mind
+
+VALUE SCORE: -0.039170
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Of One Mind]
+-> Permanents: [Island; Island; Island; Island; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.186588 - Pass
+     [1] 0.450961 - Cast Ninja of the Deep Hours
+ >>> [2] 0.054667 - Cast Spellstutter Sprite
+     [3] 0.307784 - Cast Of One Mind
+
+VALUE SCORE: -0.068619
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Of One Mind]
+-> Permanents: [Island; Island; Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.333993 - Pass
+ >>> [1] 0.666007 - Cast Of One Mind
+
+VALUE SCORE: -0.270020
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Snap; Humbling Elder; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Ninja of the Deep Hours; Counterspell; Snap; Humbling Elder; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.197854 - Pass
+ >>> [1] 0.508973 - Cast Ninja of the Deep Hours
+     [2] 0.000941 - Cast Snap
+     [3] 0.234474 - Cast Humbling Elder
+     [4] 0.057758 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.128358
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Counterspell; Snap; Humbling Elder; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Lava Dart; Fiery Temper]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.332628 - Pass
+ >>> [1] 0.667372 - Cast Humbling Elder
+
+VALUE SCORE: -0.451949
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+  - [1] Humbling Elder (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Fiery Temper; Mountain]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Fiery Temper; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Fiery Temper; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Fiery Temper; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Fiery Temper; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+-> Graveyard: [Fiery Temper; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite; Island]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite; Island]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite; Ninja of the Deep Hours; Humbling Elder]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.163828 - Pass
+     [1] 0.004610 - Cast Snap
+     [2] 0.029506 - Cast Spellstutter Sprite
+ >>> [3] 0.802057 - Play Island
+
+VALUE SCORE: -0.621751
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite; Ninja of the Deep Hours; Humbling Elder; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.811650 - Pass
+     [1] 0.029729 - Cast Snap
+     [2] 0.158622 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.636841
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours; Humbling Elder; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.804153 - Pass
+     [1] 0.032545 - Cast Snap
+     [2] 0.163302 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.645031
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours; Humbling Elder; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.804153 - Pass
+     [1] 0.032545 - Cast Snap
+     [2] 0.163302 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.645031
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.801351 - Pass
+     [1] 0.033437 - Cast Snap
+     [2] 0.165212 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.651137
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Highway Robbery (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Highway Robbery (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Force Spike; Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.706216 - Pass
+ >>> [1] 0.070193 - Cast Force Spike
+     [2] 0.030282 - Cast Counterspell
+     [3] 0.032262 - Cast Snap
+     [4] 0.161046 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.626612
+SELECTED: Cast Force Spike
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Highway Robbery (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.757822 - Pass
+     [1] 0.035974 - Cast Counterspell
+     [2] 0.037485 - Cast Snap
+     [3] 0.168719 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.703829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.757863 - Pass
+     [1] 0.036031 - Cast Counterspell
+     [2] 0.037517 - Cast Snap
+     [3] 0.168589 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.705423
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 17
+-> Hand: [Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Guttersnipe; Mountain,tapped]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.722227 - Pass
+     [1] 0.042219 - Cast Counterspell
+     [2] 0.043594 - Cast Snap
+     [3] 0.191960 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.763595
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: [Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours; Humbling Elder; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Guttersnipe; Mountain,tapped]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.722802 - Pass
+     [1] 0.042203 - Cast Counterspell
+     [2] 0.043571 - Cast Snap
+     [3] 0.191425 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.765001
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 15
+-> Hand: [Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.739322 - Pass
+     [1] 0.038503 - Cast Counterspell
+     [2] 0.039975 - Cast Snap
+     [3] 0.182200 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.720334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.737421 - Pass
+     [1] 0.038839 - Cast Counterspell
+     [2] 0.040322 - Cast Snap
+ >>> [3] 0.183418 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.722072
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters, counter target spell with mana value X or less, where X is the number of Faeries you control.) (controller=PlayerRL1)
+  - [1] Lava Dart (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain]
+-> Exile: [Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.892157 - Pass
+     [1] 0.052864 - Cast Counterspell
+     [2] 0.054979 - Cast Snap
+
+VALUE SCORE: -0.747273
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 13
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.871593 - Pass
+     [1] 0.062755 - Cast Counterspell
+     [2] 0.065652 - Cast Snap
+
+VALUE SCORE: -0.786355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.873061 - Pass
+     [1] 0.062086 - Cast Counterspell
+     [2] 0.064853 - Cast Snap
+
+VALUE SCORE: -0.789644
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.938712 - Pass
+     [1] 0.061288 - Cast Snap
+
+VALUE SCORE: -0.780546
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.938967 - Pass
+     [1] 0.061033 - Cast Snap
+
+VALUE SCORE: -0.780136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.939063 - Pass
+     [1] 0.060937 - Cast Snap
+
+VALUE SCORE: -0.779904
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.173481 - Pass
+     [1] 0.012291 - Cast Snap
+ >>> [2] 0.814228 - Cast Ninja of the Deep Hours
+
+VALUE SCORE: -0.741983
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.927993 - Pass
+     [1] 0.072007 - Cast Snap
+
+VALUE SCORE: -0.773457
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.927641 - Pass
+     [1] 0.072358 - Cast Snap
+
+VALUE SCORE: -0.776107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.928542 - Pass
+     [1] 0.071458 - Cast Snap
+
+VALUE SCORE: -0.780711
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.928423 - Pass
+     [1] 0.071577 - Cast Snap
+
+VALUE SCORE: -0.781362
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 11
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.877057 - Pass
+     [1] 0.059765 - Cast Counterspell
+     [2] 0.063178 - Cast Snap
+
+VALUE SCORE: -0.782463
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: [Counterspell; Snap]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.875339 - Pass
+ >>> [1] 0.060696 - Cast Counterspell
+     [2] 0.063966 - Cast Snap
+
+VALUE SCORE: -0.787340
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Snap]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Snap]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.929621 - Pass
+     [1] 0.070379 - Cast Snap
+
+VALUE SCORE: -0.763477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Snap]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.928223 - Pass
+ >>> [1] 0.071777 - Cast Snap
+
+VALUE SCORE: -0.767518
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9 (PlayerRL1 turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=PlayerRL1)
+[PlayerRL1], life = 9
+-> Hand: [Snap]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.203912 - Ninja of the Deep Hours (you)
+     [1] 0.203912 - Ninja of the Deep Hours (you)
+ >>> [2] 0.205866 - Spellstutter Sprite (you)
+     [3] 0.201655 - Humbling Elder (you)
+     [4] 0.184656 - Guttersnipe (Bot-Skill1)
+
+VALUE SCORE: -0.774896
+SELECTED: Spellstutter Sprite (you)
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.733369 - Pass
+     [1] 0.055572 - Cast Snap
+     [2] 0.211058 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.761468
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain; Mountain; Guttersnipe]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.733519 - Pass
+     [1] 0.055557 - Cast Snap
+     [2] 0.210924 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.761381
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.765054 - Pass
+     [1] 0.046626 - Cast Snap
+     [2] 0.188320 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.737911
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.766646 - Pass
+     [1] 0.046735 - Cast Snap
+     [2] 0.186620 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.735868
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.766935 - Pass
+     [1] 0.046673 - Cast Snap
+ >>> [2] 0.186392 - Cast Spellstutter Sprite
+
+VALUE SCORE: -0.735687
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap]
+-> Permanents: [Island; Island,tapped; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island,tapped; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.934561 - Pass
+     [1] 0.065439 - Cast Snap
+
+VALUE SCORE: -0.754534
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Faerie Miscreant]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 10 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap; Faerie Miscreant]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.075201 - Pass
+     [1] 0.006134 - Cast Snap
+ >>> [2] 0.918665 - Cast Faerie Miscreant
+
+VALUE SCORE: -0.772225
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 10 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap]
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.922280 - Pass
+     [1] 0.077720 - Cast Snap
+
+VALUE SCORE: -0.778869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 10 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Snap]
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped,attacking; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.921950 - Pass
+ >>> [1] 0.078050 - Cast Snap
+
+VALUE SCORE: -0.780692
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 10 (PlayerRL1 turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=PlayerRL1)
+[PlayerRL1], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped,attacking; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.169867 - Ninja of the Deep Hours (you)
+     [1] 0.169867 - Ninja of the Deep Hours (you)
+ >>> [2] 0.169279 - Faerie Miscreant (you)
+     [3] 0.170890 - Spellstutter Sprite (you)
+     [4] 0.167197 - Humbling Elder (you)
+     [5] 0.152901 - Guttersnipe (Bot-Skill1)
+
+VALUE SCORE: -0.783386
+SELECTED: Faerie Miscreant (you)
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 10 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Faerie Miscreant]
+-> Permanents: [Island; Island; Island; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped,attacking]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 10 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Faerie Miscreant]
+-> Permanents: [Island; Island; Island; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped,attacking]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: [Faerie Miscreant]
+-> Permanents: [Island; Island; Island; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.074145 - Pass
+ >>> [1] 0.925855 - Cast Faerie Miscreant
+
+VALUE SCORE: -0.782394
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Bot-Skill1)
+[PlayerRL1], life = 7
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island,tapped; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 11 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Miscreant]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+     [0] 0.072487 - Pass
+ >>> [1] 0.927513 - Play Island
+
+VALUE SCORE: -0.791979
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 11 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Miscreant; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 11 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 11 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 11 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 4
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Guttersnipe; Mountain]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Fireblast (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 11 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Bot-Skill1)
+  - [1] Fireblast (controller=Bot-Skill1)
+[PlayerRL1], life = 4
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 11 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Bot-Skill1)
+[PlayerRL1], life = 2
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Ninja of the Deep Hours; Humbling Elder; Island; Ninja of the Deep Hours; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Island]
+-> Graveyard: [Faerie Miscreant; Humbling Elder; Of One Mind; Of One Mind; Force Spike; Spellstutter Sprite; Counterspell; Snap; Snap]
+-> Exile: []
+[Bot-Skill1], life = 13
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped]
+-> Graveyard: [Fiery Temper; Mountain; Mountain; Grab the Prize; Mountain; Highway Robbery; Mountain; Mountain; Grab the Prize; Mountain; Grab the Prize; Lightning Bolt]
+-> Exile: [Lava Dart; Lava Dart]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 11
+Reason: Episode 154600 - Win
+Total Decisions Logged: 113
+Ended: 2026-02-08T18:12:30.540086300
+================================================================================

@@ -123,10 +123,10 @@ public interface PythonEntryPoint {
      * @param features Batch of mulligan features
      * @param decisions Batch of mulligan decisions (1=keep, 0=mulligan)
      * @param outcomes Batch of game outcomes (win/loss)
-     * @param landCounts Batch of land counts for heuristic (int32 array)
+     * @param gameLengths Batch of game lengths in turns (int32 array) for survival reward
      * @param batchSize Size of the batch
      */
-    void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] landCounts, int batchSize);
+    void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, int batchSize);
 
     /**
      * Save the mulligan model to disk.

@@ -1199,7 +1199,7 @@ public class RLTrainer {
                         }
 
                         // Train mulligan model from this game's decisions
-                        trainMulliganModel(rlPlayer, rlPlayerWon);
+                        trainMulliganModel(rlPlayer, rlPlayerWon, turns);
                         maybeSaveMulliganModel();
 
                         // Log head usage statistics
@@ -2636,41 +2636,24 @@ public class RLTrainer {
      * @param rlPlayer The RL player whose mulligans to train on
      * @param won Whether the player won the game
      */
-    private static void trainMulliganModel(ComputerPlayerRL rlPlayer, boolean won) {
+    private static void trainMulliganModel(ComputerPlayerRL rlPlayer, boolean won, int gameTurns) {
         try {
-            List<Integer> mulliganNums = rlPlayer.getMulliganNums();
-            List<int[]> handIds = rlPlayer.getMulliganHandIds();
-            List<int[]> deckIds = rlPlayer.getMulliganDeckIds();
+            List<float[]> features = rlPlayer.getMulliganFeatures();
             List<Float> decisions = rlPlayer.getMulliganDecisions();
-            List<Integer> landCounts = rlPlayer.getMulliganLandCounts();
 
-            if (mulliganNums.isEmpty()) {
+            if (features.isEmpty()) {
                 return; // No mulligan decisions this game
             }
 
-            int batchSize = mulliganNums.size();
+            int batchSize = features.size();
             float outcome = won ? 1.0f : 0.0f;
-            int MAX_HAND_SIZE = 7;
-            int MAX_DECK_SIZE = 60;
+            int featureSize = features.get(0).length;
 
-            // Pack features: [mulliganNum, handIds[7], deckIds[60]] for each sample
-            int featureSize = 1 + MAX_HAND_SIZE + MAX_DECK_SIZE;
+            // Pack pre-built feature vectors directly
             java.nio.ByteBuffer featuresBuf = java.nio.ByteBuffer.allocate(batchSize * featureSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
-
-            for (int i = 0; i < batchSize; i++) {
-                // Mulligan number
-                featuresBuf.putFloat(mulliganNums.get(i).floatValue());
-
-                // Hand card IDs (7 cards, padded with 0s)
-                int[] hand = handIds.get(i);
-                for (int j = 0; j < MAX_HAND_SIZE; j++) {
-                    featuresBuf.putFloat(j < hand.length ? hand[j] : 0);
-                }
-
-                // Deck card IDs (60 cards, padded with 0s)
-                int[] deck = deckIds.get(i);
-                for (int j = 0; j < MAX_DECK_SIZE; j++) {
-                    featuresBuf.putFloat(j < deck.length ? deck[j] : 0);
+            for (float[] feat : features) {
+                for (float f : feat) {
+                    featuresBuf.putFloat(f);
                 }
             }
 
@@ -2686,21 +2669,21 @@ public class RLTrainer {
                 outcomesBuf.putFloat(outcome);
             }
 
-            // Pack land counts for heuristic
-            java.nio.ByteBuffer landCountsBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
-            for (Integer landCount : landCounts) {
-                landCountsBuf.putInt(landCount);
+            // Pack game lengths for survival-based reward shaping (same for all decisions)
+            java.nio.ByteBuffer gameLengthsBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+            for (int i = 0; i < batchSize; i++) {
+                gameLengthsBuf.putInt(Math.max(1, gameTurns));
             }
 
             long keepN = decisions.stream().filter(d -> d != null && d > 0.5f).count();
-            logger.info(String.format("MULLIGAN TRAIN batch=%d keepN=%d mullN=%d decisions=%s", batchSize, keepN, batchSize - keepN, decisions));
+            logger.info(String.format("MULLIGAN TRAIN batch=%d keepN=%d mullN=%d turns=%d won=%s", batchSize, keepN, batchSize - keepN, gameTurns, won));
 
             // Train the model
             sharedModel.trainMulligan(
                     featuresBuf.array(),
                     decisionsBuf.array(),
                     outcomesBuf.array(),
-                    landCountsBuf.array(),
+                    gameLengthsBuf.array(),
                     batchSize
             );
 

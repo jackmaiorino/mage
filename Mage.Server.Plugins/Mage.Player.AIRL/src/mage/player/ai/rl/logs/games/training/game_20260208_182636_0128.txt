@@ -1,0 +1,2387 @@
+================================================================================
+GAME LOG: game_20260208_182636_0128
+Started: 2026-02-08T18:26:36.059589300
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=2 decision=KEEP Q_keep=0.336 Q_mull=0.251 hand=[Island; Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.088368 - Pass
+ >>> [1] 0.911632 - Play Island
+
+VALUE SCORE: -0.143860
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.739583 - Pass
+     [1] 0.260417 - Cast Ponder
+
+VALUE SCORE: -0.162879
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.739176 - Pass
+     [1] 0.260824 - Cast Ponder
+
+VALUE SCORE: -0.163746
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent; Lorien Revealed]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Island; Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent; Lorien Revealed]
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.086362 - Pass
+ >>> [1] 0.867631 - Play Island
+     [2] 0.030315 - Cast Ponder
+     [3] 0.015691 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.158056
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Ponder; Cryptic Serpent; Lorien Revealed]
+-> Permanents: [Island; Island]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.646112 - Pass
+ >>> [1] 0.233671 - Cast Ponder
+     [2] 0.120216 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.179544
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Lorien Revealed; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Ponder]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.846872 - Pass
+     [1] 0.153128 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.197165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Lorien Revealed; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Ponder]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.847038 - Pass
+     [1] 0.152962 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.196238
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Lorien Revealed; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+-> Graveyard: [Ponder]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.847170 - Pass
+ >>> [1] 0.152831 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.195592
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Postcombat Main (CARD_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.071429 - Island
+     [1] 0.071429 - Island
+     [2] 0.071429 - Island
+     [3] 0.071429 - Island
+     [4] 0.071429 - Island
+     [5] 0.071429 - Island
+ >>> [6] 0.071429 - Island
+     [7] 0.071429 - Island
+     [8] 0.071429 - Island
+     [9] 0.071429 - Island
+     [10] 0.071429 - Island
+     [11] 0.071429 - Island
+     [12] 0.071429 - Island
+     [13] 0.071429 - Island
+
+VALUE SCORE: -0.209414
+SELECTED: Island
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Island; Deem Inferior]
+-> Permanents: [Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Island; Deem Inferior]
+-> Permanents: [Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.099428 - Pass
+ >>> [1] 0.900572 - Play Island
+
+VALUE SCORE: -0.205978
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992305 - Pass
+     [1] 0.007695 - Cast Thought Scour
+
+VALUE SCORE: -0.274570
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992459 - Pass
+     [1] 0.007541 - Cast Thought Scour
+
+VALUE SCORE: -0.270099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Tolarian Terror; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992619 - Pass
+     [1] 0.007381 - Cast Thought Scour
+
+VALUE SCORE: -0.264293
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Lorien Revealed]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.988984 - Pass
+     [1] 0.011016 - Cast Thought Scour
+
+VALUE SCORE: -0.347055
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+-> Graveyard: [Lorien Revealed; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986460 - Pass
+     [1] 0.013540 - Cast Thought Scour
+
+VALUE SCORE: -0.374731
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986786 - Pass
+     [1] 0.013214 - Cast Thought Scour
+
+VALUE SCORE: -0.369722
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986857 - Pass
+     [1] 0.013143 - Cast Thought Scour
+
+VALUE SCORE: -0.368771
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986869 - Pass
+     [1] 0.013131 - Cast Thought Scour
+
+VALUE SCORE: -0.368563
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour; Brainstorm]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour; Brainstorm]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.834026 - Pass
+     [1] 0.010295 - Cast Thought Scour
+     [2] 0.155678 - Cast Brainstorm
+
+VALUE SCORE: -0.391614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour; Brainstorm]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.834413 - Pass
+     [1] 0.010252 - Cast Thought Scour
+ >>> [2] 0.155335 - Cast Brainstorm
+
+VALUE SCORE: -0.391017
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 6 (PlayerRL1 turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour; Murmuring Mystic; Tolarian Terror; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.107673 - Deem Inferior
+     [1] 0.107673 - Deem Inferior
+     [2] 0.090604 - Deep Analysis
+ >>> [3] 0.107109 - Tolarian Terror
+     [4] 0.097552 - Counterspell
+     [5] 0.090604 - Deep Analysis
+     [6] 0.097452 - Cryptic Serpent
+     [7] 0.093560 - Murmuring Mystic
+     [8] 0.107673 - Deem Inferior
+     [9] 0.100100 - Thought Scour
+
+VALUE SCORE: -0.402239
+SELECTED: Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 6 (PlayerRL1 turn), Declare Attackers (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Thought Scour; Murmuring Mystic; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.120576 - Deem Inferior
+     [1] 0.120576 - Deem Inferior
+     [2] 0.101538 - Deep Analysis
+     [3] 0.109301 - Counterspell
+     [4] 0.101538 - Deep Analysis
+     [5] 0.109140 - Cryptic Serpent
+     [6] 0.104724 - Murmuring Mystic
+     [7] 0.120576 - Deem Inferior
+ >>> [8] 0.112032 - Thought Scour
+
+VALUE SCORE: -0.408276
+SELECTED: Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Murmuring Mystic; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Murmuring Mystic; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Deep Analysis; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982280 - Pass
+     [1] 0.017720 - Cast Counterspell
+
+VALUE SCORE: -0.402052
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.974641 - Pass
+     [1] 0.025359 - Cast Counterspell
+
+VALUE SCORE: -0.474093
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.919880 - Pass
+     [1] 0.057880 - Cast Deem Inferior
+     [2] 0.022239 - Cast Thought Scour
+
+VALUE SCORE: -0.468271
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976534 - Pass
+     [1] 0.023466 - Cast Thought Scour
+
+VALUE SCORE: -0.467740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Cryptic Serpent; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.920263 - Pass
+     [1] 0.057644 - Cast Deem Inferior
+     [2] 0.022093 - Cast Thought Scour
+
+VALUE SCORE: -0.467474
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.948954 - Pass
+     [1] 0.024546 - Cast Counterspell
+     [2] 0.026500 - Cast Thought Scour
+
+VALUE SCORE: -0.460194
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975440 - Pass
+     [1] 0.024560 - Cast Thought Scour
+
+VALUE SCORE: -0.449335
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent,tapped,attacking; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970173 - Pass
+     [1] 0.029827 - Cast Thought Scour
+
+VALUE SCORE: -0.468003
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 7 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent,tapped,attacking; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969117 - Pass
+     [1] 0.030883 - Cast Thought Scour
+
+VALUE SCORE: -0.475318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent,tapped; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.968112 - Pass
+     [1] 0.031888 - Cast Thought Scour
+
+VALUE SCORE: -0.478737
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent,tapped; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent,tapped; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.895702 - Pass
+     [1] 0.076016 - Cast Deem Inferior
+     [2] 0.028283 - Cast Thought Scour
+
+VALUE SCORE: -0.499438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent,tapped; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969672 - Pass
+     [1] 0.030328 - Cast Thought Scour
+
+VALUE SCORE: -0.497571
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent,tapped; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.896489 - Pass
+     [1] 0.075503 - Cast Deem Inferior
+     [2] 0.028007 - Cast Thought Scour
+
+VALUE SCORE: -0.497344
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Bot-Skill1)
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.908877 - Pass
+     [1] 0.032508 - Cast Counterspell
+     [2] 0.058615 - Cast Thought Scour
+
+VALUE SCORE: -0.573163
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.942783 - Pass
+     [1] 0.057217 - Cast Thought Scour
+
+VALUE SCORE: -0.567531
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.931828 - Pass
+     [1] 0.068172 - Cast Thought Scour
+
+VALUE SCORE: -0.595372
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Thought Scour]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.931374 - Pass
+ >>> [1] 0.068626 - Cast Thought Scour
+
+VALUE SCORE: -0.597807
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 8 (Bot-Skill1 turn), Declare Blockers (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=PlayerRL1)
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.499959 - Bot-Skill1
+     [1] 0.500041 - PlayerRL1
+
+VALUE SCORE: -0.619210
+SELECTED: Bot-Skill1
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 8 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 14
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island; Island; Island,tapped]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island; Island]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island; Island]
+-> Permanents: [Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.220745 - Pass
+     [1] 0.062064 - Cast Deem Inferior
+ >>> [2] 0.717191 - Play Island
+
+VALUE SCORE: -0.612678
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island; Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.591306 - Pass
+     [1] 0.342565 - Cast Deem Inferior
+     [2] 0.066129 - Cast Deep Analysis
+
+VALUE SCORE: -0.636159
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island; Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deem Inferior; Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island; Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.580668 - Pass
+ >>> [1] 0.352798 - Cast Deem Inferior
+     [2] 0.066534 - Cast Deep Analysis
+
+VALUE SCORE: -0.640557
+SELECTED: Cast Deem Inferior
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 9 (PlayerRL1 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=PlayerRL1)
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island; Island; Island; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+     [0] 0.344261 - Cryptic Serpent (Bot-Skill1)
+     [1] 0.311478 - Murmuring Mystic (Bot-Skill1)
+ >>> [2] 0.344261 - Cryptic Serpent (Bot-Skill1)
+
+VALUE SCORE: -0.679333
+SELECTED: Cryptic Serpent (Bot-Skill1)
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped; Island; Cryptic Serpent; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island; Island,tapped; Island; Cryptic Serpent; Murmuring Mystic]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Bot-Skill1)
+  - [1] Brainstorm (controller=Bot-Skill1)
+  - [2] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent; Murmuring Mystic; Bird Illusion Token]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=Bot-Skill1)
+  - [1] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Island]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Bot-Skill1)
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island; Cryptic Serpent; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Bot-Skill1)
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Sleep of the Dead; Island; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Sleep of the Dead; Island; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 9 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Sleep of the Dead; Island; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 9 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 2
+-> Hand: [Deep Analysis; Deep Analysis; Deem Inferior; Deem Inferior; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+-> Graveyard: [Ponder; Lorien Revealed; Tolarian Terror; Brainstorm; Murmuring Mystic; Cryptic Serpent; Tolarian Terror; Thought Scour; Deem Inferior]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent]
+-> Graveyard: [Lorien Revealed; Thought Scour; Thought Scour; Mental Note; Thought Scour; Brainstorm; Sleep of the Dead; Island; Thought Scour]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Bot-Skill1
+Loser: PlayerRL1
+Turns: 9
+Reason: Episode 154800 - Win
+Total Decisions Logged: 82
+Ended: 2026-02-08T18:29:31.284274600
+================================================================================

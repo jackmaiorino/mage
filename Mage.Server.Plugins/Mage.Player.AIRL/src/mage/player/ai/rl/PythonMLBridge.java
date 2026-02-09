@@ -836,17 +836,17 @@ public class PythonMLBridge implements AutoCloseable {
      * @param features Batch of mulligan features
      * @param decisions Batch of mulligan decisions (1=keep, 0=mulligan)
      * @param outcomes Batch of game outcomes (win/loss)
-     * @param landCounts Batch of land counts for heuristic
+     * @param gameLengths Batch of game lengths in turns (int32 array) for survival reward
      * @param batchSize Size of the batch
      */
-    public void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] landCounts, int batchSize) {
+    public void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, int batchSize) {
         if (!isInitialized) {
             throw new IllegalStateException("Python ML Bridge not initialized");
         }
 
         try {
             synchronized (py4jLock) {
-                entryPoint.trainMulligan(features, decisions, outcomes, landCounts, batchSize);
+                entryPoint.trainMulligan(features, decisions, outcomes, gameLengths, batchSize);
             }
         } catch (Py4JException e) {
             logger.severe("Py4J error during mulligan training: " + e.getMessage());

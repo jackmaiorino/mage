@@ -23,6 +23,8 @@ public class MulliganModel {
     private final PythonModel pythonBridge;
     private static final int MAX_HAND_SIZE = 7;
     private static final int MAX_DECK_SIZE = 60;
+    private static final int NUM_EXPLICIT = 3; // land_count, creature_count, avg_cmc
+    private static final int FEATURE_SIZE = 1 + NUM_EXPLICIT + MAX_HAND_SIZE + MAX_DECK_SIZE; // 71
     private static final int TOKEN_ID_VOCAB = 65536; // Same as StateSequenceBuilder
 
     // Epsilon-greedy exploration parameters
@@ -58,15 +60,17 @@ public class MulliganModel {
         public final int[] deckCardIds;
         public final float qKeep;
         public final float qMull;
+        public final float[] features; // Full feature vector for training
 
         public MulliganDecision(boolean shouldMulligan, int mulliganNum, int[] handCardIds,
-                int[] deckCardIds, float qKeep, float qMull) {
+                int[] deckCardIds, float qKeep, float qMull, float[] features) {
             this.shouldMulligan = shouldMulligan;
             this.mulliganNum = mulliganNum;
             this.handCardIds = handCardIds;
             this.deckCardIds = deckCardIds;
             this.qKeep = qKeep;
             this.qMull = qMull;
+            this.features = features;
         }
     }
 
@@ -84,22 +88,15 @@ public class MulliganModel {
     }
 
     /**
-     * Decide whether to mulligan and return card IDs for training.
+     * Decide whether to mulligan and return card IDs + features for training.
      */
     public MulliganDecision shouldMulliganWithFeatures(Player player, Game game, int mulliganCount, int episodeNum) {
         // Extract card IDs from hand and deck
         int[] handCardIds = extractHandCardIds(player, game);
         int[] deckCardIds = extractDeckCardIds(player, game);
 
-        // Create feature array: [mulliganNum, handIds..., deckIds...]
-        float[] features = new float[1 + MAX_HAND_SIZE + MAX_DECK_SIZE];
-        features[0] = mulliganCount;
-        for (int i = 0; i < handCardIds.length; i++) {
-            features[1 + i] = handCardIds[i];
-        }
-        for (int i = 0; i < deckCardIds.length; i++) {
-            features[1 + MAX_HAND_SIZE + i] = deckCardIds[i];
-        }
+        // Build feature vector with explicit hand features
+        float[] features = buildFeatureVector(player, game, mulliganCount, handCardIds, deckCardIds);
 
         float[] scores = pythonBridge.predictMulliganScores(features);
         float qKeep = scores != null && scores.length > 0 ? scores[0] : 0.0f;
@@ -123,12 +120,7 @@ public class MulliganModel {
 
             // Early training keep-floor (only for opening hand, and only for "reasonable" land counts)
             if (KEEP_FLOOR_EPISODES > 0 && episodeNum < KEEP_FLOOR_EPISODES && mulliganCount == 0 && shouldMulligan) {
-                int landCount = 0;
-                for (Card card : player.getHand().getCards(game)) {
-                    if (card != null && card.isLand(game)) {
-                        landCount++;
-                    }
-                }
+                int landCount = (int) features[1]; // land_count is at index 1
                 if (landCount >= 2 && landCount <= 4) {
                     double t = Math.max(0.0, Math.min(1.0, episodeNum / (double) KEEP_FLOOR_EPISODES));
                     double p = KEEP_FLOOR_P * (1.0 - t);
@@ -139,8 +131,7 @@ public class MulliganModel {
             }
         }
 
-        // Logging is now handled in ComputerPlayerRL.chooseMulligan() and chooseLondonMulliganCards()
-        return new MulliganDecision(shouldMulligan, mulliganCount, handCardIds, deckCardIds, qKeep, qMull);
+        return new MulliganDecision(shouldMulligan, mulliganCount, handCardIds, deckCardIds, qKeep, qMull, features);
     }
 
     /**
@@ -155,65 +146,53 @@ public class MulliganModel {
      */
     public boolean shouldMulligan(Player player, Game game, int mulliganCount, int episodeNum) {
         try {
-            // Extract card IDs
-            int[] handCardIds = extractHandCardIds(player, game);
-            int[] deckCardIds = extractDeckCardIds(player, game);
-
-            // Create feature array
-            float[] features = new float[1 + MAX_HAND_SIZE + MAX_DECK_SIZE];
-            features[0] = mulliganCount;
-            for (int i = 0; i < handCardIds.length; i++) {
-                features[1 + i] = handCardIds[i];
-            }
-            for (int i = 0; i < deckCardIds.length; i++) {
-                features[1 + MAX_HAND_SIZE + i] = deckCardIds[i];
-            }
-
-            float[] scores = pythonBridge.predictMulliganScores(features);
-            float qKeep = scores != null && scores.length > 0 ? scores[0] : 0.0f;
-            float qMull = scores != null && scores.length > 1 ? scores[1] : 0.0f;
-            boolean shouldMulligan;
-
-            if (episodeNum < 0) {
-                // Evaluation/benchmark: fully deterministic argmax
-                shouldMulligan = qKeep < qMull;
-            } else {
-                // Training: epsilon-greedy exploration with stochastic sampling
-                double epsilon = calculateEpsilon(episodeNum);
-
-                if (ThreadLocalRandom.current().nextDouble() < epsilon) {
-                    // Explore: random action
-                    shouldMulligan = ThreadLocalRandom.current().nextBoolean();
-                } else {
-                    // Exploit: deterministic argmax
-                    shouldMulligan = qKeep < qMull;
-                }
-
-                // Early training keep-floor (only for opening hand, and only for "reasonable" land counts)
-                if (KEEP_FLOOR_EPISODES > 0 && episodeNum < KEEP_FLOOR_EPISODES && mulliganCount == 0 && shouldMulligan) {
-                    int landCount = 0;
-                    for (Card card : player.getHand().getCards(game)) {
-                        if (card != null && card.isLand(game)) {
-                            landCount++;
-                        }
-                    }
-                    if (landCount >= 2 && landCount <= 4) {
-                        double t = Math.max(0.0, Math.min(1.0, episodeNum / (double) KEEP_FLOOR_EPISODES));
-                        double p = KEEP_FLOOR_P * (1.0 - t);
-                        if (ThreadLocalRandom.current().nextDouble() < p) {
-                            shouldMulligan = false;
-                        }
-                    }
-                }
-            }
-
-            // Logging is now handled in ComputerPlayerRL.chooseMulligan() and chooseLondonMulliganCards()
-            return shouldMulligan;
-
+            MulliganDecision decision = shouldMulliganWithFeatures(player, game, mulliganCount, episodeNum);
+            return decision.shouldMulligan;
         } catch (Exception e) {
             logger.error("Error in mulligan model, defaulting to keep", e);
             return getDefaultMulliganDecision(player);
         }
+    }
+
+    /**
+     * Build the full feature vector for mulligan model input.
+     * Format: [mulligan_num, land_count, creature_count, avg_cmc, hand_ids[7], deck_ids[60]]
+     */
+    private float[] buildFeatureVector(Player player, Game game, int mulliganCount,
+            int[] handCardIds, int[] deckCardIds) {
+        // Compute explicit hand features
+        int landCount = 0;
+        int creatureCount = 0;
+        float totalCmc = 0;
+        int nonLandCount = 0;
+        for (Card card : player.getHand().getCards(game)) {
+            if (card == null) {
+                continue;
+            }
+            if (card.isLand(game)) {
+                landCount++;
+            } else {
+                if (card.isCreature(game)) {
+                    creatureCount++;
+                }
+                totalCmc += card.getManaValue();
+                nonLandCount++;
+            }
+        }
+        float avgCmc = nonLandCount > 0 ? totalCmc / nonLandCount : 0.0f;
+
+        float[] features = new float[FEATURE_SIZE];
+        features[0] = mulliganCount;
+        features[1] = landCount;
+        features[2] = creatureCount;
+        features[3] = avgCmc;
+        for (int i = 0; i < handCardIds.length; i++) {
+            features[1 + NUM_EXPLICIT + i] = handCardIds[i];
+        }
+        for (int i = 0; i < deckCardIds.length; i++) {
+            features[1 + NUM_EXPLICIT + MAX_HAND_SIZE + i] = deckCardIds[i];
+        }
+        return features;
     }
 
     /**
