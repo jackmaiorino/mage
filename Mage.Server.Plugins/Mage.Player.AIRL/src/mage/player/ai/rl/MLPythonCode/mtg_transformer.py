@@ -8,6 +8,7 @@ import logging
 import time
 import traceback
 import math
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -74,21 +75,25 @@ class MTGTransformerModel(nn.Module):
             nn.ReLU(),
             nn.LayerNorm(d_model),
         )
-        self.policy_query = nn.Sequential(
-            nn.LayerNorm(d_model),
-            nn.Linear(d_model, d_model),
+        # MLP-based candidate scorers (concat CLS + candidate → scalar score)
+        # Each head learns non-linear interactions between game context and candidate features
+        self.policy_scorer = nn.Sequential(
+            nn.LayerNorm(d_model * 2),
+            nn.Linear(d_model * 2, d_model // 2),
             nn.ReLU(),
+            nn.Linear(d_model // 2, 1),
         )
-        # Separate candidate-scoring heads (do not share final projection)
-        self.policy_query_target = nn.Sequential(
-            nn.LayerNorm(d_model),
-            nn.Linear(d_model, d_model),
+        self.policy_scorer_target = nn.Sequential(
+            nn.LayerNorm(d_model * 2),
+            nn.Linear(d_model * 2, d_model // 2),
             nn.ReLU(),
+            nn.Linear(d_model // 2, 1),
         )
-        self.policy_query_card_select = nn.Sequential(
-            nn.LayerNorm(d_model),
-            nn.Linear(d_model, d_model),
+        self.policy_scorer_card_select = nn.Sequential(
+            nn.LayerNorm(d_model * 2),
+            nn.Linear(d_model * 2, d_model // 2),
             nn.ReLU(),
+            nn.Linear(d_model // 2, 1),
         )
 
         # Legacy fixed-action actor head (kept for backwards compatibility / debugging)
@@ -112,8 +117,8 @@ class MTGTransformerModel(nn.Module):
         # Initialize weights
         self._init_weights()
 
-        # Gradient clipping value (looser for faster learning)
-        self.max_grad_norm = 5.0
+        # Gradient clipping value (configurable via env var)
+        self.max_grad_norm = float(os.getenv('MAX_GRAD_NORM', '1.0'))
 
         # --- utility lambdas ----------------------------------------
         self._stat_str = lambda a: f"Mean: {a.mean():.4f}, Std: {a.std():.4f}, Min: {a.min():.4f}, Max: {a.max():.4f}"
@@ -124,6 +129,13 @@ class MTGTransformerModel(nn.Module):
         # Increased to standard ranges for transformer training
         special_actor_linears = {self.actor_proj1, self.actor_proj2}
         special_critic_linears = {self.critic_proj1, self.critic_proj2}
+        
+        # Collect MLP scorer linears for special initialization
+        scorer_linears = set()
+        for scorer in [self.policy_scorer, self.policy_scorer_target, self.policy_scorer_card_select]:
+            for module in scorer.modules():
+                if isinstance(module, nn.Linear):
+                    scorer_linears.add(module)
 
         for m in self.modules():
             if isinstance(m, nn.Linear):
@@ -131,6 +143,8 @@ class MTGTransformerModel(nn.Module):
                     gain = 0.5  # Stronger actor init for clearer policy signal
                 elif m in special_critic_linears:
                     gain = 0.5  # Stronger critic init to avoid constant output
+                elif m in scorer_linears:
+                    gain = 0.5  # MLP scorers get same init as actor (clear scoring signal)
                 else:
                     gain = 0.1  # Standard transformer layers (was 0.005)
                 nn.init.xavier_uniform_(m.weight, gain=gain)
@@ -205,17 +219,21 @@ class MTGTransformerModel(nn.Module):
         cand_ids = candidate_ids.clamp(min=0, max=self.action_vocab - 1).long()
         cand = cand_feat + self.action_id_emb(cand_ids)
 
+        # MLP scoring: concat(CLS, candidate) → scalar score
+        # This allows learning non-linear interactions (e.g., "damage spell + is_you = bad")
+        cls_expanded = cls.unsqueeze(1).expand(-1, cand.size(1), -1)  # [B, N, d_model]
+        combined = torch.cat([cls_expanded, cand], dim=-1)             # [B, N, d_model*2]
+        
         # Route head selection (ignore pick_index/min/max for now; plumbed for future conditioning)
         hid = str(head_id).strip().lower() if head_id is not None else "action"
         if hid == "target":
-            query = self.policy_query_target(cls)
+            scorer = self.policy_scorer_target
         elif hid == "card_select":
-            query = self.policy_query_card_select(cls)
+            scorer = self.policy_scorer_card_select
         else:
-            query = self.policy_query(cls)
-
-        scores = (cand * query.unsqueeze(1)).sum(dim=-1) / \
-            math.sqrt(self.d_model)
+            scorer = self.policy_scorer
+        
+        scores = scorer(combined).squeeze(-1)  # [B, N]
         valid = candidate_mask.bool()
         # Numeric safety: if any score is NaN/Inf, treat it as invalid
         scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)

@@ -7,12 +7,14 @@ package mage.player.ai.rl;
  * logs/
  * ├── health/              # Training health monitoring
  * │   ├── training_health.csv
- * │   └── game_kills.log
+ * │   ├── game_kills.log
+ * │   └── activation_failures.log
  * ├── stats/               # Episode-level statistics
  * │   ├── training_stats.csv
  * │   ├── evaluation_stats.csv
  * │   ├── mulligan_stats.csv
- * │   └── head_usage.csv
+ * │   ├── head_usage.csv
+ * │   └── training_losses.csv
  * ├── games/               # Detailed game logs
  * │   ├── training/        (max 50 files)
  * │   └── evaluation/
@@ -37,8 +39,14 @@ public final class RLLogPaths {
     public static final String GAME_KILLS_LOG_PATH = EnvConfig.str("GAME_KILLS_LOG_PATH",
             LOGS_BASE_DIR + "/health/game_kills.log");
 
+    public static final String ACTIVATION_FAILURES_LOG_PATH = EnvConfig.str("ACTIVATION_FAILURES_LOG_PATH",
+            LOGS_BASE_DIR + "/health/activation_failures.log");
+
     public static final String HEAD_USAGE_LOG_PATH = EnvConfig.str("HEAD_USAGE_LOG_PATH",
             LOGS_BASE_DIR + "/stats/head_usage.csv");
+
+    public static final String TRAINING_LOSSES_PATH = EnvConfig.str("TRAINING_LOSSES_PATH",
+            LOGS_BASE_DIR + "/stats/training_losses.csv");
 
     // Episode statistics
     public static final String TRAINING_STATS_PATH = EnvConfig.str("STATS_PATH",

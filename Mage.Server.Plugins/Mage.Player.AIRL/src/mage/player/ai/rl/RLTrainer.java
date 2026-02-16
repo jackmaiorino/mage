@@ -1179,7 +1179,6 @@ public class RLTrainer {
                         }
 
                         logger.info("Players added to game. RL player library size: " + rlPlayer.getLibrary().size() + ", Opponent library size: " + opponentPlayer.getLibrary().size());
-                        System.out.println("DEBUG: Players added to game. RL player library size: " + rlPlayer.getLibrary().size() + ", Opponent library size: " + opponentPlayer.getLibrary().size());
 
                         game.loadCards(rlPlayerDeckThread.getCards(), rlPlayer.getId());
                         game.loadCards(opponentDeckThread.getCards(), opponentPlayer.getId());
@@ -1441,7 +1440,7 @@ public class RLTrainer {
                     }
                 }
             }
-            return (skill > 0) ? ("CP7-Skill " + skill) : "CP7";
+            return "CP7-Skill " + skill;
         }
         try {
             return opponentPlayer == null ? "UNKNOWN" : opponentPlayer.getName();
@@ -2872,7 +2871,7 @@ public class RLTrainer {
             }
             try {
                 int v = Integer.parseInt(t);
-                if (v > 0) {
+                if (v >= 0) {
                     out.add(v);
                 }
             } catch (NumberFormatException ignored) {

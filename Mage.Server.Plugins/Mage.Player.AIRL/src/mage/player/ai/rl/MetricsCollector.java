@@ -108,6 +108,15 @@ public class MetricsCollector {
     private final AtomicLong inferTimeMsBits = new AtomicLong(Double.doubleToRawLongBits(0.0));
     private final AtomicLong mulliganTimeMsBits = new AtomicLong(Double.doubleToRawLongBits(0.0));
 
+    // Training loss component metrics (latest values from Python)
+    private final AtomicLong trainingPolicyLossBits = new AtomicLong(Double.doubleToRawLongBits(0.0));
+    private final AtomicLong trainingValueLossBits = new AtomicLong(Double.doubleToRawLongBits(0.0));
+    private final AtomicLong trainingEntropyBits = new AtomicLong(Double.doubleToRawLongBits(0.0));
+    private final AtomicLong trainingEntropyCoefBits = new AtomicLong(Double.doubleToRawLongBits(0.0));
+    private final AtomicLong trainingClipFracBits = new AtomicLong(Double.doubleToRawLongBits(0.0));
+    private final AtomicLong trainingApproxKlBits = new AtomicLong(Double.doubleToRawLongBits(0.0));
+    private final AtomicLong trainingAdvantageMeanBits = new AtomicLong(Double.doubleToRawLongBits(0.0));
+
     // Value head quality metrics (rolling window)
     private static final int VALUE_WINDOW_SIZE = 100;
     private final double[] valueWins = new double[VALUE_WINDOW_SIZE];  // Value predictions for wins
@@ -405,6 +414,20 @@ public class MetricsCollector {
         return Double.longBitsToDouble(bits);
     }
 
+    private static double toDouble(Object obj) {
+        if (obj == null) {
+            return 0.0;
+        }
+        if (obj instanceof Number) {
+            return ((Number) obj).doubleValue();
+        }
+        try {
+            return Double.parseDouble(obj.toString());
+        } catch (Exception e) {
+            return 0.0;
+        }
+    }
+
     public void recordAutoBatchDeltas(
             long inferCapDelta,
             long inferPagingDelta,
@@ -455,6 +478,22 @@ public class MetricsCollector {
         mulliganTimeMsBits.set(dblBits(mulliganTimeMs));
         autoInferFreeMbBits.set(dblBits(freeMb));
         autoInferDesiredFreeMbBits.set(dblBits(desiredFreeMb));
+    }
+
+    public void recordTrainingLossComponents(Map<String, Object> metrics) {
+        if (metrics == null || metrics.isEmpty()) {
+            return;
+        }
+        try {
+            trainingPolicyLossBits.set(dblBits(toDouble(metrics.get("policy_loss"))));
+            trainingValueLossBits.set(dblBits(toDouble(metrics.get("value_loss"))));
+            trainingEntropyBits.set(dblBits(toDouble(metrics.get("entropy"))));
+            trainingEntropyCoefBits.set(dblBits(toDouble(metrics.get("entropy_coef"))));
+            trainingClipFracBits.set(dblBits(toDouble(metrics.get("clip_frac"))));
+            trainingApproxKlBits.set(dblBits(toDouble(metrics.get("approx_kl"))));
+            trainingAdvantageMeanBits.set(dblBits(toDouble(metrics.get("advantage_mean"))));
+        } catch (Exception ignored) {
+        }
     }
 
     public void recordSamplesProcessed(int samples) {
@@ -861,6 +900,34 @@ public class MetricsCollector {
         sb.append("# HELP mage_training_loss Current training loss\n");
         sb.append("# TYPE mage_training_loss gauge\n");
         sb.append("mage_training_loss ").append(trainingLoss.doubleValue()).append("\n");
+
+        sb.append("# HELP mage_training_policy_loss Policy component of training loss\n");
+        sb.append("# TYPE mage_training_policy_loss gauge\n");
+        sb.append("mage_training_policy_loss ").append(String.format("%.6f", bitsToDbl(trainingPolicyLossBits.get()))).append("\n");
+
+        sb.append("# HELP mage_training_value_loss Value component of training loss\n");
+        sb.append("# TYPE mage_training_value_loss gauge\n");
+        sb.append("mage_training_value_loss ").append(String.format("%.6f", bitsToDbl(trainingValueLossBits.get()))).append("\n");
+
+        sb.append("# HELP mage_training_entropy Policy entropy\n");
+        sb.append("# TYPE mage_training_entropy gauge\n");
+        sb.append("mage_training_entropy ").append(String.format("%.6f", bitsToDbl(trainingEntropyBits.get()))).append("\n");
+
+        sb.append("# HELP mage_training_entropy_coef Entropy coefficient (loss weight)\n");
+        sb.append("# TYPE mage_training_entropy_coef gauge\n");
+        sb.append("mage_training_entropy_coef ").append(String.format("%.6f", bitsToDbl(trainingEntropyCoefBits.get()))).append("\n");
+
+        sb.append("# HELP mage_training_clip_frac PPO clip fraction\n");
+        sb.append("# TYPE mage_training_clip_frac gauge\n");
+        sb.append("mage_training_clip_frac ").append(String.format("%.4f", bitsToDbl(trainingClipFracBits.get()))).append("\n");
+
+        sb.append("# HELP mage_training_approx_kl PPO approximate KL divergence\n");
+        sb.append("# TYPE mage_training_approx_kl gauge\n");
+        sb.append("mage_training_approx_kl ").append(String.format("%.6f", bitsToDbl(trainingApproxKlBits.get()))).append("\n");
+
+        sb.append("# HELP mage_training_advantage_mean Mean advantage value\n");
+        sb.append("# TYPE mage_training_advantage_mean gauge\n");
+        sb.append("mage_training_advantage_mean ").append(String.format("%.6f", bitsToDbl(trainingAdvantageMeanBits.get()))).append("\n");
 
         sb.append("# HELP mage_training_updates_total Total number of training updates\n");
         sb.append("# TYPE mage_training_updates_total counter\n");

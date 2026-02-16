@@ -970,6 +970,15 @@ public class PythonMLBridge implements AutoCloseable {
         }
     }
 
+    public java.util.Map<String, Object> getTrainingLossMetrics() {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+        synchronized (py4jLock) {
+            return entryPoint.getTrainingLossMetrics();
+        }
+    }
+
     /**
      * Train the model with a batch of states and immediate rewards. GAE
      * (Generalized Advantage Estimation) will be computed in Python.

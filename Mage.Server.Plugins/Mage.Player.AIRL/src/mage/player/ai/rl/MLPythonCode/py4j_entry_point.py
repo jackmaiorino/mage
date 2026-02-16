@@ -213,6 +213,13 @@ class PythonEntryPoint:
         # Single-backend runs inference+training in one process; ensure training pauses inference.
         self._gpu_mutex = threading.Lock()
 
+        # Training losses CSV path (resolved relative to RL logs dir)
+        self.training_losses_csv_path = os.getenv(
+            'TRAINING_LOSSES_PATH',
+            'Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/logs/stats/training_losses.csv'
+        )
+        self._training_losses_header_written = False
+
         # Mulligan model device toggle (separate from main model device)
         # Env: MULLIGAN_DEVICE=auto|cpu|cuda
         mull_dev = os.getenv("MULLIGAN_DEVICE", "auto").strip().lower()
@@ -473,7 +480,14 @@ class PythonEntryPoint:
         """Initialize the model and optimizer"""
         logger.info(LogCategory.GPU_MEMORY, "Initializing model")
         if self.model is None:
-            self.model = MTGTransformerModel().to(self.device)
+            # Model v2 (small): 2-layer, d_model=128, ~2M params, saturates in 50k-200k episodes
+            # Model v1 (large): 6-layer, d_model=512, ~55M params, saturates in 20M+ episodes
+            self.model = MTGTransformerModel(
+                d_model=int(os.getenv('MODEL_D_MODEL', '128')),
+                nhead=int(os.getenv('MODEL_NHEAD', '4')),
+                num_layers=int(os.getenv('MODEL_NUM_LAYERS', '2')),
+                dim_feedforward=int(os.getenv('MODEL_DIM_FEEDFORWARD', '512')),
+            ).to(self.device)
 
             # Separate higher LR for actor head to help logits move early
             actor_param_names = [
@@ -488,11 +502,10 @@ class PythonEntryPoint:
                     other_params.append(param)
 
             # ----------------- LR Tuning ---------------------------
-            # Slower, more stable learning rates to prevent policy collapse.
+            # v2 small model uses higher LR (3e-4); v1 large model used 1e-4
             self.optimizer = torch.optim.Adam([
-                {'params': actor_params, 'lr': 1e-4},
-                # Increased from 5e-5 to match actor LR
-                {'params': other_params, 'lr': 1e-4}
+                {'params': actor_params, 'lr': float(os.getenv('ACTOR_LR', '3e-4'))},
+                {'params': other_params, 'lr': float(os.getenv('OTHER_LR', '3e-4'))}
             ])
 
             # Log model size and GPU memory
@@ -1290,10 +1303,13 @@ class PythonEntryPoint:
                 batch_var = float(advantages.var().item()
                                   ) if batch_size >= 2 else 1.0
                 alpha = self._adv_ema_alpha
+                # Include between-batch variance (mean shift) for proper streaming variance
+                mean_shift_sq = (batch_mean - self._adv_running_mean) ** 2
+                combined_var = batch_var + mean_shift_sq
                 self._adv_running_mean = (
                     1 - alpha) * self._adv_running_mean + alpha * batch_mean
                 self._adv_running_var = (
-                    1 - alpha) * self._adv_running_var + alpha * batch_var
+                    1 - alpha) * self._adv_running_var + alpha * combined_var
                 # Normalize using running stats (not per-batch)
                 running_std = max(self._adv_running_var ** 0.5, 1e-8)
                 advantages_normalized = (
@@ -1304,6 +1320,10 @@ class PythonEntryPoint:
                 if adv_std > 1e-8:
                     advantages_normalized = (
                         advantages - advantages.mean()) / adv_std
+
+            # Clip normalized advantages to prevent gradient explosions
+            adv_clip_max = float(os.getenv('ADV_CLIP_MAX', '5.0'))
+            advantages_normalized = advantages_normalized.clamp(-adv_clip_max, adv_clip_max)
 
             probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
             new_logp = self._joint_logp_from_probs(
@@ -1482,10 +1502,38 @@ class PythonEntryPoint:
                             "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
                             loss.item(), loss_policy.item(), loss_value.item(), entropy.item(),
                             entropy_coef, clip_frac.item() * 100, approx_kl.item())
+                # Record loss components for metrics export
+                self.metrics.record_train_losses(
+                    total_loss=loss.item(),
+                    policy_loss=loss_policy.item(),
+                    value_loss=loss_value.item(),
+                    entropy=entropy.item(),
+                    entropy_coef=entropy_coef,
+                    clip_frac=clip_frac.item(),
+                    approx_kl=approx_kl.item(),
+                    batch_size=batch_size,
+                    advantage_mean=float(advantages_normalized.mean().item())
+                )
+                # Write to CSV for post-hoc analysis
+                self._write_training_losses_csv(episodes_in_batch=1)
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
                             "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f)",
                             loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
+                # Record loss components for metrics export
+                self.metrics.record_train_losses(
+                    total_loss=loss.item(),
+                    policy_loss=loss_policy.item(),
+                    value_loss=loss_value.item(),
+                    entropy=entropy.item(),
+                    entropy_coef=entropy_coef,
+                    clip_frac=0.0,
+                    approx_kl=0.0,
+                    batch_size=batch_size,
+                    advantage_mean=float(advantages_normalized.mean().item())
+                )
+                # Write to CSV for post-hoc analysis
+                self._write_training_losses_csv(episodes_in_batch=1)
 
             # -------------------------------------------------------
             # Debug: did this update move value toward target?
@@ -1802,10 +1850,13 @@ class PythonEntryPoint:
                     batch_var = float(advantages.var().item()
                                       ) if local_batch_size >= 2 else 1.0
                     alpha = self._adv_ema_alpha
+                    # Include between-batch variance (mean shift) for proper streaming variance
+                    mean_shift_sq = (batch_mean - self._adv_running_mean) ** 2
+                    combined_var = batch_var + mean_shift_sq
                     self._adv_running_mean = (
                         1 - alpha) * self._adv_running_mean + alpha * batch_mean
                     self._adv_running_var = (
-                        1 - alpha) * self._adv_running_var + alpha * batch_var
+                        1 - alpha) * self._adv_running_var + alpha * combined_var
                     # Normalize using running stats (not per-batch)
                     running_std = max(self._adv_running_var ** 0.5, 1e-8)
                     advantages_normalized = (
@@ -1816,6 +1867,10 @@ class PythonEntryPoint:
                     if adv_std > 1e-8:
                         advantages_normalized = (
                             advantages - advantages.mean()) / adv_std
+
+                # Clip normalized advantages to prevent gradient explosions
+                adv_clip_max = float(os.getenv('ADV_CLIP_MAX', '5.0'))
+                advantages_normalized = advantages_normalized.clamp(-adv_clip_max, adv_clip_max)
 
                 probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
                 new_logp = self._joint_logp_from_probs(
@@ -1946,10 +2001,38 @@ class PythonEntryPoint:
                             "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
                             loss.item(), loss_policy.item(), loss_value.item(), entropy.item(),
                             entropy_coef, clip_frac.item() * 100, approx_kl.item())
+                # Record loss components for metrics export
+                self.metrics.record_train_losses(
+                    total_loss=loss.item(),
+                    policy_loss=loss_policy.item(),
+                    value_loss=loss_value.item(),
+                    entropy=entropy.item(),
+                    entropy_coef=entropy_coef,
+                    clip_frac=clip_frac.item(),
+                    approx_kl=approx_kl.item(),
+                    batch_size=local_batch_size,
+                    advantage_mean=float(advantages_normalized.mean().item())
+                )
+                # Write to CSV for post-hoc analysis
+                self._write_training_losses_csv(episodes_in_batch=ep_count)
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
                             "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f)",
                             loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
+                # Record loss components for metrics export
+                self.metrics.record_train_losses(
+                    total_loss=loss.item(),
+                    policy_loss=loss_policy.item(),
+                    value_loss=loss_value.item(),
+                    entropy=entropy.item(),
+                    entropy_coef=entropy_coef,
+                    clip_frac=0.0,
+                    approx_kl=0.0,
+                    batch_size=local_batch_size,
+                    advantage_mean=float(advantages_normalized.mean().item())
+                )
+                # Write to CSV for post-hoc analysis
+                self._write_training_losses_csv(episodes_in_batch=ep_count)
 
             if do_post:
                 with torch.no_grad():
@@ -2709,6 +2792,31 @@ class PythonEntryPoint:
         result.put('use_gae', self.use_gae)
         return result
 
+    def _write_training_losses_csv(self, episodes_in_batch):
+        """Write training loss components to CSV file for post-hoc analysis."""
+        try:
+            import csv
+            from datetime import datetime
+            
+            # Create directories if needed
+            os.makedirs(os.path.dirname(self.training_losses_csv_path), exist_ok=True)
+            
+            # Check if we need to write header
+            file_exists = os.path.exists(self.training_losses_csv_path)
+            
+            with open(self.training_losses_csv_path, 'a', newline='') as f:
+                if not file_exists or not self._training_losses_header_written:
+                    # Write header
+                    f.write('step,timestamp,total_loss,policy_loss,value_loss,entropy,entropy_coef,clip_frac,approx_kl,batch_size,episodes_in_batch,advantage_mean\n')
+                    self._training_losses_header_written = True
+                
+                # Write data row
+                timestamp = datetime.now().isoformat()
+                f.write(f'{self.train_step_counter},{timestamp},{self.metrics.latest_total_loss:.6f},{self.metrics.latest_policy_loss:.6f},{self.metrics.latest_value_loss:.6f},{self.metrics.latest_entropy:.6f},{self.metrics.latest_entropy_coef:.6f},{self.metrics.latest_clip_frac:.6f},{self.metrics.latest_approx_kl:.6f},{self.metrics.latest_batch_size},{episodes_in_batch},{self.metrics.latest_advantage_mean:.6f}\n')
+        except Exception as e:
+            # Non-critical - don't fail training over CSV logging
+            logger.warning(LogCategory.MODEL_TRAIN, f"Failed to write training_losses.csv: {e}")
+
     def getAutoBatchMetrics(self):
         """
         Export auto-batching decisions + timing metrics for Prometheus/Grafana via Java.
@@ -2752,6 +2860,19 @@ class PythonEntryPoint:
                 result.put(k, int(v))
             except Exception:
                 pass
+        return result
+
+    def getTrainingLossMetrics(self):
+        """
+        Export latest training loss components for Prometheus/Grafana via Java.
+        Returns a HashMap with total_loss, policy_loss, value_loss, entropy, etc.
+        """
+        from py4j.java_gateway import java_import
+        java_import(gateway.jvm, 'java.util.HashMap')
+        m = self.metrics.get_training_loss_metrics()
+        result = gateway.jvm.HashMap()
+        for k, v in m.items():
+            result.put(k, float(v))
         return result
 
     def shutdown(self):

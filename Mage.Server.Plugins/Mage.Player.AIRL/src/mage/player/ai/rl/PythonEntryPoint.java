@@ -234,6 +234,13 @@ public interface PythonEntryPoint {
     java.util.Map<String, Object> getAutoBatchMetrics();
 
     /**
+     * Get training loss components for Grafana/Prometheus. Returns a map with
+     * keys: total_loss, policy_loss, value_loss, entropy, entropy_coef,
+     * clip_frac, approx_kl, batch_size, advantage_mean
+     */
+    java.util.Map<String, Object> getTrainingLossMetrics();
+
+    /**
      * Acquire GPU lock (called by Java before learner training burst). Learner
      * will hold this lock while draining the training queue.
      */

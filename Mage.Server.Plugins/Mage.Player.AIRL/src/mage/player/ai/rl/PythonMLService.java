@@ -77,6 +77,7 @@ public class PythonMLService implements PythonModel {
     // Auto-batching metrics polling (per Python worker)
     private final ConcurrentHashMap<String, long[]> autoBatchLastCounts = new ConcurrentHashMap<>();
     private volatile long lastLearnerAutoBatchPollMs = 0L;
+    private volatile long lastLearnerLossMetricsPollMs = 0L;
 
     private static final class InferSlot {
 
@@ -279,6 +280,13 @@ public class PythonMLService implements PythonModel {
                     tryPollAutoBatchMetrics(learner);
                 }
 
+                // Poll training loss metrics from learner periodically (best-effort).
+                long nowLoss = System.currentTimeMillis();
+                if (nowLoss - lastLearnerLossMetricsPollMs > 5000L) {
+                    lastLearnerLossMetricsPollMs = nowLoss;
+                    tryPollTrainingLossMetrics(learner);
+                }
+
                 long now = System.currentTimeMillis();
                 if (stepsSinceSync >= syncEveryTrainSteps || now - lastSyncMsLocal >= syncEveryMs) {
                     if (learner.saveLatestModelAtomic(latestWeightsPath)) {
@@ -413,6 +421,17 @@ public class PythonMLService implements PythonModel {
                     inferTimeMs,
                     mulliganTimeMs
             );
+        } catch (Exception ignored) {
+        }
+    }
+
+    private void tryPollTrainingLossMetrics(PythonMLBridge bridge) {
+        try {
+            Map<String, Object> m = bridge.getTrainingLossMetrics();
+            if (m == null || m.isEmpty()) {
+                return;
+            }
+            MetricsCollector.getInstance().recordTrainingLossComponents(m);
         } catch (Exception ignored) {
         }
     }

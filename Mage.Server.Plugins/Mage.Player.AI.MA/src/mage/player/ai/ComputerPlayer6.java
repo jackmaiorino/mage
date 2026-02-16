@@ -96,7 +96,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         } else {
             maxDepth = skill;
         }
-        maxThinkTimeSecs = skill * 3;
+        maxThinkTimeSecs = skill * 2;
         maxNodes = MAX_SIMULATED_NODES_PER_CALC;
         this.actionCache = new HashSet<>();
     }
@@ -127,10 +127,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
     }
 
     protected void printBattlefieldScore(Game game, String info) {
-        if (logger.isInfoEnabled()) {
-            logger.info("");
-            logger.info("=================== " + info + ", turn " + game.getTurnNum() + ", " + game.getPlayer(game.getPriorityPlayerId()).getName() + " ===================");
-            logger.info("[Stack]: " + game.getStack());
+        if (logger.isDebugEnabled()) {
+            logger.debug("");
+            logger.debug("=================== " + info + ", turn " + game.getTurnNum() + ", " + game.getPlayer(game.getPriorityPlayerId()).getName() + " ===================");
+            logger.debug("[Stack]: " + game.getStack());
             printBattlefieldScore(game, playerId);
             for (UUID opponentId : game.getOpponents(playerId)) {
                 printBattlefieldScore(game, opponentId);
@@ -142,7 +142,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         // hand
         Player player = game.getPlayer(playerId);
         GameStateEvaluator2.PlayerEvaluateScore score = GameStateEvaluator2.evaluate(playerId, game);
-        logger.info(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("]")
+        logger.debug(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("]")
                 .append(", life = ").append(player.getLife())
                 .append(", score = ").append(score.getTotalScore())
                 .append(" (").append(score.getPlayerInfoFull()).append(")")
@@ -153,20 +153,20 @@ public class ComputerPlayer6 extends ComputerPlayer {
         StringBuilder sb = new StringBuilder("-> Hand: [")
                 .append(cardsInfo)
                 .append("]");
-        logger.info(sb.toString());
+        logger.debug(sb.toString());
 
         // battlefield
         sb.setLength(0);
         String ownPermanentsInfo = game.getBattlefield().getAllPermanents().stream()
                 .filter(p -> p.isOwnedBy(player.getId()))
                 .map(p -> p.getName()
-                        + (p.isTapped() ? ",tapped" : "")
-                        + (p.isAttacking() ? ",attacking" : "")
-                        + (p.getBlocking() > 0 ? ",blocking" : "")
-                        + ":" + GameStateEvaluator2.evaluatePermanent(p, game, true))
+                + (p.isTapped() ? ",tapped" : "")
+                + (p.isAttacking() ? ",attacking" : "")
+                + (p.getBlocking() > 0 ? ",blocking" : "")
+                + ":" + GameStateEvaluator2.evaluatePermanent(p, game, true))
                 .collect(Collectors.joining("; "));
         sb.append("-> Permanents: [").append(ownPermanentsInfo).append("]");
-        logger.info(sb.toString());
+        logger.debug(sb.toString());
     }
 
     protected void act(Game game) {
@@ -1045,7 +1045,6 @@ public class ComputerPlayer6 extends ComputerPlayer {
             }
 
             // TODO: add game simulations here to find best attackers/blockers combination
-
             // find safe attackers (can't be killed by blockers)
             for (UUID defenderId : game.getOpponents(playerId, true)) {
                 Player defender = game.getPlayer(defenderId);

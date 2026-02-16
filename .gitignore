@@ -86,3 +86,4 @@ Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/evalgamelogs/
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/mulligan_trace.jsonl
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MulliganModel.java
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/logs/

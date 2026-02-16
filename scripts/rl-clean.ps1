@@ -81,12 +81,19 @@ $dirsToClean = @()
 # MAIN MODEL artifacts
 # ============================================================
 if ($cleanMain) {
-    # Main model file
+    # Main model files
     $mainModelFile = Join-Path $modelsDir "model.pt"
-    if (Test-Path $mainModelFile) {
+    $mainModelLatestFile = Join-Path $modelsDir "model_latest.pt"
+    if ((Test-Path $mainModelFile) -or (Test-Path $mainModelLatestFile)) {
         Write-Host "  Main model:" -ForegroundColor Yellow
-        Write-Host "    - model.pt" -ForegroundColor Gray
-        $itemsToDelete += $mainModelFile
+        if (Test-Path $mainModelFile) {
+            Write-Host "    - model.pt" -ForegroundColor Gray
+            $itemsToDelete += $mainModelFile
+        }
+        if (Test-Path $mainModelLatestFile) {
+            Write-Host "    - model_latest.pt" -ForegroundColor Gray
+            $itemsToDelete += $mainModelLatestFile
+        }
     }
 
     # Episode counter
@@ -110,7 +117,7 @@ if ($cleanMain) {
     # Check logs/stats dir
     $statsDir = Join-Path $logsDir "stats"
     if (Test-Path $statsDir) {
-        foreach ($pattern in @("training_stats*.csv", "head_usage*.csv")) {
+        foreach ($pattern in @("training_stats*.csv", "head_usage*.csv", "training_losses*.csv", "evaluation_stats*.csv")) {
             $matches = Get-ChildItem -Path $statsDir -Filter $pattern -ErrorAction SilentlyContinue
             if ($matches) { $mainStatsFiles += $matches }
         }
@@ -118,8 +125,10 @@ if ($cleanMain) {
     # Check logs/health dir
     $healthDir = Join-Path $logsDir "health"
     if (Test-Path $healthDir) {
-        $matches = Get-ChildItem -Path $healthDir -Filter "training_health*.csv" -ErrorAction SilentlyContinue
-        if ($matches) { $mainStatsFiles += $matches }
+        foreach ($pattern in @("training_health*.csv", "game_kills*.log", "activation_failures*.log")) {
+            $matches = Get-ChildItem -Path $healthDir -Filter $pattern -ErrorAction SilentlyContinue
+            if ($matches) { $mainStatsFiles += $matches }
+        }
     }
     if ($mainStatsFiles) {
         Write-Host "  Main training stats:" -ForegroundColor Yellow
@@ -289,6 +298,24 @@ Write-Host "Done!" -ForegroundColor Green
 Write-Host "  Deleted: $deleted items" -ForegroundColor Green
 if ($failed -gt 0) {
     Write-Host "  Failed: $failed items" -ForegroundColor Red
+}
+
+# Refresh Grafana/Prometheus metrics for fresh graphs
+if ($cleanMain -or $cleanMulligan) {
+    Write-Host ""
+    Write-Host "Refreshing monitoring metrics (Prometheus/Grafana)..." -ForegroundColor Cyan
+    
+    $composeFile = Join-Path $repoRoot "docker-compose-observe-local.yml"
+    if (Test-Path $composeFile) {
+        try {
+            # Restart Prometheus to clear time-series data
+            docker compose -f $composeFile restart prometheus 2>&1 | Out-Null
+            Write-Host "  Prometheus restarted (metrics cleared)" -ForegroundColor Gray
+        } catch {
+            Write-Host "  Warning: Could not restart Prometheus - $($_.Exception.Message)" -ForegroundColor Yellow
+            Write-Host "  If monitoring is running, manually restart: docker compose -f docker-compose-observe-local.yml restart prometheus" -ForegroundColor Yellow
+        }
+    }
 }
 
 Write-Host ""
