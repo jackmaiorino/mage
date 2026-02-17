@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="53177" Quantity="1" Sideboard="false" Name="Ancestral Recall" Annotation="0"/>
+  <Cards CatID="53155" Quantity="1" Sideboard="false" Name="Black Lotus" Annotation="0"/>
+  <Cards CatID="53099" Quantity="2" Sideboard="false" Name="Volcanic Island" Annotation="0"/>
+  <Cards CatID="90447" Quantity="1" Sideboard="false" Name="Dress Down" Annotation="0"/>
+  <Cards CatID="111536" Quantity="2" Sideboard="false" Name="Flame of Anor" Annotation="0"/>
+  <Cards CatID="11931" Quantity="1" Sideboard="false" Name="Tolarian Academy" Annotation="0"/>
+  <Cards CatID="142227" Quantity="2" Sideboard="false" Name="Swords to Plowshares" Annotation="0"/>
+  <Cards CatID="79598" Quantity="1" Sideboard="false" Name="Soul-Guide Lantern" Annotation="0"/>
+  <Cards CatID="112576" Quantity="1" Sideboard="false" Name="Forth Eorlingas!" Annotation="0"/>
+  <Cards CatID="128907" Quantity="1" Sideboard="false" Name="Sol Ring" Annotation="0"/>
+  <Cards CatID="42512" Quantity="1" Sideboard="false" Name="Snapcaster Mage" Annotation="0"/>
+  <Cards CatID="112030" Quantity="1" Sideboard="false" Name="Lorien Revealed" Annotation="0"/>
+  <Cards CatID="91401" Quantity="2" Sideboard="false" Name="Scalding Tarn" Annotation="0"/>
+  <Cards CatID="125709" Quantity="1" Sideboard="false" Name="Polluted Delta" Annotation="0"/>
+  <Cards CatID="38197" Quantity="1" Sideboard="false" Name="Mox Opal" Annotation="0"/>
+  <Cards CatID="34622" Quantity="1" Sideboard="false" Name="Misty Rainforest" Annotation="0"/>
+  <Cards CatID="122020" Quantity="1" Sideboard="false" Name="Meticulous Archive" Annotation="0"/>
+  <Cards CatID="104486" Quantity="1" Sideboard="false" Name="Mishra's Bauble" Annotation="0"/>
+  <Cards CatID="19569" Quantity="1" Sideboard="false" Name="Merchant Scroll" Annotation="0"/>
+  <Cards CatID="52877" Quantity="1" Sideboard="false" Name="Mox Emerald" Annotation="0"/>
+  <Cards CatID="52713" Quantity="1" Sideboard="false" Name="Mox Jet" Annotation="0"/>
+  <Cards CatID="39920" Quantity="1" Sideboard="false" Name="Mental Misstep" Annotation="0"/>
+  <Cards CatID="52597" Quantity="1" Sideboard="false" Name="Mox Pearl" Annotation="0"/>
+  <Cards CatID="53243" Quantity="1" Sideboard="false" Name="Mox Ruby" Annotation="0"/>
+  <Cards CatID="52919" Quantity="1" Sideboard="false" Name="Mox Sapphire" Annotation="0"/>
+  <Cards CatID="61909" Quantity="4" Sideboard="false" Name="Paradoxical Outcome" Annotation="0"/>
+  <Cards CatID="102100" Quantity="1" Sideboard="false" Name="Mana Vault" Annotation="0"/>
+  <Cards CatID="52941" Quantity="1" Sideboard="false" Name="Mana Crypt" Annotation="0"/>
+  <Cards CatID="126509" Quantity="1" Sideboard="false" Name="Sink into Stupor" Annotation="0"/>
+  <Cards CatID="79626" Quantity="1" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="39976" Quantity="1" Sideboard="false" Name="Gitaxian Probe" Annotation="0"/>
+  <Cards CatID="82136" Quantity="4" Sideboard="false" Name="Force of Will" Annotation="0"/>
+  <Cards CatID="136257" Quantity="4" Sideboard="false" Name="Stock Up" Annotation="0"/>
+  <Cards CatID="72899" Quantity="2" Sideboard="false" Name="Flusterstorm" Annotation="0"/>
+  <Cards CatID="129127" Quantity="4" Sideboard="false" Name="Thundertrap Trainer" Annotation="0"/>
+  <Cards CatID="52987" Quantity="1" Sideboard="false" Name="Time Walk" Annotation="0"/>
+  <Cards CatID="54194" Quantity="1" Sideboard="false" Name="Flooded Strand" Annotation="0"/>
+  <Cards CatID="53095" Quantity="3" Sideboard="false" Name="Tundra" Annotation="0"/>
+  <Cards CatID="90899" Quantity="1" Sideboard="false" Name="Urza's Saga" Annotation="0"/>
+  <Cards CatID="126443" Quantity="1" Sideboard="false" Name="Vexing Bauble" Annotation="0"/>
+  <Cards CatID="62513" Quantity="1" Sideboard="false" Name="Chain of Vapor" Annotation="0"/>
+  <Cards CatID="142227" Quantity="2" Sideboard="true" Name="Swords to Plowshares" Annotation="0"/>
+  <Cards CatID="126125" Quantity="1" Sideboard="true" Name="Consign to Memory" Annotation="0"/>
+  <Cards CatID="79598" Quantity="1" Sideboard="true" Name="Soul-Guide Lantern" Annotation="0"/>
+  <Cards CatID="102237" Quantity="1" Sideboard="true" Name="Force of Negation" Annotation="0"/>
+  <Cards CatID="80461" Quantity="1" Sideboard="true" Name="Lurrus of the Dream-Den" Annotation="0"/>
+  <Cards CatID="34802" Quantity="1" Sideboard="true" Name="Mindbreak Trap" Annotation="0"/>
+  <Cards CatID="132283" Quantity="1" Sideboard="true" Name="Overencumbered" Annotation="0"/>
+  <Cards CatID="69981" Quantity="2" Sideboard="true" Name="Pyroblast" Annotation="0"/>
+  <Cards CatID="91568" Quantity="2" Sideboard="true" Name="Portable Hole" Annotation="0"/>
+  <Cards CatID="33057" Quantity="1" Sideboard="true" Name="Pithing Needle" Annotation="0"/>
+  <Cards CatID="70095" Quantity="1" Sideboard="true" Name="Containment Priest" Annotation="0"/>
+  <Cards CatID="82262" Quantity="1" Sideboard="true" Name="Abrade" Annotation="0"/>
+</Deck>

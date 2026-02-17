@@ -83,6 +83,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // ThreadLocal to track which choice was made and what options were available
     private static final ThreadLocal<ChoiceTrackingData> choiceTrackingData = new ThreadLocal<>();
 
+    // ThreadLocal for activation failure tracing - captures every callback during activateAbility()
+    private static final ThreadLocal<List<String>> activationTrace = ThreadLocal.withInitial(ArrayList::new);
+    private static final ThreadLocal<Boolean> traceEnabled = ThreadLocal.withInitial(() -> false);
+
     private PythonModel model;
     private MulliganModel mulliganModel;
     protected StateSequenceBuilder.SequenceOutput currentState;
@@ -641,6 +645,29 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 return f; // Now has game context features
             }
 
+            // chooseUse candidates: Boolean.TRUE = yes, Boolean.FALSE = no
+            if (candidate instanceof Boolean) {
+                boolean isYes = (Boolean) candidate;
+                if (!isYes) {
+                    f[1] = 1.0f; // is_pass (declining = effectively passing on the option)
+                }
+                f[26] = isYes ? 1.0f : 0.0f; // is_choose_use_yes
+                // Encode source ability context if available
+                if (source != null) {
+                    MageObject srcObj = game.getObject(source.getSourceId());
+                    if (srcObj instanceof Permanent) {
+                        Permanent p = (Permanent) srcObj;
+                        f[2] = p.isCreature() ? 1.0f : 0.0f;
+                        f[3] = p.isLand() ? 1.0f : 0.0f;
+                        f[4] = p.isTapped() ? 1.0f : 0.0f;
+                        f[5] = p.getPower().getValue() / 10.0f;
+                        f[6] = p.getToughness().getValue() / 10.0f;
+                    }
+                    f[9] = source.getManaCostsToPay().manaValue() / 10.0f;
+                }
+                return f;
+            }
+
             // Ability-based candidate features
             if (candidate instanceof mage.abilities.Ability) {
                 mage.abilities.Ability ab = (mage.abilities.Ability) candidate;
@@ -959,16 +986,29 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         trackEarlyLands(game);
         
+        // Trace entry
+        if (target != null) {
+            trace(String.format("chooseTarget ENTRY: outcome=%s, targetName=%s, targetClass=%s, min=%d, max=%d",
+                outcome, target.getTargetName(), target.getClass().getSimpleName(),
+                target.getMinNumberOfTargets(), target.getMaxNumberOfTargets()));
+        } else {
+            trace("chooseTarget ENTRY: target=null");
+        }
+        
         // Special case: Choose starting player - always choose yourself (no need for model)
         if (target != null && "starting player".equalsIgnoreCase(target.getTargetName())) {
             target.addTarget(this.getId(), source, game);
+            trace("chooseTarget EXIT: starting player, result=true");
             return true;
         }
         
         // Special case: London mulligan card selection
         // TODO: I don't think this check is sufficient to say its a mulligan
         if (source == null && outcome == Outcome.Discard && target instanceof mage.target.common.TargetCardInHand) {
-            return chooseLondonMulliganCards(target, game);
+            trace("chooseTarget: london mulligan delegation");
+            boolean result = chooseLondonMulliganCards(target, game);
+            trace("chooseTarget EXIT: london mulligan, result=" + result);
+            return result;
         }
         // RL-only target selection. No engine fallback.
         UUID abilityControllerId = playerId;
@@ -991,13 +1031,32 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 possible.add(0, null); // STOP sentinel
             }
 
+            // Trace possible targets (cap at 10 for readability)
+            StringBuilder possibleStr = new StringBuilder();
+            for (int i = 0; i < Math.min(10, possible.size()); i++) {
+                UUID id = possible.get(i);
+                if (id == null) {
+                    possibleStr.append("STOP");
+                } else {
+                    MageObject obj = game.getObject(id);
+                    possibleStr.append(obj != null ? obj.getName() : "unknown");
+                    possibleStr.append("(").append(id.toString().substring(0, 8)).append(")");
+                }
+                if (i < Math.min(10, possible.size()) - 1) possibleStr.append(", ");
+            }
+            if (possible.size() > 10) possibleStr.append("...(+").append(possible.size() - 10).append(" more)");
+            trace(String.format("chooseTarget iteration %d: possible count=%d [%s]", chosenCount, possible.size(), possibleStr));
+
             if (possible.isEmpty()) {
+                trace("chooseTarget: no possible targets, breaking loop");
                 break;
             }
 
             UUID picked = null;
             if (possible.size() == 1) {
                 picked = possible.get(0);
+                String pickName = picked == null ? "STOP" : (game.getObject(picked) != null ? game.getObject(picked).getName() : "unknown");
+                trace("chooseTarget: single option, picked=" + pickName);
             } else {
                 // Check if all non-null candidates have the same name (trivial decision)
                 boolean allSameName = true;
@@ -1016,6 +1075,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
                 if (allSameName && firstName != null) {
                     // All candidates are the same card - pick first non-null
+                    trace("chooseTarget: all same name (" + firstName + "), picking first");
                     for (UUID id : possible) {
                         if (id != null) {
                             picked = id;
@@ -1024,6 +1084,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     }
                 } else {
                     // Non-trivial decision - use model inference
+                    trace("chooseTarget: calling RL model for target selection");
                     try {
                     TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
                     StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
@@ -1085,6 +1146,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         }
                     }
                     picked = possible.get(chosenIdx);
+                    String pickName = picked == null ? "STOP" : (game.getObject(picked) != null ? game.getObject(picked).getName() : "unknown");
+                    trace(String.format("chooseTarget: RL model picked idx=%d, target=%s, prob=%.3f", chosenIdx, pickName, actionProbs[chosenIdx]));
 
                     // Record training data for this target selection
                     if (trainingEnabled && !game.isSimulation()) {
@@ -1152,47 +1215,86 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     }
                     } catch (Exception e) {
                         // Deterministic internal fallback (no engine)
+                        trace("chooseTarget: RL model exception, using fallback first target: " + e.getMessage());
                         picked = possible.get(0);
+                        String pickName = picked == null ? "STOP" : (game.getObject(picked) != null ? game.getObject(picked).getName() : "unknown");
+                        trace("chooseTarget: exception fallback picked=" + pickName);
                     }
                 }
             }
 
             if (picked == null) { // STOP
+                trace("chooseTarget: STOP selected, breaking loop");
                 break;
             }
+            String addedName = game.getObject(picked) != null ? game.getObject(picked).getName() : "unknown";
+            trace("chooseTarget: adding target=" + addedName + ", chosenCount will be " + (chosenCount + 1));
             target.addTarget(picked, source, game);
             chosen.add(picked);
             chosenCount++;
         }
 
         // Ensure minimum targets if required (deterministic fill, no engine)
+        if (chosenCount < minTargets) {
+            trace("chooseTarget: filling to minTargets, current=" + chosenCount + ", min=" + minTargets);
+        }
         while (chosenCount < minTargets) {
             java.util.List<UUID> possible = new java.util.ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
             final UUID ctrlId = abilityControllerId;
             possible.removeIf(id -> id == null || chosen.contains(id) || !target.canTarget(ctrlId, id, source, game));
             if (possible.isEmpty()) {
+                trace("chooseTarget: no targets available to fill minTargets, breaking");
                 break;
             }
             UUID picked = possible.get(0);
+            String pickedName = game.getObject(picked) != null ? game.getObject(picked).getName() : "unknown";
+            trace("chooseTarget: deterministic fill, adding=" + pickedName);
             target.addTarget(picked, source, game);
             chosen.add(picked);
             chosenCount++;
         }
 
-        return chosenCount >= minTargets;
+        boolean result = chosenCount >= minTargets;
+        trace(String.format("chooseTarget EXIT: chosenCount=%d, minTargets=%d, result=%s", chosenCount, minTargets, result));
+        return result;
     }
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         // Route to chooseTarget which uses the RL model
         // This handles discard effects (Faithless Looting), sacrifice effects, etc.
-        return chooseTarget(outcome, target, source, game);
+        trace("choose(Target) ENTRY: delegating to chooseTarget");
+        boolean result = chooseTarget(outcome, target, source, game);
+        trace("choose(Target) EXIT: result=" + result);
+        return result;
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        // Trace-only override for card selection from a visible set (e.g., cost payments)
+        String targetName = target != null ? target.getTargetName() : "null";
+        int cardsCount = cards != null ? cards.size() : 0;
+        trace(String.format("choose(Cards,TargetCard) ENTRY: outcome=%s, cardsCount=%d, targetName=%s",
+            outcome, cardsCount, targetName));
+        
+        boolean result = super.choose(outcome, cards, target, source, game);
+        
+        trace("choose(Cards,TargetCard) EXIT: result=" + result);
+        return result;
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        // Trace entry
+        String targetName = target != null ? target.getTargetName() : "null";
+        String filterName = (target != null && target.getFilter() != null) ? target.getFilter().getMessage() : "none";
+        int cardsCount = cards != null ? cards.size() : 0;
+        trace(String.format("chooseTarget(Cards) ENTRY: outcome=%s, cardsCount=%d, targetName=%s, filter=%s",
+            outcome, cardsCount, targetName, filterName));
+        
         // RL-only selection from a provided visible card set. No engine fallback.
         if (cards == null || target == null) {
+            trace("chooseTarget(Cards) EXIT: null input, result=false");
             return false;
         }
         
@@ -1473,11 +1575,31 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             chosenCount++;
         }
 
-        return chosenCount >= minTargets;
+        boolean result = chosenCount >= minTargets;
+        trace(String.format("chooseTarget(Cards) EXIT: chosenCount=%d, minTargets=%d, result=%s",
+            chosenCount, minTargets, result));
+        return result;
     }
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
+        // Trace entry
+        if (choice != null) {
+            boolean isKeyChoice = choice.isKeyChoice();
+            int choiceCount = isKeyChoice ? choice.getKeyChoices().size() : choice.getChoices().size();
+            boolean isManaColor = choice.isManaColorChoice();
+            String options = "";
+            if (isKeyChoice && choiceCount > 0 && choiceCount <= 10) {
+                options = ", keys=" + choice.getKeyChoices().keySet();
+            } else if (!isKeyChoice && choiceCount > 0 && choiceCount <= 10) {
+                options = ", choices=" + choice.getChoices();
+            }
+            trace(String.format("choose ENTRY: outcome=%s, isKey=%s, isManaColor=%s, count=%d%s", 
+                outcome, isKeyChoice, isManaColor, choiceCount, options));
+        } else {
+            trace("choose ENTRY: outcome=" + outcome + ", choice=null");
+        }
+
         // ALWAYS log when choose() is called, regardless of conditions
         if (ACTIVATION_DIAG) {
             String choiceInfo;
@@ -1506,7 +1628,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         // Mana color payment: delegate to base AI logic (not a strategic decision)
         if (outcome == Outcome.PutManaInPool && choice != null && choice.isManaColorChoice()) {
-            return super.choose(outcome, choice, game);
+            trace("choose: mana color delegation, calling super.choose()");
+            boolean result = super.choose(outcome, choice, game);
+            trace("choose EXIT: mana color delegation, result=" + result + ", chosen=" + (choice.isChosen() ? choice.getChoice() : "none"));
+            return result;
         }
 
         // Detect alternative cost choices (they use KEY-based choices!)
@@ -1555,6 +1680,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                     "CHOOSE: Forced choice key " + forced + " -> " + choice.getChoice()
                             );
                         }
+                        trace("choose EXIT: alternative cost, forced choice key=" + forced + ", result=true");
                         return true;
                     }
                 }
@@ -1574,6 +1700,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                             + " valid options, sourceId=" + currentAbility.getSourceId() + ")"
                                     );
                                 }
+                                trace("choose EXIT: alternative cost, validated choice key=" + key + ", result=true");
                                 return true;
                             }
                         }
@@ -1581,6 +1708,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 }
 
                 // Default: use parent class logic (random)
+                trace("choose: alternative cost, calling super.choose() (random)");
                 boolean result = super.choose(outcome, choice, game);
                 if (result && choice.isChosen()) {
                     // Track which KEY was chosen
@@ -1601,13 +1729,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         }
                     }
                 }
+                trace("choose EXIT: alternative cost, super result=" + result + ", chosenKey=" + (choice.isChosen() ? choice.getChoiceKey() : "none"));
                 return result;
             }
         }
 
         // Handle regular choices (modal spells, etc.) with RL model
         if (choice == null || !choice.isRequired()) {
-            return super.choose(outcome, choice, game);
+            trace("choose: not required, calling super.choose()");
+            boolean result = super.choose(outcome, choice, game);
+            trace("choose EXIT: not required, result=" + result);
+            return result;
         }
 
         // Get available choices
@@ -1619,6 +1751,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         if (availableChoices.isEmpty()) {
+            trace("choose EXIT: empty choices, result=false");
             return false;
         }
 
@@ -1629,10 +1762,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             } else {
                 choice.setChoice(availableChoices.get(0));
             }
+            trace("choose EXIT: single option=" + availableChoices.get(0) + ", result=true");
             return true;
         }
 
         // Use RL model to score the choices
+        trace("choose: calling RL model, count=" + availableChoices.size());
         try {
             List<Integer> rankedIndices = genericChoose(
                     availableChoices,
@@ -1658,51 +1793,250 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                             "CHOOSE: RL model selected: " + chosenValue + " from " + availableChoices.size() + " options"
                     );
                 }
+                trace("choose EXIT: RL model, chosen=" + chosenValue + ", idx=" + chosenIdx + ", result=true");
                 return true;
             }
         } catch (Exception e) {
             RLTrainer.threadLocalLogger.get().warn("Error in RL choice selection, using fallback: " + e.getMessage());
+            trace("choose: RL model exception, falling back to super: " + e.getMessage());
         }
 
         // Fallback to parent if model fails
+        trace("choose: calling super.choose() (fallback)");
         boolean result = super.choose(outcome, choice, game);
         if (result && choice.isChosen()) {
             RLTrainer.threadLocalLogger.get().debug(
                     "Player " + getName() + " chose (fallback): " + choice.getChoiceKey() + " -> " + choice.getChoice()
             );
         }
+        trace("choose EXIT: fallback, result=" + result + ", chosen=" + (choice.isChosen() ? choice.getChoice() : "none"));
         return result;
     }
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+        // Trace entry
+        String targetName = target != null ? target.getTargetName() : "null";
+        int min = target != null ? target.getMinNumberOfTargets() : 0;
+        int max = target != null ? target.getMaxNumberOfTargets() : 0;
+        trace(String.format("chooseTargetAmount ENTRY: outcome=%s, targetName=%s, min=%d, max=%d",
+            outcome, targetName, min, max));
+        
         boolean result = super.chooseTargetAmount(outcome, target, source, game);
-        if (result && !target.getTargets().isEmpty()) {
+        
+        // Trace exit with chosen targets and amounts
+        if (result && target != null && !target.getTargets().isEmpty()) {
+            StringBuilder chosen = new StringBuilder();
             for (UUID targetId : target.getTargets()) {
                 int amount = target.getTargetAmount(targetId);
-                String targetName = describeTargetWithOwner(targetId, game);
+                String tgtName = describeTargetWithOwner(targetId, game);
+                chosen.append(tgtName).append("=").append(amount).append("; ");
                 RLTrainer.threadLocalLogger.get().debug(
-                        "Player " + getName() + " chose target amount: " + targetName + " (" + targetId + "), amount: " + amount
+                        "Player " + getName() + " chose target amount: " + tgtName + " (" + targetId + "), amount: " + amount
                         + " for ability: " + (source != null ? source.toString() : "null source")
                 );
             }
+            trace("chooseTargetAmount EXIT: result=true, targets=[" + chosen.toString() + "]");
+        } else {
+            trace("chooseTargetAmount EXIT: result=" + result);
         }
+        
         return result;
     }
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
+        trace("choose(Target,Map) ENTRY: delegating to super.choose() with options");
         boolean result = super.choose(outcome, target, source, game, options);
         if (result && !target.getTargets().isEmpty()) {
+            StringBuilder targetsStr = new StringBuilder();
             for (UUID targetId : target.getTargets()) {
                 String targetName = describeTargetWithOwner(targetId, game);
+                targetsStr.append(targetName).append(", ");
                 RLTrainer.threadLocalLogger.get().debug(
                         "Player " + getName() + " chose target with options: " + targetName + " (" + targetId + ")"
                         + " for ability: " + (source != null ? source.toString() : "null source")
                 );
             }
+            trace("choose(Target,Map) EXIT: result=" + result + ", targets=[" + targetsStr + "]");
+        } else {
+            trace("choose(Target,Map) EXIT: result=" + result + ", no targets");
         }
         return result;
+    }
+
+    @Override
+    public mage.abilities.Mode chooseMode(mage.abilities.Modes modes, Ability source, Game game) {
+        trace("chooseMode ENTRY: available modes=" + (modes != null ? modes.size() : 0));
+        mage.abilities.Mode result = super.chooseMode(modes, source, game);
+        if (result != null) {
+            trace("chooseMode EXIT: selected mode=" + result.getId());
+        } else {
+            trace("chooseMode EXIT: result=null");
+        }
+        return result;
+    }
+
+    @Override
+    public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
+        trace(String.format("announceX ENTRY: min=%d, max=%d, isManaPay=%s, msg=%s", min, max, isManaPay, message));
+        int result = super.announceX(min, max, message, game, source, isManaPay);
+        trace("announceX EXIT: announced=" + result);
+        return result;
+    }
+
+    @Override
+    public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
+        // Delegate to 7-param version (base class does the same, but we want RL logic here too)
+        return chooseUse(outcome, message, null, "Yes", "No", source, game);
+    }
+
+    @Override
+    public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
+        trace(String.format("chooseUse ENTRY: outcome=%s, msg=%s, trueText=%s, falseText=%s",
+                outcome, message, trueText, falseText));
+
+        // Safety fallback: need active game for model inference
+        if (game == null) {
+            boolean fallback = super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
+            trace("chooseUse EXIT (no game): " + fallback);
+            return fallback;
+        }
+
+        // NOTE: We intentionally do NOT skip AIDontUseIt outcomes.
+        // The engine tags kicker/buyback/replicate/squad as AIDontUseIt to protect
+        // the heuristic AI from paying costs it can't reason about.
+        // Our RL model CAN learn these decisions from the reward signal.
+
+        try {
+            final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+            final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
+
+            // Build 2-candidate decision: index 0 = Yes, index 1 = No
+            List<Boolean> candidates = Arrays.asList(Boolean.TRUE, Boolean.FALSE);
+            int candidateCount = 2;
+
+            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
+            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+            this.currentState = baseState;
+
+            int[] candidateActionIds = new int[maxCandidates];
+            float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
+            int[] candidateMask = new int[maxCandidates];
+
+            for (int i = 0; i < candidateCount; i++) {
+                candidateMask[i] = 1;
+                candidateActionIds[i] = toVocabId(StateSequenceBuilder.ActionType.CHOOSE_USE.name() + "_" + (i == 0 ? "YES" : "NO"));
+                candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.CHOOSE_USE, game, source, candidates.get(i), candFeatDim);
+            }
+
+            String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_USE);
+            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+                    baseState,
+                    candidateActionIds,
+                    candidateFeatures,
+                    candidateMask,
+                    policyKey,
+                    headId,
+                    0, 1, 1
+            );
+
+            float[] actionProbs = prediction.policyScores;
+            float valueScore = prediction.valueScores;
+
+            // Softmax/mask over 2 candidates
+            float[] logits = new float[candidateCount];
+            float maxLogit = -Float.MAX_VALUE;
+            for (int i = 0; i < candidateCount; i++) {
+                float p = actionProbs[i];
+                if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
+                logits[i] = (float) Math.log(p);
+                if (logits[i] > maxLogit) maxLogit = logits[i];
+            }
+            float[] maskedProbs = new float[candidateCount];
+            float sum = 0.0f;
+            for (int i = 0; i < candidateCount; i++) {
+                maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
+                sum += maskedProbs[i];
+            }
+            if (sum > 0.0f && !Float.isNaN(sum) && !Float.isInfinite(sum)) {
+                for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= sum;
+            } else {
+                maskedProbs[0] = 0.5f; maskedProbs[1] = 0.5f;
+            }
+
+            // Sample or greedy pick
+            int chosenIdx;
+            if (greedyMode) {
+                chosenIdx = maskedProbs[0] >= maskedProbs[1] ? 0 : 1;
+            } else {
+                chosenIdx = new Random().nextFloat() < maskedProbs[0] ? 0 : 1;
+            }
+            boolean useIt = (chosenIdx == 0);
+
+            // Record training data
+            if (trainingEnabled && !game.isSimulation()) {
+                int[] chosenIndices = new int[maxCandidates];
+                Arrays.fill(chosenIndices, -1);
+                chosenIndices[0] = chosenIdx;
+                float oldLogp = (float) Math.log(Math.max(1e-8f, maskedProbs[chosenIdx]));
+                StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
+                        baseState,
+                        candidateCount,
+                        candidateActionIds,
+                        candidateFeatures,
+                        candidateMask,
+                        1,
+                        chosenIndices,
+                        oldLogp,
+                        valueScore,
+                        StateSequenceBuilder.ActionType.CHOOSE_USE,
+                        0.0
+                );
+                trainingBuffer.add(td);
+                decisionCountsByHead.put(StateSequenceBuilder.ActionType.CHOOSE_USE,
+                        decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.CHOOSE_USE, 0) + 1);
+            }
+
+            // Game log
+            try {
+                GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+                if (gameLogger != null && gameLogger.isEnabled()) {
+                    int turn = game.getTurnNum();
+                    if (turn != lastLoggedTurn) {
+                        String activePlayerName = game.getActivePlayerId() != null
+                                ? game.getPlayer(game.getActivePlayerId()).getName() : "Unknown";
+                        gameLogger.logTurnStart(turn, activePlayerName, formatGameState(game));
+                        lastLoggedTurn = turn;
+                    }
+                    String phase = game.getStep() != null ? game.getStep().getType().toString() : "Unknown";
+                    String activePlayerName = game.getActivePlayerId() != null
+                            ? game.getPlayer(game.getActivePlayerId()).getName() : "Unknown";
+                    gameLogger.logDecision(
+                            this.getName(),
+                            activePlayerName,
+                            phase + " (CHOOSE_USE)",
+                            turn,
+                            String.format("CHOOSE_USE: msg=\"%s\" outcome=%s decision=%s scores=[%.2f, %.2f]",
+                                    message, outcome, useIt ? "YES" : "NO", maskedProbs[0], maskedProbs[1]),
+                            Arrays.asList(trueText != null ? trueText : "Yes", falseText != null ? falseText : "No"),
+                            Arrays.copyOf(maskedProbs, candidateCount),
+                            valueScore,
+                            chosenIdx,
+                            useIt ? (trueText != null ? trueText : "Yes") : (falseText != null ? falseText : "No")
+                    );
+                }
+            } catch (Exception ignored) {
+            }
+
+            trace(String.format("chooseUse EXIT: decision=%s scores=[%.3f, %.3f]", useIt ? "YES" : "NO", maskedProbs[0], maskedProbs[1]));
+            return useIt;
+
+        } catch (Exception e) {
+            // Fallback to heuristic if model fails
+            trace("chooseUse: model exception, falling back to super: " + e.getMessage());
+            return super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
+        }
     }
 
     // @Override
@@ -2774,16 +3108,37 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         "CALLING: super.activateAbility() for " + freshAbility.getClass().getSimpleName());
             }
 
+            // Enable activation tracing to capture all callbacks during activation
+            activationTrace.get().clear();
+            traceEnabled.set(true);
+            
+            // Pre-activation diagnostic trace
+            ActivatedAbility.ActivationStatus preStatus = freshAbility.canActivate(this.getId(), game);
+            MageObject sourceObj = game.getObject(freshAbility.getSourceId());
+            String sourceName = sourceObj != null ? sourceObj.getName() : "unknown";
+            String sourceZone = sourceObj != null ? String.valueOf(game.getState().getZone(sourceObj.getId())) : "unknown";
+            trace(String.format("ACT: Attempting activation of '%s' (type=%s, source=%s, zone=%s, canActivate=%s)",
+                freshAbility.getRule(),
+                freshAbility.getAbilityType(),
+                sourceName,
+                sourceZone,
+                (preStatus != null && preStatus.canActivate())));
+
             boolean activationResult;
             Exception activationException = null;
             try {
                 activationResult = super.activateAbility(freshAbility, game);
+                trace("ACT: activateAbility returned " + activationResult);
             } catch (Exception e) {
+                trace("ACT: activateAbility threw " + e.getClass().getName() + ": " + e.getMessage());
                 activationResult = false;
                 activationException = e;
                 RLTrainer.threadLocalLogger.get().error(
                         "ACTIVATION THREW EXCEPTION: " + e.getClass().getName() + ": " + e.getMessage());
                 e.printStackTrace();
+            } finally {
+                // Disable tracing after activation completes (success or failure)
+                traceEnabled.set(false);
             }
 
             if (ACTIVATION_DIAG && !activationResult) {
@@ -2839,7 +3194,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 System.err.println(errorMsg);
                 RLTrainer.threadLocalLogger.get().error(errorMsg);
                 logActivationFailure(ability, game);
-                writeActivationFailureToFile(ability, game, activationException);
+                writeActivationFailureToFile(freshAbility, game, activationException, new ArrayList<>(activationTrace.get()));
                 System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
                 RLTrainer.threadLocalLogger.get().error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
@@ -2864,6 +3219,16 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (ability.isUsesStack()) {
                 pass(game);
             }
+        }
+    }
+
+    /**
+     * Adds a trace entry to the activation trace buffer if tracing is enabled.
+     * Used to capture the sequence of player callbacks during activateAbility().
+     */
+    private void trace(String msg) {
+        if (Boolean.TRUE.equals(traceEnabled.get())) {
+            activationTrace.get().add(msg);
         }
     }
 
@@ -2972,8 +3337,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     /**
      * Writes detailed activation failure information to a dedicated log file for offline investigation.
      * This always runs (no flag needed) and captures full game state plus diagnostic details.
+     * 
+     * @param trace The activation trace buffer capturing all callbacks during the failed activation
      */
-    private void writeActivationFailureToFile(ActivatedAbility ability, Game game, Exception activationException) {
+    private void writeActivationFailureToFile(ActivatedAbility ability, Game game, Exception activationException, List<String> trace) {
         if (ability == null || game == null) {
             return;
         }
@@ -3099,6 +3466,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             ActivatedAbility.ActivationStatus postFailStatus = ability.canActivate(this.getId(), game);
             log.append("  POST-FAIL canActivate(): ").append(postFailStatus != null && postFailStatus.canActivate()).append("\n");
             
+            // State leak detection
+            log.append("  STATE LEAK DETECTED: ").append(lastActivationHadStateLeak).append("\n");
+            if (lastActivationHadStateLeak) {
+                log.append("    (A safety bookmark was restored to clean up objects left on stack)\n");
+            }
+            
             // Exception details
             if (activationException != null) {
                 log.append("\nEXCEPTION:\n");
@@ -3113,6 +3486,16 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         log.append("    ").append(stackTrace[i].toString()).append("\n");
                     }
                 }
+            }
+            
+            // Activation trace - the exact sequence of callbacks during activateAbility()
+            if (trace != null && !trace.isEmpty()) {
+                log.append("\nACTIVATION TRACE (").append(trace.size()).append(" callbacks):\n");
+                for (int i = 0; i < trace.size(); i++) {
+                    log.append("  [").append(i + 1).append("] ").append(trace.get(i)).append("\n");
+                }
+            } else {
+                log.append("\nACTIVATION TRACE: (empty or not captured)\n");
             }
             
             log.append("\n");
@@ -3433,6 +3816,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private UUID abilitySourceToExcludeFromMana = null;
     private Set<UUID> tapTargetCostReservations = new HashSet<>(); // Permanents reserved for TapTargetCost
 
+    // Track state leaks for diagnostics
+    private boolean lastActivationHadStateLeak = false;
+
     // Store last decision info for game logging
     private float[] lastActionProbs = null;
     private float lastValueScore = 0.0f;
@@ -3448,6 +3834,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // Trace mana payment for debugging activation failures
     @Override
     public boolean playMana(Ability ability, mage.abilities.costs.mana.ManaCost unpaid, String promptText, Game game) {
+        // Trace entry
+        trace(String.format("playMana ENTRY: unpaid=%s, excludeSource=%s, tapReservations=%d",
+            unpaid.getText(), abilitySourceToExcludeFromMana, tapTargetCostReservations.size()));
+        
         if (ACTIVATION_DIAG) {
             RLTrainer.threadLocalLogger.get().info(
                     "PLAYMANA: Called for unpaid=" + unpaid.getText()
@@ -3459,6 +3849,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             RLTrainer.threadLocalLogger.get().info(
                     "PLAYMANA: Result=" + result + ", unpaid remaining=" + unpaid.getText());
         }
+        
+        // Trace exit
+        trace(String.format("playMana EXIT: result=%s, remaining=%s", result, unpaid.getText()));
         return result;
     }
 
@@ -3488,6 +3881,81 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         return producers;
+    }
+
+    /**
+     * Override cast() to add safety bookmarks that catch engine state leaks.
+     * 
+     * When PlayerImpl.cast() fails (e.g., spell == null after card.cast()), it doesn't
+     * call restoreState(bookmark), leaving the card on the stack. This override detects
+     * stack growth on failure and restores to the safety bookmark.
+     */
+    @Override
+    public boolean cast(mage.abilities.SpellAbility ability, mage.game.Game game, boolean noMana, mage.ApprovingObject approvingObject) {
+        int preStackSize = game.getStack().size();
+        int safetyBookmark = game.bookmarkState();
+        
+        trace(String.format("cast() ENTRY: stackSize=%d, source=%s, zone=%s",
+            preStackSize, ability.getSourceId(),
+            game.getState().getZone(ability.getSourceId())));
+        
+        boolean result = super.cast(ability, game, noMana, approvingObject);
+        
+        if (result) {
+            game.removeBookmark(safetyBookmark);
+            trace("cast() SUCCESS");
+            lastActivationHadStateLeak = false;
+        } else {
+            int postStackSize = game.getStack().size();
+            trace(String.format("cast() FAILED: postStackSize=%d (was %d)", postStackSize, preStackSize));
+            
+            if (postStackSize > preStackSize) {
+                trace("cast() STATE LEAK: spell left on stack, restoring safety bookmark");
+                game.restoreState(safetyBookmark, "RL safety restore after cast leak");
+                lastActivationHadStateLeak = true;
+            } else {
+                game.removeBookmark(safetyBookmark);
+                lastActivationHadStateLeak = false;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Override playAbility() to add safety bookmarks that catch engine state leaks.
+     * 
+     * When PlayerImpl.playAbility() fails after ability.activate(), the bookmark restore
+     * may fail if inner restores invalidated it, leaving stack abilities behind. This
+     * override detects stack growth on failure and restores to the safety bookmark.
+     */
+    @Override
+    protected boolean playAbility(mage.abilities.ActivatedAbility ability, mage.game.Game game) {
+        int preStackSize = game.getStack().size();
+        int safetyBookmark = game.bookmarkState();
+        
+        trace(String.format("playAbility() ENTRY: stackSize=%d, ability=%s",
+            preStackSize, ability.getRule()));
+        
+        boolean result = super.playAbility(ability, game);
+        
+        if (result) {
+            game.removeBookmark(safetyBookmark);
+            trace("playAbility() SUCCESS");
+            lastActivationHadStateLeak = false;
+        } else {
+            int postStackSize = game.getStack().size();
+            trace(String.format("playAbility() FAILED: postStackSize=%d (was %d)", postStackSize, preStackSize));
+            
+            if (postStackSize > preStackSize) {
+                trace("playAbility() STATE LEAK: ability left on stack, restoring safety bookmark");
+                game.restoreState(safetyBookmark, "RL safety restore after playAbility leak");
+                lastActivationHadStateLeak = true;
+            } else {
+                game.removeBookmark(safetyBookmark);
+                lastActivationHadStateLeak = false;
+            }
+        }
+        return result;
     }
 
     // Disables engine auto-targeting heuristics by forcing strict choose mode

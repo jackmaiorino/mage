@@ -1,9 +1,0 @@
-LEAGUE_STATUS
-updated=2026-02-08T12:59:34.171820600
-promoted=false
-lastTickEpisode=150000
-champion=recent
-poolSize=0
-recent=[]
-champions=[]
-baselineWrTop

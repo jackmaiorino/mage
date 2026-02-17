@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="53177" Quantity="1" Sideboard="false" Name="Ancestral Recall" Annotation="0"/>
+  <Cards CatID="53155" Quantity="1" Sideboard="false" Name="Black Lotus" Annotation="0"/>
+  <Cards CatID="14009" Quantity="1" Sideboard="false" Name="Daze" Annotation="0"/>
+  <Cards CatID="54316" Quantity="1" Sideboard="false" Name="Dig Through Time" Annotation="0"/>
+  <Cards CatID="91401" Quantity="1" Sideboard="false" Name="Scalding Tarn" Annotation="0"/>
+  <Cards CatID="102237" Quantity="3" Sideboard="false" Name="Force of Negation" Annotation="0"/>
+  <Cards CatID="72899" Quantity="1" Sideboard="false" Name="Flusterstorm" Annotation="0"/>
+  <Cards CatID="39920" Quantity="1" Sideboard="false" Name="Mental Misstep" Annotation="0"/>
+  <Cards CatID="79628" Quantity="1" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="39976" Quantity="1" Sideboard="false" Name="Gitaxian Probe" Annotation="0"/>
+  <Cards CatID="112030" Quantity="2" Sideboard="false" Name="Lorien Revealed" Annotation="0"/>
+  <Cards CatID="111590" Quantity="4" Sideboard="false" Name="Orcish Bowmasters" Annotation="0"/>
+  <Cards CatID="136317" Quantity="1" Sideboard="false" Name="Momentum Breaker" Annotation="0"/>
+  <Cards CatID="52713" Quantity="1" Sideboard="false" Name="Mox Jet" Annotation="0"/>
+  <Cards CatID="52919" Quantity="1" Sideboard="false" Name="Mox Sapphire" Annotation="0"/>
+  <Cards CatID="64998" Quantity="3" Sideboard="false" Name="Fatal Push" Annotation="0"/>
+  <Cards CatID="125655" Quantity="4" Sideboard="false" Name="Psychic Frog" Annotation="0"/>
+  <Cards CatID="54194" Quantity="1" Sideboard="false" Name="Flooded Strand" Annotation="0"/>
+  <Cards CatID="38315" Quantity="1" Sideboard="false" Name="Nihil Spellbomb" Annotation="0"/>
+  <Cards CatID="52853" Quantity="1" Sideboard="false" Name="Strip Mine" Annotation="0"/>
+  <Cards CatID="53097" Quantity="4" Sideboard="false" Name="Underground Sea" Annotation="0"/>
+  <Cards CatID="52849" Quantity="1" Sideboard="false" Name="Demonic Tutor" Annotation="0"/>
+  <Cards CatID="52987" Quantity="1" Sideboard="false" Name="Time Walk" Annotation="0"/>
+  <Cards CatID="52597" Quantity="1" Sideboard="false" Name="Mox Pearl" Annotation="0"/>
+  <Cards CatID="121448" Quantity="1" Sideboard="false" Name="Undercity Sewers" Annotation="0"/>
+  <Cards CatID="90899" Quantity="1" Sideboard="false" Name="Urza's Saga" Annotation="0"/>
+  <Cards CatID="67006" Quantity="1" Sideboard="false" Name="Brainstorm" Annotation="0"/>
+  <Cards CatID="60971" Quantity="4" Sideboard="false" Name="Wasteland" Annotation="0"/>
+  <Cards CatID="63191" Quantity="3" Sideboard="false" Name="Spell Pierce" Annotation="0"/>
+  <Cards CatID="79626" Quantity="1" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="125709" Quantity="4" Sideboard="false" Name="Polluted Delta" Annotation="0"/>
+  <Cards CatID="82136" Quantity="4" Sideboard="false" Name="Force of Will" Annotation="0"/>
+  <Cards CatID="54300" Quantity="1" Sideboard="false" Name="Treasure Cruise" Annotation="0"/>
+  <Cards CatID="42512" Quantity="1" Sideboard="false" Name="Snapcaster Mage" Annotation="0"/>
+  <Cards CatID="53119" Quantity="1" Sideboard="false" Name="Timetwister" Annotation="0"/>
+  <Cards CatID="126125" Quantity="2" Sideboard="true" Name="Consign to Memory" Annotation="0"/>
+  <Cards CatID="142705" Quantity="1" Sideboard="true" Name="Annul" Annotation="0"/>
+  <Cards CatID="121663" Quantity="1" Sideboard="true" Name="Long Goodbye" Annotation="0"/>
+  <Cards CatID="80461" Quantity="1" Sideboard="true" Name="Lurrus of the Dream-Den" Annotation="0"/>
+  <Cards CatID="45250" Quantity="1" Sideboard="true" Name="Tormod's Crypt" Annotation="0"/>
+  <Cards CatID="79598" Quantity="1" Sideboard="true" Name="Soul-Guide Lantern" Annotation="0"/>
+  <Cards CatID="60450" Quantity="1" Sideboard="true" Name="The Tabernacle at Pendrell Vale" Annotation="0"/>
+  <Cards CatID="33057" Quantity="1" Sideboard="true" Name="Pithing Needle" Annotation="0"/>
+  <Cards CatID="57330" Quantity="1" Sideboard="true" Name="Dismember" Annotation="0"/>
+  <Cards CatID="43491" Quantity="3" Sideboard="true" Name="Grafdigger's Cage" Annotation="0"/>
+  <Cards CatID="52647" Quantity="2" Sideboard="true" Name="Null Rod" Annotation="0"/>
+</Deck>

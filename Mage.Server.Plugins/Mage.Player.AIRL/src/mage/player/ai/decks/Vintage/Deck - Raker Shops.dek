@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="10685" Quantity="1" Sideboard="false" Name="City of Traitors" Annotation="0"/>
+  <Cards CatID="53155" Quantity="1" Sideboard="false" Name="Black Lotus" Annotation="0"/>
+  <Cards CatID="19995" Quantity="1" Sideboard="false" Name="Chalice of the Void" Annotation="0"/>
+  <Cards CatID="52697" Quantity="4" Sideboard="false" Name="Ancient Tomb" Annotation="0"/>
+  <Cards CatID="20491" Quantity="1" Sideboard="false" Name="Trinisphere" Annotation="0"/>
+  <Cards CatID="126031" Quantity="4" Sideboard="false" Name="Glaring Fleshraker" Annotation="0"/>
+  <Cards CatID="61567" Quantity="4" Sideboard="false" Name="Grim Monolith" Annotation="0"/>
+  <Cards CatID="61857" Quantity="1" Sideboard="false" Name="Inventors' Fair" Annotation="0"/>
+  <Cards CatID="77979" Quantity="1" Sideboard="false" Name="Karn, the Great Creator" Annotation="0"/>
+  <Cards CatID="111810" Quantity="4" Sideboard="false" Name="The One Ring" Annotation="0"/>
+  <Cards CatID="128907" Quantity="1" Sideboard="false" Name="Sol Ring" Annotation="0"/>
+  <Cards CatID="73359" Quantity="3" Sideboard="false" Name="Manifold Key" Annotation="0"/>
+  <Cards CatID="53163" Quantity="4" Sideboard="false" Name="Mishra's Workshop" Annotation="0"/>
+  <Cards CatID="52877" Quantity="1" Sideboard="false" Name="Mox Emerald" Annotation="0"/>
+  <Cards CatID="52713" Quantity="1" Sideboard="false" Name="Mox Jet" Annotation="0"/>
+  <Cards CatID="52597" Quantity="1" Sideboard="false" Name="Mox Pearl" Annotation="0"/>
+  <Cards CatID="53243" Quantity="1" Sideboard="false" Name="Mox Ruby" Annotation="0"/>
+  <Cards CatID="52919" Quantity="1" Sideboard="false" Name="Mox Sapphire" Annotation="0"/>
+  <Cards CatID="73365" Quantity="1" Sideboard="false" Name="Mystic Forge" Annotation="0"/>
+  <Cards CatID="102112" Quantity="4" Sideboard="false" Name="Sensei's Divining Top" Annotation="0"/>
+  <Cards CatID="91568" Quantity="1" Sideboard="false" Name="Portable Hole" Annotation="0"/>
+  <Cards CatID="133242" Quantity="3" Sideboard="false" Name="Scrawling Crawler" Annotation="0"/>
+  <Cards CatID="33057" Quantity="1" Sideboard="false" Name="Pithing Needle" Annotation="0"/>
+  <Cards CatID="102100" Quantity="1" Sideboard="false" Name="Mana Vault" Annotation="0"/>
+  <Cards CatID="126727" Quantity="4" Sideboard="false" Name="Talon Gates of Madara" Annotation="0"/>
+  <Cards CatID="143167" Quantity="4" Sideboard="false" Name="Tezzeret, Cruel Captain" Annotation="0"/>
+  <Cards CatID="52941" Quantity="1" Sideboard="false" Name="Mana Crypt" Annotation="0"/>
+  <Cards CatID="53091" Quantity="1" Sideboard="false" Name="Time Vault" Annotation="0"/>
+  <Cards CatID="11931" Quantity="1" Sideboard="false" Name="Tolarian Academy" Annotation="0"/>
+  <Cards CatID="82544" Quantity="1" Sideboard="false" Name="Expedition Map" Annotation="0"/>
+  <Cards CatID="90899" Quantity="1" Sideboard="false" Name="Urza's Saga" Annotation="0"/>
+  <Cards CatID="126443" Quantity="1" Sideboard="false" Name="Vexing Bauble" Annotation="0"/>
+  <Cards CatID="106659" Quantity="2" Sideboard="true" Name="Argentum Masticore" Annotation="0"/>
+  <Cards CatID="79598" Quantity="1" Sideboard="true" Name="Soul-Guide Lantern" Annotation="0"/>
+  <Cards CatID="43491" Quantity="2" Sideboard="true" Name="Grafdigger's Cage" Annotation="0"/>
+  <Cards CatID="34802" Quantity="3" Sideboard="true" Name="Mindbreak Trap" Annotation="0"/>
+  <Cards CatID="57330" Quantity="2" Sideboard="true" Name="Dismember" Annotation="0"/>
+  <Cards CatID="52731" Quantity="4" Sideboard="true" Name="Sphere of Resistance" Annotation="0"/>
+  <Cards CatID="78616" Quantity="1" Sideboard="true" Name="Stonecoil Serpent" Annotation="0"/>
+</Deck>

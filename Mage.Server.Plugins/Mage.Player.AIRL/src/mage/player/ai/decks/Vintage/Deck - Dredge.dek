@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="60160" Quantity="4" Sideboard="false" Name="Prized Amalgam" Annotation="0"/>
+  <Cards CatID="69505" Quantity="4" Sideboard="false" Name="Creeping Chill" Annotation="0"/>
+  <Cards CatID="120150" Quantity="4" Sideboard="false" Name="Narcomoeba" Annotation="0"/>
+  <Cards CatID="23280" Quantity="4" Sideboard="false" Name="Stinkweed Imp" Annotation="0"/>
+  <Cards CatID="23318" Quantity="1" Sideboard="false" Name="Golgari Grave-Troll" Annotation="0"/>
+  <Cards CatID="23404" Quantity="4" Sideboard="false" Name="Shambling Shell" Annotation="0"/>
+  <Cards CatID="81471" Quantity="4" Sideboard="false" Name="Silversmote Ghoul" Annotation="0"/>
+  <Cards CatID="52969" Quantity="4" Sideboard="false" Name="Ichorid" Annotation="0"/>
+  <Cards CatID="102237" Quantity="2" Sideboard="false" Name="Force of Negation" Annotation="0"/>
+  <Cards CatID="23366" Quantity="4" Sideboard="false" Name="Golgari Thug" Annotation="0"/>
+  <Cards CatID="127501" Quantity="4" Sideboard="false" Name="Grief" Annotation="0"/>
+  <Cards CatID="64850" Quantity="4" Sideboard="false" Name="Hollow One" Annotation="0"/>
+  <Cards CatID="19995" Quantity="1" Sideboard="false" Name="Chalice of the Void" Annotation="0"/>
+  <Cards CatID="39920" Quantity="1" Sideboard="false" Name="Mental Misstep" Annotation="0"/>
+  <Cards CatID="20561" Quantity="4" Sideboard="false" Name="Serum Powder" Annotation="0"/>
+  <Cards CatID="82136" Quantity="4" Sideboard="false" Name="Force of Will" Annotation="0"/>
+  <Cards CatID="53233" Quantity="4" Sideboard="false" Name="Bazaar of Baghdad" Annotation="0"/>
+  <Cards CatID="39976" Quantity="1" Sideboard="false" Name="Gitaxian Probe" Annotation="0"/>
+  <Cards CatID="102237" Quantity="2" Sideboard="false" Name="Force of Negation" Annotation="0"/>
+  <Cards CatID="72700" Quantity="4" Sideboard="true" Name="Force of Vigor" Annotation="0"/>
+  <Cards CatID="37376" Quantity="4" Sideboard="true" Name="Leyline of the Void" Annotation="0"/>
+  <Cards CatID="21683" Quantity="3" Sideboard="true" Name="Sickening Shoal" Annotation="0"/>
+  <Cards CatID="39922" Quantity="4" Sideboard="true" Name="Noxious Revival" Annotation="0"/>
+</Deck>

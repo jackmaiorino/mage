@@ -57,6 +57,8 @@ public class RLTrainer {
             "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper");
     // Optional: explicit deck list file (one path per line, relative to CWD unless absolute)
     public static final String DECK_LIST_FILE = EnvConfig.str("DECK_LIST_FILE", "");
+    // Optional: separate deck list for RL agent (if empty, agent uses DECK_LIST_FILE)
+    public static final String RL_AGENT_DECK_LIST_FILE = EnvConfig.str("RL_AGENT_DECK_LIST", "");
 
     // Prefer MTG_MODEL_PATH (Python-side convention), but keep MODEL_PATH for backward compatibility.
     public static final String MODEL_FILE_PATH = EnvConfig.str("MTG_MODEL_PATH",
@@ -175,9 +177,22 @@ public class RLTrainer {
     private static final int LEAGUE_BENCHMARK_GAME_TIMEOUT_SEC = EnvConfig.i32("LEAGUE_BENCHMARK_GAME_TIMEOUT_SEC", 900);
     private static final boolean LEAGUE_EVAL_GAME_LOGGING = EnvConfig.bool("LEAGUE_EVAL_GAME_LOGGING", false);
 
+    // ============================================================
+    // Ladder mode (skill-only progression, no self-play)
+    // ============================================================
+    private static final String LADDER_SKILLS = EnvConfig.str("LADDER_SKILLS", "0,1,2,3");
+    private static final double LADDER_PROMOTE_WR = EnvConfig.f64("LADDER_PROMOTE_WR", 0.55);
+    private static final int LADDER_TICK_EPISODES = EnvConfig.i32("LADDER_TICK_EPISODES", 5000);
+    private static final int LADDER_GAMES_PER_MATCHUP = EnvConfig.i32("LADDER_GAMES_PER_MATCHUP", 6);
+    private static final double LADDER_MIX_LOWER_P = EnvConfig.f64("LADDER_MIX_LOWER_P", 0.20);
+
     private static final Object LEAGUE_LOCK = new Object();
     private static LeagueState LEAGUE_STATE = null;
     private static final AtomicInteger LEAGUE_LAST_TICK_EP = new AtomicInteger(0);
+    
+    private static final Object LADDER_LOCK = new Object();
+    private static LadderState LADDER_STATE = null;
+    private static final AtomicInteger LADDER_LAST_TICK_EP = new AtomicInteger(0);
 
     static {
         // Ensure we have at least a console appender so INFO logs are visible
@@ -249,6 +264,33 @@ public class RLTrainer {
                 }
             }
             return st;
+        }
+    }
+
+    private static final class LadderState {
+        int currentTier;
+        int lastTickEpisode;
+        final java.util.HashMap<Integer, Double> tierWinrates = new java.util.HashMap<>();
+
+        String toJson() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("{\n");
+            sb.append("  \"currentTier\": ").append(currentTier).append(",\n");
+            sb.append("  \"lastTickEpisode\": ").append(lastTickEpisode).append(",\n");
+            sb.append("  \"tierWinrates\": ").append(jsonIntDoubleMap(tierWinrates)).append("\n");
+            sb.append("}\n");
+            return sb.toString();
+        }
+
+        static LadderState fromJson(String s) {
+            LadderState ls = new LadderState();
+            if (s == null) {
+                return ls;
+            }
+            ls.currentTier = jsonInt(s, "currentTier", 0);
+            ls.lastTickEpisode = jsonInt(s, "lastTickEpisode", 0);
+            ls.tierWinrates.putAll(jsonIntDoubleMapField(s, "tierWinrates"));
+            return ls;
         }
     }
 
@@ -490,6 +532,82 @@ public class RLTrainer {
         return out;
     }
 
+    private static String jsonIntDoubleMap(java.util.Map<Integer, Double> m) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        java.util.List<Integer> keys = new java.util.ArrayList<>(m.keySet());
+        keys.sort(Integer::compareTo);
+        boolean first = true;
+        for (Integer k : keys) {
+            if (k == null) {
+                continue;
+            }
+            if (!first) {
+                sb.append(", ");
+            }
+            first = false;
+            sb.append("\"").append(k).append("\": ").append(m.get(k) == null ? "0.0" : m.get(k));
+        }
+        sb.append("}");
+        return sb.toString();
+    }
+
+    private static java.util.Map<Integer, Double> jsonIntDoubleMapField(String json, String key) {
+        java.util.HashMap<Integer, Double> out = new java.util.HashMap<>();
+        try {
+            String k = "\"" + key + "\"";
+            int i = json.indexOf(k);
+            if (i < 0) {
+                return out;
+            }
+            int c = json.indexOf("{", i);
+            if (c < 0) {
+                return out;
+            }
+            int e = json.indexOf("}", c);
+            if (e < 0) {
+                return out;
+            }
+            String body = json.substring(c + 1, e);
+            // Simple parser: "intKey": number
+            int p = 0;
+            while (p < body.length()) {
+                int q1 = body.indexOf("\"", p);
+                if (q1 < 0) {
+                    break;
+                }
+                int q2 = body.indexOf("\"", q1 + 1);
+                if (q2 < 0) {
+                    break;
+                }
+                String mk = body.substring(q1 + 1, q2);
+                int colon = body.indexOf(":", q2 + 1);
+                if (colon < 0) {
+                    break;
+                }
+                int n0 = colon + 1;
+                while (n0 < body.length() && (body.charAt(n0) == ' ' || body.charAt(n0) == '\t')) {
+                    n0++;
+                }
+                int n1 = n0;
+                while (n1 < body.length() && ("-0123456789.eE".indexOf(body.charAt(n1)) >= 0)) {
+                    n1++;
+                }
+                if (n1 > n0) {
+                    try {
+                        int intKey = Integer.parseInt(mk);
+                        double value = Double.parseDouble(body.substring(n0, n1));
+                        out.put(intKey, value);
+                    } catch (NumberFormatException ignored) {
+                    }
+                }
+                p = n1 + 1;
+            }
+        } catch (Exception ignored) {
+        }
+        return out;
+    }
+
     private static Path leagueStatePath() {
         return Paths.get(RLLogPaths.LEAGUE_STATE_PATH);
     }
@@ -542,6 +660,85 @@ public class RLTrainer {
             for (String k : champs) {
                 Double wr = st.baselineWr.get(k);
                 sb.append("  ").append(k).append(" wr=").append(wr == null ? 0.0 : wr).append('\n');
+            }
+            Files.write(p, sb.toString().getBytes(StandardCharsets.UTF_8),
+                    java.nio.file.StandardOpenOption.CREATE,
+                    java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (Exception ignored) {
+        }
+    }
+
+    // ============================================================
+    // Ladder state management
+    // ============================================================
+    
+    private static Path ladderStatePath() {
+        return Paths.get(RLLogPaths.LOGS_BASE_DIR, "league", "ladder_state.json");
+    }
+
+    private static Path ladderStatusPath() {
+        return Paths.get(RLLogPaths.LOGS_BASE_DIR, "league", "ladder_status.txt");
+    }
+
+    private static LadderState getLadderState() {
+        synchronized (LADDER_LOCK) {
+            if (LADDER_STATE != null) {
+                return LADDER_STATE;
+            }
+            LadderState ls = new LadderState();
+            try {
+                Path p = ladderStatePath();
+                if (Files.exists(p)) {
+                    String s = new String(Files.readAllBytes(p), StandardCharsets.UTF_8);
+                    ls = LadderState.fromJson(s);
+                }
+            } catch (Exception ignored) {
+                // ignore load failures; start fresh
+            }
+            LADDER_STATE = ls;
+            return LADDER_STATE;
+        }
+    }
+
+    private static void saveLadderState() {
+        synchronized (LADDER_LOCK) {
+            if (LADDER_STATE == null) {
+                return;
+            }
+            try {
+                Path p = ladderStatePath();
+                if (p.getParent() != null) {
+                    Files.createDirectories(p.getParent());
+                }
+                Files.write(p, LADDER_STATE.toJson().getBytes(StandardCharsets.UTF_8),
+                        java.nio.file.StandardOpenOption.CREATE,
+                        java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);
+            } catch (Exception ignored) {
+                // ignore
+            }
+        }
+    }
+
+    private static void writeLadderStatus(LadderState ls, int[] tiers) {
+        if (ls == null || tiers == null) {
+            return;
+        }
+        try {
+            Path p = ladderStatusPath();
+            if (p.getParent() != null) {
+                Files.createDirectories(p.getParent());
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append("LADDER_STATUS\n");
+            sb.append("updated=").append(java.time.LocalDateTime.now().toString()).append('\n');
+            sb.append("currentTier=").append(ls.currentTier).append('\n');
+            sb.append("currentSkill=").append(ls.currentTier < tiers.length ? tiers[ls.currentTier] : -1).append('\n');
+            sb.append("lastTickEpisode=").append(ls.lastTickEpisode).append('\n');
+            sb.append("tierWinrates:\n");
+            for (int i = 0; i < tiers.length; i++) {
+                Double wr = ls.tierWinrates.get(i);
+                sb.append("  tier=").append(i).append(" skill=").append(tiers[i])
+                  .append(" wr=").append(wr == null ? "n/a" : String.format("%.3f", wr)).append('\n');
             }
             Files.write(p, sb.toString().getBytes(StandardCharsets.UTF_8),
                     java.nio.file.StandardOpenOption.CREATE,
@@ -871,6 +1068,104 @@ public class RLTrainer {
                 st.pool.size(), tickMs / 1000.0));
     }
 
+    private void maybeRunLadderTick(int episodeNum) {
+        if (LADDER_TICK_EPISODES <= 0) {
+            return;
+        }
+        if (episodeNum <= 0 || (episodeNum % LADDER_TICK_EPISODES) != 0) {
+            return;
+        }
+        // Only in ladder mode
+        String mode = OPPONENT_SAMPLER == null ? "league" : OPPONENT_SAMPLER.trim().toLowerCase();
+        if (!"ladder".equals(mode)) {
+            return;
+        }
+        // Single-thread the tick across runners
+        int prev = LADDER_LAST_TICK_EP.get();
+        if (episodeNum <= prev) {
+            return;
+        }
+        if (!LADDER_LAST_TICK_EP.compareAndSet(prev, episodeNum)) {
+            return;
+        }
+
+        final long tickStartMs = System.currentTimeMillis();
+        LadderState ls = getLadderState();
+        int[] tiers = parseSkillList(LADDER_SKILLS, new int[]{0, 1, 2, 3});
+        
+        if (tiers.length == 0) {
+            logger.warn("Ladder tick: no tiers defined in LADDER_SKILLS, skipping");
+            return;
+        }
+
+        int currentTier = Math.min(ls.currentTier, tiers.length - 1);
+        int currentSkill = tiers[currentTier];
+
+        logger.info("Ladder tick start: ep=" + episodeNum + " tickEvery=" + LADDER_TICK_EPISODES
+                + " currentTier=" + currentTier + " currentSkill=" + currentSkill
+                + " gpm=" + LADDER_GAMES_PER_MATCHUP
+                + " promoteWR=" + String.format("%.3f", LADDER_PROMOTE_WR));
+        appendLeagueEvent("ladder_tick_start ep=" + episodeNum 
+                + " tier=" + currentTier + " skill=" + currentSkill
+                + " gpm=" + LADDER_GAMES_PER_MATCHUP);
+
+        // Benchmark current policy vs current tier bot
+        double benchmarkWr = runLeagueBenchmarkPolicy(
+                "train",
+                LeagueOpponentSpec.bot(currentSkill),
+                DECK_LIST_FILE,
+                Math.max(1, LADDER_GAMES_PER_MATCHUP)
+        );
+        
+        logger.info(String.format("Ladder tick benchmark: ep=%d tier=%d skill=%d wr=%.3f",
+                episodeNum, currentTier, currentSkill, benchmarkWr));
+        appendLeagueEvent(String.format("ladder_benchmark ep=%d tier=%d skill=%d wr=%.6f",
+                episodeNum, currentTier, currentSkill, benchmarkWr));
+
+        synchronized (LADDER_LOCK) {
+            ls.lastTickEpisode = episodeNum;
+            ls.tierWinrates.put(currentTier, benchmarkWr);
+        }
+
+        // Promotion check
+        boolean promotedNow = false;
+        synchronized (LADDER_LOCK) {
+            if (benchmarkWr >= LADDER_PROMOTE_WR && currentTier < tiers.length - 1) {
+                ls.currentTier++;
+                promotedNow = true;
+            }
+        }
+
+        if (promotedNow) {
+            int newTier = ls.currentTier;
+            int newSkill = tiers[newTier];
+            logger.info(String.format("Ladder tick PROMOTED: ep=%d tier %d->%d skill %d->%d benchmarkWR=%.3f >= %.3f",
+                    episodeNum, currentTier, newTier, currentSkill, newSkill, benchmarkWr, LADDER_PROMOTE_WR));
+            appendLeagueEvent(String.format("ladder_promoted ep=%d oldTier=%d newTier=%d oldSkill=%d newSkill=%d wr=%.6f threshold=%.6f",
+                    episodeNum, currentTier, newTier, currentSkill, newSkill, benchmarkWr, LADDER_PROMOTE_WR));
+        }
+
+        synchronized (LADDER_LOCK) {
+            saveLadderState();
+            writeLadderStatus(ls, tiers);
+        }
+
+        long tickMs = Math.max(1, System.currentTimeMillis() - tickStartMs);
+        logger.info(String.format(
+                "Ladder tick ep=%d tier=%d skill=%d wr=%.3f promoted=%s time=%.1fs",
+                episodeNum,
+                ls.currentTier,
+                ls.currentTier < tiers.length ? tiers[ls.currentTier] : -1,
+                benchmarkWr,
+                promotedNow,
+                tickMs / 1000.0
+        ));
+        appendLeagueEvent(String.format("ladder_tick_done ep=%d tier=%d skill=%d wr=%.6f promoted=%s time_s=%.3f",
+                episodeNum, ls.currentTier, 
+                ls.currentTier < tiers.length ? tiers[ls.currentTier] : -1,
+                benchmarkWr, promotedNow, tickMs / 1000.0));
+    }
+
     private static Level parseLog4jLevel(String s, Level fallback) {
         if (s == null) {
             return fallback;
@@ -977,6 +1272,17 @@ public class RLTrainer {
         try {
             List<Path> deckFiles = loadDeckPool();
             System.out.println("DEBUG: Found " + deckFiles.size() + " deck files in deck pool");
+            
+            // Load agent deck pool (may be separate from opponent pool)
+            List<Path> agentDeckFiles;
+            if (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty()) {
+                agentDeckFiles = loadDeckPoolWithOverride(RL_AGENT_DECK_LIST_FILE);
+                logger.info("Agent deck pool: " + agentDeckFiles.size() + " decks (from RL_AGENT_DECK_LIST)");
+                System.out.println("DEBUG: Agent deck pool: " + agentDeckFiles.size() + " decks (from RL_AGENT_DECK_LIST)");
+            } else {
+                agentDeckFiles = deckFiles;  // default: same pool
+                logger.info("Agent deck pool: same as opponent pool (" + deckFiles.size() + " decks)");
+            }
 
             // Reset health stats and failure counters at start of training
             TrainingHealthStats healthStats = TrainingHealthStats.getInstance();
@@ -1138,7 +1444,7 @@ public class RLTrainer {
                         long episodeStartNanos = System.nanoTime();
                         ACTIVE_EPISODES.incrementAndGet();
                         metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
-                        Path rlPlayerDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
+                        Path rlPlayerDeckPath = agentDeckFiles.get(threadRand.nextInt(agentDeckFiles.size()));
                         Deck rlPlayerDeckThread = loadDeck(rlPlayerDeckPath.toString());
                         Path opponentDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
                         Deck opponentDeckThread = loadDeck(opponentDeckPath.toString());
@@ -1322,8 +1628,9 @@ public class RLTrainer {
                         // League tick (runs only on specific ep boundaries, single-threaded)
                         try {
                             maybeRunLeagueTick(epNumber);
+                            maybeRunLadderTick(epNumber);
                         } catch (Exception e) {
-                            logger.warn("League tick failed at ep " + epNumber, e);
+                            logger.warn("League/Ladder tick failed at ep " + epNumber, e);
                         }
 
                         try {
@@ -1455,8 +1762,16 @@ public class RLTrainer {
 
     public static double runEvaluation(int numEpisodesPerThread) {
         List<Path> deckFiles;
+        List<Path> agentDeckFiles;
         try {
             deckFiles = loadDeckPool();
+            // Load agent deck pool (may be separate from opponent pool)
+            if (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty()) {
+                agentDeckFiles = loadDeckPoolWithOverride(RL_AGENT_DECK_LIST_FILE);
+                logger.info("Eval: Agent deck pool: " + agentDeckFiles.size() + " decks (from RL_AGENT_DECK_LIST)");
+            } else {
+                agentDeckFiles = deckFiles;  // default: same pool
+            }
         } catch (Exception e) {
             logger.error("Error during evaluation", e);
             return 0.0;
@@ -1497,7 +1812,7 @@ public class RLTrainer {
                 Random threadRand = new Random();
 
                 for (int evalEpisode = 0; evalEpisode < numEpisodesPerThread; evalEpisode++) {
-                    Path rlPlayerDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
+                    Path rlPlayerDeckPath = agentDeckFiles.get(threadRand.nextInt(agentDeckFiles.size()));
                     Deck rlPlayerDeckThread = new RLTrainer().loadDeck(rlPlayerDeckPath.toString());
                     Path opponentDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
                     Deck opponentDeckThread = new RLTrainer().loadDeck(opponentDeckPath.toString());
@@ -2776,6 +3091,8 @@ public class RLTrainer {
                 // Force fixed schedule by temporarily disabling adaptive logic.
                 // (This preserves existing behavior with FIXED_* env vars.)
                 return createFixedOpponent(episodeNum, rand);
+            case "ladder":
+                return createLadderOpponent(episodeNum, rand);
             case "league":
             default:
                 return createLeagueOpponent(episodeNum, rand);
@@ -2846,6 +3163,30 @@ public class RLTrainer {
             lastOpponentType = "SELFPLAY";
             return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel, false, false, "train");
         }
+    }
+
+    private Player createLadderOpponent(int episodeNum, Random rand) {
+        int[] tiers = parseSkillList(LADDER_SKILLS, new int[]{0, 1, 2, 3});
+        if (tiers.length == 0) {
+            // Fallback to skill 1 if no tiers defined
+            lastOpponentType = "L-CP7(skill=1,tier=0)";
+            return new ComputerPlayer7("Bot-Skill1", RangeOfInfluence.ALL, 1);
+        }
+        
+        LadderState ls = getLadderState();
+        int currentTier = Math.min(ls.currentTier, tiers.length - 1);
+
+        // Mix in lower-tier bots to prevent forgetting
+        if (currentTier > 0 && rand.nextDouble() < LADDER_MIX_LOWER_P) {
+            int lowerTier = rand.nextInt(currentTier); // random lower tier
+            int skill = tiers[lowerTier];
+            lastOpponentType = "L-CP7(skill=" + skill + ",tier=" + lowerTier + ")";
+            return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
+        }
+
+        int skill = tiers[currentTier];
+        lastOpponentType = "L-CP7(skill=" + skill + ",tier=" + currentTier + ")";
+        return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
     }
 
     private static double clamp01(double v) {

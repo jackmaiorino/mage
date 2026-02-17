@@ -67,7 +67,8 @@ public class StateSequenceBuilder {
         LONDON_MULLIGAN, // Choosing which cards to put on bottom after mulligan
         SELECT_CHOICE,
         SELECT_TRIGGERED_ABILITY,
-        SELECT_CARD
+        SELECT_CARD,
+        CHOOSE_USE   // Binary yes/no decisions (kicker, optional costs, etc.)
     }
 
     /* === PUBLIC API ===================================================== */
@@ -250,17 +251,23 @@ public class StateSequenceBuilder {
         float handSize = Math.max(1, p.getHand().size());
         float librarySize = Math.max(1, p.getLibrary().size());
         float graveyardSize = Math.max(1, p.getGraveyard().size());
-        float landsPlayed = Math.max(1, p.getLandsPlayed());
 
         // Normalize with validation
         v[0] = (float) p.getLife() / startingLife;
         v[1] = (float) p.getHand().size() / handSize;
         v[2] = (float) p.getLibrary().size() / librarySize;
         v[3] = (float) p.getGraveyard().size() / graveyardSize;
-        v[4] = (float) p.getLandsPlayed() / landsPlayed;
+        // v[4]: lands played this turn (normalized, 0-1 scale)
+        v[4] = (float) p.getLandsPlayed() / Math.max(1, p.getLandsPerTurn());
+        // v[5]: can still play a land (binary: 1.0 = yes)
+        v[5] = p.getLandsPlayed() < p.getLandsPerTurn() ? 1.0f : 0.0f;
+        // v[6]: turn number (normalized, caps at 20)
+        v[6] = Math.min(g.getTurnNum(), 20) / 20.0f;
+        // v[7]: is active player (binary: 1.0 = it's this player's turn)
+        v[7] = g.getActivePlayerId() != null && g.getActivePlayerId().equals(p.getId()) ? 1.0f : 0.0f;
 
         // Validate normalized values
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 8; i++) {
             if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
                 logger.severe(String.format("Invalid normalized value at index %d: %f", i, v[i]));
                 v[i] = 0.0f; // Replace NaN/Inf with 0

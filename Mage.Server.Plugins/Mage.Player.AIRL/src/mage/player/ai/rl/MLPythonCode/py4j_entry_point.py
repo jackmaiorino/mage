@@ -2256,12 +2256,52 @@ class PythonEntryPoint:
         self.persistence._did_initial_load = value
 
     def saveModel(self, path):
-        self.persistence.save_model(self.model, path)
+        # Pack optimizer state and training counters for persistence
+        extra = {
+            'optimizer_state_dict': self.optimizer.state_dict() if self.optimizer else None,
+            'train_step_counter': self.train_step_counter,
+            'mulligan_train_step_counter': self.mulligan_train_step_counter,
+            'main_train_sample_counter': self.main_train_sample_counter,
+            'gae_enabled_step': self.metrics.gae_enabled_step,
+        }
+        self.persistence.save_model(self.model, path, extra_state=extra)
 
     def loadModel(self, path):
         if self.model is None:
             self.initializeModel()
-        self.persistence.load_model(self.model, path)
+        extra = self.persistence.load_model(self.model, path)
+        
+        # Restore optimizer state and training counters if present
+        if extra and self.optimizer:
+            if 'optimizer_state_dict' in extra and extra['optimizer_state_dict'] is not None:
+                try:
+                    self.optimizer.load_state_dict(extra['optimizer_state_dict'])
+                    logger.info(LogCategory.MODEL_LOAD, "Restored optimizer state")
+                except Exception as e:
+                    logger.warning(LogCategory.MODEL_LOAD, "Could not restore optimizer state: %s", e)
+            
+            if 'train_step_counter' in extra:
+                self.train_step_counter = int(extra['train_step_counter'])
+                logger.info(LogCategory.MODEL_LOAD, "Restored train_step_counter: %d", self.train_step_counter)
+            
+            if 'mulligan_train_step_counter' in extra:
+                self.mulligan_train_step_counter = int(extra['mulligan_train_step_counter'])
+                logger.info(LogCategory.MODEL_LOAD, "Restored mulligan_train_step_counter: %d", self.mulligan_train_step_counter)
+            
+            if 'main_train_sample_counter' in extra:
+                self.main_train_sample_counter = int(extra['main_train_sample_counter'])
+                logger.info(LogCategory.MODEL_LOAD, "Restored main_train_sample_counter: %d", self.main_train_sample_counter)
+            
+            if 'gae_enabled_step' in extra:
+                self.metrics.gae_enabled_step = extra['gae_enabled_step']
+                if self.metrics.gae_enabled_step is not None:
+                    logger.info(LogCategory.MODEL_LOAD, "Restored gae_enabled_step: %d", self.metrics.gae_enabled_step)
+            
+            # Log summary of restored training state
+            entropy_coef = self.get_entropy_coefficient()
+            logger.info(LogCategory.MODEL_LOAD, 
+                       "Training state restored: train_steps=%d, entropy_coef=%.4f, samples=%d",
+                       self.train_step_counter, entropy_coef, self.main_train_sample_counter)
 
     def saveLatestModelAtomic(self, path=None):
         return self.persistence.save_latest_model_atomic(self.model, path)

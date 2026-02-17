@@ -1,0 +1,4 @@
+# Mono Red Rally only - single deck training
+# Use with: $env:RL_AGENT_DECK_LIST="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.monored-rally.txt"
+
+../Pauper/Deck - Mono Red Rally.dek

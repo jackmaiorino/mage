@@ -1,0 +1,227 @@
+{
+  "id": null,
+  "title": "Mage Training - Learning Metrics",
+  "tags": [
+    "mage",
+    "rl",
+    "training",
+    "learning"
+  ],
+  "timezone": "browser",
+  "refresh": "5s",
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Total Loss",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "mage_training_loss",
+          "legendFormat": "total_loss",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 4
+        }
+      },
+      "gridPos": { "h": 7, "w": 5, "x": 0, "y": 0 }
+    },
+    {
+      "id": 2,
+      "title": "Policy Loss",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "mage_training_policy_loss",
+          "legendFormat": "policy_loss",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 4
+        }
+      },
+      "gridPos": { "h": 7, "w": 5, "x": 5, "y": 0 }
+    },
+    {
+      "id": 3,
+      "title": "Value Loss",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "mage_training_value_loss",
+          "legendFormat": "value_loss",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 4
+        }
+      },
+      "gridPos": { "h": 7, "w": 5, "x": 10, "y": 0 }
+    },
+    {
+      "id": 4,
+      "title": "Entropy",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "mage_training_entropy",
+          "legendFormat": "entropy",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 4
+        }
+      },
+      "gridPos": { "h": 7, "w": 5, "x": 15, "y": 0 }
+    },
+    {
+      "id": 5,
+      "title": "Entropy Coef",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "mage_training_entropy_coef",
+          "legendFormat": "entropy_coef",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 4
+        }
+      },
+      "gridPos": { "h": 7, "w": 4, "x": 20, "y": 0 }
+    },
+    {
+      "id": 6,
+      "title": "Loss Components Over Time",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "mage_training_loss",
+          "legendFormat": "total_loss",
+          "refId": "A"
+        },
+        {
+          "expr": "mage_training_policy_loss",
+          "legendFormat": "policy_loss",
+          "refId": "B"
+        },
+        {
+          "expr": "mage_training_value_loss",
+          "legendFormat": "value_loss",
+          "refId": "C"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 10
+          }
+        }
+      },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 7 }
+    },
+    {
+      "id": 7,
+      "title": "Entropy and Entropy Coefficient",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "mage_training_entropy",
+          "legendFormat": "entropy",
+          "refId": "A"
+        },
+        {
+          "expr": "mage_training_entropy_coef",
+          "legendFormat": "entropy_coef",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 10
+          }
+        }
+      },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 16 }
+    },
+    {
+      "id": 8,
+      "title": "PPO Diagnostics",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "mage_training_clip_frac",
+          "legendFormat": "clip_frac",
+          "refId": "A"
+        },
+        {
+          "expr": "mage_training_approx_kl",
+          "legendFormat": "approx_kl",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 10
+          }
+        }
+      },
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 16 }
+    },
+    {
+      "id": 9,
+      "title": "Advantage Mean",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "mage_training_advantage_mean",
+          "legendFormat": "advantage_mean",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 10
+          }
+        }
+      },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 25 }
+    }
+  ],
+  "schemaVersion": 38,
+  "version": 1
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="52941" Quantity="1" Sideboard="false" Name="Mana Crypt" Annotation="0"/>
+  <Cards CatID="82943" Quantity="4" Sideboard="false" Name="Archon of Emeria" Annotation="0"/>
+  <Cards CatID="53155" Quantity="1" Sideboard="false" Name="Black Lotus" Annotation="0"/>
+  <Cards CatID="37885" Quantity="2" Sideboard="false" Name="Karakas" Annotation="0"/>
+  <Cards CatID="60971" Quantity="4" Sideboard="false" Name="Wasteland" Annotation="0"/>
+  <Cards CatID="91143" Quantity="4" Sideboard="false" Name="Void Mirror" Annotation="0"/>
+  <Cards CatID="39878" Quantity="4" Sideboard="false" Name="Chancellor of the Annex" Annotation="0"/>
+  <Cards CatID="52877" Quantity="1" Sideboard="false" Name="Mox Emerald" Annotation="0"/>
+  <Cards CatID="52713" Quantity="1" Sideboard="false" Name="Mox Jet" Annotation="0"/>
+  <Cards CatID="52597" Quantity="1" Sideboard="false" Name="Mox Pearl" Annotation="0"/>
+  <Cards CatID="53243" Quantity="1" Sideboard="false" Name="Mox Ruby" Annotation="0"/>
+  <Cards CatID="52919" Quantity="1" Sideboard="false" Name="Mox Sapphire" Annotation="0"/>
+  <Cards CatID="79624" Quantity="1" Sideboard="false" Name="Plains" Annotation="0"/>
+  <Cards CatID="101416" Quantity="4" Sideboard="false" Name="Seasoned Dungeoneer" Annotation="0"/>
+  <Cards CatID="52853" Quantity="1" Sideboard="false" Name="Strip Mine" Annotation="0"/>
+  <Cards CatID="126443" Quantity="1" Sideboard="false" Name="Vexing Bauble" Annotation="0"/>
+  <Cards CatID="139831" Quantity="4" Sideboard="false" Name="Clarion Conqueror" Annotation="0"/>
+  <Cards CatID="100096" Quantity="4" Sideboard="false" Name="White Plume Adventurer" Annotation="0"/>
+  <Cards CatID="126501" Quantity="4" Sideboard="false" Name="Witch Enchanter" Annotation="0"/>
+  <Cards CatID="117702" Quantity="4" Sideboard="false" Name="Cavern of Souls" Annotation="0"/>
+  <Cards CatID="19831" Quantity="4" Sideboard="false" Name="Chrome Mox" Annotation="0"/>
+  <Cards CatID="52697" Quantity="4" Sideboard="false" Name="Ancient Tomb" Annotation="0"/>
+  <Cards CatID="142227" Quantity="1" Sideboard="false" Name="Swords to Plowshares" Annotation="0"/>
+  <Cards CatID="142227" Quantity="3" Sideboard="false" Name="Swords to Plowshares" Annotation="0"/>
+  <Cards CatID="52647" Quantity="4" Sideboard="true" Name="Null Rod" Annotation="0"/>
+  <Cards CatID="91045" Quantity="4" Sideboard="true" Name="Sanctifier en-Vec" Annotation="0"/>
+  <Cards CatID="70095" Quantity="3" Sideboard="true" Name="Containment Priest" Annotation="0"/>
+  <Cards CatID="57330" Quantity="4" Sideboard="true" Name="Dismember" Annotation="0"/>
+</Deck>

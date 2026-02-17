@@ -13,22 +13,23 @@ class ModelPersistence:
         self._latest_loaded_mtime = 0.0
         self._did_initial_load = False
 
-    def save_model(self, model, path):
-        """Save model state."""
+    def save_model(self, model, path, extra_state=None):
+        """Save model state and optional training state (optimizer, counters)."""
         try:
             if model is None:
                 raise RuntimeError("Model not initialized")
-            model.save(path)
+            model.save(path, extra_state=extra_state)
             logger.info(LogCategory.GPU_MEMORY, "Model saved to %s", path)
         except Exception as e:
             logger.error(LogCategory.GPU_MEMORY, "Error saving model: %s", str(e))
             raise
 
     def load_model(self, model, path):
-        """Load model state."""
+        """Load model state. Returns extra state dict (optimizer, counters) if present."""
         try:
-            model.load(path)
+            extra = model.load(path)
             logger.info(LogCategory.GPU_MEMORY, "Model loaded from %s", path)
+            return extra
         except Exception as e:
             logger.error(LogCategory.GPU_MEMORY, "Error loading model: %s", str(e))
             raise

@@ -1,91 +1,102 @@
-$env:MTG_AI_LOG_LEVEL="INFO"
-$env:METRICS_PORT=9090
+  $env:MTG_AI_LOG_LEVEL="INFO"
+  $env:METRICS_PORT=9090
 
-# Inference workers (each = 1 Python proc + 1 model replica on GPU)
-$env:PY4J_BASE_PORT=25334
-$env:INFER_WORKERS=1
-$env:INFER_STARTUP_THREADS=1
-$env:PY_SCORE_TIMEOUT_MS=0   # No timeout - games wait as long as needed
-$env:MODEL_RELOAD_EVERY_MS=2000
+  # Inference workers (each = 1 Python proc + 1 model replica on GPU)
+  $env:PY4J_BASE_PORT=25334
+  $env:INFER_WORKERS=1
+  $env:INFER_STARTUP_THREADS=1
+  $env:PY_SCORE_TIMEOUT_MS=0   # No timeout - games wait as long as needed
+  $env:MODEL_RELOAD_EVERY_MS=2000
 
-# Snapshots (keep VRAM stable)
-$env:SNAPSHOT_CACHE_SIZE=0
+  # Snapshots (keep VRAM stable)
+  $env:SNAPSHOT_CACHE_SIZE=0
 
-# Learner queue (don’t stall runners)
-$env:TRAIN_QUEUE_MAX_EPISODES=160
-$env:TRAIN_QUEUE_DROP_ON_FULL=1
-$env:TRAIN_QUEUE_OFFER_TIMEOUT_MS=0
+  # Learner queue (don’t stall runners)
+  $env:TRAIN_QUEUE_MAX_EPISODES=160
+  $env:TRAIN_QUEUE_DROP_ON_FULL=1
+  $env:TRAIN_QUEUE_OFFER_TIMEOUT_MS=0
 
-# Learner micro-batching
-$env:LEARNER_BATCH_MAX_EPISODES=16
-$env:LEARNER_BATCH_MAX_STEPS=512
+  # Learner micro-batching
+  $env:LEARNER_BATCH_MAX_EPISODES=16
+  $env:LEARNER_BATCH_MAX_STEPS=512
 
-$env:MODEL_SYNC_EVERY_TRAIN_STEPS=100
-$env:MODEL_SYNC_EVERY_MS=5000
+  $env:MODEL_SYNC_EVERY_TRAIN_STEPS=100
+  $env:MODEL_SYNC_EVERY_MS=5000
 
-# Java-side inference batching (performance)
-$env:PY_BATCH_MAX_SIZE=256
-$env:PY_BATCH_TIMEOUT_MS=10   # Lower timeout for faster response with more runners
-$env:PY_BATCH_LOG_LEVEL="WARNING"
+  # Java-side inference batching (performance)
+  $env:PY_BATCH_MAX_SIZE=256
+  $env:PY_BATCH_TIMEOUT_MS=10   # Lower timeout for faster response with more runners
+  $env:PY_BATCH_LOG_LEVEL="WARNING"
 
-# Python-side auto-batching (avoid paging/shared RAM)
-$env:AUTO_BATCH_ENABLE=1
-$env:AUTO_AVOID_PAGING=1
-$env:AUTO_TARGET_USED_FRAC=0.75   # Reduced from 0.85 for snapshot safety
-$env:AUTO_MIN_FREE_MB=512          # Reduced from 2048 for v2 small model
+  # Python-side auto-batching (avoid paging/shared RAM)
+  $env:AUTO_BATCH_ENABLE=1
+  $env:AUTO_AVOID_PAGING=1
+  $env:AUTO_TARGET_USED_FRAC=0.75   # Reduced from 0.85 for snapshot safety
+  $env:AUTO_MIN_FREE_MB=512          # Reduced from 2048 for v2 small model
 
-# Model architecture (v2 small defaults: 2-layer, d_model=128, ~2M params)
-# $env:MODEL_D_MODEL=128           # Default 128 (v2); set to 512 for v1
-# $env:MODEL_NHEAD=4               # Default 4 (v2); set to 8 for v1
-# $env:MODEL_NUM_LAYERS=2          # Default 2 (v2); set to 6 for v1
-# $env:MODEL_DIM_FEEDFORWARD=512   # Default 512 (v2); set to 2048 for v1
+  # Model architecture (v2 small defaults: 2-layer, d_model=128, ~2M params)
+  # $env:MODEL_D_MODEL=128           # Default 128 (v2); set to 512 for v1
+  # $env:MODEL_NHEAD=4               # Default 4 (v2); set to 8 for v1
+  # $env:MODEL_NUM_LAYERS=2          # Default 2 (v2); set to 6 for v1
+  # $env:MODEL_DIM_FEEDFORWARD=512   # Default 512 (v2); set to 2048 for v1
 
-# Entropy schedule (v2 small model: faster decay to reach decisiveness sooner)
-$env:ENTROPY_START=0.10            # Start: 0.10 (v2) vs 0.20 (v1)
-$env:ENTROPY_END=0.01              # End: 0.01 (v2) vs 0.03 (v1)
-$env:ENTROPY_DECAY_STEPS=10000     # Decay over 10k steps (v2) vs 50k (v1)
+  # Entropy schedule (v2 small model: faster decay to reach decisiveness sooner)
+  $env:ENTROPY_START=0.10            # Start: 0.10 (v2) vs 0.20 (v1)
+  $env:ENTROPY_END=0.01              # End: 0.01 (v2) vs 0.03 (v1)
+  $env:ENTROPY_DECAY_STEPS=10000     # Decay over 10k steps (v2) vs 50k (v1)
 
-# Learning rate (v2 small model: higher LR stable with fewer params)
-$env:ACTOR_LR="3e-4"               # 3e-4 (v2) vs 1e-4 (v1)
-$env:OTHER_LR="3e-4"               # 3e-4 (v2) vs 1e-4 (v1)
+  # Learning rate (v2 small model: higher LR stable with fewer params)
+  $env:ACTOR_LR="3e-4"               # 3e-4 (v2) vs 1e-4 (v1)
+  $env:OTHER_LR="3e-4"               # 3e-4 (v2) vs 1e-4 (v1)
 
-# Torch profiler (REMOVED - replaced with manual timing metrics in Grafana)
-# $env:TORCH_PROFILER_ENABLE=0
+  # Torch profiler (REMOVED - replaced with manual timing metrics in Grafana)
+  # $env:TORCH_PROFILER_ENABLE=0
 
-# Training settings
-$env:USE_GAE=0
-$env:GAE_AUTO_ENABLE=1
-$env:GAE_AUTO_THRESHOLD=0.65
-$env:GAE_AUTO_MIN_SAMPLES=200
+  # Training settings
+  $env:USE_GAE=0
+  $env:GAE_AUTO_ENABLE=1
+  $env:GAE_AUTO_THRESHOLD=0.65
+  $env:GAE_AUTO_MIN_SAMPLES=200
 
-# NO WARMUP - Train everything from start
-$env:LOSS_SCHEDULE_ENABLE=0
-$env:CRITIC_WARMUP_STEPS=0
-$env:FREEZE_ENCODER_IN_WARMUP=0
+  # NO WARMUP - Train everything from start
+  $env:LOSS_SCHEDULE_ENABLE=0
+  $env:CRITIC_WARMUP_STEPS=0
+  $env:FREEZE_ENCODER_IN_WARMUP=0
 
-# BALANCED LOSS COEFFICIENTS (PPO standard values)
-$env:VALUE_LOSS_COEF=1.0            # Standard PPO range (0.5-1.0)
-$env:POLICY_LOSS_COEF=1.0           # Standard PPO value
-$env:ENTROPY_LOSS_MULT=1.0
-$env:ADV_CLIP_MAX=5.0               # Clip normalized advantages to prevent gradient explosion
-$env:MAX_GRAD_NORM=1.0              # Standard PPO gradient clipping (was 5.0)
+  # BALANCED LOSS COEFFICIENTS (PPO standard values)
+  $env:VALUE_LOSS_COEF=1.0            # Standard PPO range (0.5-1.0)
+  $env:POLICY_LOSS_COEF=1.0           # Standard PPO value
+  $env:ENTROPY_LOSS_MULT=1.0
+  $env:ADV_CLIP_MAX=5.0               # Clip normalized advantages to prevent gradient explosion
+  $env:MAX_GRAD_NORM=1.0              # Standard PPO gradient clipping (was 5.0)
 
-# Debug
-$env:VALUE_POSTUPDATE_DIAG_EVERY=200
-$env:VALUE_TARGET_DIAG_EVERY=200
-$env:VALUE_GRAD_DIAG_EVERY=200
-$env:SCORE_DIAG_EVERY=2000
+  # Debug
+  $env:VALUE_POSTUPDATE_DIAG_EVERY=200
+  $env:VALUE_TARGET_DIAG_EVERY=200
+  $env:VALUE_GRAD_DIAG_EVERY=200
+  $env:SCORE_DIAG_EVERY=2000
 
-$env:PY_BACKEND_MODE="multi"      # Multi-backend: inference + learner run in parallel
+  $env:PY_BACKEND_MODE="multi"      # Multi-backend: inference + learner run in parallel
 
-$env:MULLIGAN_DEVICE="cpu"
+  $env:MULLIGAN_DEVICE="cpu"
 
-# League type
-$env:OPPONENT_SAMPLER="league"
-$env:GAME_TIMEOUT_SEC=600
-$env:LEAGUE_BASELINE_GAMES_PER_MATCHUP=6
-$env:LEAGUE_HEURISTIC_SKILLS_PRE="1"  # Use CP7-Skill 0 (0s timeout, fast opponent) for training
+  # League type
+  $env:OPPONENT_SAMPLER="league"
+  $env:GAME_TIMEOUT_SEC=600
+  $env:LEAGUE_BASELINE_GAMES_PER_MATCHUP=6
+  $env:LEAGUE_HEURISTIC_SKILLS_PRE="1"  # Use CP7-Skill 0 (0s timeout, fast opponent) for training
 
-# Run
-.\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -TotalEpisodes 1000000 -NumGameRunners 48 `
-  -DeckListFile "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.txt"
+  # Single-deck training: RL agent only plays one deck, opponents use full pool
+  $env:RL_AGENT_DECK_LIST="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.monored-rally.txt"
+
+  # Ladder mode: skill-only progression (good for single-deck training, no self-play)
+  $env:OPPONENT_SAMPLER="ladder"
+  $env:LADDER_SKILLS="1,2,3,4,5,6,7"       # Ordered skill tiers to progress through
+  $env:LADDER_PROMOTE_WR=0.55                # Winrate threshold to promote to next tier
+  $env:LADDER_TICK_EPISODES=5000             # Benchmark frequency
+  $env:LADDER_GAMES_PER_MATCHUP=6            # Games per deck matchup in benchmark
+  $env:LADDER_MIX_LOWER_P=0.20               # Probability of facing lower-tier bot
+
+  # Run
+  .\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -TotalEpisodes 1000000 -NumGameRunners 48 `
+    -DeckListFile "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.txt"

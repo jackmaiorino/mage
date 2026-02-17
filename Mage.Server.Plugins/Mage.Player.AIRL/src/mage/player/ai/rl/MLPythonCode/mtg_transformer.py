@@ -75,7 +75,22 @@ class MTGTransformerModel(nn.Module):
             nn.ReLU(),
             nn.LayerNorm(d_model),
         )
-        # MLP-based candidate scorers (concat CLS + candidate → scalar score)
+        
+        # Cross-attention: candidates attend to full state sequence
+        self.cross_attn = nn.MultiheadAttention(
+            embed_dim=d_model, num_heads=nhead,
+            dropout=dropout, batch_first=True
+        )
+        self.cross_attn_norm = nn.LayerNorm(d_model)
+        
+        # Self-attention among candidates for relative comparison
+        self.cand_self_attn = nn.MultiheadAttention(
+            embed_dim=d_model, num_heads=nhead,
+            dropout=dropout, batch_first=True
+        )
+        self.cand_self_attn_norm = nn.LayerNorm(d_model)
+        
+        # MLP-based candidate scorers (concat CLS + attended_candidate → scalar score)
         # Each head learns non-linear interactions between game context and candidate features
         self.policy_scorer = nn.Sequential(
             nn.LayerNorm(d_model * 2),
@@ -160,6 +175,13 @@ class MTGTransformerModel(nn.Module):
                         nn.init.xavier_uniform_(param, gain=0.1)
                     else:
                         nn.init.zeros_(param)
+            elif isinstance(m, nn.MultiheadAttention):
+                # Cross-attention initialization
+                for param in m.parameters():
+                    if param.dim() > 1:  # weight tensors
+                        nn.init.xavier_uniform_(param, gain=0.1)
+                    else:
+                        nn.init.zeros_(param)
 
     def forward(self,
                 sequences: torch.Tensor,
@@ -174,11 +196,11 @@ class MTGTransformerModel(nn.Module):
 
         return policy_logits, policy_probs, value_scores
 
-    def encode_state(self,
-                     sequences: torch.Tensor,
-                     masks: torch.Tensor,
-                     token_ids: Optional[torch.Tensor] = None) -> torch.Tensor:
-        """Return CLS embedding [B, d_model] for a state batch."""
+    def encode_state_full(self,
+                          sequences: torch.Tensor,
+                          masks: torch.Tensor,
+                          token_ids: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor]:
+        """Return (all_tokens [B, S+1, d_model], pad_mask [B, S+1])."""
         x = self.input_proj(sequences)
         if token_ids is not None:
             token_ids = token_ids.clamp(min=0, max=self.token_vocab - 1).long()
@@ -197,6 +219,14 @@ class MTGTransformerModel(nn.Module):
         for layer in self.transformer_layers:
             x = layer(x, src_key_padding_mask=pad_mask)
 
+        return x, pad_mask
+
+    def encode_state(self,
+                     sequences: torch.Tensor,
+                     masks: torch.Tensor,
+                     token_ids: Optional[torch.Tensor] = None) -> torch.Tensor:
+        """Return CLS embedding [B, d_model] for backward compatibility."""
+        x, _ = self.encode_state_full(sequences, masks, token_ids)
         return x[:, 0]
 
     def score_candidates(self,
@@ -211,18 +241,39 @@ class MTGTransformerModel(nn.Module):
                          min_targets: int = 0,
                          max_targets: int = 0) -> Tuple[torch.Tensor, torch.Tensor]:
         """Return (candidate_probs, value_scores)."""
-        cls = self.encode_state(sequences, masks, token_ids)
+        # Encode full state sequence for cross-attention
+        state_seq, state_pad_mask = self.encode_state_full(sequences, masks, token_ids)
+        cls = state_seq[:, 0]                     # [B, d_model]
         value_scores = self._process_value(cls)
 
         # Build candidate representations
         cand_feat = self.cand_feat_proj(candidate_features.float())
         cand_ids = candidate_ids.clamp(min=0, max=self.action_vocab - 1).long()
-        cand = cand_feat + self.action_id_emb(cand_ids)
+        cand = cand_feat + self.action_id_emb(cand_ids)  # [B, N, d_model]
 
-        # MLP scoring: concat(CLS, candidate) → scalar score
-        # This allows learning non-linear interactions (e.g., "damage spell + is_you = bad")
-        cls_expanded = cls.unsqueeze(1).expand(-1, cand.size(1), -1)  # [B, N, d_model]
-        combined = torch.cat([cls_expanded, cand], dim=-1)             # [B, N, d_model*2]
+        # Cross-attention: candidates attend to full state sequence
+        attended, _ = self.cross_attn(
+            query=cand,
+            key=state_seq,
+            value=state_seq,
+            key_padding_mask=state_pad_mask
+        )
+        attended = self.cross_attn_norm(attended + cand)   # residual + norm
+
+        # Self-attention among candidates (relative comparison)
+        cand_pad_mask = ~candidate_mask.bool()  # True = padding (MHA convention)
+        attended_pre = attended
+        attended, _ = self.cand_self_attn(
+            query=attended,
+            key=attended,
+            value=attended,
+            key_padding_mask=cand_pad_mask
+        )
+        attended = self.cand_self_attn_norm(attended + attended_pre)  # residual + norm
+
+        # MLP scoring: concat(CLS, attended_candidate) → scalar score
+        cls_expanded = cls.unsqueeze(1).expand(-1, attended.size(1), -1)  # [B, N, d_model]
+        combined = torch.cat([cls_expanded, attended], dim=-1)             # [B, N, d_model*2]
         
         # Route head selection (ignore pick_index/min/max for now; plumbed for future conditioning)
         hid = str(head_id).strip().lower() if head_id is not None else "action"
@@ -311,13 +362,16 @@ class MTGTransformerModel(nn.Module):
 
             return action_probs_np, value_scores_np
 
-    def save(self, path: str):
-        """Save weights & minimal config."""
-        torch.save({'state_dict': self.state_dict(),
-                   'config': self.get_config()}, path)
+    def save(self, path: str, extra_state=None):
+        """Save weights & minimal config, plus optional training state."""
+        data = {'state_dict': self.state_dict(), 'config': self.get_config()}
+        if extra_state:
+            data.update(extra_state)
+        torch.save(data, path)
 
     def load(self, path: str):
-        """Load weights from file (ignores config—assumes same architecture)."""
+        """Load weights from file (ignores config—assumes same architecture).
+        Returns dict of extra state (optimizer, counters, etc.) if present."""
         ckpt = torch.load(path, map_location='cpu')
         # Backward compatible loads: allow missing keys (e.g., newly added heads).
         res = self.load_state_dict(ckpt['state_dict'], strict=False)
@@ -329,6 +383,8 @@ class MTGTransformerModel(nn.Module):
                 )
         except Exception:
             pass
+        # Return non-model keys for caller to restore (optimizer, counters, etc.)
+        return {k: v for k, v in ckpt.items() if k not in ('state_dict', 'config')}
 
     # ------------------------------------------------------------------
     # Helper functions for policy and value heads (actor / critic)
