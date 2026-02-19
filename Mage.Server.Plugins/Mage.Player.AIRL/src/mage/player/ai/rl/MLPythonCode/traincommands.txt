@@ -41,9 +41,9 @@
   # $env:MODEL_DIM_FEEDFORWARD=512   # Default 512 (v2); set to 2048 for v1
 
   # Entropy schedule (v2 small model: faster decay to reach decisiveness sooner)
-  $env:ENTROPY_START=0.10            # Start: 0.10 (v2) vs 0.20 (v1)
-  $env:ENTROPY_END=0.01              # End: 0.01 (v2) vs 0.03 (v1)
-  $env:ENTROPY_DECAY_STEPS=10000     # Decay over 10k steps (v2) vs 50k (v1)
+  $env:ENTROPY_START=0.10         
+  $env:ENTROPY_END=0.01 
+  $env:ENTROPY_DECAY_STEPS=60000
 
   # Learning rate (v2 small model: higher LR stable with fewer params)
   $env:ACTOR_LR="3e-4"               # 3e-4 (v2) vs 1e-4 (v1)

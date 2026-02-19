@@ -520,6 +520,9 @@ public class PythonMLBatchManager {
                     .map(d -> d.oldValue)
                     .collect(Collectors.toList()));
             byte[] donesBytes = convertIntegersToBytes(dones);
+            byte[] headIdxBytes = convertIntegersToBytes(trainingData.stream()
+                    .map(d -> actionTypeToHeadIdx(d.actionType))
+                    .collect(Collectors.toList()));
 
             int batchSize = trainingData.size();
             int seqLen = trainingData.get(0).state.getSequence().length;
@@ -540,6 +543,7 @@ public class PythonMLBatchManager {
                         oldLogpTotalBytes,
                         oldValueBytes,
                         donesBytes,
+                        headIdxBytes,
                         batchSize,
                         seqLen,
                         dModel,
@@ -593,6 +597,23 @@ public class PythonMLBatchManager {
             buffer.putFloat(value != null ? value : 0.0f);
         }
         return buffer.array();
+    }
+
+    /**
+     * Maps ActionType to a head index matching Python HEAD_NAMES = ["action", "target", "card_select"].
+     * 0 = action head (default), 1 = target head, 2 = card_select head.
+     */
+    private static int actionTypeToHeadIdx(StateSequenceBuilder.ActionType actionType) {
+        if (actionType == null) return 0;
+        switch (actionType) {
+            case SELECT_TARGETS:
+                return 1;
+            case LONDON_MULLIGAN:
+            case SELECT_CARD:
+                return 2;
+            default:
+                return 0;
+        }
     }
 
     public static class PredictionResult {

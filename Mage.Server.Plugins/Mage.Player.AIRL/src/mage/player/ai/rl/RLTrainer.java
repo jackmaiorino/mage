@@ -271,13 +271,15 @@ public class RLTrainer {
         int currentTier;
         int lastTickEpisode;
         final java.util.HashMap<Integer, Double> tierWinrates = new java.util.HashMap<>();
+        final java.util.ArrayList<String> evalHistory = new java.util.ArrayList<>();
 
         String toJson() {
             StringBuilder sb = new StringBuilder();
             sb.append("{\n");
             sb.append("  \"currentTier\": ").append(currentTier).append(",\n");
             sb.append("  \"lastTickEpisode\": ").append(lastTickEpisode).append(",\n");
-            sb.append("  \"tierWinrates\": ").append(jsonIntDoubleMap(tierWinrates)).append("\n");
+            sb.append("  \"tierWinrates\": ").append(jsonIntDoubleMap(tierWinrates)).append(",\n");
+            sb.append("  \"evalHistory\": ").append(jsonStringArray(evalHistory)).append("\n");
             sb.append("}\n");
             return sb.toString();
         }
@@ -290,6 +292,7 @@ public class RLTrainer {
             ls.currentTier = jsonInt(s, "currentTier", 0);
             ls.lastTickEpisode = jsonInt(s, "lastTickEpisode", 0);
             ls.tierWinrates.putAll(jsonIntDoubleMapField(s, "tierWinrates"));
+            ls.evalHistory.addAll(jsonStringArrayField(s, "evalHistory"));
             return ls;
         }
     }
@@ -740,6 +743,10 @@ public class RLTrainer {
                 sb.append("  tier=").append(i).append(" skill=").append(tiers[i])
                   .append(" wr=").append(wr == null ? "n/a" : String.format("%.3f", wr)).append('\n');
             }
+            sb.append("evalHistory:\n");
+            for (String entry : ls.evalHistory) {
+                sb.append("  ").append(entry).append('\n');
+            }
             Files.write(p, sb.toString().getBytes(StandardCharsets.UTF_8),
                     java.nio.file.StandardOpenOption.CREATE,
                     java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);
@@ -1125,6 +1132,8 @@ public class RLTrainer {
         synchronized (LADDER_LOCK) {
             ls.lastTickEpisode = episodeNum;
             ls.tierWinrates.put(currentTier, benchmarkWr);
+            ls.evalHistory.add(String.format("ep=%d,tier=%d,skill=%d,wr=%.6f",
+                    episodeNum, currentTier, currentSkill, benchmarkWr));
         }
 
         // Promotion check

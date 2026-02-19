@@ -179,6 +179,7 @@ public interface PythonEntryPoint {
             byte[] oldLogpTotalBytes,
             byte[] oldValueBytes,
             byte[] donesBytes,
+            byte[] headIdxBytes,
             int batchSize,
             int seqLen,
             int dModel,

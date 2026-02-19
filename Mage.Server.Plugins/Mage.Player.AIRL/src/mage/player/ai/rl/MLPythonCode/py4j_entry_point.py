@@ -1645,6 +1645,7 @@ class PythonEntryPoint:
                                  old_logp_total_bytes,
                                  old_value_bytes,
                                  dones_bytes,
+                                 head_ids_bytes,
                                  batch_size,
                                  seq_len,
                                  d_model,
@@ -1653,6 +1654,7 @@ class PythonEntryPoint:
         """
         Train on a batch that concatenates multiple episodes.
         dones marks episode ends (1=end-of-episode), so GAE/returns do not leak across boundaries.
+        head_ids_bytes: per-step head index (0=action, 1=target, 2=card_select).
         """
         t_start = time.perf_counter()
         lock_held = False
@@ -1691,6 +1693,8 @@ class PythonEntryPoint:
                 batch_size)[start:end]
             dones = np.frombuffer(dones_bytes, dtype='<i4').reshape(
                 batch_size)[start:end]
+            head_ids = np.frombuffer(head_ids_bytes, dtype='<i4').reshape(
+                batch_size)[start:end]
 
             seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
             mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
@@ -1712,9 +1716,10 @@ class PythonEntryPoint:
             old_value_t = torch.tensor(
                 old_value, dtype=torch.float32, device=device)
             dones_t = torch.tensor(dones, dtype=torch.float32, device=device)
+            head_idx_t = torch.tensor(head_ids, dtype=torch.long, device=device)
 
             # Release numpy slices immediately
-            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value, dones
+            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value, dones, head_ids
 
             local_batch_size = int(end - start)
 
@@ -1767,8 +1772,21 @@ class PythonEntryPoint:
                 self.optimizer.zero_grad(set_to_none=True)
 
                 with autocast_ctx:
-                    probs, value = self.model.score_candidates(
-                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+                    # Route each step to its correct policy head (action/target/card_select).
+                    # 0=action, 1=target, 2=card_select -- must match actionTypeToHeadIdx() in Java.
+                    _HEAD_NAMES = ["action", "target", "card_select"]
+                    probs = torch.zeros(local_batch_size, max_candidates, device=device)
+                    value = torch.zeros(local_batch_size, 1, device=device)
+                    for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
+                        _hmask = (head_idx_t == _hid_val)
+                        if not _hmask.any():
+                            continue
+                        _p_h, _v_h = self.model.score_candidates(
+                            seq_t[_hmask], mask_t[_hmask], tok_t[_hmask],
+                            cand_feat_t[_hmask], cand_ids_t[_hmask], cand_mask_t[_hmask],
+                            head_id=_hid_name)
+                        probs[_hmask] = _p_h.float()
+                        value[_hmask] = _v_h.float()
 
                 if torch.isnan(probs).any() or torch.isnan(value).any():
                     logger.warning(LogCategory.MODEL_TRAIN,
@@ -1806,11 +1824,20 @@ class PythonEntryPoint:
                 if do_post:
                     with torch.no_grad():
                         self.model.eval()
-                        _p0, _v0 = self.model.score_candidates(
-                            seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
-                        )
-                        v_before_eval = _v0.squeeze(
-                            1).detach().float().view(-1)
+                        _v0_parts = []
+                        for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
+                            _hmask_d = (head_idx_t == _hid_val)
+                            if not _hmask_d.any():
+                                continue
+                            _, _v0_h = self.model.score_candidates(
+                                seq_t[_hmask_d], mask_t[_hmask_d], tok_t[_hmask_d],
+                                cand_feat_t[_hmask_d], cand_ids_t[_hmask_d], cand_mask_t[_hmask_d],
+                                head_id=_hid_name)
+                            _v0_parts.append((_hmask_d, _v0_h))
+                        _v0_full = torch.zeros(local_batch_size, 1, device=device)
+                        for _hmask_d, _v0_h in _v0_parts:
+                            _v0_full[_hmask_d] = _v0_h.float()
+                        v_before_eval = _v0_full.squeeze(1).detach().float().view(-1)
                         self.model.train()
                 if diag_every > 0 and (next_step % diag_every == 0):
                     with torch.no_grad():
@@ -2037,10 +2064,20 @@ class PythonEntryPoint:
             if do_post:
                 with torch.no_grad():
                     self.model.eval()
-                    _p1, _v1 = self.model.score_candidates(
-                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
-                    )
-                    v_after_eval = _v1.squeeze(1).detach().float().view(-1)
+                    _v1_parts = []
+                    for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
+                        _hmask_d = (head_idx_t == _hid_val)
+                        if not _hmask_d.any():
+                            continue
+                        _, _v1_h = self.model.score_candidates(
+                            seq_t[_hmask_d], mask_t[_hmask_d], tok_t[_hmask_d],
+                            cand_feat_t[_hmask_d], cand_ids_t[_hmask_d], cand_mask_t[_hmask_d],
+                            head_id=_hid_name)
+                        _v1_parts.append((_hmask_d, _v1_h))
+                    _v1_full = torch.zeros(local_batch_size, 1, device=device)
+                    for _hmask_d, _v1_h in _v1_parts:
+                        _v1_full[_hmask_d] = _v1_h.float()
+                    v_after_eval = _v1_full.squeeze(1).detach().float().view(-1)
                     self.model.train()
 
                     v_before = v_before_eval if v_before_eval is not None else value_squeezed.detach().float().view(-1)

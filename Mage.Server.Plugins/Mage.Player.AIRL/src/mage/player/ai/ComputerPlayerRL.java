@@ -20,8 +20,11 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import mage.Mana;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.mana.ManaOptions;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.PlayLandAbility;
@@ -1908,6 +1911,29 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // the heuristic AI from paying costs it can't reason about.
         // Our RL model CAN learn these decisions from the reward signal.
 
+        // Mana feasibility gate: for optional additional costs (kicker, buyback, etc.),
+        // the engine's canPay() only checks the additional cost in isolation, not the
+        // combined total. Block the model from choosing an unaffordable option.
+        if (outcome == Outcome.AIDontUseIt && source instanceof SpellAbility) {
+            try {
+                Mana additionalCost = parseManaCostFromMessage(message);
+                if (additionalCost.count() > 0) {
+                    Mana baseCost = source.getManaCostsToPay().getMana();
+                    Mana totalCost = baseCost.copy();
+                    totalCost.add(additionalCost);
+                    ManaOptions available = getManaAvailable(game);
+                    if (!available.enough(totalCost)) {
+                        trace(String.format("chooseUse EXIT (mana infeasible): base=%s additional=%s total=%s",
+                                baseCost, additionalCost, totalCost));
+                        return false;
+                    }
+                }
+            } catch (Exception e) {
+                // Parsing failed - let model decide rather than silently blocking
+                trace("chooseUse mana feasibility check failed: " + e.getMessage());
+            }
+        }
+
         try {
             final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
             final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
@@ -3229,6 +3255,26 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private void trace(String msg) {
         if (Boolean.TRUE.equals(traceEnabled.get())) {
             activationTrace.get().add(msg);
+        }
+    }
+
+    /**
+     * Parses mana symbols from a chooseUse prompt message (e.g. "Pay Kicker {R} ?")
+     * and returns their total as a Mana object. Returns empty Mana if no symbols found
+     * or if the cost is non-mana (e.g. "sacrifice a creature").
+     */
+    private Mana parseManaCostFromMessage(String message) {
+        if (message == null) return new Mana();
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile("\\{([^}]+)\\}").matcher(message);
+        StringBuilder sb = new StringBuilder();
+        while (m.find()) {
+            sb.append('{').append(m.group(1)).append('}');
+        }
+        if (sb.length() == 0) return new Mana();
+        try {
+            return new ManaCostsImpl<>(sb.toString()).getMana();
+        } catch (Exception e) {
+            return new Mana();
         }
     }
 
