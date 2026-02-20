@@ -659,6 +659,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 } else {
                     base += ":TARGET:UNKNOWN";
                 }
+            } else if (candidate instanceof mage.abilities.Mode) {
+                mage.abilities.Mode mode = (mage.abilities.Mode) candidate;
+                String effectText = mode.getEffects().getText(mode);
+                // Use first 40 chars of effect text as a stable key (avoids UUID churn across games)
+                String key = effectText.length() > 40 ? effectText.substring(0, 40) : effectText;
+                base += ":MODE:" + key.replace(' ', '_');
+            } else if (candidate instanceof Integer && actionType == StateSequenceBuilder.ActionType.ANNOUNCE_X) {
+                base += ":" + candidate;
             } else if (candidate != null) {
                 base += ":" + candidate.getClass().getSimpleName();
             }
@@ -879,6 +887,54 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         f[40] = perm.getAbilities(game).containsKey(IndestructibleAbility.getInstance().getId()) ? 1.0f : 0.0f;
                         f[41] = (perm instanceof PermanentToken) ? 1.0f : 0.0f;
                         f[42] = Math.min(perm.getCounters(game).getCount(CounterType.P1P1), 10) / 10.0f;
+                    }
+                }
+            }
+
+            // Mode candidate features (CHOOSE_MODE)
+            if (candidate instanceof mage.abilities.Mode) {
+                mage.abilities.Mode mode = (mage.abilities.Mode) candidate;
+                // f[0] is overwritten externally with mode ordinal/count by chooseMode(); no duplicate here
+                f[11] = mode.getTargets() != null && !mode.getTargets().isEmpty() ? 1.0f : 0.0f;
+                f[12] = mode.getTargets() != null ? Math.min(mode.getTargets().size(), 5) / 5.0f : 0.0f;
+                f[13] = mode.getCost() != null ? 1.0f : 0.0f;
+                // Source context
+                if (source != null) {
+                    f[9] = source.getManaCostsToPay().manaValue() / 10.0f;
+                    MageObject srcObj = game.getObject(source.getSourceId());
+                    if (srcObj instanceof Permanent) {
+                        Permanent p = (Permanent) srcObj;
+                        f[27] = baseState != null && baseState.uuidToTokenIndex.get(p.getId()) != null ? 1.0f : 0.0f;
+                        f[28] = baseState != null && baseState.uuidToTokenIndex.get(p.getId()) != null
+                                ? baseState.uuidToTokenIndex.get(p.getId()) / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
+                    }
+                }
+            }
+
+            // Integer candidate features (ANNOUNCE_X)
+            if (candidate instanceof Integer && actionType == StateSequenceBuilder.ActionType.ANNOUNCE_X) {
+                int xVal = (Integer) candidate;
+                // Absolute magnitude (capped)
+                f[10] = Math.min(xVal, 20) / 20.0f;
+                // Available mana context
+                try {
+                    mage.abilities.mana.ManaOptions available = getManaAvailable(game);
+                    int totalAvailable = available.isEmpty() ? 0 : available.stream().mapToInt(m -> m.count()).max().orElse(0);
+                    f[13] = Math.min(totalAvailable, 20) / 20.0f;
+                    int baseCost = source != null ? source.getManaCostsToPay().manaValue() : 0;
+                    int budget = Math.max(0, totalAvailable - baseCost);
+                    // How much of the budget this X value uses
+                    f[14] = budget > 0 ? Math.min(xVal, budget) / (float) budget : 0.0f;
+                } catch (Exception ignored) {}
+                // Source context
+                if (source != null) {
+                    f[9] = source.getManaCostsToPay().manaValue() / 10.0f;
+                    MageObject srcObj = game.getObject(source.getSourceId());
+                    if (srcObj instanceof Permanent) {
+                        Permanent p = (Permanent) srcObj;
+                        f[27] = baseState != null && baseState.uuidToTokenIndex.get(p.getId()) != null ? 1.0f : 0.0f;
+                        f[28] = baseState != null && baseState.uuidToTokenIndex.get(p.getId()) != null
+                                ? baseState.uuidToTokenIndex.get(p.getId()) / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
                     }
                 }
             }
@@ -2040,21 +2096,282 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     @Override
     public mage.abilities.Mode chooseMode(mage.abilities.Modes modes, Ability source, Game game) {
         trace("chooseMode ENTRY: available modes=" + (modes != null ? modes.size() : 0));
-        mage.abilities.Mode result = super.chooseMode(modes, source, game);
-        if (result != null) {
-            trace("chooseMode EXIT: selected mode=" + result.getId());
-        } else {
-            trace("chooseMode EXIT: result=null");
+
+        if (modes == null || game == null) {
+            mage.abilities.Mode fallback = super.chooseMode(modes, source, game);
+            trace("chooseMode EXIT (null input): " + (fallback != null ? fallback.getId() : "null"));
+            return fallback;
         }
-        return result;
+
+        try {
+            List<mage.abilities.Mode> availableModes = modes.getAvailableModes(source, game);
+            if (availableModes.isEmpty()) {
+                trace("chooseMode EXIT: no available modes");
+                return null;
+            }
+            if (availableModes.size() == 1) {
+                trace("chooseMode EXIT: only one mode, auto-select");
+                return availableModes.get(0);
+            }
+
+            final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+            final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
+            int candidateCount = Math.min(availableModes.size(), maxCandidates);
+
+            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
+            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+            this.currentState = baseState;
+
+            int[] candidateActionIds = new int[maxCandidates];
+            float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
+            int[] candidateMask = new int[maxCandidates];
+
+            for (int i = 0; i < candidateCount; i++) {
+                candidateMask[i] = 1;
+                candidateActionIds[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.CHOOSE_MODE, game, source, availableModes.get(i));
+                candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.CHOOSE_MODE, game, source, availableModes.get(i), candFeatDim, baseState);
+                // inject mode index into the feature vector so the model knows ordinal position
+                candidateFeatures[i][0] = i / (float) candidateCount;
+            }
+
+            String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_MODE);
+            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+                    baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey, headId, 0, 1, 1);
+
+            float[] actionProbs = prediction.policyScores;
+            float valueScore = prediction.valueScores;
+
+            float[] logits = new float[candidateCount];
+            float maxLogit = -Float.MAX_VALUE;
+            for (int i = 0; i < candidateCount; i++) {
+                float p = actionProbs[i];
+                if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
+                logits[i] = (float) Math.log(p);
+                if (logits[i] > maxLogit) maxLogit = logits[i];
+            }
+            float[] maskedProbs = new float[candidateCount];
+            float sum = 0.0f;
+            for (int i = 0; i < candidateCount; i++) {
+                maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
+                sum += maskedProbs[i];
+            }
+            if (sum > 0.0f && !Float.isNaN(sum)) {
+                for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= sum;
+            } else {
+                for (int i = 0; i < candidateCount; i++) maskedProbs[i] = 1.0f / candidateCount;
+            }
+
+            int chosenIdx;
+            if (greedyMode) {
+                chosenIdx = 0;
+                float best = -1.0f;
+                for (int i = 0; i < candidateCount; i++) {
+                    if (maskedProbs[i] > best) { best = maskedProbs[i]; chosenIdx = i; }
+                }
+            } else {
+                float r = new Random().nextFloat();
+                float c = 0.0f;
+                chosenIdx = 0;
+                for (int i = 0; i < candidateCount; i++) {
+                    c += maskedProbs[i];
+                    if (r <= c) { chosenIdx = i; break; }
+                }
+            }
+
+            if (trainingEnabled && !game.isSimulation()) {
+                int[] chosenIndices = new int[maxCandidates];
+                Arrays.fill(chosenIndices, -1);
+                chosenIndices[0] = chosenIdx;
+                float oldLogp = (float) Math.log(Math.max(1e-8f, maskedProbs[chosenIdx]));
+                StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
+                        baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
+                        1, chosenIndices, oldLogp, valueScore,
+                        StateSequenceBuilder.ActionType.CHOOSE_MODE, 0.0);
+                trainingBuffer.add(td);
+                decisionCountsByHead.put(StateSequenceBuilder.ActionType.CHOOSE_MODE,
+                        decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.CHOOSE_MODE, 0) + 1);
+            }
+
+            mage.abilities.Mode chosen = availableModes.get(chosenIdx);
+            try {
+                GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+                if (gameLogger != null && gameLogger.isEnabled()) {
+                    int turn = game.getTurnNum();
+                    String activePlayerName = game.getActivePlayerId() != null
+                            ? game.getPlayer(game.getActivePlayerId()).getName() : "Unknown";
+                    String phase = game.getStep() != null ? game.getStep().getType().toString() : "Unknown";
+                    List<String> modeNames = new ArrayList<>();
+                    for (int i = 0; i < candidateCount; i++) {
+                        modeNames.add("Mode" + i + ":" + availableModes.get(i).getEffects().getText(availableModes.get(i)).substring(0, Math.min(30, availableModes.get(i).getEffects().getText(availableModes.get(i)).length())));
+                    }
+                    gameLogger.logDecision(this.getName(), activePlayerName, phase + " (CHOOSE_MODE)", turn,
+                            String.format("CHOOSE_MODE: chose mode %d of %d", chosenIdx, candidateCount),
+                            modeNames, Arrays.copyOf(maskedProbs, candidateCount), valueScore, chosenIdx,
+                            modeNames.get(chosenIdx));
+                }
+            } catch (Exception ignored) {}
+
+            trace("chooseMode EXIT: selected mode index=" + chosenIdx);
+            return chosen;
+
+        } catch (Exception e) {
+            trace("chooseMode: model exception, falling back to super: " + e.getMessage());
+            mage.abilities.Mode fallback = super.chooseMode(modes, source, game);
+            trace("chooseMode EXIT (fallback): " + (fallback != null ? fallback.getId() : "null"));
+            return fallback;
+        }
     }
 
     @Override
     public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
         trace(String.format("announceX ENTRY: min=%d, max=%d, isManaPay=%s, msg=%s", min, max, isManaPay, message));
-        int result = super.announceX(min, max, message, game, source, isManaPay);
-        trace("announceX EXIT: announced=" + result);
-        return result;
+
+        if (game == null) {
+            int fallback = super.announceX(min, max, message, game, source, isManaPay);
+            trace("announceX EXIT (no game): " + fallback);
+            return fallback;
+        }
+
+        try {
+            int realMin = min;
+            int realMax = max == Integer.MAX_VALUE ? Math.max(realMin, 20) : Math.min(max, 20);
+
+            // Tighten the upper bound to what we can actually pay (avoids offering unpayable X values)
+            if (isManaPay && source != null) {
+                try {
+                    mage.abilities.mana.ManaOptions available = getManaAvailable(game);
+                    int totalAvailable = available.isEmpty() ? 0 : available.stream()
+                            .mapToInt(m -> m.count()).max().orElse(0);
+                    int baseCost = source.getManaCostsToPay().manaValue();
+                    int affordableX = Math.max(realMin, totalAvailable - baseCost);
+                    realMax = Math.min(realMax, affordableX);
+                } catch (Exception ignored) {}
+            }
+
+            if (realMax < realMin) realMax = realMin;
+
+            if (realMin == realMax) {
+                trace("announceX EXIT: only one option, returning " + realMin);
+                return realMin;
+            }
+
+            final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+            final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
+
+            // Build one candidate per integer value [realMin .. realMax], capped at MAX_CANDIDATES
+            int range = realMax - realMin + 1;
+            int candidateCount = Math.min(range, maxCandidates);
+            // If too many values, sample evenly spaced integers
+            List<Integer> xValues = new ArrayList<>(candidateCount);
+            if (range <= maxCandidates) {
+                for (int x = realMin; x <= realMax; x++) xValues.add(x);
+            } else {
+                for (int i = 0; i < maxCandidates; i++) {
+                    xValues.add(realMin + (int) Math.round(i * (range - 1.0) / (maxCandidates - 1)));
+                }
+            }
+            candidateCount = xValues.size();
+
+            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
+            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+            this.currentState = baseState;
+
+            int[] candidateActionIds = new int[maxCandidates];
+            float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
+            int[] candidateMask = new int[maxCandidates];
+
+            for (int i = 0; i < candidateCount; i++) {
+                candidateMask[i] = 1;
+                candidateActionIds[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.ANNOUNCE_X, game, source, xValues.get(i));
+                candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.ANNOUNCE_X, game, source, xValues.get(i), candFeatDim, baseState);
+            }
+
+            String headId = headForActionType(StateSequenceBuilder.ActionType.ANNOUNCE_X);
+            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+                    baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey, headId, 0, 1, 1);
+
+            float[] actionProbs = prediction.policyScores;
+            float valueScore = prediction.valueScores;
+
+            float[] logits = new float[candidateCount];
+            float maxLogit = -Float.MAX_VALUE;
+            for (int i = 0; i < candidateCount; i++) {
+                float p = actionProbs[i];
+                if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
+                logits[i] = (float) Math.log(p);
+                if (logits[i] > maxLogit) maxLogit = logits[i];
+            }
+            float[] maskedProbs = new float[candidateCount];
+            float sum = 0.0f;
+            for (int i = 0; i < candidateCount; i++) {
+                maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
+                sum += maskedProbs[i];
+            }
+            if (sum > 0.0f && !Float.isNaN(sum)) {
+                for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= sum;
+            } else {
+                for (int i = 0; i < candidateCount; i++) maskedProbs[i] = 1.0f / candidateCount;
+            }
+
+            int chosenIdx;
+            if (greedyMode) {
+                chosenIdx = 0;
+                float best = -1.0f;
+                for (int i = 0; i < candidateCount; i++) {
+                    if (maskedProbs[i] > best) { best = maskedProbs[i]; chosenIdx = i; }
+                }
+            } else {
+                float r = new Random().nextFloat();
+                float c = 0.0f;
+                chosenIdx = 0;
+                for (int i = 0; i < candidateCount; i++) {
+                    c += maskedProbs[i];
+                    if (r <= c) { chosenIdx = i; break; }
+                }
+            }
+
+            int chosenX = xValues.get(chosenIdx);
+
+            if (trainingEnabled && !game.isSimulation()) {
+                int[] chosenIndices = new int[maxCandidates];
+                Arrays.fill(chosenIndices, -1);
+                chosenIndices[0] = chosenIdx;
+                float oldLogp = (float) Math.log(Math.max(1e-8f, maskedProbs[chosenIdx]));
+                StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
+                        baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
+                        1, chosenIndices, oldLogp, valueScore,
+                        StateSequenceBuilder.ActionType.ANNOUNCE_X, 0.0);
+                trainingBuffer.add(td);
+                decisionCountsByHead.put(StateSequenceBuilder.ActionType.ANNOUNCE_X,
+                        decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.ANNOUNCE_X, 0) + 1);
+            }
+
+            try {
+                GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+                if (gameLogger != null && gameLogger.isEnabled()) {
+                    int turn = game.getTurnNum();
+                    String activePlayerName = game.getActivePlayerId() != null
+                            ? game.getPlayer(game.getActivePlayerId()).getName() : "Unknown";
+                    String phase = game.getStep() != null ? game.getStep().getType().toString() : "Unknown";
+                    List<String> xNames = new ArrayList<>();
+                    for (Integer x : xValues) xNames.add("X=" + x);
+                    gameLogger.logDecision(this.getName(), activePlayerName, phase + " (ANNOUNCE_X)", turn,
+                            String.format("ANNOUNCE_X: msg=\"%s\" isManaPay=%s chose X=%d (range [%d..%d])",
+                                    message, isManaPay, chosenX, realMin, realMax),
+                            xNames, Arrays.copyOf(maskedProbs, candidateCount), valueScore, chosenIdx,
+                            "X=" + chosenX);
+                }
+            } catch (Exception ignored) {}
+
+            trace(String.format("announceX EXIT: chose X=%d (prob=%.3f)", chosenX, maskedProbs[chosenIdx]));
+            return chosenX;
+
+        } catch (Exception e) {
+            trace("announceX: model exception, falling back to super: " + e.getMessage());
+            int fallback = super.announceX(min, max, message, game, source, isManaPay);
+            trace("announceX EXIT (fallback): " + fallback);
+            return fallback;
+        }
     }
 
     @Override

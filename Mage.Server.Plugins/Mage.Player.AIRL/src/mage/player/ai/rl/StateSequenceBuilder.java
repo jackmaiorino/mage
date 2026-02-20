@@ -104,7 +104,9 @@ public class StateSequenceBuilder {
         SELECT_TRIGGERED_ABILITY,
         SELECT_CARD,
         CHOOSE_USE,          // Binary yes/no decisions (kicker, optional costs, etc.)
-        DECLARE_ATTACK_TARGET // Phase 2: choosing which defender to attack (player/PW/battle)
+        DECLARE_ATTACK_TARGET, // Phase 2: choosing which defender to attack (player/PW/battle)
+        CHOOSE_MODE,         // Selecting a mode from a modal spell/ability
+        ANNOUNCE_X           // Announcing an X value for spells/abilities with variable X cost
     }
 
     /* === PUBLIC API ===================================================== */
