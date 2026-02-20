@@ -487,6 +487,7 @@ class PythonEntryPoint:
                 nhead=int(os.getenv('MODEL_NHEAD', '4')),
                 num_layers=int(os.getenv('MODEL_NUM_LAYERS', '2')),
                 dim_feedforward=int(os.getenv('MODEL_DIM_FEEDFORWARD', '512')),
+                cand_feat_dim=48,
             ).to(self.device)
 
             # Separate higher LR for actor head to help logits move early

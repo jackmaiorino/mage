@@ -42,23 +42,33 @@ public class GameLogger {
         if (!enableLogging) {
             return createNoOp();
         }
+        return createInDir(resolveLogDir(), isTrainingMode() ? 50 : -1);
+    }
 
+    /**
+     * Create a game logger that always writes to the evaluation log directory.
+     * Used for league/ladder benchmark games; no cleanup cap (eval logs accumulate).
+     */
+    public static GameLogger createForEval(boolean enableLogging) {
+        if (!enableLogging) {
+            return createNoOp();
+        }
+        return createInDir(EVAL_LOG_DIR, -1);
+    }
+
+    private static GameLogger createInDir(String dir, int maxFiles) {
         try {
-            // Create log directory if it doesn't exist
-            Path logDir = Paths.get(resolveLogDir());
+            Path logDir = Paths.get(dir);
             Files.createDirectories(logDir);
 
-            // Clean up old game logs (keep only 50 most recent for training)
-            if (isTrainingMode()) {
-                cleanupOldGameLogs(logDir, 50);
+            if (maxFiles > 0) {
+                cleanupOldGameLogs(logDir, maxFiles);
             }
 
-            // Generate unique game ID
             int gameNum = gameCounter.incrementAndGet();
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
             String gameId = String.format("game_%s_%04d", timestamp, gameNum);
 
-            // Create log file
             Path logFile = logDir.resolve(gameId + ".txt");
             BufferedWriter writer = Files.newBufferedWriter(
                     logFile,

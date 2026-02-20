@@ -962,8 +962,10 @@ public class RLTrainer {
         double baselineWr = runLeagueBenchmarkPolicy(
                 snapKey,
                 LeagueOpponentSpec.bot(Math.max(1, LEAGUE_BASELINE_BOT_SKILL)),
+                null,
                 LEAGUE_BASELINE_DECKLIST_FILE,
-                Math.max(1, LEAGUE_BASELINE_GAMES_PER_MATCHUP)
+                Math.max(1, LEAGUE_BASELINE_GAMES_PER_MATCHUP),
+                "baseline_ep=" + episodeNum
         );
         logger.info(String.format("League tick baseline: ep=%d key=%s vs CP7Skill%d wr=%.3f",
                 episodeNum, snapKey, Math.max(1, LEAGUE_BASELINE_BOT_SKILL), baselineWr));
@@ -1029,8 +1031,10 @@ public class RLTrainer {
             champMatchWr = runLeagueBenchmarkPolicy(
                     snapKey,
                     LeagueOpponentSpec.snapshot(championAfter),
+                    null,
                     LEAGUE_BASELINE_DECKLIST_FILE,
-                    Math.max(1, LEAGUE_BASELINE_GAMES_PER_MATCHUP)
+                    Math.max(1, LEAGUE_BASELINE_GAMES_PER_MATCHUP),
+                    "champion_match_ep=" + episodeNum
             );
             logger.info(String.format("League tick champion match done: ep=%d challenger=%s vs champion=%s wr=%.3f threshold=%.3f",
                     episodeNum, snapKey, championAfter, champMatchWr, LEAGUE_CHAMPION_PROMOTE_WR));
@@ -1116,12 +1120,17 @@ public class RLTrainer {
                 + " tier=" + currentTier + " skill=" + currentSkill
                 + " gpm=" + LADDER_GAMES_PER_MATCHUP);
 
-        // Benchmark current policy vs current tier bot
+        // Benchmark current policy vs current tier bot.
+        // Agent uses its own deck list (RL_AGENT_DECK_LIST if set, else full pool).
+        String ladderAgentDeckList = (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty())
+                ? RL_AGENT_DECK_LIST_FILE : null;
         double benchmarkWr = runLeagueBenchmarkPolicy(
                 "train",
                 LeagueOpponentSpec.bot(currentSkill),
+                ladderAgentDeckList,
                 DECK_LIST_FILE,
-                Math.max(1, LADDER_GAMES_PER_MATCHUP)
+                Math.max(1, LADDER_GAMES_PER_MATCHUP),
+                "ladder_ep=" + episodeNum + "_tier=" + currentTier
         );
         
         logger.info(String.format("Ladder tick benchmark: ep=%d tier=%d skill=%d wr=%.3f",
@@ -2198,17 +2207,40 @@ public class RLTrainer {
         }
     }
 
+    /**
+     * Run a benchmark between the RL policy and an opponent across a deck matrix.
+     *
+     * @param agentDeckListFile deck list the RL agent pilots; null/empty = same pool as oppDeckListFile
+     *                          (old symmetric round-robin, skipping mirror matchups)
+     * @param oppDeckListFile   deck list the opponent uses
+     * @param logContext        short label written to league events for per-matchup rows
+     */
     private double runLeagueBenchmarkPolicy(
             String rlPolicyKey,
             LeagueOpponentSpec opponent,
-            String deckListFileOverride,
-            int gamesPerMatchup
+            String agentDeckListFile,
+            String oppDeckListFile,
+            int gamesPerMatchup,
+            String logContext
     ) {
         try {
             mage.cards.repository.CardScanner.scan();
-            List<Path> decks = loadDeckPoolWithOverride(deckListFileOverride);
-            if (decks.size() < 2) {
-                logger.warn("League benchmark requires at least 2 decks; found " + decks.size());
+
+            // Load deck pools
+            final boolean samePool = (agentDeckListFile == null || agentDeckListFile.trim().isEmpty());
+            List<Path> oppDecks = loadDeckPoolWithOverride(oppDeckListFile);
+            List<Path> agentDecks = samePool ? oppDecks : loadDeckPoolWithOverride(agentDeckListFile);
+
+            if (oppDecks.isEmpty()) {
+                logger.warn("League benchmark: opponent deck pool is empty");
+                return 0.0;
+            }
+            if (agentDecks.isEmpty()) {
+                logger.warn("League benchmark: agent deck pool is empty");
+                return 0.0;
+            }
+            if (samePool && oppDecks.size() < 2) {
+                logger.warn("League benchmark requires at least 2 decks in shared pool; found " + oppDecks.size());
                 return 0.0;
             }
 
@@ -2216,12 +2248,35 @@ public class RLTrainer {
             final int logEvery = Math.max(1, LEAGUE_BENCHMARK_LOG_EVERY);
             final int heartbeatSec = LEAGUE_BENCHMARK_HEARTBEAT_SEC;
             final int gameTimeoutSec = LEAGUE_BENCHMARK_GAME_TIMEOUT_SEC;
-            final int totalPlannedGames = decks.size() * (decks.size() - 1) * Math.max(1, gamesPerMatchup);
 
+            // Build the list of (agentDeck, oppDeck) pairs
+            final List<Path[]> pairs = new ArrayList<>();
+            for (Path a : agentDecks) {
+                for (Path o : oppDecks) {
+                    if (samePool && a.equals(o)) {
+                        continue; // skip mirror matchups when using shared pool
+                    }
+                    pairs.add(new Path[]{a, o});
+                }
+            }
+            if (pairs.isEmpty()) {
+                logger.warn("League benchmark: no valid deck pairs");
+                return 0.0;
+            }
+
+            final int totalPlannedGames = pairs.size() * Math.max(1, gamesPerMatchup);
             final AtomicLong completed = new AtomicLong(0);
             final AtomicLong started = new AtomicLong(0);
             final AtomicLong winsTotal = new AtomicLong(0);
+            final ConcurrentHashMap<String, AtomicLong> matchupWins = new ConcurrentHashMap<>();
+            final ConcurrentHashMap<String, AtomicLong> matchupGames = new ConcurrentHashMap<>();
             final long startMs = System.currentTimeMillis();
+
+            for (Path[] pair : pairs) {
+                String key = pair[0].getFileName() + " vs " + pair[1].getFileName();
+                matchupWins.put(key, new AtomicLong(0));
+                matchupGames.put(key, new AtomicLong(0));
+            }
 
             ExecutorService exec = Executors.newFixedThreadPool(benchThreads, r -> {
                 Thread t = new Thread(r);
@@ -2231,10 +2286,13 @@ public class RLTrainer {
             });
 
             logger.info(String.format(
-                    "League benchmark started: rlPolicy=%s vs %s, decks=%d, gamesPerMatchup=%d, plannedGames=%d, threads=%d",
+                    "League benchmark started: context=%s rlPolicy=%s vs %s, agentDecks=%d oppDecks=%d pairs=%d gpm=%d plannedGames=%d threads=%d",
+                    logContext,
                     rlPolicyKey,
                     opponent.kind == LeagueOpponentKind.BOT ? ("CP7Skill" + opponent.botSkill) : opponent.policyKey,
-                    decks.size(),
+                    agentDecks.size(),
+                    oppDecks.size(),
+                    pairs.size(),
                     gamesPerMatchup,
                     totalPlannedGames,
                     benchThreads
@@ -2264,41 +2322,40 @@ public class RLTrainer {
             }
 
             List<Future<Void>> futures = new ArrayList<>();
-            for (int i = 0; i < decks.size(); i++) {
-                for (int j = 0; j < decks.size(); j++) {
-                    if (i == j) {
-                        continue;
-                    }
-                    final Path p1 = decks.get(i);
-                    final Path p2 = decks.get(j);
-                    for (int g = 0; g < gamesPerMatchup; g++) {
-                        futures.add(exec.submit(() -> {
-                            Thread.currentThread().setName("GAME-BENCH");
-                            long s = started.incrementAndGet();
-                            if (s % logEvery == 0 || s == totalPlannedGames) {
-                                logger.info(String.format("League benchmark started games: %d/%d", s, totalPlannedGames));
-                            }
+            for (Path[] pair : pairs) {
+                final Path p1 = pair[0];
+                final Path p2 = pair[1];
+                final String matchupKey = p1.getFileName() + " vs " + p2.getFileName();
+                for (int g = 0; g < gamesPerMatchup; g++) {
+                    final boolean logThisGame = (g == 0);
+                    futures.add(exec.submit(() -> {
+                        Thread.currentThread().setName("GAME-BENCH");
+                        long s = started.incrementAndGet();
+                        if (s % logEvery == 0 || s == totalPlannedGames) {
+                            logger.info(String.format("League benchmark started games: %d/%d", s, totalPlannedGames));
+                        }
 
-                            boolean win = runSingleLeagueBenchmarkGame(
-                                    p1, p2, gameTimeoutSec,
-                                    rlPolicyKey, opponent
-                            );
-                            if (win) {
-                                winsTotal.incrementAndGet();
-                            }
+                        boolean win = runSingleLeagueBenchmarkGame(
+                                p1, p2, gameTimeoutSec,
+                                rlPolicyKey, opponent, logThisGame
+                        );
+                        matchupGames.get(matchupKey).incrementAndGet();
+                        if (win) {
+                            winsTotal.incrementAndGet();
+                            matchupWins.get(matchupKey).incrementAndGet();
+                        }
 
-                            long done = completed.incrementAndGet();
-                            if (done % logEvery == 0 || done == totalPlannedGames) {
-                                long elapsedMs = Math.max(1, System.currentTimeMillis() - startMs);
-                                double gamesPerSec = done / (elapsedMs / 1000.0);
-                                logger.info(String.format(
-                                        "League benchmark progress: %d/%d games done (%.2f games/s)",
-                                        done, totalPlannedGames, gamesPerSec
-                                ));
-                            }
-                            return null;
-                        }));
-                    }
+                        long done = completed.incrementAndGet();
+                        if (done % logEvery == 0 || done == totalPlannedGames) {
+                            long elapsedMs = Math.max(1, System.currentTimeMillis() - startMs);
+                            double gamesPerSec = done / (elapsedMs / 1000.0);
+                            logger.info(String.format(
+                                    "League benchmark progress: %d/%d games done (%.2f games/s)",
+                                    done, totalPlannedGames, gamesPerSec
+                            ));
+                        }
+                        return null;
+                    }));
                 }
             }
 
@@ -2319,9 +2376,21 @@ public class RLTrainer {
             long totalWins = winsTotal.get();
             double overall = totalGames > 0 ? (double) totalWins / totalGames : 0.0;
             logger.info(String.format(
-                    "League benchmark done: winrate=%.3f (%d/%d)",
-                    overall, totalWins, totalGames
+                    "League benchmark done: context=%s winrate=%.3f (%d/%d)",
+                    logContext, overall, totalWins, totalGames
             ));
+
+            // Log per-matchup winrates to league events
+            java.util.List<String> sortedMatchups = new java.util.ArrayList<>(matchupGames.keySet());
+            java.util.Collections.sort(sortedMatchups);
+            for (String mk : sortedMatchups) {
+                long mg = matchupGames.get(mk).get();
+                long mw = matchupWins.get(mk).get();
+                double mwr = mg > 0 ? (double) mw / mg : 0.0;
+                appendLeagueEvent(String.format("matchup_result context=%s matchup=[%s] wr=%.4f wins=%d games=%d",
+                        logContext, mk, mwr, mw, mg));
+            }
+
             return overall;
         } catch (Exception e) {
             logger.error("League benchmark failed", e);
@@ -2334,7 +2403,8 @@ public class RLTrainer {
             Path oppDeckPath,
             int gameTimeoutSec,
             String rlPolicyKey,
-            LeagueOpponentSpec opponent
+            LeagueOpponentSpec opponent,
+            boolean logThisGame
     ) {
         Deck d1 = loadDeck(rlDeckPath.toString());
         Deck d2 = loadDeck(oppDeckPath.toString());
@@ -2351,7 +2421,7 @@ public class RLTrainer {
         }
         Game game = match.getGames().get(0);
 
-        GameLogger gameLogger = GameLogger.create(LEAGUE_EVAL_GAME_LOGGING);
+        GameLogger gameLogger = GameLogger.createForEval(logThisGame);
         threadLocalGameLogger.set(gameLogger);
         if (gameLogger.isEnabled()) {
             gameLogger.log("MODE=league_benchmark");

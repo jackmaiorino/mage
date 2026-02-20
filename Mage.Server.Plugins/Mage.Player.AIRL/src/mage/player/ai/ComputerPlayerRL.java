@@ -30,6 +30,17 @@ import mage.abilities.mana.ManaAbility;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.counters.CounterType;
+import mage.game.permanent.PermanentToken;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
@@ -384,7 +395,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             candidateMask[i] = 1;
             T cand = candidates.get(i);
             candidateActionIds[i] = computeCandidateActionId(actionType, game, source, cand);
-            candidateFeatures[i] = computeCandidateFeatures(actionType, game, source, cand, candFeatDim);
+            candidateFeatures[i] = computeCandidateFeatures(actionType, game, source, cand, candFeatDim, baseState);
         }
 
         // Get model predictions - single call for both policy and value
@@ -629,7 +640,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
     }
 
-    private float[] computeCandidateFeatures(StateSequenceBuilder.ActionType actionType, Game game, Ability source, Object candidate, int dim) {
+    private float[] computeCandidateFeatures(StateSequenceBuilder.ActionType actionType, Game game, Ability source, Object candidate, int dim, StateSequenceBuilder.SequenceOutput baseState) {
         float[] f = new float[dim];
         try {
             // Generic context
@@ -665,6 +676,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         f[4] = p.isTapped() ? 1.0f : 0.0f;
                         f[5] = p.getPower().getValue() / 10.0f;
                         f[6] = p.getToughness().getValue() / 10.0f;
+                        f[32] = p.isArtifact() ? 1.0f : 0.0f;
                     }
                     f[9] = source.getManaCostsToPay().manaValue() / 10.0f;
                 }
@@ -682,6 +694,20 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     f[4] = p.isTapped() ? 1.0f : 0.0f;
                     f[5] = p.getPower().getValue() / 10.0f;
                     f[6] = p.getToughness().getValue() / 10.0f;
+                    // Token index linkage: link this ability to its source permanent's state token
+                    if (baseState != null) {
+                        Integer tokenIdx = baseState.uuidToTokenIndex.get(p.getId());
+                        f[27] = (tokenIdx != null) ? 1.0f : 0.0f;
+                        f[28] = (tokenIdx != null) ? tokenIdx / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
+                    }
+                    // Source keyword flags [32-38]
+                    f[32] = p.isArtifact() ? 1.0f : 0.0f;
+                    f[33] = p.getAbilities(game).containsKey(FlyingAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                    f[34] = p.getAbilities(game).containsKey(HasteAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                    f[35] = p.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                    f[36] = p.getAbilities(game).containsKey(LifelinkAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                    f[37] = p.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                    f[38] = p.getAbilities(game).containsKey(TrampleAbility.getInstance().getId()) ? 1.0f : 0.0f;
                 }
                 // rough target count
                 f[7] = ab.getTargets() != null ? ab.getTargets().size() / 5.0f : 0.0f;
@@ -710,6 +736,30 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         f[17] = perm.getToughness().getValue() / 10.0f;
                         // Is opponent controlled (for targeting decisions)
                         f[25] = perm.isControlledBy(this.getId()) ? 0.0f : 1.0f;
+                        // Token index linkage: link this target to its state sequence position.
+                        // The cross-attention can then read the full state token (damage, sickness, etc.)
+                        // and discover relationships (e.g., a buff spell on the stack targeting it).
+                        if (baseState != null) {
+                            Integer tokenIdx = baseState.uuidToTokenIndex.get(tid);
+                            f[27] = (tokenIdx != null) ? 1.0f : 0.0f;
+                            f[28] = (tokenIdx != null) ? tokenIdx / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
+                        }
+                        // Battlefield state features for this specific permanent instance
+                        f[29] = Math.min(perm.getDamage(), 10) / 10.0f;
+                        f[30] = perm.hasSummoningSickness() ? 1.0f : 0.0f;
+                        f[31] = perm.isAttacking() ? 1.0f : 0.0f;
+                        // Target keyword/extra flags [32-42]
+                        f[32] = perm.isArtifact() ? 1.0f : 0.0f;
+                        f[33] = perm.getAbilities(game).containsKey(FlyingAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                        f[34] = perm.getAbilities(game).containsKey(HasteAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                        f[35] = perm.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                        f[36] = perm.getAbilities(game).containsKey(LifelinkAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                        f[37] = perm.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                        f[38] = perm.getAbilities(game).containsKey(TrampleAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                        f[39] = perm.getAbilities(game).containsKey(HexproofAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                        f[40] = perm.getAbilities(game).containsKey(IndestructibleAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                        f[41] = (perm instanceof PermanentToken) ? 1.0f : 0.0f;
+                        f[42] = Math.min(perm.getCounters(game).getCount(CounterType.P1P1), 10) / 10.0f;
                     }
                 }
             }
@@ -1102,7 +1152,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         candidateMask[i] = 1;
                         UUID cand = possible.get(i);
                         candidateActionIds[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source, cand);
-                        candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source, cand, candFeatDim);
+                        candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source, cand, candFeatDim, baseState);
                     }
 
                     mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
@@ -1415,7 +1465,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         }
                         UUID cid = representative == null ? null : representative.getId();
                         candidateActionIds[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.SELECT_CARD, game, source, cid);
-                        candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_CARD, game, source, cid, candFeatDim);
+                        candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_CARD, game, source, cid, candFeatDim, baseState);
                     }
 
                     mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
@@ -1953,7 +2003,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             for (int i = 0; i < candidateCount; i++) {
                 candidateMask[i] = 1;
                 candidateActionIds[i] = toVocabId(StateSequenceBuilder.ActionType.CHOOSE_USE.name() + "_" + (i == 0 ? "YES" : "NO"));
-                candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.CHOOSE_USE, game, source, candidates.get(i), candFeatDim);
+                candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.CHOOSE_USE, game, source, candidates.get(i), candFeatDim, baseState);
             }
 
             String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_USE);
