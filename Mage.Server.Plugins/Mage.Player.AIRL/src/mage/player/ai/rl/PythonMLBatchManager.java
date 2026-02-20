@@ -611,6 +611,11 @@ public class PythonMLBatchManager {
             case LONDON_MULLIGAN:
             case SELECT_CARD:
                 return 2;
+            case DECLARE_ATTACKS:
+            case DECLARE_ATTACK_TARGET:
+                return 3;
+            case DECLARE_BLOCKS:
+                return 4;
             default:
                 return 0;
         }

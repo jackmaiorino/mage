@@ -1775,7 +1775,7 @@ class PythonEntryPoint:
                 with autocast_ctx:
                     # Route each step to its correct policy head (action/target/card_select).
                     # 0=action, 1=target, 2=card_select -- must match actionTypeToHeadIdx() in Java.
-                    _HEAD_NAMES = ["action", "target", "card_select"]
+                    _HEAD_NAMES = ["action", "target", "card_select", "attack", "block"]
                     probs = torch.zeros(local_batch_size, max_candidates, device=device)
                     value = torch.zeros(local_batch_size, 1, device=device)
                     for _hid_val, _hid_name in enumerate(_HEAD_NAMES):

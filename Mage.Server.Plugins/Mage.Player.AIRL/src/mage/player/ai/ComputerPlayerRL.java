@@ -38,7 +38,9 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.counters.CounterType;
 import mage.game.permanent.PermanentToken;
 import mage.cards.Card;
@@ -596,6 +598,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             case LONDON_MULLIGAN:
             case SELECT_CARD:
                 return "card_select";
+            case DECLARE_ATTACKS:
+            case DECLARE_ATTACK_TARGET:
+                return "attack";
+            case DECLARE_BLOCKS:
+                return "block";
             default:
                 return "action";
         }
@@ -615,6 +622,27 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             String base = actionType.name();
             if (candidate instanceof PassAbility) {
                 return toVocabId("PASS");
+            }
+            if (candidate instanceof CombatCandidate) {
+                CombatCandidate cc = (CombatCandidate) candidate;
+                if (cc.isDone()) {
+                    return toVocabId(base + ":DONE");
+                }
+                String creatureName = cc.creature.getName().replace(' ', '_');
+                if (cc.context instanceof UUID) {
+                    // Phase 2: attack target
+                    MageObject target = game.getObject((UUID) cc.context);
+                    String targetName = target != null ? target.getName().replace(' ', '_') : "PLAYER";
+                    base += ":" + creatureName + ":ATTACKS:" + targetName;
+                } else if (cc.context instanceof Permanent) {
+                    // Block candidate: blocker vs attacker
+                    String attackerName = ((Permanent) cc.context).getName().replace(' ', '_');
+                    base += ":" + creatureName + ":BLOCKS:" + attackerName;
+                } else {
+                    // Phase 1: attacker candidate
+                    base += ":" + creatureName;
+                }
+                return toVocabId(base);
             }
             if (candidate instanceof mage.abilities.Ability) {
                 mage.abilities.Ability ab = (mage.abilities.Ability) candidate;
@@ -679,6 +707,97 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         f[32] = p.isArtifact() ? 1.0f : 0.0f;
                     }
                     f[9] = source.getManaCostsToPay().manaValue() / 10.0f;
+                }
+                return f;
+            }
+
+            // Combat candidates (attack/block decisions)
+            if (candidate instanceof CombatCandidate) {
+                CombatCandidate cc = (CombatCandidate) candidate;
+                if (cc.isDone()) {
+                    f[1] = 1.0f; // DONE sentinel = is_pass
+                    return f;
+                }
+                Permanent creature = cc.creature;
+                // Creature making the decision
+                f[2] = creature.isCreature() ? 1.0f : 0.0f;
+                f[3] = creature.isLand() ? 1.0f : 0.0f;
+                f[4] = creature.isTapped() ? 1.0f : 0.0f;
+                f[5] = creature.getPower().getValue() / 10.0f;
+                f[6] = creature.getToughness().getValue() / 10.0f;
+                if (baseState != null) {
+                    Integer tokenIdx = baseState.uuidToTokenIndex.get(creature.getId());
+                    f[27] = (tokenIdx != null) ? 1.0f : 0.0f;
+                    f[28] = (tokenIdx != null) ? tokenIdx / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
+                }
+                f[29] = Math.min(creature.getDamage(), 10) / 10.0f;
+                f[30] = creature.hasSummoningSickness() ? 1.0f : 0.0f;
+                f[31] = creature.isAttacking() ? 1.0f : 0.0f;
+                f[32] = creature.isArtifact() ? 1.0f : 0.0f;
+                f[33] = creature.getAbilities(game).containsKey(FlyingAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                f[34] = creature.getAbilities(game).containsKey(HasteAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                f[35] = creature.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                f[36] = creature.getAbilities(game).containsKey(LifelinkAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                f[37] = creature.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                f[38] = creature.getAbilities(game).containsKey(TrampleAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                f[39] = creature.getAbilities(game).containsKey(HexproofAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                f[42] = Math.min(creature.getCounters(game).getCount(CounterType.P1P1), 10) / 10.0f;
+
+                if (actionType == StateSequenceBuilder.ActionType.DECLARE_ATTACKS) {
+                    // Phase 1: deciding whether this creature attacks; no target context yet
+                    f[43] = countOpponentCreatures(game) / 10.0f; // blocking risk
+                    f[44] = creature.getAbilities(game).containsKey(VigilanceAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                } else if (actionType == StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET) {
+                    // Phase 2: choosing which defender this attacker attacks
+                    Object ctx = cc.context;
+                    if (ctx instanceof UUID) {
+                        UUID defId = (UUID) ctx;
+                        Player defPlayer = game.getPlayer(defId);
+                        if (defPlayer != null) {
+                            f[10] = 1.0f; // is_player
+                            f[12] = defPlayer.getLife() / 20.0f;
+                        } else {
+                            Permanent defPerm = game.getPermanent(defId);
+                            if (defPerm != null) {
+                                f[13] = 1.0f; // is_permanent
+                                f[14] = defPerm.isCreature() ? 1.0f : 0.0f;
+                                f[16] = defPerm.getPower().getValue() / 10.0f;
+                                f[17] = defPerm.getToughness().getValue() / 10.0f;
+                                f[46] = defPerm.isPlaneswalker() ? 1.0f : 0.0f;
+                                if (baseState != null) {
+                                    Integer tIdx = baseState.uuidToTokenIndex.get(defId);
+                                    // store target token index in separate slots to not clobber creature's
+                                    f[47] = (tIdx != null) ? tIdx / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
+                                }
+                            }
+                        }
+                    }
+                } else if (actionType == StateSequenceBuilder.ActionType.DECLARE_BLOCKS) {
+                    // Block candidate: this creature is a potential blocker; context is the attacker
+                    if (cc.context instanceof Permanent) {
+                        Permanent attacker = (Permanent) cc.context;
+                        int attackerPow = attacker.getPower().getValue();
+                        int attackerTou = attacker.getToughness().getValue();
+                        int blockerPow = creature.getPower().getValue();
+                        int blockerTou = creature.getToughness().getValue();
+                        // Attacker stats in target slots
+                        f[13] = 1.0f; // is_permanent (attacker)
+                        f[14] = 1.0f; // attacker is always a creature
+                        f[16] = attackerPow / 10.0f;
+                        f[17] = attackerTou / 10.0f;
+                        f[25] = 1.0f; // attacker is opponent-controlled
+                        if (baseState != null) {
+                            Integer tIdx = baseState.uuidToTokenIndex.get(attacker.getId());
+                            f[47] = (tIdx != null) ? tIdx / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
+                        }
+                        // Combat outcome signals
+                        f[44] = (attackerPow >= blockerTou) ? 1.0f : 0.0f; // will blocker die
+                        f[45] = (blockerPow >= attackerTou) ? 1.0f : 0.0f; // will attacker die
+                        // Attacker keywords (affects blocking value)
+                        f[43] = attacker.getAbilities(game).containsKey(TrampleAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                        // Blocker has reach (can block flyers)
+                        f[46] = creature.getAbilities(game).containsKey(ReachAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                    }
                 }
                 return f;
             }
@@ -2140,168 +2259,474 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     //     }
     //     return true;
     // }
-//    @Override
-//    public void selectAttackers(Game game, UUID attackingPlayerId) {
-//        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, attackingPlayerId));
-//        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))) {
-//            // Generate list of possible attackers
-//            List<Permanent> allAttackers = game.getBattlefield().getAllActivePermanents(
-//                StaticFilters.FILTER_PERMANENT_CREATURE,
-//                attackingPlayerId,
-//                game
-//            );
-//            List<Permanent> possibleAttackers = new ArrayList<>();
-//
-//            for (Permanent creature : allAttackers) {
-//                if (creature.canAttack(null, game)) {
-//                    possibleAttackers.add(creature);
-//                }
-//            }
-//
-//            if (possibleAttackers.isEmpty()) {
-//                return;
-//            }
-//
-//            currentState = StateSequenceBuilder.build(game,
-//                                                      StateSequenceBuilder.ActionType.DECLARE_ATTACKS,
-//                                                      game.getPhase().getType(),
-//                                                      StateSequenceBuilder.MAX_LEN);
-//            stateBuffer.add(currentState);
-//            // Generate list of attack targets (Player, planeswalkers, battles)
-//            List<UUID> possibleAttackTargets = new ArrayList<>(game.getCombat().getDefenders());
-//            if (possibleAttackers.size() > RLModel.MAX_ACTIONS) {
-//                RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
-//            }
-//            if (possibleAttackTargets.size() > RLModel.MAX_OPTIONS - 1) {
-//                RLTrainer.threadLocalLogger.get().error("ERROR: More attack targets than max options, Model truncating");
-//            }
-//            int numAttackers = Math.min(RLModel.MAX_ACTIONS, possibleAttackers.size());
-//            // -1 to reserve the option to not attack
-//            int numAttackTargets = Math.min(RLModel.MAX_OPTIONS-1, possibleAttackTargets.size());
-//
-//            // predict logits once for the whole batch
-//            INDArray qValues = model.predictDistribution(currentState, true)
-//                                    .reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
-//
-//            // for each attacker we'll record its chosen index separately
-//            for (int attackerIndex = 0; attackerIndex < numAttackers; attackerIndex++) {
-//                Permanent attacker = possibleAttackers.get(attackerIndex);
-//
-//                // Create a list of defender indices with their Q-values for this attacker
-//                List<AttackOption> attackOptions = new ArrayList<>();
-//                for (int attackTargetIndex = 0; attackTargetIndex < RLModel.MAX_OPTIONS; attackTargetIndex++) {
-//                    float qValue = qValues.getFloat(attackerIndex, attackTargetIndex);
-//                    attackOptions.add(new AttackOption(attackTargetIndex, attackerIndex, qValue));
-//                }
-//
-//                // Sort attack options by Q-value in descending order
-//                attackOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
-//
-//                // Declare attacks based on sorted Q-values
-//                for (AttackOption option : attackOptions) {
-//                    if (option.attackTargetIndex >= numAttackTargets) {
-//                        int index = attackerIndex * (numAttackTargets + 1) + option.attackTargetIndex;
-//                        stateBuffer.add(new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, index));
-//                        break; // Skip this attacker if the first choice is to not attack
-//                    }
-//                    UUID attackTargetId = possibleAttackTargets.get(option.attackTargetIndex);
-//                    if (attacker.canAttack(attackTargetId, game)) {
-//                        RLTrainer.threadLocalLogger.get().info("Declaring attacker: " + attacker.getName() + " for attack target: " + attackTargetId.toString());
-//                        this.declareAttacker(attacker.getId(), attackTargetId, game, false);
-//                        int index = attackerIndex * (numAttackTargets + 1) + option.attackTargetIndex;
-//                        stateBuffer.add(new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, index));
-//                        break; // Once an attack is declared, move to the next attacker
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    @Override
-//    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
-//        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, defendingPlayerId));
-//        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, defendingPlayerId, defendingPlayerId))) {
-//            List<Permanent> attackers = getAttackers(game);
-//            if (attackers == null) {
-//                return;
-//            }
-//
-//            List<Permanent> possibleBlockers = super.getAvailableBlockers(game);
-//            possibleBlockers = filterOutNonblocking(game, attackers, possibleBlockers);
-//            if (possibleBlockers.isEmpty()) {
-//                return;
-//            }
-//
-//            RLTrainer.threadLocalLogger.get().info("possibleBlockers: " + possibleBlockers);
-//
-//            attackers = filterOutUnblockable(game, attackers, possibleBlockers);
-//            if (attackers.isEmpty()) {
-//                return;
-//            }
-//
-//            currentState = StateSequenceBuilder.build(game,
-//                                                      StateSequenceBuilder.ActionType.DECLARE_BLOCKS,
-//                                                      game.getPhase().getType(),
-//                                                      StateSequenceBuilder.MAX_LEN);
-//            stateBuffer.add(currentState);
-//            // -1 to reserve the option to not block nothing no a creature. Essentially an attacker that is "nothing"
-//            int numAttackers = Math.min(RLModel.MAX_ACTIONS - 1, attackers.size());
-//            int numBlockers = Math.min(RLModel.MAX_OPTIONS, possibleBlockers.size());
-//            if (attackers.size() > RLModel.MAX_ACTIONS - 1) {
-//                RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
-//            }
-//            if (possibleBlockers.size() > RLModel.MAX_OPTIONS) {
-//                RLTrainer.threadLocalLogger.get().error("ERROR: More blockers than max actions, Model truncating");
-//            }
-//
-//            // Build exploration dimensions
-//            // +1 to explore the option to not block
-//            for(int i = 0; i < numAttackers + 1; i++){
-//                // exploration metadata skipped
-//            }
-//            INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
-//
-//            boolean blockerDeclared = false;
-//
-//            // Iterate over blockers first
-//            // Attacker = X, Blockers = Y
-//            for (int blockerIndex = 0; blockerIndex < numBlockers; blockerIndex++) {
-//                Permanent blocker = possibleBlockers.get(blockerIndex);
-//
-//                // Create a list of blocker indices with their Q-values for this attacker
-//                List<BlockOption> blockOptions = new ArrayList<>();
-//                // We use the full MAX_OPTIONS because we need to reserve the option to not block
-//                for (int attackerIndex = 0; attackerIndex < RLModel.MAX_ACTIONS; attackerIndex++) {
-//                    float qValue = qValues.getFloat(attackerIndex, blockerIndex);
-//                    blockOptions.add(new BlockOption(attackerIndex, blockerIndex, qValue));
-//                }
-//
-//                // Sort block options by Q-value in descending order
-//                blockOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
-//
-//                // Declare blocks based on sorted Q-values
-//                for (BlockOption option : blockOptions) {
-//                    if (option.attackerIndex >= numAttackers) {
-//                        int index = option.attackerIndex * numBlockers + option.blockerIndex;
-//                        stateBuffer.add(new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, index));
-//                        break; // Skip this blocker if the first choice is to not block
-//                    }
-//
-//                    Permanent attacker = attackers.get(option.attackerIndex);
-//                    if (blocker.canBlock(attacker.getId(), game)) {
-//                        RLTrainer.threadLocalLogger.get().info("Declaring blocker: " + blocker.getName() + " for attacker: " + attacker.getName());
-//                        this.declareBlocker(playerId, blocker.getId(), attacker.getId(), game);
-//                        int index = option.attackerIndex * numBlockers + option.blockerIndex;
-//                        stateBuffer.add(new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, index));
-//                        break; // Skip this blocker if the first choice is to not block
-//                    }
-//                }
-//            }
-//            if (blockerDeclared) {
-//                game.getPlayers().resetPassed();
-//            }
-//            // skip training metadata cleanup
-//        }
-//    }
+    @Override
+    public void selectAttackers(Game game, UUID attackingPlayerId) {
+        if (game.isSimulation()) {
+            return;
+        }
+        try {
+            // Build possible attackers
+            List<Permanent> possibleAttackers = new ArrayList<>();
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(attackingPlayerId)) {
+                if (perm.isCreature() && perm.canAttack(null, game)) {
+                    possibleAttackers.add(perm);
+                }
+            }
+            if (possibleAttackers.isEmpty()) {
+                return;
+            }
+
+            final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+            final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
+            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
+            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+            this.currentState = baseState;
+
+            // Phase 1: Multi-select which creatures attack.
+            // Candidates = [attacker0, attacker1, ..., DONE]
+            int numAttackers = Math.min(possibleAttackers.size(), maxCandidates - 1);
+            List<CombatCandidate> phase1Candidates = new ArrayList<>();
+            for (int i = 0; i < numAttackers; i++) {
+                phase1Candidates.add(new CombatCandidate(possibleAttackers.get(i), null));
+            }
+            phase1Candidates.add(new CombatCandidate(null, null)); // DONE sentinel
+            int doneIdx = phase1Candidates.size() - 1;
+
+            int candidateCount = phase1Candidates.size();
+            int[] candidateActionIds = new int[maxCandidates];
+            float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
+            int[] candidateMask = new int[maxCandidates];
+            for (int i = 0; i < candidateCount; i++) {
+                candidateMask[i] = 1;
+                candidateActionIds[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.DECLARE_ATTACKS, game, null, phase1Candidates.get(i));
+                candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.DECLARE_ATTACKS, game, null, phase1Candidates.get(i), candFeatDim, baseState);
+            }
+
+            String headId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_ATTACKS);
+            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+                    baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey, headId, 0, 1, candidateCount);
+
+            float[] actionProbs = prediction.policyScores;
+            float valueScore = prediction.valueScores;
+
+            // Softmax over valid candidates
+            float[] logits = new float[candidateCount];
+            float maxLogit = -Float.MAX_VALUE;
+            for (int i = 0; i < candidateCount; i++) {
+                float p = actionProbs[i];
+                if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
+                logits[i] = (float) Math.log(p);
+                if (logits[i] > maxLogit) maxLogit = logits[i];
+            }
+            float[] maskedProbs = new float[candidateCount];
+            float probSum = 0.0f;
+            for (int i = 0; i < candidateCount; i++) {
+                maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
+                probSum += maskedProbs[i];
+            }
+            if (probSum > 0.0f && !Float.isNaN(probSum)) {
+                for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= probSum;
+            } else {
+                for (int i = 0; i < candidateCount; i++) maskedProbs[i] = 1.0f / candidateCount;
+            }
+
+            // Sequential without-replacement sampling until DONE
+            List<Integer> selectedIndices = new ArrayList<>();
+            boolean[] selected = new boolean[candidateCount];
+            float oldLogpTotal = 0.0f;
+            Random rng = new Random();
+            List<Permanent> selectedAttackers = new ArrayList<>();
+
+            for (int t = 0; t < candidateCount; t++) {
+                float denom = 0.0f;
+                for (int i = 0; i < candidateCount; i++) {
+                    if (!selected[i]) denom += maskedProbs[i];
+                }
+                if (!(denom > 0.0f)) break;
+
+                int pickIdx;
+                if (greedyMode) {
+                    pickIdx = -1;
+                    float best = -1.0f;
+                    for (int i = 0; i < candidateCount; i++) {
+                        if (!selected[i] && maskedProbs[i] > best) { best = maskedProbs[i]; pickIdx = i; }
+                    }
+                } else {
+                    float r = rng.nextFloat() * denom;
+                    float c = 0.0f;
+                    pickIdx = -1;
+                    for (int i = 0; i < candidateCount; i++) {
+                        if (selected[i]) continue;
+                        c += maskedProbs[i];
+                        if (r <= c) { pickIdx = i; break; }
+                    }
+                    if (pickIdx < 0) {
+                        for (int i = candidateCount - 1; i >= 0; i--) {
+                            if (!selected[i]) { pickIdx = i; break; }
+                        }
+                    }
+                }
+                if (pickIdx < 0) break;
+
+                float pCond = maskedProbs[pickIdx] / denom;
+                oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
+                selected[pickIdx] = true;
+                selectedIndices.add(pickIdx);
+
+                if (pickIdx == doneIdx) {
+                    break; // DONE picked, stop
+                }
+                selectedAttackers.add(phase1Candidates.get(pickIdx).creature);
+            }
+
+            // Record Phase 1 TrainingData
+            if (trainingEnabled && !game.isSimulation()) {
+                int[] chosenIndices = new int[maxCandidates];
+                Arrays.fill(chosenIndices, -1);
+                int chosenCount = Math.min(selectedIndices.size(), maxCandidates);
+                for (int i = 0; i < chosenCount; i++) chosenIndices[i] = selectedIndices.get(i);
+                StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
+                        baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
+                        chosenCount, chosenIndices, oldLogpTotal, valueScore,
+                        StateSequenceBuilder.ActionType.DECLARE_ATTACKS, 0.0);
+                trainingBuffer.add(td);
+                decisionCountsByHead.put(StateSequenceBuilder.ActionType.DECLARE_ATTACKS,
+                        decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.DECLARE_ATTACKS, 0) + 1);
+            }
+
+            if (selectedAttackers.isEmpty()) {
+                return;
+            }
+
+            // Determine attack targets
+            List<UUID> defenders = new ArrayList<>(game.getCombat().getDefenders());
+            Map<UUID, UUID> attackerToDefender = new HashMap<>();
+
+            if (defenders.size() == 1) {
+                // Only one defender: auto-assign all
+                UUID singleDefender = defenders.get(0);
+                for (Permanent attacker : selectedAttackers) {
+                    attackerToDefender.put(attacker.getId(), singleDefender);
+                }
+            } else if (defenders.size() > 1) {
+                // Phase 2: for each selected attacker, choose which defender to attack
+                for (Permanent attacker : selectedAttackers) {
+                    // Build Phase 2 candidates: one CombatCandidate per defender
+                    List<CombatCandidate> phase2Candidates = new ArrayList<>();
+                    for (UUID defId : defenders) {
+                        if (attacker.canAttack(defId, game)) {
+                            phase2Candidates.add(new CombatCandidate(attacker, defId));
+                        }
+                    }
+                    if (phase2Candidates.isEmpty()) continue;
+                    if (phase2Candidates.size() == 1) {
+                        CombatCandidate cc = phase2Candidates.get(0);
+                        attackerToDefender.put(attacker.getId(), (UUID) cc.context);
+                        continue;
+                    }
+
+                    int p2Count = Math.min(phase2Candidates.size(), maxCandidates);
+                    int[] p2Ids = new int[maxCandidates];
+                    float[][] p2Feats = new float[maxCandidates][candFeatDim];
+                    int[] p2Mask = new int[maxCandidates];
+                    for (int i = 0; i < p2Count; i++) {
+                        p2Mask[i] = 1;
+                        p2Ids[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET, game, null, phase2Candidates.get(i));
+                        p2Feats[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET, game, null, phase2Candidates.get(i), candFeatDim, baseState);
+                    }
+
+                    String p2HeadId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET);
+                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult p2Pred = model.scoreCandidates(
+                            baseState, p2Ids, p2Feats, p2Mask, policyKey, p2HeadId, 0, 1, 1);
+
+                    float[] p2Probs = p2Pred.policyScores;
+                    float p2Value = p2Pred.valueScores;
+
+                    // Softmax
+                    float[] p2Logits = new float[p2Count];
+                    float p2MaxLogit = -Float.MAX_VALUE;
+                    for (int i = 0; i < p2Count; i++) {
+                        float p = p2Probs[i];
+                        if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
+                        p2Logits[i] = (float) Math.log(p);
+                        if (p2Logits[i] > p2MaxLogit) p2MaxLogit = p2Logits[i];
+                    }
+                    float[] p2MaskedProbs = new float[p2Count];
+                    float p2Sum = 0.0f;
+                    for (int i = 0; i < p2Count; i++) {
+                        p2MaskedProbs[i] = (float) Math.exp(p2Logits[i] - p2MaxLogit);
+                        p2Sum += p2MaskedProbs[i];
+                    }
+                    if (p2Sum > 0.0f && !Float.isNaN(p2Sum)) {
+                        for (int i = 0; i < p2Count; i++) p2MaskedProbs[i] /= p2Sum;
+                    } else {
+                        for (int i = 0; i < p2Count; i++) p2MaskedProbs[i] = 1.0f / p2Count;
+                    }
+
+                    int p2PickIdx = 0;
+                    if (greedyMode) {
+                        float best = -1.0f;
+                        for (int i = 0; i < p2Count; i++) {
+                            if (p2MaskedProbs[i] > best) { best = p2MaskedProbs[i]; p2PickIdx = i; }
+                        }
+                    } else {
+                        float r = rng.nextFloat();
+                        float c = 0.0f;
+                        for (int i = 0; i < p2Count; i++) {
+                            c += p2MaskedProbs[i];
+                            if (r <= c) { p2PickIdx = i; break; }
+                        }
+                    }
+
+                    float p2LogP = (float) Math.log(Math.max(1e-8f, p2MaskedProbs[p2PickIdx]));
+                    UUID chosenDefId = (UUID) phase2Candidates.get(p2PickIdx).context;
+                    attackerToDefender.put(attacker.getId(), chosenDefId);
+
+                    // Record Phase 2 TrainingData
+                    if (trainingEnabled && !game.isSimulation()) {
+                        int[] p2Chosen = new int[maxCandidates];
+                        Arrays.fill(p2Chosen, -1);
+                        p2Chosen[0] = p2PickIdx;
+                        StateSequenceBuilder.TrainingData td2 = new StateSequenceBuilder.TrainingData(
+                                baseState, p2Count, p2Ids, p2Feats, p2Mask,
+                                1, p2Chosen, p2LogP, p2Value,
+                                StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET, 0.0);
+                        trainingBuffer.add(td2);
+                        decisionCountsByHead.put(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET,
+                                decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET, 0) + 1);
+                    }
+                }
+            }
+
+            // Declare attackers
+            for (Permanent attacker : selectedAttackers) {
+                UUID defenderId = attackerToDefender.get(attacker.getId());
+                if (defenderId != null && attacker.canAttack(defenderId, game)) {
+                    this.declareAttacker(attacker.getId(), defenderId, game, false);
+                }
+            }
+
+            // Game log
+            try {
+                GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+                if (gameLogger != null && gameLogger.isEnabled()) {
+                    int turn = game.getTurnNum();
+                    if (turn != lastLoggedTurn) {
+                        String activeName = game.getActivePlayerId() != null
+                                ? game.getPlayer(game.getActivePlayerId()).getName() : "Unknown";
+                        gameLogger.logTurnStart(turn, activeName, formatGameState(game));
+                        lastLoggedTurn = turn;
+                    }
+                    String phase = game.getStep() != null ? game.getStep().getType().toString() : "Unknown";
+                    String activeName = game.getActivePlayerId() != null
+                            ? game.getPlayer(game.getActivePlayerId()).getName() : "Unknown";
+                    List<String> attackerNames = selectedAttackers.stream().map(Permanent::getName).collect(Collectors.toList());
+                    gameLogger.logDecision(
+                            this.getName(), activeName, phase + " (DECLARE_ATTACKS)", turn,
+                            String.format("DECLARE_ATTACKS: selected=%s from %d possible",
+                                    attackerNames, possibleAttackers.size()),
+                            phase1Candidates.stream().map(cc -> cc.isDone() ? "DONE" : cc.creature.getName()).collect(Collectors.toList()),
+                            Arrays.copyOf(maskedProbs, candidateCount),
+                            valueScore, selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0),
+                            attackerNames.toString()
+                    );
+                }
+            } catch (Exception ignored) {}
+
+        } catch (Exception e) {
+            RLTrainer.threadLocalLogger.get().warn("selectAttackers: model exception, no attacks declared: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
+        if (game.isSimulation()) {
+            return;
+        }
+        try {
+            List<Permanent> attackers = getAttackers(game);
+            if (attackers == null || attackers.isEmpty()) {
+                return;
+            }
+            List<Permanent> availableBlockers = new ArrayList<>(super.getAvailableBlockers(game));
+            availableBlockers = filterOutNonblocking(game, attackers, availableBlockers);
+            if (availableBlockers.isEmpty()) {
+                return;
+            }
+            attackers = filterOutUnblockable(game, attackers, availableBlockers);
+            if (attackers.isEmpty()) {
+                return;
+            }
+
+            // Sort attackers by power descending so biggest threats are handled first
+            attackers.sort((a, b) -> Integer.compare(b.getPower().getValue(), a.getPower().getValue()));
+
+            final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+            final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
+            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
+            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+            this.currentState = baseState;
+
+            boolean anyBlockerDeclared = false;
+            Random rng = new Random();
+
+            for (Permanent attacker : attackers) {
+                // Build blocker candidates for this attacker: only blockers that can block it
+                List<Permanent> eligibleBlockers = new ArrayList<>();
+                for (Permanent blocker : availableBlockers) {
+                    if (blocker.canBlock(attacker.getId(), game)) {
+                        eligibleBlockers.add(blocker);
+                    }
+                }
+                if (eligibleBlockers.isEmpty()) continue;
+
+                // Candidates: [blocker0, blocker1, ..., DONE]
+                int numBlockers = Math.min(eligibleBlockers.size(), maxCandidates - 1);
+                List<CombatCandidate> blockCandidates = new ArrayList<>();
+                for (int i = 0; i < numBlockers; i++) {
+                    blockCandidates.add(new CombatCandidate(eligibleBlockers.get(i), attacker));
+                }
+                blockCandidates.add(new CombatCandidate(null, attacker)); // DONE
+                int doneIdx = blockCandidates.size() - 1;
+
+                int candidateCount = blockCandidates.size();
+                int[] candidateActionIds = new int[maxCandidates];
+                float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
+                int[] candidateMask = new int[maxCandidates];
+                for (int i = 0; i < candidateCount; i++) {
+                    candidateMask[i] = 1;
+                    candidateActionIds[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.DECLARE_BLOCKS, game, null, blockCandidates.get(i));
+                    candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.DECLARE_BLOCKS, game, null, blockCandidates.get(i), candFeatDim, baseState);
+                }
+
+                String headId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_BLOCKS);
+                mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+                        baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey, headId, 0, 1, candidateCount);
+
+                float[] actionProbs = prediction.policyScores;
+                float valueScore = prediction.valueScores;
+
+                // Softmax
+                float[] logits = new float[candidateCount];
+                float maxLogit = -Float.MAX_VALUE;
+                for (int i = 0; i < candidateCount; i++) {
+                    float p = actionProbs[i];
+                    if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
+                    logits[i] = (float) Math.log(p);
+                    if (logits[i] > maxLogit) maxLogit = logits[i];
+                }
+                float[] maskedProbs = new float[candidateCount];
+                float probSum = 0.0f;
+                for (int i = 0; i < candidateCount; i++) {
+                    maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
+                    probSum += maskedProbs[i];
+                }
+                if (probSum > 0.0f && !Float.isNaN(probSum)) {
+                    for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= probSum;
+                } else {
+                    for (int i = 0; i < candidateCount; i++) maskedProbs[i] = 1.0f / candidateCount;
+                }
+
+                // Sequential without-replacement until DONE
+                List<Integer> selectedIndices = new ArrayList<>();
+                boolean[] selected = new boolean[candidateCount];
+                float oldLogpTotal = 0.0f;
+                List<Permanent> selectedBlockers = new ArrayList<>();
+
+                for (int t = 0; t < candidateCount; t++) {
+                    float denom = 0.0f;
+                    for (int i = 0; i < candidateCount; i++) {
+                        if (!selected[i]) denom += maskedProbs[i];
+                    }
+                    if (!(denom > 0.0f)) break;
+
+                    int pickIdx;
+                    if (greedyMode) {
+                        pickIdx = -1;
+                        float best = -1.0f;
+                        for (int i = 0; i < candidateCount; i++) {
+                            if (!selected[i] && maskedProbs[i] > best) { best = maskedProbs[i]; pickIdx = i; }
+                        }
+                    } else {
+                        float r = rng.nextFloat() * denom;
+                        float c = 0.0f;
+                        pickIdx = -1;
+                        for (int i = 0; i < candidateCount; i++) {
+                            if (selected[i]) continue;
+                            c += maskedProbs[i];
+                            if (r <= c) { pickIdx = i; break; }
+                        }
+                        if (pickIdx < 0) {
+                            for (int i = candidateCount - 1; i >= 0; i--) {
+                                if (!selected[i]) { pickIdx = i; break; }
+                            }
+                        }
+                    }
+                    if (pickIdx < 0) break;
+
+                    float pCond = maskedProbs[pickIdx] / denom;
+                    oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
+                    selected[pickIdx] = true;
+                    selectedIndices.add(pickIdx);
+
+                    if (pickIdx == doneIdx) {
+                        break;
+                    }
+                    selectedBlockers.add(blockCandidates.get(pickIdx).creature);
+                }
+
+                // Record TrainingData for this attacker's block decision
+                if (trainingEnabled && !game.isSimulation()) {
+                    int[] chosenIndices = new int[maxCandidates];
+                    Arrays.fill(chosenIndices, -1);
+                    int chosenCount = Math.min(selectedIndices.size(), maxCandidates);
+                    for (int i = 0; i < chosenCount; i++) chosenIndices[i] = selectedIndices.get(i);
+                    StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
+                            baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
+                            chosenCount, chosenIndices, oldLogpTotal, valueScore,
+                            StateSequenceBuilder.ActionType.DECLARE_BLOCKS, 0.0);
+                    trainingBuffer.add(td);
+                    decisionCountsByHead.put(StateSequenceBuilder.ActionType.DECLARE_BLOCKS,
+                            decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.DECLARE_BLOCKS, 0) + 1);
+                }
+
+                // Declare blockers
+                for (Permanent blocker : selectedBlockers) {
+                    this.declareBlocker(playerId, blocker.getId(), attacker.getId(), game);
+                    availableBlockers.remove(blocker); // remove from pool so it can't block again
+                    anyBlockerDeclared = true;
+                }
+
+                // Game log
+                try {
+                    GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+                    if (gameLogger != null && gameLogger.isEnabled()) {
+                        int turn = game.getTurnNum();
+                        String activeName = game.getActivePlayerId() != null
+                                ? game.getPlayer(game.getActivePlayerId()).getName() : "Unknown";
+                        String phase = game.getStep() != null ? game.getStep().getType().toString() : "Unknown";
+                        List<String> blockerNames = selectedBlockers.stream().map(Permanent::getName).collect(Collectors.toList());
+                        gameLogger.logDecision(
+                                this.getName(), activeName, phase + " (DECLARE_BLOCKS)", turn,
+                                String.format("DECLARE_BLOCKS: %s blocks %s (%d blockers selected)",
+                                        blockerNames, attacker.getName(), selectedBlockers.size()),
+                                blockCandidates.stream().map(cc -> cc.isDone() ? "DONE" : cc.creature.getName()).collect(Collectors.toList()),
+                                Arrays.copyOf(maskedProbs, candidateCount),
+                                valueScore, selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0),
+                                blockerNames.toString()
+                        );
+                    }
+                } catch (Exception ignored) {}
+            }
+
+            if (anyBlockerDeclared) {
+                game.getPlayers().resetPassed();
+            }
+
+        } catch (Exception e) {
+            RLTrainer.threadLocalLogger.get().warn("selectBlockers: model exception, no blockers declared: " + e.getMessage());
+        }
+    }
     private List<Permanent> filterOutNonblocking(Game game, List<Permanent> attackers, List<Permanent> blockers) {
         List<Permanent> blockersLeft = new ArrayList<>();
         for (Permanent blocker : blockers) {
@@ -4138,6 +4563,24 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Candidate wrapper for combat decisions (attacking and blocking).
+     * When creature is null, this represents the DONE sentinel (stop selecting).
+     */
+    static class CombatCandidate {
+        final Permanent creature;  // the attacker (Phase 1) or blocker making the decision; null = DONE
+        final Object context;      // Phase 1: null. Phase 2 attack target: defender UUID. Block: attacker Permanent.
+
+        CombatCandidate(Permanent creature, Object context) {
+            this.creature = creature;
+            this.context = context;
+        }
+
+        boolean isDone() {
+            return creature == null;
+        }
     }
 }
 

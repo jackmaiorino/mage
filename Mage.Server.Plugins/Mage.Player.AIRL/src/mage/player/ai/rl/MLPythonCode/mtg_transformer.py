@@ -110,6 +110,18 @@ class MTGTransformerModel(nn.Module):
             nn.ReLU(),
             nn.Linear(d_model // 2, 1),
         )
+        self.policy_scorer_attack = nn.Sequential(
+            nn.LayerNorm(d_model * 2),
+            nn.Linear(d_model * 2, d_model // 2),
+            nn.ReLU(),
+            nn.Linear(d_model // 2, 1),
+        )
+        self.policy_scorer_block = nn.Sequential(
+            nn.LayerNorm(d_model * 2),
+            nn.Linear(d_model * 2, d_model // 2),
+            nn.ReLU(),
+            nn.Linear(d_model // 2, 1),
+        )
 
         # Legacy fixed-action actor head (kept for backwards compatibility / debugging)
         self.actor_norm = nn.LayerNorm(d_model)
@@ -147,7 +159,8 @@ class MTGTransformerModel(nn.Module):
         
         # Collect MLP scorer linears for special initialization
         scorer_linears = set()
-        for scorer in [self.policy_scorer, self.policy_scorer_target, self.policy_scorer_card_select]:
+        for scorer in [self.policy_scorer, self.policy_scorer_target, self.policy_scorer_card_select,
+                       self.policy_scorer_attack, self.policy_scorer_block]:
             for module in scorer.modules():
                 if isinstance(module, nn.Linear):
                     scorer_linears.add(module)
@@ -281,6 +294,10 @@ class MTGTransformerModel(nn.Module):
             scorer = self.policy_scorer_target
         elif hid == "card_select":
             scorer = self.policy_scorer_card_select
+        elif hid == "attack":
+            scorer = self.policy_scorer_attack
+        elif hid == "block":
+            scorer = self.policy_scorer_block
         else:
             scorer = self.policy_scorer
         

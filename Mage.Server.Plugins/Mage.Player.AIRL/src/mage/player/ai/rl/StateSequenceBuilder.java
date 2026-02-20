@@ -103,7 +103,8 @@ public class StateSequenceBuilder {
         SELECT_CHOICE,
         SELECT_TRIGGERED_ABILITY,
         SELECT_CARD,
-        CHOOSE_USE   // Binary yes/no decisions (kicker, optional costs, etc.)
+        CHOOSE_USE,          // Binary yes/no decisions (kicker, optional costs, etc.)
+        DECLARE_ATTACK_TARGET // Phase 2: choosing which defender to attack (player/PW/battle)
     }
 
     /* === PUBLIC API ===================================================== */
