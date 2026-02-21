@@ -70,20 +70,24 @@ Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/venv/
 *.pyc
 __pycache__/
 
-# RL model artifacts
-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/*.pt
-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/*.csv
+# RL model artifacts (flat legacy layout)
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/logs/
+
+# RL named profile artifacts - model weights, snapshots, runtime state, logs
+# (profiles/<name>/models/ and profiles/<name>/logs/ are all runtime data)
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/models/
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/games/
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/stats/
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/health/
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/league/
 
 # Archived model binaries
-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/ModelArchive/*.pt
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/ModelArchive/
 
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/gamelogs/
-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/snapshots/
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/torch_profiler/
 Mage.Tests/Mage.Server.Plugins/
-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/ModelArchive/
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/evalgamelogs/
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/mulligan_trace.jsonl
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MulliganModel.java
-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt
-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/logs/
