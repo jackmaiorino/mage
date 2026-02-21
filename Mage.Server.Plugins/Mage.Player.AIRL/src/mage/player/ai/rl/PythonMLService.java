@@ -36,9 +36,7 @@ public class PythonMLService implements PythonModel {
     }
 
     private static String defaultModelPath() {
-        return EnvConfig.str("MTG_MODEL_PATH",
-                EnvConfig.str("MODEL_PATH",
-                        "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt"));
+        return RLLogPaths.MODEL_FILE_PATH;
     }
 
     private static String defaultLatestPath(String modelPath) {
@@ -46,11 +44,11 @@ public class PythonMLService implements PythonModel {
             File f = new File(modelPath);
             File dir = f.getParentFile();
             if (dir == null) {
-                return "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model_latest.pt";
+                return RLLogPaths.MODELS_BASE_DIR + "/model_latest.pt";
             }
             return new File(dir, "model_latest.pt").getPath();
         } catch (Exception ignored) {
-            return "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model_latest.pt";
+            return RLLogPaths.MODELS_BASE_DIR + "/model_latest.pt";
         }
     }
 

@@ -23,6 +23,7 @@ from metrics_collector import MetricsCollector
 from model_persistence import ModelPersistence
 from mulligan_model import MulliganNet
 from gpu_lock import GPULock
+from profile_paths import profile_models_dir
 
 # Now we can safely log initialization
 logger.info(LogCategory.SYSTEM_INIT, f"Logging to file: {log_file}")
@@ -252,7 +253,7 @@ class PythonEntryPoint:
         self.mulligan_model = None
         self.mulligan_optimizer = None
         self.mulligan_model_path = os.getenv('MULLIGAN_MODEL_PATH',
-                                             'Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_model.pt')
+                                             f'{profile_models_dir()}/mulligan_model.pt')
         self.mulligan_lock = threading.Lock()
         self._mull_target1_window = int(
             os.getenv("MULLIGAN_TARGET1_WINDOW", "500"))
@@ -1588,8 +1589,8 @@ class PythonEntryPoint:
                     # Overwrite main model every 100 steps for continuous checkpointing
                     ckpt_path = self.model_path
                 else:
-                    # Fallback to models directory
-                    ckpt_path = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt"
+                    # Fallback to profile-aware models directory
+                    ckpt_path = f'{profile_models_dir()}/model.pt'
                 try:
                     self.saveModel(ckpt_path)
                     logger.info(LogCategory.MODEL_SAVE,
@@ -2133,7 +2134,7 @@ class PythonEntryPoint:
                 if self.model_path:
                     ckpt_path = self.model_path
                 else:
-                    ckpt_path = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt"
+                    ckpt_path = f'{profile_models_dir()}/model.pt'
                 try:
                     self.saveModel(ckpt_path)
                     logger.info(LogCategory.MODEL_SAVE,

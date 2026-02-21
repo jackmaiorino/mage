@@ -2,14 +2,18 @@ import os
 import time
 import torch
 from logging_utils import logger, LogCategory
+from profile_paths import profile_models_dir
 
 
 class ModelPersistence:
     """Handles model save/load operations with atomic write support."""
 
     def __init__(self):
-        self.model_path = os.getenv('MTG_MODEL_PATH')
-        self.model_latest_path = os.getenv('MODEL_LATEST_PATH', '').strip()
+        models_dir = profile_models_dir()
+        self.model_path = os.getenv('MTG_MODEL_PATH',
+                                    os.getenv('MODEL_PATH', f'{models_dir}/model.pt'))
+        self.model_latest_path = os.getenv('MODEL_LATEST_PATH',
+                                           f'{models_dir}/model_latest.pt').strip()
         self._latest_loaded_mtime = 0.0
         self._did_initial_load = False
 

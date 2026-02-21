@@ -19,17 +19,57 @@
 #>
 
 param(
-    [switch]$Force
+    [switch]$Force,
+    # When set, deletes the entire named profile directory under rl/profiles/<ModelProfile>/
+    [string]$ModelProfile = ""
 )
 
 $ErrorActionPreference = "Stop"
 
 # Resolve paths relative to repo root
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$modelsDir = Join-Path $repoRoot "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\models"
-$gamelogsDir = Join-Path $repoRoot "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\gamelogs"
-$pythonCodeDir = Join-Path $repoRoot "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\MLPythonCode"
-$logsDir = Join-Path $repoRoot "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\logs"
+$rlBase = Join-Path $repoRoot "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl"
+
+# --- Profile-based fast path ---
+if ($ModelProfile -ne "") {
+    $profileDir = Join-Path $rlBase "profiles\$ModelProfile"
+    if (-not (Test-Path $profileDir)) {
+        Write-Host "Profile '$ModelProfile' not found at: $profileDir" -ForegroundColor Yellow
+        exit 0
+    }
+    Write-Host "`n=== RL Training Cleanup Script ===" -ForegroundColor Cyan
+    Write-Host "Profile: $ModelProfile" -ForegroundColor Yellow
+    Write-Host "Will DELETE entire directory:" -ForegroundColor Red
+    Write-Host "  $profileDir" -ForegroundColor Gray
+    Write-Host ""
+    if (-not $Force) {
+        Write-Host "Type the profile name to confirm deletion (or anything else to cancel):" -ForegroundColor Red
+        $confirm = Read-Host "Profile name"
+        if ($confirm -ne $ModelProfile) {
+            Write-Host "Cancelled." -ForegroundColor Yellow
+            exit 0
+        }
+    }
+    Remove-Item -Path $profileDir -Recurse -Force
+    Write-Host "Deleted profile: $ModelProfile" -ForegroundColor Green
+
+    # Refresh Grafana/Prometheus
+    $composeFile = Join-Path $repoRoot "docker-compose-observe-local.yml"
+    if (Test-Path $composeFile) {
+        try {
+            docker compose -f $composeFile restart prometheus 2>&1 | Out-Null
+            Write-Host "Prometheus restarted (metrics cleared)" -ForegroundColor Gray
+        } catch {
+            Write-Host "Warning: Could not restart Prometheus" -ForegroundColor Yellow
+        }
+    }
+    exit 0
+}
+
+$modelsDir = Join-Path $rlBase "models"
+$gamelogsDir = Join-Path $rlBase "gamelogs"
+$pythonCodeDir = Join-Path $rlBase "MLPythonCode"
+$logsDir = Join-Path $rlBase "logs"
 $snapshotsDir = Join-Path $modelsDir "snapshots"
 
 Write-Host "`n=== RL Training Cleanup Script ===" -ForegroundColor Cyan

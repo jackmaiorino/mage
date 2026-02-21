@@ -60,17 +60,14 @@ public class RLTrainer {
     // Optional: separate deck list for RL agent (if empty, agent uses DECK_LIST_FILE)
     public static final String RL_AGENT_DECK_LIST_FILE = EnvConfig.str("RL_AGENT_DECK_LIST", "");
 
-    // Prefer MTG_MODEL_PATH (Python-side convention), but keep MODEL_PATH for backward compatibility.
-    public static final String MODEL_FILE_PATH = EnvConfig.str("MTG_MODEL_PATH",
-            EnvConfig.str("MODEL_PATH", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt"));
+    // Model and episode counter paths -- all derived from MODEL_PROFILE via RLLogPaths.
+    public static final String MODEL_FILE_PATH        = RLLogPaths.MODEL_FILE_PATH;
     // Episode-level statistics will be appended here (CSV)
-    public static final String STATS_FILE_PATH = RLLogPaths.TRAINING_STATS_PATH;
+    public static final String STATS_FILE_PATH        = RLLogPaths.TRAINING_STATS_PATH;
     // Path that stores the cumulative number of episodes trained so far (persisted across runs)
-    public static final String EPISODE_COUNT_PATH = EnvConfig.str("EPISODE_COUNTER_PATH",
-            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt");
+    public static final String EPISODE_COUNT_PATH     = RLLogPaths.EPISODE_COUNT_PATH;
     // Mulligan model episode counter (separate from main model for independent exploration)
-    public static final String MULLIGAN_EPISODE_COUNT_PATH = EnvConfig.str("MULLIGAN_EPISODE_COUNTER_PATH",
-            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_episodes.txt");
+    public static final String MULLIGAN_EPISODE_COUNT_PATH = RLLogPaths.MULLIGAN_EPISODE_COUNT_PATH;
     // Auto-detect optimal number of threads based on CPU cores
     private static final int DEFAULT_GAME_RUNNERS = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
     public static final int NUM_THREADS = EnvConfig.i32("NUM_THREADS", DEFAULT_GAME_RUNNERS);
@@ -1305,6 +1302,12 @@ public class RLTrainer {
             // Reset health stats and failure counters at start of training
             TrainingHealthStats healthStats = TrainingHealthStats.getInstance();
             healthStats.reset();
+            String profileName = EnvConfig.str("MODEL_PROFILE", "");
+            if (!profileName.isEmpty()) {
+                logger.info("Model profile: " + profileName
+                        + "  models=" + RLLogPaths.MODELS_BASE_DIR
+                        + "  logs=" + RLLogPaths.LOGS_BASE_DIR);
+            }
             logger.info("Starting training - health stats reset (games_killed=0, rl_failures=0)");
 
             // Start health stats logging

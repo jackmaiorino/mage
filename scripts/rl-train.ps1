@@ -9,6 +9,9 @@ param(
   [string]$StatsPath = "",
   [int]$MetricsPort = 9090,
 
+  # Named model profile - all artifacts (models + logs) go under rl/profiles/<ModelProfile>/
+  [string]$ModelProfile = "",
+
   # Optional overrides for frequently tweaked knobs
   [ValidateSet("WARNING", "INFO", "DEBUG")]
   [string]$LogLevel = "",
@@ -54,6 +57,13 @@ $env:METRICS_PORT = "$MetricsPort"
 
 if ($ModelPath -ne "") { $env:MTG_MODEL_PATH = "$ModelPath" }
 if ($StatsPath -ne "") { $env:STATS_PATH = "$StatsPath" }
+
+# Model profile - sets MODEL_PROFILE env var; Java+Python derive all paths from it
+if ($ModelProfile -ne "") {
+  $env:MODEL_PROFILE = "$ModelProfile"
+} elseif ($env:MODEL_PROFILE -and $env:MODEL_PROFILE.Trim() -ne "") {
+  $ModelProfile = $env:MODEL_PROFILE
+}
 
 # -----------------------
 # Profile defaults
@@ -110,7 +120,8 @@ if ($GaeAutoEnable -ge 0) { $env:GAE_AUTO_ENABLE = "$GaeAutoEnable" }
 
 if ($AdaptiveCurriculum -ge 0) { $env:ADAPTIVE_CURRICULUM = "$AdaptiveCurriculum" }
 
-Write-Host "Train($Profile): totalEpisodes=$TotalEpisodes runners=$NumGameRunners deckList=$DeckListFile metricsPort=$MetricsPort"
+$profileMsg = if ($ModelProfile -ne "") { " profile=$ModelProfile" } else { "" }
+Write-Host "Train($Profile):$profileMsg totalEpisodes=$TotalEpisodes runners=$NumGameRunners deckList=$DeckListFile metricsPort=$MetricsPort"
 
 Push-Location $repoRoot
 try {

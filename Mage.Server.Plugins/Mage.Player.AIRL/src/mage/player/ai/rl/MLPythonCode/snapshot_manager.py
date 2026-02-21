@@ -3,6 +3,7 @@ import torch
 from collections import OrderedDict
 from mtg_transformer import MTGTransformerModel
 from logging_utils import logger, LogCategory
+from profile_paths import profile_models_dir
 
 
 class SnapshotManager:
@@ -12,7 +13,7 @@ class SnapshotManager:
         self.device = device
         self.snapshot_dir = os.getenv(
             'SNAPSHOT_DIR',
-            'Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/snapshots'
+            f'{profile_models_dir()}/snapshots'
         )
         self.snapshot_save_every_steps = int(os.getenv('SNAPSHOT_SAVE_EVERY_STEPS', '1000'))
         self.snapshot_max_files = int(os.getenv('SNAPSHOT_MAX_FILES', '20'))
