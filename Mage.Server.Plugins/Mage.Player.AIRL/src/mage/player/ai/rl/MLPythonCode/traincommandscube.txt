@@ -1,0 +1,154 @@
+  # ============================================================
+  # Vintage Cube Draft Training Commands
+  # Usage: paste env vars into terminal, then run the mvn line
+  # ============================================================
+
+  $env:MTG_AI_LOG_LEVEL="INFO"
+
+  # -------------------------------------------------------
+  # Model Profiles
+  # -------------------------------------------------------
+  # Game model profile (used to pilot drafted decks in self-play)
+  $env:MODEL_PROFILE="Vintage-Cube"
+
+  # Draft model profile (picks + deck construction)
+  # Artifacts go to: rl/profiles/Vintage-Cube/models/ (draft subdir)
+  $env:DRAFT_MODEL_PROFILE="Vintage-Cube"
+
+  # Cube deck list (loaded via CubeFromDeck)
+  $env:CUBE_DECK_FILE="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Vintage/Cube/MTGOVintageCube.dck"
+
+  # -------------------------------------------------------
+  # Draft Training Loop (DraftTrainer)
+  # -------------------------------------------------------
+  # Total draft episodes (each = 1 full 8-player draft + N eval games)
+  $env:DRAFT_TOTAL_EPISODES=10000
+
+  # Evaluation games played per draft episode (RL-drafted deck vs heuristic deck)
+  $env:DRAFT_GAMES_PER_EPISODE=3
+
+  # Save draft model every N episodes
+  $env:DRAFT_SAVE_EVERY=50
+
+  # Log full draft decision logs every N episodes (pack contents, scores, pick order)
+  $env:DRAFT_LOG_FREQUENCY=10
+
+  # Write draft_stats.csv every N episodes
+  $env:DRAFT_STATS_EVERY=10
+
+  # Rolling window for winrate tracking
+  $env:DRAFT_WINRATE_WINDOW=100
+
+  # -------------------------------------------------------
+  # Draft Model Py4J Bridge
+  # -------------------------------------------------------
+  # Port for Java <-> Python draft model communication (separate from game model port)
+  $env:DRAFT_PY4J_PORT=25335
+
+  # -------------------------------------------------------
+  # Draft Model Hyperparameters
+  # (defaults in draft_py4j_entry_point.py, override here if needed)
+  # -------------------------------------------------------
+  # Architecture: 256d, 4-head, 4-layer (~500K-1M params, smaller than game model)
+  # $env:DRAFT_D_MODEL=256
+  # $env:DRAFT_NHEAD=4
+  # $env:DRAFT_NUM_LAYERS=4
+  # $env:DRAFT_CAND_DIM=32
+
+  # -------------------------------------------------------
+  # Draft Model Training Hyperparameters
+  # -------------------------------------------------------
+  $env:DRAFT_LR="3e-4"
+  $env:DRAFT_PPO_EPSILON="0.2"
+  $env:DRAFT_VALUE_LOSS_COEF="5.0"
+  $env:DRAFT_ENTROPY_COEF="0.05"   # Higher entropy early; draft exploration is important
+  $env:DRAFT_MAX_GRAD_NORM="1.0"
+  $env:DRAFT_GAMMA="0.99"
+  $env:DRAFT_GAE_LAMBDA="0.95"
+
+  # -------------------------------------------------------
+  # Game Model Py4J (for self-play game evaluation)
+  # Same settings as regular training but for the co-training context
+  # -------------------------------------------------------
+  $env:PY4J_BASE_PORT=25334
+  $env:INFER_WORKERS=1
+  $env:INFER_STARTUP_THREADS=1
+  $env:PY_SCORE_TIMEOUT_MS=0
+  $env:MODEL_RELOAD_EVERY_MS=2000
+
+  $env:SNAPSHOT_CACHE_SIZE=0
+
+  # Game model entropy (for self-play games evaluating draft outcomes)
+  $env:ENTROPY_START=0.10
+  $env:ENTROPY_END=0.01
+  $env:ENTROPY_DECAY_STEPS=60000
+
+  # Game model learning rates
+  $env:ACTOR_LR="3e-4"
+  $env:OTHER_LR="3e-4"
+
+  # -------------------------------------------------------
+  # Java-side inference batching
+  # -------------------------------------------------------
+  $env:PY_BATCH_MAX_SIZE=256
+  $env:PY_BATCH_TIMEOUT_MS=10
+  $env:PY_BATCH_LOG_LEVEL="WARNING"
+
+  # -------------------------------------------------------
+  # Python auto-batching (memory safety)
+  # -------------------------------------------------------
+  $env:AUTO_BATCH_ENABLE=1
+  $env:AUTO_AVOID_PAGING=1
+  $env:AUTO_TARGET_USED_FRAC=0.75
+  $env:AUTO_MIN_FREE_MB=512
+
+  # -------------------------------------------------------
+  # Game model loss / GAE settings
+  # -------------------------------------------------------
+  $env:USE_GAE=0
+  $env:GAE_AUTO_ENABLE=1
+  $env:GAE_AUTO_THRESHOLD=0.65
+  $env:GAE_AUTO_MIN_SAMPLES=200
+
+  $env:LOSS_SCHEDULE_ENABLE=0
+  $env:CRITIC_WARMUP_STEPS=0
+  $env:FREEZE_ENCODER_IN_WARMUP=0
+
+  $env:VALUE_LOSS_COEF=1.0
+  $env:POLICY_LOSS_COEF=1.0
+  $env:ENTROPY_LOSS_MULT=1.0
+  $env:ADV_CLIP_MAX=5.0
+  $env:MAX_GRAD_NORM=1.0
+
+  # -------------------------------------------------------
+  # Multi-backend: inference + learner run in parallel
+  # -------------------------------------------------------
+  $env:PY_BACKEND_MODE="multi"
+  $env:MULLIGAN_DEVICE="cpu"
+
+  # -------------------------------------------------------
+  # Debug diagnostics
+  # -------------------------------------------------------
+  $env:VALUE_POSTUPDATE_DIAG_EVERY=200
+  $env:VALUE_TARGET_DIAG_EVERY=200
+  $env:VALUE_GRAD_DIAG_EVERY=200
+  $env:SCORE_DIAG_EVERY=2000
+
+  # Game timeout for self-play evaluation games (Vintage cards can be slower)
+  $env:GAME_TIMEOUT_SEC=900
+
+  # -------------------------------------------------------
+  # Run DraftTrainer
+  # Note: NumGameRunners controls parallel draft workers
+  # Fewer runners than regular training (each draft episode is heavier)
+  # -------------------------------------------------------
+  .\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -ModelProfile "Vintage-Cube" `
+    -TotalEpisodes 10000 -NumGameRunners 8 `
+    -MainClass "mage.player.ai.rl.DraftTrainer"
+
+  # -------------------------------------------------------
+  # Alternative: run directly with mvn (without rl-train.ps1)
+  # -------------------------------------------------------
+  # mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile exec:java `
+  #   "-Dexec.mainClass=mage.player.ai.rl.DraftTrainer" `
+  #   "-Dexec.args=train"

@@ -124,4 +124,37 @@ public final class RLLogPaths {
     // Python logs (kept in MLPythonCode for proximity to Python scripts)
     public static final String PYTHON_MULLIGAN_TRACE_PATH
             = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/mulligan_trace.jsonl";
+
+    // -----------------------------------------------------------------------
+    // Draft model paths (DRAFT_MODEL_PROFILE, defaults to MODEL_PROFILE + "-Draft")
+    // -----------------------------------------------------------------------
+    private static final String DRAFT_PROFILE_NAME;
+    public static final String DRAFT_MODELS_BASE_DIR;
+    public static final String DRAFT_LOGS_BASE_DIR;
+
+    static {
+        String dp = EnvConfig.str("DRAFT_MODEL_PROFILE", "");
+        if (dp.isEmpty()) {
+            dp = PROFILE_NAME.isEmpty() ? "VintageCube-Draft" : PROFILE_NAME + "-Draft";
+        }
+        DRAFT_PROFILE_NAME = dp;
+        String draftRoot = RL_BASE + "/profiles/" + DRAFT_PROFILE_NAME;
+        DRAFT_MODELS_BASE_DIR = EnvConfig.str("DRAFT_MODELS_DIR", draftRoot + "/models");
+        DRAFT_LOGS_BASE_DIR   = EnvConfig.str("DRAFT_LOGS_DIR",   draftRoot + "/logs");
+    }
+
+    public static final String DRAFT_MODEL_FILE_PATH = EnvConfig.str("DRAFT_MODEL_PATH",
+            DRAFT_MODELS_BASE_DIR + "/draft_model.pt");
+
+    public static final String DRAFT_EPISODE_COUNT_PATH = EnvConfig.str("DRAFT_EPISODE_COUNTER_PATH",
+            DRAFT_MODELS_BASE_DIR + "/draft_episodes.txt");
+
+    public static final String DRAFT_GAME_LOGS_DIR = EnvConfig.str("DRAFT_GAME_LOGS_DIR",
+            DRAFT_LOGS_BASE_DIR + "/games/drafts");
+
+    public static final String DRAFT_STATS_PATH = EnvConfig.str("DRAFT_STATS_PATH",
+            DRAFT_LOGS_BASE_DIR + "/stats/draft_stats.csv");
+
+    public static final String DRAFT_LOSSES_PATH = EnvConfig.str("DRAFT_LOSSES_PATH",
+            DRAFT_LOGS_BASE_DIR + "/stats/draft_losses.csv");
 }

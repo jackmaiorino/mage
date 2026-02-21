@@ -24,7 +24,10 @@ param(
   [int]$GameLogFrequency = 0,
   [int]$UseGae = -1,
   [int]$GaeAutoEnable = -1,
-  [int]$AdaptiveCurriculum = -1
+  [int]$AdaptiveCurriculum = -1,
+
+  # Override the main class (default: RLTrainer; use DraftTrainer for cube draft training)
+  [string]$MainClass = "mage.player.ai.rl.RLTrainer"
 )
 
 $ErrorActionPreference = "Stop"
@@ -126,7 +129,7 @@ Write-Host "Train($Profile):$profileMsg totalEpisodes=$TotalEpisodes runners=$Nu
 Push-Location $repoRoot
 try {
   mvn -q -pl $modulePath -am -DskipTests compile exec:java `
-    "-Dexec.mainClass=mage.player.ai.rl.RLTrainer" `
+    "-Dexec.mainClass=$MainClass" `
     "-Dexec.args=train"
 }
 finally {

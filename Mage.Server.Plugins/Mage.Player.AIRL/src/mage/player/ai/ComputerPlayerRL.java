@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -54,6 +55,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+import mage.cards.decks.Deck;
+import mage.game.draft.Draft;
+import mage.player.ai.rl.DraftLogger;
+import mage.player.ai.rl.DraftPickRecord;
+import mage.player.ai.rl.DraftPythonMLBridge;
+import mage.player.ai.rl.DraftStateBuilder;
 import mage.player.ai.rl.GameLogger;
 import mage.player.ai.rl.MulliganLogger;
 import mage.player.ai.rl.MulliganModel;
@@ -156,6 +163,74 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     );
 
     private long mulliganEventSeq = 0L;
+
+    // -----------------------------------------------------------------------
+    // Draft model state (reset per draft episode via resetDraftState())
+    // -----------------------------------------------------------------------
+    private DraftPythonMLBridge draftBridge = null;
+    private DraftLogger draftLogger = null;
+
+    // Per-draft tracking
+    private final List<Card> draftPool = new ArrayList<>();
+    private final List<DraftPickRecord> draftSeenCards = new ArrayList<>();
+    // Training data for current draft
+    private final List<DraftStepData> draftSteps = new ArrayList<>();
+
+    // Draft context set externally by DraftTrainer before each draft
+    private int currentDraftEpisode = -1;
+    private boolean draftLoggingEnabled = false;
+
+    /** Lightweight container for one draft decision step's training data. */
+    public static class DraftStepData {
+        public final float[] stateFlat;
+        public final int[]   maskFlat;
+        public final int[]   tokenIds;
+        public final float[] candFeats;
+        public final int[]   candIds;
+        public final int[]   candMask;
+        public final int     chosenIdx;
+        public final float   logProb;
+        public final float   value;
+        public final int     headIdx; // 0=pick, 1=construction
+
+        DraftStepData(float[] stateFlat, int[] maskFlat, int[] tokenIds,
+                      float[] candFeats, int[] candIds, int[] candMask,
+                      int chosenIdx, float logProb, float value, int headIdx) {
+            this.stateFlat = stateFlat;
+            this.maskFlat = maskFlat;
+            this.tokenIds = tokenIds;
+            this.candFeats = candFeats;
+            this.candIds = candIds;
+            this.candMask = candMask;
+            this.chosenIdx = chosenIdx;
+            this.logProb = logProb;
+            this.value = value;
+            this.headIdx = headIdx;
+        }
+    }
+
+    /**
+     * Reset draft state before starting a new draft episode.
+     * Called by DraftTrainer before runDraft().
+     */
+    public void resetDraftState(DraftPythonMLBridge bridge, DraftLogger logger,
+                                int episodeNum, boolean loggingEnabled) {
+        this.draftBridge = bridge;
+        this.draftLogger = logger;
+        this.currentDraftEpisode = episodeNum;
+        this.draftLoggingEnabled = loggingEnabled;
+        this.draftPool.clear();
+        this.draftSeenCards.clear();
+        this.draftSteps.clear();
+    }
+
+    public List<DraftStepData> getDraftSteps() {
+        return draftSteps;
+    }
+
+    public List<Card> getDraftPool() {
+        return draftPool;
+    }
 
     private static void mulliganTrainingLog(String line) {
         if (line == null || line.isEmpty()) {
@@ -4880,6 +4955,267 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
         }
         return sb.toString();
+    }
+
+    // -----------------------------------------------------------------------
+    // Draft: pickCard override
+    // -----------------------------------------------------------------------
+
+    /**
+     * Called by the draft engine for each pick. If a draft bridge is available,
+     * uses the draft model; otherwise falls back to heuristic (super).
+     */
+    @Override
+    public void pickCard(List<Card> cards, Deck deck, Draft draft) {
+        if (draftBridge == null || cards.isEmpty()) {
+            super.pickCard(cards, deck, draft);
+            // Record seen cards (heuristic pick path - no RL data)
+            int packNum = draft.getBoosterNum();
+            int pickNum = draft.getCardNum();
+            for (Card c : cards) {
+                draftSeenCards.add(new DraftPickRecord(c, packNum, pickNum, false));
+            }
+            return;
+        }
+
+        int packNum = draft.getBoosterNum();
+        int pickNum = draft.getCardNum();
+
+        try {
+            DraftStateBuilder.DraftStateOutput state = DraftStateBuilder.buildState(
+                    draftPool, draftSeenCards, packNum, pickNum);
+
+            float[] candFeats = DraftStateBuilder.buildCandidateFeatures(cards);
+            int[] candIds = DraftStateBuilder.buildCandidateIds(cards);
+
+            float[] scores = draftBridge.scoreDraftPick(
+                    state.sequence, state.mask, state.tokenIds,
+                    candFeats, candIds,
+                    cards.size(), DraftStateBuilder.MAX_LEN, DraftStateBuilder.DIM_PER_TOKEN
+            );
+
+            // Last element is the value estimate
+            float value = scores.length > cards.size() ? scores[cards.size()] : 0.0f;
+
+            // Sample from softmax scores (or greedy in eval)
+            int chosenIdx = sampleFromScores(scores, cards.size());
+            Card chosenCard = cards.get(chosenIdx);
+
+            // Compute log-prob for PPO
+            float chosenScore = scores[chosenIdx];
+            float logProb = (float) Math.log(Math.max(chosenScore, 1e-8f));
+
+            // Candidate mask (all real = 0)
+            int[] candMask = new int[cards.size()];
+
+            draftSteps.add(new DraftStepData(
+                    state.sequence, state.mask, state.tokenIds,
+                    candFeats, candIds, candMask,
+                    chosenIdx, logProb, value, 0 // headIdx=0 for pick
+            ));
+
+            // Log pick decision
+            if (draftLogger != null && draftLogger.isEnabled()) {
+                draftLogger.logPick(packNum, pickNum, cards, scores, chosenIdx, value, draftPool.size());
+            }
+
+            // Record seen-but-not-picked cards
+            for (int i = 0; i < cards.size(); i++) {
+                if (i != chosenIdx) {
+                    draftSeenCards.add(new DraftPickRecord(cards.get(i), packNum, pickNum, false));
+                }
+            }
+
+            // Add chosen card to pool
+            draftPool.add(chosenCard);
+            draftSeenCards.add(new DraftPickRecord(chosenCard, packNum, pickNum, true));
+
+            draft.addPick(playerId, chosenCard.getId(), null);
+
+        } catch (Exception e) {
+            System.err.println("[DraftRL] pickCard error: " + e.getMessage());
+            // Fallback: pick highest-rated card
+            super.pickCard(cards, deck, draft);
+        }
+    }
+
+    private int sampleFromScores(float[] scores, int n) {
+        // Greedy: pick highest score
+        int best = 0;
+        for (int i = 1; i < n; i++) {
+            if (scores[i] > scores[best]) best = i;
+        }
+        return best;
+    }
+
+    // -----------------------------------------------------------------------
+    // Draft: deck construction (called by DraftTrainer, not tournament system)
+    // -----------------------------------------------------------------------
+
+    /**
+     * Uses the construction head to select 23 non-land cards from the drafted
+     * pool, then adds 17 lands proportional to color distribution.
+     *
+     * @return a 40-card limited deck ready for play
+     */
+    public Deck constructDraftDeck() {
+        List<Card> pool = new ArrayList<>(draftPool);
+        List<Card> nonLands = pool.stream().filter(c -> !c.isLand()).collect(Collectors.toList());
+        List<Card> lands = pool.stream().filter(Card::isLand).collect(Collectors.toList());
+
+        List<Card> selectedNonLands;
+
+        if (draftBridge != null && !nonLands.isEmpty()) {
+            selectedNonLands = selectNonLandsWithModel(nonLands, pool);
+        } else {
+            // Heuristic fallback: take best 23 non-lands by CMC curve
+            selectedNonLands = nonLands.stream()
+                    .sorted(Comparator.comparingDouble(c -> c.getManaValue()))
+                    .limit(23)
+                    .collect(Collectors.toList());
+        }
+
+        // Build heuristic land base (17 lands, color-proportional)
+        List<Card> landBase = buildHeuristicLandBase(selectedNonLands, lands, 17);
+
+        if (draftLogger != null) {
+            float[] scores = null; // scores were logged during construction scoring
+            draftLogger.logConstruction(pool, scores, selectedNonLands, landBase);
+        }
+
+        Deck deck = new Deck();
+        for (Card c : selectedNonLands) deck.getCards().add(c);
+        for (Card c : landBase) deck.getCards().add(c);
+        return deck;
+    }
+
+    private List<Card> selectNonLandsWithModel(List<Card> nonLands, List<Card> fullPool) {
+        try {
+            // Build construction state (entire pool as state)
+            DraftStateBuilder.DraftStateOutput state = DraftStateBuilder.buildState(
+                    fullPool, draftSeenCards, 3, 15); // post-draft position
+
+            float[] candFeats = DraftStateBuilder.buildCandidateFeatures(nonLands);
+            int[] candIds = DraftStateBuilder.buildCandidateIds(nonLands);
+
+            float[] scores = draftBridge.scoreDraftConstruction(
+                    state.sequence, state.mask, state.tokenIds,
+                    candFeats, candIds,
+                    nonLands.size(), DraftStateBuilder.MAX_LEN, DraftStateBuilder.DIM_PER_TOKEN
+            );
+
+            float value = scores.length > nonLands.size() ? scores[nonLands.size()] : 0.0f;
+
+            // Record training data for construction step (candidate mask: all real = 1)
+            int[] candMaskInt = new int[nonLands.size()];
+            Arrays.fill(candMaskInt, 1);
+
+            // Select top 23 by score
+            Integer[] indices = new Integer[nonLands.size()];
+            for (int i = 0; i < indices.length; i++) indices[i] = i;
+            final float[] scoresF = scores;
+            Arrays.sort(indices, (a, b) -> Float.compare(scoresF[b], scoresF[a]));
+
+            int take = Math.min(23, nonLands.size());
+            List<Card> selected = new ArrayList<>();
+            for (int i = 0; i < take; i++) {
+                selected.add(nonLands.get(indices[i]));
+            }
+
+            // Log construction step - record the "chosen" index (highest score)
+            // For PPO we need a single chosen index per step; we record the top pick
+            int topChosenIdx = take > 0 ? indices[0] : 0;
+            float topLogProb = take > 0 ? (float) Math.log(Math.max(scores[topChosenIdx], 1e-8f)) : 0;
+            draftSteps.add(new DraftStepData(
+                    state.sequence, state.mask, state.tokenIds,
+                    candFeats, candIds, candMaskInt,
+                    topChosenIdx, topLogProb, value, 1 // headIdx=1 for construction
+            ));
+
+            return selected;
+        } catch (Exception e) {
+            System.err.println("[DraftRL] constructDraftDeck error: " + e.getMessage());
+            return nonLands.stream().limit(23).collect(Collectors.toList());
+        }
+    }
+
+    /**
+     * Build a heuristic land base from available lands or basic land placeholders.
+     * Allocates numLands lands proportional to WUBRG mana symbol distribution in selectedSpells.
+     */
+    private List<Card> buildHeuristicLandBase(List<Card> selectedSpells, List<Card> draftedLands, int numLands) {
+        // Count WUBRG symbols in selected spells
+        int[] colorCounts = new int[5]; // W, U, B, R, G
+        for (Card c : selectedSpells) {
+            try {
+                mage.Mana mana = new mage.Mana();
+                for (mage.abilities.costs.mana.ManaCost mc : c.getManaCost()) {
+                    mana.add(mc.getMana());
+                }
+                colorCounts[0] += mana.getWhite();
+                colorCounts[1] += mana.getBlue();
+                colorCounts[2] += mana.getBlack();
+                colorCounts[3] += mana.getRed();
+                colorCounts[4] += mana.getGreen();
+            } catch (Exception ignored) {}
+        }
+
+        int totalColor = 0;
+        for (int c : colorCounts) totalColor += c;
+
+        // Compute proportional land counts
+        int[] landCounts = new int[5];
+        if (totalColor > 0) {
+            int assigned = 0;
+            for (int i = 0; i < 5; i++) {
+                landCounts[i] = (int) Math.round(colorCounts[i] * numLands / (double) totalColor);
+                assigned += landCounts[i];
+            }
+            // Fix rounding errors
+            int diff = numLands - assigned;
+            for (int i = 0; diff > 0; i = (i + 1) % 5) {
+                if (colorCounts[i] > 0) { landCounts[i]++; diff--; }
+            }
+        } else {
+            landCounts[0] = numLands; // default to Plains if no color info
+        }
+
+        // First, use drafted non-basic lands from pool (duals, fetches, etc.)
+        List<Card> landBase = new ArrayList<>(draftedLands.stream()
+                .limit(Math.min(draftedLands.size(), 5)) // up to 5 non-basics
+                .collect(Collectors.toList()));
+
+        // Fill remainder with basic lands (create simple card objects)
+        String[] basicNames = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
+        int remaining = numLands - landBase.size();
+        for (int color = 0; color < 5 && remaining > 0; color++) {
+            int need = landCounts[color];
+            // Subtract what we already have (drafted non-basics count as "any color" for simplicity)
+            for (int i = 0; i < need && remaining > 0; i++) {
+                // Create a basic land card - use first matching basic land from drafted pool
+                Card basicFromPool = findBasicLandByColor(draftedLands, basicNames[color]);
+                if (basicFromPool != null) {
+                    landBase.add(basicFromPool);
+                    draftedLands.remove(basicFromPool);
+                } else {
+                    // We can't create basic land objects without a game context here;
+                    // DraftTrainer will handle adding the correct basic land cards to the final deck
+                    // For now, skip (this list is for logging; actual deck is built by DraftTrainer)
+                }
+                remaining--;
+            }
+        }
+
+        return landBase;
+    }
+
+    private Card findBasicLandByColor(List<Card> lands, String basicName) {
+        for (Card c : lands) {
+            if (c.isLand() && c.getName().equals(basicName)) {
+                return c;
+            }
+        }
+        return null;
     }
 
     /**
