@@ -152,8 +152,20 @@ public final class RLLogPaths {
     public static final String DRAFT_GAME_LOGS_DIR = EnvConfig.str("DRAFT_GAME_LOGS_DIR",
             DRAFT_LOGS_BASE_DIR + "/games/drafts");
 
+    public static final String DRAFT_EVAL_GAME_LOGS_DIR = EnvConfig.str("DRAFT_EVAL_GAME_LOGS_DIR",
+            DRAFT_LOGS_BASE_DIR + "/games/draft_eval");
+
+    public static final String DRAFT_BENCHMARK_GAME_LOGS_DIR = EnvConfig.str("DRAFT_BENCHMARK_GAME_LOGS_DIR",
+            DRAFT_LOGS_BASE_DIR + "/games/benchmark");
+
     public static final String DRAFT_STATS_PATH = EnvConfig.str("DRAFT_STATS_PATH",
             DRAFT_LOGS_BASE_DIR + "/stats/draft_stats.csv");
+
+    public static final String DRAFT_BENCHMARK_STATS_PATH = EnvConfig.str("DRAFT_BENCHMARK_STATS_PATH",
+            DRAFT_LOGS_BASE_DIR + "/stats/draft_benchmark_stats.csv");
+
+    public static final String DRAFT_BENCHMARK_STATE_PATH = EnvConfig.str("DRAFT_BENCHMARK_STATE_PATH",
+            DRAFT_LOGS_BASE_DIR + "/league/draft_benchmark_state.txt");
 
     public static final String DRAFT_LOSSES_PATH = EnvConfig.str("DRAFT_LOSSES_PATH",
             DRAFT_LOGS_BASE_DIR + "/stats/draft_losses.csv");

@@ -16,7 +16,7 @@
   $env:DRAFT_MODEL_PROFILE="Vintage-Cube"
 
   # Cube deck list (loaded via CubeFromDeck)
-  $env:CUBE_DECK_FILE="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Vintage/Cube/MTGOVintageCube.dck"
+  $env:CUBE_DECK_PATH="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Vintage/Cube/LSVCube.txt"
 
   # -------------------------------------------------------
   # Draft Training Loop (DraftTrainer)
@@ -32,6 +32,51 @@
 
   # Log full draft decision logs every N episodes (pack contents, scores, pick order)
   $env:DRAFT_LOG_FREQUENCY=10
+  # Optional: detailed per-episode reward-game logs from DraftTrainer
+  # (written to logs/games/draft_eval)
+  # Set to 1 for every evaluation game.
+  $env:DRAFT_EVAL_GAME_LOGGING=0
+  # Normal-training style logging cadence: log game #1 and every Xth game after.
+  # Falls back to GAME_LOG_FREQUENCY if not set.
+  $env:DRAFT_GAME_LOG_FREQUENCY=200
+
+  # -------------------------------------------------------
+  # Periodic benchmark tick (separate from per-episode reward games)
+  # -------------------------------------------------------
+  # Run a benchmark every N draft episodes (like ladder-style periodic checks).
+  $env:DRAFT_BENCHMARK_ENABLE=1
+  $env:DRAFT_BENCHMARK_EVERY=5000
+  # Each benchmark runs N fresh drafts, with M games per draft.
+  $env:DRAFT_BENCHMARK_DRAFTS=12
+  $env:DRAFT_BENCHMARK_GAMES_PER_DRAFT=3
+  # If benchmark WR >= threshold, benchmark tier increments.
+  $env:DRAFT_BENCHMARK_PROMOTE_WR=0.55
+  # Optional benchmark game logs (written to logs/games/benchmark).
+  $env:DRAFT_BENCHMARK_GAME_LOGGING=0
+  # If >0, logs benchmark game #1 and every Xth benchmark game.
+  $env:DRAFT_BENCHMARK_GAME_LOG_FREQUENCY=0
+
+  # -------------------------------------------------------
+  # Co-train game + mulligan models during cube DraftTrainer runs
+  # -------------------------------------------------------
+  # Immediate on-policy co-training from draft reward games.
+  $env:DRAFT_COTRAIN_GAME_MODEL=1
+  $env:DRAFT_COTRAIN_MULLIGAN_MODEL=1
+  # Train both sides in self-play reward games.
+  $env:DRAFT_COTRAIN_BOTH_SIDES=1
+  # Keep benchmark runs as no-train by default.
+  $env:DRAFT_COTRAIN_ON_BENCHMARK=0
+  # Mulligan checkpoint cadence for co-training updates.
+  $env:DRAFT_MULLIGAN_SAVE_INTERVAL=100
+
+  # Save play + mulligan models periodically during DraftTrainer,
+  # so Ctrl+C doesn't rely solely on shutdown hook race ordering.
+  $env:DRAFT_SAVE_GAME_MODELS=1
+  $env:DRAFT_SAVE_GAME_MODELS_EVERY=50
+
+  # Shutdown-hook checkpoint controls (best-effort on Ctrl+C).
+  $env:DRAFT_SHUTDOWN_SAVE_HOOK=1
+  $env:DRAFT_SHUTDOWN_SAVE_GAME_MODELS=1
 
   # Write draft_stats.csv every N episodes
   $env:DRAFT_STATS_EVERY=10
@@ -40,10 +85,22 @@
   $env:DRAFT_WINRATE_WINDOW=100
 
   # -------------------------------------------------------
+  # Construction Curriculum (land floor)
+  # -------------------------------------------------------
+  # Enforce a minimum land count early, then decay to free choice.
+  $env:DRAFT_MIN_LANDS_ENABLE=1
+  $env:DRAFT_MIN_LANDS_START=12
+  $env:DRAFT_MIN_LANDS_END=0
+  $env:DRAFT_MIN_LANDS_DECAY_EPISODES=5000
+
+  # -------------------------------------------------------
   # Draft Model Py4J Bridge
   # -------------------------------------------------------
   # Port for Java <-> Python draft model communication (separate from game model port)
-  $env:DRAFT_PY4J_PORT=25335
+  # Game model uses: BASE_PORT (learner) + BASE_PORT+1..BASE_PORT+INFER_WORKERS (inference)
+  # e.g. with BASE=25334, INFER_WORKERS=1: game uses 25334 + 25335
+  # Draft model must be above that range. Default: 25360 (clear of up to 16 inference workers)
+  $env:DRAFT_PY4J_PORT=25360
 
   # -------------------------------------------------------
   # Draft Model Hyperparameters
@@ -145,10 +202,3 @@
   .\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -ModelProfile "Vintage-Cube" `
     -TotalEpisodes 10000 -NumGameRunners 8 `
     -MainClass "mage.player.ai.rl.DraftTrainer"
-
-  # -------------------------------------------------------
-  # Alternative: run directly with mvn (without rl-train.ps1)
-  # -------------------------------------------------------
-  # mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile exec:java `
-  #   "-Dexec.mainClass=mage.player.ai.rl.DraftTrainer" `
-  #   "-Dexec.args=train"

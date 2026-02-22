@@ -22,13 +22,16 @@ import py4j.ClientServer;
  * Py4J bridge for the draft model Python process.
  *
  * Starts a separate Python process running draft_py4j_entry_point.py on
- * DRAFT_PY4J_PORT (default 25335) to keep the draft and game models isolated.
+ * DRAFT_PY4J_PORT (default 25360) to keep the draft and game models isolated.
  */
 public class DraftPythonMLBridge implements AutoCloseable {
 
     private static final Logger logger = Logger.getLogger(DraftPythonMLBridge.class.getName());
 
-    public static final int DEFAULT_DRAFT_PORT = 25335;
+    // Port layout: game model learner=BASE, inference workers=BASE+1..BASE+N
+    // Draft model must be above BASE+INFER_WORKERS to avoid collision.
+    // Default: BASE=25334, up to 16 inference workers → draft starts at 25360.
+    public static final int DEFAULT_DRAFT_PORT = 25360;
     private static final int MAX_CONNECTION_RETRIES = 20;
     private static final int CONNECTION_RETRY_DELAY_MS = 2000;
     private static final int PYTHON_STARTUP_WAIT_MS = 2000;
@@ -46,6 +49,11 @@ public class DraftPythonMLBridge implements AutoCloseable {
     private Process pythonProcess;
     private boolean initialized = false;
     private final Object py4jLock = new Object();
+
+    @FunctionalInterface
+    private interface RpcCall<T> {
+        T call() throws Exception;
+    }
 
     private DraftPythonMLBridge() {
         this.py4jPort = EnvConfig.i32("DRAFT_PY4J_PORT", DEFAULT_DRAFT_PORT);
@@ -73,9 +81,9 @@ public class DraftPythonMLBridge implements AutoCloseable {
 
     private void init() throws Exception {
         setupVenvIfNeeded();
+        installDependencies();
         startPythonProcess();
-        connectToGateway();
-        entryPoint.initializeDraftModel();
+        connectAndInitialize();
         initialized = true;
         logger.info("DraftPythonMLBridge initialized on port " + py4jPort);
     }
@@ -96,6 +104,64 @@ public class DraftPythonMLBridge implements AutoCloseable {
         } catch (Exception e) {
             logger.warning("Failed to create venv (will try system Python): " + e.getMessage());
         }
+    }
+
+    private void installDependencies() throws Exception {
+        logger.info("Checking/installing Python dependencies...");
+        String pip = getPipExec();
+
+        // Core packages needed by draft_py4j_entry_point.py
+        String[] packages = { "py4j", "numpy", "torch", "transformers" };
+        for (String pkg : packages) {
+            if (!isImportable(pkg)) {
+                logger.info("Installing " + pkg + "...");
+                if (pkg.equals("torch")) {
+                    // Install PyTorch with CUDA support
+                    runPip(pip, "install", "--index-url",
+                            "https://download.pytorch.org/whl/cu121", "torch>=2.2.0");
+                } else {
+                    runPip(pip, "install", "--upgrade", pkg);
+                }
+                logger.info(pkg + " installed.");
+            } else {
+                logger.info(pkg + " already present.");
+            }
+        }
+        logger.info("All draft dependencies satisfied.");
+    }
+
+    private boolean isImportable(String module) {
+        try {
+            ProcessBuilder pb = new ProcessBuilder(getPythonExec(), "-c", "import " + module);
+            pb.redirectErrorStream(true);
+            Process p = pb.start();
+            drainProcess(p, "[CHECK]");
+            return p.waitFor() == 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void runPip(String pip, String... args) throws Exception {
+        List<String> cmd = new java.util.ArrayList<>();
+        cmd.add(pip);
+        for (String a : args) cmd.add(a);
+        ProcessBuilder pb = new ProcessBuilder(cmd);
+        pb.redirectErrorStream(true);
+        Process p = pb.start();
+        drainProcess(p, "[PIP]");
+        int code = p.waitFor();
+        if (code != 0) {
+            throw new RuntimeException("pip command failed (exit " + code + "): " + String.join(" ", cmd));
+        }
+    }
+
+    private String getPipExec() {
+        File win = new File(venvPath, "Scripts/pip.exe");
+        if (win.exists()) return win.getAbsolutePath();
+        File unix = new File(venvPath, "bin/pip");
+        if (unix.exists()) return unix.getAbsolutePath();
+        return "pip";
     }
 
     private void startPythonProcess() throws Exception {
@@ -132,7 +198,7 @@ public class DraftPythonMLBridge implements AutoCloseable {
                     new InputStreamReader(pythonProcess.getInputStream()))) {
                 String line;
                 while ((line = r.readLine()) != null) {
-                    logger.fine("[DRAFT_PY] " + line);
+                    logger.info("[DRAFT_PY] " + line);
                 }
             } catch (Exception ignored) {
             }
@@ -152,9 +218,25 @@ public class DraftPythonMLBridge implements AutoCloseable {
         }
     }
 
-    private void connectToGateway() throws Exception {
+    private void connectAndInitialize() throws Exception {
+        connectToGateway(true);
+    }
+
+    /**
+     * Connect to the Python Py4J server.
+     *
+     * getPythonServerEntryPoint() returns a lazy proxy (no actual network call), so when
+     * initModel=true we force a real RPC via initializeDraftModel() inside retry loop.
+     */
+    private void connectToGateway(boolean initModel) throws Exception {
+        logger.info("Waiting for draft Python process to accept connections on port " + py4jPort + "...");
         Exception last = null;
         for (int attempt = 0; attempt < MAX_CONNECTION_RETRIES; attempt++) {
+            if (attempt > 0) {
+                logger.info("  [attempt " + (attempt + 1) + "/" + MAX_CONNECTION_RETRIES + "] retrying in "
+                        + CONNECTION_RETRY_DELAY_MS + "ms...");
+                Thread.sleep(CONNECTION_RETRY_DELAY_MS);
+            }
             try {
                 clientServer = new ClientServer(
                         0,
@@ -169,6 +251,14 @@ public class DraftPythonMLBridge implements AutoCloseable {
                 clientServer.startServer();
                 entryPoint = (DraftPythonEntryPoint) clientServer
                         .getPythonServerEntryPoint(new Class[]{DraftPythonEntryPoint.class});
+
+                if (initModel) {
+                    // This is the first real RPC -- it will throw if Python isn't listening yet.
+                    // It also does the heavy work (CUDA init, model build/load).
+                    logger.info("Initializing draft model (loading torch/CUDA, may take 10-30s on first run)...");
+                    entryPoint.initializeDraftModel();
+                }
+
                 logger.info("Connected to draft Python model on port " + py4jPort);
                 return;
             } catch (Exception e) {
@@ -177,13 +267,59 @@ public class DraftPythonMLBridge implements AutoCloseable {
                     try { clientServer.shutdown(); } catch (Exception ignored) {}
                     clientServer = null;
                 }
-                if (attempt < MAX_CONNECTION_RETRIES - 1) {
-                    Thread.sleep(CONNECTION_RETRY_DELAY_MS);
-                }
             }
         }
         throw new RuntimeException("Could not connect to draft Python process after "
                 + MAX_CONNECTION_RETRIES + " attempts", last);
+    }
+
+    private void shutdownGatewayOnly() {
+        if (clientServer != null) {
+            try {
+                clientServer.shutdown();
+            } catch (Exception ignored) {}
+            clientServer = null;
+        }
+        entryPoint = null;
+    }
+
+    private void recoverConnection(String opName, Exception cause) throws Exception {
+        logger.warning(opName + " failed: " + cause.getMessage() + " - attempting draft bridge reconnect");
+        shutdownGatewayOnly();
+
+        // Fast path: Python process is alive, just reconnect Java client side.
+        if (pythonProcess != null && pythonProcess.isAlive()) {
+            try {
+                connectToGateway(false);
+                return;
+            } catch (Exception e) {
+                logger.warning("Draft bridge reconnect without restart failed: " + e.getMessage());
+            }
+        }
+
+        // Slow path: restart Python process and fully initialize model.
+        if (pythonProcess != null && pythonProcess.isAlive()) {
+            try {
+                pythonProcess.destroy();
+            } catch (Exception ignored) {}
+        }
+        startPythonProcess();
+        connectToGateway(true);
+    }
+
+    private <T> T callWithReconnect(String opName, RpcCall<T> rpc) {
+        synchronized (py4jLock) {
+            try {
+                return rpc.call();
+            } catch (Exception first) {
+                try {
+                    recoverConnection(opName, first);
+                    return rpc.call();
+                } catch (Exception second) {
+                    throw new RuntimeException(opName + " failed after reconnect: " + second.getMessage(), second);
+                }
+            }
+        }
     }
 
     // -----------------------------------------------------------------------
@@ -199,14 +335,14 @@ public class DraftPythonMLBridge implements AutoCloseable {
             float[] candFeats, int[] candIds,
             int numCands, int seqLen, int dimPerToken
     ) {
-        synchronized (py4jLock) {
+        return callWithReconnect("scoreDraftPick", () -> {
             byte[] result = entryPoint.scoreDraftPick(
                     toBytes(stateFlat), toBytes(maskFlat), toBytes(tokenIds),
                     toBytes(candFeats), toBytes(candIds),
                     numCands, seqLen, dimPerToken
             );
             return fromBytes(result, numCands + 1);
-        }
+        });
     }
 
     /**
@@ -218,14 +354,14 @@ public class DraftPythonMLBridge implements AutoCloseable {
             float[] candFeats, int[] candIds,
             int numCands, int seqLen, int dimPerToken
     ) {
-        synchronized (py4jLock) {
+        return callWithReconnect("scoreDraftConstruction", () -> {
             byte[] result = entryPoint.scoreDraftConstruction(
                     toBytes(stateFlat), toBytes(maskFlat), toBytes(tokenIds),
                     toBytes(candFeats), toBytes(candIds),
                     numCands, seqLen, dimPerToken
             );
             return fromBytes(result, numCands + 1);
-        }
+        });
     }
 
     /**
@@ -238,7 +374,7 @@ public class DraftPythonMLBridge implements AutoCloseable {
             byte[] rewardBytes, byte[] doneBytes, byte[] headIdxBytes,
             int numSteps, int seqLen, int dimPerToken, int maxCands
     ) {
-        synchronized (py4jLock) {
+        callWithReconnect("trainDraftBatch", () -> {
             entryPoint.trainDraftBatch(
                     stateBytes, maskBytes, tokenIdBytes,
                     candFeatBytes, candIdBytes, candMaskBytes,
@@ -246,36 +382,35 @@ public class DraftPythonMLBridge implements AutoCloseable {
                     rewardBytes, doneBytes, headIdxBytes,
                     numSteps, seqLen, dimPerToken, maxCands
             );
-        }
+            return null;
+        });
     }
 
     public Map<String, Integer> getTrainingStats() {
-        synchronized (py4jLock) {
-            return entryPoint.getDraftTrainingStats();
-        }
+        return callWithReconnect("getDraftTrainingStats", () -> entryPoint.getDraftTrainingStats());
     }
 
     public Map<String, Object> getLossMetrics() {
-        synchronized (py4jLock) {
-            return entryPoint.getDraftLossMetrics();
-        }
+        return callWithReconnect("getDraftLossMetrics", () -> entryPoint.getDraftLossMetrics());
     }
 
     public void saveDraftModel(String path) {
-        synchronized (py4jLock) {
+        callWithReconnect("saveDraftModel", () -> {
             try {
                 Files.createDirectories(Paths.get(path).getParent());
             } catch (Exception e) {
                 logger.warning("Failed to create dirs for draft model save: " + e.getMessage());
             }
             entryPoint.saveDraftModel(path);
-        }
+            return null;
+        });
     }
 
     public void loadDraftModel(String path) {
-        synchronized (py4jLock) {
+        callWithReconnect("loadDraftModel", () -> {
             entryPoint.loadDraftModel(path);
-        }
+            return null;
+        });
     }
 
     // -----------------------------------------------------------------------
@@ -352,7 +487,7 @@ public class DraftPythonMLBridge implements AutoCloseable {
                 new InputStreamReader(p.getInputStream()))) {
             String line;
             while ((line = r.readLine()) != null) {
-                logger.fine(prefix + " " + line);
+                logger.info(prefix + " " + line);
             }
         } catch (Exception ignored) {}
     }

@@ -132,6 +132,9 @@ public abstract class DraftCube {
             boolean done = false;
             int notValid = 0;
             while (!done) {
+                if (leftCubeCards.isEmpty()) {
+                    throw new IllegalStateException("Cube has no cards available for booster generation: " + this.getName());
+                }
                 int index = RandomUtil.nextInt(leftCubeCards.size());
                 CardIdentity cardId = leftCubeCards.get(index);
                 leftCubeCards.remove(index);

@@ -1,0 +1,4 @@
+# Elves only - single deck training
+# Use with: $env:RL_AGENT_DECK_LIST="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.elves.txt"
+
+../Pauper/Deck - Elves.dek

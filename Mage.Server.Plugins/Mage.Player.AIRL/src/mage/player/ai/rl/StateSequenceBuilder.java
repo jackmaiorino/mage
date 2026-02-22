@@ -13,8 +13,46 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.PayLoyaltyCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.SearchEffect;
+import mage.abilities.effects.common.CopyPermanentEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.ExileAllEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -32,6 +70,9 @@ import mage.cards.Card;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -39,6 +80,8 @@ import mage.game.permanent.PermanentToken;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  * Helper that converts a {@link Game} snapshot into a padded token sequence +
@@ -79,6 +122,11 @@ public class StateSequenceBuilder {
     private static final int KW_SLOT_START = 39;
     // Slots 51-55: extra BF-only properties (counters, attachments, blocking, token).
     private static final int EXTRA_SLOT_START = 51;
+    // Slots 56-82: effect-type flags (27 flags, all zones).
+    private static final int EFFECT_SLOT_START = 56;
+    // Slots 83-114: pre-computed text embeddings (32 dims, filled by CardTextEmbeddings).
+    private static final int TEXT_EMBED_SLOT_START = 83;
+    public static final int TEXT_EMBED_DIM = 32;
 
     public enum ZoneType {
         HAND,
@@ -530,16 +578,132 @@ public class StateSequenceBuilder {
                 v[EXTRA_SLOT_START + 4] = (ep instanceof PermanentToken) ? 1.0f : 0.0f;
         }
 
-        // --- 9. Text embedding ----------------------------------
-        // For the local Pauper milestone we run fully offline:
-        // - Do NOT embed rules text via external APIs.
-        // - Any remaining dimensions stay as 0 padding here.
+        // --- 10. Effect-type flags (slots 56-82) ----------------
+        // Walk all abilities and their effects to detect functional categories.
+        // Uses static getAbilities() - reflects card text across all zones.
+        {
+            boolean fDealsDamage = false;
+            boolean fDestroys = false;
+            boolean fExiles = false;
+            boolean fBounces = false;
+            boolean fDraws = false;
+            boolean fGainsLife = false;
+            boolean fLosesLife = false;
+            boolean fTokens = false;
+            boolean fCounters = false;
+            boolean fAddCounters = false;
+            boolean fSacrifices = false;
+            boolean fDiscards = false;
+            boolean fMills = false;
+            boolean fTutors = false;
+            boolean fBoostsPT = false;
+            boolean fGrantsAbility = false;
+            boolean fAddsMana = false;
+            boolean fCostReduction = false;
+            boolean fPreventsDamage = false;
+            boolean fExtraTurn = false;
+            boolean fCopies = false;
+            boolean fTransforms = false;
+            boolean fTargetsAny = false;
+            boolean fTargetsCreature = false;
+            boolean fTargetsArtifact = false;
+            boolean fTargetsEnchantment = false;
+            boolean fHasETB = false;
+
+            Iterable<Ability> abilities = isPerm
+                    ? kwPerm.getAbilities(game)
+                    : card.getAbilities();
+
+            for (Ability ability : abilities) {
+                if (ability instanceof EntersBattlefieldTriggeredAbility) {
+                    fHasETB = true;
+                }
+                for (Effect effect : ability.getAllEffects()) {
+                    if (effect instanceof DamageTargetEffect || effect instanceof DamagePlayersEffect)
+                        fDealsDamage = true;
+                    if (effect instanceof DestroyTargetEffect || effect instanceof DestroyAllEffect)
+                        fDestroys = true;
+                    if (effect instanceof ExileTargetEffect || effect instanceof ExileAllEffect)
+                        fExiles = true;
+                    if (effect instanceof ReturnToHandTargetEffect || effect instanceof ReturnToHandFromBattlefieldAllEffect)
+                        fBounces = true;
+                    if (effect instanceof DrawCardSourceControllerEffect || effect instanceof DrawCardTargetEffect)
+                        fDraws = true;
+                    if (effect instanceof GainLifeEffect)
+                        fGainsLife = true;
+                    if (effect instanceof LoseLifeTargetEffect || effect instanceof LoseLifeSourceControllerEffect)
+                        fLosesLife = true;
+                    if (effect instanceof CreateTokenEffect)
+                        fTokens = true;
+                    if (effect instanceof CounterTargetEffect)
+                        fCounters = true;
+                    if (effect instanceof AddCountersTargetEffect || effect instanceof AddCountersSourceEffect)
+                        fAddCounters = true;
+                    if (effect instanceof SacrificeEffect || effect instanceof SacrificeSourceEffect)
+                        fSacrifices = true;
+                    if (effect instanceof DiscardTargetEffect || effect instanceof DiscardControllerEffect)
+                        fDiscards = true;
+                    if (effect instanceof MillCardsTargetEffect || effect instanceof MillCardsControllerEffect)
+                        fMills = true;
+                    if (effect instanceof SearchEffect)
+                        fTutors = true;
+                    if (effect instanceof BoostTargetEffect || effect instanceof BoostSourceEffect || effect instanceof BoostControlledEffect)
+                        fBoostsPT = true;
+                    if (effect instanceof GainAbilityTargetEffect || effect instanceof GainAbilityControlledEffect)
+                        fGrantsAbility = true;
+                    if (effect instanceof ManaEffect)
+                        fAddsMana = true;
+                    if (effect instanceof CostModificationEffectImpl)
+                        fCostReduction = true;
+                    if (effect instanceof PreventDamageToTargetEffect)
+                        fPreventsDamage = true;
+                    if (effect instanceof AddExtraTurnControllerEffect)
+                        fExtraTurn = true;
+                    if (effect instanceof CopyTargetStackObjectEffect || effect instanceof CopyPermanentEffect)
+                        fCopies = true;
+                    if (effect instanceof TransformSourceEffect)
+                        fTransforms = true;
+                }
+                for (Target target : ability.getTargets()) {
+                    if (target instanceof TargetAnyTarget || target instanceof TargetCreatureOrPlayer)
+                        fTargetsAny = true;
+                    if (target.getFilter() instanceof FilterCreaturePermanent)
+                        fTargetsCreature = true;
+                    if (target.getFilter() instanceof FilterArtifactPermanent)
+                        fTargetsArtifact = true;
+                    if (target.getFilter() instanceof FilterEnchantmentPermanent)
+                        fTargetsEnchantment = true;
+                }
+            }
+
+            boolean[] ef = {
+                fDealsDamage, fDestroys, fExiles, fBounces, fDraws, fGainsLife, fLosesLife,
+                fTokens, fCounters, fAddCounters, fSacrifices, fDiscards, fMills, fTutors,
+                fBoostsPT, fGrantsAbility, fAddsMana, fCostReduction, fPreventsDamage,
+                fExtraTurn, fCopies, fTransforms,
+                fTargetsAny, fTargetsCreature, fTargetsArtifact, fTargetsEnchantment, fHasETB
+            };
+            for (int i = 0; i < ef.length && EFFECT_SLOT_START + i < DIM_PER_TOKEN; i++) {
+                v[EFFECT_SLOT_START + i] = ef[i] ? 1.0f : 0.0f;
+            }
+        }
+
+        // --- 11. Pre-computed text embeddings (slots 83-114) ----
+        // Filled by CardTextEmbeddings singleton if a card_embeddings.json is present
+        // for the current profile. Falls back to zeros if not available.
+        {
+            float[] textEmbed = CardTextEmbeddings.getInstance().getEmbedding(card.getName());
+            for (int i = 0; i < TEXT_EMBED_DIM && TEXT_EMBED_SLOT_START + i < DIM_PER_TOKEN; i++) {
+                v[TEXT_EMBED_SLOT_START + i] = textEmbed[i];
+            }
+        }
+
         // Validate final vector
         for (int i = 0; i < v.length; i++) {
             if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
                 logger.severe(String.format("Invalid value in final vector for card %s at index %d: %f",
                         card.getName(), i, v[i]));
-                v[i] = 0.0f; // Replace NaN/Inf with 0
+                v[i] = 0.0f;
             }
         }
 

@@ -120,16 +120,14 @@ public class DraftLogger {
         }
     }
 
-    /**
-     * Log the deck construction decision after drafting.
-     *
-     * @param poolCards      all 45 drafted cards
-     * @param scores         construction head scores per non-land card (null if heuristic)
-     * @param selectedCards  cards selected for maindeck (23 non-lands)
-     * @param landBase       lands added to complete the deck
-     */
-    public void logConstruction(List<Card> poolCards, float[] scores,
-            List<Card> selectedCards, List<Card> landBase) {
+    public void logConstruction(List<Card> poolCards,
+            List<Card> selectedCards, List<Card> landBase,
+            int rawLandCount, int floorLandCount, int appliedLandCount,
+            int targetNonLandCount, boolean forcedByFloor,
+            int finalNonLands, int finalLands, int finalDeckSize,
+            int draftedNonBasicsUsed, int draftedBasicsUsed, int syntheticBasicsAdded,
+            List<String> spellPickSteps, List<String> landPickSteps,
+            List<String> repairActions, String landSourceSummary) {
         if (!enabled) return;
         try {
             writer.write(repeat('=', LINE_WIDTH));
@@ -138,6 +136,21 @@ public class DraftLogger {
             writer.newLine();
             writer.write(repeat('=', LINE_WIDTH));
             writer.newLine();
+            writer.write(String.format(
+                    "land_count raw=%d floor=%d applied=%d forced_by_floor=%s target_nonlands=%d",
+                    rawLandCount, floorLandCount, appliedLandCount, forcedByFloor, targetNonLandCount));
+            writer.newLine();
+            writer.write(String.format(
+                    "final_composition nonlands=%d lands=%d deck_size=%d",
+                    finalNonLands, finalLands, finalDeckSize));
+            writer.newLine();
+            writer.write(String.format(
+                    "land_sources drafted_nonbasics=%d drafted_basics=%d synthetic_basics=%d",
+                    draftedNonBasicsUsed, draftedBasicsUsed, syntheticBasicsAdded));
+            writer.newLine();
+            writer.write("land_color_sources " + (landSourceSummary == null ? "" : landSourceSummary));
+            writer.newLine();
+            writer.newLine();
 
             writer.write("Pool (" + poolCards.size() + " cards):");
             writer.newLine();
@@ -145,9 +158,7 @@ public class DraftLogger {
                 Card c = poolCards.get(i);
                 boolean selected = selectedCards.contains(c);
                 String sel = selected ? " [IN]" : "     ";
-                String score = (scores != null && i < scores.length)
-                        ? String.format(" %.4f", scores[i]) : "";
-                writer.write(String.format("  %s%s  %s", sel, score, c.getName()));
+                writer.write(String.format("  %s  %s", sel, c.getName()));
                 writer.newLine();
             }
             writer.newLine();
@@ -157,6 +168,16 @@ public class DraftLogger {
             for (Card c : selectedCards) {
                 writer.write("  " + c.getName());
                 writer.newLine();
+            }
+            writer.newLine();
+
+            writer.write("Spell pick steps (" + (spellPickSteps == null ? 0 : spellPickSteps.size()) + "):");
+            writer.newLine();
+            if (spellPickSteps != null) {
+                for (String line : spellPickSteps) {
+                    writer.write("  " + line);
+                    writer.newLine();
+                }
             }
             writer.newLine();
 
@@ -171,6 +192,29 @@ public class DraftLogger {
                     writer.newLine();
                 } catch (IOException ignored) {}
             });
+            writer.newLine();
+
+            writer.write("Land pick steps (" + (landPickSteps == null ? 0 : landPickSteps.size()) + "):");
+            writer.newLine();
+            if (landPickSteps != null) {
+                for (String line : landPickSteps) {
+                    writer.write("  " + line);
+                    writer.newLine();
+                }
+            }
+            writer.newLine();
+
+            writer.write("Repairs (" + (repairActions == null ? 0 : repairActions.size()) + "):");
+            writer.newLine();
+            if (repairActions != null && !repairActions.isEmpty()) {
+                for (String line : repairActions) {
+                    writer.write("  " + line);
+                    writer.newLine();
+                }
+            } else {
+                writer.write("  none");
+                writer.newLine();
+            }
             writer.newLine();
             writer.flush();
         } catch (IOException e) {

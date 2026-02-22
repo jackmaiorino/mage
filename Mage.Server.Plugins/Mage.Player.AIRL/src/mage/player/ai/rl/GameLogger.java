@@ -20,6 +20,8 @@ public class GameLogger {
     private static final AtomicInteger gameCounter = new AtomicInteger(0);
     private static final String TRAIN_LOG_DIR = RLLogPaths.TRAINING_GAME_LOGS_DIR;
     private static final String EVAL_LOG_DIR = RLLogPaths.EVAL_GAME_LOGS_DIR;
+    private static final String DRAFT_EVAL_LOG_DIR = RLLogPaths.DRAFT_EVAL_GAME_LOGS_DIR;
+    private static final String DRAFT_BENCHMARK_LOG_DIR = RLLogPaths.DRAFT_BENCHMARK_GAME_LOGS_DIR;
     private static final int LINE_WIDTH = 80;
 
     private final BufferedWriter writer;
@@ -54,6 +56,26 @@ public class GameLogger {
             return createNoOp();
         }
         return createInDir(EVAL_LOG_DIR, -1);
+    }
+
+    /**
+     * Create a game logger for DraftTrainer per-episode reward games.
+     */
+    public static GameLogger createForDraftEval(boolean enableLogging) {
+        if (!enableLogging) {
+            return createNoOp();
+        }
+        return createInDir(DRAFT_EVAL_LOG_DIR, -1);
+    }
+
+    /**
+     * Create a game logger for DraftTrainer periodic benchmark games.
+     */
+    public static GameLogger createForDraftBenchmark(boolean enableLogging) {
+        if (!enableLogging) {
+            return createNoOp();
+        }
+        return createInDir(DRAFT_BENCHMARK_LOG_DIR, -1);
     }
 
     private static GameLogger createInDir(String dir, int maxFiles) {

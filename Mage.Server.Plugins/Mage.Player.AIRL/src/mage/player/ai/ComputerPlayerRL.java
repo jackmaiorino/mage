@@ -22,9 +22,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import mage.Mana;
+import mage.ConditionalMana;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.mana.ManaOptions;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.mana.ManaAbility;
@@ -73,6 +75,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 public class ComputerPlayerRL extends ComputerPlayer7 {
 
@@ -109,6 +113,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // ThreadLocal for activation failure tracing - captures every callback during activateAbility()
     private static final ThreadLocal<List<String>> activationTrace = ThreadLocal.withInitial(ArrayList::new);
     private static final ThreadLocal<Boolean> traceEnabled = ThreadLocal.withInitial(() -> false);
+    private static final ThreadLocal<String> choiceExplosionContext = new ThreadLocal<>();
 
     private PythonModel model;
     private MulliganModel mulliganModel;
@@ -161,6 +166,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             "MULLIGAN_TRACE_JSONL_FILE",
             "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/mulligan_trace.jsonl"
     );
+    private static final Object CANDIDATE_EXPLOSION_LOG_LOCK = new Object();
+    private static final String CANDIDATE_EXPLOSIONS_LOG_FILE = System.getenv().getOrDefault(
+            "CANDIDATE_EXPLOSIONS_LOG_FILE",
+            RLLogPaths.LOGS_BASE_DIR + "/health/candidate_explosions.log"
+    );
 
     private long mulliganEventSeq = 0L;
 
@@ -179,6 +189,18 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // Draft context set externally by DraftTrainer before each draft
     private int currentDraftEpisode = -1;
     private boolean draftLoggingEnabled = false;
+    private static final boolean DRAFT_MIN_LANDS_ENABLE =
+            "1".equals(System.getenv().getOrDefault("DRAFT_MIN_LANDS_ENABLE", "1"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("DRAFT_MIN_LANDS_ENABLE", "1"));
+    private static final int DRAFT_MIN_LANDS_START =
+            Integer.parseInt(System.getenv().getOrDefault("DRAFT_MIN_LANDS_START", "12"));
+    private static final int DRAFT_MIN_LANDS_END =
+            Integer.parseInt(System.getenv().getOrDefault("DRAFT_MIN_LANDS_END", "0"));
+    private static final int DRAFT_MIN_LANDS_DECAY_EPISODES =
+            Math.max(1, Integer.parseInt(System.getenv().getOrDefault("DRAFT_MIN_LANDS_DECAY_EPISODES", "5000")));
+    private static final int DRAFT_TARGET_DECK_SIZE = 40;
+    private static final int DRAFT_LAND_COUNT_MIN = 0;
+    private static final int DRAFT_LAND_COUNT_MAX = 20;
 
     /** Lightweight container for one draft decision step's training data. */
     public static class DraftStepData {
@@ -192,10 +214,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         public final float   logProb;
         public final float   value;
         public final int     headIdx; // 0=pick, 1=construction
+        public final boolean forcedByCurriculum;
+        public final String  constructionStepKind;
 
         DraftStepData(float[] stateFlat, int[] maskFlat, int[] tokenIds,
                       float[] candFeats, int[] candIds, int[] candMask,
                       int chosenIdx, float logProb, float value, int headIdx) {
+            this(stateFlat, maskFlat, tokenIds, candFeats, candIds, candMask, chosenIdx, logProb, value, headIdx, false, null);
+        }
+
+        DraftStepData(float[] stateFlat, int[] maskFlat, int[] tokenIds,
+                      float[] candFeats, int[] candIds, int[] candMask,
+                      int chosenIdx, float logProb, float value, int headIdx,
+                      boolean forcedByCurriculum, String constructionStepKind) {
             this.stateFlat = stateFlat;
             this.maskFlat = maskFlat;
             this.tokenIds = tokenIds;
@@ -206,6 +237,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             this.logProb = logProb;
             this.value = value;
             this.headIdx = headIdx;
+            this.forcedByCurriculum = forcedByCurriculum;
+            this.constructionStepKind = constructionStepKind;
         }
     }
 
@@ -249,6 +282,28 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
         } catch (Exception ignored) {
             // Intentionally ignore logging failures (never crash engine for diagnostics).
+        }
+    }
+
+    private static void candidateExplosionLog(String line) {
+        if (line == null || line.isEmpty()) {
+            return;
+        }
+        try {
+            Path p = Paths.get(CANDIDATE_EXPLOSIONS_LOG_FILE);
+            Path parent = p.getParent();
+            if (parent != null) {
+                Files.createDirectories(parent);
+            }
+            String stamped = LocalDateTime.now().format(MULL_TRAIN_TS)
+                    + " - candidate_explosion - WARN - "
+                    + line + System.lineSeparator();
+            synchronized (CANDIDATE_EXPLOSION_LOG_LOCK) {
+                Files.write(p, stamped.getBytes(StandardCharsets.UTF_8),
+                        StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+            }
+        } catch (Exception ignored) {
+            // Never fail gameplay because of diagnostics logging.
         }
     }
 
@@ -444,6 +499,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         if (candidates.size() > maxCandidates) {
             RLTrainer.threadLocalLogger.get().warn(
                     "genericChoose: received " + candidates.size() + " options, truncating to " + maxCandidates);
+            logCandidateExplosionDebug(candidates, actionType, game, source);
         }
 
         // Prevent infinite loops if the engine requests more picks than we kept after truncation
@@ -661,6 +717,151 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         return selectedIndices;
+    }
+
+    private <T> void logCandidateExplosionDebug(
+            List<T> candidates,
+            StateSequenceBuilder.ActionType actionType,
+            Game game,
+            Ability source
+    ) {
+        try {
+            String phase = "unknown";
+            if (game != null && game.getStep() != null && game.getStep().getType() != null) {
+                phase = game.getStep().getType().toString();
+            }
+            String sourceText = "none";
+            if (source != null) {
+                sourceText = source.toString();
+                try {
+                    MageObject srcObj = game != null ? game.getObject(source.getSourceId()) : null;
+                    if (srcObj != null) {
+                        sourceText = srcObj.getName() + " :: " + sourceText;
+                    }
+                } catch (Exception ignored) {
+                    // best-effort only
+                }
+            }
+
+            Map<String, Integer> typeCounts = new HashMap<>();
+            Map<String, Integer> signatureCounts = new HashMap<>();
+            for (T candidate : candidates) {
+                if (candidate == null) {
+                    typeCounts.merge("null", 1, Integer::sum);
+                    signatureCounts.merge("null", 1, Integer::sum);
+                    continue;
+                }
+                String type = candidate.getClass().getSimpleName();
+                typeCounts.merge(type, 1, Integer::sum);
+
+                String signature;
+                if (candidate instanceof ActivatedAbility) {
+                    ActivatedAbility a = (ActivatedAbility) candidate;
+                    MageObject srcObj = game != null ? game.getObject(a.getSourceId()) : null;
+                    String srcName = srcObj != null ? srcObj.getName() : "unknown-source";
+                    signature = srcName + " :: " + a.toString();
+                } else if (candidate instanceof MageObject) {
+                    signature = ((MageObject) candidate).getName();
+                } else {
+                    signature = String.valueOf(candidate);
+                }
+                if (signature.length() > 140) {
+                    signature = signature.substring(0, 140) + "...";
+                }
+                signatureCounts.merge(signature, 1, Integer::sum);
+            }
+
+            List<Map.Entry<String, Integer>> topTypes = typeCounts.entrySet().stream()
+                    .sorted((a, b) -> Integer.compare(b.getValue(), a.getValue()))
+                    .limit(8)
+                    .collect(Collectors.toList());
+            List<Map.Entry<String, Integer>> topSignatures = signatureCounts.entrySet().stream()
+                    .sorted((a, b) -> Integer.compare(b.getValue(), a.getValue()))
+                    .limit(12)
+                    .collect(Collectors.toList());
+
+            RLTrainer.threadLocalLogger.get().warn(
+                    "genericChoose explosion: actionType=" + actionType
+                            + ", phase=" + phase
+                            + ", source=" + sourceText
+                            + ", totalCandidates=" + candidates.size()
+                            + ", uniqueSignatures=" + signatureCounts.size()
+            );
+            RLTrainer.threadLocalLogger.get().warn("genericChoose explosion types: " + topTypes);
+            RLTrainer.threadLocalLogger.get().warn("genericChoose explosion top signatures: " + topSignatures);
+            String ctx = choiceExplosionContext.get();
+            if (ctx != null && !ctx.isEmpty()) {
+                RLTrainer.threadLocalLogger.get().warn("genericChoose explosion choice_context: " + ctx);
+            }
+            String stack = buildCompactCallerStack(12);
+            RLTrainer.threadLocalLogger.get().warn("genericChoose explosion stack: " + stack);
+            candidateExplosionLog(
+                    "actionType=" + actionType
+                            + ", phase=" + phase
+                            + ", source=" + sourceText
+                            + ", gameId=" + (game != null ? game.getId() : "none")
+                            + ", totalCandidates=" + candidates.size()
+                            + ", uniqueSignatures=" + signatureCounts.size()
+            );
+            candidateExplosionLog("types=" + topTypes);
+            candidateExplosionLog("top_signatures=" + topSignatures);
+            if (ctx != null && !ctx.isEmpty()) {
+                candidateExplosionLog("choice_context=" + ctx);
+            }
+            candidateExplosionLog("stack=" + stack);
+            candidateExplosionLog("first_candidates=" + sampleCandidates(candidates, 0, Math.min(12, candidates.size()), game));
+            if (candidates.size() > 12) {
+                int start = Math.max(0, candidates.size() - 12);
+                candidateExplosionLog("last_candidates=" + sampleCandidates(candidates, start, candidates.size(), game));
+            }
+            candidateExplosionLog("---");
+        } catch (Exception e) {
+            RLTrainer.threadLocalLogger.get().warn(
+                    "genericChoose explosion debug failed: " + e.getMessage());
+            candidateExplosionLog("debug_failed=" + e.getMessage());
+        }
+    }
+
+    private String buildCompactCallerStack(int maxFrames) {
+        StackTraceElement[] frames = Thread.currentThread().getStackTrace();
+        List<String> filtered = new ArrayList<>();
+        for (StackTraceElement f : frames) {
+            String cls = f.getClassName();
+            if (cls.contains("ComputerPlayerRL")
+                    || cls.contains("mage.game")
+                    || cls.contains("mage.abilities")) {
+                filtered.add(f.getClassName() + "#" + f.getMethodName() + ":" + f.getLineNumber());
+            }
+            if (filtered.size() >= maxFrames) {
+                break;
+            }
+        }
+        return filtered.toString();
+    }
+
+    private <T> List<String> sampleCandidates(List<T> candidates, int from, int to, Game game) {
+        List<String> out = new ArrayList<>();
+        int start = Math.max(0, from);
+        int end = Math.min(candidates.size(), to);
+        for (int i = start; i < end; i++) {
+            T candidate = candidates.get(i);
+            String signature;
+            if (candidate instanceof ActivatedAbility) {
+                ActivatedAbility a = (ActivatedAbility) candidate;
+                MageObject srcObj = game != null ? game.getObject(a.getSourceId()) : null;
+                String srcName = srcObj != null ? srcObj.getName() : "unknown-source";
+                signature = srcName + " :: " + a.toString();
+            } else if (candidate instanceof MageObject) {
+                signature = ((MageObject) candidate).getName();
+            } else {
+                signature = String.valueOf(candidate);
+            }
+            if (signature.length() > 180) {
+                signature = signature.substring(0, 180) + "...";
+            }
+            out.add("[" + i + "] " + signature);
+        }
+        return out;
     }
 
     private static String headForActionType(StateSequenceBuilder.ActionType t) {
@@ -1321,6 +1522,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         int minTargets = Math.max(0, target.getMinNumberOfTargets());
         int maxTargets = Math.max(0, target.getMaxNumberOfTargets());
+        int requiredTapPower = parseCrewOrSaddleRequiredPower(outcome, source, target);
 
         java.util.HashSet<UUID> chosen = new java.util.HashSet<>();
         int chosenCount = 0;
@@ -1329,9 +1531,15 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             final UUID ctrlId = abilityControllerId;
             possible.removeIf(id -> id == null || chosen.contains(id) || !target.canTarget(ctrlId, id, source, game));
 
-            boolean allowStop = chosenCount >= minTargets;
+            int chosenPower = requiredTapPower > 0 ? computeTotalPowerForTargets(chosen, game) : 0;
+            boolean allowStop = chosenCount >= minTargets
+                    && (requiredTapPower <= 0 || chosenPower >= requiredTapPower);
             if (allowStop) {
                 possible.add(0, null); // STOP sentinel
+            } else if (requiredTapPower > 0) {
+                trace(String.format(
+                        "chooseTarget: STOP disabled (crew/saddle), chosenPower=%d requiredPower=%d",
+                        chosenPower, requiredTapPower));
             }
 
             // Trace possible targets (cap at 10 for readability)
@@ -1557,9 +1765,90 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             chosenCount++;
         }
 
+        // Crew/Saddle safety: if model choices didn't reach required total power,
+        // deterministically add highest-power legal creatures until threshold is met.
+        if (requiredTapPower > 0) {
+            int chosenPower = computeTotalPowerForTargets(chosen, game);
+            while (chosenPower < requiredTapPower && chosenCount < maxTargets) {
+                java.util.List<UUID> possible = new java.util.ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+                final UUID ctrlId = abilityControllerId;
+                possible.removeIf(id -> id == null || chosen.contains(id) || !target.canTarget(ctrlId, id, source, game));
+                if (possible.isEmpty()) {
+                    break;
+                }
+                UUID best = null;
+                int bestPower = Integer.MIN_VALUE;
+                for (UUID id : possible) {
+                    int p = powerForTarget(id, game);
+                    if (p > bestPower) {
+                        bestPower = p;
+                        best = id;
+                    }
+                }
+                if (best == null) {
+                    break;
+                }
+                String bestName = game.getObject(best) != null ? game.getObject(best).getName() : "unknown";
+                trace(String.format(
+                        "chooseTarget: crew/saddle deterministic fill add=%s power=%d chosenPower=%d requiredPower=%d",
+                        bestName, Math.max(0, bestPower), chosenPower, requiredTapPower));
+                target.addTarget(best, source, game);
+                chosen.add(best);
+                chosenCount++;
+                chosenPower = computeTotalPowerForTargets(chosen, game);
+            }
+        }
+
         boolean result = chosenCount >= minTargets;
         trace(String.format("chooseTarget EXIT: chosenCount=%d, minTargets=%d, result=%s", chosenCount, minTargets, result));
         return result;
+    }
+
+    private int parseCrewOrSaddleRequiredPower(Outcome outcome, Ability source, Target target) {
+        if (outcome != Outcome.Tap || source == null || target == null) {
+            return 0;
+        }
+        String text = source.toString();
+        if (text == null || (!text.contains("Crew") && !text.contains("Saddle"))) {
+            return 0;
+        }
+        java.util.regex.Matcher m = java.util.regex.Pattern
+                .compile("\\b(?:Crew|Saddle)\\s+(\\d+)\\b")
+                .matcher(text);
+        if (m.find()) {
+            try {
+                return Math.max(0, Integer.parseInt(m.group(1)));
+            } catch (Exception ignored) {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    private int computeTotalPowerForTargets(Set<UUID> ids, Game game) {
+        int total = 0;
+        for (UUID id : ids) {
+            total += powerForTarget(id, game);
+        }
+        return total;
+    }
+
+    private int powerForTarget(UUID id, Game game) {
+        if (id == null || game == null) {
+            return 0;
+        }
+        try {
+            Permanent p = game.getPermanent(id);
+            if (p != null) {
+                return Math.max(0, p.getPower().getValue());
+            }
+            MageObject o = game.getObject(id);
+            if (o instanceof Card) {
+                return Math.max(0, ((Card) o).getPower().getValue());
+            }
+        } catch (Exception ignored) {
+        }
+        return 0;
     }
 
     @Override
@@ -2069,17 +2358,39 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return true;
         }
 
+        // Card-name effects can present the full card database (30k+ options).
+        // RL truncation to MAX_CANDIDATES is both noisy and strategically unsound here,
+        // so defer to base AI handling for these giant naming menus.
+        String choiceMsg = choice.getMessage() != null ? choice.getMessage().toLowerCase() : "";
+        boolean isCardNamePrompt = choiceMsg.contains("card name");
+        if (isCardNamePrompt && availableChoices.size() > StateSequenceBuilder.TrainingData.MAX_CANDIDATES) {
+            trace("choose: large card-name prompt, delegating to super.choose() to avoid truncation");
+            return super.choose(outcome, choice, game);
+        }
+
         // Use RL model to score the choices
         trace("choose: calling RL model, count=" + availableChoices.size());
         try {
-            List<Integer> rankedIndices = genericChoose(
-                    availableChoices,
-                    1, // maxTargets = 1 (pick one choice)
-                    1, // minTargets = 1 (must pick)
-                    StateSequenceBuilder.ActionType.SELECT_CHOICE,
-                    game,
-                    null
-            );
+            String choiceContext = "choiceClass=" + choice.getClass().getSimpleName()
+                    + ", message=" + trunc(choice.getMessage(), 220)
+                    + ", isKeyChoice=" + choice.isKeyChoice()
+                    + ", isRequired=" + choice.isRequired()
+                    + ", availableCount=" + availableChoices.size()
+                    + ", preview=" + trunc(availableChoices.subList(0, Math.min(8, availableChoices.size())).toString(), 320);
+            choiceExplosionContext.set(choiceContext);
+            List<Integer> rankedIndices;
+            try {
+                rankedIndices = genericChoose(
+                        availableChoices,
+                        1, // maxTargets = 1 (pick one choice)
+                        1, // minTargets = 1 (must pick)
+                        StateSequenceBuilder.ActionType.SELECT_CHOICE,
+                        game,
+                        currentAbility
+                );
+            } finally {
+                choiceExplosionContext.remove();
+            }
 
             if (rankedIndices != null && !rankedIndices.isEmpty()) {
                 int chosenIdx = rankedIndices.get(0);
@@ -2253,11 +2564,33 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 }
             }
 
+            int appliedIdx = chosenIdx;
+            if (!isModeChoiceCurrentlyLegal(availableModes.get(appliedIdx), source, game)) {
+                int fallbackIdx = -1;
+                for (int i = 0; i < candidateCount; i++) {
+                    if (isModeChoiceCurrentlyLegal(availableModes.get(i), source, game)) {
+                        fallbackIdx = i;
+                        break;
+                    }
+                }
+                if (fallbackIdx >= 0) {
+                    trace(String.format(
+                            "chooseMode: overriding illegal mode idx=%d with legal idx=%d",
+                            appliedIdx, fallbackIdx));
+                    appliedIdx = fallbackIdx;
+                } else {
+                    trace("chooseMode: no legal mode found after legality check, falling back to super");
+                    mage.abilities.Mode fallback = super.chooseMode(modes, source, game);
+                    trace("chooseMode EXIT (no legal mode fallback): " + (fallback != null ? fallback.getId() : "null"));
+                    return fallback;
+                }
+            }
+
             if (trainingEnabled && !game.isSimulation()) {
                 int[] chosenIndices = new int[maxCandidates];
                 Arrays.fill(chosenIndices, -1);
-                chosenIndices[0] = chosenIdx;
-                float oldLogp = (float) Math.log(Math.max(1e-8f, maskedProbs[chosenIdx]));
+                chosenIndices[0] = appliedIdx;
+                float oldLogp = (float) Math.log(Math.max(1e-8f, maskedProbs[appliedIdx]));
                 StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
                         baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
                         1, chosenIndices, oldLogp, valueScore,
@@ -2267,7 +2600,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.CHOOSE_MODE, 0) + 1);
             }
 
-            mage.abilities.Mode chosen = availableModes.get(chosenIdx);
+            mage.abilities.Mode chosen = availableModes.get(appliedIdx);
             try {
                 GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
                 if (gameLogger != null && gameLogger.isEnabled()) {
@@ -2280,13 +2613,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         modeNames.add("Mode" + i + ":" + availableModes.get(i).getEffects().getText(availableModes.get(i)).substring(0, Math.min(30, availableModes.get(i).getEffects().getText(availableModes.get(i)).length())));
                     }
                     gameLogger.logDecision(this.getName(), activePlayerName, phase + " (CHOOSE_MODE)", turn,
-                            String.format("CHOOSE_MODE: chose mode %d of %d", chosenIdx, candidateCount),
-                            modeNames, Arrays.copyOf(maskedProbs, candidateCount), valueScore, chosenIdx,
-                            modeNames.get(chosenIdx));
+                            String.format("CHOOSE_MODE: chose mode %d of %d", appliedIdx, candidateCount),
+                            modeNames, Arrays.copyOf(maskedProbs, candidateCount), valueScore, appliedIdx,
+                            modeNames.get(appliedIdx));
                 }
             } catch (Exception ignored) {}
 
-            trace("chooseMode EXIT: selected mode index=" + chosenIdx);
+            trace("chooseMode EXIT: selected mode index=" + appliedIdx);
             return chosen;
 
         } catch (Exception e) {
@@ -2294,6 +2627,22 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             mage.abilities.Mode fallback = super.chooseMode(modes, source, game);
             trace("chooseMode EXIT (fallback): " + (fallback != null ? fallback.getId() : "null"));
             return fallback;
+        }
+    }
+
+    private boolean isModeChoiceCurrentlyLegal(mage.abilities.Mode mode, Ability source, Game game) {
+        if (mode == null || source == null || game == null) {
+            return true;
+        }
+        try {
+            boolean targetsOk = mode.getTargets().isEmpty()
+                    || mode.getTargets().canChoose(source.getControllerId(), source, game);
+            boolean costOk = mode.getCost() == null
+                    || mode.getCost().canPay(source, source, playerId, game);
+            return targetsOk && costOk;
+        } catch (Exception e) {
+            trace("isModeChoiceCurrentlyLegal: exception during legality check: " + e.getMessage());
+            return false;
         }
     }
 
@@ -2315,10 +2664,31 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (isManaPay && source != null) {
                 try {
                     mage.abilities.mana.ManaOptions available = getManaAvailable(game);
-                    int totalAvailable = available.isEmpty() ? 0 : available.stream()
-                            .mapToInt(m -> m.count()).max().orElse(0);
+                    int totalAvailable = 0;
+                    if (!available.isEmpty()) {
+                        for (Mana mana : available) {
+                            // Ignore conditional mana options that cannot be used for this spell/ability.
+                            // Example: Mishra's Workshop mana for non-artifact spells.
+                            if (mana instanceof ConditionalMana
+                                    && !((ConditionalMana) mana).apply(source, game, getId(), source.getManaCosts())) {
+                                continue;
+                            }
+                            totalAvailable = Math.max(totalAvailable, mana.count());
+                        }
+                    }
                     int baseCost = source.getManaCostsToPay().manaValue();
-                    int affordableX = Math.max(realMin, totalAvailable - baseCost);
+                    int xInstances = source.getManaCostsToPay().stream()
+                            .filter(c -> c instanceof VariableManaCost)
+                            .mapToInt(c -> ((VariableManaCost) c).getXInstancesCount())
+                            .sum();
+                    if (xInstances <= 0) {
+                        xInstances = 1;
+                    }
+
+                    int affordableX = (totalAvailable - baseCost) / xInstances;
+                    if (affordableX < 0) {
+                        affordableX = 0;
+                    }
                     realMax = Math.min(realMax, affordableX);
                 } catch (Exception ignored) {}
             }
@@ -2492,6 +2862,52 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             } catch (Exception e) {
                 // Parsing failed - let model decide rather than silently blocking
                 trace("chooseUse mana feasibility check failed: " + e.getMessage());
+            }
+        }
+
+        // Phyrexian payment safety gate: if this prompt is the phyrexian "pay 2 life
+        // instead of {X}" choice and we cannot produce the colored mana option,
+        // force YES when legal to avoid repeated activation failures.
+        if (outcome == Outcome.LoseLife && message != null
+                && message.toLowerCase().contains("phyrexian cost")) {
+            try {
+                Mana manaOption = parseManaCostFromMessage(message); // usually parses "{U}" from the prompt
+                ManaOptions available = getManaAvailable(game);
+                boolean canPayWithMana = manaOption.count() == 0 || available.enough(manaOption);
+                if (!canPayWithMana) {
+                    int life = this.getLife();
+                    if (life >= 2) {
+                        trace("chooseUse EXIT (forced phyrexian YES): cannot pay mana option, life>=2");
+                        return true;
+                    } else {
+                        trace("chooseUse EXIT (forced phyrexian NO): cannot pay mana option and life<2");
+                        return false;
+                    }
+                }
+            } catch (Exception e) {
+                trace("chooseUse phyrexian feasibility check failed: " + e.getMessage());
+            }
+        }
+
+        // Generic optional mana-payment gate for chooseUse prompts like:
+        // "Pay {R}{R} to copy the spell?"
+        // If the prompt requires an explicit mana payment and we can't pay it now,
+        // force NO to avoid invalid activations.
+        if (message != null && message.startsWith("Pay ")
+                && message.contains("{") && !message.toLowerCase().contains("instead of")) {
+            try {
+                Mana optionalCost = parseManaCostFromMessage(message);
+                if (optionalCost.count() > 0) {
+                    ManaOptions available = getManaAvailable(game);
+                    if (!available.enough(optionalCost)) {
+                        trace(String.format(
+                                "chooseUse EXIT (forced NO: optional mana infeasible): msg=%s required=%s available=%s",
+                                message, optionalCost, available));
+                        return false;
+                    }
+                }
+            } catch (Exception e) {
+                trace("chooseUse optional-cost feasibility check failed: " + e.getMessage());
             }
         }
 
@@ -4550,11 +4966,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         List<ActivatedAbility> flattenedOptions = getPlayable(game, true);
         // (PassAbility will be added later after duplicate removal)
 
-        // Filter out mana abilities
-        flattenedOptions = flattenedOptions.stream()
-                .filter(ability -> !(ability instanceof ManaAbility))
-                .collect(java.util.stream.Collectors.toList());
-
         // Filter by testing activation in a simulation (like ComputerPlayer6 does)
         // For abilities with alternative costs, test ALL alternatives and track which ones work
         List<ActivatedAbility> validOptions = new ArrayList<>();
@@ -4591,14 +5002,16 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
         flattenedOptions = validOptions;
 
-        // Remove duplicate spell abilities with the same name
+        // Remove duplicate spell abilities with the same name.
+        // Mana abilities are keyed by sourceId+name so each land/creature is a distinct tap option
+        // (e.g. two Forests are separate choices — which one you tap before a bounce matters).
         List<ActivatedAbility> uniqueOptions = new ArrayList<>();
         Set<String> seenNames = new HashSet<>();
 
-        // Remove duplicate spell abilities with the same name
-        // TODO: Investigate if this is what we want. I did this because despite "setting targets" during selection. we still get prompted for choices later anyway
         for (ActivatedAbility ability : flattenedOptions) {
-            String name = ability.toString();
+            String name = (ability instanceof ManaAbility)
+                    ? ability.getSourceId() + ":" + ability.toString()
+                    : ability.toString();
             if (!seenNames.contains(name)) {
                 seenNames.add(name);
                 uniqueOptions.add(ability);
@@ -4805,6 +5218,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
      */
     @Override
     public boolean cast(mage.abilities.SpellAbility ability, mage.game.Game game, boolean noMana, mage.ApprovingObject approvingObject) {
+        if (ability == null || game == null) {
+            trace("cast() EXIT: refused null ability/game");
+            return false;
+        }
+
         int preStackSize = game.getStack().size();
         int safetyBookmark = game.bookmarkState();
         
@@ -5053,102 +5471,347 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // -----------------------------------------------------------------------
 
     /**
-     * Uses the construction head to select 23 non-land cards from the drafted
-     * pool, then adds 17 lands proportional to color distribution.
-     *
-     * @return a 40-card limited deck ready for play
+     * Uses the construction head to select land count and non-land cards,
+     * then deterministically materializes lands to always produce a 40-card deck.
      */
     public Deck constructDraftDeck() {
         List<Card> pool = new ArrayList<>(draftPool);
         List<Card> nonLands = pool.stream().filter(c -> !c.isLand()).collect(Collectors.toList());
         List<Card> lands = pool.stream().filter(Card::isLand).collect(Collectors.toList());
 
-        List<Card> selectedNonLands;
+        LandCountDecision landCountDecision = chooseLandCount(pool);
+        int targetNonLandCount = Math.max(0, DRAFT_TARGET_DECK_SIZE - landCountDecision.appliedLandCount);
 
-        if (draftBridge != null && !nonLands.isEmpty()) {
-            selectedNonLands = selectNonLandsWithModel(nonLands, pool);
-        } else {
-            // Heuristic fallback: take best 23 non-lands by CMC curve
-            selectedNonLands = nonLands.stream()
-                    .sorted(Comparator.comparingDouble(c -> c.getManaValue()))
-                    .limit(23)
-                    .collect(Collectors.toList());
+        // Hard playability repair for malformed pools: maintain 40 if target nonlands exceed available.
+        List<String> repairActions = new ArrayList<>();
+        if (targetNonLandCount > nonLands.size()) {
+            int adjusted = nonLands.size();
+            repairActions.add(String.format(
+                    "adjust_target_nonlands old=%d new=%d reason=nonland_pool_exhausted",
+                    targetNonLandCount, adjusted));
+            targetNonLandCount = adjusted;
         }
 
-        // Build heuristic land base (17 lands, color-proportional)
-        List<Card> landBase = buildHeuristicLandBase(selectedNonLands, lands, 17);
+        NonLandSelectionResult nonLandSelection = selectNonLandsSequentially(nonLands, targetNonLandCount);
+        List<Card> selectedNonLands = nonLandSelection.selectedCards;
+        int targetLandCount = DRAFT_TARGET_DECK_SIZE - selectedNonLands.size();
 
-        if (draftLogger != null) {
-            float[] scores = null; // scores were logged during construction scoring
-            draftLogger.logConstruction(pool, scores, selectedNonLands, landBase);
+        LandSelectionResult landSelection = selectLandsSequentially(lands, selectedNonLands, targetLandCount);
+        List<Card> selectedLands = landSelection.selectedCards;
+        while (selectedLands.size() < targetLandCount) {
+            String basicName = BASIC_LAND_NAMES[selectedLands.size() % BASIC_LAND_NAMES.length];
+            Card extra = createBasicLand(basicName);
+            if (extra == null) {
+                break;
+            }
+            selectedLands.add(extra);
+            repairActions.add("fill_missing_land synthetic=" + basicName);
         }
+        if (selectedLands.size() > targetLandCount) {
+            selectedLands = new ArrayList<>(selectedLands.subList(0, targetLandCount));
+            repairActions.add("trim_land_overflow to_target=" + targetLandCount);
+        }
+
+        repairActions.addAll(applyMinimalSourceRepair(selectedNonLands, selectedLands));
+        LandOriginBreakdown landOrigins = computeLandOriginBreakdown(selectedLands, lands);
+        String landSourceSummary = buildLandSourceSummary(selectedLands);
 
         Deck deck = new Deck();
-        for (Card c : selectedNonLands) deck.getCards().add(c);
-        for (Card c : landBase) deck.getCards().add(c);
+        for (Card c : selectedNonLands) {
+            deck.getCards().add(c);
+        }
+        for (Card c : selectedLands) {
+            deck.getCards().add(c);
+        }
+
+        if (draftLogger != null) {
+            draftLogger.logConstruction(
+                    pool,
+                    selectedNonLands,
+                    selectedLands,
+                    landCountDecision.rawLandCount,
+                    landCountDecision.floorLandCount,
+                    targetLandCount,
+                    targetNonLandCount,
+                    landCountDecision.forcedByFloor,
+                    selectedNonLands.size(),
+                    selectedLands.size(),
+                    deck.getCards().size(),
+                    landOrigins.draftedNonBasicsUsed,
+                    landOrigins.draftedBasicsUsed,
+                    landOrigins.syntheticBasicsAdded,
+                    nonLandSelection.stepLogs,
+                    landSelection.stepLogs,
+                    repairActions,
+                    landSourceSummary
+            );
+        }
+
         return deck;
     }
 
-    private List<Card> selectNonLandsWithModel(List<Card> nonLands, List<Card> fullPool) {
-        try {
-            // Build construction state (entire pool as state)
-            DraftStateBuilder.DraftStateOutput state = DraftStateBuilder.buildState(
-                    fullPool, draftSeenCards, 3, 15); // post-draft position
+    private LandCountDecision chooseLandCount(List<Card> fullPool) {
+        int floor = computeCurrentLandFloor();
+        int raw = floor;
+        float rawLogProb = 0.0f;
+        float value = 0.0f;
 
-            float[] candFeats = DraftStateBuilder.buildCandidateFeatures(nonLands);
-            int[] candIds = DraftStateBuilder.buildCandidateIds(nonLands);
+        if (draftBridge != null) {
+            try {
+                DraftStateBuilder.DraftStateOutput state = DraftStateBuilder.buildState(
+                        fullPool, draftSeenCards, 3, 15);
+                int numCands = DRAFT_LAND_COUNT_MAX - DRAFT_LAND_COUNT_MIN + 1;
+                float[] candFeats = new float[numCands * DraftStateBuilder.DIM_PER_TOKEN];
+                int[] candIds = new int[numCands];
+                int[] candMask = new int[numCands];
+                Arrays.fill(candMask, 1);
+                for (int i = 0; i < numCands; i++) {
+                    int landCount = DRAFT_LAND_COUNT_MIN + i;
+                    int base = i * DraftStateBuilder.DIM_PER_TOKEN;
+                    candFeats[base + 9] = 1.0f; // mark as "land-ish" candidate
+                    candFeats[base + 17] = landCount / (float) DRAFT_LAND_COUNT_MAX;
+                    candFeats[base + 2] = landCount / (float) DRAFT_LAND_COUNT_MAX;
+                    candIds[i] = ("land_count_" + landCount).hashCode() & 0x7fff_ffff;
+                }
 
-            float[] scores = draftBridge.scoreDraftConstruction(
-                    state.sequence, state.mask, state.tokenIds,
-                    candFeats, candIds,
-                    nonLands.size(), DraftStateBuilder.MAX_LEN, DraftStateBuilder.DIM_PER_TOKEN
-            );
+                float[] scores = draftBridge.scoreDraftConstruction(
+                        state.sequence, state.mask, state.tokenIds,
+                        candFeats, candIds,
+                        numCands, DraftStateBuilder.MAX_LEN, DraftStateBuilder.DIM_PER_TOKEN
+                );
+                value = scores.length > numCands ? scores[numCands] : 0.0f;
+                int bestIdx = sampleFromScores(scores, numCands);
+                raw = DRAFT_LAND_COUNT_MIN + bestIdx;
 
-            float value = scores.length > nonLands.size() ? scores[nonLands.size()] : 0.0f;
+                int applied = Math.max(raw, floor);
+                boolean forced = applied != raw;
+                int appliedIdx = applied - DRAFT_LAND_COUNT_MIN;
+                rawLogProb = (float) Math.log(Math.max(scores[appliedIdx], 1e-8f));
+                draftSteps.add(new DraftStepData(
+                        state.sequence, state.mask, state.tokenIds,
+                        candFeats, candIds, candMask,
+                        appliedIdx, rawLogProb, value, 1,
+                        forced, "land_count"
+                ));
 
-            // Record training data for construction step (candidate mask: all real = 1)
-            int[] candMaskInt = new int[nonLands.size()];
-            Arrays.fill(candMaskInt, 1);
-
-            // Select top 23 by score
-            Integer[] indices = new Integer[nonLands.size()];
-            for (int i = 0; i < indices.length; i++) indices[i] = i;
-            final float[] scoresF = scores;
-            Arrays.sort(indices, (a, b) -> Float.compare(scoresF[b], scoresF[a]));
-
-            int take = Math.min(23, nonLands.size());
-            List<Card> selected = new ArrayList<>();
-            for (int i = 0; i < take; i++) {
-                selected.add(nonLands.get(indices[i]));
+                return new LandCountDecision(raw, floor, applied, forced);
+            } catch (Exception e) {
+                System.err.println("[DraftRL] land-count decision error: " + e.getMessage());
             }
-
-            // Log construction step - record the "chosen" index (highest score)
-            // For PPO we need a single chosen index per step; we record the top pick
-            int topChosenIdx = take > 0 ? indices[0] : 0;
-            float topLogProb = take > 0 ? (float) Math.log(Math.max(scores[topChosenIdx], 1e-8f)) : 0;
-            draftSteps.add(new DraftStepData(
-                    state.sequence, state.mask, state.tokenIds,
-                    candFeats, candIds, candMaskInt,
-                    topChosenIdx, topLogProb, value, 1 // headIdx=1 for construction
-            ));
-
-            return selected;
-        } catch (Exception e) {
-            System.err.println("[DraftRL] constructDraftDeck error: " + e.getMessage());
-            return nonLands.stream().limit(23).collect(Collectors.toList());
         }
+
+        int applied = Math.max(raw, floor);
+        return new LandCountDecision(raw, floor, applied, applied != raw);
     }
 
-    /**
-     * Build a heuristic land base from available lands or basic land placeholders.
-     * Allocates numLands lands proportional to WUBRG mana symbol distribution in selectedSpells.
-     */
-    private List<Card> buildHeuristicLandBase(List<Card> selectedSpells, List<Card> draftedLands, int numLands) {
-        // Count WUBRG symbols in selected spells
-        int[] colorCounts = new int[5]; // W, U, B, R, G
+    private NonLandSelectionResult selectNonLandsSequentially(List<Card> nonLands, int targetNonLandCount) {
+        NonLandSelectionResult result = new NonLandSelectionResult();
+        if (targetNonLandCount <= 0 || nonLands.isEmpty()) {
+            return result;
+        }
+
+        List<Card> remaining = new ArrayList<>(nonLands);
+        for (int step = 0; step < targetNonLandCount && !remaining.isEmpty(); step++) {
+            int chosenIdx;
+            float[] scores = null;
+            float value = 0.0f;
+            float[] candFeats = null;
+            int[] candIds = null;
+            int[] candMask = null;
+            DraftStateBuilder.DraftStateOutput state = null;
+
+            if (draftBridge != null) {
+                try {
+                    List<Card> stateCards = new ArrayList<>(result.selectedCards);
+                    state = DraftStateBuilder.buildState(stateCards, draftSeenCards, 3, 15);
+                    candFeats = DraftStateBuilder.buildCandidateFeatures(remaining);
+                    candIds = DraftStateBuilder.buildCandidateIds(remaining);
+                    candMask = new int[remaining.size()];
+                    Arrays.fill(candMask, 1);
+                    scores = draftBridge.scoreDraftConstruction(
+                            state.sequence, state.mask, state.tokenIds,
+                            candFeats, candIds,
+                            remaining.size(), DraftStateBuilder.MAX_LEN, DraftStateBuilder.DIM_PER_TOKEN
+                    );
+                    value = scores.length > remaining.size() ? scores[remaining.size()] : 0.0f;
+                    chosenIdx = sampleFromScores(scores, remaining.size());
+                    recordConstructionStep(state, candFeats, candIds, candMask, chosenIdx, scores, value, "spell_pick");
+                } catch (Exception e) {
+                    System.err.println("[DraftRL] spell-pick step error: " + e.getMessage());
+                    chosenIdx = 0;
+                }
+            } else {
+                remaining.sort(Comparator.comparingDouble(Card::getManaValue));
+                chosenIdx = 0;
+            }
+
+            Card chosen = remaining.remove(Math.max(0, Math.min(chosenIdx, remaining.size() - 1)));
+            result.selectedCards.add(chosen);
+            float chosenScore = (scores != null && chosenIdx < scores.length) ? scores[chosenIdx] : -1.0f;
+            result.stepLogs.add(String.format(
+                    "step=%d chosen_idx=%d card=%s candidates=%d score=%.4f",
+                    step + 1, chosenIdx, chosen.getName(), (scores != null ? scores.length - 1 : remaining.size() + 1), chosenScore));
+        }
+        return result;
+    }
+
+    private LandSelectionResult selectLandsSequentially(List<Card> draftedLands, List<Card> selectedSpells, int targetLandCount) {
+        LandSelectionResult result = new LandSelectionResult();
+        if (targetLandCount <= 0) {
+            return result;
+        }
+
+        List<Card> remainingDrafted = new ArrayList<>(draftedLands);
+        List<Card> syntheticBasics = createSyntheticBasicCandidates();
+
+        for (int step = 0; step < targetLandCount; step++) {
+            List<Card> candidates = new ArrayList<>(remainingDrafted.size() + syntheticBasics.size());
+            candidates.addAll(remainingDrafted);
+            candidates.addAll(syntheticBasics);
+            if (candidates.isEmpty()) {
+                break;
+            }
+
+            int chosenIdx;
+            float[] scores = null;
+            float value = 0.0f;
+            DraftStateBuilder.DraftStateOutput state = null;
+            float[] candFeats = null;
+            int[] candIds = null;
+            int[] candMask = null;
+
+            if (draftBridge != null) {
+                try {
+                    List<Card> stateCards = new ArrayList<>(selectedSpells.size() + result.selectedCards.size());
+                    stateCards.addAll(selectedSpells);
+                    stateCards.addAll(result.selectedCards);
+                    state = DraftStateBuilder.buildState(stateCards, draftSeenCards, 3, 15);
+                    candFeats = DraftStateBuilder.buildCandidateFeatures(candidates);
+                    candIds = DraftStateBuilder.buildCandidateIds(candidates);
+                    candMask = new int[candidates.size()];
+                    Arrays.fill(candMask, 1);
+                    scores = draftBridge.scoreDraftConstruction(
+                            state.sequence, state.mask, state.tokenIds,
+                            candFeats, candIds,
+                            candidates.size(), DraftStateBuilder.MAX_LEN, DraftStateBuilder.DIM_PER_TOKEN
+                    );
+                    value = scores.length > candidates.size() ? scores[candidates.size()] : 0.0f;
+                    chosenIdx = sampleFromScores(scores, candidates.size());
+                    recordConstructionStep(state, candFeats, candIds, candMask, chosenIdx, scores, value, "land_pick");
+                } catch (Exception e) {
+                    System.err.println("[DraftRL] land-pick step error: " + e.getMessage());
+                    chosenIdx = 0;
+                }
+            } else {
+                int[] demand = computeColorDemand(selectedSpells, targetLandCount);
+                String wanted = pickBasicForDemand(demand, step);
+                int found = -1;
+                for (int i = 0; i < candidates.size(); i++) {
+                    if (wanted.equals(candidates.get(i).getName())) {
+                        found = i;
+                        break;
+                    }
+                }
+                chosenIdx = found >= 0 ? found : 0;
+            }
+
+            chosenIdx = Math.max(0, Math.min(chosenIdx, candidates.size() - 1));
+            Card chosenCandidate = candidates.get(chosenIdx);
+            Card deckCard;
+            String origin;
+            if (chosenIdx < remainingDrafted.size()) {
+                deckCard = remainingDrafted.remove(chosenIdx);
+                origin = isBasicLandName(deckCard.getName()) ? "drafted_basic" : "drafted_nonbasic";
+            } else {
+                deckCard = createBasicLand(chosenCandidate.getName());
+                if (deckCard == null) {
+                    deckCard = chosenCandidate.copy();
+                }
+                origin = "synthetic_basic";
+            }
+            result.selectedCards.add(deckCard);
+            float chosenScore = (scores != null && chosenIdx < scores.length) ? scores[chosenIdx] : -1.0f;
+            result.stepLogs.add(String.format(
+                    "step=%d chosen_idx=%d card=%s origin=%s candidates=%d score=%.4f",
+                    step + 1, chosenIdx, deckCard.getName(), origin, (scores != null ? scores.length - 1 : candidates.size()), chosenScore));
+        }
+
+        return result;
+    }
+
+    private void recordConstructionStep(
+            DraftStateBuilder.DraftStateOutput state,
+            float[] candFeats,
+            int[] candIds,
+            int[] candMask,
+            int chosenIdx,
+            float[] scores,
+            float value,
+            String kind
+    ) {
+        if (state == null || candFeats == null || candIds == null || candMask == null
+                || scores == null || chosenIdx < 0 || chosenIdx >= candIds.length) {
+            return;
+        }
+        float logProb = (float) Math.log(Math.max(scores[chosenIdx], 1e-8f));
+        draftSteps.add(new DraftStepData(
+                state.sequence, state.mask, state.tokenIds,
+                candFeats, candIds, candMask,
+                chosenIdx, logProb, value, 1,
+                false, kind
+        ));
+    }
+
+    private List<Card> createSyntheticBasicCandidates() {
+        List<Card> basics = new ArrayList<>();
+        for (String basic : BASIC_LAND_NAMES) {
+            Card c = createBasicLand(basic);
+            if (c != null) {
+                basics.add(c);
+            }
+        }
+        return basics;
+    }
+
+    private List<String> applyMinimalSourceRepair(List<Card> selectedSpells, List<Card> selectedLands) {
+        List<String> repairs = new ArrayList<>();
+        if (selectedLands.isEmpty()) {
+            return repairs;
+        }
+        boolean[] demanded = computeDemandedColors(selectedSpells);
+        int[] sourceCounts = computeLandSourceCounts(selectedLands);
+
+        for (int color = 0; color < 5; color++) {
+            if (!demanded[color] || sourceCounts[color] > 0) {
+                continue;
+            }
+
+            int donorIdx = findBasicSwapDonorIndex(selectedLands, sourceCounts, demanded);
+            if (donorIdx < 0) {
+                repairs.add("source_repair_failed missing=" + BASIC_LAND_NAMES[color]);
+                continue;
+            }
+
+            Card replacement = createBasicLand(BASIC_LAND_NAMES[color]);
+            if (replacement == null) {
+                repairs.add("source_repair_failed missing=" + BASIC_LAND_NAMES[color] + " reason=create_basic_failed");
+                continue;
+            }
+
+            Card old = selectedLands.set(donorIdx, replacement);
+            sourceCounts = computeLandSourceCounts(selectedLands);
+            repairs.add(String.format(
+                    "source_repair swap_out=%s swap_in=%s",
+                    old.getName(), replacement.getName()));
+        }
+        return repairs;
+    }
+
+    private int[] computeColorDemand(List<Card> selectedSpells, int numLands) {
+        int[] colorCounts = new int[5]; // W U B R G
         for (Card c : selectedSpells) {
             try {
-                mage.Mana mana = new mage.Mana();
+                Mana mana = new Mana();
                 for (mage.abilities.costs.mana.ManaCost mc : c.getManaCost()) {
                     mana.add(mc.getMana());
                 }
@@ -5157,65 +5820,259 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 colorCounts[2] += mana.getBlack();
                 colorCounts[3] += mana.getRed();
                 colorCounts[4] += mana.getGreen();
-            } catch (Exception ignored) {}
-        }
-
-        int totalColor = 0;
-        for (int c : colorCounts) totalColor += c;
-
-        // Compute proportional land counts
-        int[] landCounts = new int[5];
-        if (totalColor > 0) {
-            int assigned = 0;
-            for (int i = 0; i < 5; i++) {
-                landCounts[i] = (int) Math.round(colorCounts[i] * numLands / (double) totalColor);
-                assigned += landCounts[i];
-            }
-            // Fix rounding errors
-            int diff = numLands - assigned;
-            for (int i = 0; diff > 0; i = (i + 1) % 5) {
-                if (colorCounts[i] > 0) { landCounts[i]++; diff--; }
-            }
-        } else {
-            landCounts[0] = numLands; // default to Plains if no color info
-        }
-
-        // First, use drafted non-basic lands from pool (duals, fetches, etc.)
-        List<Card> landBase = new ArrayList<>(draftedLands.stream()
-                .limit(Math.min(draftedLands.size(), 5)) // up to 5 non-basics
-                .collect(Collectors.toList()));
-
-        // Fill remainder with basic lands (create simple card objects)
-        String[] basicNames = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
-        int remaining = numLands - landBase.size();
-        for (int color = 0; color < 5 && remaining > 0; color++) {
-            int need = landCounts[color];
-            // Subtract what we already have (drafted non-basics count as "any color" for simplicity)
-            for (int i = 0; i < need && remaining > 0; i++) {
-                // Create a basic land card - use first matching basic land from drafted pool
-                Card basicFromPool = findBasicLandByColor(draftedLands, basicNames[color]);
-                if (basicFromPool != null) {
-                    landBase.add(basicFromPool);
-                    draftedLands.remove(basicFromPool);
-                } else {
-                    // We can't create basic land objects without a game context here;
-                    // DraftTrainer will handle adding the correct basic land cards to the final deck
-                    // For now, skip (this list is for logging; actual deck is built by DraftTrainer)
-                }
-                remaining--;
+            } catch (Exception ignored) {
             }
         }
 
-        return landBase;
+        int total = 0;
+        for (int count : colorCounts) {
+            total += count;
+        }
+
+        int[] demand = new int[5];
+        if (total <= 0) {
+            demand[0] = numLands;
+            return demand;
+        }
+
+        int assigned = 0;
+        for (int i = 0; i < 5; i++) {
+            demand[i] = (int) Math.floor(colorCounts[i] * numLands / (double) total);
+            assigned += demand[i];
+        }
+        int remainder = numLands - assigned;
+        int idx = 0;
+        while (remainder > 0) {
+            if (colorCounts[idx] > 0) {
+                demand[idx]++;
+                remainder--;
+            }
+            idx = (idx + 1) % 5;
+        }
+        return demand;
     }
 
-    private Card findBasicLandByColor(List<Card> lands, String basicName) {
-        for (Card c : lands) {
-            if (c.isLand() && c.getName().equals(basicName)) {
-                return c;
+    private boolean[] computeDemandedColors(List<Card> selectedSpells) {
+        boolean[] demanded = new boolean[5];
+        for (Card c : selectedSpells) {
+            try {
+                Mana mana = new Mana();
+                for (mage.abilities.costs.mana.ManaCost mc : c.getManaCost()) {
+                    mana.add(mc.getMana());
+                }
+                if (mana.getWhite() > 0) demanded[0] = true;
+                if (mana.getBlue() > 0) demanded[1] = true;
+                if (mana.getBlack() > 0) demanded[2] = true;
+                if (mana.getRed() > 0) demanded[3] = true;
+                if (mana.getGreen() > 0) demanded[4] = true;
+            } catch (Exception ignored) {
             }
         }
-        return null;
+        return demanded;
+    }
+
+    private int[] computeLandSourceCounts(List<Card> lands) {
+        int[] counts = new int[5];
+        for (Card land : lands) {
+            for (int c = 0; c < 5; c++) {
+                if (landProvidesColor(land, c)) {
+                    counts[c]++;
+                }
+            }
+        }
+        return counts;
+    }
+
+    private boolean landProvidesColor(Card land, int colorIdx) {
+        if (land == null) {
+            return false;
+        }
+        String name = land.getName();
+        if ("Plains".equals(name)) return colorIdx == 0;
+        if ("Island".equals(name)) return colorIdx == 1;
+        if ("Swamp".equals(name)) return colorIdx == 2;
+        if ("Mountain".equals(name)) return colorIdx == 3;
+        if ("Forest".equals(name)) return colorIdx == 4;
+
+        try {
+            String rules = String.join(" ", land.getRules()).toUpperCase();
+            if (rules.contains("ANY COLOR")) {
+                return true;
+            }
+            switch (colorIdx) {
+                case 0:
+                    return rules.contains("{W}");
+                case 1:
+                    return rules.contains("{U}");
+                case 2:
+                    return rules.contains("{B}");
+                case 3:
+                    return rules.contains("{R}");
+                case 4:
+                    return rules.contains("{G}");
+                default:
+                    return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private int findBasicSwapDonorIndex(List<Card> lands, int[] sourceCounts, boolean[] demanded) {
+        int bestIdx = -1;
+        int bestScore = Integer.MIN_VALUE;
+
+        for (int i = 0; i < lands.size(); i++) {
+            Card c = lands.get(i);
+            if (!isBasicLandName(c.getName())) {
+                continue;
+            }
+            int donorColor = colorIndexForBasic(c.getName());
+            if (donorColor < 0 || sourceCounts[donorColor] <= 0) {
+                continue;
+            }
+            int score;
+            if (!demanded[donorColor]) {
+                score = 1000 + sourceCounts[donorColor];
+            } else if (sourceCounts[donorColor] > 1) {
+                score = 100 + sourceCounts[donorColor];
+            } else {
+                score = sourceCounts[donorColor] - 10;
+            }
+            if (score > bestScore) {
+                bestScore = score;
+                bestIdx = i;
+            }
+        }
+        return bestIdx;
+    }
+
+    private String buildLandSourceSummary(List<Card> lands) {
+        int[] source = computeLandSourceCounts(lands);
+        return String.format("W=%d U=%d B=%d R=%d G=%d", source[0], source[1], source[2], source[3], source[4]);
+    }
+
+    private LandOriginBreakdown computeLandOriginBreakdown(List<Card> selectedLands, List<Card> draftedLands) {
+        Set<UUID> draftedIds = draftedLands.stream().map(Card::getId).collect(Collectors.toSet());
+        LandOriginBreakdown out = new LandOriginBreakdown();
+        for (Card c : selectedLands) {
+            if (draftedIds.contains(c.getId())) {
+                if (isBasicLandName(c.getName())) {
+                    out.draftedBasicsUsed++;
+                } else {
+                    out.draftedNonBasicsUsed++;
+                }
+            } else if (isBasicLandName(c.getName())) {
+                out.syntheticBasicsAdded++;
+            }
+        }
+        return out;
+    }
+
+    private int computeCurrentLandFloor() {
+        if (!DRAFT_MIN_LANDS_ENABLE) {
+            return 0;
+        }
+        int episode = Math.max(0, currentDraftEpisode);
+        double progress = Math.min(1.0, Math.max(0.0, episode / (double) DRAFT_MIN_LANDS_DECAY_EPISODES));
+        int floor = (int) Math.round(DRAFT_MIN_LANDS_START
+                + (DRAFT_MIN_LANDS_END - DRAFT_MIN_LANDS_START) * progress);
+        return Math.max(DRAFT_LAND_COUNT_MIN, Math.min(DRAFT_LAND_COUNT_MAX, floor));
+    }
+
+    private static final String[] BASIC_LAND_NAMES = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
+
+    private String pickBasicForDemand(int[] demand, int cycleIdx) {
+        int bestIdx = -1;
+        int bestVal = Integer.MIN_VALUE;
+        for (int i = 0; i < demand.length; i++) {
+            if (demand[i] > bestVal) {
+                bestVal = demand[i];
+                bestIdx = i;
+            }
+        }
+        if (bestIdx >= 0 && bestVal > 0) {
+            return BASIC_LAND_NAMES[bestIdx];
+        }
+        return BASIC_LAND_NAMES[cycleIdx % BASIC_LAND_NAMES.length];
+    }
+
+    private void decrementColorDemand(int[] demand, String basicName) {
+        int idx = colorIndexForBasic(basicName);
+        if (idx >= 0 && demand[idx] > 0) {
+            demand[idx]--;
+        }
+    }
+
+    private boolean isBasicLandName(String name) {
+        return "Plains".equals(name)
+                || "Island".equals(name)
+                || "Swamp".equals(name)
+                || "Mountain".equals(name)
+                || "Forest".equals(name);
+    }
+
+    private int colorIndexForBasic(String basicName) {
+        switch (basicName) {
+            case "Plains":
+                return 0;
+            case "Island":
+                return 1;
+            case "Swamp":
+                return 2;
+            case "Mountain":
+                return 3;
+            case "Forest":
+                return 4;
+            default:
+                return -1;
+        }
+    }
+
+    private Card createBasicLand(String basicName) {
+        try {
+            CardInfo cardInfo = CardRepository.instance.findCard(basicName);
+            return cardInfo != null ? cardInfo.createCard() : null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private static class LandCountDecision {
+        final int rawLandCount;
+        final int floorLandCount;
+        final int appliedLandCount;
+        final boolean forcedByFloor;
+
+        LandCountDecision(int rawLandCount, int floorLandCount, int appliedLandCount, boolean forcedByFloor) {
+            this.rawLandCount = rawLandCount;
+            this.floorLandCount = floorLandCount;
+            this.appliedLandCount = appliedLandCount;
+            this.forcedByFloor = forcedByFloor;
+        }
+    }
+
+    private static class LandBaseResult {
+        final List<Card> lands = new ArrayList<>();
+        int draftedNonBasicsUsed = 0;
+        int draftedBasicsUsed = 0;
+        int syntheticBasicsAdded = 0;
+    }
+
+    private static class NonLandSelectionResult {
+        final List<Card> selectedCards = new ArrayList<>();
+        final List<String> stepLogs = new ArrayList<>();
+    }
+
+    private static class LandSelectionResult {
+        final List<Card> selectedCards = new ArrayList<>();
+        final List<String> stepLogs = new ArrayList<>();
+    }
+
+    private static class LandOriginBreakdown {
+        int draftedNonBasicsUsed = 0;
+        int draftedBasicsUsed = 0;
+        int syntheticBasicsAdded = 0;
     }
 
     /**

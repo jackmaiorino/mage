@@ -38,6 +38,10 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s [draft_model] %(message)s",
 )
 logger = logging.getLogger("draft_model")
+# Suppress Py4J protocol chatter like "Received command c on object id t"
+logging.getLogger("py4j").setLevel(logging.WARNING)
+logging.getLogger("py4j.java_gateway").setLevel(logging.WARNING)
+logging.getLogger("py4j.clientserver").setLevel(logging.WARNING)
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -98,7 +102,9 @@ class DraftModelEntryPoint:
     def initializeDraftModel(self):
         """Create or load the draft model."""
         with self._lock:
+            print(f"[DRAFT_PY] initializeDraftModel: device={self.device}, models_dir={self.models_dir}", flush=True)
             os.makedirs(self.models_dir, exist_ok=True)
+            print(f"[DRAFT_PY] Building model (d_model={DRAFT_D_MODEL}, layers={DRAFT_NUM_LAYERS}, nhead={DRAFT_NHEAD})...", flush=True)
             self.model = MTGTransformerModel(
                 input_dim=DRAFT_INPUT_DIM,
                 d_model=DRAFT_D_MODEL,
@@ -113,6 +119,7 @@ class DraftModelEntryPoint:
                 self.model.parameters(), lr=LEARNING_RATE)
 
             if os.path.exists(self.model_path):
+                print(f"[DRAFT_PY] Loading checkpoint from {self.model_path}...", flush=True)
                 try:
                     ckpt = torch.load(self.model_path, map_location=self.device)
                     if isinstance(ckpt, dict) and "model_state_dict" in ckpt:
@@ -125,15 +132,14 @@ class DraftModelEntryPoint:
                         self._train_steps = ckpt.get("train_steps", 0)
                     else:
                         self.model.load_state_dict(ckpt, strict=False)
-                    logger.info("Loaded draft model from %s", self.model_path)
+                    print(f"[DRAFT_PY] Loaded draft model (train_steps={self._train_steps})", flush=True)
                 except Exception as e:
-                    logger.warning("Failed to load draft model, starting fresh: %s", e)
+                    print(f"[DRAFT_PY] Failed to load draft model, starting fresh: {e}", flush=True)
             else:
-                logger.info("No draft model found, starting fresh")
+                print(f"[DRAFT_PY] No checkpoint found at {self.model_path}, starting fresh", flush=True)
 
-            logger.info("Draft model ready on %s (%d params)",
-                        self.device,
-                        sum(p.numel() for p in self.model.parameters()))
+            n_params = sum(p.numel() for p in self.model.parameters())
+            print(f"[DRAFT_PY] Draft model ready: device={self.device}, params={n_params:,}", flush=True)
 
     def saveDraftModel(self, path: str):
         with self._lock:
@@ -412,12 +418,18 @@ class DraftModelEntryPoint:
 # ---------------------------------------------------------------------------
 
 def main():
+    print("[DRAFT_PY] draft_py4j_entry_point.py starting...", flush=True)
     parser = argparse.ArgumentParser(description="Draft Model Py4J server")
     parser.add_argument("--port", type=int,
-                        default=int(os.getenv("DRAFT_PY4J_PORT", "25335")))
+                        default=int(os.getenv("DRAFT_PY4J_PORT", "25360")))
     args = parser.parse_args()
 
+    print(f"[DRAFT_PY] importing torch...", flush=True)
+    import torch as _torch_check
+    print(f"[DRAFT_PY] torch {_torch_check.__version__}, CUDA={_torch_check.cuda.is_available()}", flush=True)
+
     models_dir = os.getenv("DRAFT_MODELS_DIR", os.path.join(script_dir, "draft_models"))
+    print(f"[DRAFT_PY] models_dir={models_dir}", flush=True)
     os.makedirs(models_dir, exist_ok=True)
 
     entry = DraftModelEntryPoint(models_dir)

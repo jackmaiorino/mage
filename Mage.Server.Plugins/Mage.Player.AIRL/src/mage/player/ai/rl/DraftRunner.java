@@ -34,8 +34,13 @@ public class DraftRunner {
     public static final int NUM_PLAYERS = 8;
     public static final int NUM_BOOSTERS = 3;
 
-    public static final String CUBE_DECK_PATH = EnvConfig.str("CUBE_DECK_PATH",
-            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Vintage/Cube/MTGOVintageCube.dck");
+    public static final String CUBE_DECK_PATH = EnvConfig.str(
+            "CUBE_DECK_PATH",
+            EnvConfig.str(
+                    "CUBE_DECK_FILE",
+                    "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Vintage/Cube/MTGOVintageCube.dck"
+            )
+    );
 
     /**
      * Result of a single draft episode.
@@ -65,7 +70,21 @@ public class DraftRunner {
             if (others.isEmpty()) {
                 return null;
             }
-            return decks.get(others.get(rand.nextInt(others.size())));
+            // Draft pools are typically stored in sideboard at this stage.
+            List<Deck> candidates = new ArrayList<>();
+            for (UUID id : others) {
+                Deck d = decks.get(id);
+                if (d == null) {
+                    continue;
+                }
+                if (!d.getSideboard().isEmpty() || !d.getCards().isEmpty()) {
+                    candidates.add(d);
+                }
+            }
+            if (candidates.isEmpty()) {
+                return null;
+            }
+            return candidates.get(rand.nextInt(candidates.size()));
         }
     }
 
@@ -95,6 +114,7 @@ public class DraftRunner {
             }
 
             CubeFromDeck cubeDraft = new CubeFromDeck(cube);
+            cubeDraft.validateData();
 
             DraftOptions options = new DraftOptions();
             options.setDraftCube(cubeDraft);
@@ -144,8 +164,13 @@ public class DraftRunner {
                 return null;
             }
             cubeDeck = Deck.load(lists, false, false);
+            if (cubeDeck.getCards().isEmpty() && cubeDeck.getSideboard().isEmpty()) {
+                logger.severe("Cube deck parsed as empty from " + cubeDeckPath
+                        + ". Check file extension/format. For plain lists use .txt with lines like '1 Card Name'.");
+                return null;
+            }
             logger.info("Loaded cube deck from " + cubeDeckPath
-                    + " (" + cubeDeck.getCards().size() + " cards)");
+                    + " (" + cubeDeck.getCards().size() + " main, " + cubeDeck.getSideboard().size() + " sideboard)");
             return cubeDeck;
         } catch (Exception e) {
             logger.severe("Failed to load cube deck from " + cubeDeckPath + ": " + e.getMessage());
