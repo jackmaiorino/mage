@@ -147,6 +147,9 @@ class MTGTransformerModel(nn.Module):
         # Gradient clipping value (configurable via env var)
         self.max_grad_norm = float(os.getenv('MAX_GRAD_NORM', '1.0'))
 
+        # Temperature floor: prevents policy from becoming near-deterministic
+        self.temperature_floor = float(os.getenv('TEMPERATURE_FLOOR', '0.3'))
+
         # --- utility lambdas ----------------------------------------
         self._stat_str = lambda a: f"Mean: {a.mean():.4f}, Std: {a.std():.4f}, Min: {a.min():.4f}, Max: {a.max():.4f}"
 
@@ -421,8 +424,8 @@ class MTGTransformerModel(nn.Module):
         # Replace NaN/Inf in logits to avoid invalid softmax
         logits = torch.nan_to_num(logits, nan=0.0, posinf=50.0, neginf=-50.0)
 
-        # Temperature scaling (learnable)
-        temp = torch.clamp(self.temperature, min=0.1)
+        # Temperature scaling (learnable); floor prevents near-deterministic collapse
+        temp = torch.clamp(self.temperature, min=self.temperature_floor)
         logits = logits / (temp + 1e-8)
 
         # Clamp finite logits for numeric stability (do this BEFORE masking so

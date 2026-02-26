@@ -25,11 +25,41 @@ function KillByPredicate($nameList, $predicate, $label) {
   }
 }
 
-# Kill Python workers running our py4j entrypoint from this repo
+# Kill Python workers running our py4j entrypoints.
+# Keep repo scoping, but also match common relative-path command lines used by wrapper scripts.
 KillByPredicate @("python.exe","pythonw.exe","python3.12.exe","python3.11.exe","python3.10.exe") `
   { param($p)
-    ($p.CommandLine -like "*py4j_entry_point.py*") -and ($p.CommandLine -like "*$repoRoot*")
+    $cmd = [string]$p.CommandLine
+    if ([string]::IsNullOrWhiteSpace($cmd)) { return $false }
+    $isPy4j = ($cmd -like "*py4j_entry_point.py*") -or ($cmd -like "*draft_py4j_entry_point.py*")
+    if (-not $isPy4j) { return $false }
+    return ($cmd -like "*$repoRoot*") -or ($cmd -like "*Mage.Server.Plugins*Mage.Player.AIRL*MLPythonCode*")
   } "py4j_python"
+
+# Extra safety: free known Py4J port ranges used by train/eval workers.
+$py4jPorts = @()
+$py4jPorts += 25334..25345
+$py4jPorts += 26334..26345
+foreach ($port in $py4jPorts) {
+  $listeners = Get-NetTCPConnection -State Listen -LocalPort $port -ErrorAction SilentlyContinue
+  foreach ($listener in $listeners) {
+    try {
+      $pid = $listener.OwningProcess
+      $proc = Get-CimInstance Win32_Process -Filter "ProcessId=$pid" -ErrorAction SilentlyContinue
+      if ($null -eq $proc) { continue }
+      $name = [string]$proc.Name
+      $cmd = [string]$proc.CommandLine
+      $isKnown = ($name -in @("python.exe","pythonw.exe","python3.12.exe","python3.11.exe","python3.10.exe","java.exe","javaw.exe"))
+      $isRepoProcess = ($cmd -like "*$repoRoot*") -or ($cmd -like "*Mage.Server.Plugins*Mage.Player.AIRL*") -or ($cmd -like "*py4j_entry_point.py*") -or ($cmd -like "*RLTrainer*")
+      if ($isKnown -and $isRepoProcess) {
+        Log ("Killing port owner PID={0} port={1}" -f $pid, $port)
+        Stop-Process -Id $pid -Force -ErrorAction SilentlyContinue
+      }
+    } catch {
+      Write-Warning ("Failed killing listener on port {0}: {1}" -f $port, $_.Exception.Message)
+    }
+  }
+}
 
 # Kill RLTrainer Java processes for this repo (mvn exec or direct java)
 KillByPredicate @("java.exe","javaw.exe") `

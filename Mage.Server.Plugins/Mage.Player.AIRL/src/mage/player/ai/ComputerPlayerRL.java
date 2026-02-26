@@ -63,7 +63,9 @@ import mage.player.ai.rl.DraftLogger;
 import mage.player.ai.rl.DraftPickRecord;
 import mage.player.ai.rl.DraftPythonMLBridge;
 import mage.player.ai.rl.DraftStateBuilder;
+import mage.player.ai.rl.EnvConfig;
 import mage.player.ai.rl.GameLogger;
+import mage.player.ai.rl.MetricsCollector;
 import mage.player.ai.rl.MulliganLogger;
 import mage.player.ai.rl.MulliganModel;
 import mage.player.ai.rl.PythonModel;
@@ -80,14 +82,16 @@ import mage.cards.repository.CardRepository;
 
 public class ComputerPlayerRL extends ComputerPlayer7 {
 
-    // Denser reward shaping to help credit assignment with sparse terminal rewards
-    // These provide gradient signal for actions that are generally good in MTG
-    private static final double LAND_PLAY_REWARD = 0.05;   // Playing lands is almost always good
-    private static final double SPELL_CAST_REWARD = 0.02;  // Casting spells advances the game (was 0)
-    private static final double ATTACK_REWARD = 0.01;      // Attacking pressures opponent
-    private static final double BLOCK_REWARD = 0.005;      // Blocking prevents damage
-    private static final double TARGET_OPP_REWARD = 0.01;  // Targeting opponent (damage/effects usually good)
-    private static final double TARGET_SELF_PENALTY = -0.01; // Targeting self (damage/effects usually bad)
+    // Heuristic step shaping is opt-in; default off so learning is driven by returns.
+    private static final boolean USE_HEURISTIC_STEP_REWARDS = "1".equals(System.getenv().getOrDefault("RL_HEURISTIC_STEP_REWARDS", "0"))
+            || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_HEURISTIC_STEP_REWARDS", "0"));
+    // Legacy shaping coefficients (used only when RL_HEURISTIC_STEP_REWARDS is enabled).
+    private static final double LAND_PLAY_REWARD = 0.05;
+    private static final double SPELL_CAST_REWARD = 0.02;
+    private static final double ATTACK_REWARD = 0.0;
+    private static final double BLOCK_REWARD = 0.0;
+    private static final double TARGET_OPP_REWARD = 0.0;
+    private static final double TARGET_SELF_PENALTY = 0.0;
     private static final boolean ACTIVATION_DIAG = "1".equals(System.getenv().getOrDefault("RL_ACTIVATION_DIAG", "0"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_ACTIVATION_DIAG", "0"));
     private static final boolean USE_ENGINE_CHOICES = "1".equals(System.getenv().getOrDefault("RL_ENGINE_CHOICES", "1"))
@@ -96,6 +100,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_MULLIGAN_TRACE", "0"));
     private static final boolean MULLIGAN_TRACE_JSONL = "1".equals(System.getenv().getOrDefault("RL_MULLIGAN_TRACE_JSONL", "1"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_MULLIGAN_TRACE_JSONL", "1"));
+
+    // Main policy exploration (actor) - epsilon mixture + correlated full-random turn.
+    private static final double ACTION_EPS_START = EnvConfig.f64("RL_ACTION_EPS_START", 0.05);
+    private static final double ACTION_EPS_END = EnvConfig.f64("RL_ACTION_EPS_END", 0.01);
+    private static final int ACTION_EPS_DECAY_EPISODES = EnvConfig.i32("RL_ACTION_EPS_DECAY_EPISODES", 200000);
+    private static final double TURN_RANDOM_EPS_START = EnvConfig.f64("RL_FULL_TURN_RANDOM_START", 0.03);
+    private static final double TURN_RANDOM_EPS_END = EnvConfig.f64("RL_FULL_TURN_RANDOM_END", 0.03);
+    private static final int TURN_RANDOM_EPS_DECAY_EPISODES = EnvConfig.i32("RL_FULL_TURN_RANDOM_DECAY_EPISODES", 400000);
 
     // Track RL player activation failures (these pollute training signal)
     private static final java.util.concurrent.atomic.AtomicInteger RL_ACTIVATION_FAILURES = new java.util.concurrent.atomic.AtomicInteger(0);
@@ -114,6 +126,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final ThreadLocal<List<String>> activationTrace = ThreadLocal.withInitial(ArrayList::new);
     private static final ThreadLocal<Boolean> traceEnabled = ThreadLocal.withInitial(() -> false);
     private static final ThreadLocal<String> choiceExplosionContext = new ThreadLocal<>();
+    // Marks callbacks triggered during mana payment; used to delegate low-level
+    // payment choices to engine logic for reliability.
+    private static final ThreadLocal<Integer> playManaDepth = ThreadLocal.withInitial(() -> 0);
+    private static final ThreadLocal<String> currentUnpaidManaText = new ThreadLocal<>();
 
     private PythonModel model;
     private MulliganModel mulliganModel;
@@ -125,6 +141,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private int currentEpisode = -1; // Main model episode for logging
     private int mulliganEpisode = -1; // Mulligan model episode for epsilon-greedy
     private int lastLoggedTurn = -1; // Track turn changes for game logging
+    // Fallback logger attachment for callbacks that may run off the trainer thread.
+    private transient GameLogger attachedGameLogger = null;
+    private int lastExplorationTurn = Integer.MIN_VALUE;
+    private boolean turnForceUniform = false;
+    private double turnActionEps = 0.0;
+    private double turnRandomEps = 0.0;
+    private String turnExplorationMode = "policy";
+    private final Random stochasticRng = new Random();
 
     // Track early-game land drops for mulligan reward shaping
     private boolean rlPlayerHasHadATurn = false;
@@ -152,6 +176,578 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return s;
         }
         return s.substring(0, maxLen) + "...";
+    }
+
+    private static final class BehaviorPolicyView {
+
+        final float[] policyProbs;
+        final float[] behaviorProbs;
+        final String mode;
+        final double actionEps;
+        final double turnRandomEps;
+
+        private BehaviorPolicyView(
+                float[] policyProbs,
+                float[] behaviorProbs,
+                String mode,
+                double actionEps,
+                double turnRandomEps
+        ) {
+            this.policyProbs = policyProbs;
+            this.behaviorProbs = behaviorProbs;
+            this.mode = mode;
+            this.actionEps = actionEps;
+            this.turnRandomEps = turnRandomEps;
+        }
+    }
+
+    private static final class SinglePickResult {
+
+        final int chosenIdx;
+        final float oldLogp;
+        final float selectedBehaviorProb;
+        final BehaviorPolicyView behavior;
+
+        private SinglePickResult(
+                int chosenIdx,
+                float oldLogp,
+                float selectedBehaviorProb,
+                BehaviorPolicyView behavior
+        ) {
+            this.chosenIdx = chosenIdx;
+            this.oldLogp = oldLogp;
+            this.selectedBehaviorProb = selectedBehaviorProb;
+            this.behavior = behavior;
+        }
+    }
+
+    private static final class SequentialPickResult {
+
+        final List<Integer> selectedIndices;
+        final float oldLogpTotal;
+        final BehaviorPolicyView behavior;
+
+        private SequentialPickResult(
+                List<Integer> selectedIndices,
+                float oldLogpTotal,
+                BehaviorPolicyView behavior
+        ) {
+            this.selectedIndices = selectedIndices;
+            this.oldLogpTotal = oldLogpTotal;
+            this.behavior = behavior;
+        }
+    }
+
+    private boolean isMainExplorationEnabled() {
+        return trainingEnabled && !greedyMode && "train".equals(policyKey) && currentEpisode >= 0;
+    }
+
+    private static double linearDecay(int episodeNum, double start, double end, int decayEpisodes) {
+        if (decayEpisodes <= 0) {
+            return end;
+        }
+        if (episodeNum <= 0) {
+            return start;
+        }
+        if (episodeNum >= decayEpisodes) {
+            return end;
+        }
+        double t = (double) episodeNum / (double) decayEpisodes;
+        return start + (end - start) * t;
+    }
+
+    private void refreshTurnExploration(Game game) {
+        if (!isMainExplorationEnabled() || game == null) {
+            turnForceUniform = false;
+            turnActionEps = 0.0;
+            turnRandomEps = 0.0;
+            turnExplorationMode = "policy";
+            return;
+        }
+
+        int turnNum = game.getTurnNum();
+        if (turnNum == lastExplorationTurn) {
+            return;
+        }
+
+        lastExplorationTurn = turnNum;
+        turnActionEps = Math.max(0.0, Math.min(1.0,
+                linearDecay(currentEpisode, ACTION_EPS_START, ACTION_EPS_END, ACTION_EPS_DECAY_EPISODES)));
+        turnRandomEps = Math.max(0.0, Math.min(1.0,
+                linearDecay(currentEpisode, TURN_RANDOM_EPS_START, TURN_RANDOM_EPS_END, TURN_RANDOM_EPS_DECAY_EPISODES)));
+
+        UUID activeId = game.getActivePlayerId();
+        boolean ownTurn = activeId != null && activeId.equals(getId());
+        if (ownTurn && turnRandomEps > 0.0) {
+            turnForceUniform = stochasticRng.nextDouble() < turnRandomEps;
+            if (turnForceUniform) {
+                MetricsCollector.getInstance().recordMainTurnUniform();
+            }
+        } else {
+            turnForceUniform = false;
+        }
+        turnExplorationMode = turnForceUniform
+                ? "turn_uniform"
+                : (turnActionEps > 0.0 ? "epsilon_mix" : "policy");
+    }
+
+    private static float[] normalizePolicyScores(float[] actionScores, int[] candidateMask, int candidateCount) {
+        float[] logits = new float[candidateCount];
+        float maxLogit = -Float.MAX_VALUE;
+        for (int i = 0; i < candidateCount; i++) {
+            float p = (actionScores != null && i < actionScores.length) ? actionScores[i] : 0.0f;
+            if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) {
+                p = 1e-20f;
+            }
+            float logit = (float) Math.log(p);
+            if (candidateMask != null && (i >= candidateMask.length || candidateMask[i] != 1)) {
+                logit = -1e9f;
+            }
+            logits[i] = logit;
+            if (logit > maxLogit) {
+                maxLogit = logit;
+            }
+        }
+
+        float[] probs = new float[candidateCount];
+        float sum = 0.0f;
+        for (int i = 0; i < candidateCount; i++) {
+            boolean valid = candidateMask == null || (i < candidateMask.length && candidateMask[i] == 1);
+            float e = valid ? (float) Math.exp(logits[i] - maxLogit) : 0.0f;
+            probs[i] = e;
+            sum += e;
+        }
+        if (sum <= 0.0f || Float.isNaN(sum) || Float.isInfinite(sum)) {
+            float uniformProb = 1.0f / Math.max(1, candidateCount);
+            Arrays.fill(probs, uniformProb);
+        } else {
+            for (int i = 0; i < candidateCount; i++) {
+                probs[i] /= sum;
+            }
+        }
+        return probs;
+    }
+
+    private static float[] buildUniformProbs(int candidateCount) {
+        float[] uniform = new float[candidateCount];
+        float p = 1.0f / Math.max(1, candidateCount);
+        Arrays.fill(uniform, p);
+        return uniform;
+    }
+
+    private BehaviorPolicyView buildBehaviorPolicy(float[] actionScores, int[] candidateMask, int candidateCount, Game game) {
+        refreshTurnExploration(game);
+        float[] policy = normalizePolicyScores(actionScores, candidateMask, candidateCount);
+        float[] behavior = Arrays.copyOf(policy, policy.length);
+        String mode = "policy";
+
+        if (isMainExplorationEnabled()) {
+            if (turnForceUniform) {
+                behavior = buildUniformProbs(candidateCount);
+                mode = "turn_uniform";
+            } else if (turnActionEps > 0.0) {
+                float[] uniform = buildUniformProbs(candidateCount);
+                double eps = Math.max(0.0, Math.min(1.0, turnActionEps));
+                for (int i = 0; i < candidateCount; i++) {
+                    behavior[i] = (float) ((1.0 - eps) * policy[i] + eps * uniform[i]);
+                }
+                MetricsCollector.getInstance().recordMainActionEpsilonDecision();
+                mode = "epsilon_mix";
+            }
+        }
+        return new BehaviorPolicyView(policy, behavior, mode, turnActionEps, turnRandomEps);
+    }
+
+    private int sampleFromDistribution(float[] probs, int candidateCount) {
+        float r = stochasticRng.nextFloat();
+        float cdf = 0.0f;
+        for (int i = 0; i < candidateCount; i++) {
+            cdf += probs[i];
+            if (r <= cdf) {
+                return i;
+            }
+        }
+        return Math.max(0, candidateCount - 1);
+    }
+
+    private int argmax(float[] probs, int candidateCount, boolean[] selectedMask) {
+        int bestIdx = -1;
+        float bestVal = -1.0f;
+        for (int i = 0; i < candidateCount; i++) {
+            if (selectedMask != null && selectedMask[i]) {
+                continue;
+            }
+            if (probs[i] > bestVal) {
+                bestVal = probs[i];
+                bestIdx = i;
+            }
+        }
+        return bestIdx >= 0 ? bestIdx : 0;
+    }
+
+    private SinglePickResult sampleSinglePick(
+            float[] actionScores,
+            int[] candidateMask,
+            int candidateCount,
+            Game game
+    ) {
+        BehaviorPolicyView behavior = buildBehaviorPolicy(actionScores, candidateMask, candidateCount, game);
+        int chosenIdx = greedyMode
+                ? argmax(behavior.policyProbs, candidateCount, null)
+                : sampleFromDistribution(behavior.behaviorProbs, candidateCount);
+        float selectedBehaviorProb = behavior.behaviorProbs[Math.max(0, Math.min(chosenIdx, candidateCount - 1))];
+        float oldLogp = (float) Math.log(Math.max(1e-8f, selectedBehaviorProb));
+        return new SinglePickResult(chosenIdx, oldLogp, selectedBehaviorProb, behavior);
+    }
+
+    private SequentialPickResult sampleSequentialWithoutReplacement(
+            float[] actionScores,
+            int[] candidateMask,
+            int candidateCount,
+            int picks,
+            Game game
+    ) {
+        BehaviorPolicyView behavior = buildBehaviorPolicy(actionScores, candidateMask, candidateCount, game);
+        List<Integer> selectedIndices = new ArrayList<>();
+        boolean[] selected = new boolean[candidateCount];
+        float oldLogpTotal = 0.0f;
+
+        int safePicks = Math.max(0, Math.min(picks, candidateCount));
+        for (int t = 0; t < safePicks; t++) {
+            float denom = 0.0f;
+            for (int i = 0; i < candidateCount; i++) {
+                if (!selected[i]) {
+                    denom += behavior.behaviorProbs[i];
+                }
+            }
+            if (!(denom > 0.0f)) {
+                int fallback = -1;
+                for (int i = 0; i < candidateCount; i++) {
+                    if (!selected[i]) {
+                        fallback = i;
+                        break;
+                    }
+                }
+                if (fallback < 0) {
+                    break;
+                }
+                selected[fallback] = true;
+                selectedIndices.add(fallback);
+                oldLogpTotal += (float) Math.log(1e-8f);
+                continue;
+            }
+
+            int chosenIdx;
+            if (greedyMode) {
+                chosenIdx = argmax(behavior.policyProbs, candidateCount, selected);
+            } else {
+                float r = stochasticRng.nextFloat() * denom;
+                float cdf = 0.0f;
+                chosenIdx = -1;
+                for (int i = 0; i < candidateCount; i++) {
+                    if (selected[i]) {
+                        continue;
+                    }
+                    cdf += behavior.behaviorProbs[i];
+                    if (r <= cdf) {
+                        chosenIdx = i;
+                        break;
+                    }
+                }
+                if (chosenIdx < 0) {
+                    for (int i = candidateCount - 1; i >= 0; i--) {
+                        if (!selected[i]) {
+                            chosenIdx = i;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (chosenIdx < 0) {
+                break;
+            }
+
+            float pCond = behavior.behaviorProbs[chosenIdx] / denom;
+            oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
+            selected[chosenIdx] = true;
+            selectedIndices.add(chosenIdx);
+        }
+
+        return new SequentialPickResult(selectedIndices, oldLogpTotal, behavior);
+    }
+
+    private String explorationAnnotation(BehaviorPolicyView behavior, int chosenIdx) {
+        if (behavior == null || chosenIdx < 0 || chosenIdx >= behavior.behaviorProbs.length) {
+            return "";
+        }
+        return String.format(
+                "exploration{mode=%s action_eps=%.4f turn_random_eps=%.4f behavior_prob=%.6f}",
+                behavior.mode,
+                behavior.actionEps,
+                behavior.turnRandomEps,
+                behavior.behaviorProbs[chosenIdx]
+        );
+    }
+
+    private String appendExplorationToState(String gameState, BehaviorPolicyView behavior, int chosenIdx) {
+        String annotation = explorationAnnotation(behavior, chosenIdx);
+        if (annotation.isEmpty()) {
+            return gameState;
+        }
+        if (gameState == null || gameState.isEmpty()) {
+            return "[Exploration] " + annotation;
+        }
+        return gameState + "\n[Exploration] " + annotation;
+    }
+
+    private static boolean isFatalEmbeddingError(Throwable t) {
+        Throwable cur = t;
+        while (cur != null) {
+            String msg = cur.getMessage();
+            if (msg != null) {
+                if (msg.contains("CardTextEmbeddings")
+                        || msg.contains("card_embeddings.json")
+                        || msg.contains("missing embedding for card")) {
+                    return true;
+                }
+            }
+            cur = cur.getCause();
+        }
+        return false;
+    }
+
+    private static boolean inPlayManaContext() {
+        Integer d = playManaDepth.get();
+        return d != null && d > 0;
+    }
+
+    private static String preferredManaColorForUnpaid(String unpaidText, java.util.Set<String> choices) {
+        if (unpaidText == null || unpaidText.isEmpty() || choices == null || choices.isEmpty()) {
+            return null;
+        }
+        // Prefer required colored symbols first.
+        if (unpaidText.contains("{W}") && choices.contains("White")) return "White";
+        if (unpaidText.contains("{U}") && choices.contains("Blue")) return "Blue";
+        if (unpaidText.contains("{B}") && choices.contains("Black")) return "Black";
+        if (unpaidText.contains("{R}") && choices.contains("Red")) return "Red";
+        if (unpaidText.contains("{G}") && choices.contains("Green")) return "Green";
+        return null;
+    }
+
+    private static int manaProducerPenalty(UUID targetId, Game game) {
+        if (targetId == null || game == null) {
+            return Integer.MAX_VALUE;
+        }
+        Permanent p = game.getPermanent(targetId);
+        if (p == null) {
+            return Integer.MAX_VALUE;
+        }
+        int penalty = 0;
+        int output = estimatePermanentManaOutput(p, game);
+        if (output > 0) {
+            // Opportunity cost of tapping this target as a cost:
+            // keep higher-output producers available for actual payment.
+            penalty += 100 + (75 * output);
+        }
+        // Prefer tapping low-impact bodies over bigger creatures.
+        try {
+            penalty += Math.max(0, p.getPower().getValue());
+        } catch (Exception ignored) {
+        }
+        return penalty;
+    }
+
+    private static int estimateAbilityManaOutput(Ability ability, Game game) {
+        if (!(ability instanceof ManaAbility)) {
+            return 0;
+        }
+        int best = 0;
+        try {
+            for (Mana mana : ((ManaAbility) ability).getNetMana(game)) {
+                if (mana != null) {
+                    best = Math.max(best, Math.max(1, mana.count()));
+                }
+            }
+        } catch (Exception ignored) {
+            best = Math.max(best, 1);
+        }
+        // Some mana abilities (notably "any color" selectors) may not expose
+        // concrete net mana options before a choice is made. Treat those as at
+        // least 1 to avoid undervaluing/incorrectly preferring dominated paths.
+        return Math.max(1, best);
+    }
+
+    private static int estimatePermanentManaOutput(Permanent p, Game game) {
+        if (p == null || game == null) {
+            return 0;
+        }
+        int best = 0;
+        try {
+            for (Ability a : p.getAbilities(game)) {
+                best = Math.max(best, estimateAbilityManaOutput(a, game));
+            }
+        } catch (Exception ignored) {
+            return best;
+        }
+        return best;
+    }
+
+    private static boolean hasTapTargetCost(Ability ability) {
+        if (ability == null) {
+            return false;
+        }
+        try {
+            for (mage.abilities.costs.Cost cost : ability.getCosts()) {
+                if (cost instanceof mage.abilities.costs.common.TapTargetCost) {
+                    return true;
+                }
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+        return false;
+    }
+
+    private static boolean hasTapSourceCost(Ability ability) {
+        if (ability == null) {
+            return false;
+        }
+        try {
+            for (mage.abilities.costs.Cost cost : ability.getCosts()) {
+                if (cost instanceof mage.abilities.costs.common.TapSourceCost) {
+                    return true;
+                }
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+        return false;
+    }
+
+    private static int manaProducerUsePenalty(MageObject obj, Game game) {
+        if (!(obj instanceof Permanent) || game == null) {
+            return Integer.MAX_VALUE / 4;
+        }
+        Permanent p = (Permanent) obj;
+        int bestAbilityPenalty = Integer.MAX_VALUE / 4;
+        int bestOutput = 0;
+        boolean foundManaAbility = false;
+        try {
+            for (Ability a : p.getAbilities(game)) {
+                if (!(a instanceof ManaAbility)) {
+                    continue;
+                }
+                foundManaAbility = true;
+                int abilityPenalty = 0;
+                if (hasTapTargetCost(a)) {
+                    // Abilities like Saruli Caretaker consume another permanent.
+                    abilityPenalty += 300;
+                }
+                int output = estimateAbilityManaOutput(a, game);
+                bestOutput = Math.max(bestOutput, output);
+                bestAbilityPenalty = Math.min(bestAbilityPenalty, abilityPenalty);
+            }
+        } catch (Exception ignored) {
+            return Integer.MAX_VALUE / 8;
+        }
+        if (!foundManaAbility) {
+            return Integer.MAX_VALUE / 8;
+        }
+
+        int penalty = bestAbilityPenalty;
+        // Prefer producers with larger immediate output, but keep complexity dominant.
+        penalty -= (20 * Math.max(1, bestOutput));
+        if (p.isLand(game)) {
+            penalty -= 40;
+        }
+        return penalty;
+    }
+
+    private static String requiredManaColorFromUnpaid(String unpaidText) {
+        if (unpaidText == null || unpaidText.isEmpty()) {
+            return null;
+        }
+        if (unpaidText.contains("{W}")) return "White";
+        if (unpaidText.contains("{U}")) return "Blue";
+        if (unpaidText.contains("{B}")) return "Black";
+        if (unpaidText.contains("{R}")) return "Red";
+        if (unpaidText.contains("{G}")) return "Green";
+        return null;
+    }
+
+    private static boolean manaCanProduceColor(Mana mana, String color) {
+        if (mana == null || color == null) {
+            return false;
+        }
+        switch (color) {
+            case "White":
+                return mana.getWhite() > 0 || mana.getAny() > 0;
+            case "Blue":
+                return mana.getBlue() > 0 || mana.getAny() > 0;
+            case "Black":
+                return mana.getBlack() > 0 || mana.getAny() > 0;
+            case "Red":
+                return mana.getRed() > 0 || mana.getAny() > 0;
+            case "Green":
+                return mana.getGreen() > 0 || mana.getAny() > 0;
+            default:
+                return false;
+        }
+    }
+
+    private static boolean permanentCanProduceColor(Permanent permanent, String color, Game game) {
+        if (permanent == null || color == null || game == null) {
+            return false;
+        }
+        try {
+            for (Ability a : permanent.getAbilities(game)) {
+                if (!(a instanceof ManaAbility)) {
+                    continue;
+                }
+                for (Mana mana : ((ManaAbility) a).getNetMana(game)) {
+                    if (manaCanProduceColor(mana, color)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+        return false;
+    }
+
+    private static boolean abilityCanProduceColor(Ability ability, String color, Game game) {
+        if (!(ability instanceof ManaAbility) || color == null || game == null) {
+            return false;
+        }
+        try {
+            for (Mana mana : ((ManaAbility) ability).getNetMana(game)) {
+                if (manaCanProduceColor(mana, color)) {
+                    return true;
+                }
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+        return false;
+    }
+
+    public void setAttachedGameLogger(GameLogger gameLogger) {
+        this.attachedGameLogger = gameLogger;
+    }
+
+    private GameLogger resolveGameLogger() {
+        try {
+            GameLogger threadLogger = RLTrainer.threadLocalGameLogger.get();
+            if (threadLogger != null && threadLogger.isEnabled()) {
+                return threadLogger;
+            }
+        } catch (Exception ignored) {
+        }
+        if (attachedGameLogger != null && attachedGameLogger.isEnabled()) {
+            return attachedGameLogger;
+        }
+        return null;
     }
 
     private static final Object MULL_TRAIN_LOG_LOCK = new Object();
@@ -460,6 +1056,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.greedyMode = player.greedyMode;
         this.policyKey = player.policyKey;
         this.trainingEnabled = player.trainingEnabled;
+        this.attachedGameLogger = player.attachedGameLogger;
         // strict choose mode enforced via method override
     }
 
@@ -475,12 +1072,55 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         try {
             result = priorityPlay(game);
         } catch (Throwable t) {
+            if (isFatalEmbeddingError(t)) {
+                try {
+                    RLTrainer.threadLocalLogger.get().error(
+                            "RL priority() fatal embedding error; aborting run: " + t.getMessage());
+                } catch (Exception ignored) {
+                    // ignore
+                }
+                if (t instanceof RuntimeException) {
+                    throw (RuntimeException) t;
+                }
+                if (t instanceof Error) {
+                    throw (Error) t;
+                }
+                throw new IllegalStateException("Fatal embedding configuration error", t);
+            }
             // Never let RL decision logic crash the game engine.
             // A single bad activation/choice can otherwise trigger "too many errors" and end the whole game.
             try {
                 RLTrainer.threadLocalLogger.get().warn("RL priority() caught exception; forcing pass: " + t.getMessage());
             } catch (Exception ignored) {
                 // ignore
+            }
+            try {
+                GameLogger gameLogger = resolveGameLogger();
+                if (gameLogger != null && gameLogger.isEnabled()) {
+                    String phase = "unknown";
+                    try {
+                        if (game != null && game.getPhase() != null && game.getPhase().getType() != null) {
+                            phase = game.getPhase().getType().toString();
+                        }
+                    } catch (Exception ignored) {
+                    }
+                    int turnNum = -1;
+                    try {
+                        if (game != null) {
+                            turnNum = game.getTurnNum();
+                        }
+                    } catch (Exception ignored) {
+                    }
+                    gameLogger.log(String.format(
+                            "PRIORITY_FALLBACK_PASS: player=%s turn=%d phase=%s reason=%s",
+                            getName(),
+                            turnNum,
+                            phase,
+                            trunc(String.valueOf(t.getMessage()), 300)
+                    ));
+                }
+            } catch (Exception ignored) {
+                // don't fail on fallback logging
             }
             pass(game);
             result = false;
@@ -555,44 +1195,23 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         float[] actionProbs = prediction.policyScores; // length = maxCandidates
         float valueScore = prediction.valueScores;
 
-        // PPO-critical: mask in logits space then softmax to get a valid categorical distribution.
-        float[] logits = new float[candidateCount];
-        float maxLogit = -Float.MAX_VALUE;
-        for (int i = 0; i < candidateCount; i++) {
-            float p = actionProbs[i];
-            if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) {
-                p = 1e-20f;
-            }
-            float logit = (float) Math.log(p);
-            if (candidateMask[i] != 1) {
-                logit = -1e9f;
-            }
-            logits[i] = logit;
-            if (logit > maxLogit) {
-                maxLogit = logit;
-            }
-        }
-        float[] maskedProbs = new float[candidateCount];
-        float sum = 0.0f;
-        for (int i = 0; i < candidateCount; i++) {
-            float e = (candidateMask[i] == 1) ? (float) Math.exp(logits[i] - maxLogit) : 0.0f;
-            maskedProbs[i] = e;
-            sum += e;
-        }
-        if (sum <= 0.0f || Float.isNaN(sum) || Float.isInfinite(sum)) {
-            // Fallback: uniform over valid candidates
-            float uniformProb = 1.0f / candidateCount;
-            for (int i = 0; i < candidateCount; i++) {
-                maskedProbs[i] = uniformProb;
-            }
-        } else {
-            for (int i = 0; i < candidateCount; i++) {
-                maskedProbs[i] /= sum;
-            }
-        }
+        int picks = maxTargets; // historical behavior: pick maxTargets (then ensure >= minTargets via truncation above)
+        SequentialPickResult pickResult = sampleSequentialWithoutReplacement(
+                actionProbs,
+                candidateMask,
+                candidateCount,
+                picks,
+                game
+        );
+        float[] maskedProbs = pickResult.behavior.behaviorProbs;
+        float[] policyMaskedProbs = pickResult.behavior.policyProbs;
 
         if (ACTIVATION_DIAG) {
-            RLTrainer.threadLocalLogger.get().info("Action probabilities: " + Arrays.toString(maskedProbs));
+            RLTrainer.threadLocalLogger.get().info("Policy probabilities: " + Arrays.toString(policyMaskedProbs));
+            RLTrainer.threadLocalLogger.get().info("Behavior probabilities: " + Arrays.toString(maskedProbs)
+                    + " mode=" + pickResult.behavior.mode
+                    + " actionEps=" + pickResult.behavior.actionEps
+                    + " turnRandomEps=" + pickResult.behavior.turnRandomEps);
             RLTrainer.threadLocalLogger.get().info("Value score: " + valueScore);
         }
 
@@ -600,77 +1219,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.lastActionProbs = maskedProbs.clone();
         this.lastValueScore = valueScore;
 
-        // Choose indices (sequential without replacement) + joint old log-prob (PPO-critical)
-        List<Integer> selectedIndices = new ArrayList<>();
-        boolean[] selected = new boolean[candidateCount];
-        float oldLogpTotal = 0.0f;
-        Random random = new Random();
-        int picks = maxTargets; // historical behavior: pick maxTargets (then ensure >= minTargets via truncation above)
-        for (int t = 0; t < picks; t++) {
-            float denom = 0.0f;
-            for (int i = 0; i < candidateCount; i++) {
-                if (!selected[i]) {
-                    denom += maskedProbs[i];
-                }
-            }
-            if (!(denom > 0.0f)) {
-                // Degenerate: pick first remaining
-                int fallback = -1;
-                for (int i = 0; i < candidateCount; i++) {
-                    if (!selected[i]) {
-                        fallback = i;
-                        break;
-                    }
-                }
-                if (fallback < 0) {
-                    break;
-                }
-                selected[fallback] = true;
-                selectedIndices.add(fallback);
-                oldLogpTotal += (float) Math.log(1e-8f);
-                continue;
-            }
-
-            int pickIdx = -1;
-            if (greedyMode) {
-                float best = -1.0f;
-                for (int i = 0; i < candidateCount; i++) {
-                    if (!selected[i] && maskedProbs[i] > best) {
-                        best = maskedProbs[i];
-                        pickIdx = i;
-                    }
-                }
-            } else {
-                float r = random.nextFloat() * denom;
-                float c = 0.0f;
-                for (int i = 0; i < candidateCount; i++) {
-                    if (selected[i]) {
-                        continue;
-                    }
-                    c += maskedProbs[i];
-                    if (r <= c) {
-                        pickIdx = i;
-                        break;
-                    }
-                }
-                if (pickIdx < 0) {
-                    // numerical edge: take last remaining
-                    for (int i = candidateCount - 1; i >= 0; i--) {
-                        if (!selected[i]) {
-                            pickIdx = i;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (pickIdx < 0) {
-                break;
-            }
-            float pCond = maskedProbs[pickIdx] / denom;
-            oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
-            selected[pickIdx] = true;
-            selectedIndices.add(pickIdx);
-        }
+        List<Integer> selectedIndices = pickResult.selectedIndices;
+        float oldLogpTotal = pickResult.oldLogpTotal;
 
         // Record training data for decisions (store full action + joint log-prob)
         if (trainingEnabled && !selectedIndices.isEmpty()) {
@@ -1165,6 +1715,18 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         f[42] = Math.min(perm.getCounters(game).getCount(CounterType.P1P1), 10) / 10.0f;
                     }
                 }
+                // Include source-ability context for target selection so the model can
+                // distinguish "target yourself" combo enablers from hostile effects.
+                if (actionType == StateSequenceBuilder.ActionType.SELECT_TARGETS && source != null) {
+                    f[43] = source.isUsesStack() ? 1.0f : 0.0f;
+                    f[44] = source.getManaCostsToPay().manaValue() / 10.0f;
+                    f[45] = source.getTargets() != null ? Math.min(source.getTargets().size(), 5) / 5.0f : 0.0f;
+                    f[46] = (source instanceof SpellAbility) ? 1.0f : 0.0f;
+                    if (baseState != null && source.getSourceId() != null) {
+                        Integer sourceTokenIdx = baseState.uuidToTokenIndex.get(source.getSourceId());
+                        f[47] = sourceTokenIdx != null ? sourceTokenIdx / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
+                    }
+                }
             }
 
             // Mode candidate features (CHOOSE_MODE)
@@ -1221,37 +1783,35 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     private double computeStepReward(StateSequenceBuilder.ActionType actionType, Object candidate, Game game) {
-        // Denser reward shaping for better credit assignment
-        // Terminal reward (+1/-1) is too sparse for long games
+        // Default: no heuristic shaping; rely on returns/GAE from game outcomes.
+        if (!USE_HEURISTIC_STEP_REWARDS) {
+            return 0.0;
+        }
 
         if (actionType == StateSequenceBuilder.ActionType.DECLARE_ATTACKS) {
-            // Attacking is generally good - pressures opponent
             return ATTACK_REWARD;
         }
 
         if (actionType == StateSequenceBuilder.ActionType.DECLARE_BLOCKS) {
-            // Blocking prevents damage (small reward since sometimes not blocking is better)
             return BLOCK_REWARD;
         }
 
-        // Target selection: small reward for targeting opponent, small penalty for targeting self
         if (actionType == StateSequenceBuilder.ActionType.SELECT_TARGETS && candidate instanceof java.util.UUID && game != null) {
             java.util.UUID tid = (java.util.UUID) candidate;
             Player targetPlayer = game.getPlayer(tid);
             if (targetPlayer != null) {
                 if (targetPlayer.getId().equals(playerId)) {
-                    return TARGET_SELF_PENALTY; // Targeting self with damage/effects
+                    return TARGET_SELF_PENALTY;
                 } else {
-                    return TARGET_OPP_REWARD; // Targeting opponent
+                    return TARGET_OPP_REWARD;
                 }
             }
-            // Permanent target: reward targeting opponent's permanents
             Permanent targetPerm = game.getPermanent(tid);
             if (targetPerm != null) {
                 if (targetPerm.isControlledBy(playerId)) {
-                    return TARGET_SELF_PENALTY; // Targeting own permanent (usually bad for damage)
+                    return TARGET_SELF_PENALTY;
                 } else {
-                    return TARGET_OPP_REWARD; // Targeting opponent's permanent (removal)
+                    return TARGET_OPP_REWARD;
                 }
             }
         }
@@ -1265,8 +1825,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         if (candidate instanceof SpellAbility) {
-            // NOTE: Can't check if creature without Game object
-            // Treat all spells equally for now
             return SPELL_CAST_REWARD;
         }
 
@@ -1514,6 +2072,127 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             trace("chooseTarget EXIT: london mulligan, result=" + result);
             return result;
         }
+        // During mana payment, avoid tapping key mana producers when a target
+        // choice is required (e.g., Saruli Caretaker) by using a deterministic
+        // target heuristic instead of policy sampling.
+        if (USE_ENGINE_CHOICES && inPlayManaContext() && outcome == Outcome.Tap
+                && source instanceof ManaAbility
+                && target != null
+                && target.getMinNumberOfTargets() == 1
+                && target.getMaxNumberOfTargets() == 1) {
+            UUID abilityControllerId = playerId;
+            if (target.getTargetController() != null && target.getAbilityController() != null) {
+                abilityControllerId = target.getAbilityController();
+            }
+            java.util.List<UUID> possible = new java.util.ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+            final UUID ctrlId = abilityControllerId;
+            possible.removeIf(id -> id == null || !target.canTarget(ctrlId, id, source, game));
+            // For mana abilities that already tap their source as a cost, avoid
+            // selecting the same permanent as a tap-target (can become illegal
+            // after costs are paid and strands mana payment).
+            if (source != null && hasTapSourceCost(source)) {
+                UUID sourceId = source.getSourceId();
+                if (sourceId != null) {
+                    possible.removeIf(id -> sourceId.equals(id));
+                }
+            }
+            if (!possible.isEmpty()) {
+                UUID best = null;
+                int bestPenalty = Integer.MAX_VALUE;
+                for (UUID id : possible) {
+                    int pen = manaProducerPenalty(id, game);
+                    if (best == null || pen < bestPenalty) {
+                        best = id;
+                        bestPenalty = pen;
+                    }
+                }
+                boolean allCandidatesAreManaProducers = true;
+                for (UUID id : possible) {
+                    Permanent cand = game.getPermanent(id);
+                    if (estimatePermanentManaOutput(cand, game) <= 0) {
+                        allCandidatesAreManaProducers = false;
+                        break;
+                    }
+                }
+                if (allCandidatesAreManaProducers) {
+                    // Reject dominated targeted-mana lines (e.g., Saruli tapping Battlement to make
+                    // one mana while spending two producers) when the tapped producers can already
+                    // satisfy the currently required color.
+                    boolean sourceHasTapTargetCost = hasTapTargetCost(source);
+                    int sourceOutput = estimateAbilityManaOutput(source, game);
+                    boolean dominatedByTargets = sourceOutput > 0;
+                    for (UUID id : possible) {
+                        Permanent cand = game.getPermanent(id);
+                        int targetOutput = estimatePermanentManaOutput(cand, game);
+                        if (targetOutput < sourceOutput) {
+                            dominatedByTargets = false;
+                            break;
+                        }
+                    }
+                    String requiredColor = requiredManaColorFromUnpaid(currentUnpaidManaText.get());
+                    boolean targetsCanCoverRequiredColor = true;
+                    if (requiredColor != null) {
+                        targetsCanCoverRequiredColor = false;
+                        for (UUID id : possible) {
+                            Permanent cand = game.getPermanent(id);
+                            if (permanentCanProduceColor(cand, requiredColor, game)) {
+                                targetsCanCoverRequiredColor = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    // Allow lines where this source is being used for a required color
+                    // that at least one legal target cannot produce. Example: Saruli
+                    // makes {B} while tapping a green-only producer as target.
+                    boolean sourceProvidesRequiredColor = requiredColor != null
+                            && abilityCanProduceColor(source, requiredColor, game);
+                    boolean hasOffColorTarget = false;
+                    if (requiredColor != null) {
+                        for (UUID id : possible) {
+                            Permanent cand = game.getPermanent(id);
+                            if (!permanentCanProduceColor(cand, requiredColor, game)) {
+                                hasOffColorTarget = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (sourceHasTapTargetCost
+                            && dominatedByTargets
+                            && targetsCanCoverRequiredColor
+                            && !(sourceProvidesRequiredColor && hasOffColorTarget)) {
+                        trace("chooseTarget: playMana rejected dominated tap-target mana line "
+                                + "(sourceOutput=" + sourceOutput
+                                + ", requiredColor=" + requiredColor + ")");
+                        trace("chooseTarget EXIT: playMana heuristic, result=false");
+                        return false;
+                    }
+                    // Keep legal lines open otherwise and pick the least costly target.
+                    trace("chooseTarget: playMana heuristic all targets are mana producers; picking least costly");
+                }
+                if (best != null) {
+                    target.addTarget(best, source, game);
+                    MageObject obj = game.getObject(best);
+                    String pickName = obj != null ? obj.getName() : best.toString();
+                    trace("chooseTarget: playMana heuristic picked=" + pickName + " penalty=" + bestPenalty);
+                    trace("chooseTarget EXIT: playMana heuristic, result=true");
+                    return true;
+                }
+            }
+            trace("chooseTarget: playMana heuristic fallback to engine");
+            boolean result = super.chooseTarget(outcome, target, source, game);
+            trace("chooseTarget EXIT: playMana heuristic fallback, result=" + result);
+            return result;
+        }
+        // For mana payment plumbing, engine target selection is more reliable than
+        // policy-driven picks (prevents cast failures from stranding mana sources).
+        if (USE_ENGINE_CHOICES && source instanceof ManaAbility) {
+            trace("chooseTarget: mana ability target delegation to engine");
+            boolean result = super.chooseTarget(outcome, target, source, game);
+            trace("chooseTarget EXIT: mana ability delegation, result=" + result);
+            return result;
+        }
         // RL-only target selection. No engine fallback.
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null && target.getAbilityController() != null) {
@@ -1626,46 +2305,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     );
                     float[] actionProbs = prediction.policyScores;
                     float valueScore = prediction.valueScores;
-
-                    int chosenIdx = candidateCount - 1;
-                    if (greedyMode) {
-                        float best = -1.0f;
-                        for (int i = 0; i < candidateCount; i++) {
-                            float p = actionProbs[i];
-                            if (Float.isNaN(p) || Float.isInfinite(p) || p < 0.0f) {
-                                p = 0.0f;
-                            }
-                            if (p > best) {
-                                best = p;
-                                chosenIdx = i;
-                            }
-                        }
-                    } else {
-                        // Sample from returned probabilities (already masked/renormalized by Python)
-                        float r = new java.util.Random().nextFloat();
-                        float cdf = 0.0f;
-                        for (int i = 0; i < candidateCount; i++) {
-                            float p = actionProbs[i];
-                            if (Float.isNaN(p) || Float.isInfinite(p) || p < 0.0f) {
-                                p = 0.0f;
-                            }
-                            cdf += p;
-                            if (r <= cdf) {
-                                chosenIdx = i;
-                                break;
-                            }
-                        }
-                    }
+                    SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+                    int chosenIdx = pickResult.chosenIdx;
                     picked = possible.get(chosenIdx);
                     String pickName = picked == null ? "STOP" : (game.getObject(picked) != null ? game.getObject(picked).getName() : "unknown");
-                    trace(String.format("chooseTarget: RL model picked idx=%d, target=%s, prob=%.3f", chosenIdx, pickName, actionProbs[chosenIdx]));
+                    trace(String.format("chooseTarget: RL model picked idx=%d, target=%s, behavior_prob=%.3f, mode=%s",
+                            chosenIdx, pickName, pickResult.selectedBehaviorProb, pickResult.behavior.mode));
 
                     // Record training data for this target selection
                     if (trainingEnabled && !game.isSimulation()) {
                         int[] chosenIndices = new int[maxCandidates];
                         Arrays.fill(chosenIndices, -1);
                         chosenIndices[0] = chosenIdx;
-                        float oldLogp = (float) Math.log(Math.max(1e-8f, actionProbs[chosenIdx]));
+                        float oldLogp = pickResult.oldLogp;
                         double stepReward = computeStepReward(StateSequenceBuilder.ActionType.SELECT_TARGETS, picked, game);
                         StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
                                 baseState,
@@ -1709,14 +2361,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                 optionNames.add(tid == null ? "STOP" : describeTargetWithOwner(tid, game));
                             }
                             String selectedName = picked == null ? "STOP" : describeTargetWithOwner(picked, game);
+                            String gameStateWithExploration = appendExplorationToState(
+                                    formatGameState(game),
+                                    pickResult.behavior,
+                                    chosenIdx
+                            );
                             gameLogger.logDecision(
                                     this.getName(),
                                     activePlayerName,
                                     phase + " (TARGET_PICK " + chosenCount + " min=" + minTargets + " max=" + maxTargets + ")",
                                     turn,
-                                    formatGameState(game),
+                                    gameStateWithExploration,
                                     optionNames,
-                                    Arrays.copyOf(actionProbs, candidateCount),
+                                    Arrays.copyOf(pickResult.behavior.behaviorProbs, candidateCount),
                                     valueScore,
                                     chosenIdx,
                                     selectedName
@@ -2020,34 +2677,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     );
                     float[] actionProbs = prediction.policyScores;
                     float valueScore = prediction.valueScores;
-                    int chosenIdx = candidateCount - 1;
-                    if (greedyMode) {
-                        float best = -1.0f;
-                        for (int i = 0; i < candidateCount; i++) {
-                            float p = actionProbs[i];
-                            if (Float.isNaN(p) || Float.isInfinite(p) || p < 0.0f) {
-                                p = 0.0f;
-                            }
-                            if (p > best) {
-                                best = p;
-                                chosenIdx = i;
-                            }
-                        }
-                    } else {
-                        float r = new java.util.Random().nextFloat();
-                        float cdf = 0.0f;
-                        for (int i = 0; i < candidateCount; i++) {
-                            float p = actionProbs[i];
-                            if (Float.isNaN(p) || Float.isInfinite(p) || p < 0.0f) {
-                                p = 0.0f;
-                            }
-                            cdf += p;
-                            if (r <= cdf) {
-                                chosenIdx = i;
-                                break;
-                            }
-                        }
-                    }
+                    SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+                    int chosenIdx = pickResult.chosenIdx;
                     pickedName = remainingNames.get(chosenIdx);
 
                     // Record training data for this card selection
@@ -2055,7 +2686,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         int[] chosenIndices = new int[maxCandidates];
                         Arrays.fill(chosenIndices, -1);
                         chosenIndices[0] = chosenIdx;
-                        float oldLogp = (float) Math.log(Math.max(1e-8f, actionProbs[chosenIdx]));
+                        float oldLogp = pickResult.oldLogp;
                         // Get representative card UUID for step reward computation
                         UUID pickedCardUUID = (pickedName != null && cardsByName.containsKey(pickedName) && !cardsByName.get(pickedName).isEmpty())
                                 ? cardsByName.get(pickedName).get(0).getId()
@@ -2102,14 +2733,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                 String name = remainingNames.get(i);
                                 optionNames.add(name == null ? "STOP" : name);
                             }
+                            String gameStateWithExploration = appendExplorationToState(
+                                    formatGameState(game),
+                                    pickResult.behavior,
+                                    chosenIdx
+                            );
                             gameLogger.logDecision(
                                     this.getName(),
                                     activePlayerName,
                                     phase + " (CARD_PICK " + chosenCount + " min=" + minTargets + " max=" + maxTargets + ")",
                                     turn,
-                                    formatGameState(game),
+                                    gameStateWithExploration,
                                     optionNames,
-                                    Arrays.copyOf(actionProbs, candidateCount),
+                                    Arrays.copyOf(pickResult.behavior.behaviorProbs, candidateCount),
                                     valueScore,
                                     chosenIdx,
                                     pickedName == null ? "STOP" : pickedName
@@ -2220,6 +2856,15 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         // Mana color payment: delegate to base AI logic (not a strategic decision)
         if (outcome == Outcome.PutManaInPool && choice != null && choice.isManaColorChoice()) {
+            if (USE_ENGINE_CHOICES && inPlayManaContext() && choice.getChoices() != null) {
+                String preferred = preferredManaColorForUnpaid(currentUnpaidManaText.get(), choice.getChoices());
+                if (preferred != null) {
+                    choice.setChoice(preferred);
+                    trace("choose: mana color forced by unpaid cost, chosen=" + preferred
+                            + ", unpaid=" + currentUnpaidManaText.get());
+                    return true;
+                }
+            }
             trace("choose: mana color delegation, calling super.choose()");
             boolean result = super.choose(outcome, choice, game);
             trace("choose EXIT: mana color delegation, result=" + result + ", chosen=" + (choice.isChosen() ? choice.getChoice() : "none"));
@@ -2511,13 +3156,24 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             int[] candidateActionIds = new int[maxCandidates];
             float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
             int[] candidateMask = new int[maxCandidates];
+            int legalModes = 0;
 
             for (int i = 0; i < candidateCount; i++) {
-                candidateMask[i] = 1;
+                boolean legal = isModeChoiceCurrentlyLegal(availableModes.get(i), source, game);
+                candidateMask[i] = legal ? 1 : 0;
+                if (legal) {
+                    legalModes++;
+                }
                 candidateActionIds[i] = computeCandidateActionId(StateSequenceBuilder.ActionType.CHOOSE_MODE, game, source, availableModes.get(i));
                 candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.CHOOSE_MODE, game, source, availableModes.get(i), candFeatDim, baseState);
                 // inject mode index into the feature vector so the model knows ordinal position
                 candidateFeatures[i][0] = i / (float) candidateCount;
+            }
+            if (legalModes <= 0) {
+                trace("chooseMode: no legal mode candidates after masking, falling back to super");
+                mage.abilities.Mode fallback = super.chooseMode(modes, source, game);
+                trace("chooseMode EXIT (masked fallback): " + (fallback != null ? fallback.getId() : "null"));
+                return fallback;
             }
 
             String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_MODE);
@@ -2526,71 +3182,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
-
-            float[] logits = new float[candidateCount];
-            float maxLogit = -Float.MAX_VALUE;
-            for (int i = 0; i < candidateCount; i++) {
-                float p = actionProbs[i];
-                if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
-                logits[i] = (float) Math.log(p);
-                if (logits[i] > maxLogit) maxLogit = logits[i];
-            }
-            float[] maskedProbs = new float[candidateCount];
-            float sum = 0.0f;
-            for (int i = 0; i < candidateCount; i++) {
-                maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
-                sum += maskedProbs[i];
-            }
-            if (sum > 0.0f && !Float.isNaN(sum)) {
-                for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= sum;
-            } else {
-                for (int i = 0; i < candidateCount; i++) maskedProbs[i] = 1.0f / candidateCount;
-            }
-
-            int chosenIdx;
-            if (greedyMode) {
-                chosenIdx = 0;
-                float best = -1.0f;
-                for (int i = 0; i < candidateCount; i++) {
-                    if (maskedProbs[i] > best) { best = maskedProbs[i]; chosenIdx = i; }
-                }
-            } else {
-                float r = new Random().nextFloat();
-                float c = 0.0f;
-                chosenIdx = 0;
-                for (int i = 0; i < candidateCount; i++) {
-                    c += maskedProbs[i];
-                    if (r <= c) { chosenIdx = i; break; }
-                }
-            }
-
-            int appliedIdx = chosenIdx;
-            if (!isModeChoiceCurrentlyLegal(availableModes.get(appliedIdx), source, game)) {
-                int fallbackIdx = -1;
-                for (int i = 0; i < candidateCount; i++) {
-                    if (isModeChoiceCurrentlyLegal(availableModes.get(i), source, game)) {
-                        fallbackIdx = i;
-                        break;
-                    }
-                }
-                if (fallbackIdx >= 0) {
-                    trace(String.format(
-                            "chooseMode: overriding illegal mode idx=%d with legal idx=%d",
-                            appliedIdx, fallbackIdx));
-                    appliedIdx = fallbackIdx;
-                } else {
-                    trace("chooseMode: no legal mode found after legality check, falling back to super");
-                    mage.abilities.Mode fallback = super.chooseMode(modes, source, game);
-                    trace("chooseMode EXIT (no legal mode fallback): " + (fallback != null ? fallback.getId() : "null"));
-                    return fallback;
-                }
-            }
+            SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+            int appliedIdx = pickResult.chosenIdx;
 
             if (trainingEnabled && !game.isSimulation()) {
                 int[] chosenIndices = new int[maxCandidates];
                 Arrays.fill(chosenIndices, -1);
                 chosenIndices[0] = appliedIdx;
-                float oldLogp = (float) Math.log(Math.max(1e-8f, maskedProbs[appliedIdx]));
+                float oldLogp = pickResult.oldLogp;
                 StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
                         baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
                         1, chosenIndices, oldLogp, valueScore,
@@ -2612,9 +3211,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     for (int i = 0; i < candidateCount; i++) {
                         modeNames.add("Mode" + i + ":" + availableModes.get(i).getEffects().getText(availableModes.get(i)).substring(0, Math.min(30, availableModes.get(i).getEffects().getText(availableModes.get(i)).length())));
                     }
-                    gameLogger.logDecision(this.getName(), activePlayerName, phase + " (CHOOSE_MODE)", turn,
+                    String modeInfo = appendExplorationToState(
                             String.format("CHOOSE_MODE: chose mode %d of %d", appliedIdx, candidateCount),
-                            modeNames, Arrays.copyOf(maskedProbs, candidateCount), valueScore, appliedIdx,
+                            pickResult.behavior,
+                            appliedIdx
+                    );
+                    gameLogger.logDecision(this.getName(), activePlayerName, phase + " (CHOOSE_MODE)", turn,
+                            modeInfo,
+                            modeNames, Arrays.copyOf(pickResult.behavior.behaviorProbs, candidateCount), valueScore, appliedIdx,
                             modeNames.get(appliedIdx));
                 }
             } catch (Exception ignored) {}
@@ -2737,43 +3341,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
-
-            float[] logits = new float[candidateCount];
-            float maxLogit = -Float.MAX_VALUE;
-            for (int i = 0; i < candidateCount; i++) {
-                float p = actionProbs[i];
-                if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
-                logits[i] = (float) Math.log(p);
-                if (logits[i] > maxLogit) maxLogit = logits[i];
-            }
-            float[] maskedProbs = new float[candidateCount];
-            float sum = 0.0f;
-            for (int i = 0; i < candidateCount; i++) {
-                maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
-                sum += maskedProbs[i];
-            }
-            if (sum > 0.0f && !Float.isNaN(sum)) {
-                for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= sum;
-            } else {
-                for (int i = 0; i < candidateCount; i++) maskedProbs[i] = 1.0f / candidateCount;
-            }
-
-            int chosenIdx;
-            if (greedyMode) {
-                chosenIdx = 0;
-                float best = -1.0f;
-                for (int i = 0; i < candidateCount; i++) {
-                    if (maskedProbs[i] > best) { best = maskedProbs[i]; chosenIdx = i; }
-                }
-            } else {
-                float r = new Random().nextFloat();
-                float c = 0.0f;
-                chosenIdx = 0;
-                for (int i = 0; i < candidateCount; i++) {
-                    c += maskedProbs[i];
-                    if (r <= c) { chosenIdx = i; break; }
-                }
-            }
+            SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+            int chosenIdx = pickResult.chosenIdx;
 
             int chosenX = xValues.get(chosenIdx);
 
@@ -2781,7 +3350,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 int[] chosenIndices = new int[maxCandidates];
                 Arrays.fill(chosenIndices, -1);
                 chosenIndices[0] = chosenIdx;
-                float oldLogp = (float) Math.log(Math.max(1e-8f, maskedProbs[chosenIdx]));
+                float oldLogp = pickResult.oldLogp;
                 StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
                         baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
                         1, chosenIndices, oldLogp, valueScore,
@@ -2800,15 +3369,21 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     String phase = game.getStep() != null ? game.getStep().getType().toString() : "Unknown";
                     List<String> xNames = new ArrayList<>();
                     for (Integer x : xValues) xNames.add("X=" + x);
-                    gameLogger.logDecision(this.getName(), activePlayerName, phase + " (ANNOUNCE_X)", turn,
+                    String xDecisionState = appendExplorationToState(
                             String.format("ANNOUNCE_X: msg=\"%s\" isManaPay=%s chose X=%d (range [%d..%d])",
                                     message, isManaPay, chosenX, realMin, realMax),
-                            xNames, Arrays.copyOf(maskedProbs, candidateCount), valueScore, chosenIdx,
+                            pickResult.behavior,
+                            chosenIdx
+                    );
+                    gameLogger.logDecision(this.getName(), activePlayerName, phase + " (ANNOUNCE_X)", turn,
+                            xDecisionState,
+                            xNames, Arrays.copyOf(pickResult.behavior.behaviorProbs, candidateCount), valueScore, chosenIdx,
                             "X=" + chosenX);
                 }
             } catch (Exception ignored) {}
 
-            trace(String.format("announceX EXIT: chose X=%d (prob=%.3f)", chosenX, maskedProbs[chosenIdx]));
+            trace(String.format("announceX EXIT: chose X=%d (behavior_prob=%.3f, mode=%s)",
+                    chosenX, pickResult.selectedBehaviorProb, pickResult.behavior.mode));
             return chosenX;
 
         } catch (Exception e) {
@@ -2946,35 +3521,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
-
-            // Softmax/mask over 2 candidates
-            float[] logits = new float[candidateCount];
-            float maxLogit = -Float.MAX_VALUE;
-            for (int i = 0; i < candidateCount; i++) {
-                float p = actionProbs[i];
-                if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
-                logits[i] = (float) Math.log(p);
-                if (logits[i] > maxLogit) maxLogit = logits[i];
-            }
-            float[] maskedProbs = new float[candidateCount];
-            float sum = 0.0f;
-            for (int i = 0; i < candidateCount; i++) {
-                maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
-                sum += maskedProbs[i];
-            }
-            if (sum > 0.0f && !Float.isNaN(sum) && !Float.isInfinite(sum)) {
-                for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= sum;
-            } else {
-                maskedProbs[0] = 0.5f; maskedProbs[1] = 0.5f;
-            }
-
-            // Sample or greedy pick
-            int chosenIdx;
-            if (greedyMode) {
-                chosenIdx = maskedProbs[0] >= maskedProbs[1] ? 0 : 1;
-            } else {
-                chosenIdx = new Random().nextFloat() < maskedProbs[0] ? 0 : 1;
-            }
+            SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+            int chosenIdx = pickResult.chosenIdx;
             boolean useIt = (chosenIdx == 0);
 
             // Record training data
@@ -2982,7 +3530,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 int[] chosenIndices = new int[maxCandidates];
                 Arrays.fill(chosenIndices, -1);
                 chosenIndices[0] = chosenIdx;
-                float oldLogp = (float) Math.log(Math.max(1e-8f, maskedProbs[chosenIdx]));
+                float oldLogp = pickResult.oldLogp;
                 StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
                         baseState,
                         candidateCount,
@@ -3015,15 +3563,21 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     String phase = game.getStep() != null ? game.getStep().getType().toString() : "Unknown";
                     String activePlayerName = game.getActivePlayerId() != null
                             ? game.getPlayer(game.getActivePlayerId()).getName() : "Unknown";
+                    String chooseUseState = appendExplorationToState(
+                            String.format("CHOOSE_USE: msg=\"%s\" outcome=%s decision=%s scores=[%.2f, %.2f]",
+                                    message, outcome, useIt ? "YES" : "NO",
+                                    pickResult.behavior.behaviorProbs[0], pickResult.behavior.behaviorProbs[1]),
+                            pickResult.behavior,
+                            chosenIdx
+                    );
                     gameLogger.logDecision(
                             this.getName(),
                             activePlayerName,
                             phase + " (CHOOSE_USE)",
                             turn,
-                            String.format("CHOOSE_USE: msg=\"%s\" outcome=%s decision=%s scores=[%.2f, %.2f]",
-                                    message, outcome, useIt ? "YES" : "NO", maskedProbs[0], maskedProbs[1]),
+                            chooseUseState,
                             Arrays.asList(trueText != null ? trueText : "Yes", falseText != null ? falseText : "No"),
-                            Arrays.copyOf(maskedProbs, candidateCount),
+                            Arrays.copyOf(pickResult.behavior.behaviorProbs, candidateCount),
                             valueScore,
                             chosenIdx,
                             useIt ? (trueText != null ? trueText : "Yes") : (falseText != null ? falseText : "No")
@@ -3032,7 +3586,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             } catch (Exception ignored) {
             }
 
-            trace(String.format("chooseUse EXIT: decision=%s scores=[%.3f, %.3f]", useIt ? "YES" : "NO", maskedProbs[0], maskedProbs[1]));
+            trace(String.format("chooseUse EXIT: decision=%s behavior_scores=[%.3f, %.3f] mode=%s",
+                    useIt ? "YES" : "NO",
+                    pickResult.behavior.behaviorProbs[0],
+                    pickResult.behavior.behaviorProbs[1],
+                    pickResult.behavior.mode));
             return useIt;
 
         } catch (Exception e) {
@@ -3116,71 +3674,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
-
-            // Softmax over valid candidates
-            float[] logits = new float[candidateCount];
-            float maxLogit = -Float.MAX_VALUE;
-            for (int i = 0; i < candidateCount; i++) {
-                float p = actionProbs[i];
-                if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
-                logits[i] = (float) Math.log(p);
-                if (logits[i] > maxLogit) maxLogit = logits[i];
-            }
-            float[] maskedProbs = new float[candidateCount];
-            float probSum = 0.0f;
-            for (int i = 0; i < candidateCount; i++) {
-                maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
-                probSum += maskedProbs[i];
-            }
-            if (probSum > 0.0f && !Float.isNaN(probSum)) {
-                for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= probSum;
-            } else {
-                for (int i = 0; i < candidateCount; i++) maskedProbs[i] = 1.0f / candidateCount;
-            }
-
-            // Sequential without-replacement sampling until DONE
-            List<Integer> selectedIndices = new ArrayList<>();
-            boolean[] selected = new boolean[candidateCount];
-            float oldLogpTotal = 0.0f;
-            Random rng = new Random();
+            SequentialPickResult attackPickResult = sampleSequentialWithoutReplacement(
+                    actionProbs,
+                    candidateMask,
+                    candidateCount,
+                    candidateCount,
+                    game
+            );
+            List<Integer> selectedIndices = attackPickResult.selectedIndices;
+            float oldLogpTotal = attackPickResult.oldLogpTotal;
             List<Permanent> selectedAttackers = new ArrayList<>();
-
-            for (int t = 0; t < candidateCount; t++) {
-                float denom = 0.0f;
-                for (int i = 0; i < candidateCount; i++) {
-                    if (!selected[i]) denom += maskedProbs[i];
-                }
-                if (!(denom > 0.0f)) break;
-
-                int pickIdx;
-                if (greedyMode) {
-                    pickIdx = -1;
-                    float best = -1.0f;
-                    for (int i = 0; i < candidateCount; i++) {
-                        if (!selected[i] && maskedProbs[i] > best) { best = maskedProbs[i]; pickIdx = i; }
-                    }
-                } else {
-                    float r = rng.nextFloat() * denom;
-                    float c = 0.0f;
-                    pickIdx = -1;
-                    for (int i = 0; i < candidateCount; i++) {
-                        if (selected[i]) continue;
-                        c += maskedProbs[i];
-                        if (r <= c) { pickIdx = i; break; }
-                    }
-                    if (pickIdx < 0) {
-                        for (int i = candidateCount - 1; i >= 0; i--) {
-                            if (!selected[i]) { pickIdx = i; break; }
-                        }
-                    }
-                }
-                if (pickIdx < 0) break;
-
-                float pCond = maskedProbs[pickIdx] / denom;
-                oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
-                selected[pickIdx] = true;
-                selectedIndices.add(pickIdx);
-
+            for (int pickIdx : selectedIndices) {
                 if (pickIdx == doneIdx) {
                     break; // DONE picked, stop
                 }
@@ -3249,44 +3753,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
                     float[] p2Probs = p2Pred.policyScores;
                     float p2Value = p2Pred.valueScores;
-
-                    // Softmax
-                    float[] p2Logits = new float[p2Count];
-                    float p2MaxLogit = -Float.MAX_VALUE;
-                    for (int i = 0; i < p2Count; i++) {
-                        float p = p2Probs[i];
-                        if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
-                        p2Logits[i] = (float) Math.log(p);
-                        if (p2Logits[i] > p2MaxLogit) p2MaxLogit = p2Logits[i];
-                    }
-                    float[] p2MaskedProbs = new float[p2Count];
-                    float p2Sum = 0.0f;
-                    for (int i = 0; i < p2Count; i++) {
-                        p2MaskedProbs[i] = (float) Math.exp(p2Logits[i] - p2MaxLogit);
-                        p2Sum += p2MaskedProbs[i];
-                    }
-                    if (p2Sum > 0.0f && !Float.isNaN(p2Sum)) {
-                        for (int i = 0; i < p2Count; i++) p2MaskedProbs[i] /= p2Sum;
-                    } else {
-                        for (int i = 0; i < p2Count; i++) p2MaskedProbs[i] = 1.0f / p2Count;
-                    }
-
-                    int p2PickIdx = 0;
-                    if (greedyMode) {
-                        float best = -1.0f;
-                        for (int i = 0; i < p2Count; i++) {
-                            if (p2MaskedProbs[i] > best) { best = p2MaskedProbs[i]; p2PickIdx = i; }
-                        }
-                    } else {
-                        float r = rng.nextFloat();
-                        float c = 0.0f;
-                        for (int i = 0; i < p2Count; i++) {
-                            c += p2MaskedProbs[i];
-                            if (r <= c) { p2PickIdx = i; break; }
-                        }
-                    }
-
-                    float p2LogP = (float) Math.log(Math.max(1e-8f, p2MaskedProbs[p2PickIdx]));
+                    SinglePickResult p2Pick = sampleSinglePick(p2Probs, p2Mask, p2Count, game);
+                    int p2PickIdx = p2Pick.chosenIdx;
+                    float p2LogP = p2Pick.oldLogp;
                     UUID chosenDefId = (UUID) phase2Candidates.get(p2PickIdx).context;
                     attackerToDefender.put(attacker.getId(), chosenDefId);
 
@@ -3331,10 +3800,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     List<String> attackerNames = selectedAttackers.stream().map(Permanent::getName).collect(Collectors.toList());
                     gameLogger.logDecision(
                             this.getName(), activeName, phase + " (DECLARE_ATTACKS)", turn,
-                            String.format("DECLARE_ATTACKS: selected=%s from %d possible",
-                                    attackerNames, possibleAttackers.size()),
+                            appendExplorationToState(
+                                    String.format("DECLARE_ATTACKS: selected=%s from %d possible",
+                                            attackerNames, possibleAttackers.size()),
+                                    attackPickResult.behavior,
+                                    selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0)
+                            ),
                             phase1Candidates.stream().map(cc -> cc.isDone() ? "DONE" : cc.creature.getName()).collect(Collectors.toList()),
-                            Arrays.copyOf(maskedProbs, candidateCount),
+                            Arrays.copyOf(attackPickResult.behavior.behaviorProbs, candidateCount),
                             valueScore, selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0),
                             attackerNames.toString()
                     );
@@ -3376,7 +3849,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             this.currentState = baseState;
 
             boolean anyBlockerDeclared = false;
-            Random rng = new Random();
 
             for (Permanent attacker : attackers) {
                 // Build blocker candidates for this attacker: only blockers that can block it
@@ -3413,70 +3885,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
                 float[] actionProbs = prediction.policyScores;
                 float valueScore = prediction.valueScores;
-
-                // Softmax
-                float[] logits = new float[candidateCount];
-                float maxLogit = -Float.MAX_VALUE;
-                for (int i = 0; i < candidateCount; i++) {
-                    float p = actionProbs[i];
-                    if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) p = 1e-20f;
-                    logits[i] = (float) Math.log(p);
-                    if (logits[i] > maxLogit) maxLogit = logits[i];
-                }
-                float[] maskedProbs = new float[candidateCount];
-                float probSum = 0.0f;
-                for (int i = 0; i < candidateCount; i++) {
-                    maskedProbs[i] = (float) Math.exp(logits[i] - maxLogit);
-                    probSum += maskedProbs[i];
-                }
-                if (probSum > 0.0f && !Float.isNaN(probSum)) {
-                    for (int i = 0; i < candidateCount; i++) maskedProbs[i] /= probSum;
-                } else {
-                    for (int i = 0; i < candidateCount; i++) maskedProbs[i] = 1.0f / candidateCount;
-                }
-
-                // Sequential without-replacement until DONE
-                List<Integer> selectedIndices = new ArrayList<>();
-                boolean[] selected = new boolean[candidateCount];
-                float oldLogpTotal = 0.0f;
+                SequentialPickResult blockPickResult = sampleSequentialWithoutReplacement(
+                        actionProbs,
+                        candidateMask,
+                        candidateCount,
+                        candidateCount,
+                        game
+                );
+                List<Integer> selectedIndices = blockPickResult.selectedIndices;
+                float oldLogpTotal = blockPickResult.oldLogpTotal;
                 List<Permanent> selectedBlockers = new ArrayList<>();
-
-                for (int t = 0; t < candidateCount; t++) {
-                    float denom = 0.0f;
-                    for (int i = 0; i < candidateCount; i++) {
-                        if (!selected[i]) denom += maskedProbs[i];
-                    }
-                    if (!(denom > 0.0f)) break;
-
-                    int pickIdx;
-                    if (greedyMode) {
-                        pickIdx = -1;
-                        float best = -1.0f;
-                        for (int i = 0; i < candidateCount; i++) {
-                            if (!selected[i] && maskedProbs[i] > best) { best = maskedProbs[i]; pickIdx = i; }
-                        }
-                    } else {
-                        float r = rng.nextFloat() * denom;
-                        float c = 0.0f;
-                        pickIdx = -1;
-                        for (int i = 0; i < candidateCount; i++) {
-                            if (selected[i]) continue;
-                            c += maskedProbs[i];
-                            if (r <= c) { pickIdx = i; break; }
-                        }
-                        if (pickIdx < 0) {
-                            for (int i = candidateCount - 1; i >= 0; i--) {
-                                if (!selected[i]) { pickIdx = i; break; }
-                            }
-                        }
-                    }
-                    if (pickIdx < 0) break;
-
-                    float pCond = maskedProbs[pickIdx] / denom;
-                    oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
-                    selected[pickIdx] = true;
-                    selectedIndices.add(pickIdx);
-
+                for (int pickIdx : selectedIndices) {
                     if (pickIdx == doneIdx) {
                         break;
                     }
@@ -3516,10 +3935,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         List<String> blockerNames = selectedBlockers.stream().map(Permanent::getName).collect(Collectors.toList());
                         gameLogger.logDecision(
                                 this.getName(), activeName, phase + " (DECLARE_BLOCKS)", turn,
-                                String.format("DECLARE_BLOCKS: %s blocks %s (%d blockers selected)",
-                                        blockerNames, attacker.getName(), selectedBlockers.size()),
+                                appendExplorationToState(
+                                        String.format("DECLARE_BLOCKS: %s blocks %s (%d blockers selected)",
+                                                blockerNames, attacker.getName(), selectedBlockers.size()),
+                                        blockPickResult.behavior,
+                                        selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0)
+                                ),
                                 blockCandidates.stream().map(cc -> cc.isDone() ? "DONE" : cc.creature.getName()).collect(Collectors.toList()),
-                                Arrays.copyOf(maskedProbs, candidateCount),
+                                Arrays.copyOf(blockPickResult.behavior.behaviorProbs, candidateCount),
                                 valueScore, selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0),
                                 blockerNames.toString()
                         );
@@ -3615,7 +4038,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             // Gamelog: mulligan decision details
             try {
-                GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+                GameLogger gameLogger = resolveGameLogger();
                 if (gameLogger != null && gameLogger.isEnabled()) {
                     String cards = "";
                     try {
@@ -3729,6 +4152,30 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             boolean shouldMulligan = landCount <= 1 || landCount >= 6;
             int handSizeNow = getHand() != null ? getHand().size() : -1;
             int handFp = computeHandFingerprint(game);
+            try {
+                GameLogger gameLogger = resolveGameLogger();
+                if (gameLogger != null && gameLogger.isEnabled()) {
+                    String cards = "";
+                    try {
+                        List<Card> handCards = new ArrayList<>(getHand().getCards(game));
+                        cards = handCards.stream().map(Card::getName).collect(Collectors.joining("; "));
+                    } catch (Exception ignored) {
+                        cards = "";
+                    }
+                    gameLogger.log(String.format(
+                            "MULLIGAN_DECISION_FALLBACK: player=%s mulligansTaken=%d handSize=%d lands=%d decision=%s reason=%s hand=[%s]",
+                            getName(),
+                            mulligansTaken,
+                            handSizeNow,
+                            landCount,
+                            shouldMulligan ? "MULLIGAN" : "KEEP",
+                            trunc(e.getClass().getSimpleName() + ": " + e.getMessage(), 220),
+                            trunc(cards, 400)
+                    ));
+                }
+            } catch (Exception ignored) {
+                // don't fail mulligan fallback for logging
+            }
             lastMulliganHandFingerprint = handFp;
             lastMulliganHandSize = handSizeNow;
             lastMulliganDecisionShouldMulligan = shouldMulligan;
@@ -3866,7 +4313,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             // Gamelog: london bottoming details
             try {
-                GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+                GameLogger gameLogger = resolveGameLogger();
                 if (gameLogger != null && gameLogger.isEnabled()) {
                     gameLogger.log(String.format(
                             "LONDON_BOTTOM: player=%s mulligansTaken=%d handSize=%d bottomN=%d kept=[%s] bottomed=[%s]",
@@ -4075,6 +4522,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     public void setCurrentEpisode(int episodeNum) {
         this.currentEpisode = episodeNum;
         this.lastLoggedTurn = -1; // Reset turn tracking for new game
+        this.lastExplorationTurn = Integer.MIN_VALUE;
+        this.turnForceUniform = false;
+        this.turnActionEps = 0.0;
+        this.turnRandomEps = 0.0;
+        this.turnExplorationMode = "policy";
     }
 
     /**
@@ -5094,7 +5546,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             String selectedAction = flattenedOptions.get(selectedIndex).toString();
 
             // Get game state
-            String gameState = formatGameState(game);
+            BehaviorPolicyView latestBehavior = new BehaviorPolicyView(
+                    lastActionProbs,
+                    lastActionProbs,
+                    turnExplorationMode,
+                    turnActionEps,
+                    turnRandomEps
+            );
+            String gameState = appendExplorationToState(formatGameState(game), latestBehavior, selectedIndex);
 
             // Log decision
             gameLogger.logDecision(
@@ -5170,7 +5629,25 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     + ", ability=" + (ability != null ? ability.getRule() : "null")
                     + ", excludingSource=" + abilitySourceToExcludeFromMana);
         }
-        boolean result = super.playMana(ability, unpaid, promptText, game);
+        int prevDepth = playManaDepth.get();
+        String prevUnpaid = currentUnpaidManaText.get();
+        playManaDepth.set(prevDepth + 1);
+        currentUnpaidManaText.set(unpaid != null ? unpaid.getText() : "");
+        boolean result;
+        try {
+            result = super.playMana(ability, unpaid, promptText, game);
+        } finally {
+            if (prevDepth <= 0) {
+                playManaDepth.remove();
+            } else {
+                playManaDepth.set(prevDepth);
+            }
+            if (prevUnpaid == null) {
+                currentUnpaidManaText.remove();
+            } else {
+                currentUnpaidManaText.set(prevUnpaid);
+            }
+        }
         if (ACTIVATION_DIAG) {
             RLTrainer.threadLocalLogger.get().info(
                     "PLAYMANA: Result=" + result + ", unpaid remaining=" + unpaid.getText());
@@ -5203,6 +5680,21 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (ACTIVATION_DIAG) {
                 RLTrainer.threadLocalLogger.get().info(
                         "MANA-EXCLUDE: Excluded " + tapTargetCostReservations.size() + " permanents reserved for TapTargetCost");
+            }
+        }
+
+        if (inPlayManaContext() && producers.size() > 1) {
+            producers.sort(Comparator.comparingInt(obj -> manaProducerUsePenalty(obj, game)));
+            if (ACTIVATION_DIAG) {
+                String ranked = producers.stream()
+                        .limit(6)
+                        .map(obj -> {
+                            String name = obj != null ? obj.getName() : "unknown";
+                            int pen = manaProducerUsePenalty(obj, game);
+                            return name + "(pen=" + pen + ")";
+                        })
+                        .collect(Collectors.joining(", "));
+                RLTrainer.threadLocalLogger.get().info("MANA-PRODUCER-RANK: " + ranked);
             }
         }
 

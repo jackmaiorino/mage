@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import tempfile
+import threading
 from logging_utils import logger, LogCategory
 
 # Windows-compatible file locking
@@ -28,6 +29,8 @@ class GPULock:
         self.file_handle = None
         self.is_locked = False
         self.is_windows = sys.platform == 'win32'
+        self._local_mutex = threading.Lock()
+        self._local_ref_count = 0
     
     def acquire(self, timeout=None, process_name="unknown"):
         """
@@ -41,33 +44,50 @@ class GPULock:
             True if lock acquired, False if timeout
         """
         start_time = time.time()
-        
+
         while True:
+            fh = None
             try:
-                # Open file for writing (creates if doesn't exist)
-                self.file_handle = open(self.lock_file, 'w')
-                
-                if self.is_windows:
-                    # Windows: Lock first byte using msvcrt
-                    msvcrt.locking(self.file_handle.fileno(), msvcrt.LK_NBLCK, 1)
-                else:
-                    # Unix: Use fcntl
-                    fcntl.flock(self.file_handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-                
-                # Write process info for debugging
-                self.file_handle.write(f"{process_name}:{os.getpid()}:{time.time()}\n")
-                self.file_handle.flush()
-                
-                self.is_locked = True
+                with self._local_mutex:
+                    # Re-entrant within this process: if already held, just bump ref count.
+                    if self.is_locked and self.file_handle is not None:
+                        self._local_ref_count += 1
+                        logger.debug(
+                            LogCategory.GPU_MEMORY,
+                            "GPU lock re-entered by %s (pid=%d, ref=%d)",
+                            process_name, os.getpid(), self._local_ref_count
+                        )
+                        return True
+
+                    # Open file for writing (creates if doesn't exist)
+                    fh = open(self.lock_file, 'w')
+
+                    if self.is_windows:
+                        # Windows: Lock first byte using msvcrt
+                        msvcrt.locking(fh.fileno(), msvcrt.LK_NBLCK, 1)
+                    else:
+                        # Unix: Use fcntl
+                        fcntl.flock(fh.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+                    # Write process info for debugging
+                    fh.write(f"{process_name}:{os.getpid()}:{time.time()}\n")
+                    fh.flush()
+
+                    self.file_handle = fh
+                    self.is_locked = True
+                    self._local_ref_count = 1
+
                 logger.debug(LogCategory.GPU_MEMORY, 
                             f"GPU lock acquired by {process_name} (pid={os.getpid()})")
                 return True
                 
-            except (IOError, OSError) as e:
+            except (IOError, OSError, ValueError) as e:
                 # Lock is held by another process
-                if self.file_handle:
-                    self.file_handle.close()
-                    self.file_handle = None
+                if fh is not None:
+                    try:
+                        fh.close()
+                    except Exception:
+                        pass
                 
                 # Check timeout
                 if timeout is not None:
@@ -82,26 +102,37 @@ class GPULock:
     
     def release(self, process_name="unknown"):
         """Release GPU lock."""
-        if not self.is_locked or self.file_handle is None:
-            return
-        
-        try:
-            if self.is_windows:
-                # Windows: Unlock first byte
-                msvcrt.locking(self.file_handle.fileno(), msvcrt.LK_UNLCK, 1)
-            else:
-                # Unix: Use fcntl
-                fcntl.flock(self.file_handle.fileno(), fcntl.LOCK_UN)
-            
-            self.file_handle.close()
-            logger.debug(LogCategory.GPU_MEMORY,
-                        f"GPU lock released by {process_name} (pid={os.getpid()})")
-        except Exception as e:
-            logger.warning(LogCategory.GPU_MEMORY,
-                          f"Error releasing GPU lock: {e}")
-        finally:
-            self.file_handle = None
-            self.is_locked = False
+        with self._local_mutex:
+            if not self.is_locked or self.file_handle is None:
+                return
+            if self._local_ref_count > 1:
+                self._local_ref_count -= 1
+                logger.debug(
+                    LogCategory.GPU_MEMORY,
+                    "GPU lock release (decrement) by %s (pid=%d, ref=%d)",
+                    process_name, os.getpid(), self._local_ref_count
+                )
+                return
+
+            fh = self.file_handle
+            self._local_ref_count = 0
+            try:
+                if self.is_windows:
+                    # Windows: Unlock first byte
+                    msvcrt.locking(fh.fileno(), msvcrt.LK_UNLCK, 1)
+                else:
+                    # Unix: Use fcntl
+                    fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+
+                fh.close()
+                logger.debug(LogCategory.GPU_MEMORY,
+                            f"GPU lock released by {process_name} (pid={os.getpid()})")
+            except Exception as e:
+                logger.warning(LogCategory.GPU_MEMORY,
+                              f"Error releasing GPU lock: {e}")
+            finally:
+                self.file_handle = None
+                self.is_locked = False
     
     def __enter__(self):
         """Context manager entry."""

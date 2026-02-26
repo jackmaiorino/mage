@@ -1,0 +1,83 @@
+[
+  {
+    "profile": "Pauper-Elves",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Elves.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 10,
+    "notes": "Starter profile"
+  },
+  {
+    "profile": "Pauper-Spy-Combo",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Spy Combo.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 20,
+    "notes": "Combo profile"
+  },
+  {
+    "profile": "Pauper-Caw-Gates",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Caw-Gates.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 30,
+    "notes": "Pauper meta profile"
+  },
+  {
+    "profile": "Pauper-Grixis-Affinity",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Grixis Affinity.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 40,
+    "notes": "Pauper meta profile"
+  },
+  {
+    "profile": "Pauper-Jund-Wildfire",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Jund Wildfire.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 50,
+    "notes": "Pauper meta profile"
+  },
+  {
+    "profile": "Pauper-Mono-Blue-Faeries",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono-Blue Faeries.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 60,
+    "notes": "Pauper meta profile"
+  },
+  {
+    "profile": "Pauper-Mono-Blue-Terror",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono-Blue Terror.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 70,
+    "notes": "Pauper meta profile"
+  },
+  {
+    "profile": "Pauper-Mono-Red-Burn",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono-Red Burn.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 80,
+    "notes": "Pauper meta profile"
+  },
+  {
+    "profile": "Pauper-Mono-Red-Rally",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono Red Rally.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 90,
+    "notes": "Pauper meta profile"
+  }
+]

@@ -22,6 +22,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.BasicConfigurator;
@@ -42,6 +43,7 @@ import mage.player.ai.ComputerPlayer;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerRL;
 import mage.players.Player;
+import mage.util.ThreadUtils;
 
 public class RLTrainer {
 
@@ -162,11 +164,21 @@ public class RLTrainer {
     private static final int LEAGUE_POOL_MAX = EnvConfig.i32("LEAGUE_POOL_MAX", 30);
     private static final int LEAGUE_POOL_CHAMPIONS = EnvConfig.i32("LEAGUE_POOL_CHAMPIONS", 8);
     private static final int LEAGUE_POOL_RECENT = EnvConfig.i32("LEAGUE_POOL_RECENT", 8);
-    private static final double LEAGUE_P_H = EnvConfig.f64("LEAGUE_P_H", 0.30);
-    private static final double LEAGUE_P_S = EnvConfig.f64("LEAGUE_P_S", 0.50);
-    private static final double LEAGUE_P_C = EnvConfig.f64("LEAGUE_P_C", 0.20);
-    private static final String LEAGUE_HEURISTIC_SKILLS_PRE = EnvConfig.str("LEAGUE_HEURISTIC_SKILLS_PRE", "1");
-    private static final String LEAGUE_HEURISTIC_SKILLS_POST = EnvConfig.str("LEAGUE_HEURISTIC_SKILLS_POST", "1,2,3");
+    private static final double LEAGUE_POST_HEURISTIC_P = EnvConfig.f64("LEAGUE_POST_HEURISTIC_P", 0.20);
+    private static final double LEAGUE_POST_LOCAL_P = EnvConfig.f64("LEAGUE_POST_LOCAL_P", 0.40);
+    private static final double LEAGUE_POST_CROSS_P = EnvConfig.f64("LEAGUE_POST_CROSS_P", 0.40);
+    private static final int LEAGUE_POST_HEURISTIC_SKILL = EnvConfig.i32("LEAGUE_POST_HEURISTIC_SKILL", 1);
+    private static final int LEAGUE_CROSS_PROFILE_REFRESH_MS = EnvConfig.i32("LEAGUE_CROSS_PROFILE_REFRESH_MS", 30000);
+    private static final String LEAGUE_REGISTRY_PATH = EnvConfig.str("LEAGUE_REGISTRY_PATH",
+            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_league_registry.json");
+    private static final String LEAGUE_REPORTS_DIR = EnvConfig.str("LEAGUE_REPORTS_DIR",
+            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper");
+    private static final int LEAGUE_ELO_GAMES_PER_DIRECTION = EnvConfig.i32("LEAGUE_ELO_GAMES_PER_DIRECTION", 6);
+    private static final double LEAGUE_ELO_K_FACTOR = EnvConfig.f64("LEAGUE_ELO_K_FACTOR", 20.0);
+    private static final boolean LEAGUE_ANCHOR_ENABLE = EnvConfig.bool("LEAGUE_ANCHOR_ENABLE", true);
+    private static final int LEAGUE_ANCHOR_GAMES = EnvConfig.i32("LEAGUE_ANCHOR_GAMES", 20);
+    private static final int LEAGUE_EVAL_CADENCE_EPISODES = EnvConfig.i32("LEAGUE_EVAL_CADENCE_EPISODES", 5000);
+    private static final boolean LEAGUE_EVAL_FORCE = EnvConfig.bool("LEAGUE_EVAL_FORCE", false);
     private static final int LEAGUE_BENCHMARK_THREADS = EnvConfig.i32("LEAGUE_BENCHMARK_THREADS",
             Math.max(1, Runtime.getRuntime().availableProcessors() - 1));
     private static final int LEAGUE_BENCHMARK_LOG_EVERY = EnvConfig.i32("LEAGUE_BENCHMARK_LOG_EVERY", 25);
@@ -186,6 +198,14 @@ public class RLTrainer {
     private static final Object LEAGUE_LOCK = new Object();
     private static LeagueState LEAGUE_STATE = null;
     private static final AtomicInteger LEAGUE_LAST_TICK_EP = new AtomicInteger(0);
+    private static final ThreadLocal<Path> THREAD_LOCAL_OPPONENT_DECK_OVERRIDE = new ThreadLocal<>();
+    private static final Object CROSS_PROFILE_CACHE_LOCK = new Object();
+    private static volatile long CROSS_PROFILE_CACHE_AT_MS = 0L;
+    private static volatile java.util.List<CrossProfileSnapshot> CROSS_PROFILE_CACHE = java.util.Collections.emptyList();
+    private static final Object LEAGUE_META_CACHE_LOCK = new Object();
+    private static volatile long LEAGUE_META_CACHE_AT_MS = 0L;
+    private static volatile java.util.List<LeagueMetaOpponentCandidate> LEAGUE_META_CACHE = java.util.Collections.emptyList();
+    private static final String MODEL_PROFILE_NAME = EnvConfig.str("MODEL_PROFILE", "").trim();
     
     private static final Object LADDER_LOCK = new Object();
     private static LadderState LADDER_STATE = null;
@@ -291,6 +311,69 @@ public class RLTrainer {
             ls.tierWinrates.putAll(jsonIntDoubleMapField(s, "tierWinrates"));
             ls.evalHistory.addAll(jsonStringArrayField(s, "evalHistory"));
             return ls;
+        }
+    }
+
+    private static final class LeagueRegistryEntry {
+        String profile;
+        String deckPath;
+        boolean active;
+        String notes;
+    }
+
+    private static final class CrossProfileSnapshot {
+        final String profile;
+        final Path deckPath;
+        final Path snapshotPath;
+        final int episode;
+
+        private CrossProfileSnapshot(String profile, Path deckPath, Path snapshotPath, int episode) {
+            this.profile = profile;
+            this.deckPath = deckPath;
+            this.snapshotPath = snapshotPath;
+            this.episode = episode;
+        }
+    }
+
+    private static final class LeagueMetaOpponentCandidate {
+        final String profile;
+        final Path deckPath;
+        final Path snapshotPath; // nullable when not yet qualified
+        final int episode;
+        final boolean promoted;
+        final double baselineWr;
+        final boolean qualified;
+
+        private LeagueMetaOpponentCandidate(
+                String profile,
+                Path deckPath,
+                Path snapshotPath,
+                int episode,
+                boolean promoted,
+                double baselineWr,
+                boolean qualified
+        ) {
+            this.profile = profile;
+            this.deckPath = deckPath;
+            this.snapshotPath = snapshotPath;
+            this.episode = episode;
+            this.promoted = promoted;
+            this.baselineWr = baselineWr;
+            this.qualified = qualified;
+        }
+    }
+
+    private static final class LeagueEvalEntrant {
+        final String profile;
+        final Path deckPath;
+        final Path snapshotPath;
+        final int episode;
+
+        private LeagueEvalEntrant(String profile, Path deckPath, Path snapshotPath, int episode) {
+            this.profile = profile;
+            this.deckPath = deckPath;
+            this.snapshotPath = snapshotPath;
+            this.episode = episode;
         }
     }
 
@@ -411,6 +494,20 @@ public class RLTrainer {
                 return def;
             }
             return Integer.parseInt(json.substring(end, j));
+        } catch (Exception ignored) {
+            return def;
+        }
+    }
+
+    private static double jsonDouble(String json, String key, double def) {
+        try {
+            String pattern = "\\\"" + java.util.regex.Pattern.quote(key)
+                    + "\\\"\\s*:\\s*(-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)";
+            java.util.regex.Matcher m = java.util.regex.Pattern.compile(pattern).matcher(json);
+            if (!m.find()) {
+                return def;
+            }
+            return Double.parseDouble(m.group(1));
         } catch (Exception ignored) {
             return def;
         }
@@ -668,6 +765,306 @@ public class RLTrainer {
         }
     }
 
+    private static Path leagueRegistryPath() {
+        return Paths.get(LEAGUE_REGISTRY_PATH);
+    }
+
+    private static Path profileAgentStatusPath(String profile) {
+        String p = profile == null ? "" : profile.trim();
+        if (p.isEmpty()) {
+            return Paths.get(RLLogPaths.LOGS_BASE_DIR, "league", "agent_status.json");
+        }
+        return Paths.get("Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles",
+                p, "logs", "league", "agent_status.json");
+    }
+
+    private static Path profileSnapshotsDir(String profile) {
+        String p = profile == null ? "" : profile.trim();
+        if (p.isEmpty()) {
+            return Paths.get(RLLogPaths.SNAPSHOT_DIR);
+        }
+        return Paths.get("Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles",
+                p, "models", "snapshots");
+    }
+
+    private static Path profileModelsDir(String profile) {
+        String p = profile == null ? "" : profile.trim();
+        if (p.isEmpty()) {
+            return Paths.get(RLLogPaths.MODELS_BASE_DIR);
+        }
+        return Paths.get("Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles",
+                p, "models");
+    }
+
+    private static Path findLatestLeagueSnapshotPathForProfile(String profile) {
+        try {
+            Path dir = profileSnapshotsDir(profile);
+            if (!Files.isDirectory(dir)) {
+                return null;
+            }
+            java.util.List<Path> snaps;
+            try (java.util.stream.Stream<Path> stream = Files.list(dir)) {
+                snaps = stream
+                        .filter(Files::isRegularFile)
+                        .filter(p -> {
+                            String n = p.getFileName().toString().toLowerCase();
+                            return n.endsWith(".pt") && n.contains("league_ep_");
+                        })
+                        .collect(Collectors.toList());
+            }
+            if (snaps.isEmpty()) {
+                return null;
+            }
+            snaps.sort((a, b) -> {
+                int ea = extractEpisodeNumber("snap:" + a.getFileName().toString());
+                int eb = extractEpisodeNumber("snap:" + b.getFileName().toString());
+                if (ea != eb) {
+                    return Integer.compare(eb, ea);
+                }
+                try {
+                    long ta = Files.getLastModifiedTime(a).toMillis();
+                    long tb = Files.getLastModifiedTime(b).toMillis();
+                    return Long.compare(tb, ta);
+                } catch (Exception ignored) {
+                    return 0;
+                }
+            });
+            return snaps.get(0).toAbsolutePath().normalize();
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    private static Path findLatestPolicyPathForProfile(String profile) {
+        Path leagueSnapshot = findLatestLeagueSnapshotPathForProfile(profile);
+        if (leagueSnapshot != null && Files.isRegularFile(leagueSnapshot)) {
+            return leagueSnapshot.toAbsolutePath().normalize();
+        }
+        Path modelsDir = profileModelsDir(profile);
+        Path latest = modelsDir.resolve("model_latest.pt");
+        if (Files.isRegularFile(latest)) {
+            return latest.toAbsolutePath().normalize();
+        }
+        Path model = modelsDir.resolve("model.pt");
+        if (Files.isRegularFile(model)) {
+            return model.toAbsolutePath().normalize();
+        }
+        return null;
+    }
+
+    private static void writeAgentStatus(int episodeNum) {
+        try {
+            LeagueState st = getLeagueState();
+            String profile = MODEL_PROFILE_NAME.isEmpty() ? "default" : MODEL_PROFILE_NAME;
+            String latestKey = null;
+            int latestEp = Integer.MIN_VALUE;
+            synchronized (LEAGUE_LOCK) {
+                for (String k : st.baselineWr.keySet()) {
+                    int ep = extractEpisodeNumber(k);
+                    if (ep > latestEp) {
+                        latestEp = ep;
+                        latestKey = k;
+                    }
+                }
+            }
+            double baselineWr = 0.0;
+            if (latestKey != null) {
+                Double wr = st.baselineWr.get(latestKey);
+                baselineWr = wr == null ? 0.0 : wr;
+            }
+            Path latestSnapshot = findLatestPolicyPathForProfile(profile);
+            Path statusPath = Paths.get(RLLogPaths.LOGS_BASE_DIR, "league", "agent_status.json");
+            if (statusPath.getParent() != null) {
+                Files.createDirectories(statusPath.getParent());
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append("{\n");
+            sb.append("  \"profile\": ").append(jsonString(profile)).append(",\n");
+            sb.append("  \"episode\": ").append(episodeNum).append(",\n");
+            sb.append("  \"promoted\": ").append(st.promoted ? "true" : "false").append(",\n");
+            sb.append("  \"baseline_wr\": ").append(String.format(java.util.Locale.US, "%.6f", baselineWr)).append(",\n");
+            sb.append("  \"latest_snapshot_path\": ").append(jsonString(latestSnapshot == null ? "" : latestSnapshot.toString())).append(",\n");
+            sb.append("  \"updated_at\": ").append(jsonString(java.time.Instant.now().toString())).append("\n");
+            sb.append("}\n");
+            Files.write(statusPath, sb.toString().getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (Exception e) {
+            logger.warn("Failed to write agent_status.json: " + e.getMessage());
+        }
+    }
+
+    private static java.util.List<LeagueRegistryEntry> loadLeagueRegistryEntries() {
+        java.util.ArrayList<LeagueRegistryEntry> out = new java.util.ArrayList<>();
+        try {
+            Path p = leagueRegistryPath();
+            if (!Files.exists(p)) {
+                return out;
+            }
+            String s = new String(Files.readAllBytes(p), StandardCharsets.UTF_8);
+            java.util.regex.Matcher m = java.util.regex.Pattern.compile("\\{[^\\{\\}]*\\}").matcher(s);
+            while (m.find()) {
+                String obj = m.group();
+                String profile = jsonStringField(obj, "profile", "").trim();
+                String deckPath = jsonStringField(obj, "deck_path", "").trim();
+                boolean active = jsonBool(obj, "active", true);
+                if (profile.isEmpty() || deckPath.isEmpty()) {
+                    continue;
+                }
+                LeagueRegistryEntry e = new LeagueRegistryEntry();
+                e.profile = profile;
+                e.deckPath = deckPath;
+                e.active = active;
+                e.notes = jsonStringField(obj, "notes", "");
+                out.add(e);
+            }
+        } catch (Exception e) {
+            logger.warn("Failed to load league registry: " + e.getMessage());
+        }
+        return out;
+    }
+
+    private static Path resolveDeckPath(String rawDeckPath, Path baseDir) {
+        if (rawDeckPath == null || rawDeckPath.trim().isEmpty()) {
+            return null;
+        }
+        Path p = Paths.get(rawDeckPath.trim());
+        if (p.isAbsolute()) {
+            return p.normalize();
+        }
+
+        // First try relative to provided base (registry or status file location).
+        Path baseResolved = (baseDir != null ? baseDir : Paths.get(System.getProperty("user.dir")))
+                .resolve(p).normalize();
+        if (Files.exists(baseResolved)) {
+            return baseResolved;
+        }
+
+        // Fallback for repo-root relative paths in config files.
+        Path cwdResolved = Paths.get(System.getProperty("user.dir")).resolve(p).normalize();
+        if (Files.exists(cwdResolved)) {
+            return cwdResolved;
+        }
+
+        // Return the base-resolved value for diagnostics even if missing.
+        return baseResolved;
+    }
+
+    private static java.util.List<CrossProfileSnapshot> getCrossProfileCandidates() {
+        long now = System.currentTimeMillis();
+        if (now - CROSS_PROFILE_CACHE_AT_MS < Math.max(1000, LEAGUE_CROSS_PROFILE_REFRESH_MS)) {
+            return CROSS_PROFILE_CACHE;
+        }
+        synchronized (CROSS_PROFILE_CACHE_LOCK) {
+            now = System.currentTimeMillis();
+            if (now - CROSS_PROFILE_CACHE_AT_MS < Math.max(1000, LEAGUE_CROSS_PROFILE_REFRESH_MS)) {
+                return CROSS_PROFILE_CACHE;
+            }
+            java.util.ArrayList<CrossProfileSnapshot> loaded = new java.util.ArrayList<>();
+            Path registry = leagueRegistryPath();
+            Path baseDir = registry.toAbsolutePath().getParent();
+            for (LeagueRegistryEntry e : loadLeagueRegistryEntries()) {
+                if (!e.active) {
+                    continue;
+                }
+                if (!MODEL_PROFILE_NAME.isEmpty() && MODEL_PROFILE_NAME.equalsIgnoreCase(e.profile)) {
+                    continue;
+                }
+                Path statusPath = profileAgentStatusPath(e.profile);
+                if (!Files.exists(statusPath)) {
+                    continue;
+                }
+                try {
+                    String status = new String(Files.readAllBytes(statusPath), StandardCharsets.UTF_8);
+                    String snapPathRaw = jsonStringField(status, "latest_snapshot_path", "").trim();
+                    int episode = jsonInt(status, "episode", 0);
+                    Path snapPath = resolveDeckPath(snapPathRaw, statusPath.toAbsolutePath().getParent());
+                    if (snapPath == null || !Files.isRegularFile(snapPath)) {
+                        snapPath = findLatestPolicyPathForProfile(e.profile);
+                    }
+                    Path deckPath = resolveDeckPath(e.deckPath, baseDir);
+                    if (snapPath == null || deckPath == null || !Files.isRegularFile(snapPath) || !Files.isRegularFile(deckPath)) {
+                        continue;
+                    }
+                    loaded.add(new CrossProfileSnapshot(
+                            e.profile,
+                            deckPath.toAbsolutePath().normalize(),
+                            snapPath.toAbsolutePath().normalize(),
+                            episode
+                    ));
+                } catch (Exception ignored) {
+                }
+            }
+            CROSS_PROFILE_CACHE = java.util.Collections.unmodifiableList(loaded);
+            CROSS_PROFILE_CACHE_AT_MS = now;
+            return CROSS_PROFILE_CACHE;
+        }
+    }
+
+    private static java.util.List<LeagueMetaOpponentCandidate> getLeagueMetaOpponentCandidates() {
+        long now = System.currentTimeMillis();
+        if (now - LEAGUE_META_CACHE_AT_MS < Math.max(1000, LEAGUE_CROSS_PROFILE_REFRESH_MS)) {
+            return LEAGUE_META_CACHE;
+        }
+        synchronized (LEAGUE_META_CACHE_LOCK) {
+            now = System.currentTimeMillis();
+            if (now - LEAGUE_META_CACHE_AT_MS < Math.max(1000, LEAGUE_CROSS_PROFILE_REFRESH_MS)) {
+                return LEAGUE_META_CACHE;
+            }
+            java.util.ArrayList<LeagueMetaOpponentCandidate> loaded = new java.util.ArrayList<>();
+            Path registry = leagueRegistryPath();
+            Path baseDir = registry.toAbsolutePath().getParent();
+            for (LeagueRegistryEntry e : loadLeagueRegistryEntries()) {
+                if (!e.active) {
+                    continue;
+                }
+                String profile = e.profile == null ? "" : e.profile.trim();
+                if (profile.isEmpty()) {
+                    continue;
+                }
+
+                Path deckPath = resolveDeckPath(e.deckPath, baseDir);
+                if (deckPath == null || !Files.isRegularFile(deckPath)) {
+                    continue;
+                }
+
+                Path statusPath = profileAgentStatusPath(profile);
+                boolean promoted = false;
+                double baselineWr = 0.0;
+                int episode = 0;
+                Path snapPath = null;
+                if (Files.exists(statusPath)) {
+                    try {
+                        String status = new String(Files.readAllBytes(statusPath), StandardCharsets.UTF_8);
+                        promoted = jsonBool(status, "promoted", false);
+                        baselineWr = jsonDouble(status, "baseline_wr", 0.0);
+                        episode = jsonInt(status, "episode", 0);
+                        String snapPathRaw = jsonStringField(status, "latest_snapshot_path", "").trim();
+                        snapPath = resolveDeckPath(snapPathRaw, statusPath.toAbsolutePath().getParent());
+                    } catch (Exception ignored) {
+                    }
+                }
+                if (snapPath == null || !Files.isRegularFile(snapPath)) {
+                    snapPath = findLatestPolicyPathForProfile(profile);
+                }
+                boolean hasSnapshot = snapPath != null && Files.isRegularFile(snapPath);
+                boolean qualified = hasSnapshot && (promoted || baselineWr >= LEAGUE_PROMOTE_WR);
+                loaded.add(new LeagueMetaOpponentCandidate(
+                        profile,
+                        deckPath.toAbsolutePath().normalize(),
+                        hasSnapshot ? snapPath.toAbsolutePath().normalize() : null,
+                        episode,
+                        promoted,
+                        baselineWr,
+                        qualified
+                ));
+            }
+            loaded.sort((a, b) -> a.profile.compareToIgnoreCase(b.profile));
+            LEAGUE_META_CACHE = java.util.Collections.unmodifiableList(loaded);
+            LEAGUE_META_CACHE_AT_MS = now;
+            return LEAGUE_META_CACHE;
+        }
+    }
+
     // ============================================================
     // Ladder state management
     // ============================================================
@@ -791,7 +1188,12 @@ public class RLTrainer {
     }
 
     private static String leagueSnapshotFileName(int episode) {
-        return "league_ep_" + episode + ".pt";
+        String profile = MODEL_PROFILE_NAME == null ? "" : MODEL_PROFILE_NAME.trim();
+        if (profile.isEmpty()) {
+            return "league_ep_" + episode + ".pt";
+        }
+        String safe = profile.replaceAll("[^A-Za-z0-9._-]", "_");
+        return safe + "_league_ep_" + episode + ".pt";
     }
 
     private static String leagueSnapshotPolicyKey(int episode) {
@@ -1074,6 +1476,7 @@ public class RLTrainer {
                 episodeNum, snapKey, baselineWr, st.promoted, admitted,
                 st.championPolicyKey == null ? "" : st.championPolicyKey,
                 st.pool.size(), tickMs / 1000.0));
+        writeAgentStatus(episodeNum);
     }
 
     private void maybeRunLadderTick(int episodeNum) {
@@ -1256,6 +1659,8 @@ public class RLTrainer {
             } else if ("benchmark".equalsIgnoreCase(mode)) {
                 int gamesPerMatchup = EnvConfig.i32("GAMES_PER_MATCHUP", 20);
                 new RLTrainer().runBenchmark(gamesPerMatchup);
+            } else if ("league_eval".equalsIgnoreCase(mode)) {
+                new RLTrainer().runLeagueEvaluation();
             } else {
                 new RLTrainer().train();
             }
@@ -1467,9 +1872,27 @@ public class RLTrainer {
                         metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
                         Path rlPlayerDeckPath = agentDeckFiles.get(threadRand.nextInt(agentDeckFiles.size()));
                         Deck rlPlayerDeckThread = loadDeck(rlPlayerDeckPath.toString());
-                        Path opponentDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
+                        if (rlPlayerDeckThread == null) {
+                            logger.warn("Train: failed to load deck(s) for game, skipping.");
+                            ACTIVE_EPISODES.decrementAndGet();
+                            metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
+                            continue;
+                        }
+
+                        THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.remove();
+                        Player opponentPlayer = createTrainingOpponent(epNumber, threadRand);
+                        Path opponentDeckPath = THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.get();
+                        if (opponentDeckPath == null) {
+                            opponentDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
+                        }
                         Deck opponentDeckThread = loadDeck(opponentDeckPath.toString());
-                        if (rlPlayerDeckThread == null || opponentDeckThread == null) {
+                        if (opponentDeckThread == null && THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.get() != null) {
+                            logger.warn("Train: failed to load override opponent deck " + opponentDeckPath + ", falling back to pool random deck.");
+                            opponentDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
+                            opponentDeckThread = loadDeck(opponentDeckPath.toString());
+                        }
+                        THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.remove();
+                        if (opponentDeckThread == null) {
                             logger.warn("Train: failed to load deck(s) for game, skipping.");
                             ACTIVE_EPISODES.decrementAndGet();
                             metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
@@ -1492,11 +1915,14 @@ public class RLTrainer {
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
                         rlPlayer.setCurrentEpisode(epNumber); // Set main model episode for logging
                         rlPlayer.setMulliganEpisode(mulliganEpNumber); // Set mulligan model episode for epsilon-greedy
+                        rlPlayer.setAttachedGameLogger(gameLogger);
+                        if (opponentPlayer instanceof ComputerPlayerRL) {
+                            ((ComputerPlayerRL) opponentPlayer).setCurrentEpisode(epNumber);
+                        }
                         game.addPlayer(rlPlayer, rlPlayerDeckThread);
                         match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
-                        // Opponent selection
-                        Player opponentPlayer = createTrainingOpponent(epNumber, threadRand);
+                        // Opponent already selected before deck binding.
                         game.addPlayer(opponentPlayer, opponentDeckThread);
                         match.addPlayer(opponentPlayer, opponentDeckThread);
 
@@ -1585,6 +2011,7 @@ public class RLTrainer {
                                 Files.write(Paths.get(EPISODE_COUNT_PATH),
                                         String.valueOf(epNumber).getBytes(StandardCharsets.UTF_8));
                                 logger.info("Episode counter saved: " + epNumber);
+                                writeAgentStatus(epNumber);
                             } catch (IOException e) {
                                 logger.error("Failed to save episode counter at episode " + epNumber, e);
                             }
@@ -1864,6 +2291,7 @@ public class RLTrainer {
                     // Greedy evaluation: use deterministic arg-max player
                     ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel, true);
                     rlPlayer.setCurrentEpisode(-currentEvalGame); // Negative for eval = deterministic mulligan
+                    rlPlayer.setAttachedGameLogger(gameLogger);
                     game.addPlayer(rlPlayer, rlPlayerDeckThread);
                     match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
@@ -2184,6 +2612,415 @@ public class RLTrainer {
         }
     }
 
+    public void runLeagueEvaluation() {
+        try {
+            mage.cards.repository.CardScanner.scan();
+            java.util.ArrayList<String> skipped = new java.util.ArrayList<>();
+            java.util.List<LeagueEvalEntrant> entrants = loadLeagueEvalEntrants(skipped);
+            if (entrants.isEmpty()) {
+                logger.warn("League eval: no valid entrants from registry/status; nothing to do.");
+                writeLeagueEvalReport(Paths.get(LEAGUE_REPORTS_DIR), "no_run", java.time.Instant.now().toString(),
+                        java.util.Collections.emptyList(), java.util.Collections.emptyMap(),
+                        java.util.Collections.emptyMap(), java.util.Collections.emptyMap(),
+                        skipped, java.util.Collections.emptyList());
+                return;
+            }
+
+            int minEpisode = entrants.stream().mapToInt(e -> e.episode).min().orElse(0);
+            int maxEpisode = entrants.stream().mapToInt(e -> e.episode).max().orElse(0);
+            String timestamp = java.time.Instant.now().toString();
+
+            Path reportsDir = Paths.get(LEAGUE_REPORTS_DIR);
+            Files.createDirectories(reportsDir);
+            Path evalStatePath = reportsDir.resolve("eval_state.json");
+            int lastMinEpisode = -1;
+            try {
+                if (Files.exists(evalStatePath)) {
+                    String s = new String(Files.readAllBytes(evalStatePath), StandardCharsets.UTF_8);
+                    lastMinEpisode = jsonInt(s, "last_min_episode", -1);
+                }
+            } catch (Exception ignored) {
+            }
+            if (!LEAGUE_EVAL_FORCE && lastMinEpisode >= 0 && (minEpisode - lastMinEpisode) < Math.max(1, LEAGUE_EVAL_CADENCE_EPISODES)) {
+                logger.info(String.format(
+                        "League eval skipped by cadence: minEpisode=%d lastMinEpisode=%d cadence=%d force=%s",
+                        minEpisode, lastMinEpisode, LEAGUE_EVAL_CADENCE_EPISODES, LEAGUE_EVAL_FORCE
+                ));
+                return;
+            }
+
+            String evalRunId = buildEvalRunId(minEpisode, maxEpisode);
+            logger.info(String.format("League eval start: runId=%s entrants=%d gpd=%d k=%.2f",
+                    evalRunId, entrants.size(), LEAGUE_ELO_GAMES_PER_DIRECTION, LEAGUE_ELO_K_FACTOR));
+
+            Path matchesCsv = reportsDir.resolve("elo_matches.csv");
+            Path ratingsCsv = reportsDir.resolve("elo_ratings.csv");
+            Path historyCsv = reportsDir.resolve("elo_history.csv");
+            Path pairwiseCsv = reportsDir.resolve("pairwise_matrix.csv");
+            Path anchorCsv = reportsDir.resolve("anchor_cp7_skill1.csv");
+            Path currentRatingsJson = reportsDir.resolve("elo_current_ratings.json");
+
+            ensureCsvHeader(matchesCsv, "eval_run_id,timestamp,profile_a,profile_b,deck_a,deck_b,wins_a,wins_b,games,wr_a\n");
+            ensureCsvHeader(ratingsCsv, "eval_run_id,timestamp,profile,rating,rank,games_played\n");
+            ensureCsvHeader(historyCsv, "eval_run_id,timestamp,profile,rating,delta_from_prev\n");
+            ensureCsvHeader(pairwiseCsv, "eval_run_id,profile_a,profile_b,wr_a,games\n");
+            ensureCsvHeader(anchorCsv, "eval_run_id,timestamp,profile,wins,losses,win_rate,games\n");
+
+            java.util.Map<String, Double> prevRatings = loadCurrentRatings(currentRatingsJson);
+            java.util.Map<String, Double> ratings = new java.util.HashMap<>();
+            java.util.Map<String, Integer> gamesPlayed = new java.util.HashMap<>();
+            for (LeagueEvalEntrant e : entrants) {
+                ratings.put(e.profile, prevRatings.getOrDefault(e.profile, 1500.0));
+                gamesPlayed.put(e.profile, 0);
+            }
+
+            java.util.Map<String, double[]> pairwise = new java.util.LinkedHashMap<>();
+            int timeoutSec = Math.max(60, LEAGUE_BENCHMARK_GAME_TIMEOUT_SEC);
+            int gpd = Math.max(1, LEAGUE_ELO_GAMES_PER_DIRECTION);
+            for (LeagueEvalEntrant a : entrants) {
+                for (LeagueEvalEntrant b : entrants) {
+                    if (a.profile.equals(b.profile)) {
+                        continue;
+                    }
+                    long winsA = 0L;
+                    for (int g = 0; g < gpd; g++) {
+                        boolean winA = runSingleLeagueBenchmarkGame(
+                                a.deckPath,
+                                b.deckPath,
+                                timeoutSec,
+                                "snap:" + a.snapshotPath.toString(),
+                                LeagueOpponentSpec.snapshot("snap:" + b.snapshotPath.toString()),
+                                g == 0 && LEAGUE_EVAL_GAME_LOGGING
+                        );
+                        if (winA) {
+                            winsA++;
+                        }
+                    }
+                    double wrA = gpd > 0 ? (double) winsA / (double) gpd : 0.0;
+                    appendCsv(matchesCsv, String.format(java.util.Locale.US,
+                            "%s,%s,%s,%s,%s,%s,%d,%d,%d,%.6f\n",
+                            csv(evalRunId),
+                            csv(timestamp),
+                            csv(a.profile),
+                            csv(b.profile),
+                            csv(a.deckPath.toString()),
+                            csv(b.deckPath.toString()),
+                            winsA,
+                            (gpd - winsA),
+                            gpd,
+                            wrA
+                    ));
+                    pairwise.put(a.profile + "||" + b.profile, new double[]{wrA, gpd});
+
+                    gamesPlayed.put(a.profile, gamesPlayed.getOrDefault(a.profile, 0) + gpd);
+                    gamesPlayed.put(b.profile, gamesPlayed.getOrDefault(b.profile, 0) + gpd);
+
+                    double ra = ratings.getOrDefault(a.profile, 1500.0);
+                    double rb = ratings.getOrDefault(b.profile, 1500.0);
+                    double ea = 1.0 / (1.0 + Math.pow(10.0, (rb - ra) / 400.0));
+                    double delta = LEAGUE_ELO_K_FACTOR * (wrA - ea);
+                    ratings.put(a.profile, ra + delta);
+                    ratings.put(b.profile, rb - delta);
+                }
+            }
+
+            java.util.List<String> ranked = new java.util.ArrayList<>(ratings.keySet());
+            ranked.sort((x, y) -> Double.compare(ratings.getOrDefault(y, 1500.0), ratings.getOrDefault(x, 1500.0)));
+
+            java.util.Map<String, Double> deltas = new java.util.HashMap<>();
+            int rank = 1;
+            for (String profile : ranked) {
+                double rating = ratings.getOrDefault(profile, 1500.0);
+                double prev = prevRatings.getOrDefault(profile, 1500.0);
+                double delta = rating - prev;
+                deltas.put(profile, delta);
+                appendCsv(ratingsCsv, String.format(java.util.Locale.US,
+                        "%s,%s,%s,%.6f,%d,%d\n",
+                        csv(evalRunId),
+                        csv(timestamp),
+                        csv(profile),
+                        rating,
+                        rank,
+                        gamesPlayed.getOrDefault(profile, 0)
+                ));
+                appendCsv(historyCsv, String.format(java.util.Locale.US,
+                        "%s,%s,%s,%.6f,%.6f\n",
+                        csv(evalRunId),
+                        csv(timestamp),
+                        csv(profile),
+                        rating,
+                        delta
+                ));
+                rank++;
+            }
+
+            for (java.util.Map.Entry<String, double[]> e : pairwise.entrySet()) {
+                String[] parts = e.getKey().split("\\|\\|", 2);
+                String pa = parts.length > 0 ? parts[0] : "";
+                String pb = parts.length > 1 ? parts[1] : "";
+                double wr = e.getValue()[0];
+                int games = (int) e.getValue()[1];
+                appendCsv(pairwiseCsv, String.format(java.util.Locale.US,
+                        "%s,%s,%s,%.6f,%d\n",
+                        csv(evalRunId), csv(pa), csv(pb), wr, games
+                ));
+            }
+
+            java.util.List<String> anchorSummary = new java.util.ArrayList<>();
+            if (LEAGUE_ANCHOR_ENABLE) {
+                int anchorGames = Math.max(1, LEAGUE_ANCHOR_GAMES);
+                for (LeagueEvalEntrant e : entrants) {
+                    int wins = 0;
+                    for (int g = 0; g < anchorGames; g++) {
+                        boolean win = runSingleLeagueBenchmarkGame(
+                                e.deckPath,
+                                e.deckPath,
+                                timeoutSec,
+                                "snap:" + e.snapshotPath.toString(),
+                                LeagueOpponentSpec.bot(1),
+                                g == 0 && LEAGUE_EVAL_GAME_LOGGING
+                        );
+                        if (win) {
+                            wins++;
+                        }
+                    }
+                    int losses = anchorGames - wins;
+                    double wr = (double) wins / (double) anchorGames;
+                    appendCsv(anchorCsv, String.format(java.util.Locale.US,
+                            "%s,%s,%s,%d,%d,%.6f,%d\n",
+                            csv(evalRunId),
+                            csv(timestamp),
+                            csv(e.profile),
+                            wins,
+                            losses,
+                            wr,
+                            anchorGames
+                    ));
+                    anchorSummary.add(String.format(java.util.Locale.US, "%s %.3f (%d/%d)", e.profile, wr, wins, anchorGames));
+                }
+            }
+
+            writeCurrentRatings(currentRatingsJson, ratings, evalRunId, minEpisode, maxEpisode, timestamp);
+            String evalState = "{\n"
+                    + "  \"last_eval_run_id\": " + jsonString(evalRunId) + ",\n"
+                    + "  \"last_min_episode\": " + minEpisode + ",\n"
+                    + "  \"last_max_episode\": " + maxEpisode + ",\n"
+                    + "  \"updated_at\": " + jsonString(timestamp) + "\n"
+                    + "}\n";
+            Files.write(evalStatePath, evalState.getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
+            writeLeagueEvalReport(reportsDir, evalRunId, timestamp, ranked, ratings, deltas, pairwise, skipped, anchorSummary);
+            logger.info(String.format("League eval done: runId=%s entrants=%d", evalRunId, entrants.size()));
+        } catch (Exception e) {
+            logger.error("League eval failed", e);
+        }
+    }
+
+    private static String buildEvalRunId(int minEpisode, int maxEpisode) {
+        String ts = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
+                .withZone(java.time.ZoneOffset.UTC)
+                .format(java.time.Instant.now());
+        return ts + "_" + minEpisode + "_" + maxEpisode;
+    }
+
+    private static void ensureCsvHeader(Path path, String header) throws IOException {
+        if (path.getParent() != null) {
+            Files.createDirectories(path.getParent());
+        }
+        if (!Files.exists(path)) {
+            Files.write(path, header.getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        }
+    }
+
+    private static void appendCsv(Path path, String line) throws IOException {
+        Files.write(path, line.getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
+    private static String csv(String s) {
+        if (s == null) {
+            return "\"\"";
+        }
+        String v = s.replace("\"", "\"\"");
+        return "\"" + v + "\"";
+    }
+
+    private java.util.List<LeagueEvalEntrant> loadLeagueEvalEntrants(java.util.List<String> skipped) {
+        java.util.ArrayList<LeagueEvalEntrant> out = new java.util.ArrayList<>();
+        java.util.HashSet<String> seenProfiles = new java.util.HashSet<>();
+        Path registryPath = leagueRegistryPath();
+        Path baseDir = registryPath.toAbsolutePath().getParent();
+        for (LeagueRegistryEntry e : loadLeagueRegistryEntries()) {
+            if (!e.active) {
+                continue;
+            }
+            String profile = e.profile == null ? "" : e.profile.trim();
+            if (profile.isEmpty() || seenProfiles.contains(profile)) {
+                continue;
+            }
+            Path deckPath = resolveDeckPath(e.deckPath, baseDir);
+            if (deckPath == null || !Files.isRegularFile(deckPath)) {
+                skipped.add("skip profile=" + profile + " reason=deck_missing path=" + e.deckPath);
+                continue;
+            }
+            Path statusPath = profileAgentStatusPath(profile);
+            if (!Files.exists(statusPath)) {
+                skipped.add("skip profile=" + profile + " reason=status_missing path=" + statusPath);
+                continue;
+            }
+            try {
+                String s = new String(Files.readAllBytes(statusPath), StandardCharsets.UTF_8);
+                int episode = jsonInt(s, "episode", 0);
+                String snapRaw = jsonStringField(s, "latest_snapshot_path", "").trim();
+                Path snapPath = resolveDeckPath(snapRaw, statusPath.toAbsolutePath().getParent());
+                if (snapPath == null || !Files.isRegularFile(snapPath)) {
+                    snapPath = findLatestPolicyPathForProfile(profile);
+                }
+                if (snapPath == null || !Files.isRegularFile(snapPath)) {
+                    skipped.add("skip profile=" + profile + " reason=snapshot_missing");
+                    continue;
+                }
+                out.add(new LeagueEvalEntrant(profile,
+                        deckPath.toAbsolutePath().normalize(),
+                        snapPath.toAbsolutePath().normalize(),
+                        episode));
+                seenProfiles.add(profile);
+            } catch (Exception ex) {
+                skipped.add("skip profile=" + profile + " reason=status_parse_error");
+            }
+        }
+        out.sort((a, b) -> a.profile.compareToIgnoreCase(b.profile));
+        return out;
+    }
+
+    private static java.util.Map<String, Double> loadCurrentRatings(Path currentRatingsJson) {
+        java.util.HashMap<String, Double> out = new java.util.HashMap<>();
+        try {
+            if (!Files.exists(currentRatingsJson)) {
+                return out;
+            }
+            String s = new String(Files.readAllBytes(currentRatingsJson), StandardCharsets.UTF_8);
+            out.putAll(jsonDoubleMapField(s, "ratings"));
+        } catch (Exception ignored) {
+        }
+        return out;
+    }
+
+    private static void writeCurrentRatings(Path currentRatingsJson, java.util.Map<String, Double> ratings,
+                                            String evalRunId, int minEpisode, int maxEpisode, String timestamp) {
+        try {
+            if (currentRatingsJson.getParent() != null) {
+                Files.createDirectories(currentRatingsJson.getParent());
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append("{\n");
+            sb.append("  \"eval_run_id\": ").append(jsonString(evalRunId)).append(",\n");
+            sb.append("  \"min_episode\": ").append(minEpisode).append(",\n");
+            sb.append("  \"max_episode\": ").append(maxEpisode).append(",\n");
+            sb.append("  \"updated_at\": ").append(jsonString(timestamp)).append(",\n");
+            sb.append("  \"ratings\": ").append(jsonDoubleMap(ratings)).append("\n");
+            sb.append("}\n");
+            Files.write(currentRatingsJson, sb.toString().getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (Exception e) {
+            logger.warn("Failed to write current Elo ratings: " + e.getMessage());
+        }
+    }
+
+    private static void writeLeagueEvalReport(
+            Path reportsDir,
+            String evalRunId,
+            String timestamp,
+            java.util.List<String> ranked,
+            java.util.Map<String, Double> ratings,
+            java.util.Map<String, Double> deltas,
+            java.util.Map<String, double[]> pairwise,
+            java.util.List<String> skipped,
+            java.util.List<String> anchorSummary
+    ) {
+        try {
+            Files.createDirectories(reportsDir);
+            Path p = reportsDir.resolve("league_report_latest.md");
+            StringBuilder sb = new StringBuilder();
+            sb.append("# Pauper League Report\n\n");
+            sb.append("- eval_run_id: ").append(evalRunId).append('\n');
+            sb.append("- timestamp: ").append(timestamp).append('\n');
+            sb.append("- entrants: ").append(ranked.size()).append("\n\n");
+
+            sb.append("## Current Ranking (Snapshot Elo)\n\n");
+            sb.append("| Rank | Profile | Elo | Delta |\n");
+            sb.append("|---:|---|---:|---:|\n");
+            int r = 1;
+            for (String profile : ranked) {
+                double elo = ratings.getOrDefault(profile, 1500.0);
+                double d = deltas.getOrDefault(profile, 0.0);
+                sb.append("| ").append(r).append(" | ").append(profile).append(" | ")
+                        .append(String.format(java.util.Locale.US, "%.2f", elo)).append(" | ")
+                        .append(String.format(java.util.Locale.US, "%+.2f", d)).append(" |\n");
+                r++;
+            }
+            sb.append('\n');
+
+            sb.append("## Top Elo Movers\n\n");
+            java.util.List<String> movers = new java.util.ArrayList<>(deltas.keySet());
+            movers.sort((a, b) -> Double.compare(Math.abs(deltas.getOrDefault(b, 0.0)), Math.abs(deltas.getOrDefault(a, 0.0))));
+            int shown = 0;
+            for (String profile : movers) {
+                if (shown >= 5) {
+                    break;
+                }
+                sb.append("- ").append(profile).append(": ")
+                        .append(String.format(java.util.Locale.US, "%+.2f", deltas.getOrDefault(profile, 0.0))).append('\n');
+                shown++;
+            }
+            sb.append('\n');
+
+            sb.append("## Difficult Pairwise Matchups (Lowest WR for profile_a)\n\n");
+            java.util.List<java.util.Map.Entry<String, double[]>> pairs = new java.util.ArrayList<>(pairwise.entrySet());
+            pairs.sort((x, y) -> Double.compare(x.getValue()[0], y.getValue()[0]));
+            int badN = 0;
+            for (java.util.Map.Entry<String, double[]> e : pairs) {
+                if (badN >= 8) {
+                    break;
+                }
+                String[] parts = e.getKey().split("\\|\\|", 2);
+                String pa = parts.length > 0 ? parts[0] : "";
+                String pb = parts.length > 1 ? parts[1] : "";
+                sb.append("- ").append(pa).append(" vs ").append(pb)
+                        .append(": wr=").append(String.format(java.util.Locale.US, "%.3f", e.getValue()[0]))
+                        .append(" games=").append((int) e.getValue()[1]).append('\n');
+                badN++;
+            }
+            sb.append('\n');
+
+            sb.append("## CP7 Skill1 Anchor\n\n");
+            if (anchorSummary.isEmpty()) {
+                sb.append("- disabled\n\n");
+            } else {
+                for (String line : anchorSummary) {
+                    sb.append("- ").append(line).append('\n');
+                }
+                sb.append('\n');
+            }
+
+            sb.append("## Coverage\n\n");
+            if (skipped == null || skipped.isEmpty()) {
+                sb.append("- no skipped profiles\n");
+            } else {
+                for (String s : skipped) {
+                    sb.append("- ").append(s).append('\n');
+                }
+            }
+
+            Files.write(p, sb.toString().getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (Exception e) {
+            logger.warn("Failed to write league report: " + e.getMessage());
+        }
+    }
+
     private enum LeagueOpponentKind {
         BOT,
         SNAPSHOT
@@ -2440,6 +3277,7 @@ public class RLTrainer {
 
         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("RL", RangeOfInfluence.ALL, sharedModel, true, false, rlPolicyKey);
         rlPlayer.setCurrentEpisode(-1);
+        rlPlayer.setAttachedGameLogger(gameLogger);
 
         Player opp;
         if (opponent.kind == LeagueOpponentKind.BOT) {
@@ -2448,6 +3286,7 @@ public class RLTrainer {
         } else {
             String pk = opponent.policyKey == null ? "train" : opponent.policyKey;
             opp = new ComputerPlayerRL("SnapshotOpp", RangeOfInfluence.ALL, sharedModel, true, false, pk);
+            ((ComputerPlayerRL) opp).setAttachedGameLogger(gameLogger);
         }
 
         Deck rlDeck = d1.copy();
@@ -2481,7 +3320,7 @@ public class RLTrainer {
         watchdog.setDaemon(true);
         watchdog.start();
 
-        game.start(rlPlayer.getId());
+        startGameInGameThread(game, rlPlayer.getId(), Math.max(1, gameTimeoutSec) + 30);
         watchdog.interrupt();
 
         boolean win = false;
@@ -2617,6 +3456,7 @@ public class RLTrainer {
 
         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("RL", RangeOfInfluence.ALL, sharedModel, true);
         rlPlayer.setCurrentEpisode(-1); // -1 indicates benchmark game
+        rlPlayer.setAttachedGameLogger(gameLogger);
         // Use strong opponent for benchmarking
         int benchSkill = EnvConfig.i32("BENCHMARK_OPPONENT_SKILL", 6);
         Player opponent = new ComputerPlayer7("Benchmark-skill" + benchSkill, RangeOfInfluence.ALL, benchSkill);
@@ -2654,7 +3494,7 @@ public class RLTrainer {
         watchdog.setDaemon(true);
         watchdog.start();
 
-        game.start(rlPlayer.getId());
+        startGameInGameThread(game, rlPlayer.getId(), Math.max(1, gameTimeoutSec) + 30);
         watchdog.interrupt();
 
         boolean win = game.getWinner().contains(rlPlayer.getName());
@@ -2670,6 +3510,57 @@ public class RLTrainer {
             }
         }
         return win;
+    }
+
+    private static void startGameInGameThread(Game game, UUID startingPlayerId, int joinTimeoutSec) {
+        // In some modes (e.g., league_eval) the caller runs on RLTrainer.main, which fails strict game-thread checks.
+        if (ThreadUtils.isRunGameThread()) {
+            game.start(startingPlayerId);
+            return;
+        }
+
+        final AtomicReference<Throwable> error = new AtomicReference<>(null);
+        Thread gameThread = new Thread(() -> {
+            try {
+                game.start(startingPlayerId);
+            } catch (Throwable t) {
+                error.set(t);
+            }
+        }, "GAME-LEAGUE-EVAL");
+        gameThread.setDaemon(true);
+        gameThread.start();
+
+        long timeoutMs = Math.max(1L, joinTimeoutSec) * 1000L;
+        try {
+            gameThread.join(timeoutMs);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Interrupted while waiting for game thread", ie);
+        }
+
+        if (gameThread.isAlive()) {
+            try {
+                game.end();
+            } catch (Exception ignored) {
+            }
+            try {
+                gameThread.join(5000L);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            if (gameThread.isAlive()) {
+                throw new IllegalStateException("Game thread did not finish after timeout and forced end.");
+            }
+        }
+
+        Throwable t = error.get();
+        if (t == null) {
+            return;
+        }
+        if (t instanceof RuntimeException) {
+            throw (RuntimeException) t;
+        }
+        throw new IllegalStateException("Error while running game on GAME thread", t);
     }
 
     public static List<Path> loadDeckPool() throws IOException {
@@ -3200,50 +4091,99 @@ public class RLTrainer {
 
     private Player createLeagueOpponent(int episodeNum, Random rand) {
         LeagueState st = getLeagueState();
+        THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.remove();
 
+        // Full-meta league sampling:
+        // - Sample opponent profile from active registry entries (excluding self when possible).
+        // - If that profile is qualified (promoted and has snapshot), play vs its RL snapshot.
+        // - Otherwise play heuristic CP7 on that profile's deck.
+        java.util.List<LeagueMetaOpponentCandidate> allMeta = getLeagueMetaOpponentCandidates();
+        if (!allMeta.isEmpty()) {
+            java.util.ArrayList<LeagueMetaOpponentCandidate> meta = new java.util.ArrayList<>(allMeta);
+            if (!MODEL_PROFILE_NAME.isEmpty() && meta.size() > 1) {
+                meta.removeIf(c -> MODEL_PROFILE_NAME.equalsIgnoreCase(c.profile));
+            }
+            if (!meta.isEmpty()) {
+                LeagueMetaOpponentCandidate pick = meta.get(rand.nextInt(meta.size()));
+                THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.set(pick.deckPath);
+                if (pick.qualified && pick.snapshotPath != null) {
+                    String policyKey = "snap:" + pick.snapshotPath.toString();
+                    lastOpponentType = String.format(java.util.Locale.US,
+                            "META-RL(profile=%s,ep=%d,wr=%.3f,promoted=%s)",
+                            pick.profile, pick.episode, pick.baselineWr, pick.promoted);
+                    return new ComputerPlayerRL("MetaSnapshotOpp", RangeOfInfluence.ALL, sharedModel, false, false, policyKey);
+                }
+                int skill = Math.max(1, LEAGUE_POST_HEURISTIC_SKILL);
+                lastOpponentType = String.format(java.util.Locale.US,
+                        "META-H(profile=%s,skill=%d,wr=%.3f,promoted=%s)",
+                        pick.profile, skill, pick.baselineWr, pick.promoted);
+                return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
+            }
+        }
+
+        // Legacy fallback if registry/meta candidates are unavailable.
+        return createLeagueOpponentLegacy(st, rand);
+    }
+
+    private Player createLeagueOpponentLegacy(LeagueState st, Random rand) {
         // Stage 0 (bootstrap): train against CP7Skill1 only until promoted.
         if (!st.promoted) {
-            int[] skills = parseSkillList(LEAGUE_HEURISTIC_SKILLS_PRE, new int[]{1});
-            int skill = pickFrom(skills, rand, 1);
+            int skill = Math.max(1, LEAGUE_BASELINE_BOT_SKILL);
             lastOpponentType = "H-CP7(skill=" + skill + ")";
             return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
         }
 
-        // After promotion: mixed league training (H/S/C)
-        double pH = clamp01(LEAGUE_P_H);
-        double pS = clamp01(LEAGUE_P_S);
-        double pC = clamp01(LEAGUE_P_C);
-        double sum = pH + pS + pC;
+        // After promotion:
+        // 20% heuristic (CP7 skill1),
+        // 40% local profile snapshot/self-play,
+        // 40% cross-profile snapshot opponent.
+        double pH = clamp01(LEAGUE_POST_HEURISTIC_P);
+        double pL = clamp01(LEAGUE_POST_LOCAL_P);
+        double pX = clamp01(LEAGUE_POST_CROSS_P);
+        double sum = pH + pL + pX;
         if (sum <= 0) {
-            pH = 0.30;
-            pS = 0.50;
-            pC = 0.20;
+            pH = 0.20;
+            pL = 0.40;
+            pX = 0.40;
             sum = 1.0;
         }
         pH /= sum;
-        pS /= sum;
-        pC /= sum;
+        pL /= sum;
+        pX /= sum;
 
         double r = rand.nextDouble();
         if (r < pH) {
-            int[] skills = parseSkillList(LEAGUE_HEURISTIC_SKILLS_POST, new int[]{1, 2, 3});
-            int skill = pickFrom(skills, rand, 1);
+            int skill = Math.max(1, LEAGUE_POST_HEURISTIC_SKILL);
             lastOpponentType = "H-CP7(skill=" + skill + ")";
             return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
-        } else if (r < pH + pS) {
+        } else if (r < pH + pL) {
             String snapKey = pickLeagueSnapshotPolicyKey(st, rand);
-            if (snapKey == null) {
-                int[] skills = parseSkillList(LEAGUE_HEURISTIC_SKILLS_POST, new int[]{1, 2, 3});
-                int skill = pickFrom(skills, rand, 1);
-                lastOpponentType = "H-CP7(skill=" + skill + ")";
-                return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
+            boolean useSnapshot = snapKey != null && rand.nextBoolean();
+            if (useSnapshot) {
+                lastOpponentType = "LOCAL-SNAP(" + snapKey + ")";
+                return new ComputerPlayerRL("LocalSnapshotOpp", RangeOfInfluence.ALL, sharedModel, false, false, snapKey);
             }
-            lastOpponentType = "S-" + snapKey;
-            return new ComputerPlayerRL("SnapshotOpp", RangeOfInfluence.ALL, sharedModel, false, false, snapKey);
+            lastOpponentType = "LOCAL-SELFPLAY";
+            return new ComputerPlayerRL("SelfPlayLocal", RangeOfInfluence.ALL, sharedModel, false, false, "train");
         } else {
-            // Self-play bucket: C vs C. Opponent is off-policy from the learner's perspective.
-            lastOpponentType = "SELFPLAY";
-            return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel, false, false, "train");
+            java.util.List<CrossProfileSnapshot> candidates = getCrossProfileCandidates();
+            if (!candidates.isEmpty()) {
+                CrossProfileSnapshot pick = candidates.get(rand.nextInt(candidates.size()));
+                THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.set(pick.deckPath);
+                String policyKey = "snap:" + pick.snapshotPath.toString();
+                lastOpponentType = "CROSS(" + pick.profile + ",ep=" + pick.episode + ")";
+                return new ComputerPlayerRL("CrossProfileOpp", RangeOfInfluence.ALL, sharedModel, false, false, policyKey);
+            }
+
+            // Fallback if no cross-profile candidates are available.
+            String snapKey = pickLeagueSnapshotPolicyKey(st, rand);
+            if (snapKey != null) {
+                lastOpponentType = "LOCAL-SNAP-FALLBACK(" + snapKey + ")";
+                return new ComputerPlayerRL("LocalSnapshotFallback", RangeOfInfluence.ALL, sharedModel, false, false, snapKey);
+            }
+            int skill = Math.max(1, LEAGUE_POST_HEURISTIC_SKILL);
+            lastOpponentType = "H-CP7-FALLBACK(skill=" + skill + ")";
+            return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
         }
     }
 

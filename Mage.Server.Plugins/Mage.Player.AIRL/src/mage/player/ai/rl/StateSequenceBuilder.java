@@ -10,6 +10,7 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import mage.Mana;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
@@ -239,40 +240,24 @@ public class StateSequenceBuilder {
 
         // Stack objects: added last so the UUID map is complete, enabling target
         // token index linkage (e.g., knowing which permanent a buff spell targets).
+        // Include non-card stack abilities so target-pick decisions can "see" triggered
+        // abilities currently on stack, not only spells.
         for (StackObject so : game.getStack()) {
+            int soTokenIdx = tokens.size();
+            float[] stackTok;
+            int tokenId;
             if (so instanceof Card) {
-                int soTokenIdx = tokens.size();
-                float[] stackTok = embedCard((Card) so, Zone.STACK, game);
-                // Patch target linkage into reserved slots of the stack token.
-                try {
-                    Ability sa = so.getStackAbility();
-                    if (sa != null && sa.getModes() != null) {
-                        int slot = STACK_TARGET_SLOT_START;
-                        outer:
-                        for (UUID modeId : sa.getModes().getSelectedModes()) {
-                            Mode mode = sa.getModes().get(modeId);
-                            if (mode == null) continue;
-                            for (Target target : mode.getTargets()) {
-                                for (UUID targetId : target.getTargets()) {
-                                    Integer tIdx = uuidMap.get(targetId);
-                                    if (tIdx != null && slot + 1 < DIM_PER_TOKEN) {
-                                        stackTok[slot]     = 1.0f;
-                                        stackTok[slot + 1] = tIdx / (float) MAX_LEN;
-                                        slot += 2;
-                                        if (slot + 1 >= DIM_PER_TOKEN) break outer;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    // Non-critical: target linkage is best-effort
-                }
-                uuidMap.put(((Card) so).getId(), soTokenIdx);
-                tokens.add(stackTok);
-                mask.add(0);
-                tokenIds.add(cardTokenId((Card) so));
+                stackTok = embedCard((Card) so, Zone.STACK, game);
+                tokenId = cardTokenId((Card) so);
+            } else {
+                stackTok = embedStackObject(so, game);
+                tokenId = stackObjectTokenId(so);
             }
+            patchStackTargetLinks(stackTok, so.getStackAbility(), uuidMap);
+            uuidMap.put(so.getId(), soTokenIdx);
+            tokens.add(stackTok);
+            mask.add(0);
+            tokenIds.add(tokenId);
         }
 
         /*
@@ -424,6 +409,228 @@ public class StateSequenceBuilder {
         t.add(embedCard(c, z, g));
         m.add(0);  // Don't mask card tokens
         ids.add(cardTokenId(c));
+    }
+
+    private static int stackObjectTokenId(StackObject stackObject) {
+        if (stackObject == null) {
+            return 0;
+        }
+        try {
+            Ability stackAbility = stackObject.getStackAbility();
+            String name = stackObject.getName() != null ? stackObject.getName() : "unknown";
+            String kind = stackAbility != null
+                    ? stackAbility.getClass().getSimpleName()
+                    : stackObject.getClass().getSimpleName();
+            return toVocabId("STACK:" + name + ":" + kind);
+        } catch (Exception e) {
+            return toVocabId("STACK:unknown");
+        }
+    }
+
+    private static void patchStackTargetLinks(float[] stackTok, Ability stackAbility, Map<UUID, Integer> uuidMap) {
+        if (stackTok == null || stackAbility == null || uuidMap == null) {
+            return;
+        }
+        try {
+            int slot = STACK_TARGET_SLOT_START;
+            boolean linkedAny = false;
+            if (stackAbility.getModes() != null) {
+                List<Mode> modesToScan = new ArrayList<>();
+                if (stackAbility.getModes().getSelectedModes() != null
+                        && !stackAbility.getModes().getSelectedModes().isEmpty()) {
+                    for (UUID modeId : stackAbility.getModes().getSelectedModes()) {
+                        Mode mode = stackAbility.getModes().get(modeId);
+                        if (mode != null) {
+                            modesToScan.add(mode);
+                        }
+                    }
+                } else {
+                    modesToScan.addAll(stackAbility.getModes().values());
+                }
+                for (Mode mode : modesToScan) {
+                    slot = writeTargetLinks(stackTok, slot, mode.getTargets(), uuidMap);
+                    if (slot > STACK_TARGET_SLOT_START) {
+                        linkedAny = true;
+                    }
+                    if (slot + 1 >= DIM_PER_TOKEN) {
+                        return;
+                    }
+                }
+            }
+            // Some abilities expose chosen targets directly on the root ability.
+            if (!linkedAny && stackAbility.getTargets() != null) {
+                writeTargetLinks(stackTok, slot, stackAbility.getTargets(), uuidMap);
+            }
+        } catch (Exception e) {
+            // Non-critical: target linkage is best-effort.
+        }
+    }
+
+    private static int writeTargetLinks(float[] stackTok, int slot, Iterable<Target> targets, Map<UUID, Integer> uuidMap) {
+        if (targets == null) {
+            return slot;
+        }
+        for (Target target : targets) {
+            if (target == null || target.getTargets() == null) {
+                continue;
+            }
+            for (UUID targetId : target.getTargets()) {
+                if (slot + 1 >= DIM_PER_TOKEN) {
+                    return slot;
+                }
+                Integer targetTokenIdx = uuidMap.get(targetId);
+                if (targetTokenIdx != null) {
+                    stackTok[slot] = 1.0f;
+                    stackTok[slot + 1] = targetTokenIdx / (float) MAX_LEN;
+                    slot += 2;
+                }
+            }
+        }
+        return slot;
+    }
+
+    private static float[] embedStackObject(StackObject stackObject, Game game) {
+        float[] v = new float[DIM_PER_TOKEN];
+        Ability stackAbility = stackObject != null ? stackObject.getStackAbility() : null;
+        Card sourceCard = null;
+
+        try {
+            if (stackObject != null && stackObject.getSourceId() != null) {
+                MageObject sourceObj = game.getObject(stackObject.getSourceId());
+                if (sourceObj instanceof Card) {
+                    sourceCard = (Card) sourceObj;
+                }
+            }
+        } catch (Exception ignored) {
+            // Best effort only.
+        }
+
+        if (sourceCard != null) {
+            v = embedCard(sourceCard, Zone.STACK, game);
+        } else {
+            v[Zone.STACK.ordinal() % DIM_PER_TOKEN] = 1.0f;
+            int index = Zone.values().length;
+            if (index < DIM_PER_TOKEN) {
+                UUID controllerId = stackObject != null ? stackObject.getControllerId() : null;
+                v[index++] = controllerId != null && controllerId.equals(game.getActivePlayerId()) ? 1.0f : 0.0f;
+            }
+
+            // Basic stats slots are not meaningful for non-card stack objects.
+            if (index + 3 < DIM_PER_TOKEN) {
+                v[index++] = 0.0f;
+                v[index++] = 0.0f;
+                int mv = (stackAbility != null && stackAbility.getManaCostsToPay() != null)
+                        ? Math.max(0, stackAbility.getManaCostsToPay().manaValue())
+                        : 0;
+                v[index++] = (float) mv;
+            }
+
+            Mana total = new Mana();
+            if (stackAbility != null && stackAbility.getManaCostsToPay() != null) {
+                for (ManaCost cost : stackAbility.getManaCostsToPay()) {
+                    total.add(cost.getMana());
+                }
+            }
+            if (index + 5 < DIM_PER_TOKEN) {
+                v[index++] = Math.max(0, total.getWhite());
+                v[index++] = Math.max(0, total.getBlue());
+                v[index++] = Math.max(0, total.getBlack());
+                v[index++] = Math.max(0, total.getRed());
+                v[index++] = Math.max(0, total.getGreen());
+            }
+        }
+
+        applyAbilitySemanticFlags(v, stackAbility);
+
+        if (stackObject != null && stackObject.getName() != null) {
+            float[] textEmbed = CardTextEmbeddings.getInstance().getEmbedding(stackObject.getName());
+            for (int i = 0; i < TEXT_EMBED_DIM && TEXT_EMBED_SLOT_START + i < DIM_PER_TOKEN; i++) {
+                v[TEXT_EMBED_SLOT_START + i] = textEmbed[i];
+            }
+        }
+
+        for (int i = 0; i < v.length; i++) {
+            if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
+                v[i] = 0.0f;
+            }
+        }
+        return v;
+    }
+
+    private static void applyAbilitySemanticFlags(float[] v, Ability ability) {
+        if (v == null || ability == null) {
+            return;
+        }
+        boolean fDealsDamage = false;
+        boolean fDestroys = false;
+        boolean fExiles = false;
+        boolean fBounces = false;
+        boolean fDraws = false;
+        boolean fGainsLife = false;
+        boolean fLosesLife = false;
+        boolean fTokens = false;
+        boolean fCounters = false;
+        boolean fAddCounters = false;
+        boolean fSacrifices = false;
+        boolean fDiscards = false;
+        boolean fMills = false;
+        boolean fTutors = false;
+        boolean fBoostsPT = false;
+        boolean fGrantsAbility = false;
+        boolean fAddsMana = false;
+        boolean fCostReduction = false;
+        boolean fPreventsDamage = false;
+        boolean fExtraTurn = false;
+        boolean fCopies = false;
+        boolean fTransforms = false;
+        boolean fTargetsAny = false;
+        boolean fTargetsCreature = false;
+        boolean fTargetsArtifact = false;
+        boolean fTargetsEnchantment = false;
+        boolean fHasETB = ability instanceof EntersBattlefieldTriggeredAbility;
+
+        for (Effect effect : ability.getAllEffects()) {
+            if (effect instanceof DamageTargetEffect || effect instanceof DamagePlayersEffect) fDealsDamage = true;
+            if (effect instanceof DestroyTargetEffect || effect instanceof DestroyAllEffect) fDestroys = true;
+            if (effect instanceof ExileTargetEffect || effect instanceof ExileAllEffect) fExiles = true;
+            if (effect instanceof ReturnToHandTargetEffect || effect instanceof ReturnToHandFromBattlefieldAllEffect) fBounces = true;
+            if (effect instanceof DrawCardSourceControllerEffect || effect instanceof DrawCardTargetEffect) fDraws = true;
+            if (effect instanceof GainLifeEffect) fGainsLife = true;
+            if (effect instanceof LoseLifeTargetEffect || effect instanceof LoseLifeSourceControllerEffect) fLosesLife = true;
+            if (effect instanceof CreateTokenEffect) fTokens = true;
+            if (effect instanceof CounterTargetEffect) fCounters = true;
+            if (effect instanceof AddCountersTargetEffect || effect instanceof AddCountersSourceEffect) fAddCounters = true;
+            if (effect instanceof SacrificeEffect || effect instanceof SacrificeSourceEffect) fSacrifices = true;
+            if (effect instanceof DiscardTargetEffect || effect instanceof DiscardControllerEffect) fDiscards = true;
+            if (effect instanceof MillCardsTargetEffect || effect instanceof MillCardsControllerEffect) fMills = true;
+            if (effect instanceof SearchEffect) fTutors = true;
+            if (effect instanceof BoostTargetEffect || effect instanceof BoostSourceEffect || effect instanceof BoostControlledEffect) fBoostsPT = true;
+            if (effect instanceof GainAbilityTargetEffect || effect instanceof GainAbilityControlledEffect) fGrantsAbility = true;
+            if (effect instanceof ManaEffect) fAddsMana = true;
+            if (effect instanceof CostModificationEffectImpl) fCostReduction = true;
+            if (effect instanceof PreventDamageToTargetEffect) fPreventsDamage = true;
+            if (effect instanceof AddExtraTurnControllerEffect) fExtraTurn = true;
+            if (effect instanceof CopyTargetStackObjectEffect || effect instanceof CopyPermanentEffect) fCopies = true;
+            if (effect instanceof TransformSourceEffect) fTransforms = true;
+        }
+
+        for (Target target : ability.getTargets()) {
+            if (target instanceof TargetAnyTarget || target instanceof TargetCreatureOrPlayer) fTargetsAny = true;
+            if (target.getFilter() instanceof FilterCreaturePermanent) fTargetsCreature = true;
+            if (target.getFilter() instanceof FilterArtifactPermanent) fTargetsArtifact = true;
+            if (target.getFilter() instanceof FilterEnchantmentPermanent) fTargetsEnchantment = true;
+        }
+
+        boolean[] ef = {
+            fDealsDamage, fDestroys, fExiles, fBounces, fDraws, fGainsLife, fLosesLife,
+            fTokens, fCounters, fAddCounters, fSacrifices, fDiscards, fMills, fTutors,
+            fBoostsPT, fGrantsAbility, fAddsMana, fCostReduction, fPreventsDamage,
+            fExtraTurn, fCopies, fTransforms,
+            fTargetsAny, fTargetsCreature, fTargetsArtifact, fTargetsEnchantment, fHasETB
+        };
+        for (int i = 0; i < ef.length && EFFECT_SLOT_START + i < DIM_PER_TOKEN; i++) {
+            v[EFFECT_SLOT_START + i] = ef[i] ? 1.0f : 0.0f;
+        }
     }
 
     private static float[] embedCard(Card card, Zone zone, Game game) {

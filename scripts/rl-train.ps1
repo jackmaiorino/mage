@@ -27,13 +27,102 @@ param(
   [int]$AdaptiveCurriculum = -1,
 
   # Override the main class (default: RLTrainer; use DraftTrainer for cube draft training)
-  [string]$MainClass = "mage.player.ai.rl.RLTrainer"
+  [string]$MainClass = "mage.player.ai.rl.RLTrainer",
+
+  # Embedding preflight: auto-generate profile embeddings if missing.
+  [bool]$PreflightEmbeddings = $true,
+  # Refresh profile embeddings on startup (recommended; cheap with global cache).
+  [bool]$PreflightRefreshEmbeddings = $true,
+  [string]$PythonExe = "python",
+  [bool]$PreflightStrict = $true
 )
 
 $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $modulePath = "Mage.Server.Plugins/Mage.Player.AIRL"
+
+function Resolve-RepoPath([string]$pathValue) {
+  if ([string]::IsNullOrWhiteSpace($pathValue)) {
+    return ""
+  }
+  if ([System.IO.Path]::IsPathRooted($pathValue)) {
+    try { return (Resolve-Path -LiteralPath $pathValue).Path } catch { return $pathValue }
+  }
+  $candidate = Join-Path $repoRoot $pathValue
+  if (Test-Path -LiteralPath $candidate) {
+    return (Resolve-Path -LiteralPath $candidate).Path
+  }
+  return $candidate
+}
+
+function Ensure-ProfileEmbeddings([string]$profile, [string]$resolvedDeckList) {
+  if (-not $PreflightEmbeddings) {
+    return
+  }
+  if ([string]::IsNullOrWhiteSpace($profile)) {
+    return
+  }
+
+  $modelsDir = Join-Path $repoRoot ("Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/{0}/models" -f $profile)
+  $embeddingPath = Join-Path $modelsDir "card_embeddings.json"
+  if ((Test-Path -LiteralPath $embeddingPath) -and (-not $PreflightRefreshEmbeddings)) {
+    Write-Host ("Embeddings present for profile={0}: {1}" -f $profile, $embeddingPath)
+    return
+  }
+  if ((Test-Path -LiteralPath $embeddingPath) -and $PreflightRefreshEmbeddings) {
+    Write-Host ("Refreshing embeddings for profile={0}: {1}" -f $profile, $embeddingPath)
+  }
+
+  $generator = Join-Path $repoRoot "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/generate_card_embeddings.py"
+  if (-not (Test-Path -LiteralPath $generator)) {
+    throw "Embedding generator not found: $generator"
+  }
+
+  if ([string]::IsNullOrWhiteSpace($resolvedDeckList) -or -not (Test-Path -LiteralPath $resolvedDeckList)) {
+    throw ("Embeddings missing for profile={0}, and deck list source is unavailable: {1}" -f $profile, $resolvedDeckList)
+  }
+
+  $sourceFlag = "--decklist"
+  $deckExt = [System.IO.Path]::GetExtension($resolvedDeckList).ToLowerInvariant()
+  if ($deckExt -eq ".dck") {
+    $sourceFlag = "--cube"
+  } elseif ($deckExt -eq ".dek") {
+    $sourceFlag = "--dek"
+  }
+
+  $pythonCmd = $PythonExe
+  if ([string]::IsNullOrWhiteSpace($pythonCmd) -or $pythonCmd -eq "python") {
+    $venvPy = Join-Path $repoRoot "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/venv/Scripts/python.exe"
+    if (Test-Path -LiteralPath $venvPy) {
+      $pythonCmd = $venvPy
+    }
+  }
+
+  New-Item -ItemType Directory -Force -Path $modelsDir | Out-Null
+
+  $args = @(
+    $generator,
+    "--profile", $profile,
+    $sourceFlag, $resolvedDeckList,
+    "--output", $embeddingPath
+  )
+
+  Write-Host ("Generating embeddings for profile={0} using {1}={2}" -f $profile, $sourceFlag, $resolvedDeckList)
+  try {
+    & $pythonCmd @args
+    if ($LASTEXITCODE -ne 0) {
+      throw "Embedding generator exited with code $LASTEXITCODE"
+    }
+    if (-not (Test-Path -LiteralPath $embeddingPath)) {
+      throw "Expected output not found: $embeddingPath"
+    }
+    Write-Host ("Embeddings generated for profile={0}: {1}" -f $profile, $embeddingPath)
+  } catch {
+    $msg = ("Embedding preflight failed for profile={0}: {1}" -f $profile, $_.Exception.Message)
+    if ($PreflightStrict) { throw $msg } else { Write-Warning $msg }
+  }
+}
 
 # Prefer explicit parameter, otherwise respect existing env var, otherwise default.
 if ($DeckListFile -eq "") {
@@ -51,6 +140,7 @@ if (-not [System.IO.Path]::IsPathRooted($DeckListFile)) {
     $DeckListFile = (Resolve-Path $maybeRepoPath).Path
   }
 }
+$resolvedDeckList = Resolve-RepoPath $DeckListFile
 
 $env:MODE = "train"
 $env:TOTAL_EPISODES = "$TotalEpisodes"
@@ -66,6 +156,10 @@ if ($ModelProfile -ne "") {
   $env:MODEL_PROFILE = "$ModelProfile"
 } elseif ($env:MODEL_PROFILE -and $env:MODEL_PROFILE.Trim() -ne "") {
   $ModelProfile = $env:MODEL_PROFILE
+}
+
+if (-not [string]::IsNullOrWhiteSpace($ModelProfile)) {
+  Ensure-ProfileEmbeddings $ModelProfile $resolvedDeckList
 }
 
 # -----------------------

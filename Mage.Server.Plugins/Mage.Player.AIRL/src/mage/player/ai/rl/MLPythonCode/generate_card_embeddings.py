@@ -5,6 +5,10 @@ Generates 32-dim PCA-compressed text embeddings for a set of MTG cards using
 OpenAI text-embedding-3-large, then saves them as card_embeddings.json in the
 profile's models directory.
 
+Also maintains a global raw-embedding cache at:
+  rl/models/card_embeddings_raw_global.json
+so multiple profiles can reuse OpenAI results.
+
 Usage:
     python generate_card_embeddings.py --profile Pauper-Elves \
         --decklist ../../decks/PauperSubset/decklist.txt
@@ -16,8 +20,9 @@ Requirements:
     pip install openai scikit-learn requests
 
 Environment:
-    OPENAI_API_KEY - required
+    OPENAI_API_KEY - required only for cards missing from global cache
     MODEL_PROFILE  - fallback profile name if --profile not given
+    RL_GLOBAL_EMBEDDINGS_PATH - optional override for global raw cache path
 
 Scryfall bulk data is downloaded automatically on first run and cached at
 MLPythonCode/scryfall_oracle_cards.json (auto-refreshed if >7 days old).
@@ -50,6 +55,41 @@ def profile_models_dir(profile: str) -> Path:
     if env_override:
         return Path(env_override)
     return _RL_BASE / "profiles" / profile / "models"
+
+
+def global_raw_cache_path() -> Path:
+    """
+    Global store for raw (pre-PCA) embeddings so profiles can share API results.
+    Override with RL_GLOBAL_EMBEDDINGS_PATH if desired.
+    """
+    env_override = os.getenv("RL_GLOBAL_EMBEDDINGS_PATH", "").strip()
+    if env_override:
+        return Path(env_override)
+    return _RL_BASE / "models" / "card_embeddings_raw_global.json"
+
+
+def load_global_raw_cache(path: Path) -> dict[str, list[float]]:
+    if not path.exists():
+        return {}
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            return {}
+        out: dict[str, list[float]] = {}
+        for key, value in data.items():
+            if isinstance(key, str) and isinstance(value, list) and value:
+                out[key] = [float(x) for x in value]
+        return out
+    except Exception:
+        # Corrupt cache should not block generation.
+        return {}
+
+
+def save_global_raw_cache(path: Path, cache: dict[str, list[float]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
 
 
 # ---------------------------------------------------------------------------
@@ -108,6 +148,13 @@ def build_scryfall_lookup() -> dict[str, dict]:
                     if part:
                         lookup[part] = card
                         lookup[normalise_card_name(part)] = card
+            # Also index explicit face names when Scryfall stores only front name
+            # in card["name"] (e.g. transform cards with card_faces entries).
+            for face in card.get("card_faces", []) or []:
+                face_name = (face.get("name") or "").strip()
+                if face_name:
+                    lookup[face_name] = card
+                    lookup[normalise_card_name(face_name)] = card
     print(f"  {canonical_count} cards loaded ({len(lookup)} lookup keys incl. aliases).")
     return lookup
 
@@ -132,6 +179,35 @@ def card_text(card_data: dict) -> str:
         face_texts = [f.get("oracle_text", "") for f in card_data["card_faces"]]
         parts.append(" // ".join(t for t in face_texts if t))
     return ". ".join(parts)
+
+
+def related_token_names(card_data: dict) -> set[str]:
+    """
+    Extract token names referenced by this card from Scryfall all_parts.
+    Adds both canonical token name (e.g. "Blood") and the runtime-friendly
+    "<name> Token" variant (e.g. "Blood Token").
+    """
+    names: set[str] = set()
+    for part in card_data.get("all_parts", []) or []:
+        if (part.get("component") or "").strip().lower() != "token":
+            continue
+        raw = (part.get("name") or "").strip()
+        if not raw:
+            continue
+        names.add(raw)
+        if not raw.lower().endswith(" token"):
+            names.add(f"{raw} Token")
+    return names
+
+
+def related_face_names(card_data: dict) -> set[str]:
+    """Extract per-face names from card_faces (e.g. transform back faces)."""
+    names: set[str] = set()
+    for face in card_data.get("card_faces", []) or []:
+        raw = (face.get("name") or "").strip()
+        if raw:
+            names.add(raw)
+    return names
 
 
 # ---------------------------------------------------------------------------
@@ -325,6 +401,8 @@ def main():
                         help="Path to a single .dek file")
     parser.add_argument("--output", default="",
                         help="Override output path for card_embeddings.json")
+    parser.add_argument("--global-cache", default="",
+                        help="Override global raw embedding cache path (default: rl/models/card_embeddings_raw_global.json)")
     parser.add_argument("--embed-dim", type=int, default=_EMBED_DIM,
                         help=f"PCA output dimension (default: {_EMBED_DIM})")
     args = parser.parse_args()
@@ -333,10 +411,7 @@ def main():
         print("Error: --profile is required (or set MODEL_PROFILE env var)", file=sys.stderr)
         sys.exit(1)
 
-    api_key = os.getenv("OPENAI_API_KEY", "")
-    if not api_key:
-        print("Error: OPENAI_API_KEY env var is not set", file=sys.stderr)
-        sys.exit(1)
+    api_key = os.getenv("OPENAI_API_KEY", "").strip()
 
     # Resolve card names
     card_names: list[str] = []
@@ -360,6 +435,28 @@ def main():
 
     # Resolve Scryfall oracle text
     scryfall = build_scryfall_lookup()
+    # Expand requested names with token names referenced by these cards.
+    # This keeps strict embedding mode happy for token permanents seen in-game
+    # (e.g. "Blood Token") even when tokens are not listed in deck files.
+    expanded_names = set(card_names)
+    derived_tokens: set[str] = set()
+    derived_faces: set[str] = set()
+    for name in card_names:
+        data = scryfall.get(name) or scryfall.get(normalise_card_name(name))
+        if data is not None:
+            derived_tokens.update(related_token_names(data))
+            derived_faces.update(related_face_names(data))
+    if derived_tokens:
+        expanded_names.update(derived_tokens)
+    if derived_faces:
+        expanded_names.update(derived_faces)
+    if derived_tokens or derived_faces:
+        card_names = sorted(expanded_names)
+        print(
+            f"Expanded to {len(card_names)} names "
+            f"(+{len(derived_tokens)} token names, +{len(derived_faces)} face names)."
+        )
+
     texts: list[str] = []
     missing: list[str] = []
     resolved_names: list[str] = []
@@ -376,12 +473,50 @@ def main():
         print(f"  Warning: {len(missing)} cards not found in Scryfall: {missing[:10]}"
               + (" …" if len(missing) > 10 else ""))
 
-    # Embed
-    print(f"\nEmbedding {len(texts)} cards with {_OPENAI_MODEL}…")
+    # Resolve raw embeddings with global cache to avoid duplicate API calls across profiles.
+    cache_path = Path(args.global_cache) if args.global_cache else global_raw_cache_path()
+    cache = load_global_raw_cache(cache_path)
+
+    resolved_raw: dict[str, list[float]] = {}
+    to_embed_names: list[str] = []
+    to_embed_texts: list[str] = []
+    cache_hits = 0
+
+    for name, text in zip(resolved_names, texts):
+        cached_vec = cache.get(name)
+        if isinstance(cached_vec, list) and len(cached_vec) > 0:
+            resolved_raw[name] = cached_vec
+            cache_hits += 1
+        else:
+            to_embed_names.append(name)
+            to_embed_texts.append(text)
+
+    print(f"\nGlobal cache: {cache_hits}/{len(resolved_names)} cards hit ({cache_path})")
+    if to_embed_names:
+        if not api_key:
+            print(
+                "Error: OPENAI_API_KEY env var is not set and cache is missing "
+                f"{len(to_embed_names)} cards (e.g. {to_embed_names[:5]}).",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        print(f"Embedding {len(to_embed_names)} uncached cards with {_OPENAI_MODEL}…")
+        try:
+            embedded = embed_texts(to_embed_texts, api_key)
+        except RuntimeError as exc:
+            print(f"Error: {exc}", file=sys.stderr)
+            sys.exit(1)
+        for name, vec in zip(to_embed_names, embedded):
+            vec_list = [float(x) for x in vec]
+            resolved_raw[name] = vec_list
+            cache[name] = vec_list
+        save_global_raw_cache(cache_path, cache)
+        print(f"Updated global cache: {cache_path} (size={len(cache)})")
+
     try:
-        raw_embeddings = embed_texts(texts, api_key)
-    except RuntimeError as exc:
-        print(f"Error: {exc}", file=sys.stderr)
+        raw_embeddings = [resolved_raw[name] for name in resolved_names]
+    except Exception as exc:
+        print(f"Error: failed to assemble raw embeddings from cache/API: {exc}", file=sys.stderr)
         sys.exit(1)
 
     # PCA compress

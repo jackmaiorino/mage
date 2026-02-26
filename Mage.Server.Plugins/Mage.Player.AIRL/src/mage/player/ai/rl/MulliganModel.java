@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Separate neural network model for mulligan decisions.
@@ -33,11 +34,17 @@ public class MulliganModel {
     private static final int EPSILON_DECAY_EPISODES = EnvConfig.i32("MULLIGAN_EPSILON_DECAY_EPISODES", 20000);
 
     // Optional keep floor early in training to avoid always-mull collapse
-    private static final int KEEP_FLOOR_EPISODES = EnvConfig.i32("MULLIGAN_KEEP_FLOOR_EPISODES", 200);
+    private static final int KEEP_FLOOR_EPISODES = EnvConfig.i32("MULLIGAN_KEEP_FLOOR_EPISODES", 0);
     private static final double KEEP_FLOOR_P = EnvConfig.f64("MULLIGAN_KEEP_FLOOR_P", 0.7);
+    private static final boolean HARD_OVERRIDES_ENABLE = EnvConfig.bool("MULLIGAN_HARD_OVERRIDES_ENABLE", false);
+    private static final AtomicBoolean POLICY_LOGGED = new AtomicBoolean(false);
 
     public MulliganModel(PythonModel pythonBridge) {
         this.pythonBridge = pythonBridge;
+        if (POLICY_LOGGED.compareAndSet(false, true)) {
+            logger.info("Mulligan policy: hard_overrides_enabled={} keep_floor_episodes={} keep_floor_p={}",
+                    HARD_OVERRIDES_ENABLE, KEEP_FLOOR_EPISODES, KEEP_FLOOR_P);
+        }
     }
 
     /**
@@ -149,7 +156,7 @@ public class MulliganModel {
         // - 0 lands: never keepable
         // - All lands (no spells): never keepable
         // - 1 land: allowed (Ponder/Brainstorm/Lorien can find lands)
-        if (episodeNum >= 0 && !shouldMulligan) {
+        if (HARD_OVERRIDES_ENABLE && episodeNum >= 0 && !shouldMulligan) {
             int landCount = (int) features[1];
             int handSize = 0;
             for (int i = 0; i < MAX_HAND_SIZE; i++) {

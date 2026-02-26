@@ -1,0 +1,9 @@
+C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Elves.dek
+C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Spy Combo.dek
+C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Caw-Gates.dek
+C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Grixis Affinity.dek
+C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Jund Wildfire.dek
+C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Mono-Blue Faeries.dek
+C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Mono-Blue Terror.dek
+C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Mono-Red Burn.dek
+C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Mono Red Rally.dek

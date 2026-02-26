@@ -72,3 +72,7 @@ $env:RL_SILENCE_THREAD_LOGGER="1"
 # Run
 .\scripts\rl-benchmark.ps1 -GamesPerMatchup 2 -LogEvery 10 -BenchmarkThreads 50 `
   -DeckListFile "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.txt"
+
+# Cross-profile Snapshot Elo league evaluation (reporting-first)
+# Uses registry + agent_status.json from each active profile.
+.\scripts\rl-league-eval.ps1 -GamesPerDirection 6 -AnchorGames 20 -CadenceEpisodes 5000

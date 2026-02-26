@@ -183,6 +183,19 @@
   $env:PY_BACKEND_MODE="multi"
   $env:MULLIGAN_DEVICE="cpu"
 
+  # Mulligan policy (deck-agnostic defaults)
+  $env:MULLIGAN_HARD_OVERRIDES_ENABLE=0
+  $env:MULLIGAN_KEEP_FLOOR_EPISODES=0
+  # Optional legacy strict behavior:
+  # $env:MULLIGAN_HARD_OVERRIDES_ENABLE=1
+  # $env:MULLIGAN_KEEP_FLOOR_EPISODES=200
+  # $env:MULLIGAN_KEEP_FLOOR_P=0.7
+
+  # Spy Combo profile example (if you reuse this command template for pauper deck training):
+  # $env:MODEL_PROFILE="Pauper-Spy-Combo"
+  # $env:MULLIGAN_HARD_OVERRIDES_ENABLE=0
+  # $env:MULLIGAN_KEEP_FLOOR_EPISODES=0
+
   # -------------------------------------------------------
   # Debug diagnostics
   # -------------------------------------------------------

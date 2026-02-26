@@ -213,6 +213,7 @@ class PythonEntryPoint:
             "PY_BACKEND_MODE", "multi").strip().lower()
         # Single-backend runs inference+training in one process; ensure training pauses inference.
         self._gpu_mutex = threading.Lock()
+        self._model_init_lock = threading.Lock()
 
         # Training losses CSV path (resolved relative to RL logs dir)
         self.training_losses_csv_path = os.getenv(
@@ -477,6 +478,13 @@ class PythonEntryPoint:
             if name.startswith(prefixes):
                 p.requires_grad = requires_grad
 
+    def _ensure_main_model_initialized(self):
+        if self.model is not None:
+            return
+        with self._model_init_lock:
+            if self.model is None:
+                self.initializeModel()
+
     def initializeModel(self):
         """Initialize the model and optimizer"""
         logger.info(LogCategory.GPU_MEMORY, "Initializing model")
@@ -676,8 +684,6 @@ class PythonEntryPoint:
         t_start = time.perf_counter()
 
         def _score_numpy_range(start: int, end: int):
-            if self.model is None:
-                raise RuntimeError("Model not initialized")
             device = self.device
             lock_held = False
             if self.backend_mode == "single":
@@ -713,18 +719,34 @@ class PythonEntryPoint:
                 del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask
 
                 model = self._get_policy_model(policy_key)
+                if model is None:
+                    # Snapshot may fail to load; ensure base model exists as fallback.
+                    self._ensure_main_model_initialized()
+                    model = self._get_policy_model(policy_key)
+                if model is None:
+                    raise RuntimeError("No policy model available for scoring")
                 model.eval()
 
+                acquired_gpu_lock_here = False
                 if self.backend_mode != "single":
-                    # Multi-backend: inference must only run while GPULock is held (coordinated by Java).
+                    # Multi-backend: inference should run while GPULock is held.
+                    # If Java-side lock acquisition was missed, recover by acquiring here.
                     if torch.cuda.is_available() and str(device).startswith("cuda") and not self.gpu_lock.is_locked:
-                        raise RuntimeError(
-                            "GPULock is required for inference. Call acquireGPULock() before scoring.")
+                        logger.warning(
+                            LogCategory.GPU_MEMORY,
+                            "Inference entered without GPULock; auto-acquiring for this score call."
+                        )
+                        self.gpu_lock.acquire(timeout=None, process_name=self.process_name)
+                        acquired_gpu_lock_here = True
 
-                with torch.inference_mode():
-                    probs, value = model.score_candidates(
-                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
-                        head_id, int(pick_index), int(min_targets), int(max_targets))
+                try:
+                    with torch.inference_mode():
+                        probs, value = model.score_candidates(
+                            seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
+                            head_id, int(pick_index), int(min_targets), int(max_targets))
+                finally:
+                    if acquired_gpu_lock_here:
+                        self.gpu_lock.release(process_name=self.process_name)
 
                 probs_np = probs.detach().cpu().numpy()
                 value_np = value.detach().cpu().numpy()

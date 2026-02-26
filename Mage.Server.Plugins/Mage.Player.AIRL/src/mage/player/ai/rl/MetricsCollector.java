@@ -47,6 +47,8 @@ public class MetricsCollector {
     private final AtomicLong inferLatencyCount = new AtomicLong(0);
     private final AtomicLong inferLatencySumMs = new AtomicLong(0);
     private final AtomicLong inferLatencyMaxMs = new AtomicLong(0);
+    private final AtomicLong mainTurnUniformTotal = new AtomicLong(0);
+    private final AtomicLong mainActionEpsilonTotal = new AtomicLong(0);
 
     // Inference batching (Java-side) metrics
     private final AtomicLong inferFlushesTotal = new AtomicLong(0);
@@ -226,6 +228,14 @@ public class MetricsCollector {
                 break;
             }
         } while (!inferLatencyMaxMs.compareAndSet(prev, latencyMs));
+    }
+
+    public void recordMainTurnUniform() {
+        mainTurnUniformTotal.incrementAndGet();
+    }
+
+    public void recordMainActionEpsilonDecision() {
+        mainActionEpsilonTotal.incrementAndGet();
     }
 
     public void recordInferBatchFlush(int batchSize, boolean dueToFull) {
@@ -712,6 +722,12 @@ public class MetricsCollector {
         sb.append("# HELP mage_infer_latency_max_ms Max candidate scoring latency observed (ms)\n");
         sb.append("# TYPE mage_infer_latency_max_ms gauge\n");
         sb.append("mage_infer_latency_max_ms ").append(inferLatencyMaxMs.get()).append("\n");
+        sb.append("# HELP mage_main_turn_uniform_total RL main-policy turns executed with full uniform exploration\n");
+        sb.append("# TYPE mage_main_turn_uniform_total counter\n");
+        sb.append("mage_main_turn_uniform_total ").append(mainTurnUniformTotal.get()).append("\n");
+        sb.append("# HELP mage_main_action_epsilon_total RL main-policy decisions using epsilon-mixture behavior\n");
+        sb.append("# TYPE mage_main_action_epsilon_total counter\n");
+        sb.append("mage_main_action_epsilon_total ").append(mainActionEpsilonTotal.get()).append("\n");
 
         // Effective runtime config (helps debug "did env var apply?")
         sb.append("# HELP mage_config_py_batch_max_size Effective PY_BATCH_MAX_SIZE loaded by JVM\n");

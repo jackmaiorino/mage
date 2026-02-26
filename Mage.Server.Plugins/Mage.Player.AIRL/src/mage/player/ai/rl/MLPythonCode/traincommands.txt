@@ -1,9 +1,6 @@
 $env:MTG_AI_LOG_LEVEL="INFO"
 $env:METRICS_PORT=9090
 
-# Model profile - all artifacts (models + logs) go under rl/profiles/Pauper-Elves/
-$env:MODEL_PROFILE="Pauper-Elves"
-
 # Inference workers (each = 1 Python proc + 1 model replica on GPU)
 $env:PY4J_BASE_PORT=25334
 $env:INFER_WORKERS=1
@@ -44,9 +41,19 @@ $env:AUTO_MIN_FREE_MB=512
 # $env:MODEL_DIM_FEEDFORWARD=512
 
 # Entropy schedule
-$env:ENTROPY_START=0.10
-$env:ENTROPY_END=0.01
-$env:ENTROPY_DECAY_STEPS=60000
+$env:ENTROPY_START=0.30
+$env:ENTROPY_END=0.02
+$env:ENTROPY_DECAY_STEPS=70000
+
+# Main-policy exploration (actor rollout behavior, PPO old_logp-consistent)
+# Per-action epsilon-mixture: behavior = (1-eps)*policy + eps*uniform
+$env:RL_ACTION_EPS_START=0.05
+$env:RL_ACTION_EPS_END=0.01
+$env:RL_ACTION_EPS_DECAY_EPISODES=200000
+# Correlated turn-level exploration: sample full-random behavior once per RL turn
+$env:RL_FULL_TURN_RANDOM_START=0.03
+$env:RL_FULL_TURN_RANDOM_END=0.03
+$env:RL_FULL_TURN_RANDOM_DECAY_EPISODES=400000
 
 # Learning rate
 $env:ACTOR_LR="3e-4"
@@ -78,13 +85,29 @@ $env:SCORE_DIAG_EVERY=2000
 $env:PY_BACKEND_MODE="multi"
 $env:MULLIGAN_DEVICE="cpu"
 
+# Mulligan policy (deck-agnostic defaults)
+$env:MULLIGAN_HARD_OVERRIDES_ENABLE=0
+$env:MULLIGAN_KEEP_FLOOR_EPISODES=0
+# Optional legacy strict behavior:
+# $env:MULLIGAN_HARD_OVERRIDES_ENABLE=1
+# $env:MULLIGAN_KEEP_FLOOR_EPISODES=200
+# $env:MULLIGAN_KEEP_FLOOR_P=0.7
+
 # League / sampler
 $env:GAME_TIMEOUT_SEC=600
 $env:LEAGUE_BASELINE_GAMES_PER_MATCHUP=6
 $env:LEAGUE_HEURISTIC_SKILLS_PRE="1"
 
 # Single-deck training: RL agent plays Elves only, opponents use full pool
-$env:RL_AGENT_DECK_LIST="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.elves.txt"
+#$env:RL_AGENT_DECK_LIST="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.elves.txt"
+# Model profile - all artifacts (models + logs) go under rl/profiles/Pauper-Elves/
+#$env:MODEL_PROFILE="Pauper-Elves"
+
+# Spy Combo profile example (explicit mulligan policy for 0-land keep capability):
+$env:MODEL_PROFILE="Pauper-Spy-Combo"
+$env:RL_AGENT_DECK_LIST="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.spy_combo.txt"
+$env:MULLIGAN_HARD_OVERRIDES_ENABLE=0
+$env:MULLIGAN_KEEP_FLOOR_EPISODES=0
 
 # Ladder mode: skill-only progression
 $env:OPPONENT_SAMPLER="ladder"
@@ -94,7 +117,28 @@ $env:LADDER_TICK_EPISODES=5000
 $env:LADDER_GAMES_PER_MATCHUP=6
 $env:LADDER_MIX_LOWER_P=0.20
 
+# Multi-profile Pauper league mode (reporting-first Snapshot Elo)
+# Uncomment to train in league mode instead of ladder:
+# $env:OPPONENT_SAMPLER="league"
+# $env:LEAGUE_BASELINE_BOT_SKILL=1
+# $env:LEAGUE_PROMOTE_WR=0.55
+# $env:LEAGUE_POST_HEURISTIC_P=0.20
+# $env:LEAGUE_POST_LOCAL_P=0.40
+# $env:LEAGUE_POST_CROSS_P=0.40
+# $env:LEAGUE_POST_HEURISTIC_SKILL=1
+# $env:LEAGUE_REGISTRY_PATH="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_league_registry.json"
+
+# One-command orchestrator (starts league trainers + periodic Snapshot Elo eval)
+# .\scripts\rl-league-run.ps1 -EvalEveryMinutes 180 -NumGameRunners 24 -TotalEpisodes 1000000
+# Default behavior is sequential: one training profile at a time (full runners),
+# auto-rotating when rolling winrate reaches target.
+# Key registry knobs per profile:
+#   active: true/false          (included in league and eligible for training)
+#   train_enabled: true/false   (can be trained by orchestrator)
+#   target_winrate: 0.60        (rotation threshold for that profile)
+#   priority: 10                (lower = earlier in training order)
+
 # Run
-.\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -ModelProfile "Pauper-Elves" `
+.\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -ModelProfile "Pauper-Spy-Combo" `
   -TotalEpisodes 1000000 -NumGameRunners 48 `
   -DeckListFile "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.txt"

@@ -1,0 +1,17 @@
+timestamp_utc,event,profile,episode,rolling_winrate,rolling_avg,baseline_wr,target_winrate,samples,promoted
+2026-02-22T23:50:36.7234825Z,training_start,Pauper-Elves,11700,0.0000,0.0000,0.0000,0.6000,200,False
+2026-02-22T23:51:09.8799457Z,training_start,Pauper-Elves,11700,0.0000,0.0000,0.0000,0.6000,200,False
+2026-02-22T23:53:17.4398547Z,training_start,Pauper-Elves,11700,0.0000,0.0000,0.0000,0.6000,200,False
+2026-02-22T23:53:39.2893870Z,training_start,Pauper-Elves,11700,0.0000,0.0000,0.0000,0.6000,200,False
+2026-02-22T23:56:53.0495910Z,training_start,Pauper-Elves,11700,0.1330,0.0084,0.0000,0.6000,200,False
+2026-02-22T23:58:42.1841613Z,training_start,Pauper-Elves,11700,0.1820,0.0110,0.0000,0.6000,200,False
+2026-02-23T00:13:11.3426331Z,training_start,Pauper-Elves,12000,0.0000,0.0155,0.0000,0.6000,200,False
+2026-02-23T00:28:40.2701628Z,training_start,Pauper-Elves,12300,0.0000,0.0061,0.0000,0.6000,200,False
+2026-02-23T00:38:43.5741615Z,training_start,Pauper-Elves,12500,0.0000,0.0605,0.0000,0.6000,200,False
+2026-02-23T00:48:27.9077048Z,training_start,Pauper-Elves,12600,0.0500,0.0935,0.0000,0.6000,200,False
+2026-02-23T00:58:45.0898400Z,training_start,Pauper-Elves,12700,0.0700,0.1046,0.0000,0.6000,200,False
+2026-02-23T02:01:07.8109283Z,training_start,Pauper-Elves,13100,0.0000,0.0000,0.0000,0.6000,200,False
+2026-02-23T02:03:51.5771387Z,training_start,Pauper-Elves,13100,0.1560,0.0108,0.0000,0.6000,200,False
+2026-02-23T02:18:52.4814614Z,training_start,Pauper-Elves,13200,0.0000,0.0339,0.0000,0.6000,200,False
+2026-02-23T02:32:49.5906440Z,training_start,Pauper-Elves,13400,0.1900,0.1049,0.0000,0.6000,200,False
+2026-02-23T02:34:36.3819363Z,training_start,Pauper-Elves,13400,0.1400,0.1152,0.0000,0.6000,200,False
