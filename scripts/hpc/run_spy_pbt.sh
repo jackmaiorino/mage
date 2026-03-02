@@ -44,8 +44,24 @@ if (( runners_per_profile < 2 )); then
   runners_per_profile=2
 fi
 
-if ! command -v pwsh >/dev/null 2>&1; then
-  echo "pwsh is required on Linux hosts to run rl-league-run.ps1" >&2
+shell_exe=""
+if command -v pwsh >/dev/null 2>&1; then
+  shell_exe="pwsh"
+elif command -v powershell >/dev/null 2>&1; then
+  shell_exe="powershell"
+else
+  if command -v module >/dev/null 2>&1; then
+    module load powershell >/dev/null 2>&1 || true
+  fi
+  if command -v pwsh >/dev/null 2>&1; then
+    shell_exe="pwsh"
+  elif command -v powershell >/dev/null 2>&1; then
+    shell_exe="powershell"
+  fi
+fi
+
+if [[ -z "$shell_exe" ]]; then
+  echo "PowerShell is required to run rl-league-run.ps1; expected 'pwsh' or 'powershell' on PATH." >&2
   exit 1
 fi
 
@@ -60,7 +76,7 @@ cleanup() {
   if [[ -f "$repo_root/scripts/rl-stop.sh" ]]; then
     bash "$repo_root/scripts/rl-stop.sh" -q || true
   else
-    pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$repo_root/scripts/rl-stop.ps1" -Quiet || true
+    "$shell_exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$repo_root/scripts/rl-stop.ps1" -Quiet || true
   fi
   echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] cleanup done" | tee -a "$orchestrator_log"
 }
@@ -112,4 +128,4 @@ ps_command="& '$repo_root/scripts/rl-league-run.ps1' \
   -NumGameRunners $runners_per_profile \
   -TotalEpisodes $total_episodes"
 
-pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "$ps_command" 2>&1 | tee -a "$orchestrator_log"
+"$shell_exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "$ps_command" 2>&1 | tee -a "$orchestrator_log"
