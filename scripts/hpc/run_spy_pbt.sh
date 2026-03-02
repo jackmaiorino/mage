@@ -6,7 +6,7 @@ ensure_module_cmd() {
     return 0
   fi
   local init
-  for init in /etc/profile.d/modules.sh /etc/profile.d/lmod.sh /usr/share/lmod/lmod/init/bash; do
+  for init in /etc/profile.d/modules.sh /etc/profile.d/lmod.sh /usr/share/lmod/lmod/init/bash /usr/share/Modules/init/bash; do
     if [[ -r "$init" ]]; then
       # shellcheck disable=SC1090
       source "$init" >/dev/null 2>&1 || true

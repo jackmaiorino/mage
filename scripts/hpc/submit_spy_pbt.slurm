@@ -14,6 +14,23 @@
 
 set -euo pipefail
 
+ensure_module_cmd() {
+  if command -v module >/dev/null 2>&1; then
+    return 0
+  fi
+  local init
+  for init in /etc/profile.d/modules.sh /etc/profile.d/lmod.sh /usr/share/lmod/lmod/init/bash /usr/share/Modules/init/bash; do
+    if [[ -r "$init" ]]; then
+      # shellcheck disable=SC1090
+      source "$init" >/dev/null 2>&1 || true
+      if command -v module >/dev/null 2>&1; then
+        return 0
+      fi
+    fi
+  done
+  return 1
+}
+
 REPO_ROOT="${REPO_ROOT:-$SLURM_SUBMIT_DIR}"
 cd "$REPO_ROOT"
 
@@ -22,6 +39,22 @@ echo "SLURM_JOB_ID=${SLURM_JOB_ID:-}"
 echo "SLURM_CPUS_ON_NODE=${SLURM_CPUS_ON_NODE:-}"
 echo "SLURM_JOB_GPUS=${SLURM_JOB_GPUS:-}"
 echo "REPO_ROOT=$REPO_ROOT"
+
+if ! command -v pwsh >/dev/null 2>&1 && ! command -v powershell >/dev/null 2>&1; then
+  if ensure_module_cmd; then
+    module load powershell >/dev/null 2>&1 || module load pwsh >/dev/null 2>&1 || true
+  fi
+fi
+
+if command -v pwsh >/dev/null 2>&1; then
+  echo "PowerShell executable: $(command -v pwsh)"
+elif command -v powershell >/dev/null 2>&1; then
+  echo "PowerShell executable: $(command -v powershell)"
+else
+  echo "PowerShell unavailable on compute node; expected 'pwsh' or 'powershell' on PATH." >&2
+  echo "Tip: verify module name on login node with: module avail powershell" >&2
+  exit 1
+fi
 
 export MTG_VENV_PATH="${MTG_VENV_PATH:-$REPO_ROOT/.mtgrl_venv_hpc}"
 export PY_BRIDGE_CREATE_VENV=0
