@@ -1,6 +1,42 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ensure_module_cmd() {
+  if command -v module >/dev/null 2>&1; then
+    return 0
+  fi
+  local init
+  for init in /etc/profile.d/modules.sh /etc/profile.d/lmod.sh /usr/share/lmod/lmod/init/bash; do
+    if [[ -r "$init" ]]; then
+      # shellcheck disable=SC1090
+      source "$init" >/dev/null 2>&1 || true
+      if command -v module >/dev/null 2>&1; then
+        return 0
+      fi
+    fi
+  done
+  return 1
+}
+
+load_powershell_module() {
+  if ! ensure_module_cmd; then
+    return 1
+  fi
+  module load powershell >/dev/null 2>&1 && return 0
+  module load pwsh >/dev/null 2>&1 && return 0
+
+  local mod_name=""
+  mod_name="$(module -t avail powershell 2>&1 | awk 'NF {print $1; exit}')"
+  if [[ -n "$mod_name" ]]; then
+    module load "$mod_name" >/dev/null 2>&1 && return 0
+  fi
+  mod_name="$(module -t avail pwsh 2>&1 | awk 'NF {print $1; exit}')"
+  if [[ -n "$mod_name" ]]; then
+    module load "$mod_name" >/dev/null 2>&1 && return 0
+  fi
+  return 1
+}
+
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 registry_path="${REGISTRY_PATH:-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json}"
 total_episodes="${TOTAL_EPISODES:-1000000}"
@@ -50,9 +86,7 @@ if command -v pwsh >/dev/null 2>&1; then
 elif command -v powershell >/dev/null 2>&1; then
   shell_exe="powershell"
 else
-  if command -v module >/dev/null 2>&1; then
-    module load powershell >/dev/null 2>&1 || true
-  fi
+  load_powershell_module || true
   if command -v pwsh >/dev/null 2>&1; then
     shell_exe="pwsh"
   elif command -v powershell >/dev/null 2>&1; then
