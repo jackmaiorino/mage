@@ -87,6 +87,15 @@ public class RLTrainer {
     private static final AtomicInteger ACTIVE_EPISODES = new AtomicInteger(0);
     private static final boolean TRAIN_DIAG = EnvConfig.bool("TRAIN_DIAG", false);
     private static final int TRAIN_DIAG_EVERY = EnvConfig.i32("TRAIN_DIAG_EVERY", 50);
+    private static final long RL_BASE_SEED = EnvConfig.i64("RL_BASE_SEED", -1L);
+
+    private static Random newSeededRandom(long salt) {
+        if (RL_BASE_SEED < 0L) {
+            return new Random();
+        }
+        long mixed = RL_BASE_SEED ^ (salt * 0x5DEECE66DL);
+        return new Random(mixed);
+    }
 
     // ============================================================
     // Adaptive Curriculum Learning Configuration
@@ -1325,7 +1334,7 @@ public class RLTrainer {
         }
 
         final long tickStartMs = System.currentTimeMillis();
-        final Random rand = new Random();
+        final Random rand = newSeededRandom(100L + episodeNum);
         LeagueState st = getLeagueState();
 
         logger.info("League tick start: ep=" + episodeNum + " tickEvery=" + LEAGUE_TICK_EPISODES
@@ -1846,6 +1855,7 @@ public class RLTrainer {
             final boolean[] isFirstThread = {true}; // Flag to track the first thread
 
             for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
+                final int runnerIndex = i;
                 Future<Void> future = executor.submit(() -> {
                     boolean isFirst;
                     synchronized (lock) {
@@ -1858,7 +1868,7 @@ public class RLTrainer {
                     currentLogger.info("Starting Game Runner");
 
                     Thread.currentThread().setName("GAME");
-                    Random threadRand = new Random();
+                    Random threadRand = newSeededRandom(1_000L + runnerIndex);
 
                     while (EPISODE_COUNTER.get() < NUM_EPISODES) {
                         int epNumber = EPISODE_COUNTER.incrementAndGet();
@@ -2242,6 +2252,7 @@ public class RLTrainer {
         List<Future<Integer>> futures = new ArrayList<>();
 
         for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
+            final int evalRunnerIndex = i;
             Future<Integer> future = executor.submit(() -> {
                 boolean isFirst;
                 synchronized (lock) {
@@ -2257,7 +2268,7 @@ public class RLTrainer {
                 int localWinsAgainstComputerPlayer7 = 0;
 
                 Thread.currentThread().setName("GAME");
-                Random threadRand = new Random();
+                Random threadRand = newSeededRandom(2_000L + evalRunnerIndex);
 
                 for (int evalEpisode = 0; evalEpisode < numEpisodesPerThread; evalEpisode++) {
                     Path rlPlayerDeckPath = agentDeckFiles.get(threadRand.nextInt(agentDeckFiles.size()));

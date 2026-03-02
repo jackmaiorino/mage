@@ -8,6 +8,11 @@ $env:INFER_STARTUP_THREADS=1
 $env:PY_SCORE_TIMEOUT_MS=0   # No timeout - games wait as long as needed
 $env:MODEL_RELOAD_EVERY_MS=2000
 
+# HPC/offline startup controls (prebuilt venv path + no runtime pip/venv work)
+# $env:MTG_VENV_PATH="/path/to/prebuilt/venv"
+# $env:PY_BRIDGE_CREATE_VENV=0
+# $env:PY_BRIDGE_INSTALL_DEPS=0
+
 # Snapshots (keep VRAM stable)
 $env:SNAPSHOT_CACHE_SIZE=0
 
@@ -54,6 +59,8 @@ $env:RL_ACTION_EPS_DECAY_EPISODES=200000
 $env:RL_FULL_TURN_RANDOM_START=0.03
 $env:RL_FULL_TURN_RANDOM_END=0.03
 $env:RL_FULL_TURN_RANDOM_DECAY_EPISODES=400000
+# Option C: during full-random turns, store old_logp from policy or behavior
+$env:RL_TURN_UNIFORM_OLD_LOGP_SOURCE="policy"   # policy|behavior
 
 # Learning rate
 $env:ACTOR_LR="3e-4"
@@ -64,6 +71,22 @@ $env:USE_GAE=0
 $env:GAE_AUTO_ENABLE=1
 $env:GAE_AUTO_THRESHOLD=0.65
 $env:GAE_AUTO_MIN_SAMPLES=200
+
+# Main-policy prioritized episode replay (PER)
+$env:MAIN_PER_ENABLE=1
+$env:MAIN_PER_CAPACITY_EPISODES=64
+$env:MAIN_PER_ALPHA=0.7
+$env:MAIN_PER_BETA_START=0.4
+$env:MAIN_PER_BETA_END=1.0
+$env:MAIN_PER_BETA_DECAY_EPISODES=400000
+$env:MAIN_PER_EPS=1e-3
+$env:MAIN_PER_GAMMA=0.99
+$env:MAIN_PER_MIN_FRESH_EPISODES=1
+
+# Optional deterministic seeding (orchestrator can set these per profile)
+# $env:RL_BASE_SEED=12345
+# $env:PY_GLOBAL_SEED=12345
+# $env:MULLIGAN_REPLAY_SEED=12345
 
 $env:LOSS_SCHEDULE_ENABLE=0
 $env:CRITIC_WARMUP_STEPS=0
@@ -130,6 +153,10 @@ $env:LADDER_MIX_LOWER_P=0.20
 
 # One-command orchestrator (starts league trainers + periodic Snapshot Elo eval)
 # .\scripts\rl-league-run.ps1 -EvalEveryMinutes 180 -NumGameRunners 24 -TotalEpisodes 1000000
+# PBT example:
+# .\scripts\rl-league-run.ps1 -EnablePbt $true -PbtExploitIntervalMinutes 120 -PbtMutationPct 0.20 -PbtMinPopulationSize 3
+# Hybrid episode/time exploit gating example (sparse combo discovery):
+# .\scripts\rl-league-run.ps1 -EnablePbt $true -PbtMinEpisodesBeforeFirstExploit 12000 -PbtMinEpisodeDeltaPerProfile 10000 -PbtExploitIntervalMinutes 240
 # Default behavior is sequential: one training profile at a time (full runners),
 # auto-rotating when rolling winrate reaches target.
 # Key registry knobs per profile:
@@ -137,6 +164,10 @@ $env:LADDER_MIX_LOWER_P=0.20
 #   train_enabled: true/false   (can be trained by orchestrator)
 #   target_winrate: 0.60        (rotation threshold for that profile)
 #   priority: 10                (lower = earlier in training order)
+#   population_group: "spy-pbt" (profiles in same group compete in PBT exploit/explore)
+#   seed: 12345                 (base RNG seed for Java+Python process)
+#   train_env: { RL_ACTION_EPS_START: "0.05", RL_FULL_TURN_RANDOM_START: "0.03" }
+#   pbt_mutable_env: ["RL_ACTION_EPS_START","RL_FULL_TURN_RANDOM_START"]
 
 # Run
 .\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -ModelProfile "Pauper-Spy-Combo" `

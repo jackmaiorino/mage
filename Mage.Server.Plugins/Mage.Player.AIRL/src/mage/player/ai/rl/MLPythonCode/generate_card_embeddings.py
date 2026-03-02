@@ -360,17 +360,38 @@ def embed_texts(texts: list[str], api_key: str) -> list[list[float]]:
 def pca_compress(embeddings: list[list[float]], n_components: int) -> list[list[float]]:
     """Fit PCA on the provided embeddings and compress to n_components dims."""
     import numpy as np
-    from sklearn.decomposition import PCA
 
     X = np.array(embeddings, dtype="float32")
     effective_components = min(n_components, X.shape[0], X.shape[1])
     if effective_components < n_components:
         print(f"  Warning: only {X.shape[0]} cards — using {effective_components} PCA components")
 
-    pca = PCA(n_components=effective_components, random_state=42)
-    X_reduced = pca.fit_transform(X)
-    variance = pca.explained_variance_ratio_.sum()
-    print(f"  PCA: {effective_components} components, {variance:.1%} variance retained")
+    X_centered = X - X.mean(axis=0, keepdims=True)
+    backend = "numpy_svd"
+    variance = 0.0
+    try:
+        from sklearn.decomposition import PCA
+        pca = PCA(n_components=effective_components, random_state=42)
+        X_reduced = pca.fit_transform(X)
+        variance = float(pca.explained_variance_ratio_.sum())
+        backend = "sklearn"
+    except Exception as exc:
+        print(f"  sklearn PCA unavailable ({exc}); using numpy SVD fallback")
+        if X_centered.shape[0] == 0:
+            X_reduced = np.zeros((0, effective_components), dtype="float32")
+            variance = 0.0
+        elif X_centered.shape[0] == 1:
+            X_reduced = np.zeros((1, effective_components), dtype="float32")
+            variance = 1.0
+        else:
+            _, s, vt = np.linalg.svd(X_centered, full_matrices=False)
+            basis = vt[:effective_components]
+            X_reduced = np.matmul(X_centered, basis.T)
+            eigvals = (s ** 2) / float(X_centered.shape[0] - 1)
+            total_var = float(np.sum(eigvals))
+            retained_var = float(np.sum(eigvals[:effective_components]))
+            variance = (retained_var / total_var) if total_var > 0.0 else 0.0
+    print(f"  PCA[{backend}]: {effective_components} components, {variance:.1%} variance retained")
 
     # Pad to _EMBED_DIM if we had fewer samples than components
     if effective_components < n_components:

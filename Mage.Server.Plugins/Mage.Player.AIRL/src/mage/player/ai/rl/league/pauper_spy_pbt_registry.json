@@ -1,0 +1,176 @@
+[
+  {
+    "profile": "Pauper-Spy-Combo-A",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Spy Combo.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 20,
+    "population_group": "spy-combo",
+    "seed": 1001,
+    "train_env": {
+      "ENTROPY_START": "0.30",
+      "ENTROPY_END": "0.02",
+      "RL_ACTION_EPS_START": "0.05",
+      "RL_FULL_TURN_RANDOM_START": "0.15",
+      "TEMPERATURE_FLOOR": "0.30",
+      "ACTOR_LR": "3e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "USE_GAE": "1",
+      "GAE_AUTO_ENABLE": "1",
+      "GAE_LAMBDA_HIGH": "0.99",
+      "GAE_LAMBDA_LOW": "0.95",
+      "GAE_LAMBDA_DECAY_STEPS": "30000",
+      "PPO_GAMMA": "0.995"
+    },
+    "pbt_mutable_env": [
+      "ENTROPY_START",
+      "ENTROPY_END",
+      "RL_ACTION_EPS_START",
+      "RL_FULL_TURN_RANDOM_START",
+      "TEMPERATURE_FLOOR",
+      "ACTOR_LR"
+    ],
+    "notes": "Spy combo PBT copy A"
+  },
+  {
+    "profile": "Pauper-Spy-Combo-B",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Spy Combo.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 21,
+    "population_group": "spy-combo",
+    "seed": 2002,
+    "train_env": {
+      "ENTROPY_START": "0.42",
+      "ENTROPY_END": "0.03",
+      "RL_ACTION_EPS_START": "0.03",
+      "RL_FULL_TURN_RANDOM_START": "0.20",
+      "TEMPERATURE_FLOOR": "0.40",
+      "ACTOR_LR": "2.5e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "USE_GAE": "1",
+      "GAE_AUTO_ENABLE": "1",
+      "GAE_LAMBDA_HIGH": "0.99",
+      "GAE_LAMBDA_LOW": "0.95",
+      "GAE_LAMBDA_DECAY_STEPS": "30000",
+      "PPO_GAMMA": "0.995"
+    },
+    "pbt_mutable_env": [
+      "ENTROPY_START",
+      "ENTROPY_END",
+      "RL_ACTION_EPS_START",
+      "RL_FULL_TURN_RANDOM_START",
+      "TEMPERATURE_FLOOR",
+      "ACTOR_LR"
+    ],
+    "notes": "Spy combo PBT copy B"
+  },
+  {
+    "profile": "Pauper-Spy-Combo-C",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Spy Combo.dek",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 22,
+    "population_group": "spy-combo",
+    "seed": 3003,
+    "train_env": {
+      "ENTROPY_START": "0.22",
+      "ENTROPY_END": "0.015",
+      "RL_ACTION_EPS_START": "0.08",
+      "RL_FULL_TURN_RANDOM_START": "0.25",
+      "TEMPERATURE_FLOOR": "0.25",
+      "ACTOR_LR": "3.5e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "USE_GAE": "1",
+      "GAE_AUTO_ENABLE": "1",
+      "GAE_LAMBDA_HIGH": "0.99",
+      "GAE_LAMBDA_LOW": "0.95",
+      "GAE_LAMBDA_DECAY_STEPS": "30000",
+      "PPO_GAMMA": "0.995"
+    },
+    "pbt_mutable_env": [
+      "ENTROPY_START",
+      "ENTROPY_END",
+      "RL_ACTION_EPS_START",
+      "RL_FULL_TURN_RANDOM_START",
+      "TEMPERATURE_FLOOR",
+      "ACTOR_LR"
+    ],
+    "notes": "Spy combo PBT copy C"
+  },
+  {
+    "profile": "Pauper-Elves",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Elves.dek",
+    "active": true,
+    "train_enabled": false,
+    "target_winrate": 0.6,
+    "priority": 30,
+    "notes": "Opponent-pool only (frozen)"
+  },
+  {
+    "profile": "Pauper-Caw-Gates",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Caw-Gates.dek",
+    "active": true,
+    "train_enabled": false,
+    "target_winrate": 0.6,
+    "priority": 40,
+    "notes": "Opponent-pool only (frozen)"
+  },
+  {
+    "profile": "Pauper-Grixis-Affinity",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Grixis Affinity.dek",
+    "active": true,
+    "train_enabled": false,
+    "target_winrate": 0.6,
+    "priority": 50,
+    "notes": "Opponent-pool only (frozen)"
+  },
+  {
+    "profile": "Pauper-Jund-Wildfire",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Jund Wildfire.dek",
+    "active": true,
+    "train_enabled": false,
+    "target_winrate": 0.6,
+    "priority": 60,
+    "notes": "Opponent-pool only (frozen)"
+  },
+  {
+    "profile": "Pauper-Mono-Blue-Faeries",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono-Blue Faeries.dek",
+    "active": true,
+    "train_enabled": false,
+    "target_winrate": 0.6,
+    "priority": 70,
+    "notes": "Opponent-pool only (frozen)"
+  },
+  {
+    "profile": "Pauper-Mono-Blue-Terror",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono-Blue Terror.dek",
+    "active": true,
+    "train_enabled": false,
+    "target_winrate": 0.6,
+    "priority": 80,
+    "notes": "Opponent-pool only (frozen)"
+  },
+  {
+    "profile": "Pauper-Mono-Red-Burn",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono-Red Burn.dek",
+    "active": true,
+    "train_enabled": false,
+    "target_winrate": 0.6,
+    "priority": 90,
+    "notes": "Opponent-pool only (frozen)"
+  },
+  {
+    "profile": "Pauper-Mono-Red-Rally",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono Red Rally.dek",
+    "active": true,
+    "train_enabled": false,
+    "target_winrate": 0.6,
+    "priority": 100,
+    "notes": "Opponent-pool only (frozen)"
+  }
+]

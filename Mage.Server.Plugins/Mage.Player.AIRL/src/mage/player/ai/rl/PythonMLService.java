@@ -2,6 +2,7 @@ package mage.player.ai.rl;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -71,6 +72,20 @@ public class PythonMLService implements PythonModel {
     private final long reloadEveryMs;
     private final int learnerBatchMaxEpisodes;
     private final int learnerBatchMaxSteps;
+    private final boolean mainPerEnable;
+    private final int mainPerCapacityEpisodes;
+    private final double mainPerAlpha;
+    private final double mainPerBetaStart;
+    private final double mainPerBetaEnd;
+    private final int mainPerBetaDecayEpisodes;
+    private final double mainPerEps;
+    private final double mainPerGamma;
+    private final int mainPerMinFreshEpisodes;
+    private final List<ReplayEpisode> replayEpisodes;
+    private final Object replayLock = new Object();
+    private final AtomicLong enqueueEpisodeCounter = new AtomicLong(0);
+    private final AtomicLong replayInsertCounter = new AtomicLong(0);
+    private final java.util.Random replayRng = new java.util.Random();
 
     // Auto-batching metrics polling (per Python worker)
     private final ConcurrentHashMap<String, long[]> autoBatchLastCounts = new ConcurrentHashMap<>();
@@ -98,10 +113,56 @@ public class PythonMLService implements PythonModel {
 
         final List<StateSequenceBuilder.TrainingData> data;
         final List<Double> rewards;
+        final List<Integer> dones;
+        final double priority;
+        final long episodeNumber;
 
-        TrainItem(List<StateSequenceBuilder.TrainingData> data, List<Double> rewards) {
+        TrainItem(
+                List<StateSequenceBuilder.TrainingData> data,
+                List<Double> rewards,
+                List<Integer> dones,
+                double priority,
+                long episodeNumber
+        ) {
             this.data = data;
             this.rewards = rewards;
+            this.dones = dones;
+            this.priority = priority;
+            this.episodeNumber = episodeNumber;
+        }
+    }
+
+    private static final class ReplayEpisode {
+
+        final List<StateSequenceBuilder.TrainingData> data;
+        final List<Double> rewards;
+        final List<Integer> dones;
+        final double priority;
+        final long insertedAt;
+
+        ReplayEpisode(
+                List<StateSequenceBuilder.TrainingData> data,
+                List<Double> rewards,
+                List<Integer> dones,
+                double priority,
+                long insertedAt
+        ) {
+            this.data = data;
+            this.rewards = rewards;
+            this.dones = dones;
+            this.priority = priority;
+            this.insertedAt = insertedAt;
+        }
+    }
+
+    private static final class ReplaySample {
+
+        final ReplayEpisode episode;
+        final double probability;
+
+        ReplaySample(ReplayEpisode episode, double probability) {
+            this.episode = episode;
+            this.probability = probability;
         }
     }
 
@@ -122,6 +183,20 @@ public class PythonMLService implements PythonModel {
         // Learner micro-batching: drain multiple completed episodes per train() call to improve GPU utilization.
         this.learnerBatchMaxEpisodes = Math.max(1, EnvConfig.i32("LEARNER_BATCH_MAX_EPISODES", 8));
         this.learnerBatchMaxSteps = Math.max(128, EnvConfig.i32("LEARNER_BATCH_MAX_STEPS", 4096));
+        this.mainPerEnable = EnvConfig.bool("MAIN_PER_ENABLE", true);
+        this.mainPerCapacityEpisodes = Math.max(8, EnvConfig.i32("MAIN_PER_CAPACITY_EPISODES", 64));
+        this.mainPerAlpha = Math.max(0.0, EnvConfig.f64("MAIN_PER_ALPHA", 0.7));
+        this.mainPerBetaStart = Math.max(0.0, Math.min(1.0, EnvConfig.f64("MAIN_PER_BETA_START", 0.4)));
+        this.mainPerBetaEnd = Math.max(0.0, Math.min(1.0, EnvConfig.f64("MAIN_PER_BETA_END", 1.0)));
+        this.mainPerBetaDecayEpisodes = Math.max(1, EnvConfig.i32("MAIN_PER_BETA_DECAY_EPISODES", 400000));
+        this.mainPerEps = Math.max(1e-9, EnvConfig.f64("MAIN_PER_EPS", 1e-3));
+        this.mainPerGamma = Math.max(0.0, Math.min(1.0, EnvConfig.f64("MAIN_PER_GAMMA", 0.99)));
+        this.mainPerMinFreshEpisodes = Math.max(1, EnvConfig.i32("MAIN_PER_MIN_FRESH_EPISODES", 1));
+        this.replayEpisodes = new ArrayList<>(this.mainPerCapacityEpisodes);
+        long baseSeed = EnvConfig.i64("RL_BASE_SEED", -1L);
+        if (baseSeed >= 0L) {
+            this.replayRng.setSeed(baseSeed ^ 0x5DEECE66DL);
+        }
         // Allow disabling reloads entirely with MODEL_RELOAD_EVERY_MS=0.
         // In single-backend mode we don't spin inference workers, so periodic reload is unnecessary.
         long reloadMs = EnvConfig.i32("MODEL_RELOAD_EVERY_MS", 2000);
@@ -178,6 +253,186 @@ public class PythonMLService implements PythonModel {
         }, "PyService-ShutdownHook"));
     }
 
+    private static List<Integer> buildEpisodeDones(int stepCount) {
+        if (stepCount <= 0) {
+            return Collections.emptyList();
+        }
+        List<Integer> dones = new ArrayList<>(stepCount);
+        for (int i = 0; i < stepCount; i++) {
+            dones.add((i == stepCount - 1) ? 1 : 0);
+        }
+        return dones;
+    }
+
+    private double computeEpisodePriority(
+            List<StateSequenceBuilder.TrainingData> data,
+            List<Double> rewards,
+            List<Integer> dones
+    ) {
+        if (data == null || rewards == null || dones == null) {
+            return mainPerEps;
+        }
+        int n = data.size();
+        if (n == 0 || rewards.size() != n || dones.size() != n) {
+            return mainPerEps;
+        }
+        double sumAbsTd = 0.0;
+        for (int i = 0; i < n; i++) {
+            double reward = rewards.get(i) == null ? 0.0 : rewards.get(i);
+            double done = dones.get(i) == null ? 0.0 : dones.get(i);
+            double vNow = data.get(i).oldValue;
+            double vNext = 0.0;
+            if (i + 1 < n && done == 0.0) {
+                vNext = data.get(i + 1).oldValue;
+            }
+            double td = reward + (mainPerGamma * (1.0 - done) * vNext) - vNow;
+            sumAbsTd += Math.abs(td);
+        }
+        double priority = (sumAbsTd / n) + mainPerEps;
+        if (!Double.isFinite(priority) || priority <= 0.0) {
+            return mainPerEps;
+        }
+        return priority;
+    }
+
+    private double currentPerBeta() {
+        long episodes = Math.max(0L, enqueueEpisodeCounter.get());
+        if (episodes >= mainPerBetaDecayEpisodes) {
+            return mainPerBetaEnd;
+        }
+        double t = episodes / (double) mainPerBetaDecayEpisodes;
+        return mainPerBetaStart + (mainPerBetaEnd - mainPerBetaStart) * t;
+    }
+
+    private void addReplayEpisode(ReplayEpisode episode) {
+        if (!mainPerEnable || episode == null || episode.data == null || episode.data.isEmpty()) {
+            return;
+        }
+        synchronized (replayLock) {
+            if (replayEpisodes.size() >= mainPerCapacityEpisodes) {
+                int evictIdx = 0;
+                ReplayEpisode evict = replayEpisodes.get(0);
+                for (int i = 1; i < replayEpisodes.size(); i++) {
+                    ReplayEpisode candidate = replayEpisodes.get(i);
+                    if (candidate.priority < evict.priority
+                            || (candidate.priority == evict.priority && candidate.insertedAt < evict.insertedAt)) {
+                        evict = candidate;
+                        evictIdx = i;
+                    }
+                }
+                replayEpisodes.remove(evictIdx);
+            }
+            replayEpisodes.add(episode);
+        }
+    }
+
+    private List<ReplaySample> sampleReplayEpisodes(int maxEpisodes, int maxSteps) {
+        if (!mainPerEnable || maxEpisodes <= 0 || maxSteps <= 0) {
+            return Collections.emptyList();
+        }
+
+        List<ReplayEpisode> snapshot;
+        synchronized (replayLock) {
+            if (replayEpisodes.isEmpty()) {
+                return Collections.emptyList();
+            }
+            snapshot = new ArrayList<>(replayEpisodes);
+        }
+
+        int n = snapshot.size();
+        double[] powered = new double[n];
+        double totalPowered = 0.0;
+        for (int i = 0; i < n; i++) {
+            double base = Math.max(mainPerEps, snapshot.get(i).priority);
+            double p = Math.pow(base, mainPerAlpha);
+            if (!Double.isFinite(p) || p <= 0.0) {
+                p = mainPerEps;
+            }
+            powered[i] = p;
+            totalPowered += p;
+        }
+        if (!(totalPowered > 0.0)) {
+            for (int i = 0; i < n; i++) {
+                powered[i] = 1.0;
+            }
+            totalPowered = n;
+        }
+
+        List<Integer> remaining = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            remaining.add(i);
+        }
+
+        List<ReplaySample> sampled = new ArrayList<>();
+        int stepsUsed = 0;
+        while (sampled.size() < maxEpisodes && !remaining.isEmpty()) {
+            double totalRemaining = 0.0;
+            for (int idx : remaining) {
+                totalRemaining += powered[idx];
+            }
+            if (!(totalRemaining > 0.0)) {
+                break;
+            }
+            double r = replayRng.nextDouble() * totalRemaining;
+            double cdf = 0.0;
+            int chosenPos = -1;
+            for (int pos = 0; pos < remaining.size(); pos++) {
+                cdf += powered[remaining.get(pos)];
+                if (r <= cdf) {
+                    chosenPos = pos;
+                    break;
+                }
+            }
+            if (chosenPos < 0) {
+                chosenPos = remaining.size() - 1;
+            }
+            int idx = remaining.remove(chosenPos);
+            ReplayEpisode ep = snapshot.get(idx);
+            int epSteps = ep.data == null ? 0 : ep.data.size();
+            if (epSteps <= 0) {
+                continue;
+            }
+            if (stepsUsed > 0 && (stepsUsed + epSteps) > maxSteps) {
+                break;
+            }
+            stepsUsed += epSteps;
+            double prob = powered[idx] / totalPowered;
+            sampled.add(new ReplaySample(ep, prob));
+        }
+        return sampled;
+    }
+
+    private boolean appendEpisodeToBatch(
+            List<StateSequenceBuilder.TrainingData> data,
+            List<Double> rewards,
+            List<Integer> dones,
+            double sampleWeight,
+            List<StateSequenceBuilder.TrainingData> mergedData,
+            List<Double> mergedRewards,
+            List<Integer> mergedDones,
+            List<Double> mergedSampleWeights,
+            int maxSteps
+    ) {
+        if (data == null || rewards == null || dones == null || data.isEmpty()) {
+            return false;
+        }
+        int n = data.size();
+        if (rewards.size() != n || dones.size() != n) {
+            return false;
+        }
+        if (!mergedData.isEmpty() && (mergedData.size() + n) > maxSteps) {
+            return false;
+        }
+        double w = Double.isFinite(sampleWeight) && sampleWeight > 0.0 ? sampleWeight : 1.0;
+        mergedData.addAll(data);
+        mergedRewards.addAll(rewards);
+        mergedDones.addAll(dones);
+        for (int i = 0; i < n; i++) {
+            mergedSampleWeights.add(w);
+        }
+        return true;
+    }
+
     private void learnerLoop() {
         long lastSyncMsLocal = System.currentTimeMillis();
         int stepsSinceSync = 0;
@@ -203,42 +458,126 @@ public class PythonMLService implements PythonModel {
                         // Drain a small bundle of episodes to amortize Python overhead and better use the GPU.
                         List<StateSequenceBuilder.TrainingData> mergedData = new ArrayList<>();
                         List<Double> mergedRewards = new ArrayList<>();
-                        List<Integer> dones = new ArrayList<>();
+                        List<Integer> mergedDones = new ArrayList<>();
+                        List<Double> sampleWeights = new ArrayList<>();
 
                         int episodes = 0;
                         int totalSteps = 0;
+                        int freshEpisodes = 0;
+                        int replayEpisodesUsed = 0;
+                        double replayPrioritySum = 0.0;
+                        double replayWeightSum = 0.0;
+                        int replayWeightCount = 0;
 
-                        java.util.function.Consumer<TrainItem> appendEpisode = (it) -> {
-                            if (it == null || it.data == null || it.data.isEmpty()) {
-                                return;
-                            }
-                            int n = it.data.size();
-                            if (it.rewards == null || it.rewards.size() != n) {
-                                logger.warning("Learner batch: rewards size mismatch, skipping episode (data=" + n + ")");
-                                return;
-                            }
-                            mergedData.addAll(it.data);
-                            mergedRewards.addAll(it.rewards);
-                            for (int i = 0; i < n; i++) {
-                                dones.add((i == n - 1) ? 1 : 0);
-                            }
-                        };
+                        if (appendEpisodeToBatch(
+                                currentFirst.data,
+                                currentFirst.rewards,
+                                currentFirst.dones,
+                                1.0,
+                                mergedData,
+                                mergedRewards,
+                                mergedDones,
+                                sampleWeights,
+                                learnerBatchMaxSteps
+                        )) {
+                            episodes++;
+                            freshEpisodes++;
+                            totalSteps = mergedData.size();
+                        }
 
-                        appendEpisode.accept(currentFirst);
-                        episodes = 1;
-                        totalSteps = mergedData.size();
-
-                        while (episodes < learnerBatchMaxEpisodes && totalSteps < learnerBatchMaxSteps) {
+                        int freshTarget = mainPerEnable
+                                ? Math.min(learnerBatchMaxEpisodes, Math.max(1, mainPerMinFreshEpisodes))
+                                : learnerBatchMaxEpisodes;
+                        while (episodes < freshTarget && totalSteps < learnerBatchMaxSteps) {
                             TrainItem next = trainQueue.poll(0, TimeUnit.MILLISECONDS);
                             if (next == null) {
                                 break;
                             }
-                            int before = mergedData.size();
-                            appendEpisode.accept(next);
-                            int after = mergedData.size();
-                            if (after > before) {
+                            if (appendEpisodeToBatch(
+                                    next.data,
+                                    next.rewards,
+                                    next.dones,
+                                    1.0,
+                                    mergedData,
+                                    mergedRewards,
+                                    mergedDones,
+                                    sampleWeights,
+                                    learnerBatchMaxSteps
+                            )) {
                                 episodes++;
-                                totalSteps = after;
+                                freshEpisodes++;
+                                totalSteps = mergedData.size();
+                            }
+                        }
+
+                        if (!mainPerEnable) {
+                            while (episodes < learnerBatchMaxEpisodes && totalSteps < learnerBatchMaxSteps) {
+                                TrainItem next = trainQueue.poll(0, TimeUnit.MILLISECONDS);
+                                if (next == null) {
+                                    break;
+                                }
+                                if (appendEpisodeToBatch(
+                                        next.data,
+                                        next.rewards,
+                                        next.dones,
+                                        1.0,
+                                        mergedData,
+                                        mergedRewards,
+                                        mergedDones,
+                                        sampleWeights,
+                                        learnerBatchMaxSteps
+                                )) {
+                                    episodes++;
+                                    totalSteps = mergedData.size();
+                                }
+                            }
+                        } else if (episodes < learnerBatchMaxEpisodes && totalSteps < learnerBatchMaxSteps) {
+                            int replaySlots = learnerBatchMaxEpisodes - episodes;
+                            int replayStepBudget = learnerBatchMaxSteps - totalSteps;
+                            List<ReplaySample> replaySamples = sampleReplayEpisodes(replaySlots, replayStepBudget);
+                            int replaySizeSnapshot;
+                            synchronized (replayLock) {
+                                replaySizeSnapshot = replayEpisodes.size();
+                            }
+                            double beta = currentPerBeta();
+                            double maxRawWeight = 1.0;
+                            List<Double> replayRawWeights = new ArrayList<>(replaySamples.size());
+                            for (ReplaySample sample : replaySamples) {
+                                double p = Math.max(mainPerEps, sample.probability);
+                                double base = Math.max(mainPerEps, replaySizeSnapshot * p);
+                                double raw = Math.pow(base, -beta);
+                                if (!Double.isFinite(raw) || raw <= 0.0) {
+                                    raw = 1.0;
+                                }
+                                replayRawWeights.add(raw);
+                                if (raw > maxRawWeight) {
+                                    maxRawWeight = raw;
+                                }
+                            }
+                            for (int i = 0; i < replaySamples.size(); i++) {
+                                ReplaySample sample = replaySamples.get(i);
+                                double normalizedWeight = replayRawWeights.get(i) / maxRawWeight;
+                                if (appendEpisodeToBatch(
+                                        sample.episode.data,
+                                        sample.episode.rewards,
+                                        sample.episode.dones,
+                                        normalizedWeight,
+                                        mergedData,
+                                        mergedRewards,
+                                        mergedDones,
+                                        sampleWeights,
+                                        learnerBatchMaxSteps
+                                )) {
+                                    episodes++;
+                                    replayEpisodesUsed++;
+                                    totalSteps = mergedData.size();
+                                    replayPrioritySum += sample.episode.priority;
+                                    replayWeightSum += normalizedWeight;
+                                    replayWeightCount++;
+                                }
+                                if (episodes >= learnerBatchMaxEpisodes || totalSteps >= learnerBatchMaxSteps) {
+                                    break;
+                                }
                             }
                         }
 
@@ -247,11 +586,30 @@ public class PythonMLService implements PythonModel {
                             boolean cappedBySteps = totalSteps >= learnerBatchMaxSteps;
                             try {
                                 MetricsCollector.getInstance().recordTrainBatchFlush(episodes, totalSteps, cappedByEpisodes, cappedBySteps);
+                                if (mainPerEnable) {
+                                    int replayBufferSizeSnapshot;
+                                    synchronized (replayLock) {
+                                        replayBufferSizeSnapshot = replayEpisodes.size();
+                                    }
+                                    double meanPriority = replayEpisodesUsed > 0
+                                            ? replayPrioritySum / replayEpisodesUsed
+                                            : 0.0;
+                                    double meanIsWeight = replayWeightCount > 0
+                                            ? replayWeightSum / replayWeightCount
+                                            : 0.0;
+                                    MetricsCollector.getInstance().recordMainPerBatch(
+                                            replayBufferSizeSnapshot,
+                                            freshEpisodes,
+                                            replayEpisodesUsed,
+                                            meanPriority,
+                                            meanIsWeight
+                                    );
+                                }
                             } catch (Exception ignored) {
                             }
 
                             long t0 = System.nanoTime();
-                            learner.trainMulti(mergedData, mergedRewards, dones);
+                            learner.trainMulti(mergedData, mergedRewards, mergedDones, sampleWeights);
                             long trainMs = (System.nanoTime() - t0) / 1_000_000L;
                             try {
                                 MetricsCollector.getInstance().recordTrainLatencyMs(trainMs);
@@ -474,8 +832,24 @@ public class PythonMLService implements PythonModel {
         if (trainingData == null || trainingData.isEmpty()) {
             return;
         }
+        if (rewards == null || rewards.size() != trainingData.size()) {
+            logger.warning("enqueueTraining: rewards size mismatch, skipping episode (data=" + trainingData.size() + ")");
+            return;
+        }
         try {
-            TrainItem item = new TrainItem(trainingData, rewards);
+            List<StateSequenceBuilder.TrainingData> dataCopy = new ArrayList<>(trainingData);
+            List<Double> rewardsCopy = new ArrayList<>(rewards);
+            List<Integer> dones = buildEpisodeDones(dataCopy.size());
+            double priority = computeEpisodePriority(dataCopy, rewardsCopy, dones);
+            long episodeNumber = enqueueEpisodeCounter.incrementAndGet();
+            TrainItem item = new TrainItem(dataCopy, rewardsCopy, dones, priority, episodeNumber);
+            addReplayEpisode(new ReplayEpisode(
+                    dataCopy,
+                    rewardsCopy,
+                    dones,
+                    priority,
+                    replayInsertCounter.incrementAndGet()
+            ));
             boolean ok;
             if (trainQueueOfferTimeoutMs <= 0) {
                 ok = trainQueue.offer(item);

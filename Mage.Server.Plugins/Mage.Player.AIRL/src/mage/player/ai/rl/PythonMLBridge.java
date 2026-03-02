@@ -70,6 +70,8 @@ public class PythonMLBridge implements AutoCloseable {
     private final String pyRole;
     private final boolean workerMode;
     private final boolean cleanupEnabled;
+    private final boolean createVenvEnabled;
+    private final boolean installDepsEnabled;
 
     private ClientServer clientServer;
     private PythonEntryPoint entryPoint;
@@ -95,17 +97,28 @@ public class PythonMLBridge implements AutoCloseable {
             this.py4jPort = py4jPort;
             this.pyRole = (pyRole == null || pyRole.trim().isEmpty()) ? "learner" : pyRole.trim();
             this.workerMode = workerMode;
-            this.cleanupEnabled = "1".equals(System.getenv().getOrDefault("PY_BRIDGE_CLEANUP",
-                    (workerMode ? "0" : "1")))
-                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("PY_BRIDGE_CLEANUP",
-                            (workerMode ? "0" : "1")));
+            this.cleanupEnabled = parseBoolEnv("PY_BRIDGE_CLEANUP", !workerMode);
+            this.createVenvEnabled = parseBoolEnv("PY_BRIDGE_CREATE_VENV", true);
+            this.installDepsEnabled = parseBoolEnv("PY_BRIDGE_INSTALL_DEPS", true);
 
             configureLogging();
             cleanupExistingPythonProcesses();
             setupPaths();
-            setupVirtualEnvironment();
-            if (!this.workerMode) {
+            if (this.createVenvEnabled) {
+                setupVirtualEnvironment();
+            } else {
+                File venvDir = new File(venvPath);
+                if (!venvDir.exists()) {
+                    throw new RuntimeException("PY_BRIDGE_CREATE_VENV=0 but virtual environment does not exist at: " + venvPath);
+                }
+                if (logger.isLoggable(Level.INFO)) {
+                    logger.info("Skipping virtual environment creation (PY_BRIDGE_CREATE_VENV=0): " + venvPath);
+                }
+            }
+            if (!this.workerMode && this.installDepsEnabled) {
                 installDependencies();
+            } else if (!this.workerMode && logger.isLoggable(Level.INFO)) {
+                logger.info("Skipping dependency install checks (PY_BRIDGE_INSTALL_DEPS=0)");
             } else if (logger.isLoggable(Level.INFO)) {
                 logger.info("Worker mode: skipping dependency install checks");
             }
@@ -171,6 +184,25 @@ public class PythonMLBridge implements AutoCloseable {
                 return defaultValue;
             }
             return Integer.parseInt(v.trim());
+        } catch (Exception ignored) {
+            return defaultValue;
+        }
+    }
+
+    private static boolean parseBoolEnv(String key, boolean defaultValue) {
+        try {
+            String v = System.getenv(key);
+            if (v == null || v.trim().isEmpty()) {
+                return defaultValue;
+            }
+            String value = v.trim().toLowerCase();
+            if ("1".equals(value) || "true".equals(value) || "yes".equals(value) || "on".equals(value)) {
+                return true;
+            }
+            if ("0".equals(value) || "false".equals(value) || "no".equals(value) || "off".equals(value)) {
+                return false;
+            }
+            return defaultValue;
         } catch (Exception ignored) {
             return defaultValue;
         }
@@ -1004,12 +1036,13 @@ public class PythonMLBridge implements AutoCloseable {
     public void trainMulti(
             List<StateSequenceBuilder.TrainingData> trainingData,
             List<Double> rewards,
-            List<Integer> dones) {
+            List<Integer> dones,
+            List<Double> sampleWeights) {
         if (!isInitialized) {
             throw new IllegalStateException("Python ML Bridge not initialized");
         }
         try {
-            batchManager.trainMulti(trainingData, rewards, dones).get();
+            batchManager.trainMulti(trainingData, rewards, dones, sampleWeights).get();
         } catch (Exception e) {
             logger.severe("Error during multi-episode training: " + e.getMessage());
             throw new RuntimeException("Failed to train Python model (multi)", e);

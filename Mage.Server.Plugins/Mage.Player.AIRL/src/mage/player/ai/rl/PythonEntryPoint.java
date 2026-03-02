@@ -178,6 +178,7 @@ public interface PythonEntryPoint {
             byte[] chosenCountBytes,
             byte[] oldLogpTotalBytes,
             byte[] oldValueBytes,
+            byte[] sampleWeightsBytes,
             byte[] donesBytes,
             byte[] headIdxBytes,
             int batchSize,

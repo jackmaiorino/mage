@@ -21,7 +21,9 @@
 param(
     [switch]$Force,
     # When set, deletes the entire named profile directory under rl/profiles/<ModelProfile>/
-    [string]$ModelProfile = ""
+    [string]$ModelProfile = "",
+    # With -ModelProfile, also deletes profile-local card_embeddings.json.
+    [switch]$DeleteEmbeddings
 )
 
 $ErrorActionPreference = "Stop"
@@ -37,10 +39,25 @@ if ($ModelProfile -ne "") {
         Write-Host "Profile '$ModelProfile' not found at: $profileDir" -ForegroundColor Yellow
         exit 0
     }
+    $profileEmbeddingPath = Join-Path $profileDir "models\card_embeddings.json"
+    $preserveEmbedding = (-not $DeleteEmbeddings.IsPresent) -and (Test-Path $profileEmbeddingPath)
+    $embeddingContent = ""
+    if ($preserveEmbedding) {
+        try {
+            $embeddingContent = Get-Content -LiteralPath $profileEmbeddingPath -Raw -Encoding UTF8
+        } catch {
+            $preserveEmbedding = $false
+            Write-Warning ("Could not read profile embedding file; it will be deleted: {0}" -f $profileEmbeddingPath)
+        }
+    }
     Write-Host "`n=== RL Training Cleanup Script ===" -ForegroundColor Cyan
     Write-Host "Profile: $ModelProfile" -ForegroundColor Yellow
     Write-Host "Will DELETE entire directory:" -ForegroundColor Red
     Write-Host "  $profileDir" -ForegroundColor Gray
+    if ($preserveEmbedding) {
+        Write-Host "Will PRESERVE:" -ForegroundColor Yellow
+        Write-Host "  $profileEmbeddingPath" -ForegroundColor Gray
+    }
     Write-Host ""
     if (-not $Force) {
         Write-Host "Type the profile name to confirm deletion (or anything else to cancel):" -ForegroundColor Red
@@ -52,6 +69,12 @@ if ($ModelProfile -ne "") {
     }
     Remove-Item -Path $profileDir -Recurse -Force
     Write-Host "Deleted profile: $ModelProfile" -ForegroundColor Green
+    if ($preserveEmbedding) {
+        $restoreDir = Join-Path $profileDir "models"
+        New-Item -ItemType Directory -Path $restoreDir -Force | Out-Null
+        Set-Content -LiteralPath $profileEmbeddingPath -Value $embeddingContent -Encoding UTF8
+        Write-Host "Restored profile embedding file: $profileEmbeddingPath" -ForegroundColor Gray
+    }
 
     # Refresh Grafana/Prometheus
     $composeFile = Join-Path $repoRoot "docker-compose-observe-local.yml"

@@ -208,6 +208,23 @@ class PythonEntryPoint:
         self.optimizer = None
         self.device = torch.device(
             'cuda' if torch.cuda.is_available() else 'cpu')
+        seed_raw = os.getenv("PY_GLOBAL_SEED", "").strip()
+        if not seed_raw:
+            seed_raw = os.getenv("RL_BASE_SEED", "").strip()
+        self.global_seed = None
+        if seed_raw:
+            try:
+                self.global_seed = int(seed_raw)
+            except Exception:
+                self.global_seed = None
+        if self.global_seed is not None:
+            random.seed(self.global_seed)
+            np.random.seed(self.global_seed & 0xFFFFFFFF)
+            torch.manual_seed(self.global_seed)
+            if torch.cuda.is_available():
+                torch.cuda.manual_seed_all(self.global_seed)
+            logger.info(LogCategory.SYSTEM_INIT,
+                        "Applied global seed PY_GLOBAL_SEED=%d", int(self.global_seed))
         self.py_role = os.getenv("PY_ROLE", "learner").strip().lower()
         self.backend_mode = os.getenv(
             "PY_BACKEND_MODE", "multi").strip().lower()
@@ -289,6 +306,8 @@ class PythonEntryPoint:
             1, self._mull_replay_stats_window))  # 1=KEEP, 0=MULL
 
         seed = os.getenv("MULLIGAN_REPLAY_SEED", "").strip()
+        if (not seed) and self.global_seed is not None:
+            seed = str(self.global_seed)
         try:
             seed_i = int(seed) if seed else None
         except Exception:
@@ -298,6 +317,7 @@ class PythonEntryPoint:
         # PPO configuration
         self.ppo_epsilon = float(os.getenv('PPO_EPSILON', '0.2'))
         self.use_ppo = bool(int(os.getenv('USE_PPO', '1')))
+        self.gamma = float(os.getenv('PPO_GAMMA', '0.99'))
         self._ppo_stats_every = int(os.getenv("PPO_STATS_EVERY", "50"))
 
         # Loss scheduling
@@ -363,6 +383,15 @@ class PythonEntryPoint:
                     self.amp_use_scaler = False
 
         logger.info(LogCategory.GPU_MEMORY, "Using device: %s", self.device)
+        logger.info(
+            LogCategory.MODEL_INIT,
+            "RL horizon config: gamma=%.5f use_gae=%s gae_lambda_high=%.3f gae_lambda_low=%.3f gae_lambda_decay_steps=%d",
+            float(self.gamma),
+            bool(self.use_gae),
+            float(self.metrics.gae_lambda_high),
+            float(self.metrics.gae_lambda_low),
+            int(self.metrics.gae_lambda_decay_steps),
+        )
 
     def _log_cuda_mem(self, where: str):
         """Lightweight CUDA memory snapshot for VRAM creep diagnostics."""
@@ -1260,7 +1289,7 @@ class PythonEntryPoint:
                 # Flat batches are not guaranteed to be a single ordered trajectory; prevent leakage.
                 dones_t = torch.ones_like(rewards_t)
                 advantages, value_targets = self.compute_gae(
-                    rewards_t, value_detached, gamma=0.99, gae_lambda=self.current_gae_lambda, dones=dones_t)
+                    rewards_t, value_detached, gamma=self.gamma, gae_lambda=self.current_gae_lambda, dones=dones_t)
                 advantages = advantages.detach()
                 value_targets = value_targets.detach()
             else:
@@ -1668,6 +1697,7 @@ class PythonEntryPoint:
                                  chosen_count_bytes,
                                  old_logp_total_bytes,
                                  old_value_bytes,
+                                 sample_weights_bytes,
                                  dones_bytes,
                                  head_ids_bytes,
                                  batch_size,
@@ -1715,6 +1745,8 @@ class PythonEntryPoint:
                 batch_size)[start:end]
             old_value = np.frombuffer(old_value_bytes, dtype='<f4').reshape(
                 batch_size)[start:end]
+            sample_weights = np.frombuffer(sample_weights_bytes, dtype='<f4').reshape(
+                batch_size)[start:end]
             dones = np.frombuffer(dones_bytes, dtype='<i4').reshape(
                 batch_size)[start:end]
             head_ids = np.frombuffer(head_ids_bytes, dtype='<i4').reshape(
@@ -1739,11 +1771,13 @@ class PythonEntryPoint:
                 old_logp_total, dtype=torch.float32, device=device)
             old_value_t = torch.tensor(
                 old_value, dtype=torch.float32, device=device)
+            sample_w_t = torch.tensor(
+                sample_weights, dtype=torch.float32, device=device)
             dones_t = torch.tensor(dones, dtype=torch.float32, device=device)
             head_idx_t = torch.tensor(head_ids, dtype=torch.long, device=device)
 
             # Release numpy slices immediately
-            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value, dones, head_ids
+            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value, sample_weights, dones, head_ids
 
             local_batch_size = int(end - start)
 
@@ -1763,6 +1797,14 @@ class PythonEntryPoint:
                 self._log_cuda_mem(
                     "trainCandidatesMultiFlat:skip_candfeat_nan")
                 return
+            sample_w_t = torch.nan_to_num(
+                sample_w_t, nan=1.0, posinf=1.0, neginf=1.0).clamp_min(0.0)
+            w_sum = sample_w_t.sum()
+            if (not torch.isfinite(w_sum)) or float(w_sum.item()) <= 0.0:
+                sample_w_t = torch.ones_like(sample_w_t)
+                w_sum = sample_w_t.sum()
+            norm_w_t = sample_w_t / w_sum.clamp_min(1e-8)
+            norm_w_t = norm_w_t * float(max(1, local_batch_size))
 
             self.model.train()
             # Preserve the historical semantics of train_step_counter as "episodes processed".
@@ -1826,11 +1868,11 @@ class PythonEntryPoint:
                 if self.use_gae:
                     self.update_gae_lambda_schedule()
                     advantages, value_targets = self.compute_gae(
-                        rewards_t, value_detached, gamma=0.99, gae_lambda=self.current_gae_lambda, dones=dones_t)
+                        rewards_t, value_detached, gamma=self.gamma, gae_lambda=self.current_gae_lambda, dones=dones_t)
                     advantages = advantages.detach()
                     value_targets = value_targets.detach()
                 else:
-                    gamma = 0.99
+                    gamma = self.gamma
                     monte_carlo_returns = torch.zeros_like(rewards_t)
                     running_return = 0.0
                     for t in reversed(range(local_batch_size)):
@@ -1932,9 +1974,11 @@ class PythonEntryPoint:
                     ratio_raw = torch.exp(log_ratio)
                     clipped_ratio = torch.clamp(
                         ratio_raw, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
-                    loss_policy = - \
-                        torch.min(ratio_raw * advantages_normalized,
-                                  clipped_ratio * advantages_normalized).mean()
+                    policy_obj = torch.min(
+                        ratio_raw * advantages_normalized,
+                        clipped_ratio * advantages_normalized
+                    )
+                    loss_policy = -(policy_obj * norm_w_t).sum() / norm_w_t.sum().clamp_min(1e-8)
 
                     # PPO stats logging (mtg_ai.log) - mean/std of adv/ret/ratio
                     if self._ppo_stats_every > 0 and (next_step % self._ppo_stats_every == 0):
@@ -1963,7 +2007,7 @@ class PythonEntryPoint:
                             ratio_mean, ratio_std
                         )
                 else:
-                    loss_policy = -(new_logp * advantages_normalized).mean()
+                    loss_policy = -((new_logp * advantages_normalized) * norm_w_t).sum() / norm_w_t.sum().clamp_min(1e-8)
 
                 if self.loss_schedule_enable and next_step <= self.critic_warmup_steps:
                     policy_loss_coef = float(self.policy_loss_coef_warmup)
@@ -1982,11 +2026,13 @@ class PythonEntryPoint:
                         (v_pred - v_old).clamp(-vf_clip, vf_clip)
                     vf_loss1 = (v_pred - value_targets).pow(2)
                     vf_loss2 = (v_clipped - value_targets).pow(2)
+                    vf_max = torch.max(vf_loss1, vf_loss2)
                     loss_value = value_loss_coef * \
-                        (0.5 * torch.max(vf_loss1, vf_loss2).mean())
+                        (0.5 * (vf_max * norm_w_t).sum() / norm_w_t.sum().clamp_min(1e-8))
                 else:
+                    vf_loss = (value_squeezed - value_targets).pow(2)
                     loss_value = value_loss_coef * \
-                        F.mse_loss(value_squeezed, value_targets)
+                        ((vf_loss * norm_w_t).sum() / norm_w_t.sum().clamp_min(1e-8))
 
                 probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
                 log_probs = torch.log(probs_safe)
@@ -2139,7 +2185,7 @@ class PythonEntryPoint:
 
             # Explicit cleanup of training tensors
             del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
-            del chosen_indices_t, chosen_count_t, value_targets, advantages, rewards_t, old_logp_t, old_value_t, dones_t
+            del chosen_indices_t, chosen_count_t, value_targets, advantages, rewards_t, old_logp_t, old_value_t, sample_w_t, norm_w_t, dones_t
             del loss, loss_policy, loss_value, entropy
             try:
                 import gc

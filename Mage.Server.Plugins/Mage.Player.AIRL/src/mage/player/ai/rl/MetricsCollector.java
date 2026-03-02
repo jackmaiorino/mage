@@ -49,6 +49,11 @@ public class MetricsCollector {
     private final AtomicLong inferLatencyMaxMs = new AtomicLong(0);
     private final AtomicLong mainTurnUniformTotal = new AtomicLong(0);
     private final AtomicLong mainActionEpsilonTotal = new AtomicLong(0);
+    private final AtomicLong mainPerReplayBufferSize = new AtomicLong(0);
+    private final AtomicLong mainPerFreshEpisodesTotal = new AtomicLong(0);
+    private final AtomicLong mainPerReplaySampledEpisodesTotal = new AtomicLong(0);
+    private final AtomicLong mainPerMeanPriorityBits = new AtomicLong(dblBits(0.0));
+    private final AtomicLong mainPerMeanIsWeightBits = new AtomicLong(dblBits(0.0));
 
     // Inference batching (Java-side) metrics
     private final AtomicLong inferFlushesTotal = new AtomicLong(0);
@@ -236,6 +241,26 @@ public class MetricsCollector {
 
     public void recordMainActionEpsilonDecision() {
         mainActionEpsilonTotal.incrementAndGet();
+    }
+
+    public void recordMainPerBatch(
+            int replayBufferSize,
+            int freshEpisodes,
+            int replaySampledEpisodes,
+            double meanPriority,
+            double meanIsWeight
+    ) {
+        if (replayBufferSize >= 0) {
+            mainPerReplayBufferSize.set(replayBufferSize);
+        }
+        if (freshEpisodes > 0) {
+            mainPerFreshEpisodesTotal.addAndGet(freshEpisodes);
+        }
+        if (replaySampledEpisodes > 0) {
+            mainPerReplaySampledEpisodesTotal.addAndGet(replaySampledEpisodes);
+        }
+        mainPerMeanPriorityBits.set(dblBits(meanPriority));
+        mainPerMeanIsWeightBits.set(dblBits(meanIsWeight));
     }
 
     public void recordInferBatchFlush(int batchSize, boolean dueToFull) {
@@ -728,6 +753,21 @@ public class MetricsCollector {
         sb.append("# HELP mage_main_action_epsilon_total RL main-policy decisions using epsilon-mixture behavior\n");
         sb.append("# TYPE mage_main_action_epsilon_total counter\n");
         sb.append("mage_main_action_epsilon_total ").append(mainActionEpsilonTotal.get()).append("\n");
+        sb.append("# HELP mage_main_per_replay_buffer_size Main-policy PER replay buffer size\n");
+        sb.append("# TYPE mage_main_per_replay_buffer_size gauge\n");
+        sb.append("mage_main_per_replay_buffer_size ").append(mainPerReplayBufferSize.get()).append("\n");
+        sb.append("# HELP mage_main_per_fresh_episodes_total Fresh episodes included in learner updates while PER is enabled\n");
+        sb.append("# TYPE mage_main_per_fresh_episodes_total counter\n");
+        sb.append("mage_main_per_fresh_episodes_total ").append(mainPerFreshEpisodesTotal.get()).append("\n");
+        sb.append("# HELP mage_main_per_replay_sampled_episodes_total Replay episodes sampled into learner updates\n");
+        sb.append("# TYPE mage_main_per_replay_sampled_episodes_total counter\n");
+        sb.append("mage_main_per_replay_sampled_episodes_total ").append(mainPerReplaySampledEpisodesTotal.get()).append("\n");
+        sb.append("# HELP mage_main_per_mean_priority Mean replay priority in latest learner update\n");
+        sb.append("# TYPE mage_main_per_mean_priority gauge\n");
+        sb.append("mage_main_per_mean_priority ").append(String.format("%.6f", bitsToDbl(mainPerMeanPriorityBits.get()))).append("\n");
+        sb.append("# HELP mage_main_per_mean_is_weight Mean normalized IS weight in latest learner update\n");
+        sb.append("# TYPE mage_main_per_mean_is_weight gauge\n");
+        sb.append("mage_main_per_mean_is_weight ").append(String.format("%.6f", bitsToDbl(mainPerMeanIsWeightBits.get()))).append("\n");
 
         // Effective runtime config (helps debug "did env var apply?")
         sb.append("# HELP mage_config_py_batch_max_size Effective PY_BATCH_MAX_SIZE loaded by JVM\n");

@@ -455,7 +455,8 @@ public class PythonMLBatchManager {
     public CompletableFuture<Boolean> trainMulti(
             List<StateSequenceBuilder.TrainingData> trainingData,
             List<Double> rewards,
-            List<Integer> dones) {
+            List<Integer> dones,
+            List<Double> sampleWeights) {
         UUID id = UUID.randomUUID();
         CompletableFuture<Boolean> future = new CompletableFuture<>();
         pendingTraining.put(id, future);
@@ -474,6 +475,9 @@ public class PythonMLBatchManager {
             }
             if (dones == null || dones.size() != trainingData.size()) {
                 throw new IllegalArgumentException("dones size must match trainingData size");
+            }
+            if (sampleWeights == null || sampleWeights.size() != trainingData.size()) {
+                throw new IllegalArgumentException("sampleWeights size must match trainingData size");
             }
 
             byte[] sequences = convertFloatArraysToBytes(trainingData.stream()
@@ -519,6 +523,7 @@ public class PythonMLBatchManager {
             byte[] oldValueBytes = convertFloatsToBytes(trainingData.stream()
                     .map(d -> d.oldValue)
                     .collect(Collectors.toList()));
+            byte[] sampleWeightsBytes = convertDoublesToBytes(sampleWeights);
             byte[] donesBytes = convertIntegersToBytes(dones);
             byte[] headIdxBytes = convertIntegersToBytes(trainingData.stream()
                     .map(d -> actionTypeToHeadIdx(d.actionType))
@@ -542,6 +547,7 @@ public class PythonMLBatchManager {
                         chosenCountBytes,
                         oldLogpTotalBytes,
                         oldValueBytes,
+                        sampleWeightsBytes,
                         donesBytes,
                         headIdxBytes,
                         batchSize,

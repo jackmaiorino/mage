@@ -2,6 +2,8 @@ package mage.cards.repository;
 
 import mage.util.DebugUtil;
 
+import java.io.File;
+
 /**
  * Helper class for database
  *
@@ -18,6 +20,32 @@ public class DatabaseUtils {
     public static final String DB_NAME_RECORDS = "table_record.db";
     public static final String DB_NAME_STATS = "user_stats.db";
 
+    private static String getDbBaseDir() {
+        String fromEnv = System.getenv("MAGE_DB_DIR");
+        if (fromEnv == null || fromEnv.trim().isEmpty()) {
+            return "./db";
+        }
+        return fromEnv.trim();
+    }
+
+    private static boolean isAutoServerEnabled() {
+        String fromEnv = System.getenv("MAGE_DB_AUTO_SERVER");
+        if (fromEnv == null || fromEnv.trim().isEmpty()) {
+            return true;
+        }
+        String value = fromEnv.trim().toLowerCase();
+        return !("0".equals(value) || "false".equals(value) || "no".equals(value));
+    }
+
+    private static String buildDbFilePath(String dbName) {
+        File dbDir = new File(getDbBaseDir());
+        if (!dbDir.exists()) {
+            dbDir.mkdirs();
+        }
+        File dbFile = new File(dbDir, dbName);
+        return dbFile.getPath().replace("\\", "/");
+    }
+
     /**
      * Prepare JDBC connection string and setup additional params for H2 databases
      *
@@ -26,10 +54,13 @@ public class DatabaseUtils {
      */
     public static String prepareH2Connection(String dbName, boolean improveCaches) {
         // example: jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE;IGNORECASE=TRUE
-        String res = String.format("jdbc:h2:file:./db/%s", dbName);
+        String res = String.format("jdbc:h2:file:%s", buildDbFilePath(dbName));
 
         // shared params
-        res += ";AUTO_SERVER=TRUE"; // open database in mix mode (first open by new thread, second open by new jvm-process)
+        if (isAutoServerEnabled()) {
+            // open database in mix mode (first open by new thread, second open by new jvm-process)
+            res += ";AUTO_SERVER=TRUE";
+        }
         res += ";IGNORECASE=TRUE"; // ignore char case for text searching
 
         // additional params
@@ -64,6 +95,6 @@ public class DatabaseUtils {
      */
     public static String prepareSqliteConnection(String dbName) {
         // example: jdbc:sqlite:./db/table_record.db
-        return String.format("jdbc:sqlite:./db/%s", dbName);
+        return String.format("jdbc:sqlite:%s", buildDbFilePath(dbName));
     }
 }

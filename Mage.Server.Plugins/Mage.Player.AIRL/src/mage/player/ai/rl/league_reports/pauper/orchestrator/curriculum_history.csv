@@ -15,3 +15,10 @@ timestamp_utc,event,profile,episode,rolling_winrate,rolling_avg,baseline_wr,targ
 2026-02-23T02:18:52.4814614Z,training_start,Pauper-Elves,13200,0.0000,0.0339,0.0000,0.6000,200,False
 2026-02-23T02:32:49.5906440Z,training_start,Pauper-Elves,13400,0.1900,0.1049,0.0000,0.6000,200,False
 2026-02-23T02:34:36.3819363Z,training_start,Pauper-Elves,13400,0.1400,0.1152,0.0000,0.6000,200,False
+2026-02-27T00:33:07.2848600Z,training_start,Pauper-Elves,43700,0.5100,0.5348,0.0000,0.6000,200,False
+2026-02-27T00:34:44.8219681Z,training_start,Pauper-Spy-Combo,27400,0.3400,0.3359,0.0000,0.6000,200,False
+2026-02-27T00:38:11.8752666Z,training_start,Pauper-Spy-Combo,0,,,0.0000,0.6000,0,False
+2026-02-27T00:38:48.6834048Z,training_start,Pauper-Spy-Combo,0,,,0.0000,0.6000,0,False
+2026-02-27T00:44:24.8652824Z,training_start,Pauper-Spy-Combo,0,0.1670,0.1196,0.0000,0.6000,47,False
+2026-02-28T14:18:29.8220122Z,training_start,Pauper-Spy-Combo-A,8995,0.0600,0.0922,0.1944,0.6000,200,False
+2026-02-28T14:38:09.8901347Z,training_start,Pauper-Elves,43937,0.0100,0.3290,0.0000,0.6000,200,False

@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -108,6 +109,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final double TURN_RANDOM_EPS_START = EnvConfig.f64("RL_FULL_TURN_RANDOM_START", 0.03);
     private static final double TURN_RANDOM_EPS_END = EnvConfig.f64("RL_FULL_TURN_RANDOM_END", 0.03);
     private static final int TURN_RANDOM_EPS_DECAY_EPISODES = EnvConfig.i32("RL_FULL_TURN_RANDOM_DECAY_EPISODES", 400000);
+    private static final String TURN_UNIFORM_OLD_LOGP_SOURCE_RAW =
+            EnvConfig.str("RL_TURN_UNIFORM_OLD_LOGP_SOURCE", "policy").trim().toLowerCase(Locale.ROOT);
+    private static final String TURN_UNIFORM_OLD_LOGP_SOURCE =
+            "behavior".equals(TURN_UNIFORM_OLD_LOGP_SOURCE_RAW) ? "behavior" : "policy";
+    private static final long RL_BASE_SEED = EnvConfig.i64("RL_BASE_SEED", -1L);
 
     // Track RL player activation failures (these pollute training signal)
     private static final java.util.concurrent.atomic.AtomicInteger RL_ACTIVATION_FAILURES = new java.util.concurrent.atomic.AtomicInteger(0);
@@ -206,17 +212,23 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         final int chosenIdx;
         final float oldLogp;
         final float selectedBehaviorProb;
+        final float selectedOldProb;
+        final String oldLogpSource;
         final BehaviorPolicyView behavior;
 
         private SinglePickResult(
                 int chosenIdx,
                 float oldLogp,
                 float selectedBehaviorProb,
+                float selectedOldProb,
+                String oldLogpSource,
                 BehaviorPolicyView behavior
         ) {
             this.chosenIdx = chosenIdx;
             this.oldLogp = oldLogp;
             this.selectedBehaviorProb = selectedBehaviorProb;
+            this.selectedOldProb = selectedOldProb;
+            this.oldLogpSource = oldLogpSource;
             this.behavior = behavior;
         }
     }
@@ -225,15 +237,18 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         final List<Integer> selectedIndices;
         final float oldLogpTotal;
+        final String oldLogpSource;
         final BehaviorPolicyView behavior;
 
         private SequentialPickResult(
                 List<Integer> selectedIndices,
                 float oldLogpTotal,
+                String oldLogpSource,
                 BehaviorPolicyView behavior
         ) {
             this.selectedIndices = selectedIndices;
             this.oldLogpTotal = oldLogpTotal;
+            this.oldLogpSource = oldLogpSource;
             this.behavior = behavior;
         }
     }
@@ -385,6 +400,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return bestIdx >= 0 ? bestIdx : 0;
     }
 
+    private boolean usePolicyOldLogpForTurnUniform(BehaviorPolicyView behavior) {
+        return behavior != null
+                && "turn_uniform".equals(behavior.mode)
+                && "policy".equals(TURN_UNIFORM_OLD_LOGP_SOURCE);
+    }
+
     private SinglePickResult sampleSinglePick(
             float[] actionScores,
             int[] candidateMask,
@@ -395,9 +416,15 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         int chosenIdx = greedyMode
                 ? argmax(behavior.policyProbs, candidateCount, null)
                 : sampleFromDistribution(behavior.behaviorProbs, candidateCount);
-        float selectedBehaviorProb = behavior.behaviorProbs[Math.max(0, Math.min(chosenIdx, candidateCount - 1))];
-        float oldLogp = (float) Math.log(Math.max(1e-8f, selectedBehaviorProb));
-        return new SinglePickResult(chosenIdx, oldLogp, selectedBehaviorProb, behavior);
+        int clampedChosenIdx = Math.max(0, Math.min(chosenIdx, candidateCount - 1));
+        float selectedBehaviorProb = behavior.behaviorProbs[clampedChosenIdx];
+        boolean policyOldLogp = usePolicyOldLogpForTurnUniform(behavior);
+        float selectedOldProb = policyOldLogp
+                ? behavior.policyProbs[clampedChosenIdx]
+                : behavior.behaviorProbs[clampedChosenIdx];
+        float oldLogp = (float) Math.log(Math.max(1e-8f, selectedOldProb));
+        String oldLogpSource = policyOldLogp ? "policy" : "behavior";
+        return new SinglePickResult(chosenIdx, oldLogp, selectedBehaviorProb, selectedOldProb, oldLogpSource, behavior);
     }
 
     private SequentialPickResult sampleSequentialWithoutReplacement(
@@ -411,16 +438,20 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         List<Integer> selectedIndices = new ArrayList<>();
         boolean[] selected = new boolean[candidateCount];
         float oldLogpTotal = 0.0f;
+        boolean policyOldLogp = usePolicyOldLogpForTurnUniform(behavior);
+        float[] oldLogpProbs = policyOldLogp ? behavior.policyProbs : behavior.behaviorProbs;
 
         int safePicks = Math.max(0, Math.min(picks, candidateCount));
         for (int t = 0; t < safePicks; t++) {
-            float denom = 0.0f;
+            float behaviorDenom = 0.0f;
+            float oldLogpDenom = 0.0f;
             for (int i = 0; i < candidateCount; i++) {
                 if (!selected[i]) {
-                    denom += behavior.behaviorProbs[i];
+                    behaviorDenom += behavior.behaviorProbs[i];
+                    oldLogpDenom += oldLogpProbs[i];
                 }
             }
-            if (!(denom > 0.0f)) {
+            if (!(behaviorDenom > 0.0f)) {
                 int fallback = -1;
                 for (int i = 0; i < candidateCount; i++) {
                     if (!selected[i]) {
@@ -441,7 +472,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (greedyMode) {
                 chosenIdx = argmax(behavior.policyProbs, candidateCount, selected);
             } else {
-                float r = stochasticRng.nextFloat() * denom;
+                float r = stochasticRng.nextFloat() * behaviorDenom;
                 float cdf = 0.0f;
                 chosenIdx = -1;
                 for (int i = 0; i < candidateCount; i++) {
@@ -467,30 +498,44 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 break;
             }
 
-            float pCond = behavior.behaviorProbs[chosenIdx] / denom;
-            oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
+            if (!(oldLogpDenom > 0.0f)) {
+                oldLogpTotal += (float) Math.log(1e-8f);
+            } else {
+                float pCond = oldLogpProbs[chosenIdx] / oldLogpDenom;
+                oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
+            }
             selected[chosenIdx] = true;
             selectedIndices.add(chosenIdx);
         }
 
-        return new SequentialPickResult(selectedIndices, oldLogpTotal, behavior);
+        return new SequentialPickResult(selectedIndices, oldLogpTotal, policyOldLogp ? "policy" : "behavior", behavior);
     }
 
-    private String explorationAnnotation(BehaviorPolicyView behavior, int chosenIdx) {
+    private String explorationAnnotation(BehaviorPolicyView behavior, int chosenIdx, String oldLogpSource) {
         if (behavior == null || chosenIdx < 0 || chosenIdx >= behavior.behaviorProbs.length) {
             return "";
         }
+        String source = oldLogpSource == null ? "behavior" : oldLogpSource;
+        float[] oldLogpProbs = "policy".equals(source) ? behavior.policyProbs : behavior.behaviorProbs;
+        float selectedOldProb = chosenIdx < oldLogpProbs.length ? oldLogpProbs[chosenIdx] : 0.0f;
         return String.format(
-                "exploration{mode=%s action_eps=%.4f turn_random_eps=%.4f behavior_prob=%.6f}",
+                "exploration{mode=%s action_eps=%.4f turn_random_eps=%.4f behavior_prob=%.6f old_logp_source=%s old_prob_selected=%.6f}",
                 behavior.mode,
                 behavior.actionEps,
                 behavior.turnRandomEps,
-                behavior.behaviorProbs[chosenIdx]
+                behavior.behaviorProbs[chosenIdx],
+                source,
+                selectedOldProb
         );
     }
 
     private String appendExplorationToState(String gameState, BehaviorPolicyView behavior, int chosenIdx) {
-        String annotation = explorationAnnotation(behavior, chosenIdx);
+        String defaultOldLogpSource = usePolicyOldLogpForTurnUniform(behavior) ? "policy" : "behavior";
+        return appendExplorationToState(gameState, behavior, chosenIdx, defaultOldLogpSource);
+    }
+
+    private String appendExplorationToState(String gameState, BehaviorPolicyView behavior, int chosenIdx, String oldLogpSource) {
+        String annotation = explorationAnnotation(behavior, chosenIdx, oldLogpSource);
         if (annotation.isEmpty()) {
             return gameState;
         }
@@ -2364,7 +2409,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                             String gameStateWithExploration = appendExplorationToState(
                                     formatGameState(game),
                                     pickResult.behavior,
-                                    chosenIdx
+                                    chosenIdx,
+                                    pickResult.oldLogpSource
                             );
                             gameLogger.logDecision(
                                     this.getName(),
@@ -2736,7 +2782,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                             String gameStateWithExploration = appendExplorationToState(
                                     formatGameState(game),
                                     pickResult.behavior,
-                                    chosenIdx
+                                    chosenIdx,
+                                    pickResult.oldLogpSource
                             );
                             gameLogger.logDecision(
                                     this.getName(),
@@ -3214,7 +3261,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     String modeInfo = appendExplorationToState(
                             String.format("CHOOSE_MODE: chose mode %d of %d", appliedIdx, candidateCount),
                             pickResult.behavior,
-                            appliedIdx
+                            appliedIdx,
+                            pickResult.oldLogpSource
                     );
                     gameLogger.logDecision(this.getName(), activePlayerName, phase + " (CHOOSE_MODE)", turn,
                             modeInfo,
@@ -3373,7 +3421,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                             String.format("ANNOUNCE_X: msg=\"%s\" isManaPay=%s chose X=%d (range [%d..%d])",
                                     message, isManaPay, chosenX, realMin, realMax),
                             pickResult.behavior,
-                            chosenIdx
+                            chosenIdx,
+                            pickResult.oldLogpSource
                     );
                     gameLogger.logDecision(this.getName(), activePlayerName, phase + " (ANNOUNCE_X)", turn,
                             xDecisionState,
@@ -3568,7 +3617,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                     message, outcome, useIt ? "YES" : "NO",
                                     pickResult.behavior.behaviorProbs[0], pickResult.behavior.behaviorProbs[1]),
                             pickResult.behavior,
-                            chosenIdx
+                            chosenIdx,
+                            pickResult.oldLogpSource
                     );
                     gameLogger.logDecision(
                             this.getName(),
@@ -3804,7 +3854,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                     String.format("DECLARE_ATTACKS: selected=%s from %d possible",
                                             attackerNames, possibleAttackers.size()),
                                     attackPickResult.behavior,
-                                    selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0)
+                                    selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0),
+                                    attackPickResult.oldLogpSource
                             ),
                             phase1Candidates.stream().map(cc -> cc.isDone() ? "DONE" : cc.creature.getName()).collect(Collectors.toList()),
                             Arrays.copyOf(attackPickResult.behavior.behaviorProbs, candidateCount),
@@ -3939,7 +3990,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                         String.format("DECLARE_BLOCKS: %s blocks %s (%d blockers selected)",
                                                 blockerNames, attacker.getName(), selectedBlockers.size()),
                                         blockPickResult.behavior,
-                                        selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0)
+                                        selectedIndices.isEmpty() ? doneIdx : selectedIndices.get(0),
+                                        blockPickResult.oldLogpSource
                                 ),
                                 blockCandidates.stream().map(cc -> cc.isDone() ? "DONE" : cc.creature.getName()).collect(Collectors.toList()),
                                 Arrays.copyOf(blockPickResult.behavior.behaviorProbs, candidateCount),
@@ -4527,6 +4579,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.turnActionEps = 0.0;
         this.turnRandomEps = 0.0;
         this.turnExplorationMode = "policy";
+        if (RL_BASE_SEED >= 0L) {
+            long seed = RL_BASE_SEED;
+            seed = seed * 31L + episodeNum;
+            String n = getName();
+            seed = seed * 31L + (n == null ? 0L : n.hashCode());
+            stochasticRng.setSeed(seed);
+        }
     }
 
     /**

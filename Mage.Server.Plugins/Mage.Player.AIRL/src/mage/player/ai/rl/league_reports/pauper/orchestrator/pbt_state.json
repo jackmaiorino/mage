@@ -1,0 +1,197 @@
+﻿{
+    "updated_at_utc":  "2026-03-01T23:00:09.8934220Z",
+    "enable_pbt":  true,
+    "pbt_exploit_max_interval_minutes":  240,
+    "pbt_min_episodes_before_first_exploit":  12000,
+    "pbt_min_episode_delta_per_profile":  10000,
+    "pbt_time_fallback_min_episode_delta":  3000,
+    "pbt_mutation_pct":  0.2,
+    "pbt_min_winner_gap":  0.03,
+    "pbt_min_winner_winrate":  0.06,
+    "last_exploit_utc":  "",
+    "profiles":  [
+                     {
+                         "profile":  "Pauper-Spy-Combo-A",
+                         "population_group":  "spy-combo",
+                         "seed":  1001,
+                         "pbt_mutable_env":  [
+                                                 "ENTROPY_START",
+                                                 "ENTROPY_END",
+                                                 "RL_ACTION_EPS_START",
+                                                 "RL_FULL_TURN_RANDOM_START",
+                                                 "TEMPERATURE_FLOOR",
+                                                 "ACTOR_LR"
+                                             ],
+                         "train_env":  {
+                                           "ENTROPY_START":  "0.30",
+                                           "USE_GAE":  "1",
+                                           "GAE_LAMBDA_HIGH":  "0.99",
+                                           "RL_ACTION_EPS_START":  "0.05",
+                                           "TEMPERATURE_FLOOR":  "0.30",
+                                           "ENTROPY_END":  "0.02",
+                                           "ACTOR_LR":  "3e-4",
+                                           "GAME_TIMEOUT_SEC":  "900",
+                                           "GAE_LAMBDA_DECAY_STEPS":  "30000",
+                                           "PPO_GAMMA":  "0.995",
+                                           "RL_FULL_TURN_RANDOM_START":  "0.15",
+                                           "GAE_AUTO_ENABLE":  "1",
+                                           "GAE_LAMBDA_LOW":  "0.95"
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Spy-Combo-B",
+                         "population_group":  "spy-combo",
+                         "seed":  2002,
+                         "pbt_mutable_env":  [
+                                                 "ENTROPY_START",
+                                                 "ENTROPY_END",
+                                                 "RL_ACTION_EPS_START",
+                                                 "RL_FULL_TURN_RANDOM_START",
+                                                 "TEMPERATURE_FLOOR",
+                                                 "ACTOR_LR"
+                                             ],
+                         "train_env":  {
+                                           "ENTROPY_START":  "0.42",
+                                           "USE_GAE":  "1",
+                                           "GAE_LAMBDA_HIGH":  "0.99",
+                                           "RL_ACTION_EPS_START":  "0.03",
+                                           "TEMPERATURE_FLOOR":  "0.40",
+                                           "ENTROPY_END":  "0.03",
+                                           "ACTOR_LR":  "2.5e-4",
+                                           "GAME_TIMEOUT_SEC":  "900",
+                                           "GAE_LAMBDA_DECAY_STEPS":  "30000",
+                                           "PPO_GAMMA":  "0.995",
+                                           "RL_FULL_TURN_RANDOM_START":  "0.20",
+                                           "GAE_AUTO_ENABLE":  "1",
+                                           "GAE_LAMBDA_LOW":  "0.95"
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Spy-Combo-C",
+                         "population_group":  "spy-combo",
+                         "seed":  3003,
+                         "pbt_mutable_env":  [
+                                                 "ENTROPY_START",
+                                                 "ENTROPY_END",
+                                                 "RL_ACTION_EPS_START",
+                                                 "RL_FULL_TURN_RANDOM_START",
+                                                 "TEMPERATURE_FLOOR",
+                                                 "ACTOR_LR"
+                                             ],
+                         "train_env":  {
+                                           "ENTROPY_START":  "0.22",
+                                           "USE_GAE":  "1",
+                                           "GAE_LAMBDA_HIGH":  "0.99",
+                                           "RL_ACTION_EPS_START":  "0.08",
+                                           "TEMPERATURE_FLOOR":  "0.25",
+                                           "ENTROPY_END":  "0.015",
+                                           "ACTOR_LR":  "3.5e-4",
+                                           "GAME_TIMEOUT_SEC":  "900",
+                                           "GAE_LAMBDA_DECAY_STEPS":  "30000",
+                                           "PPO_GAMMA":  "0.995",
+                                           "RL_FULL_TURN_RANDOM_START":  "0.25",
+                                           "GAE_AUTO_ENABLE":  "1",
+                                           "GAE_LAMBDA_LOW":  "0.95"
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Elves",
+                         "population_group":  "Pauper-Elves",
+                         "seed":  null,
+                         "pbt_mutable_env":  [
+
+                                             ],
+                         "train_env":  {
+
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Caw-Gates",
+                         "population_group":  "Pauper-Caw-Gates",
+                         "seed":  null,
+                         "pbt_mutable_env":  [
+
+                                             ],
+                         "train_env":  {
+
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Grixis-Affinity",
+                         "population_group":  "Pauper-Grixis-Affinity",
+                         "seed":  null,
+                         "pbt_mutable_env":  [
+
+                                             ],
+                         "train_env":  {
+
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Jund-Wildfire",
+                         "population_group":  "Pauper-Jund-Wildfire",
+                         "seed":  null,
+                         "pbt_mutable_env":  [
+
+                                             ],
+                         "train_env":  {
+
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Mono-Blue-Faeries",
+                         "population_group":  "Pauper-Mono-Blue-Faeries",
+                         "seed":  null,
+                         "pbt_mutable_env":  [
+
+                                             ],
+                         "train_env":  {
+
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Mono-Blue-Terror",
+                         "population_group":  "Pauper-Mono-Blue-Terror",
+                         "seed":  null,
+                         "pbt_mutable_env":  [
+
+                                             ],
+                         "train_env":  {
+
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Mono-Red-Burn",
+                         "population_group":  "Pauper-Mono-Red-Burn",
+                         "seed":  null,
+                         "pbt_mutable_env":  [
+
+                                             ],
+                         "train_env":  {
+
+                                       }
+                     },
+                     {
+                         "profile":  "Pauper-Mono-Red-Rally",
+                         "population_group":  "Pauper-Mono-Red-Rally",
+                         "seed":  null,
+                         "pbt_mutable_env":  [
+
+                                             ],
+                         "train_env":  {
+
+                                       }
+                     }
+                 ],
+    "group_state":  [
+                        {
+                            "population_group":  "spy-combo",
+                            "last_exploit_utc":  "",
+                            "last_exploit_min_episode":  0,
+                            "exploit_count":  0
+                        }
+                    ],
+    "events":  [
+
+               ]
+}

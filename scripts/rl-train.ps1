@@ -227,11 +227,19 @@ try {
     "-Dexec.args=train"
 }
 finally {
-  # Ctrl+C can leave java/python subprocesses alive; always attempt cleanup.
-  try {
-    & (Join-Path $PSScriptRoot "rl-stop.ps1") -Quiet
-  } catch {
-    # Don't block exit on cleanup failures
+  $orchestratedRaw = [string]$env:ORCHESTRATED_RUN
+  $isOrchestrated = $false
+  if (-not [string]::IsNullOrWhiteSpace($orchestratedRaw)) {
+    $orchestratedNorm = $orchestratedRaw.Trim().ToLowerInvariant()
+    $isOrchestrated = ($orchestratedNorm -eq "1" -or $orchestratedNorm -eq "true" -or $orchestratedNorm -eq "yes")
+  }
+  if (-not $isOrchestrated) {
+    # Standalone runs: Ctrl+C can leave java/python subprocesses alive; attempt cleanup.
+    try {
+      & (Join-Path $PSScriptRoot "rl-stop.ps1") -Quiet
+    } catch {
+      # Don't block exit on cleanup failures
+    }
   }
   Pop-Location
 }
