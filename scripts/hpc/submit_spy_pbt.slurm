@@ -31,6 +31,19 @@ ensure_module_cmd() {
   return 1
 }
 
+load_first_module_match() {
+  local query="$1"
+  if ! ensure_module_cmd; then
+    return 1
+  fi
+  local mod_name=""
+  mod_name="$(module -t avail "$query" 2>&1 | awk 'NF && $1 !~ /^-+$/ { print $1; exit }')"
+  if [[ -z "$mod_name" ]]; then
+    return 1
+  fi
+  module load "$mod_name" >/dev/null 2>&1
+}
+
 REPO_ROOT="${REPO_ROOT:-$SLURM_SUBMIT_DIR}"
 cd "$REPO_ROOT"
 
@@ -39,6 +52,45 @@ echo "SLURM_JOB_ID=${SLURM_JOB_ID:-}"
 echo "SLURM_CPUS_ON_NODE=${SLURM_CPUS_ON_NODE:-}"
 echo "SLURM_JOB_GPUS=${SLURM_JOB_GPUS:-}"
 echo "REPO_ROOT=$REPO_ROOT"
+
+if [[ -n "${MAGE_RL_RUNTIME_TARBALL:-}" ]]; then
+  if [[ ! -f "${MAGE_RL_RUNTIME_TARBALL}" ]]; then
+    echo "Artifact tarball not found: ${MAGE_RL_RUNTIME_TARBALL}" >&2
+    exit 1
+  fi
+  runtime_stage_root="${SLURM_TMPDIR:-/tmp/${USER}/mtgrl-runtime-${SLURM_JOB_ID}}"
+  runtime_extract_dir="${runtime_stage_root}/runtime"
+  rm -rf "$runtime_extract_dir"
+  mkdir -p "$runtime_extract_dir"
+  top_entry="$(tar -tzf "$MAGE_RL_RUNTIME_TARBALL" | head -n 1 || true)"
+  top_dir="${top_entry%%/*}"
+  if [[ -z "$top_dir" ]]; then
+    echo "Could not detect top-level directory in tarball: ${MAGE_RL_RUNTIME_TARBALL}" >&2
+    exit 1
+  fi
+  tar -xzf "$MAGE_RL_RUNTIME_TARBALL" -C "$runtime_extract_dir"
+  export MAGE_RL_RUNTIME_DIR="${runtime_extract_dir}/${top_dir}"
+fi
+
+if [[ -n "${MAGE_RL_RUNTIME_DIR:-}" ]]; then
+  echo "Artifact runtime dir: ${MAGE_RL_RUNTIME_DIR}"
+elif ! command -v mvn >/dev/null 2>&1; then
+  if ensure_module_cmd; then
+    module load maven >/dev/null 2>&1 || \
+    module load apache-maven >/dev/null 2>&1 || \
+    load_first_module_match maven || true
+  fi
+fi
+
+if [[ -n "${MAGE_RL_RUNTIME_DIR:-}" ]]; then
+  :
+elif command -v mvn >/dev/null 2>&1; then
+  echo "Maven executable: $(command -v mvn)"
+else
+  echo "Maven unavailable on compute node; expected 'mvn' on PATH." >&2
+  echo "Tip: verify module name on login node with: module avail maven, or provide MAGE_RL_RUNTIME_TARBALL." >&2
+  exit 1
+fi
 
 native_orch_raw="${HPC_NATIVE_ORCH:-1}"
 native_orch_norm="$(echo "$native_orch_raw" | tr '[:upper:]' '[:lower:]')"

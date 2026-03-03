@@ -2,11 +2,13 @@
 import json
 import os
 import signal
+import shlex
+import shutil
 import subprocess
 import sys
 import time
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 
 def now_utc() -> str:
@@ -127,8 +129,66 @@ class NativeOrchestrator:
         self.main_class = os.getenv("MAIN_CLASS", "mage.player.ai.rl.RLTrainer").strip() or "mage.player.ai.rl.RLTrainer"
         self.train_log_level = os.getenv("TRAIN_LOG_LEVEL", "").strip()
         self.league_promote_wr = os.getenv("LEAGUE_PROMOTE_WR", "0.55").strip() or "0.55"
+        self.runtime_dir = self.resolve_runtime_dir()
+        self.launch_mode = ""
+        self.artifact_prefix: List[str] = []
+        self.maven_prefix: List[str] = []
+        if self.runtime_dir is not None:
+            self.artifact_prefix = self.resolve_artifact_prefix()
+            self.launch_mode = "artifact"
+        else:
+            self.maven_prefix = self.resolve_maven_prefix()
+            self.launch_mode = "maven"
         self.stop_requested = False
         self.trainers: Dict[str, TrainerState] = {}
+
+    def resolve_runtime_dir(self) -> Optional[Path]:
+        raw = os.getenv("MAGE_RL_RUNTIME_DIR", "").strip()
+        if not raw:
+            return None
+        runtime_dir = resolve_path(self.repo_root, raw)
+        if not runtime_dir.exists():
+            raise RuntimeError(f"MAGE_RL_RUNTIME_DIR does not exist: {runtime_dir}")
+        app_dir = runtime_dir / "app"
+        lib_dir = runtime_dir / "lib"
+        if not app_dir.exists():
+            raise RuntimeError(f"Artifact runtime is missing app directory: {app_dir}")
+        if not any(app_dir.glob("*.jar")):
+            raise RuntimeError(f"Artifact runtime has no app jars in: {app_dir}")
+        if not lib_dir.exists():
+            raise RuntimeError(f"Artifact runtime is missing lib directory: {lib_dir}")
+        return runtime_dir
+
+    def resolve_artifact_prefix(self) -> List[str]:
+        if self.runtime_dir is None:
+            raise RuntimeError("Artifact runtime directory is not configured")
+        java_path = shutil.which("java")
+        if not java_path:
+            raise RuntimeError("Java executable not found on PATH for artifact launch mode")
+        app_jars = sorted((self.runtime_dir / "app").glob("*.jar"))
+        lib_jars = sorted((self.runtime_dir / "lib").glob("*.jar"))
+        classpath_entries = [str(p) for p in app_jars + lib_jars]
+        if not classpath_entries:
+            raise RuntimeError(f"No jars found under artifact runtime: {self.runtime_dir}")
+        classpath = os.pathsep.join(classpath_entries)
+        return [java_path, "-cp", classpath, self.main_class]
+
+    def resolve_maven_prefix(self) -> List[str]:
+        raw_cmd = os.getenv("MAGE_MVN_CMD", "").strip()
+        if raw_cmd:
+            try:
+                parsed = shlex.split(raw_cmd)
+            except Exception:
+                parsed = []
+            if parsed:
+                return parsed
+        mvn_path = shutil.which("mvn")
+        if mvn_path:
+            return [mvn_path]
+        raise RuntimeError(
+            "Maven executable not found on PATH. "
+            "Load a Maven module in the Slurm job (for example: module load maven)."
+        )
 
     def load_profiles(self) -> List[dict]:
         if not self.registry_path.exists():
@@ -178,8 +238,9 @@ class NativeOrchestrator:
         return output
 
     def build_command(self) -> List[str]:
-        return [
-            "mvn",
+        if self.launch_mode == "artifact":
+            return self.artifact_prefix + ["train"]
+        return self.maven_prefix + [
             "-q",
             "-pl",
             "Mage.Server.Plugins/Mage.Player.AIRL",
@@ -337,6 +398,9 @@ class NativeOrchestrator:
             f"minGap={self.pbt_min_winner_gap:.3f} minWinnerWr={self.pbt_min_winner_wr:.3f} "
             f"timeFallbackMinEpisodeDelta={self.pbt_time_fallback_episode_delta}"
         )
+        log(f"Trainer launch mode: {self.launch_mode}")
+        if self.runtime_dir is not None:
+            log(f"Artifact runtime dir: {self.runtime_dir}")
         log("Native orchestrator mode active; PBT exploit/copy loop is disabled in this mode.")
         log(f"Meta opponent decklist: {opponent_decklist}")
         log(f"Configured NumGameRunners per profile={runners_per_profile}")
@@ -412,7 +476,11 @@ class NativeOrchestrator:
 
 
 def main() -> int:
-    orchestrator = NativeOrchestrator()
+    try:
+        orchestrator = NativeOrchestrator()
+    except Exception as exc:
+        log(f"FATAL: {exc}")
+        return 1
 
     def _signal_handler(signum, _frame):
         log(f"Signal received: {signum}; shutting down")
@@ -420,7 +488,11 @@ def main() -> int:
 
     signal.signal(signal.SIGINT, _signal_handler)
     signal.signal(signal.SIGTERM, _signal_handler)
-    return orchestrator.run()
+    try:
+        return orchestrator.run()
+    except Exception as exc:
+        log(f"FATAL: {exc}")
+        return 1
 
 
 if __name__ == "__main__":

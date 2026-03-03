@@ -151,6 +151,11 @@ echo "NumGameRunners (per profile): $runners_per_profile" | tee -a "$orchestrato
 echo "PBT gating: firstMinEp=$pbt_first_exploit_min_ep deltaPerProfile=$pbt_episode_delta maxIntervalMin=$pbt_interval" | tee -a "$orchestrator_log"
 echo "MAGE_DB_DIR: $MAGE_DB_DIR" | tee -a "$orchestrator_log"
 echo "MTG_VENV_PATH: $MTG_VENV_PATH" | tee -a "$orchestrator_log"
+if [[ -n "${MAGE_RL_RUNTIME_DIR:-}" ]]; then
+  echo "MAGE_RL_RUNTIME_DIR: $MAGE_RL_RUNTIME_DIR" | tee -a "$orchestrator_log"
+elif [[ -n "${MAGE_RL_RUNTIME_TARBALL:-}" ]]; then
+  echo "MAGE_RL_RUNTIME_TARBALL: $MAGE_RL_RUNTIME_TARBALL" | tee -a "$orchestrator_log"
+fi
 echo "Reports dir: $reports_dir" | tee -a "$orchestrator_log"
 if [[ "$use_native_orch" -eq 1 ]]; then
   echo "Orchestrator mode: native (python)" | tee -a "$orchestrator_log"
