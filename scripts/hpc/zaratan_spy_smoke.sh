@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Run this on a Zaratan login node after syncing the repo.
-cd /home/jmaior/mage
+# Run this on a Zaratan login node from any repo checkout path.
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$repo_root"
 
-BUNDLE="$(ls -1t /home/jmaior/mage/local-training/hpc/bundles/rl-runtime-*.tar.gz 2>/dev/null | head -n 1 || true)"
+BUNDLE_DIR="${BUNDLE_DIR:-$repo_root/local-training/hpc/bundles}"
+BUNDLE="$(ls -1t "$BUNDLE_DIR"/rl-runtime-*.tar.gz 2>/dev/null | head -n 1 || true)"
 if [[ -z "${BUNDLE}" ]]; then
-  echo "No runtime bundle found under /home/jmaior/mage/local-training/hpc/bundles/" >&2
+  echo "No runtime bundle found under $BUNDLE_DIR" >&2
   echo "Build/upload one first with scripts/hpc/build_rl_runtime_bundle.ps1" >&2
   exit 1
 fi
