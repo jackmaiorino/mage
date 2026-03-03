@@ -26,6 +26,23 @@
   - `scontrol show partition`
   - `sinfo -o "%P %a %l %D %c %m %G"`
 
+## Zaratan Session Learnings (2026-03)
+- Keep one canonical remote checkout path per session. In this environment the active path was `/home/jmaior/scratch.msml603/jmaior/mage` (not `/scratch.msml603/jmaior/mage`).
+- Keep artifacts (runtime bundles, logs, checkpoints, DB) in scratch-backed project paths, and submit/watch jobs from the same checkout that owns those artifact paths.
+- `scp` exit code interpretation:
+  - `255`: authentication failure (before transfer), often keyboard-interactive / Duo flow mismatch.
+  - `1`: transfer path failure (for example remote destination directory does not exist).
+- For Zaratan SSH/SCP from Windows OpenSSH, `keyboard-interactive` + Duo works; disabling `GSSAPIAuthentication` may reduce auth confusion.
+- PowerShell multiline paste frequently breaks long commands (split tokens like `TRAIN_PROFILES` or local file names). Prefer single-line commands or script files for submit/upload.
+- In PowerShell, `$HOME` expands locally before reaching remote shell unless escaped/quoted carefully; avoid relying on inline `$HOME` in remote command strings when debugging paths.
+- For runtime-bundle upload via `scripts/hpc/build_rl_runtime_bundle.ps1`:
+  - Set `-ScpCreateRemoteDir:$true` when targeting new remote directories.
+  - Ensure `-ScpDestination` exactly matches the active remote checkout path.
+- Smoke-test baseline used here:
+  - Submit with `HPC_NATIVE_ORCH=1`, `TOTAL_EPISODES=40`, `TRAIN_PROFILES=1`, short walltime.
+  - Monitor with `scripts/hpc/watch_job.sh <job_id>`.
+- Use `scripts/hpc/zaratan_spy_smoke.sh` to avoid copy/paste breakage. It auto-selects newest bundle from `BUNDLE_DIR` (default: `<repo>/local-training/hpc/bundles`) and submits then watches the job.
+
 ## Coding Style & Naming Conventions
 - Java source/target compatibility is `1.8`; keep files UTF-8 encoded.
 - Match existing style: 4-space indentation, same-line braces, concise class-level Javadocs.

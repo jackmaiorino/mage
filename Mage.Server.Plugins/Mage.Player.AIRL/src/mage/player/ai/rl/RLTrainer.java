@@ -3578,6 +3578,12 @@ public class RLTrainer {
         // If explicit list is provided, use it
         if (DECK_LIST_FILE != null && !DECK_LIST_FILE.trim().isEmpty()) {
             Path listPath = Paths.get(DECK_LIST_FILE);
+            if (Files.exists(listPath) && Files.isRegularFile(listPath)) {
+                String fileName = listPath.getFileName().toString().toLowerCase();
+                if (fileName.endsWith(".dek") || fileName.endsWith(".dck")) {
+                    return Collections.singletonList(listPath.toAbsolutePath().normalize());
+                }
+            }
             Path base = listPath.toAbsolutePath().getParent();
             if (base == null) {
                 base = Paths.get(System.getProperty("user.dir"));
@@ -3616,6 +3622,12 @@ public class RLTrainer {
         String dl = deckListFileOverride == null ? "" : deckListFileOverride.trim();
         if (!dl.isEmpty()) {
             Path listPath = Paths.get(dl);
+            if (Files.exists(listPath) && Files.isRegularFile(listPath)) {
+                String fileName = listPath.getFileName().toString().toLowerCase();
+                if (fileName.endsWith(".dek") || fileName.endsWith(".dck")) {
+                    return Collections.singletonList(listPath.toAbsolutePath().normalize());
+                }
+            }
             Path base = listPath.toAbsolutePath().getParent();
             if (base == null) {
                 base = Paths.get(System.getProperty("user.dir"));
