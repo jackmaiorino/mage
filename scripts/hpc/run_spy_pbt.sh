@@ -59,6 +59,16 @@ telemetry_log="$reports_dir/telemetry.log"
 export PY_BRIDGE_CREATE_VENV="${PY_BRIDGE_CREATE_VENV:-0}"
 export PY_BRIDGE_INSTALL_DEPS="${PY_BRIDGE_INSTALL_DEPS:-0}"
 export MAGE_DB_AUTO_SERVER="false"
+# Avoid cross-job localhost Py4J port collisions when multiple jobs land on the same node.
+# Caller can still override by setting PY4J_BASE_PORT explicitly.
+if [[ -z "${PY4J_BASE_PORT:-}" ]]; then
+  job_num="${SLURM_JOB_ID:-0}"
+  if [[ "$job_num" =~ ^[0-9]+$ ]]; then
+    export PY4J_BASE_PORT="$((25000 + (job_num % 30000)))"
+  else
+    export PY4J_BASE_PORT="25334"
+  fi
+fi
 if [[ -n "${SLURM_TMPDIR:-}" ]]; then
   export MAGE_DB_DIR="$SLURM_TMPDIR/rl-db"
 else
