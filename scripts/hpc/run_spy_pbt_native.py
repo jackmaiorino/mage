@@ -5,7 +5,6 @@ import signal
 import subprocess
 import sys
 import time
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List
 
@@ -58,23 +57,37 @@ def normalize_truthy(value: object, default: bool = True) -> bool:
     return default
 
 
-@dataclass
 class TrainerState:
-    entry: dict
-    slot: int
-    profile: str
-    metrics_port: int
-    py4j_base_port: int
-    runners_per_profile: int
-    opponent_decklist: Path
-    command: List[str]
-    env: Dict[str, str]
-    stdout_handle: object
-    stderr_handle: object
-    process: subprocess.Popen
-    restart_count: int = 0
-    consecutive_failures: int = 0
-    completed: bool = False
+    def __init__(
+        self,
+        entry: dict,
+        slot: int,
+        profile: str,
+        metrics_port: int,
+        py4j_base_port: int,
+        runners_per_profile: int,
+        opponent_decklist: Path,
+        command: List[str],
+        env: Dict[str, str],
+        stdout_handle: object,
+        stderr_handle: object,
+        process: subprocess.Popen,
+    ) -> None:
+        self.entry = entry
+        self.slot = slot
+        self.profile = profile
+        self.metrics_port = metrics_port
+        self.py4j_base_port = py4j_base_port
+        self.runners_per_profile = runners_per_profile
+        self.opponent_decklist = opponent_decklist
+        self.command = command
+        self.env = env
+        self.stdout_handle = stdout_handle
+        self.stderr_handle = stderr_handle
+        self.process = process
+        self.restart_count = 0
+        self.consecutive_failures = 0
+        self.completed = False
 
 
 class NativeOrchestrator:
