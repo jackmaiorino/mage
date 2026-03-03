@@ -40,20 +40,32 @@ echo "SLURM_CPUS_ON_NODE=${SLURM_CPUS_ON_NODE:-}"
 echo "SLURM_JOB_GPUS=${SLURM_JOB_GPUS:-}"
 echo "REPO_ROOT=$REPO_ROOT"
 
-if ! command -v pwsh >/dev/null 2>&1 && ! command -v powershell >/dev/null 2>&1; then
-  if ensure_module_cmd; then
-    module load powershell >/dev/null 2>&1 || module load pwsh >/dev/null 2>&1 || true
-  fi
+native_orch_raw="${HPC_NATIVE_ORCH:-1}"
+native_orch_norm="$(echo "$native_orch_raw" | tr '[:upper:]' '[:lower:]')"
+use_native_orch=0
+if [[ "$native_orch_norm" == "1" || "$native_orch_norm" == "true" || "$native_orch_norm" == "yes" ]]; then
+  use_native_orch=1
 fi
+export HPC_NATIVE_ORCH="${HPC_NATIVE_ORCH:-1}"
 
-if command -v pwsh >/dev/null 2>&1; then
-  echo "PowerShell executable: $(command -v pwsh)"
-elif command -v powershell >/dev/null 2>&1; then
-  echo "PowerShell executable: $(command -v powershell)"
+if [[ "$use_native_orch" -eq 1 ]]; then
+  echo "Orchestrator mode: native (python)"
 else
-  echo "PowerShell unavailable on compute node; expected 'pwsh' or 'powershell' on PATH." >&2
-  echo "Tip: verify module name on login node with: module avail powershell" >&2
-  exit 1
+  if ! command -v pwsh >/dev/null 2>&1 && ! command -v powershell >/dev/null 2>&1; then
+    if ensure_module_cmd; then
+      module load powershell >/dev/null 2>&1 || module load pwsh >/dev/null 2>&1 || true
+    fi
+  fi
+
+  if command -v pwsh >/dev/null 2>&1; then
+    echo "PowerShell executable: $(command -v pwsh)"
+  elif command -v powershell >/dev/null 2>&1; then
+    echo "PowerShell executable: $(command -v powershell)"
+  else
+    echo "PowerShell unavailable on compute node; expected 'pwsh' or 'powershell' on PATH." >&2
+    echo "Tip: set HPC_NATIVE_ORCH=1 (default) or verify module name on login node with: module avail powershell" >&2
+    exit 1
+  fi
 fi
 
 export MTG_VENV_PATH="${MTG_VENV_PATH:-$REPO_ROOT/.mtgrl_venv_hpc}"

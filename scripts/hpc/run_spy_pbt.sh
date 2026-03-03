@@ -94,7 +94,14 @@ else
   fi
 fi
 
-if [[ -z "$shell_exe" ]]; then
+native_orch_raw="${HPC_NATIVE_ORCH:-1}"
+native_orch_norm="$(echo "$native_orch_raw" | tr '[:upper:]' '[:lower:]')"
+use_native_orch=0
+if [[ "$native_orch_norm" == "1" || "$native_orch_norm" == "true" || "$native_orch_norm" == "yes" ]]; then
+  use_native_orch=1
+fi
+
+if [[ "$use_native_orch" -eq 0 && -z "$shell_exe" ]]; then
   echo "PowerShell is required to run rl-league-run.ps1; expected 'pwsh' or 'powershell' on PATH." >&2
   exit 1
 fi
@@ -145,21 +152,30 @@ echo "PBT gating: firstMinEp=$pbt_first_exploit_min_ep deltaPerProfile=$pbt_epis
 echo "MAGE_DB_DIR: $MAGE_DB_DIR" | tee -a "$orchestrator_log"
 echo "MTG_VENV_PATH: $MTG_VENV_PATH" | tee -a "$orchestrator_log"
 echo "Reports dir: $reports_dir" | tee -a "$orchestrator_log"
+if [[ "$use_native_orch" -eq 1 ]]; then
+  echo "Orchestrator mode: native (python)" | tee -a "$orchestrator_log"
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "python3 is required for native orchestrator mode" >&2
+    exit 1
+  fi
+  python3 "$repo_root/scripts/hpc/run_spy_pbt_native.py" 2>&1 | tee -a "$orchestrator_log"
+else
+  echo "Orchestrator mode: powershell" | tee -a "$orchestrator_log"
+  ps_command="& '$repo_root/scripts/rl-league-run.ps1' \
+    -RegistryPath '$registry_path' \
+    -SequentialTraining \$false \
+    -EnablePbt \$true \
+    -PbtExploitIntervalMinutes $pbt_interval \
+    -PbtMinEpisodesBeforeFirstExploit $pbt_first_exploit_min_ep \
+    -PbtMinEpisodeDeltaPerProfile $pbt_episode_delta \
+    -PbtMutationPct $pbt_mutation_pct \
+    -PbtMinPopulationSize $pbt_min_population \
+    -GameLogFrequency $game_log_frequency \
+    -StallRestartMinutes $stall_restart_minutes \
+    -EvalEveryMinutes $eval_every_minutes \
+    -NoEval \
+    -NumGameRunners $runners_per_profile \
+    -TotalEpisodes $total_episodes"
 
-ps_command="& '$repo_root/scripts/rl-league-run.ps1' \
-  -RegistryPath '$registry_path' \
-  -SequentialTraining \$false \
-  -EnablePbt \$true \
-  -PbtExploitIntervalMinutes $pbt_interval \
-  -PbtMinEpisodesBeforeFirstExploit $pbt_first_exploit_min_ep \
-  -PbtMinEpisodeDeltaPerProfile $pbt_episode_delta \
-  -PbtMutationPct $pbt_mutation_pct \
-  -PbtMinPopulationSize $pbt_min_population \
-  -GameLogFrequency $game_log_frequency \
-  -StallRestartMinutes $stall_restart_minutes \
-  -EvalEveryMinutes $eval_every_minutes \
-  -NoEval \
-  -NumGameRunners $runners_per_profile \
-  -TotalEpisodes $total_episodes"
-
-"$shell_exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "$ps_command" 2>&1 | tee -a "$orchestrator_log"
+  "$shell_exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "$ps_command" 2>&1 | tee -a "$orchestrator_log"
+fi
