@@ -138,6 +138,15 @@ export STALL_RESTART_MINUTES="${STALL_RESTART_MINUTES:-25}"
 export GAME_LOG_FREQUENCY="${GAME_LOG_FREQUENCY:-500}"
 export TRAIN_PROFILES="${TRAIN_PROFILES:-3}"
 export CPU_HEADROOM="${CPU_HEADROOM:-4}"
-export INFER_WORKERS="${INFER_WORKERS:-1}"
+if [[ -z "${INFER_WORKERS:-}" ]]; then
+  tp="${TRAIN_PROFILES:-3}"
+  if [[ "$tp" =~ ^[0-9]+$ ]] && (( tp > 1 )); then
+    export INFER_WORKERS="0"
+  else
+    export INFER_WORKERS="1"
+  fi
+else
+  export INFER_WORKERS
+fi
 
 bash "$REPO_ROOT/scripts/hpc/run_spy_pbt.sh"
