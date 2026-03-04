@@ -62,6 +62,97 @@ PY
   echo
 fi
 
+if [[ -f "$pbt_state" ]]; then
+  echo "== Throughput (Games/sec) =="
+  python3 - "$repo_root" "$pbt_state" <<'PY'
+import csv
+import json
+import pathlib
+import sys
+
+repo_root = pathlib.Path(sys.argv[1])
+state_path = pathlib.Path(sys.argv[2])
+stats_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
+recent_window = 200
+
+try:
+    state = json.load(open(state_path, "r", encoding="utf-8"))
+except Exception as exc:
+    print(f"failed to parse pbt state: {exc}")
+    raise SystemExit(0)
+
+profiles = []
+for item in state.get("profiles", []):
+    name = str(item.get("profile", "")).strip()
+    if name:
+        profiles.append(name)
+
+if not profiles:
+    print("no active profiles in pbt_state yet")
+    raise SystemExit(0)
+
+agg_recent_eps = 0
+agg_recent_sec = 0.0
+agg_total_eps = 0
+agg_total_sec = 0.0
+
+for profile in profiles:
+    stats_csv = stats_root / profile / "logs/stats/training_stats.csv"
+    if not stats_csv.exists():
+        print(f"{profile}: no stats yet")
+        continue
+
+    episode_seconds = []
+    try:
+        with stats_csv.open("r", encoding="utf-8", errors="replace") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                raw = row.get("episode_seconds", "")
+                try:
+                    sec = float(raw)
+                except Exception:
+                    continue
+                if sec > 0:
+                    episode_seconds.append(sec)
+    except Exception as exc:
+        print(f"{profile}: failed to read stats ({exc})")
+        continue
+
+    if not episode_seconds:
+        print(f"{profile}: no episode_seconds data yet")
+        continue
+
+    total_eps = len(episode_seconds)
+    total_sec = sum(episode_seconds)
+    recent = episode_seconds[-recent_window:]
+    recent_eps = len(recent)
+    recent_sec = sum(recent)
+
+    total_gps = (total_eps / total_sec) if total_sec > 0 else 0.0
+    recent_gps = (recent_eps / recent_sec) if recent_sec > 0 else 0.0
+
+    agg_recent_eps += recent_eps
+    agg_recent_sec += recent_sec
+    agg_total_eps += total_eps
+    agg_total_sec += total_sec
+
+    print(
+        f"{profile}: recent({recent_eps})={recent_gps:.3f} g/s  "
+        f"lifetime={total_gps:.3f} g/s  episodes={total_eps}"
+    )
+
+if agg_recent_sec > 0:
+    print(f"aggregate_recent({agg_recent_eps})={(agg_recent_eps / agg_recent_sec):.3f} g/s")
+else:
+    print("aggregate_recent: no data")
+if agg_total_sec > 0:
+    print(f"aggregate_lifetime({agg_total_eps})={(agg_total_eps / agg_total_sec):.3f} g/s")
+else:
+    print("aggregate_lifetime: no data")
+PY
+  echo
+fi
+
 orchestrator_log=""
 if [[ -n "$job_dir" && -f "$job_dir/orchestrator.log" ]]; then
   orchestrator_log="$job_dir/orchestrator.log"
@@ -93,4 +184,3 @@ fi
 
 echo "== tail -F logs =="
 tail -n 80 -F "${files_to_tail[@]}"
-
