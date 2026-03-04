@@ -183,7 +183,7 @@ class NativeOrchestrator:
         self.restart_backoff_max = max(self.restart_backoff, env_int("RESTART_BACKOFF_MAX_SECONDS", 60))
         self.max_restart_attempts = max(1, env_int("MAX_RESTART_ATTEMPTS_PER_PROFILE", 8))
         self.trainer_stop_grace_seconds = max(0, env_int("TRAINER_STOP_GRACE_SECONDS", 10))
-        self.trainer_start_stagger_seconds = max(0, env_int("TRAINER_START_STAGGER_SECONDS", 8))
+        self.trainer_start_stagger_seconds = max(0, env_int("TRAINER_START_STAGGER_SECONDS", 20))
         self.game_log_frequency = env_int("GAME_LOG_FREQUENCY", 500)
         self.eval_every_minutes = env_int("EVAL_EVERY_MINUTES", 180)
         self.stall_restart_minutes = env_int("STALL_RESTART_MINUTES", 25)

@@ -54,8 +54,8 @@ public class PythonMLBridge implements AutoCloseable {
     private static final int PROCESS_KILL_WAIT_MS = 2000;
     private static final int MAX_INIT_RETRIES = 3;
     private static final int INIT_RETRY_DELAY_MS = 1000;
-    private static final int MAX_CONNECTION_RETRIES = 15;
-    private static final int CONNECTION_RETRY_DELAY_MS = 2000;
+    private static final int MAX_CONNECTION_RETRIES = Math.max(1, parseIntEnv("PY_BRIDGE_CONNECT_RETRIES", 15));
+    private static final int CONNECTION_RETRY_DELAY_MS = Math.max(100, parseIntEnv("PY_BRIDGE_CONNECT_RETRY_DELAY_MS", 2000));
 
     // Singleton instance with volatile for thread safety
     private static volatile PythonMLBridge instance;
@@ -569,6 +569,15 @@ public class PythonMLBridge implements AutoCloseable {
         Exception lastException = null;
 
         while (retries < MAX_CONNECTION_RETRIES) {
+            // If Python crashed, fail fast with a concrete error instead of spinning on connection-refused.
+            if (pythonProcess != null) {
+                try {
+                    int exitCode = pythonProcess.exitValue();
+                    throw new RuntimeException("Python process exited before gateway became ready (exit code: " + exitCode + ")");
+                } catch (IllegalThreadStateException ignored) {
+                    // still running
+                }
+            }
             try {
                 // IMPORTANT (Windows): avoid binding a Java callback server on a fixed port (25333),
                 // which frequently gets stuck "in use" after aborted runs.
