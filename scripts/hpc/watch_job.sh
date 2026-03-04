@@ -67,13 +67,16 @@ if [[ -f "$pbt_state" ]]; then
   python3 - "$repo_root" "$pbt_state" <<'PY'
 import csv
 import json
+import re
 import pathlib
 import sys
 
 repo_root = pathlib.Path(sys.argv[1])
 state_path = pathlib.Path(sys.argv[2])
 stats_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
+trainers_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/trainers"
 recent_window = 200
+eps_re = re.compile(r"\((?:run=(\d+),\s*)?([0-9]*\.?[0-9]+)\s+eps/s\)")
 
 try:
     state = json.load(open(state_path, "r", encoding="utf-8"))
@@ -91,17 +94,47 @@ if not profiles:
     print("no active profiles in pbt_state yet")
     raise SystemExit(0)
 
-agg_recent_eps = 0
-agg_recent_sec = 0.0
-agg_total_eps = 0
-agg_total_sec = 0.0
+def tail_lines(path: pathlib.Path, max_lines: int = 400):
+    if not path.exists():
+        return []
+    try:
+        with path.open("rb") as handle:
+            handle.seek(0, 2)
+            file_size = handle.tell()
+            block = 4096
+            data = b""
+            lines = []
+            pos = file_size
+            while pos > 0 and len(lines) <= max_lines:
+                read = min(block, pos)
+                pos -= read
+                handle.seek(pos)
+                data = handle.read(read) + data
+                lines = data.splitlines()
+        return [line.decode("utf-8", errors="replace") for line in lines[-max_lines:]]
+    except Exception:
+        return []
 
-for profile in profiles:
+
+def latest_heartbeat_eps(profile: str):
+    stdout_log = trainers_root / f"{profile}.stdout.log"
+    lines = tail_lines(stdout_log, max_lines=600)
+    for line in reversed(lines):
+        m = eps_re.search(line)
+        if m:
+            run_ep = m.group(1)
+            try:
+                eps = float(m.group(2))
+            except Exception:
+                continue
+            return eps, int(run_ep) if run_ep else None
+    return None, None
+
+
+def duration_based_rates(profile: str):
     stats_csv = stats_root / profile / "logs/stats/training_stats.csv"
     if not stats_csv.exists():
-        print(f"{profile}: no stats yet")
-        continue
-
+        return None
     episode_seconds = []
     try:
         with stats_csv.open("r", encoding="utf-8", errors="replace") as handle:
@@ -114,41 +147,78 @@ for profile in profiles:
                     continue
                 if sec > 0:
                     episode_seconds.append(sec)
-    except Exception as exc:
-        print(f"{profile}: failed to read stats ({exc})")
-        continue
-
+    except Exception:
+        return None
     if not episode_seconds:
-        print(f"{profile}: no episode_seconds data yet")
-        continue
-
+        return None
     total_eps = len(episode_seconds)
     total_sec = sum(episode_seconds)
     recent = episode_seconds[-recent_window:]
     recent_eps = len(recent)
     recent_sec = sum(recent)
-
     total_gps = (total_eps / total_sec) if total_sec > 0 else 0.0
     recent_gps = (recent_eps / recent_sec) if recent_sec > 0 else 0.0
+    return {
+        "total_eps": total_eps,
+        "total_sec": total_sec,
+        "recent_eps": recent_eps,
+        "recent_sec": recent_sec,
+        "total_gps": total_gps,
+        "recent_gps": recent_gps,
+    }
 
-    agg_recent_eps += recent_eps
-    agg_recent_sec += recent_sec
-    agg_total_eps += total_eps
-    agg_total_sec += total_sec
 
-    print(
-        f"{profile}: recent({recent_eps})={recent_gps:.3f} g/s  "
-        f"lifetime={total_gps:.3f} g/s  episodes={total_eps}"
-    )
+agg_heartbeat = 0.0
+heartbeat_profiles = 0
+agg_recent_eps = 0
+agg_recent_sec = 0.0
+agg_total_eps = 0
+agg_total_sec = 0.0
+
+for profile in profiles:
+    heartbeat_eps, run_ep = latest_heartbeat_eps(profile)
+    d = duration_based_rates(profile)
+
+    line = f"{profile}: "
+    if heartbeat_eps is not None:
+        agg_heartbeat += heartbeat_eps
+        heartbeat_profiles += 1
+        if run_ep is None:
+            line += f"heartbeat={heartbeat_eps:.3f} g/s"
+        else:
+            line += f"heartbeat={heartbeat_eps:.3f} g/s (run={run_ep})"
+    else:
+        line += "heartbeat=n/a"
+
+    if d is not None:
+        agg_recent_eps += int(d["recent_eps"])
+        agg_recent_sec += float(d["recent_sec"])
+        agg_total_eps += int(d["total_eps"])
+        agg_total_sec += float(d["total_sec"])
+        line += (
+            f"  serial_recent({int(d['recent_eps'])})={float(d['recent_gps']):.3f} g/s"
+            f"  episodes={int(d['total_eps'])}"
+        )
+    else:
+        line += "  serial_recent=n/a"
+    print(line)
+
+if heartbeat_profiles > 0:
+    print(f"aggregate_heartbeat({heartbeat_profiles} profiles)={agg_heartbeat:.3f} g/s")
+else:
+    print("aggregate_heartbeat: no data")
 
 if agg_recent_sec > 0:
-    print(f"aggregate_recent({agg_recent_eps})={(agg_recent_eps / agg_recent_sec):.3f} g/s")
+    print(f"aggregate_serial_recent({agg_recent_eps})={(agg_recent_eps / agg_recent_sec):.3f} g/s")
 else:
-    print("aggregate_recent: no data")
+    print("aggregate_serial_recent: no data")
+
 if agg_total_sec > 0:
-    print(f"aggregate_lifetime({agg_total_eps})={(agg_total_eps / agg_total_sec):.3f} g/s")
+    print(f"aggregate_serial_lifetime({agg_total_eps})={(agg_total_eps / agg_total_sec):.3f} g/s")
 else:
-    print("aggregate_lifetime: no data")
+    print("aggregate_serial_lifetime: no data")
+
+print("note: serial_* uses sum(episode_seconds) and underestimates wall-clock throughput when many games run in parallel.")
 PY
   echo
 fi
