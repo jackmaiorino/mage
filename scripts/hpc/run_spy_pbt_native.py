@@ -176,6 +176,8 @@ class NativeOrchestrator:
         self.metrics_port_base = env_int("METRICS_PORT_BASE", 9100)
         self.py4j_base_port = env_int("PY4J_BASE_PORT", 25334)
         self.py4j_port_stride = max(1, env_int("PY4J_PORT_STRIDE", 50))
+        self.py4j_kill_stale_on_start = env_bool("PY4J_KILL_STALE_ON_START", True)
+        self.py4j_stale_kill_grace_seconds = max(1, env_int("PY4J_STALE_KILL_GRACE_SECONDS", 5))
         self.poll_seconds = max(2, env_int("POLL_SECONDS", 30))
         self.restart_backoff = max(1, env_int("RESTART_BACKOFF_SECONDS", 5))
         self.restart_backoff_max = max(self.restart_backoff, env_int("RESTART_BACKOFF_MAX_SECONDS", 60))
@@ -368,6 +370,7 @@ class NativeOrchestrator:
         profile = str(entry["profile"]).strip()
         metrics_port = self.metrics_port_base + slot
         py4j_base_port = self.py4j_base_port + (slot * self.py4j_port_stride)
+        self.cleanup_stale_py4j_port(profile, py4j_base_port)
         trainer_db_dir = self.repo_root / "local-training/rl-db" / profile
         trainer_db_dir.mkdir(parents=True, exist_ok=True)
         self.trainer_logs_dir.mkdir(parents=True, exist_ok=True)
@@ -450,6 +453,88 @@ class NativeOrchestrator:
             effective_train_env=train_env,
             effective_seed=seed_now,
         )
+
+    @staticmethod
+    def is_pid_alive(pid: int) -> bool:
+        if pid <= 0:
+            return False
+        try:
+            os.kill(pid, 0)
+            return True
+        except ProcessLookupError:
+            return False
+        except PermissionError:
+            return True
+        except Exception:
+            return False
+
+    def find_stale_py4j_pids(self, py4j_port: int) -> List[int]:
+        pattern = f"py4j_entry_point.py --port {py4j_port}"
+        try:
+            out = subprocess.check_output(
+                ["pgrep", "-f", pattern],
+                text=True,
+                stderr=subprocess.DEVNULL,
+            )
+        except Exception:
+            return []
+
+        pids: List[int] = []
+        for raw in out.splitlines():
+            text = raw.strip()
+            if not text:
+                continue
+            try:
+                pid = int(text)
+            except Exception:
+                continue
+            if pid == os.getpid() or pid <= 0:
+                continue
+            pids.append(pid)
+        return sorted(set(pids))
+
+    def cleanup_stale_py4j_port(self, profile: str, py4j_port: int) -> None:
+        if not self.py4j_kill_stale_on_start:
+            return
+
+        stale_pids = self.find_stale_py4j_pids(py4j_port)
+        if not stale_pids:
+            return
+
+        pid_text = ",".join(str(pid) for pid in stale_pids)
+        log(
+            f"WARNING: Found stale py4j_entry_point process(es) "
+            f"profile={profile} port={py4j_port} pids={pid_text}; terminating before restart"
+        )
+
+        for pid in stale_pids:
+            try:
+                os.kill(pid, signal.SIGTERM)
+            except Exception:
+                pass
+
+        deadline = time.time() + float(self.py4j_stale_kill_grace_seconds)
+        while time.time() < deadline:
+            remaining = [pid for pid in stale_pids if self.is_pid_alive(pid)]
+            if not remaining:
+                return
+            time.sleep(0.2)
+
+        remaining = [pid for pid in stale_pids if self.is_pid_alive(pid)]
+        if not remaining:
+            return
+
+        for pid in remaining:
+            try:
+                os.kill(pid, signal.SIGKILL)
+            except Exception:
+                pass
+        remaining_after = [pid for pid in remaining if self.is_pid_alive(pid)]
+        if remaining_after:
+            log(
+                f"WARNING: Could not kill all stale py4j processes "
+                f"profile={profile} port={py4j_port} pids={','.join(str(pid) for pid in remaining_after)}"
+            )
 
     def stop_trainer(self, state: TrainerState) -> None:
         proc = state.process

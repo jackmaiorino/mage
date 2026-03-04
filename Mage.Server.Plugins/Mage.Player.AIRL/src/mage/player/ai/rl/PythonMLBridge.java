@@ -130,6 +130,13 @@ public class PythonMLBridge implements AutoCloseable {
         } catch (Exception e) {
             logger.severe("Failed to initialize Python ML Bridge: " + e.getMessage());
             e.printStackTrace();
+            try {
+                // If startup fails after spawning Python, tear down partially initialized resources
+                // so restart loops do not collide with a stale process holding the same port.
+                shutdown();
+            } catch (Exception shutdownError) {
+                logger.warning("Error during failed-init bridge cleanup: " + shutdownError.getMessage());
+            }
             throw new RuntimeException("Failed to initialize Python ML Bridge", e);
         }
     }
