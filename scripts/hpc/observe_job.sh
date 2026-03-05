@@ -33,7 +33,7 @@ sync_pid_file="$repo_root/monitoring/file_sd/target_sync.pid"
 mkdir -p "$(dirname "$targets_path")"
 
 # Seed targets once before starting the loop.
-METRICS_HOST="$node" "$repo_root/scripts/hpc/refresh_prometheus_targets.sh" "$status_path" "$targets_path" >/dev/null
+METRICS_HOST="$node" bash "$repo_root/scripts/hpc/refresh_prometheus_targets.sh" "$status_path" "$targets_path" >/dev/null
 
 # Start or reuse background target sync loop.
 if [[ -f "$sync_pid_file" ]]; then
