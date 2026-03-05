@@ -117,17 +117,73 @@ def tail_lines(path: pathlib.Path, max_lines: int = 400):
 
 
 def latest_heartbeat_eps(profile: str):
-    stdout_log = trainers_root / f"{profile}.stdout.log"
-    lines = tail_lines(stdout_log, max_lines=600)
-    for line in reversed(lines):
-        m = eps_re.search(line)
-        if m:
+    def read_tail_bytes(path: pathlib.Path, byte_count: int):
+        try:
+            size = path.stat().st_size
+            if size <= 0:
+                return ""
+            with path.open("rb") as handle:
+                start = max(0, size - byte_count)
+                handle.seek(start)
+                return handle.read().decode("utf-8", errors="replace")
+        except Exception:
+            return ""
+
+    def extract_eps_from_text(text: str):
+        for line in reversed(text.splitlines()):
+            if "eps/s" not in line:
+                continue
+            m = eps_re.search(line)
+            if not m:
+                continue
             run_ep = m.group(1)
             try:
                 eps = float(m.group(2))
             except Exception:
                 continue
             return eps, int(run_ep) if run_ep else None
+        return None, None
+
+    # Logs can be extremely chatty; scan progressively deeper from file end
+    # so we still find the latest heartbeat/progress line.
+    log_candidates = [
+        trainers_root / f"{profile}.stdout.log",
+        trainers_root / f"{profile}.stderr.log",
+    ]
+    for log_path in log_candidates:
+        if not log_path.exists():
+            continue
+        probe_bytes = 128 * 1024
+        max_bytes = 16 * 1024 * 1024
+        while probe_bytes <= max_bytes:
+            text = read_tail_bytes(log_path, probe_bytes)
+            if text:
+                eps, run = extract_eps_from_text(text)
+                if eps is not None:
+                    return eps, run
+            try:
+                size = log_path.stat().st_size
+            except Exception:
+                break
+            if probe_bytes >= size:
+                break
+            probe_bytes *= 2
+
+    # Fallback for tiny logs or unexpected encodings.
+    stdout_log = trainers_root / f"{profile}.stdout.log"
+    lines = tail_lines(stdout_log, max_lines=1200)
+    for line in reversed(lines):
+        if "eps/s" not in line:
+            continue
+        m = eps_re.search(line)
+        if not m:
+            continue
+        run_ep = m.group(1)
+        try:
+            eps = float(m.group(2))
+        except Exception:
+            continue
+        return eps, int(run_ep) if run_ep else None
     return None, None
 
 

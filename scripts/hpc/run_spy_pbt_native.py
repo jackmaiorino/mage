@@ -170,6 +170,7 @@ class NativeOrchestrator:
         self.trainer_logs_dir = self.reports_root / "trainers"
         self.generated_decklists_dir = self.reports_root / "generated_decklists"
         self.pbt_state_path = self.reports_root / "pbt_state.json"
+        self.orchestrator_status_path = self.reports_root / "orchestrator_status.json"
         self.total_episodes = env_int("TOTAL_EPISODES", 1_000_000)
         self.train_profiles = env_int("TRAIN_PROFILES", 3)
         self.cpu_headroom = env_int("CPU_HEADROOM", 4)
@@ -216,6 +217,7 @@ class NativeOrchestrator:
         self.pbt_group_state: Dict[str, Dict[str, Any]] = {}
         self.last_pbt_at: Optional[datetime] = None
         self.selected_profiles: List[Dict[str, Any]] = []
+        self.active_profiles: List[Dict[str, Any]] = []
 
     def resolve_runtime_dir(self) -> Optional[Path]:
         raw = os.getenv("MAGE_RL_RUNTIME_DIR", "").strip()
@@ -992,6 +994,93 @@ class NativeOrchestrator:
         }
         self.pbt_state_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
+    def write_orchestrator_status(self, snapshots: Dict[str, Dict[str, Any]], note: str) -> None:
+        self.reports_root.mkdir(parents=True, exist_ok=True)
+
+        trainer_rows: List[Dict[str, Any]] = []
+        for entry in self.active_profiles:
+            profile = str(entry.get("profile", "")).strip()
+            if not profile:
+                continue
+            state = self.trainers.get(profile)
+            proc = state.process if state is not None else None
+            running = False
+            pid = 0
+            exit_code: Optional[int] = None
+            if proc is not None:
+                try:
+                    rc = proc.poll()
+                    running = rc is None
+                    pid = int(proc.pid)
+                    if rc is not None:
+                        exit_code = int(rc)
+                except Exception:
+                    pass
+            stdout_log = ""
+            stderr_log = ""
+            if state is not None:
+                stdout_log = str(self.trainer_logs_dir / f"{profile}.stdout.log")
+                stderr_log = str(self.trainer_logs_dir / f"{profile}.stderr.log")
+            trainer_rows.append(
+                {
+                    "profile": profile,
+                    "running": running,
+                    "pid": pid,
+                    "restart_count": 0 if state is None else int(state.restart_count),
+                    "consecutive_failures": 0 if state is None else int(state.consecutive_failures),
+                    "last_restart_reason": "" if state is None else str(state.last_restart_reason),
+                    "launched_at_utc": "" if state is None else str(state.launched_at_utc),
+                    "metrics_port": 0 if state is None else int(state.metrics_port),
+                    "py4j_base_port": 0 if state is None else int(state.py4j_base_port),
+                    "train_decklist": "" if state is None else str(state.env.get("RL_AGENT_DECK_LIST", "")),
+                    "opponent_decklist": "" if state is None else str(state.opponent_decklist),
+                    "stdout_log": stdout_log,
+                    "stderr_log": stderr_log,
+                    "exit_code": exit_code,
+                }
+            )
+
+        snapshot_rows: List[Dict[str, Any]] = []
+        for entry in self.active_profiles:
+            profile = str(entry.get("profile", "")).strip()
+            if not profile:
+                continue
+            snap = snapshots.get(profile)
+            if snap is None:
+                continue
+            state = self.trainers.get(profile)
+            completed = False
+            if state is not None:
+                completed = bool(state.completed)
+            snapshot_rows.append(
+                {
+                    "profile": profile,
+                    "episode": int(snap.get("episode", 0)),
+                    "rolling_winrate": snap.get("rolling_current"),
+                    "rolling_avg": snap.get("rolling_avg"),
+                    "baseline_wr": float(snap.get("baseline_wr", 0.0)),
+                    "target_winrate": float(snap.get("target_winrate", 0.60)),
+                    "promoted": bool(snap.get("promoted", False)),
+                    "train_enabled": bool(snap.get("train_enabled", True)),
+                    "completed": completed,
+                }
+            )
+
+        payload = {
+            "updated_at_utc": now_utc(),
+            "registry_path": str(self.registry_path),
+            "eval_every_minutes": int(self.eval_every_minutes),
+            "last_eval_utc": "",
+            "next_eval_utc": "",
+            "dry_run": False,
+            "sequential_training": False,
+            "current_training_profile": "",
+            "note": note,
+            "trainers": trainer_rows,
+            "profile_snapshots": snapshot_rows,
+        }
+        self.orchestrator_status_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
     def log_status(self, snapshots: Dict[str, Dict[str, Any]]) -> None:
         running = [name for name, t in self.trainers.items() if t.process.poll() is None]
         log(f"Concurrent training profiles running ({len(running)}): {', '.join(running) if running else '(none)'}")
@@ -1026,6 +1115,7 @@ class NativeOrchestrator:
                 log(f"WARNING: cleanup failed: {exc}")
 
         active_profiles = self.load_profiles()
+        self.active_profiles = list(active_profiles)
         trainable = [e for e in active_profiles if normalize_truthy(e.get("train_enabled", True), True)]
         if not trainable:
             log("No train_enabled profiles found in registry.")
@@ -1061,14 +1151,22 @@ class NativeOrchestrator:
             if idx < (len(self.selected_profiles) - 1) and self.trainer_start_stagger_seconds > 0:
                 time.sleep(self.trainer_start_stagger_seconds)
 
+        initial_snapshots: Dict[str, Dict[str, Any]] = {}
+        for entry in self.active_profiles:
+            profile = str(entry.get("profile", "")).strip()
+            if profile:
+                initial_snapshots[profile] = self.get_profile_training_snapshot(entry)
         self.write_pbt_state()
+        self.write_orchestrator_status(initial_snapshots, note=f"training_concurrent_{len(self.selected_profiles)}")
 
         last_status = 0.0
+        last_snapshots: Dict[str, Dict[str, Any]] = dict(initial_snapshots)
         while not self.stop_requested:
             snapshots: Dict[str, Dict[str, Any]] = {}
-            for entry in self.selected_profiles:
+            for entry in self.active_profiles:
                 profile = str(entry.get("profile", "")).strip()
                 snapshots[profile] = self.get_profile_training_snapshot(entry)
+            last_snapshots = snapshots
 
             all_completed = True
             now_ts = time.time()
@@ -1146,11 +1244,13 @@ class NativeOrchestrator:
                             f"groupMinEp={int(ev.get('group_min_episode', 0))} deltaEp={int(ev.get('episode_delta', 0))}"
                         )
                 self.write_pbt_state()
+                self.write_orchestrator_status(snapshots, note=f"training_concurrent_{len(self.selected_profiles)}")
 
             now = time.time()
             if now - last_status >= 60:
                 self.log_status(snapshots)
                 self.write_pbt_state()
+                self.write_orchestrator_status(snapshots, note=f"training_concurrent_{len(self.selected_profiles)}")
                 last_status = now
 
             if all_completed and self.trainers:
@@ -1162,6 +1262,7 @@ class NativeOrchestrator:
             self.stop_trainer(state)
             self.close_logs(state)
         self.write_pbt_state()
+        self.write_orchestrator_status(last_snapshots, note="stopping")
         return 130 if self.stop_requested else 0
 
 

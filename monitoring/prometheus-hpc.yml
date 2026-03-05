@@ -1,0 +1,17 @@
+# Prometheus config for HPC trainer monitoring via file_sd targets.
+# Targets are generated from native orchestrator_status.json.
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: 'mage-hpc-trainers'
+    metrics_path: '/metrics'
+    file_sd_configs:
+      - files:
+          - '/etc/prometheus/file_sd/mage_hpc_targets.json'
+        refresh_interval: 5s
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
