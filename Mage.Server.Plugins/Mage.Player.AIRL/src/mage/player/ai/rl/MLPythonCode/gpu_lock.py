@@ -23,7 +23,10 @@ class GPULock:
         if lock_file is None:
             lock_dir = os.path.join(tempfile.gettempdir(), 'mage_gpu_locks')
             os.makedirs(lock_dir, exist_ok=True)
-            lock_file = os.path.join(lock_dir, 'gpu.lock')
+            py4j_port = os.environ.get('PY4J_PORT', '')
+            base_port = os.environ.get('PY4J_BASE_PORT', '')
+            lock_id = base_port or py4j_port or 'global'
+            lock_file = os.path.join(lock_dir, f'gpu_{lock_id}.lock')
         
         self.lock_file = lock_file
         self.file_handle = None

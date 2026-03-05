@@ -174,6 +174,7 @@ class NativeOrchestrator:
         self.total_episodes = env_int("TOTAL_EPISODES", 1_000_000)
         self.train_profiles = env_int("TRAIN_PROFILES", 3)
         self.cpu_headroom = env_int("CPU_HEADROOM", 4)
+        self.runner_oversubscription_factor = max(0.1, env_float("RUNNER_OVERSUBSCRIPTION_FACTOR", 1.0))
         self.metrics_port_base = env_int("METRICS_PORT_BASE", 9100)
         self.py4j_base_port = env_int("PY4J_BASE_PORT", 25334)
         self.py4j_port_stride = max(1, env_int("PY4J_PORT_STRIDE", 50))
@@ -309,11 +310,12 @@ class NativeOrchestrator:
 
     def compute_runners_per_profile(self, profile_count: int) -> int:
         cpu_total = env_int("SLURM_CPUS_ON_NODE", os.cpu_count() or 8)
-        usable = cpu_total - self.cpu_headroom
-        min_usable = max(2, profile_count * 2)
-        if usable < min_usable:
-            usable = min_usable
-        runners = usable // max(1, profile_count)
+        usable = max(0, cpu_total - self.cpu_headroom)
+        min_total_runners = max(2, profile_count * 2)
+        target_total_runners = int(math.floor(float(usable) * self.runner_oversubscription_factor))
+        if target_total_runners < min_total_runners:
+            target_total_runners = min_total_runners
+        runners = target_total_runners // max(1, profile_count)
         return max(2, runners)
 
     def resolve_profile_deck_path(self, entry: Dict[str, Any]) -> Optional[Path]:
@@ -1156,6 +1158,12 @@ class NativeOrchestrator:
         if self.runtime_dir is not None:
             log(f"Artifact runtime dir: {self.runtime_dir}")
         log(f"Meta opponent decklist: {opponent_decklist}")
+        total_runner_target = runners_per_profile * len(self.selected_profiles)
+        log(
+            f"Runner sizing: cpuTotal={env_int('SLURM_CPUS_ON_NODE', os.cpu_count() or 8)} "
+            f"cpuHeadroom={self.cpu_headroom} runnerOversubscriptionFactor={self.runner_oversubscription_factor:g} "
+            f"targetTotalRunners={total_runner_target}"
+        )
         log(f"Configured NumGameRunners per profile={runners_per_profile}")
         log(f"Trainer startup stagger seconds={self.trainer_start_stagger_seconds}")
 

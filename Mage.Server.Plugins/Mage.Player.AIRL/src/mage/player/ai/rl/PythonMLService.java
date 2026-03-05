@@ -613,6 +613,7 @@ public class PythonMLService implements PythonModel {
                             long trainMs = (System.nanoTime() - t0) / 1_000_000L;
                             try {
                                 MetricsCollector.getInstance().recordTrainLatencyMs(trainMs);
+                                MetricsCollector.getInstance().recordTrainingBatch(totalSteps, 0.0);
                             } catch (Exception ignored) {
                             }
                             stepsSinceSync++;

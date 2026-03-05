@@ -50,6 +50,7 @@ stall_restart_minutes="${STALL_RESTART_MINUTES:-25}"
 game_log_frequency="${GAME_LOG_FREQUENCY:-500}"
 cpu_headroom="${CPU_HEADROOM:-4}"
 train_profiles="${TRAIN_PROFILES:-3}"
+runner_oversubscription_factor="${RUNNER_OVERSUBSCRIPTION_FACTOR:-1}"
 job_id="${SLURM_JOB_ID:-manual_$(date -u +%Y%m%dT%H%M%SZ)}"
 reports_dir="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs/$job_id"
 mkdir -p "$reports_dir"
@@ -81,11 +82,18 @@ if [[ -z "${MTG_VENV_PATH:-}" ]]; then
 fi
 
 cpu_total="${SLURM_CPUS_ON_NODE:-$(nproc --all)}"
-usable_cpus=$(( cpu_total - cpu_headroom ))
-if (( usable_cpus < train_profiles * 2 )); then
-  usable_cpus=$(( train_profiles * 2 ))
+target_total_runners="$(awk -v cpu="$cpu_total" -v head="$cpu_headroom" -v factor="$runner_oversubscription_factor" '
+BEGIN {
+  usable = cpu - head
+  if (usable < 0) usable = 0
+  total = int(usable * factor)
+  if (total < 0) total = 0
+  print total
+}')"
+if (( target_total_runners < train_profiles * 2 )); then
+  target_total_runners=$(( train_profiles * 2 ))
 fi
-runners_per_profile=$(( usable_cpus / train_profiles ))
+runners_per_profile=$(( target_total_runners / train_profiles ))
 if (( runners_per_profile < 2 )); then
   runners_per_profile=2
 fi
@@ -138,7 +146,7 @@ trap cleanup EXIT INT TERM
     {
       echo "===== $(date -u +%Y-%m-%dT%H:%M:%SZ) ====="
       echo "host=$(hostname -f)"
-      echo "cpu_total=$cpu_total runners_per_profile=$runners_per_profile"
+      echo "cpu_total=$cpu_total cpu_headroom=$cpu_headroom runner_oversubscription_factor=$runner_oversubscription_factor target_total_runners=$target_total_runners runners_per_profile=$runners_per_profile"
       if command -v nvidia-smi >/dev/null 2>&1; then
         nvidia-smi --query-gpu=timestamp,name,index,utilization.gpu,utilization.memory,memory.used,memory.total,temperature.gpu --format=csv,noheader,nounits || true
       else
@@ -157,6 +165,7 @@ telemetry_pid=$!
 echo "Repo root: $repo_root" | tee -a "$orchestrator_log"
 echo "Job ID: $job_id" | tee -a "$orchestrator_log"
 echo "Registry: $registry_path" | tee -a "$orchestrator_log"
+echo "Runner sizing: cpu_total=$cpu_total cpu_headroom=$cpu_headroom runner_oversubscription_factor=$runner_oversubscription_factor target_total_runners=$target_total_runners" | tee -a "$orchestrator_log"
 echo "NumGameRunners (per profile): $runners_per_profile" | tee -a "$orchestrator_log"
 echo "Bridge retries: PY_BRIDGE_CONNECT_RETRIES=${PY_BRIDGE_CONNECT_RETRIES:-unset} PY_BRIDGE_CONNECT_RETRY_DELAY_MS=${PY_BRIDGE_CONNECT_RETRY_DELAY_MS:-unset}" | tee -a "$orchestrator_log"
 echo "PBT gating: firstMinEp=$pbt_first_exploit_min_ep deltaPerProfile=$pbt_episode_delta maxIntervalMin=$pbt_interval" | tee -a "$orchestrator_log"
