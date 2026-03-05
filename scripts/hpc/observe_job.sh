@@ -27,6 +27,7 @@ fi
 
 status_path="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/orchestrator_status.json"
 targets_path="$repo_root/monitoring/file_sd/mage_hpc_targets.json"
+job_orch_log="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs/$job_id/orchestrator.log"
 sync_log="$repo_root/monitoring/file_sd/target_sync.log"
 sync_pid_file="$repo_root/monitoring/file_sd/target_sync.pid"
 
@@ -76,7 +77,7 @@ if ! command -v curl >/dev/null 2>&1 || ! command -v python3 >/dev/null 2>&1; th
 fi
 
 get_ports() {
-  python3 - "$status_path" "$targets_path" <<'PY'
+  python3 - "$status_path" "$targets_path" "$job_orch_log" <<'PY'
 import json
 import pathlib
 import re
@@ -84,6 +85,7 @@ import sys
 
 status_path = pathlib.Path(sys.argv[1])
 targets_path = pathlib.Path(sys.argv[2])
+job_orch_log = pathlib.Path(sys.argv[3])
 
 ports = []
 if status_path.exists():
@@ -103,7 +105,7 @@ if status_path.exists():
     except Exception:
         pass
 
-if not ports and targets_path.exists():
+if targets_path.exists():
     try:
         payload = json.loads(targets_path.read_text(encoding="utf-8-sig"))
         for row in payload:
@@ -113,6 +115,14 @@ if not ports and targets_path.exists():
                 m = re.search(r":(\d+)$", str(target))
                 if m:
                     ports.append(int(m.group(1)))
+    except Exception:
+        pass
+
+# Parse metricsPort from this job's orchestrator log (most reliable for current run).
+if job_orch_log.exists():
+    try:
+        text = job_orch_log.read_text(encoding="utf-8", errors="replace")
+        ports.extend(int(m.group(1)) for m in re.finditer(r"metricsPort=(\d+)", text))
     except Exception:
         pass
 

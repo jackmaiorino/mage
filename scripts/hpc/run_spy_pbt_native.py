@@ -430,6 +430,20 @@ class NativeOrchestrator:
             env["PY_GLOBAL_SEED"] = seed_text
             env["MULLIGAN_REPLAY_SEED"] = seed_text
 
+        cuda_vis = os.environ.get("CUDA_VISIBLE_DEVICES", "").strip()
+        if cuda_vis:
+            gpu_list = [g.strip() for g in cuda_vis.split(",") if g.strip()]
+        else:
+            try:
+                out = subprocess.check_output(
+                    ["nvidia-smi", "-L"], text=True, stderr=subprocess.DEVNULL
+                )
+                gpu_list = [str(i) for i in range(out.count("GPU "))]
+            except Exception:
+                gpu_list = ["0"]
+        if len(gpu_list) > 1:
+            env["CUDA_VISIBLE_DEVICES"] = gpu_list[slot % len(gpu_list)]
+
         command = self.build_command()
         process = subprocess.Popen(
             command,
