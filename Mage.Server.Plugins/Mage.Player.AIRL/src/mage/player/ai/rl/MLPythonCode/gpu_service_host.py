@@ -608,9 +608,11 @@ class MetricsHandler(BaseHTTPRequestHandler):
 
 
 def connection_loop(host: SharedGpuHost, session: ConnectionSession) -> None:
+    current_request_id = -1
     try:
         while True:
             opcode, request_id, headers, payload = read_request(session.sock)
+            current_request_id = request_id
             if opcode == 1:
                 state = host.get_or_create_profile(headers)
                 session.profile_id = state.context.profile_id
@@ -629,9 +631,16 @@ def connection_loop(host: SharedGpuHost, session: ConnectionSession) -> None:
                 session.reply(0, request_id, {"queued": "1", "queue_depth": str(queue_depth), "dropped_train_episodes": "0"})
             else:
                 host.handle_control(session, opcode, request_id, headers, payload)
+            current_request_id = -1
     except Exception as exc:
+        host._last_error = f"{type(exc).__name__}: {exc}"
+        traceback.print_exc()
         try:
-            session.reply(1, -1, {"error": str(exc)})
+            error_headers = {
+                "error": str(exc),
+                "error_type": type(exc).__name__,
+            }
+            session.reply(1, current_request_id, error_headers)
         except Exception:
             pass
     finally:
