@@ -104,6 +104,11 @@ done | awk '
   /^gpu_service_train_service_p50_ms / {train_service_p50+=$2; train_service_p50_n++}
   /^gpu_service_train_service_p95_ms / {train_service_p95+=$2; train_service_p95_n++}
   END {
+    if (batch_timeout_n == 0 && batch_max_n == 0 && profiles == 0 && score_batches == 0 && train_batches == 0) {
+      print "warning=no_shared_gpu_host_metrics_detected";
+      print "hint=verify PY_SERVICE_MODE=shared_gpu and curl a single host metrics port directly (for example 27100)";
+      exit 0;
+    }
     printf "batch_timeout_ms_mean=%.2f\n", batch_timeout_n ? batch_timeout / batch_timeout_n : 0;
     printf "batch_max_size_mean=%.2f\n", batch_max_n ? batch_max / batch_max_n : 0;
     printf "registered_profiles_total=%d\n", profiles;

@@ -1,11 +1,5 @@
 BUNDLE="$(ls -1t local-training/hpc/bundles/rl-runtime-*.tar.gz | head -1)"
 
-# Throughput-oriented shared-GPU probe:
-# - use one shared Python host per visible GPU
-# - keep 4 GPUs and aggressive runner oversubscription
-# - reduce profile count so each trainer gets more runners and larger batches
-# - let PY_BATCH_TIMEOUT_MS fall back to the JVM default (200 ms) instead of forcing 1 ms flushes
-# - non-default trainer and host metrics ports avoid collisions with node-level exporters
 JOB=$(sbatch --parsable \
   --partition=gpu \
   --gres=gpu:a100:4 \
