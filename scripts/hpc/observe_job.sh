@@ -142,10 +142,12 @@ for p in $PORTS; do
   c=$(printf "%s\n" "$m" | awk "/^mage_episodes_completed_total /{print \$2; exit}")
   u=$(printf "%s\n" "$m" | awk "/^mage_training_updates_total /{print \$2; exit}")
   a=$(printf "%s\n" "$m" | awk "/^mage_active_episodes /{print \$2; exit}")
+  g=$(printf "%s\n" "$m" | awk "/^gpu_service_train_batches_total /{print \$2; exit}")
   if [[ -z "$c" ]]; then c=0; fi
   if [[ -z "$u" ]]; then u=0; fi
   if [[ -z "$a" ]]; then a=0; fi
-  echo "$p $c $u $a"
+  if [[ -z "$g" ]]; then g=0; fi
+  echo "$p $c $u $a $g"
 done
 '
 }
@@ -163,7 +165,7 @@ if [[ "$docker_available" -eq 1 ]]; then
   while true; do
     ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
     eps="$(query 'sum(rate(mage_episodes_completed_total[1m]))')"
-    ups="$(query 'sum(rate(mage_training_updates_total[1m]))')"
+    ups="$(query 'sum(rate(mage_training_updates_total[1m])) + sum(rate(gpu_service_train_batches_total[1m]))')"
     active="$(query 'sum(mage_active_episodes)')"
     echo "[$ts] episodes/s=$eps updates/s=$ups active_episodes=$active"
     sleep 10
@@ -171,6 +173,7 @@ if [[ "$docker_available" -eq 1 ]]; then
 else
   declare -A prev_c=()
   declare -A prev_u=()
+  declare -A prev_g=()
   prev_ts=0
   while true; do
     ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -185,21 +188,25 @@ else
     total_active=0
     delta_c=0
     delta_u=0
+    delta_g=0
     resets=0
-    while IFS=' ' read -r p c u a; do
+    while IFS=' ' read -r p c u a g; do
       [[ -z "${p:-}" ]] && continue
       if [[ -n "${prev_c[$p]:-}" ]]; then
         dc=$(( c - prev_c[$p] ))
         du=$(( u - prev_u[$p] ))
-        if (( dc < 0 || du < 0 )); then
+        dg=$(( g - ${prev_g[$p]:-0} ))
+        if (( dc < 0 || du < 0 || dg < 0 )); then
           resets=$((resets + 1))
         else
           delta_c=$((delta_c + dc))
           delta_u=$((delta_u + du))
+          delta_g=$((delta_g + dg))
         fi
       fi
       prev_c[$p]="$c"
       prev_u[$p]="$u"
+      prev_g[$p]="$g"
       total_active=$((total_active + a))
     done <<< "$snap"
 
@@ -207,7 +214,7 @@ else
       dt=$(( now_sec - prev_ts ))
       if (( dt < 1 )); then dt=1; fi
       eps="$(awk -v d="$delta_c" -v t="$dt" 'BEGIN{printf "%.3f", d/t}')"
-      ups="$(awk -v d="$delta_u" -v t="$dt" 'BEGIN{printf "%.3f", d/t}')"
+      ups="$(awk -v d="$((delta_u + delta_g))" -v t="$dt" 'BEGIN{printf "%.3f", d/t}')"
       echo "[$ts] node=$node episodes/s=$eps updates/s=$ups active_episodes=$total_active ports=$(wc -w <<<"$ports") resets=$resets"
     else
       echo "[$ts] node=$node priming sample active_episodes=$total_active ports=$(wc -w <<<"$ports")"
