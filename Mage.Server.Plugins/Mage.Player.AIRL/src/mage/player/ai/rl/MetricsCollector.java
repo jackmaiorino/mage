@@ -993,9 +993,16 @@ public class MetricsCollector {
         int qDepth = 0;
         long qDropped = 0;
         try {
-            if (RLTrainer.sharedModel instanceof PythonMLService) {
-                qDepth = ((PythonMLService) RLTrainer.sharedModel).getTrainQueueDepth();
-                qDropped = ((PythonMLService) RLTrainer.sharedModel).getDroppedTrainEpisodes();
+            PythonModel model = RLTrainer.sharedModel;
+            if (model instanceof LazyPythonModel) {
+                PythonModel inner = ((LazyPythonModel) model).peekDelegate();
+                if (inner != null) {
+                    model = inner;
+                }
+            }
+            if (model instanceof PythonMLService) {
+                qDepth = ((PythonMLService) model).getTrainQueueDepth();
+                qDropped = ((PythonMLService) model).getDroppedTrainEpisodes();
             }
         } catch (Exception ignored) {
         }

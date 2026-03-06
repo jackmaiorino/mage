@@ -9,6 +9,8 @@ import signal
 import subprocess
 import sys
 import time
+import urllib.error
+import urllib.request
 from collections import deque
 from datetime import datetime, timezone
 from pathlib import Path
@@ -186,6 +188,9 @@ class NativeOrchestrator:
         self.max_restart_attempts = max(1, env_int("MAX_RESTART_ATTEMPTS_PER_PROFILE", 8))
         self.trainer_stop_grace_seconds = max(0, env_int("TRAINER_STOP_GRACE_SECONDS", 10))
         self.trainer_start_stagger_seconds = max(0, env_int("TRAINER_START_STAGGER_SECONDS", 20))
+        self.visible_gpu_count = max(1, self.detect_visible_gpu_count())
+        self.trainer_start_wave_size = max(1, env_int("TRAINER_START_WAVE_SIZE", self.visible_gpu_count))
+        self.trainer_start_intra_wave_delay_ms = max(0, env_int("TRAINER_START_INTRA_WAVE_DELAY_MS", 250))
         self.game_log_frequency = env_int("GAME_LOG_FREQUENCY", 500)
         self.eval_every_minutes = env_int("EVAL_EVERY_MINUTES", 180)
         self.stall_restart_minutes = env_int("STALL_RESTART_MINUTES", 25)
@@ -317,6 +322,54 @@ class NativeOrchestrator:
             target_total_runners = min_total_runners
         runners = target_total_runners // max(1, profile_count)
         return max(2, runners)
+
+    def detect_visible_gpu_count(self) -> int:
+        cuda_vis = os.environ.get("CUDA_VISIBLE_DEVICES", "").strip()
+        if cuda_vis:
+            return max(1, len([g for g in cuda_vis.split(",") if g.strip()]))
+        try:
+            out = subprocess.check_output(
+                ["nvidia-smi", "-L"],
+                text=True,
+                stderr=subprocess.DEVNULL,
+            )
+        except Exception:
+            return 1
+        count = sum(1 for line in out.splitlines() if line.strip().startswith("GPU "))
+        return max(1, count)
+
+    def metrics_port_ready(self, metrics_port: int) -> bool:
+        url = f"http://127.0.0.1:{metrics_port}/metrics"
+        try:
+            with urllib.request.urlopen(url, timeout=1.0) as response:
+                return int(getattr(response, "status", 200)) == 200
+        except (urllib.error.URLError, urllib.error.HTTPError, OSError, ValueError):
+            return False
+
+    def wait_for_startup_readiness(self, states: List[TrainerState]) -> None:
+        timeout_seconds = float(self.trainer_start_stagger_seconds)
+        if timeout_seconds <= 0 or not states:
+            return
+
+        pending: Dict[str, TrainerState] = {state.profile: state for state in states}
+        deadline = time.time() + timeout_seconds
+        while pending and time.time() < deadline and not self.stop_requested:
+            for profile, state in list(pending.items()):
+                rc = state.process.poll()
+                if rc is not None:
+                    pending.pop(profile, None)
+                    continue
+                if self.metrics_port_ready(state.metrics_port):
+                    pending.pop(profile, None)
+            if pending:
+                time.sleep(0.5)
+
+        if pending:
+            names = ", ".join(sorted(pending.keys()))
+            log(
+                f"WARNING: Startup readiness wait timed out after {timeout_seconds:g}s "
+                f"for profiles={names}"
+            )
 
     def resolve_profile_deck_path(self, entry: Dict[str, Any]) -> Optional[Path]:
         raw = str(entry.get("deck_path", "")).strip()
@@ -1165,13 +1218,25 @@ class NativeOrchestrator:
             f"targetTotalRunners={total_runner_target}"
         )
         log(f"Configured NumGameRunners per profile={runners_per_profile}")
-        log(f"Trainer startup stagger seconds={self.trainer_start_stagger_seconds}")
+        log(f"Trainer startup max wait seconds={self.trainer_start_stagger_seconds}")
+        log(
+            f"Trainer startup waves: visibleGpus={self.visible_gpu_count} "
+            f"waveSize={self.trainer_start_wave_size} intraWaveDelayMs={self.trainer_start_intra_wave_delay_ms}"
+        )
 
+        startup_wave: List[TrainerState] = []
         for idx, entry in enumerate(self.selected_profiles):
             state = self.start_trainer(entry, idx, runners_per_profile, opponent_decklist)
             self.trainers[state.profile] = state
-            if idx < (len(self.selected_profiles) - 1) and self.trainer_start_stagger_seconds > 0:
-                time.sleep(self.trainer_start_stagger_seconds)
+            startup_wave.append(state)
+
+            is_last = idx >= (len(self.selected_profiles) - 1)
+            wave_full = len(startup_wave) >= self.trainer_start_wave_size
+            if wave_full or is_last:
+                self.wait_for_startup_readiness(startup_wave)
+                startup_wave = []
+            elif self.trainer_start_intra_wave_delay_ms > 0:
+                time.sleep(self.trainer_start_intra_wave_delay_ms / 1000.0)
 
         initial_snapshots: Dict[str, Dict[str, Any]] = {}
         for entry in self.active_profiles:

@@ -1,18 +1,18 @@
 BUNDLE="$(ls -1t local-training/hpc/bundles/rl-runtime-*.tar.gz | head -1)"
 
-# Aggressive utilization probe:
-# - more concurrent profiles to drive more learner/inference activity on the single GPU
-# - oversubscribe total game runners to 2x the allocated CPU count
-# - no CPU headroom reservation so the launcher can use the full 96 allocated CPUs
-# - non-default metrics ports to avoid collisions with node-level exporters on shared GPU nodes
+# Throughput-oriented probe:
+# - keep 4 GPUs and aggressive runner oversubscription
+# - reduce profile count so each trainer gets more runners and larger batches
+# - let PY_BATCH_TIMEOUT_MS fall back to the JVM default (200 ms) instead of forcing 1 ms flushes
+# - non-default metrics ports avoid collisions with node-level exporters on shared GPU nodes
 JOB=$(sbatch --parsable \
   --partition=gpu \
-  --gres=gpu:a100:1 \
+  --gres=gpu:a100:4 \
   --cpus-per-task=96 \
   --mem=192G \
   --time=04:00:00 \
-  --job-name=spy-pbt-8 \
-  --export=ALL,HPC_NATIVE_ORCH=1,MAGE_RL_RUNTIME_TARBALL="$BUNDLE",METRICS_PORT_BASE=19100,TRAIN_PROFILES=8,CPU_HEADROOM=0,RUNNER_OVERSUBSCRIPTION_FACTOR=2,TRAINER_START_STAGGER_SECONDS=20,PY_BRIDGE_CONNECT_RETRIES=60,PY_BRIDGE_CONNECT_RETRY_DELAY_MS=2000,TOTAL_EPISODES=1000000,INFER_WORKERS=1,PY_BATCH_TIMEOUT_MS=1 \
+  --job-name=spy-pbt-12x4g \
+  --export=ALL,HPC_NATIVE_ORCH=1,MAGE_RL_RUNTIME_TARBALL="$BUNDLE",METRICS_PORT_BASE=19100,TRAIN_PROFILES=12,CPU_HEADROOM=0,RUNNER_OVERSUBSCRIPTION_FACTOR=3.5,TRAINER_START_STAGGER_SECONDS=20,PY_BRIDGE_CONNECT_RETRIES=60,PY_BRIDGE_CONNECT_RETRY_DELAY_MS=2000,TOTAL_EPISODES=1000000,INFER_WORKERS=1 \
   scripts/hpc/submit_spy_pbt.slurm)
 
 echo "Submitted job: $JOB"

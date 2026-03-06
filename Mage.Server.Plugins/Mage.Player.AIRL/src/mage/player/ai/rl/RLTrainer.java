@@ -77,7 +77,7 @@ public class RLTrainer {
     public static final int NUM_EPISODES_PER_GAME_RUNNER = EnvConfig.i32("EPISODES_PER_WORKER", 500);
     public static final int EVAL_EVERY = EnvConfig.i32("EVAL_EVERY", 100);
 
-    public static final PythonModel sharedModel = PythonMLService.getInstance();
+    public static final PythonModel sharedModel = new LazyPythonModel(PythonMLService::getInstance);
     public static final MetricsCollector metrics = MetricsCollector.getInstance();
 
     // Global episode counter to track total episodes across all threads
@@ -1657,12 +1657,13 @@ public class RLTrainer {
      * ============================================================ */
     public static void main(String[] args) {
         String mode = args.length > 0 ? args[0] : EnvConfig.str("MODE", "train");
+        int exitCode = 0;
 
-        // Start metrics collection server
         int metricsPort = EnvConfig.i32("METRICS_PORT", 9090);
-        metrics.startMetricsServer(metricsPort);
-        logger.info("Metrics server started on port " + metricsPort);
         try {
+            logger.info("Python device info: " + sharedModel.getDeviceInfo());
+            metrics.startMetricsServer(metricsPort);
+            logger.info("Metrics server started on port " + metricsPort);
             if ("eval".equalsIgnoreCase(mode)) {
                 runEvaluation(NUM_EVAL_EPISODES);
             } else if ("benchmark".equalsIgnoreCase(mode)) {
@@ -1673,7 +1674,8 @@ public class RLTrainer {
             } else {
                 new RLTrainer().train();
             }
-        } catch (Exception e) {
+        } catch (Throwable e) {
+            exitCode = 1;
             logger.error("RLTrainer main failed", e);
         } finally {
             // Ensure CLI invocations exit cleanly (no lingering metrics scheduler / py4j ports).
@@ -1685,6 +1687,9 @@ public class RLTrainer {
                 sharedModel.shutdown();
             } catch (Exception ignored) {
             }
+        }
+        if (exitCode != 0) {
+            System.exit(exitCode);
         }
     }
 
