@@ -52,18 +52,19 @@ collect_candidates() {
 
 collect_candidates "py4j_entry_point.py"
 collect_candidates "draft_py4j_entry_point.py"
+collect_candidates "gpu_service_host.py"
 collect_candidates "mage.player.ai.rl.RLTrainer"
 collect_candidates "-Dexec.mainClass=mage.player.ai.rl.RLTrainer"
 collect_candidates "mvn.*exec:java.*RLTrainer"
 
 if command -v lsof >/dev/null 2>&1; then
-  for port in {25334..25345} {26334..26345}; do
+  for port in {25334..25345} {26100..26115} {27100..27115} {26334..26345}; do
     while IFS= read -r pid; do
       [[ -n "$pid" ]] || continue
       [[ "$pid" =~ ^[0-9]+$ ]] || continue
       pid_in_scope "$pid" || continue
       local_cmd="$(ps -o args= -p "$pid" 2>/dev/null || true)"
-      if [[ "$local_cmd" == *"$repo_root"* || "$local_cmd" == *"Mage.Server.Plugins/Mage.Player.AIRL"* || "$local_cmd" == *"py4j_entry_point.py"* || "$local_cmd" == *"RLTrainer"* ]]; then
+      if [[ "$local_cmd" == *"$repo_root"* || "$local_cmd" == *"Mage.Server.Plugins/Mage.Player.AIRL"* || "$local_cmd" == *"py4j_entry_point.py"* || "$local_cmd" == *"gpu_service_host.py"* || "$local_cmd" == *"RLTrainer"* ]]; then
         candidate_pids["$pid"]=1
       fi
     done < <(lsof -t -i "TCP:${port}" -s TCP:LISTEN 2>/dev/null || true)

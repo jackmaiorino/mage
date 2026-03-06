@@ -130,7 +130,7 @@ public class TrainingHealthStats {
      */
     private int getGpuOomCountFromPython() {
         try {
-            PythonModel model = PythonMLService.getInstance();
+            PythonModel model = PythonModelFactory.getInstance();
             if (model != null) {
                 java.util.Map<String, Integer> stats = model.getHealthStats();
                 if (stats != null && stats.containsKey("gpu_oom_count")) {

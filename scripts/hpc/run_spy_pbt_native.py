@@ -6,6 +6,7 @@ import random
 import shlex
 import shutil
 import signal
+import socket
 import subprocess
 import sys
 import time
@@ -170,6 +171,7 @@ class NativeOrchestrator:
         )
         self.reports_root = self.repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator"
         self.trainer_logs_dir = self.reports_root / "trainers"
+        self.shared_gpu_logs_dir = self.reports_root / "gpu_hosts"
         self.generated_decklists_dir = self.reports_root / "generated_decklists"
         self.pbt_state_path = self.reports_root / "pbt_state.json"
         self.orchestrator_status_path = self.reports_root / "orchestrator_status.json"
@@ -178,6 +180,10 @@ class NativeOrchestrator:
         self.cpu_headroom = env_int("CPU_HEADROOM", 4)
         self.runner_oversubscription_factor = max(0.1, env_float("RUNNER_OVERSUBSCRIPTION_FACTOR", 1.0))
         self.metrics_port_base = env_int("METRICS_PORT_BASE", 9100)
+        self.py_service_mode = os.getenv("PY_SERVICE_MODE", "local").strip().lower() or "local"
+        self.gpu_service_bind_host = os.getenv("GPU_SERVICE_BIND_HOST", "127.0.0.1").strip() or "127.0.0.1"
+        self.gpu_service_port_base = env_int("GPU_SERVICE_PORT_BASE", 26100)
+        self.gpu_service_metrics_port_base = env_int("GPU_SERVICE_METRICS_PORT_BASE", 27100)
         self.py4j_base_port = env_int("PY4J_BASE_PORT", 25334)
         self.py4j_port_stride = max(1, env_int("PY4J_PORT_STRIDE", 50))
         self.py4j_kill_stale_on_start = env_bool("PY4J_KILL_STALE_ON_START", True)
@@ -188,10 +194,11 @@ class NativeOrchestrator:
         self.max_restart_attempts = max(1, env_int("MAX_RESTART_ATTEMPTS_PER_PROFILE", 8))
         self.trainer_stop_grace_seconds = max(0, env_int("TRAINER_STOP_GRACE_SECONDS", 10))
         self.trainer_start_stagger_seconds = max(0, env_int("TRAINER_START_STAGGER_SECONDS", 20))
-        self.visible_gpu_count = max(1, self.detect_visible_gpu_count())
+        self.visible_gpu_list = self.detect_visible_gpu_list()
+        self.visible_gpu_count = max(1, len(self.visible_gpu_list))
         self.trainer_start_wave_size = max(1, env_int("TRAINER_START_WAVE_SIZE", self.visible_gpu_count))
         self.trainer_start_intra_wave_delay_ms = max(0, env_int("TRAINER_START_INTRA_WAVE_DELAY_MS", 250))
-        self.game_log_frequency = env_int("GAME_LOG_FREQUENCY", 500)
+        self.game_log_frequency = env_int("GAME_LOG_FREQUENCY", 0 if self.py_service_mode == "shared_gpu" else 500)
         self.eval_every_minutes = env_int("EVAL_EVERY_MINUTES", 180)
         self.stall_restart_minutes = env_int("STALL_RESTART_MINUTES", 25)
         self.pbt_interval_minutes = env_int("PBT_EXPLOIT_INTERVAL_MINUTES", 240)
@@ -219,6 +226,7 @@ class NativeOrchestrator:
             self.launch_mode = "maven"
         self.stop_requested = False
         self.trainers: Dict[str, TrainerState] = {}
+        self.shared_gpu_hosts: Dict[int, Dict[str, Any]] = {}
         self.pbt_events: List[Dict[str, Any]] = []
         self.pbt_group_state: Dict[str, Dict[str, Any]] = {}
         self.last_pbt_at: Optional[datetime] = None
@@ -323,10 +331,11 @@ class NativeOrchestrator:
         runners = target_total_runners // max(1, profile_count)
         return max(2, runners)
 
-    def detect_visible_gpu_count(self) -> int:
+    def detect_visible_gpu_list(self) -> List[str]:
         cuda_vis = os.environ.get("CUDA_VISIBLE_DEVICES", "").strip()
         if cuda_vis:
-            return max(1, len([g for g in cuda_vis.split(",") if g.strip()]))
+            items = [g.strip() for g in cuda_vis.split(",") if g.strip()]
+            return items or ["0"]
         try:
             out = subprocess.check_output(
                 ["nvidia-smi", "-L"],
@@ -334,9 +343,14 @@ class NativeOrchestrator:
                 stderr=subprocess.DEVNULL,
             )
         except Exception:
-            return 1
+            return ["0"]
         count = sum(1 for line in out.splitlines() if line.strip().startswith("GPU "))
-        return max(1, count)
+        if count <= 0:
+            return ["0"]
+        return [str(i) for i in range(count)]
+
+    def detect_visible_gpu_count(self) -> int:
+        return max(1, len(self.detect_visible_gpu_list()))
 
     def metrics_port_ready(self, metrics_port: int) -> bool:
         url = f"http://127.0.0.1:{metrics_port}/metrics"
@@ -415,6 +429,112 @@ class NativeOrchestrator:
             "-Dexec.args=train",
         ]
 
+    def resolve_python_executable(self) -> str:
+        venv_path = os.getenv("MTG_VENV_PATH", "").strip()
+        if venv_path:
+            candidate = Path(venv_path) / "bin" / "python"
+            if candidate.exists():
+                return str(candidate)
+        return shutil.which("python3") or "python3"
+
+    def shared_gpu_host_ready(self, port: int) -> bool:
+        try:
+            with socket.create_connection((self.gpu_service_bind_host, port), timeout=1.0):
+                return True
+        except OSError:
+            return False
+
+    def launch_shared_gpu_hosts(self) -> None:
+        if self.py_service_mode != "shared_gpu":
+            return
+        if self.shared_gpu_hosts:
+            return
+        python_bin = self.resolve_python_executable()
+        host_script = self.repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_host.py"
+        if not host_script.exists():
+            raise RuntimeError(f"shared GPU host script missing: {host_script}")
+        self.shared_gpu_logs_dir.mkdir(parents=True, exist_ok=True)
+        for gpu_slot, gpu_id in enumerate(self.visible_gpu_list):
+            port = self.gpu_service_port_base + gpu_slot
+            metrics_port = self.gpu_service_metrics_port_base + gpu_slot
+            stdout_path = self.shared_gpu_logs_dir / f"gpu_{gpu_slot}.stdout.log"
+            stderr_path = self.shared_gpu_logs_dir / f"gpu_{gpu_slot}.stderr.log"
+            stdout_handle = stdout_path.open("ab", buffering=0)
+            stderr_handle = stderr_path.open("ab", buffering=0)
+            env = dict(os.environ)
+            env["PYTHONUNBUFFERED"] = "1"
+            env["PY_SERVICE_MODE"] = "shared_gpu"
+            env["GPU_SERVICE_PORT"] = str(port)
+            env["GPU_SERVICE_METRICS_PORT"] = str(metrics_port)
+            env["GPU_SERVICE_BIND_HOST"] = self.gpu_service_bind_host
+            env["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
+            env.setdefault("MULLIGAN_DEVICE", "cpu")
+            process = subprocess.Popen(
+                [python_bin, str(host_script)],
+                cwd=str(self.repo_root),
+                env=env,
+                stdout=stdout_handle,
+                stderr=stderr_handle,
+            )
+            self.shared_gpu_hosts[gpu_slot] = {
+                "gpu_id": str(gpu_id),
+                "port": port,
+                "metrics_port": metrics_port,
+                "process": process,
+                "stdout_handle": stdout_handle,
+                "stderr_handle": stderr_handle,
+            }
+            log(
+                f"Started shared GPU host slot={gpu_slot} gpu={gpu_id} "
+                f"pid={process.pid} port={port} metricsPort={metrics_port}"
+            )
+
+        deadline = time.time() + max(10, self.trainer_start_stagger_seconds)
+        pending = set(self.shared_gpu_hosts.keys())
+        while pending and time.time() < deadline and not self.stop_requested:
+            for gpu_slot in list(pending):
+                host = self.shared_gpu_hosts[gpu_slot]
+                process = host["process"]
+                if process.poll() is not None:
+                    raise RuntimeError(
+                        f"shared GPU host slot={gpu_slot} exited early with rc={process.returncode}"
+                    )
+                if self.shared_gpu_host_ready(int(host["port"])):
+                    pending.discard(gpu_slot)
+            if pending:
+                time.sleep(0.25)
+        if pending:
+            raise RuntimeError(f"shared GPU hosts not ready before timeout: slots={sorted(pending)}")
+
+    def stop_shared_gpu_hosts(self) -> None:
+        for host in self.shared_gpu_hosts.values():
+            process = host.get("process")
+            if process is not None and process.poll() is None:
+                try:
+                    process.terminate()
+                except Exception:
+                    pass
+        deadline = time.time() + max(3, self.trainer_stop_grace_seconds)
+        while time.time() < deadline:
+            if all(host.get("process") is None or host["process"].poll() is not None for host in self.shared_gpu_hosts.values()):
+                break
+            time.sleep(0.2)
+        for host in self.shared_gpu_hosts.values():
+            process = host.get("process")
+            if process is not None and process.poll() is None:
+                try:
+                    process.kill()
+                except Exception:
+                    pass
+            for key in ("stdout_handle", "stderr_handle"):
+                handle = host.get(key)
+                if handle is not None:
+                    try:
+                        handle.close()
+                    except Exception:
+                        pass
+        self.shared_gpu_hosts.clear()
+
     def start_trainer(
         self,
         entry: Dict[str, Any],
@@ -427,7 +547,8 @@ class NativeOrchestrator:
         profile = str(entry["profile"]).strip()
         metrics_port = self.metrics_port_base + slot
         py4j_base_port = self.py4j_base_port + (slot * self.py4j_port_stride)
-        self.cleanup_stale_py4j_port(profile, py4j_base_port)
+        if self.py_service_mode != "shared_gpu":
+            self.cleanup_stale_py4j_port(profile, py4j_base_port)
         trainer_db_dir = self.repo_root / "local-training/rl-db" / profile
         trainer_db_dir.mkdir(parents=True, exist_ok=True)
         self.trainer_logs_dir.mkdir(parents=True, exist_ok=True)
@@ -485,19 +606,23 @@ class NativeOrchestrator:
             env["PY_GLOBAL_SEED"] = seed_text
             env["MULLIGAN_REPLAY_SEED"] = seed_text
 
-        cuda_vis = os.environ.get("CUDA_VISIBLE_DEVICES", "").strip()
-        if cuda_vis:
-            gpu_list = [g.strip() for g in cuda_vis.split(",") if g.strip()]
-        else:
-            try:
-                out = subprocess.check_output(
-                    ["nvidia-smi", "-L"], text=True, stderr=subprocess.DEVNULL
-                )
-                gpu_list = [str(i) for i in range(out.count("GPU "))]
-            except Exception:
-                gpu_list = ["0"]
-        if len(gpu_list) > 1:
-            env["CUDA_VISIBLE_DEVICES"] = gpu_list[slot % len(gpu_list)]
+        gpu_list = list(self.visible_gpu_list)
+        gpu_slot = slot % max(1, len(gpu_list))
+        if self.py_service_mode == "shared_gpu":
+            env["PY_SERVICE_MODE"] = "shared_gpu"
+            env["GPU_SERVICE_ENDPOINT"] = f"{self.gpu_service_bind_host}:{self.gpu_service_port_base + gpu_slot}"
+            env["GPU_SERVICE_METRICS_ENDPOINT"] = (
+                f"http://{self.gpu_service_bind_host}:{self.gpu_service_metrics_port_base + gpu_slot}/metrics"
+            )
+            env["MULLIGAN_DEVICE"] = env.get("MULLIGAN_DEVICE", "cpu")
+            if not env.get("LEAGUE_TICK_EPISODES", "").strip():
+                env["LEAGUE_TICK_EPISODES"] = "0"
+            if not env.get("LADDER_TICK_EPISODES", "").strip():
+                env["LADDER_TICK_EPISODES"] = "0"
+            if gpu_list:
+                env["CUDA_VISIBLE_DEVICES"] = gpu_list[gpu_slot]
+        elif len(gpu_list) > 1:
+            env["CUDA_VISIBLE_DEVICES"] = gpu_list[gpu_slot]
 
         command = self.build_command()
         process = subprocess.Popen(
@@ -1210,6 +1335,7 @@ class NativeOrchestrator:
         log(f"Trainer launch mode: {self.launch_mode}")
         if self.runtime_dir is not None:
             log(f"Artifact runtime dir: {self.runtime_dir}")
+        log(f"Python service mode: {self.py_service_mode}")
         log(f"Meta opponent decklist: {opponent_decklist}")
         total_runner_target = runners_per_profile * len(self.selected_profiles)
         log(
@@ -1223,6 +1349,9 @@ class NativeOrchestrator:
             f"Trainer startup waves: visibleGpus={self.visible_gpu_count} "
             f"waveSize={self.trainer_start_wave_size} intraWaveDelayMs={self.trainer_start_intra_wave_delay_ms}"
         )
+
+        if self.py_service_mode == "shared_gpu":
+            self.launch_shared_gpu_hosts()
 
         startup_wave: List[TrainerState] = []
         for idx, entry in enumerate(self.selected_profiles):
@@ -1254,6 +1383,19 @@ class NativeOrchestrator:
                 profile = str(entry.get("profile", "")).strip()
                 snapshots[profile] = self.get_profile_training_snapshot(entry)
             last_snapshots = snapshots
+
+            if self.py_service_mode == "shared_gpu":
+                for gpu_slot, host in list(self.shared_gpu_hosts.items()):
+                    process = host.get("process")
+                    if process is not None and process.poll() is not None:
+                        log(
+                            f"CRITICAL: shared GPU host slot={gpu_slot} gpu={host.get('gpu_id')} "
+                            f"exited rc={process.returncode}; aborting orchestrator"
+                        )
+                        self.stop_requested = True
+                        break
+                if self.stop_requested:
+                    break
 
             all_completed = True
             now_ts = time.time()
@@ -1348,6 +1490,7 @@ class NativeOrchestrator:
         for state in self.trainers.values():
             self.stop_trainer(state)
             self.close_logs(state)
+        self.stop_shared_gpu_hosts()
         self.write_pbt_state()
         self.write_orchestrator_status(last_snapshots, note="stopping")
         return 130 if self.stop_requested else 0
@@ -1371,6 +1514,11 @@ def main() -> int:
     except Exception as exc:
         log(f"FATAL: {exc}")
         return 1
+    finally:
+        try:
+            orchestrator.stop_shared_gpu_hosts()
+        except Exception:
+            pass
 
 
 if __name__ == "__main__":

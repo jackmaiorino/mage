@@ -124,7 +124,7 @@ public class DraftTrainer {
 
     public DraftTrainer() {
         this.draftBridge = DraftPythonMLBridge.getInstance();
-        this.gameModel = PythonMLService.getInstance();
+        this.gameModel = PythonModelFactory.getInstance();
         this.draftRunner = new DraftRunner();
         loadBenchmarkState();
     }

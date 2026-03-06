@@ -47,6 +47,10 @@ public class MetricsCollector {
     private final AtomicLong inferLatencyCount = new AtomicLong(0);
     private final AtomicLong inferLatencySumMs = new AtomicLong(0);
     private final AtomicLong inferLatencyMaxMs = new AtomicLong(0);
+    private final long[] inferLatencyHistoryMs = new long[1000];
+    private int inferLatencyHistoryIndex = 0;
+    private int inferLatencyHistoryCount = 0;
+    private final Object inferLatencyHistoryLock = new Object();
     private final AtomicLong mainTurnUniformTotal = new AtomicLong(0);
     private final AtomicLong mainActionEpsilonTotal = new AtomicLong(0);
     private final AtomicLong mainPerReplayBufferSize = new AtomicLong(0);
@@ -93,6 +97,10 @@ public class MetricsCollector {
     private final AtomicLong trainLatencyCount = new AtomicLong(0);
     private final AtomicLong trainLatencySumMs = new AtomicLong(0);
     private final AtomicLong trainLatencyMaxMs = new AtomicLong(0);
+    private final long[] trainLatencyHistoryMs = new long[1000];
+    private int trainLatencyHistoryIndex = 0;
+    private int trainLatencyHistoryCount = 0;
+    private final Object trainLatencyHistoryLock = new Object();
 
     // Auto-batching telemetry (Python-side decisions)
     private final AtomicLong autoInferSplitsCapTotal = new AtomicLong(0);
@@ -225,6 +233,13 @@ public class MetricsCollector {
         }
         inferLatencySumMs.addAndGet(latencyMs);
         inferLatencyCount.incrementAndGet();
+        synchronized (inferLatencyHistoryLock) {
+            inferLatencyHistoryMs[inferLatencyHistoryIndex] = latencyMs;
+            inferLatencyHistoryIndex = (inferLatencyHistoryIndex + 1) % inferLatencyHistoryMs.length;
+            if (inferLatencyHistoryCount < inferLatencyHistoryMs.length) {
+                inferLatencyHistoryCount++;
+            }
+        }
         // best-effort max
         long prev;
         do {
@@ -426,12 +441,89 @@ public class MetricsCollector {
         }
     }
 
+    private double calculateInferLatencyRecentAvgMs() {
+        synchronized (inferLatencyHistoryLock) {
+            if (inferLatencyHistoryCount == 0) {
+                return 0.0;
+            }
+
+            long sum = 0L;
+            for (int i = 0; i < inferLatencyHistoryCount; i++) {
+                sum += inferLatencyHistoryMs[i];
+            }
+            return sum / (double) inferLatencyHistoryCount;
+        }
+    }
+
+    private long calculateInferLatencyPercentile(double percentile) {
+        synchronized (inferLatencyHistoryLock) {
+            if (inferLatencyHistoryCount == 0) {
+                return 0L;
+            }
+
+            long[] sorted = new long[inferLatencyHistoryCount];
+            System.arraycopy(inferLatencyHistoryMs, 0, sorted, 0, inferLatencyHistoryCount);
+            java.util.Arrays.sort(sorted);
+
+            int index = (int) Math.ceil((percentile / 100.0) * inferLatencyHistoryCount) - 1;
+            if (index < 0) {
+                index = 0;
+            }
+            if (index >= inferLatencyHistoryCount) {
+                index = inferLatencyHistoryCount - 1;
+            }
+            return sorted[index];
+        }
+    }
+
+    private double calculateTrainLatencyRecentAvgMs() {
+        synchronized (trainLatencyHistoryLock) {
+            if (trainLatencyHistoryCount == 0) {
+                return 0.0;
+            }
+
+            long sum = 0L;
+            for (int i = 0; i < trainLatencyHistoryCount; i++) {
+                sum += trainLatencyHistoryMs[i];
+            }
+            return sum / (double) trainLatencyHistoryCount;
+        }
+    }
+
+    private long calculateTrainLatencyPercentile(double percentile) {
+        synchronized (trainLatencyHistoryLock) {
+            if (trainLatencyHistoryCount == 0) {
+                return 0L;
+            }
+
+            long[] sorted = new long[trainLatencyHistoryCount];
+            System.arraycopy(trainLatencyHistoryMs, 0, sorted, 0, trainLatencyHistoryCount);
+            java.util.Arrays.sort(sorted);
+
+            int index = (int) Math.ceil((percentile / 100.0) * trainLatencyHistoryCount) - 1;
+            if (index < 0) {
+                index = 0;
+            }
+            if (index >= trainLatencyHistoryCount) {
+                index = trainLatencyHistoryCount - 1;
+            }
+            return sorted[index];
+        }
+    }
+
     public void recordTrainLatencyMs(long latencyMs) {
         if (latencyMs < 0) {
             return;
         }
         trainLatencySumMs.addAndGet(latencyMs);
         trainLatencyCount.incrementAndGet();
+        synchronized (trainLatencyHistoryLock) {
+            trainLatencyHistoryMs[trainLatencyHistoryIndex] = latencyMs;
+            trainLatencyHistoryIndex = (trainLatencyHistoryIndex + 1) % trainLatencyHistoryMs.length;
+            if (trainLatencyHistoryCount < trainLatencyHistoryMs.length) {
+                trainLatencyHistoryCount++;
+            }
+        }
         long prev;
         do {
             prev = trainLatencyMaxMs.get();
@@ -744,6 +836,22 @@ public class MetricsCollector {
         sb.append("# TYPE mage_infer_latency_avg_ms gauge\n");
         sb.append("mage_infer_latency_avg_ms ").append(String.format("%.3f", inferAvgMs)).append("\n");
 
+        sb.append("# HELP mage_infer_latency_recent_avg_ms Average candidate scoring latency over the recent 1000 requests (ms)\n");
+        sb.append("# TYPE mage_infer_latency_recent_avg_ms gauge\n");
+        sb.append("mage_infer_latency_recent_avg_ms ").append(String.format("%.3f", calculateInferLatencyRecentAvgMs())).append("\n");
+
+        sb.append("# HELP mage_infer_latency_p50_ms 50th percentile candidate scoring latency over the recent 1000 requests (ms)\n");
+        sb.append("# TYPE mage_infer_latency_p50_ms gauge\n");
+        sb.append("mage_infer_latency_p50_ms ").append(calculateInferLatencyPercentile(50)).append("\n");
+
+        sb.append("# HELP mage_infer_latency_p95_ms 95th percentile candidate scoring latency over the recent 1000 requests (ms)\n");
+        sb.append("# TYPE mage_infer_latency_p95_ms gauge\n");
+        sb.append("mage_infer_latency_p95_ms ").append(calculateInferLatencyPercentile(95)).append("\n");
+
+        sb.append("# HELP mage_infer_latency_p99_ms 99th percentile candidate scoring latency over the recent 1000 requests (ms)\n");
+        sb.append("# TYPE mage_infer_latency_p99_ms gauge\n");
+        sb.append("mage_infer_latency_p99_ms ").append(calculateInferLatencyPercentile(99)).append("\n");
+
         sb.append("# HELP mage_infer_latency_max_ms Max candidate scoring latency observed (ms)\n");
         sb.append("# TYPE mage_infer_latency_max_ms gauge\n");
         sb.append("mage_infer_latency_max_ms ").append(inferLatencyMaxMs.get()).append("\n");
@@ -890,6 +998,22 @@ public class MetricsCollector {
         sb.append("# TYPE mage_train_latency_avg_ms gauge\n");
         sb.append("mage_train_latency_avg_ms ").append(String.format("%.3f", trainLatAvg)).append("\n");
 
+        sb.append("# HELP mage_train_latency_recent_avg_ms Average learner train() call latency over the recent 1000 calls (ms)\n");
+        sb.append("# TYPE mage_train_latency_recent_avg_ms gauge\n");
+        sb.append("mage_train_latency_recent_avg_ms ").append(String.format("%.3f", calculateTrainLatencyRecentAvgMs())).append("\n");
+
+        sb.append("# HELP mage_train_latency_p50_ms 50th percentile learner train() call latency over the recent 1000 calls (ms)\n");
+        sb.append("# TYPE mage_train_latency_p50_ms gauge\n");
+        sb.append("mage_train_latency_p50_ms ").append(calculateTrainLatencyPercentile(50)).append("\n");
+
+        sb.append("# HELP mage_train_latency_p95_ms 95th percentile learner train() call latency over the recent 1000 calls (ms)\n");
+        sb.append("# TYPE mage_train_latency_p95_ms gauge\n");
+        sb.append("mage_train_latency_p95_ms ").append(calculateTrainLatencyPercentile(95)).append("\n");
+
+        sb.append("# HELP mage_train_latency_p99_ms 99th percentile learner train() call latency over the recent 1000 calls (ms)\n");
+        sb.append("# TYPE mage_train_latency_p99_ms gauge\n");
+        sb.append("mage_train_latency_p99_ms ").append(calculateTrainLatencyPercentile(99)).append("\n");
+
         sb.append("# HELP mage_train_latency_max_ms Max learner train() call latency observed (ms)\n");
         sb.append("# TYPE mage_train_latency_max_ms gauge\n");
         sb.append("mage_train_latency_max_ms ").append(trainLatencyMaxMs.get()).append("\n");
@@ -1003,6 +1127,9 @@ public class MetricsCollector {
             if (model instanceof PythonMLService) {
                 qDepth = ((PythonMLService) model).getTrainQueueDepth();
                 qDropped = ((PythonMLService) model).getDroppedTrainEpisodes();
+            } else if (model instanceof SharedGpuPythonModel) {
+                qDepth = ((SharedGpuPythonModel) model).getTrainQueueDepth();
+                qDropped = ((SharedGpuPythonModel) model).getDroppedTrainEpisodes();
             }
         } catch (Exception ignored) {
         }

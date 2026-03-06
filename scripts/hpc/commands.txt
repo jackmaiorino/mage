@@ -1,10 +1,11 @@
 BUNDLE="$(ls -1t local-training/hpc/bundles/rl-runtime-*.tar.gz | head -1)"
 
-# Throughput-oriented probe:
+# Throughput-oriented shared-GPU probe:
+# - use one shared Python host per visible GPU
 # - keep 4 GPUs and aggressive runner oversubscription
 # - reduce profile count so each trainer gets more runners and larger batches
 # - let PY_BATCH_TIMEOUT_MS fall back to the JVM default (200 ms) instead of forcing 1 ms flushes
-# - non-default metrics ports avoid collisions with node-level exporters on shared GPU nodes
+# - non-default trainer and host metrics ports avoid collisions with node-level exporters
 JOB=$(sbatch --parsable \
   --partition=gpu \
   --gres=gpu:a100:4 \
@@ -12,8 +13,54 @@ JOB=$(sbatch --parsable \
   --mem=192G \
   --time=04:00:00 \
   --job-name=spy-pbt-12x4g \
-  --export=ALL,HPC_NATIVE_ORCH=1,MAGE_RL_RUNTIME_TARBALL="$BUNDLE",METRICS_PORT_BASE=19100,TRAIN_PROFILES=12,CPU_HEADROOM=0,RUNNER_OVERSUBSCRIPTION_FACTOR=3.5,TRAINER_START_STAGGER_SECONDS=20,PY_BRIDGE_CONNECT_RETRIES=60,PY_BRIDGE_CONNECT_RETRY_DELAY_MS=2000,TOTAL_EPISODES=1000000,INFER_WORKERS=1 \
+  --export=ALL,HPC_NATIVE_ORCH=1,PY_SERVICE_MODE=shared_gpu,GPU_SERVICE_PORT_BASE=26100,GPU_SERVICE_METRICS_PORT_BASE=27100,MAGE_RL_RUNTIME_TARBALL="$BUNDLE",METRICS_PORT_BASE=19100,TRAIN_PROFILES=8,CPU_HEADROOM=0,RUNNER_OVERSUBSCRIPTION_FACTOR=6,TRAINER_START_STAGGER_SECONDS=20,PY_BRIDGE_CONNECT_RETRIES=60,PY_BRIDGE_CONNECT_RETRY_DELAY_MS=2000,TOTAL_EPISODES=1000000,INFER_WORKERS=1 \
   scripts/hpc/submit_spy_pbt.slurm)
 
 echo "Submitted job: $JOB"
 bash scripts/hpc/observe_job.sh "$JOB"
+
+
+srun --jobid="$JOB" --overlap -N1 -n1 -c1 bash -lc '
+hostname
+for p in $(seq 19100 19111); do
+  curl -fsS "http://127.0.0.1:$p/metrics" 2>/dev/null || true
+done | awk "
+  /^mage_config_py_batch_timeout_ms / {timeout=\$2}
+  /^mage_infer_batch_avg_size / {infer_avg+=\$2; infer_n++}
+  /^mage_infer_batch_size_p50 / {infer_p50+=\$2; infer_p50_n++}
+  /^mage_infer_flushes_timeout_total / {timeout_flush+=\$2}
+  /^mage_infer_flushes_full_total / {full_flush+=\$2}
+  /^mage_infer_latency_avg_ms / {infer_lat+=\$2; infer_lat_n++}
+  /^mage_infer_latency_recent_avg_ms / {infer_lat_recent+=\$2; infer_lat_recent_n++}
+  /^mage_infer_latency_p50_ms / {infer_lat_p50+=\$2; infer_lat_p50_n++}
+  /^mage_infer_latency_p95_ms / {infer_lat_p95+=\$2; infer_lat_p95_n++}
+  /^mage_train_queue_depth / {q+=\$2}
+  /^mage_train_queue_dropped_total / {qd+=\$2}
+  /^mage_train_batch_avg_episodes / {train_ep+=\$2; train_ep_n++}
+  /^mage_train_latency_avg_ms / {train_lat+=\$2; train_lat_n++}
+  /^mage_train_latency_recent_avg_ms / {train_lat_recent+=\$2; train_lat_recent_n++}
+  /^mage_train_latency_p50_ms / {train_lat_p50+=\$2; train_lat_p50_n++}
+  /^mage_train_latency_p95_ms / {train_lat_p95+=\$2; train_lat_p95_n++}
+  /^mage_infer_time_ms / {infer_time+=\$2; infer_time_n++}
+  /^mage_train_time_ms / {train_time+=\$2; train_time_n++}
+  END {
+    printf \"batch_timeout_ms=%s\n\", timeout;
+    printf \"infer_batch_avg_size_mean=%.2f\n\", infer_n?infer_avg/infer_n:0;
+    printf \"infer_batch_p50_mean=%.2f\n\", infer_p50_n?infer_p50/infer_p50_n:0;
+    printf \"infer_flushes_timeout_total=%d\n\", timeout_flush;
+    printf \"infer_flushes_full_total=%d\n\", full_flush;
+    printf \"infer_latency_avg_ms_mean=%.2f\n\", infer_lat_n?infer_lat/infer_lat_n:0;
+    printf \"infer_latency_recent_avg_ms_mean=%.2f\n\", infer_lat_recent_n?infer_lat_recent/infer_lat_recent_n:0;
+    printf \"infer_latency_p50_ms_mean=%.2f\n\", infer_lat_p50_n?infer_lat_p50/infer_lat_p50_n:0;
+    printf \"infer_latency_p95_ms_mean=%.2f\n\", infer_lat_p95_n?infer_lat_p95/infer_lat_p95_n:0;
+    printf \"train_queue_depth_total=%d\n\", q;
+    printf \"train_queue_dropped_total=%d\n\", qd;
+    printf \"train_batch_avg_episodes_mean=%.2f\n\", train_ep_n?train_ep/train_ep_n:0;
+    printf \"train_latency_avg_ms_mean=%.2f\n\", train_lat_n?train_lat/train_lat_n:0;
+    printf \"train_latency_recent_avg_ms_mean=%.2f\n\", train_lat_recent_n?train_lat_recent/train_lat_recent_n:0;
+    printf \"train_latency_p50_ms_mean=%.2f\n\", train_lat_p50_n?train_lat_p50/train_lat_p50_n:0;
+    printf \"train_latency_p95_ms_mean=%.2f\n\", train_lat_p95_n?train_lat_p95/train_lat_p95_n:0;
+    printf \"infer_time_ms_mean=%.2f\n\", infer_time_n?infer_time/infer_time_n:0;
+    printf \"train_time_ms_mean=%.2f\n\", train_time_n?train_time/train_time_n:0;
+  }"
+'

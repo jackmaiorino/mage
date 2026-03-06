@@ -77,7 +77,10 @@ public class RLTrainer {
     public static final int NUM_EPISODES_PER_GAME_RUNNER = EnvConfig.i32("EPISODES_PER_WORKER", 500);
     public static final int EVAL_EVERY = EnvConfig.i32("EVAL_EVERY", 100);
 
-    public static final PythonModel sharedModel = new LazyPythonModel(PythonMLService::getInstance);
+    private static final boolean SHARED_GPU_MODE = PythonModelFactory.isSharedGpuMode();
+    private static final DeckTemplateCache DECK_TEMPLATE_CACHE = new DeckTemplateCache();
+    private static final AsyncLineWriter ASYNC_LINE_WRITER = new AsyncLineWriter("RLTrainer-AsyncLineWriter", logger);
+    public static final PythonModel sharedModel = new LazyPythonModel(PythonModelFactory::getInstance);
     public static final MetricsCollector metrics = MetricsCollector.getInstance();
 
     // Global episode counter to track total episodes across all threads
@@ -103,7 +106,7 @@ public class RLTrainer {
     private static final boolean ADAPTIVE_CURRICULUM = EnvConfig.bool("ADAPTIVE_CURRICULUM", true);
 
     // Game logging: log every N episodes (0 = disabled, includes episode 0)
-    private static final int GAME_LOG_FREQUENCY = EnvConfig.i32("GAME_LOG_FREQUENCY", 200);
+    private static final int GAME_LOG_FREQUENCY = EnvConfig.i32("GAME_LOG_FREQUENCY", SHARED_GPU_MODE ? 0 : 200);
     private static final int WINRATE_WINDOW = EnvConfig.i32("WINRATE_WINDOW", 100);
 
     // Minimum games at current difficulty before allowing level change
@@ -2096,25 +2099,16 @@ public class RLTrainer {
                             logger.warn("League/Ladder tick failed at ep " + epNumber, e);
                         }
 
-                        try {
-                            Path statsPath = Paths.get(STATS_FILE_PATH);
-                            if (statsPath.getParent() != null) {
-                                Files.createDirectories(statsPath.getParent());
-                            }
-                            boolean writeHeader = !Files.exists(statsPath);
-                            StringBuilder sb = new StringBuilder();
-                            if (writeHeader) {
-                                sb.append("episode,turns,final_reward,opponent_type,winrate,episode_seconds\n");
-                            }
-                            sb.append(epNumber).append(',').append(turns).append(',')
-                                    .append(String.format("%.3f", finalReward)).append(',')
-                                    .append(opponentType).append(',')
-                                    .append(String.format("%.3f", snapshotWinrate)).append(',')
-                                    .append(String.format("%.2f", episodeSeconds)).append('\n');
-                            Files.write(statsPath, sb.toString().getBytes(StandardCharsets.UTF_8), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
-                        } catch (IOException e) {
-                            logger.warn("Failed to write stats CSV", e);
-                        }
+                        Path statsPath = Paths.get(STATS_FILE_PATH);
+                        String statsHeader = "episode,turns,final_reward,opponent_type,winrate,episode_seconds\n";
+                        String statsLine = new StringBuilder()
+                                .append(epNumber).append(',').append(turns).append(',')
+                                .append(String.format("%.3f", finalReward)).append(',')
+                                .append(opponentType).append(',')
+                                .append(String.format("%.3f", snapshotWinrate)).append(',')
+                                .append(String.format("%.2f", episodeSeconds)).append('\n')
+                                .toString();
+                        ASYNC_LINE_WRITER.append(statsPath, statsHeader, statsLine);
                         metrics.recordEpisodeCompleted();
                         ACTIVE_EPISODES.decrementAndGet();
                         metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
@@ -2135,6 +2129,8 @@ public class RLTrainer {
                     throw new RuntimeException(e.getCause());
                 }
             }
+
+            ASYNC_LINE_WRITER.close();
 
             // Record end time and log statistics
             long endTime = System.nanoTime();
@@ -3688,15 +3684,6 @@ public class RLTrainer {
     private static void logHeadUsageStats(int episodeNum, ComputerPlayerRL rlPlayer, Player opponentPlayer, int turns, boolean rlPlayerWon) {
         try {
             Path logPath = Paths.get(RLLogPaths.HEAD_USAGE_LOG_PATH);
-            Files.createDirectories(logPath.getParent());
-
-            // Initialize with header if file doesn't exist
-            if (!Files.exists(logPath)) {
-                String header = "episode,turns,won,opponent_type," +
-                        "rl_total,rl_action_head,rl_target_head,rl_card_select_head," +
-                        "opp_total,opp_action_head,opp_target_head,opp_card_select_head\n";
-                Files.write(logPath, header.getBytes(StandardCharsets.UTF_8));
-            }
 
             // Get decision counts for both players
             java.util.Map<StateSequenceBuilder.ActionType, Integer> rlCounts = rlPlayer.getDecisionCountsByHead();
@@ -3752,11 +3739,12 @@ public class RLTrainer {
                     episodeNum, turns, rlPlayerWon ? 1 : 0, opponentType,
                     rlTotal, rlActionHead, rlTargetHead, rlCardSelectHead,
                     oppTotal, oppActionHead, oppTargetHead, oppCardSelectHead);
+            String header = "episode,turns,won,opponent_type," +
+                    "rl_total,rl_action_head,rl_target_head,rl_card_select_head," +
+                    "opp_total,opp_action_head,opp_target_head,opp_card_select_head\n";
+            ASYNC_LINE_WRITER.append(logPath, header, line);
 
-            Files.write(logPath, line.getBytes(StandardCharsets.UTF_8),
-                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.warn("Failed to write head usage stats: " + e.getMessage());
         }
     }
@@ -3770,30 +3758,7 @@ public class RLTrainer {
     }
 
     public Deck loadDeck(String filePath) {
-        try {
-            StringBuilder importWarnings = new StringBuilder();
-            DeckCardLists deckCardLists = DeckImporter.importDeckFromFile(filePath, importWarnings, false);
-
-            if (importWarnings.length() > 0) {
-                // Most common reason for <60 cards: DeckImporter couldn't find some card names in this XMage build,
-                // so those entries are dropped during import.
-                logger.warn("Deck import warnings for " + filePath + ":\n" + importWarnings);
-            }
-
-            Deck deck = Deck.load(deckCardLists, false, false, null);
-            if (deck != null) {
-                int mainCount = deck.getCards().size();
-                int sideCount = deck.getSideboard().size();
-                if (mainCount != 60) {
-                    logger.warn("Deck mainboard size is " + mainCount + " (expected 60) for: " + filePath
-                            + " (sideboard=" + sideCount + ")");
-                }
-            }
-            return deck;
-        } catch (GameException e) {
-            logger.error("Error loading deck: " + filePath, e);
-            return null;
-        }
+        return DECK_TEMPLATE_CACHE.load(filePath, logger);
     }
 
     private RewardDiag updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, Player opponentPlayer) {
