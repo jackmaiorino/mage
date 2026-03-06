@@ -114,9 +114,15 @@ def signal_handler(signum, frame):
     sys.exit(0)
 
 
-# Register signal handlers
-signal.signal(signal.SIGINT, signal_handler)
-signal.signal(signal.SIGTERM, signal_handler)
+def register_signal_handlers():
+    """Register signal handlers when running on the main interpreter thread."""
+    if threading.current_thread() is not threading.main_thread():
+        return
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+
+register_signal_handlers()
 
 
 def log_gpu_memory():
