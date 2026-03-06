@@ -184,6 +184,8 @@ class SharedGpuHost:
         self.metrics_port = env_int("GPU_SERVICE_METRICS_PORT", 27100)
         self.batch_timeout_ms = max(1, env_int("PY_BATCH_TIMEOUT_MS", 200))
         self.batch_timeout_s = self.batch_timeout_ms / 1000.0
+        self.train_batch_timeout_ms = max(1, env_int("GPU_SERVICE_TRAIN_BATCH_TIMEOUT_MS", min(100, self.batch_timeout_ms)))
+        self.train_batch_timeout_s = self.train_batch_timeout_ms / 1000.0
         self.batch_max_size = max(1, env_int("PY_BATCH_MAX_SIZE", 64))
         self.learner_batch_max_episodes = max(1, env_int("LEARNER_BATCH_MAX_EPISODES", 8))
         self.learner_batch_max_steps = max(1, env_int("LEARNER_BATCH_MAX_STEPS", 4096))
@@ -266,13 +268,13 @@ class SharedGpuHost:
         profiles = list(self._profiles.values())
         best_score_state = None
         best_age = -1.0
-        oldest_age = None
+        oldest_score_age = None
         for state in profiles:
             if not state.pending_scores:
                 continue
             age = now - state.pending_scores[0].enqueued_at
-            if oldest_age is None or age > oldest_age:
-                oldest_age = age
+            if oldest_score_age is None or age > oldest_score_age:
+                oldest_score_age = age
             pending_score_samples = sum(task.batch_size for task in state.pending_scores)
             if age >= self.batch_timeout_s or pending_score_samples >= self.batch_max_size:
                 if age > best_age:
@@ -281,15 +283,76 @@ class SharedGpuHost:
         if best_score_state is not None:
             return ("score", best_score_state, self._pop_score_batch_locked(best_score_state), "timeout" if best_age >= self.batch_timeout_s else "full"), 0.0
 
-        train_work = self._pop_train_batch_locked()
-        if train_work is not None:
-            state, tasks = train_work
-            return ("train", state, tasks, ""), 0.0
+        train_state, train_wait = self._select_train_state_locked(now, profiles)
+        if train_state is not None:
+            train_work = self._pop_train_batch_locked(train_state)
+            if train_work is not None:
+                state, tasks = train_work
+                return ("train", state, tasks, ""), 0.0
 
-        if oldest_age is not None:
-            wait = max(0.01, min(0.25, self.batch_timeout_s - oldest_age))
-            return None, wait
+        waits = []
+        if oldest_score_age is not None:
+            waits.append(max(0.01, min(0.25, self.batch_timeout_s - oldest_score_age)))
+        if train_wait is not None:
+            waits.append(max(0.01, min(0.25, train_wait)))
+        if waits:
+            return None, min(waits)
         return None, 0.25
+
+    def _select_train_state_locked(self, now: float, profiles: List[ProfileState]) -> Tuple[Optional[ProfileState], Optional[float]]:
+        if not profiles:
+            return None, None
+        best_state = None
+        best_age = -1.0
+        min_wait = None
+        max_steps = min(self.learner_batch_max_steps, self.train_multi_max_steps)
+        for state in profiles:
+            if not state.pending_trains:
+                continue
+            age = now - state.pending_trains[0].enqueued_at
+            pending_episodes = len(state.pending_trains)
+            pending_steps = 0
+            for task in state.pending_trains:
+                pending_steps += task.step_count
+                if pending_steps >= max_steps:
+                    break
+            ready = (
+                age >= self.train_batch_timeout_s
+                or pending_episodes >= self.learner_batch_max_episodes
+                or pending_steps >= max_steps
+            )
+            if ready:
+                if age > best_age:
+                    best_age = age
+                    best_state = state
+            else:
+                wait = max(0.0, self.train_batch_timeout_s - age)
+                if min_wait is None or wait < min_wait:
+                    min_wait = wait
+        return best_state, min_wait
+
+    def _pop_train_batch_locked(self, state: ProfileState) -> Optional[Tuple[ProfileState, List[TrainTask]]]:
+        if state is None or not state.pending_trains:
+            return None
+        profiles = list(self._profiles.values())
+        if profiles:
+            try:
+                idx = profiles.index(state)
+                self._train_rr = (idx + 1) % len(profiles)
+            except ValueError:
+                pass
+        tasks: List[TrainTask] = []
+        steps = 0
+        max_steps = min(self.learner_batch_max_steps, self.train_multi_max_steps)
+        while state.pending_trains and len(tasks) < self.learner_batch_max_episodes:
+            task = state.pending_trains[0]
+            if tasks and steps + task.step_count > max_steps:
+                break
+            tasks.append(state.pending_trains.popleft())
+            steps += task.step_count
+        if not tasks and state.pending_trains:
+            tasks.append(state.pending_trains.popleft())
+        return (state, tasks) if tasks else None
 
     def _pop_score_batch_locked(self, state: ProfileState) -> List[ScoreTask]:
         first = state.pending_scores.popleft()
@@ -308,30 +371,6 @@ class SharedGpuHost:
                 keep.append(task)
         state.pending_scores = keep
         return tasks
-
-    def _pop_train_batch_locked(self) -> Optional[Tuple[ProfileState, List[TrainTask]]]:
-        profiles = list(self._profiles.values())
-        if not profiles:
-            return None
-        for offset in range(len(profiles)):
-            idx = (self._train_rr + offset) % len(profiles)
-            state = profiles[idx]
-            if not state.pending_trains:
-                continue
-            self._train_rr = (idx + 1) % len(profiles)
-            tasks: List[TrainTask] = []
-            steps = 0
-            max_steps = min(self.learner_batch_max_steps, self.train_multi_max_steps)
-            while state.pending_trains and len(tasks) < self.learner_batch_max_episodes:
-                task = state.pending_trains[0]
-                if tasks and steps + task.step_count > max_steps:
-                    break
-                tasks.append(state.pending_trains.popleft())
-                steps += task.step_count
-            if not tasks and state.pending_trains:
-                tasks.append(state.pending_trains.popleft())
-            return state, tasks
-        return None
 
     def _run_score_batch(self, state: ProfileState, tasks: List[ScoreTask], reason: str) -> None:
         first = tasks[0]
