@@ -55,6 +55,7 @@ import mage.filter.common.FilterLandCard;
 import mage.constants.RangeOfInfluence;
 import mage.constants.TurnPhase;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -101,6 +102,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_MULLIGAN_TRACE", "0"));
     private static final boolean MULLIGAN_TRACE_JSONL = "1".equals(System.getenv().getOrDefault("RL_MULLIGAN_TRACE_JSONL", "1"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_MULLIGAN_TRACE_JSONL", "1"));
+    private static final boolean BASE_STATE_CACHE_ENABLED = EnvConfig.bool("RL_BASE_STATE_CACHE_ENABLED", true);
 
     // Main policy exploration (actor) - epsilon mixture + correlated full-random turn.
     private static final double ACTION_EPS_START = EnvConfig.f64("RL_ACTION_EPS_START", 0.05);
@@ -140,6 +142,16 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private PythonModel model;
     private MulliganModel mulliganModel;
     protected StateSequenceBuilder.SequenceOutput currentState;
+    private transient StateSequenceBuilder.SequenceOutput cachedBaseState;
+    private transient UUID cachedBaseStateGameId;
+    private transient TurnPhase cachedBaseStatePhase;
+    private transient UUID cachedBaseStateActivePlayerId;
+    private transient UUID cachedBaseStatePriorityPlayerId;
+    private transient UUID cachedBaseStateChoosingPlayerId;
+    private transient int cachedBaseStateTurnNum = Integer.MIN_VALUE;
+    private transient int cachedBaseStateStepNum = Integer.MIN_VALUE;
+    private transient int cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
+    private transient int cachedBaseStateStackSize = Integer.MIN_VALUE;
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
     private final java.util.Map<StateSequenceBuilder.ActionType, Integer> decisionCountsByHead;
     private Ability currentAbility;
@@ -304,6 +316,66 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         turnExplorationMode = turnForceUniform
                 ? "turn_uniform"
                 : (turnActionEps > 0.0 ? "epsilon_mix" : "policy");
+    }
+
+    private void invalidateBaseStateCache() {
+        cachedBaseState = null;
+        cachedBaseStateGameId = null;
+        cachedBaseStatePhase = null;
+        cachedBaseStateActivePlayerId = null;
+        cachedBaseStatePriorityPlayerId = null;
+        cachedBaseStateChoosingPlayerId = null;
+        cachedBaseStateTurnNum = Integer.MIN_VALUE;
+        cachedBaseStateStepNum = Integer.MIN_VALUE;
+        cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
+        cachedBaseStateStackSize = Integer.MIN_VALUE;
+    }
+
+    private StateSequenceBuilder.SequenceOutput getOrBuildBaseState(Game game) {
+        TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
+        GameState state = game.getState();
+        UUID gameId = game.getId();
+        UUID activePlayerId = game.getActivePlayerId();
+        UUID priorityPlayerId = state != null ? state.getPriorityPlayerId() : null;
+        UUID choosingPlayerId = state != null ? state.getChoosingPlayerId() : null;
+        int turnNum = game.getTurnNum();
+        int stepNum = state != null ? state.getStepNum() : Integer.MIN_VALUE;
+        int applyEffectsCounter = state != null ? state.getApplyEffectsCounter() : Integer.MIN_VALUE;
+        int stackSize = game.getStack() != null ? game.getStack().size() : 0;
+
+        if (BASE_STATE_CACHE_ENABLED
+                && cachedBaseState != null
+                && java.util.Objects.equals(cachedBaseStateGameId, gameId)
+                && cachedBaseStatePhase == turnPhase
+                && java.util.Objects.equals(cachedBaseStateActivePlayerId, activePlayerId)
+                && java.util.Objects.equals(cachedBaseStatePriorityPlayerId, priorityPlayerId)
+                && java.util.Objects.equals(cachedBaseStateChoosingPlayerId, choosingPlayerId)
+                && cachedBaseStateTurnNum == turnNum
+                && cachedBaseStateStepNum == stepNum
+                && cachedBaseStateApplyEffectsCounter == applyEffectsCounter
+                && cachedBaseStateStackSize == stackSize) {
+            currentState = cachedBaseState;
+            return cachedBaseState;
+        }
+
+        StateSequenceBuilder.SequenceOutput baseState =
+                StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+        currentState = baseState;
+        if (BASE_STATE_CACHE_ENABLED) {
+            cachedBaseState = baseState;
+            cachedBaseStateGameId = gameId;
+            cachedBaseStatePhase = turnPhase;
+            cachedBaseStateActivePlayerId = activePlayerId;
+            cachedBaseStatePriorityPlayerId = priorityPlayerId;
+            cachedBaseStateChoosingPlayerId = choosingPlayerId;
+            cachedBaseStateTurnNum = turnNum;
+            cachedBaseStateStepNum = stepNum;
+            cachedBaseStateApplyEffectsCounter = applyEffectsCounter;
+            cachedBaseStateStackSize = stackSize;
+        } else {
+            invalidateBaseStateCache();
+        }
+        return baseState;
     }
 
     private static float[] normalizePolicyScores(float[] actionScores, int[] candidateMask, int candidateCount) {
@@ -1197,12 +1269,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return Arrays.asList();
         }
 
-        // Get current phase
-        TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
-
-        // Build base state and cache as current
-        StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
-        this.currentState = baseState;
+        StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
         // Build padded candidate tensors
         int[] candidateActionIds = new int[maxCandidates];
@@ -2321,8 +2388,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     // Non-trivial decision - use model inference
                     trace("chooseTarget: calling RL model for target selection");
                     try {
-                    TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
-                    StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+                    StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
                     final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
                     final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
 
@@ -2682,8 +2748,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 pickedName = remainingNames.get(0);
             } else {
                 try {
-                    TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
-                    StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+                    StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
                     final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
                     final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
 
@@ -3196,9 +3261,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
             int candidateCount = Math.min(availableModes.size(), maxCandidates);
 
-            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
-            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
-            this.currentState = baseState;
+            StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
             int[] candidateActionIds = new int[maxCandidates];
             float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
@@ -3369,9 +3432,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
             candidateCount = xValues.size();
 
-            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
-            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
-            this.currentState = baseState;
+            StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
             int[] candidateActionIds = new int[maxCandidates];
             float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
@@ -3543,9 +3604,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             List<Boolean> candidates = Arrays.asList(Boolean.TRUE, Boolean.FALSE);
             int candidateCount = 2;
 
-            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
-            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
-            this.currentState = baseState;
+            StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
             int[] candidateActionIds = new int[maxCandidates];
             float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
@@ -3694,9 +3753,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
             final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
-            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
-            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
-            this.currentState = baseState;
+            StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
             // Phase 1: Multi-select which creatures attack.
             // Candidates = [attacker0, attacker1, ..., DONE]
@@ -3895,9 +3952,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
             final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
-            TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
-            StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
-            this.currentState = baseState;
+            StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
             boolean anyBlockerDeclared = false;
 
