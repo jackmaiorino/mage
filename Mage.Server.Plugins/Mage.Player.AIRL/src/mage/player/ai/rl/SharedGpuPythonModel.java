@@ -45,6 +45,10 @@ public final class SharedGpuPythonModel implements PythonModel {
             EnvConfig.i32("GPU_SERVICE_LOCAL_BATCH_MAX_SIZE", PythonMLBatchManager.getConfiguredMaxBatchSize()));
     private static final int LOCAL_SCORE_BATCH_TIMEOUT_MS = Math.max(1,
             EnvConfig.i32("GPU_SERVICE_LOCAL_BATCH_TIMEOUT_MS", PythonMLBatchManager.getConfiguredBatchTimeoutMs()));
+    private static final int LOCAL_TRAIN_BATCH_MAX_EPISODES = Math.max(1,
+            EnvConfig.i32("GPU_SERVICE_LOCAL_TRAIN_BATCH_MAX_EPISODES", EnvConfig.i32("LEARNER_BATCH_MAX_EPISODES", 8)));
+    private static final int LOCAL_TRAIN_BATCH_TIMEOUT_MS = Math.max(1,
+            EnvConfig.i32("GPU_SERVICE_LOCAL_TRAIN_BATCH_TIMEOUT_MS", 100));
 
     private static volatile SharedGpuPythonModel instance;
     private static final Object INSTANCE_LOCK = new Object();
@@ -75,8 +79,11 @@ public final class SharedGpuPythonModel implements PythonModel {
     private final AtomicBoolean shutdown = new AtomicBoolean(false);
     private final Object connectionLock = new Object();
     private final Object predictionLock = new Object();
+    private final Object trainLock = new Object();
     private final List<ScoreRequest> predictionQueue = new ArrayList<>();
+    private final List<TrainRequest> trainQueue = new ArrayList<>();
     private final ScheduledExecutorService predictionScheduler;
+    private final ScheduledExecutorService trainScheduler;
 
     private volatile Socket socket;
     private volatile InputStream input;
@@ -171,6 +178,58 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
     }
 
+    private static final class TrainBatchKey {
+        final int seqLen;
+        final int dModel;
+        final int maxCandidates;
+        final int candFeatDim;
+
+        private TrainBatchKey(int seqLen, int dModel, int maxCandidates, int candFeatDim) {
+            this.seqLen = seqLen;
+            this.dModel = dModel;
+            this.maxCandidates = maxCandidates;
+            this.candFeatDim = candFeatDim;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            TrainBatchKey other = (TrainBatchKey) o;
+            return seqLen == other.seqLen
+                    && dModel == other.dModel
+                    && maxCandidates == other.maxCandidates
+                    && candFeatDim == other.candFeatDim;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(seqLen, dModel, maxCandidates, candFeatDim);
+        }
+    }
+
+    private static final class TrainRequest {
+        final List<StateSequenceBuilder.TrainingData> trainingData;
+        final List<Double> rewards;
+        final TrainBatchKey batchKey;
+        final int episodeCount;
+
+        private TrainRequest(
+                List<StateSequenceBuilder.TrainingData> trainingData,
+                List<Double> rewards,
+                TrainBatchKey batchKey
+        ) {
+            this.trainingData = trainingData;
+            this.rewards = rewards;
+            this.batchKey = batchKey;
+            this.episodeCount = trainingData.size();
+        }
+    }
+
     private SharedGpuPythonModel() {
         this.profileId = EnvConfig.str("MODEL_PROFILE", "").trim();
         if (this.profileId.isEmpty()) {
@@ -178,6 +237,11 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
         this.predictionScheduler = Executors.newSingleThreadScheduledExecutor(r -> {
             Thread t = new Thread(r, "SharedGpuLocalBatch-" + this.profileId);
+            t.setDaemon(true);
+            return t;
+        });
+        this.trainScheduler = Executors.newSingleThreadScheduledExecutor(r -> {
+            Thread t = new Thread(r, "SharedGpuLocalTrainBatch-" + this.profileId);
             t.setDaemon(true);
             return t;
         });
@@ -258,17 +322,28 @@ public final class SharedGpuPythonModel implements PythonModel {
             return;
         }
         StateSequenceBuilder.TrainingData first = trainingData.get(0);
-        Map<String, String> headers = new LinkedHashMap<>();
-        headers.put("profile_id", profileId);
-        headers.put("batch_size", Integer.toString(trainingData.size()));
-        headers.put("seq_len", Integer.toString(first.state.getSequence().length));
-        headers.put("d_model", Integer.toString(first.state.getSequence().length == 0 ? 0 : first.state.getSequence()[0].length));
-        headers.put("max_candidates", Integer.toString(StateSequenceBuilder.TrainingData.MAX_CANDIDATES));
-        headers.put("cand_feat_dim", Integer.toString(StateSequenceBuilder.TrainingData.CAND_FEAT_DIM));
-        byte[] payload = SharedGpuTensorSerde.buildTrainPayload(trainingData, rewards);
-        SharedGpuProtocol.ResponseFrame response = invoke(SharedGpuProtocol.OP_ENQUEUE_TRAIN, headers, payload, CONTROL_TIMEOUT_MS);
-        trainQueueDepth = parseIntHeader(response.headers, "queue_depth", trainQueueDepth);
-        droppedTrainEpisodes = parseIntHeader(response.headers, "dropped_train_episodes", (int) droppedTrainEpisodes);
+        TrainBatchKey batchKey = new TrainBatchKey(
+                first.state.getSequence().length,
+                first.state.getSequence().length == 0 ? 0 : first.state.getSequence()[0].length,
+                StateSequenceBuilder.TrainingData.MAX_CANDIDATES,
+                StateSequenceBuilder.TrainingData.CAND_FEAT_DIM
+        );
+        boolean flushNow = false;
+        synchronized (trainLock) {
+            trainQueue.add(new TrainRequest(
+                    new ArrayList<>(trainingData),
+                    copyRewards(rewards, trainingData.size()),
+                    batchKey
+            ));
+            if (queuedTrainEpisodesLocked() >= LOCAL_TRAIN_BATCH_MAX_EPISODES) {
+                flushNow = true;
+            } else if (trainQueue.size() == 1) {
+                trainScheduler.schedule(this::safeFlushTrainQueue, LOCAL_TRAIN_BATCH_TIMEOUT_MS, TimeUnit.MILLISECONDS);
+            }
+        }
+        if (flushNow) {
+            flushTrainQueue(true);
+        }
     }
 
     @Override
@@ -409,7 +484,9 @@ public final class SharedGpuPythonModel implements PythonModel {
         } finally {
             IOException shutdownError = new IOException("Shared GPU client shutdown");
             predictionScheduler.shutdownNow();
+            trainScheduler.shutdownNow();
             failQueuedPredictions(shutdownError);
+            clearQueuedTrainRequests();
             closeConnection(shutdownError);
             failPending(shutdownError);
         }
@@ -430,6 +507,10 @@ public final class SharedGpuPythonModel implements PythonModel {
 
     private void safeFlushPredictionQueue() {
         flushPredictionQueue(false);
+    }
+
+    private void safeFlushTrainQueue() {
+        flushTrainQueue(false);
     }
 
     private void flushPredictionQueue(boolean dueToFull) {
@@ -508,6 +589,74 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
     }
 
+    private void flushTrainQueue(boolean dueToFull) {
+        List<TrainRequest> queued;
+        synchronized (trainLock) {
+            if (trainQueue.isEmpty()) {
+                return;
+            }
+            queued = new ArrayList<>(trainQueue);
+            trainQueue.clear();
+        }
+
+        Map<TrainBatchKey, List<TrainRequest>> grouped = new LinkedHashMap<>();
+        for (TrainRequest request : queued) {
+            grouped.computeIfAbsent(request.batchKey, ignored -> new ArrayList<>()).add(request);
+        }
+        for (List<TrainRequest> requests : grouped.values()) {
+            List<TrainRequest> batch = new ArrayList<>();
+            int episodes = 0;
+            for (TrainRequest request : requests) {
+                if (!batch.isEmpty() && (episodes + request.episodeCount) > LOCAL_TRAIN_BATCH_MAX_EPISODES) {
+                    flushTrainBatch(new ArrayList<>(batch), dueToFull || episodes >= LOCAL_TRAIN_BATCH_MAX_EPISODES);
+                    batch.clear();
+                    episodes = 0;
+                }
+                batch.add(request);
+                episodes += request.episodeCount;
+            }
+            flushTrainBatch(batch, dueToFull || episodes >= LOCAL_TRAIN_BATCH_MAX_EPISODES);
+        }
+    }
+
+    private void flushTrainBatch(List<TrainRequest> batch, boolean dueToFull) {
+        if (batch == null || batch.isEmpty()) {
+            return;
+        }
+        TrainBatchKey key = batch.get(0).batchKey;
+        List<StateSequenceBuilder.TrainingData> mergedTrainingData = new ArrayList<>();
+        List<Double> mergedRewards = new ArrayList<>();
+        for (TrainRequest request : batch) {
+            mergedTrainingData.addAll(request.trainingData);
+            mergedRewards.addAll(request.rewards);
+        }
+
+        Map<String, String> headers = new LinkedHashMap<>();
+        headers.put("profile_id", profileId);
+        headers.put("batch_size", Integer.toString(mergedTrainingData.size()));
+        headers.put("seq_len", Integer.toString(key.seqLen));
+        headers.put("d_model", Integer.toString(key.dModel));
+        headers.put("max_candidates", Integer.toString(key.maxCandidates));
+        headers.put("cand_feat_dim", Integer.toString(key.candFeatDim));
+        headers.put("local_flush_reason", dueToFull ? "full" : "timeout");
+        byte[] payload = SharedGpuTensorSerde.buildTrainPayload(mergedTrainingData, mergedRewards);
+        try {
+            SharedGpuProtocol.ResponseFrame response = invoke(SharedGpuProtocol.OP_ENQUEUE_TRAIN, headers, payload, CONTROL_TIMEOUT_MS);
+            trainQueueDepth = parseIntHeader(response.headers, "queue_depth", trainQueueDepth);
+            droppedTrainEpisodes = parseIntHeader(response.headers, "dropped_train_episodes", (int) droppedTrainEpisodes);
+        } catch (Exception e) {
+            logger.warning("Shared GPU local train batch flush failed: " + e.getMessage());
+            synchronized (trainLock) {
+                List<TrainRequest> requeue = new ArrayList<>(batch.size() + trainQueue.size());
+                requeue.addAll(batch);
+                requeue.addAll(trainQueue);
+                trainQueue.clear();
+                trainQueue.addAll(requeue);
+                trainScheduler.schedule(this::safeFlushTrainQueue, LOCAL_TRAIN_BATCH_TIMEOUT_MS, TimeUnit.MILLISECONDS);
+            }
+        }
+    }
+
     private byte[] buildMergedScorePayload(List<ScoreRequest> batch) {
         ByteArrayOutputStream[] merged = new ByteArrayOutputStream[]{
                 new ByteArrayOutputStream(),
@@ -536,6 +685,14 @@ public final class SharedGpuPythonModel implements PythonModel {
                 merged[4].toByteArray(),
                 merged[5].toByteArray()
         );
+    }
+
+    private int queuedTrainEpisodesLocked() {
+        int total = 0;
+        for (TrainRequest request : trainQueue) {
+            total += request.episodeCount;
+        }
+        return total;
     }
 
     private SharedGpuProtocol.ResponseFrame invokeConnected(int opcode, Map<String, String> headers, byte[] payload, int timeoutMs) {
@@ -683,6 +840,12 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
     }
 
+    private void clearQueuedTrainRequests() {
+        synchronized (trainLock) {
+            trainQueue.clear();
+        }
+    }
+
     private void failPending(Throwable error) {
         List<Long> ids = new ArrayList<>(pending.keySet());
         for (Long id : ids) {
@@ -777,6 +940,14 @@ public final class SharedGpuPythonModel implements PythonModel {
 
     private static byte[] safeBytes(byte[] data) {
         return data == null ? new byte[0] : data;
+    }
+
+    private static List<Double> copyRewards(List<Double> rewards, int expectedSize) {
+        List<Double> copy = new ArrayList<>(expectedSize);
+        for (int i = 0; i < expectedSize; i++) {
+            copy.add(rewards != null && i < rewards.size() ? rewards.get(i) : 0.0d);
+        }
+        return copy;
     }
 
     private static String safe(String value, String fallback) {
