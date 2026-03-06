@@ -155,7 +155,7 @@ class ScoreTask:
 
     @property
     def batch_size(self) -> int:
-        return int(self.headers.get("batch_size", "1"))
+        return max(1, int(self.headers.get("batch_size", "1")))
 
 
 @dataclass
@@ -273,7 +273,8 @@ class SharedGpuHost:
             age = now - state.pending_scores[0].enqueued_at
             if oldest_age is None or age > oldest_age:
                 oldest_age = age
-            if age >= self.batch_timeout_s or len(state.pending_scores) >= self.batch_max_size:
+            pending_score_samples = sum(task.batch_size for task in state.pending_scores)
+            if age >= self.batch_timeout_s or pending_score_samples >= self.batch_max_size:
                 if age > best_age:
                     best_age = age
                     best_score_state = state
@@ -293,11 +294,16 @@ class SharedGpuHost:
     def _pop_score_batch_locked(self, state: ProfileState) -> List[ScoreTask]:
         first = state.pending_scores.popleft()
         tasks = [first]
+        logical_batch_size = first.batch_size
         keep: Deque[ScoreTask] = deque()
         while state.pending_scores:
             task = state.pending_scores.popleft()
-            if len(tasks) < self.batch_max_size and task.batch_key == first.batch_key:
+            if (
+                task.batch_key == first.batch_key
+                and (logical_batch_size + task.batch_size) <= self.batch_max_size
+            ):
                 tasks.append(task)
+                logical_batch_size += task.batch_size
             else:
                 keep.append(task)
         state.pending_scores = keep
@@ -331,6 +337,7 @@ class SharedGpuHost:
         first = tasks[0]
         headers = first.headers
         merged = merge_segments([task.segments for task in tasks])
+        logical_batch_size = sum(task.batch_size for task in tasks)
         started = time.monotonic()
         result_bytes = state.context.score_batch(
             merged[0],
@@ -344,7 +351,7 @@ class SharedGpuHost:
             int(headers.get("pick_index", "0")),
             int(headers.get("min_targets", "0")),
             int(headers.get("max_targets", "0")),
-            len(tasks),
+            logical_batch_size,
             int(headers.get("seq_len", "0")),
             int(headers.get("d_model", "0")),
             int(headers.get("max_candidates", "0")),
@@ -359,17 +366,21 @@ class SharedGpuHost:
                 self._score_flush_full_total += 1
             else:
                 self._score_flush_timeout_total += 1
-            self._infer_batch_sizes.append(float(len(tasks)))
+            self._infer_batch_sizes.append(float(logical_batch_size))
             self._infer_service_ms.append(service_ms)
-            for latency_ms in latency_samples:
-                self._infer_latency_ms.append(latency_ms)
+            for task, latency_ms in zip(tasks, latency_samples):
+                for _ in range(task.batch_size):
+                    self._infer_latency_ms.append(latency_ms)
         max_candidates = int(headers.get("max_candidates", "0"))
         stride = (max_candidates + 1) * 4
+        result_offset = 0
         for idx, task in enumerate(tasks):
-            start = idx * stride
-            end = start + stride
+            task_stride = task.batch_size * stride
+            start = result_offset
+            end = start + task_stride
+            result_offset = end
             extra = {
-                "host_batch_size": str(len(tasks)),
+                "host_batch_size": str(logical_batch_size),
                 "host_flush_reason": reason,
             }
             if idx == 0:
@@ -488,7 +499,7 @@ class SharedGpuHost:
 
     def render_metrics(self) -> str:
         with self._lock:
-            pending_scores = sum(len(state.pending_scores) for state in self._profiles.values())
+            pending_scores = sum(task.batch_size for state in self._profiles.values() for task in state.pending_scores)
             pending_trains = sum(len(state.pending_trains) for state in self._profiles.values())
             pending_score_times = [task.enqueued_at for state in self._profiles.values() for task in state.pending_scores]
             pending_train_times = [task.enqueued_at for state in self._profiles.values() for task in state.pending_trains]

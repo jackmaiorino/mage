@@ -141,7 +141,7 @@ public final class SharedGpuProtocol {
         } catch (EOFException eof) {
             throw eof;
         }
-        if (frameLength < 0 || frameLength > (64 * 1024 * 1024)) {
+        if (frameLength < 0 || frameLength > (256 * 1024 * 1024)) {
             throw new IOException("Invalid shared GPU frame length: " + frameLength);
         }
         byte[] body = new byte[frameLength];

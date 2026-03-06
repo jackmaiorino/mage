@@ -1,5 +1,6 @@
 package mage.player.ai.rl;
 
+import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +19,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -38,6 +41,10 @@ public final class SharedGpuPythonModel implements PythonModel {
     private static final int CONTROL_TIMEOUT_MS = Math.max(1000, EnvConfig.i32("GPU_SERVICE_CONTROL_TIMEOUT_MS", 30_000));
     private static final int SCORE_TIMEOUT_MS = Math.max(1000, EnvConfig.i32("PY_SCORE_TIMEOUT_MS", 60_000));
     private static final int OUTBOUND_QUEUE_CAPACITY = Math.max(128, EnvConfig.i32("GPU_SERVICE_OUTBOUND_QUEUE", 4096));
+    private static final int LOCAL_SCORE_BATCH_MAX_SIZE = Math.max(1,
+            EnvConfig.i32("GPU_SERVICE_LOCAL_BATCH_MAX_SIZE", PythonMLBatchManager.getConfiguredMaxBatchSize()));
+    private static final int LOCAL_SCORE_BATCH_TIMEOUT_MS = Math.max(1,
+            EnvConfig.i32("GPU_SERVICE_LOCAL_BATCH_TIMEOUT_MS", PythonMLBatchManager.getConfiguredBatchTimeoutMs()));
 
     private static volatile SharedGpuPythonModel instance;
     private static final Object INSTANCE_LOCK = new Object();
@@ -67,6 +74,9 @@ public final class SharedGpuPythonModel implements PythonModel {
     private final BlockingQueue<OutboundRequest> outbound = new LinkedBlockingQueue<>(OUTBOUND_QUEUE_CAPACITY);
     private final AtomicBoolean shutdown = new AtomicBoolean(false);
     private final Object connectionLock = new Object();
+    private final Object predictionLock = new Object();
+    private final List<ScoreRequest> predictionQueue = new ArrayList<>();
+    private final ScheduledExecutorService predictionScheduler;
 
     private volatile Socket socket;
     private volatile InputStream input;
@@ -77,11 +87,100 @@ public final class SharedGpuPythonModel implements PythonModel {
     private volatile int trainQueueDepth;
     private volatile long droppedTrainEpisodes;
 
+    private static final class BatchKey {
+        final String policyKey;
+        final String headId;
+        final int pickIndex;
+        final int minTargets;
+        final int maxTargets;
+        final int seqLen;
+        final int dModel;
+        final int maxCandidates;
+        final int candFeatDim;
+
+        private BatchKey(
+                String policyKey,
+                String headId,
+                int pickIndex,
+                int minTargets,
+                int maxTargets,
+                int seqLen,
+                int dModel,
+                int maxCandidates,
+                int candFeatDim
+        ) {
+            this.policyKey = policyKey;
+            this.headId = headId;
+            this.pickIndex = pickIndex;
+            this.minTargets = minTargets;
+            this.maxTargets = maxTargets;
+            this.seqLen = seqLen;
+            this.dModel = dModel;
+            this.maxCandidates = maxCandidates;
+            this.candFeatDim = candFeatDim;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            BatchKey other = (BatchKey) o;
+            return pickIndex == other.pickIndex
+                    && minTargets == other.minTargets
+                    && maxTargets == other.maxTargets
+                    && seqLen == other.seqLen
+                    && dModel == other.dModel
+                    && maxCandidates == other.maxCandidates
+                    && candFeatDim == other.candFeatDim
+                    && Objects.equals(policyKey, other.policyKey)
+                    && Objects.equals(headId, other.headId);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(policyKey, headId, pickIndex, minTargets, maxTargets, seqLen, dModel, maxCandidates, candFeatDim);
+        }
+    }
+
+    private static final class ScoreRequest {
+        final StateSequenceBuilder.SequenceOutput state;
+        final int[] candidateActionIds;
+        final float[][] candidateFeatures;
+        final int[] candidateMask;
+        final BatchKey batchKey;
+        final CompletableFuture<PythonMLBatchManager.PredictionResult> future;
+
+        private ScoreRequest(
+                StateSequenceBuilder.SequenceOutput state,
+                int[] candidateActionIds,
+                float[][] candidateFeatures,
+                int[] candidateMask,
+                BatchKey batchKey,
+                CompletableFuture<PythonMLBatchManager.PredictionResult> future
+        ) {
+            this.state = state;
+            this.candidateActionIds = candidateActionIds;
+            this.candidateFeatures = candidateFeatures;
+            this.candidateMask = candidateMask;
+            this.batchKey = batchKey;
+            this.future = future;
+        }
+    }
+
     private SharedGpuPythonModel() {
         this.profileId = EnvConfig.str("MODEL_PROFILE", "").trim();
         if (this.profileId.isEmpty()) {
             throw new IllegalStateException("PY_SERVICE_MODE=shared_gpu requires MODEL_PROFILE to be set");
         }
+        this.predictionScheduler = Executors.newSingleThreadScheduledExecutor(r -> {
+            Thread t = new Thread(r, "SharedGpuLocalBatch-" + this.profileId);
+            t.setDaemon(true);
+            return t;
+        });
         this.endpoint = EnvConfig.str("GPU_SERVICE_ENDPOINT", "").trim();
         if (this.endpoint.isEmpty()) {
             throw new IllegalStateException("PY_SERVICE_MODE=shared_gpu requires GPU_SERVICE_ENDPOINT to be set");
@@ -111,28 +210,46 @@ public final class SharedGpuPythonModel implements PythonModel {
             int maxTargets
     ) {
         Objects.requireNonNull(state, "state");
-        Map<String, String> headers = new LinkedHashMap<>();
-        headers.put("profile_id", profileId);
-        headers.put("policy_key", safe(policyKey, "train"));
-        headers.put("head_id", safe(headId, "action"));
-        headers.put("pick_index", Integer.toString(pickIndex));
-        headers.put("min_targets", Integer.toString(minTargets));
-        headers.put("max_targets", Integer.toString(maxTargets));
-        headers.put("batch_size", "1");
-        headers.put("seq_len", Integer.toString(state.getSequence().length));
-        headers.put("d_model", Integer.toString(state.getSequence().length == 0 ? 0 : state.getSequence()[0].length));
-        headers.put("max_candidates", Integer.toString(candidateActionIds.length));
-        headers.put("cand_feat_dim", Integer.toString(candidateFeatures.length == 0 ? 0 : candidateFeatures[0].length));
-        byte[] payload = SharedGpuTensorSerde.buildScorePayload(state, candidateActionIds, candidateFeatures, candidateMask);
-        long startNanos = System.nanoTime();
-        SharedGpuProtocol.ResponseFrame response = invoke(SharedGpuProtocol.OP_SCORE, headers, payload, SCORE_TIMEOUT_MS);
-        metrics.recordInferenceLatencyMs((System.nanoTime() - startNanos) / 1_000_000L);
-        if ("1".equals(response.headers.get("flush_leader"))) {
-            int batchSize = parseIntHeader(response.headers, "host_batch_size", 0);
-            boolean dueToFull = "full".equalsIgnoreCase(response.headers.getOrDefault("host_flush_reason", ""));
-            metrics.recordInferBatchFlush(batchSize, dueToFull);
+        BatchKey batchKey = new BatchKey(
+                safe(policyKey, "train"),
+                safe(headId, "action"),
+                pickIndex,
+                minTargets,
+                maxTargets,
+                state.getSequence().length,
+                state.getSequence().length == 0 ? 0 : state.getSequence()[0].length,
+                candidateActionIds.length,
+                candidateFeatures.length == 0 ? 0 : candidateFeatures[0].length
+        );
+        CompletableFuture<PythonMLBatchManager.PredictionResult> future = new CompletableFuture<>();
+        metrics.recordInferenceRequest();
+        boolean flushNow = false;
+        synchronized (predictionLock) {
+            predictionQueue.add(new ScoreRequest(state, candidateActionIds, candidateFeatures, candidateMask, batchKey, future));
+            if (predictionQueue.size() >= LOCAL_SCORE_BATCH_MAX_SIZE) {
+                flushNow = true;
+            } else if (predictionQueue.size() == 1) {
+                predictionScheduler.schedule(this::safeFlushPredictionQueue, LOCAL_SCORE_BATCH_TIMEOUT_MS, TimeUnit.MILLISECONDS);
+            }
         }
-        return SharedGpuTensorSerde.decodePredictionResult(response.payload, candidateActionIds.length);
+        if (flushNow) {
+            flushPredictionQueue(true);
+        }
+        long startNanos = System.nanoTime();
+        try {
+            PythonMLBatchManager.PredictionResult result = future.get(SCORE_TIMEOUT_MS, TimeUnit.MILLISECONDS);
+            metrics.recordInferenceLatencyMs((System.nanoTime() - startNanos) / 1_000_000L);
+            return result;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Interrupted while waiting for shared GPU batch response", e);
+        } catch (TimeoutException e) {
+            metrics.recordInferenceTimeout();
+            throw new IllegalStateException("Timed out waiting for shared GPU batch response", e);
+        } catch (ExecutionException e) {
+            Throwable cause = e.getCause() == null ? e : e.getCause();
+            throw new IllegalStateException("Shared GPU batch request failed", cause);
+        }
     }
 
     @Override
@@ -290,8 +407,11 @@ public final class SharedGpuPythonModel implements PythonModel {
                 }
             }
         } finally {
-            closeConnection(new IOException("Shared GPU client shutdown"));
-            failPending(new IOException("Shared GPU client shutdown"));
+            IOException shutdownError = new IOException("Shared GPU client shutdown");
+            predictionScheduler.shutdownNow();
+            failQueuedPredictions(shutdownError);
+            closeConnection(shutdownError);
+            failPending(shutdownError);
         }
     }
 
@@ -306,6 +426,116 @@ public final class SharedGpuPythonModel implements PythonModel {
     private SharedGpuProtocol.ResponseFrame invoke(int opcode, Map<String, String> headers, byte[] payload, int timeoutMs) {
         ensureReady();
         return invokeConnected(opcode, headers, payload, timeoutMs);
+    }
+
+    private void safeFlushPredictionQueue() {
+        flushPredictionQueue(false);
+    }
+
+    private void flushPredictionQueue(boolean dueToFull) {
+        List<ScoreRequest> batch;
+        synchronized (predictionLock) {
+            if (predictionQueue.isEmpty()) {
+                return;
+            }
+            batch = new ArrayList<>(predictionQueue);
+            predictionQueue.clear();
+        }
+
+        Map<BatchKey, List<ScoreRequest>> grouped = new LinkedHashMap<>();
+        for (ScoreRequest request : batch) {
+            grouped.computeIfAbsent(request.batchKey, ignored -> new ArrayList<>()).add(request);
+        }
+        for (List<ScoreRequest> requests : grouped.values()) {
+            int offset = 0;
+            while (offset < requests.size()) {
+                int end = Math.min(requests.size(), offset + LOCAL_SCORE_BATCH_MAX_SIZE);
+                flushPredictionBatch(new ArrayList<>(requests.subList(offset, end)),
+                        dueToFull || (end - offset) >= LOCAL_SCORE_BATCH_MAX_SIZE);
+                offset = end;
+            }
+        }
+    }
+
+    private void flushPredictionBatch(List<ScoreRequest> batch, boolean dueToFull) {
+        if (batch.isEmpty()) {
+            return;
+        }
+        BatchKey key = batch.get(0).batchKey;
+        try {
+            metrics.recordInferBatchFlush(batch.size(), dueToFull);
+        } catch (Exception ignored) {
+        }
+
+        Map<String, String> headers = new LinkedHashMap<>();
+        headers.put("profile_id", profileId);
+        headers.put("policy_key", key.policyKey);
+        headers.put("head_id", key.headId);
+        headers.put("pick_index", Integer.toString(key.pickIndex));
+        headers.put("min_targets", Integer.toString(key.minTargets));
+        headers.put("max_targets", Integer.toString(key.maxTargets));
+        headers.put("batch_size", Integer.toString(batch.size()));
+        headers.put("seq_len", Integer.toString(key.seqLen));
+        headers.put("d_model", Integer.toString(key.dModel));
+        headers.put("max_candidates", Integer.toString(key.maxCandidates));
+        headers.put("cand_feat_dim", Integer.toString(key.candFeatDim));
+
+        try {
+            SharedGpuProtocol.ResponseFrame response = invoke(
+                    SharedGpuProtocol.OP_SCORE,
+                    headers,
+                    buildMergedScorePayload(batch),
+                    SCORE_TIMEOUT_MS
+            );
+            ByteBuffer buffer = ByteBuffer.wrap(response.payload == null ? new byte[0] : response.payload).order(ByteOrder.LITTLE_ENDIAN);
+            for (ScoreRequest request : batch) {
+                int candidateCount = request.candidateActionIds.length;
+                int expectedBytes = (candidateCount + 1) * 4;
+                if (buffer.remaining() < expectedBytes) {
+                    throw new IllegalStateException("Shared GPU batch score response truncated");
+                }
+                float[] policy = new float[candidateCount];
+                for (int i = 0; i < candidateCount; i++) {
+                    policy[i] = buffer.getFloat();
+                }
+                float value = buffer.getFloat();
+                request.future.complete(new PythonMLBatchManager.PredictionResult(policy, value));
+            }
+        } catch (Exception e) {
+            for (ScoreRequest request : batch) {
+                request.future.completeExceptionally(e);
+            }
+        }
+    }
+
+    private byte[] buildMergedScorePayload(List<ScoreRequest> batch) {
+        ByteArrayOutputStream[] merged = new ByteArrayOutputStream[]{
+                new ByteArrayOutputStream(),
+                new ByteArrayOutputStream(),
+                new ByteArrayOutputStream(),
+                new ByteArrayOutputStream(),
+                new ByteArrayOutputStream(),
+                new ByteArrayOutputStream()
+        };
+        for (ScoreRequest request : batch) {
+            byte[][] segments = SharedGpuTensorSerde.buildScoreSegments(
+                    request.state,
+                    request.candidateActionIds,
+                    request.candidateFeatures,
+                    request.candidateMask
+            );
+            for (int i = 0; i < segments.length; i++) {
+                merged[i].write(segments[i], 0, segments[i].length);
+            }
+        }
+        return SharedGpuTensorSerde.packSegments(
+                merged[0].toByteArray(),
+                merged[1].toByteArray(),
+                merged[2].toByteArray(),
+                merged[3].toByteArray(),
+                merged[4].toByteArray(),
+                merged[5].toByteArray()
+        );
     }
 
     private SharedGpuProtocol.ResponseFrame invokeConnected(int opcode, Map<String, String> headers, byte[] payload, int timeoutMs) {
@@ -403,6 +633,7 @@ public final class SharedGpuPythonModel implements PythonModel {
                 break;
             } catch (Exception e) {
                 closeConnection(e instanceof IOException ? (IOException) e : new IOException(e));
+                failQueuedPredictions(e);
                 failPending(e);
                 break;
             }
@@ -423,13 +654,32 @@ public final class SharedGpuPythonModel implements PythonModel {
                 }
             } catch (EOFException eof) {
                 closeConnection(new IOException("Shared GPU host closed connection", eof));
+                failQueuedPredictions(eof);
                 failPending(eof);
                 break;
             } catch (Exception e) {
                 closeConnection(e instanceof IOException ? (IOException) e : new IOException(e));
+                failQueuedPredictions(e);
                 failPending(e);
                 break;
             }
+        }
+    }
+
+    private void failQueuedPredictions(Throwable error) {
+        if (error == null) {
+            return;
+        }
+        List<ScoreRequest> queued;
+        synchronized (predictionLock) {
+            if (predictionQueue.isEmpty()) {
+                return;
+            }
+            queued = new ArrayList<>(predictionQueue);
+            predictionQueue.clear();
+        }
+        for (ScoreRequest request : queued) {
+            request.future.completeExceptionally(error);
         }
     }
 

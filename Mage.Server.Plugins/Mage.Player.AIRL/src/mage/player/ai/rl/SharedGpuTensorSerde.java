@@ -18,6 +18,22 @@ final class SharedGpuTensorSerde {
     private SharedGpuTensorSerde() {
     }
 
+    static byte[][] buildScoreSegments(
+            StateSequenceBuilder.SequenceOutput state,
+            int[] candidateActionIds,
+            float[][] candidateFeatures,
+            int[] candidateMask
+    ) {
+        return new byte[][]{
+                floats2dToBytes(state.getSequence()),
+                intsToBytes(state.getMask()),
+                intsToBytes(state.getTokenIds()),
+                floats2dToBytes(candidateFeatures),
+                intsToBytes(candidateActionIds),
+                intsToBytes(candidateMask)
+        };
+    }
+
     static byte[] packSegments(byte[]... segments) {
         try {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -57,14 +73,7 @@ final class SharedGpuTensorSerde {
             float[][] candidateFeatures,
             int[] candidateMask
     ) {
-        return packSegments(
-                floats2dToBytes(state.getSequence()),
-                intsToBytes(state.getMask()),
-                intsToBytes(state.getTokenIds()),
-                floats2dToBytes(candidateFeatures),
-                intsToBytes(candidateActionIds),
-                intsToBytes(candidateMask)
-        );
+        return packSegments(buildScoreSegments(state, candidateActionIds, candidateFeatures, candidateMask));
     }
 
     static PythonMLBatchManager.PredictionResult decodePredictionResult(byte[] payload, int maxCandidates) {
