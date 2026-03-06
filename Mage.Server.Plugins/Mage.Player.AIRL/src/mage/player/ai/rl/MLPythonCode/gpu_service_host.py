@@ -14,6 +14,7 @@ from gpu_service_core import ProfileContext, feature_array_from_bytes, merge_seg
 
 
 FRAME_MAX_BYTES = 256 * 1024 * 1024
+RECENT_METRIC_HISTORY = 1000
 
 
 def env_int(name: str, default: int) -> int:
@@ -136,7 +137,7 @@ class ScoreTask:
     profile_id: str
     headers: Dict[str, str]
     segments: List[bytes]
-    enqueued_at: float = field(default_factory=time.time)
+    enqueued_at: float = field(default_factory=time.monotonic)
 
     @property
     def batch_key(self) -> Tuple[str, str, str, str, str, str, str, str, str]:
@@ -162,6 +163,7 @@ class TrainTask:
     profile_id: str
     headers: Dict[str, str]
     segments: List[bytes]
+    enqueued_at: float = field(default_factory=time.monotonic)
 
     @property
     def step_count(self) -> int:
@@ -193,7 +195,16 @@ class SharedGpuHost:
         self._train_rr = 0
         self._score_batches = 0
         self._train_batches = 0
+        self._score_flush_timeout_total = 0
+        self._score_flush_full_total = 0
         self._last_error = ""
+        self._infer_latency_ms: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
+        self._infer_service_ms: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
+        self._infer_batch_sizes: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
+        self._train_latency_ms: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
+        self._train_service_ms: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
+        self._train_batch_episode_counts: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
+        self._train_batch_step_counts: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
 
     def get_or_create_profile(self, headers: Dict[str, str]) -> ProfileState:
         profile_id = headers.get("profile_id", "").strip()
@@ -251,7 +262,7 @@ class SharedGpuHost:
                             pass
 
     def _select_work_locked(self):
-        now = time.time()
+        now = time.monotonic()
         profiles = list(self._profiles.values())
         best_score_state = None
         best_age = -1.0
@@ -320,6 +331,7 @@ class SharedGpuHost:
         first = tasks[0]
         headers = first.headers
         merged = merge_segments([task.segments for task in tasks])
+        started = time.monotonic()
         result_bytes = state.context.score_batch(
             merged[0],
             merged[1],
@@ -338,7 +350,19 @@ class SharedGpuHost:
             int(headers.get("max_candidates", "0")),
             int(headers.get("cand_feat_dim", "0")),
         )
-        self._score_batches += 1
+        finished = time.monotonic()
+        service_ms = max(0.0, (finished - started) * 1000.0)
+        latency_samples = [max(0.0, (finished - task.enqueued_at) * 1000.0) for task in tasks]
+        with self._lock:
+            self._score_batches += 1
+            if reason == "full":
+                self._score_flush_full_total += 1
+            else:
+                self._score_flush_timeout_total += 1
+            self._infer_batch_sizes.append(float(len(tasks)))
+            self._infer_service_ms.append(service_ms)
+            for latency_ms in latency_samples:
+                self._infer_latency_ms.append(latency_ms)
         max_candidates = int(headers.get("max_candidates", "0"))
         stride = (max_candidates + 1) * 4
         for idx, task in enumerate(tasks):
@@ -356,6 +380,7 @@ class SharedGpuHost:
         first = tasks[0]
         merged = merge_segments([task.segments for task in tasks])
         total_steps = sum(task.step_count for task in tasks)
+        started = time.monotonic()
         state.context.train_batch(
             merged[0],
             merged[1],
@@ -377,7 +402,40 @@ class SharedGpuHost:
             int(first.headers.get("max_candidates", "0")),
             int(first.headers.get("cand_feat_dim", "0")),
         )
-        self._train_batches += 1
+        finished = time.monotonic()
+        service_ms = max(0.0, (finished - started) * 1000.0)
+        latency_samples = [max(0.0, (finished - task.enqueued_at) * 1000.0) for task in tasks]
+        with self._lock:
+            self._train_batches += 1
+            self._train_service_ms.append(service_ms)
+            self._train_batch_episode_counts.append(float(len(tasks)))
+            self._train_batch_step_counts.append(float(total_steps))
+            for latency_ms in latency_samples:
+                self._train_latency_ms.append(latency_ms)
+
+    @staticmethod
+    def _avg(values: Deque[float]) -> float:
+        return (sum(values) / float(len(values))) if values else 0.0
+
+    @staticmethod
+    def _percentile(values: Deque[float], percentile: float) -> float:
+        if not values:
+            return 0.0
+        ordered = sorted(values)
+        if len(ordered) == 1:
+            return float(ordered[0])
+        rank = (percentile / 100.0) * (len(ordered) - 1)
+        lower = int(rank)
+        upper = min(lower + 1, len(ordered) - 1)
+        weight = rank - lower
+        return (ordered[lower] * (1.0 - weight)) + (ordered[upper] * weight)
+
+    @staticmethod
+    def _oldest_age_ms(tasks: List[float]) -> float:
+        if not tasks:
+            return 0.0
+        now = time.monotonic()
+        return max(0.0, (now - min(tasks)) * 1000.0)
 
     def handle_control(self, session: ConnectionSession, opcode: int, request_id: int,
                        headers: Dict[str, str], payload: bytes) -> None:
@@ -430,22 +488,95 @@ class SharedGpuHost:
 
     def render_metrics(self) -> str:
         with self._lock:
+            pending_scores = sum(len(state.pending_scores) for state in self._profiles.values())
+            pending_trains = sum(len(state.pending_trains) for state in self._profiles.values())
+            pending_score_times = [task.enqueued_at for state in self._profiles.values() for task in state.pending_scores]
+            pending_train_times = [task.enqueued_at for state in self._profiles.values() for task in state.pending_trains]
             lines = [
+                "# HELP gpu_service_batch_timeout_ms Shared GPU host inference batch timeout in milliseconds",
+                "# TYPE gpu_service_batch_timeout_ms gauge",
+                f"gpu_service_batch_timeout_ms {self.batch_timeout_ms}",
+                "# HELP gpu_service_batch_max_size Shared GPU host inference batch max size",
+                "# TYPE gpu_service_batch_max_size gauge",
+                f"gpu_service_batch_max_size {self.batch_max_size}",
                 "# HELP gpu_service_profiles Number of registered profile contexts",
                 "# TYPE gpu_service_profiles gauge",
                 f"gpu_service_profiles {len(self._profiles)}",
                 "# HELP gpu_service_pending_scores Total pending inference requests",
                 "# TYPE gpu_service_pending_scores gauge",
-                f"gpu_service_pending_scores {sum(len(state.pending_scores) for state in self._profiles.values())}",
+                f"gpu_service_pending_scores {pending_scores}",
+                "# HELP gpu_service_pending_scores_oldest_ms Age of the oldest pending inference request in milliseconds",
+                "# TYPE gpu_service_pending_scores_oldest_ms gauge",
+                f"gpu_service_pending_scores_oldest_ms {self._oldest_age_ms(pending_score_times):.3f}",
                 "# HELP gpu_service_pending_trains Total pending train episodes",
                 "# TYPE gpu_service_pending_trains gauge",
-                f"gpu_service_pending_trains {sum(len(state.pending_trains) for state in self._profiles.values())}",
+                f"gpu_service_pending_trains {pending_trains}",
+                "# HELP gpu_service_pending_trains_oldest_ms Age of the oldest pending train request in milliseconds",
+                "# TYPE gpu_service_pending_trains_oldest_ms gauge",
+                f"gpu_service_pending_trains_oldest_ms {self._oldest_age_ms(pending_train_times):.3f}",
                 "# HELP gpu_service_score_batches_total Score batches executed by shared GPU host",
                 "# TYPE gpu_service_score_batches_total counter",
                 f"gpu_service_score_batches_total {self._score_batches}",
+                "# HELP gpu_service_infer_flush_timeout_total Inference batches flushed by timeout on the shared GPU host",
+                "# TYPE gpu_service_infer_flush_timeout_total counter",
+                f"gpu_service_infer_flush_timeout_total {self._score_flush_timeout_total}",
+                "# HELP gpu_service_infer_flush_full_total Inference batches flushed because the batch max size was reached on the shared GPU host",
+                "# TYPE gpu_service_infer_flush_full_total counter",
+                f"gpu_service_infer_flush_full_total {self._score_flush_full_total}",
+                "# HELP gpu_service_infer_batch_avg_size Average recent shared-host inference batch size",
+                "# TYPE gpu_service_infer_batch_avg_size gauge",
+                f"gpu_service_infer_batch_avg_size {self._avg(self._infer_batch_sizes):.3f}",
+                "# HELP gpu_service_infer_batch_p50_size 50th percentile recent shared-host inference batch size",
+                "# TYPE gpu_service_infer_batch_p50_size gauge",
+                f"gpu_service_infer_batch_p50_size {self._percentile(self._infer_batch_sizes, 50):.3f}",
+                "# HELP gpu_service_infer_batch_p95_size 95th percentile recent shared-host inference batch size",
+                "# TYPE gpu_service_infer_batch_p95_size gauge",
+                f"gpu_service_infer_batch_p95_size {self._percentile(self._infer_batch_sizes, 95):.3f}",
+                "# HELP gpu_service_infer_latency_recent_avg_ms Average recent shared-host inference request latency in milliseconds",
+                "# TYPE gpu_service_infer_latency_recent_avg_ms gauge",
+                f"gpu_service_infer_latency_recent_avg_ms {self._avg(self._infer_latency_ms):.3f}",
+                "# HELP gpu_service_infer_latency_p50_ms 50th percentile recent shared-host inference request latency in milliseconds",
+                "# TYPE gpu_service_infer_latency_p50_ms gauge",
+                f"gpu_service_infer_latency_p50_ms {self._percentile(self._infer_latency_ms, 50):.3f}",
+                "# HELP gpu_service_infer_latency_p95_ms 95th percentile recent shared-host inference request latency in milliseconds",
+                "# TYPE gpu_service_infer_latency_p95_ms gauge",
+                f"gpu_service_infer_latency_p95_ms {self._percentile(self._infer_latency_ms, 95):.3f}",
+                "# HELP gpu_service_infer_service_recent_avg_ms Average recent shared-host inference batch service time in milliseconds",
+                "# TYPE gpu_service_infer_service_recent_avg_ms gauge",
+                f"gpu_service_infer_service_recent_avg_ms {self._avg(self._infer_service_ms):.3f}",
+                "# HELP gpu_service_infer_service_p50_ms 50th percentile recent shared-host inference batch service time in milliseconds",
+                "# TYPE gpu_service_infer_service_p50_ms gauge",
+                f"gpu_service_infer_service_p50_ms {self._percentile(self._infer_service_ms, 50):.3f}",
+                "# HELP gpu_service_infer_service_p95_ms 95th percentile recent shared-host inference batch service time in milliseconds",
+                "# TYPE gpu_service_infer_service_p95_ms gauge",
+                f"gpu_service_infer_service_p95_ms {self._percentile(self._infer_service_ms, 95):.3f}",
                 "# HELP gpu_service_train_batches_total Train batches executed by shared GPU host",
                 "# TYPE gpu_service_train_batches_total counter",
                 f"gpu_service_train_batches_total {self._train_batches}",
+                "# HELP gpu_service_train_batch_avg_episodes Average recent shared-host train batch size in episodes",
+                "# TYPE gpu_service_train_batch_avg_episodes gauge",
+                f"gpu_service_train_batch_avg_episodes {self._avg(self._train_batch_episode_counts):.3f}",
+                "# HELP gpu_service_train_batch_avg_steps Average recent shared-host train batch size in steps",
+                "# TYPE gpu_service_train_batch_avg_steps gauge",
+                f"gpu_service_train_batch_avg_steps {self._avg(self._train_batch_step_counts):.3f}",
+                "# HELP gpu_service_train_latency_recent_avg_ms Average recent shared-host train request latency in milliseconds",
+                "# TYPE gpu_service_train_latency_recent_avg_ms gauge",
+                f"gpu_service_train_latency_recent_avg_ms {self._avg(self._train_latency_ms):.3f}",
+                "# HELP gpu_service_train_latency_p50_ms 50th percentile recent shared-host train request latency in milliseconds",
+                "# TYPE gpu_service_train_latency_p50_ms gauge",
+                f"gpu_service_train_latency_p50_ms {self._percentile(self._train_latency_ms, 50):.3f}",
+                "# HELP gpu_service_train_latency_p95_ms 95th percentile recent shared-host train request latency in milliseconds",
+                "# TYPE gpu_service_train_latency_p95_ms gauge",
+                f"gpu_service_train_latency_p95_ms {self._percentile(self._train_latency_ms, 95):.3f}",
+                "# HELP gpu_service_train_service_recent_avg_ms Average recent shared-host train batch service time in milliseconds",
+                "# TYPE gpu_service_train_service_recent_avg_ms gauge",
+                f"gpu_service_train_service_recent_avg_ms {self._avg(self._train_service_ms):.3f}",
+                "# HELP gpu_service_train_service_p50_ms 50th percentile recent shared-host train batch service time in milliseconds",
+                "# TYPE gpu_service_train_service_p50_ms gauge",
+                f"gpu_service_train_service_p50_ms {self._percentile(self._train_service_ms, 50):.3f}",
+                "# HELP gpu_service_train_service_p95_ms 95th percentile recent shared-host train batch service time in milliseconds",
+                "# TYPE gpu_service_train_service_p95_ms gauge",
+                f"gpu_service_train_service_p95_ms {self._percentile(self._train_service_ms, 95):.3f}",
             ]
             if self._last_error:
                 lines.extend([

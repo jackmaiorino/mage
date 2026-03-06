@@ -19,48 +19,4 @@ JOB=$(sbatch --parsable \
 echo "Submitted job: $JOB"
 bash scripts/hpc/observe_job.sh "$JOB"
 
-
-srun --jobid="$JOB" --overlap -N1 -n1 -c1 bash -lc '
-hostname
-for p in $(seq 19100 19111); do
-  curl -fsS "http://127.0.0.1:$p/metrics" 2>/dev/null || true
-done | awk "
-  /^mage_config_py_batch_timeout_ms / {timeout=\$2}
-  /^mage_infer_batch_avg_size / {infer_avg+=\$2; infer_n++}
-  /^mage_infer_batch_size_p50 / {infer_p50+=\$2; infer_p50_n++}
-  /^mage_infer_flushes_timeout_total / {timeout_flush+=\$2}
-  /^mage_infer_flushes_full_total / {full_flush+=\$2}
-  /^mage_infer_latency_avg_ms / {infer_lat+=\$2; infer_lat_n++}
-  /^mage_infer_latency_recent_avg_ms / {infer_lat_recent+=\$2; infer_lat_recent_n++}
-  /^mage_infer_latency_p50_ms / {infer_lat_p50+=\$2; infer_lat_p50_n++}
-  /^mage_infer_latency_p95_ms / {infer_lat_p95+=\$2; infer_lat_p95_n++}
-  /^mage_train_queue_depth / {q+=\$2}
-  /^mage_train_queue_dropped_total / {qd+=\$2}
-  /^mage_train_batch_avg_episodes / {train_ep+=\$2; train_ep_n++}
-  /^mage_train_latency_avg_ms / {train_lat+=\$2; train_lat_n++}
-  /^mage_train_latency_recent_avg_ms / {train_lat_recent+=\$2; train_lat_recent_n++}
-  /^mage_train_latency_p50_ms / {train_lat_p50+=\$2; train_lat_p50_n++}
-  /^mage_train_latency_p95_ms / {train_lat_p95+=\$2; train_lat_p95_n++}
-  /^mage_infer_time_ms / {infer_time+=\$2; infer_time_n++}
-  /^mage_train_time_ms / {train_time+=\$2; train_time_n++}
-  END {
-    printf \"batch_timeout_ms=%s\n\", timeout;
-    printf \"infer_batch_avg_size_mean=%.2f\n\", infer_n?infer_avg/infer_n:0;
-    printf \"infer_batch_p50_mean=%.2f\n\", infer_p50_n?infer_p50/infer_p50_n:0;
-    printf \"infer_flushes_timeout_total=%d\n\", timeout_flush;
-    printf \"infer_flushes_full_total=%d\n\", full_flush;
-    printf \"infer_latency_avg_ms_mean=%.2f\n\", infer_lat_n?infer_lat/infer_lat_n:0;
-    printf \"infer_latency_recent_avg_ms_mean=%.2f\n\", infer_lat_recent_n?infer_lat_recent/infer_lat_recent_n:0;
-    printf \"infer_latency_p50_ms_mean=%.2f\n\", infer_lat_p50_n?infer_lat_p50/infer_lat_p50_n:0;
-    printf \"infer_latency_p95_ms_mean=%.2f\n\", infer_lat_p95_n?infer_lat_p95/infer_lat_p95_n:0;
-    printf \"train_queue_depth_total=%d\n\", q;
-    printf \"train_queue_dropped_total=%d\n\", qd;
-    printf \"train_batch_avg_episodes_mean=%.2f\n\", train_ep_n?train_ep/train_ep_n:0;
-    printf \"train_latency_avg_ms_mean=%.2f\n\", train_lat_n?train_lat/train_lat_n:0;
-    printf \"train_latency_recent_avg_ms_mean=%.2f\n\", train_lat_recent_n?train_lat_recent/train_lat_recent_n:0;
-    printf \"train_latency_p50_ms_mean=%.2f\n\", train_lat_p50_n?train_lat_p50/train_lat_p50_n:0;
-    printf \"train_latency_p95_ms_mean=%.2f\n\", train_lat_p95_n?train_lat_p95/train_lat_p95_n:0;
-    printf \"infer_time_ms_mean=%.2f\n\", infer_time_n?infer_time/infer_time_n:0;
-    printf \"train_time_ms_mean=%.2f\n\", train_time_n?train_time/train_time_n:0;
-  }"
-'
+bash scripts/hpc/probe_job_metrics.sh "$JOB"
