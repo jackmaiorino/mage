@@ -3518,7 +3518,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     public ManaOptions getManaAvailable(Game originalGame) {
         // workaround to fix a triggers list modification bug (game must be immutable on playable calculations)
         Game game = originalGame.createSimulationForPlayableCalc();
+        return getManaAvailableInternal(game);
+    }
 
+    protected ManaOptions getManaAvailableFast(Game game) {
+        return getManaAvailableInternal(game);
+    }
+
+    private ManaOptions getManaAvailableInternal(Game game) {
         ManaOptions availableMana = new ManaOptions();
         availableMana.addMana(manaPool.getMana());
         // conditional mana
@@ -4248,13 +4255,40 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return
      */
     public List<ActivatedAbility> getPlayable(Game originalGame, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
-        List<ActivatedAbility> playable = new ArrayList<>();
         if (shouldSkipGettingPlayable(originalGame)) {
-            return playable;
+            return new ArrayList<>();
         }
 
         Game game = originalGame.createSimulationForPlayableCalc();
-        ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
+        return getPlayableInternal(game, hidden, fromZone, hideDuplicatedAbilities);
+    }
+
+    /**
+     * Aggressive fast path for RL-style callers that can tolerate evaluating playable state
+     * directly on the live game as long as the engine is placed into the same
+     * "playable calc" mode and any unexpected runtime failure falls back to the
+     * normal cloned path.
+     */
+    protected List<ActivatedAbility> getPlayableFast(Game originalGame, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
+        if (shouldSkipGettingPlayable(originalGame)) {
+            return new ArrayList<>();
+        }
+        if (!(originalGame instanceof GameImpl)) {
+            return getPlayable(originalGame, hidden, fromZone, hideDuplicatedAbilities);
+        }
+
+        GameImpl gameImpl = (GameImpl) originalGame;
+        try (GameImpl.PlayableCalculationScope ignored = gameImpl.enterPlayableCalculationScope()) {
+            return getPlayableInternal(originalGame, hidden, fromZone, hideDuplicatedAbilities);
+        } catch (RuntimeException ex) {
+            logger.debug("Fast playable calculation failed; falling back to simulation copy", ex);
+            return getPlayable(originalGame, hidden, fromZone, hideDuplicatedAbilities);
+        }
+    }
+
+    private List<ActivatedAbility> getPlayableInternal(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
+        List<ActivatedAbility> playable = new ArrayList<>();
+        ManaOptions availableMana = getManaAvailableInternal(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
         if (hidden && fromZone.match(Zone.HAND)) {
             for (Card card : hand.getCards(game)) {
                 for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)

@@ -106,6 +106,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final boolean BASE_STATE_CACHE_ENABLED = EnvConfig.bool("RL_BASE_STATE_CACHE_ENABLED", true);
     private static final boolean ALTERNATIVE_COST_SIM_CACHE_ENABLED =
             EnvConfig.bool("RL_ALTCOST_SIM_CACHE_ENABLED", true);
+    private static final boolean PLAYABLE_CACHE_ENABLED =
+            EnvConfig.bool("RL_PLAYABLE_CACHE_ENABLED", true);
+    // Experimental: bypass the playable-calculation game clone and evaluate directly
+    // on the live game while forcing playable-calc flags. This can be faster, but it
+    // is not enabled by default because XMage still mutates some state while checking
+    // playability.
+    private static final boolean PLAYABLE_NOCLONE_ENABLED =
+            EnvConfig.bool("RL_PLAYABLE_NOCLONE_ENABLED", false);
 
     // Main policy exploration (actor) - epsilon mixture + correlated full-random turn.
     private static final double ACTION_EPS_START = EnvConfig.f64("RL_ACTION_EPS_START", 0.05);
@@ -165,6 +173,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private transient int cachedAltCostValidationStepNum = Integer.MIN_VALUE;
     private transient int cachedAltCostValidationApplyEffectsCounter = Integer.MIN_VALUE;
     private transient int cachedAltCostValidationStackSize = Integer.MIN_VALUE;
+    private transient String cachedPlayableStateKey;
+    private transient List<ActivatedAbility> cachedPlayableOptions = new ArrayList<>();
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
     private final java.util.Map<StateSequenceBuilder.ActionType, Integer> decisionCountsByHead;
     private Ability currentAbility;
@@ -342,6 +352,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         cachedBaseStateStepNum = Integer.MIN_VALUE;
         cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
         cachedBaseStateStackSize = Integer.MIN_VALUE;
+        cachedPlayableStateKey = null;
+        cachedPlayableOptions.clear();
     }
 
     private void invalidateAlternativeCostValidationCache() {
@@ -466,6 +478,58 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             invalidateBaseStateCache();
         }
         return baseState;
+    }
+
+    private String buildPlayableStateKey(Game game) {
+        StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
+        int hash = 1;
+        hash = 31 * hash + baseState.mask.hashCode();
+        hash = 31 * hash + baseState.tokenIds.hashCode();
+        for (float[] token : baseState.tokens) {
+            hash = 31 * hash + Arrays.hashCode(token);
+        }
+
+        Player self = game.getPlayer(getId());
+        int landsPlayed = self != null ? self.getLandsPlayed() : Integer.MIN_VALUE;
+        int landsPerTurn = self != null ? self.getLandsPerTurn() : Integer.MIN_VALUE;
+
+        StringBuilder key = new StringBuilder(160);
+        key.append(game.getId()).append('|');
+        key.append(game.getTurnNum()).append('|');
+        key.append(game.getPhase() != null ? game.getPhase().getType() : "NONE").append('|');
+        key.append(game.getActivePlayerId()).append('|');
+        key.append(game.getState() != null ? game.getState().getPriorityPlayerId() : null).append('|');
+        key.append(game.getState() != null ? game.getState().getChoosingPlayerId() : null).append('|');
+        key.append(game.getState() != null ? game.getState().getApplyEffectsCounter() : Integer.MIN_VALUE).append('|');
+        key.append(game.getState() != null ? game.getState().getStepNum() : Integer.MIN_VALUE).append('|');
+        key.append(game.getStack() != null ? game.getStack().size() : 0).append('|');
+        key.append(landsPlayed).append('|');
+        key.append(landsPerTurn).append('|');
+        key.append(hash);
+        return key.toString();
+    }
+
+    private List<ActivatedAbility> getPlayableForCurrentState(Game game) {
+        List<ActivatedAbility> playable;
+        if (!PLAYABLE_CACHE_ENABLED) {
+            cachedPlayableStateKey = null;
+            cachedPlayableOptions.clear();
+            return PLAYABLE_NOCLONE_ENABLED
+                    ? getPlayableFast(game, true, Zone.ALL, true)
+                    : getPlayable(game, true);
+        }
+
+        String stateKey = buildPlayableStateKey(game);
+        if (stateKey.equals(cachedPlayableStateKey) && !cachedPlayableOptions.isEmpty()) {
+            return new ArrayList<>(cachedPlayableOptions);
+        }
+
+        playable = PLAYABLE_NOCLONE_ENABLED
+                ? getPlayableFast(game, true, Zone.ALL, true)
+                : getPlayable(game, true);
+        cachedPlayableStateKey = stateKey;
+        cachedPlayableOptions = new ArrayList<>(playable);
+        return playable;
     }
 
     private static float[] normalizePolicyScores(float[] actionScores, int[] candidateMask, int candidateCount) {
@@ -5619,7 +5683,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     protected Ability calculateRLAction(Game game) {
-        List<ActivatedAbility> flattenedOptions = getPlayable(game, true);
+        List<ActivatedAbility> flattenedOptions = getPlayableForCurrentState(game);
         // (PassAbility will be added later after duplicate removal)
 
         // Filter by testing activation in a simulation (like ComputerPlayer6 does)

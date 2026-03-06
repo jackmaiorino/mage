@@ -281,6 +281,40 @@ public abstract class GameImpl implements Game {
         return res;
     }
 
+    /**
+     * Temporarily marks the live game as a playable-calculation simulation.
+     * <p>
+     * This is intended for carefully-scoped engine fast paths that want the
+     * same "no dialogs / no UI choices" behavior as {@link #createSimulationForPlayableCalc()}
+     * without paying for a full deep copy.
+     */
+    public PlayableCalculationScope enterPlayableCalculationScope() {
+        return new PlayableCalculationScope(this.simulation, this.checkPlayableState);
+    }
+
+    public final class PlayableCalculationScope implements AutoCloseable {
+        private final boolean previousSimulation;
+        private final boolean previousCheckPlayableState;
+        private boolean closed;
+
+        private PlayableCalculationScope(boolean previousSimulation, boolean previousCheckPlayableState) {
+            this.previousSimulation = previousSimulation;
+            this.previousCheckPlayableState = previousCheckPlayableState;
+            GameImpl.this.simulation = true;
+            GameImpl.this.checkPlayableState = true;
+        }
+
+        @Override
+        public void close() {
+            if (closed) {
+                return;
+            }
+            GameImpl.this.simulation = previousSimulation;
+            GameImpl.this.checkPlayableState = previousCheckPlayableState;
+            closed = true;
+        }
+    }
+
     @Override
     public boolean inCheckPlayableState() {
         return checkPlayableState;
