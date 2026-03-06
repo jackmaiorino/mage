@@ -3,8 +3,6 @@ import threading
 from contextlib import contextmanager
 from typing import Dict, List, Optional
 
-from py4j_entry_point import PythonEntryPoint
-
 
 _ENV_LOCK = threading.Lock()
 
@@ -39,6 +37,8 @@ def _temporary_env(overrides: Dict[str, str]):
 
 class ProfileContext:
     def __init__(self, profile_id: str, headers: Dict[str, str]):
+        from py4j_entry_point import PythonEntryPoint
+
         self.profile_id = profile_id
         self.env = _header_env(headers)
         self.env["MODEL_PROFILE"] = profile_id

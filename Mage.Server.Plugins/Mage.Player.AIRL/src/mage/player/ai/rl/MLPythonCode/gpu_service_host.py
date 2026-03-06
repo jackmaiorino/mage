@@ -521,6 +521,12 @@ def main() -> int:
         listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         listener.bind((host.bind_host, host.port))
         listener.listen()
+        print(
+            f"[GPU_HOST] listening host={host.bind_host} port={host.port} "
+            f"metrics_port={host.metrics_port} batch_timeout_ms={host.batch_timeout_ms} "
+            f"batch_max_size={host.batch_max_size}",
+            flush=True,
+        )
         while True:
             client, _addr = listener.accept()
             session = ConnectionSession(sock=client)

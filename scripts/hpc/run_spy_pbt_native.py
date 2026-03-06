@@ -194,6 +194,10 @@ class NativeOrchestrator:
         self.max_restart_attempts = max(1, env_int("MAX_RESTART_ATTEMPTS_PER_PROFILE", 8))
         self.trainer_stop_grace_seconds = max(0, env_int("TRAINER_STOP_GRACE_SECONDS", 10))
         self.trainer_start_stagger_seconds = max(0, env_int("TRAINER_START_STAGGER_SECONDS", 20))
+        self.gpu_service_startup_timeout_seconds = max(
+            10,
+            env_int("GPU_SERVICE_STARTUP_TIMEOUT_SECONDS", max(60, self.trainer_start_stagger_seconds)),
+        )
         self.visible_gpu_list = self.detect_visible_gpu_list()
         self.visible_gpu_count = max(1, len(self.visible_gpu_list))
         self.trainer_start_wave_size = max(1, env_int("TRAINER_START_WAVE_SIZE", self.visible_gpu_count))
@@ -489,7 +493,7 @@ class NativeOrchestrator:
                 f"pid={process.pid} port={port} metricsPort={metrics_port}"
             )
 
-        deadline = time.time() + max(10, self.trainer_start_stagger_seconds)
+        deadline = time.time() + self.gpu_service_startup_timeout_seconds
         pending = set(self.shared_gpu_hosts.keys())
         while pending and time.time() < deadline and not self.stop_requested:
             for gpu_slot in list(pending):
@@ -1345,6 +1349,8 @@ class NativeOrchestrator:
         )
         log(f"Configured NumGameRunners per profile={runners_per_profile}")
         log(f"Trainer startup max wait seconds={self.trainer_start_stagger_seconds}")
+        if self.py_service_mode == "shared_gpu":
+            log(f"Shared GPU host startup timeout seconds={self.gpu_service_startup_timeout_seconds}")
         log(
             f"Trainer startup waves: visibleGpus={self.visible_gpu_count} "
             f"waveSize={self.trainer_start_wave_size} intraWaveDelayMs={self.trainer_start_intra_wave_delay_ms}"
