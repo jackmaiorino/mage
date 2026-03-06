@@ -54,6 +54,7 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterLandCard;
 import mage.constants.RangeOfInfluence;
 import mage.constants.TurnPhase;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.events.GameEvent;
@@ -103,6 +104,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final boolean MULLIGAN_TRACE_JSONL = "1".equals(System.getenv().getOrDefault("RL_MULLIGAN_TRACE_JSONL", "1"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_MULLIGAN_TRACE_JSONL", "1"));
     private static final boolean BASE_STATE_CACHE_ENABLED = EnvConfig.bool("RL_BASE_STATE_CACHE_ENABLED", true);
+    private static final boolean ALTERNATIVE_COST_SIM_CACHE_ENABLED =
+            EnvConfig.bool("RL_ALTCOST_SIM_CACHE_ENABLED", true);
 
     // Main policy exploration (actor) - epsilon mixture + correlated full-random turn.
     private static final double ACTION_EPS_START = EnvConfig.f64("RL_ACTION_EPS_START", 0.05);
@@ -152,6 +155,16 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private transient int cachedBaseStateStepNum = Integer.MIN_VALUE;
     private transient int cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
     private transient int cachedBaseStateStackSize = Integer.MIN_VALUE;
+    private transient Map<String, Set<String>> cachedAlternativeCostValidation = new HashMap<>();
+    private transient UUID cachedAltCostValidationGameId;
+    private transient TurnPhase cachedAltCostValidationPhase;
+    private transient UUID cachedAltCostValidationActivePlayerId;
+    private transient UUID cachedAltCostValidationPriorityPlayerId;
+    private transient UUID cachedAltCostValidationChoosingPlayerId;
+    private transient int cachedAltCostValidationTurnNum = Integer.MIN_VALUE;
+    private transient int cachedAltCostValidationStepNum = Integer.MIN_VALUE;
+    private transient int cachedAltCostValidationApplyEffectsCounter = Integer.MIN_VALUE;
+    private transient int cachedAltCostValidationStackSize = Integer.MIN_VALUE;
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
     private final java.util.Map<StateSequenceBuilder.ActionType, Integer> decisionCountsByHead;
     private Ability currentAbility;
@@ -329,6 +342,83 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         cachedBaseStateStepNum = Integer.MIN_VALUE;
         cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
         cachedBaseStateStackSize = Integer.MIN_VALUE;
+    }
+
+    private void invalidateAlternativeCostValidationCache() {
+        cachedAlternativeCostValidation.clear();
+        cachedAltCostValidationGameId = null;
+        cachedAltCostValidationPhase = null;
+        cachedAltCostValidationActivePlayerId = null;
+        cachedAltCostValidationPriorityPlayerId = null;
+        cachedAltCostValidationChoosingPlayerId = null;
+        cachedAltCostValidationTurnNum = Integer.MIN_VALUE;
+        cachedAltCostValidationStepNum = Integer.MIN_VALUE;
+        cachedAltCostValidationApplyEffectsCounter = Integer.MIN_VALUE;
+        cachedAltCostValidationStackSize = Integer.MIN_VALUE;
+    }
+
+    private void refreshAlternativeCostValidationCache(Game game) {
+        if (!ALTERNATIVE_COST_SIM_CACHE_ENABLED) {
+            invalidateAlternativeCostValidationCache();
+            return;
+        }
+
+        TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
+        GameState state = game.getState();
+        UUID gameId = game.getId();
+        UUID activePlayerId = game.getActivePlayerId();
+        UUID priorityPlayerId = state != null ? state.getPriorityPlayerId() : null;
+        UUID choosingPlayerId = state != null ? state.getChoosingPlayerId() : null;
+        int turnNum = game.getTurnNum();
+        int stepNum = state != null ? state.getStepNum() : Integer.MIN_VALUE;
+        int applyEffectsCounter = state != null ? state.getApplyEffectsCounter() : Integer.MIN_VALUE;
+        int stackSize = game.getStack() != null ? game.getStack().size() : 0;
+
+        boolean sameState = java.util.Objects.equals(cachedAltCostValidationGameId, gameId)
+                && cachedAltCostValidationPhase == turnPhase
+                && java.util.Objects.equals(cachedAltCostValidationActivePlayerId, activePlayerId)
+                && java.util.Objects.equals(cachedAltCostValidationPriorityPlayerId, priorityPlayerId)
+                && java.util.Objects.equals(cachedAltCostValidationChoosingPlayerId, choosingPlayerId)
+                && cachedAltCostValidationTurnNum == turnNum
+                && cachedAltCostValidationStepNum == stepNum
+                && cachedAltCostValidationApplyEffectsCounter == applyEffectsCounter
+                && cachedAltCostValidationStackSize == stackSize;
+
+        if (sameState) {
+            return;
+        }
+
+        cachedAlternativeCostValidation.clear();
+        cachedAltCostValidationGameId = gameId;
+        cachedAltCostValidationPhase = turnPhase;
+        cachedAltCostValidationActivePlayerId = activePlayerId;
+        cachedAltCostValidationPriorityPlayerId = priorityPlayerId;
+        cachedAltCostValidationChoosingPlayerId = choosingPlayerId;
+        cachedAltCostValidationTurnNum = turnNum;
+        cachedAltCostValidationStepNum = stepNum;
+        cachedAltCostValidationApplyEffectsCounter = applyEffectsCounter;
+        cachedAltCostValidationStackSize = stackSize;
+    }
+
+    private String buildAlternativeCostValidationKey(ActivatedAbility ability, Game game) {
+        StringBuilder key = new StringBuilder(256);
+        key.append(ability.getSourceId()).append('|');
+        key.append(ability.getClass().getName()).append('|');
+        key.append(ability.getRule()).append('|');
+        key.append(ability.getManaCostsToPay() != null ? ability.getManaCostsToPay().getText() : "").append('|');
+        key.append(ability.getCosts() != null ? ability.getCosts().toString() : "").append('|');
+
+        Zone sourceZone = game.getState() != null ? game.getState().getZone(ability.getSourceId()) : null;
+        key.append(sourceZone != null ? sourceZone.name() : "UNKNOWN").append('|');
+
+        for (Target target : ability.getTargets()) {
+            key.append(target.getClass().getName()).append(':')
+                    .append(target.getMinNumberOfTargets()).append(':')
+                    .append(target.getMaxNumberOfTargets()).append(':')
+                    .append(target.getTargetName()).append('|');
+        }
+
+        return key.toString();
     }
 
     private StateSequenceBuilder.SequenceOutput getOrBuildBaseState(Game game) {
@@ -5537,9 +5627,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         List<ActivatedAbility> validOptions = new ArrayList<>();
         int filteredCount = 0;
         validAlternativeCosts.clear(); // Clear previous tracking
+        refreshAlternativeCostValidationCache(game);
 
         for (ActivatedAbility ability : flattenedOptions) {
-            Set<String> validChoices = testAllAlternativeCosts(ability, game);
+            String validationKey = buildAlternativeCostValidationKey(ability, game);
+            Set<String> validChoices = cachedAlternativeCostValidation.get(validationKey);
+            if (validChoices == null) {
+                validChoices = testAllAlternativeCosts(ability, game);
+                if (ALTERNATIVE_COST_SIM_CACHE_ENABLED) {
+                    cachedAlternativeCostValidation.put(validationKey, new HashSet<>(validChoices));
+                }
+            }
 
             if (!validChoices.isEmpty()) {
                 // At least one alternative worked
@@ -5548,7 +5646,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 // We detect alternatives by checking if the set contains anything other than just "0"
                 boolean hasAlternatives = !(validChoices.size() == 1 && validChoices.contains("0"));
                 if (hasAlternatives) {
-                    validAlternativeCosts.put(ability.getSourceId(), validChoices);
+                    validAlternativeCosts.put(ability.getSourceId(), new HashSet<>(validChoices));
                     if (ACTIVATION_DIAG) {
                         RLTrainer.threadLocalLogger.get().info(
                                 "SIM-FILTER: Ability has alternatives, storing validated choices: "
