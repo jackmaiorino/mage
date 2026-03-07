@@ -15,6 +15,7 @@ NATIVE_PATH = REPO_ROOT / "scripts/hpc/run_spy_pbt_native.py"
 TARGETS_PATH = REPO_ROOT / "scripts/hpc/generate_prometheus_targets.py"
 SATURATION_PATH = REPO_ROOT / "scripts/hpc/spy_saturation.py"
 AVAILABILITY_PATH = REPO_ROOT / "scripts/hpc/slurm_availability.py"
+GPU_CORE_PATH = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_core.py"
 GPU_HOST_PATH = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_host.py"
 
 
@@ -580,6 +581,61 @@ class SlurmAvailabilityTests(unittest.TestCase):
         self.assertEqual(["gpu", "gpu-h100"], gpu_h100_type["partitions"])
         self.assertEqual(1, gpu_v100_type["nodes_total"])
         self.assertEqual(4, gpu_v100_type["gpu_idle_est"])
+
+
+class SharedGpuCoreTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        entry_module = types.ModuleType("py4j_entry_point")
+
+        class StubPythonEntryPoint:
+            def __init__(self):
+                self.model = None
+                self.optimizer = None
+                self.initialize_calls = 0
+                self.train_calls = 0
+                self.saved_paths = []
+
+            def initializeModel(self):
+                self.initialize_calls += 1
+                self.model = object()
+                self.optimizer = object()
+
+            def trainCandidatesMultiFlat(self, *args, **kwargs):
+                self.train_calls += 1
+                return True
+
+            def saveLatestModelAtomic(self, path=None):
+                self.saved_paths.append(path)
+                return True
+
+        entry_module.PythonEntryPoint = StubPythonEntryPoint
+        cls._entry_patch = mock.patch.dict(sys.modules, {"py4j_entry_point": entry_module})
+        cls._entry_patch.start()
+        cls.core = load_module("gpu_service_core_test", GPU_CORE_PATH)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._entry_patch.stop()
+
+    def test_learner_context_initializes_model_eagerly(self):
+        context = self.core.ProfileContext("ProfileA", {}, role="learner")
+
+        self.assertEqual("learner", context.role)
+        self.assertEqual(1, context.entry.initialize_calls)
+        self.assertIsNotNone(context.entry.model)
+        self.assertIsNotNone(context.entry.optimizer)
+
+    def test_train_batch_reinitializes_if_model_was_cleared(self):
+        context = self.core.ProfileContext("ProfileA", {}, role="learner")
+        context.entry.model = None
+        context.entry.optimizer = None
+
+        ok = context.train_batch(*([b""] * 14), 1, 1, 1, 1, 1)
+
+        self.assertTrue(ok)
+        self.assertEqual(2, context.entry.initialize_calls)
+        self.assertEqual(1, context.entry.train_calls)
 
 
 class SharedGpuHostTests(unittest.TestCase):

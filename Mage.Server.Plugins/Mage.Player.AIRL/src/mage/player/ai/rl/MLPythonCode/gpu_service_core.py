@@ -54,6 +54,15 @@ class ProfileContext:
         self.lock = threading.RLock()
         with _temporary_env(self.env):
             self.entry = PythonEntryPoint()
+        if self.role == "learner":
+            self._ensure_model_initialized()
+
+    def _ensure_model_initialized(self) -> None:
+        with self.lock:
+            model = getattr(self.entry, "model", None)
+            optimizer = getattr(self.entry, "optimizer", None)
+            if model is None or optimizer is None:
+                self.entry.initializeModel()
 
     def score_batch(
         self,
@@ -116,6 +125,7 @@ class ProfileContext:
         max_candidates: int,
         cand_feat_dim: int,
     ) -> bool:
+        self._ensure_model_initialized()
         with self.lock:
             return bool(
                 self.entry.trainCandidatesMultiFlat(
@@ -175,10 +185,14 @@ class ProfileContext:
             self.entry.saveMulliganModel()
 
     def save_model(self, path: str) -> None:
+        if self.role == "learner":
+            self._ensure_model_initialized()
         with self.lock:
             self.entry.saveModel(path)
 
     def save_latest_model_atomic(self, path: Optional[str] = None) -> bool:
+        if self.role == "learner":
+            self._ensure_model_initialized()
         with self.lock:
             return bool(self.entry.saveLatestModelAtomic(path))
 
