@@ -506,9 +506,20 @@ class SharedGpuHostTests(unittest.TestCase):
         stub_core = types.ModuleType("gpu_service_core")
 
         class StubProfileContext:
-            def __init__(self, profile_id, headers):
+            def __init__(self, profile_id, headers, role="inference"):
                 self.profile_id = profile_id
                 self.headers = headers
+                self.role = role
+                self.save_latest_calls = 0
+                self.reload_latest_calls = 0
+
+            def save_latest_model_atomic(self, path=None):
+                self.save_latest_calls += 1
+                return True
+
+            def reload_latest_model_if_newer(self, path=None):
+                self.reload_latest_calls += 1
+                return True
 
         stub_core.ProfileContext = StubProfileContext
         stub_core.feature_array_from_bytes = lambda data: data
@@ -521,12 +532,21 @@ class SharedGpuHostTests(unittest.TestCase):
     def tearDownClass(cls):
         cls._gpu_core_patch.stop()
 
-    def test_score_work_blocks_train_dispatch_until_score_is_flushable(self):
+    def test_register_creates_separate_inference_and_learner_contexts(self):
+        shared_host = self.host.SharedGpuHost()
+
+        state = shared_host.get_or_create_profile({"profile_id": "ProfileA"})
+
+        self.assertIsNot(state.infer_context, state.learner_context)
+        self.assertEqual("inference", state.infer_context.role)
+        self.assertEqual("learner", state.learner_context.role)
+
+    def test_score_and_train_lanes_can_both_dispatch_when_ready(self):
         shared_host = self.host.SharedGpuHost()
         shared_host.batch_timeout_s = 0.2
         shared_host.train_batch_timeout_s = 0.1
 
-        state = self.host.ProfileState(context=object())
+        state = self.host.ProfileState(infer_context=object(), learner_context=object())
         now = 1000.0
         state.pending_scores.append(
             self.host.ScoreTask(
@@ -535,7 +555,7 @@ class SharedGpuHostTests(unittest.TestCase):
                 profile_id="ProfileA",
                 headers={"batch_size": "1"},
                 segments=[],
-                enqueued_at=now - 0.05,
+                enqueued_at=now - 0.25,
             )
         )
         state.pending_trains.append(
@@ -549,13 +569,28 @@ class SharedGpuHostTests(unittest.TestCase):
         shared_host._profiles = {"ProfileA": state}
 
         with mock.patch.object(self.host.time, "monotonic", return_value=now):
-            work, sleep_for = shared_host._select_work_locked()
+            score_work, score_sleep = shared_host._select_score_work_locked()
+            train_work, train_sleep = shared_host._select_train_work_locked()
 
-        self.assertIsNone(work)
-        self.assertGreaterEqual(sleep_for, 0.01)
-        self.assertLessEqual(sleep_for, 0.25)
-        self.assertEqual(1, len(state.pending_scores))
-        self.assertEqual(1, len(state.pending_trains))
+        self.assertIsNotNone(score_work)
+        self.assertIsNotNone(train_work)
+        self.assertEqual(0.0, score_sleep)
+        self.assertEqual(0.0, train_sleep)
+
+    def test_publish_and_reload_counters_use_separate_contexts(self):
+        shared_host = self.host.SharedGpuHost()
+        state = shared_host.get_or_create_profile({"profile_id": "ProfileA"})
+
+        with mock.patch.object(self.host.time, "monotonic", return_value=1000.0):
+            shared_host._maybe_publish_latest_model(state)
+            shared_host._maybe_reload_inference_model(state)
+
+        self.assertEqual(1, shared_host._model_publishes)
+        self.assertEqual(1, shared_host._model_reloads)
+        self.assertEqual(1, state.learner_context.save_latest_calls)
+        self.assertEqual(0, state.infer_context.save_latest_calls)
+        self.assertEqual(1, state.infer_context.reload_latest_calls)
+        self.assertEqual(0, state.learner_context.reload_latest_calls)
 
 
 if __name__ == "__main__":

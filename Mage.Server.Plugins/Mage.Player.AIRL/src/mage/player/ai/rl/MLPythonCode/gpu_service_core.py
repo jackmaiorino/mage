@@ -36,10 +36,11 @@ def _temporary_env(overrides: Dict[str, str]):
 
 
 class ProfileContext:
-    def __init__(self, profile_id: str, headers: Dict[str, str]):
+    def __init__(self, profile_id: str, headers: Dict[str, str], role: str = "inference"):
         from py4j_entry_point import PythonEntryPoint
 
         self.profile_id = profile_id
+        self.role = (role or "inference").strip().lower()
         self.env = _header_env(headers)
         self.env["MODEL_PROFILE"] = profile_id
         self.env["PY_BACKEND_MODE"] = "single"
@@ -48,7 +49,7 @@ class ProfileContext:
         self.env["MODEL_SYNC_EVERY_MS"] = "0"
         self.env["MODEL_SYNC_EVERY_TRAIN_STEPS"] = "0"
         self.env.setdefault("MULLIGAN_DEVICE", "cpu")
-        self.env.setdefault("PY_ROLE", "shared_gpu")
+        self.env["PY_ROLE"] = f"shared_gpu_{self.role}"
         self.lock = threading.RLock()
         with _temporary_env(self.env):
             self.entry = PythonEntryPoint()
@@ -175,6 +176,14 @@ class ProfileContext:
     def save_model(self, path: str) -> None:
         with self.lock:
             self.entry.saveModel(path)
+
+    def save_latest_model_atomic(self, path: Optional[str] = None) -> bool:
+        with self.lock:
+            return bool(self.entry.saveLatestModelAtomic(path))
+
+    def reload_latest_model_if_newer(self, path: Optional[str] = None) -> bool:
+        with self.lock:
+            return bool(self.entry.reloadLatestModelIfNewer(path))
 
     def get_device_info(self) -> str:
         with self.lock:

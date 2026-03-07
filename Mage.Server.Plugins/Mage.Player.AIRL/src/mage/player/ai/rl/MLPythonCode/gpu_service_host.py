@@ -172,9 +172,12 @@ class TrainTask:
 
 @dataclass
 class ProfileState:
-    context: ProfileContext
+    infer_context: ProfileContext
+    learner_context: ProfileContext
     pending_scores: Deque[ScoreTask] = field(default_factory=deque)
     pending_trains: Deque[TrainTask] = field(default_factory=deque)
+    last_publish_at: float = 0.0
+    last_reload_at: float = 0.0
 
 
 class SharedGpuHost:
@@ -190,13 +193,16 @@ class SharedGpuHost:
         self.learner_batch_max_episodes = max(1, env_int("LEARNER_BATCH_MAX_EPISODES", 8))
         self.learner_batch_max_steps = max(1, env_int("LEARNER_BATCH_MAX_STEPS", 4096))
         self.train_multi_max_steps = max(1, env_int("TRAIN_MULTI_MAX_STEPS", self.learner_batch_max_steps))
-        self.train_slices_per_tick = max(1, env_int("GPU_SERVICE_SCHED_TRAIN_SLICES_PER_TICK", 1))
+        self.model_publish_every_ms = max(0, env_int("GPU_SERVICE_MODEL_PUBLISH_EVERY_MS", 1000))
+        self.model_reload_every_ms = max(0, env_int("GPU_SERVICE_MODEL_RELOAD_EVERY_MS", 250))
         self._profiles: Dict[str, ProfileState] = {}
         self._lock = threading.Condition()
         self._running = True
         self._train_rr = 0
         self._score_batches = 0
         self._train_batches = 0
+        self._model_publishes = 0
+        self._model_reloads = 0
         self._score_flush_timeout_total = 0
         self._score_flush_full_total = 0
         self._last_error = ""
@@ -216,8 +222,9 @@ class SharedGpuHost:
             existing = self._profiles.get(profile_id)
         if existing is not None:
             return existing
-        context = ProfileContext(profile_id, headers)
-        state = ProfileState(context=context)
+        infer_context = ProfileContext(profile_id, headers, role="inference")
+        learner_context = ProfileContext(profile_id, headers, role="learner")
+        state = ProfileState(infer_context=infer_context, learner_context=learner_context)
         with self._lock:
             return self._profiles.setdefault(profile_id, state)
 
@@ -238,42 +245,79 @@ class SharedGpuHost:
             state.pending_trains.append(task)
             self._lock.notify_all()
 
-    def scheduler_loop(self) -> None:
+    def _maybe_publish_latest_model(self, state: ProfileState, now: Optional[float] = None) -> None:
+        if state is None or self.model_publish_every_ms <= 0:
+            return
+        current = time.monotonic() if now is None else now
+        if state.last_publish_at > 0.0 and ((current - state.last_publish_at) * 1000.0) < self.model_publish_every_ms:
+            return
+        if state.learner_context.save_latest_model_atomic():
+            with self._lock:
+                state.last_publish_at = current
+                self._model_publishes += 1
+
+    def _maybe_reload_inference_model(self, state: ProfileState, now: Optional[float] = None) -> None:
+        if state is None or self.model_reload_every_ms <= 0:
+            return
+        current = time.monotonic() if now is None else now
+        if state.last_reload_at > 0.0 and ((current - state.last_reload_at) * 1000.0) < self.model_reload_every_ms:
+            return
+        reloaded = state.infer_context.reload_latest_model_if_newer()
+        with self._lock:
+            state.last_reload_at = current
+            if reloaded:
+                self._model_reloads += 1
+
+    def score_worker_loop(self) -> None:
+        # Inference stays on its own lane so score traffic is no longer serialized
+        # behind learner scheduling decisions.
         while self._running:
             work = None
             sleep_for = 0.25
             with self._lock:
-                work, sleep_for = self._select_work_locked()
+                work, sleep_for = self._select_score_work_locked()
                 if work is None:
                     self._lock.wait(timeout=sleep_for)
                     continue
-            kind, state, tasks, reason = work
+            state, tasks, reason = work
             try:
-                if kind == "score":
-                    self._run_score_batch(state, tasks, reason)
-                else:
-                    self._run_train_batch(state, tasks)
+                self._run_score_batch(state, tasks, reason)
             except Exception as exc:
                 self._last_error = f"{type(exc).__name__}: {exc}"
                 traceback.print_exc()
-                if kind == "score":
-                    for task in tasks:
-                        try:
-                            task.session.reply(1, task.request_id, {"error": str(exc)})
-                        except Exception:
-                            pass
+                for task in tasks:
+                    try:
+                        task.session.reply(1, task.request_id, {"error": str(exc)})
+                    except Exception:
+                        pass
 
-    def _select_work_locked(self):
+    def train_worker_loop(self) -> None:
+        # Learner updates drain independently and publish fresh weights for the
+        # inference lane to reload asynchronously.
+        while self._running:
+            work = None
+            sleep_for = 0.25
+            with self._lock:
+                work, sleep_for = self._select_train_work_locked()
+                if work is None:
+                    self._lock.wait(timeout=sleep_for)
+                    continue
+            state, tasks = work
+            try:
+                self._run_train_batch(state, tasks)
+            except Exception as exc:
+                self._last_error = f"{type(exc).__name__}: {exc}"
+                traceback.print_exc()
+
+    def _select_score_work_locked(self):
         now = time.monotonic()
         profiles = list(self._profiles.values())
         best_score_state = None
         best_age = -1.0
         oldest_score_age = None
-        any_pending_scores = False
         for state in profiles:
             if not state.pending_scores:
                 continue
-            any_pending_scores = True
             age = now - state.pending_scores[0].enqueued_at
             if oldest_score_age is None or age > oldest_score_age:
                 oldest_score_age = age
@@ -283,29 +327,23 @@ class SharedGpuHost:
                     best_age = age
                     best_score_state = state
         if best_score_state is not None:
-            return ("score", best_score_state, self._pop_score_batch_locked(best_score_state), "timeout" if best_age >= self.batch_timeout_s else "full"), 0.0
+            reason = "timeout" if best_age >= self.batch_timeout_s else "full"
+            return (best_score_state, self._pop_score_batch_locked(best_score_state), reason), 0.0
 
-        # Inference-first scheduling: if any score work is pending, wait for it to
-        # become flushable instead of dispatching train work on the same scheduler.
-        if any_pending_scores:
-            wait = max(0.01, min(0.25, self.batch_timeout_s - (oldest_score_age or 0.0)))
-            return None, wait
+        if oldest_score_age is not None:
+            return None, max(0.01, min(0.25, self.batch_timeout_s - oldest_score_age))
+        return None, 0.25
 
+    def _select_train_work_locked(self):
+        now = time.monotonic()
+        profiles = list(self._profiles.values())
         train_state, train_wait = self._select_train_state_locked(now, profiles)
         if train_state is not None:
             train_work = self._pop_train_batch_locked(train_state)
             if train_work is not None:
                 state, tasks = train_work
-                return ("train", state, tasks, ""), 0.0
-
-        waits = []
-        if oldest_score_age is not None:
-            waits.append(max(0.01, min(0.25, self.batch_timeout_s - oldest_score_age)))
-        if train_wait is not None:
-            waits.append(max(0.01, min(0.25, train_wait)))
-        if waits:
-            return None, min(waits)
-        return None, 0.25
+                return (state, tasks), 0.0
+        return None, max(0.01, min(0.25, train_wait)) if train_wait is not None else 0.25
 
     def _select_train_state_locked(self, now: float, profiles: List[ProfileState]) -> Tuple[Optional[ProfileState], Optional[float]]:
         if not profiles:
@@ -385,8 +423,9 @@ class SharedGpuHost:
         headers = first.headers
         merged = merge_segments([task.segments for task in tasks])
         logical_batch_size = sum(task.batch_size for task in tasks)
+        self._maybe_reload_inference_model(state)
         started = time.monotonic()
-        result_bytes = state.context.score_batch(
+        result_bytes = state.infer_context.score_batch(
             merged[0],
             merged[1],
             merged[2],
@@ -439,7 +478,7 @@ class SharedGpuHost:
         merged = merge_segments([task.segments for task in tasks])
         total_steps = sum(task.step_count for task in tasks)
         started = time.monotonic()
-        state.context.train_batch(
+        state.learner_context.train_batch(
             merged[0],
             merged[1],
             merged[2],
@@ -463,6 +502,7 @@ class SharedGpuHost:
         finished = time.monotonic()
         service_ms = max(0.0, (finished - started) * 1000.0)
         latency_samples = [max(0.0, (finished - task.enqueued_at) * 1000.0) for task in tasks]
+        self._maybe_publish_latest_model(state, now=finished)
         with self._lock:
             self._train_batches += 1
             self._train_service_ms.append(service_ms)
@@ -500,44 +540,47 @@ class SharedGpuHost:
         profile_id = headers.get("profile_id", "").strip()
         state = self.require_profile(profile_id)
         if opcode == 4:
-            state.context.save_model(headers.get("path", ""))
+            state.learner_context.save_model(headers.get("path", ""))
             session.reply(0, request_id)
         elif opcode == 5:
-            session.reply(0, request_id, {"device_info": state.context.get_device_info()})
+            session.reply(0, request_id, {"device_info": state.infer_context.get_device_info()})
         elif opcode == 6:
-            session.reply(0, request_id, {k: str(v) for k, v in state.context.get_main_stats().items()})
+            session.reply(0, request_id, {k: str(v) for k, v in state.learner_context.get_main_stats().items()})
         elif opcode == 7:
-            session.reply(0, request_id, {k: str(v) for k, v in state.context.get_mulligan_stats().items()})
+            session.reply(0, request_id, {k: str(v) for k, v in state.learner_context.get_mulligan_stats().items()})
         elif opcode == 8:
-            stats = {k: str(v) for k, v in state.context.get_health_stats().items()}
+            learner_stats = state.learner_context.get_health_stats()
+            infer_stats = state.infer_context.get_health_stats()
+            stats = {k: str(max(int(learner_stats.get(k, 0)), int(infer_stats.get(k, 0)))) for k in set(learner_stats) | set(infer_stats)}
             with self._lock:
                 stats["train_queue_depth"] = str(len(state.pending_trains))
                 stats["dropped_train_episodes"] = "0"
             session.reply(0, request_id, stats)
         elif opcode == 9:
-            state.context.reset_health_stats()
+            state.learner_context.reset_health_stats()
+            state.infer_context.reset_health_stats()
             session.reply(0, request_id)
         elif opcode == 10:
-            state.context.record_game_result(float(headers.get("last_value_prediction", "0")), headers.get("won", "false").lower() == "true")
+            state.learner_context.record_game_result(float(headers.get("last_value_prediction", "0")), headers.get("won", "false").lower() == "true")
             session.reply(0, request_id)
         elif opcode == 11:
             features = feature_array_from_bytes(unpack_segments(payload)[0])
-            value = state.context.predict_mulligan(features)
+            value = state.infer_context.predict_mulligan(features)
             session.reply(0, request_id, {"value": str(value)})
         elif opcode == 12:
             features = feature_array_from_bytes(unpack_segments(payload)[0])
-            scores = state.context.predict_mulligan_scores(features)
+            scores = state.infer_context.predict_mulligan_scores(features)
             session.reply(0, request_id, payload=scores)
         elif opcode == 13:
             segments = unpack_segments(payload)
-            state.context.train_mulligan(segments[0], segments[1], segments[2], segments[3], segments[4], segments[5],
+            state.learner_context.train_mulligan(segments[0], segments[1], segments[2], segments[3], segments[4], segments[5],
                                          int(headers.get("batch_size", "0")))
             session.reply(0, request_id)
         elif opcode == 14:
-            state.context.save_mulligan_model()
+            state.learner_context.save_mulligan_model()
             session.reply(0, request_id)
         elif opcode == 15:
-            metrics = state.context.get_value_head_metrics()
+            metrics = state.learner_context.get_value_head_metrics()
             session.reply(0, request_id, {k: str(v) for k, v in metrics.items()})
         elif opcode == 16:
             session.reply(0, request_id)
@@ -611,6 +654,12 @@ class SharedGpuHost:
                 "# HELP gpu_service_train_batches_total Train batches executed by shared GPU host",
                 "# TYPE gpu_service_train_batches_total counter",
                 f"gpu_service_train_batches_total {self._train_batches}",
+                "# HELP gpu_service_model_publishes_total Learner-to-inference model publish operations",
+                "# TYPE gpu_service_model_publishes_total counter",
+                f"gpu_service_model_publishes_total {self._model_publishes}",
+                "# HELP gpu_service_model_reloads_total Inference model reload operations",
+                "# TYPE gpu_service_model_reloads_total counter",
+                f"gpu_service_model_reloads_total {self._model_reloads}",
                 "# HELP gpu_service_train_batch_avg_episodes Average recent shared-host train batch size in episodes",
                 "# TYPE gpu_service_train_batch_avg_episodes gauge",
                 f"gpu_service_train_batch_avg_episodes {self._avg(self._train_batch_episode_counts):.3f}",
@@ -673,8 +722,8 @@ def connection_loop(host: SharedGpuHost, session: ConnectionSession) -> None:
             current_request_id = request_id
             if opcode == 1:
                 state = host.get_or_create_profile(headers)
-                session.profile_id = state.context.profile_id
-                session.reply(0, request_id, {"device_info": state.context.get_device_info()})
+                session.profile_id = state.infer_context.profile_id
+                session.reply(0, request_id, {"device_info": state.infer_context.get_device_info()})
             elif opcode == 2:
                 profile_id = headers.get("profile_id", "").strip()
                 state = host.require_profile(profile_id)
@@ -707,8 +756,8 @@ def connection_loop(host: SharedGpuHost, session: ConnectionSession) -> None:
 
 def main() -> int:
     host = SharedGpuHost()
-    scheduler = threading.Thread(target=host.scheduler_loop, name="GpuServiceScheduler", daemon=True)
-    scheduler.start()
+    threading.Thread(target=host.score_worker_loop, name="GpuServiceScore", daemon=True).start()
+    threading.Thread(target=host.train_worker_loop, name="GpuServiceTrain", daemon=True).start()
 
     if host.metrics_port > 0:
         MetricsHandler.host_ref = host
