@@ -390,6 +390,8 @@ class SpySaturationTests(unittest.TestCase):
             self.assertEqual(2, summary["selected_count"])
             self.assertEqual(180, summary["total_episode"])
             self.assertAlmostEqual(0.9, summary["heartbeat_eps_per_s"], places=3)
+            self.assertAlmostEqual(6.0, summary["episodes_per_sec"], places=3)
+            self.assertAlmostEqual(0.0, summary["updates_per_sec"], places=3)
             self.assertEqual(64, summary["cpus_per_task"])
             self.assertAlmostEqual(8.0, summary["runner_oversubscription_factor"], places=3)
             self.assertAlmostEqual(70.0, summary["telemetry"]["gpu_util_avg"], places=3)

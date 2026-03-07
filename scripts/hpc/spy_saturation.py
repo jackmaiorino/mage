@@ -7,6 +7,7 @@ import re
 import shlex
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
@@ -45,6 +46,19 @@ def load_json(path: Path) -> Optional[Dict[str, Any]]:
     try:
         return json.loads(path.read_text(encoding="utf-8-sig"))
     except Exception:
+        return None
+
+
+def parse_utc_timestamp(value: str) -> Optional[datetime]:
+    text = str(value).strip()
+    if not text:
+        return None
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    try:
+        return datetime.fromisoformat(text)
+    except Exception:
+        return None
         return None
 
 
@@ -495,6 +509,7 @@ def parse_telemetry_log(path: Path) -> Dict[str, Any]:
     tasks_running_values: List[float] = []
     cpu_total = 0
     runner_oversubscription_factor = 0.0
+    timestamps: List[datetime] = []
     if not path.exists():
         return {
             "sample_count": 0,
@@ -516,10 +531,17 @@ def parse_telemetry_log(path: Path) -> Dict[str, Any]:
             "gpu_mem_used_gb_avg": 0.0,
             "gpu_mem_used_gb_max": 0.0,
             "gpu_temp_c_avg": 0.0,
+            "duration_seconds": 0.0,
         }
     for raw_line in path.read_text(encoding="utf-8", errors="replace").splitlines():
         line = raw_line.strip()
-        if not line or line.startswith("=") or line.startswith("host="):
+        if not line or line.startswith("host="):
+            continue
+        if line.startswith("====="):
+            stamp_text = line.strip("=").strip()
+            stamp = parse_utc_timestamp(stamp_text)
+            if stamp is not None:
+                timestamps.append(stamp)
             continue
         if line.startswith("cpu_total="):
             cpu_match = re.search(r"\bcpu_total=(\d+)", line)
@@ -586,6 +608,175 @@ def parse_telemetry_log(path: Path) -> Dict[str, Any]:
         "gpu_mem_used_gb_avg": safe_mean(gpu_mem_used_gb),
         "gpu_mem_used_gb_max": max(gpu_mem_used_gb) if gpu_mem_used_gb else 0.0,
         "gpu_temp_c_avg": safe_mean(gpu_temp_c),
+        "duration_seconds": max(0.0, (timestamps[-1] - timestamps[0]).total_seconds()) if len(timestamps) >= 2 else 0.0,
+    }
+
+
+def discover_job_ports(job_id: str, repo_root: Path = REPO_ROOT) -> List[int]:
+    jobs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
+    runs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs"
+    run_dir = runs_root / str(job_id)
+    status_path = run_dir / "orchestrator_status.json"
+    targets_path = repo_root / "monitoring/file_sd" / str(job_id) / "mage_hpc_targets.json"
+    orch_log = jobs_root / str(job_id) / "orchestrator.log"
+    ports: List[int] = []
+    status = load_json(status_path) or {}
+    for row in status.get("trainers", []):
+        if not isinstance(row, dict):
+            continue
+        if not bool(row.get("running", False)):
+            continue
+        try:
+            port = int(row.get("metrics_port", 0))
+        except Exception:
+            port = 0
+        if port > 0:
+            ports.append(port)
+    targets = load_json(targets_path)
+    if isinstance(targets, list):
+        for row in targets:
+            if not isinstance(row, dict):
+                continue
+            for target in row.get("targets", []):
+                match = re.search(r":(\d+)$", str(target))
+                if match:
+                    ports.append(parse_int(match.group(1), 0))
+    if orch_log.exists():
+        try:
+            text = orch_log.read_text(encoding="utf-8", errors="replace")
+            ports.extend(parse_int(m.group(1), 0) for m in re.finditer(r"metricsPort=(\d+)", text))
+        except Exception:
+            pass
+    return sorted(set(p for p in ports if p > 0))
+
+
+def sample_job_counters(job_id: str, repo_root: Path = REPO_ROOT) -> Optional[Dict[str, Any]]:
+    user = current_username()
+    if not user:
+        return None
+    try:
+        output = subprocess.check_output(
+            ["squeue", "-j", str(job_id), "-h", "-o", "%T|%N"],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT,
+        ).strip()
+    except Exception:
+        return None
+    if not output:
+        return None
+    parts = [piece.strip() for piece in output.split("|", 1)]
+    if len(parts) != 2:
+        return None
+    state, node = parts
+    if str(state).upper() != "RUNNING" or not node or node in ("(null)", "None"):
+        return None
+    ports = discover_job_ports(str(job_id), repo_root=repo_root)
+    if not ports:
+        return None
+    port_text = " ".join(str(p) for p in ports)
+    try:
+        output = subprocess.check_output(
+            [
+                "srun",
+                "--jobid={}".format(job_id),
+                "--overlap",
+                "-N1",
+                "-n1",
+                "-w",
+                node,
+                "env",
+                "PORTS={}".format(port_text),
+                "bash",
+                "-lc",
+                r'''for p in $PORTS; do
+m=$(curl -fsS "http://127.0.0.1:${p}/metrics" 2>/dev/null || true)
+c=$(printf "%s\n" "$m" | awk "/^mage_episodes_completed_total /{print \$2; exit}")
+u=$(printf "%s\n" "$m" | awk "/^mage_training_updates_total /{print \$2; exit}")
+a=$(printf "%s\n" "$m" | awk "/^mage_active_episodes /{print \$2; exit}")
+g=$(printf "%s\n" "$m" | awk "/^gpu_service_train_batches_total /{print \$2; exit}")
+if [[ -z "$c" ]]; then c=0; fi
+if [[ -z "$u" ]]; then u=0; fi
+if [[ -z "$a" ]]; then a=0; fi
+if [[ -z "$g" ]]; then g=0; fi
+echo "$p $c $u $a $g"
+done''',
+            ],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT,
+        )
+    except Exception:
+        return None
+    total_episodes = 0.0
+    total_updates = 0.0
+    total_gpu_updates = 0.0
+    total_active = 0.0
+    seen = 0
+    for raw_line in output.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        parts = line.split()
+        if len(parts) != 5:
+            continue
+        _port, c, u, a, g = parts
+        total_episodes += parse_float(c, 0.0)
+        total_updates += parse_float(u, 0.0)
+        total_active += parse_float(a, 0.0)
+        total_gpu_updates += parse_float(g, 0.0)
+        seen += 1
+    if seen <= 0:
+        return None
+    return {
+        "timestamp": time.time(),
+        "node": node,
+        "ports": ports,
+        "episodes_total": total_episodes,
+        "updates_total": total_updates + total_gpu_updates,
+        "active_episodes": total_active,
+    }
+
+
+def compute_live_job_rates(job_id: str, repo_root: Path = REPO_ROOT) -> Dict[str, float]:
+    jobs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
+    cache_path = jobs_root / str(job_id) / "summary_rate_cache.json"
+    previous = load_json(cache_path) or {}
+    current = sample_job_counters(str(job_id), repo_root=repo_root)
+    if current is None:
+        return {
+            "episodes_per_sec": 0.0,
+            "updates_per_sec": 0.0,
+            "active_episodes": 0.0,
+            "sample_ok": 0.0,
+        }
+    atomic_write_json(cache_path, current)
+    prev_ts = parse_float(previous.get("timestamp", 0.0), 0.0)
+    curr_ts = parse_float(current.get("timestamp", 0.0), 0.0)
+    dt = curr_ts - prev_ts
+    if dt <= 0:
+        return {
+            "episodes_per_sec": 0.0,
+            "updates_per_sec": 0.0,
+            "active_episodes": parse_float(current.get("active_episodes", 0.0), 0.0),
+            "sample_ok": 1.0,
+        }
+    prev_episodes = parse_float(previous.get("episodes_total", 0.0), 0.0)
+    prev_updates = parse_float(previous.get("updates_total", 0.0), 0.0)
+    curr_episodes = parse_float(current.get("episodes_total", 0.0), 0.0)
+    curr_updates = parse_float(current.get("updates_total", 0.0), 0.0)
+    delta_episodes = curr_episodes - prev_episodes
+    delta_updates = curr_updates - prev_updates
+    if delta_episodes < 0 or delta_updates < 0:
+        return {
+            "episodes_per_sec": 0.0,
+            "updates_per_sec": 0.0,
+            "active_episodes": parse_float(current.get("active_episodes", 0.0), 0.0),
+            "sample_ok": 1.0,
+        }
+    return {
+        "episodes_per_sec": delta_episodes / dt,
+        "updates_per_sec": delta_updates / dt,
+        "active_episodes": parse_float(current.get("active_episodes", 0.0), 0.0),
+        "sample_ok": 1.0,
     }
 
 
@@ -615,6 +806,7 @@ def summarize_job(
 
     telemetry = parse_telemetry_log(job_dir / "telemetry.log")
     heartbeat = aggregate_heartbeat_rates(run_dir / "trainers", selected_profiles, heartbeat_window)
+    live_rates = compute_live_job_rates(str(job_id), repo_root=repo_root)
     rolling_values: List[float] = []
     total_episode = 0
     for row in snapshot_rows:
@@ -638,6 +830,12 @@ def summarize_job(
     effective_oversub = float(config.get("runner_oversubscription_factor", 0.0) or 0.0)
     if effective_oversub <= 0:
         effective_oversub = float(telemetry.get("runner_oversubscription_factor", 0.0) or 0.0)
+    duration_seconds = float(telemetry.get("duration_seconds", 0.0) or 0.0)
+    average_eps_per_sec = (float(total_episode) / duration_seconds) if duration_seconds > 0 else 0.0
+    episodes_per_sec = float(live_rates.get("episodes_per_sec", 0.0) or 0.0)
+    updates_per_sec = float(live_rates.get("updates_per_sec", 0.0) or 0.0)
+    if episodes_per_sec <= 0.0:
+        episodes_per_sec = average_eps_per_sec
 
     return {
         "label": str(record.get("label", job_id)) if record else str(job_id),
@@ -658,6 +856,10 @@ def summarize_job(
         "heartbeat": heartbeat,
         "heartbeat_eps_per_s": float(heartbeat["aggregate_mean_eps_per_s"]),
         "heartbeat_profile_samples": int(heartbeat["profile_samples"]),
+        "episodes_per_sec": episodes_per_sec,
+        "updates_per_sec": updates_per_sec,
+        "active_episodes": float(live_rates.get("active_episodes", 0.0) or 0.0),
+        "average_eps_per_sec": average_eps_per_sec,
         "total_episode": total_episode,
         "rolling_current_avg": safe_mean(rolling_values),
         "rolling_current_max": max(rolling_values) if rolling_values else 0.0,
@@ -713,6 +915,8 @@ def print_summary_table(rows: Sequence[Dict[str, Any]]) -> None:
         ("p", 3),
         ("cpu", 5),
         ("ovr", 5),
+        ("eps/s", 8),
+        ("upd/s", 8),
         ("hb_g/s", 8),
         ("gpu_avg", 8),
         ("gpu_p95", 8),
@@ -747,6 +951,8 @@ def print_summary_table(rows: Sequence[Dict[str, Any]]) -> None:
             fmt(row.get("requested_train_profiles"), 3),
             fmt(row.get("cpus_per_task"), 5),
             fmt(row.get("runner_oversubscription_factor"), 5, 1),
+            fmt(float(row.get("episodes_per_sec", 0.0)), 8, 3),
+            fmt(float(row.get("updates_per_sec", 0.0)), 8, 3),
             fmt(row.get("heartbeat_eps_per_s"), 8, 3),
             fmt(float(telemetry.get("gpu_util_avg", 0.0)), 8, 1),
             fmt(float(telemetry.get("gpu_util_p95", 0.0)), 8, 1),
@@ -791,7 +997,9 @@ def summarize_experiments(args: argparse.Namespace) -> int:
         print_summary_table(rows)
         print()
         print("notes:")
+        print("  eps/s and upd/s are live rates for running jobs when available; otherwise eps/s falls back to the run-average from telemetry duration.")
         print("  hb_g/s is the aggregate mean of the last heartbeat eps/s values from the job-scoped trainer logs.")
+        print("  gpu_avg is a whole-window average and includes startup/idle periods; gpu_p95 is usually the better bursty-utilization signal.")
         print("  gpu_* and cpu_* columns come from the job-scoped telemetry log sampled during the run.")
         print("  Use higher hb_g/s together with higher gpu_avg/gpu_p95 and cpu_avg/cpu_p95 to find the best single-node saturation point.")
     return 0
