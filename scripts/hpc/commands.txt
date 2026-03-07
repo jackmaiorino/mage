@@ -1,7 +1,7 @@
 # Single-node saturation sweep with the newest bundle.
 bash scripts/hpc/zaratan_spy_saturation.sh
 
-# Custom saturation sweep.
+# Custom saturation sweep starting from the known-good oversub range.
 BUNDLE="$(ls -1t local-training/hpc/bundles/rl-runtime-*.tar.gz | head -1)"
 python3 scripts/hpc/spy_saturation.py submit \
   --bundle "$BUNDLE" \
@@ -10,9 +10,9 @@ python3 scripts/hpc/spy_saturation.py submit \
   --gres gpu:a100:2 \
   --mem 128G \
   --time 02:00:00 \
-  --train-profiles 2,4 \
+  --train-profiles 4 \
   --cpus-per-task 64,128,192 \
-  --runner-oversubscription-factor 8,12
+  --runner-oversubscription-factor 20,24
 
 # Wider CPU sweep if you get a high-core single node.
 python3 scripts/hpc/spy_saturation.py submit \
@@ -24,7 +24,7 @@ python3 scripts/hpc/spy_saturation.py submit \
   --time 02:00:00 \
   --train-profiles 4 \
   --cpus-per-task 128,192,256,320 \
-  --runner-oversubscription-factor 8,12,16
+  --runner-oversubscription-factor 20,24,28
 
 # Summarize a finished or running sweep from its manifest.
 python3 scripts/hpc/spy_saturation.py summarize \

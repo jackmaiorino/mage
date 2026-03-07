@@ -614,7 +614,7 @@ def build_parser() -> argparse.ArgumentParser:
     submit.add_argument("--constraint", default="")
     submit.add_argument("--train-profiles", default="2,4")
     submit.add_argument("--cpus-per-task", default="32,64,96")
-    submit.add_argument("--runner-oversubscription-factor", default="4,8")
+    submit.add_argument("--runner-oversubscription-factor", default="20,24")
     submit.add_argument("--infer-workers", default="1")
     submit.add_argument("--cpu-headroom", type=int, default=0)
     submit.add_argument("--trainer-start-stagger-seconds", type=int, default=45)

@@ -22,9 +22,9 @@ python3 scripts/hpc/spy_saturation.py submit \
   --gres "${SAT_GRES:-gpu:a100:2}" \
   --mem "${SAT_MEM:-128G}" \
   --time "${SAT_TIME:-02:00:00}" \
-  --train-profiles "${SAT_TRAIN_PROFILES:-2,4}" \
+  --train-profiles "${SAT_TRAIN_PROFILES:-4}" \
   --cpus-per-task "${SAT_CPUS_PER_TASK:-64,128,192}" \
-  --runner-oversubscription-factor "${SAT_RUNNER_OVERSUBSCRIPTION_FACTOR:-8,12}" \
+  --runner-oversubscription-factor "${SAT_RUNNER_OVERSUBSCRIPTION_FACTOR:-20,24}" \
   --infer-workers "${SAT_INFER_WORKERS:-1}" \
   --cpu-headroom "${SAT_CPU_HEADROOM:-0}" \
   --trainer-start-stagger-seconds "${SAT_TRAINER_START_STAGGER_SECONDS:-45}" \
