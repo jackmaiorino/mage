@@ -15,6 +15,7 @@ NATIVE_PATH = REPO_ROOT / "scripts/hpc/run_spy_pbt_native.py"
 TARGETS_PATH = REPO_ROOT / "scripts/hpc/generate_prometheus_targets.py"
 SATURATION_PATH = REPO_ROOT / "scripts/hpc/spy_saturation.py"
 AVAILABILITY_PATH = REPO_ROOT / "scripts/hpc/slurm_availability.py"
+GPU_HOST_PATH = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_host.py"
 
 
 def load_module(module_name: str, path: Path):
@@ -497,6 +498,64 @@ class SlurmAvailabilityTests(unittest.TestCase):
         self.assertEqual(["gpu", "gpu-h100"], gpu_h100_type["partitions"])
         self.assertEqual(1, gpu_v100_type["nodes_total"])
         self.assertEqual(4, gpu_v100_type["gpu_idle_est"])
+
+
+class SharedGpuHostTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        stub_core = types.ModuleType("gpu_service_core")
+
+        class StubProfileContext:
+            def __init__(self, profile_id, headers):
+                self.profile_id = profile_id
+                self.headers = headers
+
+        stub_core.ProfileContext = StubProfileContext
+        stub_core.feature_array_from_bytes = lambda data: data
+        stub_core.merge_segments = lambda segments: segments[0] if segments else []
+        cls._gpu_core_patch = mock.patch.dict(sys.modules, {"gpu_service_core": stub_core})
+        cls._gpu_core_patch.start()
+        cls.host = load_module("gpu_service_host_test", GPU_HOST_PATH)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._gpu_core_patch.stop()
+
+    def test_score_work_blocks_train_dispatch_until_score_is_flushable(self):
+        shared_host = self.host.SharedGpuHost()
+        shared_host.batch_timeout_s = 0.2
+        shared_host.train_batch_timeout_s = 0.1
+
+        state = self.host.ProfileState(context=object())
+        now = 1000.0
+        state.pending_scores.append(
+            self.host.ScoreTask(
+                session=types.SimpleNamespace(reply=lambda *args, **kwargs: None),
+                request_id=1,
+                profile_id="ProfileA",
+                headers={"batch_size": "1"},
+                segments=[],
+                enqueued_at=now - 0.05,
+            )
+        )
+        state.pending_trains.append(
+            self.host.TrainTask(
+                profile_id="ProfileA",
+                headers={"batch_size": "8"},
+                segments=[],
+                enqueued_at=now - 0.15,
+            )
+        )
+        shared_host._profiles = {"ProfileA": state}
+
+        with mock.patch.object(self.host.time, "monotonic", return_value=now):
+            work, sleep_for = shared_host._select_work_locked()
+
+        self.assertIsNone(work)
+        self.assertGreaterEqual(sleep_for, 0.01)
+        self.assertLessEqual(sleep_for, 0.25)
+        self.assertEqual(1, len(state.pending_scores))
+        self.assertEqual(1, len(state.pending_trains))
 
 
 if __name__ == "__main__":

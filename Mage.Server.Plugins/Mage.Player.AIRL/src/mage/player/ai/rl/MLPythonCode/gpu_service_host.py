@@ -269,9 +269,11 @@ class SharedGpuHost:
         best_score_state = None
         best_age = -1.0
         oldest_score_age = None
+        any_pending_scores = False
         for state in profiles:
             if not state.pending_scores:
                 continue
+            any_pending_scores = True
             age = now - state.pending_scores[0].enqueued_at
             if oldest_score_age is None or age > oldest_score_age:
                 oldest_score_age = age
@@ -282,6 +284,12 @@ class SharedGpuHost:
                     best_score_state = state
         if best_score_state is not None:
             return ("score", best_score_state, self._pop_score_batch_locked(best_score_state), "timeout" if best_age >= self.batch_timeout_s else "full"), 0.0
+
+        # Inference-first scheduling: if any score work is pending, wait for it to
+        # become flushable instead of dispatching train work on the same scheduler.
+        if any_pending_scores:
+            wait = max(0.01, min(0.25, self.batch_timeout_s - (oldest_score_age or 0.0)))
+            return None, wait
 
         train_state, train_wait = self._select_train_state_locked(now, profiles)
         if train_state is not None:
