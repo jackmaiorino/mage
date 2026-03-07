@@ -396,10 +396,12 @@ class SlurmAvailabilityTests(unittest.TestCase):
     def test_parse_and_aggregate_rows_by_partition_and_type(self):
         sample = "\n".join(
             [
-                "gpu-a100*|idle|128|515000|gpu:a100:4(S:1,3,5,7)|7-00:00:00|up",
-                "gpu-a100|mixed|128|515000|gpu:a100:4(S:1,3,5,7)|7-00:00:00|up",
-                "gpu-h100|allocated|128|515000|gpu:h100:4(S:1,3,5,7)|7-00:00:00|up",
-                "cpu|idle|64|257000|(null)|7-00:00:00|up",
+                "node-h100-1|gpu,gpu-h100|idle|128|515000|gpu:h100:4(S:1,3,5,7)|7-00:00:00|up",
+                "node-h100-2|gpu,gpu-h100|mixed|128|515000|gpu:h100:4(S:1,3,5,7)|7-00:00:00|up",
+                "node-v100-1|gpu,gpu-v100|idle|40|257000|gpu:v100:4|7-00:00:00|up",
+                "node-a100-1|gpu-a100*|mixed|128|515000|gpu:a100:4(S:1,3,5,7)|7-00:00:00|up",
+                "node-a100-2|gpu-a100|allocated|128|515000|gpu:a100:4(S:1,3,5,7)|7-00:00:00|up",
+                "node-cpu-1|cpu|idle|64|257000|(null)|7-00:00:00|up",
             ]
         )
 
@@ -408,26 +410,40 @@ class SlurmAvailabilityTests(unittest.TestCase):
 
         gpu_a100 = next(row for row in by_partition if row["label"] == "gpu-a100")
         cpu = next(row for row in by_partition if row["label"] == "cpu")
+        gpu_partition = next(row for row in by_partition if row["label"] == "gpu")
         gpu_a100_type = next(row for row in by_type if row["label"] == "gpu-a100")
+        gpu_h100_type = next(row for row in by_type if row["label"] == "gpu-h100")
+        gpu_v100_type = next(row for row in by_type if row["label"] == "gpu-v100")
 
-        self.assertEqual("gpu-a100", rows[0]["partition"])
-        self.assertEqual("gpu-a100", rows[0]["type"])
-        self.assertEqual(4, rows[0]["gpu_count"])
+        first_h100 = next(row for row in rows if row["node"] == "node-h100-1" and row["partition"] == "gpu")
+        self.assertEqual("gpu-h100", first_h100["type"])
+        self.assertEqual(4, first_h100["gpu_count"])
 
         self.assertEqual(2, gpu_a100["nodes_total"])
-        self.assertEqual(1, gpu_a100["nodes_idle"])
+        self.assertEqual(0, gpu_a100["nodes_idle"])
         self.assertEqual(1, gpu_a100["nodes_mix"])
+        self.assertEqual(1, gpu_a100["nodes_alloc"])
         self.assertEqual(8, gpu_a100["gpu_total"])
-        self.assertEqual(4, gpu_a100["gpu_idle_est"])
+        self.assertEqual(0, gpu_a100["gpu_idle_est"])
         self.assertEqual(4, gpu_a100["gpu_mixed"])
-        self.assertEqual(128, gpu_a100["cpu_idle_est"])
+        self.assertEqual(["gpu-a100"], gpu_a100["types"])
 
         self.assertEqual(1, cpu["nodes_idle"])
         self.assertEqual(0, cpu["gpu_total"])
         self.assertEqual(64, cpu["cpu_idle_est"])
 
+        self.assertEqual(["gpu-h100", "gpu-v100"], gpu_partition["types"])
+        self.assertEqual(2, gpu_partition["nodes_idle"])
+        self.assertEqual(1, gpu_partition["nodes_mix"])
+
         self.assertEqual(["gpu-a100"], gpu_a100_type["partitions"])
-        self.assertEqual(4, gpu_a100_type["gpu_idle_est"])
+        self.assertEqual(0, gpu_a100_type["gpu_idle_est"])
+        self.assertEqual(2, gpu_h100_type["nodes_total"])
+        self.assertEqual(4, gpu_h100_type["gpu_idle_est"])
+        self.assertEqual(4, gpu_h100_type["gpu_mixed"])
+        self.assertEqual(["gpu", "gpu-h100"], gpu_h100_type["partitions"])
+        self.assertEqual(1, gpu_v100_type["nodes_total"])
+        self.assertEqual(4, gpu_v100_type["gpu_idle_est"])
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ import sys
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 
-SINFO_FORMAT = "%P|%T|%c|%m|%G|%l|%a"
+SINFO_FORMAT = "%N|%P|%T|%c|%m|%G|%l|%a"
 
 
 def parse_int(value: Any, default: int = 0) -> int:
@@ -29,6 +29,15 @@ def normalize_partition_name(partition: str) -> str:
     while text.endswith("*"):
         text = text[:-1]
     return text
+
+
+def expand_partition_names(partition_field: str) -> List[str]:
+    names: List[str] = []
+    for item in str(partition_field).split(","):
+        name = normalize_partition_name(item)
+        if name:
+            names.append(name)
+    return names
 
 
 def normalize_state(state: str) -> str:
@@ -88,35 +97,39 @@ def parse_sinfo_node_rows(text: str) -> List[Dict[str, Any]]:
         if not line:
             continue
         parts = [piece.strip() for piece in line.split("|")]
-        if len(parts) != 7:
+        if len(parts) != 8:
             continue
-        partition, state, cpus, mem_mb, gres, time_limit, avail = parts
-        partition_name = normalize_partition_name(partition)
-        rows.append(
-            {
-                "partition": partition_name,
-                "type": partition_type_for(partition_name, gres),
-                "state": normalize_state(state),
-                "bucket": state_bucket(state),
-                "cpus": parse_int(cpus, 0),
-                "memory_gb": parse_float(mem_mb, 0.0) / 1024.0,
-                "gpu_count": gpu_count_from_gres(gres),
-                "gres": gres,
-                "time_limit": time_limit,
-                "avail": avail,
-            }
-        )
+        node, partition_field, state, cpus, mem_mb, gres, time_limit, avail = parts
+        partitions = expand_partition_names(partition_field)
+        if not partitions:
+            continue
+        for partition_name in partitions:
+            rows.append(
+                {
+                    "node": str(node).strip(),
+                    "partition": partition_name,
+                    "type": partition_type_for(partition_name, gres),
+                    "state": normalize_state(state),
+                    "bucket": state_bucket(state),
+                    "cpus": parse_int(cpus, 0),
+                    "memory_gb": parse_float(mem_mb, 0.0) / 1024.0,
+                    "gpu_count": gpu_count_from_gres(gres),
+                    "gres": gres,
+                    "time_limit": time_limit,
+                    "avail": avail,
+                }
+            )
     return rows
 
 
-def blank_summary(key: str, label: str, type_name: str, avail: str, time_limit: str) -> Dict[str, Any]:
+def blank_summary(key: str, label: str, avail: str, time_limit: str) -> Dict[str, Any]:
     return {
         "key": key,
         "label": label,
-        "type": type_name,
         "avail": avail,
         "time_limit": time_limit,
         "partitions": set(),
+        "types": set(),
         "nodes_total": 0,
         "nodes_idle": 0,
         "nodes_mix": 0,
@@ -135,7 +148,26 @@ def blank_summary(key: str, label: str, type_name: str, avail: str, time_limit: 
 
 
 def apply_row(summary: Dict[str, Any], row: Dict[str, Any]) -> None:
-    summary["partitions"].add(str(row.get("partition", "")))
+    partitions = row.get("partitions")
+    if isinstance(partitions, (list, tuple, set)):
+        for partition in partitions:
+            name = str(partition).strip()
+            if name:
+                summary["partitions"].add(name)
+    else:
+        name = str(row.get("partition", "")).strip()
+        if name:
+            summary["partitions"].add(name)
+    types = row.get("types")
+    if isinstance(types, (list, tuple, set)):
+        for item in types:
+            type_name = str(item).strip()
+            if type_name:
+                summary["types"].add(type_name)
+    else:
+        type_name = str(row.get("type", "")).strip()
+        if type_name:
+            summary["types"].add(type_name)
     summary["nodes_total"] += 1
     summary["cpu_total"] += int(row.get("cpus", 0))
     summary["mem_total_gb"] += float(row.get("memory_gb", 0.0))
@@ -160,6 +192,68 @@ def apply_row(summary: Dict[str, Any], row: Dict[str, Any]) -> None:
         summary["nodes_other"] += 1
 
 
+def collapse_node_rows(rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    grouped: Dict[str, Dict[str, Any]] = {}
+    bucket_rank = {
+        "other": 0,
+        "idle": 1,
+        "mix": 2,
+        "alloc": 3,
+        "drain": 4,
+        "down": 5,
+    }
+    for row in rows:
+        node = str(row.get("node", "")).strip()
+        if not node:
+            continue
+        item = grouped.get(node)
+        if item is None:
+            item = {
+                "node": node,
+                "partitions": set(),
+                "types": set(),
+                "bucket": str(row.get("bucket", "other")),
+                "state": str(row.get("state", "")),
+                "cpus": int(row.get("cpus", 0)),
+                "memory_gb": float(row.get("memory_gb", 0.0)),
+                "gpu_count": int(row.get("gpu_count", 0)),
+                "avail": str(row.get("avail", "")),
+                "time_limit": str(row.get("time_limit", "")),
+            }
+            grouped[node] = item
+        item["partitions"].add(str(row.get("partition", "")))
+        item["types"].add(str(row.get("type", "")))
+        current_bucket = str(item.get("bucket", "other"))
+        next_bucket = str(row.get("bucket", "other"))
+        if bucket_rank.get(next_bucket, 0) > bucket_rank.get(current_bucket, 0):
+            item["bucket"] = next_bucket
+            item["state"] = str(row.get("state", ""))
+        item["cpus"] = max(int(item.get("cpus", 0)), int(row.get("cpus", 0)))
+        item["memory_gb"] = max(float(item.get("memory_gb", 0.0)), float(row.get("memory_gb", 0.0)))
+        item["gpu_count"] = max(int(item.get("gpu_count", 0)), int(row.get("gpu_count", 0)))
+    collapsed: List[Dict[str, Any]] = []
+    for item in grouped.values():
+        types = sorted(t for t in item.get("types", set()) if str(t).strip())
+        type_name = types[0] if len(types) == 1 else "mixed"
+        collapsed.append(
+            {
+                "node": item["node"],
+                "partition": "",
+                "partitions": sorted(p for p in item.get("partitions", set()) if str(p).strip()),
+                "type": type_name,
+                "types": types,
+                "state": str(item.get("state", "")),
+                "bucket": str(item.get("bucket", "other")),
+                "cpus": int(item.get("cpus", 0)),
+                "memory_gb": float(item.get("memory_gb", 0.0)),
+                "gpu_count": int(item.get("gpu_count", 0)),
+                "avail": str(item.get("avail", "")),
+                "time_limit": str(item.get("time_limit", "")),
+            }
+        )
+    return collapsed
+
+
 def aggregate_rows(rows: Sequence[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     by_partition: Dict[str, Dict[str, Any]] = {}
     by_type: Dict[str, Dict[str, Any]] = {}
@@ -174,13 +268,17 @@ def aggregate_rows(rows: Sequence[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]]
 
         partition_summary = by_partition.get(partition)
         if partition_summary is None:
-            partition_summary = blank_summary(partition, partition, type_name, avail, time_limit)
+            partition_summary = blank_summary(partition, partition, avail, time_limit)
             by_partition[partition] = partition_summary
         apply_row(partition_summary, row)
 
+    for row in collapse_node_rows(rows):
+        type_name = str(row.get("type", "")).strip() or "unknown"
+        avail = str(row.get("avail", "")).strip()
+        time_limit = str(row.get("time_limit", "")).strip()
         type_summary = by_type.get(type_name)
         if type_summary is None:
-            type_summary = blank_summary(type_name, type_name, type_name, avail, time_limit)
+            type_summary = blank_summary(type_name, type_name, avail, time_limit)
             by_type[type_name] = type_summary
         apply_row(type_summary, row)
 
@@ -192,6 +290,7 @@ def finalize_summaries(rows: Iterable[Dict[str, Any]]) -> List[Dict[str, Any]]:
     for row in rows:
         summary = dict(row)
         summary["partitions"] = sorted(p for p in row.get("partitions", set()) if str(p).strip())
+        summary["types"] = sorted(t for t in row.get("types", set()) if str(t).strip())
         result.append(summary)
     result.sort(
         key=lambda item: (
@@ -239,7 +338,7 @@ def partition_table_rows(rows: Sequence[Dict[str, Any]]) -> List[List[Any]]:
         result.append(
             [
                 row.get("label", ""),
-                row.get("type", ""),
+                ",".join(row.get("types", [])),
                 row.get("avail", ""),
                 int(row.get("nodes_idle", 0)),
                 int(row.get("nodes_mix", 0)),
@@ -279,7 +378,7 @@ def type_table_rows(rows: Sequence[Dict[str, Any]]) -> List[List[Any]]:
 def print_text(by_partition: Sequence[Dict[str, Any]], by_type: Sequence[Dict[str, Any]]) -> None:
     partition_headers = [
         ("partition", 18),
-        ("type", 12),
+        ("types", 18),
         ("avail", 6),
         ("idle_n", 6),
         ("mix_n", 5),
@@ -314,6 +413,7 @@ def print_text(by_partition: Sequence[Dict[str, Any]], by_type: Sequence[Dict[st
     print("Notes")
     print("  cpu_idle and gpu_idle are conservative estimates from fully idle nodes only.")
     print("  gpu_mix shows GPUs that sit on mixed nodes and may or may not be practically available.")
+    print("  By Type is deduplicated by physical node, so generic and hardware-specific partitions do not double-count.")
 
 
 def build_parser() -> argparse.ArgumentParser:
