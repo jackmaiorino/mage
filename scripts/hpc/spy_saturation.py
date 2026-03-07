@@ -322,15 +322,32 @@ def submit_experiments(args: argparse.Namespace) -> int:
         else:
             env = os.environ.copy()
             env.update(exports)
-            result = subprocess.run(
-                command,
-                cwd=str(REPO_ROOT),
-                env=env,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                universal_newlines=True,
-                check=True,
-            )
+            try:
+                result = subprocess.run(
+                    command,
+                    cwd=str(REPO_ROOT),
+                    env=env,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    universal_newlines=True,
+                    check=True,
+                )
+            except subprocess.CalledProcessError as exc:
+                details = []
+                if getattr(exc, "stdout", ""):
+                    details.append(str(exc.stdout).strip())
+                if getattr(exc, "stderr", ""):
+                    details.append(str(exc.stderr).strip())
+                detail_text = "\n".join(item for item in details if item)
+                if not detail_text:
+                    detail_text = str(exc)
+                raise SystemExit(
+                    "sbatch failed for label={} command={}\n{}".format(
+                        record["label"],
+                        shell_join(command),
+                        detail_text,
+                    )
+                )
             record["job_id"] = result.stdout.strip()
             record["submitted_at_utc"] = now_utc()
             print(

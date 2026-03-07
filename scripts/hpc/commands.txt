@@ -15,6 +15,9 @@ SAT_RUNNER_OVERSUBSCRIPTION_FACTOR=24 bash scripts/hpc/zaratan_spy_saturation.sh
 # If queue time is still bad, try a 1-GPU quick experiment.
 SAT_GRES=gpu:a100:1 bash scripts/hpc/zaratan_spy_saturation.sh
 
+# H100 quick experiment uses 96 CPUs by default.
+SAT_PARTITION=gpu-h100 SAT_GRES=gpu:h100:2 bash scripts/hpc/zaratan_spy_saturation.sh
+
 # Override the quick walltime explicitly if needed.
 SAT_TIME=00:20:00 bash scripts/hpc/zaratan_spy_saturation.sh
 SAT_TIME=00:20:00 SAT_GRES=gpu:a100:1 bash scripts/hpc/zaratan_spy_saturation.sh

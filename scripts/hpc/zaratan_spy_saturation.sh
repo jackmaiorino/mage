@@ -15,15 +15,25 @@ fi
 
 echo "Using bundle: ${BUNDLE}"
 
+partition="${SAT_PARTITION:-gpu-a100}"
+gres="${SAT_GRES:-gpu:a100:2}"
+default_cpus="128"
+case "$partition" in
+  gpu-h100*)
+    default_cpus="96"
+    ;;
+esac
+cpus_per_task="${SAT_CPUS_PER_TASK:-$default_cpus}"
+
 python3 scripts/hpc/spy_saturation.py submit \
   --bundle "${BUNDLE}" \
   --tag "${SAT_TAG:-zaratan-single-node-quick}" \
-  --partition "${SAT_PARTITION:-gpu-a100}" \
-  --gres "${SAT_GRES:-gpu:a100:2}" \
+  --partition "${partition}" \
+  --gres "${gres}" \
   --mem "${SAT_MEM:-128G}" \
   --time "${SAT_TIME:-00:20:00}" \
   --train-profiles "${SAT_TRAIN_PROFILES:-4}" \
-  --cpus-per-task "${SAT_CPUS_PER_TASK:-128}" \
+  --cpus-per-task "${cpus_per_task}" \
   --runner-oversubscription-factor "${SAT_RUNNER_OVERSUBSCRIPTION_FACTOR:-20}" \
   --infer-workers "${SAT_INFER_WORKERS:-1}" \
   --cpu-headroom "${SAT_CPU_HEADROOM:-0}" \
