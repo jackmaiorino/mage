@@ -2,7 +2,7 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-orchestrator_dir="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator"
+orchestrator_root="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator"
 jobs_root="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
 job_id="${1:-}"
 follow_mode="${FOLLOW_MODE:-1}"
@@ -22,11 +22,33 @@ if [[ -n "$job_id" && -d "$jobs_root/$job_id" ]]; then
   job_dir="$jobs_root/$job_id"
 fi
 
+orchestrator_dir=""
+if [[ -n "$job_id" && -d "$orchestrator_root/runs/$job_id" ]]; then
+  orchestrator_dir="$orchestrator_root/runs/$job_id"
+elif [[ -n "$job_id" ]]; then
+  orchestrator_dir="$orchestrator_root/runs/$job_id"
+elif [[ -f "$orchestrator_root/latest_run.json" ]]; then
+  orchestrator_dir="$(python3 - "$orchestrator_root/latest_run.json" <<'PY'
+import json, pathlib, sys
+path = pathlib.Path(sys.argv[1])
+try:
+    data = json.loads(path.read_text(encoding="utf-8"))
+except Exception:
+    raise SystemExit(0)
+print(str(data.get("reports_root", "")).strip())
+PY
+)"
+fi
+if [[ -z "$orchestrator_dir" ]]; then
+  orchestrator_dir="$orchestrator_root"
+fi
+
 echo "Repo root: $repo_root"
 echo "Job ID: ${job_id:-n/a}"
 if [[ -n "$job_dir" ]]; then
   echo "Job reports: $job_dir"
 fi
+echo "PBT reports: $orchestrator_dir"
 echo
 
 if [[ -n "$job_id" ]] && command -v squeue >/dev/null 2>&1; then
@@ -52,10 +74,15 @@ for ev in events[-5:]:
     grp=ev.get("population_group","")
     w=ev.get("winner","")
     l=ev.get("loser","")
+    result=ev.get("result","")
     ww=ev.get("winner_wr","")
     lw=ev.get("loser_wr","")
     seed=ev.get("new_seed","")
-    print(f"{ts} group={grp} winner={w} loser={l} winner_wr={ww} loser_wr={lw} seed={seed}")
+    failure=ev.get("failure_reason","")
+    if result:
+        print(f"{ts} result={result} group={grp} winner={w} loser={l} winner_wr={ww} loser_wr={lw} seed={seed} failure={failure}")
+    else:
+        print(f"{ts} group={grp} winner={w} loser={l} winner_wr={ww} loser_wr={lw} seed={seed}")
 if not events:
     print("no PBT events yet")
 PY
@@ -64,7 +91,7 @@ fi
 
 if [[ -f "$pbt_state" ]]; then
   echo "== Throughput (Games/sec) =="
-  python3 - "$repo_root" "$pbt_state" <<'PY'
+  python3 - "$repo_root" "$pbt_state" "$orchestrator_dir" <<'PY'
 import csv
 import json
 import re
@@ -73,8 +100,9 @@ import sys
 
 repo_root = pathlib.Path(sys.argv[1])
 state_path = pathlib.Path(sys.argv[2])
+reports_root = pathlib.Path(sys.argv[3])
 stats_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
-trainers_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/trainers"
+trainers_root = reports_root / "trainers"
 recent_window = 200
 eps_re = re.compile(r"\((?:run=(\d+),\s*)?([0-9]*\.?[0-9]+)\s+eps/s\)")
 
@@ -274,7 +302,7 @@ if agg_total_sec > 0:
 else:
     print("aggregate_serial_lifetime: no data")
 
-print("note: serial_* uses sum(episode_seconds) and underestimates wall-clock throughput when many games run in parallel.")
+print("note: serial_* is a serial estimate from summed episode_seconds and can substantially understate wall-clock throughput in parallel runs.")
 PY
   echo
 fi

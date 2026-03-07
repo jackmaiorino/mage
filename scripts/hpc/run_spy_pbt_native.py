@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import csv
 import json
 import math
 import os
@@ -15,7 +16,7 @@ import urllib.request
 from collections import deque
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Deque, Dict, List, Optional
+from typing import Any, Deque, Dict, List, Optional, Set
 
 
 def now_utc() -> str:
@@ -55,6 +56,51 @@ def env_bool(name: str, default: bool) -> bool:
     if raw in {"0", "false", "no", "n", "off"}:
         return False
     return default
+
+
+def parse_float(value: object) -> Optional[float]:
+    if value is None:
+        return None
+    try:
+        return float(str(value).strip())
+    except Exception:
+        return None
+
+
+def normalize_mode(value: object) -> str:
+    return str(value or "").strip().lower()
+
+
+def sanitize_run_id(value: str) -> str:
+    text = str(value or "").strip()
+    if not text:
+        text = now_utc().replace(":", "").replace("-", "")
+    safe_chars = []
+    for ch in text:
+        if ch.isalnum() or ch in {"-", "_", "."}:
+            safe_chars.append(ch)
+        else:
+            safe_chars.append("_")
+    safe = "".join(safe_chars).strip("._")
+    return safe or "run"
+
+
+def atomic_write_text(path: Path, text: str, encoding: str = "utf-8") -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = path.with_name(f".{path.name}.tmp.{os.getpid()}.{int(time.time() * 1000)}")
+    try:
+        temp_path.write_text(text, encoding=encoding)
+        os.replace(str(temp_path), str(path))
+    finally:
+        if temp_path.exists():
+            try:
+                temp_path.unlink()
+            except Exception:
+                pass
+
+
+def atomic_write_json(path: Path, payload: Dict[str, Any]) -> None:
+    atomic_write_text(path, json.dumps(payload, indent=2), encoding="utf-8")
 
 
 def resolve_path(root: Path, value: str) -> Path:
@@ -162,6 +208,9 @@ class TrainerState:
 class NativeOrchestrator:
     def __init__(self) -> None:
         self.repo_root = Path(__file__).resolve().parents[2]
+        self.mode = "native_full_pbt"
+        default_run_id = os.getenv("SLURM_JOB_ID", "").strip() or now_utc().replace(":", "").replace("-", "")
+        self.run_id = sanitize_run_id(os.getenv("ORCH_RUN_ID", "").strip() or default_run_id)
         self.registry_path = resolve_path(
             self.repo_root,
             os.getenv(
@@ -169,12 +218,21 @@ class NativeOrchestrator:
                 "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json",
             ),
         )
-        self.reports_root = self.repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator"
+        self.compat_reports_root = self.repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator"
+        self.runs_root = self.compat_reports_root / "runs"
+        self.reports_root = self.runs_root / self.run_id
         self.trainer_logs_dir = self.reports_root / "trainers"
         self.shared_gpu_logs_dir = self.reports_root / "gpu_hosts"
         self.generated_decklists_dir = self.reports_root / "generated_decklists"
         self.pbt_state_path = self.reports_root / "pbt_state.json"
         self.orchestrator_status_path = self.reports_root / "orchestrator_status.json"
+        self.compat_pbt_state_path = self.compat_reports_root / "pbt_state.json"
+        self.compat_orchestrator_status_path = self.compat_reports_root / "orchestrator_status.json"
+        self.latest_run_path = self.compat_reports_root / "latest_run.json"
+        self.db_root = resolve_path(
+            self.repo_root,
+            os.getenv("MAGE_DB_DIR", "").strip() or "local-training/rl-db",
+        )
         self.total_episodes = env_int("TOTAL_EPISODES", 1_000_000)
         self.train_profiles = env_int("TRAIN_PROFILES", 3)
         self.cpu_headroom = env_int("CPU_HEADROOM", 4)
@@ -236,6 +294,7 @@ class NativeOrchestrator:
         self.last_pbt_at: Optional[datetime] = None
         self.selected_profiles: List[Dict[str, Any]] = []
         self.active_profiles: List[Dict[str, Any]] = []
+        self.snapshot_warning_keys: Set[str] = set()
 
     def resolve_runtime_dir(self) -> Optional[Path]:
         raw = os.getenv("MAGE_RL_RUNTIME_DIR", "").strip()
@@ -285,6 +344,18 @@ class NativeOrchestrator:
             "Load a Maven module in the Slurm job (for example: module load maven)."
         )
 
+    def write_latest_run_pointer(self) -> None:
+        payload = {
+            "updated_at_utc": now_utc(),
+            "run_id": self.run_id,
+            "mode": self.mode,
+            "reports_root": str(self.reports_root),
+            "orchestrator_status_path": str(self.orchestrator_status_path),
+            "pbt_state_path": str(self.pbt_state_path),
+            "compat_reports_root": str(self.compat_reports_root),
+        }
+        atomic_write_json(self.latest_run_path, payload)
+
     def load_profiles(self) -> List[Dict[str, Any]]:
         if not self.registry_path.exists():
             raise FileNotFoundError(f"Registry not found: {self.registry_path}")
@@ -302,7 +373,10 @@ class NativeOrchestrator:
                 continue
             if not normalize_truthy(item.get("active", True), True):
                 continue
+            mode = normalize_mode(item.get("mode"))
             train_enabled = normalize_truthy(item.get("train_enabled", True), True)
+            if mode in {"frozen", "eval_only"}:
+                train_enabled = False
             population_group = str(item.get("population_group", "")).strip() or profile
             priority = parse_int64(item.get("priority"))
             if priority is None:
@@ -314,6 +388,7 @@ class NativeOrchestrator:
                 target_wr_num = 0.60
             entry = dict(item)
             entry["profile"] = profile
+            entry["mode"] = mode
             entry["train_enabled"] = train_enabled
             entry["population_group"] = population_group
             entry["priority"] = int(priority)
@@ -415,7 +490,7 @@ class NativeOrchestrator:
             deck_paths.append(text)
         if not deck_paths:
             raise RuntimeError("No usable deck paths found to build meta opponent decklist")
-        output.write_text("\n".join(deck_paths) + "\n", encoding="utf-8")
+        atomic_write_text(output, "\n".join(deck_paths) + "\n", encoding="utf-8")
         return output
 
     def build_command(self) -> List[str]:
@@ -485,6 +560,8 @@ class NativeOrchestrator:
                 "port": port,
                 "metrics_port": metrics_port,
                 "process": process,
+                "stdout_log": str(stdout_path),
+                "stderr_log": str(stderr_path),
                 "stdout_handle": stdout_handle,
                 "stderr_handle": stderr_handle,
             }
@@ -553,7 +630,7 @@ class NativeOrchestrator:
         py4j_base_port = self.py4j_base_port + (slot * self.py4j_port_stride)
         if self.py_service_mode != "shared_gpu":
             self.cleanup_stale_py4j_port(profile, py4j_base_port)
-        trainer_db_dir = self.repo_root / "local-training/rl-db" / profile
+        trainer_db_dir = self.db_root / profile
         trainer_db_dir.mkdir(parents=True, exist_ok=True)
         self.trainer_logs_dir.mkdir(parents=True, exist_ok=True)
         stdout_path = self.trainer_logs_dir / f"{profile}.stdout.log"
@@ -570,12 +647,14 @@ class NativeOrchestrator:
         env["METRICS_PORT"] = str(metrics_port)
         env["OPPONENT_SAMPLER"] = "league"
         env["ORCHESTRATED_RUN"] = "1"
+        env["ORCH_RUN_ID"] = self.run_id
         env["LEAGUE_REGISTRY_PATH"] = str(self.registry_path)
         env["LEAGUE_PROMOTE_WR"] = self.league_promote_wr
         env["PY4J_BASE_PORT"] = str(py4j_base_port)
         env["PY_BRIDGE_CLEANUP"] = "0"
         env["MAGE_DB_DIR"] = str(trainer_db_dir)
         env["MAGE_DB_AUTO_SERVER"] = "false"
+        env["ORCHESTRATOR_REPORTS_ROOT"] = str(self.reports_root)
         if self.train_log_level:
             env["MTG_AI_LOG_LEVEL"] = self.train_log_level
         if self.game_log_frequency > 0:
@@ -774,18 +853,139 @@ class NativeOrchestrator:
     def profile_model_path(self, profile: str) -> Path:
         return self.profile_models_dir(profile) / "model.pt"
 
-    def copy_profile_latest_model(self, source_profile: str, target_profile: str) -> bool:
-        source_latest = self.profile_model_latest_path(source_profile)
-        source_model = self.profile_model_path(source_profile)
-        source = source_latest if source_latest.exists() else source_model
-        if not source.exists():
-            return False
+    def resolve_stable_checkpoint_path(self, profile: str) -> Optional[Path]:
+        source_latest = self.profile_model_latest_path(profile)
+        if source_latest.exists():
+            return source_latest
+        source_model = self.profile_model_path(profile)
+        if source_model.exists():
+            return source_model
+        return None
+
+    def _copy_file_atomic(self, source: Path, target: Path) -> None:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temp_path = target.with_name(f".{target.name}.tmp.{os.getpid()}.{int(time.time() * 1000)}")
+        try:
+            shutil.copy2(str(source), str(temp_path))
+            os.replace(str(temp_path), str(target))
+        finally:
+            if temp_path.exists():
+                try:
+                    temp_path.unlink()
+                except Exception:
+                    pass
+
+    def restore_profile_model_files(self, restore_info: Dict[str, Any]) -> None:
+        for target_key, backup_key in (("target_latest", "backup_latest"), ("target_model", "backup_model")):
+            target = restore_info.get(target_key)
+            backup = restore_info.get(backup_key)
+            created = bool(restore_info.get(f"{target_key}_created", False))
+            if not isinstance(target, Path):
+                continue
+            if isinstance(backup, Path) and backup.exists():
+                self._copy_file_atomic(backup, target)
+                try:
+                    backup.unlink()
+                except Exception:
+                    pass
+            elif created and target.exists():
+                try:
+                    target.unlink()
+                except Exception:
+                    pass
+
+    def stage_profile_model_replacement(self, source_profile: str, target_profile: str) -> Dict[str, Any]:
+        source = self.resolve_stable_checkpoint_path(source_profile)
+        if source is None:
+            raise RuntimeError(f"stable checkpoint not found for winner={source_profile}")
+
         target_latest = self.profile_model_latest_path(target_profile)
         target_model = self.profile_model_path(target_profile)
         target_latest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(str(source), str(target_latest))
-        shutil.copy2(str(target_latest), str(target_model))
-        return True
+
+        restore_info: Dict[str, Any] = {
+            "source": source,
+            "target_latest": target_latest,
+            "target_model": target_model,
+            "backup_latest": None,
+            "backup_model": None,
+            "target_latest_created": not target_latest.exists(),
+            "target_model_created": not target_model.exists(),
+        }
+
+        for target_key in ("target_latest", "target_model"):
+            target = restore_info[target_key]
+            if target.exists():
+                backup = target.with_name(f".{target.name}.bak.{os.getpid()}.{int(time.time() * 1000)}")
+                shutil.copy2(str(target), str(backup))
+                restore_info[f"backup_{target_key.split('_', 1)[1]}"] = backup
+
+        self._copy_file_atomic(source, target_latest)
+        self._copy_file_atomic(source, target_model)
+        return restore_info
+
+    @staticmethod
+    def cleanup_restore_info_backups(restore_info: Dict[str, Any]) -> None:
+        for key in ("backup_latest", "backup_model"):
+            backup = restore_info.get(key)
+            if isinstance(backup, Path) and backup.exists():
+                try:
+                    backup.unlink()
+                except Exception:
+                    pass
+
+    @staticmethod
+    def new_pbt_event(
+        group: str,
+        trigger: str,
+        group_min_episode: int,
+        episode_delta_since_last: int,
+        elapsed_minutes: float,
+        winner_profile: str,
+        loser_profile: str,
+        winner_wr: float,
+        loser_wr: float,
+        winner_gap: float,
+        winner_gap_min: float,
+        winner_wr_min_gate: float,
+        time_delta_gate: int,
+        time_delta_gate_passed: bool,
+    ) -> Dict[str, Any]:
+        elapsed_value = -1.0 if math.isinf(elapsed_minutes) else float(elapsed_minutes)
+        return {
+            "timestamp_utc": now_utc(),
+            "run_id": "",
+            "population_group": group,
+            "trigger": trigger,
+            "group_min_episode": int(group_min_episode),
+            "episode_delta": int(episode_delta_since_last),
+            "elapsed_minutes": elapsed_value,
+            "winner": winner_profile,
+            "loser": loser_profile,
+            "winner_wr": float(winner_wr),
+            "loser_wr": float(loser_wr),
+            "winner_gap": float(winner_gap),
+            "winner_gap_min": float(winner_gap_min),
+            "winner_wr_min_gate": float(winner_wr_min_gate),
+            "time_delta_gate": int(time_delta_gate),
+            "time_delta_gate_passed": bool(time_delta_gate_passed),
+            "skip_reason": "",
+            "result": "",
+            "failure_reason": "",
+            "state": "candidate",
+            "state_transitions": ["candidate"],
+            "copied": False,
+            "copy_source_path": "",
+            "new_seed": "",
+            "mutated_keys": "",
+        }
+
+    @staticmethod
+    def advance_event_state(event: Dict[str, Any], state: str) -> None:
+        event["state"] = state
+        transitions = event.setdefault("state_transitions", [])
+        if not transitions or transitions[-1] != state:
+            transitions.append(state)
 
     def mutate_env_value(self, key: str, value: str) -> str:
         try:
@@ -825,23 +1025,36 @@ class NativeOrchestrator:
         values: Deque[float] = deque(maxlen=max(50, self.winrate_window))
         if stats_path.exists():
             try:
-                with stats_path.open("r", encoding="utf-8", errors="replace") as handle:
-                    for raw in handle:
-                        line = raw.strip()
-                        if not line or line.startswith("episode,"):
-                            continue
-                        parts = line.split(",")
-                        if len(parts) < 5:
-                            continue
-                        ep = parse_int64(parts[0].strip())
-                        if ep is not None and int(ep) > episode:
-                            episode = int(ep)
-                        try:
-                            values.append(float(parts[4].strip()))
-                        except Exception:
-                            continue
-            except Exception:
-                pass
+                with stats_path.open("r", encoding="utf-8", errors="replace", newline="") as handle:
+                    reader = csv.DictReader(handle)
+                    if reader.fieldnames and "episode" in reader.fieldnames and "winrate" in reader.fieldnames:
+                        for row in reader:
+                            ep = parse_int64(row.get("episode"))
+                            if ep is not None and int(ep) > episode:
+                                episode = int(ep)
+                            wr = parse_float(row.get("winrate"))
+                            if wr is not None:
+                                values.append(wr)
+                    else:
+                        handle.seek(0)
+                        for raw in handle:
+                            line = raw.strip()
+                            if not line or line.startswith("episode,"):
+                                continue
+                            parts = line.split(",")
+                            if len(parts) < 5:
+                                continue
+                            ep = parse_int64(parts[0].strip())
+                            if ep is not None and int(ep) > episode:
+                                episode = int(ep)
+                            wr = parse_float(parts[4].strip())
+                            if wr is not None:
+                                values.append(wr)
+            except Exception as exc:
+                warn_key = f"snapshot:{stats_path}"
+                if warn_key not in self.snapshot_warning_keys:
+                    self.snapshot_warning_keys.add(warn_key)
+                    log(f"WARNING: Failed parsing training stats for profile={profile}: {stats_path} ({exc})")
 
         rolling_current = values[-1] if values else None
         rolling_avg = (sum(values) / len(values)) if values else None
@@ -855,6 +1068,7 @@ class NativeOrchestrator:
             "promoted": promoted,
             "target_winrate": float(entry.get("target_winrate", 0.60)),
             "train_enabled": bool(entry.get("train_enabled", True)),
+            "mode": str(entry.get("mode", "")),
         }
 
     def update_stall_progress(self, state: TrainerState, snapshots: Dict[str, Dict[str, Any]]) -> None:
@@ -1015,6 +1229,25 @@ class NativeOrchestrator:
                 winner_gap = winner_wr - loser_wr
                 gap_gate_passed = winner_gap >= self.pbt_min_winner_gap
                 winner_wr_gate_passed = winner_wr >= self.pbt_min_winner_wr
+                event = self.new_pbt_event(
+                    group=group,
+                    trigger=trigger,
+                    group_min_episode=group_min_episode,
+                    episode_delta_since_last=episode_delta_since_last,
+                    elapsed_minutes=elapsed_minutes,
+                    winner_profile=winner_profile,
+                    loser_profile=loser_profile,
+                    winner_wr=winner_wr,
+                    loser_wr=loser_wr,
+                    winner_gap=winner_gap,
+                    winner_gap_min=self.pbt_min_winner_gap,
+                    winner_wr_min_gate=self.pbt_min_winner_wr,
+                    time_delta_gate=time_delta_gate,
+                    time_delta_gate_passed=time_delta_gate_passed,
+                )
+                event["run_id"] = self.run_id
+                event["gap_gate_passed"] = gap_gate_passed
+                event["winner_wr_gate_passed"] = winner_wr_gate_passed
 
                 if not (gap_gate_passed and winner_wr_gate_passed):
                     if not gap_gate_passed and not winner_wr_gate_passed:
@@ -1023,39 +1256,13 @@ class NativeOrchestrator:
                         skip_reason = "gap_below_threshold"
                     else:
                         skip_reason = "winner_wr_below_threshold"
-                    event = {
-                        "timestamp_utc": now_utc(),
-                        "population_group": group,
-                        "trigger": trigger,
-                        "group_min_episode": group_min_episode,
-                        "episode_delta": episode_delta_since_last,
-                        "elapsed_minutes": -1.0 if math.isinf(elapsed_minutes) else float(elapsed_minutes),
-                        "winner": winner_profile,
-                        "loser": loser_profile,
-                        "winner_wr": winner_wr,
-                        "loser_wr": loser_wr,
-                        "winner_gap": winner_gap,
-                        "winner_gap_min": float(self.pbt_min_winner_gap),
-                        "winner_wr_min_gate": float(self.pbt_min_winner_wr),
-                        "gap_gate_passed": gap_gate_passed,
-                        "winner_wr_gate_passed": winner_wr_gate_passed,
-                        "time_delta_gate": int(time_delta_gate),
-                        "time_delta_gate_passed": bool(time_delta_gate_passed),
-                        "skip_reason": skip_reason,
-                        "copied": False,
-                        "new_seed": "",
-                        "mutated_keys": "",
-                    }
+                    self.advance_event_state(event, "failed")
+                    event["skip_reason"] = skip_reason
+                    event["result"] = "skipped"
+                    event["failure_reason"] = skip_reason
                     events.append(event)
                     self._append_pbt_event(event)
                     continue
-
-                copied = False
-                try:
-                    copied = self.copy_profile_latest_model(winner_profile, loser_profile)
-                except Exception as exc:
-                    copied = False
-                    log(f"WARNING: PBT copy failed winner={winner_profile} loser={loser_profile}: {exc}")
 
                 effective_env = dict(state.effective_train_env)
                 if not effective_env and isinstance(loser["entry"].get("train_env"), dict):
@@ -1075,12 +1282,17 @@ class NativeOrchestrator:
                 if seed_now is None:
                     seed_now = 1
                 seed_now = int(seed_now) + random.randint(1, 99999)
-                state.effective_seed = seed_now
-                state.effective_train_env = dict(effective_env)
-
+                restore_info: Optional[Dict[str, Any]] = None
+                replacement: Optional[TrainerState] = None
+                recovery_state: Optional[TrainerState] = None
                 try:
+                    self.advance_event_state(event, "copy_started")
                     self.stop_trainer(state)
                     self.close_logs(state)
+                    restore_info = self.stage_profile_model_replacement(winner_profile, loser_profile)
+                    event["copied"] = True
+                    event["copy_source_path"] = str(restore_info["source"])
+                    self.advance_event_state(event, "copy_succeeded")
                     time.sleep(0.25)
                     replacement = self.start_trainer(
                         loser["entry"],
@@ -1095,33 +1307,68 @@ class NativeOrchestrator:
                     replacement.last_restart_reason = "pbt_replace"
                     replacement.last_progress_episode = state.last_progress_episode
                     replacement.last_progress_at = time.time()
-                    self.trainers[loser_profile] = replacement
+                    self.advance_event_state(event, "restart_succeeded")
                 except Exception as exc:
-                    log(f"WARNING: PBT restart failed loser={loser_profile}: {exc}")
+                    failure_prefix = "restart_failed"
+                    if str(event.get("state", "")) == "copy_started" and not bool(event.get("copied", False)):
+                        failure_prefix = "copy_failed"
+                    failure_reason = f"{failure_prefix}: {exc}"
+                    log(
+                        f"WARNING: PBT {failure_prefix} winner={winner_profile} "
+                        f"loser={loser_profile}: {exc}"
+                    )
+                    if restore_info is not None:
+                        try:
+                            self.restore_profile_model_files(restore_info)
+                        except Exception as rollback_exc:
+                            failure_reason = f"{failure_reason}; rollback_failed: {rollback_exc}"
+                    try:
+                        recovery_state = self.start_trainer(
+                            loser["entry"],
+                            state.slot,
+                            state.runners_per_profile,
+                            state.opponent_decklist,
+                            effective_train_env=state.effective_train_env,
+                            effective_seed=state.effective_seed,
+                        )
+                        recovery_state.restart_count = state.restart_count
+                        recovery_state.consecutive_failures = state.consecutive_failures
+                        recovery_state.last_restart_reason = "pbt_recover"
+                        recovery_state.last_progress_episode = state.last_progress_episode
+                        recovery_state.last_progress_at = time.time()
+                        self.trainers[loser_profile] = recovery_state
+                    except Exception as recovery_exc:
+                        failure_reason = f"{failure_reason}; recovery_restart_failed: {recovery_exc}"
+                        log(
+                            f"WARNING: PBT recovery restart failed winner={winner_profile} "
+                            f"loser={loser_profile}: {recovery_exc}"
+                        )
+                    self.advance_event_state(event, "failed")
+                    event["result"] = "failed"
+                    event["failure_reason"] = failure_reason
+                    event["new_seed"] = str(seed_now)
+                    event["mutated_keys"] = ";".join(mutable_keys)
+                    events.append(event)
+                    self._append_pbt_event(event)
+                    continue
 
-                event = {
-                    "timestamp_utc": now_utc(),
-                    "population_group": group,
-                    "trigger": trigger,
-                    "group_min_episode": group_min_episode,
-                    "episode_delta": episode_delta_since_last,
-                    "elapsed_minutes": -1.0 if math.isinf(elapsed_minutes) else float(elapsed_minutes),
-                    "winner": winner_profile,
-                    "loser": loser_profile,
-                    "winner_wr": winner_wr,
-                    "loser_wr": loser_wr,
-                    "winner_gap": winner_gap,
-                    "winner_gap_min": float(self.pbt_min_winner_gap),
-                    "winner_wr_min_gate": float(self.pbt_min_winner_wr),
-                    "gap_gate_passed": gap_gate_passed,
-                    "winner_wr_gate_passed": winner_wr_gate_passed,
-                    "time_delta_gate": int(time_delta_gate),
-                    "time_delta_gate_passed": bool(time_delta_gate_passed),
-                    "skip_reason": "",
-                    "copied": bool(copied),
-                    "new_seed": str(seed_now),
-                    "mutated_keys": ";".join(mutable_keys),
-                }
+                if replacement is None:
+                    self.advance_event_state(event, "failed")
+                    event["result"] = "failed"
+                    event["failure_reason"] = "restart_failed: replacement_missing"
+                    event["new_seed"] = str(seed_now)
+                    event["mutated_keys"] = ";".join(mutable_keys)
+                    events.append(event)
+                    self._append_pbt_event(event)
+                    continue
+
+                if restore_info is not None:
+                    self.cleanup_restore_info_backups(restore_info)
+                self.trainers[loser_profile] = replacement
+                self.advance_event_state(event, "committed")
+                event["result"] = "committed"
+                event["new_seed"] = str(seed_now)
+                event["mutated_keys"] = ";".join(mutable_keys)
                 events.append(event)
                 self._append_pbt_event(event)
                 did_exploit_group = True
@@ -1136,6 +1383,7 @@ class NativeOrchestrator:
 
     def write_pbt_state(self) -> None:
         self.reports_root.mkdir(parents=True, exist_ok=True)
+        selected_lookup = {str(entry.get("profile", "")).strip() for entry in self.selected_profiles}
 
         profiles_payload: List[Dict[str, Any]] = []
         for entry in self.selected_profiles:
@@ -1156,18 +1404,43 @@ class NativeOrchestrator:
             profiles_payload.append(
                 {
                     "profile": profile,
+                    "mode": str(entry.get("mode", "")),
+                    "selected": True,
                     "population_group": str(entry.get("population_group", "")).strip() or profile,
+                    "target_winrate": float(entry.get("target_winrate", 0.60)),
                     "seed": seed_now,
                     "pbt_mutable_env": to_string_list(entry.get("pbt_mutable_env")),
                     "train_env": train_env_now,
                 }
             )
 
+        all_active_profiles: List[Dict[str, Any]] = []
+        for entry in self.active_profiles:
+            profile = str(entry.get("profile", "")).strip()
+            if not profile:
+                continue
+            all_active_profiles.append(
+                {
+                    "profile": profile,
+                    "mode": str(entry.get("mode", "")),
+                    "selected": profile in selected_lookup,
+                    "train_enabled": bool(entry.get("train_enabled", True)),
+                    "population_group": str(entry.get("population_group", "")).strip() or profile,
+                    "priority": int(entry.get("priority", 1000)),
+                    "target_winrate": float(entry.get("target_winrate", 0.60)),
+                    "deck_path": str(entry.get("deck_path", "")),
+                }
+            )
+
         group_payload: List[Dict[str, Any]] = []
         for key, st in self.pbt_group_state.items():
+            group_profiles = [row["profile"] for row in all_active_profiles if row["population_group"] == str(key)]
+            selected_profiles = [row["profile"] for row in all_active_profiles if row["population_group"] == str(key) and row["selected"]]
             group_payload.append(
                 {
                     "population_group": str(key),
+                    "profiles": group_profiles,
+                    "selected_profiles": selected_profiles,
                     "last_exploit_utc": str(st.get("last_exploit_utc", "")),
                     "last_exploit_min_episode": int(st.get("last_exploit_min_episode", 0)),
                     "exploit_count": int(st.get("exploit_count", 0)),
@@ -1176,7 +1449,11 @@ class NativeOrchestrator:
 
         payload = {
             "updated_at_utc": now_utc(),
-            "mode": "native_full_pbt",
+            "run_id": self.run_id,
+            "mode": self.mode,
+            "registry_path": str(self.registry_path),
+            "reports_root": str(self.reports_root),
+            "compat_reports_root": str(self.compat_reports_root),
             "enable_pbt": bool(self.enable_pbt),
             "pbt_exploit_max_interval_minutes": int(self.pbt_interval_minutes),
             "pbt_min_episodes_before_first_exploit": int(self.pbt_first_exploit_min_ep),
@@ -1186,17 +1463,22 @@ class NativeOrchestrator:
             "pbt_min_winner_gap": float(self.pbt_min_winner_gap),
             "pbt_min_winner_winrate": float(self.pbt_min_winner_wr),
             "last_exploit_utc": "" if self.last_pbt_at is None else self.last_pbt_at.replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+            "selected_profiles": [row["profile"] for row in profiles_payload],
+            "all_active_profiles": all_active_profiles,
             "profiles": profiles_payload,
             "group_state": group_payload,
             "events": self.pbt_events[-200:],
         }
-        self.pbt_state_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        atomic_write_json(self.pbt_state_path, payload)
+        atomic_write_json(self.compat_pbt_state_path, payload)
+        self.write_latest_run_pointer()
 
     def write_orchestrator_status(self, snapshots: Dict[str, Dict[str, Any]], note: str) -> None:
         self.reports_root.mkdir(parents=True, exist_ok=True)
+        selected_lookup = {str(entry.get("profile", "")).strip() for entry in self.selected_profiles}
 
         trainer_rows: List[Dict[str, Any]] = []
-        for entry in self.active_profiles:
+        for entry in self.selected_profiles:
             profile = str(entry.get("profile", "")).strip()
             if not profile:
                 continue
@@ -1230,6 +1512,7 @@ class NativeOrchestrator:
                     "launched_at_utc": "" if state is None else str(state.launched_at_utc),
                     "metrics_port": 0 if state is None else int(state.metrics_port),
                     "py4j_base_port": 0 if state is None else int(state.py4j_base_port),
+                    "run_id": self.run_id,
                     "train_decklist": "" if state is None else str(state.env.get("RL_AGENT_DECK_LIST", "")),
                     "opponent_decklist": "" if state is None else str(state.opponent_decklist),
                     "stdout_log": stdout_log,
@@ -1238,7 +1521,8 @@ class NativeOrchestrator:
                 }
             )
 
-        snapshot_rows: List[Dict[str, Any]] = []
+        all_snapshot_rows: List[Dict[str, Any]] = []
+        selected_snapshot_rows: List[Dict[str, Any]] = []
         for entry in self.active_profiles:
             profile = str(entry.get("profile", "")).strip()
             if not profile:
@@ -1250,23 +1534,92 @@ class NativeOrchestrator:
             completed = False
             if state is not None:
                 completed = bool(state.completed)
-            snapshot_rows.append(
+            row = {
+                "profile": profile,
+                "mode": str(snap.get("mode", entry.get("mode", ""))),
+                "selected": profile in selected_lookup,
+                "episode": int(snap.get("episode", 0)),
+                "rolling_winrate": snap.get("rolling_current"),
+                "rolling_avg": snap.get("rolling_avg"),
+                "sample_count": int(snap.get("sample_count", 0)),
+                "baseline_wr": float(snap.get("baseline_wr", 0.0)),
+                "target_winrate": float(snap.get("target_winrate", 0.60)),
+                "promoted": bool(snap.get("promoted", False)),
+                "train_enabled": bool(snap.get("train_enabled", True)),
+                "completed": completed,
+                "population_group": str(entry.get("population_group", "")).strip() or profile,
+            }
+            all_snapshot_rows.append(row)
+            if profile in selected_lookup:
+                selected_snapshot_rows.append(row)
+
+        all_active_profiles: List[Dict[str, Any]] = []
+        for entry in self.active_profiles:
+            profile = str(entry.get("profile", "")).strip()
+            if not profile:
+                continue
+            all_active_profiles.append(
                 {
                     "profile": profile,
-                    "episode": int(snap.get("episode", 0)),
-                    "rolling_winrate": snap.get("rolling_current"),
-                    "rolling_avg": snap.get("rolling_avg"),
-                    "baseline_wr": float(snap.get("baseline_wr", 0.0)),
-                    "target_winrate": float(snap.get("target_winrate", 0.60)),
-                    "promoted": bool(snap.get("promoted", False)),
-                    "train_enabled": bool(snap.get("train_enabled", True)),
-                    "completed": completed,
+                    "mode": str(entry.get("mode", "")),
+                    "selected": profile in selected_lookup,
+                    "train_enabled": bool(entry.get("train_enabled", True)),
+                    "population_group": str(entry.get("population_group", "")).strip() or profile,
+                    "priority": int(entry.get("priority", 1000)),
+                    "target_winrate": float(entry.get("target_winrate", 0.60)),
+                    "deck_path": str(entry.get("deck_path", "")),
+                }
+            )
+
+        population_groups: List[Dict[str, Any]] = []
+        for group in sorted({row["population_group"] for row in all_active_profiles}):
+            group_all = [row["profile"] for row in all_active_profiles if row["population_group"] == group]
+            group_selected = [row["profile"] for row in all_active_profiles if row["population_group"] == group and row["selected"]]
+            population_groups.append(
+                {
+                    "population_group": group,
+                    "all_active_profiles": group_all,
+                    "selected_profiles": group_selected,
+                    "selected_count": len(group_selected),
+                }
+            )
+
+        shared_gpu_host_rows: List[Dict[str, Any]] = []
+        for slot, host in sorted(self.shared_gpu_hosts.items()):
+            process = host.get("process")
+            running = False
+            pid = 0
+            exit_code: Optional[int] = None
+            if process is not None:
+                try:
+                    rc = process.poll()
+                    running = rc is None
+                    pid = int(process.pid)
+                    if rc is not None:
+                        exit_code = int(rc)
+                except Exception:
+                    pass
+            shared_gpu_host_rows.append(
+                {
+                    "slot": int(slot),
+                    "gpu_id": str(host.get("gpu_id", "")),
+                    "port": int(host.get("port", 0)),
+                    "metrics_port": int(host.get("metrics_port", 0)),
+                    "running": running,
+                    "pid": pid,
+                    "exit_code": exit_code,
+                    "stdout_log": str(host.get("stdout_log", "")),
+                    "stderr_log": str(host.get("stderr_log", "")),
                 }
             )
 
         payload = {
             "updated_at_utc": now_utc(),
+            "run_id": self.run_id,
+            "mode": self.mode,
             "registry_path": str(self.registry_path),
+            "reports_root": str(self.reports_root),
+            "compat_reports_root": str(self.compat_reports_root),
             "eval_every_minutes": int(self.eval_every_minutes),
             "last_eval_utc": "",
             "next_eval_utc": "",
@@ -1274,10 +1627,26 @@ class NativeOrchestrator:
             "sequential_training": False,
             "current_training_profile": "",
             "note": note,
+            "paths": {
+                "reports_root": str(self.reports_root),
+                "trainers_dir": str(self.trainer_logs_dir),
+                "gpu_hosts_dir": str(self.shared_gpu_logs_dir),
+                "generated_decklists_dir": str(self.generated_decklists_dir),
+                "orchestrator_status_path": str(self.orchestrator_status_path),
+                "pbt_state_path": str(self.pbt_state_path),
+            },
+            "all_active_profiles": all_active_profiles,
+            "selected_profiles": [row["profile"] for row in all_active_profiles if row["selected"]],
+            "population_groups": population_groups,
             "trainers": trainer_rows,
-            "profile_snapshots": snapshot_rows,
+            "shared_gpu_hosts": shared_gpu_host_rows,
+            "all_active_profile_snapshots": all_snapshot_rows,
+            "selected_profile_snapshots": selected_snapshot_rows,
+            "profile_snapshots": selected_snapshot_rows,
         }
-        self.orchestrator_status_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        atomic_write_json(self.orchestrator_status_path, payload)
+        atomic_write_json(self.compat_orchestrator_status_path, payload)
+        self.write_latest_run_pointer()
 
     def log_status(self, snapshots: Dict[str, Dict[str, Any]]) -> None:
         running = [name for name, t in self.trainers.items() if t.process.poll() is None]
@@ -1327,8 +1696,14 @@ class NativeOrchestrator:
         if len(self.selected_profiles) < self.pbt_min_population:
             self.enable_pbt = False
 
-        log(f"League orchestrator starting. profiles={len(active_profiles)} evalEveryMinutes={self.eval_every_minutes} runOnce=False dryRun=False")
+        log(
+            f"League orchestrator starting. runId={self.run_id} profiles={len(active_profiles)} "
+            f"selected={len(self.selected_profiles)} evalEveryMinutes={self.eval_every_minutes} runOnce=False dryRun=False"
+        )
         log(f"Registry: {self.registry_path}")
+        log(f"Reports root: {self.reports_root}")
+        log(f"Compatibility reports root: {self.compat_reports_root}")
+        log(f"DB root: {self.db_root}")
         log(
             f"PBT gating: firstExploitMinEp={self.pbt_first_exploit_min_ep} "
             f"deltaEpPerProfile={self.pbt_episode_delta} maxTimeFallbackMin={self.pbt_interval_minutes} "
@@ -1458,10 +1833,20 @@ class NativeOrchestrator:
             now_dt = datetime.now(timezone.utc)
             events = self.invoke_pbt_exploit(snapshots, now_dt)
             if events:
-                self.last_pbt_at = now_dt
+                if any(str(ev.get("result", "")) == "committed" for ev in events):
+                    self.last_pbt_at = now_dt
                 for ev in events:
                     skip_reason = str(ev.get("skip_reason", "")).strip()
-                    if skip_reason:
+                    result = str(ev.get("result", "")).strip() or "unknown"
+                    if result == "committed":
+                        log(
+                            "PBT exploit "
+                            f"group={ev.get('population_group')} winner={ev.get('winner')} loser={ev.get('loser')} "
+                            f"winner_wr={float(ev.get('winner_wr', 0.0)):.3f} loser_wr={float(ev.get('loser_wr', 0.0)):.3f} "
+                            f"gap={float(ev.get('winner_gap', 0.0)):.3f} seed={ev.get('new_seed')} trigger={ev.get('trigger')} "
+                            f"groupMinEp={int(ev.get('group_min_episode', 0))} deltaEp={int(ev.get('episode_delta', 0))}"
+                        )
+                    elif result == "skipped":
                         log(
                             "PBT exploit skipped "
                             f"group={ev.get('population_group')} winner={ev.get('winner')} loser={ev.get('loser')} "
@@ -1472,11 +1857,12 @@ class NativeOrchestrator:
                         )
                     else:
                         log(
-                            "PBT exploit "
+                            "PBT exploit failed "
                             f"group={ev.get('population_group')} winner={ev.get('winner')} loser={ev.get('loser')} "
-                            f"winner_wr={float(ev.get('winner_wr', 0.0)):.3f} loser_wr={float(ev.get('loser_wr', 0.0)):.3f} "
-                            f"gap={float(ev.get('winner_gap', 0.0)):.3f} seed={ev.get('new_seed')} trigger={ev.get('trigger')} "
-                            f"groupMinEp={int(ev.get('group_min_episode', 0))} deltaEp={int(ev.get('episode_delta', 0))}"
+                            f"reason={ev.get('failure_reason')} winner_wr={float(ev.get('winner_wr', 0.0)):.3f} "
+                            f"loser_wr={float(ev.get('loser_wr', 0.0)):.3f} gap={float(ev.get('winner_gap', 0.0)):.3f} "
+                            f"trigger={ev.get('trigger')} groupMinEp={int(ev.get('group_min_episode', 0))} "
+                            f"deltaEp={int(ev.get('episode_delta', 0))}"
                         )
                 self.write_pbt_state()
                 self.write_orchestrator_status(snapshots, note=f"training_concurrent_{len(self.selected_profiles)}")

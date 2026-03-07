@@ -6,6 +6,7 @@ status_path="${1:-$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/playe
 output_path="${2:-$repo_root/monitoring/file_sd/mage_hpc_targets.json}"
 metrics_host="${METRICS_HOST:-localhost}"
 include_stopped="${INCLUDE_STOPPED_TARGETS:-0}"
+strict_refresh="${STRICT_TARGET_REFRESH:-0}"
 
 args=(
   --repo-root "$repo_root"
@@ -16,6 +17,10 @@ args=(
 
 if [[ "$include_stopped" == "1" || "$include_stopped" == "true" || "$include_stopped" == "yes" ]]; then
   args+=(--include-stopped)
+fi
+
+if [[ "$strict_refresh" == "1" || "$strict_refresh" == "true" || "$strict_refresh" == "yes" ]]; then
+  args+=(--strict)
 fi
 
 python3 "$repo_root/scripts/hpc/generate_prometheus_targets.py" "${args[@]}"

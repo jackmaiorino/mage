@@ -41,10 +41,13 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 registry_path="${REGISTRY_PATH:-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json}"
 total_episodes="${TOTAL_EPISODES:-1000000}"
 pbt_interval="${PBT_EXPLOIT_INTERVAL_MINUTES:-240}"
-pbt_first_exploit_min_ep="${PBT_MIN_EPISODES_BEFORE_FIRST_EXPLOIT:-12000}"
-pbt_episode_delta="${PBT_MIN_EPISODE_DELTA_PER_PROFILE:-10000}"
+pbt_first_exploit_min_ep="${PBT_MIN_EPISODES_BEFORE_FIRST_EXPLOIT:-6000}"
+pbt_episode_delta="${PBT_MIN_EPISODE_DELTA_PER_PROFILE:-3000}"
+pbt_time_fallback_episode_delta="${PBT_TIME_FALLBACK_MIN_EPISODE_DELTA:-1000}"
 pbt_mutation_pct="${PBT_MUTATION_PCT:-0.20}"
 pbt_min_population="${PBT_MIN_POPULATION_SIZE:-3}"
+pbt_min_winner_gap="${PBT_MIN_WINNER_GAP:-0.02}"
+pbt_min_winner_wr="${PBT_MIN_WINNER_WINRATE:-0.03}"
 eval_every_minutes="${EVAL_EVERY_MINUTES:-180}"
 stall_restart_minutes="${STALL_RESTART_MINUTES:-25}"
 game_log_frequency="${GAME_LOG_FREQUENCY:-500}"
@@ -53,13 +56,30 @@ train_profiles="${TRAIN_PROFILES:-3}"
 runner_oversubscription_factor="${RUNNER_OVERSUBSCRIPTION_FACTOR:-1}"
 job_id="${SLURM_JOB_ID:-manual_$(date -u +%Y%m%dT%H%M%SZ)}"
 reports_dir="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs/$job_id"
+orch_reports_dir="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs/$job_id"
 mkdir -p "$reports_dir"
 orchestrator_log="$reports_dir/orchestrator.log"
 telemetry_log="$reports_dir/telemetry.log"
+export ORCH_RUN_ID="${ORCH_RUN_ID:-$job_id}"
 
 export PY_BRIDGE_CREATE_VENV="${PY_BRIDGE_CREATE_VENV:-0}"
 export PY_BRIDGE_INSTALL_DEPS="${PY_BRIDGE_INSTALL_DEPS:-0}"
 export MAGE_DB_AUTO_SERVER="false"
+export REGISTRY_PATH="$registry_path"
+export TOTAL_EPISODES="$total_episodes"
+export PBT_EXPLOIT_INTERVAL_MINUTES="$pbt_interval"
+export PBT_MIN_EPISODES_BEFORE_FIRST_EXPLOIT="$pbt_first_exploit_min_ep"
+export PBT_MIN_EPISODE_DELTA_PER_PROFILE="$pbt_episode_delta"
+export PBT_TIME_FALLBACK_MIN_EPISODE_DELTA="$pbt_time_fallback_episode_delta"
+export PBT_MUTATION_PCT="$pbt_mutation_pct"
+export PBT_MIN_POPULATION_SIZE="$pbt_min_population"
+export PBT_MIN_WINNER_GAP="$pbt_min_winner_gap"
+export PBT_MIN_WINNER_WINRATE="$pbt_min_winner_wr"
+export EVAL_EVERY_MINUTES="$eval_every_minutes"
+export STALL_RESTART_MINUTES="$stall_restart_minutes"
+export GAME_LOG_FREQUENCY="$game_log_frequency"
+export TRAIN_PROFILES="$train_profiles"
+export CPU_HEADROOM="$cpu_headroom"
 # Avoid cross-job localhost Py4J port collisions when multiple jobs land on the same node.
 # Caller can still override by setting PY4J_BASE_PORT explicitly.
 if [[ -z "${PY4J_BASE_PORT:-}" ]]; then
@@ -168,7 +188,9 @@ echo "Registry: $registry_path" | tee -a "$orchestrator_log"
 echo "Runner sizing: cpu_total=$cpu_total cpu_headroom=$cpu_headroom runner_oversubscription_factor=$runner_oversubscription_factor target_total_runners=$target_total_runners" | tee -a "$orchestrator_log"
 echo "NumGameRunners (per profile): $runners_per_profile" | tee -a "$orchestrator_log"
 echo "Bridge retries: PY_BRIDGE_CONNECT_RETRIES=${PY_BRIDGE_CONNECT_RETRIES:-unset} PY_BRIDGE_CONNECT_RETRY_DELAY_MS=${PY_BRIDGE_CONNECT_RETRY_DELAY_MS:-unset}" | tee -a "$orchestrator_log"
-echo "PBT gating: firstMinEp=$pbt_first_exploit_min_ep deltaPerProfile=$pbt_episode_delta maxIntervalMin=$pbt_interval" | tee -a "$orchestrator_log"
+echo "Run ID: $ORCH_RUN_ID" | tee -a "$orchestrator_log"
+echo "PBT reports dir: $orch_reports_dir" | tee -a "$orchestrator_log"
+echo "PBT gating: firstMinEp=$pbt_first_exploit_min_ep deltaPerProfile=$pbt_episode_delta timeFallbackDelta=$pbt_time_fallback_episode_delta maxIntervalMin=$pbt_interval minGap=$pbt_min_winner_gap minWinnerWr=$pbt_min_winner_wr" | tee -a "$orchestrator_log"
 echo "MAGE_DB_DIR: $MAGE_DB_DIR" | tee -a "$orchestrator_log"
 echo "MTG_VENV_PATH: $MTG_VENV_PATH" | tee -a "$orchestrator_log"
 if [[ -n "${MAGE_RL_RUNTIME_DIR:-}" ]]; then
@@ -185,7 +207,7 @@ if [[ "$use_native_orch" -eq 1 ]]; then
   fi
   python3 "$repo_root/scripts/hpc/run_spy_pbt_native.py" 2>&1 | tee -a "$orchestrator_log"
 else
-  echo "Orchestrator mode: powershell" | tee -a "$orchestrator_log"
+  echo "Orchestrator mode: powershell (legacy HPC fallback)" | tee -a "$orchestrator_log"
   ps_command="& '$repo_root/scripts/rl-league-run.ps1' \
     -RegistryPath '$registry_path' \
     -SequentialTraining \$false \
@@ -193,8 +215,11 @@ else
     -PbtExploitIntervalMinutes $pbt_interval \
     -PbtMinEpisodesBeforeFirstExploit $pbt_first_exploit_min_ep \
     -PbtMinEpisodeDeltaPerProfile $pbt_episode_delta \
+    -PbtTimeFallbackMinEpisodeDelta $pbt_time_fallback_episode_delta \
     -PbtMutationPct $pbt_mutation_pct \
     -PbtMinPopulationSize $pbt_min_population \
+    -PbtMinWinnerGap $pbt_min_winner_gap \
+    -PbtMinWinnerWinrate $pbt_min_winner_wr \
     -GameLogFrequency $game_log_frequency \
     -StallRestartMinutes $stall_restart_minutes \
     -EvalEveryMinutes $eval_every_minutes \

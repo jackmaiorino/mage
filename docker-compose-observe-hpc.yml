@@ -1,13 +1,13 @@
 services:
   prometheus:
     image: prom/prometheus:latest
-    container_name: mage-prometheus-hpc
+    container_name: ${MAGE_HPC_PROM_CONTAINER:-mage-prometheus-hpc}
     ports:
       # Avoid clashing with RLTrainer host metrics port (9090)
-      - "9091:9090"
+      - "${MAGE_HPC_PROMETHEUS_PORT:-9091}:9090"
     volumes:
-      - ./monitoring/prometheus-hpc.yml:/etc/prometheus/prometheus.yml:ro
-      - ./monitoring/file_sd:/etc/prometheus/file_sd:ro
+      - ${MAGE_HPC_PROM_CONFIG:-./monitoring/prometheus-hpc.yml}:/etc/prometheus/prometheus.yml:ro
+      - ${MAGE_HPC_FILE_SD_DIR:-./monitoring/file_sd}:/etc/prometheus/file_sd:ro
       - prometheus-data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -18,9 +18,9 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    container_name: mage-grafana-hpc
+    container_name: ${MAGE_HPC_GRAFANA_CONTAINER:-mage-grafana-hpc}
     ports:
-      - "3000:3000"
+      - "${MAGE_HPC_GRAFANA_PORT:-3000}:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin123
     volumes:

@@ -25,17 +25,38 @@ if [[ -z "$node" || "$node" == "(null)" || "$node" == "None" ]]; then
   exit 1
 fi
 
-status_path="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/orchestrator_status.json"
-targets_path="$repo_root/monitoring/file_sd/mage_hpc_targets.json"
-job_orch_log="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs/$job_id/orchestrator.log"
-sync_log="$repo_root/monitoring/file_sd/target_sync.log"
-sync_pid_file="$repo_root/monitoring/file_sd/target_sync.pid"
+orchestrator_root="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator"
+run_reports_dir="$orchestrator_root/runs/$job_id"
+status_path="$run_reports_dir/orchestrator_status.json"
 
-mkdir -p "$(dirname "$targets_path")"
+targets_dir="$repo_root/monitoring/file_sd/$job_id"
+targets_path="$targets_dir/mage_hpc_targets.json"
+job_orch_log="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs/$job_id/orchestrator.log"
+sync_log="$targets_dir/target_sync.log"
+sync_pid_file="$targets_dir/target_sync.pid"
+
+mkdir -p "$targets_dir"
 docker_available=0
+status_wait_seconds="${STATUS_WAIT_SECONDS:-120}"
+status_wait_started="$(date +%s)"
+
+port_offset="$(printf '%s' "$job_id" | cksum | awk '{print $1 % 500}')"
+prometheus_port="${MAGE_HPC_PROMETHEUS_PORT:-$((19091 + port_offset))}"
+grafana_port="${MAGE_HPC_GRAFANA_PORT:-$((13000 + port_offset))}"
+compose_project="${COMPOSE_PROJECT_NAME:-mage-hpc-$job_id}"
+prom_container="${MAGE_HPC_PROM_CONTAINER:-mage-prometheus-hpc-$job_id}"
+graf_container="${MAGE_HPC_GRAFANA_CONTAINER:-mage-grafana-hpc-$job_id}"
 
 # Seed targets once before starting the loop.
-METRICS_HOST="$node" bash "$repo_root/scripts/hpc/refresh_prometheus_targets.sh" "$status_path" "$targets_path" >/dev/null
+until METRICS_HOST="$node" STRICT_TARGET_REFRESH=1 \
+  bash "$repo_root/scripts/hpc/refresh_prometheus_targets.sh" "$status_path" "$targets_path" >/dev/null; do
+  now_wait="$(date +%s)"
+  if (( now_wait - status_wait_started >= status_wait_seconds )); then
+    echo "Failed to generate Prometheus targets from $status_path after ${status_wait_seconds}s" >&2
+    exit 1
+  fi
+  sleep 5
+done
 
 # Start or reuse background target sync loop.
 if [[ -f "$sync_pid_file" ]]; then
@@ -48,7 +69,7 @@ if [[ -f "$sync_pid_file" ]]; then
 fi
 
 if [[ ! -f "$sync_pid_file" ]]; then
-  nohup env METRICS_HOST="$node" SYNC_INTERVAL_SEC="${SYNC_INTERVAL_SEC:-5}" \
+  nohup env METRICS_HOST="$node" STRICT_TARGET_REFRESH=1 SYNC_INTERVAL_SEC="${SYNC_INTERVAL_SEC:-5}" \
     bash "$repo_root/scripts/hpc/sync_prometheus_targets_loop.sh" "$status_path" "$targets_path" \
     >"$sync_log" 2>&1 &
   echo "$!" >"$sync_pid_file"
@@ -57,15 +78,27 @@ fi
 # Start monitoring stack if docker compose is available.
 if command -v docker >/dev/null 2>&1; then
   docker_available=1
-  (cd "$repo_root" && docker compose -f docker-compose-observe-hpc.yml up -d >/dev/null)
+  (
+    cd "$repo_root" && \
+    COMPOSE_PROJECT_NAME="$compose_project" \
+    MAGE_HPC_PROM_CONTAINER="$prom_container" \
+    MAGE_HPC_GRAFANA_CONTAINER="$graf_container" \
+    MAGE_HPC_PROMETHEUS_PORT="$prometheus_port" \
+    MAGE_HPC_GRAFANA_PORT="$grafana_port" \
+    MAGE_HPC_FILE_SD_DIR="$targets_dir" \
+    docker compose -f docker-compose-observe-hpc.yml up -d >/dev/null
+  )
 else
   echo "docker not found; target sync started, but Prometheus/Grafana stack not started." >&2
 fi
 
 echo "job=$job_id node=$node"
+echo "run_reports_dir=$run_reports_dir"
+echo "status_path=$status_path"
+echo "targets_path=$targets_path"
 echo "target_sync_pid=$(cat "$sync_pid_file")"
-echo "prometheus=http://localhost:9091"
-echo "grafana=http://localhost:3000"
+echo "prometheus=http://localhost:$prometheus_port"
+echo "grafana=http://localhost:$grafana_port"
 
 if [[ "$watch_mode" -eq 0 ]]; then
   exit 0
@@ -155,7 +188,7 @@ done
 echo
 echo "Live metrics (Ctrl+C to stop):"
 if [[ "$docker_available" -eq 1 ]]; then
-  prom_url="http://127.0.0.1:9091"
+  prom_url="http://127.0.0.1:$prometheus_port"
   query() {
     local q="$1"
     curl -fsS --get "$prom_url/api/v1/query" --data-urlencode "query=$q" \

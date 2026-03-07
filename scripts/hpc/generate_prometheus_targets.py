@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import os
+import sys
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -39,6 +41,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Include trainers that are not currently marked running",
     )
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Fail instead of silently returning no targets when status JSON is missing or invalid",
+    )
     return parser.parse_args()
 
 
@@ -49,12 +56,16 @@ def resolve(base: Path, value: str) -> Path:
     return base / p
 
 
-def load_json(path: Path) -> Dict[str, Any]:
+def load_json(path: Path, strict: bool = False) -> Dict[str, Any]:
     if not path.exists():
+        if strict:
+            raise FileNotFoundError(f"status JSON not found: {path}")
         return {}
     try:
         return json.loads(path.read_text(encoding="utf-8-sig"))
-    except Exception:
+    except Exception as exc:
+        if strict:
+            raise RuntimeError(f"failed to parse status JSON {path}: {exc}")
         return {}
 
 
@@ -64,15 +75,29 @@ def main() -> int:
     status_path = resolve(repo_root, args.status)
     output_path = resolve(repo_root, args.output)
 
-    payload = load_json(status_path)
+    try:
+        payload = load_json(status_path, strict=args.strict)
+    except Exception as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
     trainers = payload.get("trainers", [])
     if not isinstance(trainers, list):
         trainers = []
+    shared_gpu_hosts = payload.get("shared_gpu_hosts", [])
+    if not isinstance(shared_gpu_hosts, list):
+        shared_gpu_hosts = []
 
     generated: List[Dict[str, Any]] = []
     seen_targets = set()
     note = str(payload.get("note", "")).strip()
     updated_at = str(payload.get("updated_at_utc", "")).strip()
+    run_id = str(payload.get("run_id", "")).strip()
+
+    def add_target(target: str, labels: Dict[str, str]) -> None:
+        if target in seen_targets:
+            return
+        seen_targets.add(target)
+        generated.append({"targets": [target], "labels": labels})
 
     for row in trainers:
         if not isinstance(row, dict):
@@ -91,13 +116,10 @@ def main() -> int:
             continue
 
         target = f"{args.host}:{port}"
-        if target in seen_targets:
-            continue
-        seen_targets.add(target)
-
         labels = {
             "job": args.job_label,
             "profile": profile,
+            "kind": "trainer",
             "running": "1" if running else "0",
             "source": "native_orchestrator_status",
         }
@@ -105,17 +127,62 @@ def main() -> int:
             labels["orch_note"] = note
         if updated_at:
             labels["orch_updated_at_utc"] = updated_at
+        if run_id:
+            labels["run_id"] = run_id
+        add_target(target, labels)
 
-        generated.append({"targets": [target], "labels": labels})
+    for row in shared_gpu_hosts:
+        if not isinstance(row, dict):
+            continue
+        try:
+            port = int(row.get("metrics_port", 0))
+        except Exception:
+            port = 0
+        if port <= 0:
+            continue
+        running = bool(row.get("running", False))
+        if (not args.include_stopped) and (not running):
+            continue
+        slot = str(row.get("slot", "")).strip()
+        gpu_id = str(row.get("gpu_id", "")).strip()
+        target = f"{args.host}:{port}"
+        labels = {
+            "job": args.job_label,
+            "kind": "gpu_host",
+            "running": "1" if running else "0",
+            "source": "native_orchestrator_status",
+        }
+        if slot:
+            labels["slot"] = slot
+        if gpu_id:
+            labels["gpu_id"] = gpu_id
+        if note:
+            labels["orch_note"] = note
+        if updated_at:
+            labels["orch_updated_at_utc"] = updated_at
+        if run_id:
+            labels["run_id"] = run_id
+        add_target(target, labels)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(generated, indent=2), encoding="utf-8")
+    temp_path = output_path.with_name(f".{output_path.name}.tmp.{os.getpid()}")
+    temp_path.write_text(json.dumps(generated, indent=2), encoding="utf-8")
+    temp_path.replace(output_path)
 
     print(f"status={status_path}")
     print(f"output={output_path}")
     print(f"targets={len(generated)}")
     if generated:
-        print("profiles=" + ",".join(item["labels"]["profile"] for item in generated))
+        labels = []
+        for item in generated:
+            row_labels = item.get("labels", {})
+            kind = str(row_labels.get("kind", "")).strip()
+            if "profile" in row_labels:
+                labels.append(str(row_labels["profile"]))
+            elif kind == "gpu_host" and "slot" in row_labels:
+                labels.append(f"gpu_slot_{row_labels['slot']}")
+        if labels:
+            print("profiles=" + ",".join(labels))
     return 0
 
 
