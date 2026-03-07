@@ -51,6 +51,9 @@ python3 scripts/hpc/spy_saturation.py submit \
 python3 scripts/hpc/spy_saturation.py summarize \
   --manifest local-training/hpc/saturation_runs/<timestamp>_<tag>/manifest.json
 
+# Summarize local job reports owned by you from this checkout.
+python3 scripts/hpc/spy_saturation.py summarize
+
 # See queued/running jobs.
 squeue -u "$USER"
 

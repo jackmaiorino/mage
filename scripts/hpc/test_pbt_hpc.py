@@ -399,6 +399,28 @@ class SpySaturationTests(unittest.TestCase):
             self.assertAlmostEqual(19.0, summary["telemetry"]["gpu_mem_used_gb_avg"], places=3)
             self.assertAlmostEqual(0.035, summary["rolling_current_avg"], places=3)
 
+    def test_discover_local_job_records_finds_numeric_job_dirs(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            jobs_root = (
+                repo_root
+                / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
+            )
+            runs_root = (
+                repo_root
+                / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs"
+            )
+            (jobs_root / "111").mkdir(parents=True, exist_ok=True)
+            (jobs_root / "111" / "telemetry.log").write_text("host=compute-node\n", encoding="utf-8")
+            (jobs_root / "notes").mkdir(parents=True, exist_ok=True)
+            (runs_root / "222").mkdir(parents=True, exist_ok=True)
+            (runs_root / "222" / "orchestrator_status.json").write_text("{}", encoding="utf-8")
+            (jobs_root / "222").mkdir(parents=True, exist_ok=True)
+
+            records = self.saturation.discover_local_job_records(repo_root=repo_root, username="")
+
+            self.assertEqual(["111", "222"], [row["job_id"] for row in records])
+
 
 class SlurmAvailabilityTests(unittest.TestCase):
     @classmethod

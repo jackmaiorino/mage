@@ -11,6 +11,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
+try:
+    import pwd  # type: ignore
+except Exception:  # pragma: no cover
+    pwd = None
+
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 JOBS_ROOT = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
@@ -81,6 +86,19 @@ def parse_extra_exports(items: Sequence[str]) -> Dict[str, str]:
             raise ValueError(f"missing export name in: {item}")
         exports[name] = value
     return exports
+
+
+def current_username() -> str:
+    for name in ("USER", "USERNAME"):
+        value = str(os.getenv(name, "")).strip()
+        if value:
+            return value
+    if pwd is not None:
+        try:
+            return pwd.getpwuid(os.getuid()).pw_name
+        except Exception:
+            pass
+    return ""
 
 
 def sanitize_label(text: str) -> str:
@@ -616,6 +634,47 @@ def summarize_job(
     }
 
 
+def discover_local_job_records(repo_root: Path = REPO_ROOT, username: Optional[str] = None) -> List[Dict[str, Any]]:
+    jobs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
+    runs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs"
+    target_user = str(username or current_username()).strip()
+    rows: List[Dict[str, Any]] = []
+    if not jobs_root.exists():
+        return rows
+    for child in sorted(jobs_root.iterdir()):
+        if not child.is_dir():
+            continue
+        job_id = child.name.strip()
+        if not job_id.isdigit():
+            continue
+        try:
+            stat_info = child.stat()
+        except Exception:
+            continue
+        if target_user:
+            owner_name = ""
+            if pwd is not None:
+                try:
+                    owner_name = pwd.getpwuid(stat_info.st_uid).pw_name
+                except Exception:
+                    owner_name = ""
+            if owner_name and owner_name != target_user:
+                continue
+        run_dir = runs_root / job_id
+        if not (child / "telemetry.log").exists() and not (run_dir / "orchestrator_status.json").exists():
+            continue
+        rows.append(
+            {
+                "job_id": job_id,
+                "label": job_id,
+                "config": {},
+                "sbatch": {},
+                "exports": {},
+            }
+        )
+    return rows
+
+
 def print_summary_table(rows: Sequence[Dict[str, Any]]) -> None:
     headers = [
         ("label", 22),
@@ -677,13 +736,15 @@ def summarize_experiments(args: argparse.Namespace) -> int:
         records.extend([row for row in manifest["jobs"] if isinstance(row, dict)])
     for job_id in args.job_id:
         records.append({"job_id": str(job_id), "label": str(job_id), "config": {}, "sbatch": {}, "exports": {}})
+    if not records:
+        records.extend(discover_local_job_records())
     deduped: Dict[str, Dict[str, Any]] = {}
     for record in records:
         job_id = str(record.get("job_id", "")).strip()
         if job_id:
             deduped[job_id] = record
     if not deduped:
-        raise SystemExit("no submitted jobs found; pass --manifest or --job-id")
+        raise SystemExit("no submitted jobs found; pass --manifest or --job-id, or run from the checkout that contains your job reports")
 
     rows = [summarize_job(job_id, record=record, heartbeat_window=args.heartbeat_window) for job_id, record in deduped.items()]
     rows.sort(key=lambda row: (-float(row.get(args.sort_by, 0.0) or 0.0), str(row.get("label", ""))))
