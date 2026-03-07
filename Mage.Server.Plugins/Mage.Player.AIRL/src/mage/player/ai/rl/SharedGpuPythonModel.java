@@ -43,8 +43,10 @@ public final class SharedGpuPythonModel implements PythonModel {
     private static final int OUTBOUND_QUEUE_CAPACITY = Math.max(128, EnvConfig.i32("GPU_SERVICE_OUTBOUND_QUEUE", 4096));
     private static final int LOCAL_SCORE_BATCH_MAX_SIZE = Math.max(1,
             EnvConfig.i32("GPU_SERVICE_LOCAL_BATCH_MAX_SIZE", PythonMLBatchManager.getConfiguredMaxBatchSize()));
+    // Keep the JVM-side queue as a very thin staging buffer in shared-GPU mode.
+    // The Python host owns the real cross-request batching window.
     private static final int LOCAL_SCORE_BATCH_TIMEOUT_MS = Math.max(1,
-            EnvConfig.i32("GPU_SERVICE_LOCAL_BATCH_TIMEOUT_MS", PythonMLBatchManager.getConfiguredBatchTimeoutMs()));
+            EnvConfig.i32("GPU_SERVICE_LOCAL_BATCH_TIMEOUT_MS", 5));
     private static final int LOCAL_TRAIN_BATCH_MAX_EPISODES = Math.max(1,
             EnvConfig.i32("GPU_SERVICE_LOCAL_TRAIN_BATCH_MAX_EPISODES", EnvConfig.i32("LEARNER_BATCH_MAX_EPISODES", 8)));
     private static final int LOCAL_TRAIN_BATCH_TIMEOUT_MS = Math.max(1,
@@ -216,6 +218,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         final List<StateSequenceBuilder.TrainingData> trainingData;
         final List<Double> rewards;
         final TrainBatchKey batchKey;
+        final int stepCount;
         final int episodeCount;
 
         private TrainRequest(
@@ -226,7 +229,9 @@ public final class SharedGpuPythonModel implements PythonModel {
             this.trainingData = trainingData;
             this.rewards = rewards;
             this.batchKey = batchKey;
-            this.episodeCount = trainingData.size();
+            this.stepCount = trainingData.size();
+            // enqueueTraining is called once per finished game/trajectory.
+            this.episodeCount = 1;
         }
     }
 
