@@ -755,6 +755,8 @@ def compute_live_job_rates(job_id: str, repo_root: Path = REPO_ROOT) -> Dict[str
             "updates_per_sec": 0.0,
             "active_episodes": 0.0,
             "sample_ok": 0.0,
+            "episodes_total": parse_float(previous.get("episodes_total", 0.0), 0.0),
+            "updates_total": parse_float(previous.get("updates_total", 0.0), 0.0),
         }
     atomic_write_json(cache_path, current)
     prev_ts = parse_float(previous.get("timestamp", 0.0), 0.0)
@@ -766,6 +768,8 @@ def compute_live_job_rates(job_id: str, repo_root: Path = REPO_ROOT) -> Dict[str
             "updates_per_sec": 0.0,
             "active_episodes": parse_float(current.get("active_episodes", 0.0), 0.0),
             "sample_ok": 1.0,
+            "episodes_total": parse_float(current.get("episodes_total", 0.0), 0.0),
+            "updates_total": parse_float(current.get("updates_total", 0.0), 0.0),
         }
     prev_episodes = parse_float(previous.get("episodes_total", 0.0), 0.0)
     prev_updates = parse_float(previous.get("updates_total", 0.0), 0.0)
@@ -779,12 +783,16 @@ def compute_live_job_rates(job_id: str, repo_root: Path = REPO_ROOT) -> Dict[str
             "updates_per_sec": 0.0,
             "active_episodes": parse_float(current.get("active_episodes", 0.0), 0.0),
             "sample_ok": 1.0,
+            "episodes_total": curr_episodes,
+            "updates_total": curr_updates,
         }
     return {
         "episodes_per_sec": delta_episodes / dt,
         "updates_per_sec": delta_updates / dt,
         "active_episodes": parse_float(current.get("active_episodes", 0.0), 0.0),
         "sample_ok": 1.0,
+        "episodes_total": curr_episodes,
+        "updates_total": curr_updates,
     }
 
 
@@ -839,11 +847,17 @@ def summarize_job(
     if effective_oversub <= 0:
         effective_oversub = float(telemetry.get("runner_oversubscription_factor", 0.0) or 0.0)
     duration_seconds = float(telemetry.get("duration_seconds", 0.0) or 0.0)
-    average_eps_per_sec = (float(total_episode) / duration_seconds) if duration_seconds > 0 else 0.0
-    episodes_per_sec = float(live_rates.get("episodes_per_sec", 0.0) or 0.0)
-    updates_per_sec = float(live_rates.get("updates_per_sec", 0.0) or 0.0)
-    if episodes_per_sec <= 0.0:
-        episodes_per_sec = average_eps_per_sec
+    counter_episode_total = float(live_rates.get("episodes_total", 0.0) or 0.0)
+    counter_update_total = float(live_rates.get("updates_total", 0.0) or 0.0)
+    average_eps_per_sec = (counter_episode_total / duration_seconds) if duration_seconds > 0 and counter_episode_total > 0 else 0.0
+    average_updates_per_sec = (counter_update_total / duration_seconds) if duration_seconds > 0 and counter_update_total > 0 else 0.0
+    live_eps_per_sec = float(live_rates.get("episodes_per_sec", 0.0) or 0.0)
+    live_updates_per_sec = float(live_rates.get("updates_per_sec", 0.0) or 0.0)
+    legacy_average_eps_per_sec = (float(total_episode) / duration_seconds) if duration_seconds > 0 and total_episode > 0 else 0.0
+    if average_eps_per_sec <= 0.0:
+        average_eps_per_sec = legacy_average_eps_per_sec
+    episodes_per_sec = average_eps_per_sec
+    updates_per_sec = average_updates_per_sec
 
     return {
         "label": str(record.get("label", job_id)) if record else str(job_id),
@@ -866,8 +880,14 @@ def summarize_job(
         "heartbeat_profile_samples": int(heartbeat["profile_samples"]),
         "episodes_per_sec": episodes_per_sec,
         "updates_per_sec": updates_per_sec,
+        "live_eps_per_sec": live_eps_per_sec,
+        "live_updates_per_sec": live_updates_per_sec,
         "active_episodes": float(live_rates.get("active_episodes", 0.0) or 0.0),
         "average_eps_per_sec": average_eps_per_sec,
+        "legacy_average_eps_per_sec": legacy_average_eps_per_sec,
+        "average_updates_per_sec": average_updates_per_sec,
+        "counter_episode_total": counter_episode_total,
+        "counter_update_total": counter_update_total,
         "total_episode": total_episode,
         "rolling_current_avg": safe_mean(rolling_values),
         "rolling_current_max": max(rolling_values) if rolling_values else 0.0,
@@ -1005,7 +1025,8 @@ def summarize_experiments(args: argparse.Namespace) -> int:
         print_summary_table(rows)
         print()
         print("notes:")
-        print("  eps/s and upd/s are live rates for running jobs when available; otherwise eps/s falls back to the run-average from telemetry duration.")
+        print("  eps/s and upd/s are run-average rates over the observed job duration when run-local counters are available.")
+        print("  live counter deltas are still collected internally, but they are not used as the primary eps/s metric because they are too bursty.")
         print("  hb_g/s is the aggregate mean of the last heartbeat eps/s values from the job-scoped trainer logs.")
         print("  gpu_avg is a whole-window average and includes startup/idle periods; gpu_p95 is usually the better bursty-utilization signal.")
         print("  gpu_* and cpu_* columns come from the job-scoped telemetry log sampled during the run.")
