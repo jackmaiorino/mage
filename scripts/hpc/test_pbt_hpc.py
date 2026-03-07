@@ -13,6 +13,7 @@ from unittest import mock
 REPO_ROOT = Path(__file__).resolve().parents[2]
 NATIVE_PATH = REPO_ROOT / "scripts/hpc/run_spy_pbt_native.py"
 TARGETS_PATH = REPO_ROOT / "scripts/hpc/generate_prometheus_targets.py"
+SATURATION_PATH = REPO_ROOT / "scripts/hpc/spy_saturation.py"
 
 
 def load_module(module_name: str, path: Path):
@@ -250,6 +251,140 @@ class GeneratePrometheusTargetsTests(unittest.TestCase):
             self.assertIn(("gpu_host", "compute-node:27100"), labels)
             self.assertEqual("job-42", labels[("trainer", "compute-node:9100")]["run_id"])
             self.assertEqual("job-42", labels[("gpu_host", "compute-node:27100")]["run_id"])
+
+
+class SpySaturationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.saturation = load_module("spy_saturation_test", SATURATION_PATH)
+
+    def test_build_experiment_rows_enables_throughput_mode(self):
+        args = types.SimpleNamespace(
+            train_profiles="2",
+            cpus_per_task="64",
+            runner_oversubscription_factor="8",
+            infer_workers="1",
+            gres="gpu:a100:2",
+            trainer_start_wave_size=0,
+            extra_export=["FOO=bar"],
+            job_prefix="spy-sat",
+            cpu_headroom=0,
+            trainer_start_stagger_seconds=45,
+            gpu_service_startup_timeout_seconds=120,
+            py_bridge_connect_retries=60,
+            py_bridge_connect_retry_delay_ms=2000,
+            total_episodes=1000000,
+            stall_restart_minutes=45,
+            game_log_frequency=0,
+            metrics_port_base=None,
+            gpu_service_port_base=None,
+            gpu_service_metrics_port_base=None,
+            throughput_mode=True,
+        )
+
+        rows = self.saturation.build_experiment_rows(args, Path("/tmp/rl-runtime.tar.gz"))
+
+        self.assertEqual(1, len(rows))
+        row = rows[0]
+        self.assertEqual("spy-sat-p2-c64-o8-g2", row["label"])
+        self.assertEqual("1", row["exports"]["INFER_WORKERS"])
+        self.assertEqual("1000000000", row["exports"]["PBT_MIN_EPISODES_BEFORE_FIRST_EXPLOIT"])
+        self.assertEqual("1000000", row["exports"]["EVAL_EVERY_MINUTES"])
+        self.assertEqual("bar", row["exports"]["FOO"])
+
+    def test_summarize_job_aggregates_job_scoped_metrics(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            job_id = "4242"
+            jobs_root = (
+                repo_root
+                / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
+                / job_id
+            )
+            runs_root = (
+                repo_root
+                / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs"
+                / job_id
+            )
+            trainers_dir = runs_root / "trainers"
+            trainers_dir.mkdir(parents=True, exist_ok=True)
+            jobs_root.mkdir(parents=True, exist_ok=True)
+
+            status_payload = {
+                "run_id": job_id,
+                "note": "training_concurrent_2",
+                "updated_at_utc": "2026-03-07T00:00:00Z",
+                "selected_profiles": ["ProfileA", "ProfileB"],
+                "trainers": [
+                    {"profile": "ProfileA", "running": True, "metrics_port": 19100},
+                    {"profile": "ProfileB", "running": True, "metrics_port": 19101},
+                ],
+                "selected_profile_snapshots": [
+                    {"profile": "ProfileA", "episode": 100, "rolling_current": 0.05},
+                    {"profile": "ProfileB", "episode": 80, "rolling_current": 0.02},
+                ],
+            }
+            (runs_root / "orchestrator_status.json").write_text(
+                json.dumps(status_payload),
+                encoding="utf-8",
+            )
+            (jobs_root / "telemetry.log").write_text(
+                "\n".join(
+                    [
+                        "===== 2026-03-07T00:00:00Z =====",
+                        "host=compute-node",
+                        "cpu_total=64 cpu_headroom=0 runner_oversubscription_factor=8 target_total_runners=512 runners_per_profile=256",
+                        "2026/03/07 00:00:00.000, NVIDIA A100, 0, 80, 40, 20480, 40960, 60",
+                        "2026/03/07 00:00:30.000, NVIDIA A100, 0, 60, 35, 18432, 40960, 58",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (trainers_dir / "ProfileA.stdout.log").write_text(
+                "\n".join(
+                    [
+                        "progress (run=10, 0.500 eps/s)",
+                        "progress (run=20, 0.700 eps/s)",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (trainers_dir / "ProfileB.stdout.log").write_text(
+                "\n".join(
+                    [
+                        "progress (run=10, 0.200 eps/s)",
+                        "progress (run=20, 0.400 eps/s)",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            summary = self.saturation.summarize_job(
+                job_id=job_id,
+                record={
+                    "label": "spy-sat-p2-c64-o8-g1",
+                    "config": {
+                        "train_profiles": 2,
+                        "runner_oversubscription_factor": 8.0,
+                        "infer_workers": 1,
+                        "cpu_headroom": 0,
+                    },
+                    "sbatch": {"cpus_per_task": 64},
+                    "exports": {},
+                },
+                repo_root=repo_root,
+                heartbeat_window=3,
+            )
+
+            self.assertEqual(2, summary["selected_count"])
+            self.assertEqual(180, summary["total_episode"])
+            self.assertAlmostEqual(0.9, summary["heartbeat_eps_per_s"], places=3)
+            self.assertAlmostEqual(70.0, summary["telemetry"]["gpu_util_avg"], places=3)
+            self.assertAlmostEqual(19.0, summary["telemetry"]["gpu_mem_used_gb_avg"], places=3)
+            self.assertAlmostEqual(0.035, summary["rolling_current_avg"], places=3)
 
 
 if __name__ == "__main__":

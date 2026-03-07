@@ -82,13 +82,27 @@ export TRAIN_PROFILES="$train_profiles"
 export CPU_HEADROOM="$cpu_headroom"
 # Avoid cross-job localhost Py4J port collisions when multiple jobs land on the same node.
 # Caller can still override by setting PY4J_BASE_PORT explicitly.
+job_num="${SLURM_JOB_ID:-0}"
 if [[ -z "${PY4J_BASE_PORT:-}" ]]; then
-  job_num="${SLURM_JOB_ID:-0}"
   if [[ "$job_num" =~ ^[0-9]+$ ]]; then
     export PY4J_BASE_PORT="$((25000 + (job_num % 30000)))"
   else
     export PY4J_BASE_PORT="25334"
   fi
+fi
+if [[ "$job_num" =~ ^[0-9]+$ ]]; then
+  port_slot="$((job_num % 20))"
+else
+  port_slot=0
+fi
+if [[ -z "${METRICS_PORT_BASE:-}" ]]; then
+  export METRICS_PORT_BASE="$((19100 + (port_slot * 40)))"
+fi
+if [[ -z "${GPU_SERVICE_PORT_BASE:-}" ]]; then
+  export GPU_SERVICE_PORT_BASE="$((26100 + (port_slot * 40)))"
+fi
+if [[ -z "${GPU_SERVICE_METRICS_PORT_BASE:-}" ]]; then
+  export GPU_SERVICE_METRICS_PORT_BASE="$((27100 + (port_slot * 40)))"
 fi
 if [[ -n "${SLURM_TMPDIR:-}" ]]; then
   export MAGE_DB_DIR="$SLURM_TMPDIR/rl-db"
@@ -189,9 +203,13 @@ echo "Runner sizing: cpu_total=$cpu_total cpu_headroom=$cpu_headroom runner_over
 echo "NumGameRunners (per profile): $runners_per_profile" | tee -a "$orchestrator_log"
 echo "Bridge retries: PY_BRIDGE_CONNECT_RETRIES=${PY_BRIDGE_CONNECT_RETRIES:-unset} PY_BRIDGE_CONNECT_RETRY_DELAY_MS=${PY_BRIDGE_CONNECT_RETRY_DELAY_MS:-unset}" | tee -a "$orchestrator_log"
 echo "Run ID: $ORCH_RUN_ID" | tee -a "$orchestrator_log"
+if [[ -n "${SATURATION_EXPERIMENT_LABEL:-}" ]]; then
+  echo "Saturation label: ${SATURATION_EXPERIMENT_LABEL}" | tee -a "$orchestrator_log"
+fi
 echo "PBT reports dir: $orch_reports_dir" | tee -a "$orchestrator_log"
 echo "PBT gating: firstMinEp=$pbt_first_exploit_min_ep deltaPerProfile=$pbt_episode_delta timeFallbackDelta=$pbt_time_fallback_episode_delta maxIntervalMin=$pbt_interval minGap=$pbt_min_winner_gap minWinnerWr=$pbt_min_winner_wr" | tee -a "$orchestrator_log"
 echo "MAGE_DB_DIR: $MAGE_DB_DIR" | tee -a "$orchestrator_log"
+echo "Port bases: metrics=$METRICS_PORT_BASE gpuService=$GPU_SERVICE_PORT_BASE gpuServiceMetrics=$GPU_SERVICE_METRICS_PORT_BASE py4j=$PY4J_BASE_PORT" | tee -a "$orchestrator_log"
 echo "MTG_VENV_PATH: $MTG_VENV_PATH" | tee -a "$orchestrator_log"
 if [[ -n "${MAGE_RL_RUNTIME_DIR:-}" ]]; then
   echo "MAGE_RL_RUNTIME_DIR: $MAGE_RL_RUNTIME_DIR" | tee -a "$orchestrator_log"

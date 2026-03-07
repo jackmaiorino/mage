@@ -1,16 +1,40 @@
+# Single-node saturation sweep with the newest bundle.
+bash scripts/hpc/zaratan_spy_saturation.sh
+
+# Custom saturation sweep.
 BUNDLE="$(ls -1t local-training/hpc/bundles/rl-runtime-*.tar.gz | head -1)"
+python3 scripts/hpc/spy_saturation.py submit \
+  --bundle "$BUNDLE" \
+  --tag a100-saturation \
+  --partition gpu-a100 \
+  --gres gpu:a100:2 \
+  --mem 128G \
+  --time 02:00:00 \
+  --train-profiles 2,4 \
+  --cpus-per-task 64,128,192 \
+  --runner-oversubscription-factor 8,12
 
-JOB=$(sbatch --parsable \
-  --partition=gpu \
-  --gres=gpu:a100:2 \
-  --cpus-per-task=64 \
-  --mem=128G \
-  --time=02:00:00 \
-  --job-name=spy-pbt-4x2g \
-  --export=ALL,HPC_NATIVE_ORCH=1,PY_SERVICE_MODE=shared_gpu,GPU_SERVICE_PORT_BASE=26100,GPU_SERVICE_METRICS_PORT_BASE=27100,GPU_SERVICE_STARTUP_TIMEOUT_SECONDS=120,MAGE_RL_RUNTIME_TARBALL="$BUNDLE",METRICS_PORT_BASE=19100,TRAIN_PROFILES=4,CPU_HEADROOM=0,RUNNER_OVERSUBSCRIPTION_FACTOR=20,TRAINER_START_STAGGER_SECONDS=45,TRAINER_START_WAVE_SIZE=2,PY_BRIDGE_CONNECT_RETRIES=60,PY_BRIDGE_CONNECT_RETRY_DELAY_MS=2000,TOTAL_EPISODES=1000000,PBT_MIN_EPISODES_BEFORE_FIRST_EXPLOIT=6000,PBT_MIN_EPISODE_DELTA_PER_PROFILE=3000,PBT_TIME_FALLBACK_MIN_EPISODE_DELTA=1000,PBT_MIN_WINNER_GAP=0.02,PBT_MIN_WINNER_WINRATE=0.03,INFER_WORKERS=1 \
-  scripts/hpc/submit_spy_pbt.slurm)
+# Wider CPU sweep if you get a high-core single node.
+python3 scripts/hpc/spy_saturation.py submit \
+  --bundle "$BUNDLE" \
+  --tag high-core \
+  --partition gpu-a100 \
+  --gres gpu:a100:2 \
+  --mem 192G \
+  --time 02:00:00 \
+  --train-profiles 4 \
+  --cpus-per-task 128,192,256,320 \
+  --runner-oversubscription-factor 8,12,16
 
-echo "Submitted job: $JOB"
-bash scripts/hpc/observe_job.sh "$JOB"
+# Summarize a finished or running sweep from its manifest.
+python3 scripts/hpc/spy_saturation.py summarize \
+  --manifest local-training/hpc/saturation_runs/<timestamp>_<tag>/manifest.json
 
-bash scripts/hpc/probe_job_metrics.sh "$JOB"
+# Summarize specific jobs without a manifest.
+python3 scripts/hpc/spy_saturation.py summarize --job-id 123456 --job-id 123457
+
+# Observe one job live.
+bash scripts/hpc/observe_job.sh 123456
+
+# Probe one job's current trainer and shared-GPU metrics ports.
+bash scripts/hpc/probe_job_metrics.sh 123456

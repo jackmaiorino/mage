@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 JOB_ID="${1:-${JOB:-}}"
 if [[ -z "${JOB_ID}" ]]; then
   echo "usage: bash scripts/hpc/probe_job_metrics.sh <job_id>" >&2
@@ -12,22 +13,69 @@ TRAINER_PORT_END="${TRAINER_PORT_END:-19131}"
 GPU_HOST_METRICS_PORT_START="${GPU_HOST_METRICS_PORT_START:-27100}"
 GPU_HOST_METRICS_PORT_END="${GPU_HOST_METRICS_PORT_END:-27115}"
 
+status_path="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs/$JOB_ID/orchestrator_status.json"
+
+discover_ports() {
+  python3 - "$status_path" <<'PY'
+import json
+import pathlib
+import sys
+
+status_path = pathlib.Path(sys.argv[1])
+trainer_ports = []
+gpu_host_ports = []
+if status_path.exists():
+    try:
+        payload = json.loads(status_path.read_text(encoding="utf-8-sig"))
+    except Exception:
+        payload = {}
+    for row in payload.get("trainers", []):
+        if not isinstance(row, dict):
+            continue
+        try:
+            port = int(row.get("metrics_port", 0))
+        except Exception:
+            port = 0
+        if port > 0:
+            trainer_ports.append(port)
+    for row in payload.get("shared_gpu_hosts", []):
+        if not isinstance(row, dict):
+            continue
+        try:
+            port = int(row.get("metrics_port", 0))
+        except Exception:
+            port = 0
+        if port > 0:
+            gpu_host_ports.append(port)
+print(" ".join(str(p) for p in sorted(set(trainer_ports))))
+print(" ".join(str(p) for p in sorted(set(gpu_host_ports))))
+PY
+}
+
+mapfile -t discovered_ports < <(discover_ports)
+TRAINER_PORTS="${discovered_ports[0]:-}"
+GPU_HOST_METRICS_PORTS="${discovered_ports[1]:-}"
+
+if [[ -z "$TRAINER_PORTS" ]]; then
+  TRAINER_PORTS="$(seq "${TRAINER_PORT_START}" "${TRAINER_PORT_END}" | tr '\n' ' ' | xargs)"
+fi
+if [[ -z "$GPU_HOST_METRICS_PORTS" ]]; then
+  GPU_HOST_METRICS_PORTS="$(seq "${GPU_HOST_METRICS_PORT_START}" "${GPU_HOST_METRICS_PORT_END}" | tr '\n' ' ' | xargs)"
+fi
+
 srun --jobid="${JOB_ID}" --overlap -N1 -n1 -c1 bash -s -- \
-  "${TRAINER_PORT_START}" \
-  "${TRAINER_PORT_END}" \
-  "${GPU_HOST_METRICS_PORT_START}" \
-  "${GPU_HOST_METRICS_PORT_END}" <<'EOF'
+  "${TRAINER_PORTS}" \
+  "${GPU_HOST_METRICS_PORTS}" <<'EOF'
 set -euo pipefail
 
-trainer_port_start="$1"
-trainer_port_end="$2"
-gpu_host_metrics_port_start="$3"
-gpu_host_metrics_port_end="$4"
+trainer_ports="$1"
+gpu_host_metrics_ports="$2"
 
 hostname
 
 echo "== Trainer metrics =="
-for p in $(seq "${trainer_port_start}" "${trainer_port_end}"); do
+echo "ports=${trainer_ports}"
+for p in ${trainer_ports}; do
   curl -fsS "http://127.0.0.1:${p}/metrics" 2>/dev/null || true
 done | awk '
   /^mage_config_py_batch_timeout_ms / {timeout=$2}
@@ -72,7 +120,8 @@ done | awk '
 
 echo
 echo "== Shared GPU host metrics =="
-for p in $(seq "${gpu_host_metrics_port_start}" "${gpu_host_metrics_port_end}"); do
+echo "ports=${gpu_host_metrics_ports}"
+for p in ${gpu_host_metrics_ports}; do
   curl -fsS "http://127.0.0.1:${p}/metrics" 2>/dev/null || true
 done | awk '
   /^gpu_service_batch_timeout_ms / {batch_timeout+=$2; batch_timeout_n++}
