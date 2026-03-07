@@ -421,6 +421,12 @@ class SpySaturationTests(unittest.TestCase):
 
             self.assertEqual(["111", "222"], [row["job_id"] for row in records])
 
+    def test_discover_current_slurm_job_records_uses_squeue(self):
+        with mock.patch.object(self.saturation.subprocess, "check_output", return_value="18429954\n18429955\nnot-a-job\n18429954\n"):
+            records = self.saturation.discover_current_slurm_job_records(username="jmaior")
+
+        self.assertEqual(["18429954", "18429955"], [row["job_id"] for row in records])
+
 
 class SlurmAvailabilityTests(unittest.TestCase):
     @classmethod

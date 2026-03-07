@@ -101,6 +101,37 @@ def current_username() -> str:
     return ""
 
 
+def discover_current_slurm_job_records(username: Optional[str] = None) -> List[Dict[str, Any]]:
+    user = str(username or current_username()).strip()
+    if not user:
+        return []
+    try:
+        output = subprocess.check_output(
+            ["squeue", "-u", user, "-h", "-o", "%i"],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT,
+        )
+    except Exception:
+        return []
+    rows: List[Dict[str, Any]] = []
+    seen = set()
+    for raw_line in output.splitlines():
+        job_id = str(raw_line).strip()
+        if not job_id or not job_id.isdigit() or job_id in seen:
+            continue
+        seen.add(job_id)
+        rows.append(
+            {
+                "job_id": job_id,
+                "label": job_id,
+                "config": {},
+                "sbatch": {},
+                "exports": {},
+            }
+        )
+    return rows
+
+
 def sanitize_label(text: str) -> str:
     value = re.sub(r"[^A-Za-z0-9._-]+", "-", str(text).strip())
     value = re.sub(r"-{2,}", "-", value).strip("-")
@@ -737,7 +768,12 @@ def summarize_experiments(args: argparse.Namespace) -> int:
     for job_id in args.job_id:
         records.append({"job_id": str(job_id), "label": str(job_id), "config": {}, "sbatch": {}, "exports": {}})
     if not records:
-        records.extend(discover_local_job_records())
+        if args.all_local:
+            records.extend(discover_local_job_records())
+        else:
+            records.extend(discover_current_slurm_job_records())
+            if not records:
+                records.extend(discover_local_job_records())
     deduped: Dict[str, Dict[str, Any]] = {}
     for record in records:
         job_id = str(record.get("job_id", "")).strip()
@@ -808,6 +844,7 @@ def build_parser() -> argparse.ArgumentParser:
     summarize = subparsers.add_parser("summarize", help="summarize completed or running saturation jobs")
     summarize.add_argument("--manifest", default="")
     summarize.add_argument("--job-id", action="append", default=[])
+    summarize.add_argument("--all-local", action="store_true", help="summarize all local job reports from this checkout instead of current Slurm jobs")
     summarize.add_argument("--heartbeat-window", type=int, default=5)
     summarize.add_argument("--sort-by", default="heartbeat_eps_per_s")
     summarize.add_argument("--json", action="store_true")
