@@ -1,3 +1,9 @@
+# Clear availability view by partition and partition type.
+python3 scripts/hpc/slurm_availability.py
+
+# JSON form if you want to capture or diff it.
+python3 scripts/hpc/slurm_availability.py --json
+
 # Quick single-job throughput experiment (20 min default for easier backfill).
 bash scripts/hpc/zaratan_spy_saturation.sh
 

@@ -14,6 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 NATIVE_PATH = REPO_ROOT / "scripts/hpc/run_spy_pbt_native.py"
 TARGETS_PATH = REPO_ROOT / "scripts/hpc/generate_prometheus_targets.py"
 SATURATION_PATH = REPO_ROOT / "scripts/hpc/spy_saturation.py"
+AVAILABILITY_PATH = REPO_ROOT / "scripts/hpc/slurm_availability.py"
 
 
 def load_module(module_name: str, path: Path):
@@ -385,6 +386,48 @@ class SpySaturationTests(unittest.TestCase):
             self.assertAlmostEqual(70.0, summary["telemetry"]["gpu_util_avg"], places=3)
             self.assertAlmostEqual(19.0, summary["telemetry"]["gpu_mem_used_gb_avg"], places=3)
             self.assertAlmostEqual(0.035, summary["rolling_current_avg"], places=3)
+
+
+class SlurmAvailabilityTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.availability = load_module("slurm_availability_test", AVAILABILITY_PATH)
+
+    def test_parse_and_aggregate_rows_by_partition_and_type(self):
+        sample = "\n".join(
+            [
+                "gpu-a100*|idle|128|515000|gpu:a100:4(S:1,3,5,7)|7-00:00:00|up",
+                "gpu-a100|mixed|128|515000|gpu:a100:4(S:1,3,5,7)|7-00:00:00|up",
+                "gpu-h100|allocated|128|515000|gpu:h100:4(S:1,3,5,7)|7-00:00:00|up",
+                "cpu|idle|64|257000|(null)|7-00:00:00|up",
+            ]
+        )
+
+        rows = self.availability.parse_sinfo_node_rows(sample)
+        by_partition, by_type = self.availability.aggregate_rows(rows)
+
+        gpu_a100 = next(row for row in by_partition if row["label"] == "gpu-a100")
+        cpu = next(row for row in by_partition if row["label"] == "cpu")
+        gpu_a100_type = next(row for row in by_type if row["label"] == "gpu-a100")
+
+        self.assertEqual("gpu-a100", rows[0]["partition"])
+        self.assertEqual("gpu-a100", rows[0]["type"])
+        self.assertEqual(4, rows[0]["gpu_count"])
+
+        self.assertEqual(2, gpu_a100["nodes_total"])
+        self.assertEqual(1, gpu_a100["nodes_idle"])
+        self.assertEqual(1, gpu_a100["nodes_mix"])
+        self.assertEqual(8, gpu_a100["gpu_total"])
+        self.assertEqual(4, gpu_a100["gpu_idle_est"])
+        self.assertEqual(4, gpu_a100["gpu_mixed"])
+        self.assertEqual(128, gpu_a100["cpu_idle_est"])
+
+        self.assertEqual(1, cpu["nodes_idle"])
+        self.assertEqual(0, cpu["gpu_total"])
+        self.assertEqual(64, cpu["cpu_idle_est"])
+
+        self.assertEqual(["gpu-a100"], gpu_a100_type["partitions"])
+        self.assertEqual(4, gpu_a100_type["gpu_idle_est"])
 
 
 if __name__ == "__main__":
