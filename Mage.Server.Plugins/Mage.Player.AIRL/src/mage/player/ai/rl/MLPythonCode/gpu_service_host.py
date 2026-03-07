@@ -201,6 +201,8 @@ class SharedGpuHost:
         self._train_rr = 0
         self._score_batches = 0
         self._train_batches = 0
+        self._score_failures = 0
+        self._train_failures = 0
         self._model_publishes = 0
         self._model_reloads = 0
         self._score_flush_timeout_total = 0
@@ -284,6 +286,8 @@ class SharedGpuHost:
                 self._run_score_batch(state, tasks, reason)
             except Exception as exc:
                 self._last_error = f"{type(exc).__name__}: {exc}"
+                with self._lock:
+                    self._score_failures += 1
                 traceback.print_exc()
                 for task in tasks:
                     try:
@@ -307,6 +311,8 @@ class SharedGpuHost:
                 self._run_train_batch(state, tasks)
             except Exception as exc:
                 self._last_error = f"{type(exc).__name__}: {exc}"
+                with self._lock:
+                    self._train_failures += 1
                 traceback.print_exc()
 
     def _select_score_work_locked(self):
@@ -502,7 +508,6 @@ class SharedGpuHost:
         finished = time.monotonic()
         service_ms = max(0.0, (finished - started) * 1000.0)
         latency_samples = [max(0.0, (finished - task.enqueued_at) * 1000.0) for task in tasks]
-        self._maybe_publish_latest_model(state, now=finished)
         with self._lock:
             self._train_batches += 1
             self._train_service_ms.append(service_ms)
@@ -510,6 +515,12 @@ class SharedGpuHost:
             self._train_batch_step_counts.append(float(total_steps))
             for latency_ms in latency_samples:
                 self._train_latency_ms.append(latency_ms)
+        try:
+            self._maybe_publish_latest_model(state, now=finished)
+        except Exception as exc:
+            self._last_error = f"{type(exc).__name__}: {exc}"
+            with self._lock:
+                self._train_failures += 1
 
     @staticmethod
     def _avg(values: Deque[float]) -> float:
@@ -654,6 +665,12 @@ class SharedGpuHost:
                 "# HELP gpu_service_train_batches_total Train batches executed by shared GPU host",
                 "# TYPE gpu_service_train_batches_total counter",
                 f"gpu_service_train_batches_total {self._train_batches}",
+                "# HELP gpu_service_score_failures_total Score batches that failed after dequeue",
+                "# TYPE gpu_service_score_failures_total counter",
+                f"gpu_service_score_failures_total {self._score_failures}",
+                "# HELP gpu_service_train_failures_total Train batches that failed after dequeue",
+                "# TYPE gpu_service_train_failures_total counter",
+                f"gpu_service_train_failures_total {self._train_failures}",
                 "# HELP gpu_service_model_publishes_total Learner-to-inference model publish operations",
                 "# TYPE gpu_service_model_publishes_total counter",
                 f"gpu_service_model_publishes_total {self._model_publishes}",

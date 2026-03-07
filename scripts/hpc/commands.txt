@@ -76,5 +76,6 @@ python3 scripts/hpc/spy_saturation.py summarize --job-id 123456 --job-id 123457
 # Observe one job live.
 bash scripts/hpc/observe_job.sh 123456
 
-# Probe one job's current trainer and shared-GPU metrics ports.
+# Probe one job's trainer and shared-GPU metrics.
+# If the job already finished, this falls back to the saved final metrics snapshot.
 bash scripts/hpc/probe_job_metrics.sh 123456

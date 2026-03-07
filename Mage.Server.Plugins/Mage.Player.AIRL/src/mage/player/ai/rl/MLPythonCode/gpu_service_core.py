@@ -49,7 +49,8 @@ class ProfileContext:
         self.env["MODEL_SYNC_EVERY_MS"] = "0"
         self.env["MODEL_SYNC_EVERY_TRAIN_STEPS"] = "0"
         self.env.setdefault("MULLIGAN_DEVICE", "cpu")
-        self.env["PY_ROLE"] = f"shared_gpu_{self.role}"
+        # PythonEntryPoint expects the canonical role names ("inference" / "learner").
+        self.env["PY_ROLE"] = self.role
         self.lock = threading.RLock()
         with _temporary_env(self.env):
             self.entry = PythonEntryPoint()

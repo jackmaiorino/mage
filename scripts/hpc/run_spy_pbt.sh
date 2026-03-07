@@ -60,6 +60,8 @@ orch_reports_dir="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/playe
 mkdir -p "$reports_dir"
 orchestrator_log="$reports_dir/orchestrator.log"
 telemetry_log="$reports_dir/telemetry.log"
+final_probe_metrics_log="$reports_dir/final_probe_metrics.txt"
+metrics_collector_script="$repo_root/scripts/hpc/collect_job_metrics_local.sh"
 export ORCH_RUN_ID="${ORCH_RUN_ID:-$job_id}"
 
 export PY_BRIDGE_CREATE_VENV="${PY_BRIDGE_CREATE_VENV:-0}"
@@ -159,9 +161,27 @@ if [[ "$use_native_orch" -eq 0 && -z "$shell_exe" ]]; then
 fi
 
 telemetry_pid=""
+write_final_metrics_snapshot() {
+  if [[ ! -f "$metrics_collector_script" ]]; then
+    return 0
+  fi
+  {
+    echo "source=final_snapshot"
+    bash "$metrics_collector_script" \
+      --status-path "$orch_reports_dir/orchestrator_status.json" \
+      --orchestrator-log "$orchestrator_log"
+  } >"$final_probe_metrics_log" 2>&1 || true
+  if [[ -s "$final_probe_metrics_log" ]]; then
+    echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] wrote final metrics snapshot to $final_probe_metrics_log" | tee -a "$orchestrator_log"
+  else
+    rm -f "$final_probe_metrics_log" 2>/dev/null || true
+  fi
+}
+
 cleanup() {
   local exit_code=$?
   echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] cleanup start (exit_code=${exit_code})" | tee -a "$orchestrator_log"
+  write_final_metrics_snapshot
   if [[ -n "$telemetry_pid" ]] && kill -0 "$telemetry_pid" 2>/dev/null; then
     kill "$telemetry_pid" 2>/dev/null || true
     wait "$telemetry_pid" 2>/dev/null || true

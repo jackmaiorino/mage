@@ -413,6 +413,88 @@ class SpySaturationTests(unittest.TestCase):
             self.assertAlmostEqual(19.0, summary["telemetry"]["gpu_mem_used_gb_avg"], places=3)
             self.assertAlmostEqual(0.035, summary["rolling_current_avg"], places=3)
 
+    def test_summarize_job_uses_final_probe_metrics_for_finished_job(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            job_id = "18430000"
+            jobs_root = (
+                repo_root
+                / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
+                / job_id
+            )
+            runs_root = (
+                repo_root
+                / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs"
+                / job_id
+            )
+            trainers_dir = runs_root / "trainers"
+            trainers_dir.mkdir(parents=True, exist_ok=True)
+            jobs_root.mkdir(parents=True, exist_ok=True)
+
+            status_payload = {
+                "run_id": job_id,
+                "selected_profiles": ["ProfileA"],
+                "trainers": [{"profile": "ProfileA", "running": False, "metrics_port": 19100}],
+                "selected_profile_snapshots": [{"profile": "ProfileA", "episode": 90, "rolling_current": 0.03}],
+            }
+            (runs_root / "orchestrator_status.json").write_text(
+                json.dumps(status_payload),
+                encoding="utf-8",
+            )
+            (jobs_root / "telemetry.log").write_text(
+                "\n".join(
+                    [
+                        "===== 2026-03-07T00:00:00Z =====",
+                        "host=compute-node",
+                        "cpu_total=64 cpu_headroom=0 runner_oversubscription_factor=16 target_total_runners=1024 runners_per_profile=1024",
+                        "cpu_usage_pct=55.0",
+                        "2026/03/07 00:00:00.000, NVIDIA H100, 0, 50, 20, 10240, 81920, 52",
+                        "===== 2026-03-07T00:00:30Z =====",
+                        "host=compute-node",
+                        "cpu_total=64 cpu_headroom=0 runner_oversubscription_factor=16 target_total_runners=1024 runners_per_profile=1024",
+                        "cpu_usage_pct=57.0",
+                        "2026/03/07 00:00:30.000, NVIDIA H100, 0, 60, 22, 12288, 81920, 54",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (jobs_root / "final_probe_metrics.txt").write_text(
+                "\n".join(
+                    [
+                        "source=final_snapshot",
+                        "hostname=gpu-a6-4.zaratan.umd.edu",
+                        "episodes_completed_total=240",
+                        "training_updates_total=60",
+                        "active_episodes_total=512",
+                        "train_batches_total=15",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            summary = self.saturation.summarize_job(
+                job_id=job_id,
+                record={
+                    "label": "spy-sat-finished",
+                    "config": {
+                        "train_profiles": 1,
+                        "runner_oversubscription_factor": 16.0,
+                    },
+                    "sbatch": {"cpus_per_task": 64},
+                    "exports": {},
+                },
+                repo_root=repo_root,
+                heartbeat_window=3,
+            )
+
+            self.assertAlmostEqual(8.0, summary["episodes_per_sec"], places=3)
+            self.assertAlmostEqual(2.5, summary["updates_per_sec"], places=3)
+            self.assertAlmostEqual(512.0, summary["active_episodes"], places=3)
+            self.assertAlmostEqual(240.0, summary["counter_episode_total"], places=3)
+            self.assertAlmostEqual(75.0, summary["counter_update_total"], places=3)
+
     def test_discover_local_job_records_finds_numeric_job_dirs(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             repo_root = Path(temp_dir)
@@ -512,6 +594,7 @@ class SharedGpuHostTests(unittest.TestCase):
                 self.role = role
                 self.save_latest_calls = 0
                 self.reload_latest_calls = 0
+                self.train_batch_calls = 0
 
             def save_latest_model_atomic(self, path=None):
                 self.save_latest_calls += 1
@@ -519,6 +602,10 @@ class SharedGpuHostTests(unittest.TestCase):
 
             def reload_latest_model_if_newer(self, path=None):
                 self.reload_latest_calls += 1
+                return True
+
+            def train_batch(self, *args, **kwargs):
+                self.train_batch_calls += 1
                 return True
 
         stub_core.ProfileContext = StubProfileContext
@@ -591,6 +678,32 @@ class SharedGpuHostTests(unittest.TestCase):
         self.assertEqual(0, state.infer_context.save_latest_calls)
         self.assertEqual(1, state.infer_context.reload_latest_calls)
         self.assertEqual(0, state.learner_context.reload_latest_calls)
+
+    def test_train_batch_counts_even_if_publish_latest_fails(self):
+        shared_host = self.host.SharedGpuHost()
+        state = shared_host.get_or_create_profile({"profile_id": "ProfileA"})
+        state.learner_context.save_latest_model_atomic = mock.Mock(side_effect=RuntimeError("publish failed"))
+
+        task = self.host.TrainTask(
+            profile_id="ProfileA",
+            headers={
+                "batch_size": "2",
+                "seq_len": "1",
+                "d_model": "1",
+                "max_candidates": "1",
+                "cand_feat_dim": "1",
+            },
+            segments=[b""] * 14,
+            enqueued_at=1000.0,
+        )
+
+        with mock.patch.object(self.host.time, "monotonic", side_effect=[1000.0, 1000.5]):
+            shared_host._run_train_batch(state, [task])
+
+        self.assertEqual(1, shared_host._train_batches)
+        self.assertEqual(1, shared_host._train_failures)
+        self.assertEqual(1, state.learner_context.train_batch_calls)
+        self.assertIn("publish failed", shared_host._last_error)
 
 
 if __name__ == "__main__":

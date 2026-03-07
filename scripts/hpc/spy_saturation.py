@@ -49,6 +49,35 @@ def load_json(path: Path) -> Optional[Dict[str, Any]]:
         return None
 
 
+def parse_key_value_report(path: Path) -> Dict[str, Any]:
+    if not path.exists():
+        return {}
+    rows: Dict[str, Any] = {}
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except Exception:
+        return rows
+    for raw_line in text.splitlines():
+        line = str(raw_line).strip()
+        if not line or line.startswith("=="):
+            continue
+        if "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        name = key.strip()
+        raw_value = value.strip()
+        if not name:
+            continue
+        if re.fullmatch(r"[-+]?[0-9]+", raw_value):
+            rows[name] = parse_int(raw_value, 0)
+            continue
+        if re.fullmatch(r"[-+]?(?:[0-9]*\.[0-9]+|[0-9]+\.[0-9]*|[0-9]+)", raw_value):
+            rows[name] = parse_float(raw_value, 0.0)
+            continue
+        rows[name] = raw_value
+    return rows
+
+
 def parse_utc_timestamp(value: str) -> Optional[datetime]:
     text = str(value).strip()
     if not text:
@@ -821,6 +850,7 @@ def summarize_job(
     snapshot_rows = [row for row in status.get("selected_profile_snapshots", []) if isinstance(row, dict)]
 
     telemetry = parse_telemetry_log(job_dir / "telemetry.log")
+    final_probe = parse_key_value_report(job_dir / "final_probe_metrics.txt")
     heartbeat = aggregate_heartbeat_rates(run_dir / "trainers", selected_profiles, heartbeat_window)
     live_rates = compute_live_job_rates(str(job_id), repo_root=repo_root)
     rolling_values: List[float] = []
@@ -849,6 +879,12 @@ def summarize_job(
     duration_seconds = float(telemetry.get("duration_seconds", 0.0) or 0.0)
     counter_episode_total = float(live_rates.get("episodes_total", 0.0) or 0.0)
     counter_update_total = float(live_rates.get("updates_total", 0.0) or 0.0)
+    final_episode_total = float(final_probe.get("episodes_completed_total", 0.0) or 0.0)
+    final_update_total = float(final_probe.get("training_updates_total", 0.0) or 0.0) + float(final_probe.get("train_batches_total", 0.0) or 0.0)
+    if final_episode_total > counter_episode_total:
+        counter_episode_total = final_episode_total
+    if final_update_total > counter_update_total:
+        counter_update_total = final_update_total
     average_eps_per_sec = (counter_episode_total / duration_seconds) if duration_seconds > 0 and counter_episode_total > 0 else 0.0
     average_updates_per_sec = (counter_update_total / duration_seconds) if duration_seconds > 0 and counter_update_total > 0 else 0.0
     live_eps_per_sec = float(live_rates.get("episodes_per_sec", 0.0) or 0.0)
@@ -882,7 +918,10 @@ def summarize_job(
         "updates_per_sec": updates_per_sec,
         "live_eps_per_sec": live_eps_per_sec,
         "live_updates_per_sec": live_updates_per_sec,
-        "active_episodes": float(live_rates.get("active_episodes", 0.0) or 0.0),
+        "active_episodes": max(
+            float(live_rates.get("active_episodes", 0.0) or 0.0),
+            float(final_probe.get("active_episodes_total", 0.0) or 0.0),
+        ),
         "average_eps_per_sec": average_eps_per_sec,
         "legacy_average_eps_per_sec": legacy_average_eps_per_sec,
         "average_updates_per_sec": average_updates_per_sec,
@@ -892,6 +931,7 @@ def summarize_job(
         "rolling_current_avg": safe_mean(rolling_values),
         "rolling_current_max": max(rolling_values) if rolling_values else 0.0,
         "exports": exports,
+        "final_probe": final_probe,
     }
 
 
@@ -1025,7 +1065,7 @@ def summarize_experiments(args: argparse.Namespace) -> int:
         print_summary_table(rows)
         print()
         print("notes:")
-        print("  eps/s and upd/s are run-average rates over the observed job duration when run-local counters are available.")
+        print("  eps/s and upd/s are run-average rates over the observed job duration using run-local counters when available, with final probe snapshots as the finished-job fallback.")
         print("  live counter deltas are still collected internally, but they are not used as the primary eps/s metric because they are too bursty.")
         print("  hb_g/s is the aggregate mean of the last heartbeat eps/s values from the job-scoped trainer logs.")
         print("  gpu_avg is a whole-window average and includes startup/idle periods; gpu_p95 is usually the better bursty-utilization signal.")
