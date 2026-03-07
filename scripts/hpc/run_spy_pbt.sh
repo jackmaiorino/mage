@@ -176,11 +176,41 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 (
+  prev_cpu_total=0
+  prev_cpu_idle=0
   while true; do
     {
       echo "===== $(date -u +%Y-%m-%dT%H:%M:%SZ) ====="
       echo "host=$(hostname -f)"
       echo "cpu_total=$cpu_total cpu_headroom=$cpu_headroom runner_oversubscription_factor=$runner_oversubscription_factor target_total_runners=$target_total_runners runners_per_profile=$runners_per_profile"
+      if [[ -r /proc/stat ]]; then
+        cpu_line="$(grep '^cpu ' /proc/stat || true)"
+        if [[ -n "$cpu_line" ]]; then
+          read -r _ cpu_user cpu_nice cpu_system cpu_idle cpu_iowait cpu_irq cpu_softirq cpu_steal _ <<<"$cpu_line"
+          cpu_idle_all=$((cpu_idle + cpu_iowait))
+          cpu_non_idle=$((cpu_user + cpu_nice + cpu_system + cpu_irq + cpu_softirq + cpu_steal))
+          cpu_total_now=$((cpu_idle_all + cpu_non_idle))
+          if (( prev_cpu_total > 0 && cpu_total_now > prev_cpu_total )); then
+            total_delta=$((cpu_total_now - prev_cpu_total))
+            idle_delta=$((cpu_idle_all - prev_cpu_idle))
+            busy_delta=$((total_delta - idle_delta))
+            cpu_usage_pct="$(awk -v busy="$busy_delta" -v total="$total_delta" 'BEGIN { if (total <= 0) printf "0.0"; else printf "%.1f", (100.0 * busy) / total }')"
+            echo "cpu_usage_pct=$cpu_usage_pct"
+          else
+            echo "cpu_usage_pct=warmup"
+          fi
+          prev_cpu_total=$cpu_total_now
+          prev_cpu_idle=$cpu_idle_all
+        fi
+      fi
+      if [[ -r /proc/loadavg ]]; then
+        read -r load1 load5 load15 task_counts _ < /proc/loadavg || true
+        if [[ -n "${load1:-}" && -n "${task_counts:-}" ]]; then
+          tasks_running="${task_counts%%/*}"
+          tasks_total="${task_counts##*/}"
+          echo "load1=$load1 load5=$load5 load15=$load15 tasks_running=$tasks_running tasks_total=$tasks_total"
+        fi
+      fi
       if command -v nvidia-smi >/dev/null 2>&1; then
         nvidia-smi --query-gpu=timestamp,name,index,utilization.gpu,utilization.memory,memory.used,memory.total,temperature.gpu --format=csv,noheader,nounits || true
       else

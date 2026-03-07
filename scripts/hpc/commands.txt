@@ -54,6 +54,12 @@ python3 scripts/hpc/spy_saturation.py summarize \
 # See queued/running jobs.
 squeue -u "$USER"
 
+# Cancel all of your running jobs.
+bash scripts/hpc/stop_all_jobs.sh
+
+# Cancel all of your running and pending jobs.
+bash scripts/hpc/stop_all_jobs.sh --all
+
 # Cancel old pending saturation jobs if you want a narrower sequential workflow.
 # Example:
 # scancel 18429918 18429919

@@ -43,6 +43,20 @@ def load_json(path: Path) -> Optional[Dict[str, Any]]:
         return None
 
 
+def parse_int(value: Any, default: int = 0) -> int:
+    try:
+        return int(str(value).strip())
+    except Exception:
+        return default
+
+
+def parse_float(value: Any, default: float = 0.0) -> float:
+    try:
+        return float(str(value).strip())
+    except Exception:
+        return default
+
+
 def split_csv_values(raw: str, cast) -> List[Any]:
     values: List[Any] = []
     for piece in str(raw).split(","):
@@ -425,9 +439,27 @@ def parse_telemetry_log(path: Path) -> Dict[str, Any]:
     gpu_mem_utils: List[float] = []
     gpu_mem_used_gb: List[float] = []
     gpu_temp_c: List[float] = []
+    cpu_utils: List[float] = []
+    load1_values: List[float] = []
+    load5_values: List[float] = []
+    load15_values: List[float] = []
+    tasks_running_values: List[float] = []
+    cpu_total = 0
+    runner_oversubscription_factor = 0.0
     if not path.exists():
         return {
             "sample_count": 0,
+            "cpu_sample_count": 0,
+            "cpu_total": 0,
+            "cpu_util_avg": 0.0,
+            "cpu_util_p50": 0.0,
+            "cpu_util_p95": 0.0,
+            "load1_avg": 0.0,
+            "load5_avg": 0.0,
+            "load15_avg": 0.0,
+            "load1_per_cpu_avg": 0.0,
+            "tasks_running_avg": 0.0,
+            "runner_oversubscription_factor": 0.0,
             "gpu_util_avg": 0.0,
             "gpu_util_p50": 0.0,
             "gpu_util_p95": 0.0,
@@ -438,7 +470,36 @@ def parse_telemetry_log(path: Path) -> Dict[str, Any]:
         }
     for raw_line in path.read_text(encoding="utf-8", errors="replace").splitlines():
         line = raw_line.strip()
-        if not line or line.startswith("=") or line.startswith("host=") or line.startswith("cpu_total="):
+        if not line or line.startswith("=") or line.startswith("host="):
+            continue
+        if line.startswith("cpu_total="):
+            cpu_match = re.search(r"\bcpu_total=(\d+)", line)
+            oversub_match = re.search(r"\brunner_oversubscription_factor=([0-9]*\.?[0-9]+)", line)
+            if cpu_match:
+                cpu_total = parse_int(cpu_match.group(1), cpu_total)
+            if oversub_match:
+                runner_oversubscription_factor = parse_float(oversub_match.group(1), runner_oversubscription_factor)
+            continue
+        if line.startswith("cpu_usage_pct="):
+            value = line.split("=", 1)[1].strip()
+            try:
+                cpu_utils.append(float(value))
+            except Exception:
+                pass
+            continue
+        if line.startswith("load1="):
+            load1_match = re.search(r"\bload1=([0-9]*\.?[0-9]+)", line)
+            load5_match = re.search(r"\bload5=([0-9]*\.?[0-9]+)", line)
+            load15_match = re.search(r"\bload15=([0-9]*\.?[0-9]+)", line)
+            tasks_running_match = re.search(r"\btasks_running=(\d+)", line)
+            if load1_match:
+                load1_values.append(parse_float(load1_match.group(1), 0.0))
+            if load5_match:
+                load5_values.append(parse_float(load5_match.group(1), 0.0))
+            if load15_match:
+                load15_values.append(parse_float(load15_match.group(1), 0.0))
+            if tasks_running_match:
+                tasks_running_values.append(parse_float(tasks_running_match.group(1), 0.0))
             continue
         if line.startswith("MemTotal:") or line.startswith("MemAvailable:") or line == "nvidia-smi unavailable":
             continue
@@ -458,6 +519,17 @@ def parse_telemetry_log(path: Path) -> Dict[str, Any]:
         gpu_temp_c.append(temp_c)
     return {
         "sample_count": len(gpu_utils),
+        "cpu_sample_count": len(cpu_utils),
+        "cpu_total": cpu_total,
+        "cpu_util_avg": safe_mean(cpu_utils),
+        "cpu_util_p50": percentile(cpu_utils, 0.50),
+        "cpu_util_p95": percentile(cpu_utils, 0.95),
+        "load1_avg": safe_mean(load1_values),
+        "load5_avg": safe_mean(load5_values),
+        "load15_avg": safe_mean(load15_values),
+        "load1_per_cpu_avg": (safe_mean(load1_values) / float(cpu_total)) if cpu_total > 0 else 0.0,
+        "tasks_running_avg": safe_mean(tasks_running_values),
+        "runner_oversubscription_factor": runner_oversubscription_factor,
         "gpu_util_avg": safe_mean(gpu_utils),
         "gpu_util_p50": percentile(gpu_utils, 0.50),
         "gpu_util_p95": percentile(gpu_utils, 0.95),
@@ -511,6 +583,13 @@ def summarize_job(
     sbatch = dict(record.get("sbatch", {})) if record else {}
     exports = dict(record.get("exports", {})) if record else {}
 
+    effective_cpus = int(sbatch.get("cpus_per_task", 0) or 0)
+    if effective_cpus <= 0:
+        effective_cpus = int(telemetry.get("cpu_total", 0) or 0)
+    effective_oversub = float(config.get("runner_oversubscription_factor", 0.0) or 0.0)
+    if effective_oversub <= 0:
+        effective_oversub = float(telemetry.get("runner_oversubscription_factor", 0.0) or 0.0)
+
     return {
         "label": str(record.get("label", job_id)) if record else str(job_id),
         "job_id": str(job_id),
@@ -521,9 +600,9 @@ def summarize_job(
         "selected_count": len(selected_profiles),
         "running_trainers": sum(1 for row in trainer_rows if bool(row.get("running", False))),
         "requested_train_profiles": int(config.get("train_profiles", len(selected_profiles) or 0)),
-        "cpus_per_task": int(sbatch.get("cpus_per_task", 0) or 0),
+        "cpus_per_task": effective_cpus,
         "requested_gpu_count": int(config.get("requested_gpu_count", 0) or 0),
-        "runner_oversubscription_factor": float(config.get("runner_oversubscription_factor", 0.0) or 0.0),
+        "runner_oversubscription_factor": effective_oversub,
         "infer_workers": int(config.get("infer_workers", 0) or 0),
         "cpu_headroom": int(config.get("cpu_headroom", 0) or 0),
         "telemetry": telemetry,
@@ -547,6 +626,8 @@ def print_summary_table(rows: Sequence[Dict[str, Any]]) -> None:
         ("hb_g/s", 8),
         ("gpu_avg", 8),
         ("gpu_p95", 8),
+        ("cpu_avg", 8),
+        ("cpu_p95", 8),
         ("mem_gb", 8),
         ("ep", 8),
         ("wr_avg", 7),
@@ -579,6 +660,8 @@ def print_summary_table(rows: Sequence[Dict[str, Any]]) -> None:
             fmt(row.get("heartbeat_eps_per_s"), 8, 3),
             fmt(float(telemetry.get("gpu_util_avg", 0.0)), 8, 1),
             fmt(float(telemetry.get("gpu_util_p95", 0.0)), 8, 1),
+            fmt(float(telemetry.get("cpu_util_avg", 0.0)), 8, 1),
+            fmt(float(telemetry.get("cpu_util_p95", 0.0)), 8, 1),
             fmt(float(telemetry.get("gpu_mem_used_gb_avg", 0.0)), 8, 1),
             fmt(row.get("total_episode"), 8),
             fmt(row.get("rolling_current_avg"), 7, 3),
@@ -612,8 +695,8 @@ def summarize_experiments(args: argparse.Namespace) -> int:
         print()
         print("notes:")
         print("  hb_g/s is the aggregate mean of the last heartbeat eps/s values from the job-scoped trainer logs.")
-        print("  gpu_* columns come from the job-scoped telemetry log sampled with nvidia-smi during the run.")
-        print("  Use higher hb_g/s together with higher gpu_avg/gpu_p95 to find the best single-node saturation point.")
+        print("  gpu_* and cpu_* columns come from the job-scoped telemetry log sampled during the run.")
+        print("  Use higher hb_g/s together with higher gpu_avg/gpu_p95 and cpu_avg/cpu_p95 to find the best single-node saturation point.")
     return 0
 
 

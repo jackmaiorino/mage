@@ -335,7 +335,14 @@ class SpySaturationTests(unittest.TestCase):
                         "===== 2026-03-07T00:00:00Z =====",
                         "host=compute-node",
                         "cpu_total=64 cpu_headroom=0 runner_oversubscription_factor=8 target_total_runners=512 runners_per_profile=256",
+                        "cpu_usage_pct=72.0",
+                        "load1=32.0 load5=28.0 load15=20.0 tasks_running=180 tasks_total=900",
                         "2026/03/07 00:00:00.000, NVIDIA A100, 0, 80, 40, 20480, 40960, 60",
+                        "===== 2026-03-07T00:00:30Z =====",
+                        "host=compute-node",
+                        "cpu_total=64 cpu_headroom=0 runner_oversubscription_factor=8 target_total_runners=512 runners_per_profile=256",
+                        "cpu_usage_pct=68.0",
+                        "load1=30.0 load5=27.0 load15=19.0 tasks_running=170 tasks_total=880",
                         "2026/03/07 00:00:30.000, NVIDIA A100, 0, 60, 35, 18432, 40960, 58",
                     ]
                 )
@@ -383,7 +390,12 @@ class SpySaturationTests(unittest.TestCase):
             self.assertEqual(2, summary["selected_count"])
             self.assertEqual(180, summary["total_episode"])
             self.assertAlmostEqual(0.9, summary["heartbeat_eps_per_s"], places=3)
+            self.assertEqual(64, summary["cpus_per_task"])
+            self.assertAlmostEqual(8.0, summary["runner_oversubscription_factor"], places=3)
             self.assertAlmostEqual(70.0, summary["telemetry"]["gpu_util_avg"], places=3)
+            self.assertAlmostEqual(70.0, summary["telemetry"]["cpu_util_avg"], places=3)
+            self.assertAlmostEqual(71.8, summary["telemetry"]["cpu_util_p95"], places=3)
+            self.assertAlmostEqual(0.484375, summary["telemetry"]["load1_per_cpu_avg"], places=6)
             self.assertAlmostEqual(19.0, summary["telemetry"]["gpu_mem_used_gb_avg"], places=3)
             self.assertAlmostEqual(0.035, summary["rolling_current_avg"], places=3)
 
