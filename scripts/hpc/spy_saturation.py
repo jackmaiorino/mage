@@ -5,7 +5,6 @@ import json
 import os
 import re
 import shlex
-import statistics
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -126,7 +125,13 @@ def percentile(values: Sequence[float], pct: float) -> float:
 
 
 def safe_mean(values: Sequence[float]) -> float:
-    return statistics.fmean(values) if values else 0.0
+    if not values:
+        return 0.0
+    return float(sum(float(v) for v in values)) / float(len(values))
+
+
+def shell_join(parts: Sequence[Any]) -> str:
+    return " ".join(shlex.quote(str(part)) for part in parts)
 
 
 def build_experiment_rows(args: argparse.Namespace, bundle: Path) -> List[Dict[str, Any]]:
@@ -313,7 +318,7 @@ def submit_experiments(args: argparse.Namespace) -> int:
             "command": command,
         }
         if args.dry_run:
-            print(f"dry_run label={record['label']} command={shlex.join(command)}")
+            print(f"dry_run label={record['label']} command={shell_join(command)}")
         else:
             env = os.environ.copy()
             env.update(exports)
@@ -321,8 +326,9 @@ def submit_experiments(args: argparse.Namespace) -> int:
                 command,
                 cwd=str(REPO_ROOT),
                 env=env,
-                text=True,
-                capture_output=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                universal_newlines=True,
                 check=True,
             )
             record["job_id"] = result.stdout.strip()
@@ -596,7 +602,11 @@ def summarize_experiments(args: argparse.Namespace) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Submit and summarize single-node Spy saturation experiments.")
-    subparsers = parser.add_subparsers(dest="command", required=True)
+    subparsers = parser.add_subparsers(dest="command")
+    try:
+        subparsers.required = True
+    except Exception:
+        pass
 
     submit = subparsers.add_parser("submit", help="submit a sweep of single-node saturation jobs")
     submit.add_argument("--bundle", default="", help="path to runtime tarball; defaults to newest bundle in bundle-dir")
@@ -648,6 +658,9 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    if not hasattr(args, "func"):
+        parser.print_help(sys.stderr)
+        return 2
     return int(args.func(args))
 
 
