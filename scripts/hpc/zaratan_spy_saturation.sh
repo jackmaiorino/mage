@@ -17,14 +17,14 @@ echo "Using bundle: ${BUNDLE}"
 
 python3 scripts/hpc/spy_saturation.py submit \
   --bundle "${BUNDLE}" \
-  --tag "${SAT_TAG:-zaratan-single-node}" \
+  --tag "${SAT_TAG:-zaratan-single-node-quick}" \
   --partition "${SAT_PARTITION:-gpu-a100}" \
   --gres "${SAT_GRES:-gpu:a100:2}" \
   --mem "${SAT_MEM:-128G}" \
-  --time "${SAT_TIME:-02:00:00}" \
+  --time "${SAT_TIME:-00:20:00}" \
   --train-profiles "${SAT_TRAIN_PROFILES:-4}" \
-  --cpus-per-task "${SAT_CPUS_PER_TASK:-64,128,192}" \
-  --runner-oversubscription-factor "${SAT_RUNNER_OVERSUBSCRIPTION_FACTOR:-20,24}" \
+  --cpus-per-task "${SAT_CPUS_PER_TASK:-128}" \
+  --runner-oversubscription-factor "${SAT_RUNNER_OVERSUBSCRIPTION_FACTOR:-20}" \
   --infer-workers "${SAT_INFER_WORKERS:-1}" \
   --cpu-headroom "${SAT_CPU_HEADROOM:-0}" \
   --trainer-start-stagger-seconds "${SAT_TRAINER_START_STAGGER_SECONDS:-45}" \

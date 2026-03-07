@@ -1,7 +1,19 @@
-# Single-node saturation sweep with the newest bundle.
+# Quick single-job throughput experiment (20 min default for easier backfill).
 bash scripts/hpc/zaratan_spy_saturation.sh
 
-# Custom saturation sweep starting from the known-good oversub range.
+# Next sequential jobs after the first one starts or finishes.
+SAT_CPUS_PER_TASK=192 bash scripts/hpc/zaratan_spy_saturation.sh
+SAT_CPUS_PER_TASK=64 bash scripts/hpc/zaratan_spy_saturation.sh
+SAT_RUNNER_OVERSUBSCRIPTION_FACTOR=24 bash scripts/hpc/zaratan_spy_saturation.sh
+
+# If queue time is still bad, try a 1-GPU quick experiment.
+SAT_GRES=gpu:a100:1 bash scripts/hpc/zaratan_spy_saturation.sh
+
+# Override the quick walltime explicitly if needed.
+SAT_TIME=00:20:00 bash scripts/hpc/zaratan_spy_saturation.sh
+SAT_TIME=00:20:00 SAT_GRES=gpu:a100:1 bash scripts/hpc/zaratan_spy_saturation.sh
+
+# Custom multi-job sweep once the queue situation is acceptable.
 BUNDLE="$(ls -1t local-training/hpc/bundles/rl-runtime-*.tar.gz | head -1)"
 python3 scripts/hpc/spy_saturation.py submit \
   --bundle "$BUNDLE" \
@@ -14,7 +26,7 @@ python3 scripts/hpc/spy_saturation.py submit \
   --cpus-per-task 64,128,192 \
   --runner-oversubscription-factor 20,24
 
-# Wider CPU sweep if you get a high-core single node.
+# Wider CPU sweep if you get a high-core single node and can tolerate queue time.
 python3 scripts/hpc/spy_saturation.py submit \
   --bundle "$BUNDLE" \
   --tag high-core \
@@ -29,6 +41,13 @@ python3 scripts/hpc/spy_saturation.py submit \
 # Summarize a finished or running sweep from its manifest.
 python3 scripts/hpc/spy_saturation.py summarize \
   --manifest local-training/hpc/saturation_runs/<timestamp>_<tag>/manifest.json
+
+# See queued/running jobs.
+squeue -u "$USER"
+
+# Cancel old pending saturation jobs if you want a narrower sequential workflow.
+# Example:
+# scancel 18429918 18429919
 
 # Summarize specific jobs without a manifest.
 python3 scripts/hpc/spy_saturation.py summarize --job-id 123456 --job-id 123457
