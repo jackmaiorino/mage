@@ -259,6 +259,17 @@ class SpySaturationTests(unittest.TestCase):
     def setUpClass(cls):
         cls.saturation = load_module("spy_saturation_test", SATURATION_PATH)
 
+    def test_parse_utc_timestamp_supports_python36_safe_zulu_format(self):
+        stamp = self.saturation.parse_utc_timestamp("2026-03-07T15:28:20Z")
+
+        self.assertIsNotNone(stamp)
+        self.assertEqual(2026, stamp.year)
+        self.assertEqual(3, stamp.month)
+        self.assertEqual(7, stamp.day)
+        self.assertEqual(15, stamp.hour)
+        self.assertEqual(28, stamp.minute)
+        self.assertEqual(20, stamp.second)
+
     def test_build_experiment_rows_enables_throughput_mode(self):
         args = types.SimpleNamespace(
             train_profiles="2",

@@ -53,13 +53,21 @@ def parse_utc_timestamp(value: str) -> Optional[datetime]:
     text = str(value).strip()
     if not text:
         return None
-    if text.endswith("Z"):
-        text = text[:-1] + "+00:00"
-    try:
-        return datetime.fromisoformat(text)
-    except Exception:
-        return None
-        return None
+    patterns = [
+        "%Y-%m-%dT%H:%M:%S.%fZ",
+        "%Y-%m-%dT%H:%M:%SZ",
+        "%Y-%m-%dT%H:%M:%S.%f+00:00",
+        "%Y-%m-%dT%H:%M:%S+00:00",
+    ]
+    for pattern in patterns:
+        try:
+            stamp = datetime.strptime(text, pattern)
+            if stamp.tzinfo is None:
+                stamp = stamp.replace(tzinfo=timezone.utc)
+            return stamp
+        except Exception:
+            pass
+    return None
 
 
 def parse_int(value: Any, default: int = 0) -> int:
