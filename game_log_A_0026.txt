@@ -1,0 +1,2983 @@
+================================================================================
+GAME LOG: game_20260313_182426_0026
+Started: 2026-03-13T18:24:26.169
+================================================================================
+
+OPPONENT: CP7-Skill 1 (name=Bot-Skill1)
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=0 handSize=7 lands=0 decision=MULLIGAN Q_keep=0.641 Q_mull=0.656 hand=[Lead the Stampede; Land Grant; Winding Way; Lotleth Giant; Masked Vandal; Wall of Roots; Quirion Ranger]
+LONDON_BOTTOM: player=PlayerRL1 mulligansTaken=1 handSize=7 bottomN=1 kept=[Forest; Lotus Petal; Generous Ent; Overgrown Battlement; Gatecreeper Vine; Winding Way] bottomed=[Generous Ent]
+LONDON_BOTTOM_PROBS: player=PlayerRL1 cards=[Forest (0.189); Lotus Petal (0.144); Generous Ent (0.129); Overgrown Battlement (0.142); Gatecreeper Vine (0.127); Winding Way (0.140); Generous Ent (0.129)]
+MULLIGAN_DECISION: player=PlayerRL1 mulligansTaken=1 handSize=6 lands=1 decision=KEEP Q_keep=0.766 Q_mull=0.673 hand=[Forest; Winding Way; Lotus Petal; Generous Ent; Gatecreeper Vine; Overgrown Battlement]
+
+********************************************************************************
+*** TURN 1 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Forest; Winding Way; Lotus Petal; Generous Ent; Gatecreeper Vine; Overgrown Battlement]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Forest; Winding Way; Lotus Petal; Generous Ent; Gatecreeper Vine; Overgrown Battlement]
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.979203 old_logp_source=behavior old_prob_selected=0.979203}
+
+OPTIONS & SCORES:
+     [0] 0.010399 - Pass
+     [1] 0.010399 - Play Forest
+ >>> [2] 0.979203 - Cast Lotus Petal
+
+VALUE SCORE: 0.541705
+SELECTED: Cast Lotus Petal
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Forest; Winding Way; Generous Ent; Gatecreeper Vine; Overgrown Battlement]
+-> Permanents: [Lotus Petal]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.947007 old_logp_source=behavior old_prob_selected=0.947007}
+
+OPTIONS & SCORES:
+     [0] 0.007799 - Pass
+ >>> [1] 0.947007 - Play Forest
+     [2] 0.037395 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.007799 - {T}, Sacrifice {this}: Add one mana of any color.
+
+VALUE SCORE: 0.532753
+SELECTED: Play Forest
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Gatecreeper Vine; Overgrown Battlement]
+-> Permanents: [Lotus Petal; Forest]
+-> Graveyard: []
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.497676 old_logp_source=behavior old_prob_selected=0.497676}
+
+OPTIONS & SCORES:
+     [0] 0.004457 - Pass
+     [1] 0.004457 - Cast Winding Way
+     [2] 0.004457 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.497676 - Cast Gatecreeper Vine
+     [4] 0.480041 - Cast Overgrown Battlement
+     [5] 0.004457 - {T}: Add {G}.
+     [6] 0.004457 - {T}, Sacrifice {this}: Add one mana of any color.
+
+VALUE SCORE: 0.537498
+SELECTED: Cast Gatecreeper Vine
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for a basic land card or a Gate card, reveal it, put it into your hand, then shuffle.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement]
+-> Permanents: [Forest,tapped; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1 (PlayerRL1 turn), Precombat Main (CHOOSE_USE) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+CHOOSE_USE: msg="When <font color='#90EE90' object_id='d73b91cd-8bd5-4a5d-9569-5343c724ecaa'>Gatecreeper Vine</font> [d73] enters, you may search your library for a basic land card or a Gate card, reveal it, put it into your hand, then shuffle." outcome=DrawCard decision=YES scores=[0.98, 0.02]
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.984402 old_logp_source=behavior old_prob_selected=0.984402}
+
+OPTIONS & SCORES:
+ >>> [0] 0.984402 - Yes
+     [1] 0.015598 - No
+
+VALUE SCORE: 0.619726
+SELECTED: Yes
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for a basic land card or a Gate card, reveal it, put it into your hand, then shuffle.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement]
+-> Permanents: [Forest,tapped; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.641884 old_logp_source=behavior old_prob_selected=0.641884}
+
+OPTIONS & SCORES:
+     [0] 0.358116 - Forest
+ >>> [1] 0.641884 - Swamp
+
+VALUE SCORE: 0.619726
+SELECTED: Swamp
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Swamp]
+-> Permanents: [Forest,tapped; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Swamp]
+-> Permanents: [Forest,tapped; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Swamp]
+-> Permanents: [Forest,tapped; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Swamp]
+-> Permanents: [Forest,tapped; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Swamp]
+-> Permanents: [Forest,tapped; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Swamp]
+-> Permanents: [Forest,tapped; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 1 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Swamp]
+-> Permanents: [Forest,tapped; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: []
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Swamp; Lead the Stampede]
+-> Permanents: [Forest; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Swamp; Lead the Stampede]
+-> Permanents: [Forest; Gatecreeper Vine]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.976603 old_logp_source=behavior old_prob_selected=0.976603}
+
+OPTIONS & SCORES:
+     [0] 0.007799 - Pass
+     [1] 0.007799 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.976603 - Play Swamp
+     [3] 0.007799 - {T}: Add {G}.
+
+VALUE SCORE: 0.698874
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Overgrown Battlement; Lead the Stampede]
+-> Permanents: [Forest; Gatecreeper Vine; Swamp]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.974003 old_logp_source=behavior old_prob_selected=0.974003}
+
+OPTIONS & SCORES:
+     [0] 0.005199 - Pass
+     [1] 0.005199 - Cast Winding Way
+     [2] 0.005199 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.974003 - Cast Overgrown Battlement
+     [4] 0.005199 - {T}: Add {G}.
+     [5] 0.005199 - {T}: Add {B}.
+
+VALUE SCORE: 0.711211
+SELECTED: Cast Overgrown Battlement
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Swamp,tapped; Overgrown Battlement]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Swamp,tapped; Overgrown Battlement]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Swamp,tapped; Overgrown Battlement]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Swamp,tapped; Overgrown Battlement]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Swamp,tapped; Overgrown Battlement]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Swamp,tapped; Overgrown Battlement]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Swamp,tapped; Overgrown Battlement]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede; Balustrade Spy]
+-> Permanents: [Forest; Gatecreeper Vine; Swamp; Overgrown Battlement]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede; Balustrade Spy]
+-> Permanents: [Forest; Gatecreeper Vine; Swamp; Overgrown Battlement]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.972703 old_logp_source=behavior old_prob_selected=0.972703}
+
+OPTIONS & SCORES:
+     [0] 0.003900 - Pass
+     [1] 0.003900 - Cast Winding Way
+     [2] 0.003900 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.003900 - Cast Lead the Stampede
+ >>> [4] 0.972703 - Cast Balustrade Spy
+     [5] 0.003900 - {T}: Add {G}.
+     [6] 0.003900 - {T}: Add {G} for each creature you control with defender.
+     [7] 0.003900 - {T}: Add {B}.
+
+VALUE SCORE: 0.795612
+SELECTED: Cast Balustrade Spy
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3 (PlayerRL1 turn), Precombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Swamp,tapped; Overgrown Battlement,tapped; Balustrade Spy]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.984402 old_logp_source=behavior old_prob_selected=0.984402}
+
+OPTIONS & SCORES:
+     [0] 0.015598 - Bot-Skill1
+ >>> [1] 0.984402 - PlayerRL1
+
+VALUE SCORE: 0.882230
+SELECTED: PlayerRL1
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.) (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Swamp,tapped; Overgrown Battlement,tapped; Balustrade Spy]
+-> Graveyard: [Lotus Petal]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Saruli Caretaker; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Saruli Caretaker; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Saruli Caretaker; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Saruli Caretaker; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Saruli Caretaker; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Saruli Caretaker; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Saruli Caretaker; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede; Saruli Caretaker]
+-> Permanents: [Forest; Gatecreeper Vine; Overgrown Battlement; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede; Saruli Caretaker]
+-> Permanents: [Forest; Gatecreeper Vine; Overgrown Battlement; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.004457 old_logp_source=behavior old_prob_selected=0.004457}
+
+OPTIONS & SCORES:
+     [0] 0.004457 - Pass
+     [1] 0.004457 - Cast Winding Way
+     [2] 0.004457 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.004457 - Cast Lead the Stampede
+     [4] 0.973260 - Cast Saruli Caretaker
+ >>> [5] 0.004457 - {T}: Add {G}.
+     [6] 0.004457 - {T}: Add {G} for each creature you control with defender.
+
+VALUE SCORE: 0.807816
+SELECTED: {T}: Add {G}.
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede; Saruli Caretaker]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement; Balustrade Spy]
+-> Graveyard: [Lotus Petal; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.974003 old_logp_source=behavior old_prob_selected=0.974003}
+
+OPTIONS & SCORES:
+     [0] 0.005199 - Pass
+     [1] 0.005199 - Cast Winding Way
+     [2] 0.005199 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.005199 - Cast Lead the Stampede
+ >>> [4] 0.974003 - Cast Saruli Caretaker
+     [5] 0.005199 - {T}: Add {G} for each creature you control with defender.
+
+VALUE SCORE: 0.807436
+SELECTED: Cast Saruli Caretaker
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Graveyard: [Lotus Petal; Swamp]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.975043 old_logp_source=behavior old_prob_selected=0.975043}
+
+OPTIONS & SCORES:
+     [0] 0.006239 - Pass
+ >>> [1] 0.975043 - Cast Winding Way
+     [2] 0.006239 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.006239 - Cast Lead the Stampede
+     [4] 0.006239 - {T}: Add {G} for each creature you control with defender.
+
+VALUE SCORE: 0.815325
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4 (PlayerRL1 turn), Precombat Main (CHOOSE_USE) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+CHOOSE_USE: msg="Creature or Land?" outcome=Benefit decision=YES scores=[0.98, 0.02]
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.984402 old_logp_source=behavior old_prob_selected=0.984402}
+
+OPTIONS & SCORES:
+ >>> [0] 0.984402 - Creature
+     [1] 0.015598 - Land
+
+VALUE SCORE: 0.814807
+SELECTED: Creature
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede; Elves of Deep Shadow]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.979203 old_logp_source=behavior old_prob_selected=0.979203}
+
+OPTIONS & SCORES:
+     [0] 0.010399 - Pass
+     [1] 0.010399 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.979203 - Cast Elves of Deep Shadow
+
+VALUE SCORE: 0.823911
+SELECTED: Cast Elves of Deep Shadow
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4 (PlayerRL1 turn), Declare Attackers (DECLARE_ATTACKS) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+DECLARE_ATTACKS: selected=[Balustrade Spy] from 1 possible
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.608839 old_logp_source=behavior old_prob_selected=0.608839}
+
+OPTIONS & SCORES:
+ >>> [0] 0.608839 - Balustrade Spy
+     [1] 0.391161 - DONE
+
+VALUE SCORE: 0.822925
+SELECTED: Balustrade Spy
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy,tapped,attacking; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy,tapped,attacking; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy,tapped; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy,tapped; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 8 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy,tapped; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 8 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy,tapped; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 8 cards
+-> Permanents: [Heap Gate]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy,tapped; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy,tapped; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Swamp; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede; Swamp]
+-> Permanents: [Forest; Gatecreeper Vine; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede; Swamp]
+-> Permanents: [Forest; Gatecreeper Vine; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.111111 old_logp_source=policy old_prob_selected=0.111111}
+
+OPTIONS & SCORES:
+     [0] 0.111111 - Pass
+     [1] 0.111111 - Cast Generous Ent
+     [2] 0.111111 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.111111 - Cast Lead the Stampede
+     [4] 0.111111 - Play Swamp
+     [5] 0.111111 - {T}: Add {G}.
+ >>> [6] 0.111111 - {T}: Add {G} for each creature you control with defender.
+     [7] 0.111111 - {T}, Tap an untapped creature you control: Add one mana of any color.
+     [8] 0.111111 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.719865
+SELECTED: {T}: Add {G} for each creature you control with defender.
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede; Swamp]
+-> Permanents: [Forest; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.125000 old_logp_source=policy old_prob_selected=0.125000}
+
+OPTIONS & SCORES:
+ >>> [0] 0.125000 - Pass
+     [1] 0.125000 - Cast Generous Ent
+     [2] 0.125000 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.125000 - Cast Lead the Stampede
+     [4] 0.125000 - Play Swamp
+     [5] 0.125000 - {T}: Add {G}.
+     [6] 0.125000 - {T}, Tap an untapped creature you control: Add one mana of any color.
+     [7] 0.125000 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.715478
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5 (PlayerRL1 turn), Declare Attackers (DECLARE_ATTACKS) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+DECLARE_ATTACKS: selected=[Elves of Deep Shadow] from 2 possible
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.333333 old_logp_source=policy old_prob_selected=0.000000}
+
+OPTIONS & SCORES:
+     [0] 0.333333 - Balustrade Spy
+ >>> [1] 0.333333 - Elves of Deep Shadow
+     [2] 0.333333 - DONE
+
+VALUE SCORE: 0.719438
+SELECTED: Elves of Deep Shadow
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Generous Ent; Lead the Stampede; Swamp]
+-> Permanents: [Forest; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker; Elves of Deep Shadow,tapped,attacking]
+-> Graveyard: [Lotus Petal; Dread Return; Forest; Winding Way]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.250000 old_logp_source=policy old_prob_selected=0.250000}
+
+OPTIONS & SCORES:
+     [0] 0.250000 - Pass
+ >>> [1] 0.250000 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.250000 - {T}: Add {G}.
+     [3] 0.250000 - {T}, Tap an untapped creature you control: Add one mana of any color.
+
+VALUE SCORE: 0.718800
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker; Elves of Deep Shadow,tapped,attacking]
+-> Graveyard: [Lotus Petal; Dread Return; Winding Way; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.500000 old_logp_source=policy old_prob_selected=0.500000}
+
+OPTIONS & SCORES:
+ >>> [0] 0.500000 - Pass
+     [1] 0.500000 - {T}, Tap an untapped creature you control: Add one mana of any color.
+
+VALUE SCORE: 0.717276
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5 (PlayerRL1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker; Elves of Deep Shadow,tapped,attacking]
+-> Graveyard: [Lotus Petal; Dread Return; Winding Way; Generous Ent]
+-> Exile: []
+[Bot-Skill1], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat,blocking]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.500000 old_logp_source=policy old_prob_selected=0.500000}
+
+OPTIONS & SCORES:
+ >>> [0] 0.500000 - Pass
+     [1] 0.500000 - {T}, Tap an untapped creature you control: Add one mana of any color.
+
+VALUE SCORE: 0.716006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker]
+-> Graveyard: [Lotus Petal; Dread Return; Winding Way; Generous Ent; Elves of Deep Shadow]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Sacred Cat]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.200000 old_logp_source=policy old_prob_selected=0.200000}
+
+OPTIONS & SCORES:
+     [0] 0.200000 - Pass
+     [1] 0.200000 - Play Swamp
+     [2] 0.200000 - Play Forest
+ >>> [3] 0.200000 - Flashback sacrifice three creatures
+     [4] 0.200000 - {T}, Tap an untapped creature you control: Add one mana of any color.
+
+VALUE SCORE: 0.773552
+SELECTED: Flashback sacrifice three creatures
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5 (PlayerRL1 turn), Postcombat Main (TARGET_PICK 0 min=1 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Dread Return (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Elves of Deep Shadow]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Sacred Cat]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.500000 old_logp_source=policy old_prob_selected=0.000000}
+
+OPTIONS & SCORES:
+ >>> [0] 0.500000 - Elves of Deep Shadow
+     [1] 0.500000 - Generous Ent
+
+VALUE SCORE: 0.783780
+SELECTED: Elves of Deep Shadow
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5 (PlayerRL1 turn), Postcombat Main (TARGET_PICK 0 min=3 max=3) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Dread Return (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Elves of Deep Shadow]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Sacred Cat]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.250000 old_logp_source=policy old_prob_selected=0.249803}
+
+OPTIONS & SCORES:
+ >>> [0] 0.250000 - Overgrown Battlement (you)
+     [1] 0.250000 - Gatecreeper Vine (you)
+     [2] 0.250000 - Balustrade Spy (you)
+     [3] 0.250000 - Saruli Caretaker (you)
+
+VALUE SCORE: 0.783780
+SELECTED: Overgrown Battlement (you)
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5 (PlayerRL1 turn), Postcombat Main (TARGET_PICK 1 min=3 max=3) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Dread Return (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Elves of Deep Shadow]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Sacred Cat]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.333333 old_logp_source=policy old_prob_selected=0.152853}
+
+OPTIONS & SCORES:
+     [0] 0.333333 - Gatecreeper Vine (you)
+ >>> [1] 0.333333 - Balustrade Spy (you)
+     [2] 0.333333 - Saruli Caretaker (you)
+
+VALUE SCORE: 0.783780
+SELECTED: Balustrade Spy (you)
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5 (PlayerRL1 turn), Postcombat Main (TARGET_PICK 2 min=3 max=3) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Dread Return (controller=PlayerRL1)
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Overgrown Battlement,tapped; Balustrade Spy; Saruli Caretaker]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Elves of Deep Shadow]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Sacred Cat]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.500000 old_logp_source=policy old_prob_selected=0.672707}
+
+OPTIONS & SCORES:
+     [0] 0.500000 - Gatecreeper Vine (you)
+ >>> [1] 0.500000 - Saruli Caretaker (you)
+
+VALUE SCORE: 0.783780
+SELECTED: Saruli Caretaker (you)
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Sacred Cat]
+-> Exile: []
+
+[Exploration] exploration{mode=turn_uniform action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.333333 old_logp_source=policy old_prob_selected=0.333333}
+
+OPTIONS & SCORES:
+ >>> [0] 0.333333 - Pass
+     [1] 0.333333 - Play Swamp
+     [2] 0.333333 - Play Forest
+
+VALUE SCORE: 0.523331
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest; Elves of Deep Shadow]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Forest; Elves of Deep Shadow]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.738482 old_logp_source=behavior old_prob_selected=0.738482}
+
+OPTIONS & SCORES:
+     [0] 0.005199 - Pass
+     [1] 0.240721 - Play Swamp
+ >>> [2] 0.738482 - Play Forest
+     [3] 0.005199 - Cast Elves of Deep Shadow
+     [4] 0.005199 - {T}: Add {G}.
+     [5] 0.005199 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.444557
+SELECTED: Play Forest
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: [Lead the Stampede; Swamp; Elves of Deep Shadow]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.975043 old_logp_source=behavior old_prob_selected=0.975043}
+
+OPTIONS & SCORES:
+     [0] 0.006239 - Pass
+ >>> [1] 0.975043 - Cast Lead the Stampede
+     [2] 0.006239 - Cast Elves of Deep Shadow
+     [3] 0.006239 - {T}: Add {G}.
+     [4] 0.006239 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.472821
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6 (PlayerRL1 turn), Precombat Main (CHOOSE_USE) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+CHOOSE_USE: msg="Reveal creature cards and put them into your hand?" outcome=DrawCard decision=YES scores=[0.98, 0.02]
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.984402 old_logp_source=behavior old_prob_selected=0.984402}
+
+OPTIONS & SCORES:
+ >>> [0] 0.984402 - Yes
+     [1] 0.015598 - No
+
+VALUE SCORE: 0.451984
+SELECTED: Yes
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6 (PlayerRL1 turn), Precombat Main (CARD_PICK 0 min=0 max=1) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker]
+-> Exile: [Dread Return]
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.726414 old_logp_source=behavior old_prob_selected=0.726414}
+
+OPTIONS & SCORES:
+     [0] 0.273586 - STOP
+ >>> [1] 0.726414 - 0dbeb444-6c68-44aa-a8bb-d737525e4ac1
+
+VALUE SCORE: 0.451984
+SELECTED: 0dbeb444-6c68-44aa-a8bb-d737525e4ac1
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped,attacking]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped,attacking; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6 (Bot-Skill1 turn), Declare Blockers (DECLARE_BLOCKS) - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+DECLARE_BLOCKS: [Gatecreeper Vine] blocks Sacred Cat (1 blockers selected)
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.572173 old_logp_source=behavior old_prob_selected=0.572173}
+
+OPTIONS & SCORES:
+ >>> [0] 0.572173 - Gatecreeper Vine
+     [1] 0.427827 - DONE
+
+VALUE SCORE: 0.463992
+SELECTED: Gatecreeper Vine
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6 (Bot-Skill1 turn), Declare Blockers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest,tapped; Gatecreeper Vine,blocking; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 19
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped,attacking; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Sagu Wildling]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.974002 old_logp_source=behavior old_prob_selected=0.974002}
+
+OPTIONS & SCORES:
+     [0] 0.005199 - Pass
+     [1] 0.005201 - Play Swamp
+     [2] 0.005199 - Cast Elves of Deep Shadow
+ >>> [3] 0.974002 - Cast Roost Seek
+     [4] 0.005199 - {T}: Add {G}.
+     [5] 0.005199 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.406627
+SELECTED: Cast Roost Seek
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Swamp; Elves of Deep Shadow; Forest]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.634080 old_logp_source=behavior old_prob_selected=0.634080}
+
+OPTIONS & SCORES:
+     [0] 0.005199 - Pass
+ >>> [1] 0.634080 - Play Swamp
+     [2] 0.005199 - Cast Elves of Deep Shadow
+     [3] 0.345122 - Play Forest
+     [4] 0.005199 - {T}: Add {G}.
+     [5] 0.005199 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.403557
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Elves of Deep Shadow; Forest]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.975001 old_logp_source=behavior old_prob_selected=0.975001}
+
+OPTIONS & SCORES:
+     [0] 0.006239 - Pass
+ >>> [1] 0.975001 - Cast Elves of Deep Shadow
+     [2] 0.006266 - {T}: Add {G}.
+     [3] 0.006255 - {T}: Add {B}.
+     [4] 0.006239 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.412178
+SELECTED: Cast Elves of Deep Shadow
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=Bot-Skill1)
+  - [1] Elves of Deep Shadow (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.342115 old_logp_source=behavior old_prob_selected=0.342115}
+
+OPTIONS & SCORES:
+ >>> [0] 0.342115 - Pass
+     [1] 0.432834 - {T}: Add {B}.
+     [2] 0.225051 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.370550
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elves of Deep Shadow (controller=PlayerRL1)
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.340724 old_logp_source=behavior old_prob_selected=0.340724}
+
+OPTIONS & SCORES:
+ >>> [0] 0.340724 - Pass
+     [1] 0.433554 - {T}: Add {B}.
+     [2] 0.225722 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.374142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.558481 old_logp_source=behavior old_prob_selected=0.558481}
+
+OPTIONS & SCORES:
+     [0] 0.441519 - Pass
+ >>> [1] 0.558481 - {T}: Add {B}.
+
+VALUE SCORE: 0.441084
+SELECTED: {T}: Add {B}.
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat,tapped]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Bot-Skill1)
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest]
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp,tapped]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest; Sagu Wildling]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest; Swamp]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Forest; Sagu Wildling]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest; Swamp]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.974003 old_logp_source=behavior old_prob_selected=0.974003}
+
+OPTIONS & SCORES:
+     [0] 0.005199 - Pass
+ >>> [1] 0.974003 - Play Forest
+     [2] 0.005199 - Cast Roost Seek
+     [3] 0.005199 - {T}: Add {G}.
+     [4] 0.005199 - {T}: Add {B}.
+     [5] 0.005199 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.518019
+SELECTED: Play Forest
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 19
+-> Hand: [Sagu Wildling]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest; Swamp; Forest]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.974003 old_logp_source=behavior old_prob_selected=0.974003}
+
+OPTIONS & SCORES:
+     [0] 0.005199 - Pass
+     [1] 0.005199 - Cast Roost Seek
+ >>> [2] 0.974003 - Cast Sagu Wildling
+     [3] 0.005199 - {T}: Add {G}.
+     [4] 0.005199 - {T}: Add {B}.
+     [5] 0.005199 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.495982
+SELECTED: Cast Sagu Wildling
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you gain 3 life.) (controller=PlayerRL1)
+[PlayerRL1], life = 18
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8 (Bot-Skill1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8 (Bot-Skill1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: PlayerRL1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: [Tinder Wall]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest; Swamp; Forest; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: [Tinder Wall]
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest; Swamp; Forest; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.975043 old_logp_source=behavior old_prob_selected=0.975043}
+
+OPTIONS & SCORES:
+     [0] 0.006239 - Pass
+ >>> [1] 0.975043 - Cast Tinder Wall
+     [2] 0.006239 - {T}: Add {G}.
+     [3] 0.006239 - {T}: Add {B}.
+     [4] 0.006239 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.746124
+SELECTED: Cast Tinder Wall
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 21
+-> Hand: []
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow; Forest,tapped; Swamp; Forest; Sagu Wildling; Tinder Wall]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.120133 old_logp_source=behavior old_prob_selected=0.120133}
+
+OPTIONS & SCORES:
+     [0] 0.186827 - Pass
+     [1] 0.219631 - {T}: Add {G}.
+     [2] 0.209502 - Sacrifice {this}: Add {R}{R}.
+     [3] 0.263906 - {T}: Add {B}.
+ >>> [4] 0.120133 - {T}: Add {B}. {this} deals 1 damage to you.
+
+VALUE SCORE: 0.723566
+SELECTED: {T}: Add {B}. {this} deals 1 damage to you.
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp; Forest; Sagu Wildling; Tinder Wall]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.297642 old_logp_source=behavior old_prob_selected=0.297642}
+
+OPTIONS & SCORES:
+     [0] 0.219940 - Pass
+     [1] 0.245579 - {T}: Add {G}.
+     [2] 0.236839 - Sacrifice {this}: Add {R}{R}.
+ >>> [3] 0.297642 - {T}: Add {B}.
+
+VALUE SCORE: 0.720930
+SELECTED: {T}: Add {B}.
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest; Sagu Wildling; Tinder Wall]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.341718 old_logp_source=behavior old_prob_selected=0.341718}
+
+OPTIONS & SCORES:
+     [0] 0.305161 - Pass
+     [1] 0.353122 - {T}: Add {G}.
+ >>> [2] 0.341718 - Sacrifice {this}: Add {R}{R}.
+
+VALUE SCORE: 0.719796
+SELECTED: Sacrifice {this}: Add {R}{R}.
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede; Tinder Wall]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.519947 old_logp_source=behavior old_prob_selected=0.519947}
+
+OPTIONS & SCORES:
+     [0] 0.480053 - Pass
+ >>> [1] 0.519947 - {T}: Add {G}.
+
+VALUE SCORE: 0.741059
+SELECTED: {T}: Add {G}.
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede; Tinder Wall]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.477895 old_logp_source=behavior old_prob_selected=0.477895}
+
+OPTIONS & SCORES:
+ >>> [0] 0.477895 - Pass
+     [1] 0.522105 - {T}: Add {G}.
+
+VALUE SCORE: 0.740647
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede; Tinder Wall]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+[Exploration] exploration{mode=epsilon_mix action_eps=0.0312 turn_random_eps=0.1533 behavior_prob=0.521747 old_logp_source=behavior old_prob_selected=0.521747}
+
+OPTIONS & SCORES:
+     [0] 0.478253 - Pass
+ >>> [1] 0.521747 - {T}: Add {G}.
+
+VALUE SCORE: 0.729044
+SELECTED: {T}: Add {G}.
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Bot-Skill1)
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede; Tinder Wall]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9 (PlayerRL1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede; Tinder Wall]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9 (PlayerRL1 turn), Declare Attackers - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede; Tinder Wall]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9 (PlayerRL1 turn), Postcombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede; Tinder Wall]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Citadel Gate,tapped; Sacred Cat; Treasure Token; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Bot-Skill1 ***
+********************************************************************************
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede; Tinder Wall]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9 (Bot-Skill1 turn), Precombat Main - PlayerRL1
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[PlayerRL1], life = 20
+-> Hand: []
+-> Permanents: [Forest,tapped; Gatecreeper Vine; Elves of Deep Shadow,tapped; Forest,tapped; Swamp,tapped; Forest,tapped; Sagu Wildling]
+-> Graveyard: [Lotus Petal; Winding Way; Generous Ent; Overgrown Battlement; Balustrade Spy; Saruli Caretaker; Lead the Stampede; Tinder Wall]
+-> Exile: []
+[Bot-Skill1], life = 20
+-> Hand: 8 cards
+-> Permanents: [Heap Gate; Island; Citadel Gate; Sacred Cat; Treasure Token; Treasure Token]
+-> Graveyard: [Journey to Nowhere; Counterspell; Brainstorm; Prismatic Strands; Journey to Nowhere]
+-> Exile: [Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+
+VALUE SCORE: 0.000000
+SELECTED: Pass
+

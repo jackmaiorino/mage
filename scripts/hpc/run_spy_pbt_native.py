@@ -16,7 +16,7 @@ import urllib.request
 from collections import deque
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Deque, Dict, List, Optional, Set
+from typing import Any, Deque, Dict, List, Optional, Set, Tuple
 
 
 def now_utc() -> str:
@@ -957,6 +957,9 @@ class NativeOrchestrator:
     def profile_model_path(self, profile: str) -> Path:
         return self.profile_models_dir(profile) / "model.pt"
 
+    def profile_mulligan_model_path(self, profile: str) -> Path:
+        return self.profile_models_dir(profile) / "mulligan_model.pt"
+
     def resolve_stable_checkpoint_path(self, profile: str) -> Optional[Path]:
         source_latest = self.profile_model_latest_path(profile)
         if source_latest.exists():
@@ -1015,6 +1018,7 @@ class NativeOrchestrator:
             "backup_model": None,
             "target_latest_created": not target_latest.exists(),
             "target_model_created": not target_model.exists(),
+            "mulligan_copied": False,
         }
 
         for target_key in ("target_latest", "target_model"):
@@ -1026,11 +1030,24 @@ class NativeOrchestrator:
 
         self._copy_file_atomic(source, target_latest)
         self._copy_file_atomic(source, target_model)
+
+        source_mulligan = self.profile_mulligan_model_path(source_profile)
+        if source_mulligan.exists():
+            target_mulligan = self.profile_mulligan_model_path(target_profile)
+            if target_mulligan.exists():
+                backup = target_mulligan.with_name(
+                    f".{target_mulligan.name}.bak.{os.getpid()}.{int(time.time() * 1000)}"
+                )
+                shutil.copy2(str(target_mulligan), str(backup))
+                restore_info["backup_mulligan"] = backup
+            self._copy_file_atomic(source_mulligan, target_mulligan)
+            restore_info["mulligan_copied"] = True
+
         return restore_info
 
     @staticmethod
     def cleanup_restore_info_backups(restore_info: Dict[str, Any]) -> None:
-        for key in ("backup_latest", "backup_model"):
+        for key in ("backup_latest", "backup_model", "backup_mulligan"):
             backup = restore_info.get(key)
             if isinstance(backup, Path) and backup.exists():
                 try:
@@ -1091,6 +1108,15 @@ class NativeOrchestrator:
         if not transitions or transitions[-1] != state:
             transitions.append(state)
 
+    PBT_BOUNDS: Dict[str, Tuple[float, float]] = {
+        "ENTROPY_START": (0.01, 1.0),
+        "ENTROPY_END": (0.001, 0.5),
+        "RL_ACTION_EPS_START": (0.0, 1.0),
+        "RL_FULL_TURN_RANDOM_START": (0.0, 1.0),
+        "TEMPERATURE_FLOOR": (0.05, 2.0),
+        "ACTOR_LR": (1e-5, 1e-3),
+    }
+
     def mutate_env_value(self, key: str, value: str) -> str:
         try:
             numeric = float(str(value).strip())
@@ -1102,7 +1128,10 @@ class NativeOrchestrator:
             factor = 0.01
         mutated = numeric * factor
         k = key.upper() if key else ""
-        if ("EPS" in k) or ("PROB" in k) or ("RATE" in k) or ("FRAC" in k) or k.endswith("_P") or k.startswith("P_"):
+        bounds = self.PBT_BOUNDS.get(k)
+        if bounds is not None:
+            mutated = max(bounds[0], min(bounds[1], mutated))
+        elif ("EPS" in k) or ("PROB" in k) or ("RATE" in k) or ("FRAC" in k) or k.endswith("_P") or k.startswith("P_"):
             mutated = max(0.0, min(1.0, mutated))
         return f"{mutated:g}"
 
@@ -1369,12 +1398,23 @@ class NativeOrchestrator:
                     self._append_pbt_event(event)
                     continue
 
-                effective_env = dict(state.effective_train_env)
-                if not effective_env and isinstance(loser["entry"].get("train_env"), dict):
-                    for key, value in loser["entry"].get("train_env", {}).items():
-                        name = str(key).strip()
-                        if name:
-                            effective_env[name] = str(value)
+                winner_state = self.trainers.get(winner_profile)
+                if winner_state is not None and winner_state.effective_train_env:
+                    effective_env = dict(winner_state.effective_train_env)
+                elif isinstance(winner["entry"].get("train_env"), dict):
+                    effective_env = {
+                        str(k).strip(): str(v)
+                        for k, v in winner["entry"].get("train_env", {}).items()
+                        if str(k).strip()
+                    }
+                else:
+                    effective_env = dict(state.effective_train_env)
+                    if not effective_env and isinstance(loser["entry"].get("train_env"), dict):
+                        effective_env = {
+                            str(k).strip(): str(v)
+                            for k, v in loser["entry"].get("train_env", {}).items()
+                            if str(k).strip()
+                        }
 
                 mutable_keys = to_string_list(loser["entry"].get("pbt_mutable_env"))
                 for env_key in mutable_keys:
