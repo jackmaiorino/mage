@@ -1,9 +1,7 @@
 package mage.player.ai.rl;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -35,20 +33,20 @@ final class SharedGpuTensorSerde {
     }
 
     static byte[] packSegments(byte[]... segments) {
-        try {
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            DataOutputStream out = new DataOutputStream(bytes);
-            out.writeInt(segments.length);
-            for (byte[] segment : segments) {
-                byte[] safe = segment == null ? new byte[0] : segment;
-                out.writeInt(safe.length);
-                out.write(safe);
-            }
-            out.flush();
-            return bytes.toByteArray();
-        } catch (IOException e) {
-            throw new IllegalStateException("Failed to pack shared GPU tensor segments", e);
+        byte[][] safeSegments = new byte[segments.length][];
+        int totalBytes = Integer.BYTES;
+        for (int i = 0; i < segments.length; i++) {
+            byte[] safe = segments[i] == null ? new byte[0] : segments[i];
+            safeSegments[i] = safe;
+            totalBytes += Integer.BYTES + safe.length;
         }
+        ByteBuffer buffer = ByteBuffer.allocate(totalBytes);
+        buffer.putInt(safeSegments.length);
+        for (byte[] safe : safeSegments) {
+            buffer.putInt(safe.length);
+            buffer.put(safe);
+        }
+        return buffer.array();
     }
 
     static List<byte[]> unpackSegments(byte[] payload) throws IOException {
@@ -172,29 +170,64 @@ final class SharedGpuTensorSerde {
 
     static byte[] floatsToBytes(float[] data) {
         ByteBuffer buffer = ByteBuffer.allocate(data.length * 4).order(ByteOrder.LITTLE_ENDIAN);
-        for (float value : data) {
-            buffer.putFloat(value);
-        }
+        putFloats(buffer, data);
         return buffer.array();
     }
 
     static byte[] intsToBytes(int[] data) {
         ByteBuffer buffer = ByteBuffer.allocate(data.length * 4).order(ByteOrder.LITTLE_ENDIAN);
-        for (int value : data) {
-            buffer.putInt(value);
-        }
+        putInts(buffer, data);
         return buffer.array();
     }
 
     private static byte[] floats2dToBytes(float[][] data) {
-        int dim = data.length == 0 ? 0 : data[0].length;
-        ByteBuffer buffer = ByteBuffer.allocate(data.length * dim * 4).order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer buffer = ByteBuffer.allocate(bytesForFloats2d(data)).order(ByteOrder.LITTLE_ENDIAN);
+        putFloats2d(buffer, data);
+        return buffer.array();
+    }
+
+    static int bytesForInts(int[] data) {
+        return data == null ? 0 : data.length * 4;
+    }
+
+    static int bytesForFloats2d(float[][] data) {
+        if (data == null || data.length == 0) {
+            return 0;
+        }
+        int total = 0;
         for (float[] row : data) {
-            for (float value : row) {
-                buffer.putFloat(value);
+            if (row != null) {
+                total += row.length * 4;
             }
         }
-        return buffer.array();
+        return total;
+    }
+
+    static void putInts(ByteBuffer buffer, int[] data) {
+        if (data == null) {
+            return;
+        }
+        for (int value : data) {
+            buffer.putInt(value);
+        }
+    }
+
+    static void putFloats(ByteBuffer buffer, float[] data) {
+        if (data == null) {
+            return;
+        }
+        for (float value : data) {
+            buffer.putFloat(value);
+        }
+    }
+
+    static void putFloats2d(ByteBuffer buffer, float[][] data) {
+        if (data == null) {
+            return;
+        }
+        for (float[] row : data) {
+            putFloats(buffer, row);
+        }
     }
 
     private static int actionTypeToHeadIdx(StateSequenceBuilder.ActionType actionType) {

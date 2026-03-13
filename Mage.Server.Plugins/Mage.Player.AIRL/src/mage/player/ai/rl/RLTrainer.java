@@ -1961,9 +1961,11 @@ public class RLTrainer {
                         GameHealthMonitor healthMonitor = GameHealthMonitor.createAndStart(game);
 
                         long startGameNanos = System.nanoTime();
+                        metrics.recordEpisodeSetupMs((startGameNanos - episodeStartNanos) / 1_000_000L);
                         // Restart game now that players are added
                         game.start(rlPlayer.getId());
                         long endGameNanos = System.nanoTime();
+                        metrics.recordEpisodeGameMs((endGameNanos - startGameNanos) / 1_000_000L);
 
                         // Stop health monitor
                         healthMonitor.stop();
@@ -2016,10 +2018,12 @@ public class RLTrainer {
                         RewardDiag rewardDiag = updateModelBasedOnOutcome(game, rlPlayer, opponentPlayer);
                         double finalReward = rewardDiag.finalReward;
                         long rewardEndNanos = System.nanoTime();
+                        metrics.recordRewardUpdateMs((rewardEndNanos - rewardStartNanos) / 1_000_000L);
 
                         // Defer statistics writing until after we compute episodeSeconds below
                         // -------- Episode duration & counter logging --------
                         long episodeDurationNanos = System.nanoTime() - episodeStartNanos;
+                        metrics.recordEpisodeTotalMs(episodeDurationNanos / 1_000_000L);
                         double episodeSeconds = episodeDurationNanos / 1_000_000_000.0;
                         RLTrainer.threadLocalLogger.get().info(String.format("Episode %d completed in %.2f seconds", epNumber, episodeSeconds));
 

@@ -37,7 +37,23 @@ load_powershell_module() {
   return 1
 }
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+if [[ -n "${SLURM_SUBMIT_DIR:-}" ]]; then
+  repo_root="$SLURM_SUBMIT_DIR"
+else
+  repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+fi
+resolve_path() {
+  local candidate="${1:-}"
+  local fallback="${2:-}"
+  if [[ -z "$candidate" ]]; then
+    candidate="$fallback"
+  fi
+  if [[ "$candidate" == /* ]]; then
+    printf '%s\n' "$candidate"
+  else
+    printf '%s\n' "$repo_root/$candidate"
+  fi
+}
 registry_path="${REGISTRY_PATH:-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json}"
 total_episodes="${TOTAL_EPISODES:-1000000}"
 pbt_interval="${PBT_EXPLOIT_INTERVAL_MINUTES:-240}"
@@ -55,14 +71,22 @@ cpu_headroom="${CPU_HEADROOM:-4}"
 train_profiles="${TRAIN_PROFILES:-3}"
 runner_oversubscription_factor="${RUNNER_OVERSUBSCRIPTION_FACTOR:-1}"
 job_id="${SLURM_JOB_ID:-manual_$(date -u +%Y%m%dT%H%M%SZ)}"
-reports_dir="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs/$job_id"
-orch_reports_dir="$repo_root/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs/$job_id"
+job_reports_root="$(resolve_path "${HPC_JOB_REPORTS_ROOT:-}" "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs")"
+orch_compat_reports_root="$(resolve_path "${ORCHESTRATOR_COMPAT_REPORTS_ROOT:-}" "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator")"
+export HPC_JOB_REPORTS_ROOT="$job_reports_root"
+export ORCHESTRATOR_COMPAT_REPORTS_ROOT="$orch_compat_reports_root"
+reports_dir="$job_reports_root/$job_id"
+orch_reports_dir="$orch_compat_reports_root/runs/$job_id"
+rl_artifacts_root="$orch_reports_dir/rl_artifacts"
 mkdir -p "$reports_dir"
+mkdir -p "$rl_artifacts_root"
 orchestrator_log="$reports_dir/orchestrator.log"
 telemetry_log="$reports_dir/telemetry.log"
 final_probe_metrics_log="$reports_dir/final_probe_metrics.txt"
 metrics_collector_script="$repo_root/scripts/hpc/collect_job_metrics_local.sh"
 export ORCH_RUN_ID="${ORCH_RUN_ID:-$job_id}"
+export RL_ARTIFACTS_ROOT="${RL_ARTIFACTS_ROOT:-$rl_artifacts_root}"
+mkdir -p "$RL_ARTIFACTS_ROOT"
 
 export PY_BRIDGE_CREATE_VENV="${PY_BRIDGE_CREATE_VENV:-0}"
 export PY_BRIDGE_INSTALL_DEPS="${PY_BRIDGE_INSTALL_DEPS:-0}"
@@ -257,14 +281,25 @@ if [[ -n "${SATURATION_EXPERIMENT_LABEL:-}" ]]; then
   echo "Saturation label: ${SATURATION_EXPERIMENT_LABEL}" | tee -a "$orchestrator_log"
 fi
 echo "PBT reports dir: $orch_reports_dir" | tee -a "$orchestrator_log"
+echo "RL artifacts root: $RL_ARTIFACTS_ROOT" | tee -a "$orchestrator_log"
 echo "PBT gating: firstMinEp=$pbt_first_exploit_min_ep deltaPerProfile=$pbt_episode_delta timeFallbackDelta=$pbt_time_fallback_episode_delta maxIntervalMin=$pbt_interval minGap=$pbt_min_winner_gap minWinnerWr=$pbt_min_winner_wr" | tee -a "$orchestrator_log"
 echo "MAGE_DB_DIR: $MAGE_DB_DIR" | tee -a "$orchestrator_log"
 echo "Port bases: metrics=$METRICS_PORT_BASE gpuService=$GPU_SERVICE_PORT_BASE gpuServiceMetrics=$GPU_SERVICE_METRICS_PORT_BASE py4j=$PY4J_BASE_PORT" | tee -a "$orchestrator_log"
 echo "MTG_VENV_PATH: $MTG_VENV_PATH" | tee -a "$orchestrator_log"
-if [[ -n "${MAGE_RL_RUNTIME_DIR:-}" ]]; then
+if [[ -z "${MAGE_RL_RUNTIME_DIR:-}" && -n "${MAGE_RL_RUNTIME_TARBALL:-}" ]]; then
+  runtime_extract_base="/tmp/${USER}/mtgrl-runtime-${job_id}/runtime"
+  mkdir -p "$runtime_extract_base"
+  echo "Extracting runtime tarball: $MAGE_RL_RUNTIME_TARBALL" | tee -a "$orchestrator_log"
+  tar -xzf "$MAGE_RL_RUNTIME_TARBALL" -C "$runtime_extract_base"
+  extracted_dir="$(find "$runtime_extract_base" -mindepth 1 -maxdepth 1 -type d | head -1)"
+  if [[ -z "$extracted_dir" ]]; then
+    echo "FATAL: tarball extraction produced no directory in $runtime_extract_base" >&2
+    exit 1
+  fi
+  export MAGE_RL_RUNTIME_DIR="$extracted_dir"
+  echo "MAGE_RL_RUNTIME_DIR: $MAGE_RL_RUNTIME_DIR (extracted from tarball)" | tee -a "$orchestrator_log"
+elif [[ -n "${MAGE_RL_RUNTIME_DIR:-}" ]]; then
   echo "MAGE_RL_RUNTIME_DIR: $MAGE_RL_RUNTIME_DIR" | tee -a "$orchestrator_log"
-elif [[ -n "${MAGE_RL_RUNTIME_TARBALL:-}" ]]; then
-  echo "MAGE_RL_RUNTIME_TARBALL: $MAGE_RL_RUNTIME_TARBALL" | tee -a "$orchestrator_log"
 fi
 echo "Reports dir: $reports_dir" | tee -a "$orchestrator_log"
 if [[ "$use_native_orch" -eq 1 ]]; then

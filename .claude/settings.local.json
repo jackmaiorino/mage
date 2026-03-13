@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"C:\\\\Users\\\\Jack\\\\IdeaProjects\\\\mage\\\\Mage.Server.Plugins\\\\Mage.Player.AIRL\\\\src\\\\mage\\\\player\\\\ai\\\\decks\" -type f -name \"*.txt\" 2>/dev/null | head -20)",
+      "Bash(wc -l /c/Users/Jack/IdeaProjects/mage/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/*.py | tail -20)",
+      "Bash(mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile 2>&1 | tail -20)",
+      "Bash(powershell -File scripts/hpc/build_rl_runtime_bundle.ps1 -ScpDestination \"jmaior@login.zaratan.umd.edu:/home/jmaior/scratch.msml603/jmaior/mage/local-training/hpc/bundles/\" -CredentialFile \"$env:LOCALAPPDATA\\\\Codex\\\\umd-hpc\\\\credentials\\\\zaratan.json\" 2>&1)",
+      "Bash(powershell.exe -Command \"& { Set-Location 'C:\\\\Users\\\\Jack\\\\IdeaProjects\\\\mage'; & powershell -File scripts/hpc/build_rl_runtime_bundle.ps1 -ScpDestination 'jmaior@login.zaratan.umd.edu:/home/jmaior/scratch.msml603/jmaior/mage/local-training/hpc/bundles/' -CredentialFile '$env:LOCALAPPDATA\\\\Codex\\\\umd-hpc\\\\credentials\\\\zaratan.json' }\" 2>&1)",
+      "Bash(where tar:*)"
+    ]
+  }
+}

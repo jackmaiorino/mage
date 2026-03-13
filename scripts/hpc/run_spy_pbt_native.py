@@ -208,6 +208,10 @@ class TrainerState:
 class NativeOrchestrator:
     def __init__(self) -> None:
         self.repo_root = Path(__file__).resolve().parents[2]
+        self.source_repo_root = resolve_path(
+            self.repo_root,
+            os.getenv("SOURCE_REPO_ROOT", "").strip() or str(self.repo_root),
+        )
         self.mode = "native_full_pbt"
         default_run_id = os.getenv("SLURM_JOB_ID", "").strip() or now_utc().replace(":", "").replace("-", "")
         self.run_id = sanitize_run_id(os.getenv("ORCH_RUN_ID", "").strip() or default_run_id)
@@ -218,7 +222,11 @@ class NativeOrchestrator:
                 "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json",
             ),
         )
-        self.compat_reports_root = self.repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator"
+        self.compat_reports_root = resolve_path(
+            self.repo_root,
+            os.getenv("ORCHESTRATOR_COMPAT_REPORTS_ROOT", "").strip()
+            or "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator",
+        )
         self.runs_root = self.compat_reports_root / "runs"
         self.reports_root = self.runs_root / self.run_id
         self.trainer_logs_dir = self.reports_root / "trainers"
@@ -229,6 +237,11 @@ class NativeOrchestrator:
         self.compat_pbt_state_path = self.compat_reports_root / "pbt_state.json"
         self.compat_orchestrator_status_path = self.compat_reports_root / "orchestrator_status.json"
         self.latest_run_path = self.compat_reports_root / "latest_run.json"
+        self.rl_artifacts_root = resolve_path(
+            self.repo_root,
+            os.getenv("RL_ARTIFACTS_ROOT", "").strip()
+            or "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl",
+        )
         self.db_root = resolve_path(
             self.repo_root,
             os.getenv("MAGE_DB_DIR", "").strip() or "local-training/rl-db",
@@ -261,6 +274,17 @@ class NativeOrchestrator:
         self.trainer_start_wave_size = max(1, env_int("TRAINER_START_WAVE_SIZE", self.visible_gpu_count))
         self.trainer_start_intra_wave_delay_ms = max(0, env_int("TRAINER_START_INTRA_WAVE_DELAY_MS", 250))
         self.game_log_frequency = env_int("GAME_LOG_FREQUENCY", 0 if self.py_service_mode == "shared_gpu" else 500)
+        self.slurm_mem_per_node_mb = max(0, env_int("SLURM_MEM_PER_NODE", 0))
+        self.trainer_jvm_xms_mb = max(0, env_int("TRAINER_JVM_XMS_MB", 512))
+        self.trainer_jvm_xmx_mb = max(0, env_int("TRAINER_JVM_XMX_MB", 0))
+        self.trainer_jvm_heap_reserve_mb = max(
+            0,
+            env_int("TRAINER_JVM_HEAP_RESERVE_MB", 16384 if self.py_service_mode == "shared_gpu" else 8192),
+        )
+        self.trainer_jvm_heap_fraction = min(
+            0.95,
+            max(0.10, env_float("TRAINER_JVM_HEAP_FRACTION", 0.65 if self.py_service_mode == "shared_gpu" else 0.75)),
+        )
         self.eval_every_minutes = env_int("EVAL_EVERY_MINUTES", 180)
         self.stall_restart_minutes = env_int("STALL_RESTART_MINUTES", 25)
         self.pbt_interval_minutes = env_int("PBT_EXPLOIT_INTERVAL_MINUTES", 240)
@@ -300,7 +324,7 @@ class NativeOrchestrator:
         raw = os.getenv("MAGE_RL_RUNTIME_DIR", "").strip()
         if not raw:
             return None
-        runtime_dir = resolve_path(self.repo_root, raw)
+        runtime_dir = resolve_path(self.source_repo_root, raw)
         if not runtime_dir.exists():
             raise RuntimeError(f"MAGE_RL_RUNTIME_DIR does not exist: {runtime_dir}")
         app_dir = runtime_dir / "app"
@@ -353,6 +377,7 @@ class NativeOrchestrator:
             "orchestrator_status_path": str(self.orchestrator_status_path),
             "pbt_state_path": str(self.pbt_state_path),
             "compat_reports_root": str(self.compat_reports_root),
+            "artifacts_root": str(self.rl_artifacts_root),
         }
         atomic_write_json(self.latest_run_path, payload)
 
@@ -409,6 +434,45 @@ class NativeOrchestrator:
             target_total_runners = min_total_runners
         runners = target_total_runners // max(1, profile_count)
         return max(2, runners)
+
+    @staticmethod
+    def java_opts_include_heap(text: str) -> bool:
+        value = str(text or "")
+        return any(
+            marker in value
+            for marker in (
+                "-Xmx",
+                "-Xms",
+                "-XX:MaxRAMPercentage",
+                "-XX:InitialRAMPercentage",
+                "-XX:MaxRAMFraction",
+            )
+        )
+
+    def compute_trainer_jvm_xmx_mb(self) -> int:
+        if self.trainer_jvm_xmx_mb > 0:
+            return self.trainer_jvm_xmx_mb
+        if self.slurm_mem_per_node_mb <= 0:
+            return 0
+        available_mb = max(2048, self.slurm_mem_per_node_mb - self.trainer_jvm_heap_reserve_mb)
+        heap_pool_mb = max(2048, int(math.floor(float(available_mb) * self.trainer_jvm_heap_fraction)))
+        return max(2048, heap_pool_mb // max(1, self.train_profiles))
+
+    def apply_trainer_java_tool_options(self, env: Dict[str, str]) -> int:
+        existing = str(env.get("JAVA_TOOL_OPTIONS", "")).strip()
+        if self.java_opts_include_heap(existing):
+            return 0
+        xmx_mb = self.compute_trainer_jvm_xmx_mb()
+        if xmx_mb <= 0:
+            return 0
+        xms_mb = min(max(0, self.trainer_jvm_xms_mb), xmx_mb)
+        auto_parts: List[str] = []
+        if xms_mb > 0:
+            auto_parts.append(f"-Xms{xms_mb}m")
+        auto_parts.append(f"-Xmx{xmx_mb}m")
+        env["JAVA_TOOL_OPTIONS"] = " ".join(auto_parts + ([existing] if existing else []))
+        env["TRAINER_JVM_XMX_MB"] = str(xmx_mb)
+        return xmx_mb
 
     def detect_visible_gpu_list(self) -> List[str]:
         cuda_vis = os.environ.get("CUDA_VISIBLE_DEVICES", "").strip()
@@ -468,7 +532,7 @@ class NativeOrchestrator:
         raw = str(entry.get("deck_path", "")).strip()
         if not raw:
             return None
-        candidate = resolve_path(self.repo_root, raw).resolve()
+        candidate = resolve_path(self.source_repo_root, raw).resolve()
         if candidate.exists() and candidate.is_file():
             return candidate
         return None
@@ -529,7 +593,7 @@ class NativeOrchestrator:
         if self.shared_gpu_hosts:
             return
         python_bin = self.resolve_python_executable()
-        host_script = self.repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_host.py"
+        host_script = self.source_repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_host.py"
         if not host_script.exists():
             raise RuntimeError(f"shared GPU host script missing: {host_script}")
         self.shared_gpu_logs_dir.mkdir(parents=True, exist_ok=True)
@@ -547,10 +611,21 @@ class NativeOrchestrator:
             env["GPU_SERVICE_METRICS_PORT"] = str(metrics_port)
             env["GPU_SERVICE_BIND_HOST"] = self.gpu_service_bind_host
             env["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
+            env["PYTHON_LOGS_DIR"] = str(self.shared_gpu_python_logs_dir(gpu_slot))
+            env["MTG_AI_LOG_FILE"] = str(self.shared_gpu_python_logs_dir(gpu_slot) / "mtg_ai.log")
+            env["MULLIGAN_TRAINING_LOG_FILE"] = str(
+                self.shared_gpu_python_logs_dir(gpu_slot) / "mulligan_training.log"
+            )
+            env["MULLIGAN_TRACE_JSONL_FILE"] = str(
+                self.shared_gpu_python_logs_dir(gpu_slot) / "mulligan_trace.jsonl"
+            )
+            env["VRAM_DIAGNOSTICS_LOG_FILE"] = str(
+                self.shared_gpu_python_logs_dir(gpu_slot) / "VRAM_diagnostics.log"
+            )
             env.setdefault("MULLIGAN_DEVICE", "cpu")
             process = subprocess.Popen(
                 [python_bin, str(host_script)],
-                cwd=str(self.repo_root),
+                cwd=str(self.source_repo_root),
                 env=env,
                 stdout=stdout_handle,
                 stderr=stderr_handle,
@@ -632,6 +707,9 @@ class NativeOrchestrator:
             self.cleanup_stale_py4j_port(profile, py4j_base_port)
         trainer_db_dir = self.db_root / profile
         trainer_db_dir.mkdir(parents=True, exist_ok=True)
+        self.profile_models_dir(profile).mkdir(parents=True, exist_ok=True)
+        self.profile_logs_dir(profile).mkdir(parents=True, exist_ok=True)
+        self.python_logs_dir(profile).mkdir(parents=True, exist_ok=True)
         self.trainer_logs_dir.mkdir(parents=True, exist_ok=True)
         stdout_path = self.trainer_logs_dir / f"{profile}.stdout.log"
         stderr_path = self.trainer_logs_dir / f"{profile}.stderr.log"
@@ -644,6 +722,15 @@ class NativeOrchestrator:
         env["NUM_GAME_RUNNERS"] = str(runners_per_profile)
         env["DECK_LIST_FILE"] = str(opponent_decklist)
         env["MODEL_PROFILE"] = profile
+        env["RL_ARTIFACTS_ROOT"] = str(self.rl_artifacts_root)
+        env["RL_MODELS_DIR"] = str(self.profile_models_dir(profile))
+        env["RL_LOGS_DIR"] = str(self.profile_logs_dir(profile))
+        env["PYTHON_LOGS_DIR"] = str(self.python_logs_dir(profile))
+        env["MTG_AI_LOG_FILE"] = str(self.python_logs_dir(profile) / "mtg_ai.log")
+        env["MULLIGAN_TRAINING_LOG_FILE"] = str(self.python_logs_dir(profile) / "mulligan_training.log")
+        env["MULLIGAN_TRACE_JSONL_FILE"] = str(self.python_logs_dir(profile) / "mulligan_trace.jsonl")
+        env["VRAM_DIAGNOSTICS_LOG_FILE"] = str(self.python_logs_dir(profile) / "VRAM_diagnostics.log")
+        env["CANDIDATE_EXPLOSIONS_LOG_FILE"] = str(self.profile_logs_dir(profile) / "health" / "candidate_explosions.log")
         env["METRICS_PORT"] = str(metrics_port)
         env["OPPONENT_SAMPLER"] = "league"
         env["ORCHESTRATED_RUN"] = "1"
@@ -680,6 +767,8 @@ class NativeOrchestrator:
         for key, value in train_env.items():
             env[key] = value
 
+        trainer_jvm_xmx_mb = self.apply_trainer_java_tool_options(env)
+
         seed_now = effective_seed
         if seed_now is None:
             seed_now = parse_int64(entry.get("seed"))
@@ -710,12 +799,18 @@ class NativeOrchestrator:
         command = self.build_command()
         process = subprocess.Popen(
             command,
-            cwd=str(self.repo_root),
+            cwd=str(self.source_repo_root),
             env=env,
             stdout=stdout_handle,
             stderr=stderr_handle,
         )
-        log(f"Started trainer profile={profile} pid={process.pid} metricsPort={metrics_port} py4jBasePort={py4j_base_port}")
+        if trainer_jvm_xmx_mb > 0:
+            log(
+                f"Started trainer profile={profile} pid={process.pid} metricsPort={metrics_port} "
+                f"py4jBasePort={py4j_base_port} jvmXmxMb={trainer_jvm_xmx_mb}"
+            )
+        else:
+            log(f"Started trainer profile={profile} pid={process.pid} metricsPort={metrics_port} py4jBasePort={py4j_base_port}")
         return TrainerState(
             entry=entry,
             slot=slot,
@@ -845,7 +940,16 @@ class NativeOrchestrator:
                 pass
 
     def profile_models_dir(self, profile: str) -> Path:
-        return self.repo_root / f"Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/{profile}/models"
+        return self.rl_artifacts_root / "profiles" / profile / "models"
+
+    def profile_logs_dir(self, profile: str) -> Path:
+        return self.rl_artifacts_root / "profiles" / profile / "logs"
+
+    def python_logs_dir(self, profile: str) -> Path:
+        return self.profile_logs_dir(profile) / "python"
+
+    def shared_gpu_python_logs_dir(self, gpu_slot: int) -> Path:
+        return self.shared_gpu_logs_dir / f"gpu_{gpu_slot}" / "python"
 
     def profile_model_latest_path(self, profile: str) -> Path:
         return self.profile_models_dir(profile) / "model_latest.pt"
@@ -1004,8 +1108,9 @@ class NativeOrchestrator:
 
     def get_profile_training_snapshot(self, entry: Dict[str, Any]) -> Dict[str, Any]:
         profile = str(entry.get("profile", "")).strip()
-        stats_path = self.repo_root / f"Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/{profile}/logs/stats/training_stats.csv"
-        status_path = self.repo_root / f"Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/{profile}/logs/league/agent_status.json"
+        logs_dir = self.profile_logs_dir(profile)
+        stats_path = logs_dir / "stats" / "training_stats.csv"
+        status_path = logs_dir / "league" / "agent_status.json"
 
         episode = 0
         baseline_wr = 0.0
@@ -1632,6 +1737,7 @@ class NativeOrchestrator:
                 "trainers_dir": str(self.trainer_logs_dir),
                 "gpu_hosts_dir": str(self.shared_gpu_logs_dir),
                 "generated_decklists_dir": str(self.generated_decklists_dir),
+                "artifacts_root": str(self.rl_artifacts_root),
                 "orchestrator_status_path": str(self.orchestrator_status_path),
                 "pbt_state_path": str(self.pbt_state_path),
             },
@@ -1667,13 +1773,13 @@ class NativeOrchestrator:
             log("Rolling winrates: " + ", ".join(rows))
 
     def run(self) -> int:
-        stop_script = self.repo_root / "scripts/rl-stop.sh"
+        stop_script = self.source_repo_root / "scripts/rl-stop.sh"
         if stop_script.exists():
             log(f"Running cleanup via {stop_script} (reason=orchestrator_start)")
             try:
                 subprocess.run(
                     ["bash", str(stop_script), "-q"],
-                    cwd=str(self.repo_root),
+                    cwd=str(self.source_repo_root),
                     check=False,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
@@ -1703,6 +1809,7 @@ class NativeOrchestrator:
         log(f"Registry: {self.registry_path}")
         log(f"Reports root: {self.reports_root}")
         log(f"Compatibility reports root: {self.compat_reports_root}")
+        log(f"RL artifacts root: {self.rl_artifacts_root}")
         log(f"DB root: {self.db_root}")
         log(
             f"PBT gating: firstExploitMinEp={self.pbt_first_exploit_min_ep} "

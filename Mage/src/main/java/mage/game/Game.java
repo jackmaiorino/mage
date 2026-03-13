@@ -288,6 +288,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     boolean isSimulation();
 
+    void setSimulation(boolean simulation);
+
     /**
      * Prepare game for any simulations like AI or effects calc
      */

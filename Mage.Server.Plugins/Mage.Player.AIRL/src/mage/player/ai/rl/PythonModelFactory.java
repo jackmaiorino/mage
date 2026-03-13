@@ -14,8 +14,14 @@ public final class PythonModelFactory {
     private PythonModelFactory() {
     }
 
+    private static final String SERVICE_MODE = EnvConfig.str("PY_SERVICE_MODE", "local").trim().toLowerCase();
+
     public static boolean isSharedGpuMode() {
-        return "shared_gpu".equalsIgnoreCase(EnvConfig.str("PY_SERVICE_MODE", "local"));
+        return "shared_gpu".equals(SERVICE_MODE);
+    }
+
+    public static boolean isNoneMode() {
+        return "none".equals(SERVICE_MODE);
     }
 
     public static PythonModel getInstance() {
@@ -26,9 +32,13 @@ public final class PythonModelFactory {
         synchronized (LOCK) {
             current = instance;
             if (current == null) {
-                current = isSharedGpuMode()
-                        ? SharedGpuPythonModel.getInstance()
-                        : PythonMLService.getInstance();
+                if (isNoneMode()) {
+                    current = NoOpPythonModel.getInstance();
+                } else if (isSharedGpuMode()) {
+                    current = SharedGpuPythonModel.getInstance();
+                } else {
+                    current = PythonMLService.getInstance();
+                }
                 instance = current;
             }
         }

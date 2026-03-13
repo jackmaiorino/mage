@@ -266,6 +266,11 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public void setSimulation(boolean simulation) {
+        this.simulation = simulation;
+    }
+
+    @Override
     public Game createSimulationForAI() {
         Game res = this.copy();
         ((GameImpl) res).simulation = true;
@@ -1133,7 +1138,7 @@ public abstract class GameImpl implements Game {
         }
 
         // END game
-        if (checkIfGameIsOver() && !isSimulation() || forcedToFinished) {
+        if (checkIfGameIsOver() || forcedToFinished) {
             winnerId = findWinnersAndLosers();
             StringBuilder sb = new StringBuilder("GAME END gameId: ").append(this.getId()).append(' ');
             int count = 0;

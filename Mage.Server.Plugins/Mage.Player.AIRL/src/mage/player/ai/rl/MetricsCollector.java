@@ -41,6 +41,61 @@ public class MetricsCollector {
     private final AtomicLong gpuMemoryUsed = new AtomicLong(0);
     private final AtomicLong gpuMemoryTotal = new AtomicLong(0);
 
+    // Upstream actor-side bottleneck metrics
+    private final AtomicLong baseStateCacheHitsTotal = new AtomicLong(0);
+    private final AtomicLong baseStateCacheMissesTotal = new AtomicLong(0);
+    private final AtomicLong baseStateBuildCount = new AtomicLong(0);
+    private final AtomicLong baseStateBuildSumMs = new AtomicLong(0);
+    private final AtomicLong baseStateBuildMaxMs = new AtomicLong(0);
+    private final AtomicLong decisionPrepCount = new AtomicLong(0);
+    private final AtomicLong decisionPrepSumMs = new AtomicLong(0);
+    private final AtomicLong decisionPrepMaxMs = new AtomicLong(0);
+    private final AtomicLong decisionCandidateCount = new AtomicLong(0);
+    private final AtomicLong decisionCandidateSum = new AtomicLong(0);
+    private final AtomicLong decisionCandidateMax = new AtomicLong(0);
+    private final AtomicLong playableCacheHitsTotal = new AtomicLong(0);
+    private final AtomicLong playableCacheMissesTotal = new AtomicLong(0);
+    private final AtomicLong playableLookupCount = new AtomicLong(0);
+    private final AtomicLong playableLookupSumMs = new AtomicLong(0);
+    private final AtomicLong playableLookupMaxMs = new AtomicLong(0);
+    private final AtomicLong playableOptionCount = new AtomicLong(0);
+    private final AtomicLong playableOptionSum = new AtomicLong(0);
+    private final AtomicLong playableOptionMax = new AtomicLong(0);
+    private final AtomicLong altCostValidationCacheHitsTotal = new AtomicLong(0);
+    private final AtomicLong altCostValidationCacheMissesTotal = new AtomicLong(0);
+    private final AtomicLong altCostValidationCount = new AtomicLong(0);
+    private final AtomicLong altCostValidationSumMs = new AtomicLong(0);
+    private final AtomicLong altCostValidationMaxMs = new AtomicLong(0);
+    private final AtomicLong altCostValidationChoiceCount = new AtomicLong(0);
+    private final AtomicLong altCostValidationChoiceSum = new AtomicLong(0);
+    private final AtomicLong altCostValidationChoiceMax = new AtomicLong(0);
+    private final AtomicLong actionSelectionCount = new AtomicLong(0);
+    private final AtomicLong actionSelectionSumMs = new AtomicLong(0);
+    private final AtomicLong actionSelectionMaxMs = new AtomicLong(0);
+    private final AtomicLong actionOptionRawCount = new AtomicLong(0);
+    private final AtomicLong actionOptionRawSum = new AtomicLong(0);
+    private final AtomicLong actionOptionRawMax = new AtomicLong(0);
+    private final AtomicLong actionOptionValidCount = new AtomicLong(0);
+    private final AtomicLong actionOptionValidSum = new AtomicLong(0);
+    private final AtomicLong actionOptionValidMax = new AtomicLong(0);
+    private final AtomicLong actionOptionUniqueCount = new AtomicLong(0);
+    private final AtomicLong actionOptionUniqueSum = new AtomicLong(0);
+    private final AtomicLong actionOptionUniqueMax = new AtomicLong(0);
+    private final AtomicLong actionPassOnlyTotal = new AtomicLong(0);
+    private final AtomicLong episodeSetupCount = new AtomicLong(0);
+    private final AtomicLong episodeSetupSumMs = new AtomicLong(0);
+    private final AtomicLong episodeSetupMaxMs = new AtomicLong(0);
+    private final AtomicLong episodeGameCount = new AtomicLong(0);
+    private final AtomicLong episodeGameSumMs = new AtomicLong(0);
+    private final AtomicLong episodeGameMaxMs = new AtomicLong(0);
+    private final AtomicLong rewardUpdateCount = new AtomicLong(0);
+    private final AtomicLong rewardUpdateSumMs = new AtomicLong(0);
+    private final AtomicLong rewardUpdateMaxMs = new AtomicLong(0);
+    private final AtomicLong episodeTotalCount = new AtomicLong(0);
+    private final AtomicLong episodeTotalSumMs = new AtomicLong(0);
+    private final AtomicLong episodeTotalMaxMs = new AtomicLong(0);
+    private final Map<String, AtomicLong> decisionHeadMetrics = new ConcurrentHashMap<>();
+
     // Inference health metrics (candidate scoring)
     private final AtomicLong inferRequestsTotal = new AtomicLong(0);
     private final AtomicLong inferTimeoutsTotal = new AtomicLong(0);
@@ -225,6 +280,83 @@ public class MetricsCollector {
 
     public void recordInferenceTimeout() {
         inferTimeoutsTotal.incrementAndGet();
+    }
+
+    public void recordBaseStateCacheHit() {
+        baseStateCacheHitsTotal.incrementAndGet();
+    }
+
+    public void recordBaseStateCacheMiss() {
+        baseStateCacheMissesTotal.incrementAndGet();
+    }
+
+    public void recordBaseStateBuildMs(long latencyMs) {
+        recordTimingSample(baseStateBuildCount, baseStateBuildSumMs, baseStateBuildMaxMs, latencyMs);
+    }
+
+    public void recordDecisionPrep(String headId, int candidateCount, long latencyMs) {
+        recordTimingSample(decisionPrepCount, decisionPrepSumMs, decisionPrepMaxMs, latencyMs);
+        if (candidateCount > 0) {
+            recordValueSample(decisionCandidateCount, decisionCandidateSum, decisionCandidateMax, candidateCount);
+        }
+        String sanitizedHead = sanitizeMetricPart(headId);
+        decisionHeadMetrics.computeIfAbsent(sanitizedHead, ignored -> new AtomicLong(0)).incrementAndGet();
+    }
+
+    public void recordPlayableLookup(int optionCount, long latencyMs, boolean cacheHit) {
+        if (cacheHit) {
+            playableCacheHitsTotal.incrementAndGet();
+        } else {
+            playableCacheMissesTotal.incrementAndGet();
+        }
+        recordTimingSample(playableLookupCount, playableLookupSumMs, playableLookupMaxMs, latencyMs);
+        if (optionCount >= 0) {
+            recordValueSample(playableOptionCount, playableOptionSum, playableOptionMax, optionCount);
+        }
+    }
+
+    public void recordAltCostValidation(int validChoiceCount, long latencyMs, boolean cacheHit) {
+        if (cacheHit) {
+            altCostValidationCacheHitsTotal.incrementAndGet();
+        } else {
+            altCostValidationCacheMissesTotal.incrementAndGet();
+            recordTimingSample(altCostValidationCount, altCostValidationSumMs, altCostValidationMaxMs, latencyMs);
+        }
+        if (validChoiceCount >= 0) {
+            recordValueSample(altCostValidationChoiceCount, altCostValidationChoiceSum, altCostValidationChoiceMax, validChoiceCount);
+        }
+    }
+
+    public void recordActionSelection(int rawOptionCount, int validOptionCount, int uniqueOptionCount, long latencyMs, boolean passOnly) {
+        recordTimingSample(actionSelectionCount, actionSelectionSumMs, actionSelectionMaxMs, latencyMs);
+        if (rawOptionCount >= 0) {
+            recordValueSample(actionOptionRawCount, actionOptionRawSum, actionOptionRawMax, rawOptionCount);
+        }
+        if (validOptionCount >= 0) {
+            recordValueSample(actionOptionValidCount, actionOptionValidSum, actionOptionValidMax, validOptionCount);
+        }
+        if (uniqueOptionCount >= 0) {
+            recordValueSample(actionOptionUniqueCount, actionOptionUniqueSum, actionOptionUniqueMax, uniqueOptionCount);
+        }
+        if (passOnly) {
+            actionPassOnlyTotal.incrementAndGet();
+        }
+    }
+
+    public void recordEpisodeSetupMs(long latencyMs) {
+        recordTimingSample(episodeSetupCount, episodeSetupSumMs, episodeSetupMaxMs, latencyMs);
+    }
+
+    public void recordEpisodeGameMs(long latencyMs) {
+        recordTimingSample(episodeGameCount, episodeGameSumMs, episodeGameMaxMs, latencyMs);
+    }
+
+    public void recordRewardUpdateMs(long latencyMs) {
+        recordTimingSample(rewardUpdateCount, rewardUpdateSumMs, rewardUpdateMaxMs, latencyMs);
+    }
+
+    public void recordEpisodeTotalMs(long latencyMs) {
+        recordTimingSample(episodeTotalCount, episodeTotalSumMs, episodeTotalMaxMs, latencyMs);
     }
 
     public void recordInferenceLatencyMs(long latencyMs) {
@@ -535,6 +667,54 @@ public class MetricsCollector {
 
     private static long dblBits(double v) {
         return Double.doubleToRawLongBits(v);
+    }
+
+    private static void updateMax(AtomicLong target, long value) {
+        long prev;
+        do {
+            prev = target.get();
+            if (value <= prev) {
+                return;
+            }
+        } while (!target.compareAndSet(prev, value));
+    }
+
+    private static void recordTimingSample(AtomicLong count, AtomicLong sumMs, AtomicLong maxMs, long latencyMs) {
+        if (latencyMs < 0) {
+            return;
+        }
+        count.incrementAndGet();
+        sumMs.addAndGet(latencyMs);
+        updateMax(maxMs, latencyMs);
+    }
+
+    private static void recordValueSample(AtomicLong count, AtomicLong sum, AtomicLong max, long value) {
+        if (value < 0) {
+            return;
+        }
+        count.incrementAndGet();
+        sum.addAndGet(value);
+        updateMax(max, value);
+    }
+
+    private static double averageValue(AtomicLong count, AtomicLong sum) {
+        long samples = count.get();
+        if (samples <= 0) {
+            return 0.0;
+        }
+        return sum.get() / (double) samples;
+    }
+
+    private static double averageMs(AtomicLong count, AtomicLong sumMs) {
+        return averageValue(count, sumMs);
+    }
+
+    private static String sanitizeMetricPart(String raw) {
+        if (raw == null || raw.trim().isEmpty()) {
+            return "unknown";
+        }
+        String value = raw.trim().toLowerCase(java.util.Locale.ROOT).replaceAll("[^a-z0-9_]+", "_");
+        return value.isEmpty() ? "unknown" : value;
     }
 
     private static double bitsToDbl(long bits) {
@@ -855,6 +1035,171 @@ public class MetricsCollector {
         sb.append("# HELP mage_infer_latency_max_ms Max candidate scoring latency observed (ms)\n");
         sb.append("# TYPE mage_infer_latency_max_ms gauge\n");
         sb.append("mage_infer_latency_max_ms ").append(inferLatencyMaxMs.get()).append("\n");
+
+        sb.append("# HELP mage_base_state_cache_hits_total Base-state cache hits on the JVM actor side\n");
+        sb.append("# TYPE mage_base_state_cache_hits_total counter\n");
+        sb.append("mage_base_state_cache_hits_total ").append(baseStateCacheHitsTotal.get()).append("\n");
+
+        sb.append("# HELP mage_base_state_cache_misses_total Base-state cache misses on the JVM actor side\n");
+        sb.append("# TYPE mage_base_state_cache_misses_total counter\n");
+        sb.append("mage_base_state_cache_misses_total ").append(baseStateCacheMissesTotal.get()).append("\n");
+
+        sb.append("# HELP mage_base_state_build_avg_ms Average time to build a fresh base state (ms)\n");
+        sb.append("# TYPE mage_base_state_build_avg_ms gauge\n");
+        sb.append("mage_base_state_build_avg_ms ").append(String.format("%.3f", averageMs(baseStateBuildCount, baseStateBuildSumMs))).append("\n");
+
+        sb.append("# HELP mage_base_state_build_max_ms Max time to build a fresh base state (ms)\n");
+        sb.append("# TYPE mage_base_state_build_max_ms gauge\n");
+        sb.append("mage_base_state_build_max_ms ").append(baseStateBuildMaxMs.get()).append("\n");
+
+        sb.append("# HELP mage_decision_prep_avg_ms Average actor-side decision preparation time before Python scoring (ms)\n");
+        sb.append("# TYPE mage_decision_prep_avg_ms gauge\n");
+        sb.append("mage_decision_prep_avg_ms ").append(String.format("%.3f", averageMs(decisionPrepCount, decisionPrepSumMs))).append("\n");
+
+        sb.append("# HELP mage_decision_prep_max_ms Max actor-side decision preparation time before Python scoring (ms)\n");
+        sb.append("# TYPE mage_decision_prep_max_ms gauge\n");
+        sb.append("mage_decision_prep_max_ms ").append(decisionPrepMaxMs.get()).append("\n");
+
+        double decisionCandidateAvg = 0.0;
+        long decisionCandidateSamples = decisionCandidateCount.get();
+        if (decisionCandidateSamples > 0) {
+            decisionCandidateAvg = decisionCandidateSum.get() / (double) decisionCandidateSamples;
+        }
+        sb.append("# HELP mage_decision_candidate_avg_count Average candidate count seen by actor-side decision prep\n");
+        sb.append("# TYPE mage_decision_candidate_avg_count gauge\n");
+        sb.append("mage_decision_candidate_avg_count ").append(String.format("%.3f", decisionCandidateAvg)).append("\n");
+
+        sb.append("# HELP mage_decision_candidate_max_count Max candidate count seen by actor-side decision prep\n");
+        sb.append("# TYPE mage_decision_candidate_max_count gauge\n");
+        sb.append("mage_decision_candidate_max_count ").append(decisionCandidateMax.get()).append("\n");
+
+        sb.append("# HELP mage_playable_cache_hits_total Playable-option cache hits on the JVM actor side\n");
+        sb.append("# TYPE mage_playable_cache_hits_total counter\n");
+        sb.append("mage_playable_cache_hits_total ").append(playableCacheHitsTotal.get()).append("\n");
+
+        sb.append("# HELP mage_playable_cache_misses_total Playable-option cache misses on the JVM actor side\n");
+        sb.append("# TYPE mage_playable_cache_misses_total counter\n");
+        sb.append("mage_playable_cache_misses_total ").append(playableCacheMissesTotal.get()).append("\n");
+
+        sb.append("# HELP mage_playable_lookup_avg_ms Average time to resolve playable options for the current state (ms)\n");
+        sb.append("# TYPE mage_playable_lookup_avg_ms gauge\n");
+        sb.append("mage_playable_lookup_avg_ms ").append(String.format("%.3f", averageMs(playableLookupCount, playableLookupSumMs))).append("\n");
+
+        sb.append("# HELP mage_playable_lookup_max_ms Max time to resolve playable options for the current state (ms)\n");
+        sb.append("# TYPE mage_playable_lookup_max_ms gauge\n");
+        sb.append("mage_playable_lookup_max_ms ").append(playableLookupMaxMs.get()).append("\n");
+
+        sb.append("# HELP mage_playable_option_avg_count Average number of playable options before validation/deduping\n");
+        sb.append("# TYPE mage_playable_option_avg_count gauge\n");
+        sb.append("mage_playable_option_avg_count ").append(String.format("%.3f", averageValue(playableOptionCount, playableOptionSum))).append("\n");
+
+        sb.append("# HELP mage_playable_option_max_count Max number of playable options before validation/deduping\n");
+        sb.append("# TYPE mage_playable_option_max_count gauge\n");
+        sb.append("mage_playable_option_max_count ").append(playableOptionMax.get()).append("\n");
+
+        sb.append("# HELP mage_alt_cost_validation_cache_hits_total Alternative-cost validation cache hits\n");
+        sb.append("# TYPE mage_alt_cost_validation_cache_hits_total counter\n");
+        sb.append("mage_alt_cost_validation_cache_hits_total ").append(altCostValidationCacheHitsTotal.get()).append("\n");
+
+        sb.append("# HELP mage_alt_cost_validation_cache_misses_total Alternative-cost validation cache misses\n");
+        sb.append("# TYPE mage_alt_cost_validation_cache_misses_total counter\n");
+        sb.append("mage_alt_cost_validation_cache_misses_total ").append(altCostValidationCacheMissesTotal.get()).append("\n");
+
+        sb.append("# HELP mage_alt_cost_validation_avg_ms Average time spent validating an action's alternative costs on cache miss (ms)\n");
+        sb.append("# TYPE mage_alt_cost_validation_avg_ms gauge\n");
+        sb.append("mage_alt_cost_validation_avg_ms ").append(String.format("%.3f", averageMs(altCostValidationCount, altCostValidationSumMs))).append("\n");
+
+        sb.append("# HELP mage_alt_cost_validation_max_ms Max time spent validating an action's alternative costs on cache miss (ms)\n");
+        sb.append("# TYPE mage_alt_cost_validation_max_ms gauge\n");
+        sb.append("mage_alt_cost_validation_max_ms ").append(altCostValidationMaxMs.get()).append("\n");
+
+        sb.append("# HELP mage_alt_cost_validation_choice_avg_count Average number of valid alternative-cost choices per validated action\n");
+        sb.append("# TYPE mage_alt_cost_validation_choice_avg_count gauge\n");
+        sb.append("mage_alt_cost_validation_choice_avg_count ").append(String.format("%.3f", averageValue(altCostValidationChoiceCount, altCostValidationChoiceSum))).append("\n");
+
+        sb.append("# HELP mage_alt_cost_validation_choice_max_count Max number of valid alternative-cost choices per validated action\n");
+        sb.append("# TYPE mage_alt_cost_validation_choice_max_count gauge\n");
+        sb.append("mage_alt_cost_validation_choice_max_count ").append(altCostValidationChoiceMax.get()).append("\n");
+
+        sb.append("# HELP mage_action_selection_avg_ms Average time to build, validate, dedupe, and choose a main action (ms)\n");
+        sb.append("# TYPE mage_action_selection_avg_ms gauge\n");
+        sb.append("mage_action_selection_avg_ms ").append(String.format("%.3f", averageMs(actionSelectionCount, actionSelectionSumMs))).append("\n");
+
+        sb.append("# HELP mage_action_selection_max_ms Max time to build, validate, dedupe, and choose a main action (ms)\n");
+        sb.append("# TYPE mage_action_selection_max_ms gauge\n");
+        sb.append("mage_action_selection_max_ms ").append(actionSelectionMaxMs.get()).append("\n");
+
+        sb.append("# HELP mage_action_option_raw_avg_count Average raw action-option count before validation\n");
+        sb.append("# TYPE mage_action_option_raw_avg_count gauge\n");
+        sb.append("mage_action_option_raw_avg_count ").append(String.format("%.3f", averageValue(actionOptionRawCount, actionOptionRawSum))).append("\n");
+
+        sb.append("# HELP mage_action_option_raw_max_count Max raw action-option count before validation\n");
+        sb.append("# TYPE mage_action_option_raw_max_count gauge\n");
+        sb.append("mage_action_option_raw_max_count ").append(actionOptionRawMax.get()).append("\n");
+
+        sb.append("# HELP mage_action_option_valid_avg_count Average action-option count after simulation validation\n");
+        sb.append("# TYPE mage_action_option_valid_avg_count gauge\n");
+        sb.append("mage_action_option_valid_avg_count ").append(String.format("%.3f", averageValue(actionOptionValidCount, actionOptionValidSum))).append("\n");
+
+        sb.append("# HELP mage_action_option_valid_max_count Max action-option count after simulation validation\n");
+        sb.append("# TYPE mage_action_option_valid_max_count gauge\n");
+        sb.append("mage_action_option_valid_max_count ").append(actionOptionValidMax.get()).append("\n");
+
+        sb.append("# HELP mage_action_option_unique_avg_count Average action-option count after deduping and before adding Pass\n");
+        sb.append("# TYPE mage_action_option_unique_avg_count gauge\n");
+        sb.append("mage_action_option_unique_avg_count ").append(String.format("%.3f", averageValue(actionOptionUniqueCount, actionOptionUniqueSum))).append("\n");
+
+        sb.append("# HELP mage_action_option_unique_max_count Max action-option count after deduping and before adding Pass\n");
+        sb.append("# TYPE mage_action_option_unique_max_count gauge\n");
+        sb.append("mage_action_option_unique_max_count ").append(actionOptionUniqueMax.get()).append("\n");
+
+        sb.append("# HELP mage_action_pass_only_total Priority decisions where Pass was the only available action\n");
+        sb.append("# TYPE mage_action_pass_only_total counter\n");
+        sb.append("mage_action_pass_only_total ").append(actionPassOnlyTotal.get()).append("\n");
+
+        sb.append("# HELP mage_episode_setup_avg_ms Average per-episode setup time before game.start() (ms)\n");
+        sb.append("# TYPE mage_episode_setup_avg_ms gauge\n");
+        sb.append("mage_episode_setup_avg_ms ").append(String.format("%.3f", averageMs(episodeSetupCount, episodeSetupSumMs))).append("\n");
+
+        sb.append("# HELP mage_episode_setup_max_ms Max per-episode setup time before game.start() (ms)\n");
+        sb.append("# TYPE mage_episode_setup_max_ms gauge\n");
+        sb.append("mage_episode_setup_max_ms ").append(episodeSetupMaxMs.get()).append("\n");
+
+        sb.append("# HELP mage_episode_game_avg_ms Average per-episode game execution time (ms)\n");
+        sb.append("# TYPE mage_episode_game_avg_ms gauge\n");
+        sb.append("mage_episode_game_avg_ms ").append(String.format("%.3f", averageMs(episodeGameCount, episodeGameSumMs))).append("\n");
+
+        sb.append("# HELP mage_episode_game_max_ms Max per-episode game execution time (ms)\n");
+        sb.append("# TYPE mage_episode_game_max_ms gauge\n");
+        sb.append("mage_episode_game_max_ms ").append(episodeGameMaxMs.get()).append("\n");
+
+        sb.append("# HELP mage_reward_update_avg_ms Average per-episode reward/update time after game end (ms)\n");
+        sb.append("# TYPE mage_reward_update_avg_ms gauge\n");
+        sb.append("mage_reward_update_avg_ms ").append(String.format("%.3f", averageMs(rewardUpdateCount, rewardUpdateSumMs))).append("\n");
+
+        sb.append("# HELP mage_reward_update_max_ms Max per-episode reward/update time after game end (ms)\n");
+        sb.append("# TYPE mage_reward_update_max_ms gauge\n");
+        sb.append("mage_reward_update_max_ms ").append(rewardUpdateMaxMs.get()).append("\n");
+
+        sb.append("# HELP mage_episode_total_avg_ms Average end-to-end episode time (ms)\n");
+        sb.append("# TYPE mage_episode_total_avg_ms gauge\n");
+        sb.append("mage_episode_total_avg_ms ").append(String.format("%.3f", averageMs(episodeTotalCount, episodeTotalSumMs))).append("\n");
+
+        sb.append("# HELP mage_episode_total_max_ms Max end-to-end episode time (ms)\n");
+        sb.append("# TYPE mage_episode_total_max_ms gauge\n");
+        sb.append("mage_episode_total_max_ms ").append(episodeTotalMaxMs.get()).append("\n");
+
+        if (!decisionHeadMetrics.isEmpty()) {
+            sb.append("# HELP mage_decision_head_total Total actor-side scoring decisions by head\n");
+            sb.append("# TYPE mage_decision_head_total counter\n");
+            for (Map.Entry<String, AtomicLong> entry : new java.util.TreeMap<>(decisionHeadMetrics).entrySet()) {
+                sb.append("mage_decision_head_total{head=\"")
+                        .append(entry.getKey())
+                        .append("\"} ")
+                        .append(entry.getValue().get())
+                        .append("\n");
+            }
+        }
         sb.append("# HELP mage_main_turn_uniform_total RL main-policy turns executed with full uniform exploration\n");
         sb.append("# TYPE mage_main_turn_uniform_total counter\n");
         sb.append("mage_main_turn_uniform_total ").append(mainTurnUniformTotal.get()).append("\n");

@@ -2,6 +2,8 @@ import logging
 import os
 import tempfile
 
+from profile_paths import profile_logs_dir
+
 # Logging categories
 
 
@@ -31,10 +33,50 @@ class LogCategory:
 
 # Get the directory where this script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
-log_file = os.path.join(script_dir, 'mtg_ai.log')
-mulligan_log_file = os.path.join(script_dir, 'mulligan_training.log')
-vram_log_dir = os.path.join(script_dir, 'logs')
-vram_diag_log_file = os.path.join(vram_log_dir, 'VRAM_diagnostics.log')
+
+
+def _resolve_python_log_dir():
+    candidates = []
+    explicit_dir = os.getenv("PYTHON_LOGS_DIR", "").strip()
+    if explicit_dir:
+        candidates.append(explicit_dir)
+
+    rl_logs_dir = os.getenv("RL_LOGS_DIR", "").strip()
+    if rl_logs_dir:
+        candidates.append(os.path.join(rl_logs_dir, "python"))
+
+    try:
+        candidates.append(os.path.join(profile_logs_dir(), "python"))
+    except Exception:
+        pass
+
+    candidates.append(script_dir)
+
+    for candidate in candidates:
+        if not candidate:
+            continue
+        try:
+            os.makedirs(candidate, exist_ok=True)
+            return candidate
+        except Exception:
+            continue
+
+    fallback_dir = os.path.join(tempfile.gettempdir(), "mtg_ai_logs")
+    os.makedirs(fallback_dir, exist_ok=True)
+    return fallback_dir
+
+
+python_log_dir = _resolve_python_log_dir()
+log_file = os.getenv("MTG_AI_LOG_FILE", "").strip() or os.path.join(python_log_dir, "mtg_ai.log")
+mulligan_log_file = os.getenv("MULLIGAN_TRAINING_LOG_FILE", "").strip() or os.path.join(
+    python_log_dir,
+    "mulligan_training.log",
+)
+vram_log_dir = python_log_dir
+vram_diag_log_file = os.getenv("VRAM_DIAGNOSTICS_LOG_FILE", "").strip() or os.path.join(
+    vram_log_dir,
+    "VRAM_diagnostics.log",
+)
 
 # Create a temporary directory for shared memory files
 TEMP_DIR = tempfile.mkdtemp(prefix='mtg_ai_')

@@ -4,6 +4,12 @@ python3 scripts/hpc/slurm_availability.py
 # JSON form if you want to capture or diff it.
 python3 scripts/hpc/slurm_availability.py --json
 
+# Build and upload a new runtime bundle from Windows with the saved DPAPI credential.
+# This avoids retyping the password; the upload still triggers the normal Duo approval.
+powershell -File scripts/hpc/build_rl_runtime_bundle.ps1 `
+  -ScpDestination "jmaior@login.zaratan.umd.edu:/scratch/zt1/project/msml603/user/jmaior/jmaior/mage/local-training/hpc/bundles/" `
+  -CredentialFile "$env:LOCALAPPDATA/Codex/umd-hpc/credentials/zaratan.json"
+
 # Quick single-job throughput experiment (20 min default for easier backfill).
 bash scripts/hpc/zaratan_spy_saturation.sh
 

@@ -126,7 +126,8 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     @Override
     protected void addVariableXOptions(List<Ability> options, Ability ability, int targetNum, Game game) {
         // calculate the mana that can be used for the x part
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
+        int manaValue = ability.getManaCosts() == null ? 0 : ability.getManaCosts().manaValue();
+        int numAvailable = getAvailableManaProducers(game).size() - manaValue;
 
         if (numAvailable > 0) {
             // check if variable mana costs is included and get the multiplier

@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -26,7 +28,9 @@ import mage.Mana;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.Abilities;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.mana.ManaOptions;
 import mage.abilities.ActivatedAbility;
@@ -80,10 +84,15 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 
 public class ComputerPlayerRL extends ComputerPlayer7 {
+
+    // When true, skip model inference and return uniform random scores.
+    // Use to benchmark pure game-engine throughput without GPU dependency.
+    private static final boolean RANDOM_DECISIONS = EnvConfig.bool("RL_RANDOM_DECISIONS", false);
 
     // Heuristic step shaping is opt-in; default off so learning is driven by returns.
     private static final boolean USE_HEURISTIC_STEP_REWARDS = "1".equals(System.getenv().getOrDefault("RL_HEURISTIC_STEP_REWARDS", "0"))
@@ -106,8 +115,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final boolean BASE_STATE_CACHE_ENABLED = EnvConfig.bool("RL_BASE_STATE_CACHE_ENABLED", true);
     private static final boolean ALTERNATIVE_COST_SIM_CACHE_ENABLED =
             EnvConfig.bool("RL_ALTCOST_SIM_CACHE_ENABLED", true);
+    private static final int ALTERNATIVE_COST_SIM_CACHE_MAX_ENTRIES =
+            EnvConfig.i32("RL_ALTCOST_SIM_CACHE_MAX_ENTRIES", 256);
     private static final boolean PLAYABLE_CACHE_ENABLED =
             EnvConfig.bool("RL_PLAYABLE_CACHE_ENABLED", true);
+    private static final boolean ACTIVATION_FASTPATH_ENABLED =
+            EnvConfig.bool("RL_ACTIVATION_FASTPATH_ENABLED", true);
+    private static final boolean SKIP_SIM_VALIDATION =
+            EnvConfig.bool("RL_SKIP_SIM_VALIDATION", false);
     // Experimental: bypass the playable-calculation game clone and evaluate directly
     // on the live game while forcing playable-calc flags. This can be faster, but it
     // is not enabled by default because XMage still mutates some state while checking
@@ -127,6 +142,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final String TURN_UNIFORM_OLD_LOGP_SOURCE =
             "behavior".equals(TURN_UNIFORM_OLD_LOGP_SOURCE_RAW) ? "behavior" : "policy";
     private static final long RL_BASE_SEED = EnvConfig.i64("RL_BASE_SEED", -1L);
+    private static final MetricsCollector metrics = MetricsCollector.getInstance();
 
     // Track RL player activation failures (these pollute training signal)
     private static final java.util.concurrent.atomic.AtomicInteger RL_ACTIVATION_FAILURES = new java.util.concurrent.atomic.AtomicInteger(0);
@@ -154,6 +170,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private MulliganModel mulliganModel;
     protected StateSequenceBuilder.SequenceOutput currentState;
     private transient StateSequenceBuilder.SequenceOutput cachedBaseState;
+    private transient int cachedBaseStateHash = Integer.MIN_VALUE;
     private transient UUID cachedBaseStateGameId;
     private transient TurnPhase cachedBaseStatePhase;
     private transient UUID cachedBaseStateActivePlayerId;
@@ -163,18 +180,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private transient int cachedBaseStateStepNum = Integer.MIN_VALUE;
     private transient int cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
     private transient int cachedBaseStateStackSize = Integer.MIN_VALUE;
-    private transient Map<String, Set<String>> cachedAlternativeCostValidation = new HashMap<>();
-    private transient UUID cachedAltCostValidationGameId;
-    private transient TurnPhase cachedAltCostValidationPhase;
-    private transient UUID cachedAltCostValidationActivePlayerId;
-    private transient UUID cachedAltCostValidationPriorityPlayerId;
-    private transient UUID cachedAltCostValidationChoosingPlayerId;
-    private transient int cachedAltCostValidationTurnNum = Integer.MIN_VALUE;
-    private transient int cachedAltCostValidationStepNum = Integer.MIN_VALUE;
-    private transient int cachedAltCostValidationApplyEffectsCounter = Integer.MIN_VALUE;
-    private transient int cachedAltCostValidationStackSize = Integer.MIN_VALUE;
+    private transient Map<String, Set<String>> cachedAlternativeCostValidation =
+            createLruCache(ALTERNATIVE_COST_SIM_CACHE_MAX_ENTRIES);
     private transient String cachedPlayableStateKey;
-    private transient List<ActivatedAbility> cachedPlayableOptions = new ArrayList<>();
+    private transient List<ActivatedAbility> cachedPlayableOptions = null;
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
     private final java.util.Map<StateSequenceBuilder.ActionType, Integer> decisionCountsByHead;
     private Ability currentAbility;
@@ -268,6 +277,18 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
     }
 
+    private static <K, V> Map<K, V> createLruCache(final int maxEntries) {
+        if (maxEntries <= 0) {
+            return new HashMap<>();
+        }
+        return new LinkedHashMap<K, V>(maxEntries + 1, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+                return size() > maxEntries;
+            }
+        };
+    }
+
     private static final class SequentialPickResult {
 
         final List<Integer> selectedIndices;
@@ -343,6 +364,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
     private void invalidateBaseStateCache() {
         cachedBaseState = null;
+        cachedBaseStateHash = Integer.MIN_VALUE;
         cachedBaseStateGameId = null;
         cachedBaseStatePhase = null;
         cachedBaseStateActivePlayerId = null;
@@ -353,63 +375,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
         cachedBaseStateStackSize = Integer.MIN_VALUE;
         cachedPlayableStateKey = null;
-        cachedPlayableOptions.clear();
+        cachedPlayableOptions = null;
     }
 
     private void invalidateAlternativeCostValidationCache() {
         cachedAlternativeCostValidation.clear();
-        cachedAltCostValidationGameId = null;
-        cachedAltCostValidationPhase = null;
-        cachedAltCostValidationActivePlayerId = null;
-        cachedAltCostValidationPriorityPlayerId = null;
-        cachedAltCostValidationChoosingPlayerId = null;
-        cachedAltCostValidationTurnNum = Integer.MIN_VALUE;
-        cachedAltCostValidationStepNum = Integer.MIN_VALUE;
-        cachedAltCostValidationApplyEffectsCounter = Integer.MIN_VALUE;
-        cachedAltCostValidationStackSize = Integer.MIN_VALUE;
     }
 
     private void refreshAlternativeCostValidationCache(Game game) {
         if (!ALTERNATIVE_COST_SIM_CACHE_ENABLED) {
             invalidateAlternativeCostValidationCache();
-            return;
         }
-
-        TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
-        GameState state = game.getState();
-        UUID gameId = game.getId();
-        UUID activePlayerId = game.getActivePlayerId();
-        UUID priorityPlayerId = state != null ? state.getPriorityPlayerId() : null;
-        UUID choosingPlayerId = state != null ? state.getChoosingPlayerId() : null;
-        int turnNum = game.getTurnNum();
-        int stepNum = state != null ? state.getStepNum() : Integer.MIN_VALUE;
-        int applyEffectsCounter = state != null ? state.getApplyEffectsCounter() : Integer.MIN_VALUE;
-        int stackSize = game.getStack() != null ? game.getStack().size() : 0;
-
-        boolean sameState = java.util.Objects.equals(cachedAltCostValidationGameId, gameId)
-                && cachedAltCostValidationPhase == turnPhase
-                && java.util.Objects.equals(cachedAltCostValidationActivePlayerId, activePlayerId)
-                && java.util.Objects.equals(cachedAltCostValidationPriorityPlayerId, priorityPlayerId)
-                && java.util.Objects.equals(cachedAltCostValidationChoosingPlayerId, choosingPlayerId)
-                && cachedAltCostValidationTurnNum == turnNum
-                && cachedAltCostValidationStepNum == stepNum
-                && cachedAltCostValidationApplyEffectsCounter == applyEffectsCounter
-                && cachedAltCostValidationStackSize == stackSize;
-
-        if (sameState) {
-            return;
-        }
-
-        cachedAlternativeCostValidation.clear();
-        cachedAltCostValidationGameId = gameId;
-        cachedAltCostValidationPhase = turnPhase;
-        cachedAltCostValidationActivePlayerId = activePlayerId;
-        cachedAltCostValidationPriorityPlayerId = priorityPlayerId;
-        cachedAltCostValidationChoosingPlayerId = choosingPlayerId;
-        cachedAltCostValidationTurnNum = turnNum;
-        cachedAltCostValidationStepNum = stepNum;
-        cachedAltCostValidationApplyEffectsCounter = applyEffectsCounter;
-        cachedAltCostValidationStackSize = stackSize;
     }
 
     private String buildAlternativeCostValidationKey(ActivatedAbility ability, Game game) {
@@ -431,6 +407,16 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         return key.toString();
+    }
+
+    private static int computeBaseStateHash(StateSequenceBuilder.SequenceOutput baseState) {
+        int hash = 1;
+        hash = 31 * hash + baseState.mask.hashCode();
+        hash = 31 * hash + baseState.tokenIds.hashCode();
+        for (float[] token : baseState.tokens) {
+            hash = 31 * hash + Arrays.hashCode(token);
+        }
+        return hash;
     }
 
     private StateSequenceBuilder.SequenceOutput getOrBuildBaseState(Game game) {
@@ -457,14 +443,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 && cachedBaseStateApplyEffectsCounter == applyEffectsCounter
                 && cachedBaseStateStackSize == stackSize) {
             currentState = cachedBaseState;
+            metrics.recordBaseStateCacheHit();
             return cachedBaseState;
         }
 
+        metrics.recordBaseStateCacheMiss();
+        long buildStartNanos = System.nanoTime();
         StateSequenceBuilder.SequenceOutput baseState =
                 StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+        metrics.recordBaseStateBuildMs((System.nanoTime() - buildStartNanos) / 1_000_000L);
         currentState = baseState;
         if (BASE_STATE_CACHE_ENABLED) {
             cachedBaseState = baseState;
+            cachedBaseStateHash = computeBaseStateHash(baseState);
             cachedBaseStateGameId = gameId;
             cachedBaseStatePhase = turnPhase;
             cachedBaseStateActivePlayerId = activePlayerId;
@@ -482,12 +473,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
     private String buildPlayableStateKey(Game game) {
         StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
-        int hash = 1;
-        hash = 31 * hash + baseState.mask.hashCode();
-        hash = 31 * hash + baseState.tokenIds.hashCode();
-        for (float[] token : baseState.tokens) {
-            hash = 31 * hash + Arrays.hashCode(token);
-        }
+        int hash = (BASE_STATE_CACHE_ENABLED && cachedBaseState == baseState && cachedBaseStateHash != Integer.MIN_VALUE)
+                ? cachedBaseStateHash
+                : computeBaseStateHash(baseState);
 
         Player self = game.getPlayer(getId());
         int landsPlayed = self != null ? self.getLandsPlayed() : Integer.MIN_VALUE;
@@ -499,8 +487,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         key.append(game.getPhase() != null ? game.getPhase().getType() : "NONE").append('|');
         key.append(game.getActivePlayerId()).append('|');
         key.append(game.getState() != null ? game.getState().getPriorityPlayerId() : null).append('|');
-        key.append(game.getState() != null ? game.getState().getChoosingPlayerId() : null).append('|');
-        key.append(game.getState() != null ? game.getState().getApplyEffectsCounter() : Integer.MIN_VALUE).append('|');
         key.append(game.getState() != null ? game.getState().getStepNum() : Integer.MIN_VALUE).append('|');
         key.append(game.getStack() != null ? game.getStack().size() : 0).append('|');
         key.append(landsPlayed).append('|');
@@ -510,18 +496,23 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     private List<ActivatedAbility> getPlayableForCurrentState(Game game) {
+        long lookupStartNanos = System.nanoTime();
         List<ActivatedAbility> playable;
         if (!PLAYABLE_CACHE_ENABLED) {
             cachedPlayableStateKey = null;
-            cachedPlayableOptions.clear();
-            return PLAYABLE_NOCLONE_ENABLED
+            cachedPlayableOptions = null;
+            playable = PLAYABLE_NOCLONE_ENABLED
                     ? getPlayableFast(game, true, Zone.ALL, true)
                     : getPlayable(game, true);
+            metrics.recordPlayableLookup(playable.size(), (System.nanoTime() - lookupStartNanos) / 1_000_000L, false);
+            return playable;
         }
 
         String stateKey = buildPlayableStateKey(game);
-        if (stateKey.equals(cachedPlayableStateKey) && !cachedPlayableOptions.isEmpty()) {
-            return new ArrayList<>(cachedPlayableOptions);
+        if (stateKey.equals(cachedPlayableStateKey) && cachedPlayableOptions != null) {
+            playable = new ArrayList<>(cachedPlayableOptions);
+            metrics.recordPlayableLookup(playable.size(), (System.nanoTime() - lookupStartNanos) / 1_000_000L, true);
+            return playable;
         }
 
         playable = PLAYABLE_NOCLONE_ENABLED
@@ -529,7 +520,168 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 : getPlayable(game, true);
         cachedPlayableStateKey = stateKey;
         cachedPlayableOptions = new ArrayList<>(playable);
+        metrics.recordPlayableLookup(playable.size(), (System.nanoTime() - lookupStartNanos) / 1_000_000L, false);
         return playable;
+    }
+
+    private ActivatedAbility resolveFreshAbility(ActivatedAbility ability, Game game) {
+        ActivatedAbility freshAbility = ability;
+        Permanent sourcePerm = game.getPermanent(ability.getSourceId());
+        if (sourcePerm != null) {
+            for (Ability permAbility : sourcePerm.getAbilities(game)) {
+                if (permAbility instanceof ActivatedAbility
+                        && permAbility.getRule().equals(ability.getRule())) {
+                    freshAbility = (ActivatedAbility) permAbility;
+                    break;
+                }
+            }
+            return freshAbility;
+        }
+
+        Card sourceCard = game.getCard(ability.getSourceId());
+        if (sourceCard != null) {
+            for (Ability cardAbility : sourceCard.getAbilities(game)) {
+                if (cardAbility instanceof ActivatedAbility
+                        && cardAbility.getRule().equals(ability.getRule())) {
+                    freshAbility = (ActivatedAbility) cardAbility;
+                    break;
+                }
+            }
+        }
+        return freshAbility;
+    }
+
+    private boolean hasRequiredTargets(ActivatedAbility ability) {
+        for (Target target : ability.getTargets()) {
+            if (target != null && target.getMinNumberOfTargets() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasVariableManaCost(ActivatedAbility ability) {
+        if (ability.getManaCostsToPay() == null) {
+            return false;
+        }
+        return ability.getManaCostsToPay().stream().anyMatch(VariableManaCost.class::isInstance);
+    }
+
+    private boolean hasComplexChoiceCost(Ability ability) {
+        if (ability == null || ability.getCosts() == null) {
+            return false;
+        }
+        for (mage.abilities.costs.Cost cost : ability.getCosts()) {
+            if (cost == null) {
+                continue;
+            }
+            if (cost instanceof mage.abilities.costs.common.TapTargetCost) {
+                return true;
+            }
+            try {
+                if (!cost.getTargets().isEmpty()) {
+                    return true;
+                }
+            } catch (Exception ignored) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean requiresManaPaymentSimulation(ActivatedAbility ability, boolean riskyManaProducersAvailable) {
+        if (!riskyManaProducersAvailable || ability == null || ability.getManaCostsToPay() == null) {
+            return false;
+        }
+        return !ability.getManaCostsToPay().isEmpty();
+    }
+
+    private boolean hasRiskyManaProducerAvailable(Game game) {
+        if (game == null) {
+            return false;
+        }
+        try {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(this.getId(), game)) {
+                if (permanent == null || !permanent.canUseActivatedAbilities(game)) {
+                    continue;
+                }
+                for (Ability candidate : permanent.getAbilities(game)) {
+                    if (!(candidate instanceof ActivatedAbility) || !(candidate instanceof ManaAbility)) {
+                        continue;
+                    }
+                    ActivatedAbility manaAbility = (ActivatedAbility) candidate;
+                    ActivatedAbility.ActivationStatus status = manaAbility.canActivate(this.getId(), game);
+                    if (status == null || !status.canActivate()) {
+                        continue;
+                    }
+                    if (hasComplexChoiceCost(manaAbility)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return false;
+    }
+
+    private boolean hasPotentialAlternativeCosts(ActivatedAbility ability, Game game) {
+        MageObject sourceObject = ability.getSourceObject(game);
+        if (sourceObject == null || sourceObject instanceof Permanent) {
+            return false;
+        }
+
+        Abilities<Ability> sourceAbilities = CardUtil.getAbilities(sourceObject, game);
+        for (Ability sourceAbility : sourceAbilities) {
+            if (!(sourceAbility instanceof AlternativeSourceCosts)) {
+                continue;
+            }
+            AlternativeSourceCosts alternative = (AlternativeSourceCosts) sourceAbility;
+            if (alternative.isAvailable(ability, game)
+                    && alternative.canActivateAlternativeCostsNow(ability, game)) {
+                return true;
+            }
+        }
+
+        Player controller = game.getPlayer(getId());
+        if (controller == null) {
+            return false;
+        }
+        for (AlternativeSourceCosts alternative : controller.getAlternativeSourceCosts()) {
+            if (alternative.isAvailable(ability, game)
+                    && alternative.canActivateAlternativeCostsNow(ability, game)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Set<String> validatePlayableAbility(ActivatedAbility ability, Game game, boolean riskyManaProducersAvailable) {
+        ActivatedAbility freshAbility = resolveFreshAbility(ability, game);
+        if (hasUnsatisfiedTapTargetCost(freshAbility, game)) {
+            metrics.recordAltCostValidation(0, 0L, false);
+            return Collections.emptySet();
+        }
+        boolean fastPath = ACTIVATION_FASTPATH_ENABLED
+                && !hasPotentialAlternativeCosts(freshAbility, game)
+                && !hasRequiredTargets(freshAbility)
+                && !hasComplexChoiceCost(freshAbility)
+                && freshAbility.getModes().size() <= 1
+                && !hasVariableManaCost(freshAbility)
+                && !requiresManaPaymentSimulation(freshAbility, riskyManaProducersAvailable);
+        if (fastPath) {
+            Set<String> validChoices = new HashSet<>();
+            ActivatedAbility.ActivationStatus status = freshAbility.canActivate(this.getId(), game);
+            if (status != null && status.canActivate()) {
+                validChoices.add("0");
+            }
+            metrics.recordAltCostValidation(validChoices.size(), 0L, false);
+            return validChoices;
+        }
+
+        long validationStartNanos = System.nanoTime();
+        Set<String> validChoices = testAllAlternativeCosts(freshAbility, game);
+        metrics.recordAltCostValidation(validChoices.size(), (System.nanoTime() - validationStartNanos) / 1_000_000L, false);
+        return validChoices;
     }
 
     private static float[] normalizePolicyScores(float[] actionScores, int[] candidateMask, int candidateCount) {
@@ -895,6 +1047,153 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return false;
     }
 
+    private boolean hasUnsatisfiedTapTargetCost(Ability ability, Game game) {
+        if (ability == null || game == null) {
+            return false;
+        }
+        UUID controllerId = ability.getControllerId() != null ? ability.getControllerId() : getId();
+        Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
+        boolean sourceHasTapSourceCost = hasTapSourceCost(ability);
+        try {
+            for (mage.abilities.costs.Cost cost : ability.getCosts()) {
+                if (!(cost instanceof mage.abilities.costs.common.TapTargetCost)) {
+                    continue;
+                }
+                mage.target.common.TargetControlledPermanent target =
+                        ((mage.abilities.costs.common.TapTargetCost) cost).getTarget();
+                if (target == null) {
+                    return true;
+                }
+                int needed = Math.max(1, target.getMinNumberOfTargets());
+                int legalTargets = 0;
+                for (UUID candidateId : target.possibleTargets(controllerId, ability, game)) {
+                    if (candidateId == null) {
+                        continue;
+                    }
+                    if (sourceHasTapSourceCost && sourcePermanent != null && sourcePermanent.getId().equals(candidateId)) {
+                        continue;
+                    }
+                    Permanent candidate = game.getPermanent(candidateId);
+                    if (candidate == null || candidate.isTapped()) {
+                        continue;
+                    }
+                    if (!target.canTarget(controllerId, candidateId, ability, game)) {
+                        continue;
+                    }
+                    legalTargets++;
+                    if (legalTargets >= needed) {
+                        break;
+                    }
+                }
+                if (legalTargets < needed) {
+                    return true;
+                }
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+        return false;
+    }
+
+    private boolean isUsableManaAbilityForCurrentState(Ability ability, Game game) {
+        if (!(ability instanceof ManaAbility) || game == null) {
+            return ability != null;
+        }
+        return !hasUnsatisfiedTapTargetCost(ability, game);
+    }
+
+    private Abilities<Ability> getAbilitiesForObject(MageObject mageObject, Game game) {
+        if (mageObject instanceof Permanent) {
+            return ((Permanent) mageObject).getAbilities(game);
+        }
+        if (mageObject instanceof Card) {
+            return ((Card) mageObject).getAbilities(game);
+        }
+        if (mageObject != null) {
+            return mageObject.getAbilities();
+        }
+        return new mage.abilities.AbilitiesImpl<>();
+    }
+
+    private mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl> filterUsableManaAbilities(
+            mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl> abilities,
+            Game game
+    ) {
+        mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl> filtered =
+                new mage.abilities.AbilitiesImpl<>();
+        if (abilities == null) {
+            return filtered;
+        }
+        for (mage.abilities.mana.ActivatedManaAbilityImpl ability : abilities) {
+            if (isUsableManaAbilityForCurrentState(ability, game)) {
+                filtered.add(ability);
+            }
+        }
+        return filtered;
+    }
+
+    private boolean mageObjectCanProduceManaForCurrentPayment(MageObject mageObject, String requiredColor, Game game) {
+        if (mageObject == null || game == null) {
+            return false;
+        }
+        try {
+            for (Ability ability : getAbilitiesForObject(mageObject, game)) {
+                if (!(ability instanceof ManaAbility) || !isUsableManaAbilityForCurrentState(ability, game)) {
+                    continue;
+                }
+                if (requiredColor == null) {
+                    if (estimateAbilityManaOutput(ability, game) > 0) {
+                        return true;
+                    }
+                } else if (abilityCanProduceColor(ability, requiredColor, game)) {
+                    return true;
+                }
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+        return false;
+    }
+
+    private boolean hasTapTargetManaAbility(MageObject mageObject, Game game) {
+        if (mageObject == null || game == null) {
+            return false;
+        }
+        try {
+            for (Ability ability : getAbilitiesForObject(mageObject, game)) {
+                if (ability instanceof ManaAbility && hasTapTargetCost(ability)) {
+                    return true;
+                }
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+        return false;
+    }
+
+    private boolean shouldSkipTapTargetProducerForCurrentPayment(MageObject candidate, List<MageObject> producers, Game game) {
+        if (!inPlayManaContext() || candidate == null || !hasTapTargetManaAbility(candidate, game)) {
+            return false;
+        }
+        String requiredColor = requiredManaColorFromUnpaid(currentUnpaidManaText.get());
+        if (!mageObjectCanProduceManaForCurrentPayment(candidate, requiredColor, game)) {
+            return true;
+        }
+        int candidatePenalty = manaProducerUsePenalty(candidate, game);
+        for (MageObject other : producers) {
+            if (other == null || other == candidate) {
+                continue;
+            }
+            if (!mageObjectCanProduceManaForCurrentPayment(other, requiredColor, game)) {
+                continue;
+            }
+            if (manaProducerUsePenalty(other, game) < candidatePenalty) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static int manaProducerUsePenalty(MageObject obj, Game game) {
         if (!(obj instanceof Permanent) || game == null) {
             return Integer.MAX_VALUE / 4;
@@ -1024,14 +1323,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final Object MULL_TRAIN_LOG_LOCK = new Object();
     private static final String MULL_TRAIN_LOG_FILE = System.getenv().getOrDefault(
             "MULLIGAN_TRAINING_LOG_FILE",
-            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/mulligan_training.log"
+            RLLogPaths.PYTHON_MULLIGAN_LOG_PATH
     );
     private static final DateTimeFormatter MULL_TRAIN_TS = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss,SSS");
 
     private static final Object MULL_TRACE_JSONL_LOCK = new Object();
     private static final String MULL_TRACE_JSONL_FILE = System.getenv().getOrDefault(
             "MULLIGAN_TRACE_JSONL_FILE",
-            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/mulligan_trace.jsonl"
+            RLLogPaths.PYTHON_MULLIGAN_TRACE_PATH
     );
     private static final Object CANDIDATE_EXPLOSION_LOG_LOCK = new Object();
     private static final String CANDIDATE_EXPLOSIONS_LOG_FILE = System.getenv().getOrDefault(
@@ -1426,6 +1725,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
         // Build padded candidate tensors
+        long prepStartNanos = System.nanoTime();
         int[] candidateActionIds = new int[maxCandidates];
         float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
         int[] candidateMask = new int[maxCandidates]; // 1 valid, 0 padding
@@ -1444,16 +1744,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             RLTrainer.threadLocalLogger.get().info("About to call model.scoreCandidates() with candidateCount: " + candidateCount);
         }
         mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction
-                = model.scoreCandidates(
+                = scoreCandidatesWithMetrics(
                         baseState,
                         candidateActionIds,
                         candidateFeatures,
                         candidateMask,
-                        policyKey,
                         headId,
                         pickIndex,
                         minTargets,
-                        maxTargets
+                        maxTargets,
+                        candidateCount,
+                        prepStartNanos
                 );
         if (ACTIVATION_DIAG) {
             RLTrainer.threadLocalLogger.get().info("Successfully received candidate scoring result");
@@ -1698,6 +1999,40 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             default:
                 return "action";
         }
+    }
+
+    private mage.player.ai.rl.PythonMLBatchManager.PredictionResult scoreCandidatesWithMetrics(
+            StateSequenceBuilder.SequenceOutput baseState,
+            int[] candidateActionIds,
+            float[][] candidateFeatures,
+            int[] candidateMask,
+            String headId,
+            int pickIndex,
+            int minTargets,
+            int maxTargets,
+            int candidateCount,
+            long prepStartNanos) {
+        metrics.recordDecisionPrep(headId, candidateCount, (System.nanoTime() - prepStartNanos) / 1_000_000L);
+        if (RANDOM_DECISIONS) {
+            float[] randomPolicy = new float[candidateCount];
+            java.util.concurrent.ThreadLocalRandom rng = java.util.concurrent.ThreadLocalRandom.current();
+            for (int i = 0; i < candidateCount; i++) {
+                randomPolicy[i] = rng.nextFloat();
+            }
+            return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(randomPolicy, 0.0f);
+        }
+        metrics.recordPythonBridgeCall();
+        return model.scoreCandidates(
+                baseState,
+                candidateActionIds,
+                candidateFeatures,
+                candidateMask,
+                policyKey,
+                headId,
+                pickIndex,
+                minTargets,
+                maxTargets
+        );
     }
 
     private static int toVocabId(String key) {
@@ -2341,11 +2676,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // During mana payment, avoid tapping key mana producers when a target
         // choice is required (e.g., Saruli Caretaker) by using a deterministic
         // target heuristic instead of policy sampling.
-        if (USE_ENGINE_CHOICES && inPlayManaContext() && outcome == Outcome.Tap
+        boolean manaPaymentContext = inPlayManaContext();
+        if (USE_ENGINE_CHOICES && outcome == Outcome.Tap
                 && source instanceof ManaAbility
                 && target != null
                 && target.getMinNumberOfTargets() == 1
-                && target.getMaxNumberOfTargets() == 1) {
+                && target.getMaxNumberOfTargets() == 1
+                && (manaPaymentContext || hasTapTargetCost(source))) {
+            boolean sourceHasTapTargetCost = hasTapTargetCost(source);
             UUID abilityControllerId = playerId;
             if (target.getTargetController() != null && target.getAbilityController() != null) {
                 abilityControllerId = target.getAbilityController();
@@ -2361,6 +2699,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 if (sourceId != null) {
                     possible.removeIf(id -> sourceId.equals(id));
                 }
+            }
+            if (sourceHasTapTargetCost && possible.isEmpty()) {
+                trace("chooseTarget: playMana heuristic found no legal tap-targets");
+                trace("chooseTarget EXIT: playMana heuristic, result=false");
+                return false;
             }
             if (!possible.isEmpty()) {
                 UUID best = null;
@@ -2384,7 +2727,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     // Reject dominated targeted-mana lines (e.g., Saruli tapping Battlement to make
                     // one mana while spending two producers) when the tapped producers can already
                     // satisfy the currently required color.
-                    boolean sourceHasTapTargetCost = hasTapTargetCost(source);
                     int sourceOutput = estimateAbilityManaOutput(source, game);
                     boolean dominatedByTargets = sourceOutput > 0;
                     for (UUID id : possible) {
@@ -2424,7 +2766,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         }
                     }
 
-                    if (sourceHasTapTargetCost
+                    if (manaPaymentContext
+                            && sourceHasTapTargetCost
                             && dominatedByTargets
                             && targetsCanCoverRequiredColor
                             && !(sourceProvidesRequiredColor && hasOffColorTarget)) {
@@ -2547,6 +2890,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
 
                     int candidateCount = Math.min(possible.size(), maxCandidates);
+                    long prepStartNanos = System.nanoTime();
                     int[] candidateActionIds = new int[maxCandidates];
                     float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
                     int[] candidateMask = new int[maxCandidates];
@@ -2557,16 +2901,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source, cand, candFeatDim, baseState);
                     }
 
-                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
                             baseState,
                             candidateActionIds,
                             candidateFeatures,
                             candidateMask,
-                            policyKey,
                             "target",
                             chosenCount,
                             minTargets,
-                            maxTargets
+                            maxTargets,
+                            candidateCount,
+                            prepStartNanos
                     );
                     float[] actionProbs = prediction.policyScores;
                     float valueScore = prediction.valueScores;
@@ -2907,6 +3252,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
 
                     int candidateCount = Math.min(remainingNames.size(), maxCandidates);
+                    long prepStartNanos = System.nanoTime();
                     int[] candidateActionIds = new int[maxCandidates];
                     float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
                     int[] candidateMask = new int[maxCandidates];
@@ -2929,16 +3275,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_CARD, game, source, cid, candFeatDim, baseState);
                     }
 
-                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
                             baseState,
                             candidateActionIds,
                             candidateFeatures,
                             candidateMask,
-                            policyKey,
                             "card_select",
                             chosenCount,
                             minTargets,
-                            maxTargets
+                            maxTargets,
+                            candidateCount,
+                            prepStartNanos
                     );
                     float[] actionProbs = prediction.policyScores;
                     float valueScore = prediction.valueScores;
@@ -3417,6 +3764,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
+            long prepStartNanos = System.nanoTime();
             int[] candidateActionIds = new int[maxCandidates];
             float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
             int[] candidateMask = new int[maxCandidates];
@@ -3441,8 +3789,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
 
             String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_MODE);
-            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
-                    baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey, headId, 0, 1, 1);
+            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                    baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, 1, candidateCount, prepStartNanos);
 
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
@@ -3588,6 +3936,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
+            long prepStartNanos = System.nanoTime();
             int[] candidateActionIds = new int[maxCandidates];
             float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
             int[] candidateMask = new int[maxCandidates];
@@ -3599,8 +3948,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
 
             String headId = headForActionType(StateSequenceBuilder.ActionType.ANNOUNCE_X);
-            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
-                    baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey, headId, 0, 1, 1);
+            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                    baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, 1, candidateCount, prepStartNanos);
 
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
@@ -3760,6 +4109,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
 
+            long prepStartNanos = System.nanoTime();
             int[] candidateActionIds = new int[maxCandidates];
             float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
             int[] candidateMask = new int[maxCandidates];
@@ -3771,14 +4121,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
 
             String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_USE);
-            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
+            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
                     baseState,
                     candidateActionIds,
                     candidateFeatures,
                     candidateMask,
-                    policyKey,
                     headId,
-                    0, 1, 1
+                    0,
+                    1,
+                    1,
+                    candidateCount,
+                    prepStartNanos
             );
 
             float[] actionProbs = prediction.policyScores;
@@ -3920,6 +4273,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             int doneIdx = phase1Candidates.size() - 1;
 
             int candidateCount = phase1Candidates.size();
+            long prepStartNanos = System.nanoTime();
             int[] candidateActionIds = new int[maxCandidates];
             float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
             int[] candidateMask = new int[maxCandidates];
@@ -3930,8 +4284,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
 
             String headId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_ATTACKS);
-            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
-                    baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey, headId, 0, 1, candidateCount);
+            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                    baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, candidateCount, candidateCount, prepStartNanos);
 
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
@@ -3999,6 +4353,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     }
 
                     int p2Count = Math.min(phase2Candidates.size(), maxCandidates);
+                    long attackTargetPrepStartNanos = System.nanoTime();
                     int[] p2Ids = new int[maxCandidates];
                     float[][] p2Feats = new float[maxCandidates][candFeatDim];
                     int[] p2Mask = new int[maxCandidates];
@@ -4009,8 +4364,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     }
 
                     String p2HeadId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET);
-                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult p2Pred = model.scoreCandidates(
-                            baseState, p2Ids, p2Feats, p2Mask, policyKey, p2HeadId, 0, 1, 1);
+                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult p2Pred = scoreCandidatesWithMetrics(
+                            baseState, p2Ids, p2Feats, p2Mask, p2HeadId, 0, 1, 1, p2Count, attackTargetPrepStartNanos);
 
                     float[] p2Probs = p2Pred.policyScores;
                     float p2Value = p2Pred.valueScores;
@@ -4130,6 +4485,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 int doneIdx = blockCandidates.size() - 1;
 
                 int candidateCount = blockCandidates.size();
+                long prepStartNanos = System.nanoTime();
                 int[] candidateActionIds = new int[maxCandidates];
                 float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
                 int[] candidateMask = new int[maxCandidates];
@@ -4140,8 +4496,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 }
 
                 String headId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_BLOCKS);
-                mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.scoreCandidates(
-                        baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey, headId, 0, 1, candidateCount);
+                mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                        baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, candidateCount, candidateCount, prepStartNanos);
 
                 float[] actionProbs = prediction.policyScores;
                 float valueScore = prediction.valueScores;
@@ -5034,37 +5390,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             // CRITICAL FIX: getPlayable() returns abilities from a COPIED game (createSimulationForPlayableCalc)
             // We need to get a fresh ability from the REAL game's object to avoid stale state issues
-            ActivatedAbility freshAbility = ability;
-            mage.game.permanent.Permanent sourcePerm = game.getPermanent(ability.getSourceId());
-            if (sourcePerm != null) {
-                // Find the matching ability on the real permanent
-                for (Ability permAbility : sourcePerm.getAbilities(game)) {
-                    if (permAbility instanceof ActivatedAbility
-                            && permAbility.getRule().equals(ability.getRule())) {
-                        freshAbility = (ActivatedAbility) permAbility;
-                        if (ACTIVATION_DIAG) {
-                            RLTrainer.threadLocalLogger.get().info(
-                                    "FRESH-ABILITY: Got fresh ability from real game's permanent");
-                        }
-                        break;
-                    }
-                }
-            } else {
-                // Check if it's a card (spell from hand/graveyard/etc)
-                Card sourceCard = game.getCard(ability.getSourceId());
-                if (sourceCard != null) {
-                    for (Ability cardAbility : sourceCard.getAbilities(game)) {
-                        if (cardAbility instanceof ActivatedAbility
-                                && cardAbility.getRule().equals(ability.getRule())) {
-                            freshAbility = (ActivatedAbility) cardAbility;
-                            if (ACTIVATION_DIAG) {
-                                RLTrainer.threadLocalLogger.get().info(
-                                        "FRESH-ABILITY: Got fresh ability from real game's card");
-                            }
-                            break;
-                        }
-                    }
-                }
+            ActivatedAbility freshAbility = resolveFreshAbility(ability, game);
+            if (ACTIVATION_DIAG && freshAbility != ability) {
+                RLTrainer.threadLocalLogger.get().info(
+                        "FRESH-ABILITY: Got fresh ability from current game state");
             }
 
             // Track current ability for choice filtering  
@@ -5083,7 +5412,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         sourceName,
                         sourceIsTapped,
                         freshAbility.getSourceId(),
-                        (sourcePerm != null),
+                        (game.getPermanent(freshAbility.getSourceId()) != null),
                         (freshAbility != ability)
                 ));
             }
@@ -5683,53 +6012,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     protected Ability calculateRLAction(Game game) {
+        long actionSelectionStartNanos = System.nanoTime();
         List<ActivatedAbility> flattenedOptions = getPlayableForCurrentState(game);
-        // (PassAbility will be added later after duplicate removal)
-
-        // Filter by testing activation in a simulation (like ComputerPlayer6 does)
-        // For abilities with alternative costs, test ALL alternatives and track which ones work
-        List<ActivatedAbility> validOptions = new ArrayList<>();
-        int filteredCount = 0;
-        validAlternativeCosts.clear(); // Clear previous tracking
-        refreshAlternativeCostValidationCache(game);
-
-        for (ActivatedAbility ability : flattenedOptions) {
-            String validationKey = buildAlternativeCostValidationKey(ability, game);
-            Set<String> validChoices = cachedAlternativeCostValidation.get(validationKey);
-            if (validChoices == null) {
-                validChoices = testAllAlternativeCosts(ability, game);
-                if (ALTERNATIVE_COST_SIM_CACHE_ENABLED) {
-                    cachedAlternativeCostValidation.put(validationKey, new HashSet<>(validChoices));
-                }
-            }
-
-            if (!validChoices.isEmpty()) {
-                // At least one alternative worked
-                validOptions.add(ability);
-                // Always track if there were alternatives tested (even if only one is valid)
-                // We detect alternatives by checking if the set contains anything other than just "0"
-                boolean hasAlternatives = !(validChoices.size() == 1 && validChoices.contains("0"));
-                if (hasAlternatives) {
-                    validAlternativeCosts.put(ability.getSourceId(), new HashSet<>(validChoices));
-                    if (ACTIVATION_DIAG) {
-                        RLTrainer.threadLocalLogger.get().info(
-                                "SIM-FILTER: Ability has alternatives, storing validated choices: "
-                                + ability + " (sourceId=" + ability.getSourceId() + ") -> " + validChoices
-                        );
-                    }
-                }
-            } else {
-                filteredCount++;
-                if (ACTIVATION_DIAG) {
-                    RLTrainer.threadLocalLogger.get().info("SIM-FILTER: Rejected ability in simulation: " + ability);
-                }
-            }
-        }
-        if (ACTIVATION_DIAG && filteredCount > 0) {
-            RLTrainer.threadLocalLogger.get().info("SIM-FILTER: Filtered out " + filteredCount + " abilities that failed simulation test");
-        }
-        flattenedOptions = validOptions;
-
+        int rawOptionCount = flattenedOptions.size();
         // Remove duplicate spell abilities with the same name.
         // Mana abilities are keyed by sourceId+name so each land/creature is a distinct tap option
         // (e.g. two Forests are separate choices — which one you tap before a bounce matters).
@@ -5746,6 +6031,64 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
         }
         flattenedOptions = uniqueOptions;
+        int uniqueOptionCount = flattenedOptions.size();
+
+        // Filter by testing activation in a simulation (like ComputerPlayer6 does)
+        // For abilities with alternative costs, test ALL alternatives and track which ones work
+        List<ActivatedAbility> validOptions;
+        int filteredCount = 0;
+        int validOptionCount;
+        validAlternativeCosts.clear(); // Clear previous tracking
+
+        if (SKIP_SIM_VALIDATION) {
+            validOptions = flattenedOptions;
+            validOptionCount = validOptions.size();
+        } else {
+            validOptions = new ArrayList<>();
+            refreshAlternativeCostValidationCache(game);
+            String validationStateKey = buildPlayableStateKey(game);
+
+            boolean riskyManaProducersAvailable = hasRiskyManaProducerAvailable(game);
+            for (ActivatedAbility ability : flattenedOptions) {
+                String validationKey = validationStateKey + "|" + buildAlternativeCostValidationKey(ability, game);
+                Set<String> validChoices = cachedAlternativeCostValidation.get(validationKey);
+                if (validChoices == null) {
+                    validChoices = validatePlayableAbility(ability, game, riskyManaProducersAvailable);
+                    if (ALTERNATIVE_COST_SIM_CACHE_ENABLED) {
+                        cachedAlternativeCostValidation.put(validationKey, new HashSet<>(validChoices));
+                    }
+                } else {
+                    metrics.recordAltCostValidation(validChoices.size(), 0L, true);
+                }
+
+                if (!validChoices.isEmpty()) {
+                    // At least one alternative worked
+                    validOptions.add(ability);
+                    // Always track if there were alternatives tested (even if only one is valid)
+                    // We detect alternatives by checking if the set contains anything other than just "0"
+                    boolean hasAlternatives = !(validChoices.size() == 1 && validChoices.contains("0"));
+                    if (hasAlternatives) {
+                        validAlternativeCosts.put(ability.getSourceId(), new HashSet<>(validChoices));
+                        if (ACTIVATION_DIAG) {
+                            RLTrainer.threadLocalLogger.get().info(
+                                    "SIM-FILTER: Ability has alternatives, storing validated choices: "
+                                    + ability + " (sourceId=" + ability.getSourceId() + ") -> " + validChoices
+                            );
+                        }
+                    }
+                } else {
+                    filteredCount++;
+                    if (ACTIVATION_DIAG) {
+                        RLTrainer.threadLocalLogger.get().info("SIM-FILTER: Rejected ability in simulation: " + ability);
+                    }
+                }
+            }
+            if (ACTIVATION_DIAG && filteredCount > 0) {
+                RLTrainer.threadLocalLogger.get().info("SIM-FILTER: Filtered out " + filteredCount + " abilities that failed simulation test");
+            }
+            validOptionCount = validOptions.size();
+        }
+        flattenedOptions = validOptions;
 
         // Finally, ensure PassAbility maps to index 0
         flattenedOptions.add(0, new PassAbility());
@@ -5786,11 +6129,25 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         "Pass"
                 );
             }
+            metrics.recordActionSelection(
+                    rawOptionCount,
+                    validOptionCount,
+                    uniqueOptionCount,
+                    (System.nanoTime() - actionSelectionStartNanos) / 1_000_000L,
+                    true
+            );
             return flattenedOptions.get(0);
         }
 
         // Get model's choice of actions
         List<Integer> targetsToSet = genericChoose(flattenedOptions, 1, 1, StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL, game, null);
+        metrics.recordActionSelection(
+                rawOptionCount,
+                validOptionCount,
+                uniqueOptionCount,
+                (System.nanoTime() - actionSelectionStartNanos) / 1_000_000L,
+                false
+        );
 
         if (ACTIVATION_DIAG) {
             RLTrainer.threadLocalLogger.get().info("Playable options: " + flattenedOptions);
@@ -5934,12 +6291,127 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return result;
     }
 
+    @Override
+    public ManaOptions getManaAvailable(Game originalGame) {
+        Game game = originalGame.createSimulationForPlayableCalc();
+        return getFilteredManaAvailable(game);
+    }
+
+    @Override
+    protected ManaOptions getManaAvailableFast(Game game) {
+        return getFilteredManaAvailable(game);
+    }
+
+    private ManaOptions getFilteredManaAvailable(Game game) {
+        ManaOptions availableMana = new ManaOptions();
+        availableMana.addMana(manaPool.getMana());
+        for (ConditionalMana conditionalMana : manaPool.getConditionalMana()) {
+            availableMana.addMana(conditionalMana);
+        }
+
+        List<mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
+        List<mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl>> sourceWithCosts = new ArrayList<>();
+
+        for (Card card : getHand().getCards(game)) {
+            mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl> manaAbilities =
+                    filterUsableManaAbilities(card.getAbilities(game).getAvailableActivatedManaAbilities(Zone.HAND, playerId, game), game);
+            for (mage.abilities.mana.ActivatedManaAbilityImpl ability : manaAbilities) {
+                mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl> noTapAbilities =
+                        new mage.abilities.AbilitiesImpl<>(ability);
+                if (ability.getManaCosts().isEmpty() && !ability.isPoolDependant()) {
+                    sourceWithoutManaCosts.add(noTapAbilities);
+                } else {
+                    sourceWithCosts.add(noTapAbilities);
+                }
+            }
+        }
+
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) {
+            Boolean canUse = null;
+            boolean canAdd = false;
+            boolean useLater = false;
+            mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl> manaAbilities =
+                    filterUsableManaAbilities(
+                            permanent.getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game),
+                            game
+                    );
+            for (Iterator<mage.abilities.mana.ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext(); ) {
+                mage.abilities.mana.ActivatedManaAbilityImpl ability = it.next();
+                if (canUse == null) {
+                    canUse = permanent.canUseActivatedAbilities(game);
+                }
+                if (canUse) {
+                    if (!ability.hasTapCost()) {
+                        it.remove();
+                        mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl> noTapAbilities =
+                                new mage.abilities.AbilitiesImpl<>(ability);
+                        if (ability.getManaCosts().isEmpty() && !ability.isPoolDependant()) {
+                            sourceWithoutManaCosts.add(noTapAbilities);
+                        } else {
+                            sourceWithCosts.add(noTapAbilities);
+                        }
+                        continue;
+                    }
+
+                    canAdd = true;
+                    if (!ability.getManaCosts().isEmpty() || ability.isPoolDependant()) {
+                        useLater = true;
+                        break;
+                    }
+                } else {
+                    it.remove();
+                }
+            }
+            if (canAdd && !manaAbilities.isEmpty()) {
+                if (useLater) {
+                    sourceWithCosts.add(manaAbilities);
+                } else {
+                    sourceWithoutManaCosts.add(manaAbilities);
+                }
+            }
+        }
+
+        for (mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl> manaAbilities : sourceWithoutManaCosts) {
+            availableMana.addMana(manaAbilities, game);
+        }
+
+        boolean anAbilityWasUsed = true;
+        boolean usePoolDependantAbilities = false;
+        while (anAbilityWasUsed && !sourceWithCosts.isEmpty()) {
+            anAbilityWasUsed = false;
+            for (Iterator<mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl>> iterator = sourceWithCosts.iterator(); iterator.hasNext(); ) {
+                mage.abilities.Abilities<mage.abilities.mana.ActivatedManaAbilityImpl> manaAbilities = iterator.next();
+                if (usePoolDependantAbilities || !manaAbilities.hasPoolDependantAbilities()) {
+                    boolean used;
+                    if (manaAbilities.hasPoolDependantAbilities()) {
+                        used = availableMana.addManaPoolDependant(manaAbilities, game);
+                    } else {
+                        used = availableMana.addManaWithCost(manaAbilities, game);
+                    }
+                    if (used) {
+                        iterator.remove();
+                        anAbilityWasUsed = true;
+                    }
+                }
+            }
+            if (!anAbilityWasUsed && !usePoolDependantAbilities) {
+                usePoolDependantAbilities = true;
+                anAbilityWasUsed = true;
+            }
+        }
+
+        availableMana.removeFullyIncludedVariations();
+        availableMana.remove(new Mana());
+        return availableMana.copy();
+    }
+
     // CRITICAL FIX: Exclude permanents from mana producers when they're needed for tap costs
     // This prevents the AI from tapping Basilisk Gate for mana when it needs to tap it for the ability,
     // and prevents tapping Gates needed for TapTargetCost (like Heap Gate's "tap another Gate")
     @Override
     public List<MageObject> getAvailableManaProducers(Game game) {
         List<MageObject> producers = super.getAvailableManaProducers(game);
+        producers.removeIf(obj -> !mageObjectCanProduceManaForCurrentPayment(obj, null, game));
 
         // Remove the source permanent if we're paying for an ability that needs to tap it
         if (abilitySourceToExcludeFromMana != null) {
@@ -5960,6 +6432,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         if (inPlayManaContext() && producers.size() > 1) {
+            List<MageObject> producerSnapshot = new ArrayList<>(producers);
+            producers.removeIf(obj -> shouldSkipTapTargetProducerForCurrentPayment(obj, producerSnapshot, game));
             producers.sort(Comparator.comparingInt(obj -> manaProducerUsePenalty(obj, game)));
             if (ACTIVATION_DIAG) {
                 String ranked = producers.stream()

@@ -92,8 +92,18 @@ if orchestrator_log is not None and orchestrator_log.exists():
     except Exception:
         text = ""
     if text:
-        trainer_ports.extend(int(m.group(1)) for m in re.finditer(r"metricsPort=(\d+)", text))
-        gpu_host_ports.extend(int(m.group(1)) for m in re.finditer(r"gpuServiceMetricsPort=(\d+)", text))
+        trainer_ports.extend(
+            int(m.group(1))
+            for m in re.finditer(r"Started trainer profile=.*?metricsPort=(\d+)", text)
+        )
+        gpu_host_ports.extend(
+            int(m.group(1))
+            for m in re.finditer(r"Started shared GPU host .*?metricsPort=(\d+)", text)
+        )
+        gpu_host_ports.extend(
+            int(m.group(1))
+            for m in re.finditer(r"gpuServiceMetricsPort=(\d+)", text)
+        )
 
 print(" ".join(str(p) for p in sorted(set(p for p in trainer_ports if p > 0))))
 print(" ".join(str(p) for p in sorted(set(p for p in gpu_host_ports if p > 0))))

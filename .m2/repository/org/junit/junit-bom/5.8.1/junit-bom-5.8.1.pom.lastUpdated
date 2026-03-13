@@ -1,0 +1,8 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Mar 11 19:09:41 EDT 2026
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1773270581804
+@default-jboss-public-repository-https\://repository.jboss.org/nexus/content/groups/public/.lastUpdated=1773270581778
+file\://C\:\\Users\\Jack\\IdeaProjects\\mage/repository/.error=
+file\://C\:\\Users\\Jack\\IdeaProjects\\mage/repository/.lastUpdated=1773270581788
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.junit\:junit-bom\:pom\:5.8.1 from/to central (https\://repo.maven.apache.org/maven2)\: Permission denied\: getsockopt
+https\://repository.jboss.org/nexus/content/groups/public/.error=Could not transfer artifact org.junit\:junit-bom\:pom\:5.8.1 from/to jboss-public-repository (https\://repository.jboss.org/nexus/content/groups/public)\: Permission denied\: getsockopt

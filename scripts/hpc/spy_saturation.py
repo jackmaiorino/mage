@@ -19,8 +19,9 @@ except Exception:  # pragma: no cover
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-JOBS_ROOT = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
-RUNS_ROOT = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs"
+DEFAULT_JOBS_ROOT = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
+DEFAULT_COMPAT_REPORTS_ROOT = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator"
+DEFAULT_RUNS_ROOT = DEFAULT_COMPAT_REPORTS_ROOT / "runs"
 DEFAULT_SWEEP_ROOT = REPO_ROOT / "local-training/hpc/saturation_runs"
 HEARTBEAT_RE = re.compile(r"\((?:run=(\d+),\s*)?([0-9]*\.?[0-9]+)\s+eps/s\)")
 
@@ -38,6 +39,34 @@ def atomic_write_json(path: Path, payload: Dict[str, Any]) -> None:
     temp_path = path.with_suffix(path.suffix + ".tmp")
     temp_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     temp_path.replace(path)
+
+
+def resolve_report_path(
+    repo_root: Path,
+    exports: Optional[Dict[str, Any]],
+    env_name: str,
+    default_path: Path,
+) -> Path:
+    raw = ""
+    if isinstance(exports, dict):
+        raw = str(exports.get(env_name, "")).strip()
+    if not raw:
+        raw = str(os.getenv(env_name, "")).strip()
+    if not raw:
+        return default_path
+    path = Path(raw).expanduser()
+    if path.is_absolute():
+        return path
+    return (repo_root / path).resolve()
+
+
+def resolve_report_roots(
+    repo_root: Path = REPO_ROOT,
+    exports: Optional[Dict[str, Any]] = None,
+) -> Tuple[Path, Path, Path]:
+    jobs_root = resolve_report_path(repo_root, exports, "HPC_JOB_REPORTS_ROOT", DEFAULT_JOBS_ROOT)
+    compat_root = resolve_report_path(repo_root, exports, "ORCHESTRATOR_COMPAT_REPORTS_ROOT", DEFAULT_COMPAT_REPORTS_ROOT)
+    return jobs_root, compat_root / "runs", compat_root
 
 
 def load_json(path: Path) -> Optional[Dict[str, Any]]:
@@ -349,12 +378,22 @@ def manifest_output_path(args: argparse.Namespace) -> Path:
     return Path(args.sweep_root).expanduser().resolve() / f"{timestamp_slug()}_{tag}" / "manifest.json"
 
 
-def build_sbatch_command(args: argparse.Namespace, label: str, cpus_per_task: int, export_names: Iterable[str]) -> List[str]:
+def build_sbatch_command(
+    args: argparse.Namespace,
+    label: str,
+    cpus_per_task: int,
+    export_names: Iterable[str],
+    slurm_log_dir: Path,
+) -> List[str]:
     command = [
         "sbatch",
         "--parsable",
         "--job-name",
         sanitize_label(label)[:120],
+        "--output",
+        str(slurm_log_dir / "slurm-%x-%j.out"),
+        "--error",
+        str(slurm_log_dir / "slurm-%x-%j.err"),
         "--partition",
         args.partition,
         "--gres",
@@ -381,6 +420,8 @@ def build_sbatch_command(args: argparse.Namespace, label: str, cpus_per_task: in
 def submit_experiments(args: argparse.Namespace) -> int:
     bundle = find_latest_bundle(args.bundle, args.bundle_dir)
     manifest_path = manifest_output_path(args)
+    slurm_log_dir = manifest_path.parent
+    slurm_log_dir.mkdir(parents=True, exist_ok=True)
     experiments = build_experiment_rows(args, bundle)
     manifest: Dict[str, Any] = {
         "created_at_utc": now_utc(),
@@ -402,6 +443,7 @@ def submit_experiments(args: argparse.Namespace) -> int:
             label=str(experiment["label"]),
             cpus_per_task=int(experiment["cpus_per_task"]),
             export_names=exports.keys(),
+            slurm_log_dir=slurm_log_dir,
         )
         record: Dict[str, Any] = {
             "label": experiment["label"],
@@ -649,9 +691,8 @@ def parse_telemetry_log(path: Path) -> Dict[str, Any]:
     }
 
 
-def discover_job_ports(job_id: str, repo_root: Path = REPO_ROOT) -> List[int]:
-    jobs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
-    runs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs"
+def discover_job_ports(job_id: str, repo_root: Path = REPO_ROOT, exports: Optional[Dict[str, Any]] = None) -> List[int]:
+    jobs_root, runs_root, _ = resolve_report_roots(repo_root, exports)
     run_dir = runs_root / str(job_id)
     status_path = run_dir / "orchestrator_status.json"
     targets_path = repo_root / "monitoring/file_sd" / str(job_id) / "mage_hpc_targets.json"
@@ -687,7 +728,7 @@ def discover_job_ports(job_id: str, repo_root: Path = REPO_ROOT) -> List[int]:
     return sorted(set(p for p in ports if p > 0))
 
 
-def sample_job_counters(job_id: str, repo_root: Path = REPO_ROOT) -> Optional[Dict[str, Any]]:
+def sample_job_counters(job_id: str, repo_root: Path = REPO_ROOT, exports: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
     user = current_username()
     if not user:
         return None
@@ -707,7 +748,7 @@ def sample_job_counters(job_id: str, repo_root: Path = REPO_ROOT) -> Optional[Di
     state, node = parts
     if str(state).upper() != "RUNNING" or not node or node in ("(null)", "None"):
         return None
-    ports = discover_job_ports(str(job_id), repo_root=repo_root)
+    ports = discover_job_ports(str(job_id), repo_root=repo_root, exports=exports)
     if not ports:
         return None
     port_text = " ".join(str(p) for p in ports)
@@ -773,11 +814,11 @@ done''',
     }
 
 
-def compute_live_job_rates(job_id: str, repo_root: Path = REPO_ROOT) -> Dict[str, float]:
-    jobs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
+def compute_live_job_rates(job_id: str, repo_root: Path = REPO_ROOT, exports: Optional[Dict[str, Any]] = None) -> Dict[str, float]:
+    jobs_root, _, _ = resolve_report_roots(repo_root, exports)
     cache_path = jobs_root / str(job_id) / "summary_rate_cache.json"
     previous = load_json(cache_path) or {}
-    current = sample_job_counters(str(job_id), repo_root=repo_root)
+    current = sample_job_counters(str(job_id), repo_root=repo_root, exports=exports)
     if current is None:
         return {
             "episodes_per_sec": 0.0,
@@ -831,8 +872,8 @@ def summarize_job(
     repo_root: Path = REPO_ROOT,
     heartbeat_window: int = 5,
 ) -> Dict[str, Any]:
-    jobs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
-    runs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs"
+    exports = dict(record.get("exports", {})) if record else {}
+    jobs_root, runs_root, _ = resolve_report_roots(repo_root, exports)
     job_dir = jobs_root / str(job_id)
     run_dir = runs_root / str(job_id)
     status_path = run_dir / "orchestrator_status.json"
@@ -852,7 +893,7 @@ def summarize_job(
     telemetry = parse_telemetry_log(job_dir / "telemetry.log")
     final_probe = parse_key_value_report(job_dir / "final_probe_metrics.txt")
     heartbeat = aggregate_heartbeat_rates(run_dir / "trainers", selected_profiles, heartbeat_window)
-    live_rates = compute_live_job_rates(str(job_id), repo_root=repo_root)
+    live_rates = compute_live_job_rates(str(job_id), repo_root=repo_root, exports=exports)
     rolling_values: List[float] = []
     total_episode = 0
     for row in snapshot_rows:
@@ -868,8 +909,6 @@ def summarize_job(
 
     config = dict(record.get("config", {})) if record else {}
     sbatch = dict(record.get("sbatch", {})) if record else {}
-    exports = dict(record.get("exports", {})) if record else {}
-
     effective_cpus = int(sbatch.get("cpus_per_task", 0) or 0)
     if effective_cpus <= 0:
         effective_cpus = int(telemetry.get("cpu_total", 0) or 0)
@@ -936,8 +975,7 @@ def summarize_job(
 
 
 def discover_local_job_records(repo_root: Path = REPO_ROOT, username: Optional[str] = None) -> List[Dict[str, Any]]:
-    jobs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/hpc/jobs"
-    runs_root = repo_root / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league_reports/pauper/orchestrator/runs"
+    jobs_root, runs_root, _ = resolve_report_roots(repo_root, None)
     target_user = str(username or current_username()).strip()
     rows: List[Dict[str, Any]] = []
     if not jobs_root.exists():

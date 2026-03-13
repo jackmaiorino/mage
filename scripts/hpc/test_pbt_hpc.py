@@ -17,6 +17,8 @@ SATURATION_PATH = REPO_ROOT / "scripts/hpc/spy_saturation.py"
 AVAILABILITY_PATH = REPO_ROOT / "scripts/hpc/slurm_availability.py"
 GPU_CORE_PATH = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_core.py"
 GPU_HOST_PATH = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_host.py"
+MODEL_PERSISTENCE_PATH = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/model_persistence.py"
+LOGGING_UTILS_PATH = REPO_ROOT / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/logging_utils.py"
 
 
 def load_module(module_name: str, path: Path):
@@ -64,6 +66,8 @@ class NativeOrchestratorTests(unittest.TestCase):
         reports_root = self.temp_path / "reports" / "runs" / orch.run_id
         compat_root = self.temp_path / "reports"
         orch.repo_root = self.temp_path
+        orch.source_repo_root = self.temp_path
+        orch.rl_artifacts_root = self.temp_path / "artifacts"
         orch.compat_reports_root = compat_root
         orch.runs_root = compat_root / "runs"
         orch.reports_root = reports_root
@@ -126,6 +130,204 @@ class NativeOrchestratorTests(unittest.TestCase):
         orch.restore_profile_model_files(restore_info)
         self.assertEqual("loser-latest", loser_latest.read_text(encoding="utf-8"))
         self.assertEqual("loser-model", loser_model.read_text(encoding="utf-8"))
+
+    def test_profile_paths_and_snapshots_respect_rl_artifacts_root(self):
+        artifacts_root = self.temp_path / "artifacts-root"
+        with mock.patch.dict(os.environ, {"RL_ARTIFACTS_ROOT": str(artifacts_root)}, clear=False):
+            orch = self.make_orchestrator()
+        orch.rl_artifacts_root = artifacts_root
+        profile = "ProfileA"
+        logs_dir = orch.profile_logs_dir(profile)
+        (logs_dir / "stats").mkdir(parents=True, exist_ok=True)
+        (logs_dir / "league").mkdir(parents=True, exist_ok=True)
+        (logs_dir / "stats" / "training_stats.csv").write_text(
+            "episode,avg_reward,avg_turns,loss,winrate\n12,0,0,0,0.25\n",
+            encoding="utf-8",
+        )
+        (logs_dir / "league" / "agent_status.json").write_text(
+            json.dumps({"episode": 10, "baseline_wr": 0.4, "promoted": True}),
+            encoding="utf-8",
+        )
+
+        snapshot = orch.get_profile_training_snapshot({"profile": profile, "target_winrate": 0.6})
+
+        self.assertEqual(artifacts_root / "profiles" / profile / "models", orch.profile_models_dir(profile))
+        self.assertEqual(artifacts_root / "profiles" / profile / "logs", logs_dir)
+        self.assertEqual(12, snapshot["episode"])
+        self.assertAlmostEqual(0.25, snapshot["rolling_current"], places=6)
+        self.assertAlmostEqual(0.4, snapshot["baseline_wr"], places=6)
+        self.assertTrue(snapshot["promoted"])
+
+    def test_start_trainer_sets_run_scoped_artifact_env(self):
+        orch = self.make_orchestrator()
+        orch.visible_gpu_list = ["0"]
+        orch.py_service_mode = "shared_gpu"
+        orch.total_episodes = 123
+        opponent_decklist = self.temp_path / "opponents.decklist"
+        opponent_decklist.write_text("deck\n", encoding="utf-8")
+        profile = "ProfileA"
+        entry = {
+            "profile": profile,
+            "train_env": {},
+        }
+
+        captured = {}
+
+        def fake_popen(command, cwd=None, env=None, stdout=None, stderr=None):
+            captured["command"] = command
+            captured["cwd"] = cwd
+            captured["env"] = dict(env or {})
+            return FakeProcess(pid=4321, return_code=None)
+
+        with mock.patch.object(orch, "build_command", return_value=["echo", "trainer"]):
+            with mock.patch.object(self.native.subprocess, "Popen", side_effect=fake_popen):
+                state = orch.start_trainer(entry, slot=0, runners_per_profile=77, opponent_decklist=opponent_decklist)
+
+        self.assertEqual(["echo", "trainer"], captured["command"])
+        self.assertEqual(str(self.temp_path), captured["cwd"])
+        self.assertEqual(str(orch.rl_artifacts_root), captured["env"]["RL_ARTIFACTS_ROOT"])
+        self.assertEqual(str(orch.profile_models_dir(profile)), captured["env"]["RL_MODELS_DIR"])
+        self.assertEqual(str(orch.profile_logs_dir(profile)), captured["env"]["RL_LOGS_DIR"])
+        self.assertEqual(str(orch.python_logs_dir(profile)), captured["env"]["PYTHON_LOGS_DIR"])
+        self.assertEqual(
+            str(orch.python_logs_dir(profile) / "mtg_ai.log"),
+            captured["env"]["MTG_AI_LOG_FILE"],
+        )
+        self.assertEqual(
+            str(orch.python_logs_dir(profile) / "mulligan_training.log"),
+            captured["env"]["MULLIGAN_TRAINING_LOG_FILE"],
+        )
+        self.assertEqual(
+            str(orch.python_logs_dir(profile) / "mulligan_trace.jsonl"),
+            captured["env"]["MULLIGAN_TRACE_JSONL_FILE"],
+        )
+        self.assertEqual(
+            str(orch.python_logs_dir(profile) / "VRAM_diagnostics.log"),
+            captured["env"]["VRAM_DIAGNOSTICS_LOG_FILE"],
+        )
+        self.assertEqual(profile, captured["env"]["MODEL_PROFILE"])
+        self.assertEqual("77", captured["env"]["NUM_GAME_RUNNERS"])
+        self.assertEqual(str(opponent_decklist), captured["env"]["DECK_LIST_FILE"])
+        self.assertTrue(orch.profile_models_dir(profile).is_dir())
+        self.assertTrue(orch.profile_logs_dir(profile).is_dir())
+        self.assertTrue(orch.python_logs_dir(profile).is_dir())
+        state.stdout_handle.close()
+        state.stderr_handle.close()
+
+    def test_launch_shared_gpu_hosts_sets_home_scoped_python_log_env(self):
+        orch = self.make_orchestrator()
+        orch.visible_gpu_list = ["0"]
+        orch.py_service_mode = "shared_gpu"
+        host_script = (
+            orch.source_repo_root
+            / "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_host.py"
+        )
+        host_script.parent.mkdir(parents=True, exist_ok=True)
+        host_script.write_text("#!/usr/bin/env python3\n", encoding="utf-8")
+
+        captured = {}
+
+        def fake_popen(command, cwd=None, env=None, stdout=None, stderr=None):
+            captured["command"] = command
+            captured["cwd"] = cwd
+            captured["env"] = dict(env or {})
+            return FakeProcess(pid=9876, return_code=None)
+
+        with mock.patch.object(orch, "resolve_python_executable", return_value="python3"):
+            with mock.patch.object(orch, "shared_gpu_host_ready", return_value=True):
+                with mock.patch.object(self.native.subprocess, "Popen", side_effect=fake_popen):
+                    orch.launch_shared_gpu_hosts()
+
+        expected_dir = orch.shared_gpu_python_logs_dir(0)
+        self.assertEqual(str(orch.source_repo_root), captured["cwd"])
+        self.assertEqual(str(expected_dir), captured["env"]["PYTHON_LOGS_DIR"])
+        self.assertEqual(str(expected_dir / "mtg_ai.log"), captured["env"]["MTG_AI_LOG_FILE"])
+        self.assertEqual(
+            str(expected_dir / "mulligan_training.log"),
+            captured["env"]["MULLIGAN_TRAINING_LOG_FILE"],
+        )
+        self.assertEqual(
+            str(expected_dir / "mulligan_trace.jsonl"),
+            captured["env"]["MULLIGAN_TRACE_JSONL_FILE"],
+        )
+        self.assertEqual(
+            str(expected_dir / "VRAM_diagnostics.log"),
+            captured["env"]["VRAM_DIAGNOSTICS_LOG_FILE"],
+        )
+        orch.stop_shared_gpu_hosts()
+
+    def test_start_trainer_applies_heap_cap_from_job_memory(self):
+        with mock.patch.dict(
+            os.environ,
+            {
+                "SLURM_MEM_PER_NODE": "131072",
+                "TRAIN_PROFILES": "6",
+            },
+            clear=False,
+        ):
+            orch = self.make_orchestrator()
+        orch.visible_gpu_list = ["0"]
+        orch.py_service_mode = "shared_gpu"
+        orch.train_profiles = 6
+        profile = "ProfileA"
+        opponent_decklist = self.temp_path / "opponents.decklist"
+        opponent_decklist.write_text("deck\n", encoding="utf-8")
+
+        captured = {}
+
+        def fake_popen(command, cwd=None, env=None, stdout=None, stderr=None):
+            captured["env"] = dict(env or {})
+            return FakeProcess(pid=4321, return_code=None)
+
+        with mock.patch.object(orch, "build_command", return_value=["echo", "trainer"]):
+            with mock.patch.object(self.native.subprocess, "Popen", side_effect=fake_popen):
+                state = orch.start_trainer({"profile": profile, "train_env": {}}, 0, 77, opponent_decklist)
+
+        expected_xmx_mb = orch.compute_trainer_jvm_xmx_mb()
+        self.assertGreater(expected_xmx_mb, 0)
+        self.assertIn(f"-Xmx{expected_xmx_mb}m", captured["env"]["JAVA_TOOL_OPTIONS"])
+        self.assertIn("-Xms512m", captured["env"]["JAVA_TOOL_OPTIONS"])
+        self.assertEqual(str(expected_xmx_mb), captured["env"]["TRAINER_JVM_XMX_MB"])
+        state.stdout_handle.close()
+        state.stderr_handle.close()
+
+    def test_start_trainer_respects_existing_heap_opts(self):
+        with mock.patch.dict(
+            os.environ,
+            {
+                "SLURM_MEM_PER_NODE": "131072",
+                "TRAIN_PROFILES": "6",
+            },
+            clear=False,
+        ):
+            orch = self.make_orchestrator()
+        orch.visible_gpu_list = ["0"]
+        orch.py_service_mode = "shared_gpu"
+        orch.train_profiles = 6
+        profile = "ProfileA"
+        opponent_decklist = self.temp_path / "opponents.decklist"
+        opponent_decklist.write_text("deck\n", encoding="utf-8")
+        entry = {
+            "profile": profile,
+            "train_env": {
+                "JAVA_TOOL_OPTIONS": "-Xmx4g -Dexample.flag=true",
+            },
+        }
+
+        captured = {}
+
+        def fake_popen(command, cwd=None, env=None, stdout=None, stderr=None):
+            captured["env"] = dict(env or {})
+            return FakeProcess(pid=4321, return_code=None)
+
+        with mock.patch.object(orch, "build_command", return_value=["echo", "trainer"]):
+            with mock.patch.object(self.native.subprocess, "Popen", side_effect=fake_popen):
+                state = orch.start_trainer(entry, 0, 77, opponent_decklist)
+
+        self.assertEqual("-Xmx4g -Dexample.flag=true", captured["env"]["JAVA_TOOL_OPTIONS"])
+        self.assertNotIn("TRAINER_JVM_XMX_MB", captured["env"])
+        state.stdout_handle.close()
+        state.stderr_handle.close()
 
     def test_write_orchestrator_status_includes_run_scoped_fields(self):
         orch = self.make_orchestrator()
@@ -638,6 +840,84 @@ class SharedGpuCoreTests(unittest.TestCase):
         self.assertEqual(1, context.entry.train_calls)
 
 
+class ModelPersistenceTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        torch_module = types.ModuleType("torch")
+        torch_module.cuda = types.SimpleNamespace(
+            is_available=lambda: False,
+            empty_cache=lambda: None,
+            synchronize=lambda: None,
+        )
+        logging_utils = types.ModuleType("logging_utils")
+        logging_utils.LogCategory = types.SimpleNamespace(GPU_MEMORY="GPU_MEMORY")
+        logging_utils.logger = types.SimpleNamespace(
+            info=lambda *args, **kwargs: None,
+            error=lambda *args, **kwargs: None,
+        )
+        cls._dep_patch = mock.patch.dict(
+            sys.modules,
+            {
+                "torch": torch_module,
+                "logging_utils": logging_utils,
+            },
+        )
+        cls._dep_patch.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._dep_patch.stop()
+
+    def test_save_latest_model_atomic_uses_unique_tmp_file(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            profile_paths = types.ModuleType("profile_paths")
+            profile_paths.profile_models_dir = lambda: str(temp_path)
+            with mock.patch.dict(sys.modules, {"profile_paths": profile_paths}, clear=False):
+                model_persistence = load_module("model_persistence_test", MODEL_PERSISTENCE_PATH)
+
+            persistence = model_persistence.ModelPersistence()
+            target_path = temp_path / "model_latest.pt"
+            saved_paths = []
+
+            def fake_save_model(model, path, extra_state=None):
+                saved_paths.append(path)
+                Path(path).write_text("weights", encoding="utf-8")
+
+            persistence.save_model = fake_save_model
+
+            self.assertTrue(persistence.save_latest_model_atomic(object(), path=str(target_path)))
+            self.assertEqual("weights", target_path.read_text(encoding="utf-8"))
+            self.assertEqual(1, len(saved_paths))
+            self.assertNotEqual(str(target_path), saved_paths[0])
+            self.assertIn(".tmp.", saved_paths[0])
+            self.assertFalse(Path(saved_paths[0]).exists())
+
+
+class PythonLoggingUtilsTests(unittest.TestCase):
+    def test_logging_utils_uses_python_logs_dir_override(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            explicit_dir = temp_path / "python-logs"
+            profile_paths = types.ModuleType("profile_paths")
+            profile_paths.profile_logs_dir = lambda: str(temp_path / "profile-logs")
+            with mock.patch.dict(sys.modules, {"profile_paths": profile_paths}, clear=False):
+                with mock.patch.dict(os.environ, {"PYTHON_LOGS_DIR": str(explicit_dir)}, clear=False):
+                    module = load_module("logging_utils_test", LOGGING_UTILS_PATH)
+
+            self.assertEqual(str(explicit_dir), module.python_log_dir)
+            self.assertEqual(str(explicit_dir / "mtg_ai.log"), module.log_file)
+            self.assertEqual(str(explicit_dir / "mulligan_training.log"), module.mulligan_log_file)
+            self.assertEqual(str(explicit_dir / "VRAM_diagnostics.log"), module.vram_diag_log_file)
+            self.assertTrue(explicit_dir.is_dir())
+
+            for logger_name in ("mtg_ai", "mtg_ai.mulligan", "mtg_ai.vram"):
+                logger = module.logging.getLogger(logger_name)
+                for handler in list(logger.handlers):
+                    handler.close()
+                    logger.removeHandler(handler)
+
+
 class SharedGpuHostTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -735,6 +1015,100 @@ class SharedGpuHostTests(unittest.TestCase):
         self.assertEqual(1, state.infer_context.reload_latest_calls)
         self.assertEqual(0, state.learner_context.reload_latest_calls)
 
+    def test_prune_closed_score_tasks_removes_disconnected_sessions(self):
+        shared_host = self.host.SharedGpuHost()
+        state = self.host.ProfileState(infer_context=object(), learner_context=object())
+
+        state.pending_scores.append(
+            self.host.ScoreTask(
+                session=types.SimpleNamespace(is_closed=lambda: True),
+                request_id=1,
+                profile_id="ProfileA",
+                headers={"batch_size": "1"},
+                segments=[],
+                enqueued_at=1000.0,
+            )
+        )
+        live_session = types.SimpleNamespace(is_closed=lambda: False, reply=lambda *args, **kwargs: None)
+        state.pending_scores.append(
+            self.host.ScoreTask(
+                session=live_session,
+                request_id=2,
+                profile_id="ProfileA",
+                headers={"batch_size": "1"},
+                segments=[],
+                enqueued_at=1001.0,
+            )
+        )
+
+        dropped = shared_host._prune_closed_score_tasks_locked(state)
+
+        self.assertEqual(1, dropped)
+        self.assertEqual(1, len(state.pending_scores))
+        self.assertIs(live_session, state.pending_scores[0].session)
+
+    def test_score_batch_skips_disconnected_reply_session(self):
+        shared_host = self.host.SharedGpuHost()
+        infer_context = types.SimpleNamespace(
+            reload_latest_model_if_newer=lambda: False,
+            score_batch=mock.Mock(return_value=self.host.struct.pack("<ffff", 0.1, 0.2, 0.3, 0.4)),
+        )
+        state = self.host.ProfileState(infer_context=infer_context, learner_context=object())
+
+        dead_session = types.SimpleNamespace(
+            is_closed=lambda: False,
+            reply=mock.Mock(side_effect=OSError(self.host.errno.EBADF, "session closed")),
+            close=mock.Mock(),
+        )
+        live_replies = []
+        live_session = types.SimpleNamespace(
+            is_closed=lambda: False,
+            reply=lambda *args, **kwargs: live_replies.append((args, kwargs)),
+            close=lambda: None,
+        )
+        headers = {
+            "batch_size": "1",
+            "policy_key": "train",
+            "head_id": "action",
+            "pick_index": "0",
+            "min_targets": "0",
+            "max_targets": "0",
+            "seq_len": "1",
+            "d_model": "1",
+            "max_candidates": "1",
+            "cand_feat_dim": "1",
+        }
+        tasks = [
+            self.host.ScoreTask(dead_session, 1, "ProfileA", headers, [b""] * 6, enqueued_at=1000.0),
+            self.host.ScoreTask(live_session, 2, "ProfileA", headers, [b""] * 6, enqueued_at=1000.1),
+        ]
+
+        with mock.patch.object(self.host.time, "monotonic", return_value=1000.5):
+            shared_host._run_score_batch(state, tasks, "timeout")
+
+        self.assertEqual(1, shared_host._score_batches)
+        self.assertEqual(0, shared_host._score_failures)
+        dead_session.close.assert_called_once()
+        self.assertEqual(1, len(live_replies))
+        self.assertEqual(0, live_replies[0][0][0])
+        self.assertEqual(2, live_replies[0][0][1])
+
+    def test_connection_loop_treats_bad_fd_as_disconnect(self):
+        shared_host = self.host.SharedGpuHost()
+        session = types.SimpleNamespace(
+            sock=object(),
+            reply=mock.Mock(),
+            close=mock.Mock(),
+            is_closed=lambda: False,
+        )
+
+        with mock.patch.object(self.host, "read_request", side_effect=OSError(self.host.errno.EBADF, "socket closed")):
+            self.host.connection_loop(shared_host, session)
+
+        self.assertEqual("", shared_host._last_error)
+        session.reply.assert_not_called()
+        session.close.assert_called_once()
+
     def test_train_batch_counts_even_if_publish_latest_fails(self):
         shared_host = self.host.SharedGpuHost()
         state = shared_host.get_or_create_profile({"profile_id": "ProfileA"})
@@ -760,6 +1134,131 @@ class SharedGpuHostTests(unittest.TestCase):
         self.assertEqual(1, shared_host._train_failures)
         self.assertEqual(1, state.learner_context.train_batch_calls)
         self.assertIn("publish failed", shared_host._last_error)
+
+    def test_select_score_work_prunes_closed_sessions(self):
+        shared_host = self.host.SharedGpuHost()
+        shared_host.batch_timeout_s = 0.2
+
+        class StubSession:
+            def __init__(self, closed=False):
+                self.closed = closed
+
+            def is_closed(self):
+                return self.closed
+
+            def reply(self, *args, **kwargs):
+                return None
+
+        state = self.host.ProfileState(infer_context=object(), learner_context=object())
+        now = 1000.0
+        state.pending_scores.append(
+            self.host.ScoreTask(
+                session=StubSession(closed=True),
+                request_id=1,
+                profile_id="ProfileA",
+                headers={"batch_size": "1"},
+                segments=[],
+                enqueued_at=now - 0.30,
+            )
+        )
+        live_session = StubSession(closed=False)
+        state.pending_scores.append(
+            self.host.ScoreTask(
+                session=live_session,
+                request_id=2,
+                profile_id="ProfileA",
+                headers={"batch_size": "1"},
+                segments=[],
+                enqueued_at=now - 0.25,
+            )
+        )
+        shared_host._profiles = {"ProfileA": state}
+
+        with mock.patch.object(self.host.time, "monotonic", return_value=now):
+            work, sleep_for = shared_host._select_score_work_locked()
+
+        self.assertIsNotNone(work)
+        self.assertEqual(0.0, sleep_for)
+        _state, tasks, reason = work
+        self.assertEqual("timeout", reason)
+        self.assertEqual([live_session], [task.session for task in tasks])
+        self.assertEqual(0, len(state.pending_scores))
+
+    def test_run_score_batch_ignores_closed_session_reply_errors(self):
+        shared_host = self.host.SharedGpuHost()
+        shared_host.model_reload_every_ms = 0
+        state = shared_host.get_or_create_profile({"profile_id": "ProfileA"})
+        state.infer_context.score_batch = mock.Mock(
+            return_value=self.host.struct.pack("<ffff", 0.1, 0.2, 0.3, 0.4)
+        )
+
+        class ReplySession:
+            def __init__(self, fail=False):
+                self.fail = fail
+                self.closed = False
+                self.replies = []
+
+            def is_closed(self):
+                return self.closed
+
+            def reply(self, *args, **kwargs):
+                if self.fail:
+                    raise OSError(9, "Bad file descriptor")
+                self.replies.append((args, kwargs))
+
+            def close(self):
+                self.closed = True
+
+        bad_session = ReplySession(fail=True)
+        good_session = ReplySession(fail=False)
+        headers = {
+            "profile_id": "ProfileA",
+            "policy_key": "train",
+            "head_id": "action",
+            "pick_index": "0",
+            "min_targets": "0",
+            "max_targets": "0",
+            "batch_size": "1",
+            "seq_len": "1",
+            "d_model": "1",
+            "max_candidates": "1",
+            "cand_feat_dim": "1",
+        }
+        bad_task = self.host.ScoreTask(
+            session=bad_session,
+            request_id=1,
+            profile_id="ProfileA",
+            headers=headers,
+            segments=[b""] * 6,
+            enqueued_at=1000.0,
+        )
+        good_task = self.host.ScoreTask(
+            session=good_session,
+            request_id=2,
+            profile_id="ProfileA",
+            headers=headers,
+            segments=[b""] * 6,
+            enqueued_at=1000.0,
+        )
+        state.pending_scores.append(
+            self.host.ScoreTask(
+                session=bad_session,
+                request_id=3,
+                profile_id="ProfileA",
+                headers=headers,
+                segments=[b""] * 6,
+                enqueued_at=1000.0,
+            )
+        )
+
+        with mock.patch.object(self.host.time, "monotonic", side_effect=[1000.0, 1000.5]):
+            shared_host._run_score_batch(state, [bad_task, good_task], "timeout")
+
+        self.assertEqual(1, shared_host._score_batches)
+        self.assertTrue(bad_session.closed)
+        self.assertEqual(1, len(good_session.replies))
+        self.assertEqual(0, len(state.pending_scores))
+        state.infer_context.score_batch.assert_called_once()
 
 
 if __name__ == "__main__":

@@ -45,7 +45,10 @@ class ModelPersistence:
         p = (path or self.model_latest_path or "").strip()
         if not p:
             return False
-        tmp = p + ".tmp"
+        parent = os.path.dirname(p)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
+        tmp = "%s.tmp.%s.%s" % (p, os.getpid(), int(time.time() * 1000000000))
         self.save_model(model, tmp)
         # Windows can fail replace() if another process is reading the target.
         for i in range(20):

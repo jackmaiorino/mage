@@ -45,6 +45,8 @@ public final class RLLogPaths {
 
     private static final String RL_BASE =
             "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl";
+    private static final String RL_ARTIFACTS_BASE =
+            EnvConfig.str("RL_ARTIFACTS_ROOT", RL_BASE);
 
     private static final String PROFILE_NAME = EnvConfig.str("MODEL_PROFILE", "");
 
@@ -53,12 +55,12 @@ public final class RLLogPaths {
 
     static {
         if (!PROFILE_NAME.isEmpty()) {
-            String profileRoot = RL_BASE + "/profiles/" + PROFILE_NAME;
+            String profileRoot = RL_ARTIFACTS_BASE + "/profiles/" + PROFILE_NAME;
             MODELS_BASE_DIR = EnvConfig.str("RL_MODELS_DIR", profileRoot + "/models");
             LOGS_BASE_DIR   = EnvConfig.str("RL_LOGS_DIR",   profileRoot + "/logs");
         } else {
-            MODELS_BASE_DIR = EnvConfig.str("RL_MODELS_DIR", RL_BASE + "/models");
-            LOGS_BASE_DIR   = EnvConfig.str("RL_LOGS_DIR",   RL_BASE + "/logs");
+            MODELS_BASE_DIR = EnvConfig.str("RL_MODELS_DIR", RL_ARTIFACTS_BASE + "/models");
+            LOGS_BASE_DIR   = EnvConfig.str("RL_LOGS_DIR",   RL_ARTIFACTS_BASE + "/logs");
         }
     }
 
@@ -121,9 +123,22 @@ public final class RLLogPaths {
     public static final String LEAGUE_STATE_PATH = EnvConfig.str("LEAGUE_STATE_PATH",
             LOGS_BASE_DIR + "/league/league_state.json");
 
-    // Python logs (kept in MLPythonCode for proximity to Python scripts)
+    // Python logs
+    public static final String PYTHON_LOGS_DIR = EnvConfig.str("PYTHON_LOGS_DIR",
+            LOGS_BASE_DIR + "/python");
+
+    public static final String PYTHON_MAIN_LOG_PATH = EnvConfig.str("MTG_AI_LOG_FILE",
+            PYTHON_LOGS_DIR + "/mtg_ai.log");
+
+    public static final String PYTHON_MULLIGAN_LOG_PATH = EnvConfig.str("MULLIGAN_TRAINING_LOG_FILE",
+            PYTHON_LOGS_DIR + "/mulligan_training.log");
+
+    public static final String PYTHON_VRAM_DIAGNOSTICS_LOG_PATH = EnvConfig.str("VRAM_DIAGNOSTICS_LOG_FILE",
+            PYTHON_LOGS_DIR + "/VRAM_diagnostics.log");
+
     public static final String PYTHON_MULLIGAN_TRACE_PATH
-            = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/mulligan_trace.jsonl";
+            = EnvConfig.str("MULLIGAN_TRACE_JSONL_FILE",
+            PYTHON_LOGS_DIR + "/mulligan_trace.jsonl");
 
     // -----------------------------------------------------------------------
     // Draft model paths (DRAFT_MODEL_PROFILE, defaults to MODEL_PROFILE + "-Draft")
@@ -138,7 +153,7 @@ public final class RLLogPaths {
             dp = PROFILE_NAME.isEmpty() ? "VintageCube-Draft" : PROFILE_NAME + "-Draft";
         }
         DRAFT_PROFILE_NAME = dp;
-        String draftRoot = RL_BASE + "/profiles/" + DRAFT_PROFILE_NAME;
+        String draftRoot = RL_ARTIFACTS_BASE + "/profiles/" + DRAFT_PROFILE_NAME;
         DRAFT_MODELS_BASE_DIR = EnvConfig.str("DRAFT_MODELS_DIR", draftRoot + "/models");
         DRAFT_LOGS_BASE_DIR   = EnvConfig.str("DRAFT_LOGS_DIR",   draftRoot + "/logs");
     }
