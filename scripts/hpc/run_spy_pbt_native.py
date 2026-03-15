@@ -203,6 +203,8 @@ class TrainerState:
         self.last_progress_episode = 0
         self.last_progress_at = time.time()
         self.launched_at_utc = now_utc()
+        # Multi-node: auxiliary JVM processes on CPU nodes
+        self.aux_processes: List[Dict[str, Any]] = []
 
 
 class NativeOrchestrator:
@@ -252,7 +254,8 @@ class NativeOrchestrator:
         self.runner_oversubscription_factor = max(0.1, env_float("RUNNER_OVERSUBSCRIPTION_FACTOR", 1.0))
         self.metrics_port_base = env_int("METRICS_PORT_BASE", 9100)
         self.py_service_mode = os.getenv("PY_SERVICE_MODE", "local").strip().lower() or "local"
-        self.gpu_service_bind_host = os.getenv("GPU_SERVICE_BIND_HOST", "127.0.0.1").strip() or "127.0.0.1"
+        self.gpu_service_bind_host = os.getenv("GPU_SERVICE_BIND_HOST", "0.0.0.0").strip() or "0.0.0.0"
+        self.league_mode = os.getenv("LEAGUE_MODE", "").strip().lower()
         self.gpu_service_port_base = env_int("GPU_SERVICE_PORT_BASE", 26100)
         self.gpu_service_metrics_port_base = env_int("GPU_SERVICE_METRICS_PORT_BASE", 27100)
         self.py4j_base_port = env_int("PY4J_BASE_PORT", 25334)
@@ -270,6 +273,47 @@ class NativeOrchestrator:
             env_int("GPU_SERVICE_STARTUP_TIMEOUT_SECONDS", max(60, self.trainer_start_stagger_seconds)),
         )
         self.visible_gpu_list = self.detect_visible_gpu_list()
+
+        # Eval benchmark config
+        self.eval_results: Dict[str, float] = {}
+        self.eval_num_games = env_int("EVAL_NUM_GAMES_PER_OPPONENT", 50)
+        self.eval_opponents: List[Dict[str, str]] = [
+            {
+                "deck": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono Red Rally.dek",
+                "skill": "1",
+                "label": "Rally-CP7",
+            },
+            {
+                "deck": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono-Blue Terror.dek",
+                "skill": "1",
+                "label": "Terror-CP7",
+            },
+        ]
+
+        # Multi-node discovery
+        self.gpu_node = ""
+        self.cpu_nodes: List[str] = []
+        # Het-group jobs expose per-component nodelists
+        het0 = os.getenv("SLURM_JOB_NODELIST_HET_GROUP_0", "").strip()
+        het1 = os.getenv("SLURM_JOB_NODELIST_HET_GROUP_1", "").strip()
+        if het0 and het1:
+            gpu_nodes = self._expand_slurm_nodelist(het0)
+            cpu_nodes = self._expand_slurm_nodelist(het1)
+            if gpu_nodes:
+                self.gpu_node = gpu_nodes[0]
+            self.cpu_nodes = cpu_nodes
+            log(f"Het-group multi-node: gpu_node={self.gpu_node} cpu_nodes={self.cpu_nodes}")
+        else:
+            nodelist = os.getenv("SLURM_JOB_NODELIST", "").strip()
+            if nodelist:
+                expanded = self._expand_slurm_nodelist(nodelist)
+                if len(expanded) >= 2:
+                    self.gpu_node = expanded[0]
+                    self.cpu_nodes = expanded[1:]
+                    log(f"Multi-node: gpu_node={self.gpu_node} cpu_nodes={self.cpu_nodes}")
+                elif len(expanded) == 1:
+                    self.gpu_node = expanded[0]
+                    log(f"Single-node: gpu_node={self.gpu_node}")
         self.visible_gpu_count = max(1, len(self.visible_gpu_list))
         self.trainer_start_wave_size = max(1, env_int("TRAINER_START_WAVE_SIZE", self.visible_gpu_count))
         self.trainer_start_intra_wave_delay_ms = max(0, env_int("TRAINER_START_INTRA_WAVE_DELAY_MS", 250))
@@ -300,6 +344,7 @@ class NativeOrchestrator:
         self.main_class = os.getenv("MAIN_CLASS", "mage.player.ai.rl.RLTrainer").strip() or "mage.player.ai.rl.RLTrainer"
         self.train_log_level = os.getenv("TRAIN_LOG_LEVEL", "").strip()
         self.league_promote_wr = os.getenv("LEAGUE_PROMOTE_WR", "0.55").strip() or "0.55"
+        self.multi_profile_jvm = env_bool("MULTI_PROFILE_JVM", False)
         self.runtime_dir = self.resolve_runtime_dir()
         self.launch_mode = ""
         self.artifact_prefix: List[str] = []
@@ -316,6 +361,7 @@ class NativeOrchestrator:
         self.pbt_events: List[Dict[str, Any]] = []
         self.pbt_group_state: Dict[str, Dict[str, Any]] = {}
         self.last_pbt_at: Optional[datetime] = None
+        self.last_eval_at: Optional[datetime] = datetime.now(timezone.utc)  # defer first eval by pbt_interval_minutes
         self.selected_profiles: List[Dict[str, Any]] = []
         self.active_profiles: List[Dict[str, Any]] = []
         self.snapshot_warning_keys: Set[str] = set()
@@ -345,9 +391,9 @@ class NativeOrchestrator:
             raise RuntimeError("Java executable not found on PATH for artifact launch mode")
         app_jars = sorted((self.runtime_dir / "app").glob("*.jar"))
         lib_jars = sorted((self.runtime_dir / "lib").glob("*.jar"))
-        classpath_entries = [str(p) for p in app_jars + lib_jars]
-        if not classpath_entries:
+        if not app_jars and not lib_jars:
             raise RuntimeError(f"No jars found under artifact runtime: {self.runtime_dir}")
+        classpath_entries = [str(p) for p in app_jars + lib_jars]
         classpath = os.pathsep.join(classpath_entries)
         return [java_path, "-cp", classpath, self.main_class]
 
@@ -426,7 +472,7 @@ class NativeOrchestrator:
         return active
 
     def compute_runners_per_profile(self, profile_count: int) -> int:
-        cpu_total = env_int("SLURM_CPUS_ON_NODE", os.cpu_count() or 8)
+        cpu_total = env_int("GAME_CPU_CORES", env_int("SLURM_CPUS_ON_NODE", os.cpu_count() or 8))
         usable = max(0, cpu_total - self.cpu_headroom)
         min_total_runners = max(2, profile_count * 2)
         target_total_runners = int(math.floor(float(usable) * self.runner_oversubscription_factor))
@@ -495,6 +541,122 @@ class NativeOrchestrator:
     def detect_visible_gpu_count(self) -> int:
         return max(1, len(self.detect_visible_gpu_list()))
 
+    @staticmethod
+    def _expand_slurm_nodelist(nodelist: str) -> List[str]:
+        """Expand Slurm compact nodelist like 'gpu-a6-[5,7]' into individual hostnames."""
+        try:
+            result = subprocess.run(
+                ["scontrol", "show", "hostnames", nodelist],
+                capture_output=True, text=True, timeout=10,
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                return result.stdout.strip().splitlines()
+        except Exception:
+            pass
+        return [h.strip() for h in nodelist.split(",") if h.strip()]
+
+    def run_eval_benchmark(self) -> Dict[str, float]:
+        """Stop trainers, run eval games for each profile, return {profile: winrate}."""
+        log("[EVAL] Starting eval benchmark")
+
+        # Stop all trainers
+        for profile in list(self.trainers.keys()):
+            state = self.trainers.get(profile)
+            if state:
+                log(f"[EVAL] Stopping trainer {profile} for eval benchmark")
+                self.stop_trainer(state)
+        self.trainers.clear()
+        time.sleep(2)
+
+        results: Dict[str, float] = {}
+        for entry in self.load_profiles():
+            profile = str(entry.get("profile", "")).strip()
+            if not profile:
+                continue
+
+            total_wins = 0
+            total_games = 0
+            for opp in self.eval_opponents:
+                eval_results_file = str(
+                    self.profile_models_dir(profile) / f"eval_{opp['label']}.csv"
+                )
+                env = dict(os.environ)
+                env["MODE"] = "league_bench"
+                env["MODEL_PROFILE"] = profile
+                env["EVAL_OPPONENT_DECK"] = opp["deck"]
+                env["EVAL_OPPONENT_SKILL"] = opp["skill"]
+                env["EVAL_NUM_GAMES"] = str(self.eval_num_games)
+                env["EVAL_RESULTS_FILE"] = eval_results_file
+                env["RL_ARTIFACTS_ROOT"] = str(self.rl_artifacts_root)
+
+                if self.py_service_mode == "shared_gpu":
+                    gpu_slot = 0
+                    endpoint_host = self.gpu_node if self.gpu_node else self.gpu_service_bind_host
+                    env["PY_SERVICE_MODE"] = "shared_gpu"
+                    env["GPU_SERVICE_ENDPOINT"] = (
+                        f"{endpoint_host}:{self.gpu_service_port_base + gpu_slot}"
+                    )
+
+                command = self.build_command()
+                # If multi-node, run eval on first CPU node
+                if self.cpu_nodes:
+                    command = [
+                        "srun", "--overlap", f"--nodelist={self.cpu_nodes[0]}",
+                        "--ntasks=1", "--cpus-per-task=1",
+                    ] + command
+
+                log(f"[EVAL] Running {profile} vs {opp['label']} ({self.eval_num_games} games)")
+
+                try:
+                    proc = subprocess.run(
+                        command,
+                        cwd=str(self.source_repo_root),
+                        env=env,
+                        timeout=600,
+                        capture_output=True,
+                        text=True,
+                    )
+                    if os.path.isfile(eval_results_file):
+                        with open(eval_results_file) as f:
+                            parts = f.read().strip().split(",")
+                            if len(parts) >= 3:
+                                total_wins += int(parts[0])
+                                total_games += int(parts[1])
+                    else:
+                        for line in (proc.stdout or "").splitlines():
+                            if line.startswith("EVAL_RESULT:"):
+                                for tok in line.split():
+                                    if tok.startswith("wins="):
+                                        total_wins += int(tok.split("=")[1])
+                                    elif tok.startswith("total="):
+                                        total_games += int(tok.split("=")[1])
+                except subprocess.TimeoutExpired:
+                    log(f"[EVAL] TIMEOUT: {profile} vs {opp['label']}")
+                except Exception as exc:
+                    log(f"[EVAL] ERROR: {profile} vs {opp['label']}: {exc}")
+
+            winrate = total_wins / max(1, total_games)
+            results[profile] = winrate
+            log(f"[EVAL] {profile}: {total_wins}/{total_games} = {winrate:.3f}")
+
+        self.eval_results = results
+
+        # Append to eval CSV
+        eval_csv = self.run_dir / "eval_results.csv"
+        write_header = not eval_csv.exists()
+        try:
+            with open(eval_csv, "a") as f:
+                if write_header:
+                    f.write("timestamp," + ",".join(sorted(results.keys())) + "\n")
+                ts = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+                vals = ",".join(f"{results.get(k, 0.0):.4f}" for k in sorted(results.keys()))
+                f.write(f"{ts},{vals}\n")
+        except Exception as exc:
+            log(f"[EVAL] Failed to write eval CSV: {exc}")
+
+        log(f"[EVAL] Benchmark complete: {results}")
+        return results
+
     def metrics_port_ready(self, metrics_port: int) -> bool:
         url = f"http://127.0.0.1:{metrics_port}/metrics"
         try:
@@ -557,9 +719,9 @@ class NativeOrchestrator:
         atomic_write_text(output, "\n".join(deck_paths) + "\n", encoding="utf-8")
         return output
 
-    def build_command(self) -> List[str]:
+    def build_command(self, mode: str = "train") -> List[str]:
         if self.launch_mode == "artifact":
-            return self.artifact_prefix + ["train"]
+            return self.artifact_prefix + [mode]
         return self.maven_prefix + [
             "-q",
             "-pl",
@@ -569,7 +731,23 @@ class NativeOrchestrator:
             "compile",
             "exec:java",
             f"-Dexec.mainClass={self.main_class}",
-            "-Dexec.args=train",
+            f"-Dexec.args={mode}",
+        ]
+
+    def build_multi_profile_command(self, profile_names: List[str]) -> List[str]:
+        args = "trainAll " + " ".join(profile_names)
+        if self.launch_mode == "artifact":
+            return self.artifact_prefix + args.split()
+        return self.maven_prefix + [
+            "-q",
+            "-pl",
+            "Mage.Server.Plugins/Mage.Player.AIRL",
+            "-am",
+            "-DskipTests",
+            "compile",
+            "exec:java",
+            f"-Dexec.mainClass={self.main_class}",
+            f'-Dexec.args={args}',
         ]
 
     def resolve_python_executable(self) -> str:
@@ -733,6 +911,8 @@ class NativeOrchestrator:
         env["CANDIDATE_EXPLOSIONS_LOG_FILE"] = str(self.profile_logs_dir(profile) / "health" / "candidate_explosions.log")
         env["METRICS_PORT"] = str(metrics_port)
         env["OPPONENT_SAMPLER"] = "league"
+        if self.league_mode:
+            env["LEAGUE_MODE"] = self.league_mode
         env["ORCHESTRATED_RUN"] = "1"
         env["ORCH_RUN_ID"] = self.run_id
         env["LEAGUE_REGISTRY_PATH"] = str(self.registry_path)
@@ -782,9 +962,10 @@ class NativeOrchestrator:
         gpu_slot = slot % max(1, len(gpu_list))
         if self.py_service_mode == "shared_gpu":
             env["PY_SERVICE_MODE"] = "shared_gpu"
-            env["GPU_SERVICE_ENDPOINT"] = f"{self.gpu_service_bind_host}:{self.gpu_service_port_base + gpu_slot}"
+            endpoint_host = self.gpu_node if self.gpu_node else self.gpu_service_bind_host
+            env["GPU_SERVICE_ENDPOINT"] = f"{endpoint_host}:{self.gpu_service_port_base + gpu_slot}"
             env["GPU_SERVICE_METRICS_ENDPOINT"] = (
-                f"http://{self.gpu_service_bind_host}:{self.gpu_service_metrics_port_base + gpu_slot}/metrics"
+                f"http://{endpoint_host}:{self.gpu_service_metrics_port_base + gpu_slot}/metrics"
             )
             env["MULLIGAN_DEVICE"] = env.get("MULLIGAN_DEVICE", "cpu")
             if not env.get("LEAGUE_TICK_EPISODES", "").strip():
@@ -797,6 +978,12 @@ class NativeOrchestrator:
             env["CUDA_VISIBLE_DEVICES"] = gpu_list[gpu_slot]
 
         command = self.build_command()
+        if self.cpu_nodes:
+            cpu_alloc = env_int("GAME_CPU_CORES", 128)
+            command = [
+                "srun", "--het-group=1", "--overlap", f"--nodelist={self.cpu_nodes[0]}",
+                "--ntasks=1", f"--cpus-per-task={cpu_alloc}",
+            ] + command
         process = subprocess.Popen(
             command,
             cwd=str(self.source_repo_root),
@@ -827,6 +1014,144 @@ class NativeOrchestrator:
             effective_train_env=train_env,
             effective_seed=seed_now,
         )
+
+    def start_multi_profile_trainer(
+        self,
+        entries: List[Dict[str, Any]],
+        runners_per_profile: int,
+        opponent_decklist: Path,
+    ) -> TrainerState:
+        """Launch a single JVM that trains all profiles (card DB loaded once)."""
+        profile_names = [str(e.get("profile", "")).strip() for e in entries]
+        profiles_csv = ",".join(profile_names)
+        log(f"Multi-profile JVM: profiles={profiles_csv} runners_per_profile={runners_per_profile}")
+
+        # Multi-node: primary JVM uses GPU node CPUs; auxiliaries use compute node CPUs
+        if self.cpu_nodes:
+            gpu_cpu_total = env_int("SLURM_CPUS_ON_NODE", os.cpu_count() or 8)
+            gpu_usable = max(0, gpu_cpu_total - self.cpu_headroom)
+            primary_total = max(len(entries) * 2, int(math.floor(gpu_usable * self.runner_oversubscription_factor)))
+            aux_total = runners_per_profile * len(entries)
+            log(f"Multi-node runners: primary={primary_total} (from {gpu_cpu_total} GPU-node CPUs) aux={aux_total} (from GAME_CPU_CORES/default)")
+        else:
+            primary_total = runners_per_profile * len(entries)
+            aux_total = 0
+        metrics_port = self.metrics_port_base
+        self.trainer_logs_dir.mkdir(parents=True, exist_ok=True)
+        stdout_path = self.trainer_logs_dir / "multi_profile.stdout.log"
+        stderr_path = self.trainer_logs_dir / "multi_profile.stderr.log"
+        stdout_handle = stdout_path.open("ab", buffering=0)
+        stderr_handle = stderr_path.open("ab", buffering=0)
+
+        env = dict(os.environ)
+        env["MODE"] = "trainAll"
+        env["TRAIN_PROFILES_LIST"] = profiles_csv
+        env["TOTAL_EPISODES"] = str(self.total_episodes)
+        env["NUM_GAME_RUNNERS"] = str(primary_total)
+        env["DECK_LIST_FILE"] = str(opponent_decklist)
+        env["RL_ARTIFACTS_ROOT"] = str(self.rl_artifacts_root)
+        env["METRICS_PORT"] = str(metrics_port)
+        env["OPPONENT_SAMPLER"] = "league"
+        if self.league_mode:
+            env["LEAGUE_MODE"] = self.league_mode
+        env["ORCHESTRATED_RUN"] = "1"
+        env["ORCH_RUN_ID"] = self.run_id
+        env["LEAGUE_REGISTRY_PATH"] = str(self.registry_path)
+        env["LEAGUE_PROMOTE_WR"] = self.league_promote_wr
+        env["MAGE_DB_DIR"] = str(self.db_root / "shared")
+        env["MAGE_DB_AUTO_SERVER"] = "false"
+        if self.train_log_level:
+            env["MTG_AI_LOG_LEVEL"] = self.train_log_level
+        if self.game_log_frequency > 0:
+            env["GAME_LOG_FREQUENCY"] = str(self.game_log_frequency)
+
+        if self.py_service_mode == "shared_gpu":
+            env["PY_SERVICE_MODE"] = "shared_gpu"
+            endpoint_host = self.gpu_node if self.gpu_node else self.gpu_service_bind_host
+            env["GPU_SERVICE_ENDPOINT"] = f"{endpoint_host}:{self.gpu_service_port_base}"
+            num_gpus = len(self.visible_gpu_list)
+            env["GPU_SERVICE_NUM_GPUS"] = str(num_gpus)
+            env["GPU_SERVICE_NUM_CHANNELS"] = str(max(4, num_gpus))
+            env["GPU_SERVICE_METRICS_ENDPOINT"] = (
+                f"http://{endpoint_host}:{self.gpu_service_metrics_port_base}/metrics"
+            )
+            env["MULLIGAN_DEVICE"] = env.get("MULLIGAN_DEVICE", "cpu")
+
+        # Ensure each profile's directories exist
+        for entry in entries:
+            profile = str(entry.get("profile", "")).strip()
+            self.profile_models_dir(profile).mkdir(parents=True, exist_ok=True)
+            self.profile_logs_dir(profile).mkdir(parents=True, exist_ok=True)
+            self.python_logs_dir(profile).mkdir(parents=True, exist_ok=True)
+
+        self.apply_trainer_java_tool_options(env)
+
+        # Primary JVM runs locally on GPU node (no srun wrapping)
+        command = self.build_multi_profile_command(profile_names)
+        process = subprocess.Popen(
+            command,
+            cwd=str(self.source_repo_root),
+            env=env,
+            stdout=stdout_handle,
+            stderr=stderr_handle,
+        )
+        log(f"Started primary multi-profile trainer pid={process.pid} profiles={profiles_csv} totalRunners={primary_total}")
+
+        # Return a single TrainerState using first profile as representative
+        state = TrainerState(
+            entry=entries[0],
+            slot=0,
+            profile="multi:" + profiles_csv,
+            metrics_port=metrics_port,
+            py4j_base_port=0,
+            runners_per_profile=runners_per_profile,
+            opponent_decklist=opponent_decklist,
+            command=command,
+            env=env,
+            stdout_handle=stdout_handle,
+            stderr_handle=stderr_handle,
+            process=process,
+            effective_train_env={},
+            effective_seed=None,
+        )
+
+        # Launch auxiliary JVMs on CPU nodes (game simulation only, no stats writing)
+        for idx, cpu_node in enumerate(self.cpu_nodes):
+            aux_metrics_port = metrics_port + 1 + idx
+            aux_stdout_path = self.trainer_logs_dir / f"multi_profile_aux_{cpu_node}.stdout.log"
+            aux_stderr_path = self.trainer_logs_dir / f"multi_profile_aux_{cpu_node}.stderr.log"
+            aux_stdout = aux_stdout_path.open("ab", buffering=0)
+            aux_stderr = aux_stderr_path.open("ab", buffering=0)
+
+            aux_env = dict(env)
+            aux_env["GAME_STATS_WRITER"] = "0"
+            aux_env["METRICS_PORT"] = str(aux_metrics_port)
+            aux_env["NUM_GAME_RUNNERS"] = str(aux_total)
+
+            aux_cpus = env_int("GAME_CPU_CORES", 128)
+            srun_args = ["srun", "--overlap", f"--nodelist={cpu_node}", "--ntasks=1", f"--cpus-per-task={aux_cpus}"]
+            het1 = os.getenv("SLURM_JOB_NODELIST_HET_GROUP_1", "").strip()
+            if het1:
+                srun_args.insert(1, "--het-group=1")
+            aux_command = srun_args + self.build_multi_profile_command(profile_names)
+
+            aux_proc = subprocess.Popen(
+                aux_command,
+                cwd=str(self.source_repo_root),
+                env=aux_env,
+                stdout=aux_stdout,
+                stderr=aux_stderr,
+            )
+            state.aux_processes.append({
+                "process": aux_proc,
+                "stdout": aux_stdout,
+                "stderr": aux_stderr,
+                "node": cpu_node,
+                "metrics_port": aux_metrics_port,
+            })
+            log(f"Started auxiliary JVM on {cpu_node} pid={aux_proc.pid} metricsPort={aux_metrics_port}")
+
+        return state
 
     @staticmethod
     def is_pid_alive(pid: int) -> bool:
@@ -911,22 +1236,50 @@ class NativeOrchestrator:
             )
 
     def stop_trainer(self, state: TrainerState) -> None:
+        # Terminate auxiliary JVMs first
+        for aux in state.aux_processes:
+            aux_proc = aux["process"]
+            if aux_proc.poll() is None:
+                try:
+                    aux_proc.terminate()
+                except Exception:
+                    pass
+        # Terminate primary
         proc = state.process
         if proc.poll() is not None:
+            # Still wait for auxiliaries
+            self._wait_and_kill_auxiliaries(state)
             return
         try:
             proc.terminate()
         except Exception:
+            self._wait_and_kill_auxiliaries(state)
             return
         deadline = time.time() + self.trainer_stop_grace_seconds
         while time.time() < deadline:
             if proc.poll() is not None:
-                return
+                break
             time.sleep(0.2)
-        try:
-            proc.kill()
-        except Exception:
-            pass
+        if proc.poll() is None:
+            try:
+                proc.kill()
+            except Exception:
+                pass
+        self._wait_and_kill_auxiliaries(state)
+
+    def _wait_and_kill_auxiliaries(self, state: TrainerState) -> None:
+        deadline = time.time() + min(5.0, self.trainer_stop_grace_seconds)
+        for aux in state.aux_processes:
+            aux_proc = aux["process"]
+            while time.time() < deadline:
+                if aux_proc.poll() is not None:
+                    break
+                time.sleep(0.2)
+            if aux_proc.poll() is None:
+                try:
+                    aux_proc.kill()
+                except Exception:
+                    pass
 
     def close_logs(self, state: TrainerState) -> None:
         for handle in (state.stdout_handle, state.stderr_handle):
@@ -938,6 +1291,19 @@ class NativeOrchestrator:
                 handle.close()
             except Exception:
                 pass
+        for aux in state.aux_processes:
+            for key in ("stdout", "stderr"):
+                handle = aux.get(key)
+                if handle is None:
+                    continue
+                try:
+                    handle.flush()
+                except Exception:
+                    pass
+                try:
+                    handle.close()
+                except Exception:
+                    pass
 
     def profile_models_dir(self, profile: str) -> Path:
         return self.rl_artifacts_root / "profiles" / profile / "models"
@@ -1206,6 +1572,18 @@ class NativeOrchestrator:
         }
 
     def update_stall_progress(self, state: TrainerState, snapshots: Dict[str, Dict[str, Any]]) -> None:
+        # For multi-profile trainers, check any constituent profile for progress
+        if state.profile.startswith("multi:"):
+            sub_profiles = state.profile[len("multi:"):].split(",")
+            total_ep = 0
+            for sp in sub_profiles:
+                snap = snapshots.get(sp.strip())
+                if snap:
+                    total_ep += int(snap.get("episode", 0))
+            if total_ep > state.last_progress_episode:
+                state.last_progress_episode = total_ep
+                state.last_progress_at = time.time()
+            return
         snap = snapshots.get(state.profile)
         if snap is None:
             return
@@ -1231,14 +1609,20 @@ class NativeOrchestrator:
         self.close_logs(state)
         if backoff_seconds > 0:
             time.sleep(backoff_seconds)
-        replacement = self.start_trainer(
-            entry,
-            state.slot,
-            state.runners_per_profile,
-            state.opponent_decklist,
-            effective_train_env=state.effective_train_env,
-            effective_seed=state.effective_seed,
-        )
+        # In multi-profile mode, restart the multi-profile JVM
+        if self.multi_profile_jvm and profile.startswith("multi:"):
+            replacement = self.start_multi_profile_trainer(
+                self.selected_profiles, state.runners_per_profile, state.opponent_decklist,
+            )
+        else:
+            replacement = self.start_trainer(
+                entry,
+                state.slot,
+                state.runners_per_profile,
+                state.opponent_decklist,
+                effective_train_env=state.effective_train_env,
+                effective_seed=state.effective_seed,
+            )
         replacement.restart_count = state.restart_count
         replacement.consecutive_failures = state.consecutive_failures
         replacement.last_restart_reason = reason
@@ -1328,7 +1712,10 @@ class NativeOrchestrator:
                 snap = snapshots.get(profile)
                 if snap is None:
                     continue
-                wr = snap.get("rolling_current")
+                if self.league_mode == "rl_only" and self.eval_results:
+                    wr = self.eval_results.get(profile)
+                else:
+                    wr = snap.get("rolling_current")
                 if wr is None:
                     continue
                 if profile not in self.trainers:
@@ -1337,10 +1724,15 @@ class NativeOrchestrator:
             if len(candidates) < max(2, self.pbt_min_population):
                 continue
 
-            ordered = sorted(
-                candidates,
-                key=lambda c: (-float(c["snapshot"]["rolling_current"]), str(c["entry"]["profile"])),
-            )
+            def _pbt_sort_key(c):
+                p = str(c["entry"]["profile"])
+                if self.league_mode == "rl_only" and self.eval_results:
+                    w = self.eval_results.get(p, 0.0)
+                else:
+                    w = float(c["snapshot"].get("rolling_current", 0.0))
+                return (-w, p)
+
+            ordered = sorted(candidates, key=_pbt_sort_key)
             if len(ordered) < 2:
                 continue
 
@@ -1358,8 +1750,12 @@ class NativeOrchestrator:
                 if state is None:
                     continue
 
-                winner_wr = float(winner["snapshot"]["rolling_current"])
-                loser_wr = float(loser["snapshot"]["rolling_current"])
+                if self.league_mode == "rl_only" and self.eval_results:
+                    winner_wr = self.eval_results.get(winner_profile, 0.0)
+                    loser_wr = self.eval_results.get(loser_profile, 0.0)
+                else:
+                    winner_wr = float(winner["snapshot"]["rolling_current"])
+                    loser_wr = float(loser["snapshot"]["rolling_current"])
                 winner_gap = winner_wr - loser_wr
                 gap_gate_passed = winner_gap >= self.pbt_min_winner_gap
                 winner_wr_gate_passed = winner_wr >= self.pbt_min_winner_wr
@@ -1881,19 +2277,26 @@ class NativeOrchestrator:
         if self.py_service_mode == "shared_gpu":
             self.launch_shared_gpu_hosts()
 
-        startup_wave: List[TrainerState] = []
-        for idx, entry in enumerate(self.selected_profiles):
-            state = self.start_trainer(entry, idx, runners_per_profile, opponent_decklist)
+        if self.multi_profile_jvm:
+            log("Multi-profile JVM mode: launching single JVM for all profiles")
+            state = self.start_multi_profile_trainer(
+                self.selected_profiles, runners_per_profile, opponent_decklist,
+            )
             self.trainers[state.profile] = state
-            startup_wave.append(state)
+        else:
+            startup_wave: List[TrainerState] = []
+            for idx, entry in enumerate(self.selected_profiles):
+                state = self.start_trainer(entry, idx, runners_per_profile, opponent_decklist)
+                self.trainers[state.profile] = state
+                startup_wave.append(state)
 
-            is_last = idx >= (len(self.selected_profiles) - 1)
-            wave_full = len(startup_wave) >= self.trainer_start_wave_size
-            if wave_full or is_last:
-                self.wait_for_startup_readiness(startup_wave)
-                startup_wave = []
-            elif self.trainer_start_intra_wave_delay_ms > 0:
-                time.sleep(self.trainer_start_intra_wave_delay_ms / 1000.0)
+                is_last = idx >= (len(self.selected_profiles) - 1)
+                wave_full = len(startup_wave) >= self.trainer_start_wave_size
+                if wave_full or is_last:
+                    self.wait_for_startup_readiness(startup_wave)
+                    startup_wave = []
+                elif self.trainer_start_intra_wave_delay_ms > 0:
+                    time.sleep(self.trainer_start_intra_wave_delay_ms / 1000.0)
 
         initial_snapshots: Dict[str, Dict[str, Any]] = {}
         for entry in self.active_profiles:
@@ -1978,6 +2381,17 @@ class NativeOrchestrator:
                 break
 
             now_dt = datetime.now(timezone.utc)
+            # Run eval benchmark before PBT exploitation in rl_only mode
+            if self.league_mode == "rl_only" and self.pbt_interval_minutes > 0:
+                eval_elapsed = float("inf") if self.last_eval_at is None else (now_dt - self.last_eval_at).total_seconds() / 60.0
+                if eval_elapsed >= self.pbt_interval_minutes:
+                    self.run_eval_benchmark()
+                    self.last_eval_at = datetime.now(timezone.utc)
+                    # Restart trainers after eval
+                    for entry in self.load_profiles():
+                        p = str(entry.get("profile", "")).strip()
+                        if p and p not in self.trainers:
+                            self.start_trainer(entry)
             events = self.invoke_pbt_exploit(snapshots, now_dt)
             if events:
                 if any(str(ev.get("result", "")) == "committed" for ev in events):

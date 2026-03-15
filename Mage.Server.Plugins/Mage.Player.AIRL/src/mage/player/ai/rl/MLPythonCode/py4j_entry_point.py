@@ -1,4 +1,7 @@
-from py4j.clientserver import ClientServer, JavaParameters, PythonParameters
+try:
+    from py4j.clientserver import ClientServer, JavaParameters, PythonParameters
+except ImportError:
+    ClientServer = JavaParameters = PythonParameters = None
 from mtg_transformer import MTGTransformerModel
 import numpy as np
 import torch

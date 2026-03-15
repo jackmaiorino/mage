@@ -72,6 +72,7 @@ public final class SharedGpuPythonModel implements PythonModel {
     }
 
     private static final int NUM_CHANNELS = Math.max(1, EnvConfig.i32("GPU_SERVICE_NUM_CHANNELS", 4));
+    private static final int NUM_GPU_HOSTS = Math.max(1, EnvConfig.i32("GPU_SERVICE_NUM_GPUS", 1));
 
     private final String profileId;
     private final String endpoint;
@@ -97,6 +98,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         final ConcurrentHashMap<Long, CompletableFuture<SharedGpuProtocol.ResponseFrame>> pending = new ConcurrentHashMap<>();
         final BlockingQueue<OutboundRequest> outbound = new LinkedBlockingQueue<>(OUTBOUND_QUEUE_CAPACITY);
         final Object connectionLock = new Object();
+        final java.util.Set<String> registeredProfiles = java.util.Collections.synchronizedSet(new java.util.HashSet<>());
         volatile Socket socket;
         volatile InputStream input;
         volatile OutputStream output;
@@ -125,23 +127,40 @@ public final class SharedGpuPythonModel implements PythonModel {
                     registerLocked();
                 }
             }
+            // In multi-profile mode, register additional profiles on-demand per channel
+            String epid = effectiveProfileId();
+            if (!epid.isEmpty() && !registeredProfiles.contains(epid)) {
+                synchronized (connectionLock) {
+                    if (!registeredProfiles.contains(epid)) {
+                        Map<String, String> headers = buildRegisterHeaders();
+                        SharedGpuProtocol.ResponseFrame resp = invokeOnChannel(this,
+                                SharedGpuProtocol.OP_REGISTER_PROFILE, headers, new byte[0], CONTROL_TIMEOUT_MS);
+                        if (resp.status == SharedGpuProtocol.STATUS_OK) {
+                            registeredProfiles.add(epid);
+                        }
+                    }
+                }
+            }
         }
 
         void connectLocked() {
             closeConnection(new IOException("Reconnecting shared GPU channel " + index));
+            int portOffset = (NUM_GPU_HOSTS > 1) ? (index % NUM_GPU_HOSTS) : 0;
+            int targetPort = endpointPort + portOffset;
             try {
                 Socket newSocket = new Socket();
                 newSocket.setTcpNoDelay(true);
                 newSocket.setKeepAlive(true);
-                newSocket.connect(new InetSocketAddress(endpointHost, endpointPort), CONNECT_TIMEOUT_MS);
+                newSocket.connect(new InetSocketAddress(endpointHost, targetPort), CONNECT_TIMEOUT_MS);
                 socket = newSocket;
                 input = newSocket.getInputStream();
                 output = newSocket.getOutputStream();
                 registered = false;
+                registeredProfiles.clear();
                 startThreads();
-                logger.info("Connected shared GPU channel " + index + " profile=" + profileId + " endpoint=" + endpoint);
+                logger.info("Connected shared GPU channel " + index + " profile=" + profileId + " endpoint=" + endpointHost + ":" + targetPort);
             } catch (IOException e) {
-                throw new IllegalStateException("Failed to connect channel " + index + " to shared GPU host at " + endpoint, e);
+                throw new IllegalStateException("Failed to connect channel " + index + " to shared GPU host at " + endpointHost + ":" + targetPort, e);
             }
         }
 
@@ -152,14 +171,18 @@ public final class SharedGpuPythonModel implements PythonModel {
                 throw new IllegalStateException(response.headers.getOrDefault("error", "Shared GPU profile registration failed on channel " + index));
             }
             registered = true;
+            String epid = effectiveProfileId();
+            if (!epid.isEmpty()) this.registeredProfiles.add(epid);
         }
 
         void startThreads() {
             writerThread = new Thread(() -> writerLoop(this), "SharedGpuWriter-" + profileId + "-ch" + index);
             writerThread.setDaemon(true);
+            writerThread.setPriority(Thread.MAX_PRIORITY);
             writerThread.start();
             readerThread = new Thread(() -> readerLoop(this), "SharedGpuReader-" + profileId + "-ch" + index);
             readerThread.setDaemon(true);
+            readerThread.setPriority(Thread.MAX_PRIORITY);
             readerThread.start();
         }
 
@@ -337,14 +360,36 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
     }
 
+    // First profile from TRAIN_PROFILES_LIST, used as fallback for threads without ProfileContext
+    private final String firstMultiProfile;
+
+    /** Resolve the effective profile ID for the current thread (multi-profile aware). */
+    String effectiveProfileId() {
+        ProfileContext ctx = ProfileContext.current();
+        if (ctx != null) return ctx.profileName;
+        if (!this.profileId.isEmpty()) return this.profileId;
+        return this.firstMultiProfile;
+    }
+
     private SharedGpuPythonModel() {
         this.profileId = EnvConfig.str("MODEL_PROFILE", "").trim();
-        if (this.profileId.isEmpty()) {
+        // In multi-profile mode (trainAll), MODEL_PROFILE is not set globally --
+        // effectiveProfileId() resolves it per-thread from ProfileContext instead.
+        String profilesList = EnvConfig.str("TRAIN_PROFILES_LIST", "").trim();
+        boolean multiProfile = !profilesList.isEmpty();
+        if (multiProfile) {
+            String first = profilesList.split(",")[0].trim();
+            this.firstMultiProfile = first.isEmpty() ? "default" : first;
+        } else {
+            this.firstMultiProfile = "";
+        }
+        if (this.profileId.isEmpty() && !multiProfile) {
             throw new IllegalStateException("PY_SERVICE_MODE=shared_gpu requires MODEL_PROFILE to be set");
         }
         this.predictionScheduler = Executors.newSingleThreadScheduledExecutor(r -> {
             Thread t = new Thread(r, "SharedGpuLocalBatch-" + this.profileId);
             t.setDaemon(true);
+            t.setPriority(Thread.MAX_PRIORITY);
             return t;
         });
         this.trainScheduler = Executors.newSingleThreadScheduledExecutor(r -> {
@@ -715,7 +760,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
 
         Map<String, String> headers = new LinkedHashMap<>();
-        headers.put("profile_id", profileId);
+        headers.put("profile_id", effectiveProfileId());
         headers.put("policy_key", key.policyKey);
         headers.put("head_id", key.headId);
         headers.put("pick_index", "0");
@@ -729,6 +774,7 @@ public final class SharedGpuPythonModel implements PythonModel {
 
         try {
             byte[] payload = buildMergedScorePayload(batch);
+            long batchSendNanos = System.nanoTime();
             // The transport already multiplexes responses by request id, so keep
             // distinct local batch-key groups in flight instead of waiting for
             // each synchronous round-trip to finish before submitting the next.
@@ -738,6 +784,8 @@ public final class SharedGpuPythonModel implements PythonModel {
                     payload,
                     SCORE_TIMEOUT_MS
             ).whenComplete((response, error) -> {
+                long batchRtMs = (System.nanoTime() - batchSendNanos) / 1_000_000L;
+                try { metrics.recordInferBatchRoundTripMs(batchRtMs); } catch (Exception ignored) {}
                 if (error != null) {
                     for (ScoreRequest request : batch) {
                         request.future.completeExceptionally(error);
@@ -818,7 +866,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
 
         Map<String, String> headers = new LinkedHashMap<>();
-        headers.put("profile_id", profileId);
+        headers.put("profile_id", effectiveProfileId());
         headers.put("batch_size", Integer.toString(mergedTrainingData.size()));
         headers.put("seq_len", Integer.toString(key.seqLen));
         headers.put("d_model", Integer.toString(key.dModel));
@@ -1016,20 +1064,31 @@ public final class SharedGpuPythonModel implements PythonModel {
 
     private Map<String, String> buildRegisterHeaders() {
         Map<String, String> headers = new LinkedHashMap<>();
-        headers.put("profile_id", profileId);
+        String epid = effectiveProfileId();
+        headers.put("profile_id", epid);
         headers.put("endpoint", endpoint);
 
+        // Resolve paths from ProfileContext in multi-profile mode
+        ProfileContext ctx = ProfileContext.current();
+        String modelsDir = ctx != null ? ctx.paths.modelsBaseDir : RLLogPaths.MODELS_BASE_DIR;
+        String logsDir = ctx != null ? ctx.paths.logsBaseDir : RLLogPaths.LOGS_BASE_DIR;
+        String modelPath = ctx != null ? ctx.paths.modelFilePath : RLLogPaths.MODEL_FILE_PATH;
+        String snapshotDir = ctx != null ? ctx.paths.snapshotDir : RLLogPaths.SNAPSHOT_DIR;
+        String mulliganPath = ctx != null ? ctx.paths.mulliganModelPath : RLLogPaths.MULLIGAN_MODEL_PATH;
+        String lossesPath = ctx != null ? ctx.paths.trainingLossesPath : RLLogPaths.TRAINING_LOSSES_PATH;
+        String healthPath = ctx != null ? ctx.paths.healthLogPath : RLLogPaths.HEALTH_LOG_PATH;
+
         Map<String, String> env = new LinkedHashMap<>(System.getenv());
-        env.put("MODEL_PROFILE", profileId);
-        env.put("RL_MODELS_DIR", RLLogPaths.MODELS_BASE_DIR);
-        env.put("RL_LOGS_DIR", RLLogPaths.LOGS_BASE_DIR);
-        env.put("MODEL_PATH", RLLogPaths.MODEL_FILE_PATH);
-        env.put("MTG_MODEL_PATH", RLLogPaths.MODEL_FILE_PATH);
-        env.put("MODEL_LATEST_PATH", defaultLatestPath(RLLogPaths.MODEL_FILE_PATH));
-        env.put("SNAPSHOT_DIR", RLLogPaths.SNAPSHOT_DIR);
-        env.put("MULLIGAN_MODEL_PATH", RLLogPaths.MULLIGAN_MODEL_PATH);
-        env.put("TRAINING_LOSSES_PATH", RLLogPaths.TRAINING_LOSSES_PATH);
-        env.put("HEALTH_LOG_PATH", RLLogPaths.HEALTH_LOG_PATH);
+        env.put("MODEL_PROFILE", epid);
+        env.put("RL_MODELS_DIR", modelsDir);
+        env.put("RL_LOGS_DIR", logsDir);
+        env.put("MODEL_PATH", modelPath);
+        env.put("MTG_MODEL_PATH", modelPath);
+        env.put("MODEL_LATEST_PATH", defaultLatestPath(modelPath));
+        env.put("SNAPSHOT_DIR", snapshotDir);
+        env.put("MULLIGAN_MODEL_PATH", mulliganPath);
+        env.put("TRAINING_LOSSES_PATH", lossesPath);
+        env.put("HEALTH_LOG_PATH", healthPath);
         env.put("PY_BACKEND_MODE", "single");
         env.put("INFER_WORKERS", "0");
         env.put("MODEL_RELOAD_EVERY_MS", "0");
@@ -1059,7 +1118,7 @@ public final class SharedGpuPythonModel implements PythonModel {
 
     private Map<String, String> singletonProfileHeaders() {
         Map<String, String> headers = new LinkedHashMap<>();
-        headers.put("profile_id", profileId);
+        headers.put("profile_id", effectiveProfileId());
         return headers;
     }
 

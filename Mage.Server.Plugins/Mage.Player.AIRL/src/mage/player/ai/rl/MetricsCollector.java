@@ -114,6 +114,15 @@ public class MetricsCollector {
     private final AtomicLong mainPerMeanPriorityBits = new AtomicLong(dblBits(0.0));
     private final AtomicLong mainPerMeanIsWeightBits = new AtomicLong(dblBits(0.0));
 
+    // Batch round-trip (send-to-response, excludes queue wait)
+    private final AtomicLong inferBatchRtCount = new AtomicLong(0);
+    private final AtomicLong inferBatchRtSumMs = new AtomicLong(0);
+    private final AtomicLong inferBatchRtMaxMs = new AtomicLong(0);
+    private final long[] inferBatchRtHistoryMs = new long[1000];
+    private int inferBatchRtHistoryIndex = 0;
+    private int inferBatchRtHistoryCount = 0;
+    private final Object inferBatchRtHistoryLock = new Object();
+
     // Inference batching (Java-side) metrics
     private final AtomicLong inferFlushesTotal = new AtomicLong(0);
     private final AtomicLong inferFlushesFullTotal = new AtomicLong(0);
@@ -382,6 +391,24 @@ public class MetricsCollector {
         } while (!inferLatencyMaxMs.compareAndSet(prev, latencyMs));
     }
 
+    public void recordInferBatchRoundTripMs(long ms) {
+        if (ms < 0) return;
+        inferBatchRtSumMs.addAndGet(ms);
+        inferBatchRtCount.incrementAndGet();
+        synchronized (inferBatchRtHistoryLock) {
+            inferBatchRtHistoryMs[inferBatchRtHistoryIndex] = ms;
+            inferBatchRtHistoryIndex = (inferBatchRtHistoryIndex + 1) % inferBatchRtHistoryMs.length;
+            if (inferBatchRtHistoryCount < inferBatchRtHistoryMs.length) {
+                inferBatchRtHistoryCount++;
+            }
+        }
+        long prev;
+        do {
+            prev = inferBatchRtMaxMs.get();
+            if (ms <= prev) break;
+        } while (!inferBatchRtMaxMs.compareAndSet(prev, ms));
+    }
+
     public void recordMainTurnUniform() {
         mainTurnUniformTotal.incrementAndGet();
     }
@@ -604,6 +631,17 @@ public class MetricsCollector {
             if (index >= inferLatencyHistoryCount) {
                 index = inferLatencyHistoryCount - 1;
             }
+            return sorted[index];
+        }
+    }
+
+    private long calculatePercentileFromHistory(long[] history, int count, Object lock, double percentile) {
+        synchronized (lock) {
+            if (count == 0) return 0L;
+            long[] sorted = new long[count];
+            System.arraycopy(history, 0, sorted, 0, count);
+            java.util.Arrays.sort(sorted);
+            int index = Math.min(Math.max((int) Math.ceil((percentile / 100.0) * count) - 1, 0), count - 1);
             return sorted[index];
         }
     }
@@ -1035,6 +1073,24 @@ public class MetricsCollector {
         sb.append("# HELP mage_infer_latency_max_ms Max candidate scoring latency observed (ms)\n");
         sb.append("# TYPE mage_infer_latency_max_ms gauge\n");
         sb.append("mage_infer_latency_max_ms ").append(inferLatencyMaxMs.get()).append("\n");
+
+        long brtCnt = inferBatchRtCount.get();
+        double brtAvg = brtCnt > 0 ? inferBatchRtSumMs.get() / (double) brtCnt : 0.0;
+        sb.append("# HELP mage_infer_batch_rt_avg_ms Avg batch round-trip time send-to-response (ms)\n");
+        sb.append("# TYPE mage_infer_batch_rt_avg_ms gauge\n");
+        sb.append("mage_infer_batch_rt_avg_ms ").append(String.format("%.3f", brtAvg)).append("\n");
+        sb.append("# HELP mage_infer_batch_rt_max_ms Max batch round-trip time send-to-response (ms)\n");
+        sb.append("# TYPE mage_infer_batch_rt_max_ms gauge\n");
+        sb.append("mage_infer_batch_rt_max_ms ").append(inferBatchRtMaxMs.get()).append("\n");
+        sb.append("# HELP mage_infer_batch_rt_p50_ms 50th pctile batch round-trip (ms)\n");
+        sb.append("# TYPE mage_infer_batch_rt_p50_ms gauge\n");
+        sb.append("mage_infer_batch_rt_p50_ms ").append(calculatePercentileFromHistory(inferBatchRtHistoryMs, inferBatchRtHistoryCount, inferBatchRtHistoryLock, 50)).append("\n");
+        sb.append("# HELP mage_infer_batch_rt_p95_ms 95th pctile batch round-trip (ms)\n");
+        sb.append("# TYPE mage_infer_batch_rt_p95_ms gauge\n");
+        sb.append("mage_infer_batch_rt_p95_ms ").append(calculatePercentileFromHistory(inferBatchRtHistoryMs, inferBatchRtHistoryCount, inferBatchRtHistoryLock, 95)).append("\n");
+        sb.append("# HELP mage_infer_batch_rt_count Total batch round-trips\n");
+        sb.append("# TYPE mage_infer_batch_rt_count counter\n");
+        sb.append("mage_infer_batch_rt_count ").append(brtCnt).append("\n");
 
         sb.append("# HELP mage_base_state_cache_hits_total Base-state cache hits on the JVM actor side\n");
         sb.append("# TYPE mage_base_state_cache_hits_total counter\n");

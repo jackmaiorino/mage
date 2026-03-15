@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import errno
 import os
+import signal
 import socket
 import struct
 import threading
@@ -230,11 +231,13 @@ class ProfileState:
         self.pending_trains = deque()  # type: Deque[TrainTask]
         self.last_publish_at = 0.0
         self.last_reload_at = 0.0
+        self.mulligan_train_count = 0
+        self.mulligan_save_interval = max(1, env_int("MULLIGAN_SAVE_INTERVAL", 100))
 
 
 class SharedGpuHost:
     def __init__(self) -> None:
-        self.bind_host = env_str("GPU_SERVICE_BIND_HOST", "127.0.0.1")
+        self.bind_host = env_str("GPU_SERVICE_BIND_HOST", "0.0.0.0")
         self.port = env_int("GPU_SERVICE_PORT", 26100)
         self.metrics_port = env_int("GPU_SERVICE_METRICS_PORT", 27100)
         self.batch_timeout_ms = max(1, env_int("PY_BATCH_TIMEOUT_MS", 50))
@@ -260,6 +263,9 @@ class SharedGpuHost:
         self._score_flush_timeout_total = 0
         self._score_flush_full_total = 0
         self._last_error = ""
+        self._mulligan_saves = 0
+        self._sigterm_saves = 0
+        self._shutdown_event = threading.Event()
         self._infer_latency_ms: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
         self._infer_service_ms: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
         self._infer_batch_sizes: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
@@ -648,6 +654,27 @@ class SharedGpuHost:
         now = time.monotonic()
         return max(0.0, (now - min(tasks)) * 1000.0)
 
+    def install_sigterm_handler(self) -> None:
+        def handler(signum, frame):
+            print("[GPU_HOST] SIGTERM received, saving all profiles...", flush=True)
+            saves = 0
+            with self._lock:
+                profiles = list(self._profiles.items())
+            for profile_id, state in profiles:
+                try:
+                    state.learner_context.save_model("")
+                    state.learner_context.save_mulligan_model()
+                    saves += 1
+                    print(f"[GPU_HOST] SIGTERM: saved profile {profile_id}", flush=True)
+                except Exception as exc:
+                    print(f"[GPU_HOST] SIGTERM: failed to save profile {profile_id}: {exc}", flush=True)
+            with self._lock:
+                self._sigterm_saves += saves
+            self._shutdown_event.set()
+            self._running = False
+            print(f"[GPU_HOST] SIGTERM: saved {saves} profile(s), shutting down", flush=True)
+        signal.signal(signal.SIGTERM, handler)
+
     def handle_control(self, session: ConnectionSession, opcode: int, request_id: int,
                        headers: Dict[str, str], payload: bytes) -> None:
         profile_id = headers.get("profile_id", "").strip()
@@ -688,6 +715,11 @@ class SharedGpuHost:
             segments = unpack_segments(payload)
             state.learner_context.train_mulligan(segments[0], segments[1], segments[2], segments[3], segments[4], segments[5],
                                          int(headers.get("batch_size", "0")))
+            state.mulligan_train_count += 1
+            if state.mulligan_train_count % state.mulligan_save_interval == 0:
+                state.learner_context.save_mulligan_model()
+                with self._lock:
+                    self._mulligan_saves += 1
             session.reply(0, request_id)
         elif opcode == 14:
             state.learner_context.save_mulligan_model()
@@ -779,6 +811,12 @@ class SharedGpuHost:
                 "# HELP gpu_service_model_reloads_total Inference model reload operations",
                 "# TYPE gpu_service_model_reloads_total counter",
                 f"gpu_service_model_reloads_total {self._model_reloads}",
+                "# HELP gpu_service_mulligan_saves_total Autonomous mulligan model saves",
+                "# TYPE gpu_service_mulligan_saves_total counter",
+                f"gpu_service_mulligan_saves_total {self._mulligan_saves}",
+                "# HELP gpu_service_sigterm_saves_total Profiles saved on SIGTERM",
+                "# TYPE gpu_service_sigterm_saves_total counter",
+                f"gpu_service_sigterm_saves_total {self._sigterm_saves}",
                 "# HELP gpu_service_train_batch_avg_episodes Average recent shared-host train batch size in episodes",
                 "# TYPE gpu_service_train_batch_avg_episodes gauge",
                 f"gpu_service_train_batch_avg_episodes {self._avg(self._train_batch_episode_counts):.3f}",
@@ -890,14 +928,19 @@ def main() -> int:
         listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         listener.bind((host.bind_host, host.port))
         listener.listen()
+        listener.settimeout(1.0)
+        host.install_sigterm_handler()
         print(
             f"[GPU_HOST] listening host={host.bind_host} port={host.port} "
             f"metrics_port={host.metrics_port} batch_timeout_ms={host.batch_timeout_ms} "
             f"batch_max_size={host.batch_max_size}",
             flush=True,
         )
-        while True:
-            client, _addr = listener.accept()
+        while not host._shutdown_event.is_set():
+            try:
+                client, _addr = listener.accept()
+            except socket.timeout:
+                continue
             session = ConnectionSession(sock=client)
             threading.Thread(target=connection_loop, args=(host, session), daemon=True).start()
 

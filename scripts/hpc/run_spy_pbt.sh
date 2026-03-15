@@ -42,6 +42,26 @@ if [[ -n "${SLURM_SUBMIT_DIR:-}" ]]; then
 else
   repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 fi
+
+# Multi-node: bind GPU service to all interfaces so CPU node can connect
+# Het-group jobs expose SLURM_JOB_NODELIST_HET_GROUP_1 for the second component
+is_multinode=0
+if [[ -n "${SLURM_JOB_NODELIST_HET_GROUP_1:-}" ]]; then
+  is_multinode=1
+elif [[ -n "${SLURM_JOB_NODELIST:-}" ]] && \
+     [[ "$(scontrol show hostnames "$SLURM_JOB_NODELIST" 2>/dev/null | wc -l)" -gt 1 ]]; then
+  is_multinode=1
+fi
+if [[ "$is_multinode" -eq 1 ]]; then
+  export GPU_SERVICE_BIND_HOST="0.0.0.0"
+  echo "Multi-node detected: GPU_SERVICE_BIND_HOST=0.0.0.0"
+fi
+
+# Pass through league mode if set
+if [[ -n "${LEAGUE_MODE:-}" ]]; then
+  export LEAGUE_MODE
+  echo "LEAGUE_MODE=$LEAGUE_MODE"
+fi
 resolve_path() {
   local candidate="${1:-}"
   local fallback="${2:-}"
@@ -287,7 +307,12 @@ echo "MAGE_DB_DIR: $MAGE_DB_DIR" | tee -a "$orchestrator_log"
 echo "Port bases: metrics=$METRICS_PORT_BASE gpuService=$GPU_SERVICE_PORT_BASE gpuServiceMetrics=$GPU_SERVICE_METRICS_PORT_BASE py4j=$PY4J_BASE_PORT" | tee -a "$orchestrator_log"
 echo "MTG_VENV_PATH: $MTG_VENV_PATH" | tee -a "$orchestrator_log"
 if [[ -z "${MAGE_RL_RUNTIME_DIR:-}" && -n "${MAGE_RL_RUNTIME_TARBALL:-}" ]]; then
-  runtime_extract_base="/tmp/${USER}/mtgrl-runtime-${job_id}/runtime"
+  # Multi-node: extract to shared filesystem so CPU node can access class files
+  if [[ "${GPU_SERVICE_BIND_HOST:-}" == "0.0.0.0" ]]; then
+    runtime_extract_base="$repo_root/local-training/hpc/bundles/runtime-${job_id}"
+  else
+    runtime_extract_base="/tmp/${USER}/mtgrl-runtime-${job_id}/runtime"
+  fi
   mkdir -p "$runtime_extract_base"
   echo "Extracting runtime tarball: $MAGE_RL_RUNTIME_TARBALL" | tee -a "$orchestrator_log"
   tar -xzf "$MAGE_RL_RUNTIME_TARBALL" -C "$runtime_extract_base"
@@ -298,6 +323,8 @@ if [[ -z "${MAGE_RL_RUNTIME_DIR:-}" && -n "${MAGE_RL_RUNTIME_TARBALL:-}" ]]; the
   fi
   export MAGE_RL_RUNTIME_DIR="$extracted_dir"
   echo "MAGE_RL_RUNTIME_DIR: $MAGE_RL_RUNTIME_DIR (extracted from tarball)" | tee -a "$orchestrator_log"
+  # Both GPU and CPU nodes access JARs via shared Lustre filesystem.
+  # No /tmp staging needed — Lustre classpath works for all nodes.
 elif [[ -n "${MAGE_RL_RUNTIME_DIR:-}" ]]; then
   echo "MAGE_RL_RUNTIME_DIR: $MAGE_RL_RUNTIME_DIR" | tee -a "$orchestrator_log"
 fi

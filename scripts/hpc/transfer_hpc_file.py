@@ -155,10 +155,37 @@ def ensure_remote_dir(sftp, remote_dir: str) -> None:
             sftp.mkdir(path)
 
 
-def upload_file(sftp, local_path: Path, remote_path: str, mkdirs: bool) -> None:
+def upload_file(sftp, local_path: Path, remote_path: str, mkdirs: bool, transport=None) -> None:
     if mkdirs:
         ensure_remote_dir(sftp, posixpath.dirname(remote_path))
-    sftp.put(str(local_path), remote_path)
+    # Lustre filesystems can silently produce 0-byte files with sftp.put().
+    # Work around by uploading to /tmp first (local disk), then cp into Lustre via exec.
+    tmp_remote = f"/tmp/.transfer_{os.getpid()}_{local_path.name}"
+    try:
+        sftp.put(str(local_path), tmp_remote)
+        tmp_stat = sftp.stat(tmp_remote)
+        expected = local_path.stat().st_size
+        if tmp_stat.st_size != expected:
+            raise IOError(f"size mismatch after upload to tmp: {tmp_stat.st_size} != {expected}")
+        if transport is not None:
+            # Cross-filesystem: use cp via exec_command, then remove tmp
+            remote_dir = posixpath.dirname(remote_path)
+            cmd = f"mkdir -p '{remote_dir}' && cp '{tmp_remote}' '{remote_path}' && rm -f '{tmp_remote}'"
+            chan = transport.open_session()
+            chan.exec_command(cmd)
+            stderr_data = chan.makefile_stderr("r").read()
+            exit_status = chan.recv_exit_status()
+            chan.close()
+            if exit_status != 0:
+                raise IOError(f"remote cp failed with exit code {exit_status}: {stderr_data}")
+        else:
+            sftp.rename(tmp_remote, remote_path)
+    except Exception:
+        try:
+            sftp.remove(tmp_remote)
+        except Exception:
+            pass
+        raise
     remote_stat = sftp.stat(remote_path)
     print(f"uploaded_remote={remote_path}")
     print(f"uploaded_size={remote_stat.st_size}")
@@ -202,7 +229,7 @@ def main() -> int:
     sftp = transport.open_sftp_client()
     try:
         if args.mode == "upload":
-            upload_file(sftp, local_path, args.remote_path, args.mkdirs)
+            upload_file(sftp, local_path, args.remote_path, args.mkdirs, transport=transport)
         else:
             download_file(sftp, local_path, args.remote_path)
     finally:

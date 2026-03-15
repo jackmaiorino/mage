@@ -108,6 +108,8 @@ public class RLTrainer {
     // Game logging: log every N episodes (0 = disabled, includes episode 0)
     private static final int GAME_LOG_FREQUENCY = EnvConfig.i32("GAME_LOG_FREQUENCY", SHARED_GPU_MODE ? 0 : 200);
     private static final int WINRATE_WINDOW = EnvConfig.i32("WINRATE_WINDOW", 100);
+    // When false, suppresses training_stats.csv and agent_status.json writes (auxiliary JVMs in multi-node)
+    private static final boolean GAME_STATS_WRITER = EnvConfig.bool("GAME_STATS_WRITER", true);
 
     // Minimum games at current difficulty before allowing level change
     // Prevents premature promotion/demotion based on mixed difficulty data
@@ -136,7 +138,7 @@ public class RLTrainer {
     private static final AtomicInteger winCount = new AtomicInteger(0);
 
     // Track current opponent level for hysteresis
-    private static enum OpponentLevel {
+    enum OpponentLevel {
         WEAK, MEDIUM, STRONG, SELFPLAY
     }
     private static volatile OpponentLevel currentOpponentLevel = OpponentLevel.WEAK;
@@ -149,6 +151,13 @@ public class RLTrainer {
     // League-style opponent sampling (bots never go to zero)
     // ============================================================
     private static final String OPPONENT_SAMPLER = EnvConfig.str("OPPONENT_SAMPLER", "league"); // league|adaptive|fixed
+    private static final String LEAGUE_MODE = EnvConfig.str("LEAGUE_MODE", ""); // "rl_only" = no CP7 fallback
+
+    // Eval benchmark settings
+    private static final String EVAL_OPPONENT_DECK = EnvConfig.str("EVAL_OPPONENT_DECK", "");
+    private static final int EVAL_OPPONENT_SKILL = EnvConfig.i32("EVAL_OPPONENT_SKILL", 1);
+    private static final int EVAL_NUM_GAMES = EnvConfig.i32("EVAL_NUM_GAMES", 50);
+    private static final String EVAL_RESULTS_FILE = EnvConfig.str("EVAL_RESULTS_FILE", "");
 
     // Self-play probability ramps from START->END over RAMP_EPISODES, but is capped to (1 - BOT_FLOOR).
     private static final double BOT_FLOOR_P = EnvConfig.f64("BOT_FLOOR", 0.25);
@@ -253,7 +262,7 @@ public class RLTrainer {
         Logger.getLogger("mage.player.ai.ComputerPlayer6").setLevel(Level.ERROR);
     }
 
-    private static final class LeagueState {
+    static final class LeagueState {
 
         boolean promoted;
         int lastTickEpisode;
@@ -296,7 +305,7 @@ public class RLTrainer {
         }
     }
 
-    private static final class LadderState {
+    static final class LadderState {
         int currentTier;
         int lastTickEpisode;
         final java.util.HashMap<Integer, Double> tierWinrates = new java.util.HashMap<>();
@@ -717,19 +726,19 @@ public class RLTrainer {
         return out;
     }
 
-    private static Path leagueStatePath() {
-        return Paths.get(RLLogPaths.LEAGUE_STATE_PATH);
+    private Path leagueStatePath() {
+        return Paths.get(profileContext != null ? profileContext.paths.leagueStatePath : RLLogPaths.LEAGUE_STATE_PATH);
     }
 
-    private static Path leagueEventsLogPath() {
-        return Paths.get(RLLogPaths.LEAGUE_EVENTS_LOG_PATH);
+    private Path leagueEventsLogPath() {
+        return Paths.get(profileContext != null ? profileContext.paths.leagueEventsLogPath : RLLogPaths.LEAGUE_EVENTS_LOG_PATH);
     }
 
-    private static Path leagueStatusPath() {
-        return Paths.get(RLLogPaths.LEAGUE_STATUS_PATH);
+    private Path leagueStatusPath() {
+        return Paths.get(profileContext != null ? profileContext.paths.leagueStatusPath : RLLogPaths.LEAGUE_STATUS_PATH);
     }
 
-    private static void appendLeagueEvent(String line) {
+    private void appendLeagueEvent(String line) {
         if (line == null || line.trim().isEmpty()) {
             return;
         }
@@ -746,7 +755,7 @@ public class RLTrainer {
         }
     }
 
-    private static void writeLeagueStatus(LeagueState st) {
+    private void writeLeagueStatus(LeagueState st) {
         if (st == null) {
             return;
         }
@@ -864,13 +873,13 @@ public class RLTrainer {
         return null;
     }
 
-    private static void writeAgentStatus(int episodeNum) {
+    private void writeAgentStatus(int episodeNum) {
         try {
             LeagueState st = getLeagueState();
-            String profile = MODEL_PROFILE_NAME.isEmpty() ? "default" : MODEL_PROFILE_NAME;
+            String profile = profileName().isEmpty() ? "default" : profileName();
             String latestKey = null;
             int latestEp = Integer.MIN_VALUE;
-            synchronized (LEAGUE_LOCK) {
+            synchronized (leagueLock()) {
                 for (String k : st.baselineWr.keySet()) {
                     int ep = extractEpisodeNumber(k);
                     if (ep > latestEp) {
@@ -885,7 +894,7 @@ public class RLTrainer {
                 baselineWr = wr == null ? 0.0 : wr;
             }
             Path latestSnapshot = findLatestPolicyPathForProfile(profile);
-            Path statusPath = Paths.get(RLLogPaths.LOGS_BASE_DIR, "league", "agent_status.json");
+            Path statusPath = Paths.get(logsBaseDir(), "league", "agent_status.json");
             if (statusPath.getParent() != null) {
                 Files.createDirectories(statusPath.getParent());
             }
@@ -1081,20 +1090,26 @@ public class RLTrainer {
     // Ladder state management
     // ============================================================
     
-    private static Path ladderStatePath() {
-        return Paths.get(RLLogPaths.LOGS_BASE_DIR, "league", "ladder_state.json");
+    private Path ladderStatePath() {
+        return Paths.get(logsBaseDir(), "league", "ladder_state.json");
     }
 
-    private static Path ladderStatusPath() {
-        return Paths.get(RLLogPaths.LOGS_BASE_DIR, "league", "ladder_status.txt");
+    private Path ladderStatusPath() {
+        return Paths.get(logsBaseDir(), "league", "ladder_status.txt");
     }
 
-    private static LadderState getLadderState() {
-        synchronized (LADDER_LOCK) {
-            if (LADDER_STATE != null) {
-                return LADDER_STATE;
+    private LadderState getLadderState() {
+        synchronized (ladderLock()) {
+            LadderState ls;
+            if (profileContext != null) {
+                ls = profileContext.ladderState;
+            } else {
+                ls = LADDER_STATE;
             }
-            LadderState ls = new LadderState();
+            if (ls != null) {
+                return ls;
+            }
+            ls = new LadderState();
             try {
                 Path p = ladderStatePath();
                 if (Files.exists(p)) {
@@ -1102,16 +1117,20 @@ public class RLTrainer {
                     ls = LadderState.fromJson(s);
                 }
             } catch (Exception ignored) {
-                // ignore load failures; start fresh
             }
-            LADDER_STATE = ls;
-            return LADDER_STATE;
+            if (profileContext != null) {
+                profileContext.ladderState = ls;
+            } else {
+                LADDER_STATE = ls;
+            }
+            return ls;
         }
     }
 
-    private static void saveLadderState() {
-        synchronized (LADDER_LOCK) {
-            if (LADDER_STATE == null) {
+    private void saveLadderState() {
+        synchronized (ladderLock()) {
+            LadderState ls = profileContext != null ? profileContext.ladderState : LADDER_STATE;
+            if (ls == null) {
                 return;
             }
             try {
@@ -1119,16 +1138,15 @@ public class RLTrainer {
                 if (p.getParent() != null) {
                     Files.createDirectories(p.getParent());
                 }
-                Files.write(p, LADDER_STATE.toJson().getBytes(StandardCharsets.UTF_8),
+                Files.write(p, ls.toJson().getBytes(StandardCharsets.UTF_8),
                         java.nio.file.StandardOpenOption.CREATE,
                         java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);
             } catch (Exception ignored) {
-                // ignore
             }
         }
     }
 
-    private static void writeLadderStatus(LadderState ls, int[] tiers) {
+    private void writeLadderStatus(LadderState ls, int[] tiers) {
         if (ls == null || tiers == null) {
             return;
         }
@@ -1160,12 +1178,18 @@ public class RLTrainer {
         }
     }
 
-    private static LeagueState getLeagueState() {
-        synchronized (LEAGUE_LOCK) {
-            if (LEAGUE_STATE != null) {
-                return LEAGUE_STATE;
+    private LeagueState getLeagueState() {
+        synchronized (leagueLock()) {
+            LeagueState st;
+            if (profileContext != null) {
+                st = profileContext.leagueState;
+            } else {
+                st = LEAGUE_STATE;
             }
-            LeagueState st = new LeagueState();
+            if (st != null) {
+                return st;
+            }
+            st = new LeagueState();
             try {
                 Path p = leagueStatePath();
                 if (Files.exists(p)) {
@@ -1173,16 +1197,20 @@ public class RLTrainer {
                     st = LeagueState.fromJson(s);
                 }
             } catch (Exception ignored) {
-                // ignore load failures; start fresh
             }
-            LEAGUE_STATE = st;
-            return LEAGUE_STATE;
+            if (profileContext != null) {
+                profileContext.leagueState = st;
+            } else {
+                LEAGUE_STATE = st;
+            }
+            return st;
         }
     }
 
-    private static void saveLeagueState() {
-        synchronized (LEAGUE_LOCK) {
-            if (LEAGUE_STATE == null) {
+    private void saveLeagueState() {
+        synchronized (leagueLock()) {
+            LeagueState st = profileContext != null ? profileContext.leagueState : LEAGUE_STATE;
+            if (st == null) {
                 return;
             }
             try {
@@ -1190,17 +1218,16 @@ public class RLTrainer {
                 if (p.getParent() != null) {
                     Files.createDirectories(p.getParent());
                 }
-                Files.write(p, LEAGUE_STATE.toJson().getBytes(StandardCharsets.UTF_8),
+                Files.write(p, st.toJson().getBytes(StandardCharsets.UTF_8),
                         java.nio.file.StandardOpenOption.CREATE,
                         java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);
             } catch (Exception ignored) {
-                // ignore
             }
         }
     }
 
-    private static String leagueSnapshotFileName(int episode) {
-        String profile = MODEL_PROFILE_NAME == null ? "" : MODEL_PROFILE_NAME.trim();
+    private String leagueSnapshotFileName(int episode) {
+        String profile = profileName() == null ? "" : profileName().trim();
         if (profile.isEmpty()) {
             return "league_ep_" + episode + ".pt";
         }
@@ -1208,7 +1235,7 @@ public class RLTrainer {
         return safe + "_league_ep_" + episode + ".pt";
     }
 
-    private static String leagueSnapshotPolicyKey(int episode) {
+    private String leagueSnapshotPolicyKey(int episode) {
         return "snap:" + leagueSnapshotFileName(episode);
     }
 
@@ -1328,11 +1355,11 @@ public class RLTrainer {
             return;
         }
         // Single-thread the tick across runners
-        int prev = LEAGUE_LAST_TICK_EP.get();
+        int prev = leagueLastTickEp().get();
         if (episodeNum <= prev) {
             return;
         }
-        if (!LEAGUE_LAST_TICK_EP.compareAndSet(prev, episodeNum)) {
+        if (!leagueLastTickEp().compareAndSet(prev, episodeNum)) {
             return;
         }
 
@@ -1352,19 +1379,14 @@ public class RLTrainer {
 
         // 1) Save snapshot S_t (stable policyKey = file name)
         String snapFile = leagueSnapshotFileName(episodeNum);
-        Path snapPath = Paths.get(SNAPSHOT_DIR, snapFile);
+        Path snapPath = Paths.get(snapshotDir(), snapFile);
         try {
             if (snapPath.getParent() != null) {
                 Files.createDirectories(snapPath.getParent());
             }
         } catch (Exception ignored) {
         }
-        try {
-            sharedModel.saveModel(snapPath.toString());
-        } catch (Exception e) {
-            logger.warn("League tick: failed to save snapshot at ep " + episodeNum + " -> " + snapPath, e);
-            return;
-        }
+        // Snapshot save handled autonomously by Python snapshot_manager
         String snapKey = "snap:" + snapFile;
         logger.info("League tick snapshot saved: ep=" + episodeNum + " key=" + snapKey + " path=" + snapPath);
         appendLeagueEvent("snapshot_saved ep=" + episodeNum + " key=" + snapKey + " path=" + snapPath.toString());
@@ -1383,14 +1405,14 @@ public class RLTrainer {
         appendLeagueEvent(String.format("baseline_eval ep=%d key=%s opp=CP7Skill%d wr=%.6f",
                 episodeNum, snapKey, Math.max(1, LEAGUE_BASELINE_BOT_SKILL), baselineWr));
 
-        synchronized (LEAGUE_LOCK) {
+        synchronized (leagueLock()) {
             st.lastTickEpisode = episodeNum;
             st.baselineWr.put(snapKey, baselineWr);
         }
 
         // 3) Promotion gate (bootstrap -> league)
         boolean promotedNow = false;
-        synchronized (LEAGUE_LOCK) {
+        synchronized (leagueLock()) {
             if (!st.promoted && baselineWr >= LEAGUE_PROMOTE_WR) {
                 st.promoted = true;
                 promotedNow = true;
@@ -1405,7 +1427,7 @@ public class RLTrainer {
 
         // 4) Pool admission + recency tracking
         boolean admitted = false;
-        synchronized (LEAGUE_LOCK) {
+        synchronized (leagueLock()) {
             if (baselineWr >= LEAGUE_POOL_FLOOR_WR) {
                 addToPool(st, snapKey);
                 addRecent(st, snapKey);
@@ -1421,7 +1443,7 @@ public class RLTrainer {
         boolean championUpdated = false;
         Double champMatchWr = null;
         String championBefore;
-        synchronized (LEAGUE_LOCK) {
+        synchronized (leagueLock()) {
             championBefore = st.championPolicyKey;
             if (st.championPolicyKey == null && st.promoted && admitted) {
                 st.championPolicyKey = snapKey;
@@ -1433,7 +1455,7 @@ public class RLTrainer {
             appendLeagueEvent("champion_init ep=" + episodeNum + " champion=" + snapKey);
         }
         String championAfter;
-        synchronized (LEAGUE_LOCK) {
+        synchronized (leagueLock()) {
             championAfter = st.championPolicyKey;
         }
         if (!championUpdated && st.promoted && championAfter != null && !championAfter.equals(snapKey)) {
@@ -1451,7 +1473,7 @@ public class RLTrainer {
                     episodeNum, snapKey, championAfter, champMatchWr, LEAGUE_CHAMPION_PROMOTE_WR));
             appendLeagueEvent(String.format("champion_match_done ep=%d challenger=%s champion=%s wr=%.6f threshold=%.6f",
                     episodeNum, snapKey, championAfter, champMatchWr, LEAGUE_CHAMPION_PROMOTE_WR));
-            synchronized (LEAGUE_LOCK) {
+            synchronized (leagueLock()) {
                 if (champMatchWr != null && champMatchWr >= LEAGUE_CHAMPION_PROMOTE_WR) {
                     st.championPolicyKey = snapKey;
                     championUpdated = true;
@@ -1464,7 +1486,7 @@ public class RLTrainer {
         }
 
         // 6) Prune pool
-        synchronized (LEAGUE_LOCK) {
+        synchronized (leagueLock()) {
             prunePool(st, rand);
             saveLeagueState();
             writeLeagueStatus(st);
@@ -1488,7 +1510,7 @@ public class RLTrainer {
                 episodeNum, snapKey, baselineWr, st.promoted, admitted,
                 st.championPolicyKey == null ? "" : st.championPolicyKey,
                 st.pool.size(), tickMs / 1000.0));
-        writeAgentStatus(episodeNum);
+        if (GAME_STATS_WRITER) writeAgentStatus(episodeNum);
     }
 
     private void maybeRunLadderTick(int episodeNum) {
@@ -1504,11 +1526,11 @@ public class RLTrainer {
             return;
         }
         // Single-thread the tick across runners
-        int prev = LADDER_LAST_TICK_EP.get();
+        int prev = ladderLastTickEp().get();
         if (episodeNum <= prev) {
             return;
         }
-        if (!LADDER_LAST_TICK_EP.compareAndSet(prev, episodeNum)) {
+        if (!ladderLastTickEp().compareAndSet(prev, episodeNum)) {
             return;
         }
 
@@ -1550,7 +1572,7 @@ public class RLTrainer {
         appendLeagueEvent(String.format("ladder_benchmark ep=%d tier=%d skill=%d wr=%.6f",
                 episodeNum, currentTier, currentSkill, benchmarkWr));
 
-        synchronized (LADDER_LOCK) {
+        synchronized (ladderLock()) {
             ls.lastTickEpisode = episodeNum;
             ls.tierWinrates.put(currentTier, benchmarkWr);
             ls.evalHistory.add(String.format("ep=%d,tier=%d,skill=%d,wr=%.6f",
@@ -1559,7 +1581,7 @@ public class RLTrainer {
 
         // Promotion check
         boolean promotedNow = false;
-        synchronized (LADDER_LOCK) {
+        synchronized (ladderLock()) {
             if (benchmarkWr >= LADDER_PROMOTE_WR && currentTier < tiers.length - 1) {
                 ls.currentTier++;
                 promotedNow = true;
@@ -1575,7 +1597,7 @@ public class RLTrainer {
                     episodeNum, currentTier, newTier, currentSkill, newSkill, benchmarkWr, LADDER_PROMOTE_WR));
         }
 
-        synchronized (LADDER_LOCK) {
+        synchronized (ladderLock()) {
             saveLadderState();
             writeLadderStatus(ls, tiers);
         }
@@ -1652,7 +1674,106 @@ public class RLTrainer {
             () -> GameLogger.create(false) // Default: disabled
     );
 
+    // Multi-profile support: when set, per-profile state comes from this context
+    // instead of the static fields.  Null means legacy single-profile mode.
+    private final ProfileContext profileContext;
+
     public RLTrainer() {
+        this.profileContext = null;
+    }
+
+    RLTrainer(ProfileContext ctx) {
+        this.profileContext = ctx;
+    }
+
+    // ---- Per-profile state accessors (context-first, fallback to static) ----
+
+    private java.util.concurrent.atomic.AtomicInteger episodeCounter() {
+        return profileContext != null ? profileContext.episodeCounter : EPISODE_COUNTER;
+    }
+
+    private java.util.concurrent.atomic.AtomicInteger mulliganEpisodeCounter() {
+        return profileContext != null ? profileContext.mulliganEpisodeCounter : MULLIGAN_EPISODE_COUNTER;
+    }
+
+    private java.util.concurrent.atomic.AtomicInteger activeEps() {
+        return profileContext != null ? profileContext.activeEpisodes : ACTIVE_EPISODES;
+    }
+
+    private ConcurrentLinkedQueue<Boolean> recentWinsQueue() {
+        return profileContext != null ? profileContext.recentWins : recentWins;
+    }
+
+    private java.util.concurrent.atomic.AtomicInteger winCounter() {
+        return profileContext != null ? profileContext.winCount : winCount;
+    }
+
+    private java.util.concurrent.atomic.AtomicInteger gamesAtLevel() {
+        return profileContext != null ? profileContext.gamesAtCurrentLevel : gamesAtCurrentLevel;
+    }
+
+    private String profileName() {
+        return profileContext != null ? profileContext.profileName : MODEL_PROFILE_NAME;
+    }
+
+    private String statsFilePath() {
+        return profileContext != null ? profileContext.paths.trainingStatsPath : STATS_FILE_PATH;
+    }
+
+    private String modelFilePath() {
+        return profileContext != null ? profileContext.paths.modelFilePath : MODEL_FILE_PATH;
+    }
+
+    private String modelsBaseDir() {
+        return profileContext != null ? profileContext.paths.modelsBaseDir : RLLogPaths.MODELS_BASE_DIR;
+    }
+
+    private String logsBaseDir() {
+        return profileContext != null ? profileContext.paths.logsBaseDir : RLLogPaths.LOGS_BASE_DIR;
+    }
+
+    private String snapshotDir() {
+        return profileContext != null ? profileContext.paths.snapshotDir : SNAPSHOT_DIR;
+    }
+
+    private OpponentLevel currentOpponentLevel() {
+        return profileContext != null ? profileContext.currentOpponentLevel : currentOpponentLevel;
+    }
+
+    private void setCurrentOpponentLevel(OpponentLevel level) {
+        if (profileContext != null) {
+            profileContext.currentOpponentLevel = level;
+        } else {
+            currentOpponentLevel = level;
+        }
+    }
+
+    private String lastOpponentType() {
+        return profileContext != null ? profileContext.lastOpponentType : lastOpponentType;
+    }
+
+    private void setLastOpponentType(String type) {
+        if (profileContext != null) {
+            profileContext.lastOpponentType = type;
+        } else {
+            lastOpponentType = type;
+        }
+    }
+
+    private Object leagueLock() {
+        return profileContext != null ? profileContext.leagueLock : LEAGUE_LOCK;
+    }
+
+    private java.util.concurrent.atomic.AtomicInteger leagueLastTickEp() {
+        return profileContext != null ? profileContext.leagueLastTickEp : LEAGUE_LAST_TICK_EP;
+    }
+
+    private Object ladderLock() {
+        return profileContext != null ? profileContext.ladderLock : LADDER_LOCK;
+    }
+
+    private java.util.concurrent.atomic.AtomicInteger ladderLastTickEp() {
+        return profileContext != null ? profileContext.ladderLastTickEp : LADDER_LAST_TICK_EP;
     }
 
     /* ================================================================
@@ -1664,7 +1785,9 @@ public class RLTrainer {
 
         int metricsPort = EnvConfig.i32("METRICS_PORT", 9090);
         try {
-            logger.info("Python device info: " + sharedModel.getDeviceInfo());
+            if (!"trainAll".equalsIgnoreCase(mode)) {
+                logger.info("Python device info: " + sharedModel.getDeviceInfo());
+            }
             metrics.startMetricsServer(metricsPort);
             logger.info("Metrics server started on port " + metricsPort);
             if ("eval".equalsIgnoreCase(mode)) {
@@ -1674,6 +1797,25 @@ public class RLTrainer {
                 new RLTrainer().runBenchmark(gamesPerMatchup);
             } else if ("league_eval".equalsIgnoreCase(mode)) {
                 new RLTrainer().runLeagueEvaluation();
+            } else if ("league_bench".equalsIgnoreCase(mode)) {
+                new RLTrainer().runLeagueBench();
+            } else if ("trainAll".equalsIgnoreCase(mode)) {
+                // Multi-profile: single JVM, shared card DB
+                List<String> profiles = new ArrayList<>();
+                for (int i = 1; i < args.length; i++) {
+                    profiles.add(args[i]);
+                }
+                if (profiles.isEmpty()) {
+                    String list = EnvConfig.str("TRAIN_PROFILES_LIST", "");
+                    for (String p : list.split(",")) {
+                        if (!p.trim().isEmpty()) profiles.add(p.trim());
+                    }
+                }
+                if (profiles.isEmpty()) {
+                    logger.error("trainAll mode requires profile names as args or TRAIN_PROFILES_LIST env var");
+                    System.exit(1);
+                }
+                trainMultiProfile(profiles);
             } else {
                 new RLTrainer().train();
             }
@@ -1701,110 +1843,49 @@ public class RLTrainer {
         System.out.println("DEBUG: DECKS_DIRECTORY = " + DECKS_DIRECTORY);
         System.out.println("DEBUG: Working directory = " + System.getProperty("user.dir"));
 
-        // Initialize the card database - this is crucial for deck loading to work
-        System.out.println("DEBUG: Initializing card database...");
-        mage.cards.repository.CardScanner.scan();
-        System.out.println("DEBUG: Card database initialized");
+        // In multi-profile mode, card DB and deck pools are pre-loaded by trainMultiProfile()
+        final boolean multiProfile = profileContext != null;
+        if (!multiProfile) {
+            System.out.println("DEBUG: Initializing card database...");
+            mage.cards.repository.CardScanner.scan();
+            System.out.println("DEBUG: Card database initialized");
+        } else {
+            System.out.println("DEBUG: Multi-profile mode, card DB already loaded. Profile: " + profileContext.profileName);
+        }
 
         try {
-            List<Path> deckFiles = loadDeckPool();
-            System.out.println("DEBUG: Found " + deckFiles.size() + " deck files in deck pool");
-            
-            // Load agent deck pool (may be separate from opponent pool)
+            List<Path> deckFiles;
             List<Path> agentDeckFiles;
-            if (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty()) {
-                agentDeckFiles = loadDeckPoolWithOverride(RL_AGENT_DECK_LIST_FILE);
-                logger.info("Agent deck pool: " + agentDeckFiles.size() + " decks (from RL_AGENT_DECK_LIST)");
-                System.out.println("DEBUG: Agent deck pool: " + agentDeckFiles.size() + " decks (from RL_AGENT_DECK_LIST)");
+            if (multiProfile) {
+                deckFiles = profileContext.deckFiles;
+                agentDeckFiles = profileContext.agentDeckFiles;
             } else {
-                agentDeckFiles = deckFiles;  // default: same pool
-                logger.info("Agent deck pool: same as opponent pool (" + deckFiles.size() + " decks)");
+                deckFiles = loadDeckPool();
+                if (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty()) {
+                    agentDeckFiles = loadDeckPoolWithOverride(RL_AGENT_DECK_LIST_FILE);
+                    logger.info("Agent deck pool: " + agentDeckFiles.size() + " decks (from RL_AGENT_DECK_LIST)");
+                } else {
+                    agentDeckFiles = deckFiles;
+                    logger.info("Agent deck pool: same as opponent pool (" + deckFiles.size() + " decks)");
+                }
             }
+            System.out.println("DEBUG: Found " + deckFiles.size() + " deck files in deck pool");
 
             // Reset health stats and failure counters at start of training
             TrainingHealthStats healthStats = TrainingHealthStats.getInstance();
             healthStats.reset();
-            String profileName = EnvConfig.str("MODEL_PROFILE", "");
-            if (!profileName.isEmpty()) {
-                logger.info("Model profile: " + profileName
-                        + "  models=" + RLLogPaths.MODELS_BASE_DIR
-                        + "  logs=" + RLLogPaths.LOGS_BASE_DIR);
+            String pName = profileName();
+            if (!pName.isEmpty()) {
+                logger.info("Model profile: " + pName
+                        + "  models=" + modelsBaseDir()
+                        + "  logs=" + logsBaseDir());
             }
             logger.info("Starting training - health stats reset (games_killed=0, rl_failures=0)");
 
             // Start health stats logging
             healthStats.start();
 
-            // ------------------ 1.  Load persisted episode count ------------------
-            int initialEpisodeCount = 0;
-            try {
-                Path epPath = Paths.get(EPISODE_COUNT_PATH);
-                if (Files.exists(epPath)) {
-                    String content = new String(Files.readAllBytes(epPath), StandardCharsets.UTF_8).trim();
-                    int persisted = Integer.parseInt(content);
-                    EPISODE_COUNTER.set(persisted);
-                    initialEpisodeCount = persisted;
-                    logger.info("Loaded episode counter from file: " + persisted);
-                }
-            } catch (Exception e) {
-                logger.warn("Failed to read episode counter, starting from 0", e);
-            }
-            boolean resetEpisodeCounter = EnvConfig.bool("RESET_EPISODE_COUNTER", false);
-            if (resetEpisodeCounter) {
-                EPISODE_COUNTER.set(0);
-                initialEpisodeCount = 0;
-                logger.info("Episode counter reset via RESET_EPISODE_COUNTER");
-            }
-
-            // ------------------ 1b. Load persisted mulligan episode count ------------------
-            int initialMulliganEpisodeCount = 0;
-            try {
-                Path mulEpPath = Paths.get(MULLIGAN_EPISODE_COUNT_PATH);
-                if (Files.exists(mulEpPath)) {
-                    String content = new String(Files.readAllBytes(mulEpPath), StandardCharsets.UTF_8).trim();
-                    int persisted = Integer.parseInt(content);
-                    MULLIGAN_EPISODE_COUNTER.set(persisted);
-                    initialMulliganEpisodeCount = persisted;
-                    logger.info("Loaded mulligan episode counter from file: " + persisted);
-                }
-            } catch (Exception e) {
-                logger.warn("Failed to read mulligan episode counter, starting from 0", e);
-            }
-            boolean resetMulliganCounter = EnvConfig.bool("RESET_MULLIGAN_EPISODE_COUNTER", false);
-            if (resetMulliganCounter || resetEpisodeCounter) {
-                MULLIGAN_EPISODE_COUNTER.set(0);
-                initialMulliganEpisodeCount = 0;
-                logger.info("Mulligan episode counter reset via RESET_MULLIGAN_EPISODE_COUNTER or RESET_EPISODE_COUNTER");
-            }
-
-            if (EPISODE_COUNTER.get() >= NUM_EPISODES) {
-                logger.warn("No episodes to run: TOTAL_EPISODES=" + NUM_EPISODES
-                        + " <= persisted counter=" + EPISODE_COUNTER.get()
-                        + ". Increase TOTAL_EPISODES, set RESET_EPISODE_COUNTER=1, or delete "
-                        + EPISODE_COUNT_PATH);
-                return;
-            }
-
-            // Add shutdown hook to save episode counters on Ctrl+C
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                try {
-                    int finalCount = EPISODE_COUNTER.get();
-                    Files.write(Paths.get(EPISODE_COUNT_PATH),
-                            String.valueOf(finalCount).getBytes(StandardCharsets.UTF_8));
-                    System.out.println("Shutdown hook: Saved episode counter = " + finalCount);
-                } catch (IOException e) {
-                    System.err.println("Shutdown hook: Failed to save episode counter: " + e.getMessage());
-                }
-                try {
-                    int finalMulliganCount = MULLIGAN_EPISODE_COUNTER.get();
-                    Files.write(Paths.get(MULLIGAN_EPISODE_COUNT_PATH),
-                            String.valueOf(finalMulliganCount).getBytes(StandardCharsets.UTF_8));
-                    System.out.println("Shutdown hook: Saved mulligan episode counter = " + finalMulliganCount);
-                } catch (IOException e) {
-                    System.err.println("Shutdown hook: Failed to save mulligan episode counter: " + e.getMessage());
-                }
-            }, "Episode-Counter-Shutdown-Hook"));
-            logger.info("Registered shutdown hook for episode counter persistence");
+            // Episode counters start from 0 each JVM launch; Python owns persistence.
 
             // Log system resource utilization
             int cpuCores = Runtime.getRuntime().availableProcessors();
@@ -1812,7 +1893,8 @@ public class RLTrainer {
             RLTrainer.threadLocalLogger.get().info("=== SYSTEM RESOURCES ===");
             RLTrainer.threadLocalLogger.get().info("CPU Cores Available: " + cpuCores);
             RLTrainer.threadLocalLogger.get().info("Max JVM Memory: " + maxMemory + " MB");
-            RLTrainer.threadLocalLogger.get().info("Game Runners: " + NUM_GAME_RUNNERS + " (using " + (NUM_GAME_RUNNERS * 100.0 / cpuCores) + "% of CPU cores)");
+            int loggedRunners = multiProfile ? profileContext.numGameRunners : NUM_GAME_RUNNERS;
+            RLTrainer.threadLocalLogger.get().info("Game Runners: " + loggedRunners + " (using " + (loggedRunners * 100.0 / cpuCores) + "% of CPU cores)");
             RLTrainer.threadLocalLogger.get().info("Episodes per runner: " + NUM_EPISODES_PER_GAME_RUNNER);
             RLTrainer.threadLocalLogger.get().info("Total episodes target: " + NUM_EPISODES);
             RLTrainer.threadLocalLogger.get().info("========================");
@@ -1820,7 +1902,7 @@ public class RLTrainer {
             // Record start time
             long startTime = System.nanoTime();
             final long startMs = System.currentTimeMillis();
-            final int startEpisodeCountSnapshot = EPISODE_COUNTER.get();
+            final int startEpisodeCountSnapshot = episodeCounter().get();
             final int targetEpisodeCount = NUM_EPISODES;
             final int trainLogEvery = EnvConfig.i32("TRAIN_LOG_EVERY", 10);
             final int trainHeartbeatSec = EnvConfig.i32("TRAIN_HEARTBEAT_SEC", 30);
@@ -1836,7 +1918,7 @@ public class RLTrainer {
                 });
                 final java.util.concurrent.ScheduledExecutorService hbRef = heartbeat;
                 heartbeat.scheduleAtFixedRate(() -> {
-                    int epNow = EPISODE_COUNTER.get();
+                    int epNow = episodeCounter().get();
                     int done = Math.max(0, epNow - startEpisodeCountSnapshot);
                     int remaining = Math.max(0, targetEpisodeCount - epNow);
                     long elapsedMs = Math.max(1, System.currentTimeMillis() - startMs);
@@ -1852,9 +1934,10 @@ public class RLTrainer {
                 }, trainHeartbeatSec, trainHeartbeatSec, java.util.concurrent.TimeUnit.SECONDS);
             }
 
-            ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS, runnable -> {
+            final int numRunners = multiProfile ? profileContext.numGameRunners : NUM_GAME_RUNNERS;
+            ExecutorService executor = Executors.newFixedThreadPool(numRunners, runnable -> {
                 Thread thread = new Thread(runnable);
-                thread.setPriority(Thread.MAX_PRIORITY - 1);
+                thread.setPriority(Thread.MIN_PRIORITY);
                 return thread;
             });
 
@@ -1862,9 +1945,11 @@ public class RLTrainer {
             final Object lock = new Object(); // Lock object for synchronization
             final boolean[] isFirstThread = {true}; // Flag to track the first thread
 
-            for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
+            final ProfileContext parentCtx = profileContext;
+            for (int i = 0; i < numRunners; i++) {
                 final int runnerIndex = i;
                 Future<Void> future = executor.submit(() -> {
+                    if (parentCtx != null) ProfileContext.setCurrent(parentCtx);
                     boolean isFirst;
                     synchronized (lock) {
                         isFirst = isFirstThread[0];
@@ -1878,22 +1963,22 @@ public class RLTrainer {
                     Thread.currentThread().setName("GAME");
                     Random threadRand = newSeededRandom(1_000L + runnerIndex);
 
-                    while (EPISODE_COUNTER.get() < NUM_EPISODES) {
-                        int epNumber = EPISODE_COUNTER.incrementAndGet();
-                        int mulliganEpNumber = MULLIGAN_EPISODE_COUNTER.incrementAndGet();
+                    while (episodeCounter().get() < NUM_EPISODES) {
+                        int epNumber = episodeCounter().incrementAndGet();
+                        int mulliganEpNumber = mulliganEpisodeCounter().incrementAndGet();
                         if (epNumber > NUM_EPISODES) {
                             break; // Another thread reached the target
                         }
                         metrics.recordEpisodeStarted();
                         long episodeStartNanos = System.nanoTime();
-                        ACTIVE_EPISODES.incrementAndGet();
-                        metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
+                        activeEps().incrementAndGet();
+                        metrics.setActiveEpisodes(activeEps().get());
                         Path rlPlayerDeckPath = agentDeckFiles.get(threadRand.nextInt(agentDeckFiles.size()));
                         Deck rlPlayerDeckThread = loadDeck(rlPlayerDeckPath.toString());
                         if (rlPlayerDeckThread == null) {
                             logger.warn("Train: failed to load deck(s) for game, skipping.");
-                            ACTIVE_EPISODES.decrementAndGet();
-                            metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
+                            activeEps().decrementAndGet();
+                            metrics.setActiveEpisodes(activeEps().get());
                             continue;
                         }
 
@@ -1912,8 +1997,8 @@ public class RLTrainer {
                         THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.remove();
                         if (opponentDeckThread == null) {
                             logger.warn("Train: failed to load deck(s) for game, skipping.");
-                            ACTIVE_EPISODES.decrementAndGet();
-                            metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
+                            activeEps().decrementAndGet();
+                            metrics.setActiveEpisodes(activeEps().get());
                             continue;
                         }
 
@@ -2008,7 +2093,6 @@ public class RLTrainer {
 
                         // Train mulligan model from this game's decisions
                         trainMulliganModel(rlPlayer, rlPlayerWon, turns);
-                        maybeSaveMulliganModel();
 
                         // Log head usage statistics
                         logHeadUsageStats(epNumber, rlPlayer, opponentPlayer, turns, rlPlayerWon);
@@ -2027,22 +2111,14 @@ public class RLTrainer {
                         double episodeSeconds = episodeDurationNanos / 1_000_000_000.0;
                         RLTrainer.threadLocalLogger.get().info(String.format("Episode %d completed in %.2f seconds", epNumber, episodeSeconds));
 
-                        // Periodically save episode counter (every 100 episodes)
-                        if (epNumber % 100 == 0) {
-                            try {
-                                Files.write(Paths.get(EPISODE_COUNT_PATH),
-                                        String.valueOf(epNumber).getBytes(StandardCharsets.UTF_8));
-                                logger.info("Episode counter saved: " + epNumber);
-                                writeAgentStatus(epNumber);
-                            } catch (IOException e) {
-                                logger.error("Failed to save episode counter at episode " + epNumber, e);
-                            }
+                        if (GAME_STATS_WRITER && epNumber % 100 == 0) {
+                            writeAgentStatus(epNumber);
                         }
                         if (TRAIN_DIAG && (TRAIN_DIAG_EVERY <= 1 || epNumber % TRAIN_DIAG_EVERY == 0)) {
                             double totalMs = (System.nanoTime() - episodeStartNanos) / 1_000_000.0;
                             double gameMs = (endGameNanos - startGameNanos) / 1_000_000.0;
                             double rewardMs = (rewardEndNanos - rewardStartNanos) / 1_000_000.0;
-                            int active = ACTIVE_EPISODES.get();
+                            int active = activeEps().get();
                             logger.info(String.format(
                                     "Episode %d timing: total=%.1fms game=%.1fms reward=%.1fms activeEpisodes=%d thread=%s",
                                     epNumber, totalMs, gameMs, rewardMs, active, Thread.currentThread().getName()
@@ -2103,19 +2179,21 @@ public class RLTrainer {
                             logger.warn("League/Ladder tick failed at ep " + epNumber, e);
                         }
 
-                        Path statsPath = Paths.get(STATS_FILE_PATH);
-                        String statsHeader = "episode,turns,final_reward,opponent_type,winrate,episode_seconds\n";
-                        String statsLine = new StringBuilder()
-                                .append(epNumber).append(',').append(turns).append(',')
-                                .append(String.format("%.3f", finalReward)).append(',')
-                                .append(opponentType).append(',')
-                                .append(String.format("%.3f", snapshotWinrate)).append(',')
-                                .append(String.format("%.2f", episodeSeconds)).append('\n')
-                                .toString();
-                        ASYNC_LINE_WRITER.append(statsPath, statsHeader, statsLine);
+                        if (GAME_STATS_WRITER) {
+                            Path statsPath = Paths.get(statsFilePath());
+                            String statsHeader = "episode,turns,final_reward,opponent_type,winrate,episode_seconds\n";
+                            String statsLine = new StringBuilder()
+                                    .append(epNumber).append(',').append(turns).append(',')
+                                    .append(String.format("%.3f", finalReward)).append(',')
+                                    .append(opponentType).append(',')
+                                    .append(String.format("%.3f", snapshotWinrate)).append(',')
+                                    .append(String.format("%.2f", episodeSeconds)).append('\n')
+                                    .toString();
+                            ASYNC_LINE_WRITER.append(statsPath, statsHeader, statsLine);
+                        }
                         metrics.recordEpisodeCompleted();
-                        ACTIVE_EPISODES.decrementAndGet();
-                        metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
+                        activeEps().decrementAndGet();
+                        metrics.setActiveEpisodes(activeEps().get());
                     }
                     return null;
                 });
@@ -2140,7 +2218,7 @@ public class RLTrainer {
             long endTime = System.nanoTime();
             long totalTime = endTime - startTime;
             double totalTimeInMinutes = totalTime / 1_000_000_000.0 / 60.0;
-            int episodesRun = EPISODE_COUNTER.get() - initialEpisodeCount;
+            int episodesRun = episodeCounter().get();
             double gamesRunPerMinute = totalTimeInMinutes > 0 ? episodesRun / totalTimeInMinutes : 0;
 
             // Stop health stats logging
@@ -2152,23 +2230,104 @@ public class RLTrainer {
             logger.info("Total Training Time: " + (totalTime / 1_000_000_000.0) + " seconds");
             logger.info("Health summary: " + healthStats.getSummary());
 
-            // Save the trained model
-            sharedModel.saveModel(MODEL_FILE_PATH);
-            sharedModel.shutdown();
+            if (!multiProfile) {
+                sharedModel.shutdown();
+            }
             if (heartbeat != null) {
                 heartbeat.shutdownNow();
             }
-            // ------------------ 2.  Persist updated episode counters ------------------
-            try {
-                Files.write(Paths.get(EPISODE_COUNT_PATH), String.valueOf(EPISODE_COUNTER.get()).getBytes(StandardCharsets.UTF_8));
-                Files.write(Paths.get(MULLIGAN_EPISODE_COUNT_PATH), String.valueOf(MULLIGAN_EPISODE_COUNTER.get()).getBytes(StandardCharsets.UTF_8));
-            } catch (IOException e) {
-                logger.error("Failed to persist episode counters", e);
-            }
-
         } catch (IOException | InterruptedException e) {
             logger.error("Error during training", e);
         }
+    }
+
+    // ============================================================
+    // Multi-profile training: load card DB once, run N profiles
+    // ============================================================
+
+    public static void trainMultiProfile(List<String> profileNames) {
+        if (profileNames == null || profileNames.isEmpty()) {
+            logger.error("trainMultiProfile: no profile names provided");
+            return;
+        }
+        logger.info("Multi-profile training: " + profileNames.size() + " profiles: " + profileNames);
+
+        // 1) Load card database ONCE (the whole point of this refactor)
+        System.out.println("Multi-profile: Initializing card database...");
+        mage.cards.repository.CardScanner.scan();
+        System.out.println("Multi-profile: Card database initialized");
+
+        // 2) Load shared deck pools once
+        List<Path> sharedDeckPool;
+        List<Path> sharedAgentDeckPool;
+        try {
+            sharedDeckPool = loadDeckPool();
+            if (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty()) {
+                sharedAgentDeckPool = loadDeckPoolWithOverride(RL_AGENT_DECK_LIST_FILE);
+            } else {
+                sharedAgentDeckPool = sharedDeckPool;
+            }
+        } catch (IOException e) {
+            logger.error("Multi-profile: failed to load deck pool", e);
+            return;
+        }
+        logger.info("Multi-profile: deck pool loaded (" + sharedDeckPool.size() + " decks)");
+
+        // 3) Create profile contexts
+        String artifactsRoot = EnvConfig.str("RL_ARTIFACTS_ROOT",
+                "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl");
+        int totalRunners = NUM_GAME_RUNNERS;
+        int runnersPerProfile = Math.max(1, totalRunners / profileNames.size());
+        logger.info("Multi-profile: " + totalRunners + " total runners, "
+                + runnersPerProfile + " per profile");
+
+        List<RLTrainer> trainers = new ArrayList<>();
+        for (String name : profileNames) {
+            ProfilePaths paths = new ProfilePaths(name, artifactsRoot);
+            // Ensure profile directories exist
+            new java.io.File(paths.modelsBaseDir).mkdirs();
+            new java.io.File(paths.logsBaseDir).mkdirs();
+            new java.io.File(paths.snapshotDir).mkdirs();
+            new java.io.File(paths.pythonLogsDir).mkdirs();
+            new java.io.File(paths.trainingGameLogsDir).mkdirs();
+            new java.io.File(paths.evalGameLogsDir).mkdirs();
+            ProfileContext ctx = new ProfileContext(name, paths);
+            ctx.deckFiles = sharedDeckPool;
+            ctx.agentDeckFiles = sharedAgentDeckPool;
+            ctx.numGameRunners = runnersPerProfile;
+            RLTrainer trainer = new RLTrainer(ctx);
+            trainers.add(trainer);
+        }
+
+        // 4) Launch all profiles in parallel (one thread per profile coordinator)
+        ExecutorService profileExecutor = Executors.newFixedThreadPool(profileNames.size(), r -> {
+            Thread t = new Thread(r, "PROFILE-COORD");
+            t.setDaemon(false);
+            return t;
+        });
+        List<Future<?>> profileFutures = new ArrayList<>();
+        for (RLTrainer trainer : trainers) {
+            profileFutures.add(profileExecutor.submit(() -> {
+                Thread.currentThread().setName("PROFILE-" + trainer.profileContext.profileName);
+                ProfileContext.setCurrent(trainer.profileContext);
+                try {
+                    trainer.train();
+                } catch (Exception e) {
+                    logger.error("Profile " + trainer.profileContext.profileName + " failed", e);
+                }
+            }));
+        }
+
+        // Wait for all profiles to finish
+        profileExecutor.shutdown();
+        for (Future<?> f : profileFutures) {
+            try {
+                f.get();
+            } catch (Exception e) {
+                logger.error("Profile future failed", e);
+            }
+        }
+        logger.info("Multi-profile training complete for all " + profileNames.size() + " profiles");
     }
 
     private static String formatOpponentTag(Player opponentPlayer) {
@@ -2250,7 +2409,11 @@ public class RLTrainer {
         final AtomicInteger evalCounter = new AtomicInteger(0);
         final AtomicInteger lastLoggedEval = new AtomicInteger(0);
 
-        ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS);
+        ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS, runnable -> {
+            Thread thread = new Thread(runnable);
+            thread.setPriority(Thread.MIN_PRIORITY);
+            return thread;
+        });
         final Object lock = new Object();
         final boolean[] isFirstThread = {true};
 
@@ -3254,6 +3417,106 @@ public class RLTrainer {
         }
     }
 
+    /**
+     * League bench: play N games against CP7 on a specified deck, write results to file.
+     * Used by the orchestrator's eval benchmark to get absolute performance numbers.
+     */
+    public void runLeagueBench() {
+        if (EVAL_OPPONENT_DECK.isEmpty()) {
+            logger.error("league_bench requires EVAL_OPPONENT_DECK to be set");
+            return;
+        }
+        try {
+            mage.cards.repository.CardScanner.scan();
+        } catch (Exception e) {
+            logger.error("Card scan failed", e);
+            return;
+        }
+
+        List<Path> agentDecks;
+        try {
+            if (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty()) {
+                agentDecks = loadDeckPoolWithOverride(RL_AGENT_DECK_LIST_FILE);
+            } else {
+                agentDecks = loadDeckPool();
+            }
+        } catch (Exception e) {
+            logger.error("Failed to load agent decks", e);
+            return;
+        }
+
+        Path oppDeckPath = Paths.get(EVAL_OPPONENT_DECK);
+        Deck oppDeck = loadDeck(oppDeckPath.toString());
+        if (oppDeck == null) {
+            logger.error("Failed to load opponent deck: " + EVAL_OPPONENT_DECK);
+            return;
+        }
+
+        logger.info(String.format("league_bench: %d games vs CP7-Skill%d deck=%s profile=%s",
+                EVAL_NUM_GAMES, EVAL_OPPONENT_SKILL, EVAL_OPPONENT_DECK, MODEL_PROFILE_NAME));
+
+        ComputerPlayerRL.resetRLActivationFailureCount();
+        int wins = 0;
+        int total = 0;
+        Random rand = newSeededRandom(7777);
+
+        for (int i = 0; i < EVAL_NUM_GAMES; i++) {
+            try {
+                Path agentDeckPath = agentDecks.get(rand.nextInt(agentDecks.size()));
+                Deck agentDeck = loadDeck(agentDeckPath.toString());
+                Deck oppDeckCopy = loadDeck(oppDeckPath.toString());
+                if (agentDeck == null || oppDeckCopy == null) continue;
+
+                TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("BenchMatch", "BenchMatch", false));
+                match.startGame();
+                Game game = match.getGames().get(0);
+
+                ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel, true);
+                rlPlayer.setCurrentEpisode(-(i + 1));
+                game.addPlayer(rlPlayer, agentDeck);
+                match.addPlayer(rlPlayer, agentDeck);
+
+                ComputerPlayer7 opponent = new ComputerPlayer7(
+                        "EvalBot-Skill" + EVAL_OPPONENT_SKILL, RangeOfInfluence.ALL, EVAL_OPPONENT_SKILL);
+                game.addPlayer(opponent, oppDeckCopy);
+                match.addPlayer(opponent, oppDeckCopy);
+
+                game.loadCards(agentDeck.getCards(), rlPlayer.getId());
+                game.loadCards(oppDeckCopy.getCards(), opponent.getId());
+                game.setGameOptions(new GameOptions());
+
+                GameHealthMonitor healthMonitor = GameHealthMonitor.createAndStart(game);
+                game.start(rlPlayer.getId());
+                healthMonitor.stop();
+
+                boolean won;
+                if (healthMonitor.wasKilled()) {
+                    won = false;
+                } else {
+                    won = game.getWinner().contains(rlPlayer.getName());
+                }
+                if (won) wins++;
+                total++;
+            } catch (Exception e) {
+                logger.error("Eval game " + i + " failed: " + e.getMessage());
+            }
+        }
+
+        double winrate = total > 0 ? (double) wins / total : 0.0;
+        String result = String.format("EVAL_RESULT: wins=%d total=%d winrate=%.4f profile=%s",
+                wins, total, winrate, MODEL_PROFILE_NAME);
+        logger.info(result);
+        System.out.println(result);
+
+        if (!EVAL_RESULTS_FILE.isEmpty()) {
+            try (java.io.FileWriter fw = new java.io.FileWriter(EVAL_RESULTS_FILE)) {
+                fw.write(String.format("%d,%d,%.4f,%s\n", wins, total, winrate, MODEL_PROFILE_NAME));
+            } catch (Exception e) {
+                logger.error("Failed to write eval results: " + e.getMessage());
+            }
+        }
+    }
+
     private boolean runSingleLeagueBenchmarkGame(
             Path rlDeckPath,
             Path oppDeckPath,
@@ -3916,39 +4179,32 @@ public class RLTrainer {
      * @return Array [winrate, sampleSize] at the moment this outcome was
      * recorded
      */
-    private static double[] recordGameOutcome(boolean rlPlayerWon) {
-        // Add to queue
-        recentWins.add(rlPlayerWon);
+    private double[] recordGameOutcome(boolean rlPlayerWon) {
+        ConcurrentLinkedQueue<Boolean> wins = recentWinsQueue();
+        AtomicInteger wc = winCounter();
+        wins.add(rlPlayerWon);
         if (rlPlayerWon) {
-            winCount.incrementAndGet();
+            wc.incrementAndGet();
         }
-
-        // Track games at current difficulty level
-        gamesAtCurrentLevel.incrementAndGet();
-
-        // Trim queue to window size
-        while (recentWins.size() > WINRATE_WINDOW) {
-            Boolean removed = recentWins.poll();
+        gamesAtLevel().incrementAndGet();
+        while (wins.size() > WINRATE_WINDOW) {
+            Boolean removed = wins.poll();
             if (removed != null && removed) {
-                winCount.decrementAndGet();
+                wc.decrementAndGet();
             }
         }
-
-        // Return snapshot at this exact moment (avoids race condition in logging)
-        int size = recentWins.size();
-        double winrate = size == 0 ? 0.0 : winCount.get() / (double) size;
+        int size = wins.size();
+        double winrate = size == 0 ? 0.0 : wc.get() / (double) size;
         return new double[]{winrate, size};
     }
 
-    /**
-     * Calculates current rolling winrate. Thread-safe for concurrent training.
-     */
-    private static double getCurrentWinrate() {
-        int size = recentWins.size();
+    private double getCurrentWinrate() {
+        ConcurrentLinkedQueue<Boolean> wins = recentWinsQueue();
+        int size = wins.size();
         if (size == 0) {
             return 0.0;
         }
-        return winCount.get() / (double) size;
+        return winCounter().get() / (double) size;
     }
 
     /**
@@ -4034,24 +4290,6 @@ public class RLTrainer {
         }
     }
 
-    // Mulligan model save counter
-    private static final AtomicInteger mulliganTrainCount = new AtomicInteger(0);
-    private static final int MULLIGAN_SAVE_INTERVAL = EnvConfig.i32("MULLIGAN_SAVE_INTERVAL", 100);
-
-    /**
-     * Periodically save mulligan model.
-     */
-    private static void maybeSaveMulliganModel() {
-        if (mulliganTrainCount.incrementAndGet() % MULLIGAN_SAVE_INTERVAL == 0) {
-            try {
-                sharedModel.saveMulliganModel();
-                logger.info("Mulligan model saved (after " + mulliganTrainCount.get() + " training updates)");
-            } catch (Exception e) {
-                logger.error("Failed to save mulligan model: " + e.getMessage(), e);
-            }
-        }
-    }
-
     private Player createTrainingOpponent(int episodeNum, Random rand) {
         String mode = OPPONENT_SAMPLER == null ? "league" : OPPONENT_SAMPLER.trim().toLowerCase();
         switch (mode) {
@@ -4097,18 +4335,28 @@ public class RLTrainer {
         java.util.List<LeagueMetaOpponentCandidate> allMeta = getLeagueMetaOpponentCandidates();
         if (!allMeta.isEmpty()) {
             java.util.ArrayList<LeagueMetaOpponentCandidate> meta = new java.util.ArrayList<>(allMeta);
-            if (!MODEL_PROFILE_NAME.isEmpty() && meta.size() > 1) {
-                meta.removeIf(c -> MODEL_PROFILE_NAME.equalsIgnoreCase(c.profile));
+            if (!profileName().isEmpty() && meta.size() > 1) {
+                final String pn = profileName();
+                meta.removeIf(c -> pn.equalsIgnoreCase(c.profile));
             }
             if (!meta.isEmpty()) {
                 LeagueMetaOpponentCandidate pick = meta.get(rand.nextInt(meta.size()));
                 THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.set(pick.deckPath);
+                boolean rlOnly = "rl_only".equalsIgnoreCase(LEAGUE_MODE);
                 if (pick.qualified && pick.snapshotPath != null) {
                     String policyKey = "snap:" + pick.snapshotPath.toString();
                     lastOpponentType = String.format(java.util.Locale.US,
                             "META-RL(profile=%s,ep=%d,wr=%.3f,promoted=%s)",
                             pick.profile, pick.episode, pick.baselineWr, pick.promoted);
                     return new ComputerPlayerRL("MetaSnapshotOpp", RangeOfInfluence.ALL, sharedModel, false, false, policyKey);
+                }
+                if (rlOnly) {
+                    // No snapshot yet -- use current training policy (random weights at cold start)
+                    String policyKey = "profile:" + pick.profile;
+                    lastOpponentType = String.format(java.util.Locale.US,
+                            "META-RL-LIVE(profile=%s,wr=%.3f)",
+                            pick.profile, pick.baselineWr);
+                    return new ComputerPlayerRL("LiveRLOpp", RangeOfInfluence.ALL, sharedModel, false, false, policyKey);
                 }
                 int skill = Math.max(1, LEAGUE_POST_HEURISTIC_SKILL);
                 lastOpponentType = String.format(java.util.Locale.US,
