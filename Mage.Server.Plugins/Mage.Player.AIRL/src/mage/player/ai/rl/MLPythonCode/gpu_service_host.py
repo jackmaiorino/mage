@@ -245,14 +245,23 @@ class SharedGpuHost:
         self.train_batch_timeout_ms = max(1, env_int("GPU_SERVICE_TRAIN_BATCH_TIMEOUT_MS", min(100, self.batch_timeout_ms)))
         self.train_batch_timeout_s = self.train_batch_timeout_ms / 1000.0
         self.batch_max_size = max(1, env_int("PY_BATCH_MAX_SIZE", 64))
-        self.learner_batch_max_episodes = max(1, env_int("LEARNER_BATCH_MAX_EPISODES", 8))
-        self.learner_batch_max_steps = max(1, env_int("LEARNER_BATCH_MAX_STEPS", 4096))
+        self.learner_batch_max_episodes = max(1, env_int("LEARNER_BATCH_MAX_EPISODES", 64))
+        self.learner_batch_max_steps = max(1, env_int("LEARNER_BATCH_MAX_STEPS", 16384))
         self.train_multi_max_steps = max(1, env_int("TRAIN_MULTI_MAX_STEPS", self.learner_batch_max_steps))
         self.model_publish_every_ms = max(0, env_int("GPU_SERVICE_MODEL_PUBLISH_EVERY_MS", 1000))
         self.model_reload_every_ms = max(0, env_int("GPU_SERVICE_MODEL_RELOAD_EVERY_MS", 250))
+        self.service_role = env_str("GPU_SERVICE_ROLE", "both")  # "both", "infer"
+        self.infer_cuda_device = os.getenv("INFER_CUDA_DEVICE", "").strip()
+        self.train_cuda_device = os.getenv("TRAIN_CUDA_DEVICE", "").strip()
+        self._score_worker_threads_raw = env_int("SCORE_WORKER_THREADS", 0)  # 0 = auto (match profile count)
+        self.score_worker_threads = max(1, self._score_worker_threads_raw)
         self._profiles: Dict[str, ProfileState] = {}
         self._lock = threading.Condition()
         self._running = True
+        self._processing_profiles: set = set()  # profile ids currently being scored
+        self._training_profiles: set = set()  # profile ids currently being trained
+        self._score_worker_count = 0
+        self.train_worker_threads = max(1, env_int("TRAIN_WORKER_THREADS", 3))
         self._train_rr = 0
         self._score_batches = 0
         self._train_batches = 0
@@ -262,6 +271,7 @@ class SharedGpuHost:
         self._model_reloads = 0
         self._score_flush_timeout_total = 0
         self._score_flush_full_total = 0
+        self._score_flush_eager_total = 0
         self._last_error = ""
         self._mulligan_saves = 0
         self._sigterm_saves = 0
@@ -273,6 +283,15 @@ class SharedGpuHost:
         self._train_service_ms: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
         self._train_batch_episode_counts: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
         self._train_batch_step_counts: Deque[float] = deque(maxlen=RECENT_METRIC_HISTORY)
+        # Saturation tracking
+        self._active_connections = 0
+        self._total_connections = 0
+        self._score_samples_total = 0
+        self._score_worker_busy_ms = 0.0
+        self._score_worker_wall_ms = 0.0
+        self._saturation_window_start = time.monotonic()
+        self._saturation_window_samples = 0
+        self._saturation_window_busy_ms = 0.0
 
     def get_or_create_profile(self, headers: Dict[str, str]) -> ProfileState:
         profile_id = headers.get("profile_id", "").strip()
@@ -282,8 +301,10 @@ class SharedGpuHost:
             existing = self._profiles.get(profile_id)
         if existing is not None:
             return existing
-        infer_context = ProfileContext(profile_id, headers, role="inference")
-        learner_context = ProfileContext(profile_id, headers, role="learner")
+        infer_context = ProfileContext(profile_id, headers, role="inference",
+                                       cuda_device=self.infer_cuda_device)
+        learner_context = ProfileContext(profile_id, headers, role="learner",
+                                         cuda_device=self.train_cuda_device)
         state = ProfileState(infer_context=infer_context, learner_context=learner_context)
         with self._lock:
             return self._profiles.setdefault(profile_id, state)
@@ -330,30 +351,87 @@ class SharedGpuHost:
             if reloaded:
                 self._model_reloads += 1
 
-    def score_worker_loop(self) -> None:
+    def score_worker_loop(self, worker_id: int = 0) -> None:
+        tag = f"SCORE_WORKER-{worker_id}"
+        _diag_interval = 10.0
+        _diag_last = time.monotonic()
+        _diag_cycles = 0
+        _diag_batches = 0
+        _diag_samples = 0
+        _diag_wait_ms_sum = 0.0
+        _diag_run_ms_sum = 0.0
         while self._running:
-            work_items = None
-            sleep_for = 0.25
+            work = None
+            cycle_start = time.monotonic()
             with self._lock:
-                work_items, sleep_for = self._select_all_score_work_locked()
-                if not work_items:
-                    self._lock.wait(timeout=sleep_for)
-                    continue
-            for state, tasks, reason in work_items:
-                try:
-                    self._run_score_batch(state, tasks, reason)
-                except Exception as exc:
-                    self._last_error = f"{type(exc).__name__}: {exc}"
-                    with self._lock:
-                        self._score_failures += 1
-                    traceback.print_exc()
-                    for task in tasks:
-                        try:
-                            task.session.reply(1, task.request_id, {"error": str(exc)})
-                        except Exception:
-                            pass
+                work = self._claim_score_work_locked(worker_id)
+                if work is None:
+                    self._lock.wait(timeout=self.batch_timeout_s)
+                    work = self._claim_score_work_locked(worker_id)
+                    if work is None:
+                        continue
+            state, tasks, reason, profile_key = work
+            wait_end = time.monotonic()
+            _diag_wait_ms_sum += (wait_end - cycle_start) * 1000
+            _diag_cycles += 1
+            batch_samples = sum(task.batch_size for task in tasks)
+            _diag_batches += 1
+            try:
+                self._run_score_batch(state, tasks, reason)
+            except Exception as exc:
+                self._last_error = f"{type(exc).__name__}: {exc}"
+                with self._lock:
+                    self._score_failures += 1
+                traceback.print_exc()
+                for task in tasks:
+                    try:
+                        task.session.reply(1, task.request_id, {"error": str(exc)})
+                    except Exception:
+                        pass
+            finally:
+                with self._lock:
+                    self._processing_profiles.discard(profile_key)
+                    self._lock.notify_all()
+            run_end = time.monotonic()
+            run_ms = (run_end - wait_end) * 1000
+            _diag_run_ms_sum += run_ms
+            _diag_samples += batch_samples
+            with self._lock:
+                self._score_samples_total += batch_samples
+                self._score_worker_busy_ms += run_ms
+                self._saturation_window_samples += batch_samples
+                self._saturation_window_busy_ms += run_ms
+            now = time.monotonic()
+            if now - _diag_last >= _diag_interval:
+                elapsed = now - _diag_last
+                avg_wait = _diag_wait_ms_sum / max(1, _diag_cycles)
+                avg_run = _diag_run_ms_sum / max(1, _diag_cycles)
+                duty = _diag_run_ms_sum / (elapsed * 1000) * 100
+                throughput = _diag_samples / max(0.001, elapsed)
+                with self._lock:
+                    conns = self._active_connections
+                    pending = sum(
+                        sum(task.batch_size for task in s.pending_scores)
+                        for s in self._profiles.values()
+                    )
+                print(f"[{tag}] {elapsed:.0f}s: cycles={_diag_cycles} batches={_diag_batches} "
+                      f"samples={_diag_samples} throughput={throughput:.0f}/s "
+                      f"avg_wait={avg_wait:.1f}ms avg_run={avg_run:.1f}ms "
+                      f"duty={duty:.1f}% conns={conns} pending={pending}", flush=True)
+                with self._lock:
+                    wall_ms = (now - self._saturation_window_start) * 1000
+                    self._score_worker_wall_ms += wall_ms
+                    self._saturation_window_start = now
+                    self._saturation_window_samples = 0
+                    self._saturation_window_busy_ms = 0.0
+                _diag_last = now
+                _diag_cycles = 0
+                _diag_batches = 0
+                _diag_samples = 0
+                _diag_wait_ms_sum = 0.0
+                _diag_run_ms_sum = 0.0
 
-    def train_worker_loop(self) -> None:
+    def train_worker_loop(self, worker_id: int = 0) -> None:
         # Learner updates drain independently and publish fresh weights for the
         # inference lane to reload asynchronously.
         while self._running:
@@ -364,6 +442,8 @@ class SharedGpuHost:
                 if work is None:
                     self._lock.wait(timeout=sleep_for)
                     continue
+                profile_key = work[0].infer_context.profile_id
+                self._training_profiles.add(profile_key)
             state, tasks = work
             try:
                 self._run_train_batch(state, tasks)
@@ -372,12 +452,56 @@ class SharedGpuHost:
                 with self._lock:
                     self._train_failures += 1
                 traceback.print_exc()
+            finally:
+                with self._lock:
+                    self._training_profiles.discard(profile_key)
+                    self._lock.notify_all()
+
+    def _claim_score_work_locked(self, worker_id: int = 0):
+        """Select one batch from a profile not currently being processed by another worker.
+        Each worker starts scanning from a different offset to distribute work evenly."""
+        now = time.monotonic()
+        profiles = list(self._profiles.values())
+        n = len(profiles)
+        if n == 0:
+            return None
+        best_state = None
+        best_age = -1.0
+        best_pending = 0
+        for i in range(n):
+            state = profiles[(worker_id + i) % n]
+            pid = state.infer_context.profile_id
+            if pid in self._processing_profiles:
+                continue
+            self._prune_closed_score_tasks_locked(state)
+            if not state.pending_scores:
+                continue
+            age = now - state.pending_scores[0].enqueued_at
+            pending = sum(task.batch_size for task in state.pending_scores)
+            ready = age >= self.batch_timeout_s or pending >= self.batch_max_size
+            if not ready:
+                continue
+            # First ready profile in this worker's rotation wins
+            best_state = state
+            best_age = age
+            best_pending = pending
+            break
+        if best_state is None:
+            return None
+        reason = "timeout" if best_age >= self.batch_timeout_s else "full"
+        batch = self._pop_score_batch_locked(best_state)
+        if not batch:
+            return None
+        profile_key = best_state.infer_context.profile_id
+        self._processing_profiles.add(profile_key)
+        return best_state, batch, reason, profile_key
 
     def _select_all_score_work_locked(self):
         now = time.monotonic()
         profiles = list(self._profiles.values())
         results = []
         oldest_score_age = None
+        total_pending = 0
         for state in profiles:
             self._prune_closed_score_tasks_locked(state)
             if not state.pending_scores:
@@ -386,6 +510,7 @@ class SharedGpuHost:
             if oldest_score_age is None or age > oldest_score_age:
                 oldest_score_age = age
             pending_score_samples = sum(task.batch_size for task in state.pending_scores)
+            total_pending += pending_score_samples
             if age >= self.batch_timeout_s or pending_score_samples >= self.batch_max_size:
                 reason = "timeout" if age >= self.batch_timeout_s else "full"
                 while state.pending_scores:
@@ -396,6 +521,17 @@ class SharedGpuHost:
                     remaining = sum(task.batch_size for task in state.pending_scores)
                     if remaining < self.batch_max_size:
                         break
+        # If no profile hit its timeout/max individually but there's enough
+        # aggregate pending work, flush the largest queues eagerly to avoid
+        # idle GPU cycles while requests wait for per-profile timeout.
+        if not results and total_pending >= self.batch_max_size:
+            for state in sorted(profiles, key=lambda s: len(s.pending_scores), reverse=True):
+                if not state.pending_scores:
+                    continue
+                batch = self._pop_score_batch_locked(state)
+                if batch:
+                    results.append((state, batch, "eager"))
+                    break
         if results:
             return results, 0.0
         if oldest_score_age is not None:
@@ -405,6 +541,12 @@ class SharedGpuHost:
     def _select_train_work_locked(self):
         now = time.monotonic()
         profiles = list(self._profiles.values())
+        # Inference-priority mode: defer training when ANY inference is pending.
+        # This ensures training never blocks inference on the dedicated inference GPU.
+        if self.service_role == "infer":
+            has_pending_scores = any(len(s.pending_scores) > 0 for s in profiles)
+            if has_pending_scores:
+                return None, 0.05  # short sleep, re-check soon
         train_state, train_wait = self._select_train_state_locked(now, profiles)
         if train_state is not None:
             train_work = self._pop_train_batch_locked(train_state)
@@ -421,6 +563,9 @@ class SharedGpuHost:
         min_wait = None
         max_steps = min(self.learner_batch_max_steps, self.train_multi_max_steps)
         for state in profiles:
+            pid = state.infer_context.profile_id
+            if pid in self._training_profiles:
+                continue
             if not state.pending_trains:
                 continue
             age = now - state.pending_trains[0].enqueued_at
@@ -528,10 +673,12 @@ class SharedGpuHost:
             return
         first = tasks[0]
         headers = first.headers
+        t0 = time.monotonic()
         merged = merge_segments([task.segments for task in tasks])
+        t1 = time.monotonic()
         logical_batch_size = sum(task.batch_size for task in tasks)
         self._maybe_reload_inference_model(state)
-        started = time.monotonic()
+        t2 = time.monotonic()
         result_bytes = state.infer_context.score_batch(
             merged[0],
             merged[1],
@@ -551,12 +698,24 @@ class SharedGpuHost:
             int(headers.get("cand_feat_dim", "0")),
         )
         finished = time.monotonic()
-        service_ms = max(0.0, (finished - started) * 1000.0)
+        merge_ms = (t1 - t0) * 1000
+        reload_ms = (t2 - t1) * 1000
+        infer_ms = (finished - t2) * 1000
+        total_ms = (finished - t0) * 1000
+        queue_age_ms = (t0 - first.enqueued_at) * 1000
+        if total_ms > 200 or queue_age_ms > 200:
+            print(f"[SCORE_DIAG] batch={logical_batch_size} reason={reason} "
+                  f"queue_age={queue_age_ms:.0f}ms merge={merge_ms:.0f}ms "
+                  f"reload={reload_ms:.0f}ms infer={infer_ms:.0f}ms total={total_ms:.0f}ms",
+                  flush=True)
+        service_ms = max(0.0, (finished - t0) * 1000.0)
         latency_samples = [max(0.0, (finished - task.enqueued_at) * 1000.0) for task in tasks]
         with self._lock:
             self._score_batches += 1
             if reason == "full":
                 self._score_flush_full_total += 1
+            elif reason == "eager":
+                self._score_flush_eager_total += 1
             else:
                 self._score_flush_timeout_total += 1
             self._infer_batch_sizes.append(float(logical_batch_size))
@@ -591,6 +750,7 @@ class SharedGpuHost:
         first = tasks[0]
         merged = merge_segments([task.segments for task in tasks])
         total_steps = sum(task.step_count for task in tasks)
+        total_episodes = len(tasks)
         started = time.monotonic()
         state.learner_context.train_batch(
             merged[0],
@@ -615,6 +775,8 @@ class SharedGpuHost:
         )
         finished = time.monotonic()
         service_ms = max(0.0, (finished - started) * 1000.0)
+        print(f"[TRAIN_DIAG] episodes={total_episodes} steps={total_steps} "
+              f"service={service_ms:.0f}ms profile={state.infer_context.profile_id}", flush=True)
         latency_samples = [max(0.0, (finished - task.enqueued_at) * 1000.0) for task in tasks]
         with self._lock:
             self._train_batches += 1
@@ -769,6 +931,9 @@ class SharedGpuHost:
                 "# HELP gpu_service_infer_flush_full_total Inference batches flushed because the batch max size was reached on the shared GPU host",
                 "# TYPE gpu_service_infer_flush_full_total counter",
                 f"gpu_service_infer_flush_full_total {self._score_flush_full_total}",
+                "# HELP gpu_service_infer_flush_eager_total Inference batches flushed eagerly when aggregate queue exceeds batch max",
+                "# TYPE gpu_service_infer_flush_eager_total counter",
+                f"gpu_service_infer_flush_eager_total {self._score_flush_eager_total}",
                 "# HELP gpu_service_infer_batch_avg_size Average recent shared-host inference batch size",
                 "# TYPE gpu_service_infer_batch_avg_size gauge",
                 f"gpu_service_infer_batch_avg_size {self._avg(self._infer_batch_sizes):.3f}",
@@ -842,6 +1007,40 @@ class SharedGpuHost:
                 "# TYPE gpu_service_train_service_p95_ms gauge",
                 f"gpu_service_train_service_p95_ms {self._percentile(self._train_service_ms, 95):.3f}",
             ]
+            # Saturation metrics
+            duty_pct = 0.0
+            if self._score_worker_wall_ms > 0:
+                duty_pct = min(100.0, self._score_worker_busy_ms / self._score_worker_wall_ms * 100.0)
+            window_elapsed = max(0.001, time.monotonic() - self._saturation_window_start)
+            window_throughput = self._saturation_window_samples / window_elapsed
+            total_elapsed = self._score_worker_wall_ms / 1000.0 if self._score_worker_wall_ms > 0 else 1.0
+            avg_throughput = self._score_samples_total / max(0.001, total_elapsed)
+            lines.extend([
+                "# HELP gpu_service_active_connections Number of active TCP connections to the GPU service",
+                "# TYPE gpu_service_active_connections gauge",
+                f"gpu_service_active_connections {self._active_connections}",
+                "# HELP gpu_service_total_connections_total Total TCP connections accepted",
+                "# TYPE gpu_service_total_connections_total counter",
+                f"gpu_service_total_connections_total {self._total_connections}",
+                "# HELP gpu_service_score_samples_total Total inference samples processed",
+                "# TYPE gpu_service_score_samples_total counter",
+                f"gpu_service_score_samples_total {self._score_samples_total}",
+                "# HELP gpu_service_score_duty_pct Score worker duty cycle (0-100). Higher = more saturated.",
+                "# TYPE gpu_service_score_duty_pct gauge",
+                f"gpu_service_score_duty_pct {duty_pct:.1f}",
+                "# HELP gpu_service_score_throughput_per_sec Current inference throughput (samples/sec)",
+                "# TYPE gpu_service_score_throughput_per_sec gauge",
+                f"gpu_service_score_throughput_per_sec {window_throughput:.1f}",
+                "# HELP gpu_service_score_avg_throughput_per_sec Average inference throughput since start (samples/sec)",
+                "# TYPE gpu_service_score_avg_throughput_per_sec gauge",
+                f"gpu_service_score_avg_throughput_per_sec {avg_throughput:.1f}",
+                f"# HELP gpu_service_role Service role (both or infer)",
+                f"# TYPE gpu_service_role gauge",
+                f'gpu_service_role{{role="{self.service_role}"}} 1',
+                "# HELP gpu_service_score_worker_threads Number of active score worker threads",
+                "# TYPE gpu_service_score_worker_threads gauge",
+                f"gpu_service_score_worker_threads {self._score_worker_count}",
+            ])
             if self._last_error:
                 lines.extend([
                     "# HELP gpu_service_last_error_info Last scheduler error as an info metric",
@@ -872,6 +1071,9 @@ class MetricsHandler(BaseHTTPRequestHandler):
 
 
 def connection_loop(host: SharedGpuHost, session: ConnectionSession) -> None:
+    with host._lock:
+        host._active_connections += 1
+        host._total_connections += 1
     current_request_id = -1
     try:
         while True:
@@ -910,14 +1112,60 @@ def connection_loop(host: SharedGpuHost, session: ConnectionSession) -> None:
                 except Exception:
                     pass
     finally:
+        with host._lock:
+            host._active_connections = max(0, host._active_connections - 1)
         session.close()
         host.discard_session_scores(session)
 
 
+def _autoscale_score_workers(host: SharedGpuHost) -> None:
+    """Auto-scale score workers to match the number of registered profiles."""
+    while host._running:
+        time.sleep(2.0)
+        with host._lock:
+            profile_count = len(host._profiles)
+            current = host._score_worker_count
+        if profile_count > current:
+            for i in range(current, profile_count):
+                threading.Thread(
+                    target=host.score_worker_loop, args=(i,),
+                    name=f"GpuServiceScore-{i}", daemon=True,
+                ).start()
+            host._score_worker_count = profile_count
+            print(f"[GPU_HOST] auto-scaled score workers: {current} -> {profile_count}", flush=True)
+
+
+def _launch_score_workers(host: SharedGpuHost, count: int) -> None:
+    for i in range(count):
+        threading.Thread(
+            target=host.score_worker_loop, args=(i,),
+            name=f"GpuServiceScore-{i}", daemon=True,
+        ).start()
+    host._score_worker_count = count
+    print(f"[GPU_HOST] launched {count} score worker threads", flush=True)
+
+
 def main() -> int:
     host = SharedGpuHost()
-    threading.Thread(target=host.score_worker_loop, name="GpuServiceScore", daemon=True).start()
-    threading.Thread(target=host.train_worker_loop, name="GpuServiceTrain", daemon=True).start()
+    if host.infer_cuda_device or host.train_cuda_device:
+        print(f"[GPU_HOST] split-device mode: infer={host.infer_cuda_device or 'default'} "
+              f"train={host.train_cuda_device or 'default'}", flush=True)
+    initial_workers = host.score_worker_threads if host.score_worker_threads > 0 else 1
+    _launch_score_workers(host, initial_workers)
+    for tw in range(host.train_worker_threads):
+        threading.Thread(
+            target=host.train_worker_loop, args=(tw,),
+            name=f"GpuServiceTrain-{tw}", daemon=True,
+        ).start()
+    print(f"[GPU_HOST] launched {host.train_worker_threads} train worker threads", flush=True)
+    if host.service_role == "infer":
+        print(f"[GPU_HOST] inference-priority mode (GPU_SERVICE_ROLE=infer): training yields to inference", flush=True)
+    # Auto-scale score workers when profiles register (if SCORE_WORKER_THREADS=0/auto)
+    if host._score_worker_threads_raw == 0:
+        threading.Thread(
+            target=_autoscale_score_workers, args=(host,),
+            name="GpuServiceScoreAutoscale", daemon=True,
+        ).start()
 
     if host.metrics_port > 0:
         MetricsHandler.host_ref = host

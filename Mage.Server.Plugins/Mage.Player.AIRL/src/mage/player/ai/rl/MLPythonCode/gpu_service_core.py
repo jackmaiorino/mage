@@ -36,7 +36,8 @@ def _temporary_env(overrides: Dict[str, str]):
 
 
 class ProfileContext:
-    def __init__(self, profile_id: str, headers: Dict[str, str], role: str = "inference"):
+    def __init__(self, profile_id: str, headers: Dict[str, str], role: str = "inference",
+                 cuda_device: str = ""):
         from py4j_entry_point import PythonEntryPoint
 
         self.profile_id = profile_id
@@ -51,9 +52,22 @@ class ProfileContext:
         self.env.setdefault("MULLIGAN_DEVICE", "cpu")
         # PythonEntryPoint expects the canonical role names ("inference" / "learner").
         self.env["PY_ROLE"] = self.role
+        if cuda_device:
+            self.env["CUDA_DEVICE"] = cuda_device
         self.lock = threading.RLock()
+        self._cuda_stream = None
         with _temporary_env(self.env):
             self.entry = PythonEntryPoint()
+        # Create a dedicated CUDA stream for inference so it can overlap with
+        # training on the default stream.  Learner keeps the default stream.
+        if self.role == "inference":
+            try:
+                import torch
+                if torch.cuda.is_available():
+                    device = torch.device(cuda_device) if cuda_device else self.entry.device
+                    self._cuda_stream = torch.cuda.Stream(device=device)
+            except Exception:
+                pass
         if self.role == "learner":
             self._ensure_model_initialized()
 
@@ -84,23 +98,24 @@ class ProfileContext:
         cand_feat_dim: int,
     ) -> bytes:
         with self.lock:
+            if self._cuda_stream is not None:
+                import torch
+                with torch.cuda.stream(self._cuda_stream):
+                    result = self.entry.scoreCandidatesPolicyFlat(
+                        seq_bytes, mask_bytes, token_bytes,
+                        cand_feat_bytes, cand_ids_bytes, cand_mask_bytes,
+                        policy_key, head_id, pick_index,
+                        min_targets, max_targets, batch_size,
+                        seq_len, d_model, max_candidates, cand_feat_dim,
+                    )
+                self._cuda_stream.synchronize()
+                return result
             return self.entry.scoreCandidatesPolicyFlat(
-                seq_bytes,
-                mask_bytes,
-                token_bytes,
-                cand_feat_bytes,
-                cand_ids_bytes,
-                cand_mask_bytes,
-                policy_key,
-                head_id,
-                pick_index,
-                min_targets,
-                max_targets,
-                batch_size,
-                seq_len,
-                d_model,
-                max_candidates,
-                cand_feat_dim,
+                seq_bytes, mask_bytes, token_bytes,
+                cand_feat_bytes, cand_ids_bytes, cand_mask_bytes,
+                policy_key, head_id, pick_index,
+                min_targets, max_targets, batch_size,
+                seq_len, d_model, max_candidates, cand_feat_dim,
             )
 
     def train_batch(

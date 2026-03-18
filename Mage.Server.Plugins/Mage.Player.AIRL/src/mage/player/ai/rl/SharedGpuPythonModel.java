@@ -83,6 +83,8 @@ public final class SharedGpuPythonModel implements PythonModel {
     private final AtomicBoolean shutdown = new AtomicBoolean(false);
     private final Object predictionLock = new Object();
     private final Object trainLock = new Object();
+    private final java.util.concurrent.ConcurrentLinkedQueue<ScoreRequest> predictionQueueCLQ = new java.util.concurrent.ConcurrentLinkedQueue<>();
+    private final java.util.concurrent.atomic.AtomicInteger predictionQueueSize = new java.util.concurrent.atomic.AtomicInteger(0);
     private final List<ScoreRequest> predictionQueue = new ArrayList<>();
     private final List<TrainRequest> trainQueue = new ArrayList<>();
     private final ScheduledExecutorService predictionScheduler;
@@ -456,6 +458,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         );
         CompletableFuture<PythonMLBatchManager.PredictionResult> future = new CompletableFuture<>();
         metrics.recordInferenceRequest();
+        long enqueueStartNanos = System.nanoTime();
         boolean flushNow = false;
         synchronized (predictionLock) {
             predictionQueue.add(new ScoreRequest(paddedState, paddedCandIds, paddedCandFeats, paddedCandMask, originalCandidateCount, batchKey, future));
@@ -465,13 +468,21 @@ public final class SharedGpuPythonModel implements PythonModel {
                 predictionScheduler.schedule(this::safeFlushPredictionQueue, LOCAL_SCORE_BATCH_TIMEOUT_MS, TimeUnit.MILLISECONDS);
             }
         }
+        long lockAcquireMs = (System.nanoTime() - enqueueStartNanos) / 1_000_000L;
+        if (lockAcquireMs > 50) {
+            logger.warning("predictionLock contention: " + lockAcquireMs + "ms to enqueue");
+        }
         if (flushNow) {
             flushPredictionQueue(true);
         }
         long startNanos = System.nanoTime();
         try {
             PythonMLBatchManager.PredictionResult result = future.get(SCORE_TIMEOUT_MS, TimeUnit.MILLISECONDS);
-            metrics.recordInferenceLatencyMs((System.nanoTime() - startNanos) / 1_000_000L);
+            long inferMs = (System.nanoTime() - startNanos) / 1_000_000L;
+            metrics.recordInferenceLatencyMs(inferMs);
+            if (inferMs > 500) {
+                logger.warning("Slow inference: " + inferMs + "ms (lockWait=" + lockAcquireMs + "ms)");
+            }
             return result;
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -717,7 +728,12 @@ public final class SharedGpuPythonModel implements PythonModel {
     }
 
     private void safeFlushPredictionQueue() {
+        long flushLockStart = System.nanoTime();
         flushPredictionQueue(false);
+        long flushMs = (System.nanoTime() - flushLockStart) / 1_000_000L;
+        if (flushMs > 100) {
+            logger.warning("safeFlushPredictionQueue took " + flushMs + "ms");
+        }
     }
 
     private void safeFlushTrainQueue() {

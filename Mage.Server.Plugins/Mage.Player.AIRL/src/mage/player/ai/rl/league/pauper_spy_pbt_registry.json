@@ -5,7 +5,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 10,
     "population_group": "spy-combo",
     "seed": 1001,
     "train_env": {
@@ -35,7 +35,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 10,
     "population_group": "spy-combo",
     "seed": 2002,
     "train_env": {

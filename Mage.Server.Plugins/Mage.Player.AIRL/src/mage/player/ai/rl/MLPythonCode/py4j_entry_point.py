@@ -215,8 +215,12 @@ class PythonEntryPoint:
         # Core model state
         self.model = None
         self.optimizer = None
-        self.device = torch.device(
-            'cuda' if torch.cuda.is_available() else 'cpu')
+        cuda_device_override = os.getenv("CUDA_DEVICE", "").strip()
+        if cuda_device_override:
+            self.device = torch.device(cuda_device_override)
+        else:
+            self.device = torch.device(
+                'cuda' if torch.cuda.is_available() else 'cpu')
         seed_raw = os.getenv("PY_GLOBAL_SEED", "").strip()
         if not seed_raw:
             seed_raw = os.getenv("RL_BASE_SEED", "").strip()
@@ -1761,50 +1765,45 @@ class PythonEntryPoint:
             head_ids = np.frombuffer(head_ids_bytes, dtype='<i4').reshape(
                 batch_size)[start:end]
 
-            seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
-            mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
-            tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
-            cand_feat_t = torch.tensor(
-                cand_feat, dtype=torch.float32, device=device)
-            cand_ids_t = torch.tensor(
-                cand_ids, dtype=torch.long, device=device)
-            cand_mask_t = torch.tensor(
-                cand_mask, dtype=torch.bool, device=device)
-            chosen_indices_t = torch.tensor(
-                chosen_indices, dtype=torch.long, device=device)
-            chosen_count_t = torch.tensor(
-                chosen_count, dtype=torch.long, device=device)
-            rewards_t = torch.tensor(
-                rewards, dtype=torch.float32, device=device)
-            old_logp_t = torch.tensor(
-                old_logp_total, dtype=torch.float32, device=device)
-            old_value_t = torch.tensor(
-                old_value, dtype=torch.float32, device=device)
-            sample_w_t = torch.tensor(
-                sample_weights, dtype=torch.float32, device=device)
-            dones_t = torch.tensor(dones, dtype=torch.float32, device=device)
-            head_idx_t = torch.tensor(head_ids, dtype=torch.long, device=device)
+            _nb = str(device).startswith("cuda")
+            seq_t = torch.tensor(seq, dtype=torch.float32).to(device, non_blocking=_nb)
+            mask_t = torch.tensor(mask, dtype=torch.bool).to(device, non_blocking=_nb)
+            tok_t = torch.tensor(tok_ids, dtype=torch.long).to(device, non_blocking=_nb)
+            cand_feat_t = torch.tensor(cand_feat, dtype=torch.float32).to(device, non_blocking=_nb)
+            cand_ids_t = torch.tensor(cand_ids, dtype=torch.long).to(device, non_blocking=_nb)
+            cand_mask_t = torch.tensor(cand_mask, dtype=torch.bool).to(device, non_blocking=_nb)
+            chosen_indices_t = torch.tensor(chosen_indices, dtype=torch.long).to(device, non_blocking=_nb)
+            chosen_count_t = torch.tensor(chosen_count, dtype=torch.long).to(device, non_blocking=_nb)
+            rewards_t = torch.tensor(rewards, dtype=torch.float32).to(device, non_blocking=_nb)
+            old_logp_t = torch.tensor(old_logp_total, dtype=torch.float32).to(device, non_blocking=_nb)
+            old_value_t = torch.tensor(old_value, dtype=torch.float32).to(device, non_blocking=_nb)
+            sample_w_t = torch.tensor(sample_weights, dtype=torch.float32).to(device, non_blocking=_nb)
+            dones_t = torch.tensor(dones, dtype=torch.float32).to(device, non_blocking=_nb)
+            head_idx_t = torch.tensor(head_ids, dtype=torch.long).to(device, non_blocking=_nb)
+            if _nb:
+                torch.cuda.synchronize(device)
 
             # Release numpy slices immediately
             del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value, sample_weights, dones, head_ids
 
             local_batch_size = int(end - start)
 
-            if torch.isnan(seq_t).any() or torch.isinf(seq_t).any():
+            _bad = torch.stack([
+                ~torch.isfinite(seq_t).all(),
+                ~torch.isfinite(rewards_t).all(),
+                ~torch.isfinite(cand_feat_t).all(),
+            ])
+            if _bad.any().item():
+                which = []
+                if _bad[0]:
+                    which.append("sequences")
+                if _bad[1]:
+                    which.append("rewards")
+                if _bad[2]:
+                    which.append("cand_feat")
                 logger.warning(LogCategory.MODEL_TRAIN,
-                               "NaN/Inf in input sequence - skipping batch")
-                self._log_cuda_mem("trainCandidatesMultiFlat:skip_seq_nan")
-                return
-            if torch.isnan(rewards_t).any() or torch.isinf(rewards_t).any():
-                logger.warning(LogCategory.MODEL_TRAIN,
-                               "NaN/Inf in rewards - skipping batch (rewards=%s)", rewards_t.tolist())
-                self._log_cuda_mem("trainCandidatesMultiFlat:skip_rewards_nan")
-                return
-            if torch.isnan(cand_feat_t).any() or torch.isinf(cand_feat_t).any():
-                logger.warning(LogCategory.MODEL_TRAIN,
-                               "NaN/Inf in candidate features - skipping batch")
-                self._log_cuda_mem(
-                    "trainCandidatesMultiFlat:skip_candfeat_nan")
+                               "NaN/Inf in %s - skipping batch", ",".join(which))
+                self._log_cuda_mem("trainCandidatesMultiFlat:skip_nan")
                 return
             sample_w_t = torch.nan_to_num(
                 sample_w_t, nan=1.0, posinf=1.0, neginf=1.0).clamp_min(0.0)

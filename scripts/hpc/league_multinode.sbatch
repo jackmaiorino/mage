@@ -7,8 +7,8 @@
 #
 # Het-group 0: GPU node (inference + training)
 #SBATCH --partition=gpu-h100
-#SBATCH --gres=gpu:h100:4
-#SBATCH --cpus-per-task=16
+#SBATCH --gres=gpu:h100:1
+#SBATCH --cpus-per-task=96
 #SBATCH --mem=128G
 #
 #SBATCH hetjob
@@ -16,7 +16,17 @@
 # Het-group 1: CPU node (game simulation)
 #SBATCH --partition=standard
 #SBATCH --cpus-per-task=128
-#SBATCH --mem=0
+#SBATCH --mem=128G
+#
+# Multi-JVM scaling: the orchestrator launches multiple smaller JVMs per CPU
+# node (TARGET_RUNNERS_PER_JVM, default 150) instead of one large JVM.
+# Env vars: TARGET_RUNNERS_PER_JVM, AUX_JVMS_PER_NODE (0=auto), PRIMARY_RUNNER_CAP (200)
+#
+# For more CPU nodes, add additional hetjob components or submit separate
+# coordinated jobs:
+#   1. sbatch GPU-only job (this file without het-group)
+#   2. Wait for GPU node hostname: squeue -j $GPU_JOB -h -o "%N"
+#   3. sbatch CPU jobs with GPU_SERVICE_ENDPOINT=<gpu-node>:26100
 
 set -euo pipefail
 echo "League multinode job starting on $(hostname) at $(date -u)"

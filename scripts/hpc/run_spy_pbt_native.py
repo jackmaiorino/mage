@@ -252,9 +252,13 @@ class NativeOrchestrator:
         self.train_profiles = env_int("TRAIN_PROFILES", 3)
         self.cpu_headroom = env_int("CPU_HEADROOM", 4)
         self.runner_oversubscription_factor = max(0.1, env_float("RUNNER_OVERSUBSCRIPTION_FACTOR", 1.0))
+        self.target_runners_per_jvm = max(10, env_int("TARGET_RUNNERS_PER_JVM", 150))
+        self.aux_jvms_per_node = max(0, env_int("AUX_JVMS_PER_NODE", 0))
+        self.primary_runner_cap = max(0, env_int("PRIMARY_RUNNER_CAP", 200))
         self.metrics_port_base = env_int("METRICS_PORT_BASE", 9100)
         self.py_service_mode = os.getenv("PY_SERVICE_MODE", "local").strip().lower() or "local"
         self.gpu_service_bind_host = os.getenv("GPU_SERVICE_BIND_HOST", "0.0.0.0").strip() or "0.0.0.0"
+        self.gpu_service_split_roles = env_bool("GPU_SERVICE_SPLIT_ROLES", False)
         self.league_mode = os.getenv("LEAGUE_MODE", "").strip().lower()
         self.gpu_service_port_base = env_int("GPU_SERVICE_PORT_BASE", 26100)
         self.gpu_service_metrics_port_base = env_int("GPU_SERVICE_METRICS_PORT_BASE", 27100)
@@ -553,6 +557,21 @@ class NativeOrchestrator:
                 return result.stdout.strip().splitlines()
         except Exception:
             pass
+        # Fallback: try python-based expansion for patterns like node-[1-3] or node-[1,3]
+        import re
+        m = re.match(r'^(.*)\[([^\]]+)\](.*)$', nodelist)
+        if m:
+            prefix, spec, suffix = m.group(1), m.group(2), m.group(3)
+            nodes = []
+            for part in spec.split(","):
+                if "-" in part:
+                    lo, hi = part.split("-", 1)
+                    width = len(lo)
+                    for i in range(int(lo), int(hi) + 1):
+                        nodes.append(f"{prefix}{str(i).zfill(width)}{suffix}")
+                else:
+                    nodes.append(f"{prefix}{part}{suffix}")
+            return nodes
         return [h.strip() for h in nodelist.split(",") if h.strip()]
 
     def run_eval_benchmark(self) -> Dict[str, float]:
@@ -775,7 +794,18 @@ class NativeOrchestrator:
         if not host_script.exists():
             raise RuntimeError(f"shared GPU host script missing: {host_script}")
         self.shared_gpu_logs_dir.mkdir(parents=True, exist_ok=True)
-        for gpu_slot, gpu_id in enumerate(self.visible_gpu_list):
+        # When split_roles is enabled with 2+ GPUs, run a single process that
+        # sees all GPUs: inference on cuda:0, training on cuda:1.  Otherwise
+        # start one independent process per GPU.
+        split_single_process = (
+            self.gpu_service_split_roles and len(self.visible_gpu_list) >= 2
+        )
+        if split_single_process:
+            gpu_slots = [(0, ",".join(str(g) for g in self.visible_gpu_list))]
+        else:
+            gpu_slots = [(slot, str(gid)) for slot, gid in enumerate(self.visible_gpu_list)]
+
+        for gpu_slot, cuda_devices in gpu_slots:
             port = self.gpu_service_port_base + gpu_slot
             metrics_port = self.gpu_service_metrics_port_base + gpu_slot
             stdout_path = self.shared_gpu_logs_dir / f"gpu_{gpu_slot}.stdout.log"
@@ -788,7 +818,7 @@ class NativeOrchestrator:
             env["GPU_SERVICE_PORT"] = str(port)
             env["GPU_SERVICE_METRICS_PORT"] = str(metrics_port)
             env["GPU_SERVICE_BIND_HOST"] = self.gpu_service_bind_host
-            env["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
+            env["CUDA_VISIBLE_DEVICES"] = cuda_devices
             env["PYTHON_LOGS_DIR"] = str(self.shared_gpu_python_logs_dir(gpu_slot))
             env["MTG_AI_LOG_FILE"] = str(self.shared_gpu_python_logs_dir(gpu_slot) / "mtg_ai.log")
             env["MULLIGAN_TRAINING_LOG_FILE"] = str(
@@ -801,6 +831,9 @@ class NativeOrchestrator:
                 self.shared_gpu_python_logs_dir(gpu_slot) / "VRAM_diagnostics.log"
             )
             env.setdefault("MULLIGAN_DEVICE", "cpu")
+            if split_single_process:
+                env["INFER_CUDA_DEVICE"] = "cuda:0"
+                env["TRAIN_CUDA_DEVICE"] = "cuda:1"
             process = subprocess.Popen(
                 [python_bin, str(host_script)],
                 cwd=str(self.source_repo_root),
@@ -808,8 +841,9 @@ class NativeOrchestrator:
                 stdout=stdout_handle,
                 stderr=stderr_handle,
             )
+            gpu_role = "split" if split_single_process else "both"
             self.shared_gpu_hosts[gpu_slot] = {
-                "gpu_id": str(gpu_id),
+                "gpu_id": cuda_devices,
                 "port": port,
                 "metrics_port": metrics_port,
                 "process": process,
@@ -817,10 +851,11 @@ class NativeOrchestrator:
                 "stderr_log": str(stderr_path),
                 "stdout_handle": stdout_handle,
                 "stderr_handle": stderr_handle,
+                "role": gpu_role,
             }
             log(
-                f"Started shared GPU host slot={gpu_slot} gpu={gpu_id} "
-                f"pid={process.pid} port={port} metricsPort={metrics_port}"
+                f"Started shared GPU host slot={gpu_slot} gpu={cuda_devices} "
+                f"pid={process.pid} port={port} metricsPort={metrics_port} role={gpu_role}"
             )
 
         deadline = time.time() + self.gpu_service_startup_timeout_seconds
@@ -839,6 +874,30 @@ class NativeOrchestrator:
                 time.sleep(0.25)
         if pending:
             raise RuntimeError(f"shared GPU hosts not ready before timeout: slots={sorted(pending)}")
+        if env_bool("WRITE_SATELLITE_ENV", False):
+            self._write_satellite_env()
+
+    def _write_satellite_env(self) -> None:
+        endpoint_host = self.gpu_node or socket.gethostname()
+        endpoint_port = self.gpu_service_port_base
+        endpoint = f"{endpoint_host}:{endpoint_port}"
+        profile_names = [str(e.get("profile", "")).strip() for e in self.selected_profiles if str(e.get("profile", "")).strip()]
+        tarball = os.getenv("MAGE_RL_RUNTIME_TARBALL", "")
+        lines = [
+            f'GPU_NODE="{endpoint_host}"',
+            f'GPU_SERVICE_ENDPOINT="{endpoint}"',
+            f'RL_ARTIFACTS_ROOT="{self.rl_artifacts_root}"',
+            f'BUNDLE="{tarball}"',
+            f'TRAIN_PROFILES_LIST="{",".join(profile_names)}"',
+            f'SOURCE_REPO_ROOT="{self.source_repo_root}"',
+            f'LEAGUE_REGISTRY_PATH="{self.registry_path}"',
+        ]
+        text = "\n".join(lines) + "\n"
+        sat_path = self.reports_root / "satellite.env"
+        atomic_write_text(sat_path, text)
+        compat_sat_path = self.compat_reports_root / "satellite.env"
+        atomic_write_text(compat_sat_path, text)
+        log(f"Wrote satellite.env: {sat_path} (endpoint={endpoint})")
 
     def stop_shared_gpu_hosts(self) -> None:
         for host in self.shared_gpu_hosts.values():
@@ -910,7 +969,7 @@ class NativeOrchestrator:
         env["VRAM_DIAGNOSTICS_LOG_FILE"] = str(self.python_logs_dir(profile) / "VRAM_diagnostics.log")
         env["CANDIDATE_EXPLOSIONS_LOG_FILE"] = str(self.profile_logs_dir(profile) / "health" / "candidate_explosions.log")
         env["METRICS_PORT"] = str(metrics_port)
-        env["OPPONENT_SAMPLER"] = "league"
+        env["OPPONENT_SAMPLER"] = os.getenv("OPPONENT_SAMPLER", "league")
         if self.league_mode:
             env["LEAGUE_MODE"] = self.league_mode
         env["ORCHESTRATED_RUN"] = "1"
@@ -1031,11 +1090,27 @@ class NativeOrchestrator:
             gpu_cpu_total = env_int("SLURM_CPUS_ON_NODE", os.cpu_count() or 8)
             gpu_usable = max(0, gpu_cpu_total - self.cpu_headroom)
             primary_total = max(len(entries) * 2, int(math.floor(gpu_usable * self.runner_oversubscription_factor)))
-            aux_total = runners_per_profile * len(entries)
-            log(f"Multi-node runners: primary={primary_total} (from {gpu_cpu_total} GPU-node CPUs) aux={aux_total} (from GAME_CPU_CORES/default)")
+            if self.primary_runner_cap > 0:
+                primary_total = min(primary_total, self.primary_runner_cap)
+            # Compute per-node runner budget and JVMs per node
+            aux_cpu_alloc = env_int("GAME_CPU_CORES", 128)
+            aux_usable = max(0, aux_cpu_alloc - self.cpu_headroom)
+            node_runners = max(len(entries) * 2, int(math.floor(aux_usable * self.runner_oversubscription_factor)))
+            if self.aux_jvms_per_node > 0:
+                jvms_per_node = self.aux_jvms_per_node
+            else:
+                jvms_per_node = max(1, node_runners // max(1, self.target_runners_per_jvm))
+            runners_per_aux_jvm = max(len(entries) * 2, node_runners // jvms_per_node)
+            total_aux_jvms = jvms_per_node * len(self.cpu_nodes)
+            log(
+                f"Multi-node: primary={primary_total} runners (GPU node, {gpu_cpu_total} CPUs, cap={self.primary_runner_cap}), "
+                f"aux={jvms_per_node} JVMs/node x {len(self.cpu_nodes)} nodes = {total_aux_jvms} JVMs, "
+                f"{runners_per_aux_jvm} runners/JVM (target={self.target_runners_per_jvm})"
+            )
         else:
             primary_total = runners_per_profile * len(entries)
-            aux_total = 0
+            jvms_per_node = 0
+            runners_per_aux_jvm = 0
         metrics_port = self.metrics_port_base
         self.trainer_logs_dir.mkdir(parents=True, exist_ok=True)
         stdout_path = self.trainer_logs_dir / "multi_profile.stdout.log"
@@ -1051,7 +1126,7 @@ class NativeOrchestrator:
         env["DECK_LIST_FILE"] = str(opponent_decklist)
         env["RL_ARTIFACTS_ROOT"] = str(self.rl_artifacts_root)
         env["METRICS_PORT"] = str(metrics_port)
-        env["OPPONENT_SAMPLER"] = "league"
+        env["OPPONENT_SAMPLER"] = os.getenv("OPPONENT_SAMPLER", "league")
         if self.league_mode:
             env["LEAGUE_MODE"] = self.league_mode
         env["ORCHESTRATED_RUN"] = "1"
@@ -1069,9 +1144,11 @@ class NativeOrchestrator:
             env["PY_SERVICE_MODE"] = "shared_gpu"
             endpoint_host = self.gpu_node if self.gpu_node else self.gpu_service_bind_host
             env["GPU_SERVICE_ENDPOINT"] = f"{endpoint_host}:{self.gpu_service_port_base}"
-            num_gpus = len(self.visible_gpu_list)
-            env["GPU_SERVICE_NUM_GPUS"] = str(num_gpus)
-            env["GPU_SERVICE_NUM_CHANNELS"] = str(max(4, num_gpus))
+            # With split_single_process, there's one GPU host handling both GPUs
+            # internally, so JVMs should see it as 1 host on 1 port.
+            num_hosts = 1 if self.gpu_service_split_roles else len(self.visible_gpu_list)
+            env["GPU_SERVICE_NUM_GPUS"] = str(num_hosts)
+            env["GPU_SERVICE_NUM_CHANNELS"] = str(max(4, num_hosts))
             env["GPU_SERVICE_METRICS_ENDPOINT"] = (
                 f"http://{endpoint_host}:{self.gpu_service_metrics_port_base}/metrics"
             )
@@ -1116,40 +1193,50 @@ class NativeOrchestrator:
         )
 
         # Launch auxiliary JVMs on CPU nodes (game simulation only, no stats writing)
-        for idx, cpu_node in enumerate(self.cpu_nodes):
-            aux_metrics_port = metrics_port + 1 + idx
-            aux_stdout_path = self.trainer_logs_dir / f"multi_profile_aux_{cpu_node}.stdout.log"
-            aux_stderr_path = self.trainer_logs_dir / f"multi_profile_aux_{cpu_node}.stderr.log"
-            aux_stdout = aux_stdout_path.open("ab", buffering=0)
-            aux_stderr = aux_stderr_path.open("ab", buffering=0)
+        # Multiple smaller JVMs per node to avoid thread contention (sweet spot ~150 runners/JVM)
+        aux_idx = 0
+        for cpu_node in self.cpu_nodes:
+            aux_cpu_alloc = env_int("GAME_CPU_CORES", 128)
+            jvm_cpus = max(1, aux_cpu_alloc // max(1, jvms_per_node))
+            for jvm_i in range(jvms_per_node):
+                aux_metrics_port = metrics_port + 1 + aux_idx
+                jvm_label = f"{cpu_node}_j{jvm_i}"
+                aux_stdout_path = self.trainer_logs_dir / f"multi_profile_aux_{jvm_label}.stdout.log"
+                aux_stderr_path = self.trainer_logs_dir / f"multi_profile_aux_{jvm_label}.stderr.log"
+                aux_stdout = aux_stdout_path.open("ab", buffering=0)
+                aux_stderr = aux_stderr_path.open("ab", buffering=0)
 
-            aux_env = dict(env)
-            aux_env["GAME_STATS_WRITER"] = "0"
-            aux_env["METRICS_PORT"] = str(aux_metrics_port)
-            aux_env["NUM_GAME_RUNNERS"] = str(aux_total)
+                aux_env = dict(env)
+                aux_env["GAME_STATS_WRITER"] = "0"
+                aux_env["METRICS_PORT"] = str(aux_metrics_port)
+                aux_env["NUM_GAME_RUNNERS"] = str(runners_per_aux_jvm)
 
-            aux_cpus = env_int("GAME_CPU_CORES", 128)
-            srun_args = ["srun", "--overlap", f"--nodelist={cpu_node}", "--ntasks=1", f"--cpus-per-task={aux_cpus}"]
-            het1 = os.getenv("SLURM_JOB_NODELIST_HET_GROUP_1", "").strip()
-            if het1:
-                srun_args.insert(1, "--het-group=1")
-            aux_command = srun_args + self.build_multi_profile_command(profile_names)
+                srun_args = [
+                    "srun", "--overlap", f"--nodelist={cpu_node}",
+                    "--ntasks=1", f"--cpus-per-task={jvm_cpus}",
+                ]
+                het1 = os.getenv("SLURM_JOB_NODELIST_HET_GROUP_1", "").strip()
+                if het1:
+                    srun_args.insert(1, "--het-group=1")
+                aux_command = srun_args + self.build_multi_profile_command(profile_names)
 
-            aux_proc = subprocess.Popen(
-                aux_command,
-                cwd=str(self.source_repo_root),
-                env=aux_env,
-                stdout=aux_stdout,
-                stderr=aux_stderr,
-            )
-            state.aux_processes.append({
-                "process": aux_proc,
-                "stdout": aux_stdout,
-                "stderr": aux_stderr,
-                "node": cpu_node,
-                "metrics_port": aux_metrics_port,
-            })
-            log(f"Started auxiliary JVM on {cpu_node} pid={aux_proc.pid} metricsPort={aux_metrics_port}")
+                aux_proc = subprocess.Popen(
+                    aux_command,
+                    cwd=str(self.source_repo_root),
+                    env=aux_env,
+                    stdout=aux_stdout,
+                    stderr=aux_stderr,
+                )
+                state.aux_processes.append({
+                    "process": aux_proc,
+                    "stdout": aux_stdout,
+                    "stderr": aux_stderr,
+                    "node": cpu_node,
+                    "jvm_index": jvm_i,
+                    "metrics_port": aux_metrics_port,
+                })
+                log(f"Started aux JVM {jvm_label} pid={aux_proc.pid} runners={runners_per_aux_jvm} metricsPort={aux_metrics_port}")
+                aux_idx += 1
 
         return state
 
@@ -2154,6 +2241,15 @@ class NativeOrchestrator:
                 }
             )
 
+        endpoint_host = self.gpu_node or socket.gethostname()
+        gpu_endpoints = []
+        for slot, host_info in sorted(self.shared_gpu_hosts.items()):
+            gpu_endpoints.append({
+                "slot": int(slot),
+                "endpoint": f"{endpoint_host}:{host_info.get('port', self.gpu_service_port_base + slot)}",
+                "metrics": f"http://{endpoint_host}:{host_info.get('metrics_port', self.gpu_service_metrics_port_base + slot)}/metrics",
+            })
+
         payload = {
             "updated_at_utc": now_utc(),
             "run_id": self.run_id,
@@ -2168,6 +2264,9 @@ class NativeOrchestrator:
             "sequential_training": False,
             "current_training_profile": "",
             "note": note,
+            "gpu_node": endpoint_host,
+            "gpu_service_endpoint": f"{endpoint_host}:{self.gpu_service_port_base}" if self.shared_gpu_hosts else "",
+            "gpu_endpoints": gpu_endpoints,
             "paths": {
                 "reports_root": str(self.reports_root),
                 "trainers_dir": str(self.trainer_logs_dir),
@@ -2266,6 +2365,11 @@ class NativeOrchestrator:
             f"targetTotalRunners={total_runner_target}"
         )
         log(f"Configured NumGameRunners per profile={runners_per_profile}")
+        if self.cpu_nodes:
+            log(
+                f"Multi-JVM config: targetRunnersPerJvm={self.target_runners_per_jvm} "
+                f"auxJvmsPerNode={self.aux_jvms_per_node or 'auto'} primaryRunnerCap={self.primary_runner_cap}"
+            )
         log(f"Trainer startup max wait seconds={self.trainer_start_stagger_seconds}")
         if self.py_service_mode == "shared_gpu":
             log(f"Shared GPU host startup timeout seconds={self.gpu_service_startup_timeout_seconds}")
