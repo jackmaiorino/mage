@@ -3486,7 +3486,7 @@ public class RLTrainer {
                 game.setGameOptions(new GameOptions());
 
                 GameHealthMonitor healthMonitor = GameHealthMonitor.createAndStart(game);
-                game.start(rlPlayer.getId());
+                startGameInGameThread(game, rlPlayer.getId(), 300);
                 healthMonitor.stop();
 
                 boolean won;
@@ -4293,6 +4293,10 @@ public class RLTrainer {
     private Player createTrainingOpponent(int episodeNum, Random rand) {
         String mode = OPPONENT_SAMPLER == null ? "league" : OPPONENT_SAMPLER.trim().toLowerCase();
         switch (mode) {
+            case "self":
+                return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+            case "meta":
+                return createMetaOpponent(rand);
             case "adaptive":
                 return createAdaptiveOpponent(episodeNum, rand);
             case "fixed":
@@ -4304,6 +4308,42 @@ public class RLTrainer {
             case "league":
             default:
                 return createLeagueOpponent(episodeNum, rand);
+        }
+    }
+
+    private Player createMetaOpponent(Random rand) {
+        // Pick a random profile from the registry and play against its model + deck
+        try {
+            Path registryPath = leagueRegistryPath();
+            if (!Files.exists(registryPath)) {
+                logger.warn("Meta opponent: registry not found, falling back to self-play");
+                return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+            }
+            String json = new String(Files.readAllBytes(registryPath), java.nio.charset.StandardCharsets.UTF_8);
+            com.google.gson.JsonArray entries = com.google.gson.JsonParser.parseString(json).getAsJsonArray();
+            List<com.google.gson.JsonObject> active = new ArrayList<>();
+            for (com.google.gson.JsonElement e : entries) {
+                com.google.gson.JsonObject obj = e.getAsJsonObject();
+                if (obj.has("active") && obj.get("active").getAsBoolean()
+                        && obj.has("train_enabled") && obj.get("train_enabled").getAsBoolean()) {
+                    active.add(obj);
+                }
+            }
+            if (active.isEmpty()) {
+                return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+            }
+            // Pick random profile (can be self -- that's fine, acts as self-play fraction)
+            com.google.gson.JsonObject chosen = active.get(rand.nextInt(active.size()));
+            String oppProfile = chosen.get("profile").getAsString().trim();
+            String oppDeck = chosen.has("deck_path") ? chosen.get("deck_path").getAsString().trim() : "";
+            if (!oppDeck.isEmpty()) {
+                THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.set(Paths.get(oppDeck));
+            }
+            // policyKey = opponent profile name, routes inference to that profile's model on GPU
+            return new ComputerPlayerRL("Meta-" + oppProfile, RangeOfInfluence.ALL, sharedModel, false, false, oppProfile);
+        } catch (Exception e) {
+            logger.warn("Meta opponent: failed to load registry: " + e.getMessage() + ", falling back to self-play");
+            return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
         }
     }
 

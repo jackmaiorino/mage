@@ -876,6 +876,9 @@ class NativeOrchestrator:
             raise RuntimeError(f"shared GPU hosts not ready before timeout: slots={sorted(pending)}")
         if env_bool("WRITE_SATELLITE_ENV", False):
             self._write_satellite_env()
+        auto_sats = env_int("AUTO_SATELLITES", 0)
+        if auto_sats > 0:
+            self._submit_satellites(auto_sats)
 
     def _write_satellite_env(self) -> None:
         endpoint_host = self.gpu_node or socket.gethostname()
@@ -898,6 +901,34 @@ class NativeOrchestrator:
         compat_sat_path = self.compat_reports_root / "satellite.env"
         atomic_write_text(compat_sat_path, text)
         log(f"Wrote satellite.env: {sat_path} (endpoint={endpoint})")
+
+    def _submit_satellites(self, count: int) -> None:
+        script = self.source_repo_root / "scripts" / "hpc" / "add_satellites.sh"
+        if not script.exists():
+            log(f"AUTO_SATELLITES: add_satellites.sh not found at {script}")
+            return
+        job_id = os.getenv("SLURM_JOB_ID", "")
+        if not job_id:
+            log("AUTO_SATELLITES: no SLURM_JOB_ID, skipping")
+            return
+        env = dict(os.environ)
+        env["CPUS"] = os.getenv("SAT_CPUS", "32")
+        env["MEM"] = os.getenv("SAT_MEM", "32G")
+        env["TIME"] = os.getenv("SAT_TIME", "03:00:00")
+        env["JVMS_PER_NODE"] = os.getenv("SAT_JVMS_PER_NODE", "2")
+        env["RUNNERS_PER_JVM"] = os.getenv("SAT_RUNNERS_PER_JVM", "32")
+        cmd = ["bash", str(script), job_id, str(count)]
+        log(f"AUTO_SATELLITES: submitting {count} satellites via {' '.join(cmd)}")
+        try:
+            result = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=60,
+                                   cwd=str(self.source_repo_root))
+            if result.stdout:
+                for line in result.stdout.strip().splitlines():
+                    log(f"AUTO_SATELLITES: {line}")
+            if result.returncode != 0:
+                log(f"AUTO_SATELLITES: failed rc={result.returncode} stderr={result.stderr.strip()}")
+        except Exception as exc:
+            log(f"AUTO_SATELLITES: error: {exc}")
 
     def stop_shared_gpu_hosts(self) -> None:
         for host in self.shared_gpu_hosts.values():

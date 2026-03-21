@@ -136,6 +136,12 @@ Score requests are grouped by `BatchKey = (policyKey, headId, bucketedSeqLen, dM
 | `download_via_ssh.py` | Download files by piping base64 through SSH exec |
 | `commands.txt` | Documented HPC workflow commands |
 
+### Local Training Scripts (scripts/)
+
+| File | Role |
+|------|------|
+| `run_local_pbt.py` | Local PBT orchestrator: GPU service + multi-profile JVM + exploitation loop |
+
 ### Deck Lists (decks/PauperSubset/)
 
 - `decklist.txt` — default training pool
@@ -146,10 +152,12 @@ Score requests are grouped by `BatchKey = (policyKey, headId, bucketedSeqLen, dM
 ### Artifact Layout (profile-aware)
 
 ```
-rl/profiles/<MODEL_PROFILE>/
-  models/   → model.pt, model_latest.pt, mulligan_model.pt, episode_counter
-  logs/     → training_stats.csv, game logs, mulligan logs, health stats
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/<PROFILE>/
+  models/   → model.pt, model_latest.pt, mulligan_model.pt, snapshots/
+  logs/     → stats/training_stats.csv, games/training/*.txt
 ```
+
+Local PBT logs: `local-training/local_pbt/gpu_service.log`, `trainer.log`
 
 Without `MODEL_PROFILE`: legacy `rl/models/` and `rl/logs/`.
 
@@ -160,7 +168,24 @@ Without `MODEL_PROFILE`: legacy `rl/models/` and `rl/logs/`.
 mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile
 ```
 
-**Train locally (spy combo):**
+**Train locally (PBT, preferred):**
+```bash
+# Requires Python 3.12 with PyTorch CUDA: py -3.12 -c "import torch; print(torch.cuda.is_available())"
+# Runs multi-profile PBT with self-play on local GPU (RTX 4070 Super)
+py -3.12 scripts/run_local_pbt.py
+# Override defaults via env vars:
+#   TRAIN_PROFILES=4          Profiles to train (picks top N by priority from registry)
+#   NUM_GAME_RUNNERS=48       Total runners across all profiles (12 per profile with 4 profiles)
+#   PY_BATCH_TIMEOUT_MS=25    Optimal for local 4070 Super (sweep-tested: 5/15/25/50/100ms)
+#   PBT_EXPLOIT_INTERVAL=10   Minutes between PBT exploitation attempts
+#   PBT_MIN_EPISODES=200      Min episodes before first exploitation
+# Logs: local-training/local_pbt/gpu_service.log, trainer.log
+# Metrics: curl http://localhost:27100/metrics
+# Monitor: tail -f /tmp/local_pbt.log (if redirected) or console output
+# Local throughput: ~3 eps/sec on 24-core CPU + RTX 4070 Super (~10,800 eps/hour)
+```
+
+**Train locally (single profile, legacy):**
 ```powershell
 $env:DECK_LIST_FILE="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.spy_combo.txt"
 $env:MODEL_PROFILE="spy"
@@ -285,7 +310,13 @@ sbatch \
 - 100 runners/JVM, 20 satellites (4000 total runners): ~1.75 eps/sec (thread thrashing)
 - 3h run at 5.7 eps/sec = ~61,500 episodes
 
-**Cost-optimal config:** 1x GPU head (3h) + 10 standard satellites (30min, resubmit) = ~128,000 billing-min per 3h run. A100 preferred when available (3.2x cheaper).
+**Cost-optimal config:** 1x GPU head (3h) + 10 standard satellites (3h) = ~1,488 SU per run. A100 preferred when available (3.2x cheaper).
+
+**Local training (RTX 4070 Super, 24 cores):**
+- Optimal: 48 runners, 25ms batch timeout → ~3 eps/sec, 58% GPU utilization
+- GPU-bound locally (opposite of HPC which is CPU-bound)
+- Batch timeout sweep: 25ms optimal (5ms=2.63, 15ms=2.25, 25ms=2.98, 50ms=2.62, 100ms=2.28 eps/sec)
+- `py -3.12 scripts/run_local_pbt.py` for local PBT with self-play
 
 ## Code Style
 

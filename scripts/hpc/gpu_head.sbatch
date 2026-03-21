@@ -34,7 +34,7 @@ export MULTI_PROFILE_JVM=1
 export PY_SERVICE_MODE=shared_gpu
 export GPU_SERVICE_BIND_HOST="0.0.0.0"
 export TOTAL_EPISODES="${TOTAL_EPISODES:-10000000}"
-export TRAIN_PROFILES="${TRAIN_PROFILES:-3}"
+export TRAIN_PROFILES="${TRAIN_PROFILES:-4}"
 export GAME_LOG_FREQUENCY="${GAME_LOG_FREQUENCY:-0}"
 export OPPONENT_SAMPLER="${OPPONENT_SAMPLER:-self}"
 export WINRATE_WINDOW="${WINRATE_WINDOW:-200}"
@@ -52,6 +52,14 @@ export PY_BATCH_TIMEOUT_MS="${PY_BATCH_TIMEOUT_MS:-25}"
 
 # Write satellite env file so add_satellites.sh can discover this job.
 export WRITE_SATELLITE_ENV=1
+
+# Auto-submit satellite CPU nodes after GPU service starts.
+export AUTO_SATELLITES="${AUTO_SATELLITES:-10}"
+export SAT_CPUS="${SAT_CPUS:-32}"
+export SAT_MEM="${SAT_MEM:-32G}"
+export SAT_TIME="${SAT_TIME:-03:00:00}"
+export SAT_JVMS_PER_NODE="${SAT_JVMS_PER_NODE:-2}"
+export SAT_RUNNERS_PER_JVM="${SAT_RUNNERS_PER_JVM:-32}"
 
 echo "GPU head starting on $(hostname) job=$SLURM_JOB_ID at $(date -u)"
 echo "TARBALL=$TARBALL"

@@ -364,6 +364,7 @@ public final class SharedGpuPythonModel implements PythonModel {
 
     // First profile from TRAIN_PROFILES_LIST, used as fallback for threads without ProfileContext
     private final String firstMultiProfile;
+    private final java.util.Set<String> knownProfiles;
 
     /** Resolve the effective profile ID for the current thread (multi-profile aware). */
     String effectiveProfileId() {
@@ -379,9 +380,14 @@ public final class SharedGpuPythonModel implements PythonModel {
         // effectiveProfileId() resolves it per-thread from ProfileContext instead.
         String profilesList = EnvConfig.str("TRAIN_PROFILES_LIST", "").trim();
         boolean multiProfile = !profilesList.isEmpty();
+        this.knownProfiles = new java.util.HashSet<>();
         if (multiProfile) {
             String first = profilesList.split(",")[0].trim();
             this.firstMultiProfile = first.isEmpty() ? "default" : first;
+            for (String p : profilesList.split(",")) {
+                String trimmed = p.trim();
+                if (!trimmed.isEmpty()) this.knownProfiles.add(trimmed);
+            }
         } else {
             this.firstMultiProfile = "";
         }
@@ -776,7 +782,9 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
 
         Map<String, String> headers = new LinkedHashMap<>();
-        headers.put("profile_id", effectiveProfileId());
+        // If policyKey matches a known profile name (meta opponent), route inference to that profile
+        String profileForBatch = knownProfiles.contains(key.policyKey) ? key.policyKey : effectiveProfileId();
+        headers.put("profile_id", profileForBatch);
         headers.put("policy_key", key.policyKey);
         headers.put("head_id", key.headId);
         headers.put("pick_index", "0");

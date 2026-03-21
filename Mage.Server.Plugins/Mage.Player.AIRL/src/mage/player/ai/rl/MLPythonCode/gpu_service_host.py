@@ -1080,7 +1080,15 @@ def connection_loop(host: SharedGpuHost, session: ConnectionSession) -> None:
             opcode, request_id, headers, payload = read_request(session.sock)
             current_request_id = request_id
             if opcode == 1:
-                state = host.get_or_create_profile(headers)
+                print(f"[CONN] register_profile request: {headers.get('profile_id', '?')}", flush=True)
+                try:
+                    state = host.get_or_create_profile(headers)
+                except Exception as reg_exc:
+                    import traceback as _tb
+                    print(f"[CONN] REGISTER FAILED: {reg_exc}", flush=True)
+                    _tb.print_exc()
+                    raise
+                state = state  # no-op, just to keep the variable
                 session.profile_id = state.infer_context.profile_id
                 session.reply(0, request_id, {"device_info": state.infer_context.get_device_info()})
             elif opcode == 2:

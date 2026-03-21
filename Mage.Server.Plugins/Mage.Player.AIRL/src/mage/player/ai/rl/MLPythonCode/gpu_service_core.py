@@ -21,11 +21,16 @@ def _temporary_env(overrides: Dict[str, str]):
         previous = {}
         removed = []
         for key, value in overrides.items():
+            if not key or not isinstance(value, str) or '\x00' in key or '\x00' in value:
+                continue
             if key in os.environ:
                 previous[key] = os.environ[key]
             else:
                 removed.append(key)
-            os.environ[key] = value
+            try:
+                os.environ[key] = value
+            except (OSError, ValueError):
+                continue
         try:
             yield
         finally:

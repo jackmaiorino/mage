@@ -35,7 +35,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 10,
+    "priority": 50,
     "population_group": "spy-combo",
     "seed": 2002,
     "train_env": {
@@ -65,7 +65,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 5,
     "population_group": "elves",
     "seed": 2001,
     "train_env": {
@@ -95,7 +95,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 50,
     "population_group": "elves",
     "seed": 2002,
     "train_env": {
@@ -125,7 +125,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 5,
     "population_group": "rally",
     "seed": 3001,
     "train_env": {
@@ -155,7 +155,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 50,
     "population_group": "rally",
     "seed": 3002,
     "train_env": {
@@ -185,7 +185,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 10,
     "population_group": "affinity",
     "seed": 4001,
     "train_env": {
@@ -215,7 +215,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 50,
     "population_group": "affinity",
     "seed": 4002,
     "train_env": {
@@ -245,7 +245,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 5,
     "population_group": "wildfire",
     "seed": 5001,
     "train_env": {
@@ -275,7 +275,7 @@
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 20,
+    "priority": 50,
     "population_group": "wildfire",
     "seed": 5002,
     "train_env": {
