@@ -1,0 +1,5 @@
+# Standard pauper deck pool (non-combo decks)
+Deck - Mono Red Rally.dek
+Deck - Grixis Affinity.dek
+Deck - Elves.dek
+Deck - Jund Wildfire.dek

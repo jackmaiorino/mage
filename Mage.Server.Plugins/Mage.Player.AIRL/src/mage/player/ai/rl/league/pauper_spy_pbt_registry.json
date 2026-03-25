@@ -1,5 +1,42 @@
 [
   {
+    "profile": "Pauper-Standard",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 1,
+    "population_group": "standard",
+    "seed": 42,
+    "train_env": {
+      "ENTROPY_START": "0.08",
+      "ENTROPY_END": "0.005",
+      "ENTROPY_DECAY_STEPS": "12500000",
+      "RL_ACTION_EPS_START": "0.05",
+      "RL_FULL_TURN_RANDOM_START": "0.10",
+      "TEMPERATURE_FLOOR": "0.30",
+      "ACTOR_LR": "3e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "USE_GAE": "1",
+      "GAE_AUTO_ENABLE": "1",
+      "GAE_LAMBDA_HIGH": "0.99",
+      "GAE_LAMBDA_LOW": "0.95",
+      "GAE_LAMBDA_DECAY_STEPS": "12500000",
+      "PPO_GAMMA": "0.995",
+      "MULLIGAN_EPSILON_START": "0.30",
+      "MULLIGAN_EPSILON_END": "0.05",
+      "MULLIGAN_EPSILON_DECAY_EPISODES": "200000",
+      "RL_FULL_TURN_RANDOM_START": "0.08",
+      "RL_FULL_TURN_RANDOM_END": "0.01",
+      "RL_FULL_TURN_RANDOM_DECAY_EPISODES": "100000"
+    },
+    "pbt_mutable_env": [
+      "ENTROPY_START", "ENTROPY_END", "RL_ACTION_EPS_START",
+      "RL_FULL_TURN_RANDOM_START", "TEMPERATURE_FLOOR", "ACTOR_LR"
+    ],
+    "notes": "Unified standard deck model (Rally, Affinity, Elves, Wildfire)"
+  },
+  {
     "profile": "Pauper-Spy-Combo-A",
     "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Spy Combo.dek",
     "active": true,

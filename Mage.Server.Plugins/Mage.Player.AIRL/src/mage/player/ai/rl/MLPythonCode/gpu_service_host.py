@@ -361,41 +361,52 @@ class SharedGpuHost:
         _diag_wait_ms_sum = 0.0
         _diag_run_ms_sum = 0.0
         while self._running:
-            work = None
             cycle_start = time.monotonic()
+            # Claim ALL ready profiles at once -- process them all in one cycle
+            # to reduce per-cycle lock/GIL overhead
+            work_items = []
             with self._lock:
-                work = self._claim_score_work_locked(worker_id)
-                if work is None:
-                    self._lock.wait(timeout=self.batch_timeout_s)
+                while True:
                     work = self._claim_score_work_locked(worker_id)
                     if work is None:
+                        break
+                    work_items.append(work)
+                if not work_items:
+                    self._lock.wait(timeout=self.batch_timeout_s)
+                    while True:
+                        work = self._claim_score_work_locked(worker_id)
+                        if work is None:
+                            break
+                        work_items.append(work)
+                    if not work_items:
                         continue
-            state, tasks, reason, profile_key = work
             wait_end = time.monotonic()
             _diag_wait_ms_sum += (wait_end - cycle_start) * 1000
             _diag_cycles += 1
-            batch_samples = sum(task.batch_size for task in tasks)
-            _diag_batches += 1
-            try:
-                self._run_score_batch(state, tasks, reason)
-            except Exception as exc:
-                self._last_error = f"{type(exc).__name__}: {exc}"
-                with self._lock:
-                    self._score_failures += 1
-                traceback.print_exc()
-                for task in tasks:
-                    try:
-                        task.session.reply(1, task.request_id, {"error": str(exc)})
-                    except Exception:
-                        pass
-            finally:
-                with self._lock:
-                    self._processing_profiles.discard(profile_key)
-                    self._lock.notify_all()
-            run_end = time.monotonic()
-            run_ms = (run_end - wait_end) * 1000
-            _diag_run_ms_sum += run_ms
-            _diag_samples += batch_samples
+            for state, tasks, reason, profile_key in work_items:
+                batch_samples = sum(task.batch_size for task in tasks)
+                _diag_batches += 1
+                try:
+                    self._run_score_batch(state, tasks, reason)
+                except Exception as exc:
+                    self._last_error = f"{type(exc).__name__}: {exc}"
+                    with self._lock:
+                        self._score_failures += 1
+                    traceback.print_exc()
+                    for task in tasks:
+                        try:
+                            task.session.reply(1, task.request_id, {"error": str(exc)})
+                        except Exception:
+                            pass
+                finally:
+                    with self._lock:
+                        self._processing_profiles.discard(profile_key)
+                        self._lock.notify_all()
+                run_end = time.monotonic()
+                run_ms = (run_end - wait_end) * 1000
+                _diag_run_ms_sum += run_ms
+                _diag_samples += batch_samples
+                wait_end = run_end  # for next sub-batch timing
             with self._lock:
                 self._score_samples_total += batch_samples
                 self._score_worker_busy_ms += run_ms

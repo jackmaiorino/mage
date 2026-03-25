@@ -78,6 +78,13 @@ public class GameLogger {
         return createInDir(DRAFT_BENCHMARK_LOG_DIR, -1);
     }
 
+    /**
+     * Create a game logger writing to a specific profile directory with a max file cap.
+     */
+    public static GameLogger createInProfileDir(String dir, int maxFiles) {
+        return createInDir(dir, maxFiles);
+    }
+
     private static GameLogger createInDir(String dir, int maxFiles) {
         try {
             Path logDir = Paths.get(dir);

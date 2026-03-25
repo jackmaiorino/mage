@@ -520,6 +520,111 @@ class MTGTransformerModel(nn.Module):
                     dropout=self.transformer_layers[0].dropout.p, num_actions=self.num_actions)
 
 
+class SingleHeadScorer(nn.Module):
+    """Wraps MTGTransformerModel.score_candidates for a single head for ONNX export.
+
+    Inlines the score_candidates logic with frozen head selection and no
+    data-dependent control flow (if/elif on head_id, if isnan checks), so
+    torch.onnx.export can trace the graph cleanly.
+    """
+    def __init__(self, model: 'MTGTransformerModel', head_id: str):
+        super().__init__()
+        self.model = model
+        # Resolve the scorer at construction time (not in forward)
+        hid = head_id.lower().strip()
+        if hid == "target":
+            self.scorer = model.policy_scorer_target
+        elif hid == "card_select":
+            self.scorer = model.policy_scorer_card_select
+        elif hid == "attack":
+            self.scorer = model.policy_scorer_attack
+        elif hid == "block":
+            self.scorer = model.policy_scorer_block
+        else:
+            self.scorer = model.policy_scorer
+
+    @staticmethod
+    def _unfused_encoder_layer(layer, x, src_key_padding_mask):
+        """Run TransformerEncoderLayer without the fused C++ op (for ONNX export)."""
+        # Self-attention
+        x2, _ = layer.self_attn(x, x, x, key_padding_mask=src_key_padding_mask)
+        x = layer.norm1(x + layer.dropout1(x2))
+        # Feed-forward
+        x2 = layer.linear2(layer.dropout(F.relu(layer.linear1(x))))
+        x = layer.norm2(x + layer.dropout2(x2))
+        return x
+
+    def _encode_state_unfused(self, sequences, masks, token_ids):
+        """encode_state_full but with unfused transformer layers for ONNX export."""
+        m = self.model
+        x = m.input_proj(sequences) * m.input_scale
+        if token_ids is not None:
+            safe_ids = token_ids.clamp(min=0, max=m.token_id_emb.num_embeddings - 1)
+            x = x + m.token_id_emb(safe_ids)
+        x = m.input_norm(x)
+        cls_expanded = m.cls_token.expand(sequences.size(0), -1, -1)
+        x = torch.cat((cls_expanded, x), dim=1)
+        pad_mask = masks.bool()
+        pad_mask = torch.cat(
+            (torch.zeros(sequences.size(0), 1, device=masks.device, dtype=torch.bool), pad_mask), dim=1)
+        for layer in m.transformer_layers:
+            x = self._unfused_encoder_layer(layer, x, pad_mask)
+        return x, pad_mask
+
+    def forward(self, sequences, masks, token_ids, cand_features, cand_ids, cand_mask):
+        m = self.model
+        # Encode state (unfused for ONNX export)
+        state_seq, state_pad_mask = self._encode_state_unfused(sequences, masks, token_ids)
+        cls = state_seq[:, 0]
+
+        # Value head (inlined _process_value without data-dependent NaN if-check)
+        v = m.critic_norm(cls)
+        v = m.critic_proj1(v)
+        v = F.relu(v)
+        v = m.critic_norm1(v)
+        v = m.critic_proj2(v)
+        v = torch.nan_to_num(v, nan=0.0, posinf=50.0, neginf=-50.0)
+        v = torch.clamp(v, -50.0, 50.0)
+        scale = torch.clamp(m.value_scale, 0.01, 10.0)
+        value_scores = torch.clamp(v * scale, -10.0, 10.0)
+        value_scores = torch.nan_to_num(value_scores, nan=0.0, posinf=0.0, neginf=0.0)
+
+        # Candidate embedding
+        cand_feat = m.cand_feat_proj(cand_features.float())
+        cand_ids_clamped = cand_ids.clamp(min=0, max=m.action_vocab - 1).long()
+        cand = cand_feat + m.action_id_emb(cand_ids_clamped)
+
+        # Cross-attention: candidates <-> state
+        attended, _ = m.cross_attn(query=cand, key=state_seq, value=state_seq,
+                                   key_padding_mask=state_pad_mask)
+        attended = m.cross_attn_norm(attended + cand)
+
+        # Self-attention among candidates
+        cand_pad_mask = ~cand_mask.bool()
+        attended_pre = attended
+        attended, _ = m.cand_self_attn(query=attended, key=attended, value=attended,
+                                       key_padding_mask=cand_pad_mask)
+        attended = m.cand_self_attn_norm(attended + attended_pre)
+
+        # Score with frozen head
+        cls_expanded = cls.unsqueeze(1).expand(-1, attended.size(1), -1)
+        combined = torch.cat([cls_expanded, attended], dim=-1)
+        scores = self.scorer(combined).squeeze(-1)
+
+        # Mask + softmax (no data-dependent if-checks)
+        valid = cand_mask.bool()
+        scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
+        scores = scores.masked_fill(~valid, -1e9)
+        probs = torch.softmax(scores, dim=-1)
+        probs = torch.nan_to_num(probs, nan=0.0, posinf=0.0, neginf=0.0)
+        probs = probs * valid.float()
+        row_sum = probs.sum(dim=-1, keepdim=True)
+        fallback = valid.float() / (valid.float().sum(dim=-1, keepdim=True) + 1e-8)
+        probs = torch.where(row_sum > 0, probs / (row_sum + 1e-8), fallback)
+
+        return probs, value_scores
+
+
 class ScaledMultiheadAttention(nn.MultiheadAttention):
     """Multi-head attention with a learnable pre-scaling of queries & keys.
 

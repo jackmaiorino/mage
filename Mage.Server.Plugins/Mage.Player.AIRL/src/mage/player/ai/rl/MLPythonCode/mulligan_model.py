@@ -51,6 +51,11 @@ class MulliganNet(torch.nn.Module):
         self.fc2 = torch.nn.Linear(64, 32)
         # Q-values: output 2 values (Q_keep, Q_mull)
         self.output = torch.nn.Linear(32, 2)
+        # Bias toward keeping at initialization -- prevents always-mulligan collapse
+        # before the model has learned. Training will override this naturally.
+        with torch.no_grad():
+            self.output.bias[0] = 0.5   # Q_keep starts higher
+            self.output.bias[1] = -0.5  # Q_mull starts lower
 
     def forward(self, x):
         # x shape: [batch_size, 1 + num_explicit + max_hand + max_deck]

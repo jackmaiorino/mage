@@ -131,11 +131,11 @@ class LocalPBT:
     def __init__(self):
         self.port = env_int("GPU_SERVICE_PORT", 26100)
         self.metrics_port = self.port + 1000
-        self.train_profiles = env_int("TRAIN_PROFILES", 5)
+        self.train_profiles = env_int("TRAIN_PROFILES", 1)
         self.num_runners = env_int("NUM_GAME_RUNNERS", 48)
-        self.total_episodes = env_int("TOTAL_EPISODES", 1000000)
+        self.total_episodes = env_int("TOTAL_EPISODES", 500000)
         self.winrate_window = env_int("WINRATE_WINDOW", 200)
-        self.exploit_interval_min = env_float("PBT_EXPLOIT_INTERVAL", 30.0)
+        self.exploit_interval_min = env_float("PBT_EXPLOIT_INTERVAL", 60.0)
         self.min_episodes = env_int("PBT_MIN_EPISODES", 200)
         self.episode_delta = env_int("PBT_EPISODE_DELTA", 100)
         self.min_winner_gap = env_float("PBT_MIN_WINNER_GAP", 0.02)
@@ -150,6 +150,7 @@ class LocalPBT:
         self.last_exploit_episode: Dict[str, int] = {}
         self.exploit_count: Dict[str, int] = {}
         self.eval_results: Dict[str, float] = {}
+        self._last_eval_time: float = time.time()  # skip immediate eval on startup
 
     def load_registry(self) -> List[Dict[str, Any]]:
         with self.registry_path.open("r") as f:
@@ -157,6 +158,36 @@ class LocalPBT:
         active = [e for e in entries if e.get("active") and e.get("train_enabled")]
         active.sort(key=lambda e: (int(e.get("priority", 1000)), str(e.get("profile", ""))))
         return active[:self.train_profiles]
+
+    def export_onnx_models(self) -> None:
+        """Pre-export ONNX models for all profiles (must run before GPU service starts)."""
+        if os.getenv("USE_TRT_INFERENCE", "1") != "1":
+            return
+        sys.path.insert(0, str(MLCODE))
+        try:
+            from onnx_export import export_all_heads
+        except ImportError:
+            log("ONNX export not available, skipping TRT")
+            return
+        for entry in self.selected_profiles:
+            profile = str(entry["profile"])
+            models_dir = PROFILES_ROOT / profile / "models"
+            model_path = models_dir / "model_latest.pt"
+            onnx_dir = models_dir / "onnx"
+            if not model_path.exists():
+                log(f"[TRT] No model for {profile}, skipping ONNX export")
+                continue
+            # Skip if ONNX already exists and is newer than model
+            onnx_action = onnx_dir / "model_action.onnx"
+            if onnx_action.exists() and onnx_action.stat().st_mtime >= model_path.stat().st_mtime:
+                log(f"[TRT] ONNX up-to-date for {profile}")
+                continue
+            log(f"[TRT] Exporting ONNX for {profile}...")
+            try:
+                export_all_heads(str(model_path), str(onnx_dir))
+                log(f"[TRT] Exported {profile}")
+            except Exception as e:
+                log(f"[TRT] Export failed for {profile}: {e}")
 
     def start_gpu_service(self) -> None:
         python = sys.executable
@@ -169,6 +200,7 @@ class LocalPBT:
         env["PY_BATCH_MAX_SIZE"] = os.getenv("PY_BATCH_MAX_SIZE", "256")
         env["TRAIN_WORKER_THREADS"] = os.getenv("TRAIN_WORKER_THREADS", "3")
         env["SCORE_WORKER_THREADS"] = os.getenv("SCORE_WORKER_THREADS", "3")
+        env["USE_TRT_INFERENCE"] = os.getenv("USE_TRT_INFERENCE", "0")
         env["LEARNER_BATCH_MAX_EPISODES"] = os.getenv("LEARNER_BATCH_MAX_EPISODES", "64")
         env["LEARNER_BATCH_MAX_STEPS"] = os.getenv("LEARNER_BATCH_MAX_STEPS", "16384")
         log_path = REPO_ROOT / "local-training" / "local_pbt" / "gpu_service.log"
@@ -205,9 +237,9 @@ class LocalPBT:
         env["NUM_GAME_RUNNERS"] = str(self.num_runners)
         env["TOTAL_EPISODES"] = str(self.total_episodes)
         env["WINRATE_WINDOW"] = str(self.winrate_window)
-        env["OPPONENT_SAMPLER"] = os.getenv("OPPONENT_SAMPLER", "meta")
+        env["OPPONENT_SAMPLER"] = os.getenv("OPPONENT_SAMPLER", "self")
         env["MULLIGAN_DEVICE"] = "cpu"
-        env["GAME_LOG_FREQUENCY"] = os.getenv("GAME_LOG_FREQUENCY", "100")
+        env["GAME_LOG_FREQUENCY"] = os.getenv("GAME_LOG_FREQUENCY", "500")
         env["LEAGUE_REGISTRY_PATH"] = str(self.registry_path)
         env["ORCHESTRATED_RUN"] = "1"
         if deck_paths:
@@ -239,7 +271,14 @@ class LocalPBT:
                 self.trainer_process.wait(timeout=15)
             except subprocess.TimeoutExpired:
                 self.trainer_process.kill()
-            log("Trainer stopped")
+        # Kill ALL java processes spawned by this session (shell=True spawns cmd.exe -> java)
+        try:
+            subprocess.run(["taskkill", "/F", "/IM", "java.exe"], capture_output=True, timeout=10)
+        except Exception:
+            pass
+        self.trainer_process = None
+        time.sleep(2)
+        log("Trainer stopped")
 
     def restart_trainer(self, reason: str) -> None:
         log(f"Restarting trainer: {reason}")
@@ -247,13 +286,30 @@ class LocalPBT:
         time.sleep(2)
         self.start_trainer()
 
-    def run_eval(self) -> Dict[str, float]:
-        """Stop trainer, run eval games for each profile vs heuristic bot, return winrates."""
-        log("[EVAL] Starting heuristic evaluation")
-        self.stop_trainer()
+    def _restart_gpu_service(self) -> None:
+        """Restart GPU service to flush leaked connections and reclaim memory."""
+        if self.gpu_process and self.gpu_process.poll() is None:
+            pid = self.gpu_process.pid
+            self.gpu_process.terminate()
+            try:
+                self.gpu_process.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                # Kill the specific process tree, not all python
+                try:
+                    subprocess.run(["taskkill", "/F", "/T", "/PID", str(pid)],
+                                  capture_output=True, timeout=10)
+                except Exception:
+                    pass
+                self.gpu_process.kill()
+        self.gpu_process = None
         time.sleep(2)
+        self.start_gpu_service()
 
-        eval_games = env_int("EVAL_NUM_GAMES", 20)
+    def run_eval(self) -> Dict[str, float]:
+        """Run eval games alongside training (no stop needed)."""
+        log("[EVAL] Starting heuristic evaluation")
+
+        eval_games_per_deck = env_int("EVAL_NUM_GAMES", 3)
         eval_skill = os.getenv("EVAL_OPPONENT_SKILL", "7")
         results: Dict[str, float] = {}
 
@@ -263,76 +319,79 @@ class LocalPBT:
             if not deck_path:
                 continue
 
-            env = dict(os.environ)
-            env["MODE"] = "league_bench"
-            env["MODEL_PROFILE"] = profile
-            env["EVAL_OPPONENT_DECK"] = deck_path
-            env["EVAL_OPPONENT_SKILL"] = eval_skill
-            env["EVAL_NUM_GAMES"] = str(eval_games)
-            env["GAME_LOG_FREQUENCY"] = "1"
-            env["PY_SERVICE_MODE"] = "shared_gpu"
-            env["GPU_SERVICE_ENDPOINT"] = f"localhost:{self.port}"
-            env["GPU_SERVICE_NUM_GPUS"] = "1"
-            env["GPU_SERVICE_NUM_CHANNELS"] = "4"
-            env["MULLIGAN_DEVICE"] = "cpu"
-            env["DECK_LIST_FILE"] = deck_path
-            env["LEAGUE_REGISTRY_PATH"] = str(self.registry_path)
-
-            cmd = (
-                f'mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL '
-                f'-am -DskipTests exec:java '
-                f'-Dexec.mainClass=mage.player.ai.rl.RLTrainer '
-                f'"-Dexec.args=league_bench"'
-            )
-
-            eval_timeout = env_int("EVAL_TIMEOUT_SEC", 180)
-            log(f"[EVAL] {profile} vs CP7-Skill{eval_skill} ({eval_games} games, {eval_timeout}s timeout)")
-            try:
-                proc = subprocess.Popen(
-                    cmd, env=env, cwd=str(REPO_ROOT), shell=True,
-                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
-                )
+            # Resolve deck list: if .txt pool file, eval against each deck separately
+            eval_decks = []
+            dp = Path(deck_path)
+            if dp.suffix == '.txt' and dp.exists():
                 try:
-                    stdout, _ = proc.communicate(timeout=eval_timeout)
-                except subprocess.TimeoutExpired:
-                    # Kill entire process tree on Windows
-                    import signal as _sig
-                    try:
-                        os.kill(proc.pid, _sig.SIGTERM)
-                    except Exception:
-                        pass
-                    try:
-                        subprocess.run(["taskkill", "/F", "/T", "/PID", str(proc.pid)],
-                                      capture_output=True, timeout=10)
-                    except Exception:
-                        pass
-                    proc.kill()
-                    proc.wait(timeout=5)
-                    log(f"[EVAL] TIMEOUT: {profile} (killed after {eval_timeout}s)")
-                    results[profile] = 0.0
-                    continue
-                # Parse EVAL_RESULT from stdout
-                wins = 0
-                total = 0
-                for line in (stdout or "").splitlines():
-                    if "EVAL_RESULT:" in line:
-                        for tok in line.split():
-                            if tok.startswith("wins="):
-                                wins = int(tok.split("=")[1])
-                            elif tok.startswith("total="):
-                                total = int(tok.split("=")[1])
-                if total > 0:
-                    wr = wins / total
-                else:
-                    wr = 0.0
-                results[profile] = wr
-                log(f"[EVAL] {profile}: {wins}/{total} = {wr:.3f}")
-            except Exception as exc:
-                log(f"[EVAL] ERROR: {profile}: {exc}")
-                results[profile] = 0.0
+                    for line in dp.read_text().splitlines():
+                        line = line.strip()
+                        if line and not line.startswith('#'):
+                            resolved = dp.parent / line
+                            if resolved.exists():
+                                eval_decks.append(str(resolved))
+                except Exception:
+                    pass
+            if not eval_decks:
+                eval_decks = [deck_path]
+
+            total_wins = 0
+            total_games = 0
+            for eval_deck in eval_decks:
+                deck_name = Path(eval_deck).stem
+                env = dict(os.environ)
+                env["MODE"] = "league_bench"
+                env["MODEL_PROFILE"] = profile
+                env["EVAL_OPPONENT_DECK"] = eval_deck
+                env["EVAL_OPPONENT_SKILL"] = eval_skill
+                env["EVAL_NUM_GAMES"] = str(eval_games_per_deck)
+                env["GAME_LOG_FREQUENCY"] = "1"
+                env["PY_SERVICE_MODE"] = "shared_gpu"
+                env["GPU_SERVICE_ENDPOINT"] = f"localhost:{self.port}"
+                env["GPU_SERVICE_NUM_GPUS"] = "1"
+                env["GPU_SERVICE_NUM_CHANNELS"] = "4"
+                env["MULLIGAN_DEVICE"] = "cpu"
+                env["DECK_LIST_FILE"] = deck_path
+                env["LEAGUE_REGISTRY_PATH"] = str(self.registry_path)
+
+                cmd = (
+                    f'mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL '
+                    f'-am -DskipTests exec:java '
+                    f'-Dexec.mainClass=mage.player.ai.rl.RLTrainer '
+                    f'"-Dexec.args=league_bench"'
+                )
+
+                log(f"[EVAL] {profile} vs {deck_name} ({eval_games_per_deck} games)")
+                try:
+                    proc = subprocess.run(
+                        cmd, env=env, cwd=str(REPO_ROOT), shell=True,
+                        capture_output=True, text=True,
+                    )
+                    for line in (proc.stdout or "").splitlines():
+                        if "EVAL_RESULT:" in line:
+                            for tok in line.split():
+                                if tok.startswith("wins="):
+                                    total_wins += int(tok.split("=")[1])
+                                elif tok.startswith("total="):
+                                    total_games += int(tok.split("=")[1])
+                    deck_wins = 0
+                    deck_total = 0
+                    for line in (proc.stdout or "").splitlines():
+                        if "EVAL_RESULT:" in line:
+                            for tok in line.split():
+                                if tok.startswith("wins="):
+                                    deck_wins = int(tok.split("=")[1])
+                                elif tok.startswith("total="):
+                                    deck_total = int(tok.split("=")[1])
+                    log(f"[EVAL]   vs {deck_name}: {deck_wins}/{deck_total}")
+                except Exception as exc:
+                    log(f"[EVAL] ERROR: {profile} vs {deck_name}: {exc}")
+
+            wr = total_wins / max(1, total_games)
+            results[profile] = wr
+            log(f"[EVAL] {profile} overall: {total_wins}/{total_games} = {wr:.3f}")
 
         self.eval_results = results
-        self.start_trainer()
         return results
 
     def check_exploit(self) -> None:
@@ -472,6 +531,12 @@ class LocalPBT:
                 parts.append(f"{profile}=ep:{episode}{eval_str}")
             log(f"Progress: {', '.join(parts)}")
 
+            # Periodic eval (every eval_interval, independent of PBT)
+            elapsed_since_last_eval = time.time() - getattr(self, '_last_eval_time', 0)
+            if elapsed_since_last_eval >= self.exploit_interval_min * 60:
+                self._last_eval_time = time.time()
+                self.run_eval()
+
             # PBT exploitation check every other tick
             if tick % 2 == 0:
                 self.check_exploit()
@@ -497,6 +562,7 @@ class LocalPBT:
             f"episode_delta={self.episode_delta} min_gap={self.min_winner_gap} mutation={self.mutation_pct}")
 
         try:
+            self.export_onnx_models()
             self.start_gpu_service()
             self.start_trainer()
             self.monitor_loop()

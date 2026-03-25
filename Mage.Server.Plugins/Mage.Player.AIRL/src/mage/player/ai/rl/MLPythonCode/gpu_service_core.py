@@ -73,6 +73,30 @@ class ProfileContext:
                     self._cuda_stream = torch.cuda.Stream(device=device)
             except Exception:
                 pass
+        # TRT inference path: bypass PyTorch for scoring when enabled
+        # ONNX files must be pre-exported (by onnx_export.py or PBT orchestrator)
+        self._trt_ctx = None
+        if os.getenv("USE_TRT_INFERENCE", "0") == "1" and self.role == "inference":
+            try:
+                from trt_inference import TRTInferenceContext, HEAD_IDS
+                model_dir = getattr(self.entry, 'model_dir', '')
+                if not model_dir:
+                    model_dir = os.path.join(
+                        os.getenv("RL_ARTIFACTS_ROOT",
+                                  "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl"),
+                        "profiles", profile_id, "models")
+                ctx = TRTInferenceContext(profile_id, model_dir, cuda_device or "cuda:0")
+                onnx_dir = ctx.onnx_dir
+                if all((onnx_dir / f"model_{h}.onnx").exists() for h in HEAD_IDS):
+                    ctx._model_mtime = (onnx_dir / "model_action.onnx").stat().st_mtime
+                    self._trt_ctx = ctx
+                    print(f"[TRT] Enabled for {profile_id} (role={self.role})", flush=True)
+                else:
+                    print(f"[TRT] ONNX files not found for {profile_id}, using PyTorch", flush=True)
+            except Exception as e:
+                print(f"[TRT] Failed to init for {profile_id}: {e}, falling back to PyTorch", flush=True)
+                self._trt_ctx = None
+
         if self.role == "learner":
             self._ensure_model_initialized()
 
@@ -102,6 +126,11 @@ class ProfileContext:
         max_candidates: int,
         cand_feat_dim: int,
     ) -> bytes:
+        if self._trt_ctx is not None:
+            return self._score_batch_trt(
+                seq_bytes, mask_bytes, token_bytes,
+                cand_feat_bytes, cand_ids_bytes, cand_mask_bytes,
+                head_id, batch_size, seq_len, d_model, max_candidates, cand_feat_dim)
         with self.lock:
             if self._cuda_stream is not None:
                 import torch
@@ -122,6 +151,22 @@ class ProfileContext:
                 min_targets, max_targets, batch_size,
                 seq_len, d_model, max_candidates, cand_feat_dim,
             )
+
+    def _score_batch_trt(self, seq_bytes, mask_bytes, token_bytes,
+                         cand_feat_bytes, cand_ids_bytes, cand_mask_bytes,
+                         head_id, batch_size, seq_len, d_model, max_candidates, cand_feat_dim) -> bytes:
+        """Fast inference via ONNX Runtime / TensorRT. No PyTorch in the hot path."""
+        import numpy as np
+        seq = np.frombuffer(seq_bytes, dtype='<f4').reshape(batch_size, seq_len, d_model)
+        mask = np.frombuffer(mask_bytes, dtype='<i4').reshape(batch_size, seq_len).astype(np.bool_)
+        tok = np.frombuffer(token_bytes, dtype='<i4').reshape(batch_size, seq_len).astype(np.int64)
+        cfeat = np.frombuffer(cand_feat_bytes, dtype='<f4').reshape(batch_size, max_candidates, cand_feat_dim)
+        cids = np.frombuffer(cand_ids_bytes, dtype='<i4').reshape(batch_size, max_candidates).astype(np.int64)
+        cmask = np.frombuffer(cand_mask_bytes, dtype='<i4').reshape(batch_size, max_candidates).astype(np.bool_)
+
+        probs, value = self._trt_ctx.score_batch(seq, mask, tok, cfeat, cids, cmask, head_id)
+        out = np.concatenate((probs, value), axis=1)
+        return out.astype('<f4').tobytes()
 
     def train_batch(
         self,
@@ -218,7 +263,10 @@ class ProfileContext:
 
     def reload_latest_model_if_newer(self, path: Optional[str] = None) -> bool:
         with self.lock:
-            return bool(self.entry.reloadLatestModelIfNewer(path))
+            reloaded = bool(self.entry.reloadLatestModelIfNewer(path))
+            if reloaded and self._trt_ctx is not None:
+                self._trt_ctx.ensure_exported(self.entry.model)
+            return reloaded
 
     def get_device_info(self) -> str:
         with self.lock:

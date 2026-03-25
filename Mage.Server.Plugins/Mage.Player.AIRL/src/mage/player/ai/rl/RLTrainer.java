@@ -1935,11 +1935,22 @@ public class RLTrainer {
             }
 
             final int numRunners = multiProfile ? profileContext.numGameRunners : NUM_GAME_RUNNERS;
-            ExecutorService executor = Executors.newFixedThreadPool(numRunners, runnable -> {
-                Thread thread = new Thread(runnable);
-                thread.setPriority(Thread.MIN_PRIORITY);
-                return thread;
-            });
+            // Use virtual threads (Project Loom) for game runners.
+            // Virtual threads yield on I/O (GPU inference wait) without OS context switch,
+            // allowing hundreds of concurrent games on few OS carrier threads.
+            ExecutorService executor;
+            boolean useVirtualThreads = !"0".equals(System.getenv("USE_VIRTUAL_THREADS"));
+            if (useVirtualThreads) {
+                executor = Executors.newVirtualThreadPerTaskExecutor();
+                logger.info("Using virtual threads for " + numRunners + " game runners");
+            } else {
+                executor = Executors.newFixedThreadPool(numRunners, runnable -> {
+                    Thread thread = new Thread(runnable);
+                    thread.setPriority(Thread.MIN_PRIORITY);
+                    return thread;
+                });
+                logger.info("Using platform threads for " + numRunners + " game runners");
+            }
 
             List<Future<Void>> futures = new ArrayList<>();
             final Object lock = new Object(); // Lock object for synchronization
@@ -1988,7 +1999,9 @@ public class RLTrainer {
                         if (opponentDeckPath == null) {
                             opponentDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
                         }
-                        Deck opponentDeckThread = loadDeck(opponentDeckPath.toString());
+                        // Load opponent deck independently (not from cache) to avoid shared card references
+                        // when both players use the same deck file in self-play
+                        Deck opponentDeckThread = loadDeckFresh(opponentDeckPath.toString());
                         if (opponentDeckThread == null && THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.get() != null) {
                             logger.warn("Train: failed to load override opponent deck " + opponentDeckPath + ", falling back to pool random deck.");
                             opponentDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
@@ -2009,10 +2022,16 @@ public class RLTrainer {
                         match.startGame();
                         Game game = match.getGames().get(0);
 
-                        // Enable game logging if this episode should be logged
-                        boolean enableGameLogging = GAME_LOG_FREQUENCY > 0
-                                && (epNumber == 0 || epNumber % GAME_LOG_FREQUENCY == 0);
-                        GameLogger gameLogger = GameLogger.create(enableGameLogging);
+                        // Log first 20 games immediately for sanity checking, then every GAME_LOG_FREQUENCY
+                        boolean enableGameLogging = (epNumber <= 20)
+                                || (GAME_LOG_FREQUENCY > 0 && epNumber % GAME_LOG_FREQUENCY == 0);
+                        // In multi-profile mode, direct game logs to the profile's log directory
+                        if (multiProfile && enableGameLogging && profileContext != null) {
+                            System.setProperty("GAME_LOG_DIR_OVERRIDE", profileContext.paths.trainingGameLogsDir);
+                        }
+                        GameLogger gameLogger = enableGameLogging && multiProfile && profileContext != null
+                                ? GameLogger.createInProfileDir(profileContext.paths.trainingGameLogsDir, 20)
+                                : GameLogger.create(enableGameLogging);
                         threadLocalGameLogger.set(gameLogger);
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
@@ -4026,6 +4045,21 @@ public class RLTrainer {
 
     public Deck loadDeck(String filePath) {
         return DECK_TEMPLATE_CACHE.load(filePath, logger);
+    }
+
+    /**
+     * Load a deck without using the cache -- guarantees fully independent card instances.
+     * Use for the opponent deck in self-play to avoid shared card references.
+     */
+    public Deck loadDeckFresh(String filePath) {
+        try {
+            StringBuilder warnings = new StringBuilder();
+            mage.cards.decks.DeckCardLists lists = mage.cards.decks.importer.DeckImporter.importDeckFromFile(filePath, warnings, false);
+            return Deck.load(lists, false, false, null);
+        } catch (Exception e) {
+            logger.error("Error loading fresh deck: " + filePath, e);
+            return null;
+        }
     }
 
     private RewardDiag updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, Player opponentPlayer) {
