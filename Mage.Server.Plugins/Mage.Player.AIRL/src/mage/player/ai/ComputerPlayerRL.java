@@ -94,6 +94,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // Use to benchmark pure game-engine throughput without GPU dependency.
     private static final boolean RANDOM_DECISIONS = EnvConfig.bool("RL_RANDOM_DECISIONS", false);
 
+    // Profiling counters (shared across all instances)
+    private static final java.util.concurrent.atomic.AtomicLong inferNanosTotal = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong prepNanosTotal = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong profileCount = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong skippedInfer = new java.util.concurrent.atomic.AtomicLong();
+
     // Heuristic step shaping is opt-in; default off so learning is driven by returns.
     private static final boolean USE_HEURISTIC_STEP_REWARDS = "1".equals(System.getenv().getOrDefault("RL_HEURISTIC_STEP_REWARDS", "0"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_HEURISTIC_STEP_REWARDS", "0"));
@@ -2013,6 +2019,24 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             int candidateCount,
             long prepStartNanos) {
         metrics.recordDecisionPrep(headId, candidateCount, (System.nanoTime() - prepStartNanos) / 1_000_000L);
+        // Skip inference for single valid candidate -- saves ~44ms GPU round-trip
+        int validCount = 0;
+        for (int i = 0; i < candidateCount; i++) {
+            if (candidateMask[i] != 0) validCount++;
+        }
+        if (validCount <= 1) {
+            float[] policy = new float[candidateCount];
+            for (int i = 0; i < candidateCount; i++) {
+                policy[i] = candidateMask[i] != 0 ? 1.0f : 0.0f;
+            }
+            skippedInfer.incrementAndGet();
+            long total = skippedInfer.get() + profileCount.get();
+            if (total > 0 && total % 5000 == 0) {
+                System.out.println("[SKIP] skipped=" + skippedInfer.get() + " inferred=" + profileCount.get()
+                        + " skip_rate=" + String.format("%.1f%%", 100.0 * skippedInfer.get() / total));
+            }
+            return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(policy, 0.0f);
+        }
         if (RANDOM_DECISIONS) {
             float[] randomPolicy = new float[candidateCount];
             java.util.concurrent.ThreadLocalRandom rng = java.util.concurrent.ThreadLocalRandom.current();
@@ -2022,7 +2046,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(randomPolicy, 0.0f);
         }
         metrics.recordPythonBridgeCall();
-        return model.scoreCandidates(
+        long inferStart = System.nanoTime();
+        mage.player.ai.rl.PythonMLBatchManager.PredictionResult result = model.scoreCandidates(
                 baseState,
                 candidateActionIds,
                 candidateFeatures,
@@ -2033,6 +2058,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 minTargets,
                 maxTargets
         );
+        long inferNanos = System.nanoTime() - inferStart;
+        long prepNanos = inferStart - prepStartNanos;
+        inferNanosTotal.addAndGet(inferNanos);
+        prepNanosTotal.addAndGet(prepNanos);
+        long count = profileCount.incrementAndGet();
+        if (count % 5000 == 0) {
+            long inferAvg = inferNanosTotal.get() / count / 1_000;
+            long prepAvg = prepNanosTotal.get() / count / 1_000;
+            System.out.println("[PROFILE] n=" + count + " prep_avg=" + prepAvg + "us infer_avg=" + inferAvg + "us");
+        }
+        return result;
     }
 
     private static int toVocabId(String key) {

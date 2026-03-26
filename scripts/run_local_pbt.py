@@ -58,6 +58,43 @@ def log(msg: str) -> None:
     print(f"[{ts}] {msg}", flush=True)
 
 
+def _find_cudnn_bin() -> Optional[str]:
+    """Find cuDNN bin directory for ONNX Runtime GPU on Windows."""
+    if sys.platform != "win32":
+        return None
+    cudnn_root = Path(os.environ.get("CUDNN_PATH", r"C:\Program Files\NVIDIA\CUDNN"))
+    if not cudnn_root.exists():
+        return None
+    # Scan for versioned dirs: v9.20/bin/12.x/x64/
+    for ver_dir in sorted(cudnn_root.iterdir(), reverse=True):
+        bin_dir = ver_dir / "bin"
+        if not bin_dir.exists():
+            continue
+        # Prefer CUDA 12.x (ORT 1.19.2 built against CUDA 12), then fall back
+        cuda_subs = sorted(bin_dir.iterdir(), reverse=True)
+        for cuda_sub in sorted(cuda_subs, key=lambda p: (not p.name.startswith("12"), p.name), reverse=False):
+            candidate = cuda_sub / "x64"
+            if candidate.exists() and any(candidate.glob("cudnn*.dll")):
+                return str(candidate)
+    return None
+
+
+def _prepend_cuda_paths(env: dict) -> None:
+    """Prepend cuDNN and CUDA toolkit to PATH so ORT GPU provider can load."""
+    additions = []
+    cudnn = _find_cudnn_bin()
+    if cudnn:
+        additions.append(cudnn)
+    # Also ensure a CUDA toolkit bin is on PATH
+    cuda_root = Path(os.environ.get("CUDA_PATH", r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6"))
+    cuda_bin = cuda_root / "bin"
+    if cuda_bin.exists():
+        additions.append(str(cuda_bin))
+    if additions:
+        sep = ";" if sys.platform == "win32" else ":"
+        env["PATH"] = sep.join(additions) + sep + env.get("PATH", "")
+
+
 PBT_BOUNDS: Dict[str, Tuple[float, float]] = {
     "ENTROPY_START": (0.01, 1.0),
     "ENTROPY_END": (0.001, 0.5),
@@ -228,12 +265,16 @@ class LocalPBT:
         profiles_str = ",".join(profile_names)
         deck_paths = list({str(e["deck_path"]) for e in self.selected_profiles})
         env = dict(os.environ)
-        env["PY_SERVICE_MODE"] = "shared_gpu"
+        _prepend_cuda_paths(env)
+        env["PY_SERVICE_MODE"] = os.getenv("PY_SERVICE_MODE", "shared_gpu")
         env["GPU_SERVICE_ENDPOINT"] = f"localhost:{self.port}"
         env["GPU_SERVICE_NUM_GPUS"] = "1"
         env["GPU_SERVICE_NUM_CHANNELS"] = "4"
         env["TRAIN_PROFILES_LIST"] = profiles_str
         env["MODE"] = "trainAll"
+        # For hybrid/onnx mode, set MODEL_PROFILE so ONNX path resolves
+        if len(profile_names) == 1:
+            env["MODEL_PROFILE"] = profile_names[0]
         env["NUM_GAME_RUNNERS"] = str(self.num_runners)
         env["TOTAL_EPISODES"] = str(self.total_episodes)
         env["WINRATE_WINDOW"] = str(self.winrate_window)
@@ -340,6 +381,7 @@ class LocalPBT:
             for eval_deck in eval_decks:
                 deck_name = Path(eval_deck).stem
                 env = dict(os.environ)
+                _prepend_cuda_paths(env)
                 env["MODE"] = "league_bench"
                 env["MODEL_PROFILE"] = profile
                 env["EVAL_OPPONENT_DECK"] = eval_deck

@@ -44,6 +44,11 @@
             <artifactId>py4j</artifactId>
             <version>0.10.9.9</version>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.onnxruntime</groupId>
+            <artifactId>onnxruntime_gpu</artifactId>
+            <version>1.19.2</version>
+        </dependency>
     </dependencies>
 
     <build>

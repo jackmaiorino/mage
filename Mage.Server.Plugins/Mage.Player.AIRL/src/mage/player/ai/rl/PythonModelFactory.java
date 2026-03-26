@@ -24,6 +24,14 @@ public final class PythonModelFactory {
         return "none".equals(SERVICE_MODE);
     }
 
+    public static boolean isOnnxMode() {
+        return "onnx".equals(SERVICE_MODE) || "onnx_gpu".equals(SERVICE_MODE);
+    }
+
+    public static boolean isHybridMode() {
+        return "hybrid".equals(SERVICE_MODE);
+    }
+
     public static PythonModel getInstance() {
         PythonModel current = instance;
         if (current != null) {
@@ -34,6 +42,22 @@ public final class PythonModelFactory {
             if (current == null) {
                 if (isNoneMode()) {
                     current = NoOpPythonModel.getInstance();
+                } else if (isHybridMode()) {
+                    // ONNX for inference (in-process, fast), Python GPU service for training
+                    String modelsDir = resolveModelsDir();
+                    OnnxInferenceModel onnx = new OnnxInferenceModel(modelsDir);
+                    if (onnx.isReady()) {
+                        SharedGpuPythonModel gpu = SharedGpuPythonModel.getInstance();
+                        onnx.setTrainingDelegate(gpu);
+                        current = onnx;
+                    } else {
+                        // ONNX not available, fall back to shared GPU
+                        current = SharedGpuPythonModel.getInstance();
+                    }
+                } else if (isOnnxMode()) {
+                    // ONNX only (no training, inference-only eval)
+                    String modelsDir = resolveModelsDir();
+                    current = new OnnxInferenceModel(modelsDir);
                 } else if (isSharedGpuMode()) {
                     current = SharedGpuPythonModel.getInstance();
                 } else {
@@ -43,6 +67,16 @@ public final class PythonModelFactory {
             }
         }
         return current;
+    }
+
+    private static String resolveModelsDir() {
+        String profile = EnvConfig.str("MODEL_PROFILE", "").trim();
+        String artifactsRoot = EnvConfig.str("RL_ARTIFACTS_ROOT",
+                "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl");
+        if (!profile.isEmpty()) {
+            return artifactsRoot + "/profiles/" + profile + "/models";
+        }
+        return artifactsRoot + "/models";
     }
 
     static void resetForTests() {
