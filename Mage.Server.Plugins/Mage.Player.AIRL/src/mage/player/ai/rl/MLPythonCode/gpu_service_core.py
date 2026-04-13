@@ -73,30 +73,6 @@ class ProfileContext:
                     self._cuda_stream = torch.cuda.Stream(device=device)
             except Exception:
                 pass
-        # TRT inference path: bypass PyTorch for scoring when enabled
-        # ONNX files must be pre-exported (by onnx_export.py or PBT orchestrator)
-        self._trt_ctx = None
-        if os.getenv("USE_TRT_INFERENCE", "0") == "1" and self.role == "inference":
-            try:
-                from trt_inference import TRTInferenceContext, HEAD_IDS
-                model_dir = getattr(self.entry, 'model_dir', '')
-                if not model_dir:
-                    model_dir = os.path.join(
-                        os.getenv("RL_ARTIFACTS_ROOT",
-                                  "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl"),
-                        "profiles", profile_id, "models")
-                ctx = TRTInferenceContext(profile_id, model_dir, cuda_device or "cuda:0")
-                onnx_dir = ctx.onnx_dir
-                if all((onnx_dir / f"model_{h}.onnx").exists() for h in HEAD_IDS):
-                    ctx._model_mtime = (onnx_dir / "model_action.onnx").stat().st_mtime
-                    self._trt_ctx = ctx
-                    print(f"[TRT] Enabled for {profile_id} (role={self.role})", flush=True)
-                else:
-                    print(f"[TRT] ONNX files not found for {profile_id}, using PyTorch", flush=True)
-            except Exception as e:
-                print(f"[TRT] Failed to init for {profile_id}: {e}, falling back to PyTorch", flush=True)
-                self._trt_ctx = None
-
         if self.role == "learner":
             self._ensure_model_initialized()
 

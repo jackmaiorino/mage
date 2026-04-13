@@ -24,14 +24,11 @@ from cuda_manager import CUDAManager
 from snapshot_manager import SnapshotManager
 from metrics_collector import MetricsCollector
 from model_persistence import ModelPersistence
-from mulligan_model import MulliganNet
 from gpu_lock import GPULock
 from profile_paths import profile_models_dir
 
 # Now we can safely log initialization
 logger.info(LogCategory.SYSTEM_INIT, f"Logging to file: {log_file}")
-logger.info(LogCategory.SYSTEM_INIT,
-            f"Mulligan training log file: {mulligan_log_file}")
 logger.info(LogCategory.SYSTEM_INIT,
             f"VRAM diagnostics log file: {vram_diag_log_file}")
 logger.info(LogCategory.SYSTEM_INIT,
@@ -252,24 +249,6 @@ class PythonEntryPoint:
         )
         self._training_losses_header_written = False
 
-        # Mulligan model device toggle (separate from main model device)
-        # Env: MULLIGAN_DEVICE=auto|cpu|cuda
-        mull_dev = os.getenv("MULLIGAN_DEVICE", "auto").strip().lower()
-        if mull_dev in ("cpu",):
-            self.mulligan_device = torch.device("cpu")
-        elif mull_dev in ("cuda", "gpu"):
-            self.mulligan_device = torch.device(
-                "cuda" if torch.cuda.is_available() else "cpu")
-        else:
-            # auto
-            self.mulligan_device = torch.device(
-                "cuda" if torch.cuda.is_available() else "cpu")
-        try:
-            logger.info(LogCategory.MODEL_INIT,
-                        "Mulligan device=%s (requested=%s)", str(self.mulligan_device), str(mull_dev))
-        except Exception:
-            pass
-
         # GPU coordination lock (inter-process)
         self.gpu_lock = GPULock()
         self.process_name = f"{self.py_role}_{os.getpid()}"
@@ -279,53 +258,6 @@ class PythonEntryPoint:
         self.snapshot_mgr = SnapshotManager(self.device)
         self.metrics = MetricsCollector()
         self.persistence = ModelPersistence()
-
-        # Mulligan model
-        self.mulligan_model = None
-        self.mulligan_optimizer = None
-        self.mulligan_model_path = os.getenv('MULLIGAN_MODEL_PATH',
-                                             f'{profile_models_dir()}/mulligan_model.pt')
-        self.mulligan_lock = threading.Lock()
-        self._mull_target1_window = int(
-            os.getenv("MULLIGAN_TARGET1_WINDOW", "500"))
-        self._mull_target1_log_every = int(
-            os.getenv("MULLIGAN_TARGET1_LOG_EVERY", "20"))
-        self._mull_target1_hist = deque(
-            maxlen=max(1, self._mull_target1_window))
-
-        # ---------------------------------------------------------
-        # Mulligan replay buffer (train in minibatches)
-        # ---------------------------------------------------------
-        self._mull_replay_max_per_class = int(
-            os.getenv("MULLIGAN_REPLAY_MAX_PER_CLASS", "20000"))
-        self._mull_replay_min_samples = int(
-            os.getenv("MULLIGAN_REPLAY_MIN_SAMPLES", "32"))
-        self._mull_replay_batch_size = int(
-            os.getenv("MULLIGAN_REPLAY_BATCH_SIZE", "16"))
-        self._mull_replay_stratified = bool(
-            int(os.getenv("MULLIGAN_REPLAY_STRATIFIED", "1")))
-        self._mull_replay_oversample_minority = bool(
-            int(os.getenv("MULLIGAN_REPLAY_OVERSAMPLE_MINORITY", "1")))
-        self._mull_replay_stats_window = int(
-            os.getenv("MULLIGAN_REPLAY_STATS_WINDOW", "200"))
-        self._mull_target_clamp = bool(
-            int(os.getenv("MULLIGAN_TARGET_CLAMP", "1")))
-
-        self._mull_replay_keep = deque(
-            maxlen=max(1, self._mull_replay_max_per_class))
-        self._mull_replay_mull = deque(
-            maxlen=max(1, self._mull_replay_max_per_class))
-        self._mull_action_hist = deque(maxlen=max(
-            1, self._mull_replay_stats_window))  # 1=KEEP, 0=MULL
-
-        seed = os.getenv("MULLIGAN_REPLAY_SEED", "").strip()
-        if (not seed) and self.global_seed is not None:
-            seed = str(self.global_seed)
-        try:
-            seed_i = int(seed) if seed else None
-        except Exception:
-            seed_i = None
-        self._mull_rng = np.random.default_rng(seed_i)
 
         # PPO configuration
         self.ppo_epsilon = float(os.getenv('PPO_EPSILON', '0.2'))
@@ -541,22 +473,32 @@ class PythonEntryPoint:
                 cand_feat_dim=48,
             ).to(self.device)
 
-            # Separate higher LR for actor head to help logits move early
+            # Separate LR groups: actor head, critic head, everything else
             actor_param_names = [
                 'actor_proj1', 'actor_proj2', 'actor_norm', 'actor_norm1'
             ]
+            critic_param_names = [
+                'critic_input_proj', 'critic_input_norm',
+                'critic_cls_token', 'critic_transformer',
+                'critic_proj1', 'critic_proj2', 'critic_norm', 'critic_norm1',
+                'value_scale'
+            ]
             actor_params = []
+            critic_params = []
             other_params = []
             for name, param in self.model.named_parameters():
                 if any(apn in name for apn in actor_param_names):
                     actor_params.append(param)
+                elif any(cpn in name for cpn in critic_param_names):
+                    critic_params.append(param)
                 else:
                     other_params.append(param)
 
             # ----------------- LR Tuning ---------------------------
-            # v2 small model uses higher LR (3e-4); v1 large model used 1e-4
+            critic_lr = float(os.getenv('CRITIC_LR', '1e-3'))
             self.optimizer = torch.optim.Adam([
                 {'params': actor_params, 'lr': float(os.getenv('ACTOR_LR', '3e-4'))},
+                {'params': critic_params, 'lr': critic_lr},
                 {'params': other_params, 'lr': float(os.getenv('OTHER_LR', '3e-4'))}
             ])
 
@@ -575,14 +517,8 @@ class PythonEntryPoint:
             logger.info(LogCategory.GPU_MEMORY,
                         "Model initialized successfully")
 
-        # One-time initial load + mulligan init
+        # One-time initial load
         if not self._did_initial_load:
-            try:
-                if self.mulligan_model is None:
-                    self.initializeMulliganModel()
-            except Exception:
-                pass
-
             # Load from base checkpoint if it exists
             try:
                 if self.model_path:
@@ -604,36 +540,6 @@ class PythonEntryPoint:
 
             self._did_initial_load = True
 
-    def initializeMulliganModel(self):
-        """Initialize the mulligan model (separate from main model)"""
-        logger.info(LogCategory.MODEL_INIT,
-                    "Initializing card-level mulligan model")
-
-        # vocab_size=65536 (same as main model), embed_dim=32, max_hand=7, max_deck=60
-        self.mulligan_model = MulliganNet(
-            vocab_size=65536, embed_dim=32, max_hand=7, max_deck=60).to(self.mulligan_device)
-        self.mulligan_optimizer = torch.optim.Adam(
-            self.mulligan_model.parameters(), lr=1e-3)
-
-        # Try to load existing mulligan model
-        if os.path.exists(self.mulligan_model_path):
-            try:
-                checkpoint = torch.load(
-                    self.mulligan_model_path, map_location=self.mulligan_device)
-                self.mulligan_model.load_state_dict(
-                    checkpoint['model_state_dict'])
-                self.mulligan_optimizer.load_state_dict(
-                    checkpoint['optimizer_state_dict'])
-                logger.info(LogCategory.MODEL_LOAD,
-                            f"Loaded existing mulligan model from {self.mulligan_model_path}")
-            except Exception as e:
-                logger.warning(LogCategory.MODEL_LOAD,
-                               f"Failed to load mulligan model, starting fresh: {e}")
-        else:
-            logger.info(LogCategory.MODEL_INIT,
-                        "No existing mulligan model found, starting with random initialization")
-
-        logger.info(LogCategory.MODEL_INIT, "Mulligan model initialized")
 
     # ------------------------------------------------------------------
     # Snapshot opponent helpers
@@ -968,75 +874,6 @@ class PythonEntryPoint:
                          "Error in scoreCandidatesPolicyFlat: %s", str(e))
             raise
 
-    def predictMulligan(self, features):
-        """
-        Predict mulligan decision using Q-learning neural network.
-
-        Args:
-            features: List/array of mulligan features (68-dim vector)
-                Format: [mulligan_num(1), hand_card_ids(7), deck_card_ids(60)]
-
-        Returns:
-            float: Deterministic keep indicator (0.0 = mulligan, 1.0 = keep)
-                   KEEP if Q_keep >= Q_mull else MULL
-        """
-        try:
-            if self.mulligan_model is None:
-                self.initializeMulliganModel()
-
-            # Convert to tensor - should be 68 dims: 1 + 7 + 60
-            features_tensor = torch.tensor(
-                features, dtype=torch.float32, device=self.mulligan_device).unsqueeze(0)
-
-            # Forward pass (no gradient needed for inference)
-            self.mulligan_model.eval()
-            with torch.no_grad():
-                if self.backend_mode == "single" and str(self.mulligan_device).startswith("cuda"):
-                    with self._gpu_mutex:
-                        q_values = self.mulligan_model(
-                            features_tensor)  # [1, 2]
-                else:
-                    q_values = self.mulligan_model(features_tensor)  # [1, 2]
-                q_keep = q_values[0, 0].item()
-                q_mull = q_values[0, 1].item()
-
-            return 1.0 if q_keep >= q_mull else 0.0
-
-        except Exception as e:
-            logger.error(LogCategory.SYSTEM_ERROR,
-                         "Error in predictMulligan: %s", str(e))
-            # On error, default to 50/50
-            return 0.5
-
-    def predictMulliganScores(self, features):
-        """
-        Return raw two-headed mulligan scores as little-endian float32 bytes: [Q_keep, Q_mull].
-        """
-        try:
-            if self.mulligan_model is None:
-                self.initializeMulliganModel()
-
-            features_tensor = torch.tensor(
-                features, dtype=torch.float32, device=self.mulligan_device).unsqueeze(0)
-
-            self.mulligan_model.eval()
-            with torch.no_grad():
-                if self.backend_mode == "single" and str(self.mulligan_device).startswith("cuda"):
-                    with self._gpu_mutex:
-                        q_values = self.mulligan_model(
-                            features_tensor)  # [1, 2]
-                else:
-                    q_values = self.mulligan_model(features_tensor)  # [1, 2]
-                q_keep = float(q_values[0, 0].item())
-                q_mull = float(q_values[0, 1].item())
-
-            out = np.array([q_keep, q_mull], dtype='<f4')
-            return out.tobytes()
-        except Exception as e:
-            logger.error(LogCategory.SYSTEM_ERROR,
-                         "Error in predictMulliganScores: %s", str(e))
-            return np.array([0.0, 0.0], dtype='<f4').tobytes()
-
     # Metrics methods and properties - delegate to metrics collector
     # Counters
     @property
@@ -1046,14 +883,6 @@ class PythonEntryPoint:
     @train_step_counter.setter
     def train_step_counter(self, value):
         self.metrics.train_step_counter = value
-
-    @property
-    def mulligan_train_step_counter(self):
-        return self.metrics.mulligan_train_step_counter
-
-    @mulligan_train_step_counter.setter
-    def mulligan_train_step_counter(self, value):
-        self.metrics.mulligan_train_step_counter = value
 
     @property
     def score_call_counter(self):
@@ -1070,14 +899,6 @@ class PythonEntryPoint:
     @main_train_sample_counter.setter
     def main_train_sample_counter(self, value):
         self.metrics.main_train_sample_counter = value
-
-    @property
-    def mulligan_train_sample_counter(self):
-        return self.metrics.mulligan_train_sample_counter
-
-    @mulligan_train_sample_counter.setter
-    def mulligan_train_sample_counter(self, value):
-        self.metrics.mulligan_train_sample_counter = value
 
     # GAE properties
     @property
@@ -2375,7 +2196,6 @@ class PythonEntryPoint:
         extra = {
             'optimizer_state_dict': self.optimizer.state_dict() if self.optimizer else None,
             'train_step_counter': self.train_step_counter,
-            'mulligan_train_step_counter': self.mulligan_train_step_counter,
             'main_train_sample_counter': self.main_train_sample_counter,
             'gae_enabled_step': self.metrics.gae_enabled_step,
         }
@@ -2398,10 +2218,6 @@ class PythonEntryPoint:
             if 'train_step_counter' in extra:
                 self.train_step_counter = int(extra['train_step_counter'])
                 logger.info(LogCategory.MODEL_LOAD, "Restored train_step_counter: %d", self.train_step_counter)
-            
-            if 'mulligan_train_step_counter' in extra:
-                self.mulligan_train_step_counter = int(extra['mulligan_train_step_counter'])
-                logger.info(LogCategory.MODEL_LOAD, "Restored mulligan_train_step_counter: %d", self.mulligan_train_step_counter)
             
             if 'main_train_sample_counter' in extra:
                 self.main_train_sample_counter = int(extra['main_train_sample_counter'])
@@ -2699,22 +2515,19 @@ class PythonEntryPoint:
                     outcomes_t = torch.tensor(
                         outcomes_mb, dtype=torch.float32, device=mdev)
 
-                    q_values = self.mulligan_model(features_t)  # [mb, 2]
-                    if q_values is None or q_values.ndim != 2 or q_values.shape[0] != mb_size or q_values.shape[1] != 2:
-                        skip_reason = "bad_q_values_shape"
+                    logits = self.mulligan_model(features_t)  # [mb, 1]
+                    if logits is None or logits.ndim != 2 or logits.shape[0] != mb_size:
+                        skip_reason = "bad_logit_shape"
                         train_count = 0
                         skipped_count = mb_size
                         loss = torch.tensor(0.0, device=mdev)
                     else:
-                        # action_keep_t: 1=keep, 0=mull -> action_idx: 0=keep, 1=mull
-                        action_indices = (action_keep_t <= 0).long()
-                        q_taken = q_values.gather(
-                            1, action_indices.unsqueeze(1)).squeeze(1)
+                        logits = logits.squeeze(1)  # [mb]
+                        # Clamp logits to prevent sigmoid saturation
+                        # At +/-5, sigmoid is 0.993/0.007 -- still exploratory
+                        logits = logits.clamp(-5.0, 5.0)
 
-                        # Survival + land-drop reward shaping:
-                        # Wins always get target=1.0
-                        # Losses scaled by survival (game length) + early land drops (on-curve)
-                        # Overridden decisions (0-land keeps, all-land keeps) get forced target=0.0
+                        # Reward shaping (same as before)
                         survival_alpha = float(
                             os.getenv("MULLIGAN_SURVIVAL_ALPHA", "0.3"))
                         survival_max = float(
@@ -2725,66 +2538,55 @@ class PythonEntryPoint:
                             game_len_mb, dtype=torch.float32, device=mdev)
                         survival = (game_len_t.clamp(
                             min=1.0, max=survival_max) / survival_max)
-                        # Early land score: 0-1 fraction of on-curve turns, -1 if no data
                         early_land_t = torch.tensor(
                             early_land_mb, dtype=torch.float32, device=mdev)
                         has_land_data = (early_land_t >= 0.0).float()
                         land_bonus = land_drop_alpha * early_land_t.clamp(min=0.0) * has_land_data
-                        # Standard shaped target
-                        shaped_targets = outcomes_t + \
+                        reward = outcomes_t + \
                             (1.0 - outcomes_t) * (survival_alpha * survival + land_bonus)
-                        # Override mask: 1.0 where overridden, 0.0 otherwise
+                        # Override mask: overridden decisions get reward=0
                         overridden_t = torch.tensor(
                             overridden_mb, dtype=torch.float32, device=mdev)
                         override_mask = (overridden_t > 0.5).float()
-                        # Final targets: 0.0 for overridden keeps, shaped target otherwise
-                        targets = override_mask * 0.0 + (1.0 - override_mask) * shaped_targets
+                        reward = (1.0 - override_mask) * reward
 
-                        if self._mull_target_clamp:
-                            targets = targets.clamp(0.0, 1.0)
+                        # REINFORCE: log P(action_taken)
+                        # P(keep) = sigmoid(logit), P(mull) = 1 - sigmoid(logit)
+                        # log P(keep) = logit - softplus(logit) = -softplus(-logit)
+                        # log P(mull) = -softplus(logit)
+                        action_keep_float = action_keep_t.float()
+                        log_prob = action_keep_float * logits - F.softplus(logits)
 
-                        target_mean = float(targets.detach().mean(
-                        ).item()) if targets.numel() > 0 else 0.0
-                        if not torch.isfinite(targets).all().item():
-                            skip_reason = "non_finite_targets"
+                        # Baseline: EMA of reward for variance reduction
+                        if not hasattr(self, '_mull_reward_baseline'):
+                            self._mull_reward_baseline = 0.5
+                        advantage = reward - self._mull_reward_baseline
+                        self._mull_reward_baseline = (
+                            0.99 * self._mull_reward_baseline +
+                            0.01 * float(reward.mean().item()))
+
+                        # Policy gradient loss
+                        pg_loss = -(advantage.detach() * log_prob).mean()
+
+                        # Entropy bonus to prevent collapse
+                        entropy_coeff = float(
+                            os.getenv("MULLIGAN_ENTROPY_COEFF", "0.20"))
+                        p_keep = torch.sigmoid(logits)
+                        entropy = -(p_keep * F.softplus(-logits) +
+                                    (1.0 - p_keep) * (-F.softplus(logits)))
+                        entropy_bonus = entropy.mean()
+
+                        loss = pg_loss - entropy_coeff * entropy_bonus
+
+                        if not torch.isfinite(loss).item():
+                            skip_reason = "non_finite_loss"
                             train_count = 0
                             skipped_count = mb_size
                             loss = torch.tensor(0.0, device=mdev)
                         else:
-                            # Rolling target_1_rate over last N targets
-                            try:
-                                bits = (targets.detach() >= 0.5).to(
-                                    torch.int32).cpu().tolist()
-                                for b in bits:
-                                    self._mull_target1_hist.append(int(b))
-                            except Exception:
-                                pass
-                            if self._mull_target1_log_every > 0 and (self.mulligan_train_step_counter % self._mull_target1_log_every == 0):
-                                try:
-                                    n = len(self._mull_target1_hist)
-                                    rate = float(
-                                        sum(self._mull_target1_hist)) / float(n) if n > 0 else 0.0
-                                    mulligan_logger.info(
-                                        LogCategory.MODEL_TRAIN,
-                                        "MulliganTarget1 window=%d rate=%.3f (n=%d)",
-                                        int(self._mull_target1_hist.maxlen or 0),
-                                        float(rate),
-                                        int(n)
-                                    )
-                                except Exception:
-                                    pass
-
-                            loss = F.smooth_l1_loss(
-                                q_taken, targets, reduction='mean')
-                            if not torch.isfinite(loss).all().item():
-                                skip_reason = "non_finite_loss"
-                                train_count = 0
-                                skipped_count = mb_size
-                                loss = torch.tensor(0.0, device=mdev)
-                            else:
-                                skip_reason = ""
-                                train_count = mb_size
-                                skipped_count = 0
+                            skip_reason = ""
+                            train_count = mb_size
+                            skipped_count = 0
 
                     if train_count > 0:
                         loss.backward()
@@ -2792,16 +2594,13 @@ class PythonEntryPoint:
                             self.mulligan_model.parameters(), 1.0)
                         self.mulligan_optimizer.step()
 
-                    # Q-value stats
+                    # Stats for logging (keep wire-compatible names)
                     with torch.no_grad():
-                        q_keep_mean = q_values[:, 0].mean().item(
-                        ) if q_values is not None and q_values.numel() > 0 else 0.0
-                        q_mull_mean = q_values[:, 1].mean().item(
-                        ) if q_values is not None and q_values.numel() > 0 else 0.0
-                        q_taken_mean = q_taken.mean().item() if 'q_taken' in locals(
-                        ) and q_taken is not None and q_taken.numel() > 0 else 0.0
-                        target_mean = float(targets.detach().mean().item()) if 'targets' in locals(
-                        ) and targets is not None and targets.numel() > 0 else 0.0
+                        p_keep_val = torch.sigmoid(logits).mean().item() if 'logits' in locals() and logits.numel() > 0 else 0.5
+                        q_keep_mean = p_keep_val
+                        q_mull_mean = 1.0 - p_keep_val
+                        q_taken_mean = p_keep_val
+                        target_mean = float(reward.mean().item()) if 'reward' in locals() and reward.numel() > 0 else 0.0
 
                 finally:
                     if use_gpu_lock:
@@ -2815,7 +2614,7 @@ class PythonEntryPoint:
                 if train_count > 0:
                     mulligan_logger.info(
                         LogCategory.MODEL_TRAIN,
-                        "Mulligan Q-learning trained - loss=%.4f, mb=%d, keep_rate=%.3f, replay_total=%d (keep=%d mull=%d), hist_keep_rate=%.3f, target_mean=%.3f, Q_keep_avg=%.3f, Q_mull_avg=%.3f, Q_taken_avg=%.3f",
+                        "Mulligan REINFORCE trained - loss=%.4f, mb=%d, keep_rate=%.3f, replay_total=%d (keep=%d mull=%d), hist_keep_rate=%.3f, reward_mean=%.3f, P_keep_avg=%.3f, P_mull_avg=%.3f, baseline=%.3f",
                         float(loss.item()),
                         int(train_count),
                         float(mb_keep_rate),
@@ -2826,12 +2625,12 @@ class PythonEntryPoint:
                         float(target_mean),
                         float(q_keep_mean),
                         float(q_mull_mean),
-                        float(q_taken_mean),
+                        float(self._mull_reward_baseline if hasattr(self, '_mull_reward_baseline') else 0.5),
                     )
                 else:
                     mulligan_logger.info(
                         LogCategory.MODEL_TRAIN,
-                        "Mulligan Q-learning skipped - reason=%s, mb=%d, keep_rate=%.3f, replay_total=%d (keep=%d mull=%d), hist_keep_rate=%.3f, outcome_mean=%.3f",
+                        "Mulligan REINFORCE skipped - reason=%s, mb=%d, keep_rate=%.3f, replay_total=%d (keep=%d mull=%d), hist_keep_rate=%.3f, outcome_mean=%.3f",
                         str(skip_reason) if 'skip_reason' in locals() else "unknown",
                         int(mb_size),
                         float(mb_keep_rate),
@@ -2896,16 +2695,6 @@ class PythonEntryPoint:
         result = gateway.jvm.HashMap()
         result.put('train_steps', int(self.train_step_counter))
         result.put('train_samples', int(self.main_train_sample_counter))
-        return result
-
-    def getMulliganModelTrainingStats(self):
-        """Get mulligan model training statistics (iterations and samples)"""
-        # Convert to Java HashMap for Py4J compatibility
-        from py4j.java_gateway import java_import
-        java_import(gateway.jvm, 'java.util.HashMap')
-        result = gateway.jvm.HashMap()
-        result.put('train_steps', int(self.mulligan_train_step_counter))
-        result.put('train_samples', int(self.mulligan_train_sample_counter))
         return result
 
     def getHealthStats(self):

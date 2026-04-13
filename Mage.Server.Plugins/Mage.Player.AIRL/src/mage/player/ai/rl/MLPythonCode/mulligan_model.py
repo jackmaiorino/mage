@@ -4,26 +4,13 @@ import torch.nn.functional as F
 
 class MulliganNet(torch.nn.Module):
     """
-    Q-learning neural network for mulligan decisions.
+    Policy-gradient neural network for mulligan decisions.
     Uses self-attention over hand cards + explicit hand features.
 
     Input: [mulligan_num, land_count, creature_count, avg_cmc, hand_card_ids[7], deck_card_ids[60]]
-    - mulligan_num: scalar (0-7)
-    - land_count: scalar (0-7) - number of lands in hand
-    - creature_count: scalar (0-7) - number of creatures in hand
-    - avg_cmc: scalar (0-~8) - average mana value of non-land cards
-    - hand_card_ids: 7 card IDs (token vocab)
-    - deck_card_ids: 60 card IDs (token vocab)
 
-    Output: [Q_keep, Q_mull] - Q-values for each action
-    Decision: Choose KEEP if Q_keep >= Q_mull, else MULLIGAN
-
-    Architecture:
-    1. Embed each card ID
-    2. Self-attention over hand embeddings (learns card interactions)
-    3. Mean-pool deck embeddings (deck signature)
-    4. Combine with mulligan number and explicit features
-    5. MLP to output two Q-values
+    Output: single logit -> P(keep) = sigmoid(logit)
+    Decision: KEEP if P(keep) >= 0.5, else MULLIGAN
     """
 
     def __init__(self, vocab_size=65536, embed_dim=32, max_hand=7, max_deck=60, num_explicit=3):
@@ -49,13 +36,11 @@ class MulliganNet(torch.nn.Module):
         combined_dim = 1 + num_explicit + embed_dim + 32
         self.fc1 = torch.nn.Linear(combined_dim, 64)
         self.fc2 = torch.nn.Linear(64, 32)
-        # Q-values: output 2 values (Q_keep, Q_mull)
-        self.output = torch.nn.Linear(32, 2)
-        # Bias toward keeping at initialization -- prevents always-mulligan collapse
-        # before the model has learned. Training will override this naturally.
+        # Single logit output: P(keep) = sigmoid(logit)
+        self.output = torch.nn.Linear(32, 1)
+        # Slight keep bias at init
         with torch.no_grad():
-            self.output.bias[0] = 0.5   # Q_keep starts higher
-            self.output.bias[1] = -0.5  # Q_mull starts lower
+            self.output.bias[0] = 0.5
 
     def forward(self, x):
         # x shape: [batch_size, 1 + num_explicit + max_hand + max_deck]
@@ -98,5 +83,5 @@ class MulliganNet(torch.nn.Module):
         x = F.relu(self.fc1(combined))
         x = F.relu(self.fc2(x))
 
-        # Output Q-values: [batch, 2] where [:, 0] = Q_keep, [:, 1] = Q_mull
-        return self.output(x)
+        # Single logit: P(keep) = sigmoid(output)
+        return self.output(x)  # [batch, 1]

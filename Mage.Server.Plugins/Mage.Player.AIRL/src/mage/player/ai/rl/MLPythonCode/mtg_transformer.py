@@ -129,7 +129,27 @@ class MTGTransformerModel(nn.Module):
         self.actor_norm1 = nn.LayerNorm(d_model // 2)
         self.actor_proj2 = nn.Linear(d_model // 2, num_actions)
 
-        # Critic head with proper scaling
+        # --- Separate critic encoder (independent from policy encoder) ---
+        self.critic_input_proj = nn.Linear(input_dim, d_model)
+        self.critic_input_norm = nn.LayerNorm(d_model)
+        # Shares self.token_id_emb (card identity is objective, not policy-dependent)
+        self.critic_cls_token = nn.Parameter(torch.zeros(1, 1, d_model))
+        nn.init.normal_(self.critic_cls_token, std=0.01)
+        critic_layer = nn.TransformerEncoderLayer(
+            d_model=d_model,
+            nhead=nhead,
+            dim_feedforward=dim_feedforward,
+            dropout=dropout,
+            batch_first=True,
+            norm_first=True
+        )
+        critic_layer.self_attn = ScaledMultiheadAttention(
+            embed_dim=d_model, num_heads=nhead,
+            dropout=dropout, batch_first=True
+        )
+        self.critic_transformer = nn.ModuleList([critic_layer])
+
+        # Critic MLP head (on top of critic encoder's CLS)
         self.critic_norm = nn.LayerNorm(d_model)
         self.critic_proj1 = nn.Linear(d_model, d_model // 2)
         self.critic_norm1 = nn.LayerNorm(d_model // 2)
@@ -206,9 +226,9 @@ class MTGTransformerModel(nn.Module):
                 token_ids: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         cls = self.encode_state(sequences, masks, token_ids)
 
-        # Process policy and value from CLS embedding
+        # Process policy from shared encoder CLS, value from independent critic
         policy_logits, policy_probs = self._process_policy(cls, action_masks)
-        value_scores = self._process_value(cls)
+        value_scores = self._process_value(sequences, masks, token_ids)
 
         return policy_logits, policy_probs, value_scores
 
@@ -245,6 +265,30 @@ class MTGTransformerModel(nn.Module):
         x, _ = self.encode_state_full(sequences, masks, token_ids)
         return x[:, 0]
 
+    def encode_state_critic(self,
+                            sequences: torch.Tensor,
+                            masks: torch.Tensor,
+                            token_ids: Optional[torch.Tensor] = None) -> torch.Tensor:
+        """Run separate critic encoder, return critic CLS [B, d_model]."""
+        x = self.critic_input_proj(sequences)
+        if token_ids is not None:
+            token_ids = token_ids.clamp(min=0, max=self.token_vocab - 1).long()
+            x = x + self.token_id_emb(token_ids)  # shared embedding
+        x = self.critic_input_norm(x)
+        x = x * self.input_scale  # reuse learned input scale
+
+        cls_tokens = self.critic_cls_token.expand(sequences.size(0), -1, -1)
+        x = torch.cat((cls_tokens, x), dim=1)
+
+        pad_mask = masks.bool()
+        pad_mask = torch.cat(
+            (torch.zeros(sequences.size(0), 1, device=masks.device, dtype=torch.bool), pad_mask), dim=1)
+
+        for layer in self.critic_transformer:
+            x = layer(x, src_key_padding_mask=pad_mask)
+
+        return x[:, 0]  # critic CLS
+
     def score_candidates(self,
                          sequences: torch.Tensor,
                          masks: torch.Tensor,
@@ -260,7 +304,7 @@ class MTGTransformerModel(nn.Module):
         # Encode full state sequence for cross-attention
         state_seq, state_pad_mask = self.encode_state_full(sequences, masks, token_ids)
         cls = state_seq[:, 0]                     # [B, d_model]
-        value_scores = self._process_value(cls)
+        value_scores = self._process_value(sequences, masks, token_ids)
 
         # Build candidate representations
         cand_feat = self.cand_feat_proj(candidate_features.float())
@@ -460,8 +504,13 @@ class MTGTransformerModel(nn.Module):
 
         return logits, probs
 
-    def _process_value(self, x: torch.Tensor) -> torch.Tensor:
-        """Return scalar state-value from critic head."""
+    def _process_value(self,
+                       sequences: torch.Tensor,
+                       masks: torch.Tensor,
+                       token_ids: Optional[torch.Tensor] = None) -> torch.Tensor:
+        """Return scalar state-value from independent critic encoder + head."""
+
+        x = self.encode_state_critic(sequences, masks, token_ids)
 
         # Normalisation & first projection
         x = self.critic_norm(x)
@@ -571,23 +620,42 @@ class SingleHeadScorer(nn.Module):
             x = self._unfused_encoder_layer(layer, x, pad_mask)
         return x, pad_mask
 
+    def _encode_state_critic_unfused(self, sequences, masks, token_ids):
+        """Critic encoder with unfused transformer layers for ONNX export."""
+        m = self.model
+        x = m.critic_input_proj(sequences)
+        if token_ids is not None:
+            safe_ids = token_ids.clamp(min=0, max=m.token_id_emb.num_embeddings - 1)
+            x = x + m.token_id_emb(safe_ids)
+        x = m.critic_input_norm(x)
+        x = x * m.input_scale
+        cls_expanded = m.critic_cls_token.expand(sequences.size(0), -1, -1)
+        x = torch.cat((cls_expanded, x), dim=1)
+        pad_mask = masks.bool()
+        pad_mask = torch.cat(
+            (torch.zeros(sequences.size(0), 1, device=masks.device, dtype=torch.bool), pad_mask), dim=1)
+        for layer in m.critic_transformer:
+            x = self._unfused_encoder_layer(layer, x, pad_mask)
+        return x[:, 0]  # critic CLS
+
     def forward(self, sequences, masks, token_ids, cand_features, cand_ids, cand_mask):
         m = self.model
         # Encode state (unfused for ONNX export)
         state_seq, state_pad_mask = self._encode_state_unfused(sequences, masks, token_ids)
         cls = state_seq[:, 0]
 
-        # Value head (inlined _process_value without data-dependent NaN if-check)
-        v = m.critic_norm(cls)
+        # Real value head: critic encoder + MLP (same as _process_value in MTGTransformerModel)
+        critic_cls = self._encode_state_critic_unfused(sequences, masks, token_ids)
+        v = m.critic_norm(critic_cls)
         v = m.critic_proj1(v)
-        v = F.relu(v)
+        v = torch.relu(v)
         v = m.critic_norm1(v)
         v = m.critic_proj2(v)
         v = torch.nan_to_num(v, nan=0.0, posinf=50.0, neginf=-50.0)
         v = torch.clamp(v, -50.0, 50.0)
         scale = torch.clamp(m.value_scale, 0.01, 10.0)
-        value_scores = torch.clamp(v * scale, -10.0, 10.0)
-        value_scores = torch.nan_to_num(value_scores, nan=0.0, posinf=0.0, neginf=0.0)
+        v = v * scale
+        value_scores = torch.clamp(v, -10.0, 10.0)
 
         # Candidate embedding
         cand_feat = m.cand_feat_proj(cand_features.float())

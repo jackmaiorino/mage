@@ -5,16 +5,123 @@ Usage:
     py -3.12 MLPythonCode/onnx_export.py --model-path profiles/Pauper-Rally-A/models/model_latest.pt --output-dir /tmp/onnx_test/
 """
 import argparse
+import math
 import os
 import sys
 from pathlib import Path
 
 import torch
+import torch.nn as nn
+import torch.nn.functional as F
 
 sys.path.insert(0, str(Path(__file__).parent))
 from mtg_transformer import MTGTransformerModel, SingleHeadScorer
 
 HEAD_IDS = ["action", "target", "card_select", "attack", "block"]
+
+
+class ManualMHA(nn.Module):
+    """ONNX-exportable replacement for nn.MultiheadAttention.
+
+    Uses explicit linear projections + scaled dot-product attention
+    instead of the fused _native_multi_head_attention kernel that
+    PyTorch's ONNX exporter can't handle.
+    """
+
+    def __init__(self, src: nn.MultiheadAttention):
+        super().__init__()
+        self.embed_dim = src.embed_dim
+        self.num_heads = src.num_heads
+        self.head_dim = src.embed_dim // src.num_heads
+        self.batch_first = src.batch_first
+
+        # Copy projection weights. nn.MultiheadAttention stores Q/K/V
+        # in a single in_proj_weight [3*E, E] + in_proj_bias [3*E].
+        E = self.embed_dim
+        self.q_proj = nn.Linear(E, E, bias=src.in_proj_bias is not None)
+        self.k_proj = nn.Linear(E, E, bias=src.in_proj_bias is not None)
+        self.v_proj = nn.Linear(E, E, bias=src.in_proj_bias is not None)
+
+        with torch.no_grad():
+            if src._qkv_same_embed_dim:
+                w = src.in_proj_weight
+                self.q_proj.weight.copy_(w[:E])
+                self.k_proj.weight.copy_(w[E:2*E])
+                self.v_proj.weight.copy_(w[2*E:])
+                if src.in_proj_bias is not None:
+                    b = src.in_proj_bias
+                    self.q_proj.bias.copy_(b[:E])
+                    self.k_proj.bias.copy_(b[E:2*E])
+                    self.v_proj.bias.copy_(b[2*E:])
+            else:
+                self.q_proj.weight.copy_(src.q_proj_weight)
+                self.k_proj.weight.copy_(src.k_proj_weight)
+                self.v_proj.weight.copy_(src.v_proj_weight)
+
+        self.out_proj = nn.Linear(E, E, bias=src.out_proj.bias is not None)
+        with torch.no_grad():
+            self.out_proj.weight.copy_(src.out_proj.weight)
+            if src.out_proj.bias is not None:
+                self.out_proj.bias.copy_(src.out_proj.bias)
+
+        # Copy learnable scale from ScaledMultiheadAttention if present
+        self.scale_param = None
+        if hasattr(src, 'scale') and isinstance(src.scale, nn.Parameter):
+            self.scale_param = nn.Parameter(src.scale.clone())
+
+    def forward(self, query, key, value, key_padding_mask=None,
+                need_weights=False, attn_mask=None, **kwargs):
+        # Ensure batch-first layout: [B, S, E]
+        if not self.batch_first:
+            query = query.transpose(0, 1)
+            key = key.transpose(0, 1)
+            value = value.transpose(0, 1)
+
+        B, S, E = query.shape
+        _, T, _ = key.shape
+        H = self.num_heads
+        D = self.head_dim
+
+        # Apply learnable scale if present
+        if self.scale_param is not None:
+            query = query * self.scale_param
+            key = key * self.scale_param
+
+        # Project Q, K, V
+        q = self.q_proj(query).reshape(B, S, H, D).transpose(1, 2)  # [B, H, S, D]
+        k = self.k_proj(key).reshape(B, T, H, D).transpose(1, 2)    # [B, H, T, D]
+        v = self.v_proj(value).reshape(B, T, H, D).transpose(1, 2)  # [B, H, T, D]
+
+        # Scaled dot-product attention
+        scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(D)  # [B, H, S, T]
+
+        # Apply key padding mask: True = ignore
+        if key_padding_mask is not None:
+            # [B, T] -> [B, 1, 1, T]
+            mask = key_padding_mask.unsqueeze(1).unsqueeze(2)
+            scores = scores.masked_fill(mask, float('-inf'))
+
+        attn_weights = F.softmax(scores, dim=-1)
+        # Replace NaN from all-masked rows with 0
+        attn_weights = torch.nan_to_num(attn_weights, nan=0.0)
+
+        out = torch.matmul(attn_weights, v)  # [B, H, S, D]
+        out = out.transpose(1, 2).reshape(B, S, E)  # [B, S, E]
+        out = self.out_proj(out)
+
+        if not self.batch_first:
+            out = out.transpose(0, 1)
+
+        return out, None
+
+
+def _replace_mha(module: nn.Module):
+    """Recursively replace all MultiheadAttention with ManualMHA."""
+    for name, child in module.named_children():
+        if isinstance(child, nn.MultiheadAttention):
+            setattr(module, name, ManualMHA(child))
+        else:
+            _replace_mha(child)
 
 
 def export_all_heads(model_path: str, output_dir: str,
@@ -26,14 +133,8 @@ def export_all_heads(model_path: str, output_dir: str,
         dim_feedforward=dim_ff, cand_feat_dim=cand_feat_dim,
     )
     model.load(model_path)
-    model.cpu()
-    # Use training mode for export to avoid fused _transformer_encoder_layer_fwd
-    # which ONNX can't export. Dropout is 0 so output is identical.
-    model.train()
-    # Disable dropout explicitly to ensure numerical equivalence
-    for layer in model.transformer_layers:
-        layer.dropout = torch.nn.Dropout(0.0)
-        layer.self_attn.dropout = 0.0
+    use_fp16 = bool(int(os.getenv("ONNX_EXPORT_FP16", "1")))
+    model.cpu().eval()
 
     if fixed_shapes:
         B, S, N = fixed_batch, fixed_seq, fixed_cand
@@ -51,34 +152,44 @@ def export_all_heads(model_path: str, output_dir: str,
     )
 
     if fixed_shapes:
-        dynamic_shapes = None
+        dynamic_axes = None
     else:
-        batch = torch.export.Dim("batch", min=1, max=512)
-        seq_len = torch.export.Dim("seq_len", min=1, max=256)
-        max_cand = torch.export.Dim("max_cand", min=1, max=512)
-        dynamic_shapes = {
-            "sequences": {0: batch, 1: seq_len},
-            "masks": {0: batch, 1: seq_len},
-            "token_ids": {0: batch, 1: seq_len},
-            "cand_features": {0: batch, 1: max_cand},
-            "cand_ids": {0: batch, 1: max_cand},
-            "cand_mask": {0: batch, 1: max_cand},
+        dynamic_axes = {
+            "sequences": {0: "batch", 1: "seq_len"},
+            "masks": {0: "batch", 1: "seq_len"},
+            "token_ids": {0: "batch", 1: "seq_len"},
+            "cand_features": {0: "batch", 1: "max_cand"},
+            "cand_ids": {0: "batch", 1: "max_cand"},
+            "cand_mask": {0: "batch", 1: "max_cand"},
+            "probs": {0: "batch", 1: "max_cand"},
+            "value": {0: "batch"},
         }
 
     for head_id in HEAD_IDS:
         wrapper = SingleHeadScorer(model, head_id)
         wrapper.eval()
+        # Replace all MHA modules with ONNX-exportable versions
+        _replace_mha(wrapper)
+
         out_path = os.path.join(output_dir, f"model_{head_id}.onnx")
         with torch.no_grad():
             torch.onnx.export(
                 wrapper, dummy, out_path,
-                dynamo=True,
+                opset_version=17,
                 input_names=["sequences", "masks", "token_ids",
                              "cand_features", "cand_ids", "cand_mask"],
                 output_names=["probs", "value"],
-                dynamic_shapes=dynamic_shapes,
+                dynamic_axes=dynamic_axes,
             )
-        print(f"Exported {head_id} -> {out_path}")
+        # Post-export FP16 conversion (cleaner than converting PyTorch model)
+        if use_fp16:
+            from onnxruntime.transformers.float16 import convert_float_to_float16
+            import onnx
+            fp32_model = onnx.load(out_path)
+            fp16_model = convert_float_to_float16(fp32_model, keep_io_types=True)
+            onnx.save(fp16_model, out_path)
+        sz = os.path.getsize(out_path)
+        print(f"Exported {head_id} -> {out_path} ({sz / 1024:.0f} KB)")
 
 
 if __name__ == "__main__":

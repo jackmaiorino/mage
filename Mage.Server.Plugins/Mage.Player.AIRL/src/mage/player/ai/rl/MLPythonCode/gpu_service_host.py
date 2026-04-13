@@ -763,27 +763,37 @@ class SharedGpuHost:
         total_steps = sum(task.step_count for task in tasks)
         total_episodes = len(tasks)
         started = time.monotonic()
-        state.learner_context.train_batch(
-            merged[0],
-            merged[1],
-            merged[2],
-            merged[3],
-            merged[4],
-            merged[5],
-            merged[6],
-            merged[7],
-            merged[8],
-            merged[9],
-            merged[10],
-            merged[11],
-            merged[12],
-            merged[13],
-            total_steps,
-            int(first.headers.get("seq_len", "0")),
-            int(first.headers.get("d_model", "0")),
-            int(first.headers.get("max_candidates", "0")),
-            int(first.headers.get("cand_feat_dim", "0")),
-        )
+        try:
+            state.learner_context.train_batch(
+                merged[0],
+                merged[1],
+                merged[2],
+                merged[3],
+                merged[4],
+                merged[5],
+                merged[6],
+                merged[7],
+                merged[8],
+                merged[9],
+                merged[10],
+                merged[11],
+                merged[12],
+                merged[13],
+                total_steps,
+                int(first.headers.get("seq_len", "0")),
+                int(first.headers.get("d_model", "0")),
+                int(first.headers.get("max_candidates", "0")),
+                int(first.headers.get("cand_feat_dim", "0")),
+            )
+        finally:
+            # Release cached GPU memory after every training batch so ONNX
+            # inference (running in the JVM on the same GPU) isn't starved.
+            try:
+                import torch
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+            except Exception:
+                pass
         finished = time.monotonic()
         service_ms = max(0.0, (finished - started) * 1000.0)
         print(f"[TRAIN_DIAG] episodes={total_episodes} steps={total_steps} "
