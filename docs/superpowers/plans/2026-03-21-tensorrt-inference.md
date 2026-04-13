@@ -1,3 +1,5 @@
+> **SUPERSEDED** by [Java ONNX Runtime](2026-03-25-java-onnx-inference.md). See [Project Timeline](../../PROJECT_TIMELINE.md).
+
 # TensorRT Inference Optimization Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.

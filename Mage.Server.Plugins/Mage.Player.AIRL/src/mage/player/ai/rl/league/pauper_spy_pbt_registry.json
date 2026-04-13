@@ -1,40 +1,91 @@
 [
   {
-    "profile": "Pauper-Standard",
+    "profile": "Pauper-Wildfire",
     "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
-    "priority": 1,
-    "population_group": "standard",
-    "seed": 42,
+    "priority": 2,
+    "population_group": "single-deck",
+    "seed": 100,
     "train_env": {
-      "ENTROPY_START": "0.08",
-      "ENTROPY_END": "0.005",
-      "ENTROPY_DECAY_STEPS": "12500000",
-      "RL_ACTION_EPS_START": "0.05",
-      "RL_FULL_TURN_RANDOM_START": "0.10",
-      "TEMPERATURE_FLOOR": "0.30",
+      "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Jund Wildfire.dek",
+      "ENTROPY_START": "0.15",
+      "ENTROPY_END": "0.02",
+      "ENTROPY_DECAY_STEPS": "2500000",
+      "TEMPERATURE_FLOOR": "0.05",
       "ACTOR_LR": "3e-4",
       "GAME_TIMEOUT_SEC": "900",
       "USE_GAE": "1",
-      "GAE_AUTO_ENABLE": "1",
-      "GAE_LAMBDA_HIGH": "0.99",
-      "GAE_LAMBDA_LOW": "0.95",
-      "GAE_LAMBDA_DECAY_STEPS": "12500000",
-      "PPO_GAMMA": "0.995",
-      "MULLIGAN_EPSILON_START": "0.30",
-      "MULLIGAN_EPSILON_END": "0.05",
-      "MULLIGAN_EPSILON_DECAY_EPISODES": "200000",
-      "RL_FULL_TURN_RANDOM_START": "0.08",
-      "RL_FULL_TURN_RANDOM_END": "0.01",
-      "RL_FULL_TURN_RANDOM_DECAY_EPISODES": "100000"
+      "GAE_AUTO_ENABLE": "1"
     },
-    "pbt_mutable_env": [
-      "ENTROPY_START", "ENTROPY_END", "RL_ACTION_EPS_START",
-      "RL_FULL_TURN_RANDOM_START", "TEMPERATURE_FLOOR", "ACTOR_LR"
-    ],
-    "notes": "Unified standard deck model (Rally, Affinity, Elves, Wildfire)"
+    "notes": "Single-deck: Jund Wildfire (Cleansing Wildfire combo)"
+  },
+  {
+    "profile": "Pauper-Rally",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 3,
+    "population_group": "single-deck",
+    "seed": 200,
+    "train_env": {
+      "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono Red Rally.dek",
+      "ENTROPY_START": "0.15",
+      "ENTROPY_END": "0.02",
+      "ENTROPY_DECAY_STEPS": "2500000",
+      "TEMPERATURE_FLOOR": "0.05",
+      "ACTOR_LR": "3e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "USE_GAE": "1",
+      "GAE_AUTO_ENABLE": "1"
+    },
+    "notes": "Single-deck: Mono Red Rally (aggro)"
+  },
+  {
+    "profile": "Pauper-Affinity",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 4,
+    "population_group": "single-deck",
+    "seed": 300,
+    "train_env": {
+      "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Grixis Affinity.dek",
+      "ENTROPY_START": "0.15",
+      "ENTROPY_END": "0.02",
+      "ENTROPY_DECAY_STEPS": "2500000",
+      "TEMPERATURE_FLOOR": "0.05",
+      "ACTOR_LR": "3e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "USE_GAE": "1",
+      "GAE_AUTO_ENABLE": "1"
+    },
+    "notes": "Single-deck: Grixis Affinity (artifact synergy)"
+  },
+  {
+    "profile": "Pauper-Elves",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 5,
+    "population_group": "single-deck",
+    "seed": 400,
+    "train_env": {
+      "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Elves.dek",
+      "ENTROPY_START": "0.15",
+      "ENTROPY_END": "0.02",
+      "ENTROPY_DECAY_STEPS": "2500000",
+      "TEMPERATURE_FLOOR": "0.05",
+      "ACTOR_LR": "3e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "USE_GAE": "1",
+      "GAE_AUTO_ENABLE": "1"
+    },
+    "notes": "Single-deck: Elves (tribal synergy)"
   },
   {
     "profile": "Pauper-Spy-Combo-A",
@@ -50,7 +101,7 @@
       "ENTROPY_END": "0.02",
       "RL_ACTION_EPS_START": "0.05",
       "RL_FULL_TURN_RANDOM_START": "0.15",
-      "TEMPERATURE_FLOOR": "0.30",
+      "TEMPERATURE_FLOOR": "0.05",
       "ACTOR_LR": "3e-4",
       "GAME_TIMEOUT_SEC": "900",
       "USE_GAE": "1",
@@ -110,7 +161,7 @@
       "ENTROPY_END": "0.02",
       "RL_ACTION_EPS_START": "0.05",
       "RL_FULL_TURN_RANDOM_START": "0.15",
-      "TEMPERATURE_FLOOR": "0.30",
+      "TEMPERATURE_FLOOR": "0.05",
       "ACTOR_LR": "3e-4",
       "GAME_TIMEOUT_SEC": "900",
       "USE_GAE": "1",
@@ -127,36 +178,6 @@
     "notes": "Elves A"
   },
   {
-    "profile": "Pauper-Elves-B",
-    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Elves.dek",
-    "active": true,
-    "train_enabled": true,
-    "target_winrate": 0.6,
-    "priority": 50,
-    "population_group": "elves",
-    "seed": 2002,
-    "train_env": {
-      "ENTROPY_START": "0.25",
-      "ENTROPY_END": "0.03",
-      "RL_ACTION_EPS_START": "0.08",
-      "RL_FULL_TURN_RANDOM_START": "0.20",
-      "TEMPERATURE_FLOOR": "0.25",
-      "ACTOR_LR": "2e-4",
-      "GAME_TIMEOUT_SEC": "900",
-      "USE_GAE": "1",
-      "GAE_AUTO_ENABLE": "1",
-      "GAE_LAMBDA_HIGH": "0.99",
-      "GAE_LAMBDA_LOW": "0.95",
-      "GAE_LAMBDA_DECAY_STEPS": "30000",
-      "PPO_GAMMA": "0.995"
-    },
-    "pbt_mutable_env": [
-      "ENTROPY_START", "ENTROPY_END", "RL_ACTION_EPS_START",
-      "RL_FULL_TURN_RANDOM_START", "TEMPERATURE_FLOOR", "ACTOR_LR"
-    ],
-    "notes": "Elves B"
-  },
-  {
     "profile": "Pauper-Rally-A",
     "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono Red Rally.dek",
     "active": true,
@@ -170,7 +191,7 @@
       "ENTROPY_END": "0.02",
       "RL_ACTION_EPS_START": "0.05",
       "RL_FULL_TURN_RANDOM_START": "0.15",
-      "TEMPERATURE_FLOOR": "0.30",
+      "TEMPERATURE_FLOOR": "0.05",
       "ACTOR_LR": "3e-4",
       "GAME_TIMEOUT_SEC": "900",
       "USE_GAE": "1",
@@ -230,7 +251,7 @@
       "ENTROPY_END": "0.02",
       "RL_ACTION_EPS_START": "0.05",
       "RL_FULL_TURN_RANDOM_START": "0.15",
-      "TEMPERATURE_FLOOR": "0.30",
+      "TEMPERATURE_FLOOR": "0.05",
       "ACTOR_LR": "3e-4",
       "GAME_TIMEOUT_SEC": "900",
       "USE_GAE": "1",
@@ -290,7 +311,7 @@
       "ENTROPY_END": "0.02",
       "RL_ACTION_EPS_START": "0.05",
       "RL_FULL_TURN_RANDOM_START": "0.15",
-      "TEMPERATURE_FLOOR": "0.30",
+      "TEMPERATURE_FLOOR": "0.05",
       "ACTOR_LR": "3e-4",
       "GAME_TIMEOUT_SEC": "900",
       "USE_GAE": "1",
@@ -305,35 +326,5 @@
       "RL_FULL_TURN_RANDOM_START", "TEMPERATURE_FLOOR", "ACTOR_LR"
     ],
     "notes": "Wildfire A"
-  },
-  {
-    "profile": "Pauper-Wildfire-B",
-    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Jund Wildfire.dek",
-    "active": true,
-    "train_enabled": true,
-    "target_winrate": 0.6,
-    "priority": 50,
-    "population_group": "wildfire",
-    "seed": 5002,
-    "train_env": {
-      "ENTROPY_START": "0.25",
-      "ENTROPY_END": "0.03",
-      "RL_ACTION_EPS_START": "0.08",
-      "RL_FULL_TURN_RANDOM_START": "0.20",
-      "TEMPERATURE_FLOOR": "0.25",
-      "ACTOR_LR": "2e-4",
-      "GAME_TIMEOUT_SEC": "900",
-      "USE_GAE": "1",
-      "GAE_AUTO_ENABLE": "1",
-      "GAE_LAMBDA_HIGH": "0.99",
-      "GAE_LAMBDA_LOW": "0.95",
-      "GAE_LAMBDA_DECAY_STEPS": "30000",
-      "PPO_GAMMA": "0.995"
-    },
-    "pbt_mutable_env": [
-      "ENTROPY_START", "ENTROPY_END", "RL_ACTION_EPS_START",
-      "RL_FULL_TURN_RANDOM_START", "TEMPERATURE_FLOOR", "ACTOR_LR"
-    ],
-    "notes": "Wildfire B"
   }
 ]
