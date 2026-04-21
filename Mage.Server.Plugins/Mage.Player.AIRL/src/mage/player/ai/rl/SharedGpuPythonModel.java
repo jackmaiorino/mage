@@ -90,13 +90,17 @@ public final class SharedGpuPythonModel implements PythonModel {
     private final ScheduledExecutorService predictionScheduler;
     private final ScheduledExecutorService trainScheduler;
     private final Channel[] channels;
+    private final Channel[] inferChannels; // separate channels for Rust inference server (null if not configured)
     private final AtomicLong channelRoundRobin = new AtomicLong(0);
+    private final AtomicLong inferChannelRoundRobin = new AtomicLong(0);
 
     private volatile int trainQueueDepth;
     private volatile long droppedTrainEpisodes;
 
     private final class Channel {
         final int index;
+        final String overrideHost; // null = use default endpointHost
+        final int overridePort;    // -1 = use default endpointPort
         final ConcurrentHashMap<Long, CompletableFuture<SharedGpuProtocol.ResponseFrame>> pending = new ConcurrentHashMap<>();
         final BlockingQueue<OutboundRequest> outbound = new LinkedBlockingQueue<>(OUTBOUND_QUEUE_CAPACITY);
         final Object connectionLock = new Object();
@@ -110,7 +114,18 @@ public final class SharedGpuPythonModel implements PythonModel {
 
         Channel(int index) {
             this.index = index;
+            this.overrideHost = null;
+            this.overridePort = -1;
         }
+
+        Channel(int index, String host, int port) {
+            this.index = index;
+            this.overrideHost = host;
+            this.overridePort = port;
+        }
+
+        String resolveHost() { return overrideHost != null ? overrideHost : endpointHost; }
+        int resolvePort() { return overridePort >= 0 ? overridePort : endpointPort; }
 
         boolean isConnected() {
             Socket s = socket;
@@ -147,22 +162,24 @@ public final class SharedGpuPythonModel implements PythonModel {
 
         void connectLocked() {
             closeConnection(new IOException("Reconnecting shared GPU channel " + index));
+            String host = resolveHost();
+            int basePort = resolvePort();
             int portOffset = (NUM_GPU_HOSTS > 1) ? (index % NUM_GPU_HOSTS) : 0;
-            int targetPort = endpointPort + portOffset;
+            int targetPort = basePort + portOffset;
             try {
                 Socket newSocket = new Socket();
                 newSocket.setTcpNoDelay(true);
                 newSocket.setKeepAlive(true);
-                newSocket.connect(new InetSocketAddress(endpointHost, targetPort), CONNECT_TIMEOUT_MS);
+                newSocket.connect(new InetSocketAddress(host, targetPort), CONNECT_TIMEOUT_MS);
                 socket = newSocket;
                 input = newSocket.getInputStream();
                 output = newSocket.getOutputStream();
                 registered = false;
                 registeredProfiles.clear();
                 startThreads();
-                logger.info("Connected shared GPU channel " + index + " profile=" + profileId + " endpoint=" + endpointHost + ":" + targetPort);
+                logger.info("Connected shared GPU channel " + index + " profile=" + profileId + " endpoint=" + host + ":" + targetPort);
             } catch (IOException e) {
-                throw new IllegalStateException("Failed to connect channel " + index + " to shared GPU host at " + endpointHost + ":" + targetPort, e);
+                throw new IllegalStateException("Failed to connect channel " + index + " to shared GPU host at " + host + ":" + targetPort, e);
             }
         }
 
@@ -423,6 +440,20 @@ public final class SharedGpuPythonModel implements PythonModel {
         for (int i = 0; i < NUM_CHANNELS; i++) {
             this.channels[i] = new Channel(i);
         }
+        // Optional separate inference server (Rust) for score/mulligan requests
+        String inferEndpoint = EnvConfig.str("INFER_SERVICE_ENDPOINT", "").trim();
+        if (!inferEndpoint.isEmpty()) {
+            int inferSep = inferEndpoint.lastIndexOf(':');
+            String inferHost = inferEndpoint.substring(0, inferSep);
+            int inferPort = Integer.parseInt(inferEndpoint.substring(inferSep + 1));
+            this.inferChannels = new Channel[NUM_CHANNELS];
+            for (int i = 0; i < NUM_CHANNELS; i++) {
+                this.inferChannels[i] = new Channel(i, inferHost, inferPort);
+            }
+            logger.info("SharedGpuPythonModel: inference -> " + inferEndpoint + ", training -> " + this.endpoint);
+        } else {
+            this.inferChannels = null;
+        }
         logger.info("SharedGpuPythonModel created with " + NUM_CHANNELS + " channels for profile=" + profileId);
     }
 
@@ -533,63 +564,6 @@ public final class SharedGpuPythonModel implements PythonModel {
     }
 
     @Override
-    public float predictMulligan(float[] features) {
-        Map<String, String> headers = singletonProfileHeaders();
-        headers.put("feature_count", Integer.toString(features == null ? 0 : features.length));
-        SharedGpuProtocol.ResponseFrame response = invoke(
-                SharedGpuProtocol.OP_PREDICT_MULLIGAN,
-                headers,
-                SharedGpuTensorSerde.packSegments(SharedGpuTensorSerde.floatFeaturesToBytes(features == null ? new float[0] : features)),
-                CONTROL_TIMEOUT_MS
-        );
-        return parseFloatHeader(response.headers, "value", 0.5f);
-    }
-
-    @Override
-    public float[] predictMulliganScores(float[] features) {
-        Map<String, String> headers = singletonProfileHeaders();
-        headers.put("feature_count", Integer.toString(features == null ? 0 : features.length));
-        SharedGpuProtocol.ResponseFrame response = invoke(
-                SharedGpuProtocol.OP_PREDICT_MULLIGAN_SCORES,
-                headers,
-                SharedGpuTensorSerde.packSegments(SharedGpuTensorSerde.floatFeaturesToBytes(features == null ? new float[0] : features)),
-                CONTROL_TIMEOUT_MS
-        );
-        ByteBuffer buffer = ByteBuffer.wrap(response.payload == null ? new byte[0] : response.payload).order(ByteOrder.LITTLE_ENDIAN);
-        float keep = buffer.remaining() >= 4 ? buffer.getFloat() : 0.0f;
-        float mull = buffer.remaining() >= 4 ? buffer.getFloat() : 0.0f;
-        return new float[]{keep, mull};
-    }
-
-    @Override
-    public void trainMulligan(
-            byte[] features,
-            byte[] decisions,
-            byte[] outcomes,
-            byte[] gameLengths,
-            byte[] earlyLandScores,
-            byte[] overrides,
-            int batchSize
-    ) {
-        Map<String, String> headers = singletonProfileHeaders();
-        headers.put("batch_size", Integer.toString(batchSize));
-        byte[] payload = SharedGpuTensorSerde.packSegments(
-                safeBytes(features),
-                safeBytes(decisions),
-                safeBytes(outcomes),
-                safeBytes(gameLengths),
-                safeBytes(earlyLandScores),
-                safeBytes(overrides)
-        );
-        invoke(SharedGpuProtocol.OP_TRAIN_MULLIGAN, headers, payload, CONTROL_TIMEOUT_MS);
-    }
-
-    @Override
-    public void saveMulliganModel() {
-        invoke(SharedGpuProtocol.OP_SAVE_MULLIGAN_MODEL, singletonProfileHeaders(), new byte[0], CONTROL_TIMEOUT_MS);
-    }
-
-    @Override
     public void saveModel(String path) {
         Map<String, String> headers = singletonProfileHeaders();
         headers.put("path", path == null ? "" : path);
@@ -605,15 +579,6 @@ public final class SharedGpuPythonModel implements PythonModel {
     @Override
     public Map<String, Integer> getMainModelTrainingStats() {
         SharedGpuProtocol.ResponseFrame response = invoke(SharedGpuProtocol.OP_GET_MAIN_STATS, singletonProfileHeaders(), new byte[0], CONTROL_TIMEOUT_MS);
-        Map<String, Integer> result = new LinkedHashMap<>();
-        result.put("train_steps", parseIntHeader(response.headers, "train_steps", 0));
-        result.put("train_samples", parseIntHeader(response.headers, "train_samples", 0));
-        return result;
-    }
-
-    @Override
-    public Map<String, Integer> getMulliganModelTrainingStats() {
-        SharedGpuProtocol.ResponseFrame response = invoke(SharedGpuProtocol.OP_GET_MULLIGAN_STATS, singletonProfileHeaders(), new byte[0], CONTROL_TIMEOUT_MS);
         Map<String, Integer> result = new LinkedHashMap<>();
         result.put("train_steps", parseIntHeader(response.headers, "train_steps", 0));
         result.put("train_samples", parseIntHeader(response.headers, "train_samples", 0));
@@ -702,6 +667,28 @@ public final class SharedGpuPythonModel implements PythonModel {
         Channel ch = pickChannel();
         ch.ensureReady();
         return invokeOnChannel(ch, opcode, headers, payload, timeoutMs);
+    }
+
+    /** Route inference requests to Rust server if configured, else default channels. */
+    private SharedGpuProtocol.ResponseFrame invokeInfer(int opcode, Map<String, String> headers, byte[] payload, int timeoutMs) {
+        Channel ch = pickInferChannel();
+        ch.ensureReady();
+        return invokeOnChannel(ch, opcode, headers, payload, timeoutMs);
+    }
+
+    private CompletableFuture<SharedGpuProtocol.ResponseFrame> invokeInferAsync(
+            int opcode, Map<String, String> headers, byte[] payload, int timeoutMs) {
+        Channel ch = pickInferChannel();
+        ch.ensureReady();
+        return invokeOnChannelAsync(ch, opcode, headers, payload, timeoutMs)
+                .thenApply(r -> r); // unwrap
+    }
+
+    private Channel pickInferChannel() {
+        if (inferChannels != null) {
+            return inferChannels[(int)(inferChannelRoundRobin.getAndIncrement() % inferChannels.length)];
+        }
+        return pickChannel();
     }
 
     private CompletableFuture<SharedGpuProtocol.ResponseFrame> invokeAsync(
@@ -802,7 +789,7 @@ public final class SharedGpuPythonModel implements PythonModel {
             // The transport already multiplexes responses by request id, so keep
             // distinct local batch-key groups in flight instead of waiting for
             // each synchronous round-trip to finish before submitting the next.
-            invokeAsync(
+            invokeInferAsync(
                     SharedGpuProtocol.OP_SCORE,
                     headers,
                     payload,
@@ -896,6 +883,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         headers.put("d_model", Integer.toString(key.dModel));
         headers.put("max_candidates", Integer.toString(key.maxCandidates));
         headers.put("cand_feat_dim", Integer.toString(key.candFeatDim));
+        headers.put("num_archetypes", Integer.toString(StateSequenceBuilder.TrainingData.NUM_ARCHETYPES));
         headers.put("local_flush_reason", dueToFull ? "full" : "timeout");
         byte[] payload = SharedGpuTensorSerde.buildTrainPayload(mergedTrainingData, mergedRewards);
         try {

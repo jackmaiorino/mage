@@ -155,6 +155,20 @@ class MTGTransformerModel(nn.Module):
         self.critic_norm1 = nn.LayerNorm(d_model // 2)
         self.critic_proj2 = nn.Linear(d_model // 2, 1)
 
+        # Belief head (Phase 1 aux loss): classifier over deck archetypes.
+        # Input: shared encoder CLS. Output: logits over NUM_ARCHETYPES classes
+        # (0=Wildfire, 1=Rally, 2=Affinity, 3=Elves). Trained only on the
+        # public state the policy sees -- it must INFER the archetype, not
+        # be told it. At inference, softmax(belief_head(cls)) gives the
+        # archetype distribution for ISMCTS determinization sampling.
+        self.num_archetypes = int(os.getenv('NUM_ARCHETYPES', '4'))
+        self.belief_head = nn.Sequential(
+            nn.LayerNorm(d_model),
+            nn.Linear(d_model, d_model // 2),
+            nn.ReLU(),
+            nn.Linear(d_model // 2, self.num_archetypes),
+        )
+
         # Learnable scaling factors
         self.value_scale = nn.Parameter(torch.tensor(1.0))
         # Start with a slightly lower temperature so small logit differences
@@ -299,12 +313,15 @@ class MTGTransformerModel(nn.Module):
                          head_id: str = "action",
                          pick_index: int = 0,
                          min_targets: int = 0,
-                         max_targets: int = 0) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Return (candidate_probs, value_scores)."""
-        # Encode full state sequence for cross-attention
+                         max_targets: int = 0,
+                         return_cls: bool = False):
+        """Return (candidate_probs, value_scores). If return_cls, also returns the shared-encoder CLS as the 3rd element."""
+        # Encode full state sequence for cross-attention. The CLS token is
+        # reused by the value head (shared encoder) so gradient flows from
+        # both the policy and value losses into the same transformer_layers.
         state_seq, state_pad_mask = self.encode_state_full(sequences, masks, token_ids)
         cls = state_seq[:, 0]                     # [B, d_model]
-        value_scores = self._process_value(sequences, masks, token_ids)
+        value_scores = self._process_value_from_cls(cls)
 
         # Build candidate representations
         cand_feat = self.cand_feat_proj(candidate_features.float())
@@ -363,7 +380,20 @@ class MTGTransformerModel(nn.Module):
         fallback = valid.float() / (valid.float().sum(dim=-1, keepdim=True) + 1e-8)
         probs = torch.where(row_sum > 0, probs / (row_sum + 1e-8), fallback)
 
+        if return_cls:
+            return probs, value_scores, cls
         return probs, value_scores
+
+    def belief_logits_from_cls(self, cls: torch.Tensor) -> torch.Tensor:
+        """Archetype classifier logits from shared-encoder CLS.
+
+        Args:
+            cls: [B, d_model] shared-encoder CLS embedding.
+
+        Returns:
+            [B, num_archetypes] logits over deck archetypes.
+        """
+        return self.belief_head(cls)
 
     def predict_batch(self,
                       sequences: np.ndarray,
@@ -504,37 +534,38 @@ class MTGTransformerModel(nn.Module):
 
         return logits, probs
 
-    def _process_value(self,
-                       sequences: torch.Tensor,
-                       masks: torch.Tensor,
-                       token_ids: Optional[torch.Tensor] = None) -> torch.Tensor:
-        """Return scalar state-value from independent critic encoder + head."""
+    def _process_value_from_cls(self, cls: torch.Tensor) -> torch.Tensor:
+        """Scalar value from any [B, d_model] feature (shared-encoder path).
 
-        x = self.encode_state_critic(sequences, masks, token_ids)
-
-        # Normalisation & first projection
-        x = self.critic_norm(x)
+        This is the active value head after the critic-encoder refactor: the
+        value MLP operates on the *same* CLS token the policy uses, so the
+        encoder is shared and gets gradient from both the policy and value
+        losses. The old separate `critic_transformer` encoder is retained in
+        the state_dict only for backward-compat with existing checkpoints;
+        its parameters no longer receive gradient.
+        """
+        x = self.critic_norm(cls)
         x = self.critic_proj1(x)
         x = F.relu(x)
         x = self.critic_norm1(x)
-
-        # Second projection → scalar
         value = self.critic_proj2(x)
-
-        # Numeric safety
         value = torch.nan_to_num(value, nan=0.0, posinf=50.0, neginf=-50.0)
         value = torch.clamp(value, -50.0, 50.0)
-
-        # Apply learnable scale (no tanh: allow critic to represent targets > 1.0)
         scale = torch.clamp(self.value_scale, 0.01, 10.0)
         value = value * scale
         value = torch.clamp(value, -10.0, 10.0)
-
-        # Final safety clamp for numerical stability
         if torch.isnan(value).any() or torch.isinf(value).any():
             logger.error("NaN/Inf in value head – replacing with zeros")
             value = torch.nan_to_num(value, nan=0.0, posinf=0.0, neginf=0.0)
         return value
+
+    def _process_value(self,
+                       sequences: torch.Tensor,
+                       masks: torch.Tensor,
+                       token_ids: Optional[torch.Tensor] = None) -> torch.Tensor:
+        """Backward-compat wrapper: uses shared encoder + critic head."""
+        cls = self.encode_state(sequences, masks, token_ids)
+        return self._process_value_from_cls(cls)
 
     # ------------------------------------------------------------------
     # Generic helpers
@@ -640,13 +671,13 @@ class SingleHeadScorer(nn.Module):
 
     def forward(self, sequences, masks, token_ids, cand_features, cand_ids, cand_mask):
         m = self.model
-        # Encode state (unfused for ONNX export)
+        # Encode state (unfused for ONNX export). Shared encoder: CLS token
+        # feeds BOTH policy scorer and value head (see _process_value_from_cls).
         state_seq, state_pad_mask = self._encode_state_unfused(sequences, masks, token_ids)
         cls = state_seq[:, 0]
 
-        # Real value head: critic encoder + MLP (same as _process_value in MTGTransformerModel)
-        critic_cls = self._encode_state_critic_unfused(sequences, masks, token_ids)
-        v = m.critic_norm(critic_cls)
+        # Value head: MLP on top of shared CLS (same as _process_value_from_cls).
+        v = m.critic_norm(cls)
         v = m.critic_proj1(v)
         v = torch.relu(v)
         v = m.critic_norm1(v)
@@ -696,11 +727,15 @@ class SingleHeadScorer(nn.Module):
 class ScaledMultiheadAttention(nn.MultiheadAttention):
     """Multi-head attention with a learnable pre-scaling of queries & keys.
 
-    Subclassing ``nn.MultiheadAttention`` means we automatically present the
-    full public API (e.g. ``in_proj_weight``, ``_qkv_same_embed_dim``) expected
-    by upstream PyTorch components such as ``nn.TransformerEncoderLayer``. The
-    only behavioural change is a learnable scalar factor applied to *Q* and *K*
-    before the dot-product attention is computed.
+    Subclassing ``nn.MultiheadAttention`` keeps the public parameter surface
+    (``in_proj_weight``, ``in_proj_bias``, ``out_proj``, etc.) so existing
+    checkpoints load unchanged. The forward path, however, invokes
+    ``F.scaled_dot_product_attention`` directly so that PyTorch picks the
+    fused flash / memory-efficient kernel -- the attention matrix is never
+    materialized, which is the dominant memory cost on long sequences.
+
+    Set env var ``USE_FUSED_SDPA=0`` to fall back to the parent's forward
+    for A/B comparison.
     """
 
     def __init__(self, embed_dim: int, num_heads: int, dropout: float = 0.0, batch_first: bool = False):
@@ -711,16 +746,19 @@ class ScaledMultiheadAttention(nn.MultiheadAttention):
         # NOTE: Was 0.1, increased to 1.0 to avoid uniform attention
         self.scale = nn.Parameter(torch.ones(1) * 1.0)
 
-    # ------------------------------------------------------------------
-    # Override forward to inject scaling, then delegate to super().forward
-    # ------------------------------------------------------------------
+    def _effective_scale(self):
+        # Learnable scale has collapsed to 0 in every saved checkpoint, which
+        # makes q*scale == k*scale == 0 and forces uniform attention (bag-of-
+        # words). Floor at a positive value so attention remains meaningful and
+        # the rest of the network has a chance to recover; gradient still lets
+        # the scale grow above the floor. Override via env for ablation.
+        floor = float(os.getenv("SCALED_MHA_MIN_SCALE", "1.0"))
+        return torch.clamp(self.scale, min=floor)
 
-    def forward(self, query, key, value, key_padding_mask=None, need_weights=True, attn_mask=None, is_causal=False):
-        # Apply learnable scaling to queries and keys
-        q = query * self.scale
-        k = key * self.scale
-
-        # Handle the optional is_causal argument depending on torch version
+    def _parent_forward(self, query, key, value, key_padding_mask, need_weights, attn_mask, is_causal):
+        s = self._effective_scale()
+        q = query * s
+        k = key * s
         forward_kwargs = {
             'key_padding_mask': key_padding_mask,
             'need_weights': need_weights,
@@ -728,8 +766,62 @@ class ScaledMultiheadAttention(nn.MultiheadAttention):
         }
         if 'is_causal' in super().forward.__code__.co_varnames:
             forward_kwargs['is_causal'] = is_causal
-
         return super().forward(q, k, value, **forward_kwargs)
+
+    def forward(self, query, key, value, key_padding_mask=None, need_weights=True, attn_mask=None, is_causal=False):
+        # Fall back to parent when: caller needs attention weights, non-default
+        # embed-dim layout, non-3D tensors, or explicitly disabled via env.
+        _fused_enabled = os.getenv("USE_FUSED_SDPA", "1") != "0"
+        if (not _fused_enabled) or need_weights or (not self._qkv_same_embed_dim) \
+                or query.dim() != 3 or (not self.batch_first) or attn_mask is not None:
+            return self._parent_forward(query, key, value, key_padding_mask, need_weights, attn_mask, is_causal)
+
+        E = self.embed_dim
+        H = self.num_heads
+        Hd = self.head_dim
+        B, N_q, _ = query.shape
+        N_k = key.shape[1]
+
+        # Apply learnable scale (floored to avoid the collapsed-to-0 failure
+        # mode) to query & key *inputs* pre-projection, matching the original
+        # super().forward(q*scale, k*scale, value) semantics.
+        s = self._effective_scale()
+        q_in = query * s
+        k_in = key * s
+
+        if self.in_proj_bias is not None:
+            q_proj = F.linear(q_in, self.in_proj_weight[:E], self.in_proj_bias[:E])
+            k_proj = F.linear(k_in, self.in_proj_weight[E:2 * E], self.in_proj_bias[E:2 * E])
+            v_proj = F.linear(value, self.in_proj_weight[2 * E:], self.in_proj_bias[2 * E:])
+        else:
+            q_proj = F.linear(q_in, self.in_proj_weight[:E])
+            k_proj = F.linear(k_in, self.in_proj_weight[E:2 * E])
+            v_proj = F.linear(value, self.in_proj_weight[2 * E:])
+
+        # [B, N, E] -> [B, H, N, Hd]
+        q = q_proj.view(B, N_q, H, Hd).transpose(1, 2)
+        k = k_proj.view(B, N_k, H, Hd).transpose(1, 2)
+        v = v_proj.view(B, N_k, H, Hd).transpose(1, 2)
+
+        # key_padding_mask: bool [B, N_k]; True = padding. SDPA attn_mask float:
+        # 0 = attend, -inf = mask out. Broadcast to [B, 1, 1, N_k].
+        sdpa_mask = None
+        if key_padding_mask is not None:
+            kpm = key_padding_mask.bool()
+            sdpa_mask = torch.zeros(B, 1, 1, N_k, dtype=q.dtype, device=q.device)
+            sdpa_mask = sdpa_mask.masked_fill(kpm.unsqueeze(1).unsqueeze(2), float('-inf'))
+
+        dropout_p = self.dropout if self.training else 0.0
+        out = F.scaled_dot_product_attention(
+            q, k, v,
+            attn_mask=sdpa_mask,
+            dropout_p=dropout_p,
+            is_causal=is_causal,
+        )
+
+        out = out.transpose(1, 2).contiguous().view(B, N_q, E)
+        out = self.out_proj(out)
+        return out, None
 
     def _get_name(self):
         return 'ScaledMultiheadAttention'

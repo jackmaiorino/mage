@@ -20,6 +20,45 @@ from mtg_transformer import MTGTransformerModel, SingleHeadScorer
 HEAD_IDS = ["action", "target", "card_select", "attack", "block"]
 
 
+class BeliefHeadScorer(nn.Module):
+    """ONNX wrapper: run shared encoder, emit archetype logits.
+
+    Input: (sequences, masks, token_ids) — same signature as action heads,
+    so the Java side can build tensors once and call either model.
+    Output: logits [B, num_archetypes].
+    """
+
+    def __init__(self, model: 'MTGTransformerModel'):
+        super().__init__()
+        self.model = model
+
+    @staticmethod
+    def _unfused_encoder_layer(layer, x, src_key_padding_mask):
+        """Mirror SingleHeadScorer._unfused_encoder_layer so ONNX export avoids
+        PyTorch's fused multi-head attention op (which the exporter can't handle)."""
+        x2, _ = layer.self_attn(x, x, x, key_padding_mask=src_key_padding_mask)
+        x = layer.norm1(x + layer.dropout1(x2))
+        x2 = layer.linear2(layer.dropout(F.relu(layer.linear1(x))))
+        x = layer.norm2(x + layer.dropout2(x2))
+        return x
+
+    def forward(self, sequences, masks, token_ids):
+        m = self.model
+        x = m.input_proj(sequences) * m.input_scale
+        safe_ids = token_ids.clamp(min=0, max=m.token_id_emb.num_embeddings - 1)
+        x = x + m.token_id_emb(safe_ids)
+        x = m.input_norm(x)
+        cls_expanded = m.cls_token.expand(sequences.size(0), -1, -1)
+        x = torch.cat((cls_expanded, x), dim=1)
+        pad_mask = masks.bool()
+        pad_mask = torch.cat(
+            (torch.zeros(sequences.size(0), 1, device=masks.device, dtype=torch.bool), pad_mask), dim=1)
+        for layer in m.transformer_layers:
+            x = self._unfused_encoder_layer(layer, x, pad_mask)
+        cls = x[:, 0]
+        return m.belief_head(cls)  # [B, num_archetypes]
+
+
 class ManualMHA(nn.Module):
     """ONNX-exportable replacement for nn.MultiheadAttention.
 
@@ -64,10 +103,15 @@ class ManualMHA(nn.Module):
             if src.out_proj.bias is not None:
                 self.out_proj.bias.copy_(src.out_proj.bias)
 
-        # Copy learnable scale from ScaledMultiheadAttention if present
+        # Copy learnable scale from ScaledMultiheadAttention if present.
+        # The saved checkpoints have scale collapsed to 0 (makes attention
+        # uniform). Apply the same floor used at training time so exported
+        # ONNX doesn't reproduce the bag-of-words failure mode.
         self.scale_param = None
         if hasattr(src, 'scale') and isinstance(src.scale, nn.Parameter):
-            self.scale_param = nn.Parameter(src.scale.clone())
+            floor = float(os.getenv("SCALED_MHA_MIN_SCALE", "1.0"))
+            clamped = torch.clamp(src.scale.detach(), min=floor)
+            self.scale_param = nn.Parameter(clamped.clone())
 
     def forward(self, query, key, value, key_padding_mask=None,
                 need_weights=False, attn_mask=None, **kwargs):
@@ -190,6 +234,43 @@ def export_all_heads(model_path: str, output_dir: str,
             onnx.save(fp16_model, out_path)
         sz = os.path.getsize(out_path)
         print(f"Exported {head_id} -> {out_path} ({sz / 1024:.0f} KB)")
+
+    # Phase 2 belief head: takes only (sequences, masks, token_ids) since
+    # archetype prediction is independent of candidate set.
+    # Note: we do NOT call _replace_mha here -- the only attention we touch
+    # is transformer_layers[*].self_attn which is a ScaledMultiheadAttention
+    # (already ONNX-exportable via scaled_dot_product_attention). The cross_attn
+    # / cand_self_attn nn.MultiheadAttention modules were already replaced with
+    # ManualMHA by earlier action-head exports, but we don't invoke them.
+    belief_wrapper = BeliefHeadScorer(model)
+    belief_wrapper.eval()
+    belief_dummy = (dummy[0], dummy[1], dummy[2])
+    if fixed_shapes:
+        belief_dynamic = None
+    else:
+        belief_dynamic = {
+            "sequences": {0: "batch", 1: "seq_len"},
+            "masks": {0: "batch", 1: "seq_len"},
+            "token_ids": {0: "batch", 1: "seq_len"},
+            "archetype_logits": {0: "batch"},
+        }
+    belief_path = os.path.join(output_dir, "model_belief.onnx")
+    with torch.no_grad():
+        torch.onnx.export(
+            belief_wrapper, belief_dummy, belief_path,
+            opset_version=17,
+            input_names=["sequences", "masks", "token_ids"],
+            output_names=["archetype_logits"],
+            dynamic_axes=belief_dynamic,
+        )
+    if use_fp16:
+        from onnxruntime.transformers.float16 import convert_float_to_float16
+        import onnx
+        fp32_model = onnx.load(belief_path)
+        fp16_model = convert_float_to_float16(fp32_model, keep_io_types=True)
+        onnx.save(fp16_model, belief_path)
+    sz = os.path.getsize(belief_path)
+    print(f"Exported belief -> {belief_path} ({sz / 1024:.0f} KB)")
 
 
 if __name__ == "__main__":

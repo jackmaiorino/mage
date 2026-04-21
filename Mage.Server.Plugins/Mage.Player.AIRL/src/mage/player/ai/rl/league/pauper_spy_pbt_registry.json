@@ -1,12 +1,58 @@
 [
   {
+    "profile": "Pauper-Standard-Wide",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 0,
+    "population_group": "standard-wide-solo",
+    "seed": 501,
+    "train_env": {
+      "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
+      "MODEL_D_MODEL": "256",
+      "MODEL_NUM_LAYERS": "4",
+      "ENTROPY_START": "0.15",
+      "ENTROPY_END": "0.02",
+      "ENTROPY_DECAY_STEPS": "2500000",
+      "TEMPERATURE_FLOOR": "0.05",
+      "ACTOR_LR": "2e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "USE_GAE": "1",
+      "GAE_AUTO_ENABLE": "1"
+    },
+    "notes": "Wider-encoder variant (option 2): d_model 128->256, layers 2->4. 4x param count vs Pauper-Standard; fresh random init. Slightly lower ACTOR_LR to account for wider network."
+  },
+  {
+    "profile": "Pauper-Standard",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 1,
+    "population_group": "standard-solo",
+    "seed": 500,
+    "train_env": {
+      "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
+      "ENTROPY_START": "0.15",
+      "ENTROPY_END": "0.02",
+      "ENTROPY_DECAY_STEPS": "2500000",
+      "TEMPERATURE_FLOOR": "0.05",
+      "ACTOR_LR": "3e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "USE_GAE": "1",
+      "GAE_AUTO_ENABLE": "1"
+    },
+    "notes": "Experiment: ONE general model trained on all 4 decks rotated vs 4 specialist models. Compare eval winrates at similar episode counts."
+  },
+  {
     "profile": "Pauper-Wildfire",
     "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.standard_pool.txt",
     "active": true,
     "train_enabled": true,
     "target_winrate": 0.6,
     "priority": 2,
-    "population_group": "single-deck",
+    "population_group": "wildfire-solo",
     "seed": 100,
     "train_env": {
       "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Jund Wildfire.dek",
@@ -28,7 +74,7 @@
     "train_enabled": true,
     "target_winrate": 0.6,
     "priority": 3,
-    "population_group": "single-deck",
+    "population_group": "rally-solo",
     "seed": 200,
     "train_env": {
       "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono Red Rally.dek",
@@ -50,7 +96,7 @@
     "train_enabled": true,
     "target_winrate": 0.6,
     "priority": 4,
-    "population_group": "single-deck",
+    "population_group": "affinity-solo",
     "seed": 300,
     "train_env": {
       "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Grixis Affinity.dek",
@@ -72,7 +118,7 @@
     "train_enabled": true,
     "target_winrate": 0.6,
     "priority": 5,
-    "population_group": "single-deck",
+    "population_group": "elves-solo",
     "seed": 400,
     "train_env": {
       "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Elves.dek",

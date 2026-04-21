@@ -77,15 +77,10 @@ public class DraftTrainer {
             EnvConfig.i32("DRAFT_BENCHMARK_GAME_LOG_FREQUENCY", 0);
     private static final boolean DRAFT_COTRAIN_GAME_MODEL =
             EnvConfig.bool("DRAFT_COTRAIN_GAME_MODEL", true);
-    private static final boolean DRAFT_COTRAIN_MULLIGAN_MODEL =
-            EnvConfig.bool("DRAFT_COTRAIN_MULLIGAN_MODEL", true);
     private static final boolean DRAFT_COTRAIN_BOTH_SIDES =
             EnvConfig.bool("DRAFT_COTRAIN_BOTH_SIDES", true);
     private static final boolean DRAFT_COTRAIN_ON_BENCHMARK =
             EnvConfig.bool("DRAFT_COTRAIN_ON_BENCHMARK", false);
-    private static final int DRAFT_MULLIGAN_SAVE_INTERVAL =
-            EnvConfig.i32("DRAFT_MULLIGAN_SAVE_INTERVAL",
-                    EnvConfig.i32("MULLIGAN_SAVE_INTERVAL", 100));
     private static final boolean DRAFT_SHUTDOWN_SAVE_HOOK =
             EnvConfig.bool("DRAFT_SHUTDOWN_SAVE_HOOK", true);
     private static final boolean DRAFT_SHUTDOWN_SAVE_GAME_MODELS =
@@ -112,7 +107,6 @@ public class DraftTrainer {
     private final AtomicInteger totalGames = new AtomicInteger(0);
     private final AtomicInteger evalGameCounter = new AtomicInteger(0);
     private final AtomicInteger benchmarkGameCounter = new AtomicInteger(0);
-    private final AtomicInteger mulliganTrainCount = new AtomicInteger(0);
     private final AtomicInteger currentEpisodeForPersistence = new AtomicInteger(0);
     private final AtomicInteger shutdownSaveOnce = new AtomicInteger(0);
     private final Object persistenceLock = new Object();
@@ -379,7 +373,7 @@ public class DraftTrainer {
             boolean rlWon,
             boolean benchmarkMode
     ) {
-        if (!(DRAFT_COTRAIN_GAME_MODEL || DRAFT_COTRAIN_MULLIGAN_MODEL)) {
+        if (!DRAFT_COTRAIN_GAME_MODEL) {
             return;
         }
         if (benchmarkMode && !DRAFT_COTRAIN_ON_BENCHMARK) {
@@ -400,19 +394,6 @@ public class DraftTrainer {
                 }
             }
 
-            if (DRAFT_COTRAIN_MULLIGAN_MODEL) {
-                int turns = game != null ? game.getTurnNum() : 0;
-                int rlMul = trainMulliganForPlayer(rlSide, rlWon, turns);
-                int oppMul = 0;
-                if (DRAFT_COTRAIN_BOTH_SIDES) {
-                    oppMul = trainMulliganForPlayer(heuristicSide, !rlWon, turns);
-                }
-                if (rlMul > 0 || oppMul > 0) {
-                    logger.info(String.format(
-                            "Draft co-train mulligan: rlDecisions=%d oppDecisions=%d mode=%s",
-                            rlMul, oppMul, benchmarkMode ? "benchmark" : "reward"));
-                }
-            }
         } catch (Exception e) {
             logger.warn("Draft co-train update failed: " + e.getMessage());
         }
@@ -429,88 +410,6 @@ public class DraftTrainer {
         List<Double> rewards = RLTrainer.calculateImmediateRewards(trajectory, terminalReward);
         gameModel.enqueueTraining(trajectory, rewards);
         return trajectory.size();
-    }
-
-    private int trainMulliganForPlayer(ComputerPlayerRL player, boolean won, int gameTurns) {
-        if (player == null) {
-            return 0;
-        }
-        try {
-            List<float[]> features = player.getMulliganFeatures();
-            List<Float> decisions = player.getMulliganDecisions();
-            List<Boolean> overrides = player.getMulliganOverrides();
-
-            if (features.isEmpty()) {
-                return 0;
-            }
-
-            int batchSize = features.size();
-            float outcome = won ? 1.0f : 0.0f;
-            int featureSize = features.get(0).length;
-
-            ByteBuffer featuresBuf = ByteBuffer.allocate(batchSize * featureSize * 4).order(ByteOrder.LITTLE_ENDIAN);
-            for (float[] feat : features) {
-                for (float f : feat) {
-                    featuresBuf.putFloat(f);
-                }
-            }
-
-            ByteBuffer decisionsBuf = ByteBuffer.allocate(batchSize * 4).order(ByteOrder.LITTLE_ENDIAN);
-            for (Float decision : decisions) {
-                decisionsBuf.putFloat(decision);
-            }
-
-            ByteBuffer outcomesBuf = ByteBuffer.allocate(batchSize * 4).order(ByteOrder.LITTLE_ENDIAN);
-            for (int i = 0; i < batchSize; i++) {
-                outcomesBuf.putFloat(outcome);
-            }
-
-            ByteBuffer gameLengthsBuf = ByteBuffer.allocate(batchSize * 4).order(ByteOrder.LITTLE_ENDIAN);
-            for (int i = 0; i < batchSize; i++) {
-                gameLengthsBuf.putInt(Math.max(1, gameTurns));
-            }
-
-            float earlyLandScore = player.getEarlyLandScore();
-            ByteBuffer earlyLandScoresBuf = ByteBuffer.allocate(batchSize * 4).order(ByteOrder.LITTLE_ENDIAN);
-            for (int i = 0; i < batchSize; i++) {
-                earlyLandScoresBuf.putFloat(earlyLandScore);
-            }
-
-            ByteBuffer overridesBuf = ByteBuffer.allocate(batchSize * 4).order(ByteOrder.LITTLE_ENDIAN);
-            for (Boolean override : overrides) {
-                overridesBuf.putFloat(override != null && override ? 1.0f : 0.0f);
-            }
-
-            gameModel.trainMulligan(
-                    featuresBuf.array(),
-                    decisionsBuf.array(),
-                    outcomesBuf.array(),
-                    gameLengthsBuf.array(),
-                    earlyLandScoresBuf.array(),
-                    overridesBuf.array(),
-                    batchSize
-            );
-            player.clearMulliganData();
-            maybeSaveDraftMulliganModel();
-            return batchSize;
-        } catch (Exception e) {
-            logger.warn("Error training mulligan model from draft game: " + e.getMessage());
-            return 0;
-        }
-    }
-
-    private void maybeSaveDraftMulliganModel() {
-        if (DRAFT_MULLIGAN_SAVE_INTERVAL <= 0) {
-            return;
-        }
-        if (mulliganTrainCount.incrementAndGet() % DRAFT_MULLIGAN_SAVE_INTERVAL == 0) {
-            try {
-                gameModel.saveMulliganModel();
-                logger.info("Draft co-train: mulligan model saved (updates=" + mulliganTrainCount.get() + ")");
-            } catch (Exception e) {
-                logger.warn("Draft co-train: failed to save mulligan model: " + e.getMessage());
-            }
-        }
     }
 
     private void maybeRunBenchmarkTick(int episode) {
@@ -897,11 +796,6 @@ public class DraftTrainer {
             gameModel.saveModel(RLLogPaths.MODEL_FILE_PATH);
         } catch (Exception e) {
             logModelSaveFailure("game model", reason, duringShutdown, e);
-        }
-        try {
-            gameModel.saveMulliganModel();
-        } catch (Exception e) {
-            logModelSaveFailure("mulligan model", reason, duringShutdown, e);
         }
     }
 

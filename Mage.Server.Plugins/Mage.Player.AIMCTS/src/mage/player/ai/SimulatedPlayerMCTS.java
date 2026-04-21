@@ -31,7 +31,7 @@ import java.util.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public final class SimulatedPlayerMCTS extends MCTSPlayer {
+public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     private boolean isSimulatedPlayer;
     private int actionCount = 0;

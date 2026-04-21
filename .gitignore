@@ -83,6 +83,8 @@ Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/games
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/stats/
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/health/
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/league/
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/status.txt
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/*/logs/python/
 
 # Archived model binaries
 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/ModelArchive/
@@ -103,3 +105,10 @@ local-training/
 *.h2.mv.db
 *.h2.trace.db
 onnxruntime_profile__*.json
+
+# Torch ONNX export diagnostic reports
+*.sarif
+
+# Claude Code local state
+.claude/*.lock
+.claude/worktrees/

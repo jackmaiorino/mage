@@ -285,6 +285,12 @@ class PythonEntryPoint:
         self.value_loss_coef_main = float(os.getenv('VALUE_LOSS_COEF', '5.0'))
         self.entropy_loss_mult_main = float(
             os.getenv('ENTROPY_LOSS_MULT', '1.0'))
+        # Phase 1 belief auxiliary loss coefficient. 0 disables the loss.
+        self.belief_loss_coef = float(os.getenv('BELIEF_LOSS_COEF', '0.3'))
+        # AlphaZero policy distillation loss: cross-entropy between the model's
+        # policy and the MCTS visit distribution at steps where MCTS was run.
+        # 0 disables the loss (use when MCTS-generated targets aren't present).
+        self.mcts_kl_loss_coef = float(os.getenv('MCTS_KL_LOSS_COEF', '1.0'))
 
         # Auto-batching state (kept for backward compatibility)
         self._infer_safe_max = None
@@ -1538,7 +1544,10 @@ class PythonEntryPoint:
                                  seq_len,
                                  d_model,
                                  max_candidates,
-                                 cand_feat_dim):
+                                 cand_feat_dim,
+                                 archetype_labels_bytes=None,
+                                 num_archetypes=0,
+                                 mcts_visits_bytes=None):
         """
         Train on a batch that concatenates multiple episodes.
         dones marks episode ends (1=end-of-episode), so GAE/returns do not leak across boundaries.
@@ -1586,6 +1595,27 @@ class PythonEntryPoint:
             head_ids = np.frombuffer(head_ids_bytes, dtype='<i4').reshape(
                 batch_size)[start:end]
 
+            # Phase 1 archetype labels (optional - may be absent from older senders).
+            archetype_labels_np = None
+            _num_archetypes = int(num_archetypes or 0)
+            if _num_archetypes > 0 and archetype_labels_bytes:
+                try:
+                    archetype_labels_np = np.frombuffer(
+                        archetype_labels_bytes, dtype='<i4').reshape(
+                        batch_size)[start:end]
+                except Exception:
+                    archetype_labels_np = None
+
+            # AlphaZero MCTS visit distribution target (optional; zero rows = no target).
+            mcts_visits_np = None
+            if mcts_visits_bytes:
+                try:
+                    mcts_visits_np = np.frombuffer(
+                        mcts_visits_bytes, dtype='<f4').reshape(
+                        batch_size, max_candidates)[start:end]
+                except Exception:
+                    mcts_visits_np = None
+
             _nb = str(device).startswith("cuda")
             seq_t = torch.tensor(seq, dtype=torch.float32).to(device, non_blocking=_nb)
             mask_t = torch.tensor(mask, dtype=torch.bool).to(device, non_blocking=_nb)
@@ -1601,11 +1631,23 @@ class PythonEntryPoint:
             sample_w_t = torch.tensor(sample_weights, dtype=torch.float32).to(device, non_blocking=_nb)
             dones_t = torch.tensor(dones, dtype=torch.float32).to(device, non_blocking=_nb)
             head_idx_t = torch.tensor(head_ids, dtype=torch.long).to(device, non_blocking=_nb)
+
+            archetype_labels_t = None
+            if archetype_labels_np is not None:
+                archetype_labels_t = torch.tensor(
+                    archetype_labels_np, dtype=torch.long).to(device, non_blocking=_nb)
+
+            mcts_visits_t = None
+            if mcts_visits_np is not None:
+                mcts_visits_t = torch.tensor(
+                    mcts_visits_np, dtype=torch.float32).to(device, non_blocking=_nb)
+
             if _nb:
                 torch.cuda.synchronize(device)
 
             # Release numpy slices immediately
             del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value, sample_weights, dones, head_ids
+            archetype_labels_np = None
 
             local_batch_size = int(end - start)
 
@@ -1664,32 +1706,105 @@ class PythonEntryPoint:
                 scaler = self.amp_scaler if (use_amp and bool(
                     self.amp_use_scaler) and self.amp_scaler is not None) else None
 
-                self.optimizer.zero_grad(set_to_none=True)
+                # Chunking: cap peak VRAM by splitting forward/backward into
+                # step-wise chunks. Pass 1 (below) does a no_grad forward for GAE;
+                # Pass 2 (after advantage normalization) does grad forward + loss + backward
+                # per chunk so activations from earlier chunks are freed before the next.
+                _HEAD_NAMES = ["action", "target", "card_select", "attack", "block"]
+                train_chunk_size = int(os.getenv("TRAIN_CHUNK_SIZE", "256"))
+                if train_chunk_size <= 0 or train_chunk_size >= local_batch_size:
+                    chunk_starts = [0]
+                    effective_chunk = local_batch_size
+                else:
+                    chunk_starts = list(range(0, local_batch_size, train_chunk_size))
+                    effective_chunk = train_chunk_size
 
-                with autocast_ctx:
-                    # Route each step to its correct policy head (action/target/card_select).
-                    # 0=action, 1=target, 2=card_select -- must match actionTypeToHeadIdx() in Java.
-                    _HEAD_NAMES = ["action", "target", "card_select", "attack", "block"]
-                    probs = torch.zeros(local_batch_size, max_candidates, device=device)
-                    value = torch.zeros(local_batch_size, 1, device=device)
-                    for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
-                        _hmask = (head_idx_t == _hid_val)
-                        if not _hmask.any():
-                            continue
-                        _p_h, _v_h = self.model.score_candidates(
-                            seq_t[_hmask], mask_t[_hmask], tok_t[_hmask],
-                            cand_feat_t[_hmask], cand_ids_t[_hmask], cand_mask_t[_hmask],
-                            head_id=_hid_name)
-                        probs[_hmask] = _p_h.float()
-                        value[_hmask] = _v_h.float()
+                # Pass 1 is only needed when we plan to backward per chunk (multi-chunk):
+                # we need all values BEFORE any Pass 2 chunk starts loss computation
+                # because GAE requires the full value trajectory.
+                # When single-chunk (batch fits in one forward), skip Pass 1 and keep
+                # the grad graph alive from a single forward that serves BOTH GAE (via
+                # detach) AND the loss+backward. Saves one full forward pass.
+                _multi_chunk = len(chunk_starts) > 1
+                _single_pass_probs = None
+                _single_pass_value = None
+                _single_pass_cls = None
+                probs = torch.zeros(local_batch_size, max_candidates, device=device)
+                value = torch.zeros(local_batch_size, 1, device=device)
+                if _multi_chunk:
+                    # ----------------------------------------------------------
+                    # Pass 1 (no_grad, eval-mode): probs + value for GAE.
+                    # eval() drops dropout so values are deterministic -- gives
+                    # cleaner GAE targets than using dropout-corrupted values.
+                    # ----------------------------------------------------------
+                    self.model.eval()
+                    try:
+                        with torch.no_grad(), autocast_ctx:
+                            for _c_start in chunk_starts:
+                                _c_end = min(_c_start + effective_chunk, local_batch_size)
+                                _head_idx_c = head_idx_t[_c_start:_c_end]
+                                _seq_c = seq_t[_c_start:_c_end]
+                                _mask_c = mask_t[_c_start:_c_end]
+                                _tok_c = tok_t[_c_start:_c_end]
+                                _cf_c = cand_feat_t[_c_start:_c_end]
+                                _ci_c = cand_ids_t[_c_start:_c_end]
+                                _cm_c = cand_mask_t[_c_start:_c_end]
+                                for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
+                                    _hmask = (_head_idx_c == _hid_val)
+                                    if not _hmask.any():
+                                        continue
+                                    _p_h, _v_h = self.model.score_candidates(
+                                        _seq_c[_hmask], _mask_c[_hmask], _tok_c[_hmask],
+                                        _cf_c[_hmask], _ci_c[_hmask], _cm_c[_hmask],
+                                        head_id=_hid_name)
+                                    _abs_idx = torch.nonzero(_hmask, as_tuple=False).view(-1) + _c_start
+                                    probs[_abs_idx] = _p_h.float()
+                                    value[_abs_idx] = _v_h.float()
+                    finally:
+                        self.model.train()
 
-                if torch.isnan(probs).any() or torch.isnan(value).any():
-                    logger.warning(LogCategory.MODEL_TRAIN,
-                                   "Model produced NaN outputs - skipping batch (probs_nan=%s, value_nan=%s)",
-                                   torch.isnan(probs).any().item(), torch.isnan(value).any().item())
-                    self._log_cuda_mem(
-                        "trainCandidatesMultiFlat:skip_model_nan")
-                    return
+                    if torch.isnan(probs).any() or torch.isnan(value).any():
+                        logger.warning(LogCategory.MODEL_TRAIN,
+                                       "Model produced NaN outputs - skipping batch (probs_nan=%s, value_nan=%s)",
+                                       torch.isnan(probs).any().item(), torch.isnan(value).any().item())
+                        self._log_cuda_mem(
+                            "trainCandidatesMultiFlat:skip_model_nan")
+                        return
+                else:
+                    # ----------------------------------------------------------
+                    # Single-pass forward (grad, train-mode): one forward serves
+                    # both GAE (via .detach()) and the loss + backward below.
+                    # The autograd graph stays alive for the single backward.
+                    # ----------------------------------------------------------
+                    with autocast_ctx:
+                        _sp_probs = torch.zeros(local_batch_size, max_candidates, device=device)
+                        _sp_value = torch.zeros(local_batch_size, 1, device=device)
+                        _sp_cls = torch.zeros(local_batch_size, self.model.d_model, device=device)
+                        for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
+                            _hmask = (head_idx_t == _hid_val)
+                            if not _hmask.any():
+                                continue
+                            _p_h, _v_h, _cls_h = self.model.score_candidates(
+                                seq_t[_hmask], mask_t[_hmask], tok_t[_hmask],
+                                cand_feat_t[_hmask], cand_ids_t[_hmask], cand_mask_t[_hmask],
+                                head_id=_hid_name, return_cls=True)
+                            _sp_probs[_hmask] = _p_h.float()
+                            _sp_value[_hmask] = _v_h.float()
+                            _sp_cls[_hmask] = _cls_h.float()
+                    if torch.isnan(_sp_probs).any() or torch.isnan(_sp_value).any():
+                        logger.warning(LogCategory.MODEL_TRAIN,
+                                       "Model produced NaN outputs - skipping batch (probs_nan=%s, value_nan=%s)",
+                                       torch.isnan(_sp_probs).any().item(), torch.isnan(_sp_value).any().item())
+                        self._log_cuda_mem(
+                            "trainCandidatesMultiFlat:skip_model_nan")
+                        return
+                    _single_pass_probs = _sp_probs
+                    _single_pass_value = _sp_value
+                    _single_pass_cls = _sp_cls
+                    # Use detached copy for diagnostics / GAE; the live-grad copies
+                    # live in _single_pass_probs / _single_pass_value for the loss.
+                    probs = _sp_probs.detach()
+                    value = _sp_value.detach()
 
                 value_squeezed = value.squeeze(1)
                 value_detached = value_squeezed.detach()
@@ -1794,50 +1909,7 @@ class PythonEntryPoint:
                 adv_clip_max = float(os.getenv('ADV_CLIP_MAX', '5.0'))
                 advantages_normalized = advantages_normalized.clamp(-adv_clip_max, adv_clip_max)
 
-                probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
-                new_logp = self._joint_logp_from_probs(
-                    probs_safe, cand_mask_t, chosen_indices_t, chosen_count_t)
-
-                if self.use_ppo:
-                    log_ratio = (new_logp - old_logp_t).clamp(-20.0, 20.0)
-                    ratio_raw = torch.exp(log_ratio)
-                    clipped_ratio = torch.clamp(
-                        ratio_raw, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
-                    policy_obj = torch.min(
-                        ratio_raw * advantages_normalized,
-                        clipped_ratio * advantages_normalized
-                    )
-                    loss_policy = -(policy_obj * norm_w_t).sum() / norm_w_t.sum().clamp_min(1e-8)
-
-                    # PPO stats logging (mtg_ai.log) - mean/std of adv/ret/ratio
-                    if self._ppo_stats_every > 0 and (next_step % self._ppo_stats_every == 0):
-                        with torch.no_grad():
-                            adv_t = advantages.detach().float().view(-1)
-                            ret_t = value_targets.detach().float().view(-1)
-                            rr_t = ratio_raw.detach().float().view(-1)
-                            adv_mean = float(
-                                adv_t.mean().item()) if adv_t.numel() > 0 else 0.0
-                            adv_std = float(adv_t.std().item()
-                                            ) if adv_t.numel() > 1 else 0.0
-                            ret_mean = float(
-                                ret_t.mean().item()) if ret_t.numel() > 0 else 0.0
-                            ret_std = float(ret_t.std().item()
-                                            ) if ret_t.numel() > 1 else 0.0
-                            ratio_mean = float(
-                                rr_t.mean().item()) if rr_t.numel() > 0 else 1.0
-                            ratio_std = float(
-                                rr_t.std().item()) if rr_t.numel() > 1 else 0.0
-                        logger.info(
-                            LogCategory.MODEL_TRAIN,
-                            "PPOStats step=%d adv(mean=%.4f std=%.4f) ret(mean=%.4f std=%.4f) ratio(mean=%.4f std=%.4f)",
-                            int(next_step),
-                            adv_mean, adv_std,
-                            ret_mean, ret_std,
-                            ratio_mean, ratio_std
-                        )
-                else:
-                    loss_policy = -((new_logp * advantages_normalized) * norm_w_t).sum() / norm_w_t.sum().clamp_min(1e-8)
-
+                # Compute loss coefficients once (shared by all chunks).
                 if self.loss_schedule_enable and next_step <= self.critic_warmup_steps:
                     policy_loss_coef = float(self.policy_loss_coef_warmup)
                     value_loss_coef = float(self.value_loss_coef_warmup)
@@ -1846,48 +1918,195 @@ class PythonEntryPoint:
                     policy_loss_coef = float(self.policy_loss_coef_main)
                     value_loss_coef = float(self.value_loss_coef_main)
                     entropy_loss_mult = float(self.entropy_loss_mult_main)
-
-                vf_clip = float(os.getenv("PPO_VF_CLIP", "0.2"))
-                if self.use_ppo and vf_clip > 0.0:
-                    v_pred = value_squeezed
-                    v_old = old_value_t.view_as(v_pred).detach()
-                    v_clipped = v_old + \
-                        (v_pred - v_old).clamp(-vf_clip, vf_clip)
-                    vf_loss1 = (v_pred - value_targets).pow(2)
-                    vf_loss2 = (v_clipped - value_targets).pow(2)
-                    vf_max = torch.max(vf_loss1, vf_loss2)
-                    loss_value = value_loss_coef * \
-                        (0.5 * (vf_max * norm_w_t).sum() / norm_w_t.sum().clamp_min(1e-8))
-                else:
-                    vf_loss = (value_squeezed - value_targets).pow(2)
-                    loss_value = value_loss_coef * \
-                        ((vf_loss * norm_w_t).sum() / norm_w_t.sum().clamp_min(1e-8))
-
-                probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
-                log_probs = torch.log(probs_safe)
-                entropy = -(probs_safe * log_probs).sum(dim=-1).mean()
                 entropy_coef = float(
                     self.get_entropy_coefficient()) * float(entropy_loss_mult)
-                loss_entropy = -entropy_coef * entropy
+                vf_clip = float(os.getenv("PPO_VF_CLIP", "0.2"))
+                total_norm_w_sum = norm_w_t.sum().clamp_min(1e-8).detach()
 
-                loss = (policy_loss_coef * loss_policy) + \
-                    loss_value + loss_entropy
+                # ------------------------------------------------------------------
+                # Pass 2 (grad, chunked): forward + loss + backward per chunk.
+                # Per-chunk loss terms are normalized by BATCH-WIDE totals so that
+                # summing chunk losses equals the original full-batch loss. Backward
+                # per chunk frees activations before the next chunk's forward.
+                # ------------------------------------------------------------------
+                self.optimizer.zero_grad(set_to_none=True)
 
-                if torch.isnan(loss) or torch.isinf(loss):
-                    logger.warning(LogCategory.MODEL_TRAIN,
-                                   "Skipping update due to NaN/Inf loss (policy=%.4f, value=%.4f, ent=%.4f)",
-                                   loss_policy.item() if not torch.isnan(loss_policy) else float('nan'),
-                                   loss_value.item() if not torch.isnan(loss_value) else float('nan'),
-                                   entropy.item() if not torch.isnan(entropy) else float('nan'))
-                    self.optimizer.zero_grad()
-                    self._log_cuda_mem(
-                        "trainCandidatesMultiFlat:skip_loss_nan")
-                    return
+                total_loss = 0.0
+                total_loss_policy = 0.0
+                total_loss_value = 0.0
+                total_loss_belief = 0.0
+                total_entropy_sum = 0.0
+                new_logp_chunks = []
+                ratio_raw_chunks = []
 
-                if scaler is not None:
-                    scaler.scale(loss).backward()
-                else:
-                    loss.backward()
+                for _c_start in chunk_starts:
+                    _c_end = min(_c_start + effective_chunk, local_batch_size)
+                    _head_idx_c = head_idx_t[_c_start:_c_end]
+                    _seq_c = seq_t[_c_start:_c_end]
+                    _mask_c = mask_t[_c_start:_c_end]
+                    _tok_c = tok_t[_c_start:_c_end]
+                    _cf_c = cand_feat_t[_c_start:_c_end]
+                    _ci_c = cand_ids_t[_c_start:_c_end]
+                    _cm_c = cand_mask_t[_c_start:_c_end]
+                    _chosen_idx_c = chosen_indices_t[_c_start:_c_end]
+                    _chosen_cnt_c = chosen_count_t[_c_start:_c_end]
+                    _norm_w_c = norm_w_t[_c_start:_c_end]
+                    _adv_c = advantages_normalized[_c_start:_c_end]
+                    _old_logp_c = old_logp_t[_c_start:_c_end]
+                    _old_value_c = old_value_t[_c_start:_c_end]
+                    _value_targets_c = value_targets[_c_start:_c_end]
+                    _chunk_N = _c_end - _c_start
+
+                    if _single_pass_probs is not None:
+                        # Reuse the forward already done above (single-chunk).
+                        _probs_c = _single_pass_probs
+                        _value_c = _single_pass_value
+                        _cls_c = _single_pass_cls
+                    else:
+                        with autocast_ctx:
+                            _probs_c = torch.zeros(_chunk_N, max_candidates, device=device)
+                            _value_c = torch.zeros(_chunk_N, 1, device=device)
+                            _cls_c = torch.zeros(_chunk_N, self.model.d_model, device=device)
+                            for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
+                                _hmask = (_head_idx_c == _hid_val)
+                                if not _hmask.any():
+                                    continue
+                                _p_h, _v_h, _cls_h = self.model.score_candidates(
+                                    _seq_c[_hmask], _mask_c[_hmask], _tok_c[_hmask],
+                                    _cf_c[_hmask], _ci_c[_hmask], _cm_c[_hmask],
+                                    head_id=_hid_name, return_cls=True)
+                                _probs_c[_hmask] = _p_h.float()
+                                _value_c[_hmask] = _v_h.float()
+                                _cls_c[_hmask] = _cls_h.float()
+
+                    _probs_safe_c = torch.clamp(_probs_c, min=1e-8, max=1.0)
+                    _new_logp_c = self._joint_logp_from_probs(
+                        _probs_safe_c, _cm_c, _chosen_idx_c, _chosen_cnt_c)
+
+                    if self.use_ppo:
+                        _log_ratio_c = (_new_logp_c - _old_logp_c).clamp(-20.0, 20.0)
+                        _ratio_raw_c = torch.exp(_log_ratio_c)
+                        _clipped_ratio_c = torch.clamp(
+                            _ratio_raw_c, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
+                        _policy_obj_c = torch.min(
+                            _ratio_raw_c * _adv_c, _clipped_ratio_c * _adv_c)
+                        _loss_policy_c = -(_policy_obj_c * _norm_w_c).sum() / total_norm_w_sum
+                    else:
+                        _loss_policy_c = -((_new_logp_c * _adv_c) * _norm_w_c).sum() / total_norm_w_sum
+
+                    _value_c_sq = _value_c.squeeze(1)
+                    if self.use_ppo and vf_clip > 0.0:
+                        _v_old_c = _old_value_c.view_as(_value_c_sq).detach()
+                        _v_clipped_c = _v_old_c + (_value_c_sq - _v_old_c).clamp(-vf_clip, vf_clip)
+                        _vf1_c = (_value_c_sq - _value_targets_c).pow(2)
+                        _vf2_c = (_v_clipped_c - _value_targets_c).pow(2)
+                        _vf_max_c = torch.max(_vf1_c, _vf2_c)
+                        _loss_value_c = value_loss_coef * (0.5 * (_vf_max_c * _norm_w_c).sum() / total_norm_w_sum)
+                    else:
+                        _vf_c = (_value_c_sq - _value_targets_c).pow(2)
+                        _loss_value_c = value_loss_coef * ((_vf_c * _norm_w_c).sum() / total_norm_w_sum)
+
+                    _log_probs_c = torch.log(_probs_safe_c)
+                    _entropy_per_step_c = -(_probs_safe_c * _log_probs_c).sum(dim=-1)
+                    _loss_entropy_c = -entropy_coef * _entropy_per_step_c.sum() / float(max(local_batch_size, 1))
+
+                    # Phase 1 belief auxiliary loss: classify opponent's deck archetype
+                    # from the shared encoder CLS. Only samples with a known label
+                    # (>= 0) contribute; padded/off-meta steps are ignored.
+                    _loss_belief_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if (archetype_labels_t is not None
+                            and _num_archetypes > 0
+                            and self.belief_loss_coef > 0.0):
+                        _arc_c = archetype_labels_t[_c_start:_c_end]
+                        _valid_c = (_arc_c >= 0)
+                        if _valid_c.any():
+                            with autocast_ctx:
+                                _belief_logits_c = self.model.belief_logits_from_cls(_cls_c)
+                            _sel_logits = _belief_logits_c[_valid_c].float()
+                            _sel_labels = _arc_c[_valid_c].long()
+                            _loss_belief_c = self.belief_loss_coef * torch.nn.functional.cross_entropy(
+                                _sel_logits, _sel_labels, reduction='mean')
+
+                    # AlphaZero policy distillation loss: KL(policy || MCTS_visits)
+                    # for steps where MCTS was run (non-zero visit distribution).
+                    _loss_mcts_kl_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if mcts_visits_t is not None and self.mcts_kl_loss_coef > 0.0:
+                        _mcts_c = mcts_visits_t[_c_start:_c_end]
+                        # Mask steps that have any positive visit target.
+                        _mcts_row_sum = _mcts_c.sum(dim=-1)
+                        _mcts_valid = (_mcts_row_sum > 1e-6)
+                        if _mcts_valid.any():
+                            _probs_c_valid = _probs_safe_c[_mcts_valid]
+                            _targets_valid = _mcts_c[_mcts_valid]
+                            # Normalize each MCTS row (in case not exactly 1.0).
+                            _targets_valid = _targets_valid / _targets_valid.sum(dim=-1, keepdim=True).clamp(min=1e-6)
+                            # KL(targets || probs) = sum(targets * (log(targets) - log(probs)))
+                            # We only care about the gradient on probs: sum(-targets * log(probs)) + const
+                            # Use cross-entropy form which is what matters for gradient.
+                            _log_probs_valid = torch.log(_probs_c_valid.clamp(min=1e-8))
+                            _ce = -(_targets_valid * _log_probs_valid).sum(dim=-1)
+                            _loss_mcts_kl_c = self.mcts_kl_loss_coef * _ce.mean()
+
+                    _chunk_loss = (policy_loss_coef * _loss_policy_c) + _loss_value_c + _loss_entropy_c + _loss_belief_c + _loss_mcts_kl_c
+
+                    if torch.isnan(_chunk_loss) or torch.isinf(_chunk_loss):
+                        logger.warning(LogCategory.MODEL_TRAIN,
+                                       "Skipping update due to NaN/Inf loss in chunk [%d:%d] (policy=%.4f value=%.4f)",
+                                       _c_start, _c_end,
+                                       _loss_policy_c.item() if not torch.isnan(_loss_policy_c) else float('nan'),
+                                       _loss_value_c.item() if not torch.isnan(_loss_value_c) else float('nan'))
+                        self.optimizer.zero_grad(set_to_none=True)
+                        self._log_cuda_mem("trainCandidatesMultiFlat:skip_loss_nan")
+                        return
+
+                    if scaler is not None:
+                        scaler.scale(_chunk_loss).backward()
+                    else:
+                        _chunk_loss.backward()
+
+                    total_loss += _chunk_loss.item()
+                    total_loss_policy += _loss_policy_c.item()
+                    total_loss_value += _loss_value_c.item()
+                    try:
+                        total_loss_belief += float(_loss_belief_c.item())
+                    except Exception:
+                        pass
+                    total_entropy_sum += _entropy_per_step_c.detach().sum().item()
+                    new_logp_chunks.append(_new_logp_c.detach())
+                    if self.use_ppo:
+                        ratio_raw_chunks.append(_ratio_raw_c.detach())
+
+                # Reassemble batch-wide tensors for post-backward logging.
+                new_logp = torch.cat(new_logp_chunks) if new_logp_chunks else torch.zeros(local_batch_size, device=device)
+                if self.use_ppo:
+                    ratio_raw = torch.cat(ratio_raw_chunks) if ratio_raw_chunks else torch.ones(local_batch_size, device=device)
+
+                    if self._ppo_stats_every > 0 and (next_step % self._ppo_stats_every == 0):
+                        with torch.no_grad():
+                            adv_t = advantages.detach().float().view(-1)
+                            ret_t = value_targets.detach().float().view(-1)
+                            rr_t = ratio_raw.detach().float().view(-1)
+                            adv_mean = float(adv_t.mean().item()) if adv_t.numel() > 0 else 0.0
+                            adv_std = float(adv_t.std().item()) if adv_t.numel() > 1 else 0.0
+                            ret_mean = float(ret_t.mean().item()) if ret_t.numel() > 0 else 0.0
+                            ret_std = float(ret_t.std().item()) if ret_t.numel() > 1 else 0.0
+                            ratio_mean = float(rr_t.mean().item()) if rr_t.numel() > 0 else 1.0
+                            ratio_std = float(rr_t.std().item()) if rr_t.numel() > 1 else 0.0
+                        logger.info(
+                            LogCategory.MODEL_TRAIN,
+                            "PPOStats step=%d adv(mean=%.4f std=%.4f) ret(mean=%.4f std=%.4f) ratio(mean=%.4f std=%.4f)",
+                            int(next_step),
+                            adv_mean, adv_std,
+                            ret_mean, ret_std,
+                            ratio_mean, ratio_std
+                        )
+
+                # Wrap aggregates as 0-d tensors so downstream `.item()` /
+                # torch.isnan() calls continue to work unchanged.
+                loss = torch.tensor(total_loss, device=device)
+                loss_policy = torch.tensor(total_loss_policy, device=device)
+                loss_value = torch.tensor(total_loss_value, device=device)
+                entropy = torch.tensor(total_entropy_sum / float(max(local_batch_size, 1)), device=device)
 
                 has_nan_grad = False
                 for param in self.model.parameters():
@@ -1924,8 +2143,8 @@ class PythonEntryPoint:
                     clip_frac = ((ratio_raw < 1.0 - self.ppo_epsilon) |
                                  (ratio_raw > 1.0 + self.ppo_epsilon)).float().mean()
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
-                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(),
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f belief=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
+                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), total_loss_belief,
                             entropy_coef, clip_frac.item() * 100, approx_kl.item())
                 # Record loss components for metrics export
                 self.metrics.record_train_losses(
@@ -1943,8 +2162,8 @@ class PythonEntryPoint:
                 self._write_training_losses_csv(episodes_in_batch=ep_count)
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f)",
-                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f belief=%.4f (coeff: %.4f)",
+                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), total_loss_belief, float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
                 # Record loss components for metrics export
                 self.metrics.record_train_losses(
                     total_loss=loss.item(),
@@ -2201,11 +2420,47 @@ class PythonEntryPoint:
         }
         self.persistence.save_model(self.model, path, extra_state=extra)
 
+    def _heal_collapsed_scales(self):
+        """Detect and reset attention scale params that collapsed to ~0.
+        Uniform attention (scale*Q @ (scale*K)^T == 0) makes the encoder a
+        bag-of-words averager. If the saved model has this state, reset to 1.0
+        before training resumes. Returns list of reset param names.
+        """
+        if self.model is None:
+            return []
+        reset = []
+        with torch.no_grad():
+            for name, param in self.model.named_parameters():
+                if name.endswith('self_attn.scale') and param.numel() == 1:
+                    if abs(float(param.item())) < 0.1:
+                        param.data.fill_(1.0)
+                        reset.append(name)
+        if reset:
+            logger.warning(
+                LogCategory.MODEL_LOAD,
+                "Auto-healed %d collapsed self_attn.scale params -> 1.0: %s",
+                len(reset), reset,
+            )
+        return reset
+
     def loadModel(self, path):
         if self.model is None:
             self.initializeModel()
         extra = self.persistence.load_model(self.model, path)
-        
+
+        # Auto-heal collapsed scales before we rebuild optimizer state from the
+        # saved dict. Adam's momentum for those params is driving them back to
+        # zero, so we also discard the saved optimizer state when we heal.
+        healed = self._heal_collapsed_scales()
+        if healed and extra and extra.get('optimizer_state_dict') is not None:
+            extra = dict(extra)
+            extra['optimizer_state_dict'] = None
+            logger.warning(
+                LogCategory.MODEL_LOAD,
+                "Cleared saved optimizer_state_dict because scale collapse was healed; "
+                "momentum from old (broken) gradients would otherwise re-collapse the scale.",
+            )
+
         # Restore optimizer state and training counters if present
         if extra and self.optimizer:
             if 'optimizer_state_dict' in extra and extra['optimizer_state_dict'] is not None:
@@ -2235,7 +2490,17 @@ class PythonEntryPoint:
                        self.train_step_counter, entropy_coef, self.main_train_sample_counter)
 
     def saveLatestModelAtomic(self, path=None):
-        return self.persistence.save_latest_model_atomic(self.model, path)
+        # Include the same extra state as saveModel so the entropy-decay
+        # counter and optimizer momentum survive trainer restarts. Without
+        # this, every restart rewinds train_step_counter to the last full
+        # save (often 0), and entropy never decays across restarts.
+        extra = {
+            'optimizer_state_dict': self.optimizer.state_dict() if self.optimizer else None,
+            'train_step_counter': self.train_step_counter,
+            'main_train_sample_counter': self.main_train_sample_counter,
+            'gae_enabled_step': self.metrics.gae_enabled_step,
+        }
+        return self.persistence.save_latest_model_atomic(self.model, path, extra_state=extra)
 
     def reloadLatestModelIfNewer(self, path=None):
         if self.model is None:

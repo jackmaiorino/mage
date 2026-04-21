@@ -108,6 +108,8 @@ final class SharedGpuTensorSerde {
         float[] sampleWeights = new float[batchSize];
         int[] dones = new int[batchSize];
         int[] headIdx = new int[batchSize];
+        int[] beliefArchetypeLabels = new int[batchSize];
+        float[] mctsVisitTargets = new float[batchSize * maxCandidates];
 
         int seqOffset = 0;
         int maskOffset = 0;
@@ -135,6 +137,12 @@ final class SharedGpuTensorSerde {
             System.arraycopy(item.chosenIndices, 0, chosenIndices, candOffset, item.chosenIndices.length);
             candOffset += item.candidateActionIds.length;
 
+            beliefArchetypeLabels[i] = item.beliefArchetypeLabel;
+            if (item.mctsVisitTargets != null && item.mctsVisitTargets.length == maxCandidates) {
+                System.arraycopy(item.mctsVisitTargets, 0, mctsVisitTargets,
+                        i * maxCandidates, maxCandidates);
+            }
+
             rewardValues[i] = rewards != null && i < rewards.size() && rewards.get(i) != null
                     ? rewards.get(i).floatValue()
                     : 0.0f;
@@ -160,7 +168,9 @@ final class SharedGpuTensorSerde {
                 floatsToBytes(oldValue),
                 floatsToBytes(sampleWeights),
                 intsToBytes(dones),
-                intsToBytes(headIdx)
+                intsToBytes(headIdx),
+                intsToBytes(beliefArchetypeLabels),
+                floatsToBytes(mctsVisitTargets)
         );
     }
 

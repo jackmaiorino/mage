@@ -25,17 +25,20 @@ public final class OnnxInferenceModel implements PythonModel {
     private static final String[] HEAD_IDS = {"action", "target", "card_select", "attack", "block"};
 
     private static final int BATCH_TIMEOUT_MS = EnvConfig.i32("ONNX_BATCH_TIMEOUT_MS", 20);
+    private static final int BATCH_TIMEOUT_MAX_MS = EnvConfig.i32("ONNX_BATCH_TIMEOUT_MAX_MS", 100);
     private static final int BATCH_MAX_SIZE = EnvConfig.i32("ONNX_BATCH_MAX_SIZE", 64);
     private static final int SCORE_TIMEOUT_MS = EnvConfig.i32("ONNX_SCORE_TIMEOUT_MS", 30000);
     private static final int DIM = StateSequenceBuilder.DIM_PER_TOKEN;
     private static final int MAX_CAND = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
     private static final int CAND_DIM = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
 
-    private final OrtEnvironment env;
-    private final OrtSession.SessionOptions sessionOpts;
     private final Map<String, OrtSession> sessions = new ConcurrentHashMap<>();
     private final Path onnxDir;
+    private final String modelsDir;
+    private final boolean forceCpu;
     private PythonModel trainingDelegate;
+    private OrtEnvironment env;
+    private OrtSession.SessionOptions sessionOpts;
 
     // --- Batching infrastructure ---
     private final List<ScoreRequest> queue = new ArrayList<>();
@@ -45,6 +48,12 @@ public final class OnnxInferenceModel implements PythonModel {
     private ScheduledFuture<?> pendingFlush;
     private final AtomicLong totalBatched = new AtomicLong();
     private final AtomicLong totalFlushes = new AtomicLong();
+    private volatile long lastOnnxReloadMs = System.currentTimeMillis();
+    private volatile long lastOnnxMtime = 0; // mtime of model_action.onnx at last load
+
+    // Adaptive batch timeout: scale up when batches are small (death spiral prevention)
+    private volatile int adaptiveBatchTimeoutMs = BATCH_TIMEOUT_MS;
+    private volatile long lastBatchSizeEma = BATCH_MAX_SIZE; // EMA of recent batch sizes (x100 for int math)
 
     private static class BatchKey {
         final String headId;
@@ -97,44 +106,97 @@ public final class OnnxInferenceModel implements PythonModel {
     }
 
     public OnnxInferenceModel(String modelsDir) {
+        this(modelsDir, false);
+    }
+
+    public OnnxInferenceModel(String modelsDir, boolean forceCpu) {
+        this.modelsDir = modelsDir;
         this.onnxDir = Paths.get(modelsDir, "onnx");
-        OrtEnvironment tmpEnv = null;
-        OrtSession.SessionOptions tmpOpts = null;
-        try {
-            System.out.println("[ONNX] Initializing OrtEnvironment...");
-            tmpEnv = OrtEnvironment.getEnvironment();
-            System.out.println("[ONNX] OrtEnvironment OK");
-            tmpOpts = new OrtSession.SessionOptions();
-            tmpOpts.setOptimizationLevel(OrtSession.SessionOptions.OptLevel.ALL_OPT);
-            try {
-                if (EnvConfig.bool("ONNX_CUDA_GRAPH", false)) {
-                    ai.onnxruntime.providers.OrtCUDAProviderOptions cudaOpts =
-                            new ai.onnxruntime.providers.OrtCUDAProviderOptions(0);
-                    cudaOpts.add("enable_cuda_graph", "1");
-                    tmpOpts.addCUDA(cudaOpts);
-                    System.out.println("[ONNX] CUDA GPU provider added with CUDA graphs");
-                } else {
-                    tmpOpts.addCUDA(0);
-                    System.out.println("[ONNX] CUDA GPU provider added (no CUDA graph)");
-                }
-            } catch (Exception e) {
-                System.out.println("[ONNX] CUDA not available, using CPU: " + e.getMessage());
-            }
-        } catch (Throwable e) {
-            System.out.println("[ONNX] Failed to initialize: " + e.getMessage());
-        }
-        this.env = tmpEnv;
-        this.sessionOpts = tmpOpts;
+        this.forceCpu = forceCpu;
+        initOrtEnvironment();
         if (env != null && sessionOpts != null) {
             loadSessions();
         }
-        if (!sessions.isEmpty()) {
+        startBatchInfra();
+    }
+
+    private boolean sharedSessionOpts = false;
+
+    /**
+     * Construct with shared OrtEnvironment and SessionOptions.
+     * All instances share one CUDA arena instead of each allocating their own.
+     * The shared sessionOpts will NOT be closed during periodic reload.
+     */
+    public OnnxInferenceModel(String modelsDir, OrtEnvironment sharedEnv, OrtSession.SessionOptions sharedOpts) {
+        this.modelsDir = modelsDir;
+        this.onnxDir = Paths.get(modelsDir, "onnx");
+        this.forceCpu = false;
+        this.sharedSessionOpts = true;
+        this.env = sharedEnv;
+        this.sessionOpts = sharedOpts;
+        if (env != null && sessionOpts != null) {
+            loadSessions();
+        }
+        startBatchInfra();
+    }
+
+    private void initOrtEnvironment() {
+        try {
+            System.out.println("[ONNX] Initializing OrtEnvironment...");
+            env = OrtEnvironment.getEnvironment();
+            System.out.println("[ONNX] OrtEnvironment OK");
+            sessionOpts = createSessionOptions();
+        } catch (Throwable e) {
+            System.out.println("[ONNX] Failed to initialize: " + e.getMessage());
+            env = null;
+            sessionOpts = null;
+        }
+    }
+
+    private OrtSession.SessionOptions createSessionOptions() throws OrtException {
+        OrtSession.SessionOptions opts = new OrtSession.SessionOptions();
+        opts.setOptimizationLevel(OrtSession.SessionOptions.OptLevel.ALL_OPT);
+        if (!forceCpu && !EnvConfig.bool("ONNX_FORCE_CPU", false)) {
+            try {
+                ai.onnxruntime.providers.OrtCUDAProviderOptions cudaOpts =
+                        new ai.onnxruntime.providers.OrtCUDAProviderOptions(0);
+                // Reduce fragmentation: use kSameAsRequested so the arena doesn't
+                // over-allocate and fragment VRAM with geometrically growing blocks.
+                cudaOpts.add("arena_extend_strategy", "kSameAsRequested");
+                // Cap ONNX GPU memory. When PyTorch trains on CPU (hybrid mode),
+                // ONNX can use more VRAM. Default 8GB when training is on CPU.
+                String trainDevice = System.getenv("TRAIN_CUDA_DEVICE");
+                int defaultMb = ("cpu".equals(trainDevice)) ? 8192 : 5120;
+                long onnxMemLimitMb = EnvConfig.i32("ONNX_GPU_MEM_LIMIT_MB", defaultMb);
+                cudaOpts.add("gpu_mem_limit", String.valueOf(onnxMemLimitMb * 1024 * 1024));
+                if (EnvConfig.bool("ONNX_CUDA_GRAPH", false)) {
+                    cudaOpts.add("enable_cuda_graph", "1");
+                    System.out.println("[ONNX] CUDA GPU provider added with CUDA graphs + arena_extend=SameAsRequested");
+                } else {
+                    System.out.println("[ONNX] CUDA GPU provider added (arena_extend=SameAsRequested)");
+                }
+                opts.addCUDA(cudaOpts);
+            } catch (Exception e) {
+                System.out.println("[ONNX] CUDA not available, using CPU: " + e.getMessage());
+            }
+        } else {
+            System.out.println("[ONNX] Forced CPU mode" + (forceCpu ? " (forceCpu=true)" : " (ONNX_FORCE_CPU=1)"));
+        }
+        return opts;
+    }
+
+    /** Expose for shared-arena multi-profile construction. */
+    public OrtEnvironment getEnv() { return env; }
+    /** Expose for shared-arena multi-profile construction. */
+    public OrtSession.SessionOptions getSessionOpts() { return sessionOpts; }
+
+    private void startBatchInfra() {
+        if (!sessions.isEmpty() && flushScheduler == null) {
             flushScheduler = Executors.newSingleThreadScheduledExecutor(r -> {
                 Thread t = new Thread(r, "OnnxBatchFlush");
                 t.setDaemon(true);
                 return t;
             });
-            // Pool for parallel head-group inference within a flush
             int inferThreads = EnvConfig.i32("ONNX_INFER_THREADS", 3);
             inferPool = Executors.newFixedThreadPool(inferThreads, r -> {
                 Thread t = new Thread(r, "OnnxInfer");
@@ -153,15 +215,87 @@ public final class OnnxInferenceModel implements PythonModel {
                 try {
                     OrtSession session = env.createSession(onnxPath.toString(), sessionOpts);
                     sessions.put(headId, session);
+                    if ("action".equals(headId)) {
+                        try { lastOnnxMtime = Files.getLastModifiedTime(onnxPath).toMillis(); }
+                        catch (Exception ignored) {}
+                    }
                 } catch (OrtException e) {
                     logger.error("Failed to load ONNX model for head " + headId + ": " + e.getMessage());
                 }
+            }
+        }
+        // Phase 2 belief head: archetype classifier from shared encoder CLS.
+        Path beliefPath = onnxDir.resolve("model_belief.onnx");
+        if (Files.exists(beliefPath)) {
+            try {
+                OrtSession beliefSession = env.createSession(beliefPath.toString(), sessionOpts);
+                sessions.put("belief", beliefSession);
+                logger.info("Loaded belief ONNX model from " + beliefPath);
+            } catch (OrtException e) {
+                logger.error("Failed to load belief ONNX model: " + e.getMessage());
             }
         }
         if (sessions.isEmpty()) {
             logger.warn("No ONNX models loaded from " + onnxDir);
         } else {
             logger.info("Loaded " + sessions.size() + " ONNX models from " + onnxDir);
+        }
+        lastOnnxReloadMs = System.currentTimeMillis();
+    }
+
+    /**
+     * Phase 2: predict opponent's deck archetype from public state via the
+     * belief head. Returns softmax probabilities [num_archetypes] in the
+     * order {Wildfire, Rally, Affinity, Elves}, or null if belief model
+     * unavailable. Runs single-sample inference (no batching); callers
+     * should invoke sparingly (e.g., once per turn).
+     */
+    public float[] predictArchetype(StateSequenceBuilder.SequenceOutput state) {
+        OrtSession session = sessions.get("belief");
+        if (session == null || state == null) return null;
+        float[][] tokens = state.getSequence();
+        int[] mask = state.getMask();
+        int[] tokenIds = state.getTokenIds();
+        if (tokens == null || tokens.length == 0) return null;
+        int seqLen = tokens.length;
+        int dModel = tokens[0].length;
+
+        FloatBuffer seqBuf = ByteBuffer.allocateDirect(seqLen * dModel * 4)
+                .order(ByteOrder.nativeOrder()).asFloatBuffer();
+        for (float[] row : tokens) seqBuf.put(row);
+        seqBuf.rewind();
+        ByteBuffer maskBuf = ByteBuffer.allocateDirect(seqLen).order(ByteOrder.nativeOrder());
+        for (int v : mask) maskBuf.put((byte) (v != 0 ? 1 : 0));
+        maskBuf.rewind();
+        LongBuffer tokBuf = ByteBuffer.allocateDirect(seqLen * 8)
+                .order(ByteOrder.nativeOrder()).asLongBuffer();
+        for (int id : tokenIds) tokBuf.put(id);
+        tokBuf.rewind();
+
+        try (OnnxTensor seqT = OnnxTensor.createTensor(env, seqBuf, new long[]{1, seqLen, dModel});
+             OnnxTensor maskT = OnnxTensor.createTensor(env, maskBuf, new long[]{1, seqLen}, OnnxJavaType.BOOL);
+             OnnxTensor tokT = OnnxTensor.createTensor(env, tokBuf, new long[]{1, seqLen})) {
+            Map<String, OnnxTensor> inputs = new LinkedHashMap<>();
+            inputs.put("sequences", seqT);
+            inputs.put("masks", maskT);
+            inputs.put("token_ids", tokT);
+            try (OrtSession.Result result = session.run(inputs)) {
+                float[][] logits = (float[][]) result.get(0).getValue();  // [1, num_archetypes]
+                float[] row = logits[0];
+                float max = -Float.MAX_VALUE;
+                for (float v : row) if (v > max) max = v;
+                float sum = 0;
+                float[] probs = new float[row.length];
+                for (int i = 0; i < row.length; i++) {
+                    probs[i] = (float) Math.exp(row[i] - max);
+                    sum += probs[i];
+                }
+                if (sum > 0) for (int i = 0; i < probs.length; i++) probs[i] /= sum;
+                return probs;
+            }
+        } catch (Exception e) {
+            logger.error("Belief inference failed: " + e.getMessage());
+            return null;
         }
     }
 
@@ -213,16 +347,20 @@ public final class OnnxInferenceModel implements PythonModel {
                 }
                 flushScheduler.execute(this::flushQueue);
             } else if (pendingFlush == null) {
-                // Schedule timeout flush
+                // Schedule timeout flush using adaptive timeout
+                int timeout = adaptiveBatchTimeoutMs;
                 pendingFlush = flushScheduler.schedule(
-                        this::flushQueue, BATCH_TIMEOUT_MS, TimeUnit.MILLISECONDS);
+                        this::flushQueue, timeout, TimeUnit.MILLISECONDS);
             }
         }
 
         try {
             return req.future.get(SCORE_TIMEOUT_MS, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
-            logger.error("ONNX batch wait failed: " + e.getMessage());
+            logger.error("ONNX batch wait failed: " + e.getClass().getSimpleName()
+                    + " msg=" + e.getMessage()
+                    + (e.getCause() != null ? " cause=" + e.getCause().getClass().getSimpleName()
+                            + "/" + e.getCause().getMessage() : ""));
             return uniformResult(candidateMask);
         }
     }
@@ -249,6 +387,69 @@ public final class OnnxInferenceModel implements PythonModel {
         long batchNum = totalFlushes.incrementAndGet();
         totalBatched.addAndGet(batch.size());
 
+        // Adaptive batch timeout: EMA of batch size, scale timeout inversely.
+        // When batches shrink (throughput dropping), wait longer to accumulate
+        // more requests -- prevents the death spiral where small batches cause
+        // low GPU utilization which causes fewer requests which causes smaller batches.
+        long ema = lastBatchSizeEma;
+        ema = (ema * 7 + batch.size() * 100L * 3) / 10; // EMA alpha=0.3, stored as x100
+        lastBatchSizeEma = ema;
+        int avgBatchX100 = (int) ema;
+        if (avgBatchX100 < 500) { // avg < 5 requests per flush
+            adaptiveBatchTimeoutMs = BATCH_TIMEOUT_MAX_MS;
+        } else if (avgBatchX100 < 1500) { // avg < 15
+            adaptiveBatchTimeoutMs = (BATCH_TIMEOUT_MS + BATCH_TIMEOUT_MAX_MS) / 2;
+        } else {
+            adaptiveBatchTimeoutMs = BATCH_TIMEOUT_MS;
+        }
+
+        // Reload ONNX sessions when files on disk are newer (re-exported by orchestrator).
+        // Check every ONNX_RELOAD_CHECK_MS (default 30s). Only actually reload if
+        // model_action.onnx mtime changed, avoiding expensive session teardown/create.
+        long reloadCheckMs = Long.parseLong(System.getenv().getOrDefault("ONNX_RELOAD_CHECK_MS", "30000"));
+        long nowMs = System.currentTimeMillis();
+        if (reloadCheckMs > 0 && (nowMs - lastOnnxReloadMs) >= reloadCheckMs) {
+            lastOnnxReloadMs = nowMs;
+            Path actionOnnx = onnxDir.resolve("model_action.onnx");
+            long currentMtime = 0;
+            try {
+                if (Files.exists(actionOnnx)) {
+                    currentMtime = Files.getLastModifiedTime(actionOnnx).toMillis();
+                }
+            } catch (Exception ignored) {}
+            if (currentMtime > 0 && currentMtime != lastOnnxMtime) {
+                System.out.println("[ONNX] Detected updated ONNX files (mtime changed), reloading at flush #" + batchNum);
+                for (OrtSession s : sessions.values()) {
+                    try { s.close(); } catch (OrtException ignored) {}
+                }
+                sessions.clear();
+                loadSessions();
+                // Reset adaptive timeout after reload
+                lastBatchSizeEma = BATCH_MAX_SIZE * 100L;
+                adaptiveBatchTimeoutMs = BATCH_TIMEOUT_MS;
+            }
+        }
+        // Periodic full CUDA arena reset (recreate session options) to prevent fragmentation.
+        long arenaResetInterval = Long.parseLong(System.getenv().getOrDefault("ONNX_ARENA_RESET_INTERVAL", "100000"));
+        if (arenaResetInterval > 0 && batchNum > 0 && batchNum % arenaResetInterval == 0) {
+            System.out.println("[ONNX] Full CUDA arena reset at flush #" + batchNum);
+            for (OrtSession s : sessions.values()) {
+                try { s.close(); } catch (OrtException ignored) {}
+            }
+            sessions.clear();
+            if (!sharedSessionOpts && sessionOpts != null) {
+                try { sessionOpts.close(); } catch (Exception ignored) {}
+                try {
+                    sessionOpts = createSessionOptions();
+                } catch (OrtException e) {
+                    System.out.println("[ONNX] Failed to recreate session options: " + e.getMessage());
+                }
+            }
+            loadSessions();
+            lastBatchSizeEma = BATCH_MAX_SIZE * 100L;
+            adaptiveBatchTimeoutMs = BATCH_TIMEOUT_MS;
+        }
+
         if (batchNum <= 5 || batchNum % 500 == 0) {
             StringBuilder sb = new StringBuilder("[ONNX] flush #" + batchNum + " total=" + batch.size());
             for (Map.Entry<BatchKey, List<ScoreRequest>> e : groups.entrySet()) {
@@ -256,7 +457,7 @@ public final class OnnxInferenceModel implements PythonModel {
                         .append("=").append(e.getValue().size());
             }
             double avg = (double) totalBatched.get() / batchNum;
-            sb.append(" avg=").append(String.format("%.1f", avg));
+            sb.append(" avg=").append(String.format("%.1f", avg)).append(" timeout=").append(adaptiveBatchTimeoutMs).append("ms");
             System.out.println(sb);
         }
 
@@ -304,6 +505,15 @@ public final class OnnxInferenceModel implements PythonModel {
         if (session == null) {
             for (ScoreRequest r : requests) {
                 r.future.complete(uniformResult(r.candidateMask));
+            }
+            return;
+        }
+
+        // Split into sub-batches if exceeding buffer capacity
+        if (requests.size() > BATCH_MAX_SIZE) {
+            for (int start = 0; start < requests.size(); start += BATCH_MAX_SIZE) {
+                int end = Math.min(start + BATCH_MAX_SIZE, requests.size());
+                runBatchedInference(key, requests.subList(start, end));
             }
             return;
         }
@@ -459,30 +669,6 @@ public final class OnnxInferenceModel implements PythonModel {
     }
 
     @Override
-    public float predictMulligan(float[] features) {
-        if (trainingDelegate != null) return trainingDelegate.predictMulligan(features);
-        return 0.0f;
-    }
-
-    @Override
-    public float[] predictMulliganScores(float[] features) {
-        if (trainingDelegate != null) return trainingDelegate.predictMulliganScores(features);
-        return new float[]{0.5f, -0.5f};
-    }
-
-    @Override
-    public void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes,
-                               byte[] gameLengths, byte[] earlyLandScores, byte[] overrides, int batchSize) {
-        if (trainingDelegate != null) trainingDelegate.trainMulligan(features, decisions, outcomes,
-                gameLengths, earlyLandScores, overrides, batchSize);
-    }
-
-    @Override
-    public void saveMulliganModel() {
-        if (trainingDelegate != null) trainingDelegate.saveMulliganModel();
-    }
-
-    @Override
     public void saveModel(String path) {
         if (trainingDelegate != null) trainingDelegate.saveModel(path);
     }
@@ -500,12 +686,6 @@ public final class OnnxInferenceModel implements PythonModel {
     @Override
     public Map<String, Integer> getMainModelTrainingStats() {
         if (trainingDelegate != null) return trainingDelegate.getMainModelTrainingStats();
-        return Collections.emptyMap();
-    }
-
-    @Override
-    public Map<String, Integer> getMulliganModelTrainingStats() {
-        if (trainingDelegate != null) return trainingDelegate.getMulliganModelTrainingStats();
         return Collections.emptyMap();
     }
 

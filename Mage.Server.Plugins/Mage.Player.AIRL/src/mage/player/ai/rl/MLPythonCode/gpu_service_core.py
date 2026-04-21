@@ -61,6 +61,7 @@ class ProfileContext:
             self.env["CUDA_DEVICE"] = cuda_device
         self.lock = threading.RLock()
         self._cuda_stream = None
+        self._trt_ctx = None
         with _temporary_env(self.env):
             self.entry = PythonEntryPoint()
         # Create a dedicated CUDA stream for inference so it can overlap with
@@ -165,6 +166,9 @@ class ProfileContext:
         d_model: int,
         max_candidates: int,
         cand_feat_dim: int,
+        archetype_labels: Optional[bytes] = None,
+        num_archetypes: int = 0,
+        mcts_visits: Optional[bytes] = None,
     ) -> bool:
         self._ensure_model_initialized()
         with self.lock:
@@ -189,6 +193,9 @@ class ProfileContext:
                     d_model,
                     max_candidates,
                     cand_feat_dim,
+                    archetype_labels,
+                    num_archetypes,
+                    mcts_visits,
                 )
             )
 

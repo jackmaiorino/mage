@@ -38,24 +38,11 @@ public interface PythonModel extends AutoCloseable {
 
     void enqueueTraining(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> rewards);
 
-    float predictMulligan(float[] features);
-
-    /**
-     * Return raw two-headed mulligan scores: [Q_keep, Q_mull].
-     */
-    float[] predictMulliganScores(float[] features);
-
-    void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, byte[] earlyLandScores, byte[] overrides, int batchSize);
-
-    void saveMulliganModel();
-
     void saveModel(String path);
 
     String getDeviceInfo();
 
     Map<String, Integer> getMainModelTrainingStats();
-
-    Map<String, Integer> getMulliganModelTrainingStats();
 
     Map<String, Integer> getHealthStats();
 
@@ -64,6 +51,15 @@ public interface PythonModel extends AutoCloseable {
     void recordGameResult(float lastValuePrediction, boolean won);
 
     Map<String, Object> getValueHeadMetrics();
+
+    /**
+     * Phase 2: predict opponent's deck archetype from public state.
+     * Returns softmax probabilities over {Wildfire, Rally, Affinity, Elves},
+     * or null if belief head is not available for this backend.
+     */
+    default float[] predictArchetype(StateSequenceBuilder.SequenceOutput state) {
+        return null;
+    }
 
     void shutdown();
 

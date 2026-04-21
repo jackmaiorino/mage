@@ -108,6 +108,9 @@ public final class ThreadUtils {
         } else if (name.startsWith(THREAD_PREFIX_AI_SIMULATION_MAD)) {
             // ai simulation
             return true;
+        } else if (name.startsWith(THREAD_PREFIX_AI_SIMULATION_MCTS)) {
+            // mcts ai simulation (rollouts for PolicyValueMCTS / CoroutineRollout)
+            return true;
         } else if (name.equals("main")) {
             // unit test
             return true;

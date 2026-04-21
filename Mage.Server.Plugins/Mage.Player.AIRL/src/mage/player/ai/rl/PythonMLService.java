@@ -874,26 +874,6 @@ public class PythonMLService implements PythonModel {
     }
 
     @Override
-    public float predictMulligan(float[] features) {
-        return learner.predictMulligan(features);
-    }
-
-    @Override
-    public float[] predictMulliganScores(float[] features) {
-        return learner.predictMulliganScores(features);
-    }
-
-    @Override
-    public void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, byte[] earlyLandScores, byte[] overrides, int batchSize) {
-        learner.trainMulligan(features, decisions, outcomes, gameLengths, earlyLandScores, overrides, batchSize);
-    }
-
-    @Override
-    public void saveMulliganModel() {
-        learner.saveMulliganModel();
-    }
-
-    @Override
     public void saveModel(String path) {
         learner.saveModel(path);
     }
@@ -906,11 +886,6 @@ public class PythonMLService implements PythonModel {
     @Override
     public Map<String, Integer> getMainModelTrainingStats() {
         return learner.getMainModelTrainingStats();
-    }
-
-    @Override
-    public Map<String, Integer> getMulliganModelTrainingStats() {
-        return learner.getMulliganModelTrainingStats();
     }
 
     @Override

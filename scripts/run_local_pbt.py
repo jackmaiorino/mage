@@ -263,7 +263,7 @@ class LocalPBT:
                 continue
             # Skip if ONNX already exists, is newer than model, AND matches current export version.
             # Bump ONNX_EXPORT_VERSION when export format changes to force re-export.
-            ONNX_EXPORT_VERSION = "2"  # v2 = traditional opset_version=17 (was dynamo)
+            ONNX_EXPORT_VERSION = "3"  # v3 = adds belief head for archetype classification
             onnx_action = onnx_dir / "model_action.onnx"
             onnx_ver_file = onnx_dir / ".export_version"
             current_ver = onnx_ver_file.read_text().strip() if onnx_ver_file.exists() else ""

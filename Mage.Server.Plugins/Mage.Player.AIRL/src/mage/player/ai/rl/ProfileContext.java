@@ -15,6 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class ProfileContext {
 
     private static final ThreadLocal<ProfileContext> CURRENT = new ThreadLocal<>();
+    private static final java.util.concurrent.ConcurrentHashMap<String, ProfileContext> REGISTRY =
+            new java.util.concurrent.ConcurrentHashMap<>();
 
     public static ProfileContext current() {
         return CURRENT.get();
@@ -22,6 +24,14 @@ public final class ProfileContext {
 
     public static void setCurrent(ProfileContext ctx) {
         CURRENT.set(ctx);
+    }
+
+    public static void register(ProfileContext ctx) {
+        REGISTRY.put(ctx.profileName, ctx);
+    }
+
+    public static ProfileContext byName(String name) {
+        return REGISTRY.get(name);
     }
 
     // Identity

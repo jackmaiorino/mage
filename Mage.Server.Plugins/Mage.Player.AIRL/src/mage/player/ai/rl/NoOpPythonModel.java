@@ -46,24 +46,6 @@ final class NoOpPythonModel implements PythonModel {
     }
 
     @Override
-    public float predictMulligan(float[] features) {
-        return 0.5f;
-    }
-
-    @Override
-    public float[] predictMulliganScores(float[] features) {
-        return new float[]{0.5f, 0.5f};
-    }
-
-    @Override
-    public void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, byte[] earlyLandScores, byte[] overrides, int batchSize) {
-    }
-
-    @Override
-    public void saveMulliganModel() {
-    }
-
-    @Override
     public void saveModel(String path) {
     }
 
@@ -78,11 +60,6 @@ final class NoOpPythonModel implements PythonModel {
         m.put("train_steps", 0);
         m.put("train_samples", 0);
         return m;
-    }
-
-    @Override
-    public Map<String, Integer> getMulliganModelTrainingStats() {
-        return getMainModelTrainingStats();
     }
 
     @Override

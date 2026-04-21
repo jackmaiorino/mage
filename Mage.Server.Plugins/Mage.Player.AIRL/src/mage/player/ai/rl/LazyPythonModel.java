@@ -71,34 +71,6 @@ final class LazyPythonModel implements PythonModel {
     }
 
     @Override
-    public float predictMulligan(float[] features) {
-        return model().predictMulligan(features);
-    }
-
-    @Override
-    public float[] predictMulliganScores(float[] features) {
-        return model().predictMulliganScores(features);
-    }
-
-    @Override
-    public void trainMulligan(
-            byte[] features,
-            byte[] decisions,
-            byte[] outcomes,
-            byte[] gameLengths,
-            byte[] earlyLandScores,
-            byte[] overrides,
-            int batchSize
-    ) {
-        model().trainMulligan(features, decisions, outcomes, gameLengths, earlyLandScores, overrides, batchSize);
-    }
-
-    @Override
-    public void saveMulliganModel() {
-        model().saveMulliganModel();
-    }
-
-    @Override
     public void saveModel(String path) {
         model().saveModel(path);
     }
@@ -111,11 +83,6 @@ final class LazyPythonModel implements PythonModel {
     @Override
     public Map<String, Integer> getMainModelTrainingStats() {
         return model().getMainModelTrainingStats();
-    }
-
-    @Override
-    public Map<String, Integer> getMulliganModelTrainingStats() {
-        return model().getMulliganModelTrainingStats();
     }
 
     @Override
@@ -136,6 +103,11 @@ final class LazyPythonModel implements PythonModel {
     @Override
     public Map<String, Object> getValueHeadMetrics() {
         return model().getValueHeadMetrics();
+    }
+
+    @Override
+    public float[] predictArchetype(StateSequenceBuilder.SequenceOutput state) {
+        return model().predictArchetype(state);
     }
 
     @Override

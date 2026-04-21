@@ -101,39 +101,6 @@ public interface PythonEntryPoint {
     );
 
     /**
-     * Predict mulligan decision from hand features.
-     *
-     * @param features Mulligan feature vector (32-dim float array)
-     * @return Probability of keeping the hand (0.0 = mulligan, 1.0 = keep)
-     */
-    float predictMulligan(float[] features);
-
-    /**
-     * Return raw two-headed mulligan scores (Q_keep, Q_mull) as little-endian
-     * float32 bytes.
-     *
-     * @param features Mulligan feature vector (68-dim float array)
-     * @return byte[8] containing 2 float32 values: [Q_keep, Q_mull]
-     */
-    byte[] predictMulliganScores(float[] features);
-
-    /**
-     * Train the mulligan model with a batch of training data.
-     *
-     * @param features Batch of mulligan features
-     * @param decisions Batch of mulligan decisions (1=keep, 0=mulligan)
-     * @param outcomes Batch of game outcomes (win/loss)
-     * @param gameLengths Batch of game lengths in turns (int32 array) for survival reward
-     * @param batchSize Size of the batch
-     */
-    void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, byte[] earlyLandScores, byte[] overrides, int batchSize);
-
-    /**
-     * Save the mulligan model to disk.
-     */
-    void saveMulliganModel();
-
-    /**
      * Train on a batch of padded candidate decision steps.
      *
      * @param chosenIndexBytes int32[batchSize] chosen candidate index
@@ -193,12 +160,6 @@ public interface PythonEntryPoint {
      * (int) and 'train_samples' (int).
      */
     java.util.Map<String, Integer> getMainModelTrainingStats();
-
-    /**
-     * Get mulligan model training statistics. Returns a map with 'train_steps'
-     * (int) and 'train_samples' (int).
-     */
-    java.util.Map<String, Integer> getMulliganModelTrainingStats();
 
     /**
      * Get training health statistics. Returns a map with 'gpu_oom_count' (int).

@@ -74,7 +74,6 @@ import mage.player.ai.rl.EnvConfig;
 import mage.player.ai.rl.GameLogger;
 import mage.player.ai.rl.MetricsCollector;
 import mage.player.ai.rl.MulliganLogger;
-import mage.player.ai.rl.MulliganModel;
 import mage.player.ai.rl.PythonModel;
 import mage.player.ai.rl.RLLogPaths;
 import mage.player.ai.rl.RLTrainer;
@@ -173,7 +172,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final ThreadLocal<String> currentUnpaidManaText = new ThreadLocal<>();
 
     private PythonModel model;
-    private MulliganModel mulliganModel;
     protected StateSequenceBuilder.SequenceOutput currentState;
     private transient StateSequenceBuilder.SequenceOutput cachedBaseState;
     private transient int cachedBaseStateHash = Integer.MIN_VALUE;
@@ -195,7 +193,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private Ability currentAbility;
     private int mulligansTaken = 0;
     private int currentEpisode = -1; // Main model episode for logging
-    private int mulliganEpisode = -1; // Mulligan model episode for epsilon-greedy
     private int lastLoggedTurn = -1; // Track turn changes for game logging
     // Fallback logger attachment for callbacks that may run off the trainer thread.
     private transient GameLogger attachedGameLogger = null;
@@ -211,12 +208,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private int lastTrackedGameTurn = 0;
     private int rlPlayerTurnsTracked = 0;
     private int earlyLandHits = 0; // How many of first 3 turns were "on curve"
-
-    // Track mulligan decisions for training
-    private final List<float[]> mulliganFeatures = new ArrayList<>(); // Full feature vectors
-    private final List<Float> mulliganDecisions = new ArrayList<>(); // 1.0=keep, 0.0=mulligan
-    private final List<Boolean> mulliganOverrides = new ArrayList<>(); // true=decision was overridden
-    private final List<Integer> mulliganLandCounts = new ArrayList<>(); // For logging only
 
     // Duplicate-call protection for chooseMulligan (some engine flows call it multiple times).
     // Dedupe based on current hand fingerprint (IDs) + size.
@@ -316,7 +307,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     private boolean isMainExplorationEnabled() {
-        return trainingEnabled && !greedyMode && "train".equals(policyKey) && currentEpisode >= 0;
+        return trainingEnabled && !greedyMode && currentEpisode >= 0;
     }
 
     private static double linearDecay(int episodeNum, double start, double end, int decayEpisodes) {
@@ -1596,7 +1587,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     public ComputerPlayerRL(String name, RangeOfInfluence range, PythonModel model, boolean greedy, boolean trainingEnabled, String policyKey) {
         super(name, range, 10);
         this.model = model;
-        this.mulliganModel = new MulliganModel(model);
         this.trainingBuffer = new ArrayList<>();
         this.decisionCountsByHead = new java.util.HashMap<>();
         this.greedyMode = greedy;
@@ -1618,14 +1608,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     public ComputerPlayerRL(final ComputerPlayerRL player) {
         super(player);
         this.model = player.model;
-        this.mulliganModel = player.mulliganModel;
         this.trainingBuffer = new ArrayList<>();
         this.decisionCountsByHead = new java.util.HashMap<>();
         this.currentAbility = player.currentAbility;
         this.abilitySourceToExcludeFromMana = null; // Don't copy - each activation sets its own
         this.tapTargetCostReservations = new HashSet<>(); // Don't copy - each activation sets its own
         this.mulligansTaken = player.mulligansTaken;
-        this.mulliganEpisode = player.mulliganEpisode;
         this.lastMulliganHandFingerprint = player.lastMulliganHandFingerprint;
         this.lastMulliganHandSize = player.lastMulliganHandSize;
         this.lastMulliganDecisionShouldMulligan = player.lastMulliganDecisionShouldMulligan;
@@ -1644,6 +1632,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     @Override
     public boolean priority(Game game) {
         game.resumeTimer(getTurnControlledBy());
+        maybeLogBeliefPrediction(game);
         boolean result;
         try {
             result = priorityPlay(game);
@@ -1768,6 +1757,100 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         float[] actionProbs = prediction.policyScores; // length = maxCandidates
         float valueScore = prediction.valueScores;
 
+        // MCTS integration: at eval time (ISMCTS_ENABLE) pure override,
+        // at training time (MCTS_TRAINING_ENABLE) AlphaZero-style — play
+        // MCTS's action AND record the visit distribution as a training target.
+        boolean mctsEvalOverride = ISMCTS_ENABLE && !trainingEnabled;
+        boolean mctsTrainingMode = MCTS_TRAINING_ENABLE && trainingEnabled;
+        // One-shot diagnostic: print what flags the JVM actually sees on entry
+        // to this method. Helps us confirm the MCTS gate is being reached with
+        // the right values.
+        if (GENERIC_CHOOSE_DIAG_COUNT.incrementAndGet() <= 5) {
+            System.out.println("[GENERIC_CHOOSE_DIAG] actionType=" + actionType
+                    + " candidateCount=" + candidateCount
+                    + " trainingEnabled=" + trainingEnabled
+                    + " ISMCTS_ENABLE=" + ISMCTS_ENABLE
+                    + " MCTS_TRAINING_ENABLE=" + MCTS_TRAINING_ENABLE
+                    + " mctsEvalOverride=" + mctsEvalOverride
+                    + " mctsTrainingMode=" + mctsTrainingMode
+                    + " sampler=" + (DETERMINIZATION_SAMPLER != null ? "non-null" : "null"));
+        }
+        float[] mctsVisitTargets = null;
+        Integer mctsChosenIndex = null;
+        // Skip MCTS when the policy is already highly confident. MCTS cost is
+        // dominated by leaf count; if top candidate's prior already dominates,
+        // the search almost always confirms it. Gate controlled by
+        // MCTS_MIN_ENTROPY (default 0.25 nats -- roughly top prob < ~0.85).
+        boolean policyAmbiguous = true;
+        if (mctsEvalOverride || mctsTrainingMode) {
+            float maxProb = 0f;
+            int maskedCount = 0;
+            for (int i = 0; i < candidateCount; i++) {
+                if (actionProbs[i] > maxProb) maxProb = actionProbs[i];
+                if (candidateMask[i] == 1) maskedCount++;
+            }
+            // Top-prob threshold: if dominant, skip MCTS.
+            if (maskedCount >= 2 && maxProb >= MCTS_SKIP_TOP_PROB) {
+                policyAmbiguous = false;
+            }
+        }
+        // Diagnostic: record gate decisions so we can tell why MCTS isn't firing.
+        if (mctsEvalOverride || mctsTrainingMode) {
+            MCTS_GATE_TOTAL.incrementAndGet();
+            if (DETERMINIZATION_SAMPLER == null) MCTS_GATE_SAMPLER_NULL.incrementAndGet();
+            if (candidateCount < 2) MCTS_GATE_FEWCAND.incrementAndGet();
+            if (actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) MCTS_GATE_WRONGTYPE.incrementAndGet();
+            if (!policyAmbiguous) MCTS_GATE_CONFIDENT.incrementAndGet();
+        }
+        if ((mctsEvalOverride || mctsTrainingMode) && DETERMINIZATION_SAMPLER != null
+                && candidateCount >= 2
+                && actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                && policyAmbiguous) {
+            try {
+                float[] policyPriors = new float[candidateCount];
+                System.arraycopy(actionProbs, 0, policyPriors, 0, candidateCount);
+                @SuppressWarnings("unchecked")
+                List<mage.abilities.Ability> abilityCandidates = (List<mage.abilities.Ability>) (List<?>) candidates.subList(0, candidateCount);
+                long mctsSearchStart = System.nanoTime();
+                mage.player.ai.rl.PolicyValueMCTS.SearchResult mctsResult = mage.player.ai.rl.PolicyValueMCTS.search(
+                        game, this.getId(), abilityCandidates,
+                        policyPriors, valueScore, model, DETERMINIZATION_SAMPLER);
+                MCTS_ACTIVATION_COUNT.incrementAndGet();
+                if (mctsResult.bestActionIndex >= 0 && mctsResult.bestActionIndex < candidateCount) {
+                    // Normalize visit counts to a distribution over MAX_CANDIDATES.
+                    int totalVisits = 0;
+                    for (int v : mctsResult.aggregateVisits) totalVisits += v;
+                    if (totalVisits > 0) {
+                        mctsVisitTargets = new float[maxCandidates];
+                        for (int i = 0; i < Math.min(mctsResult.aggregateVisits.length, maxCandidates); i++) {
+                            mctsVisitTargets[i] = (float) mctsResult.aggregateVisits[i] / totalVisits;
+                        }
+                    }
+                    mctsChosenIndex = mctsResult.bestActionIndex;
+                    if (mctsEvalOverride) {
+                        GameLogger gl = resolveGameLogger();
+                        if (gl != null && gl.isEnabled()) {
+                            gl.log(String.format("[MCTS] arch=%s dets=%d visits=%s values=%s picked=%d wallMs=%d",
+                                    mctsResult.predictedArchetype, mctsResult.determinizationsRun,
+                                    java.util.Arrays.toString(mctsResult.aggregateVisits),
+                                    formatFloats(mctsResult.aggregateValues),
+                                    mctsResult.bestActionIndex, mctsResult.wallMs));
+                        }
+                        this.lastActionProbs = actionProbs.clone();
+                        this.lastValueScore = valueScore;
+                        return Arrays.asList(mctsChosenIndex);
+                    }
+                    // In training mode we fall through to the normal sampling
+                    // path but with the MCTS pick forced and visit targets
+                    // stashed for the TrainingData record below.
+                }
+            } catch (Throwable t) {
+                // MCTS failed; fall through to normal policy sampling.
+                mctsVisitTargets = null;
+                mctsChosenIndex = null;
+            }
+        }
+
         int picks = maxTargets; // historical behavior: pick maxTargets (then ensure >= minTargets via truncation above)
         SequentialPickResult pickResult = sampleSequentialWithoutReplacement(
                 actionProbs,
@@ -1794,6 +1877,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         List<Integer> selectedIndices = pickResult.selectedIndices;
         float oldLogpTotal = pickResult.oldLogpTotal;
+
+        // MCTS training override: replace the sampled pick with MCTS's choice
+        // and propagate the visit distribution through TrainingData so the
+        // python KL loss can use it as a distillation target.
+        if (mctsChosenIndex != null && mctsTrainingMode && !selectedIndices.isEmpty()) {
+            selectedIndices = Arrays.asList(mctsChosenIndex);
+        }
 
         // Record training data for decisions (store full action + joint log-prob)
         if (trainingEnabled && !selectedIndices.isEmpty()) {
@@ -1823,8 +1913,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     actionType,
                     stepReward
             );
-            trainingBuffer.add(td);
-            
+            if (mctsVisitTargets != null) {
+                td.setMctsVisitTargets(mctsVisitTargets);
+            }
+            recordTrainingData(td, game);
+
             // Track decision count by head
             decisionCountsByHead.put(actionType, decisionCountsByHead.getOrDefault(actionType, 0) + 1);
             
@@ -2156,6 +2249,20 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (candidate instanceof PassAbility) {
                 f[1] = 1.0f; // is_pass
                 return f; // Now has game context features
+            }
+
+            // Mulligan keep/mull candidates: Boolean.TRUE = keep (idx 0), Boolean.FALSE = mull (idx 1)
+            if (actionType == StateSequenceBuilder.ActionType.MULLIGAN && candidate instanceof Boolean) {
+                boolean isKeep = (Boolean) candidate;
+                f[1] = isKeep ? 0.0f : 1.0f; // is_mull (distinguishes the two candidates)
+                int landCount = countLandsInHand(game);
+                int handSize = getHand() != null ? getHand().size() : 0;
+                int spellCount = handSize - landCount;
+                f[2] = landCount / 7.0f;
+                f[3] = spellCount / 7.0f;
+                f[22] = handSize / 7.0f;
+                f[24] = mulligansTaken / 3.0f;
+                return f;
             }
 
             // chooseUse candidates: Boolean.TRUE = yes, Boolean.FALSE = no
@@ -2978,7 +3085,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                 StateSequenceBuilder.ActionType.SELECT_TARGETS,
                                 stepReward
                         );
-                        trainingBuffer.add(td);
+                        recordTrainingData(td, game);
                     }
 
                     // Track decision count by head
@@ -3353,7 +3460,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                 StateSequenceBuilder.ActionType.SELECT_CARD,
                                 stepReward
                         );
-                        trainingBuffer.add(td);
+                        recordTrainingData(td, game);
                     }
 
                     // Track decision count by head
@@ -3842,7 +3949,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
                         1, chosenIndices, oldLogp, valueScore,
                         StateSequenceBuilder.ActionType.CHOOSE_MODE, 0.0);
-                trainingBuffer.add(td);
+                recordTrainingData(td, game);
                 decisionCountsByHead.put(StateSequenceBuilder.ActionType.CHOOSE_MODE,
                         decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.CHOOSE_MODE, 0) + 1);
             }
@@ -4003,7 +4110,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
                         1, chosenIndices, oldLogp, valueScore,
                         StateSequenceBuilder.ActionType.ANNOUNCE_X, 0.0);
-                trainingBuffer.add(td);
+                recordTrainingData(td, game);
                 decisionCountsByHead.put(StateSequenceBuilder.ActionType.ANNOUNCE_X,
                         decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.ANNOUNCE_X, 0) + 1);
             }
@@ -4195,7 +4302,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         StateSequenceBuilder.ActionType.CHOOSE_USE,
                         0.0
                 );
-                trainingBuffer.add(td);
+                recordTrainingData(td, game);
                 decisionCountsByHead.put(StateSequenceBuilder.ActionType.CHOOSE_USE,
                         decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.CHOOSE_USE, 0) + 1);
             }
@@ -4352,7 +4459,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
                         chosenCount, chosenIndices, oldLogpTotal, valueScore,
                         StateSequenceBuilder.ActionType.DECLARE_ATTACKS, 0.0);
-                trainingBuffer.add(td);
+                recordTrainingData(td, game);
                 decisionCountsByHead.put(StateSequenceBuilder.ActionType.DECLARE_ATTACKS,
                         decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.DECLARE_ATTACKS, 0) + 1);
             }
@@ -4420,7 +4527,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                                 baseState, p2Count, p2Ids, p2Feats, p2Mask,
                                 1, p2Chosen, p2LogP, p2Value,
                                 StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET, 0.0);
-                        trainingBuffer.add(td2);
+                        recordTrainingData(td2, game);
                         decisionCountsByHead.put(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET,
                                 decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET, 0) + 1);
                     }
@@ -4564,7 +4671,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                             baseState, candidateCount, candidateActionIds, candidateFeatures, candidateMask,
                             chosenCount, chosenIndices, oldLogpTotal, valueScore,
                             StateSequenceBuilder.ActionType.DECLARE_BLOCKS, 0.0);
-                    trainingBuffer.add(td);
+                    recordTrainingData(td, game);
                     decisionCountsByHead.put(StateSequenceBuilder.ActionType.DECLARE_BLOCKS,
                             decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.DECLARE_BLOCKS, 0) + 1);
                 }
@@ -4681,13 +4788,77 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 return lastMulliganDecisionShouldMulligan;
             }
 
-            MulliganModel.MulliganDecision decision = mulliganModel.shouldMulliganWithFeatures(this, game, mulligansTaken, mulliganEpisode);
+            // Route mulligan keep/mull through the main action model (2 candidates: KEEP=0, MULL=1)
+            final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+            final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
+
+            StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
+
+            long prepStartNanos = System.nanoTime();
+            int[] candidateActionIds = new int[maxCandidates];
+            float[][] candidateFeatures = new float[maxCandidates][candFeatDim];
+            int[] candidateMask = new int[maxCandidates];
+            int candidateCount = 2;
 
             int landCount = countLandsInHand(game);
-            boolean trainingRecorded = false;
-            float actionTaken = decision.shouldMulligan ? 0.0f : 1.0f; // 0=mull, 1=keep (action taken by engine)
-            // For training, record the ORIGINAL model decision (before override) so bad decisions get punished
-            float trainingLabel = decision.originalModelDecision ? 0.0f : 1.0f; // What the model wanted to do
+            int spellCount = handSizeNow - landCount;
+
+            // Candidate 0 = KEEP
+            candidateMask[0] = 1;
+            candidateActionIds[0] = toVocabId(StateSequenceBuilder.ActionType.MULLIGAN.name() + "_KEEP");
+            candidateFeatures[0] = computeCandidateFeatures(StateSequenceBuilder.ActionType.MULLIGAN, game, null, Boolean.TRUE, candFeatDim, baseState);
+
+            // Candidate 1 = MULL
+            candidateMask[1] = 1;
+            candidateActionIds[1] = toVocabId(StateSequenceBuilder.ActionType.MULLIGAN.name() + "_MULL");
+            candidateFeatures[1] = computeCandidateFeatures(StateSequenceBuilder.ActionType.MULLIGAN, game, null, Boolean.FALSE, candFeatDim, baseState);
+
+            String headId = headForActionType(StateSequenceBuilder.ActionType.MULLIGAN); // "action"
+            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                    baseState,
+                    candidateActionIds,
+                    candidateFeatures,
+                    candidateMask,
+                    headId,
+                    0,
+                    1,
+                    1,
+                    candidateCount,
+                    prepStartNanos
+            );
+
+            float[] actionProbs = prediction.policyScores;
+            float valueScore = prediction.valueScores;
+            SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+            int chosenIdx = pickResult.chosenIdx;
+            boolean shouldMulligan = (chosenIdx == 1);
+
+            float pKeep = pickResult.behavior.behaviorProbs[0];
+            float pMull = pickResult.behavior.behaviorProbs[1];
+
+            // Record training data
+            if (trainingEnabled && !game.isSimulation()) {
+                int[] chosenIndices = new int[maxCandidates];
+                Arrays.fill(chosenIndices, -1);
+                chosenIndices[0] = chosenIdx;
+                float oldLogp = pickResult.oldLogp;
+                StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
+                        baseState,
+                        candidateCount,
+                        candidateActionIds,
+                        candidateFeatures,
+                        candidateMask,
+                        1,
+                        chosenIndices,
+                        oldLogp,
+                        valueScore,
+                        StateSequenceBuilder.ActionType.MULLIGAN,
+                        0.0
+                );
+                recordTrainingData(td, game);
+                decisionCountsByHead.put(StateSequenceBuilder.ActionType.MULLIGAN,
+                        decisionCountsByHead.getOrDefault(StateSequenceBuilder.ActionType.MULLIGAN, 0) + 1);
+            }
 
             // Gamelog: mulligan decision details
             try {
@@ -4701,14 +4872,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         cards = "";
                     }
                     gameLogger.log(String.format(
-                            "MULLIGAN_DECISION: player=%s mulligansTaken=%d handSize=%d lands=%d decision=%s Q_keep=%.3f Q_mull=%.3f hand=[%s]",
+                            "MULLIGAN_DECISION: player=%s mulligansTaken=%d handSize=%d lands=%d decision=%s P_keep=%.3f P_mull=%.3f hand=[%s]",
                             getName(),
                             mulligansTaken,
                             handSizeNow,
                             landCount,
-                            decision.shouldMulligan ? "MULLIGAN" : "KEEP",
-                            decision.qKeep,
-                            decision.qMull,
+                            shouldMulligan ? "MULLIGAN" : "KEEP",
+                            pKeep,
+                            pMull,
                             trunc(cards, 400)
                     ));
                 }
@@ -4717,52 +4888,29 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
 
             mulliganTrainingLog(String.format(
-                    "MULLIGAN_DECISION ep=%d player=%s mulligansTaken=%d handSize=%d lands=%d decision=%s Q_keep=%.3f Q_mull=%.3f action=%.1f%s",
+                    "MULLIGAN_DECISION ep=%d player=%s mulligansTaken=%d handSize=%d lands=%d decision=%s P_keep=%.3f P_mull=%.3f mode=%s",
                     currentEpisode,
                     getName(),
                     mulligansTaken,
                     handSizeNow,
                     landCount,
-                    decision.shouldMulligan ? "MULLIGAN" : "KEEP",
-                    decision.qKeep,
-                    decision.qMull,
-                    actionTaken,
-                    decision.wasOverridden ? " [OVERRIDDEN]" : ""
+                    shouldMulligan ? "MULLIGAN" : "KEEP",
+                    pKeep,
+                    pMull,
+                    pickResult.behavior.mode
             ));
-
-            // Record mulligan-model training label immediately (only if hand size is sane at this prompt).
-            // Use the ORIGINAL model decision (before override) so the model learns from its mistakes.
-            if (trainingEnabled && handSizeNow > 0 && handSizeNow <= 7) {
-                mulliganFeatures.add(decision.features);
-                mulliganDecisions.add(trainingLabel); // Original model decision, not overridden action
-                mulliganOverrides.add(decision.wasOverridden); // Track if this decision was overridden
-                mulliganLandCounts.add(landCount);
-                trainingRecorded = true;
-            } else if (trainingEnabled) {
-                mulliganTrainingLog(String.format(
-                        "MULLIGAN_WARN ep=%d player=%s mulligansTaken=%d handSize=%d -> skip_mulligan_training_record",
-                        currentEpisode,
-                        getName(),
-                        mulligansTaken,
-                        handSizeNow
-                ));
-            }
 
             mulliganTraceJsonl(
                     "decision",
                     "\"method\":\"chooseMulligan\","
                     + "\"handSize\":" + handSizeNow + ","
                     + "\"landCount\":" + landCount + ","
-                    + "\"handIdsHash\":" + Arrays.hashCode(decision.handCardIds) + ","
-                    + "\"deckIdsHash\":" + Arrays.hashCode(decision.deckCardIds) + ","
-                    + "\"shouldMulligan\":" + decision.shouldMulligan + ","
-                    + "\"qKeep\":" + decision.qKeep + ","
-                    + "\"qMull\":" + decision.qMull + ","
-                    + "\"actionTaken\":" + actionTaken + ","
-                    + "\"trainingRecorded\":" + trainingRecorded
+                    + "\"shouldMulligan\":" + shouldMulligan + ","
+                    + "\"P_keep\":" + pKeep + ","
+                    + "\"P_mull\":" + pMull
             );
 
-            // Log to CSV once per keep/mull decision (self-contained: current hand only)
+            // Log to CSV once per keep/mull decision
             String allCardsCsv = "";
             try {
                 List<Card> handCards = new ArrayList<>(getHand().getCards(game));
@@ -4773,28 +4921,28 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             MulliganLogger.getInstance().logDecision(
                     currentEpisode,
                     getName(),
-                    decision.mulliganNum,
+                    mulligansTaken,
                     handSizeNow,
-                    decision.shouldMulligan ? "MULLIGAN" : "KEEP",
-                    decision.qKeep,
-                    decision.qMull,
+                    shouldMulligan ? "MULLIGAN" : "KEEP",
+                    pKeep,
+                    pMull,
                     allCardsCsv,
-                    "", // keptCards (not tracked here)
-                    "" // bottomedCards (not tracked here)
+                    "",
+                    ""
             );
 
             // Cache decision for duplicate prompts.
             lastMulliganHandFingerprint = handFp;
             lastMulliganHandSize = handSizeNow;
-            lastMulliganDecisionShouldMulligan = decision.shouldMulligan;
+            lastMulliganDecisionShouldMulligan = shouldMulligan;
 
             // Advance mulligansTaken only when we actually take a mulligan.
-            if (decision.shouldMulligan) {
+            if (shouldMulligan) {
                 mulligansTaken++;
             }
-            return decision.shouldMulligan;
+            return shouldMulligan;
         } catch (Exception e) {
-            RLTrainer.threadLocalLogger.get().warn("Error in mulligan model, using fallback: " + e.getMessage());
+            RLTrainer.threadLocalLogger.get().warn("Error in mulligan (main model), using fallback: " + e.getMessage());
             mulliganTraceJsonl(
                     "exception",
                     "\"method\":\"chooseMulligan\","
@@ -5011,30 +5159,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
     }
 
-    /**
-     * Get mulligan training data and clear buffer.
-     */
-    public List<float[]> getMulliganFeatures() {
-        return new ArrayList<>(mulliganFeatures);
-    }
-
-    public List<Float> getMulliganDecisions() {
-        return new ArrayList<>(mulliganDecisions);
-    }
-
-    public List<Boolean> getMulliganOverrides() {
-        return new ArrayList<>(mulliganOverrides);
-    }
-
-    public List<Integer> getMulliganLandCounts() {
-        return new ArrayList<>(mulliganLandCounts);
-    }
-
     public void clearMulliganData() {
-        mulliganFeatures.clear();
-        mulliganDecisions.clear();
-        mulliganOverrides.clear();
-        mulliganLandCounts.clear();
         // Reset early-land tracking for next game
         rlPlayerHasHadATurn = false;
         lastTrackedGameTurn = 0;
@@ -5187,13 +5312,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             seed = seed * 31L + (n == null ? 0L : n.hashCode());
             stochasticRng.setSeed(seed);
         }
-    }
-
-    /**
-     * Set the mulligan model episode number for epsilon-greedy exploration.
-     */
-    public void setMulliganEpisode(int episodeNum) {
-        this.mulliganEpisode = episodeNum;
     }
 
     protected boolean priorityPlay(Game game) {
@@ -6247,7 +6365,121 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         if (!trainingEnabled) {
             return new ArrayList<>();
         }
-        return new ArrayList<>(trainingBuffer);
+        List<StateSequenceBuilder.TrainingData> copy = new ArrayList<>(trainingBuffer);
+        trainingBuffer.clear();
+        return copy;
+    }
+
+    /**
+     * Attach opponent belief ground truth (Phase 1 aux loss) and enqueue for training.
+     * Centralizing here keeps the 11 TrainingData construction sites simple.
+     */
+    // Phase 2: track last turn we logged a belief prediction so we only
+    // invoke the ONNX belief head once per turn (single-sample inference
+    // is cheap but still worth throttling since priority() fires many times).
+    private int lastBeliefLoggedTurn = -1;
+
+    private static final boolean ISMCTS_ENABLE = "1".equals(System.getenv("ISMCTS_ENABLE"));
+    private static final int ISMCTS_ROLLOUTS_PER_TURN = mage.player.ai.rl.EnvConfig.i32("ISMCTS_ROLLOUTS_PER_TURN", 4);
+    private static final boolean MCTS_TRAINING_ENABLE = "1".equals(System.getenv("MCTS_TRAINING_ENABLE"));
+    private static final float MCTS_SKIP_TOP_PROB = (float) mage.player.ai.rl.EnvConfig.f64("MCTS_SKIP_TOP_PROB", 0.85);
+    private static final java.util.concurrent.atomic.AtomicInteger MCTS_ACTIVATION_COUNT = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_TOTAL = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_SAMPLER_NULL = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_FEWCAND = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_WRONGTYPE = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_CONFIDENT = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger GENERIC_CHOOSE_DIAG_COUNT = new java.util.concurrent.atomic.AtomicInteger();
+    public static int getMctsActivationCount() { return MCTS_ACTIVATION_COUNT.get(); }
+    public static String getMctsGateStats() {
+        return String.format("total=%d sampler_null=%d fewcand=%d wrongtype=%d confident=%d activations=%d",
+                MCTS_GATE_TOTAL.get(), MCTS_GATE_SAMPLER_NULL.get(), MCTS_GATE_FEWCAND.get(),
+                MCTS_GATE_WRONGTYPE.get(), MCTS_GATE_CONFIDENT.get(), MCTS_ACTIVATION_COUNT.get());
+    }
+    private static final mage.player.ai.rl.DeterminizationSampler DETERMINIZATION_SAMPLER;
+    static {
+        mage.player.ai.rl.DeterminizationSampler tmp = null;
+        if (ISMCTS_ENABLE || MCTS_TRAINING_ENABLE) {
+            try {
+                tmp = mage.player.ai.rl.DeterminizationSampler.pauperDefaults();
+            } catch (Throwable t) {
+                System.out.println("[ISMCTS-INIT] failed to load sampler: " + t.getMessage());
+            }
+        }
+        DETERMINIZATION_SAMPLER = tmp;
+        System.out.println("[ISMCTS-INIT] ismctsEnabled=" + ISMCTS_ENABLE
+                + " mctsTrainingEnabled=" + MCTS_TRAINING_ENABLE
+                + " rolloutsPerTurn=" + ISMCTS_ROLLOUTS_PER_TURN
+                + " sampler=" + (DETERMINIZATION_SAMPLER != null ? DETERMINIZATION_SAMPLER.getArchetypes() : "null"));
+    }
+
+    private void maybeLogBeliefPrediction(Game game) {
+        if (game == null || model == null) return;
+        int turn;
+        try {
+            turn = game.getTurnNum();
+        } catch (Throwable t) {
+            return;
+        }
+        if (turn <= lastBeliefLoggedTurn || turn < 2) return;  // skip turn 1 (not enough public signal)
+        try {
+            mage.constants.TurnPhase phase = game.getPhase() != null ? game.getPhase().getType() : mage.constants.TurnPhase.BEGINNING;
+            StateSequenceBuilder.SequenceOutput state = StateSequenceBuilder.buildBaseState(game, phase, StateSequenceBuilder.MAX_LEN);
+            float[] probs = model.predictArchetype(state);
+            if (probs == null || probs.length == 0) return;
+
+            // Optional: run ISMCTS rollouts with belief-driven determinization
+            // (off by default since rollouts are expensive -- ~seconds per game).
+            mage.player.ai.rl.BeliefISMCTS.RolloutStats ismcts = null;
+            if (ISMCTS_ENABLE && ISMCTS_ROLLOUTS_PER_TURN > 0 && DETERMINIZATION_SAMPLER != null) {
+                ismcts = mage.player.ai.rl.BeliefISMCTS.runBeliefRollouts(
+                        game, this.getId(), DETERMINIZATION_SAMPLER, ISMCTS_ROLLOUTS_PER_TURN);
+            }
+            int bestIdx = 0;
+            for (int i = 1; i < probs.length; i++) if (probs[i] > probs[bestIdx]) bestIdx = i;
+            String[] names = {"Wildfire", "Rally", "Affinity", "Elves"};
+            String predicted = bestIdx < names.length ? names[bestIdx] : ("archetype_" + bestIdx);
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.format("[BELIEF] turn=%d predicted=%s conf=%.3f [",
+                    turn, predicted, probs[bestIdx]));
+            for (int i = 0; i < probs.length; i++) {
+                if (i > 0) sb.append(" ");
+                String n = i < names.length ? names[i] : ("a" + i);
+                sb.append(String.format("%s:%.3f", n, probs[i]));
+            }
+            sb.append("]");
+            if (ismcts != null) {
+                sb.append(String.format(" rollouts=%d wins=%d losses=%d winrate=%.3f wallMs=%d",
+                        ismcts.completed(), ismcts.wins, ismcts.losses, ismcts.winRate(), ismcts.totalMillis));
+            }
+            GameLogger logger = resolveGameLogger();
+            if (logger != null && logger.isEnabled()) {
+                logger.log(sb.toString());
+            }
+            lastBeliefLoggedTurn = turn;
+        } catch (Throwable t) {
+            // Best effort: never disrupt gameplay for belief logging.
+        }
+    }
+
+    private static String formatFloats(float[] arr) {
+        if (arr == null) return "null";
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < arr.length; i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(String.format("%.3f", arr[i]));
+        }
+        return sb.append("]").toString();
+    }
+
+    private void recordTrainingData(StateSequenceBuilder.TrainingData td, Game game) {
+        try {
+            int label = StateSequenceBuilder.computeArchetypeLabel(game, this.getId());
+            td.setBeliefArchetypeLabel(label);
+        } catch (Throwable t) {
+            // Label is best-effort; -1 means python skips the aux loss.
+        }
+        this.trainingBuffer.add(td);
     }
 
     public java.util.Map<StateSequenceBuilder.ActionType, Integer> getDecisionCountsByHead() {

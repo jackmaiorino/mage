@@ -442,9 +442,24 @@ class SharedGpuHost:
                 _diag_wait_ms_sum = 0.0
                 _diag_run_ms_sum = 0.0
 
+    def _log_memory(self, tag: str) -> None:
+        # Periodic memory diagnostic so we can see when RSS climbs unbounded.
+        # Uses psutil if available, else skips. Called from train_worker_loop
+        # every N batches.
+        try:
+            import psutil
+            import os as _os
+            p = psutil.Process(_os.getpid())
+            rss_gb = p.memory_info().rss / (1024 ** 3)
+            virt_gb = p.memory_info().vms / (1024 ** 3)
+            print(f"[MEMORY] {tag} rss={rss_gb:.1f}GB virtual={virt_gb:.1f}GB", flush=True)
+        except Exception:
+            pass
+
     def train_worker_loop(self, worker_id: int = 0) -> None:
         # Learner updates drain independently and publish fresh weights for the
         # inference lane to reload asynchronously.
+        _memory_log_counter = 0
         while self._running:
             work = None
             sleep_for = 0.25
@@ -467,6 +482,9 @@ class SharedGpuHost:
                 with self._lock:
                     self._training_profiles.discard(profile_key)
                     self._lock.notify_all()
+                _memory_log_counter += 1
+                if _memory_log_counter % 10 == 0:
+                    self._log_memory(f"after_train_batch_{_memory_log_counter}")
 
     def _claim_score_work_locked(self, worker_id: int = 0):
         """Select one batch from a profile not currently being processed by another worker.
@@ -764,6 +782,9 @@ class SharedGpuHost:
         total_episodes = len(tasks)
         started = time.monotonic()
         try:
+            archetype_labels = merged[14] if len(merged) > 14 else None
+            mcts_visits = merged[15] if len(merged) > 15 else None
+            num_archetypes = int(first.headers.get("num_archetypes", "0"))
             state.learner_context.train_batch(
                 merged[0],
                 merged[1],
@@ -784,6 +805,9 @@ class SharedGpuHost:
                 int(first.headers.get("d_model", "0")),
                 int(first.headers.get("max_candidates", "0")),
                 int(first.headers.get("cand_feat_dim", "0")),
+                archetype_labels,
+                num_archetypes,
+                mcts_visits,
             )
         finally:
             # Release cached GPU memory after every training batch so ONNX

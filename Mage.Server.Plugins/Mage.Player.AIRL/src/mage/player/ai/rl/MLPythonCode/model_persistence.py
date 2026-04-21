@@ -38,9 +38,11 @@ class ModelPersistence:
             logger.error(LogCategory.GPU_MEMORY, "Error loading model: %s", str(e))
             raise
 
-    def save_latest_model_atomic(self, model, path=None):
+    def save_latest_model_atomic(self, model, path=None, extra_state=None):
         """
         Save a 'latest weights' file atomically (tmp -> replace) for inference workers to reload.
+        Accepts extra_state so the train_step_counter etc. survive trainer restarts;
+        without this, restarts rewind entropy-decay schedules and other stateful things.
         """
         p = (path or self.model_latest_path or "").strip()
         if not p:
@@ -49,7 +51,7 @@ class ModelPersistence:
         if parent:
             os.makedirs(parent, exist_ok=True)
         tmp = "%s.tmp.%s.%s" % (p, os.getpid(), int(time.time() * 1000000000))
-        self.save_model(model, tmp)
+        self.save_model(model, tmp, extra_state=extra_state)
         # Windows can fail replace() if another process is reading the target.
         for i in range(20):
             try:

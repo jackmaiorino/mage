@@ -54,19 +54,23 @@ import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.effects.mana.ManaEffect;
+import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.keyword.ProwessAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
@@ -96,6 +100,7 @@ public class StateSequenceBuilder {
     /* === CONFIGURATION ================================================= */
     public static final int DIM_PER_TOKEN = 128; // feature dim per token
     public static final int MAX_LEN = 256; // hard cap for sequence length
+    private static final java.util.concurrent.atomic.AtomicLong TRUNCATION_COUNT = new java.util.concurrent.atomic.AtomicLong(0);
 
     /**
      * Token-ID vocabulary size for learned embeddings on the Python side.
@@ -271,6 +276,12 @@ public class StateSequenceBuilder {
             tokenIds.add(0);
         }
         if (tokens.size() > maxLen) {
+            // Log truncation for diagnostics (sampled to avoid spam)
+            long truncCount = TRUNCATION_COUNT.incrementAndGet();
+            if (truncCount <= 5 || truncCount % 1000 == 0) {
+                System.out.println("[STATE] TRUNCATION: " + tokens.size() + " tokens -> " + maxLen
+                    + " (count=" + truncCount + ")");
+            }
             tokens = tokens.subList(0, maxLen);
             mask = mask.subList(0, maxLen);
             tokenIds = tokenIds.subList(0, maxLen);
@@ -375,8 +386,21 @@ public class StateSequenceBuilder {
         v[12] = pool.getBlack()     / 10.0f;
         v[13] = pool.getColorless() / 10.0f;
 
+        // v[14]: artifact count on battlefield (normalized, for Metalcraft/Affinity)
+        int artifactCount = 0;
+        int elfCount = 0;
+        int creatureCount = 0;
+        for (Permanent perm : g.getBattlefield().getAllActivePermanents(p.getId())) {
+            if (perm.isArtifact(g)) artifactCount++;
+            if (perm.isCreature(g)) creatureCount++;
+            if (perm.hasSubtype(mage.constants.SubType.ELF, g)) elfCount++;
+        }
+        v[14] = artifactCount / 10.0f;
+        v[15] = elfCount / 10.0f;
+        v[16] = creatureCount / 10.0f;
+
         // Validate normalized values
-        for (int i = 0; i < 14; i++) {
+        for (int i = 0; i < 17; i++) {
             if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
                 logger.severe(String.format("Invalid normalized value at index %d: %f", i, v[i]));
                 v[i] = 0.0f;
@@ -522,7 +546,7 @@ public class StateSequenceBuilder {
                 int mv = (stackAbility != null && stackAbility.getManaCostsToPay() != null)
                         ? Math.max(0, stackAbility.getManaCostsToPay().manaValue())
                         : 0;
-                v[index++] = (float) mv;
+                v[index++] = mv / 10.0f;
             }
 
             Mana total = new Mana();
@@ -532,11 +556,11 @@ public class StateSequenceBuilder {
                 }
             }
             if (index + 5 < DIM_PER_TOKEN) {
-                v[index++] = Math.max(0, total.getWhite());
-                v[index++] = Math.max(0, total.getBlue());
-                v[index++] = Math.max(0, total.getBlack());
-                v[index++] = Math.max(0, total.getRed());
-                v[index++] = Math.max(0, total.getGreen());
+                v[index++] = Math.max(0, total.getWhite()) / 10.0f;
+                v[index++] = Math.max(0, total.getBlue()) / 10.0f;
+                v[index++] = Math.max(0, total.getBlack()) / 10.0f;
+                v[index++] = Math.max(0, total.getRed()) / 10.0f;
+                v[index++] = Math.max(0, total.getGreen()) / 10.0f;
             }
         }
 
@@ -629,7 +653,9 @@ public class StateSequenceBuilder {
             fTargetsAny, fTargetsCreature, fTargetsArtifact, fTargetsEnchantment, fHasETB
         };
         for (int i = 0; i < ef.length && EFFECT_SLOT_START + i < DIM_PER_TOKEN; i++) {
-            v[EFFECT_SLOT_START + i] = ef[i] ? 1.0f : 0.0f;
+            // Merge (OR) with existing flags so stack abilities add to card-level flags
+            // rather than overwriting them
+            if (ef[i]) v[EFFECT_SLOT_START + i] = 1.0f;
         }
     }
 
@@ -658,9 +684,9 @@ public class StateSequenceBuilder {
             toughness = Math.max(0, toughness);
             manaValue = Math.max(0, manaValue);
 
-            v[index++] = (float) power;
-            v[index++] = (float) toughness;
-            v[index++] = (float) manaValue;
+            v[index++] = power / 10.0f;
+            v[index++] = toughness / 10.0f;
+            v[index++] = manaValue / 10.0f;
 
             // Validate values
             for (int i = index - 3; i < index; i++) {
@@ -679,11 +705,11 @@ public class StateSequenceBuilder {
 
         // Add validation for mana values
         if (index + 5 < DIM_PER_TOKEN) {
-            v[index++] = Math.max(0, total.getWhite());
-            v[index++] = Math.max(0, total.getBlue());
-            v[index++] = Math.max(0, total.getBlack());
-            v[index++] = Math.max(0, total.getRed());
-            v[index++] = Math.max(0, total.getGreen());
+            v[index++] = Math.max(0, total.getWhite()) / 10.0f;
+            v[index++] = Math.max(0, total.getBlue()) / 10.0f;
+            v[index++] = Math.max(0, total.getBlack()) / 10.0f;
+            v[index++] = Math.max(0, total.getRed()) / 10.0f;
+            v[index++] = Math.max(0, total.getGreen()) / 10.0f;
 
             // Validate mana values
             for (int i = index - 5; i < index; i++) {
@@ -695,9 +721,10 @@ public class StateSequenceBuilder {
         }
 
         // --- 5. Card type flags ---------------------------------
+        // Use game-aware type checks for permanents (reflects continuous effects)
         boolean[] flags = new boolean[]{
-            card.isCreature(), card.isArtifact(), card.isEnchantment(), card.isLand(),
-            card.isPlaneswalker(), card.isPermanent(), card.isInstant(), card.isSorcery()
+            card.isCreature(game), card.isArtifact(game), card.isEnchantment(game), card.isLand(game),
+            card.isPlaneswalker(game), card.isPermanent(), card.isInstant(game), card.isSorcery(game)
         };
         for (int i = 0; i < flags.length && index < DIM_PER_TOKEN; i++) {
             v[index++] = flags[i] ? 1.0f : 0.0f;
@@ -711,7 +738,7 @@ public class StateSequenceBuilder {
                 p.isAttacking() ? 1.0f : 0.0f,
                 p.isBlocked(game) ? 1.0f : 0.0f,
                 p.hasSummoningSickness() ? 1.0f : 0.0f,
-                (float) p.getDamage()
+                p.getDamage() / 10.0f
             };
             for (int i = 0; i < bf.length && index < DIM_PER_TOKEN; i++) {
                 v[index++] = bf[i];
@@ -768,6 +795,58 @@ public class StateSequenceBuilder {
         };
         for (int i = 0; i < kws.length && KW_SLOT_START + i < DIM_PER_TOKEN; i++) {
             v[KW_SLOT_START + i] = kws[i] ? 1.0f : 0.0f;
+        }
+
+        // --- 7b. Extended keywords + subtype flags (free slots 115+) ---
+        int extSlot = 115;
+        if (extSlot < DIM_PER_TOKEN) v[extSlot++] = (kwPerm != null
+            ? kwPerm.getAbilities(game).containsKey(IndestructibleAbility.getInstance().getId())
+            : card.getAbilities().containsClass(IndestructibleAbility.class)) ? 1.0f : 0.0f;
+        if (extSlot < DIM_PER_TOKEN) v[extSlot++] = (kwPerm != null
+            ? kwPerm.getAbilities(game).containsKey(FlashAbility.getInstance().getId())
+            : card.getAbilities().containsClass(FlashAbility.class)) ? 1.0f : 0.0f;
+        if (extSlot < DIM_PER_TOKEN) v[extSlot++] =
+            card.getAbilities().containsClass(AffinityForArtifactsAbility.class) ? 1.0f : 0.0f;
+        if (extSlot < DIM_PER_TOKEN) v[extSlot++] =
+            card.getAbilities().containsClass(WardAbility.class) ? 1.0f : 0.0f;
+        if (extSlot < DIM_PER_TOKEN) v[extSlot++] =
+            card.getAbilities().containsClass(ProwessAbility.class) ? 1.0f : 0.0f;
+        // Elf subtype
+        if (extSlot < DIM_PER_TOKEN) v[extSlot++] =
+            card.hasSubtype(mage.constants.SubType.ELF, game) ? 1.0f : 0.0f;
+        // Controller flag (distinct from owner at slot 9)
+        if (extSlot < DIM_PER_TOKEN && isPerm) {
+            v[extSlot] = ((Permanent) card).getControllerId().equals(game.getActivePlayerId()) ? 1.0f : 0.0f;
+        }
+        extSlot++;
+
+        // --- 7c. Temporal features (BF permanents only) ----------
+        // These fill previously-zero slots 122+ so existing models keep loading
+        // but acquire tempo signal over further training.
+        //   122: turns-on-battlefield (normalized, caps at 10 turns)
+        //   123: controlled-from-start-of-controller-turn (complement of summoning
+        //        sickness: "has been under controller's control since start of their turn")
+        //   124: attacking-this-combat (redundant with BF slot 25 but explicit)
+        //   125: has-counters (boolean: any counters at all -- supports proliferate,
+        //        +1/+1 synergies, etc.)
+        if (isPerm) {
+            Permanent tp = (Permanent) card;
+            if (extSlot < DIM_PER_TOKEN) {
+                v[extSlot++] = Math.min(tp.getTurnsOnBattlefield(), 10) / 10.0f;
+            }
+            if (extSlot < DIM_PER_TOKEN) {
+                // hasSummoningSickness returns true when NOT controlled since start of turn;
+                // store the complement so "1.0 = ready to act (can attack/tap for mana)".
+                v[extSlot++] = tp.hasSummoningSickness() ? 0.0f : 1.0f;
+            }
+            if (extSlot < DIM_PER_TOKEN) {
+                v[extSlot++] = tp.isAttacking() ? 1.0f : 0.0f;
+            }
+            if (extSlot < DIM_PER_TOKEN) {
+                v[extSlot++] = tp.getCounters(game).size() > 0 ? 1.0f : 0.0f;
+            }
+        } else {
+            extSlot = Math.min(DIM_PER_TOKEN, extSlot + 4);
         }
 
         // --- 8. Extra BF-only properties (slots 51-55) ------------------
@@ -1044,6 +1123,13 @@ public class StateSequenceBuilder {
          */
         public static final int CAND_FEAT_DIM = 48;
 
+        /**
+         * Number of deck archetypes predicted by the belief head (Phase 1).
+         * Order must match {@link #computeArchetypeLabel}:
+         *   0 = Wildfire, 1 = Rally, 2 = Affinity, 3 = Elves.
+         */
+        public static final int NUM_ARCHETYPES = 4;
+
         public final SequenceOutput state;
         public final int candidateCount;
         public final int[] candidateActionIds;     // [MAX_CANDIDATES]
@@ -1055,6 +1141,16 @@ public class StateSequenceBuilder {
         public final float oldValue;               // V_old(s) at rollout time
         public final ActionType actionType;
         public final double stepReward;
+
+        // Phase 1 belief-loss ground truth: opponent's deck archetype id,
+        // or -1 if unknown (python side skips the loss when label < 0).
+        public int beliefArchetypeLabel;
+
+        // AlphaZero-style policy distillation target: MCTS visit distribution
+        // over the candidate list, normalized to sum to 1.0 across valid slots.
+        // All-zero array signals "no MCTS target for this step" -- python skips
+        // the KL-divergence loss in that case and falls back to PPO only.
+        public float[] mctsVisitTargets;  // [MAX_CANDIDATES]
 
         public TrainingData(SequenceOutput state,
                 int candidateCount,
@@ -1078,6 +1174,62 @@ public class StateSequenceBuilder {
             this.oldValue = oldValue;
             this.actionType = actionType;
             this.stepReward = stepReward;
+            this.beliefArchetypeLabel = -1;  // unknown until populated
+            this.mctsVisitTargets = new float[MAX_CANDIDATES];  // all zeros = no MCTS target
         }
+
+        public void setBeliefArchetypeLabel(int label) {
+            this.beliefArchetypeLabel = label;
+        }
+
+        public void setMctsVisitTargets(float[] targets) {
+            if (targets != null && targets.length == MAX_CANDIDATES) {
+                this.mctsVisitTargets = targets;
+            }
+        }
+    }
+
+    // Signature cards that uniquely identify each archetype. Ordered to match
+    // TrainingData.NUM_ARCHETYPES: 0 = Wildfire, 1 = Rally, 2 = Affinity, 3 = Elves.
+    // If any of these appears anywhere in the opponent's zones, we label the
+    // opponent with the corresponding archetype id.
+    private static final String[][] ARCHETYPE_SIGNATURE_CARDS = {
+            {"Cleansing Wildfire"},                              // Wildfire (Jund Wildfire: cleansing-target artifact lands)
+            {"Kuldotha Rebirth", "Goblin Bushwhacker"},         // Rally (Mono Red Rally: aggro go-wide)
+            {"Refurbished Familiar", "Drossforge Bridge"},      // Affinity (Grixis Affinity: artifact synergy)
+            {"Nettle Sentinel", "Elvish Mystic", "Lys Alana Huntmaster"} // Elves (tribal)
+    };
+
+    /**
+     * Determine the opponent's deck archetype by scanning their current zones
+     * for a signature card. Returns the archetype id (0..NUM_ARCHETYPES-1), or
+     * -1 if no signature matches (e.g., off-meta deck; python skips loss).
+     */
+    public static int computeArchetypeLabel(Game game, UUID viewerId) {
+        if (game == null || viewerId == null) return -1;
+        UUID oppId = null;
+        for (UUID pid : game.getOpponents(viewerId)) {
+            oppId = pid;
+            break;
+        }
+        if (oppId == null) return -1;
+        Player opp = game.getPlayer(oppId);
+        if (opp == null) return -1;
+
+        java.util.Set<String> names = new java.util.HashSet<>();
+        try {
+            for (Card c : opp.getLibrary().getCards(game)) if (c != null) names.add(c.getName());
+            for (Card c : opp.getHand().getCards(game)) if (c != null) names.add(c.getName());
+            for (Permanent p : game.getBattlefield().getAllActivePermanents(oppId)) if (p != null) names.add(p.getName());
+            for (Card c : opp.getGraveyard().getCards(game)) if (c != null) names.add(c.getName());
+        } catch (Throwable t) {
+            return -1;
+        }
+        for (int i = 0; i < ARCHETYPE_SIGNATURE_CARDS.length; i++) {
+            for (String sig : ARCHETYPE_SIGNATURE_CARDS[i]) {
+                if (names.contains(sig)) return i;
+            }
+        }
+        return -1;
     }
 }

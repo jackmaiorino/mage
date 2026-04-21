@@ -119,24 +119,6 @@ public final class TestComputerPlayerRL extends ComputerPlayerRL {
         }
 
         @Override
-        public float predictMulligan(float[] features) {
-            return 0.0f;
-        }
-
-        @Override
-        public float[] predictMulliganScores(float[] features) {
-            return new float[]{0.0f, 0.0f};
-        }
-
-        @Override
-        public void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] gameLengths, byte[] earlyLandScores, byte[] overrides, int batchSize) {
-        }
-
-        @Override
-        public void saveMulliganModel() {
-        }
-
-        @Override
         public void saveModel(String path) {
         }
 
@@ -147,11 +129,6 @@ public final class TestComputerPlayerRL extends ComputerPlayerRL {
 
         @Override
         public Map<String, Integer> getMainModelTrainingStats() {
-            return Collections.emptyMap();
-        }
-
-        @Override
-        public Map<String, Integer> getMulliganModelTrainingStats() {
             return Collections.emptyMap();
         }
 

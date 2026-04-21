@@ -68,14 +68,14 @@ public class RLTrainer {
     public static final String STATS_FILE_PATH        = RLLogPaths.TRAINING_STATS_PATH;
     // Path that stores the cumulative number of episodes trained so far (persisted across runs)
     public static final String EPISODE_COUNT_PATH     = RLLogPaths.EPISODE_COUNT_PATH;
-    // Mulligan model episode counter (separate from main model for independent exploration)
-    public static final String MULLIGAN_EPISODE_COUNT_PATH = RLLogPaths.MULLIGAN_EPISODE_COUNT_PATH;
     // Auto-detect optimal number of threads based on CPU cores
     private static final int DEFAULT_GAME_RUNNERS = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
     public static final int NUM_THREADS = EnvConfig.i32("NUM_THREADS", DEFAULT_GAME_RUNNERS);
     public static final int NUM_GAME_RUNNERS = EnvConfig.i32("NUM_GAME_RUNNERS", DEFAULT_GAME_RUNNERS);
     public static final int NUM_EPISODES_PER_GAME_RUNNER = EnvConfig.i32("EPISODES_PER_WORKER", 500);
-    public static final int EVAL_EVERY = EnvConfig.i32("EVAL_EVERY", 100);
+    public static final int EVAL_EVERY = EnvConfig.i32("EVAL_EVERY", 5000);
+    private static final int EVAL_CP7_SKILL = EnvConfig.i32("EVAL_CP7_SKILL", 7);
+    private static final int EVAL_GAMES_PER_DECK = EnvConfig.i32("EVAL_GAMES_PER_DECK", 5);
 
     private static final boolean SHARED_GPU_MODE = PythonModelFactory.isSharedGpuMode();
     private static final DeckTemplateCache DECK_TEMPLATE_CACHE = new DeckTemplateCache();
@@ -85,8 +85,6 @@ public class RLTrainer {
 
     // Global episode counter to track total episodes across all threads
     private static final AtomicInteger EPISODE_COUNTER = new AtomicInteger(0);
-    // Separate mulligan model episode counter for independent exploration schedule
-    private static final AtomicInteger MULLIGAN_EPISODE_COUNTER = new AtomicInteger(0);
     private static final AtomicInteger ACTIVE_EPISODES = new AtomicInteger(0);
     private static final boolean TRAIN_DIAG = EnvConfig.bool("TRAIN_DIAG", false);
     private static final int TRAIN_DIAG_EVERY = EnvConfig.i32("TRAIN_DIAG_EVERY", 50);
@@ -108,6 +106,64 @@ public class RLTrainer {
     // Game logging: log every N episodes (0 = disabled, includes episode 0)
     private static final int GAME_LOG_FREQUENCY = EnvConfig.i32("GAME_LOG_FREQUENCY", SHARED_GPU_MODE ? 0 : 200);
     private static final int WINRATE_WINDOW = EnvConfig.i32("WINRATE_WINDOW", 100);
+
+    // Matchup-balanced RL-deck sampling: track per-deck recent wins over a rolling
+    // window and sample agent deck with probability inversely proportional to
+    // winrate. Oversamples weak decks (Wildfire) and undersamples dominant ones
+    // (Rally). Disabled by default; enable with MATCHUP_BALANCED_SAMPLING=1.
+    private static final boolean MATCHUP_BALANCED_SAMPLING =
+            "1".equals(System.getenv().getOrDefault("MATCHUP_BALANCED_SAMPLING", "0"));
+    // When rolling value accuracy crosses this, we log a MCTS-THRESHOLD alert
+    // so the operator (or an external watchdog) knows to schedule MCTS eval.
+    private static final double VALUE_ACCURACY_MCTS_THRESHOLD =
+            Double.parseDouble(System.getenv().getOrDefault("VALUE_ACCURACY_MCTS_THRESHOLD", "0.70"));
+    private static final java.util.concurrent.atomic.AtomicBoolean MCTS_THRESHOLD_FIRED =
+            new java.util.concurrent.atomic.AtomicBoolean(false);
+    private static final int DECK_WINRATE_WINDOW = EnvConfig.i32("DECK_WINRATE_WINDOW", 200);
+    // Weight = 1 / (winrate + floor). Smaller floor => more aggressive oversampling.
+    private static final double DECK_SAMPLE_FLOOR =
+            Double.parseDouble(System.getenv().getOrDefault("DECK_SAMPLE_FLOOR", "0.15"));
+    private static final java.util.concurrent.ConcurrentHashMap<String, java.util.Deque<Boolean>>
+            DECK_RECENT_WINS = new java.util.concurrent.ConcurrentHashMap<>();
+
+    /** Record a training game outcome for the given RL-piloted deck. */
+    static void recordDeckTrainingOutcome(String deckKey, boolean rlWon) {
+        java.util.Deque<Boolean> q = DECK_RECENT_WINS.computeIfAbsent(deckKey,
+                k -> new java.util.concurrent.ConcurrentLinkedDeque<>());
+        q.addLast(rlWon);
+        while (q.size() > DECK_WINRATE_WINDOW) q.pollFirst();
+    }
+
+    private static double deckRecentWinrate(String deckKey) {
+        java.util.Deque<Boolean> q = DECK_RECENT_WINS.get(deckKey);
+        if (q == null || q.isEmpty()) return 0.5;
+        int wins = 0, n = 0;
+        for (Boolean b : q) { if (Boolean.TRUE.equals(b)) wins++; n++; }
+        return n == 0 ? 0.5 : (double) wins / n;
+    }
+
+    /** Pick an RL-piloted deck. Weighted inverse-winrate when
+     *  MATCHUP_BALANCED_SAMPLING=1 and we have data; uniform otherwise. */
+    static java.nio.file.Path pickAgentDeck(java.util.List<java.nio.file.Path> pool, java.util.Random rand) {
+        if (!MATCHUP_BALANCED_SAMPLING || pool.size() <= 1) {
+            return pool.get(rand.nextInt(pool.size()));
+        }
+        double[] weights = new double[pool.size()];
+        double sum = 0.0;
+        for (int i = 0; i < pool.size(); i++) {
+            String key = pool.get(i).getFileName().toString();
+            double wr = deckRecentWinrate(key);
+            weights[i] = 1.0 / (wr + DECK_SAMPLE_FLOOR);
+            sum += weights[i];
+        }
+        double pick = rand.nextDouble() * sum;
+        double acc = 0.0;
+        for (int i = 0; i < pool.size(); i++) {
+            acc += weights[i];
+            if (pick <= acc) return pool.get(i);
+        }
+        return pool.get(pool.size() - 1);
+    }
     // When false, suppresses training_stats.csv and agent_status.json writes (auxiliary JVMs in multi-node)
     private static final boolean GAME_STATS_WRITER = EnvConfig.bool("GAME_STATS_WRITER", true);
 
@@ -150,7 +206,7 @@ public class RLTrainer {
     // ============================================================
     // League-style opponent sampling (bots never go to zero)
     // ============================================================
-    private static final String OPPONENT_SAMPLER = EnvConfig.str("OPPONENT_SAMPLER", "league"); // league|adaptive|fixed
+    private static final String OPPONENT_SAMPLER = EnvConfig.str("OPPONENT_SAMPLER", "league"); // league|adaptive|fixed|meta
     private static final String LEAGUE_MODE = EnvConfig.str("LEAGUE_MODE", ""); // "rl_only" = no CP7 fallback
 
     // Eval benchmark settings
@@ -1692,10 +1748,6 @@ public class RLTrainer {
         return profileContext != null ? profileContext.episodeCounter : EPISODE_COUNTER;
     }
 
-    private java.util.concurrent.atomic.AtomicInteger mulliganEpisodeCounter() {
-        return profileContext != null ? profileContext.mulliganEpisodeCounter : MULLIGAN_EPISODE_COUNTER;
-    }
-
     private java.util.concurrent.atomic.AtomicInteger activeEps() {
         return profileContext != null ? profileContext.activeEpisodes : ACTIVE_EPISODES;
     }
@@ -1935,22 +1987,12 @@ public class RLTrainer {
             }
 
             final int numRunners = multiProfile ? profileContext.numGameRunners : NUM_GAME_RUNNERS;
-            // Use virtual threads (Project Loom) for game runners.
-            // Virtual threads yield on I/O (GPU inference wait) without OS context switch,
-            // allowing hundreds of concurrent games on few OS carrier threads.
-            ExecutorService executor;
-            boolean useVirtualThreads = !"0".equals(System.getenv("USE_VIRTUAL_THREADS"));
-            if (useVirtualThreads) {
-                executor = Executors.newVirtualThreadPerTaskExecutor();
-                logger.info("Using virtual threads for " + numRunners + " game runners");
-            } else {
-                executor = Executors.newFixedThreadPool(numRunners, runnable -> {
-                    Thread thread = new Thread(runnable);
-                    thread.setPriority(Thread.MIN_PRIORITY);
-                    return thread;
-                });
-                logger.info("Using platform threads for " + numRunners + " game runners");
-            }
+            ExecutorService executor = Executors.newFixedThreadPool(numRunners, runnable -> {
+                Thread thread = new Thread(runnable);
+                thread.setPriority(Thread.MIN_PRIORITY);
+                return thread;
+            });
+            logger.info("Using platform threads for " + numRunners + " game runners");
 
             List<Future<Void>> futures = new ArrayList<>();
             final Object lock = new Object(); // Lock object for synchronization
@@ -1975,8 +2017,8 @@ public class RLTrainer {
                     Random threadRand = newSeededRandom(1_000L + runnerIndex);
 
                     while (episodeCounter().get() < NUM_EPISODES) {
+                      try {
                         int epNumber = episodeCounter().incrementAndGet();
-                        int mulliganEpNumber = mulliganEpisodeCounter().incrementAndGet();
                         if (epNumber > NUM_EPISODES) {
                             break; // Another thread reached the target
                         }
@@ -1984,13 +2026,22 @@ public class RLTrainer {
                         long episodeStartNanos = System.nanoTime();
                         activeEps().incrementAndGet();
                         metrics.setActiveEpisodes(activeEps().get());
-                        Path rlPlayerDeckPath = agentDeckFiles.get(threadRand.nextInt(agentDeckFiles.size()));
+                        Path rlPlayerDeckPath = pickAgentDeck(agentDeckFiles, threadRand);
                         Deck rlPlayerDeckThread = loadDeck(rlPlayerDeckPath.toString());
                         if (rlPlayerDeckThread == null) {
                             logger.warn("Train: failed to load deck(s) for game, skipping.");
                             activeEps().decrementAndGet();
                             metrics.setActiveEpisodes(activeEps().get());
                             continue;
+                        }
+
+                        // Periodic eval checkpoint: play batch of games vs CP7 across all decks (background)
+                        boolean evalDue = EVAL_EVERY > 0 && (epNumber % EVAL_EVERY == 0
+                                || !firstEvalDone.getAndSet(true));
+                        if (evalDue) {
+                            logger.info("EVAL TRIGGER: ep=" + epNumber + " EVAL_EVERY=" + EVAL_EVERY
+                                    + " deckFiles=" + deckFiles.size() + " agentDecks=" + agentDeckFiles.size());
+                            submitEvalCheckpoint(epNumber, deckFiles, agentDeckFiles);
                         }
 
                         THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.remove();
@@ -2036,7 +2087,6 @@ public class RLTrainer {
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
                         rlPlayer.setCurrentEpisode(epNumber); // Set main model episode for logging
-                        rlPlayer.setMulliganEpisode(mulliganEpNumber); // Set mulligan model episode for epsilon-greedy
                         rlPlayer.setAttachedGameLogger(gameLogger);
                         if (opponentPlayer instanceof ComputerPlayerRL) {
                             ((ComputerPlayerRL) opponentPlayer).setCurrentEpisode(epNumber);
@@ -2059,6 +2109,7 @@ public class RLTrainer {
                         game.loadCards(opponentDeckThread.getCards(), opponentPlayer.getId());
 
                         GameOptions options = new GameOptions();
+                        options.rollbackTurnsAllowed = false;
                         game.setGameOptions(options);
 
                         // Start health monitor to detect stuck/infinite-loop games
@@ -2110,9 +2161,6 @@ public class RLTrainer {
                             gameLogger.close();
                         }
 
-                        // Train mulligan model from this game's decisions
-                        trainMulliganModel(rlPlayer, rlPlayerWon, turns);
-
                         // Log head usage statistics
                         logHeadUsageStats(epNumber, rlPlayer, opponentPlayer, turns, rlPlayerWon);
 
@@ -2159,24 +2207,47 @@ public class RLTrainer {
 
                                 // Get training stats
                                 java.util.Map<String, Integer> mainStats = sharedModel.getMainModelTrainingStats();
-                                java.util.Map<String, Integer> mulliganStats = sharedModel.getMulliganModelTrainingStats();
 
                                 logger.info(String.format(
                                         "Training progress: episode=%d/%d (run=%d, %.3f eps/s), ETA %ds, RL_activation_failures=%d, sim_training_skipped=%d, games_killed=%d",
                                         epNumber, targetEpisodeCount, done, epsPerSec, etaSec, rlFailures, simTrainSkipped, GameHealthMonitor.getGamesKilled()
                                 ));
                                 logger.info(String.format(
-                                        "  Main model: %d train steps, %d samples | Mulligan model: %d train steps, %d samples",
-                                        mainStats.get("train_steps"), mainStats.get("train_samples"),
-                                        mulliganStats.get("train_steps"), mulliganStats.get("train_samples")
+                                        "  Main model: %d train steps, %d samples",
+                                        mainStats.get("train_steps"), mainStats.get("train_samples")
                                 ));
                                 // Value head quality metrics
+                                double valueAccuracy = metrics.getValueAccuracy();
+                                double avgWinValue = metrics.getAverageValueForWins();
+                                double avgLossValue = metrics.getAverageValueForLosses();
                                 logger.info(String.format(
                                         "  Value head: accuracy=%.1f%%, avg_win=%.3f, avg_loss=%.3f (target: +1/-1)",
-                                        metrics.getValueAccuracy() * 100,
-                                        metrics.getAverageValueForWins(),
-                                        metrics.getAverageValueForLosses()
+                                        valueAccuracy * 100, avgWinValue, avgLossValue
                                 ));
+                                // Periodic CSV for value accuracy trend
+                                if (GAME_STATS_WRITER) {
+                                    String statsDir2 = profileContext != null
+                                            ? profileContext.paths.logsBaseDir + "/stats"
+                                            : logsBaseDir() + "/stats";
+                                    Path vaPath = Paths.get(statsDir2, "value_accuracy.csv");
+                                    String vaHeader = "episode,timestamp,value_accuracy,avg_win_value,avg_loss_value\n";
+                                    String vaLine = String.format("%d,%s,%.4f,%.4f,%.4f%n",
+                                            epNumber,
+                                            java.time.Instant.now().toString(),
+                                            valueAccuracy, avgWinValue, avgLossValue);
+                                    ASYNC_LINE_WRITER.append(vaPath, vaHeader, vaLine);
+                                }
+                                // MCTS-threshold trigger: when value_accuracy crosses VALUE_ACCURACY_MCTS_THRESHOLD,
+                                // log a one-shot ALERT so we know to schedule a MCTS A/B run.
+                                if (valueAccuracy >= VALUE_ACCURACY_MCTS_THRESHOLD
+                                        && MCTS_THRESHOLD_FIRED.compareAndSet(false, true)) {
+                                    logger.info(String.format(
+                                            "[MCTS-THRESHOLD] value_accuracy=%.3f >= threshold %.2f at episode %d -- ready for MCTS A/B eval",
+                                            valueAccuracy, VALUE_ACCURACY_MCTS_THRESHOLD, epNumber));
+                                    System.out.println(String.format(
+                                            "[MCTS-THRESHOLD] value_accuracy=%.3f >= %.2f at ep=%d -- time to run MCTS eval",
+                                            valueAccuracy, VALUE_ACCURACY_MCTS_THRESHOLD, epNumber));
+                                }
                                 logger.info(String.format(
                                         "  Reward diag (last ep): won=%s steps=%d finalReward=%.3f mc_return0=%.3f sum_rewards=%.3f last_reward=%.3f",
                                         rewardDiag.won, rewardDiag.steps, rewardDiag.finalReward,
@@ -2209,10 +2280,101 @@ public class RLTrainer {
                                     .append(String.format("%.2f", episodeSeconds)).append('\n')
                                     .toString();
                             ASYNC_LINE_WRITER.append(statsPath, statsHeader, statsLine);
+
+                            // Also log per-deck-pairing outcome to training_cells.csv so we
+                            // can reconstruct per-deck rolling training winrate later.
+                            // Strip directory and extension, keep just the filename.
+                            String rlDeckName = rlPlayerDeckPath.getFileName().toString().replaceAll("\\.[^.]+$", "");
+                            String oppDeckName = opponentDeckPath != null
+                                    ? opponentDeckPath.getFileName().toString().replaceAll("\\.[^.]+$", "")
+                                    : "unknown";
+                            String statsDir = profileContext != null
+                                    ? profileContext.paths.logsBaseDir + "/stats"
+                                    : logsBaseDir() + "/stats";
+                            Path cellsPath = Paths.get(statsDir, "training_cells.csv");
+                            String cellsHeader = "episode,rl_deck,opp_deck,opponent_type,final_reward,turns,episode_seconds\n";
+                            String cellsLine = new StringBuilder()
+                                    .append(epNumber).append(',')
+                                    .append(rlDeckName).append(',')
+                                    .append(oppDeckName).append(',')
+                                    .append(opponentType).append(',')
+                                    .append(String.format("%.3f", finalReward)).append(',')
+                                    .append(turns).append(',')
+                                    .append(String.format("%.2f", episodeSeconds)).append('\n')
+                                    .toString();
+                            ASYNC_LINE_WRITER.append(cellsPath, cellsHeader, cellsLine);
+
+                            // Update per-deck rolling winrate for matchup-balanced sampling.
+                            recordDeckTrainingOutcome(rlPlayerDeckPath.getFileName().toString(), rlPlayerWon);
                         }
+
+                        // Record opponent side stats for meta RL opponents
+                        if (opponentPlayer instanceof ComputerPlayerRL
+                                && (opponentTag.startsWith("META(") || "MIRROR".equals(opponentTag))) {
+                            String oppProfileName = "MIRROR".equals(opponentTag)
+                                    ? profileName()
+                                    : opponentTag.substring(5, opponentTag.length() - 1);
+                            ProfileContext oppCtx = ProfileContext.byName(oppProfileName);
+                            if (oppCtx != null) {
+                                boolean oppWon = !rlPlayerWon;
+                                // Record to opponent's rolling winrate
+                                ConcurrentLinkedQueue<Boolean> oppWins = oppCtx.recentWins;
+                                AtomicInteger oppWc = oppCtx.winCount;
+                                oppWins.add(oppWon);
+                                if (oppWon) oppWc.incrementAndGet();
+                                while (oppWins.size() > WINRATE_WINDOW) {
+                                    Boolean removed = oppWins.poll();
+                                    if (removed != null && removed) oppWc.decrementAndGet();
+                                }
+                                double oppWinrate = oppWins.isEmpty() ? 0.0 : oppWc.get() / (double) oppWins.size();
+                                // Write to opponent's CSV
+                                if (GAME_STATS_WRITER) {
+                                    String myProfile = profileName();
+                                    String oppTag;
+                                    if ("MIRROR".equals(opponentTag)) {
+                                        oppTag = "MIRROR";
+                                    } else {
+                                        oppTag = myProfile.isEmpty() ? "META(unknown)" : "META(" + myProfile + ")";
+                                    }
+                                    Path oppStatsPath = Paths.get(oppCtx.paths.trainingStatsPath);
+                                    double oppReward = oppWon ? 1.0 : -1.0;
+                                    String oppLine = new StringBuilder()
+                                            .append(epNumber).append(',').append(turns).append(',')
+                                            .append(String.format("%.3f", oppReward)).append(',')
+                                            .append(oppTag).append(',')
+                                            .append(String.format("%.3f", oppWinrate)).append(',')
+                                            .append(String.format("%.2f", episodeSeconds)).append('\n')
+                                            .toString();
+                                    String oppHeader = "episode,turns,final_reward,opponent_type,winrate,episode_seconds\n";
+                                    ASYNC_LINE_WRITER.append(oppStatsPath, oppHeader, oppLine);
+                                }
+                            }
+                        }
+
                         metrics.recordEpisodeCompleted();
                         activeEps().decrementAndGet();
                         metrics.setActiveEpisodes(activeEps().get());
+
+                        // Release game objects so GC can reclaim them.
+                        // The normal server path calls match.getGames().clear()
+                        // during cleanup -- without this, Match.games holds a
+                        // reference to Game, preventing collection of the entire
+                        // game object graph (GameStates, cards, LKI maps, etc.)
+                        game.end();
+                        match.getGames().clear();
+                        match = null;
+                        game = null;
+                        rlPlayer = null;
+                        opponentPlayer = null;
+                        healthMonitor = null;
+                        gameLogger = null;
+                        threadLocalGameLogger.remove();
+                      } catch (Exception e) {
+                        // Log but don't kill the runner thread -- keep playing games
+                        logger.error("Game runner exception (continuing): " + e.getMessage());
+                        activeEps().decrementAndGet();
+                        metrics.setActiveEpisodes(activeEps().get());
+                      }
                     }
                     return null;
                 });
@@ -2300,6 +2462,28 @@ public class RLTrainer {
         logger.info("Multi-profile: " + totalRunners + " total runners, "
                 + runnersPerProfile + " per profile");
 
+        // Load per-profile agent deck overrides from registry
+        java.util.Map<String, String> profileAgentDecks = new java.util.HashMap<>();
+        try {
+            Path registryPath = leagueRegistryPath();
+            if (Files.exists(registryPath)) {
+                String regJson = new String(Files.readAllBytes(registryPath), java.nio.charset.StandardCharsets.UTF_8);
+                com.google.gson.JsonArray entries = com.google.gson.JsonParser.parseString(regJson).getAsJsonArray();
+                for (com.google.gson.JsonElement el : entries) {
+                    com.google.gson.JsonObject obj = el.getAsJsonObject();
+                    String pName = obj.get("profile").getAsString().trim();
+                    if (obj.has("train_env")) {
+                        com.google.gson.JsonObject trainEnv = obj.getAsJsonObject("train_env");
+                        if (trainEnv.has("RL_AGENT_DECK_LIST")) {
+                            profileAgentDecks.put(pName, trainEnv.get("RL_AGENT_DECK_LIST").getAsString().trim());
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            logger.warn("Multi-profile: failed to load registry for per-profile decks: " + e.getMessage());
+        }
+
         List<RLTrainer> trainers = new ArrayList<>();
         for (String name : profileNames) {
             ProfilePaths paths = new ProfilePaths(name, artifactsRoot);
@@ -2311,9 +2495,30 @@ public class RLTrainer {
             new java.io.File(paths.trainingGameLogsDir).mkdirs();
             new java.io.File(paths.evalGameLogsDir).mkdirs();
             ProfileContext ctx = new ProfileContext(name, paths);
+            // Resume episode counter from existing training stats CSV
+            int resumedEp = readMaxEpisodeFromCsv(paths.trainingStatsPath);
+            if (resumedEp > 0) {
+                ctx.episodeCounter.set(resumedEp);
+                logger.info("Resumed episode counter for " + name + " at " + resumedEp);
+            }
             ctx.deckFiles = sharedDeckPool;
-            ctx.agentDeckFiles = sharedAgentDeckPool;
+            // Per-profile agent deck from registry RL_AGENT_DECK_LIST
+            String agentDeckOverride = profileAgentDecks.get(name);
+            if (agentDeckOverride != null && !agentDeckOverride.isEmpty()) {
+                try {
+                    ctx.agentDeckFiles = loadDeckPoolWithOverride(agentDeckOverride);
+                    logger.info("Profile " + name + ": agent deck = " + agentDeckOverride
+                            + " (" + ctx.agentDeckFiles.size() + " decks)");
+                } catch (IOException e) {
+                    logger.warn("Profile " + name + ": failed to load agent deck " + agentDeckOverride + ", using shared pool");
+                    ctx.agentDeckFiles = sharedAgentDeckPool;
+                }
+            } else {
+                ctx.agentDeckFiles = sharedAgentDeckPool;
+                logger.info("Profile " + name + ": using shared agent deck pool (" + sharedAgentDeckPool.size() + " decks)");
+            }
             ctx.numGameRunners = runnersPerProfile;
+            ProfileContext.register(ctx);
             RLTrainer trainer = new RLTrainer(ctx);
             trainers.add(trainer);
         }
@@ -2349,8 +2554,17 @@ public class RLTrainer {
         logger.info("Multi-profile training complete for all " + profileNames.size() + " profiles");
     }
 
-    private static String formatOpponentTag(Player opponentPlayer) {
+    private String formatOpponentTag(Player opponentPlayer) {
         if (opponentPlayer instanceof ComputerPlayerRL) {
+            String name = opponentPlayer.getName();
+            if (name != null && name.startsWith("Meta-")) {
+                String oppProfile = name.substring(5);
+                String self = profileName();
+                if (!self.isEmpty() && self.equals(oppProfile)) {
+                    return "MIRROR";
+                }
+                return "META(" + oppProfile + ")";
+            }
             return "SELFPLAY";
         }
         if (opponentPlayer instanceof ComputerPlayer7) {
@@ -2486,8 +2700,9 @@ public class RLTrainer {
                     GameLogger gameLogger = GameLogger.create(enableGameLogging);
                     threadLocalGameLogger.set(gameLogger);
 
-                    // Greedy evaluation: use deterministic arg-max player
-                    ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel, true);
+                    // Greedy evaluation: use deterministic arg-max player, training DISABLED so
+                    // the MCTS-eval-override gate (ISMCTS_ENABLE && !trainingEnabled) actually fires.
+                    ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel, true, false, "train");
                     rlPlayer.setCurrentEpisode(-currentEvalGame); // Negative for eval = deterministic mulligan
                     rlPlayer.setAttachedGameLogger(gameLogger);
                     game.addPlayer(rlPlayer, rlPlayerDeckThread);
@@ -2576,7 +2791,12 @@ public class RLTrainer {
         }
         double winRate = (double) totalWins / (numEpisodesPerThread * NUM_GAME_RUNNERS);
         int rlFailures = ComputerPlayerRL.getRLActivationFailureCount();
-        logger.info(String.format("Evaluation win rate: %.4f, RL_activation_failures=%d", winRate, rlFailures));
+        int mctsActivations = ComputerPlayerRL.getMctsActivationCount();
+        logger.info(String.format("Evaluation win rate: %.4f, RL_activation_failures=%d, mcts_activations=%d", winRate, rlFailures, mctsActivations));
+        System.out.println(String.format("EVAL_SUMMARY: wins=%d played=%d winrate=%.4f mcts_activations=%d",
+                totalWins, numEpisodesPerThread * NUM_GAME_RUNNERS, winRate, mctsActivations));
+        System.out.println("MCTS_GATE: " + ComputerPlayerRL.getMctsGateStats());
+        System.out.println(PolicyValueMCTS.getMctsTimingStats());
         return winRate;
     }
 
@@ -3483,8 +3703,17 @@ public class RLTrainer {
             try {
                 Path agentDeckPath = agentDecks.get(rand.nextInt(agentDecks.size()));
                 Deck agentDeck = loadDeck(agentDeckPath.toString());
-                Deck oppDeckCopy = loadDeck(oppDeckPath.toString());
+                Deck oppDeckCopy = loadDeckFresh(oppDeckPath.toString());
                 if (agentDeck == null || oppDeckCopy == null) continue;
+
+                // Set up game logger -- GAME_LOG_DIR env var directs output
+                GameLogger gameLogger = GameLogger.create(true);
+                threadLocalGameLogger.set(gameLogger);
+                if (gameLogger.isEnabled()) {
+                    gameLogger.log("MODE=league_bench_eval");
+                    gameLogger.log("MATCHUP: agent=" + agentDeckPath.getFileName()
+                            + " vs opp=" + oppDeckPath.getFileName());
+                }
 
                 TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("BenchMatch", "BenchMatch", false));
                 match.startGame();
@@ -3492,6 +3721,7 @@ public class RLTrainer {
 
                 ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel, true);
                 rlPlayer.setCurrentEpisode(-(i + 1));
+                rlPlayer.setAttachedGameLogger(gameLogger);
                 game.addPlayer(rlPlayer, agentDeck);
                 match.addPlayer(rlPlayer, agentDeck);
 
@@ -3513,6 +3743,9 @@ public class RLTrainer {
                     won = false;
                 } else {
                     won = game.getWinner().contains(rlPlayer.getName());
+                }
+                if (gameLogger.isEnabled()) {
+                    gameLogger.log("RESULT: " + (won ? "WIN" : "LOSS"));
                 }
                 if (won) wins++;
                 total++;
@@ -3810,6 +4043,27 @@ public class RLTrainer {
         return win;
     }
 
+    private static int readMaxEpisodeFromCsv(String csvPath) {
+        java.io.File f = new java.io.File(csvPath);
+        if (!f.exists()) return 0;
+        int maxEp = 0;
+        try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(f))) {
+            String line = reader.readLine(); // skip header
+            while ((line = reader.readLine()) != null) {
+                int comma = line.indexOf(',');
+                if (comma > 0) {
+                    try {
+                        int ep = Integer.parseInt(line.substring(0, comma));
+                        if (ep > maxEp) maxEp = ep;
+                    } catch (NumberFormatException ignored) {}
+                }
+            }
+        } catch (Exception e) {
+            logger.warn("Failed to read episode count from " + csvPath + ": " + e.getMessage());
+        }
+        return maxEp;
+    }
+
     private static void startGameInGameThread(Game game, UUID startingPlayerId, int joinTimeoutSec) {
         // In some modes (e.g., league_eval) the caller runs on RLTrainer.main, which fails strict game-thread checks.
         if (ThreadUtils.isRunGameThread()) {
@@ -3818,8 +4072,10 @@ public class RLTrainer {
         }
 
         final AtomicReference<Throwable> error = new AtomicReference<>(null);
+        final GameLogger callerLogger = threadLocalGameLogger.get();
         Thread gameThread = new Thread(() -> {
             try {
+                if (callerLogger != null) threadLocalGameLogger.set(callerLogger);
                 game.start(startingPlayerId);
             } catch (Throwable t) {
                 error.set(t);
@@ -4067,12 +4323,16 @@ public class RLTrainer {
 
         // ------------------------------------------------------------------
         // 1.  Terminal win / loss reward (ground-truth)
+        // Scaling up via TERMINAL_REWARD_SCALE pushes value predictions harder
+        // toward the ±1 clip bounds (larger MSE target = stronger gradient),
+        // which increases the win/loss magnitude separation that MCTS needs.
         // ------------------------------------------------------------------
-        double finalReward = rlPlayerWon ? 1.0 : -1.0;
+        double rewardScale = Double.parseDouble(System.getenv().getOrDefault("TERMINAL_REWARD_SCALE", "1.0"));
+        double finalReward = rlPlayerWon ? rewardScale : -rewardScale;
 
         if (Double.isNaN(finalReward) || Double.isInfinite(finalReward)) {
-            finalReward = rlPlayerWon ? 1.0 : -1.0;
-            logger.warn("Reward was NaN/Inf – reverted to ±1 fallback");
+            finalReward = rlPlayerWon ? rewardScale : -rewardScale;
+            logger.warn("Reward was NaN/Inf – reverted to ±" + rewardScale + " fallback");
         }
 
         // Get training data for RL player
@@ -4241,86 +4501,209 @@ public class RLTrainer {
         return winCounter().get() / (double) size;
     }
 
-    /**
-     * Train mulligan model from a completed game.
-     *
-     * @param rlPlayer The RL player whose mulligans to train on
-     * @param won Whether the player won the game
-     */
-    private static void trainMulliganModel(ComputerPlayerRL rlPlayer, boolean won, int gameTurns) {
-        try {
-            List<float[]> features = rlPlayer.getMulliganFeatures();
-            List<Float> decisions = rlPlayer.getMulliganDecisions();
-            List<Boolean> overrides = rlPlayer.getMulliganOverrides();
+    private final java.util.concurrent.ExecutorService evalExecutor =
+            java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+                Thread t = new Thread(r, "GAME");
+                t.setDaemon(true);
+                return t;
+            });
+    private final java.util.concurrent.atomic.AtomicBoolean evalRunning =
+            new java.util.concurrent.atomic.AtomicBoolean(false);
+    private final java.util.concurrent.atomic.AtomicBoolean firstEvalDone =
+            new java.util.concurrent.atomic.AtomicBoolean(false);
 
-            if (features.isEmpty()) {
-                return; // No mulligan decisions this game
+    private void submitEvalCheckpoint(int triggerEpisode, List<Path> opponentDeckPool,
+                                      List<Path> agentDeckPool) {
+        if (!evalRunning.compareAndSet(false, true)) {
+            logger.info("EVAL checkpoint skipped (previous eval still running) at episode " + triggerEpisode);
+            return;
+        }
+        // Snapshot deck pools (they're immutable lists, but be safe)
+        List<Path> oppDecks = new ArrayList<>(opponentDeckPool);
+        List<Path> agentDecks = new ArrayList<>(agentDeckPool);
+        evalExecutor.submit(() -> {
+            try {
+                runEvalCheckpoint(triggerEpisode, oppDecks, agentDecks, new Random(triggerEpisode));
+            } finally {
+                evalRunning.set(false);
             }
+        });
+    }
 
-            int batchSize = features.size();
-            float outcome = won ? 1.0f : 0.0f;
-            int featureSize = features.get(0).length;
+    /**
+     * Run a batch of eval games vs CP7 across all opponent decks. No training
+     * data is generated and rolling winrate is not affected. Results are logged
+     * to training_stats.csv with EVAL-CP7 opponent type.
+     */
+    private void runEvalCheckpoint(int triggerEpisode, List<Path> opponentDeckPool,
+                                   List<Path> agentDeckPool, Random rand) {
+        int skill = EVAL_CP7_SKILL;
+        int gamesPerDeck = EVAL_GAMES_PER_DECK;
+        int totalGames = opponentDeckPool.size() * gamesPerDeck * agentDeckPool.size();
+        int wins = 0;
+        int played = 0;
+        // Per opponent deck: aggregate across agent decks (backward-compatible CSV).
+        java.util.Map<String, int[]> perDeck = new java.util.LinkedHashMap<>();
+        // Per (agent_deck, opp_deck) cell for detailed breakdown.
+        java.util.Map<String, int[]> perCell = new java.util.LinkedHashMap<>();
 
-            // Pack pre-built feature vectors directly
-            java.nio.ByteBuffer featuresBuf = java.nio.ByteBuffer.allocate(batchSize * featureSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
-            for (float[] feat : features) {
-                for (float f : feat) {
-                    featuresBuf.putFloat(f);
+        logger.info(String.format("EVAL checkpoint at episode %d: %d games (%d agent x %d opp x %d games) vs CP7(skill=%d)",
+                triggerEpisode, totalGames, agentDeckPool.size(), opponentDeckPool.size(), gamesPerDeck, skill));
+
+        for (Path agentDeckPath : agentDeckPool) {
+            String agentName = agentDeckPath.getFileName().toString().replaceAll("\\.[^.]+$", "");
+        for (Path oppDeckPath : opponentDeckPool) {
+            String deckName = oppDeckPath.getFileName().toString().replaceAll("\\.[^.]+$", "");
+            perDeck.putIfAbsent(deckName, new int[]{0, 0}); // [wins, total]
+            String cellKey = agentName + "::" + deckName;
+            perCell.putIfAbsent(cellKey, new int[]{0, 0});
+            for (int g = 0; g < gamesPerDeck; g++) {
+                try {
+                    Deck agentDeck = loadDeckFresh(agentDeckPath.toString());
+                    Deck oppDeck = loadDeckFresh(oppDeckPath.toString());
+                    if (agentDeck == null || oppDeck == null) {
+                        logger.warn("EVAL: failed to load decks, skipping game");
+                        continue;
+                    }
+
+                    // Eval uses greedy mode (no exploration) and training disabled
+                    ComputerPlayerRL rlPlayer = new ComputerPlayerRL("EvalRL", RangeOfInfluence.ALL, sharedModel, true, false, "train");
+                    rlPlayer.setCurrentEpisode(-1);  // -1 disables exploration in isMainExplorationEnabled
+                    Player cp7 = new ComputerPlayer7("EvalCP7Skill" + skill, RangeOfInfluence.ALL, skill);
+
+                    TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("EvalMatch", "EvalMatch", false));
+                    match.startGame();
+                    Game game = match.getGames().get(0);
+
+                    // Log eval games to profile eval directory
+                    String evalLogDir = profileContext != null
+                            ? profileContext.paths.evalGameLogsDir
+                            : logsBaseDir() + "/eval_games";
+                    new java.io.File(evalLogDir).mkdirs();
+                    GameLogger evalLogger = GameLogger.createInProfileDir(evalLogDir, 50);
+                    threadLocalGameLogger.set(evalLogger);
+                    rlPlayer.setAttachedGameLogger(evalLogger);
+
+                    game.addPlayer(rlPlayer, agentDeck);
+                    match.addPlayer(rlPlayer, agentDeck);
+                    game.addPlayer(cp7, oppDeck);
+                    match.addPlayer(cp7, oppDeck);
+
+                    game.loadCards(agentDeck.getCards(), rlPlayer.getId());
+                    game.loadCards(oppDeck.getCards(), cp7.getId());
+
+                    GameOptions options = new GameOptions();
+                    options.rollbackTurnsAllowed = false;
+                    game.setGameOptions(options);
+
+                    GameHealthMonitor hm = GameHealthMonitor.createAndStart(game);
+                    long startNanos = System.nanoTime();
+                    game.start(rlPlayer.getId());
+                    long endNanos = System.nanoTime();
+                    hm.stop();
+
+                    boolean won = hm.wasKilled() ? false : game.getWinner().contains(rlPlayer.getName());
+                    int turns = game.getTurnNum();
+                    double secs = (endNanos - startNanos) / 1_000_000_000.0;
+                    played++;
+                    if (won) wins++;
+                    int[] dc = perDeck.get(deckName);
+                    dc[1]++;
+                    if (won) dc[0]++;
+                    int[] cc = perCell.get(cellKey);
+                    cc[1]++;
+                    if (won) cc[0]++;
+                    String evalTag = String.format("EVAL-CP7(skill=%d,agent=%s,opp=%s)", skill, agentName, deckName);
+
+                    // Log to training_stats.csv
+                    if (GAME_STATS_WRITER) {
+                        Path statsPath = Paths.get(statsFilePath());
+                        String statsHeader = "episode,turns,final_reward,opponent_type,winrate,episode_seconds\n";
+                        double evalWr = played > 0 ? (double) wins / played : 0.0;
+                        String statsLine = new StringBuilder()
+                                .append(triggerEpisode).append(',').append(turns).append(',')
+                                .append(won ? "1.000" : "-1.000").append(',')
+                                .append(evalTag).append(',')
+                                .append(String.format("%.3f", evalWr)).append(',')
+                                .append(String.format("%.2f", secs)).append('\n')
+                                .toString();
+                        ASYNC_LINE_WRITER.append(statsPath, statsHeader, statsLine);
+                    }
+
+                    // Close eval game log
+                    if (evalLogger.isEnabled()) {
+                        String winner = won ? rlPlayer.getName() : cp7.getName();
+                        String loser = won ? cp7.getName() : rlPlayer.getName();
+                        evalLogger.logOutcome(winner, loser, turns,
+                                String.format("Eval ep=%d vs %s", triggerEpisode, evalTag));
+                        evalLogger.close();
+                    }
+                    threadLocalGameLogger.remove();
+
+                    game.end();
+                    match.getGames().clear();
+                } catch (Exception e) {
+                    logger.warn("EVAL game failed: " + e.getMessage());
                 }
             }
+        }
+        }  // end agent-deck loop
 
-            // Pack decisions
-            java.nio.ByteBuffer decisionsBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
-            for (Float decision : decisions) {
-                decisionsBuf.putFloat(decision);
+        double evalWinrate = played > 0 ? (double) wins / played : 0.0;
+        logger.info(String.format("EVAL checkpoint ep=%d complete: %d/%d wins (%.1f%%) vs CP7(skill=%d)",
+                triggerEpisode, wins, played, evalWinrate * 100, skill));
+        // Per-cell matchup breakdown: lets us tell "agent deck X vs opp deck Y" apart.
+        if (agentDeckPool.size() > 1) {
+            for (java.util.Map.Entry<String, int[]> e : perCell.entrySet()) {
+                int[] cc = e.getValue();
+                if (cc[1] > 0) {
+                    logger.info(String.format("  CELL %s -> %d/%d (%.1f%%)",
+                            e.getKey(), cc[0], cc[1], 100.0 * cc[0] / cc[1]));
+                }
             }
+        }
 
-            // Pack outcomes (same outcome for all decisions in this game)
-            java.nio.ByteBuffer outcomesBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
-            for (int i = 0; i < batchSize; i++) {
-                outcomesBuf.putFloat(outcome);
+        // Write aggregate to eval_history.csv
+        if (GAME_STATS_WRITER && played > 0) {
+            String statsDir = profileContext != null
+                    ? profileContext.paths.logsBaseDir + "/stats"
+                    : logsBaseDir() + "/stats";
+            new java.io.File(statsDir).mkdirs();
+            Path evalPath = Paths.get(statsDir, "eval_history.csv");
+            StringBuilder deckCols = new StringBuilder();
+            StringBuilder deckHeader = new StringBuilder();
+            for (java.util.Map.Entry<String, int[]> e : perDeck.entrySet()) {
+                deckHeader.append(",wr_").append(e.getKey().replace(' ', '_'));
+                int[] dc = e.getValue();
+                double dwr = dc[1] > 0 ? (double) dc[0] / dc[1] : 0.0;
+                deckCols.append(',').append(String.format("%.3f", dwr));
             }
+            String header = "episode,wins,played,winrate" + deckHeader + "\n";
+            String line = new StringBuilder()
+                    .append(triggerEpisode).append(',')
+                    .append(wins).append(',')
+                    .append(played).append(',')
+                    .append(String.format("%.3f", evalWinrate))
+                    .append(deckCols).append('\n')
+                    .toString();
+            ASYNC_LINE_WRITER.append(evalPath, header, line);
 
-            // Pack game lengths for survival-based reward shaping (same for all decisions)
-            java.nio.ByteBuffer gameLengthsBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
-            for (int i = 0; i < batchSize; i++) {
-                gameLengthsBuf.putInt(Math.max(1, gameTurns));
+            // Multi-agent-deck profiles: also write per-cell (agent x opp) table
+            // to eval_cells.csv so we can see generalist's per-archetype performance.
+            if (agentDeckPool.size() > 1) {
+                Path cellsPath = Paths.get(statsDir, "eval_cells.csv");
+                StringBuilder cellHeader = new StringBuilder("episode");
+                StringBuilder cellLine = new StringBuilder().append(triggerEpisode);
+                for (java.util.Map.Entry<String, int[]> e : perCell.entrySet()) {
+                    int[] cc = e.getValue();
+                    double cwr = cc[1] > 0 ? (double) cc[0] / cc[1] : 0.0;
+                    cellHeader.append(",wr_").append(e.getKey().replace(' ', '_').replace("::", "__vs__"));
+                    cellLine.append(',').append(String.format("%.3f", cwr));
+                }
+                cellHeader.append('\n');
+                cellLine.append('\n');
+                ASYNC_LINE_WRITER.append(cellsPath, cellHeader.toString(), cellLine.toString());
             }
-
-            // Pack early land scores for land-drop reward shaping
-            float earlyLandScore = rlPlayer.getEarlyLandScore();
-            java.nio.ByteBuffer earlyLandScoresBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
-            for (int i = 0; i < batchSize; i++) {
-                earlyLandScoresBuf.putFloat(earlyLandScore);
-            }
-
-            // Pack override flags (1.0 = overridden, 0.0 = not overridden)
-            java.nio.ByteBuffer overridesBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
-            for (Boolean override : overrides) {
-                overridesBuf.putFloat(override ? 1.0f : 0.0f);
-            }
-
-            long keepN = decisions.stream().filter(d -> d != null && d > 0.5f).count();
-            long overrideN = overrides.stream().filter(o -> o != null && o).count();
-            logger.info(String.format("MULLIGAN TRAIN batch=%d keepN=%d mullN=%d overrideN=%d turns=%d landScore=%.2f won=%s",
-                    batchSize, keepN, batchSize - keepN, overrideN, gameTurns, earlyLandScore, won));
-
-            // Train the model
-            sharedModel.trainMulligan(
-                    featuresBuf.array(),
-                    decisionsBuf.array(),
-                    outcomesBuf.array(),
-                    gameLengthsBuf.array(),
-                    earlyLandScoresBuf.array(),
-                    overridesBuf.array(),
-                    batchSize
-            );
-
-            // Clear player's mulligan buffer
-            rlPlayer.clearMulliganData();
-
-        } catch (Exception e) {
-            logger.error("Error training mulligan model: " + e.getMessage(), e);
         }
     }
 
@@ -4355,11 +4738,25 @@ public class RLTrainer {
             }
             String json = new String(Files.readAllBytes(registryPath), java.nio.charset.StandardCharsets.UTF_8);
             com.google.gson.JsonArray entries = com.google.gson.JsonParser.parseString(json).getAsJsonArray();
+            // Filter to profiles that are active, train-enabled, and in the same
+            // population group as the current TRAIN_PROFILES_LIST
+            String trainProfilesList = System.getenv("TRAIN_PROFILES_LIST");
+            java.util.Set<String> trainProfiles = new java.util.HashSet<>();
+            if (trainProfilesList != null) {
+                for (String p : trainProfilesList.split(",")) {
+                    if (!p.trim().isEmpty()) trainProfiles.add(p.trim());
+                }
+            }
             List<com.google.gson.JsonObject> active = new ArrayList<>();
             for (com.google.gson.JsonElement e : entries) {
                 com.google.gson.JsonObject obj = e.getAsJsonObject();
                 if (obj.has("active") && obj.get("active").getAsBoolean()
                         && obj.has("train_enabled") && obj.get("train_enabled").getAsBoolean()) {
+                    // If we have a train profiles list, only pick from those profiles
+                    if (!trainProfiles.isEmpty()) {
+                        String profile = obj.get("profile").getAsString().trim();
+                        if (!trainProfiles.contains(profile)) continue;
+                    }
                     active.add(obj);
                 }
             }
@@ -4369,12 +4766,24 @@ public class RLTrainer {
             // Pick random profile (can be self -- that's fine, acts as self-play fraction)
             com.google.gson.JsonObject chosen = active.get(rand.nextInt(active.size()));
             String oppProfile = chosen.get("profile").getAsString().trim();
-            String oppDeck = chosen.has("deck_path") ? chosen.get("deck_path").getAsString().trim() : "";
+            // Prefer RL_AGENT_DECK_LIST from train_env (the profile's specific deck)
+            // over deck_path (the opponent pool)
+            String oppDeck = "";
+            if (chosen.has("train_env")) {
+                com.google.gson.JsonObject trainEnv = chosen.getAsJsonObject("train_env");
+                if (trainEnv.has("RL_AGENT_DECK_LIST")) {
+                    oppDeck = trainEnv.get("RL_AGENT_DECK_LIST").getAsString().trim();
+                }
+            }
+            if (oppDeck.isEmpty() && chosen.has("deck_path")) {
+                oppDeck = chosen.get("deck_path").getAsString().trim();
+            }
             if (!oppDeck.isEmpty()) {
                 THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.set(Paths.get(oppDeck));
             }
             // policyKey = opponent profile name, routes inference to that profile's model on GPU
-            return new ComputerPlayerRL("Meta-" + oppProfile, RangeOfInfluence.ALL, sharedModel, false, false, oppProfile);
+            // trainingEnabled=true so opponent exploration + training data is recorded
+            return new ComputerPlayerRL("Meta-" + oppProfile, RangeOfInfluence.ALL, sharedModel, false, true, oppProfile);
         } catch (Exception e) {
             logger.warn("Meta opponent: failed to load registry: " + e.getMessage() + ", falling back to self-play");
             return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
