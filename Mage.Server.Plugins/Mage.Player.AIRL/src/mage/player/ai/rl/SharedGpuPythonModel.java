@@ -133,23 +133,27 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
 
         void ensureReady() {
+            ensureReady(effectiveProfileId());
+        }
+
+        void ensureReady(String profileToRegister) {
             if (shutdown.get()) {
                 throw new IllegalStateException("Shared GPU client already shut down");
             }
+            String epid = normalizeProfileId(profileToRegister);
             synchronized (connectionLock) {
                 if (!isConnected()) {
                     connectLocked();
                 }
                 if (!registered) {
-                    registerLocked();
+                    registerLocked(epid);
                 }
             }
             // In multi-profile mode, register additional profiles on-demand per channel
-            String epid = effectiveProfileId();
             if (!epid.isEmpty() && !registeredProfiles.contains(epid)) {
                 synchronized (connectionLock) {
                     if (!registeredProfiles.contains(epid)) {
-                        Map<String, String> headers = buildRegisterHeaders();
+                        Map<String, String> headers = buildRegisterHeaders(epid);
                         SharedGpuProtocol.ResponseFrame resp = invokeOnChannel(this,
                                 SharedGpuProtocol.OP_REGISTER_PROFILE, headers, new byte[0], CONTROL_TIMEOUT_MS);
                         if (resp.status == SharedGpuProtocol.STATUS_OK) {
@@ -183,14 +187,14 @@ public final class SharedGpuPythonModel implements PythonModel {
             }
         }
 
-        void registerLocked() {
-            Map<String, String> headers = buildRegisterHeaders();
+        void registerLocked(String profileToRegister) {
+            Map<String, String> headers = buildRegisterHeaders(profileToRegister);
             SharedGpuProtocol.ResponseFrame response = invokeOnChannel(this, SharedGpuProtocol.OP_REGISTER_PROFILE, headers, new byte[0], CONTROL_TIMEOUT_MS);
             if (response.status != SharedGpuProtocol.STATUS_OK) {
                 throw new IllegalStateException(response.headers.getOrDefault("error", "Shared GPU profile registration failed on channel " + index));
             }
             registered = true;
-            String epid = effectiveProfileId();
+            String epid = normalizeProfileId(profileToRegister);
             if (!epid.isEmpty()) this.registeredProfiles.add(epid);
         }
 
@@ -250,6 +254,7 @@ public final class SharedGpuPythonModel implements PythonModel {
     }
 
     private static final class BatchKey {
+        final String profileId;
         final String policyKey;
         final String headId;
         final int seqLen;
@@ -258,6 +263,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         final int candFeatDim;
 
         private BatchKey(
+                String profileId,
                 String policyKey,
                 String headId,
                 int seqLen,
@@ -265,6 +271,7 @@ public final class SharedGpuPythonModel implements PythonModel {
                 int maxCandidates,
                 int candFeatDim
         ) {
+            this.profileId = profileId;
             this.policyKey = policyKey;
             this.headId = headId;
             this.seqLen = seqLen;
@@ -286,13 +293,14 @@ public final class SharedGpuPythonModel implements PythonModel {
                     && dModel == other.dModel
                     && maxCandidates == other.maxCandidates
                     && candFeatDim == other.candFeatDim
+                    && Objects.equals(profileId, other.profileId)
                     && Objects.equals(policyKey, other.policyKey)
                     && Objects.equals(headId, other.headId);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(policyKey, headId, seqLen, dModel, maxCandidates, candFeatDim);
+            return Objects.hash(profileId, policyKey, headId, seqLen, dModel, maxCandidates, candFeatDim);
         }
     }
 
@@ -359,6 +367,7 @@ public final class SharedGpuPythonModel implements PythonModel {
     }
 
     private static final class TrainRequest {
+        final String profileId;
         final List<StateSequenceBuilder.TrainingData> trainingData;
         final List<Double> rewards;
         final TrainBatchKey batchKey;
@@ -366,10 +375,12 @@ public final class SharedGpuPythonModel implements PythonModel {
         final int episodeCount;
 
         private TrainRequest(
+                String profileId,
                 List<StateSequenceBuilder.TrainingData> trainingData,
                 List<Double> rewards,
                 TrainBatchKey batchKey
         ) {
+            this.profileId = profileId;
             this.trainingData = trainingData;
             this.rewards = rewards;
             this.batchKey = batchKey;
@@ -389,6 +400,20 @@ public final class SharedGpuPythonModel implements PythonModel {
         if (ctx != null) return ctx.profileName;
         if (!this.profileId.isEmpty()) return this.profileId;
         return this.firstMultiProfile;
+    }
+
+    private String routeProfileForPolicy(String policyKey) {
+        String key = safe(policyKey, "train");
+        if (knownProfiles.contains(key)) {
+            return key;
+        }
+        if (key.startsWith("profile:")) {
+            String name = key.substring("profile:".length()).trim();
+            if (knownProfiles.contains(name)) {
+                return name;
+            }
+        }
+        return effectiveProfileId();
     }
 
     private SharedGpuPythonModel() {
@@ -485,8 +510,10 @@ public final class SharedGpuPythonModel implements PythonModel {
         // Pad sequence to bucketed length
         StateSequenceBuilder.SequenceOutput paddedState = padSequence(state, bucketedSeqLen, dModel);
 
+        String normalizedPolicyKey = safe(policyKey, "train");
         BatchKey batchKey = new BatchKey(
-                safe(policyKey, "train"),
+                routeProfileForPolicy(normalizedPolicyKey),
+                normalizedPolicyKey,
                 safe(headId, "action"),
                 bucketedSeqLen,
                 dModel,
@@ -539,6 +566,7 @@ public final class SharedGpuPythonModel implements PythonModel {
             return;
         }
         StateSequenceBuilder.TrainingData first = trainingData.get(0);
+        String profileForTraining = normalizeProfileId(effectiveProfileId());
         TrainBatchKey batchKey = new TrainBatchKey(
                 first.state.getSequence().length,
                 first.state.getSequence().length == 0 ? 0 : first.state.getSequence()[0].length,
@@ -548,6 +576,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         boolean flushNow = false;
         synchronized (trainLock) {
             trainQueue.add(new TrainRequest(
+                    profileForTraining,
                     new ArrayList<>(trainingData),
                     copyRewards(rewards, trainingData.size()),
                     batchKey
@@ -665,21 +694,21 @@ public final class SharedGpuPythonModel implements PythonModel {
 
     private SharedGpuProtocol.ResponseFrame invoke(int opcode, Map<String, String> headers, byte[] payload, int timeoutMs) {
         Channel ch = pickChannel();
-        ch.ensureReady();
+        ch.ensureReady(profileIdFromHeaders(headers));
         return invokeOnChannel(ch, opcode, headers, payload, timeoutMs);
     }
 
     /** Route inference requests to Rust server if configured, else default channels. */
     private SharedGpuProtocol.ResponseFrame invokeInfer(int opcode, Map<String, String> headers, byte[] payload, int timeoutMs) {
         Channel ch = pickInferChannel();
-        ch.ensureReady();
+        ch.ensureReady(profileIdFromHeaders(headers));
         return invokeOnChannel(ch, opcode, headers, payload, timeoutMs);
     }
 
     private CompletableFuture<SharedGpuProtocol.ResponseFrame> invokeInferAsync(
-            int opcode, Map<String, String> headers, byte[] payload, int timeoutMs) {
+        int opcode, Map<String, String> headers, byte[] payload, int timeoutMs) {
         Channel ch = pickInferChannel();
-        ch.ensureReady();
+        ch.ensureReady(profileIdFromHeaders(headers));
         return invokeOnChannelAsync(ch, opcode, headers, payload, timeoutMs)
                 .thenApply(r -> r); // unwrap
     }
@@ -698,7 +727,7 @@ public final class SharedGpuPythonModel implements PythonModel {
             int timeoutMs
     ) {
         Channel ch = pickChannel();
-        ch.ensureReady();
+        ch.ensureReady(profileIdFromHeaders(headers));
         CompletableFuture<SharedGpuProtocol.ResponseFrame> responseFuture =
                 invokeOnChannelAsync(ch, opcode, headers, payload, timeoutMs);
         CompletableFuture<SharedGpuProtocol.ResponseFrame> result = new CompletableFuture<>();
@@ -769,9 +798,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
 
         Map<String, String> headers = new LinkedHashMap<>();
-        // If policyKey matches a known profile name (meta opponent), route inference to that profile
-        String profileForBatch = knownProfiles.contains(key.policyKey) ? key.policyKey : effectiveProfileId();
-        headers.put("profile_id", profileForBatch);
+        headers.put("profile_id", key.profileId);
         headers.put("policy_key", key.policyKey);
         headers.put("head_id", key.headId);
         headers.put("pick_index", "0");
@@ -844,23 +871,28 @@ public final class SharedGpuPythonModel implements PythonModel {
             trainQueue.clear();
         }
 
-        Map<TrainBatchKey, List<TrainRequest>> grouped = new LinkedHashMap<>();
+        Map<String, Map<TrainBatchKey, List<TrainRequest>>> grouped = new LinkedHashMap<>();
         for (TrainRequest request : queued) {
-            grouped.computeIfAbsent(request.batchKey, ignored -> new ArrayList<>()).add(request);
+            grouped
+                    .computeIfAbsent(request.profileId, ignored -> new LinkedHashMap<>())
+                    .computeIfAbsent(request.batchKey, ignored -> new ArrayList<>())
+                    .add(request);
         }
-        for (List<TrainRequest> requests : grouped.values()) {
-            List<TrainRequest> batch = new ArrayList<>();
-            int episodes = 0;
-            for (TrainRequest request : requests) {
-                if (!batch.isEmpty() && (episodes + request.episodeCount) > LOCAL_TRAIN_BATCH_MAX_EPISODES) {
-                    flushTrainBatch(new ArrayList<>(batch), dueToFull || episodes >= LOCAL_TRAIN_BATCH_MAX_EPISODES);
-                    batch.clear();
-                    episodes = 0;
+        for (Map<TrainBatchKey, List<TrainRequest>> byShape : grouped.values()) {
+            for (List<TrainRequest> requests : byShape.values()) {
+                List<TrainRequest> batch = new ArrayList<>();
+                int episodes = 0;
+                for (TrainRequest request : requests) {
+                    if (!batch.isEmpty() && (episodes + request.episodeCount) > LOCAL_TRAIN_BATCH_MAX_EPISODES) {
+                        flushTrainBatch(new ArrayList<>(batch), dueToFull || episodes >= LOCAL_TRAIN_BATCH_MAX_EPISODES);
+                        batch.clear();
+                        episodes = 0;
+                    }
+                    batch.add(request);
+                    episodes += request.episodeCount;
                 }
-                batch.add(request);
-                episodes += request.episodeCount;
+                flushTrainBatch(batch, dueToFull || episodes >= LOCAL_TRAIN_BATCH_MAX_EPISODES);
             }
-            flushTrainBatch(batch, dueToFull || episodes >= LOCAL_TRAIN_BATCH_MAX_EPISODES);
         }
     }
 
@@ -869,6 +901,7 @@ public final class SharedGpuPythonModel implements PythonModel {
             return;
         }
         TrainBatchKey key = batch.get(0).batchKey;
+        String profileId = normalizeProfileId(batch.get(0).profileId);
         List<StateSequenceBuilder.TrainingData> mergedTrainingData = new ArrayList<>();
         List<Double> mergedRewards = new ArrayList<>();
         for (TrainRequest request : batch) {
@@ -877,7 +910,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         }
 
         Map<String, String> headers = new LinkedHashMap<>();
-        headers.put("profile_id", effectiveProfileId());
+        headers.put("profile_id", profileId);
         headers.put("batch_size", Integer.toString(mergedTrainingData.size()));
         headers.put("seq_len", Integer.toString(key.seqLen));
         headers.put("d_model", Integer.toString(key.dModel));
@@ -1075,13 +1108,20 @@ public final class SharedGpuPythonModel implements PythonModel {
     }
 
     private Map<String, String> buildRegisterHeaders() {
+        return buildRegisterHeaders(effectiveProfileId());
+    }
+
+    private Map<String, String> buildRegisterHeaders(String profileIdOverride) {
         Map<String, String> headers = new LinkedHashMap<>();
-        String epid = effectiveProfileId();
+        String epid = normalizeProfileId(profileIdOverride);
         headers.put("profile_id", epid);
         headers.put("endpoint", endpoint);
 
         // Resolve paths from ProfileContext in multi-profile mode
         ProfileContext ctx = ProfileContext.current();
+        if (ctx == null || !ctx.profileName.equals(epid)) {
+            ctx = ProfileContext.byName(epid);
+        }
         String modelsDir = ctx != null ? ctx.paths.modelsBaseDir : RLLogPaths.MODELS_BASE_DIR;
         String logsDir = ctx != null ? ctx.paths.logsBaseDir : RLLogPaths.LOGS_BASE_DIR;
         String modelPath = ctx != null ? ctx.paths.modelFilePath : RLLogPaths.MODEL_FILE_PATH;
@@ -1132,6 +1172,18 @@ public final class SharedGpuPythonModel implements PythonModel {
         Map<String, String> headers = new LinkedHashMap<>();
         headers.put("profile_id", effectiveProfileId());
         return headers;
+    }
+
+    private String normalizeProfileId(String candidate) {
+        String trimmed = candidate == null ? "" : candidate.trim();
+        return trimmed.isEmpty() ? effectiveProfileId() : trimmed;
+    }
+
+    private static String profileIdFromHeaders(Map<String, String> headers) {
+        if (headers == null) {
+            return "";
+        }
+        return headers.getOrDefault("profile_id", "");
     }
 
     private static byte[] safeBytes(byte[] data) {

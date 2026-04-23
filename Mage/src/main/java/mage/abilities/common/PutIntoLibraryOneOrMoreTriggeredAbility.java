@@ -9,12 +9,17 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 
+import java.util.EnumSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author TheElk801
  */
 public class PutIntoLibraryOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ZONE_CHANGE_BATCH);
 
     public PutIntoLibraryOneOrMoreTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -36,6 +41,11 @@ public class PutIntoLibraryOneOrMoreTriggeredAbility extends TriggeredAbilityImp
     @Override
     public PutIntoLibraryOneOrMoreTriggeredAbility copy() {
         return new PutIntoLibraryOneOrMoreTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

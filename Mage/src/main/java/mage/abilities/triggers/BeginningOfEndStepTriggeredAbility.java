@@ -7,7 +7,13 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 public class BeginningOfEndStepTriggeredAbility extends AtStepTriggeredAbility {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.END_TURN_STEP_PRE);
 
     /**
      * At the beginning of your end step (optional = false)
@@ -43,6 +49,11 @@ public class BeginningOfEndStepTriggeredAbility extends AtStepTriggeredAbility {
     @Override
     public BeginningOfEndStepTriggeredAbility copy() {
         return new BeginningOfEndStepTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

@@ -16,6 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -25,6 +26,9 @@ import java.util.stream.Collectors;
  * @author Xanderhall, xenohedron
  */
 public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER);
 
     private final SetTargetPointer setTargetPointer;
     private final FilterPermanent filter;
@@ -57,6 +61,11 @@ public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl 
     @Override
     public OneOrMoreDamagePlayerTriggeredAbility copy() {
         return new OneOrMoreDamagePlayerTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

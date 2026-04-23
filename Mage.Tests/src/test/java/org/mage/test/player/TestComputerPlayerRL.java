@@ -3,6 +3,7 @@ package org.mage.test.player;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import mage.abilities.Ability;
 import mage.cards.Cards;
@@ -111,7 +112,15 @@ public final class TestComputerPlayerRL extends ComputerPlayerRL {
                 int minTargets,
                 int maxTargets
         ) {
-            throw new UnsupportedOperationException("TestComputerPlayerRL does not support policy scoring");
+            // Random uniform policy + zero value. Lets benchmark tests play
+            // full games without a real model; previously threw to catch
+            // accidental inference in mana-shape tests, but we need scoring
+            // to work for MCTS profiling harnesses.
+            int n = candidateActionIds.length;
+            float[] policy = new float[n];
+            ThreadLocalRandom rng = ThreadLocalRandom.current();
+            for (int i = 0; i < n; i++) policy[i] = rng.nextFloat();
+            return new PythonMLBatchManager.PredictionResult(policy, 0.0f);
         }
 
         @Override

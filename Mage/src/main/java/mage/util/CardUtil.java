@@ -2018,6 +2018,7 @@ public final class CardUtil {
             throw new IllegalStateException("Unhandled TreeSet type " + original.getClass().getSimpleName() + " in deep copy");
         }
         TreeSet<T> newSet = new TreeSet<>();
+        if (original.isEmpty()) return newSet;
         for (T value : original) {
             newSet.add((T) deepCopyObject(value));
         }
@@ -2028,7 +2029,9 @@ public final class CardUtil {
         if (original.getClass() != HashSet.class) {
             throw new IllegalStateException("Unhandled HashSet type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        HashSet<T> newSet = new HashSet<>(original.size());
+        int size = original.size();
+        if (size == 0) return new HashSet<>(0);
+        HashSet<T> newSet = new HashSet<>(size);
         for (T value : original) {
             newSet.add((T) deepCopyObject(value));
         }
@@ -2039,7 +2042,9 @@ public final class CardUtil {
         if (original.getClass() != LinkedHashSet.class) {
             throw new IllegalStateException("Unhandled LinkedHashSet type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        LinkedHashSet<T> newSet = new LinkedHashSet<>(original.size());
+        int size = original.size();
+        if (size == 0) return new LinkedHashSet<>(0);
+        LinkedHashSet<T> newSet = new LinkedHashSet<>(size);
         for (T value : original) {
             newSet.add((T) deepCopyObject(value));
         }
@@ -2050,7 +2055,11 @@ public final class CardUtil {
         if (original.getClass() != ArrayList.class) {
             throw new IllegalStateException("Unhandled List type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        ArrayList<T> newList = new ArrayList<>(original.size());
+        int size = original.size();
+        if (size == 0) {
+            return new ArrayList<>(0);
+        }
+        ArrayList<T> newList = new ArrayList<>(size);
         for (T value : original) {
             newList.add((T) deepCopyObject(value));
         }
@@ -2061,7 +2070,11 @@ public final class CardUtil {
         if (original.getClass() != HashMap.class) {
             throw new IllegalStateException("Unhandled HashMap type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        HashMap<K, V> newMap = new HashMap<>(original.size());
+        int size = original.size();
+        if (size == 0) {
+            return new HashMap<>(0);
+        }
+        HashMap<K, V> newMap = new HashMap<>(size);
         for (Map.Entry<K, V> entry : original.entrySet()) {
             newMap.put((K) deepCopyObject(entry.getKey()), (V) deepCopyObject(entry.getValue()));
         }
@@ -2072,7 +2085,11 @@ public final class CardUtil {
         if (original.getClass() != LinkedHashMap.class) {
             throw new IllegalStateException("Unhandled LinkedHashMap type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        LinkedHashMap<K, V> newMap = new LinkedHashMap<>(original.size());
+        int size = original.size();
+        if (size == 0) {
+            return new LinkedHashMap<>(0);
+        }
+        LinkedHashMap<K, V> newMap = new LinkedHashMap<>(size);
         for (Map.Entry<K, V> entry : original.entrySet()) {
             newMap.put((K) deepCopyObject(entry.getKey()), (V) deepCopyObject(entry.getValue()));
         }

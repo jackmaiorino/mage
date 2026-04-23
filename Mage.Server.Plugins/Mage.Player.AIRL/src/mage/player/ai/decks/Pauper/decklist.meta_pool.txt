@@ -1,0 +1,10 @@
+# Pauper meta deck pool for Cp7 training/eval opponents.
+Deck - Mono Red Rally.dek
+Deck - Grixis Affinity.dek
+Deck - Elves.dek
+Deck - Jund Wildfire.dek
+Deck - Spy Combo.dek
+Deck - Mono-Red Burn.dek
+Deck - Mono-Blue Terror.dek
+Deck - Caw-Gates.dek
+Deck - Mono-Blue Faeries.dek

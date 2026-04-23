@@ -9,10 +9,16 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.common.ForetoldWatcher;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author jeffwadsworth
  */
 public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.CARD_FORETOLD);
 
     public ForetellSourceControllerTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
@@ -22,6 +28,11 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
 
     protected ForetellSourceControllerTriggeredAbility(final ForetellSourceControllerTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

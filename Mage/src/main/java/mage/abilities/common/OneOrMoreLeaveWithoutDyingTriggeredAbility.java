@@ -10,10 +10,16 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author TheElk801
  */
 public class OneOrMoreLeaveWithoutDyingTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ZONE_CHANGE_BATCH);
 
     private final FilterPermanent filter;
 
@@ -31,6 +37,11 @@ public class OneOrMoreLeaveWithoutDyingTriggeredAbility extends TriggeredAbility
     @Override
     public OneOrMoreLeaveWithoutDyingTriggeredAbility copy() {
         return new OneOrMoreLeaveWithoutDyingTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

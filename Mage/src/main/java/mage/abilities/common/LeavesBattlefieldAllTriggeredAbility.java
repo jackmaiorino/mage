@@ -1,6 +1,8 @@
 
 package mage.abilities.common;
 
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -18,6 +20,9 @@ import mage.target.targetpointer.FixedTarget;
  * @author Styxo
  */
 public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ZONE_CHANGE);
 
     protected FilterPermanent filter;
     protected SetTargetPointer setTargetPointer;
@@ -51,6 +56,11 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public LeavesBattlefieldAllTriggeredAbility copy() {
         return new LeavesBattlefieldAllTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

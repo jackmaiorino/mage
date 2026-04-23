@@ -10,6 +10,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -18,6 +20,9 @@ import java.util.UUID;
  * @author LevelX2
  */
 public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACKER_DECLARED);
 
     private final AttachmentType attachmentType;
     private final SetTargetPointer setTargetPointer;
@@ -50,6 +55,11 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public AttacksAttachedTriggeredAbility copy() {
         return new AttacksAttachedTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

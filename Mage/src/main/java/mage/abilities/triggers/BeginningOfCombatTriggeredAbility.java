@@ -6,7 +6,13 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 public class BeginningOfCombatTriggeredAbility extends AtStepTriggeredAbility {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.BEGIN_COMBAT_STEP_PRE);
 
     /**
      * At the beginning of combat on your turn (optional = false)
@@ -37,6 +43,11 @@ public class BeginningOfCombatTriggeredAbility extends AtStepTriggeredAbility {
     @Override
     public BeginningOfCombatTriggeredAbility copy() {
         return new BeginningOfCombatTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

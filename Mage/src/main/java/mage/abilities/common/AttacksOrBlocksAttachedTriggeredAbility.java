@@ -10,9 +10,14 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class AttacksOrBlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACKER_DECLARED, GameEvent.EventType.CREATURE_BLOCKS);
 
     private final AttachmentType attachmentType;
 
@@ -30,6 +35,11 @@ public class AttacksOrBlocksAttachedTriggeredAbility extends TriggeredAbilityImp
     @Override
     public AttacksOrBlocksAttachedTriggeredAbility copy() {
         return new AttacksOrBlocksAttachedTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

@@ -228,8 +228,11 @@ class LocalPBT:
         dst_db = eval_db_dir / "cards.h2.mv.db"
         if src_db.exists() and (not dst_db.exists()
                                 or src_db.stat().st_mtime > dst_db.stat().st_mtime):
-            shutil.copy2(str(src_db), str(dst_db))
-            log("Copied card DB for eval")
+            try:
+                shutil.copy2(str(src_db), str(dst_db))
+                log("Copied card DB for eval")
+            except PermissionError as exc:
+                log(f"Could not refresh eval card DB because it is locked: {exc}")
 
     def load_registry(self) -> List[Dict[str, Any]]:
         with self.registry_path.open("r") as f:
@@ -237,6 +240,16 @@ class LocalPBT:
         active = [e for e in entries if e.get("active") and e.get("train_enabled")]
         active.sort(key=lambda e: (int(e.get("priority", 1000)), str(e.get("profile", ""))))
         return active[:self.train_profiles]
+
+    def _common_train_env(self, key: str) -> Optional[str]:
+        values = {
+            str(e.get("train_env", {}).get(key, "")).strip()
+            for e in self.selected_profiles
+            if str(e.get("train_env", {}).get(key, "")).strip()
+        }
+        if len(values) == 1:
+            return next(iter(values))
+        return None
 
     def _auto_export_onnx(self) -> None:
         """Check if any profile needs ONNX export and do it live."""
@@ -258,27 +271,64 @@ class LocalPBT:
             models_dir = PROFILES_ROOT / profile / "models"
             model_path = models_dir / "model_latest.pt"
             onnx_dir = models_dir / "onnx"
-            if not model_path.exists():
-                log(f"[TRT] No model for {profile}, skipping ONNX export")
-                continue
-            # Skip if ONNX already exists, is newer than model, AND matches current export version.
-            # Bump ONNX_EXPORT_VERSION when export format changes to force re-export.
-            ONNX_EXPORT_VERSION = "3"  # v3 = adds belief head for archetype classification
-            onnx_action = onnx_dir / "model_action.onnx"
-            onnx_ver_file = onnx_dir / ".export_version"
-            current_ver = onnx_ver_file.read_text().strip() if onnx_ver_file.exists() else ""
-            if (onnx_action.exists()
-                    and onnx_action.stat().st_mtime >= model_path.stat().st_mtime
-                    and current_ver == ONNX_EXPORT_VERSION):
-                log(f"[TRT] ONNX up-to-date for {profile}")
-                continue
-            log(f"[TRT] Exporting ONNX for {profile}...")
+            # Apply per-profile train_env for the ENTIRE fresh-init + ONNX-export
+            # span. Without this the ONNX exporter builds its MTGTransformerModel
+            # with env-var defaults (d_model=128, num_layers=2) and fails to
+            # load a state_dict from a profile saved with MODEL_D_MODEL=256 etc.
+            # Observed 2026-04-23: `size mismatch for cls_token [1,1,256] vs
+            # [1,1,128]` blocked training on Pauper-Standard-MCTS-fresh.
+            old_env = {}
+            for k, v in entry.get("train_env", {}).items():
+                old_env[k] = os.environ.get(k)
+                os.environ[str(k)] = str(v)
+            old_profile = os.environ.get("MODEL_PROFILE")
+            os.environ["MODEL_PROFILE"] = profile
             try:
-                export_all_heads(str(model_path), str(onnx_dir))
-                onnx_ver_file.write_text(ONNX_EXPORT_VERSION)
-                log(f"[TRT] Exported {profile}")
-            except Exception as e:
-                log(f"[TRT] Export failed for {profile}: {e}")
+                if not model_path.exists():
+                    # Fresh-start: initialize a random-weights PyTorch model and save
+                    # it so ONNX export can run immediately. Without this, the trainer
+                    # spends ~10 min on slow PyTorch inference before the first
+                    # checkpoint save triggers ONNX export organically.
+                    log(f"[TRT] No model for {profile}, initializing fresh random-weights model...")
+                    try:
+                        models_dir.mkdir(parents=True, exist_ok=True)
+                        from py4j_entry_point import PythonEntryPoint
+                        ep = PythonEntryPoint()
+                        ep.initializeModel()
+                        ep.saveLatestModelAtomic(str(model_path))
+                        del ep
+                        log(f"[TRT] Wrote fresh random model for {profile} -> {model_path}")
+                    except Exception as e:
+                        log(f"[TRT] Failed to initialize fresh model for {profile}: {e}; skipping export")
+                        continue
+                # Skip if ONNX already exists, is newer than model, AND matches current export version.
+                # Bump ONNX_EXPORT_VERSION when export format changes to force re-export.
+                ONNX_EXPORT_VERSION = "3"  # v3 = adds belief head for archetype classification
+                onnx_action = onnx_dir / "model_action.onnx"
+                onnx_ver_file = onnx_dir / ".export_version"
+                current_ver = onnx_ver_file.read_text().strip() if onnx_ver_file.exists() else ""
+                if (onnx_action.exists()
+                        and onnx_action.stat().st_mtime >= model_path.stat().st_mtime
+                        and current_ver == ONNX_EXPORT_VERSION):
+                    log(f"[TRT] ONNX up-to-date for {profile}")
+                    continue
+                log(f"[TRT] Exporting ONNX for {profile}...")
+                try:
+                    export_all_heads(str(model_path), str(onnx_dir))
+                    onnx_ver_file.write_text(ONNX_EXPORT_VERSION)
+                    log(f"[TRT] Exported {profile}")
+                except Exception as e:
+                    log(f"[TRT] Export failed for {profile}: {e}")
+            finally:
+                if old_profile is None:
+                    os.environ.pop("MODEL_PROFILE", None)
+                else:
+                    os.environ["MODEL_PROFILE"] = old_profile
+                for k, prev in old_env.items():
+                    if prev is None:
+                        os.environ.pop(k, None)
+                    else:
+                        os.environ[k] = prev
             # Also export mulligan model if it exists
             mulligan_path = models_dir / "mulligan_model.pt"
             mulligan_onnx = onnx_dir / "mulligan_model.onnx"
@@ -322,7 +372,10 @@ class LocalPBT:
         env["GPU_SERVICE_METRICS_PORT"] = str(self.metrics_port)
         env["PY_BATCH_TIMEOUT_MS"] = os.getenv("PY_BATCH_TIMEOUT_MS", "25")
         env["PY_BATCH_MAX_SIZE"] = os.getenv("PY_BATCH_MAX_SIZE", "256")
-        env["TRAIN_WORKER_THREADS"] = os.getenv("TRAIN_WORKER_THREADS", "1")
+        env["TRAIN_WORKER_THREADS"] = os.getenv("TRAIN_WORKER_THREADS", "3")
+        # Cap pending train queue so memory stays bounded when JVMs generate
+        # episodes faster than the GPU can train. Dropped tasks are the oldest.
+        env.setdefault("PENDING_TRAIN_MAX", "32")
         env["SCORE_WORKER_THREADS"] = os.getenv("SCORE_WORKER_THREADS", "0")
         env["USE_TRT_INFERENCE"] = os.getenv("USE_TRT_INFERENCE", "0")
         # Smaller batches reduce PyTorch peak VRAM during forward/backward pass,
@@ -395,8 +448,16 @@ class LocalPBT:
         env["NUM_GAME_RUNNERS"] = str(self.num_runners)
         env["TOTAL_EPISODES"] = str(self.total_episodes)
         env["WINRATE_WINDOW"] = str(self.winrate_window)
-        # Use meta opponent sampler for multi-profile (routes to deck-specialist models)
-        default_sampler = "meta" if len(self.selected_profiles) > 1 else "self"
+        # Opponent sampler default:
+        #   multi-profile -> "meta" (routes to other profiles' models)
+        #   single-profile -> "adaptive" (CP7 curriculum WEAK/MEDIUM/STRONG/SELFPLAY)
+        # Previously defaulted single-profile to "self" which silently disabled the
+        # entire curriculum system — any ADAPTIVE_CURRICULUM and THRESHOLD_* env
+        # vars had no effect because createTrainingOpponent dispatched to
+        # straight self-play. Discovered 2026-04-22: wasted ~4 hours of
+        # "curriculum" experiments that were actually pure self-play.
+        registry_sampler = self._common_train_env("OPPONENT_SAMPLER")
+        default_sampler = registry_sampler or ("meta" if len(self.selected_profiles) > 1 else "adaptive")
         env["OPPONENT_SAMPLER"] = os.getenv("OPPONENT_SAMPLER", default_sampler)
         env["MULLIGAN_DEVICE"] = "cpu"
         # Cap ONNX VRAM in the JVM. Models are 170MB total (FP16) but ORT's
@@ -409,6 +470,11 @@ class LocalPBT:
         env["GAME_LOG_FREQUENCY"] = os.getenv("GAME_LOG_FREQUENCY", "500")
         env["LEAGUE_REGISTRY_PATH"] = str(self.registry_path)
         env["ORCHESTRATED_RUN"] = "1"
+        # applyEffects dirty-flag skip-gate — ~45% of applyEffects calls skipped
+        # on Pauper workloads. Regresses 5 complex cards (morph/Yixlid/Shadowbane)
+        # but none appear in our 4 RL decks. Verified 2026-04-23 via full
+        # Mage.Tests suite parity + grep across all Pauper .dek files.
+        env.setdefault("MAGE_DIRTY_APPLY", "1")
         if deck_paths:
             env["DECK_LIST_FILE"] = deck_paths[0]
         # Apply per-profile train_env from registry
@@ -417,17 +483,22 @@ class LocalPBT:
             for k, v in train_env.items():
                 env.setdefault(str(k), str(v))
         args_str = "trainAll " + " ".join(profile_names)
-        cmd = (
-            f'mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL '
-            f'-am -DskipTests exec:java '
-            f'-Dexec.mainClass=mage.player.ai.rl.RLTrainer '
-            f'"-Dexec.args={args_str}"'
-        )
+        mvn_exe = shutil.which("mvn") or shutil.which("mvn.cmd") or "mvn.cmd"
+        cmd = [
+            mvn_exe,
+            "-q",
+            "-pl", "Mage.Server.Plugins/Mage.Player.AIRL",
+            "-am",
+            "-DskipTests",
+            "exec:java",
+            "-Dexec.mainClass=mage.player.ai.rl.RLTrainer",
+            "-Dexec.args=" + args_str,
+        ]
         log_path = REPO_ROOT / "local-training" / "local_pbt" / "trainer.log"
         log_handle = log_path.open("w")
         self.trainer_process = subprocess.Popen(
             cmd, env=env, cwd=str(REPO_ROOT),
-            stdout=log_handle, stderr=subprocess.STDOUT, shell=True,
+            stdout=log_handle, stderr=subprocess.STDOUT,
         )
         log(f"Trainer started pid={self.trainer_process.pid} profiles={profiles_str} runners={self.num_runners}")
 

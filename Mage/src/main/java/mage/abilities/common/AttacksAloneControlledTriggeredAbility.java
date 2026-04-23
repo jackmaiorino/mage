@@ -11,10 +11,16 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author TheElk801
  */
 public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACKER_DECLARED);
 
     private final FilterPermanent filter;
     private final boolean setTargetPointer;
@@ -47,6 +53,11 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public AttacksAloneControlledTriggeredAbility copy() {
         return new AttacksAloneControlledTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

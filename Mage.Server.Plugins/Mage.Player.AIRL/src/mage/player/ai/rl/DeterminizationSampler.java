@@ -88,7 +88,7 @@ public final class DeterminizationSampler {
     }
 
     /**
-     * Default factory using the 4 canonical Pauper decks shipped with the repo.
+     * Default factory using the canonical Pauper decks shipped with the repo.
      * Returns null if any decklist fails to load.
      */
     public static DeterminizationSampler pauperDefaults() {
@@ -98,6 +98,11 @@ public final class DeterminizationSampler {
         paths.put("Rally", base + "/Deck - Mono Red Rally.dek");
         paths.put("Affinity", base + "/Deck - Grixis Affinity.dek");
         paths.put("Elves", base + "/Deck - Elves.dek");
+        paths.put("SpyCombo", base + "/Deck - Spy Combo.dek");
+        paths.put("Burn", base + "/Deck - Mono-Red Burn.dek");
+        paths.put("Terror", base + "/Deck - Mono-Blue Terror.dek");
+        paths.put("CawGates", base + "/Deck - Caw-Gates.dek");
+        paths.put("Faeries", base + "/Deck - Mono-Blue Faeries.dek");
         return loadArchetypes(paths);
     }
 

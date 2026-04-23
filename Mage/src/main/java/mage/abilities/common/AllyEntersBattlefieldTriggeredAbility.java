@@ -10,10 +10,16 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author North
  */
 public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ENTERS_THE_BATTLEFIELD);
 
     public AllyEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -23,6 +29,11 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
 
     public AllyEntersBattlefieldTriggeredAbility(AllyEntersBattlefieldTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

@@ -8,12 +8,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.DECLARED_ATTACKERS);
 
     protected final String text;
     protected final SetTargetPointer setTargetPointer;
@@ -42,6 +47,11 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.text = ability.text;
         this.setTargetPointer = ability.setTargetPointer;
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

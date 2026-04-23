@@ -2420,31 +2420,37 @@ public abstract class GameImpl implements Game {
         }
 
         // If a Dungeon is on its last room and is not the source of any triggered abilities, it is removed
-        Set<Dungeon> dungeonsToRemove = new HashSet<>();
-        for (CommandObject commandObject : state.getCommand()) {
-            if (!(commandObject instanceof Dungeon)) {
-                continue;
+        // Fast-path: almost every non-commander/non-plane game has an empty command zone
+        if (!state.getCommand().isEmpty()) {
+            Set<Dungeon> dungeonsToRemove = null;
+            for (CommandObject commandObject : state.getCommand()) {
+                if (!(commandObject instanceof Dungeon)) {
+                    continue;
+                }
+                Dungeon dungeon = (Dungeon) commandObject;
+                boolean removeDungeon = !dungeon.hasNextRoom()
+                        && this.getStack()
+                        .stream()
+                        .filter(DungeonRoom::isRoomTrigger)
+                        .map(StackObject::getSourceId)
+                        .noneMatch(dungeon.getId()::equals)
+                        && this.state
+                        .getTriggered(dungeon.getControllerId())
+                        .stream()
+                        .filter(DungeonRoom::isRoomTrigger)
+                        .map(Ability::getSourceId)
+                        .noneMatch(dungeon.getId()::equals);
+                if (removeDungeon) {
+                    if (dungeonsToRemove == null) dungeonsToRemove = new HashSet<>();
+                    dungeonsToRemove.add(dungeon);
+                }
             }
-            Dungeon dungeon = (Dungeon) commandObject;
-            boolean removeDungeon = !dungeon.hasNextRoom()
-                    && this.getStack()
-                    .stream()
-                    .filter(DungeonRoom::isRoomTrigger)
-                    .map(StackObject::getSourceId)
-                    .noneMatch(dungeon.getId()::equals)
-                    && this.state
-                    .getTriggered(dungeon.getControllerId())
-                    .stream()
-                    .filter(DungeonRoom::isRoomTrigger)
-                    .map(Ability::getSourceId)
-                    .noneMatch(dungeon.getId()::equals);
-            if (removeDungeon) {
-                dungeonsToRemove.add(dungeon);
+            if (dungeonsToRemove != null) {
+                for (Dungeon dungeon : dungeonsToRemove) {
+                    this.removeDungeon(dungeon);
+                    somethingHappened = true;
+                }
             }
-        }
-        for (Dungeon dungeon : dungeonsToRemove) {
-            this.removeDungeon(dungeon);
-            somethingHappened = true;
         }
 
         // If a commander is in a graveyard or in exile and that card was put into that zone
@@ -2495,16 +2501,23 @@ public abstract class GameImpl implements Game {
         //
         // Copied cards can be stored in GameState.copiedCards or in game state value (until LKI rework)
         // Copied cards list contains all parts of split/adventure/mdfc
-        Set<Card> allCopiedCards = new HashSet<>();
-        allCopiedCards.addAll(this.getState().getCopiedCards());
+        // Fast-path: skip the whole block when no copied cards exist (common in Pauper)
+        java.util.Collection<Card> copiedCardsSource = this.getState().getCopiedCards();
         Map<String, Object> stateSavedCopiedCards = this.getState().getValues(GameState.COPIED_CARD_KEY);
-        allCopiedCards.addAll(stateSavedCopiedCards.values()
-                .stream()
-                .map(object -> (Card) object)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList())
-        );
-        Set<Card> copiedCardsToRemove = new HashSet<>();
+        Set<Card> allCopiedCards;
+        if (copiedCardsSource.isEmpty() && (stateSavedCopiedCards == null || stateSavedCopiedCards.isEmpty())) {
+            allCopiedCards = java.util.Collections.emptySet();
+        } else {
+            allCopiedCards = new HashSet<>(copiedCardsSource);
+            if (stateSavedCopiedCards != null) {
+                for (Object obj : stateSavedCopiedCards.values()) {
+                    if (obj instanceof Card) {
+                        allCopiedCards.add((Card) obj);
+                    }
+                }
+            }
+        }
+        Set<Card> copiedCardsToRemove = null;
         for (Card copiedCard : allCopiedCards) {
             // 1. Zone must be checked from main card only cause mdf parts can have different zones
             //    (one side on battlefield, another side on outside)
@@ -2575,16 +2588,19 @@ public abstract class GameImpl implements Game {
             }
 
             // copied card can be removed to Outside
+            if (copiedCardsToRemove == null) copiedCardsToRemove = new HashSet<>();
             copiedCardsToRemove.add(copiedCard);
         }
         // real remove
-        copiedCardsToRemove.forEach(card -> {
-            card.setZone(Zone.OUTSIDE, this);
-            this.getState().getCopiedCards().remove(card);
-            // must keep card in game state as LKI alternative until LKI rework, so don't remove from it
-            // TODO: change after LKI rework
-            //this.getState().removeValue(GameState.COPIED_CARD_KEY + copiedCard.getId().toString());
-        });
+        if (copiedCardsToRemove != null) {
+            copiedCardsToRemove.forEach(card -> {
+                card.setZone(Zone.OUTSIDE, this);
+                this.getState().getCopiedCards().remove(card);
+                // must keep card in game state as LKI alternative until LKI rework, so don't remove from it
+                // TODO: change after LKI rework
+                //this.getState().removeValue(GameState.COPIED_CARD_KEY + copiedCard.getId().toString());
+            });
+        }
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
@@ -3219,13 +3235,16 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void informPlayers(String message) {
+        // Simulation games (AI clones, alt-cost checks, MCTS rollouts) never
+        // consume log messages. Bail at the very top so we skip the
+        // DataCollectorServices hop entirely — it's a no-op for sim too.
+        if (simulation) {
+            return;
+        }
         DataCollectorServices.getInstance().onGameLog(this, message);
 
         // Uncomment to print game messages
         // System.out.println(message.replaceAll("\\<.*?\\>", ""));
-        if (simulation) {
-            return;
-        }
         fireInformEvent(message);
     }
 

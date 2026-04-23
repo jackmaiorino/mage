@@ -28,6 +28,15 @@ public class PermanentCard extends PermanentImpl {
     // TODO: wtf, it modified on getCard/getBasicMageObject/getMainCard() and other places, e.g. on bestow -- must be fixed!
     protected Card card;
 
+    // Share permanent.card reference across clones instead of deep-copying it.
+    // Bypasses a cascade of clone constructors (ManaCostsImpl, AbilitiesImpl,
+    // CostsImpl, ManaOptions, Effects) -- ~12% CPU savings per JFR profile.
+    // UNSAFE for decks with bestow / saga / backup / copied-spell cards because
+    // those mutate the Card template at runtime. Safe for the 4 Pauper RL
+    // decks (Spy combo, Wildfire, Rally, Elves/Affinity). Default off.
+    private static final boolean SHARE_CARD =
+            "1".equals(System.getenv().getOrDefault("MAGE_SHARE_PERMANENT_CARD", "0"));
+
     protected int maxLevelCounters;
     protected int zoneChangeCounter;
     protected ObjectColor originalColor;
@@ -105,7 +114,7 @@ public class PermanentCard extends PermanentImpl {
 
     protected PermanentCard(final PermanentCard permanent) {
         super(permanent);
-        this.card = permanent.card.copy();
+        this.card = SHARE_CARD ? permanent.card : permanent.card.copy();
         this.maxLevelCounters = permanent.maxLevelCounters;
         this.zoneChangeCounter = permanent.zoneChangeCounter;
         this.originalColor = permanent.originalColor.copy();

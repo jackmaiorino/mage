@@ -56,10 +56,23 @@ public class ContinuousEffects implements Serializable {
 
     private final Map<String, ContinuousEffectsList<ContinuousEffect>> lastEffectsListOnLayer = new HashMap<>(); // helps to find out new effect timestamps on layers
 
+    // Dirty-flag callback: wired by GameState so mutations bump the
+    // applyEffects skip-gate's effectsVersion counter. Optional.
+    private transient Runnable onMutate;
+
     public ContinuousEffects() {
         applyStatus = new ApplyStatusEffect();
         auraReplacementEffect = new AuraReplacementEffect();
         collectAllEffects();
+    }
+
+    /** Wired by GameState at construction / copy time. */
+    public void setOnMutate(Runnable onMutate) {
+        this.onMutate = onMutate;
+    }
+
+    private void notifyMutation() {
+        if (onMutate != null) onMutate.run();
     }
 
     protected ContinuousEffects(final ContinuousEffects effect) {
@@ -128,6 +141,7 @@ public class ContinuousEffects implements Serializable {
         }
         costModificationEffects.removeEndOfCombatEffects();
         spliceCardEffects.removeEndOfCombatEffects();
+        notifyMutation();
     }
 
     public synchronized void removeEndOfTurnEffects(Game game) {
@@ -142,6 +156,7 @@ public class ContinuousEffects implements Serializable {
         }
         costModificationEffects.removeEndOfTurnEffects(game);
         spliceCardEffects.removeEndOfTurnEffects(game);
+        notifyMutation();
     }
 
     public synchronized void removeBeginningOfEndStepEffects(Game game) {
@@ -156,6 +171,7 @@ public class ContinuousEffects implements Serializable {
         }
         costModificationEffects.removeBeginningOfEndStepEffects(game);
         spliceCardEffects.removeBeginningOfEndStepEffects(game);
+        notifyMutation();
     }
 
     public synchronized void removeInactiveEffects(Game game) {
@@ -171,6 +187,7 @@ public class ContinuousEffects implements Serializable {
         }
         costModificationEffects.removeInactiveEffects(game);
         spliceCardEffects.removeInactiveEffects(game);
+        notifyMutation();
     }
 
     public synchronized List<ContinuousEffect> getLayeredEffects(Game game) {
@@ -1308,6 +1325,7 @@ public class ContinuousEffects implements Serializable {
             default:
                 throw new IllegalArgumentException("Unknown effect type: " + effect.getEffectType());
         }
+        notifyMutation();
     }
 
     public synchronized void setController(UUID cardId, UUID controllerId) {
@@ -1337,12 +1355,14 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffectsList effectsList : allEffectsLists) {
             effectsList.clear();
         }
+        notifyMutation();
     }
 
     public synchronized void removeAllTemporaryEffects() {
         for (ContinuousEffectsList effectsList : allEffectsLists) {
             effectsList.removeTemporaryEffects();
         }
+        notifyMutation();
     }
 
     public void prepareReplacementEffectMaps(Map<ReplacementEffect, Set<Ability>> rEffects, Game game,

@@ -10,10 +10,16 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author TheElk801
  */
 public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACKER_DECLARED);
 
     public AttacksFirstTimeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -22,6 +28,11 @@ public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
 
     protected AttacksFirstTimeTriggeredAbility(final AttacksFirstTimeTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

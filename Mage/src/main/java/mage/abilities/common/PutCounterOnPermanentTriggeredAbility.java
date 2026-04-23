@@ -11,12 +11,18 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * "Whenever you put one or more [] counters on a []" triggered ability
  *
  * @author PurpleCrowbar
  */
 public class PutCounterOnPermanentTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.COUNTERS_ADDED);
 
     private final CounterType counterType; // when null, any counter type is accepted
     private final FilterPermanent filter;
@@ -47,6 +53,11 @@ public class PutCounterOnPermanentTriggeredAbility extends TriggeredAbilityImpl 
     @Override
     public PutCounterOnPermanentTriggeredAbility copy() {
         return new PutCounterOnPermanentTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

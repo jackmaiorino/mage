@@ -1,6 +1,8 @@
 
 package mage.abilities.common;
 
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.UUID;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -19,6 +21,9 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACKER_DECLARED);
 
     protected SetTargetPointer setTargetPointer;
     protected FilterCreaturePermanent filter;
@@ -50,6 +55,11 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.filter = ability.filter;
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

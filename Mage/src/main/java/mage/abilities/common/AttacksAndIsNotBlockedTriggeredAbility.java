@@ -9,7 +9,13 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.UNBLOCKED_ATTACKER);
 
     private final SetTargetPointer setTargetPointer;
 
@@ -36,6 +42,11 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public AttacksAndIsNotBlockedTriggeredAbility copy() {
         return new AttacksAndIsNotBlockedTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

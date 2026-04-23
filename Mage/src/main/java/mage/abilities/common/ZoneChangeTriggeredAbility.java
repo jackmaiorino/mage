@@ -9,6 +9,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * Is applied when the {@link Permanent} with this ability instance changes
  * zones.
@@ -16,6 +19,9 @@ import mage.game.permanent.Permanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ZONE_CHANGE);
 
     protected final Zone fromZone;
     protected final Zone toZone;
@@ -47,6 +53,11 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.fromZone = ability.fromZone;
         this.toZone = ability.toZone;
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

@@ -12,12 +12,17 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
  * @author LevelX2
  */
 public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACKER_DECLARED);
 
     protected final FilterCreaturePermanent filter;
     protected final boolean attacksYouOrYourPlaneswalker;
@@ -52,6 +57,11 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
         this.attacksYouOrYourPlaneswalker = ability.attacksYouOrYourPlaneswalker;
         this.setTargetPointer = ability.setTargetPointer;
         this.controller = ability.controller;
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

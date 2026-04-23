@@ -12,10 +12,16 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author LevelX2
  */
 public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ZONE_CHANGE);
 
     private final FilterPermanent filter;
     private final boolean setTargetPointer;
@@ -40,6 +46,11 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
         this.filter = ability.filter;
         this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;
         this.setTargetPointer = ability.setTargetPointer;
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

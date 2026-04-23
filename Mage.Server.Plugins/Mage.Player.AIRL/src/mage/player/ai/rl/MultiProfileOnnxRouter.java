@@ -2,14 +2,14 @@ package mage.player.ai.rl;
 
 import org.apache.log4j.Logger;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Routes inference requests to per-profile ONNX models based on policyKey.
- * Training methods are delegated only to the training profile's model.
+ * Routes inference and training requests to per-profile ONNX models.
+ * Actor threads carry the active profile in {@link ProfileContext}; meta-opponent
+ * inference can also route by explicit policyKey.
  */
 public final class MultiProfileOnnxRouter implements PythonModel {
 
@@ -34,13 +34,24 @@ public final class MultiProfileOnnxRouter implements PythonModel {
         logger.info("MultiProfileOnnxRouter: " + profileModels.size() + " profiles, training=" + trainingProfile);
     }
 
+    private OnnxInferenceModel currentProfileModel() {
+        ProfileContext ctx = ProfileContext.current();
+        if (ctx != null) {
+            OnnxInferenceModel model = profileModels.get(ctx.profileName);
+            if (model != null) {
+                return model;
+            }
+        }
+        return trainingModel;
+    }
+
     /**
      * Resolve policyKey to a profile name, then look up the ONNX model.
-     * Falls back to trainingModel for unrecognized keys.
+     * Falls back to the current thread's profile for train-policy requests.
      */
     private OnnxInferenceModel resolveModel(String policyKey) {
         if (policyKey == null || policyKey.isEmpty() || "train".equals(policyKey)) {
-            return trainingModel;
+            return currentProfileModel();
         }
         // "profile:Pauper-Rally" format
         if (policyKey.startsWith("profile:")) {
@@ -78,17 +89,17 @@ public final class MultiProfileOnnxRouter implements PythonModel {
     }
 
     // -----------------------------------------------------------------------
-    // Training: delegate to training model only
+    // Training/control: delegate to the current profile's model
     // -----------------------------------------------------------------------
 
     @Override
     public void enqueueTraining(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> rewards) {
-        trainingModel.enqueueTraining(trainingData, rewards);
+        currentProfileModel().enqueueTraining(trainingData, rewards);
     }
 
     @Override
     public void saveModel(String path) {
-        trainingModel.saveModel(path);
+        currentProfileModel().saveModel(path);
     }
 
     @Override
@@ -99,38 +110,32 @@ public final class MultiProfileOnnxRouter implements PythonModel {
 
     @Override
     public Map<String, Integer> getMainModelTrainingStats() {
-        return trainingModel.getMainModelTrainingStats();
+        return currentProfileModel().getMainModelTrainingStats();
     }
 
     @Override
     public Map<String, Integer> getHealthStats() {
-        return trainingModel.getHealthStats();
+        return currentProfileModel().getHealthStats();
     }
 
     @Override
     public void resetHealthStats() {
-        trainingModel.resetHealthStats();
+        currentProfileModel().resetHealthStats();
     }
 
     @Override
     public void recordGameResult(float lastValuePrediction, boolean won) {
-        trainingModel.recordGameResult(lastValuePrediction, won);
+        currentProfileModel().recordGameResult(lastValuePrediction, won);
     }
 
     @Override
     public Map<String, Object> getValueHeadMetrics() {
-        return trainingModel.getValueHeadMetrics();
+        return currentProfileModel().getValueHeadMetrics();
     }
 
     @Override
     public float[] predictArchetype(StateSequenceBuilder.SequenceOutput state) {
-        // Route to the currently-active profile's ONNX inference model.
-        // Pick the first profile (typical case: per-profile router has one active profile).
-        for (Map.Entry<String, OnnxInferenceModel> entry : profileModels.entrySet()) {
-            float[] probs = entry.getValue().predictArchetype(state);
-            if (probs != null) return probs;
-        }
-        return null;
+        return currentProfileModel().predictArchetype(state);
     }
 
     @Override

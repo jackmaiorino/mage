@@ -7,11 +7,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  *
  * @author LoneFox
  */
 public class AttacksAloneSourceTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACKER_DECLARED);
 
     public AttacksAloneSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
@@ -26,6 +32,11 @@ public class AttacksAloneSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public AttacksAloneSourceTriggeredAbility copy() {
         return new AttacksAloneSourceTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

@@ -68,6 +68,7 @@ public final class PythonModelFactory {
                             String pModelsDir = artifactsRoot + "/profiles/" + p + "/models";
                             OnnxInferenceModel onnx = new OnnxInferenceModel(
                                     pModelsDir, trainOnnx.getEnv(), trainOnnx.getSessionOpts());
+                            onnx.setTrainingDelegate(gpu);
                             profileModels.put(p, onnx);
                         }
                         if (profileModels.containsKey(trainingProfile)

@@ -6,10 +6,16 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author TheElk801
  */
 public class PlayLandOrCastSpellTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.LAND_PLAYED, GameEvent.EventType.SPELL_CAST);
 
     private final boolean fromExile;
 
@@ -31,6 +37,11 @@ public class PlayLandOrCastSpellTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public PlayLandOrCastSpellTriggeredAbility copy() {
         return new PlayLandOrCastSpellTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

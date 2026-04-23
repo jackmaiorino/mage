@@ -12,10 +12,16 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author noxx
  */
 public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACKER_DECLARED);
 
     protected final FilterPermanent filter;
     protected final boolean setTargetPointer;
@@ -58,6 +64,11 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
     public void setOnce(boolean once) {
         this.once = once;
         setTriggerPhrase("When" + (once ? " " : "ever ") + CardUtil.addArticle(filter.getMessage()) + " attacks, ");
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

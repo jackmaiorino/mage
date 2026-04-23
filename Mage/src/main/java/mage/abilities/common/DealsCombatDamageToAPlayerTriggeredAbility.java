@@ -8,10 +8,16 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.DAMAGED_PLAYER);
 
     protected final boolean setTargetPointer;
 
@@ -38,6 +44,11 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     @Override
     public DealsCombatDamageToAPlayerTriggeredAbility copy() {
         return new DealsCombatDamageToAPlayerTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

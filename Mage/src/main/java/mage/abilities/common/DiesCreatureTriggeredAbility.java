@@ -14,10 +14,16 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author North
  */
 public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ZONE_CHANGE);
 
     protected FilterPermanent filter;
     private SetTargetPointer setTargetPointer;
@@ -71,6 +77,11 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public DiesCreatureTriggeredAbility copy() {
         return new DiesCreatureTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

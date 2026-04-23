@@ -12,10 +12,16 @@ import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author North, Susucr
  */
 public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.SPELL_CAST);
 
     protected final FilterSpell filter;
 
@@ -63,6 +69,11 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
         this.fromZone = ability.fromZone;
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

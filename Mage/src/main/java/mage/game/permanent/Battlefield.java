@@ -20,7 +20,22 @@ public class Battlefield implements Serializable {
     private final Map<UUID, Permanent> field = new LinkedHashMap<>();
     private final Map<UUID, Permanent> permanentsEntering = new LinkedHashMap<>();
 
+    // Dirty-flag callback: wired by GameState so mutations bump the
+    // applyEffects skip-gate's battlefieldVersion counter. Optional — if
+    // null (legacy tests constructing Battlefield directly), we just skip
+    // the bump and the skip-gate won't trigger on this Battlefield.
+    private transient Runnable onMutate;
+
     public Battlefield() {
+    }
+
+    /** Wired by GameState at construction / copy time. */
+    public void setOnMutate(Runnable onMutate) {
+        this.onMutate = onMutate;
+    }
+
+    private void notifyMutation() {
+        if (onMutate != null) onMutate.run();
     }
 
     protected Battlefield(final Battlefield battlefield) {
@@ -48,6 +63,7 @@ public class Battlefield implements Serializable {
     public void clear() {
         field.clear();
         permanentsEntering.clear();
+        notifyMutation();
     }
 
     /**
@@ -136,6 +152,7 @@ public class Battlefield implements Serializable {
 
     public void addPermanent(Permanent permanent) {
         field.put(permanent.getId(), permanent);
+        notifyMutation();
     }
 
     /**
@@ -152,6 +169,7 @@ public class Battlefield implements Serializable {
 
     public void removePermanent(UUID key) {
         field.remove(key);
+        notifyMutation();
     }
 
     /**
@@ -186,10 +204,16 @@ public class Battlefield implements Serializable {
     }
 
     public List<Permanent> getAllActivePermanents() {
-        return field.values()
-                .stream()
-                .filter(Permanent::isPhasedIn)
-                .collect(Collectors.toList());
+        // Direct loop avoids stream-pipeline allocation per call (this method
+        // is called from checkStateBasedActions, getPlayable, etc. — a hot path).
+        Collection<Permanent> perms = field.values();
+        List<Permanent> result = new ArrayList<>(perms.size());
+        for (Permanent perm : perms) {
+            if (perm.isPhasedIn()) {
+                result.add(perm);
+            }
+        }
+        return result;
     }
 
     /**
@@ -197,11 +221,14 @@ public class Battlefield implements Serializable {
      * the specified player id. The method ignores the range of influence.
      */
     public List<Permanent> getAllActivePermanents(UUID controllerId) {
-        return field.values()
-                .stream()
-                .filter(perm -> perm.isPhasedIn()
-                        && perm.isControlledBy(controllerId))
-                .collect(Collectors.toList());
+        Collection<Permanent> perms = field.values();
+        List<Permanent> result = new ArrayList<>(perms.size());
+        for (Permanent perm : perms) {
+            if (perm.isPhasedIn() && perm.isControlledBy(controllerId)) {
+                result.add(perm);
+            }
+        }
+        return result;
     }
 
     /**

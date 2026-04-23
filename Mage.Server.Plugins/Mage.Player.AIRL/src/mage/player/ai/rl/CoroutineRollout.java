@@ -375,6 +375,13 @@ public final class CoroutineRollout {
         int n = request.options == null ? 0 : request.options.size();
         if (n == 0) return 0;
         if (n == 1) return 0;
+        // This path only handles ACTIVATE_ABILITY (picks a spell/ability). For
+        // SELECT_TARGET or other choice types, rollouts fall back to random
+        // -- rollouts don't need to be policy-quality; only leaf-eval MCTS does.
+        if (request.choiceType != MCTSSimPlayer.ChoiceType.ACTIVATE_ABILITY) {
+            return rng.nextInt(n);
+        }
+        List<ActivatedAbility> abilityOptions = request.activateOptions();
         try {
             StateSequenceBuilder.SequenceOutput state = StateSequenceBuilder.buildBaseState(
                     sim,
@@ -388,7 +395,7 @@ public final class CoroutineRollout {
             float[][] feats = new float[maxCand][candDim];
             int[] mask = new int[maxCand];
             for (int i = 0; i < slots; i++) {
-                ActivatedAbility ab = request.options.get(i);
+                ActivatedAbility ab = abilityOptions.get(i);
                 ids[i] = abilityActionId(ab);
                 mask[i] = 1;
             }
@@ -447,20 +454,12 @@ public final class CoroutineRollout {
      */
     private static MCTSSimPlayer.DecisionRequest pollAnyChannel(
             MCTSSimPlayer.ReplacementResult rep, long remainingNanos) {
-        long perPollNanos = Math.max(1_000_000L, remainingNanos / 50);  // 20ms-ish slices
-        long deadline = System.nanoTime() + remainingNanos;
-        while (System.nanoTime() < deadline) {
-            for (Map.Entry<UUID, MCTSSimPlayer.Channel> e : rep.channels.entrySet()) {
-                MCTSSimPlayer.DecisionRequest r;
-                try {
-                    r = e.getValue().requestQueue.poll(perPollNanos, TimeUnit.NANOSECONDS);
-                } catch (InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                    return null;
-                }
-                if (r != null) return r;
-            }
+        if (remainingNanos <= 0) return null;
+        try {
+            return rep.sharedRequestQueue.poll(remainingNanos, TimeUnit.NANOSECONDS);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            return null;
         }
-        return null;
     }
 }

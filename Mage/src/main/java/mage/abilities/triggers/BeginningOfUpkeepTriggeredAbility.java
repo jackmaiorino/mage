@@ -6,10 +6,16 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author Loki
  */
 public class BeginningOfUpkeepTriggeredAbility extends AtStepTriggeredAbility {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.UPKEEP_STEP_PRE);
 
     /**
      * At the beginning of your upkeep (optional = false)
@@ -41,6 +47,11 @@ public class BeginningOfUpkeepTriggeredAbility extends AtStepTriggeredAbility {
     @Override
     public BeginningOfUpkeepTriggeredAbility copy() {
         return new BeginningOfUpkeepTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

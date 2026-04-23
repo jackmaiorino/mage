@@ -10,7 +10,13 @@ import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 public class ActivateAbilityTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ACTIVATED_ABILITY);
 
     private final FilterStackObject filter;
     protected final SetTargetPointer setTargetPointer;
@@ -35,6 +41,11 @@ public class ActivateAbilityTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public ActivateAbilityTriggeredAbility copy() {
         return new ActivateAbilityTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

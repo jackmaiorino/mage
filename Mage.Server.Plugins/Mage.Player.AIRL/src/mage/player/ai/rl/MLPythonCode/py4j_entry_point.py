@@ -1984,13 +1984,32 @@ class PythonEntryPoint:
                         _probs_safe_c, _cm_c, _chosen_idx_c, _chosen_cnt_c)
 
                     if self.use_ppo:
-                        _log_ratio_c = (_new_logp_c - _old_logp_c).clamp(-20.0, 20.0)
+                        # Tighten log-ratio clamp from [-20, 20] to [-5, 5] so
+                        # ratio_raw <= e^5 ~= 148x. The old [-20, 20] bound
+                        # allowed ratios up to e^20 ~= 5e8, which produced
+                        # policy_loss in the millions when advantage clamped to
+                        # ±5 met a pathological log-ratio (2026-04-22 value head
+                        # collapse). The collapsed network outputs near-constant
+                        # values regardless of state, killing training signal.
+                        _log_ratio_clip = float(os.getenv("PPO_LOG_RATIO_CLIP", "5.0"))
+                        _log_ratio_c = (_new_logp_c - _old_logp_c).clamp(-_log_ratio_clip, _log_ratio_clip)
                         _ratio_raw_c = torch.exp(_log_ratio_c)
                         _clipped_ratio_c = torch.clamp(
                             _ratio_raw_c, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
                         _policy_obj_c = torch.min(
                             _ratio_raw_c * _adv_c, _clipped_ratio_c * _adv_c)
                         _loss_policy_c = -(_policy_obj_c * _norm_w_c).sum() / total_norm_w_sum
+
+                        # Extra safety: if policy loss exploded despite the clamp
+                        # (e.g., many samples hit the ratio cap simultaneously),
+                        # skip this update entirely. The data is too stale.
+                        _policy_loss_threshold = float(os.getenv("PPO_POLICY_LOSS_SKIP_THRESHOLD", "100.0"))
+                        if torch.isfinite(_loss_policy_c) and _loss_policy_c.abs().item() > _policy_loss_threshold:
+                            logger.warning(LogCategory.MODEL_TRAIN,
+                                "Skipping update: policy_loss=%.1f exceeds threshold %.1f (stale rollouts or pathological ratios)",
+                                float(_loss_policy_c.item()), _policy_loss_threshold)
+                            self.optimizer.zero_grad(set_to_none=True)
+                            return
                     else:
                         _loss_policy_c = -((_new_logp_c * _adv_c) * _norm_w_c).sum() / total_norm_w_sum
 
@@ -2421,10 +2440,13 @@ class PythonEntryPoint:
         self.persistence.save_model(self.model, path, extra_state=extra)
 
     def _heal_collapsed_scales(self):
-        """Detect and reset attention scale params that collapsed to ~0.
-        Uniform attention (scale*Q @ (scale*K)^T == 0) makes the encoder a
-        bag-of-words averager. If the saved model has this state, reset to 1.0
-        before training resumes. Returns list of reset param names.
+        """Detect and reset scale / output-layer params that compress the value
+        head output. Two failure modes handled:
+          1. self_attn.scale ~0 -> uniform attention, bag-of-words encoder
+          2. value_scale << 1.0 + critic_proj2 shrunk -> compressed value output,
+             e.g., post-PPO-ratio-explosion where policy_loss in the millions
+             destabilized the value head into producing |output| ~0.05.
+        Returns list of reset param names.
         """
         if self.model is None:
             return []
@@ -2435,10 +2457,40 @@ class PythonEntryPoint:
                     if abs(float(param.item())) < 0.1:
                         param.data.fill_(1.0)
                         reset.append(name)
+
+            # Opt-in value-head unstick: triggered by env var because the
+            # heuristic for "stuck" can fire on healthy but still-learning
+            # models. Only run on explicit user request.
+            if os.getenv("VALUE_HEAD_UNSTICK", "0") == "1":
+                for name, param in self.model.named_parameters():
+                    # value_scale: scalar multiplier on value-head output.
+                    # Pre-collapse sits near 1.0; shrunk value_scale mechanically
+                    # suppresses separation between win/loss predictions.
+                    if name == "value_scale" and param.numel() == 1:
+                        current = float(param.item())
+                        if current < 0.8:
+                            param.data.fill_(1.0)
+                            reset.append(f"{name} ({current:.3f}->1.0)")
+                    # critic_proj2.weight: final linear to scalar value.
+                    # If std is unusually small after collapse, amplify 3x to
+                    # restore output magnitude without destroying learned
+                    # direction (sign structure preserved).
+                    if name == "critic_proj2.weight":
+                        w_std = float(param.std().item())
+                        if w_std < 0.15:
+                            factor = 3.0
+                            param.data.mul_(factor)
+                            reset.append(f"{name} (scaled {factor}x, was std={w_std:.3f})")
+                    # critic_proj2.bias: zero it so bias doesn't offset the
+                    # amplified weight output.
+                    if name == "critic_proj2.bias":
+                        param.data.zero_()
+                        reset.append(f"{name} (zeroed)")
+
         if reset:
             logger.warning(
                 LogCategory.MODEL_LOAD,
-                "Auto-healed %d collapsed self_attn.scale params -> 1.0: %s",
+                "Auto-healed %d params: %s",
                 len(reset), reset,
             )
         return reset

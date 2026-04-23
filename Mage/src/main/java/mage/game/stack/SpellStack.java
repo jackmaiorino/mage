@@ -24,6 +24,10 @@ public class SpellStack extends ArrayDeque<StackObject> {
 
     protected Date dateLastAdded;
 
+    // Dirty-flag callback: wired by GameState so mutations bump the
+    // applyEffects skip-gate's stackVersion counter. Optional.
+    private transient Runnable onMutate;
+
     public SpellStack() {
     }
 
@@ -32,6 +36,15 @@ public class SpellStack extends ArrayDeque<StackObject> {
         for (StackObject spell : stack) {
             this.addLast(spell.copy());
         }
+    }
+
+    /** Wired by GameState at construction / copy time. */
+    public void setOnMutate(Runnable onMutate) {
+        this.onMutate = onMutate;
+    }
+
+    private void notifyMutation() {
+        if (onMutate != null) onMutate.run();
     }
 
     //resolve top StackObject
@@ -65,7 +78,9 @@ public class SpellStack extends ArrayDeque<StackObject> {
         for (StackObject spell : this) {
             if (spell.getId().equals(object.getId())) {
                 game.getState().setZone(spell.getId(), null);
-                return super.remove(spell);
+                boolean removed = super.remove(spell);
+                if (removed) notifyMutation();
+                return removed;
             }
         }
         return false;
@@ -151,12 +166,14 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public void push(StackObject e) {
         super.push(e);
         this.dateLastAdded = new Date();
+        notifyMutation();
     }
 
     public void push(Game game, StackObject e) {
         super.push(e);
         this.dateLastAdded = new Date();
         DataCollectorServices.getInstance().onTestsStackPush(game);
+        notifyMutation();
     }
 
     public Date getDateLastAdded() {

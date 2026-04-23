@@ -387,6 +387,22 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void informPlayers(String message);
 
+    /**
+     * Lazy variant: message is only built if the game is NOT a simulation.
+     * Call this from hot paths (discard, play, tap, damage, etc.) where the
+     * message string itself is expensive to construct (getLogName HTML
+     * formatting, getSourceLogName, CardUtil.addArticle, etc.) and where the
+     * result is thrown away during AI / MCTS clone play.
+     *
+     * Default implementation keeps legacy semantics: build the string, then
+     * pass to {@link #informPlayers(String)} which early-returns in sim. The
+     * override in GameImpl skips the build entirely when simulation==true.
+     */
+    default void informPlayersLazy(java.util.function.Supplier<String> messageSupplier) {
+        if (isSimulation()) return;
+        informPlayers(messageSupplier.get());
+    }
+
     void informPlayer(Player player, String message);
 
     void debugMessage(String message);

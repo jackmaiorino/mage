@@ -11,10 +11,16 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author LevelX2
  */
 public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ENTERS_THE_BATTLEFIELD);
 
     protected FilterPermanent filter;
     protected SetTargetPointer setTargetPointer;
@@ -45,6 +51,11 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

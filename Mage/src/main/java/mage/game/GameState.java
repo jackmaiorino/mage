@@ -116,6 +116,120 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
+    // Dirty-flag version counters for applyEffects skip gate.
+    // Each mutation that can affect continuous-effect output bumps its counter.
+    // applyEffects() captures these at end-of-run; next call compares current
+    // versions vs captured and skips if nothing changed.
+    // Enabled via env MAGE_DIRTY_APPLY=1 (off by default while validating).
+    private long battlefieldVersion;
+    private long effectsVersion;
+    private long stackVersion;
+    private long turnPhaseVersion;
+    private long zoneVersion;
+
+    // Last-applied versions (captured at end of applyEffects)
+    private transient long lastAppliedBfVersion = -1L;
+    private transient long lastAppliedEffVersion = -1L;
+    private transient long lastAppliedStackVersion = -1L;
+    private transient long lastAppliedTurnPhaseVersion = -1L;
+    private transient long lastAppliedZoneVersion = -1L;
+    private transient int lastAppliedTurnNum = -1;
+    private transient int lastAppliedStepNum = -1;
+
+    // Escape hatch: force next applyEffects() to run regardless of counters.
+    // Any code path that can't be trusted to bump a counter can set this.
+    private transient boolean forceNextApply = false;
+
+    private static final boolean DIRTY_APPLY_ENABLED =
+            "1".equals(System.getenv("MAGE_DIRTY_APPLY"));
+    private static final boolean VALIDATE_DIRTY_APPLY =
+            "1".equals(System.getenv("MAGE_VALIDATE_APPLY_EFFECTS"));
+
+    /** Public bumpers called by mutation sites in Battlefield, ContinuousEffects,
+     *  SpellStack, PermanentImpl, Turn, etc. Overloads kept minimal since only
+     *  one fact matters: "something that feeds applyEffects changed".
+     *  Over-calling is safe (just reduces skip rate); under-calling corrupts
+     *  game state when MAGE_DIRTY_APPLY=1. */
+    public void bumpBattlefieldVersion() { battlefieldVersion++; }
+    public void bumpEffectsVersion()     { effectsVersion++; }
+    public void bumpStackVersion()       { stackVersion++; }
+    public void bumpTurnPhaseVersion()   { turnPhaseVersion++; }
+    public void bumpZoneVersion()        { zoneVersion++; }
+
+    /** Mark next applyEffects() must run even if counters match. */
+    public void forceNextApplyEffects() { forceNextApply = true; }
+
+    // Telemetry: how often the skip gate fired vs ran
+    private static final java.util.concurrent.atomic.AtomicLong DIRTY_SKIP_COUNT =
+            new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong DIRTY_RUN_COUNT =
+            new java.util.concurrent.atomic.AtomicLong();
+    // Validation-mode telemetry: "skip-gate said skip, but applyEffects
+    // actually changed battlefield fingerprint" — these are bugs.
+    private static final java.util.concurrent.atomic.AtomicLong DIRTY_FALSE_SKIP_COUNT =
+            new java.util.concurrent.atomic.AtomicLong();
+
+    public static long getDirtyApplySkipCount()     { return DIRTY_SKIP_COUNT.get(); }
+    public static long getDirtyApplyRunCount()      { return DIRTY_RUN_COUNT.get(); }
+    public static long getDirtyFalseSkipCount()     { return DIRTY_FALSE_SKIP_COUNT.get(); }
+
+    static {
+        // Print skip-gate telemetry on JVM exit when enabled, so smoke tests
+        // and training jobs can see missed instrumentation sites. Uses
+        // System.err rather than log4j to avoid depending on logger state.
+        if (DIRTY_APPLY_ENABLED || VALIDATE_DIRTY_APPLY) {
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                long skip = DIRTY_SKIP_COUNT.get();
+                long run  = DIRTY_RUN_COUNT.get();
+                long falseSkip = DIRTY_FALSE_SKIP_COUNT.get();
+                long total = skip + run;
+                double skipPct = total > 0 ? 100.0 * skip / total : 0.0;
+                String msg = "[DIRTY-APPLY] skip=" + skip + " run=" + run
+                        + " (" + String.format("%.1f", skipPct) + "% skipped)"
+                        + " falseSkip=" + falseSkip
+                        + (falseSkip > 0 ? " BUG: missed instrumentation sites!" : "");
+                System.err.println(msg);
+                // Also write to a fixed-path file so forked-JVM output isn't lost.
+                try (java.io.PrintWriter pw = new java.io.PrintWriter(
+                        new java.io.FileWriter("dirty-apply-telemetry.log", true))) {
+                    pw.println(new java.util.Date() + " " + msg);
+                } catch (java.io.IOException ignored) {
+                }
+            }, "dirty-apply-telemetry"));
+        }
+    }
+
+    // Cached fingerprint of battlefield state after the last applyEffects;
+    // used only by VALIDATE_DIRTY_APPLY mode.
+    private transient long lastBattlefieldFingerprint = 0L;
+
+    /** Cheap battlefield fingerprint for skip-gate validation: mixes each
+     *  permanent's id, power, toughness, ability-count, plus each player's
+     *  life and mana-pool totals (continuous effects like Omnath read mana
+     *  pool; some read life). Intentionally omits `tapped` / `damage` /
+     *  `attachedTo` — those don't change applyEffects output. Called only when
+     *  VALIDATE_DIRTY_APPLY is enabled. */
+    private long battlefieldFingerprint() {
+        long h = 1469598103934665603L; // FNV offset basis
+        for (mage.game.permanent.Permanent p : battlefield.getAllPermanents()) {
+            h ^= p.getId().getMostSignificantBits();
+            h *= 1099511628211L;
+            h ^= p.getPower().getValue();
+            h *= 1099511628211L;
+            h ^= p.getToughness().getValue();
+            h *= 1099511628211L;
+            h ^= p.getAbilities().size();
+            h *= 1099511628211L;
+        }
+        for (Player pl : players.values()) {
+            h ^= pl.getLife();
+            h *= 1099511628211L;
+            h ^= pl.getManaPool().getMana().count();
+            h *= 1099511628211L;
+        }
+        return h;
+    }
+
     public GameState() {
         players = new Players();
         playerList = new PlayerList();
@@ -134,6 +248,17 @@ public class GameState implements Serializable, Copyable<GameState> {
         turnMods = new TurnMods();
         watchers = new Watchers();
         applyEffectsCounter = 0;
+        wireDirtyFlagCallbacks();
+    }
+
+    /** Wire up the dirty-flag mutation-notification callbacks on the owned
+     *  objects. Called from the constructor AND from the copy constructor
+     *  (since the owned objects are replaced on copy, they lose their wire-up
+     *  and need re-wiring on the new GameState instance). */
+    private void wireDirtyFlagCallbacks() {
+        if (battlefield != null) battlefield.setOnMutate(this::bumpBattlefieldVersion);
+        if (effects != null)     effects.setOnMutate(this::bumpEffectsVersion);
+        if (stack != null)       stack.setOnMutate(this::bumpStackVersion);
     }
 
     protected GameState(final GameState state) {
@@ -141,7 +266,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.playerList = state.playerList.copy();
         this.choosingPlayerId = state.choosingPlayerId;
         this.revealed = state.revealed.copy();
-        this.lookedAt.putAll(state.lookedAt);
+        // Empty-check fast paths: in Pauper/simulation workloads, these maps/lists
+        // are usually empty; skipping putAll/addAll avoids iterator + entry traversal.
+        if (!state.lookedAt.isEmpty()) {
+            this.lookedAt.putAll(state.lookedAt);
+        }
         this.companion = state.companion.copy();
         this.gameOver = state.gameOver;
         this.paused = state.paused;
@@ -156,8 +285,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.stack = state.stack.copy();
         this.command = state.command.copy();
         this.isPlaneChase = state.isPlaneChase;
-        this.seenPlanes.addAll(state.seenPlanes);
-        this.designations.addAll(state.designations);
+        if (!state.seenPlanes.isEmpty()) {
+            this.seenPlanes.addAll(state.seenPlanes);
+        }
+        if (!state.designations.isEmpty()) {
+            this.designations.addAll(state.designations);
+        }
         this.helperEmblems = CardUtil.deepCopyObject(state.helperEmblems);
         this.exile = state.exile.copy();
         this.battlefield = state.battlefield.copy();
@@ -173,21 +306,49 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnMods = state.turnMods.copy();
         this.watchers = state.watchers.copy();
         this.values = CardUtil.deepCopyObject(state.values);
-        this.zones.putAll(state.zones);
-        this.simultaneousEvents.addAll(state.simultaneousEvents);
+        // Replace the default-capacity-16 HashMap from field init with a
+        // properly-sized one; avoids HashMap.resize firing 2-3 times on putAll
+        // for typical Pauper state (~50 zones per game).
+        if (!state.zones.isEmpty()) {
+            this.zones = new HashMap<>(state.zones);
+        }
+        if (!state.simultaneousEvents.isEmpty()) {
+            this.simultaneousEvents.addAll(state.simultaneousEvents);
+        }
         this.cardState = CardUtil.deepCopyObject(state.cardState);
         this.permanentCostsTags = CardUtil.deepCopyObject(state.permanentCostsTags);
         this.mageObjectAttribute = CardUtil.deepCopyObject(state.mageObjectAttribute);
-        this.zoneChangeCounter.putAll(state.zoneChangeCounter);
-        this.copiedCards.putAll(state.copiedCards);
+        if (!state.zoneChangeCounter.isEmpty()) {
+            this.zoneChangeCounter = new HashMap<>(state.zoneChangeCounter);
+        }
+        if (!state.copiedCards.isEmpty()) {
+            this.copiedCards = new HashMap<>(state.copiedCards);
+        }
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
-        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
-                -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
-        this.commandersToStay.addAll(state.commandersToStay);
+        if (!state.usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty()) {
+            state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
+                    -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
+        }
+        if (!state.commandersToStay.isEmpty()) {
+            this.commandersToStay.addAll(state.commandersToStay);
+        }
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
         this.reverseTurnOrder = state.reverseTurnOrder;
+
+        // Preserve version counters so the skip-gate on the copy starts in a
+        // well-defined state. Not copying `lastApplied*` — those are per-game-
+        // instance runtime cache; let the first applyEffects on the clone run
+        // a full rebuild and snapshot its own baseline.
+        this.battlefieldVersion = state.battlefieldVersion;
+        this.effectsVersion = state.effectsVersion;
+        this.stackVersion = state.stackVersion;
+        this.turnPhaseVersion = state.turnPhaseVersion;
+        this.zoneVersion = state.zoneVersion;
+        this.forceNextApply = state.forceNextApply;
+
+        wireDirtyFlagCallbacks();
     }
 
     public void clearOnGameRestart() {
@@ -666,6 +827,29 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     void applyEffects(Game game) {
+        // Dirty-flag skip gate: when enabled via MAGE_DIRTY_APPLY=1, skip the
+        // whole rebuild if no mutation-counted state has changed since the
+        // last apply. Bumpers in Battlefield/ContinuousEffects/SpellStack/
+        // GameState.setZone track mutations that could affect output.
+        // VALIDATE mode runs applyEffects unconditionally and compares a
+        // battlefield fingerprint against the post-last-apply snapshot: if the
+        // gate says "skip" but state actually changed, increment the false-skip
+        // counter (indicates a missed instrumentation site).
+        boolean gateWouldSkip = !forceNextApply
+                && battlefieldVersion == lastAppliedBfVersion
+                && effectsVersion     == lastAppliedEffVersion
+                && stackVersion       == lastAppliedStackVersion
+                && turnPhaseVersion   == lastAppliedTurnPhaseVersion
+                && zoneVersion        == lastAppliedZoneVersion
+                && turnNum            == lastAppliedTurnNum
+                && stepNum            == lastAppliedStepNum;
+
+        if (DIRTY_APPLY_ENABLED && !VALIDATE_DIRTY_APPLY && gateWouldSkip) {
+            DIRTY_SKIP_COUNT.incrementAndGet();
+            return;
+        }
+        DIRTY_RUN_COUNT.incrementAndGet();
+
         applyEffectsCounter++;
         for (Player player : players.values()) {
             player.reset();
@@ -675,6 +859,24 @@ public class GameState implements Serializable, Copyable<GameState> {
         combat.reset(game);
         effects.apply(game);
         combat.checkForRemoveFromCombat(game);
+
+        // Snapshot current versions as "last-applied" baseline.
+        lastAppliedBfVersion        = battlefieldVersion;
+        lastAppliedEffVersion       = effectsVersion;
+        lastAppliedStackVersion     = stackVersion;
+        lastAppliedTurnPhaseVersion = turnPhaseVersion;
+        lastAppliedZoneVersion      = zoneVersion;
+        lastAppliedTurnNum          = turnNum;
+        lastAppliedStepNum          = stepNum;
+        forceNextApply              = false;
+
+        if (VALIDATE_DIRTY_APPLY) {
+            long fp = battlefieldFingerprint();
+            if (gateWouldSkip && fp != lastBattlefieldFingerprint) {
+                DIRTY_FALSE_SKIP_COUNT.incrementAndGet();
+            }
+            lastBattlefieldFingerprint = fp;
+        }
     }
 
     // remove end of combat effects
@@ -799,6 +1001,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         } else {
             zones.put(id, zone);
         }
+        bumpZoneVersion();
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {
@@ -1450,10 +1653,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         newAbility.setSourceId(attachedTo.getId());
         newAbility.setControllerId(attachedTo.getOwnerId());
-        if (!cardState.containsKey(attachedTo.getId())) {
-            cardState.put(attachedTo.getId(), new CardState());
-        }
-        cardState.get(attachedTo.getId()).addAbility(newAbility);
+        cardState.computeIfAbsent(attachedTo.getId(), k -> new CardState()).addAbility(newAbility);
         addAbility(newAbility, attachedTo.getId(), attachedTo);
     }
 
@@ -1513,8 +1713,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public CardState getCardState(UUID cardId) {
-        cardState.putIfAbsent(cardId, new CardState());
-        return cardState.get(cardId);
+        // computeIfAbsent avoids allocating a CardState when the key already exists.
+        // Profile showed this path = 7.49% of total allocation (putIfAbsent eagerly
+        // evaluates its second arg).
+        return cardState.computeIfAbsent(cardId, k -> new CardState());
     }
 
     public MageObjectAttribute getMageObjectAttribute(UUID cardId) {

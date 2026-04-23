@@ -325,6 +325,17 @@ class SharedGpuHost:
 
     def enqueue_train(self, state: ProfileState, task: TrainTask) -> None:
         with self._lock:
+            # Soft cap: drop oldest queued tasks when backpressure builds up so
+            # memory stays bounded. Each train task holds the full segment bytes
+            # (~10-20MB per task at scale), so an unbounded queue becomes a
+            # multi-GB memory leak when training can't keep up with generation.
+            max_pending = env_int("PENDING_TRAIN_MAX", 32)
+            if max_pending > 0:
+                while len(state.pending_trains) >= max_pending:
+                    dropped = state.pending_trains.popleft()
+                    self._train_tasks_dropped = getattr(self, "_train_tasks_dropped", 0) + 1
+                    if self._train_tasks_dropped % 50 == 1:
+                        print(f"[BACKPRESSURE] dropped oldest train task (profile={dropped.profile_id}, total_dropped={self._train_tasks_dropped}, pending={len(state.pending_trains)})", flush=True)
             state.pending_trains.append(task)
             self._lock.notify_all()
 
@@ -456,6 +467,77 @@ class SharedGpuHost:
         except Exception:
             pass
 
+        # Pending queue depth — answers "are score/train tasks accumulating?"
+        try:
+            with self._lock:
+                score_pending = sum(len(s.pending_scores) for s in self._profiles.values())
+                train_pending = sum(len(s.pending_trains) for s in self._profiles.values())
+                conns = self._active_connections
+            # Count live ScoreTask/TrainTask instances via gc to see if they
+            # persist OUTSIDE the queues (would indicate a hidden reference).
+            try:
+                import gc as _gc
+                score_alive = 0
+                train_alive = 0
+                for obj in _gc.get_objects():
+                    t = type(obj).__name__
+                    if t == "ScoreTask":
+                        score_alive += 1
+                    elif t == "TrainTask":
+                        train_alive += 1
+                print(f"[MEMORY] {tag} pending_score={score_pending} pending_train={train_pending} alive_ScoreTask={score_alive} alive_TrainTask={train_alive} conns={conns}", flush=True)
+            except Exception:
+                print(f"[MEMORY] {tag} pending_score={score_pending} pending_train={train_pending} conns={conns}", flush=True)
+        except Exception:
+            pass
+
+        # tracemalloc: enabled via MEMORY_TRACEMALLOC=1. Uses diff-against-prior-snapshot
+        # so we see which call sites GREW since last check — precisely identifies the
+        # leaky line when memory is climbing batch over batch.
+        try:
+            if os.environ.get("MEMORY_TRACEMALLOC", "0") == "1":
+                import tracemalloc
+                if not tracemalloc.is_tracing():
+                    tracemalloc.start(25)
+                    self._prev_trace_snapshot = None
+                    print(f"[MEMORY] tracemalloc started at tag={tag}", flush=True)
+                    return
+                snap = tracemalloc.take_snapshot()
+                # Filter out tracemalloc internals
+                snap = snap.filter_traces((
+                    tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
+                    tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
+                    tracemalloc.Filter(False, tracemalloc.__file__),
+                ))
+                prev = getattr(self, "_prev_trace_snapshot", None)
+                if prev is not None:
+                    # Diff against previous snapshot — shows which lines are GROWING
+                    stats = snap.compare_to(prev, "lineno")[:15]
+                    print(f"[MEMORY] {tag} tracemalloc diff top 15 (size_diff, count_diff):", flush=True)
+                    for i, stat in enumerate(stats):
+                        frame = stat.traceback[0]
+                        print(f"[MEMORY]   #{i+1} +{stat.size_diff/1024/1024:+.1f}MB +{stat.count_diff:+d} total={stat.size/1024/1024:.1f}MB {frame.filename}:{frame.lineno}", flush=True)
+                else:
+                    stats = snap.statistics("lineno")[:15]
+                    print(f"[MEMORY] {tag} tracemalloc absolute top 15:", flush=True)
+                    for i, stat in enumerate(stats):
+                        frame = stat.traceback[0]
+                        print(f"[MEMORY]   #{i+1} {stat.size/1024/1024:.1f}MB count={stat.count} {frame.filename}:{frame.lineno}", flush=True)
+                self._prev_trace_snapshot = snap
+        except Exception as exc:
+            print(f"[MEMORY] tracemalloc error: {exc}", flush=True)
+
+        # GC object count — if this climbs, we have reference leaks in Python
+        # objects (not numpy/torch which are invisible to gc).
+        try:
+            if os.environ.get("MEMORY_GC_STATS", "0") == "1":
+                import gc
+                counts = gc.get_count()
+                total_objs = len(gc.get_objects())
+                print(f"[MEMORY] {tag} gc_count={counts} gc_objects={total_objs}", flush=True)
+        except Exception:
+            pass
+
     def train_worker_loop(self, worker_id: int = 0) -> None:
         # Learner updates drain independently and publish fresh weights for the
         # inference lane to reload asynchronously.
@@ -485,6 +567,18 @@ class SharedGpuHost:
                 _memory_log_counter += 1
                 if _memory_log_counter % 10 == 0:
                     self._log_memory(f"after_train_batch_{_memory_log_counter}")
+                # Defensive: force-collect reference cycles every N batches so leaks
+                # caused by cycles (closures + tensors + autograd graphs) flatten out.
+                # Does not help actual unbounded-growth leaks — those need a code fix.
+                gc_every = env_int("GPU_SERVICE_GC_EVERY_BATCHES", 5)
+                if gc_every > 0 and _memory_log_counter % gc_every == 0:
+                    try:
+                        import gc as _gc
+                        collected = _gc.collect()
+                        if collected > 0 and _memory_log_counter % 20 == 0:
+                            print(f"[MEMORY] gc.collect() freed {collected} objects at batch {_memory_log_counter}", flush=True)
+                    except Exception:
+                        pass
 
     def _claim_score_work_locked(self, worker_id: int = 0):
         """Select one batch from a profile not currently being processed by another worker.

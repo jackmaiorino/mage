@@ -74,6 +74,7 @@ public class RLTrainer {
     public static final int NUM_GAME_RUNNERS = EnvConfig.i32("NUM_GAME_RUNNERS", DEFAULT_GAME_RUNNERS);
     public static final int NUM_EPISODES_PER_GAME_RUNNER = EnvConfig.i32("EPISODES_PER_WORKER", 500);
     public static final int EVAL_EVERY = EnvConfig.i32("EVAL_EVERY", 5000);
+    private static final boolean EVAL_AT_START = EnvConfig.bool("EVAL_AT_START", false);
     private static final int EVAL_CP7_SKILL = EnvConfig.i32("EVAL_CP7_SKILL", 7);
     private static final int EVAL_GAMES_PER_DECK = EnvConfig.i32("EVAL_GAMES_PER_DECK", 5);
 
@@ -2036,10 +2037,12 @@ public class RLTrainer {
                         }
 
                         // Periodic eval checkpoint: play batch of games vs CP7 across all decks (background)
-                        boolean evalDue = EVAL_EVERY > 0 && (epNumber % EVAL_EVERY == 0
-                                || !firstEvalDone.getAndSet(true));
+                        boolean evalDue = EVAL_EVERY > 0 && (
+                                epNumber % EVAL_EVERY == 0
+                                        || (EVAL_AT_START && firstEvalDone.compareAndSet(false, true)));
                         if (evalDue) {
                             logger.info("EVAL TRIGGER: ep=" + epNumber + " EVAL_EVERY=" + EVAL_EVERY
+                                    + " EVAL_AT_START=" + EVAL_AT_START
                                     + " deckFiles=" + deckFiles.size() + " agentDecks=" + agentDeckFiles.size());
                             submitEvalCheckpoint(epNumber, deckFiles, agentDeckFiles);
                         }
@@ -4532,8 +4535,8 @@ public class RLTrainer {
 
     /**
      * Run a batch of eval games vs CP7 across all opponent decks. No training
-     * data is generated and rolling winrate is not affected. Results are logged
-     * to training_stats.csv with EVAL-CP7 opponent type.
+     * data is generated and training_stats.csv is not touched, so rolling
+     * training winrate remains a pure training signal.
      */
     private void runEvalCheckpoint(int triggerEpisode, List<Path> opponentDeckPool,
                                    List<Path> agentDeckPool, Random rand) {
@@ -4614,21 +4617,6 @@ public class RLTrainer {
                     cc[1]++;
                     if (won) cc[0]++;
                     String evalTag = String.format("EVAL-CP7(skill=%d,agent=%s,opp=%s)", skill, agentName, deckName);
-
-                    // Log to training_stats.csv
-                    if (GAME_STATS_WRITER) {
-                        Path statsPath = Paths.get(statsFilePath());
-                        String statsHeader = "episode,turns,final_reward,opponent_type,winrate,episode_seconds\n";
-                        double evalWr = played > 0 ? (double) wins / played : 0.0;
-                        String statsLine = new StringBuilder()
-                                .append(triggerEpisode).append(',').append(turns).append(',')
-                                .append(won ? "1.000" : "-1.000").append(',')
-                                .append(evalTag).append(',')
-                                .append(String.format("%.3f", evalWr)).append(',')
-                                .append(String.format("%.2f", secs)).append('\n')
-                                .toString();
-                        ASYNC_LINE_WRITER.append(statsPath, statsHeader, statsLine);
-                    }
 
                     // Close eval game log
                     if (evalLogger.isEnabled()) {
@@ -5153,20 +5141,29 @@ public class RLTrainer {
             String opType;
             Player opponent;
 
+            // CP7 skill levels are configurable via env because skill ~= search depth:
+            // skill=9 is a 9-ply alpha-beta search that can take 15-30s per decision,
+            // crushing training throughput. Default training skills are 4/5/6 instead
+            // of 7/8/9 — still challenging but ~100x faster. Eval still uses skill=7
+            // (EVAL_CP7_SKILL) for consistent benchmarking.
+            int skillWeak = EnvConfig.i32("CURRICULUM_SKILL_WEAK", 4);
+            int skillMedium = EnvConfig.i32("CURRICULUM_SKILL_MEDIUM", 5);
+            int skillStrong = EnvConfig.i32("CURRICULUM_SKILL_STRONG", 6);
+
             switch (newLevel) {
                 case WEAK:
-                    opType = "WEAK-CP7(skill=7)";
-                    opponent = new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, 7);
+                    opType = "WEAK-CP7(skill=" + skillWeak + ")";
+                    opponent = new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, skillWeak);
                     break;
 
                 case MEDIUM:
-                    opType = "MEDIUM-CP7(skill=8)";
-                    opponent = new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 8);
+                    opType = "MEDIUM-CP7(skill=" + skillMedium + ")";
+                    opponent = new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, skillMedium);
                     break;
 
                 case STRONG:
-                    opType = "STRONG-CP7(skill=9)";
-                    opponent = new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, 9);
+                    opType = "STRONG-CP7(skill=" + skillStrong + ")";
+                    opponent = new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, skillStrong);
                     break;
 
                 case SELFPLAY:

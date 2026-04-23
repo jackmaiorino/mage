@@ -9,12 +9,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ENTERS_THE_BATTLEFIELD);
 
     static public boolean ENABLE_TRIGGER_PHRASE_AUTO_FIX = false;
 
@@ -34,6 +39,11 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     protected EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

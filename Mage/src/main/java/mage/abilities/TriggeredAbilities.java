@@ -40,6 +40,12 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
     private List<TriggeredAbility> processingNeed = new ArrayList<>();
     private List<TriggeredAbility> processingDone = new ArrayList<>();
 
+    // Counter of StateTriggeredAbility entries. checkStateTriggers is called
+    // after every action in the game (GameImpl.processAction → checkStateTriggers),
+    // but on most decks the engine only has event-triggered abilities; a fast
+    // skip when this count is zero avoids a full iteration over the triggers map.
+    private int stateTriggeredCount = 0;
+
     public TriggeredAbilities() {
     }
 
@@ -80,6 +86,13 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
     public void checkStateTriggers(Game game) {
         makeSureNotProcessing(null);
 
+        // Fast path: if no StateTriggeredAbility is registered, the iteration
+        // below is pure overhead (called after every action via processAction).
+        // The count is maintained by put/remove overrides.
+        if (stateTriggeredCount == 0) {
+            return;
+        }
+
         processingStart(null);
         boolean needErrorChecksOnEnd = true;
         try {
@@ -99,13 +112,43 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
         }
     }
 
+    @Override
+    public TriggeredAbility put(String key, TriggeredAbility value) {
+        TriggeredAbility prev = super.put(key, value);
+        if (value instanceof StateTriggeredAbility) stateTriggeredCount++;
+        if (prev instanceof StateTriggeredAbility) stateTriggeredCount--;
+        return prev;
+    }
+
+    @Override
+    public TriggeredAbility remove(Object key) {
+        TriggeredAbility prev = super.remove(key);
+        if (prev instanceof StateTriggeredAbility) stateTriggeredCount--;
+        return prev;
+    }
+
+    @Override
+    public void clear() {
+        super.clear();
+        stateTriggeredCount = 0;
+    }
+
     public void checkTriggers(GameEvent event, Game game) {
         processingStart(event);
         boolean needErrorChecksOnEnd = true;
         // must keep real object refs (not copies), cause check trigger code can change trigger's and effect's data like targets
         ArrayList<TriggeredAbility> currentTriggers = new ArrayList<>(this.values());
+        GameEvent.EventType eventType = event.getType();
         try {
             for (TriggeredAbility ability : currentTriggers) {
+                // Fast-filter by declared watched event types before paying the
+                // checkEventType + checkTrigger virtual calls. Unmigrated
+                // triggers return ALL_EVENT_TYPES (identity check == wildcard).
+                Set<GameEvent.EventType> watched = ability.getWatchedEventTypes();
+                if (watched != TriggeredAbility.ALL_EVENT_TYPES && !watched.contains(eventType)) {
+                    this.processingDone(ability);
+                    continue;
+                }
                 if (ability.checkEventType(event, game)) {
                     checkTrigger(ability, event, game);
                 }

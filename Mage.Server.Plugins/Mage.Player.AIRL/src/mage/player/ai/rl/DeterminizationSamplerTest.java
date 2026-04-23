@@ -61,6 +61,9 @@ public final class DeterminizationSamplerTest {
                 {"Elvish Mystic", "Elves"},
                 {"Goblin Bushwhacker", "Rally"},
                 {"Myr Enforcer", "Affinity"},
+                {"Balustrade Spy", "SpyCombo"},
+                {"Tolarian Terror", "Terror"},
+                {"Basilisk Gate", "CawGates"},
         };
         for (String[] c : cases) {
             Map<String, Integer> obs = new HashMap<>();

@@ -10,10 +10,17 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author notgreat
  */
 public class SourceDealsNoncombatDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.DAMAGED_PLAYER);
+
     SetTargetPointer setTargetPointer;
 
     public SourceDealsNoncombatDamageToOpponentTriggeredAbility(Effect effect) {
@@ -37,6 +44,11 @@ public class SourceDealsNoncombatDamageToOpponentTriggeredAbility extends Trigge
     @Override
     public SourceDealsNoncombatDamageToOpponentTriggeredAbility copy() {
         return new SourceDealsNoncombatDamageToOpponentTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

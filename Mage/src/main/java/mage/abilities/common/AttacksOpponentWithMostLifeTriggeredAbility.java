@@ -7,12 +7,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.EnumSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author TheElk801
  */
 public class AttacksOpponentWithMostLifeTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.DECLARED_ATTACKERS);
 
     public AttacksOpponentWithMostLifeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -21,6 +26,11 @@ public class AttacksOpponentWithMostLifeTriggeredAbility extends TriggeredAbilit
 
     private AttacksOpponentWithMostLifeTriggeredAbility(final AttacksOpponentWithMostLifeTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

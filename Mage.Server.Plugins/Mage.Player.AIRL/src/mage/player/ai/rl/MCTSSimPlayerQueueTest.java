@@ -44,7 +44,8 @@ public final class MCTSSimPlayerQueueTest {
                 for (int i = 0; i < 3; i++) {
                     MCTSSimPlayer.DecisionRequest req = new MCTSSimPlayer.DecisionRequest(
                             java.util.UUID.randomUUID(),
-                            java.util.Collections.emptyList(), i + 1);
+                            MCTSSimPlayer.ChoiceType.ACTIVATE_ABILITY,
+                            java.util.Collections.emptyList(), i + 1, null);
                     ch.requestQueue.put(req);
                     MCTSSimPlayer.DecisionResponse resp = ch.responseQueue.poll(2, TimeUnit.SECONDS);
                     if (resp == null) return;  // timeout
@@ -81,7 +82,8 @@ public final class MCTSSimPlayerQueueTest {
             try {
                 MCTSSimPlayer.DecisionRequest req = new MCTSSimPlayer.DecisionRequest(
                         java.util.UUID.randomUUID(),
-                        java.util.Collections.emptyList(), 1);
+                        MCTSSimPlayer.ChoiceType.ACTIVATE_ABILITY,
+                        java.util.Collections.emptyList(), 1, null);
                 ch.requestQueue.put(req);
                 MCTSSimPlayer.DecisionResponse resp = ch.responseQueue.poll(2, TimeUnit.SECONDS);
                 if (resp != null && resp.actionIndex < 0) halted.set(true);

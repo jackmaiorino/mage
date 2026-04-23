@@ -1777,6 +1777,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
         float[] mctsVisitTargets = null;
         Integer mctsChosenIndex = null;
+        boolean mctsTacticalState = true;
         // Skip MCTS when the policy is already highly confident. MCTS cost is
         // dominated by leaf count; if top candidate's prior already dominates,
         // the search almost always confirms it. Gate controlled by
@@ -1793,6 +1794,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (maskedCount >= 2 && maxProb >= MCTS_SKIP_TOP_PROB) {
                 policyAmbiguous = false;
             }
+            mctsTacticalState = shouldRunSelectiveMcts(actionType, game, source, candidates, candidateCount);
         }
         // Diagnostic: record gate decisions so we can tell why MCTS isn't firing.
         if (mctsEvalOverride || mctsTrainingMode) {
@@ -1801,43 +1803,86 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (candidateCount < 2) MCTS_GATE_FEWCAND.incrementAndGet();
             if (actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) MCTS_GATE_WRONGTYPE.incrementAndGet();
             if (!policyAmbiguous) MCTS_GATE_CONFIDENT.incrementAndGet();
+            if (!mctsTacticalState) MCTS_GATE_NOT_TACTICAL.incrementAndGet();
         }
         if ((mctsEvalOverride || mctsTrainingMode) && DETERMINIZATION_SAMPLER != null
                 && candidateCount >= 2
                 && actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
-                && policyAmbiguous) {
+                && policyAmbiguous
+                && mctsTacticalState) {
             try {
                 float[] policyPriors = new float[candidateCount];
                 System.arraycopy(actionProbs, 0, policyPriors, 0, candidateCount);
                 @SuppressWarnings("unchecked")
                 List<mage.abilities.Ability> abilityCandidates = (List<mage.abilities.Ability>) (List<?>) candidates.subList(0, candidateCount);
                 long mctsSearchStart = System.nanoTime();
-                mage.player.ai.rl.PolicyValueMCTS.SearchResult mctsResult = mage.player.ai.rl.PolicyValueMCTS.search(
-                        game, this.getId(), abilityCandidates,
-                        policyPriors, valueScore, model, DETERMINIZATION_SAMPLER);
+                // Adapter: both search backends return the same shape bundle.
+                // Flat (1-ply) PolicyValueMCTS = current default.
+                // Multi-ply factored MCTS = MULTI_PLY_MCTS=1 (new in progress).
+                int bestActionIndex;
+                int[] aggregateVisits;
+                float[] aggregateValues;
+                int searchDets;
+                long searchWallMs;
+                String searchArch;
+                if (MULTI_PLY_MCTS) {
+                    // Advance session to the subtree we chose last call (prune siblings).
+                    if (mctsSession != null) {
+                        mctsSession.advance();
+                    }
+                    mage.player.ai.rl.MultiPlyMCTS.Result r =
+                            mage.player.ai.rl.MultiPlyMCTS.search(
+                                    game, this.getId(), abilityCandidates,
+                                    policyPriors, model, DETERMINIZATION_SAMPLER, mctsSession);
+                    bestActionIndex = r.bestActionIndex;
+                    aggregateVisits = r.aggregateVisits;
+                    aggregateValues = r.aggregateValues;
+                    searchDets = r.iterationsRun;
+                    searchWallMs = r.wallMs;
+                    searchArch = r.predictedArchetype;
+                } else {
+                    mage.player.ai.rl.PolicyValueMCTS.SearchResult r =
+                            mage.player.ai.rl.PolicyValueMCTS.search(
+                                    game, this.getId(), abilityCandidates,
+                                    policyPriors, valueScore, model, DETERMINIZATION_SAMPLER);
+                    bestActionIndex = r.bestActionIndex;
+                    aggregateVisits = r.aggregateVisits;
+                    aggregateValues = r.aggregateValues;
+                    searchDets = r.determinizationsRun;
+                    searchWallMs = r.wallMs;
+                    searchArch = r.predictedArchetype;
+                }
                 MCTS_ACTIVATION_COUNT.incrementAndGet();
-                if (mctsResult.bestActionIndex >= 0 && mctsResult.bestActionIndex < candidateCount) {
+                if (bestActionIndex >= 0 && bestActionIndex < candidateCount) {
                     // Normalize visit counts to a distribution over MAX_CANDIDATES.
                     int totalVisits = 0;
-                    for (int v : mctsResult.aggregateVisits) totalVisits += v;
+                    for (int v : aggregateVisits) totalVisits += v;
                     if (totalVisits > 0) {
                         mctsVisitTargets = new float[maxCandidates];
-                        for (int i = 0; i < Math.min(mctsResult.aggregateVisits.length, maxCandidates); i++) {
-                            mctsVisitTargets[i] = (float) mctsResult.aggregateVisits[i] / totalVisits;
+                        for (int i = 0; i < Math.min(aggregateVisits.length, maxCandidates); i++) {
+                            mctsVisitTargets[i] = (float) aggregateVisits[i] / totalVisits;
                         }
                     }
-                    mctsChosenIndex = mctsResult.bestActionIndex;
+                    mctsChosenIndex = bestActionIndex;
                     if (mctsEvalOverride) {
                         GameLogger gl = resolveGameLogger();
                         if (gl != null && gl.isEnabled()) {
-                            gl.log(String.format("[MCTS] arch=%s dets=%d visits=%s values=%s picked=%d wallMs=%d",
-                                    mctsResult.predictedArchetype, mctsResult.determinizationsRun,
-                                    java.util.Arrays.toString(mctsResult.aggregateVisits),
-                                    formatFloats(mctsResult.aggregateValues),
-                                    mctsResult.bestActionIndex, mctsResult.wallMs));
+                            gl.log(String.format("[MCTS] backend=%s arch=%s dets/iters=%d visits=%s values=%s picked=%d wallMs=%d",
+                                    MULTI_PLY_MCTS ? "multiply" : "flat",
+                                    searchArch, searchDets,
+                                    java.util.Arrays.toString(aggregateVisits),
+                                    formatFloats(aggregateValues),
+                                    bestActionIndex, searchWallMs));
                         }
                         this.lastActionProbs = actionProbs.clone();
                         this.lastValueScore = valueScore;
+                        // Phase 2: record the action we're actually playing so next
+                        // priority call can prune the tree to this subtree. In eval
+                        // override mode, MCTS's pick IS the played action.
+                        if (mctsSession != null && bestActionIndex < abilityCandidates.size()) {
+                            mctsSession.recordChoice(bestActionIndex,
+                                    abilityCandidates.get(bestActionIndex));
+                        }
                         return Arrays.asList(mctsChosenIndex);
                     }
                     // In training mode we fall through to the normal sampling
@@ -1883,6 +1928,18 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // python KL loss can use it as a distillation target.
         if (mctsChosenIndex != null && mctsTrainingMode && !selectedIndices.isEmpty()) {
             selectedIndices = Arrays.asList(mctsChosenIndex);
+        }
+
+        // Phase 2 tree reuse: record the FINAL played action (after any override)
+        // so the next priority call can prune the session's MCTS tree to the
+        // matching subtree. Recording here (not at MCTS search time) ensures
+        // the stored index matches what actually went into the game, even when
+        // epsilon-greedy or full-turn-random overrode MCTS's preferred pick.
+        if (MULTI_PLY_MCTS && mctsSession != null && !selectedIndices.isEmpty()) {
+            int finalIdx = selectedIndices.get(0);
+            if (finalIdx >= 0 && finalIdx < candidates.size()) {
+                mctsSession.recordChoice(finalIdx, candidates.get(finalIdx));
+            }
         }
 
         // Record training data for decisions (store full action + joint log-prob)
@@ -2078,6 +2135,73 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             out.add("[" + i + "] " + signature);
         }
         return out;
+    }
+
+    private <T> boolean shouldRunSelectiveMcts(
+            StateSequenceBuilder.ActionType actionType,
+            Game game,
+            Ability source,
+            List<T> candidates,
+            int candidateCount
+    ) {
+        if (!MCTS_SELECTIVE_ENABLE) {
+            return true;
+        }
+        if (MCTS_SELECTIVE_KEYWORDS.isEmpty()) {
+            return MCTS_SELECTIVE_ALLOW_ANY;
+        }
+        int n = Math.min(candidateCount, candidates.size());
+        String sourceSignature = mctsCandidateSignature(source, game, source);
+        if (matchesMctsKeyword(sourceSignature)) {
+            return true;
+        }
+        for (int i = 0; i < n; i++) {
+            if (matchesMctsKeyword(mctsCandidateSignature(candidates.get(i), game, source))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean matchesMctsKeyword(String signature) {
+        if (signature == null || signature.isEmpty()) {
+            return false;
+        }
+        String lower = signature.toLowerCase(Locale.ROOT);
+        for (String keyword : MCTS_SELECTIVE_KEYWORDS) {
+            if (!keyword.isEmpty() && lower.contains(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String mctsCandidateSignature(Object candidate, Game game, Ability source) {
+        try {
+            if (candidate instanceof ActivatedAbility) {
+                ActivatedAbility a = (ActivatedAbility) candidate;
+                MageObject srcObj = game != null ? game.getObject(a.getSourceId()) : null;
+                String srcName = srcObj != null ? srcObj.getName() : "unknown-source";
+                return srcName + " :: " + a.getRule() + " :: " + a.toString();
+            }
+            if (candidate instanceof Ability) {
+                Ability a = (Ability) candidate;
+                MageObject srcObj = game != null ? game.getObject(a.getSourceId()) : null;
+                String srcName = srcObj != null ? srcObj.getName() : "unknown-source";
+                return srcName + " :: " + a.getRule() + " :: " + a.toString();
+            }
+            if (candidate instanceof MageObject) {
+                return ((MageObject) candidate).getName();
+            }
+            if (source != null) {
+                MageObject srcObj = game != null ? game.getObject(source.getSourceId()) : null;
+                String srcName = srcObj != null ? srcObj.getName() : "unknown-source";
+                return srcName + " :: " + source.getRule() + " :: " + String.valueOf(candidate);
+            }
+        } catch (Throwable ignored) {
+            // best-effort gate; a signature failure should simply skip matching
+        }
+        return String.valueOf(candidate);
     }
 
     private static String headForActionType(StateSequenceBuilder.ActionType t) {
@@ -6380,21 +6504,48 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private int lastBeliefLoggedTurn = -1;
 
     private static final boolean ISMCTS_ENABLE = "1".equals(System.getenv("ISMCTS_ENABLE"));
-    private static final int ISMCTS_ROLLOUTS_PER_TURN = mage.player.ai.rl.EnvConfig.i32("ISMCTS_ROLLOUTS_PER_TURN", 4);
+    private static final int ISMCTS_ROLLOUTS_PER_TURN = mage.player.ai.rl.EnvConfig.i32("ISMCTS_ROLLOUTS_PER_TURN", 0);
     private static final boolean MCTS_TRAINING_ENABLE = "1".equals(System.getenv("MCTS_TRAINING_ENABLE"));
     private static final float MCTS_SKIP_TOP_PROB = (float) mage.player.ai.rl.EnvConfig.f64("MCTS_SKIP_TOP_PROB", 0.85);
+    private static final boolean MCTS_SELECTIVE_ENABLE = mage.player.ai.rl.EnvConfig.bool("MCTS_SELECTIVE_ENABLE", false);
+    private static final boolean MCTS_SELECTIVE_ALLOW_ANY = mage.player.ai.rl.EnvConfig.bool("MCTS_SELECTIVE_ALLOW_ANY", false);
+    private static final List<String> MCTS_SELECTIVE_KEYWORDS =
+            parseMctsSelectiveKeywords(mage.player.ai.rl.EnvConfig.str("MCTS_SELECTIVE_KEYWORDS", ""));
+    /** Opt into the new multi-ply factored MCTS (branches on every sub-decision
+     *  including target choices). Default off while being validated; flip on via
+     *  MULTI_PLY_MCTS=1. Falls back to PolicyValueMCTS (flat 1-ply) when false. */
+    private static final boolean MULTI_PLY_MCTS = "1".equals(System.getenv("MULTI_PLY_MCTS"));
+    /** Phase 2: persistent MCTS tree across priority calls within this runner.
+     *  Non-null only when MULTI_PLY_MCTS is active. */
+    private mage.player.ai.rl.MCTSSession mctsSession =
+            MULTI_PLY_MCTS ? new mage.player.ai.rl.MCTSSession() : null;
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_ACTIVATION_COUNT = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_TOTAL = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_SAMPLER_NULL = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_FEWCAND = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_WRONGTYPE = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_CONFIDENT = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_NOT_TACTICAL = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger GENERIC_CHOOSE_DIAG_COUNT = new java.util.concurrent.atomic.AtomicInteger();
     public static int getMctsActivationCount() { return MCTS_ACTIVATION_COUNT.get(); }
     public static String getMctsGateStats() {
-        return String.format("total=%d sampler_null=%d fewcand=%d wrongtype=%d confident=%d activations=%d",
+        return String.format("total=%d sampler_null=%d fewcand=%d wrongtype=%d confident=%d not_tactical=%d activations=%d",
                 MCTS_GATE_TOTAL.get(), MCTS_GATE_SAMPLER_NULL.get(), MCTS_GATE_FEWCAND.get(),
-                MCTS_GATE_WRONGTYPE.get(), MCTS_GATE_CONFIDENT.get(), MCTS_ACTIVATION_COUNT.get());
+                MCTS_GATE_WRONGTYPE.get(), MCTS_GATE_CONFIDENT.get(), MCTS_GATE_NOT_TACTICAL.get(),
+                MCTS_ACTIVATION_COUNT.get());
+    }
+    private static List<String> parseMctsSelectiveKeywords(String raw) {
+        if (raw == null || raw.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<String> out = new ArrayList<>();
+        for (String token : raw.split(",")) {
+            String t = token.trim().toLowerCase(Locale.ROOT);
+            if (!t.isEmpty()) {
+                out.add(t);
+            }
+        }
+        return Collections.unmodifiableList(out);
     }
     private static final mage.player.ai.rl.DeterminizationSampler DETERMINIZATION_SAMPLER;
     static {
@@ -6410,6 +6561,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         System.out.println("[ISMCTS-INIT] ismctsEnabled=" + ISMCTS_ENABLE
                 + " mctsTrainingEnabled=" + MCTS_TRAINING_ENABLE
                 + " rolloutsPerTurn=" + ISMCTS_ROLLOUTS_PER_TURN
+                + " selective=" + MCTS_SELECTIVE_ENABLE
+                + " selectiveKeywords=" + MCTS_SELECTIVE_KEYWORDS
                 + " sampler=" + (DETERMINIZATION_SAMPLER != null ? DETERMINIZATION_SAMPLER.getArchetypes() : "null"));
     }
 

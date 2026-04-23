@@ -7,10 +7,16 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author htrajan
  */
 public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACHED);
 
     public AttachedToCreatureSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -19,6 +25,11 @@ public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityIm
 
     protected AttachedToCreatureSourceTriggeredAbility(final AttachedToCreatureSourceTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

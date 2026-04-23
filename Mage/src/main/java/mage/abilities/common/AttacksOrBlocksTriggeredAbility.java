@@ -7,7 +7,13 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ATTACKER_DECLARED, GameEvent.EventType.CREATURE_BLOCKS);
 
     public AttacksOrBlocksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -26,6 +32,11 @@ public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public AttacksOrBlocksTriggeredAbility copy() {
         return new AttacksOrBlocksTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

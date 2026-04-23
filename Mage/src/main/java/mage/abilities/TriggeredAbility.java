@@ -5,13 +5,41 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 
+import java.util.Collections;
+import java.util.EnumSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public interface TriggeredAbility extends Ability {
+
+    /**
+     * Shared singleton returned by the default {@link #getWatchedEventTypes()}
+     * so unmigrated triggers behave exactly as before (checked against every
+     * event). Identity comparison {@code ws == ALL_EVENT_TYPES} on the hot
+     * path avoids per-call allocation and short-circuits the wildcard check.
+     */
+    Set<GameEvent.EventType> ALL_EVENT_TYPES =
+            Collections.unmodifiableSet(EnumSet.allOf(GameEvent.EventType.class));
+
+    /**
+     * Declare the {@link GameEvent.EventType}s this trigger listens to.
+     * MUST be a compile-time constant (not dependent on this instance's
+     * runtime state or game state). The engine indexes triggers by this set
+     * so {@link #checkEventType(GameEvent, Game)} is never called for events
+     * whose type is not in the returned set.
+     *
+     * Default returns {@link #ALL_EVENT_TYPES} so any trigger that does not
+     * override this method keeps being checked for every event — no speedup,
+     * no risk of regression. Overrides should return an immutable
+     * {@code EnumSet} stored in a {@code private static final} field.
+     */
+    default Set<GameEvent.EventType> getWatchedEventTypes() {
+        return ALL_EVENT_TYPES;
+    }
 
     void trigger(Game game, UUID controllerId, GameEvent event);
 

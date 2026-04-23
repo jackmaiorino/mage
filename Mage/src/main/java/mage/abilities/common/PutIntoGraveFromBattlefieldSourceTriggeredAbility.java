@@ -9,10 +9,16 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author nantuko, loki
  */
 public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.ZONE_CHANGE);
 
     private final boolean onlyToControllerGraveyard;
 
@@ -35,6 +41,11 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
     @Override
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility copy() {
         return new PutIntoGraveFromBattlefieldSourceTriggeredAbility(this);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

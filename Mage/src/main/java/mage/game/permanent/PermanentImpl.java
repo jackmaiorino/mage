@@ -466,6 +466,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (!fromExistingObject) {
                 abilities.addAll(copyAbility.getSubAbilities());
             }
+            if (game != null) {
+                game.getState().bumpEffectsVersion();
+            }
             return copyAbility;
         }
         return null;
@@ -475,6 +478,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void removeAllAbilities(UUID sourceId, Game game) {
         // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
         abilities.clear();
+        if (game != null) {
+            game.getState().bumpEffectsVersion();
+        }
     }
 
     @Override
@@ -493,6 +499,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
         toRemove.forEach(r -> abilities.remove(r));
+        if (game != null && !toRemove.isEmpty()) {
+            game.getState().bumpEffectsVersion();
+        }
     }
 
     @Override
@@ -643,7 +652,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void setFaceDown(boolean value, Game game) {
-        this.faceDown = value;
+        if (this.faceDown != value) {
+            this.faceDown = value;
+            if (game != null) {
+                game.getState().bumpEffectsVersion();
+            }
+        }
     }
 
     @Override
@@ -661,6 +675,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!flipped && !replaceEvent(EventType.FLIP, game)) {
             this.flipped = true;
             fireEvent(EventType.FLIPPED, game);
+            game.getState().bumpEffectsVersion();
             return true;
         }
         return false;
@@ -708,6 +723,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.setTransformed(!this.transformed);
         this.transformCount++;
         initOtherFace(game);
+        game.getState().bumpEffectsVersion();
         game.applyEffects(); // not process action - no firing of simultaneous events yet
         this.replaceEvent(EventType.TRANSFORMING, game);
         game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
@@ -749,6 +765,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
             game.addSimultaneousEvent(GameEvent.getEvent(EventType.PHASED_IN, this.objectId, null, this.controllerId));
+            game.getState().bumpBattlefieldVersion();
             return true;
         }
         return false;
@@ -773,6 +790,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.indirectPhase = indirectPhase;
             game.informPlayers(getLogName() + " phased out");
             fireEvent(EventType.PHASED_OUT, game);
+            game.getState().bumpBattlefieldVersion();
             return true;
         }
         return false;
@@ -861,6 +879,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // must change abilities controller too
         this.controllerId = newControllerId;
         this.getAbilities().setControllerId(newControllerId);
+        game.getState().bumpEffectsVersion();
         return true;
     }
 
@@ -932,6 +951,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void unattach(Game game) {
         this.attachedTo = null;
         this.addInfo("attachedTo", null, game);
+        if (game != null) {
+            game.getState().bumpEffectsVersion();
+        }
     }
 
     @Override
@@ -992,6 +1014,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
             }
+        }
+        if (game != null) {
+            game.getState().bumpEffectsVersion();
         }
     }
 

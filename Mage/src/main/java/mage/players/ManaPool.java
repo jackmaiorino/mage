@@ -179,6 +179,7 @@ public class ManaPool implements Serializable {
                     manaItems.remove(mana);
                 }
                 lockManaType(); // pay only one mana if mana payment is set to manually
+                game.getState().bumpEffectsVersion();
                 return true;
             }
         }
@@ -309,6 +310,9 @@ public class ManaPool implements Serializable {
                 it.remove();
             }
         }
+        if (total > 0) {
+            game.getState().bumpEffectsVersion();
+        }
         return total;
     }
 
@@ -431,6 +435,7 @@ public class ManaPool implements Serializable {
                 ManaEvent manaEvent = new ManaEvent(EventType.MANA_ADDED, source.getId(), source, playerId, mana);
                 manaEvent.setData(mana.toString());
                 game.fireEvent(manaEvent);
+                game.getState().bumpEffectsVersion();
             }
         }
     }

@@ -169,8 +169,23 @@ def _replace_mha(module: nn.Module):
 
 
 def export_all_heads(model_path: str, output_dir: str,
-                     d_model=128, nhead=4, num_layers=2, dim_ff=512, cand_feat_dim=48,
+                     d_model=None, nhead=None, num_layers=None, dim_ff=None, cand_feat_dim=None,
                      fixed_shapes=False, fixed_batch=64, fixed_seq=256, fixed_cand=64):
+    # Respect per-profile model architecture via env vars — keeps in lockstep
+    # with the PyTorch model definitions in py4j_entry_point / mtg_transformer.
+    # Defaults match Pauper-Standard (d_model=128, 2 layers); wider profiles
+    # like Pauper-Standard-Wide set MODEL_D_MODEL=256, MODEL_NUM_LAYERS=4 via
+    # the registry `train_env`.
+    if d_model is None:
+        d_model = int(os.getenv("MODEL_D_MODEL", "128"))
+    if nhead is None:
+        nhead = int(os.getenv("MODEL_NHEAD", "4"))
+    if num_layers is None:
+        num_layers = int(os.getenv("MODEL_NUM_LAYERS", "2"))
+    if dim_ff is None:
+        dim_ff = int(os.getenv("MODEL_DIM_FF", "512"))
+    if cand_feat_dim is None:
+        cand_feat_dim = int(os.getenv("MODEL_CAND_FEAT_DIM", "48"))
     os.makedirs(output_dir, exist_ok=True)
     model = MTGTransformerModel(
         d_model=d_model, nhead=nhead, num_layers=num_layers,
@@ -186,8 +201,9 @@ def export_all_heads(model_path: str, output_dir: str,
     else:
         B, S, N = 2, 32, 32
 
+    input_dim = model.input_dim  # respect actual loaded model; input_proj maps input_dim→d_model
     dummy = (
-        torch.randn(B, S, d_model),
+        torch.randn(B, S, input_dim),
         torch.zeros(B, S, dtype=torch.bool),
         torch.zeros(B, S, dtype=torch.long),
         torch.randn(B, N, cand_feat_dim),

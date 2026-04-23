@@ -7,10 +7,16 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @author jeffwadsworth
  */
 public class OpponentPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final Set<GameEvent.EventType> WATCHED_EVENT_TYPES =
+            EnumSet.of(GameEvent.EventType.LAND_PLAYED);
 
     public OpponentPlaysLandTriggeredAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, optional);
@@ -23,6 +29,11 @@ public class OpponentPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
 
     public OpponentPlaysLandTriggeredAbility(OpponentPlaysLandTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public Set<GameEvent.EventType> getWatchedEventTypes() {
+        return WATCHED_EVENT_TYPES;
     }
 
     @Override

@@ -61,6 +61,16 @@ public interface PythonModel extends AutoCloseable {
         return null;
     }
 
+    /**
+     * Legacy mulligan scoring. The merged-mulligan refactor moved this into the
+     * main model's target head, so bridges that don't expose a standalone
+     * mulligan scorer return null. Kept here for backward compat with
+     * MulliganModel until that class is fully retired.
+     */
+    default float[] predictMulliganScores(float[] features) {
+        return null;
+    }
+
     void shutdown();
 
     @Override

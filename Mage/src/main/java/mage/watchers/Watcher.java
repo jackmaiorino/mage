@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * watches for certain game events to occur and flags condition
@@ -18,6 +19,73 @@ import java.util.*;
 public abstract class Watcher implements Serializable {
 
     private static final Logger logger = Logger.getLogger(Watcher.class);
+
+    /** Per-class copy metadata cache: the constructor we reflectively invoke
+     *  and the list of non-static fields whose values get copied across.
+     *  Reflection lookup is 10-100x slower than direct call, and copy() is
+     *  hit once per watcher per game clone — which during MCTS happens
+     *  thousands of times per second. Cache once, pay the reflection cost
+     *  exactly once per class per JVM. */
+    private static final ConcurrentHashMap<Class<? extends Watcher>, CopyMeta> COPY_META_CACHE =
+            new ConcurrentHashMap<>();
+
+    private static final class CopyMeta {
+        final Constructor<? extends Watcher> constructor;
+        final Object[] argTemplate;
+        final Field[] fields;
+
+        CopyMeta(Constructor<? extends Watcher> constructor, Object[] argTemplate, Field[] fields) {
+            this.constructor = constructor;
+            this.argTemplate = argTemplate;
+            this.fields = fields;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static CopyMeta getCopyMeta(Class<? extends Watcher> cls) {
+        CopyMeta cached = COPY_META_CACHE.get(cls);
+        if (cached != null) return cached;
+
+        Constructor<?>[] constructors = cls.getDeclaredConstructors();
+        if (constructors.length > 1) {
+            logger.error(cls.getSimpleName() + " has multiple constructors");
+            return null;
+        }
+        Constructor<? extends Watcher> ctor = (Constructor<? extends Watcher>) constructors[0];
+        ctor.setAccessible(true);
+
+        Class<?>[] paramTypes = ctor.getParameterTypes();
+        Object[] argTemplate = new Object[paramTypes.length];
+        for (int i = 0; i < paramTypes.length; i++) {
+            if (paramTypes[i].isPrimitive()
+                    && paramTypes[i].getSimpleName().equalsIgnoreCase("boolean")) {
+                argTemplate[i] = false;
+            } else {
+                argTemplate[i] = null;
+            }
+        }
+
+        List<Field> collected = new ArrayList<>();
+        for (Field f : cls.getDeclaredFields()) {
+            if (!Modifier.isStatic(f.getModifiers())) {
+                f.setAccessible(true);
+                collected.add(f);
+            }
+        }
+        Class<?> superCls = cls.getSuperclass();
+        if (superCls != null) {
+            for (Field f : superCls.getDeclaredFields()) {
+                if (!Modifier.isStatic(f.getModifiers())) {
+                    f.setAccessible(true);
+                    collected.add(f);
+                }
+            }
+        }
+
+        CopyMeta meta = new CopyMeta(ctor, argTemplate, collected.toArray(new Field[0]));
+        COPY_META_CACHE.putIfAbsent(cls, meta);
+        return meta;
+    }
 
     protected UUID controllerId;
     protected UUID sourceId;
@@ -78,42 +146,14 @@ public abstract class Watcher implements Serializable {
 
     public abstract void watch(GameEvent event, Game game);
 
+    @SuppressWarnings("unchecked")
     public <T extends Watcher> T copy() {
+        CopyMeta meta = getCopyMeta((Class<? extends Watcher>) this.getClass());
+        if (meta == null) return null;
         try {
-            //use getDeclaredConstructors to allow for package-private constructors (i.e. omit public)
-            List<?> constructors = Arrays.asList(this.getClass().getDeclaredConstructors());
-            if (constructors.size() > 1) {
-                logger.error(getClass().getSimpleName() + " has multiple constructors");
-                return null;
-            }
-
-            Constructor<? extends Watcher> constructor = (Constructor<? extends Watcher>) constructors.get(0);
-
-            // collect all fields
-            constructor.setAccessible(true);
-            Object[] args = new Object[constructor.getParameterCount()];
-            for (int index = 0; index < constructor.getParameterTypes().length; index++) {
-                Class<?> parameterType = constructor.getParameterTypes()[index];
-                if (parameterType.isPrimitive()) {
-                    if (parameterType.getSimpleName().equalsIgnoreCase("boolean")) {
-                        args[index] = false;
-                    }
-                } else {
-                    args[index] = null;
-                }
-
-            }
-            T watcher = (T) constructor.newInstance(args);
-            List<Field> allFields = new ArrayList<>();
-            allFields.addAll(Arrays.asList(getClass().getDeclaredFields()));
-            allFields.addAll(Arrays.asList(getClass().getSuperclass().getDeclaredFields()));
-
-            // copy field's values
-            for (Field field : allFields) {
-                if (!Modifier.isStatic(field.getModifiers())) {
-                    field.setAccessible(true);
-                    field.set(watcher, CardUtil.deepCopyObject(field.get(this)));
-                }
+            T watcher = (T) meta.constructor.newInstance(meta.argTemplate);
+            for (Field field : meta.fields) {
+                field.set(watcher, CardUtil.deepCopyObject(field.get(this)));
             }
             return watcher;
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {

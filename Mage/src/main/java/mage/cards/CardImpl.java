@@ -602,6 +602,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public void setFaceDown(boolean value, Game game) {
         game.getState().getCardState(objectId).setFaceDown(value);
+        if (this instanceof Permanent) {
+            game.getState().bumpEffectsVersion();
+        }
     }
 
     @Override
@@ -783,6 +786,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 addingOneEvent.setFlag(isEffectFlag);
                 if (!game.replaceEvent(addingOneEvent)) {
                     getCounters(game).addCounter(eventCounter);
+                    if (this instanceof Permanent) {
+                        game.getState().bumpBattlefieldVersion();
+                    }
                     GameEvent addedOneEvent = GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, source, playerAddingCounters, counter.getName(), 1);
                     addedOneEvent.setFlag(addingOneEvent.getFlag());
                     game.fireEvent(addedOneEvent);
@@ -835,6 +841,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
             if (!getCounters(game).removeCounter(counterName, 1)) {
                 break;
+            }
+            if (this instanceof Permanent) {
+                game.getState().bumpBattlefieldVersion();
             }
 
             event = new CounterRemovedEvent(counterName, this, source, isDamage);
