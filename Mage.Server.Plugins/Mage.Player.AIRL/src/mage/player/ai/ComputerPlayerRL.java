@@ -9,9 +9,11 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -19,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
@@ -83,7 +86,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
+import mage.util.RandomUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 
@@ -117,6 +122,27 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_MULLIGAN_TRACE", "0"));
     private static final boolean MULLIGAN_TRACE_JSONL = "1".equals(System.getenv().getOrDefault("RL_MULLIGAN_TRACE_JSONL", "1"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_MULLIGAN_TRACE_JSONL", "1"));
+    private static final boolean REPLAY_PREGAME_DECISION_LOG =
+            EnvConfig.bool("EVAL_REPLAY_PREGAME_DECISION_LOG", EnvConfig.bool("EVAL_REPLAY_METADATA", false));
+    private static final boolean REPLAY_DECISION_LOG =
+            EnvConfig.bool("EVAL_REPLAY_DECISION_LOG", EnvConfig.bool("EVAL_REPLAY_METADATA", false));
+    private static final boolean REPLAY_AGENT_SEARCH_TRACE_JSON =
+            EnvConfig.bool("EVAL_AGENT_SEARCH_TRACE_JSON", EnvConfig.bool("EVAL_REPLAY_METADATA", false));
+    private static final boolean REPLAY_AGENT_ACTUAL_SEARCH_TRACE_JSON =
+            EnvConfig.bool("EVAL_AGENT_ACTUAL_SEARCH_TRACE_JSON", false)
+                    || EnvConfig.bool("EVAL_SOURCE_ACTUAL_SEARCH_TRACE_JSON", false);
+    private static final String REPLAY_AGENT_SEARCH_TRACE_FILE =
+            EnvConfig.str("EVAL_AGENT_SEARCH_TRACE_FILE", "").trim();
+    private static final int REPLAY_AGENT_SEARCH_TRACE_TOP =
+            Math.max(1, Math.min(40, EnvConfig.i32("EVAL_AGENT_SEARCH_TRACE_TOP", 12)));
+    private static final boolean REPLAY_LIBRARY_COPY_DETERMINISM =
+            EnvConfig.bool("EVAL_REPLAY_LIBRARY_COPY_DETERMINISM",
+                    EnvConfig.bool("EVAL_REPLAY_METADATA", false) || REPLAY_AGENT_SEARCH_TRACE_JSON);
+    private static final boolean REPLAY_VALIDATION_RNG_ISOLATION =
+            EnvConfig.bool("EVAL_REPLAY_VALIDATION_RNG_ISOLATION", true);
+    private static final Object REPLAY_AGENT_SEARCH_TRACE_LOCK = new Object();
+    private static final java.util.concurrent.atomic.AtomicLong REPLAY_AGENT_SEARCH_TRACE_SEQ =
+            new java.util.concurrent.atomic.AtomicLong(0L);
     private static final boolean BASE_STATE_CACHE_ENABLED = EnvConfig.bool("RL_BASE_STATE_CACHE_ENABLED", true);
     private static final boolean ALTERNATIVE_COST_SIM_CACHE_ENABLED =
             EnvConfig.bool("RL_ALTCOST_SIM_CACHE_ENABLED", true);
@@ -134,11 +160,23 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // playability.
     private static final boolean PLAYABLE_NOCLONE_ENABLED =
             EnvConfig.bool("RL_PLAYABLE_NOCLONE_ENABLED", false);
+    private static final boolean GENERIC_ACTION_HISTORY_FEATURES_ENABLED =
+            EnvConfig.bool("RL_GENERIC_ACTION_HISTORY_FEATURES_ENABLE", false);
+    private static final int GENERIC_ACTION_HISTORY_WINDOW =
+            Math.max(1, Math.min(16, EnvConfig.i32("RL_GENERIC_ACTION_HISTORY_WINDOW", 4)));
+    private static final double GENERIC_ACTION_HISTORY_SCALE =
+            Math.max(0.0, Math.min(1.0, EnvConfig.f64("RL_GENERIC_ACTION_HISTORY_SCALE", 1.0)));
 
     // Main policy exploration (actor) - epsilon mixture + correlated full-random turn.
     private static final double ACTION_EPS_START = EnvConfig.f64("RL_ACTION_EPS_START", 0.05);
     private static final double ACTION_EPS_END = EnvConfig.f64("RL_ACTION_EPS_END", 0.01);
     private static final int ACTION_EPS_DECAY_EPISODES = EnvConfig.i32("RL_ACTION_EPS_DECAY_EPISODES", 200000);
+    private static final double MULLIGAN_ACTION_EPS_START =
+            EnvConfig.f64("MULLIGAN_ACTION_EPS_START", ACTION_EPS_START);
+    private static final double MULLIGAN_ACTION_EPS_END =
+            EnvConfig.f64("MULLIGAN_ACTION_EPS_END", ACTION_EPS_END);
+    private static final int MULLIGAN_ACTION_EPS_DECAY_EPISODES =
+            EnvConfig.i32("MULLIGAN_ACTION_EPS_DECAY_EPISODES", ACTION_EPS_DECAY_EPISODES);
     private static final double TURN_RANDOM_EPS_START = EnvConfig.f64("RL_FULL_TURN_RANDOM_START", 0.03);
     private static final double TURN_RANDOM_EPS_END = EnvConfig.f64("RL_FULL_TURN_RANDOM_END", 0.03);
     private static final int TURN_RANDOM_EPS_DECAY_EPISODES = EnvConfig.i32("RL_FULL_TURN_RANDOM_DECAY_EPISODES", 400000);
@@ -161,6 +199,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final ThreadLocal<String> forcedAlternativeChoice = new ThreadLocal<>();
     // ThreadLocal to track which choice was made and what options were available
     private static final ThreadLocal<ChoiceTrackingData> choiceTrackingData = new ThreadLocal<>();
+    // Activation validation runs cloned game actions only to prove legality. It
+    // should not recurse into the neural policy for incidental choices.
+    private static final ThreadLocal<Boolean> activationValidationSimulation = new ThreadLocal<>();
 
     // ThreadLocal for activation failure tracing - captures every callback during activateAbility()
     private static final ThreadLocal<List<String>> activationTrace = ThreadLocal.withInitial(ArrayList::new);
@@ -184,10 +225,15 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private transient int cachedBaseStateStepNum = Integer.MIN_VALUE;
     private transient int cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
     private transient int cachedBaseStateStackSize = Integer.MIN_VALUE;
+    private transient int cachedBaseStateHandFingerprint = Integer.MIN_VALUE;
+    private transient int cachedBaseStateZoneFingerprint = Integer.MIN_VALUE;
     private transient Map<String, Set<String>> cachedAlternativeCostValidation =
             createLruCache(ALTERNATIVE_COST_SIM_CACHE_MAX_ENTRIES);
     private transient String cachedPlayableStateKey;
     private transient List<ActivatedAbility> cachedPlayableOptions = null;
+    private transient int onlinePrefixSearchActivations = 0;
+    private transient Deque<String> onlinePrefixAutopilot = new ArrayDeque<>();
+    private transient UUID onlinePrefixAutopilotGameId = null;
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
     private final java.util.Map<StateSequenceBuilder.ActionType, Integer> decisionCountsByHead;
     private Ability currentAbility;
@@ -196,12 +242,15 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private int lastLoggedTurn = -1; // Track turn changes for game logging
     // Fallback logger attachment for callbacks that may run off the trainer thread.
     private transient GameLogger attachedGameLogger = null;
+    private transient Deque<ReplayAgentSearchTraceContext> pendingReplayAgentSearchTraces = new ArrayDeque<>();
     private int lastExplorationTurn = Integer.MIN_VALUE;
     private boolean turnForceUniform = false;
     private double turnActionEps = 0.0;
     private double turnRandomEps = 0.0;
     private String turnExplorationMode = "policy";
     private final Random stochasticRng = new Random();
+    private transient Deque<GenericActionHistoryEntry> genericActionHistory = new ArrayDeque<>();
+    private transient UUID genericActionHistoryGameId = null;
 
     // Track early-game land drops for mulligan reward shaping
     private boolean rlPlayerHasHadATurn = false;
@@ -214,6 +263,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private int lastMulliganHandFingerprint = Integer.MIN_VALUE;
     private int lastMulliganHandSize = -1;
     private Boolean lastMulliganDecisionShouldMulligan = null;
+    private transient float lastMulliganPKeep = Float.NaN;
+    private transient float lastMulliganPMull = Float.NaN;
+    private transient String lastMulliganMode = "";
+    private int replayDecisionOrdinal = 0;
 
     private static String trunc(String s, int maxLen) {
         if (s == null) {
@@ -223,6 +276,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return s;
         }
         return s.substring(0, maxLen) + "...";
+    }
+
+    private static float clamp01(float value) {
+        if (Float.isNaN(value) || Float.isInfinite(value)) {
+            return 0.0f;
+        }
+        if (value < 0.0f) {
+            return 0.0f;
+        }
+        if (value > 1.0f) {
+            return 1.0f;
+        }
+        return value;
     }
 
     private static final class BehaviorPolicyView {
@@ -306,6 +372,40 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
     }
 
+    private static final class GenericActionHistoryEntry {
+        final StateSequenceBuilder.ActionType actionType;
+        final float selectedProb;
+        final float maxProb;
+        final float selectedTop;
+        final float optionsNorm;
+        final float selectedPass;
+        final float selectedPlayLand;
+        final float selectedManaAbility;
+        final float hadNonpassOption;
+
+        GenericActionHistoryEntry(
+                StateSequenceBuilder.ActionType actionType,
+                float selectedProb,
+                float maxProb,
+                boolean selectedTop,
+                float optionsNorm,
+                boolean selectedPass,
+                boolean selectedPlayLand,
+                boolean selectedManaAbility,
+                boolean hadNonpassOption
+        ) {
+            this.actionType = actionType;
+            this.selectedProb = clamp01(selectedProb);
+            this.maxProb = clamp01(maxProb);
+            this.selectedTop = selectedTop ? 1.0f : 0.0f;
+            this.optionsNorm = clamp01(optionsNorm);
+            this.selectedPass = selectedPass ? 1.0f : 0.0f;
+            this.selectedPlayLand = selectedPlayLand ? 1.0f : 0.0f;
+            this.selectedManaAbility = selectedManaAbility ? 1.0f : 0.0f;
+            this.hadNonpassOption = hadNonpassOption ? 1.0f : 0.0f;
+        }
+    }
+
     private boolean isMainExplorationEnabled() {
         return trainingEnabled && !greedyMode && currentEpisode >= 0;
     }
@@ -371,6 +471,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         cachedBaseStateStepNum = Integer.MIN_VALUE;
         cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
         cachedBaseStateStackSize = Integer.MIN_VALUE;
+        cachedBaseStateHandFingerprint = Integer.MIN_VALUE;
+        cachedBaseStateZoneFingerprint = Integer.MIN_VALUE;
         cachedPlayableStateKey = null;
         cachedPlayableOptions = null;
     }
@@ -427,6 +529,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         int stepNum = state != null ? state.getStepNum() : Integer.MIN_VALUE;
         int applyEffectsCounter = state != null ? state.getApplyEffectsCounter() : Integer.MIN_VALUE;
         int stackSize = game.getStack() != null ? game.getStack().size() : 0;
+        int handFingerprint = computeHandFingerprint(game);
+        int zoneFingerprint = computeZoneFingerprint(game);
 
         if (BASE_STATE_CACHE_ENABLED
                 && cachedBaseState != null
@@ -438,10 +542,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 && cachedBaseStateTurnNum == turnNum
                 && cachedBaseStateStepNum == stepNum
                 && cachedBaseStateApplyEffectsCounter == applyEffectsCounter
-                && cachedBaseStateStackSize == stackSize) {
-            currentState = cachedBaseState;
+                && cachedBaseStateStackSize == stackSize
+                && cachedBaseStateHandFingerprint == handFingerprint
+                && cachedBaseStateZoneFingerprint == zoneFingerprint) {
             metrics.recordBaseStateCacheHit();
-            return cachedBaseState;
+            return withGenericActionHistory(cachedBaseState);
         }
 
         metrics.recordBaseStateCacheMiss();
@@ -449,7 +554,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         StateSequenceBuilder.SequenceOutput baseState =
                 StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
         metrics.recordBaseStateBuildMs((System.nanoTime() - buildStartNanos) / 1_000_000L);
-        currentState = baseState;
         if (BASE_STATE_CACHE_ENABLED) {
             cachedBaseState = baseState;
             cachedBaseStateHash = computeBaseStateHash(baseState);
@@ -462,10 +566,194 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             cachedBaseStateStepNum = stepNum;
             cachedBaseStateApplyEffectsCounter = applyEffectsCounter;
             cachedBaseStateStackSize = stackSize;
+            cachedBaseStateHandFingerprint = handFingerprint;
+            cachedBaseStateZoneFingerprint = zoneFingerprint;
         } else {
             invalidateBaseStateCache();
         }
-        return baseState;
+        return withGenericActionHistory(baseState);
+    }
+
+    private StateSequenceBuilder.SequenceOutput withGenericActionHistory(StateSequenceBuilder.SequenceOutput baseState) {
+        if (!GENERIC_ACTION_HISTORY_FEATURES_ENABLED || baseState == null) {
+            currentState = baseState;
+            return baseState;
+        }
+        StateSequenceBuilder.SequenceOutput out =
+                StateSequenceBuilder.withActionHistoryFeatures(baseState, buildGenericActionHistoryFeatures());
+        currentState = out;
+        return out;
+    }
+
+    private float[] buildGenericActionHistoryFeatures() {
+        float[] f = new float[24];
+        if (genericActionHistory == null || genericActionHistory.isEmpty()) {
+            return f;
+        }
+        int window = Math.min(GENERIC_ACTION_HISTORY_WINDOW, genericActionHistory.size());
+        int skip = Math.max(0, genericActionHistory.size() - window);
+        GenericActionHistoryEntry last = null;
+        int count = 0;
+        float pass = 0.0f;
+        float playLand = 0.0f;
+        float mana = 0.0f;
+        float nonpass = 0.0f;
+        float top = 0.0f;
+        float selectedProb = 0.0f;
+        float maxProb = 0.0f;
+        float options = 0.0f;
+        int pos = 0;
+        for (GenericActionHistoryEntry item : genericActionHistory) {
+            if (pos++ < skip) {
+                continue;
+            }
+            last = item;
+            count++;
+            pass += item.selectedPass;
+            playLand += item.selectedPlayLand;
+            mana += item.selectedManaAbility;
+            nonpass += item.hadNonpassOption;
+            top += item.selectedTop;
+            selectedProb += item.selectedProb;
+            maxProb += item.maxProb;
+            options += item.optionsNorm;
+        }
+        if (count <= 0) {
+            return f;
+        }
+        float denom = (float) count;
+        f[0] = count / (float) GENERIC_ACTION_HISTORY_WINDOW;
+        f[1] = pass / denom;
+        f[2] = playLand / denom;
+        f[3] = mana / denom;
+        f[4] = nonpass / denom;
+        f[5] = top / denom;
+        f[6] = selectedProb / denom;
+        f[7] = maxProb / denom;
+        f[8] = options / denom;
+        if (last != null) {
+            f[9] = last.actionType.ordinal() / 16.0f;
+            f[10] = last.selectedProb;
+            f[11] = last.maxProb;
+            f[12] = last.selectedTop;
+            f[13] = last.optionsNorm;
+            f[14] = last.selectedPass;
+            f[15] = last.selectedPlayLand;
+            f[16] = last.selectedManaAbility;
+            f[17] = last.hadNonpassOption;
+        }
+        if (GENERIC_ACTION_HISTORY_SCALE < 1.0) {
+            float scale = (float) GENERIC_ACTION_HISTORY_SCALE;
+            for (int i = 0; i < f.length; i++) {
+                f[i] *= scale;
+            }
+        }
+        return f;
+    }
+
+    private void resetGenericActionHistoryGame(Game game) {
+        if (!GENERIC_ACTION_HISTORY_FEATURES_ENABLED || game == null) {
+            return;
+        }
+        UUID gameId;
+        try {
+            gameId = game.getId();
+        } catch (Throwable t) {
+            return;
+        }
+        if (!Objects.equals(genericActionHistoryGameId, gameId)) {
+            genericActionHistory.clear();
+            genericActionHistoryGameId = gameId;
+        }
+    }
+
+    private <T> void recordGenericActionHistoryChoice(
+            Game game,
+            StateSequenceBuilder.ActionType actionType,
+            List<T> candidates,
+            int candidateCount,
+            int selectedIndex,
+            float[] probs,
+            float[][] candidateFeatures
+    ) {
+        if (!GENERIC_ACTION_HISTORY_FEATURES_ENABLED || game == null
+                || candidates == null || selectedIndex < 0 || selectedIndex >= candidateCount) {
+            return;
+        }
+        resetGenericActionHistoryGame(game);
+        if (genericActionHistory == null) {
+            genericActionHistory = new ArrayDeque<>();
+        }
+
+        float maxProb = 0.0f;
+        for (int i = 0; i < candidateCount && probs != null && i < probs.length; i++) {
+            maxProb = Math.max(maxProb, probs[i]);
+        }
+        float selectedProb = (probs != null && selectedIndex < probs.length) ? probs[selectedIndex] : 1.0f;
+        boolean selectedTop = maxProb <= 0.0f || selectedProb >= maxProb - 1e-6f;
+        float optionsNorm = Math.min(candidateCount, StateSequenceBuilder.TrainingData.MAX_CANDIDATES)
+                / (float) StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+
+        Object selected = candidates.get(selectedIndex);
+        boolean selectedPass = isGenericPassLikeCandidate(actionType, selected, selectedIndex, candidateFeatures);
+        boolean selectedPlayLand = isGenericPlayLandCandidate(selected, game);
+        boolean selectedManaAbility = actionType == StateSequenceBuilder.ActionType.ACTIVATE_MANA_ABILITY
+                || selected instanceof ManaAbility;
+        boolean hadNonpassOption = false;
+        for (int i = 0; i < candidateCount; i++) {
+            if (!isGenericPassLikeCandidate(actionType, candidates.get(i), i, candidateFeatures)) {
+                hadNonpassOption = true;
+                break;
+            }
+        }
+
+        genericActionHistory.addLast(new GenericActionHistoryEntry(
+                actionType,
+                selectedProb,
+                maxProb > 0.0f ? maxProb : selectedProb,
+                selectedTop,
+                optionsNorm,
+                selectedPass,
+                selectedPlayLand,
+                selectedManaAbility,
+                hadNonpassOption
+        ));
+        while (genericActionHistory.size() > GENERIC_ACTION_HISTORY_WINDOW) {
+            genericActionHistory.removeFirst();
+        }
+    }
+
+    private boolean isGenericPassLikeCandidate(
+            StateSequenceBuilder.ActionType actionType,
+            Object candidate,
+            int candidateIndex,
+            float[][] candidateFeatures
+    ) {
+        if (candidate instanceof PassAbility) {
+            return true;
+        }
+        if (actionType == StateSequenceBuilder.ActionType.MULLIGAN) {
+            return false;
+        }
+        if (candidateFeatures != null
+                && candidateIndex >= 0
+                && candidateIndex < candidateFeatures.length
+                && candidateFeatures[candidateIndex] != null
+                && candidateFeatures[candidateIndex].length > 1
+                && candidateFeatures[candidateIndex][1] > 0.5f) {
+            return true;
+        }
+        return candidate instanceof CombatCandidate && ((CombatCandidate) candidate).isDone();
+    }
+
+    private boolean isGenericPlayLandCandidate(Object candidate, Game game) {
+        if (candidate instanceof PlayLandAbility) {
+            return true;
+        }
+        if (candidate instanceof Card && game != null) {
+            return ((Card) candidate).isLand(game);
+        }
+        return false;
     }
 
     private String buildPlayableStateKey(Game game) {
@@ -477,6 +765,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         Player self = game.getPlayer(getId());
         int landsPlayed = self != null ? self.getLandsPlayed() : Integer.MIN_VALUE;
         int landsPerTurn = self != null ? self.getLandsPerTurn() : Integer.MIN_VALUE;
+        int zoneFingerprint = computeZoneFingerprint(game);
 
         StringBuilder key = new StringBuilder(160);
         key.append(game.getId()).append('|');
@@ -488,6 +777,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         key.append(game.getStack() != null ? game.getStack().size() : 0).append('|');
         key.append(landsPlayed).append('|');
         key.append(landsPerTurn).append('|');
+        key.append(zoneFingerprint).append('|');
         key.append(hash);
         return key.toString();
     }
@@ -726,26 +1016,50 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     private BehaviorPolicyView buildBehaviorPolicy(float[] actionScores, int[] candidateMask, int candidateCount, Game game) {
+        return buildBehaviorPolicy(actionScores, candidateMask, candidateCount, game, null);
+    }
+
+    private BehaviorPolicyView buildBehaviorPolicy(
+            float[] actionScores,
+            int[] candidateMask,
+            int candidateCount,
+            Game game,
+            StateSequenceBuilder.ActionType actionType
+    ) {
         refreshTurnExploration(game);
         float[] policy = normalizePolicyScores(actionScores, candidateMask, candidateCount);
         float[] behavior = Arrays.copyOf(policy, policy.length);
         String mode = "policy";
+        double actionEps = turnActionEps;
 
         if (isMainExplorationEnabled()) {
             if (turnForceUniform) {
                 behavior = buildUniformProbs(candidateCount);
                 mode = "turn_uniform";
-            } else if (turnActionEps > 0.0) {
+            } else {
+                if (actionType == StateSequenceBuilder.ActionType.MULLIGAN) {
+                    actionEps = Math.max(0.0, Math.min(1.0, linearDecay(
+                            currentEpisode,
+                            MULLIGAN_ACTION_EPS_START,
+                            MULLIGAN_ACTION_EPS_END,
+                            MULLIGAN_ACTION_EPS_DECAY_EPISODES
+                    )));
+                }
+                if (actionEps <= 0.0) {
+                    return new BehaviorPolicyView(policy, behavior, mode, actionEps, turnRandomEps);
+                }
                 float[] uniform = buildUniformProbs(candidateCount);
-                double eps = Math.max(0.0, Math.min(1.0, turnActionEps));
+                double eps = Math.max(0.0, Math.min(1.0, actionEps));
                 for (int i = 0; i < candidateCount; i++) {
                     behavior[i] = (float) ((1.0 - eps) * policy[i] + eps * uniform[i]);
                 }
                 MetricsCollector.getInstance().recordMainActionEpsilonDecision();
-                mode = "epsilon_mix";
+                mode = actionType == StateSequenceBuilder.ActionType.MULLIGAN
+                        ? "mulligan_epsilon_mix"
+                        : "epsilon_mix";
             }
         }
-        return new BehaviorPolicyView(policy, behavior, mode, turnActionEps, turnRandomEps);
+        return new BehaviorPolicyView(policy, behavior, mode, actionEps, turnRandomEps);
     }
 
     private int sampleFromDistribution(float[] probs, int candidateCount) {
@@ -787,7 +1101,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             int candidateCount,
             Game game
     ) {
-        BehaviorPolicyView behavior = buildBehaviorPolicy(actionScores, candidateMask, candidateCount, game);
+        return sampleSinglePick(actionScores, candidateMask, candidateCount, game, null);
+    }
+
+    private SinglePickResult sampleSinglePick(
+            float[] actionScores,
+            int[] candidateMask,
+            int candidateCount,
+            Game game,
+            StateSequenceBuilder.ActionType actionType
+    ) {
+        BehaviorPolicyView behavior = buildBehaviorPolicy(actionScores, candidateMask, candidateCount, game, actionType);
         int chosenIdx = greedyMode
                 ? argmax(behavior.policyProbs, candidateCount, null)
                 : sampleFromDistribution(behavior.behaviorProbs, candidateCount);
@@ -800,6 +1124,18 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         float oldLogp = (float) Math.log(Math.max(1e-8f, selectedOldProb));
         String oldLogpSource = policyOldLogp ? "policy" : "behavior";
         return new SinglePickResult(chosenIdx, oldLogp, selectedBehaviorProb, selectedOldProb, oldLogpSource, behavior);
+    }
+
+    private SinglePickResult forceSinglePick(SinglePickResult source, int forcedIdx, int candidateCount) {
+        int clampedChosenIdx = Math.max(0, Math.min(forcedIdx, candidateCount - 1));
+        boolean policyOldLogp = usePolicyOldLogpForTurnUniform(source.behavior);
+        float selectedBehaviorProb = source.behavior.behaviorProbs[clampedChosenIdx];
+        float selectedOldProb = policyOldLogp
+                ? source.behavior.policyProbs[clampedChosenIdx]
+                : source.behavior.behaviorProbs[clampedChosenIdx];
+        float oldLogp = (float) Math.log(Math.max(1e-8f, selectedOldProb));
+        String oldLogpSource = policyOldLogp ? "policy" : "behavior";
+        return new SinglePickResult(clampedChosenIdx, oldLogp, selectedBehaviorProb, selectedOldProb, oldLogpSource, source.behavior);
     }
 
     private SequentialPickResult sampleSequentialWithoutReplacement(
@@ -884,6 +1220,34 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         return new SequentialPickResult(selectedIndices, oldLogpTotal, policyOldLogp ? "policy" : "behavior", behavior);
+    }
+
+    private SequentialPickResult forceSequentialPick(SequentialPickResult source, List<Integer> forcedIndices, int candidateCount) {
+        if (source == null || source.behavior == null || forcedIndices == null || forcedIndices.isEmpty()) {
+            return source;
+        }
+        List<Integer> selectedIndices = new ArrayList<>();
+        boolean[] selected = new boolean[Math.max(0, candidateCount)];
+        float oldLogpTotal = 0.0f;
+        boolean policyOldLogp = usePolicyOldLogpForTurnUniform(source.behavior);
+        float[] oldLogpProbs = policyOldLogp ? source.behavior.policyProbs : source.behavior.behaviorProbs;
+        for (Integer forcedIdx : forcedIndices) {
+            if (forcedIdx == null || forcedIdx < 0 || forcedIdx >= candidateCount || selected[forcedIdx]) {
+                continue;
+            }
+            float denom = 0.0f;
+            for (int i = 0; i < candidateCount; i++) {
+                if (!selected[i]) {
+                    denom += oldLogpProbs[i];
+                }
+            }
+            float pCond = denom > 0.0f ? oldLogpProbs[forcedIdx] / denom : 1e-8f;
+            oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
+            selected[forcedIdx] = true;
+            selectedIndices.add(forcedIdx);
+        }
+        return new SequentialPickResult(selectedIndices, oldLogpTotal,
+                policyOldLogp ? "policy" : "behavior", source.behavior);
     }
 
     private String explorationAnnotation(BehaviorPolicyView behavior, int chosenIdx, String oldLogpSource) {
@@ -1317,6 +1681,503 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return null;
     }
 
+    private boolean shouldTraceReplayAgentSearch(Game game, Ability source, UUID targetPlayerId) {
+        if (!isReplayAgentSearchTraceActive() || game == null) {
+            return false;
+        }
+        if (targetPlayerId != null && !targetPlayerId.equals(getId())) {
+            return false;
+        }
+        return getLibrary() != null;
+    }
+
+    private static boolean isReplayAgentSearchTraceActive() {
+        return REPLAY_AGENT_SEARCH_TRACE_JSON
+                || REPLAY_AGENT_ACTUAL_SEARCH_TRACE_JSON
+                || EnvConfig.bool("EVAL_REPLAY_METADATA", false)
+                || !replayTraceProperty("xmage.replay.seed").isEmpty();
+    }
+
+    private static boolean isReplayActualAgentSearchTraceActive() {
+        return REPLAY_AGENT_ACTUAL_SEARCH_TRACE_JSON;
+    }
+
+    private static String replayTraceProperty(String name) {
+        String value = System.getProperty(name);
+        return value == null ? "" : value.trim();
+    }
+
+    private static boolean useReplayLibraryCopyDeterminism() {
+        return REPLAY_LIBRARY_COPY_DETERMINISM || !replayTraceProperty("xmage.replay.seed").isEmpty();
+    }
+
+    private static boolean shouldIsolateReplayValidationRandom() {
+        return REPLAY_VALIDATION_RNG_ISOLATION
+                && (EnvConfig.bool("EVAL_REPLAY_METADATA", false)
+                || !replayTraceProperty("xmage.replay.seed").isEmpty());
+    }
+
+    private long replayValidationIsolationSeed(ActivatedAbility ability, Game game, String isolationKey) {
+        long seed = 0x9E3779B97F4A7C15L;
+        seed = seed * 31L + RandomUtil.getConsumptionCount();
+        seed = seed * 31L + replayDecisionOrdinal;
+        seed = seed * 31L + (isolationKey == null ? 0L : isolationKey.hashCode());
+        seed = seed * 31L + (ability == null || ability.getSourceId() == null ? 0L : ability.getSourceId().hashCode());
+        try {
+            seed = seed * 31L + (game == null ? 0L : game.getTurnNum());
+            seed = seed * 31L + (game == null || game.getStep() == null || game.getStep().getType() == null
+                    ? 0L
+                    : game.getStep().getType().toString().hashCode());
+        } catch (Exception ignored) {
+        }
+        return seed;
+    }
+
+    private boolean activateAbilityInValidationSimulation(ActivatedAbility ability, Game game, String isolationKey) {
+        if (shouldIsolateReplayValidationRandom()) {
+            // Replay controls need candidate-validation simulations to leave the real game RNG untouched.
+            try (RandomUtil.RandomIsolation ignored = RandomUtil.isolateThreadLocalRandom(
+                    replayValidationIsolationSeed(ability, game, isolationKey))) {
+                Game sim = game.createSimulationForAI();
+                return sim.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim);
+            }
+        }
+        Game sim = game.createSimulationForAI();
+        return sim.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim);
+    }
+
+    private static int replayTraceTurn(Game game) {
+        try {
+            return game == null ? -1 : game.getTurnNum();
+        } catch (Exception ignored) {
+            return -1;
+        }
+    }
+
+    private static String replayTracePhase(Game game) {
+        try {
+            if (game == null || game.getStep() == null || game.getStep().getType() == null) {
+                return "";
+            }
+            return game.getStep().getType().toString();
+        } catch (Exception ignored) {
+            return "";
+        }
+    }
+
+    private static String replayTraceSourceName(Ability source, Game game) {
+        try {
+            MageObject object = game == null || source == null ? null : game.getObject(source.getSourceId());
+            if (object != null) {
+                return object.getName();
+            }
+        } catch (Exception ignored) {
+        }
+        return source == null || source.getSourceId() == null ? "" : String.valueOf(source.getSourceId());
+    }
+
+    private static String replayTraceSourceRule(Ability source) {
+        try {
+            return source == null ? "" : source.getRule();
+        } catch (Exception ignored) {
+            return "";
+        }
+    }
+
+    private static List<Card> replayTraceCards(Iterable<Card> cards) {
+        List<Card> out = new ArrayList<>();
+        if (cards == null) {
+            return out;
+        }
+        for (Card card : cards) {
+            if (card != null) {
+                out.add(card);
+            }
+        }
+        return out;
+    }
+
+    private static List<String> cardNameIdsForReplay(Iterable<Card> cards, int maxCards) {
+        List<String> out = new ArrayList<>();
+        if (cards == null) {
+            return out;
+        }
+        int limit = maxCards <= 0 ? Integer.MAX_VALUE : maxCards;
+        for (Card card : cards) {
+            if (card == null) {
+                continue;
+            }
+            if (out.size() >= limit) {
+                break;
+            }
+            out.add(card.getName() + "#" + card.getId());
+        }
+        return out;
+    }
+
+    private static List<Card> replayTraceLibraryMatches(
+            TargetCardInLibrary target,
+            List<Card> libraryCards,
+            UUID playerId,
+            Ability source,
+            Game game
+    ) {
+        List<Card> out = new ArrayList<>();
+        if (target == null || libraryCards == null) {
+            return out;
+        }
+        for (Card card : libraryCards) {
+            try {
+                if (card != null && (target.getFilter() == null
+                        || target.getFilter().match(card, playerId, source, game))) {
+                    out.add(card);
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        return out;
+    }
+
+    private static List<Card> replayTraceCardsByIds(Iterable<UUID> ids, Game game) {
+        List<Card> out = new ArrayList<>();
+        if (ids == null || game == null) {
+            return out;
+        }
+        for (UUID id : ids) {
+            try {
+                Card card = game.getCard(id);
+                if (card != null) {
+                    out.add(card);
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        return out;
+    }
+
+    private static List<Card> replayTraceCopiesByName(List<Card> cards, String name) {
+        List<Card> out = new ArrayList<>();
+        if (cards == null || name == null) {
+            return out;
+        }
+        for (Card card : cards) {
+            if (card != null && name.equals(card.getName())) {
+                out.add(card);
+            }
+        }
+        return out;
+    }
+
+    private List<Card> replayTraceHandCards(Game game) {
+        try {
+            return getHand() == null ? Collections.emptyList() : replayTraceCards(getHand().getCards(game));
+        } catch (Exception ignored) {
+            return Collections.emptyList();
+        }
+    }
+
+    private List<Card> replayTraceGraveyardCards(Game game) {
+        try {
+            return getGraveyard() == null ? Collections.emptyList() : replayTraceCards(getGraveyard().getCards(game));
+        } catch (Exception ignored) {
+            return Collections.emptyList();
+        }
+    }
+
+    private List<Card> replayTraceLibraryCards(Game game) {
+        try {
+            return getLibrary() == null ? Collections.emptyList() : replayTraceCards(getLibrary().getCards(game));
+        } catch (Exception ignored) {
+            return Collections.emptyList();
+        }
+    }
+
+    private ReplayAgentSearchTraceContext pollReplayAgentSearchTrace(Ability source) {
+        if (pendingReplayAgentSearchTraces == null || pendingReplayAgentSearchTraces.isEmpty()) {
+            return null;
+        }
+        String sourceId = source == null || source.getSourceId() == null ? "" : source.getSourceId().toString();
+        Iterator<ReplayAgentSearchTraceContext> it = pendingReplayAgentSearchTraces.iterator();
+        while (it.hasNext()) {
+            ReplayAgentSearchTraceContext ctx = it.next();
+            if (ctx == null || sourceId.isEmpty() || sourceId.equals(ctx.sourceId)) {
+                it.remove();
+                return ctx;
+            }
+        }
+        return pendingReplayAgentSearchTraces.pollFirst();
+    }
+
+    private boolean hasPendingReplayAgentSearchTrace(Ability source) {
+        if (pendingReplayAgentSearchTraces == null || pendingReplayAgentSearchTraces.isEmpty()) {
+            return false;
+        }
+        String sourceId = source == null || source.getSourceId() == null ? "" : source.getSourceId().toString();
+        for (ReplayAgentSearchTraceContext ctx : pendingReplayAgentSearchTraces) {
+            if (ctx == null || sourceId.isEmpty() || sourceId.equals(ctx.sourceId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void enqueueReplayAgentSearchTrace(ReplayAgentSearchTraceContext ctx, Ability source) {
+        if (ctx == null || hasPendingReplayAgentSearchTrace(source)) {
+            return;
+        }
+        if (pendingReplayAgentSearchTraces == null) {
+            pendingReplayAgentSearchTraces = new ArrayDeque<>();
+        }
+        pendingReplayAgentSearchTraces.addLast(ctx);
+    }
+
+    private void writeReplayAgentSearchTrace(ReplayAgentSearchTraceContext ctx) {
+        if (ctx == null) {
+            return;
+        }
+        try {
+            StringBuilder sb = new StringBuilder(4096);
+            sb.append('{');
+            appendJsonString(sb, "event", ctx.event);
+            sb.append(',');
+            appendJsonString(sb, "trace_origin", "computer_player_rl_actual_hook");
+            sb.append(',');
+            appendJsonString(sb, "seq", String.valueOf(ctx.sequence));
+            sb.append(',');
+            appendJsonString(sb, "scenario", ctx.scenario);
+            sb.append(',');
+            appendJsonString(sb, "seed", ctx.seed);
+            sb.append(',');
+            appendJsonString(sb, "random_util_seed", ctx.randomUtilSeed);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_count_before_search", ctx.randomUtilCountBeforeSearch);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_count_after_search", ctx.randomUtilCountAfterSearch);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_count_before_shuffle", ctx.randomUtilCountBeforeShuffle);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_count_after_shuffle", ctx.randomUtilCountAfterShuffle);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_count_before_search",
+                    ctx.randomUtilDirectCountBeforeSearch);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_count_after_search",
+                    ctx.randomUtilDirectCountAfterSearch);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_count_before_shuffle",
+                    ctx.randomUtilDirectCountBeforeShuffle);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_count_after_shuffle",
+                    ctx.randomUtilDirectCountAfterShuffle);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_access_before_search",
+                    ctx.randomUtilDirectAccessBeforeSearch);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_access_after_search",
+                    ctx.randomUtilDirectAccessAfterSearch);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_access_before_shuffle",
+                    ctx.randomUtilDirectAccessBeforeShuffle);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_access_after_shuffle",
+                    ctx.randomUtilDirectAccessAfterShuffle);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_delta_search",
+                    Math.max(0L, ctx.randomUtilCountAfterSearch - ctx.randomUtilCountBeforeSearch));
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_delta_shuffle",
+                    Math.max(0L, ctx.randomUtilCountAfterShuffle - ctx.randomUtilCountBeforeShuffle));
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_delta_search",
+                    Math.max(0L, ctx.randomUtilDirectCountAfterSearch - ctx.randomUtilDirectCountBeforeSearch));
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_delta_shuffle",
+                    Math.max(0L, ctx.randomUtilDirectCountAfterShuffle - ctx.randomUtilDirectCountBeforeShuffle));
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_access_delta_search",
+                    Math.max(0L, ctx.randomUtilDirectAccessAfterSearch - ctx.randomUtilDirectAccessBeforeSearch));
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_access_delta_shuffle",
+                    Math.max(0L, ctx.randomUtilDirectAccessAfterShuffle - ctx.randomUtilDirectAccessBeforeShuffle));
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_count_during_search",
+                    Math.max(0L, ctx.randomUtilCountAfterSearch - ctx.randomUtilCountBeforeSearch));
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_count_during_shuffle",
+                    Math.max(0L, ctx.randomUtilCountAfterShuffle - ctx.randomUtilCountBeforeShuffle));
+            sb.append(',');
+            appendJsonString(sb, "scope", ctx.scope);
+            sb.append(',');
+            appendJsonString(sb, "actor", ctx.actor);
+            sb.append(',');
+            appendJsonString(sb, "actor_class", ctx.actorClass);
+            sb.append(',');
+            appendJsonNumber(sb, "turn", ctx.turn);
+            sb.append(',');
+            appendJsonString(sb, "phase", ctx.phase);
+            sb.append(',');
+            appendJsonString(sb, "decision_ordinal_next", ctx.decisionOrdinalNext);
+            sb.append(',');
+            appendJsonString(sb, "source_id", ctx.sourceId);
+            sb.append(',');
+            appendJsonString(sb, "source_name", ctx.sourceName);
+            sb.append(',');
+            appendJsonString(sb, "source_rule", ctx.sourceRule);
+            sb.append(',');
+            appendJsonString(sb, "target_name", ctx.targetName);
+            sb.append(',');
+            appendJsonBoolean(sb, "search_result", ctx.searchResult);
+            sb.append(',');
+            appendStringArray(sb, "searchable_names", ctx.searchableNames);
+            sb.append(',');
+            appendStringArray(sb, "searchable_name_ids", ctx.searchableNameIds);
+            sb.append(',');
+            appendStringArray(sb, "chosen_names", ctx.chosenNames);
+            sb.append(',');
+            appendStringArray(sb, "chosen_name_ids", ctx.chosenNameIds);
+            sb.append(',');
+            appendStringArray(sb, "duplicate_copy_candidate_ids", ctx.duplicateCopyCandidateIds);
+            sb.append(',');
+            appendJsonString(sb, "copy_pick_marker", ctx.copyPickMarker);
+            sb.append(',');
+            appendJsonString(sb, "shuffle_marker", ctx.shuffleMarker);
+            sb.append(',');
+            appendJsonNumber(sb, "shuffle_random_next_int_calls", ctx.shuffleRandomNextIntCalls);
+            sb.append(',');
+            appendStringArray(sb, "library_top_before_search", ctx.libraryTopBeforeSearch);
+            sb.append(',');
+            appendStringArray(sb, "library_top_before_shuffle", ctx.libraryTopBeforeShuffle);
+            sb.append(',');
+            appendStringArray(sb, "library_top_after_shuffle", ctx.libraryTopAfterShuffle);
+            sb.append(',');
+            appendStringArray(sb, "hand_before_search", ctx.handBeforeSearch);
+            sb.append(',');
+            appendStringArray(sb, "hand_before_shuffle", ctx.handBeforeShuffle);
+            sb.append(',');
+            appendStringArray(sb, "hand_after_shuffle", ctx.handAfterShuffle);
+            sb.append(',');
+            appendStringArray(sb, "graveyard_before_search", ctx.graveyardBeforeSearch);
+            sb.append(',');
+            appendStringArray(sb, "graveyard_before_shuffle", ctx.graveyardBeforeShuffle);
+            sb.append(',');
+            appendStringArray(sb, "graveyard_after_shuffle", ctx.graveyardAfterShuffle);
+            sb.append('}');
+            String line = "REPLAY_AGENT_SEARCH_JSON: " + sb.toString();
+            GameLogger logger = resolveGameLogger();
+            if (logger != null && logger.isEnabled()) {
+                logger.log(line);
+            }
+            String traceFile = replayAgentSearchTraceFile();
+            if (!traceFile.isEmpty()) {
+                Path path = Paths.get(traceFile);
+                Path parent = path.getParent();
+                if (parent != null) {
+                    Files.createDirectories(parent);
+                }
+                byte[] bytes = (line + System.lineSeparator()).getBytes(StandardCharsets.UTF_8);
+                synchronized (REPLAY_AGENT_SEARCH_TRACE_LOCK) {
+                    Files.write(path, bytes, StandardOpenOption.CREATE,
+                            StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+                }
+            }
+        } catch (Throwable ignored) {
+            // Diagnostics must never affect gameplay.
+        }
+    }
+
+    private static String replayAgentSearchTraceFile() {
+        String traceFile = REPLAY_AGENT_SEARCH_TRACE_FILE;
+        if (traceFile == null || traceFile.trim().isEmpty()) {
+            traceFile = EnvConfig.str("EVAL_AGENT_SEARCH_TRACE_FILE", "");
+        }
+        if (traceFile == null || traceFile.trim().isEmpty()) {
+            traceFile = replayTraceProperty("xmage.replay.agent_search_trace_file");
+        }
+        return traceFile == null ? "" : traceFile.trim();
+    }
+
+    private static final class ReplayAgentSearchTraceContext {
+        final long sequence;
+        final String event = "search_shuffle";
+        final String scenario;
+        final String seed;
+        final String randomUtilSeed;
+        final long randomUtilCountBeforeSearch;
+        long randomUtilCountAfterSearch = -1L;
+        long randomUtilCountBeforeShuffle = -1L;
+        long randomUtilCountAfterShuffle = -1L;
+        final long randomUtilDirectCountBeforeSearch;
+        long randomUtilDirectCountAfterSearch = -1L;
+        long randomUtilDirectCountBeforeShuffle = -1L;
+        long randomUtilDirectCountAfterShuffle = -1L;
+        final long randomUtilDirectAccessBeforeSearch;
+        long randomUtilDirectAccessAfterSearch = -1L;
+        long randomUtilDirectAccessBeforeShuffle = -1L;
+        long randomUtilDirectAccessAfterShuffle = -1L;
+        final String scope;
+        final String actor;
+        final String actorClass;
+        final int turn;
+        final String phase;
+        final String decisionOrdinalNext;
+        final String sourceId;
+        final String sourceName;
+        final String sourceRule;
+        final String targetName;
+        final List<Card> searchableCards;
+        final List<String> searchableNames;
+        final List<String> searchableNameIds;
+        final List<String> libraryTopBeforeSearch;
+        final List<String> handBeforeSearch;
+        final List<String> graveyardBeforeSearch;
+        boolean searchResult = false;
+        List<String> chosenNames = Collections.emptyList();
+        List<String> chosenNameIds = Collections.emptyList();
+        List<String> duplicateCopyCandidateIds = Collections.emptyList();
+        String copyPickMarker = "";
+        String shuffleMarker = "";
+        int shuffleRandomNextIntCalls = 0;
+        List<String> libraryTopBeforeShuffle = Collections.emptyList();
+        List<String> libraryTopAfterShuffle = Collections.emptyList();
+        List<String> handBeforeShuffle = Collections.emptyList();
+        List<String> handAfterShuffle = Collections.emptyList();
+        List<String> graveyardBeforeShuffle = Collections.emptyList();
+        List<String> graveyardAfterShuffle = Collections.emptyList();
+
+        ReplayAgentSearchTraceContext(
+                ComputerPlayerRL player,
+                Game game,
+                Ability source,
+                TargetCardInLibrary target,
+                List<Card> libraryCards,
+                List<Card> searchableCards
+        ) {
+            this.sequence = REPLAY_AGENT_SEARCH_TRACE_SEQ.incrementAndGet();
+            this.scenario = replayTraceProperty("xmage.replay.scenario");
+            this.seed = replayTraceProperty("xmage.replay.seed");
+            this.randomUtilSeed = replayTraceProperty("xmage.replay.random_util_seed");
+            this.randomUtilCountBeforeSearch = RandomUtil.getConsumptionCount();
+            this.randomUtilDirectCountBeforeSearch = RandomUtil.getDirectGetRandomConsumptionCount();
+            this.randomUtilDirectAccessBeforeSearch = RandomUtil.getDirectGetRandomAccessCount();
+            this.scope = replayTraceProperty("xmage.replay.scope");
+            this.actor = player == null ? "" : player.getName();
+            this.actorClass = player == null ? "" : player.getClass().getName();
+            this.turn = replayTraceTurn(game);
+            this.phase = replayTracePhase(game);
+            this.decisionOrdinalNext = player == null ? "" : String.valueOf(player.replayDecisionOrdinal);
+            this.sourceId = source == null || source.getSourceId() == null ? "" : source.getSourceId().toString();
+            this.sourceName = replayTraceSourceName(source, game);
+            this.sourceRule = replayTraceSourceRule(source);
+            this.targetName = target == null ? "" : target.getTargetName();
+            this.searchableCards = searchableCards == null ? Collections.emptyList() : new ArrayList<>(searchableCards);
+            this.searchableNames = cardNamesForReplay(this.searchableCards, 0);
+            this.searchableNameIds = cardNameIdsForReplay(this.searchableCards, 0);
+            this.libraryTopBeforeSearch = cardNamesForReplay(libraryCards, REPLAY_AGENT_SEARCH_TRACE_TOP);
+            this.handBeforeSearch = player == null ? Collections.emptyList() : cardNamesForReplay(player.replayTraceHandCards(game), 0);
+            this.graveyardBeforeSearch = player == null ? Collections.emptyList() : cardNamesForReplay(player.replayTraceGraveyardCards(game), 0);
+        }
+    }
+
     private static final Object MULL_TRAIN_LOG_LOCK = new Object();
     private static final String MULL_TRAIN_LOG_FILE = System.getenv().getOrDefault(
             "MULLIGAN_TRAINING_LOG_FILE",
@@ -1501,6 +2362,468 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return out.toString();
     }
 
+    private static void appendJsonString(StringBuilder sb, String name, String value) {
+        sb.append('"').append(name).append("\":\"").append(jsonEscape(value)).append('"');
+    }
+
+    private static void appendJsonNumber(StringBuilder sb, String name, int value) {
+        sb.append('"').append(name).append("\":").append(value);
+    }
+
+    private static void appendJsonNumber(StringBuilder sb, String name, long value) {
+        sb.append('"').append(name).append("\":").append(value);
+    }
+
+    private static void appendJsonNumber(StringBuilder sb, String name, float value) {
+        sb.append('"').append(name).append("\":");
+        if (Float.isNaN(value) || Float.isInfinite(value)) {
+            sb.append("0.0");
+        } else {
+            sb.append(String.format(Locale.US, "%.6f", value));
+        }
+    }
+
+    private static void appendJsonBoolean(StringBuilder sb, String name, boolean value) {
+        sb.append('"').append(name).append("\":").append(value ? "true" : "false");
+    }
+
+    private static void appendStringArray(StringBuilder sb, String name, List<String> values) {
+        sb.append('"').append(name).append("\":[");
+        if (values != null) {
+            for (int i = 0; i < values.size(); i++) {
+                if (i > 0) {
+                    sb.append(',');
+                }
+                sb.append('"').append(jsonEscape(values.get(i))).append('"');
+            }
+        }
+        sb.append(']');
+    }
+
+    private static void appendIntArray(StringBuilder sb, String name, List<Integer> values) {
+        sb.append('"').append(name).append("\":[");
+        if (values != null) {
+            for (int i = 0; i < values.size(); i++) {
+                if (i > 0) {
+                    sb.append(',');
+                }
+                Integer value = values.get(i);
+                sb.append(value == null ? -1 : value);
+            }
+        }
+        sb.append(']');
+    }
+
+    private static void appendFloatArray(StringBuilder sb, String name, float[] values, int count) {
+        sb.append('"').append(name).append("\":[");
+        int limit = values == null ? 0 : Math.min(Math.max(0, count), values.length);
+        for (int i = 0; i < limit; i++) {
+            if (i > 0) {
+                sb.append(',');
+            }
+            float value = values[i];
+            if (Float.isNaN(value) || Float.isInfinite(value)) {
+                sb.append("0.0");
+            } else {
+                sb.append(String.format(Locale.US, "%.6f", value));
+            }
+        }
+        sb.append(']');
+    }
+
+    private static List<String> cardNamesForReplay(Iterable<Card> cards, int maxCards) {
+        List<String> out = new ArrayList<>();
+        if (cards == null) {
+            return out;
+        }
+        int limit = maxCards <= 0 ? Integer.MAX_VALUE : maxCards;
+        for (Card card : cards) {
+            if (card == null) {
+                continue;
+            }
+            if (out.size() >= limit) {
+                break;
+            }
+            out.add(card.getName());
+        }
+        return out;
+    }
+
+    private static List<String> cardObjectIdsForReplay(Iterable<Card> cards, int maxCards) {
+        List<String> out = new ArrayList<>();
+        if (cards == null) {
+            return out;
+        }
+        int limit = maxCards <= 0 ? Integer.MAX_VALUE : maxCards;
+        for (Card card : cards) {
+            if (card == null) {
+                continue;
+            }
+            if (out.size() >= limit) {
+                break;
+            }
+            out.add(card.getId() == null ? "" : card.getId().toString());
+        }
+        return out;
+    }
+
+    private String replayCandidateText(Object candidate) {
+        if (candidate instanceof Card) {
+            return ((Card) candidate).getName();
+        }
+        return String.valueOf(candidate);
+    }
+
+    private <T> List<String> replayCandidateTexts(List<T> candidates, int candidateCount) {
+        List<String> out = new ArrayList<>();
+        int limit = candidates == null ? 0 : Math.min(candidateCount, candidates.size());
+        for (int i = 0; i < limit; i++) {
+            out.add(replayCandidateText(candidates.get(i)));
+        }
+        return out;
+    }
+
+    private String replayCandidateObjectId(Object candidate, Game game) {
+        try {
+            if (candidate == null) {
+                return "sentinel:STOP";
+            }
+            if (candidate instanceof UUID) {
+                return ((UUID) candidate).toString();
+            }
+            if (candidate instanceof CombatCandidate) {
+                CombatCandidate cc = (CombatCandidate) candidate;
+                if (cc.isDone()) {
+                    return "sentinel:DONE";
+                }
+                String creatureId = cc.creature == null || cc.creature.getId() == null
+                        ? ""
+                        : cc.creature.getId().toString();
+                if (cc.context instanceof UUID) {
+                    return creatureId + "->" + cc.context.toString();
+                }
+                if (cc.context instanceof Permanent && ((Permanent) cc.context).getId() != null) {
+                    return creatureId + "->" + ((Permanent) cc.context).getId().toString();
+                }
+                return creatureId;
+            }
+            if (candidate instanceof Card && ((Card) candidate).getId() != null) {
+                return ((Card) candidate).getId().toString();
+            }
+            if (candidate instanceof Permanent && ((Permanent) candidate).getId() != null) {
+                return ((Permanent) candidate).getId().toString();
+            }
+            if (candidate instanceof MageObject && ((MageObject) candidate).getId() != null) {
+                return ((MageObject) candidate).getId().toString();
+            }
+            if (candidate instanceof Ability && ((Ability) candidate).getSourceId() != null) {
+                return ((Ability) candidate).getSourceId().toString();
+            }
+        } catch (Throwable ignored) {
+            return "";
+        }
+        return "";
+    }
+
+    private <T> List<String> replayCandidateObjectIds(List<T> candidates, int candidateCount, Game game) {
+        List<String> out = new ArrayList<>();
+        int limit = candidates == null ? 0 : Math.min(candidateCount, candidates.size());
+        for (int i = 0; i < limit; i++) {
+            out.add(replayCandidateObjectId(candidates.get(i), game));
+        }
+        return out;
+    }
+
+    private List<String> replaySourceObjectIds(Ability source) {
+        if (source == null || source.getSourceId() == null) {
+            return Collections.emptyList();
+        }
+        return Collections.singletonList(source.getSourceId().toString());
+    }
+
+    private List<String> replayTargetObjectIds(Ability source) {
+        if (source == null || source.getAllSelectedTargets() == null) {
+            return Collections.emptyList();
+        }
+        List<String> out = new ArrayList<>();
+        try {
+            for (Target target : source.getAllSelectedTargets()) {
+                if (target == null || target.getTargets() == null) {
+                    continue;
+                }
+                for (UUID id : target.getTargets()) {
+                    if (id != null) {
+                        String value = id.toString();
+                        if (!out.contains(value)) {
+                            out.add(value);
+                        }
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+            return Collections.emptyList();
+        }
+        return out;
+    }
+
+    private List<String> replayCardCandidateObjectIds(
+            List<String> remainingNames,
+            Map<String, List<Card>> cardsByName,
+            Set<UUID> chosen,
+            int candidateCount
+    ) {
+        List<String> out = new ArrayList<>();
+        int limit = remainingNames == null ? 0 : Math.min(candidateCount, remainingNames.size());
+        for (int i = 0; i < limit; i++) {
+            String name = remainingNames.get(i);
+            if (name == null) {
+                out.add("sentinel:STOP");
+                continue;
+            }
+            String objectId = "";
+            List<Card> copies = cardsByName == null ? null : cardsByName.get(name);
+            if (copies != null) {
+                for (Card c : copies) {
+                    if (c != null && c.getId() != null && (chosen == null || !chosen.contains(c.getId()))) {
+                        objectId = c.getId().toString();
+                        break;
+                    }
+                }
+            }
+            out.add(objectId);
+        }
+        return out;
+    }
+
+    private static List<String> chosenReplayTexts(List<String> candidates, List<Integer> selectedIndices) {
+        List<String> out = new ArrayList<>();
+        if (candidates == null || selectedIndices == null) {
+            return out;
+        }
+        for (Integer idx : selectedIndices) {
+            if (idx != null && idx >= 0 && idx < candidates.size()) {
+                out.add(candidates.get(idx));
+            }
+        }
+        return out;
+    }
+
+    private boolean shouldLogReplayPregameDecision(StateSequenceBuilder.ActionType actionType) {
+        return REPLAY_PREGAME_DECISION_LOG
+                && (actionType == StateSequenceBuilder.ActionType.MULLIGAN
+                || actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN);
+    }
+
+    private boolean shouldLogReplayDecision(StateSequenceBuilder.ActionType actionType) {
+        return REPLAY_DECISION_LOG || shouldLogReplayPregameDecision(actionType);
+    }
+
+    private void logReplayPregameDecision(
+            StateSequenceBuilder.ActionType actionType,
+            List<String> candidateTexts,
+            List<Integer> selectedIndices,
+            float[] candidateProbs,
+            int candidateCount,
+            Game game
+    ) {
+        logReplayDecision(actionType, candidateTexts, selectedIndices, candidateProbs, candidateCount, 0.0f, game, null);
+    }
+
+    private void logReplayDecision(
+            StateSequenceBuilder.ActionType actionType,
+            List<String> candidateTexts,
+            List<Integer> selectedIndices,
+            float[] candidateProbs,
+            int candidateCount,
+            float valueScore,
+            Game game,
+            Ability source
+    ) {
+        logReplayDecision(actionType, candidateTexts, selectedIndices, candidateProbs, candidateCount,
+                valueScore, game, source, Collections.emptyList(), Collections.emptyList());
+    }
+
+    private void logReplayDecision(
+            StateSequenceBuilder.ActionType actionType,
+            List<String> candidateTexts,
+            List<Integer> selectedIndices,
+            float[] candidateProbs,
+            int candidateCount,
+            float valueScore,
+            Game game,
+            Ability source,
+            List<String> candidateObjectIds,
+            List<String> chosenObjectIds
+    ) {
+        if (!shouldLogReplayDecision(actionType)) {
+            return;
+        }
+        try {
+            GameLogger gameLogger = resolveGameLogger();
+            if (gameLogger == null || !gameLogger.isEnabled()) {
+                return;
+            }
+            int ordinal = replayDecisionOrdinal++;
+            List<String> chosenTexts = chosenReplayTexts(candidateTexts, selectedIndices);
+            List<String> safeCandidateObjectIds = candidateObjectIds == null
+                    ? Collections.emptyList()
+                    : new ArrayList<>(candidateObjectIds);
+            List<String> safeChosenObjectIds = (chosenObjectIds == null || chosenObjectIds.isEmpty())
+                    ? chosenReplayTexts(safeCandidateObjectIds, selectedIndices)
+                    : new ArrayList<>(chosenObjectIds);
+            int firstChosen = selectedIndices == null || selectedIndices.isEmpty() ? -1 : selectedIndices.get(0);
+            String selectedText = chosenTexts.isEmpty()
+                    ? (firstChosen >= 0 && candidateTexts != null && firstChosen < candidateTexts.size()
+                    ? candidateTexts.get(firstChosen)
+                    : "")
+                    : chosenTexts.get(0);
+            float selectedProb = (candidateProbs != null && firstChosen >= 0 && firstChosen < candidateProbs.length)
+                    ? candidateProbs[firstChosen]
+                    : 0.0f;
+            List<Card> handCards = getHand() == null
+                    ? Collections.emptyList()
+                    : new ArrayList<>(getHand().getCards(game));
+            List<Card> libraryCards = getLibrary() == null
+                    ? Collections.emptyList()
+                    : new ArrayList<>(getLibrary().getCards(game));
+            List<Card> graveyardCards = replayTraceGraveyardCards(game);
+            int turnNum = -1;
+            String phase = "";
+            String activePlayerName = "";
+            try {
+                turnNum = game != null ? game.getTurnNum() : -1;
+                phase = game != null && game.getPhase() != null && game.getPhase().getType() != null
+                        ? game.getPhase().getType().toString()
+                        : "";
+                activePlayerName = game != null && game.getActivePlayerId() != null && game.getPlayer(game.getActivePlayerId()) != null
+                        ? game.getPlayer(game.getActivePlayerId()).getName()
+                        : "";
+            } catch (Exception ignored) {
+                turnNum = -1;
+                phase = "";
+                activePlayerName = "";
+            }
+            int decisionNumber = (actionType == StateSequenceBuilder.ActionType.MULLIGAN
+                    || actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN)
+                    ? -1
+                    : gameLogger.getNextDecisionNumber();
+            String sourceId = source == null || source.getSourceId() == null ? "" : source.getSourceId().toString();
+            String sourceName = replayTraceSourceName(source, game);
+            String sourceRule = replayTraceSourceRule(source);
+            List<String> sourceObjectIds = replaySourceObjectIds(source);
+            List<String> targetObjectIds = replayTargetObjectIds(source);
+            if (targetObjectIds.isEmpty()
+                    && actionType == StateSequenceBuilder.ActionType.SELECT_TARGETS
+                    && !safeChosenObjectIds.isEmpty()) {
+                targetObjectIds = new ArrayList<>(safeChosenObjectIds);
+            }
+            String sourceZone = "";
+            try {
+                Zone zone = game != null && game.getState() != null && source != null
+                        ? game.getState().getZone(source.getSourceId())
+                        : null;
+                sourceZone = zone == null ? "" : zone.name();
+            } catch (Exception ignored) {
+                sourceZone = "";
+            }
+            StringBuilder sb = new StringBuilder(2048);
+            sb.append('{');
+            appendJsonNumber(sb, "ordinal", ordinal);
+            sb.append(',');
+            appendJsonNumber(sb, "decision_number", decisionNumber);
+            sb.append(',');
+            appendJsonString(sb, "source_decision_number", decisionNumber > 0 ? ("D" + String.format(Locale.US, "%03d", decisionNumber)) : "");
+            sb.append(',');
+            appendJsonString(sb, "player", getName());
+            sb.append(',');
+            appendJsonString(sb, "actor", getName());
+            sb.append(',');
+            appendJsonString(sb, "active_player", activePlayerName);
+            sb.append(',');
+            appendJsonString(sb, "action_type", actionType.name());
+            sb.append(',');
+            appendJsonNumber(sb, "candidate_count", candidateCount);
+            sb.append(',');
+            appendStringArray(sb, "candidate_texts", candidateTexts);
+            sb.append(',');
+            appendStringArray(sb, "candidate_object_ids", safeCandidateObjectIds);
+            sb.append(',');
+            appendIntArray(sb, "chosen_indices", selectedIndices);
+            sb.append(',');
+            appendStringArray(sb, "chosen_texts", chosenTexts);
+            sb.append(',');
+            appendStringArray(sb, "chosen_object_ids", safeChosenObjectIds);
+            sb.append(',');
+            appendStringArray(sb, "selected_object_ids", safeChosenObjectIds);
+            sb.append(',');
+            appendFloatArray(sb, "candidate_probs", candidateProbs, candidateCount);
+            sb.append(',');
+            appendJsonNumber(sb, "chosen_count", selectedIndices == null ? 0 : selectedIndices.size());
+            sb.append(',');
+            appendJsonNumber(sb, "selected_index", firstChosen);
+            sb.append(',');
+            appendJsonString(sb, "selected_text", selectedText);
+            sb.append(',');
+            appendJsonNumber(sb, "selected_prob", selectedProb);
+            sb.append(',');
+            appendJsonNumber(sb, "value_score", valueScore);
+            sb.append(',');
+            appendJsonNumber(sb, "mulligans_taken", mulligansTaken);
+            sb.append(',');
+            appendJsonNumber(sb, "hand_size", handCards.size());
+            sb.append(',');
+            appendStringArray(sb, "hand", cardNamesForReplay(handCards, 0));
+            sb.append(',');
+            appendStringArray(sb, "hand_object_ids", cardObjectIdsForReplay(handCards, 0));
+            sb.append(',');
+            appendJsonNumber(sb, "library_size", libraryCards.size());
+            sb.append(',');
+            appendStringArray(sb, "library", cardNamesForReplay(libraryCards, 0));
+            sb.append(',');
+            appendStringArray(sb, "library_object_ids", cardObjectIdsForReplay(libraryCards, 0));
+            sb.append(',');
+            appendStringArray(sb, "library_top", cardNamesForReplay(libraryCards, 12));
+            sb.append(',');
+            appendStringArray(sb, "library_top_object_ids", cardObjectIdsForReplay(libraryCards, 12));
+            sb.append(',');
+            appendJsonNumber(sb, "graveyard_size", graveyardCards.size());
+            sb.append(',');
+            appendStringArray(sb, "graveyard", cardNamesForReplay(graveyardCards, 0));
+            sb.append(',');
+            appendJsonNumber(sb, "turn", turnNum);
+            sb.append(',');
+            appendJsonString(sb, "phase", phase);
+            sb.append(',');
+            appendJsonString(sb, "source_id", sourceId);
+            sb.append(',');
+            appendStringArray(sb, "source_object_ids", sourceObjectIds);
+            sb.append(',');
+            appendJsonString(sb, "source_name", sourceName);
+            sb.append(',');
+            appendJsonString(sb, "source_rule", sourceRule);
+            sb.append(',');
+            appendJsonString(sb, "target_object_id", targetObjectIds.isEmpty() ? "" : targetObjectIds.get(0));
+            sb.append(',');
+            appendStringArray(sb, "target_object_ids", targetObjectIds);
+            sb.append(',');
+            appendJsonString(sb, "source_zone", sourceZone);
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_count", RandomUtil.getConsumptionCount());
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_count", RandomUtil.getDirectGetRandomConsumptionCount());
+            sb.append(',');
+            appendJsonNumber(sb, "random_util_direct_getrandom_access", RandomUtil.getDirectGetRandomAccessCount());
+            sb.append(',');
+            appendJsonNumber(sb, "episode", currentEpisode);
+            sb.append(',');
+            appendJsonBoolean(sb, "training_enabled", trainingEnabled);
+            sb.append('}');
+            gameLogger.log("REPLAY_DECISION_JSON: " + sb.toString());
+        } catch (Throwable ignored) {
+            // Replay diagnostics must never change game behavior.
+        }
+    }
+
     private void mulliganTraceJsonl(String eventType, String jsonPayloadFields) {
         if (!MULLIGAN_TRACE_JSONL) {
             return;
@@ -1563,6 +2886,75 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
     }
 
+    private int computeZoneFingerprint(Game game) {
+        try {
+            int h = 1;
+            Player self = game == null ? null : game.getPlayer(getId());
+            if (self != null) {
+                h = mixCardCollection(h, self.getHand().getCards(game), game);
+                h = mixCardCollection(h, self.getGraveyard().getCards(game), game);
+                h = 31 * h + self.getLibrary().size();
+                Card top = self.getLibrary().getFromTop(game);
+                h = mixUuid(h, top == null ? null : top.getId());
+            }
+            if (game != null && game.getBattlefield() != null) {
+                List<Permanent> permanents = new ArrayList<>(game.getBattlefield().getAllActivePermanents());
+                permanents.sort((a, b) -> compareUuid(a == null ? null : a.getId(), b == null ? null : b.getId()));
+                for (Permanent permanent : permanents) {
+                    if (permanent == null) {
+                        continue;
+                    }
+                    h = mixUuid(h, permanent.getId());
+                    h = mixUuid(h, permanent.getControllerId());
+                    h = 31 * h + (permanent.isTapped() ? 1 : 0);
+                    h = 31 * h + permanent.getZoneChangeCounter(game);
+                }
+            }
+            return h;
+        } catch (Exception e) {
+            return computeHandFingerprint(game);
+        }
+    }
+
+    private int mixCardCollection(int h, Iterable<Card> cards, Game game) {
+        List<Card> list = new ArrayList<>();
+        if (cards != null) {
+            for (Card card : cards) {
+                if (card != null) {
+                    list.add(card);
+                }
+            }
+        }
+        list.sort((a, b) -> compareUuid(a == null ? null : a.getId(), b == null ? null : b.getId()));
+        h = 31 * h + list.size();
+        for (Card card : list) {
+            h = mixUuid(h, card.getId());
+            h = 31 * h + (game == null ? 0 : game.getState().getZoneChangeCounter(card.getId()));
+        }
+        return h;
+    }
+
+    private static int mixUuid(int h, UUID id) {
+        return 31 * h + (id == null ? 0 : id.hashCode());
+    }
+
+    private static int compareUuid(UUID a, UUID b) {
+        if (a == b) {
+            return 0;
+        }
+        if (a == null) {
+            return -1;
+        }
+        if (b == null) {
+            return 1;
+        }
+        int c = Long.compare(a.getMostSignificantBits(), b.getMostSignificantBits());
+        if (c != 0) {
+            return c;
+        }
+        return Long.compare(a.getLeastSignificantBits(), b.getLeastSignificantBits());
+    }
+
     /**
      * If true, the agent will act greedily (arg-max) instead of sampling.
      * Useful for evaluation where we want a deterministic policy.
@@ -1617,16 +3009,144 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.lastMulliganHandFingerprint = player.lastMulliganHandFingerprint;
         this.lastMulliganHandSize = player.lastMulliganHandSize;
         this.lastMulliganDecisionShouldMulligan = player.lastMulliganDecisionShouldMulligan;
+        this.replayDecisionOrdinal = player.replayDecisionOrdinal;
+        this.onlinePrefixSearchActivations = player.onlinePrefixSearchActivations;
         this.greedyMode = player.greedyMode;
         this.policyKey = player.policyKey;
         this.trainingEnabled = player.trainingEnabled;
         this.attachedGameLogger = player.attachedGameLogger;
+        this.pendingReplayAgentSearchTraces = new ArrayDeque<>();
         // strict choose mode enforced via method override
     }
 
     @Override
     public ComputerPlayerRL copy() {
         return new ComputerPlayerRL(this);
+    }
+
+    public float getLastMulliganPKeep() {
+        return lastMulliganPKeep;
+    }
+
+    public float getLastMulliganPMull() {
+        return lastMulliganPMull;
+    }
+
+    public String getLastMulliganMode() {
+        return lastMulliganMode;
+    }
+
+    /**
+     * Test/training hook for paired terminal-only mulligan labels.
+     * Return 0 to force KEEP, 1 to force MULLIGAN, or null for normal policy.
+     */
+    protected Integer forcedMulliganChoiceIndex(Game game, int handSize, int landCount) {
+        if (!MULLIGAN_HARD_OVERRIDES_ENABLE
+                || (trainingEnabled && !MULLIGAN_HARD_APPLY_DURING_TRAINING)) {
+            return null;
+        }
+
+        int pseudoLands = MULLIGAN_HARD_USE_EFFECTIVE_LANDS ? countHardMulliganPseudoLands(game) : 0;
+        int resourceCount = landCount + pseudoLands;
+        boolean tooFew = resourceCount < MULLIGAN_HARD_MIN_EFFECTIVE_LANDS;
+        boolean tooMany = resourceCount > MULLIGAN_HARD_MAX_EFFECTIVE_LANDS;
+        boolean badResource = tooFew || tooMany;
+        boolean canMulligan = mulligansTaken < MULLIGAN_HARD_MAX_MULLIGANS;
+
+        Integer forced = null;
+        String reason = null;
+        if (badResource && canMulligan) {
+            forced = 1;
+            reason = tooFew ? "too_few_resources" : "too_many_resources";
+        } else if (badResource && MULLIGAN_HARD_FORCE_KEEP_AFTER_MAX) {
+            forced = 0;
+            reason = tooFew ? "too_few_resources_after_max" : "too_many_resources_after_max";
+        } else if (!badResource && MULLIGAN_HARD_FORCE_KEEP_GOOD) {
+            forced = 0;
+            reason = "acceptable_resources";
+        }
+
+        if (forced != null && MULLIGAN_HARD_LOG) {
+            logHardMulliganOverride(game, forced, reason, handSize, landCount, pseudoLands, resourceCount);
+        }
+        return forced;
+    }
+
+    private void logHardMulliganOverride(
+            Game game,
+            int forced,
+            String reason,
+            int handSize,
+            int landCount,
+            int pseudoLands,
+            int resourceCount
+    ) {
+        try {
+            GameLogger gameLogger = resolveGameLogger();
+            if (gameLogger != null && gameLogger.isEnabled()) {
+                gameLogger.log(String.format(Locale.US,
+                        "[MULLIGAN_HARD_OVERRIDE] decision=%s reason=%s mulligansTaken=%d handSize=%d lands=%d pseudoLands=%d resources=%d minResources=%d maxResources=%d hand=[%s]",
+                        forced == 1 ? "MULLIGAN" : "KEEP",
+                        reason == null ? "" : reason,
+                        mulligansTaken,
+                        handSize,
+                        landCount,
+                        pseudoLands,
+                        resourceCount,
+                        MULLIGAN_HARD_MIN_EFFECTIVE_LANDS,
+                        MULLIGAN_HARD_MAX_EFFECTIVE_LANDS,
+                        trunc(handCardNames(game), 400)));
+            }
+        } catch (Exception ignored) {
+            // diagnostics only
+        }
+    }
+
+    private int countHardMulliganPseudoLands(Game game) {
+        if (MULLIGAN_HARD_PSEUDO_LAND_NAMES.isEmpty()) {
+            return 0;
+        }
+        int count = 0;
+        try {
+            for (Card card : getHand().getCards(game)) {
+                if (card == null || card.getName() == null) {
+                    continue;
+                }
+                String name = card.getName().trim().toLowerCase(Locale.ROOT);
+                if (MULLIGAN_HARD_PSEUDO_LAND_NAMES.contains(name)) {
+                    count++;
+                }
+            }
+        } catch (Exception ignored) {
+            return 0;
+        }
+        return count;
+    }
+
+    private String handCardNames(Game game) {
+        try {
+            return getHand().getCards(game).stream()
+                    .map(Card::getName)
+                    .collect(Collectors.joining("; "));
+        } catch (Exception ignored) {
+            return "";
+        }
+    }
+
+    /**
+     * Test/training hook for forcing a full candidate ranking while still
+     * recording the normal TrainingData tensors. Used for London bottoming
+     * counterfactuals where the forced line chooses a specific bottom set.
+     */
+    protected <T> List<Integer> forcedChoiceIndices(
+            StateSequenceBuilder.ActionType actionType,
+            List<T> candidates,
+            int maxTargets,
+            int minTargets,
+            Game game,
+            Ability source
+    ) {
+        return null;
     }
 
     @Override
@@ -1696,6 +3216,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
     public <T> List<Integer> genericChoose(List<T> candidates, int maxTargets, int minTargets, StateSequenceBuilder.ActionType actionType, Game game, Ability source) {
         trackEarlyLands(game);
+        resetOnlinePrefixAutopilotGame(game);
+        resetGenericActionHistoryGame(game);
         // Candidate-based policy: score up to MAX_CANDIDATES candidates per decision.
         final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
         final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
@@ -1712,6 +3234,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         minTargets = Math.min(minTargets, candidateCount);
 
         if (candidateCount == 1) {
+            consumeOnlinePrefixAutopilot(candidates, candidateCount, actionType, game, source);
+            recordGenericActionHistoryChoice(game, actionType, candidates, candidateCount, 0, new float[]{1.0f}, null);
             return Arrays.asList(0);
         } else if (candidateCount == 0) {
             return Arrays.asList();
@@ -1778,6 +3302,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         float[] mctsVisitTargets = null;
         Integer mctsChosenIndex = null;
         boolean mctsTacticalState = true;
+        boolean mctsSampledIn = true;
         // Skip MCTS when the policy is already highly confident. MCTS cost is
         // dominated by leaf count; if top candidate's prior already dominates,
         // the search almost always confirms it. Gate controlled by
@@ -1794,6 +3319,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (maskedCount >= 2 && maxProb >= MCTS_SKIP_TOP_PROB) {
                 policyAmbiguous = false;
             }
+            if (mctsTrainingMode && MCTS_TRAINING_SAMPLE_PROB < 1.0f) {
+                mctsSampledIn = stochasticRng.nextFloat() < MCTS_TRAINING_SAMPLE_PROB;
+            }
             mctsTacticalState = shouldRunSelectiveMcts(actionType, game, source, candidates, candidateCount);
         }
         // Diagnostic: record gate decisions so we can tell why MCTS isn't firing.
@@ -1803,54 +3331,79 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (candidateCount < 2) MCTS_GATE_FEWCAND.incrementAndGet();
             if (actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) MCTS_GATE_WRONGTYPE.incrementAndGet();
             if (!policyAmbiguous) MCTS_GATE_CONFIDENT.incrementAndGet();
+            if (!mctsSampledIn) MCTS_GATE_SAMPLED_OUT.incrementAndGet();
             if (!mctsTacticalState) MCTS_GATE_NOT_TACTICAL.incrementAndGet();
         }
         if ((mctsEvalOverride || mctsTrainingMode) && DETERMINIZATION_SAMPLER != null
                 && candidateCount >= 2
                 && actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
                 && policyAmbiguous
+                && mctsSampledIn
                 && mctsTacticalState) {
             try {
                 float[] policyPriors = new float[candidateCount];
                 System.arraycopy(actionProbs, 0, policyPriors, 0, candidateCount);
                 @SuppressWarnings("unchecked")
                 List<mage.abilities.Ability> abilityCandidates = (List<mage.abilities.Ability>) (List<?>) candidates.subList(0, candidateCount);
+                MctsRootSubset mctsRoot = buildMctsRootSubset(abilityCandidates, policyPriors, candidateCount);
                 long mctsSearchStart = System.nanoTime();
+                boolean cardBeliefContextSet = installCardBeliefDeterminization(baseState);
                 // Adapter: both search backends return the same shape bundle.
                 // Flat (1-ply) PolicyValueMCTS = current default.
                 // Multi-ply factored MCTS = MULTI_PLY_MCTS=1 (new in progress).
                 int bestActionIndex;
+                int bestSearchActionIndex;
                 int[] aggregateVisits;
                 float[] aggregateValues;
                 int searchDets;
                 long searchWallMs;
                 String searchArch;
-                if (MULTI_PLY_MCTS) {
-                    // Advance session to the subtree we chose last call (prune siblings).
-                    if (mctsSession != null) {
-                        mctsSession.advance();
+                try {
+                    if (ISMCTS_RANDOM_ROLLOUT_ROOT) {
+                        mage.player.ai.rl.BeliefISMCTS.SearchResult r =
+                                mage.player.ai.rl.BeliefISMCTS.searchRoot(
+                                        game, this.getId(), mctsRoot.candidates,
+                                        mctsRoot.priors, DETERMINIZATION_SAMPLER);
+                        bestSearchActionIndex = r.bestActionIndex;
+                        bestActionIndex = mctsRoot.toOriginalIndex(bestSearchActionIndex);
+                        aggregateVisits = mctsRoot.expandVisits(r.aggregateVisits, candidateCount);
+                        aggregateValues = mctsRoot.expandValues(r.aggregateValues, candidateCount);
+                        searchDets = r.determinizationsRun;
+                        searchWallMs = r.wallMs;
+                        searchArch = r.predictedArchetype;
+                    } else if (MULTI_PLY_MCTS) {
+                        // Advance session to the subtree we chose last call (prune siblings).
+                        if (mctsSession != null) {
+                            mctsSession.advance();
+                        }
+                        mage.player.ai.rl.MultiPlyMCTS.Result r =
+                                mage.player.ai.rl.MultiPlyMCTS.search(
+                                        game, this.getId(), mctsRoot.candidates,
+                                        mctsRoot.priors, model, DETERMINIZATION_SAMPLER, mctsSession);
+                        bestSearchActionIndex = r.bestActionIndex;
+                        bestActionIndex = mctsRoot.toOriginalIndex(bestSearchActionIndex);
+                        aggregateVisits = mctsRoot.expandVisits(r.aggregateVisits, candidateCount);
+                        aggregateValues = mctsRoot.expandValues(r.aggregateValues, candidateCount);
+                        searchDets = r.iterationsRun;
+                        searchWallMs = r.wallMs;
+                        searchArch = r.predictedArchetype;
+                    } else {
+                        mage.player.ai.rl.PolicyValueMCTS.SearchResult r =
+                                mage.player.ai.rl.PolicyValueMCTS.search(
+                                        game, this.getId(), mctsRoot.candidates,
+                                        mctsRoot.priors, valueScore, model, DETERMINIZATION_SAMPLER);
+                        bestSearchActionIndex = r.bestActionIndex;
+                        bestActionIndex = mctsRoot.toOriginalIndex(bestSearchActionIndex);
+                        aggregateVisits = mctsRoot.expandVisits(r.aggregateVisits, candidateCount);
+                        aggregateValues = mctsRoot.expandValues(r.aggregateValues, candidateCount);
+                        searchDets = r.determinizationsRun;
+                        searchWallMs = r.wallMs;
+                        searchArch = r.predictedArchetype;
                     }
-                    mage.player.ai.rl.MultiPlyMCTS.Result r =
-                            mage.player.ai.rl.MultiPlyMCTS.search(
-                                    game, this.getId(), abilityCandidates,
-                                    policyPriors, model, DETERMINIZATION_SAMPLER, mctsSession);
-                    bestActionIndex = r.bestActionIndex;
-                    aggregateVisits = r.aggregateVisits;
-                    aggregateValues = r.aggregateValues;
-                    searchDets = r.iterationsRun;
-                    searchWallMs = r.wallMs;
-                    searchArch = r.predictedArchetype;
-                } else {
-                    mage.player.ai.rl.PolicyValueMCTS.SearchResult r =
-                            mage.player.ai.rl.PolicyValueMCTS.search(
-                                    game, this.getId(), abilityCandidates,
-                                    policyPriors, valueScore, model, DETERMINIZATION_SAMPLER);
-                    bestActionIndex = r.bestActionIndex;
-                    aggregateVisits = r.aggregateVisits;
-                    aggregateValues = r.aggregateValues;
-                    searchDets = r.determinizationsRun;
-                    searchWallMs = r.wallMs;
-                    searchArch = r.predictedArchetype;
+                } finally {
+                    if (cardBeliefContextSet) {
+                        mage.player.ai.rl.DeterminizationSampler.clearThreadLocalCardBelief();
+                    }
                 }
                 MCTS_ACTIVATION_COUNT.incrementAndGet();
                 if (bestActionIndex >= 0 && bestActionIndex < candidateCount) {
@@ -1868,7 +3421,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         GameLogger gl = resolveGameLogger();
                         if (gl != null && gl.isEnabled()) {
                             gl.log(String.format("[MCTS] backend=%s arch=%s dets/iters=%d visits=%s values=%s picked=%d wallMs=%d",
-                                    MULTI_PLY_MCTS ? "multiply" : "flat",
+                                    ISMCTS_RANDOM_ROLLOUT_ROOT ? "belief-rollout"
+                                            : (MULTI_PLY_MCTS ? "multiply" : "flat"),
                                     searchArch, searchDets,
                                     java.util.Arrays.toString(aggregateVisits),
                                     formatFloats(aggregateValues),
@@ -1879,9 +3433,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         // Phase 2: record the action we're actually playing so next
                         // priority call can prune the tree to this subtree. In eval
                         // override mode, MCTS's pick IS the played action.
-                        if (mctsSession != null && bestActionIndex < abilityCandidates.size()) {
-                            mctsSession.recordChoice(bestActionIndex,
-                                    abilityCandidates.get(bestActionIndex));
+                        if (mctsSession != null
+                                && bestSearchActionIndex >= 0
+                                && bestSearchActionIndex < mctsRoot.candidates.size()) {
+                            mctsSession.recordChoice(bestSearchActionIndex,
+                                    mctsRoot.candidates.get(bestSearchActionIndex));
                         }
                         return Arrays.asList(mctsChosenIndex);
                     }
@@ -1923,10 +3479,155 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         List<Integer> selectedIndices = pickResult.selectedIndices;
         float oldLogpTotal = pickResult.oldLogpTotal;
 
+        selectedIndices = applyValueActionGate(
+                selectedIndices,
+                actionType,
+                candidates,
+                candidateCount,
+                candidateMask,
+                policyMaskedProbs,
+                valueScore,
+                game,
+                source
+        );
+
+        selectedIndices = applySpyTimingMask(
+                selectedIndices,
+                actionType,
+                candidates,
+                candidateCount,
+                candidateMask,
+                policyMaskedProbs,
+                game,
+                source
+        );
+
+        boolean forcedApplied = false;
+        List<Integer> forcedIndices = forcedChoiceIndices(actionType, candidates, maxTargets, minTargets, game, source);
+        if (forcedIndices != null && !forcedIndices.isEmpty()) {
+            List<Integer> sanitized = new ArrayList<>();
+            Set<Integer> seenForced = new HashSet<>();
+            for (Integer idx : forcedIndices) {
+                if (idx == null || idx < 0 || idx >= candidateCount || candidateMask[idx] == 0 || seenForced.contains(idx)) {
+                    continue;
+                }
+                sanitized.add(idx);
+                seenForced.add(idx);
+                if (sanitized.size() >= maxTargets) {
+                    break;
+                }
+            }
+            if (!sanitized.isEmpty() && sanitized.size() >= minTargets) {
+                selectedIndices = sanitized;
+                oldLogpTotal = 0.0f;
+                forcedApplied = true;
+            }
+        }
+
+        if (!forcedApplied) {
+            Integer autopilotIndex = consumeOnlinePrefixAutopilot(candidates, candidateCount, actionType, game, source);
+            if (autopilotIndex != null
+                    && autopilotIndex >= 0
+                    && autopilotIndex < candidateCount
+                    && candidateMask[autopilotIndex] == 1
+                    && maxTargets == 1
+                    && minTargets <= 1) {
+                selectedIndices = Collections.singletonList(autopilotIndex);
+                oldLogpTotal = 0.0f;
+                if (ONLINE_PREFIX_AUTOPILOT_TARGETS) {
+                    mctsVisitTargets = oneHotCandidateTarget(autopilotIndex, maxCandidates);
+                }
+            }
+        }
+
+        if (ONLINE_PREFIX_SEARCH_ENABLE
+                && !forcedApplied
+                && (!trainingEnabled || ONLINE_PREFIX_SEARCH_DURING_TRAINING)
+                && game != null
+                && !game.isSimulation()
+                && model != null
+                && actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                && candidateCount >= 2
+                && maxTargets == 1
+                && minTargets <= 1
+                && selectedIndices != null
+                && selectedIndices.size() == 1
+                && (!ONLINE_PREFIX_AUTOPILOT_ENABLE || onlinePrefixAutopilot.isEmpty())
+                && (ONLINE_PREFIX_SEARCH_MAX_ACTIVATIONS <= 0
+                || onlinePrefixSearchActivations < ONLINE_PREFIX_SEARCH_MAX_ACTIVATIONS)) {
+            int originalIndex = selectedIndices.get(0);
+            mage.player.ai.rl.TerminalPrefixSearch.Config cfg =
+                    new mage.player.ai.rl.TerminalPrefixSearch.Config();
+            cfg.maxNodes = ONLINE_PREFIX_SEARCH_MAX_NODES;
+            cfg.maxDepth = ONLINE_PREFIX_SEARCH_MAX_DEPTH;
+            cfg.topK = ONLINE_PREFIX_SEARCH_TOP_K;
+            cfg.maxGameTurns = ONLINE_PREFIX_SEARCH_MAX_GAME_TURNS;
+            cfg.selectedIndex = originalIndex;
+            cfg.totalTimeoutMs = ONLINE_PREFIX_SEARCH_TOTAL_TIMEOUT_MS;
+            cfg.branchTimeoutMs = ONLINE_PREFIX_SEARCH_BRANCH_TIMEOUT_MS;
+            cfg.log = ONLINE_PREFIX_SEARCH_LOG;
+            cfg.returnSameActionWins = ONLINE_PREFIX_AUTOPILOT_ENABLE;
+            cfg.modelGuidedFallback = ONLINE_PREFIX_MODEL_GUIDED_FALLBACK;
+            cfg.genericBranchOrder = ONLINE_PREFIX_GENERIC_BRANCH_ORDER;
+            onlinePrefixSearchActivations++;
+            ONLINE_PREFIX_SEARCH_CALLS.incrementAndGet();
+            mage.player.ai.rl.TerminalPrefixSearch.Result searchResult =
+                    mage.player.ai.rl.TerminalPrefixSearch.search(
+                            game,
+                            getId(),
+                            candidates,
+                            actionType,
+                            source,
+                            policyMaskedProbs,
+                            model,
+                            cfg);
+            if (searchResult.timedOut) {
+                ONLINE_PREFIX_SEARCH_TIMEOUTS.incrementAndGet();
+            }
+            if (searchResult.hasAction()
+                    && searchResult.actionIndex >= 0
+                    && searchResult.actionIndex < candidateCount) {
+                ONLINE_PREFIX_SEARCH_FOUND.incrementAndGet();
+                if (searchResult.actionIndex != originalIndex) {
+                    ONLINE_PREFIX_SEARCH_OVERRIDES.incrementAndGet();
+                }
+                selectedIndices = Collections.singletonList(searchResult.actionIndex);
+                oldLogpTotal = 0.0f;
+                if (ONLINE_PREFIX_AUTOPILOT_TARGETS) {
+                    mctsVisitTargets = oneHotCandidateTarget(searchResult.actionIndex, maxCandidates);
+                }
+                if (ONLINE_PREFIX_AUTOPILOT_ENABLE && searchResult.prefixTexts.size() > 1) {
+                    startOnlinePrefixAutopilot(game, searchResult.prefixTexts.subList(1, searchResult.prefixTexts.size()));
+                }
+            }
+            if (ONLINE_PREFIX_SEARCH_LOG) {
+                GameLogger gl = resolveGameLogger();
+                String msg = String.format(Locale.US,
+                        "[ONLINE_PREFIX] found=%s old=%d new=%d nodes=%d queued=%d prefixLen=%d autopilot=%d wallMs=%d timeout=%s reason=%s action=%s stats=%s",
+                        searchResult.hasAction(),
+                        originalIndex,
+                        searchResult.actionIndex,
+                        searchResult.nodesRun,
+                        searchResult.queued,
+                        searchResult.prefixTexts.size(),
+                        onlinePrefixAutopilot.size(),
+                        searchResult.wallMs,
+                        searchResult.timedOut,
+                        searchResult.reason,
+                        trunc(searchResult.actionText, 180),
+                        getOnlinePrefixSearchStats());
+                if (gl != null && gl.isEnabled()) {
+                    gl.log(msg);
+                } else {
+                    System.out.println(msg);
+                }
+            }
+        }
+
         // MCTS training override: replace the sampled pick with MCTS's choice
         // and propagate the visit distribution through TrainingData so the
         // python KL loss can use it as a distillation target.
-        if (mctsChosenIndex != null && mctsTrainingMode && !selectedIndices.isEmpty()) {
+        if (mctsChosenIndex != null && mctsTrainingMode && MCTS_TRAINING_FORCE_ACTION && !selectedIndices.isEmpty()) {
             selectedIndices = Arrays.asList(mctsChosenIndex);
         }
 
@@ -1940,6 +3641,33 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (finalIdx >= 0 && finalIdx < candidates.size()) {
                 mctsSession.recordChoice(finalIdx, candidates.get(finalIdx));
             }
+        }
+
+        if (!selectedIndices.isEmpty() && shouldLogReplayDecision(actionType)) {
+            logReplayDecision(
+                    actionType,
+                    replayCandidateTexts(candidates, candidateCount),
+                    selectedIndices,
+                    maskedProbs,
+                    candidateCount,
+                    valueScore,
+                    game,
+                    source,
+                    replayCandidateObjectIds(candidates, candidateCount, game),
+                    Collections.emptyList()
+            );
+        }
+
+        if (!selectedIndices.isEmpty()) {
+            recordGenericActionHistoryChoice(
+                    game,
+                    actionType,
+                    candidates,
+                    candidateCount,
+                    selectedIndices.get(0),
+                    policyMaskedProbs,
+                    candidateFeatures
+            );
         }
 
         // Record training data for decisions (store full action + joint log-prob)
@@ -1977,7 +3705,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             // Track decision count by head
             decisionCountsByHead.put(actionType, decisionCountsByHead.getOrDefault(actionType, 0) + 1);
-            
+
             if (actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN) {
                 mulliganTraceJsonl(
                         "bottom_td_recorded",
@@ -1990,6 +3718,290 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         return selectedIndices;
+    }
+
+    private void resetOnlinePrefixAutopilotGame(Game game) {
+        if (!ONLINE_PREFIX_AUTOPILOT_ENABLE || game == null) {
+            return;
+        }
+        UUID gameId;
+        try {
+            gameId = game.getId();
+        } catch (Throwable t) {
+            return;
+        }
+        if (!Objects.equals(onlinePrefixAutopilotGameId, gameId)) {
+            onlinePrefixAutopilot.clear();
+            onlinePrefixAutopilotGameId = gameId;
+        }
+    }
+
+    private void startOnlinePrefixAutopilot(Game game, List<String> suffix) {
+        if (!ONLINE_PREFIX_AUTOPILOT_ENABLE || game == null || suffix == null || suffix.isEmpty()) {
+            return;
+        }
+        resetOnlinePrefixAutopilotGame(game);
+        onlinePrefixAutopilot.clear();
+        for (String text : suffix) {
+            if (text != null && !text.trim().isEmpty()) {
+                onlinePrefixAutopilot.addLast(text);
+            }
+        }
+        if (!onlinePrefixAutopilot.isEmpty()) {
+            ONLINE_PREFIX_AUTOPILOT_STARTED.incrementAndGet();
+            if (ONLINE_PREFIX_SEARCH_LOG) {
+                logOnlinePrefixAutopilot(game, "start", onlinePrefixAutopilot.peekFirst(), -1);
+            }
+        }
+    }
+
+    private <T> Integer consumeOnlinePrefixAutopilot(
+            List<T> candidates,
+            int candidateCount,
+            StateSequenceBuilder.ActionType actionType,
+            Game game,
+            Ability source
+    ) {
+        if (!ONLINE_PREFIX_AUTOPILOT_ENABLE
+                || (trainingEnabled && !ONLINE_PREFIX_AUTOPILOT_DURING_TRAINING)
+                || game == null
+                || game.isSimulation()
+                || onlinePrefixAutopilot.isEmpty()
+                || !mage.player.ai.rl.TerminalPrefixSearch.isControllableActionType(actionType)) {
+            return null;
+        }
+        int count = Math.min(candidateCount, candidates == null ? 0 : candidates.size());
+        if (count <= 0) {
+            return null;
+        }
+        String expected = onlinePrefixAutopilot.peekFirst();
+        int idx = mage.player.ai.rl.TerminalPrefixSearch.findMatchingCandidateIndex(
+                candidates, count, game, source, expected);
+        if (idx >= 0) {
+            onlinePrefixAutopilot.removeFirst();
+            ONLINE_PREFIX_AUTOPILOT_APPLIED.incrementAndGet();
+            if (ONLINE_PREFIX_SEARCH_LOG) {
+                logOnlinePrefixAutopilot(game, "apply", expected, idx);
+            }
+            return idx;
+        }
+        if (count >= 2) {
+            ONLINE_PREFIX_AUTOPILOT_MISSES.incrementAndGet();
+            if (ONLINE_PREFIX_SEARCH_LOG) {
+                logOnlinePrefixAutopilot(game, "miss", expected, -1);
+            }
+            onlinePrefixAutopilot.clear();
+        }
+        return null;
+    }
+
+    private void logOnlinePrefixAutopilot(Game game, String event, String expected, int idx) {
+        String msg = String.format(Locale.US,
+                "[ONLINE_PREFIX_AUTOPILOT] event=%s idx=%d remaining=%d expected=%s stats=%s",
+                event,
+                idx,
+                onlinePrefixAutopilot.size(),
+                trunc(expected, 180),
+                getOnlinePrefixSearchStats());
+        GameLogger gl = resolveGameLogger();
+        if (gl != null && gl.isEnabled()) {
+            gl.log(msg);
+        } else {
+            System.out.println(msg);
+        }
+    }
+
+    private static float[] oneHotCandidateTarget(int index, int maxCandidates) {
+        float[] out = new float[maxCandidates];
+        if (index >= 0 && index < maxCandidates) {
+            out[index] = 1.0f;
+        }
+        return out;
+    }
+
+    private <T> List<Integer> applyValueActionGate(
+            List<Integer> selectedIndices,
+            StateSequenceBuilder.ActionType actionType,
+            List<T> candidates,
+            int candidateCount,
+            int[] candidateMask,
+            float[] policyProbs,
+            float valueScore,
+            Game game,
+            Ability source
+    ) {
+        if (!VALUE_ACTION_GATE_ENABLE
+                || trainingEnabled
+                || actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                || selectedIndices == null
+                || selectedIndices.size() != 1
+                || valueScore >= VALUE_ACTION_GATE_MIN) {
+            return selectedIndices;
+        }
+        int selected = selectedIndices.get(0);
+        if (selected < 0 || selected >= candidateCount || selected >= candidates.size()) {
+            return selectedIndices;
+        }
+        String selectedSignature = mctsCandidateSignature(candidates.get(selected), game, source);
+        if (!matchesValueActionGateKeyword(selectedSignature)) {
+            return selectedIndices;
+        }
+
+        int bestAlt = -1;
+        float bestProb = -1.0f;
+        for (int i = 0; i < candidateCount && i < candidates.size(); i++) {
+            if (i == selected || (candidateMask != null && (i >= candidateMask.length || candidateMask[i] != 1))) {
+                continue;
+            }
+            String signature = mctsCandidateSignature(candidates.get(i), game, source);
+            if (matchesValueActionGateKeyword(signature)) {
+                continue;
+            }
+            float p = policyProbs != null && i < policyProbs.length ? policyProbs[i] : 0.0f;
+            if (p > bestProb) {
+                bestProb = p;
+                bestAlt = i;
+            }
+        }
+        if (bestAlt < 0) {
+            return selectedIndices;
+        }
+
+        GameLogger gl = resolveGameLogger();
+        if (gl != null && gl.isEnabled()) {
+            gl.log(String.format(Locale.US,
+                    "[VALUE_GATE] value=%.6f min=%.6f selected=%d alt=%d selectedSig=%s altSig=%s altProb=%.6f",
+                    valueScore,
+                    VALUE_ACTION_GATE_MIN,
+                    selected,
+                    bestAlt,
+                    selectedSignature,
+                    mctsCandidateSignature(candidates.get(bestAlt), game, source),
+                    bestProb));
+        }
+        return Collections.singletonList(bestAlt);
+    }
+
+    private <T> List<Integer> applySpyTimingMask(
+            List<Integer> selectedIndices,
+            StateSequenceBuilder.ActionType actionType,
+            List<T> candidates,
+            int candidateCount,
+            int[] candidateMask,
+            float[] policyProbs,
+            Game game,
+            Ability source
+    ) {
+        if (!SPY_TIMING_MASK_ENABLE
+                || trainingEnabled
+                || actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                || selectedIndices == null
+                || selectedIndices.size() != 1) {
+            return selectedIndices;
+        }
+        int selected = selectedIndices.get(0);
+        if (selected < 0 || selected >= candidateCount || selected >= candidates.size()) {
+            return selectedIndices;
+        }
+
+        int libraryTrueLands = countLibraryTrueLands(game);
+        String selectedSignature = mctsCandidateSignature(candidates.get(selected), game, source);
+        String selectedReason = spyTimingMaskReason(selectedSignature, libraryTrueLands, game);
+        if (selectedReason == null) {
+            return selectedIndices;
+        }
+
+        int bestAlt = -1;
+        float bestProb = -1.0f;
+        for (int i = 0; i < candidateCount && i < candidates.size(); i++) {
+            if (i == selected || (candidateMask != null && (i >= candidateMask.length || candidateMask[i] != 1))) {
+                continue;
+            }
+            String signature = mctsCandidateSignature(candidates.get(i), game, source);
+            if (spyTimingMaskReason(signature, libraryTrueLands, game) != null) {
+                continue;
+            }
+            float p = policyProbs != null && i < policyProbs.length ? policyProbs[i] : 0.0f;
+            if (p > bestProb) {
+                bestProb = p;
+                bestAlt = i;
+            }
+        }
+        if (bestAlt < 0) {
+            return selectedIndices;
+        }
+
+        if (SPY_TIMING_MASK_LOG) {
+            GameLogger gl = resolveGameLogger();
+            if (gl != null && gl.isEnabled()) {
+                gl.log(String.format(Locale.US,
+                        "[SPY_TIMING_MASK] reason=%s selected=%d alt=%d libraryTrueLands=%d ownCreatures=%d graveyardHasLotleth=%s selectedSig=%s altSig=%s altProb=%.6f",
+                        selectedReason,
+                        selected,
+                        bestAlt,
+                        libraryTrueLands,
+                        countOwnCreatures(game),
+                        graveyardContains(game, "Lotleth Giant"),
+                        selectedSignature,
+                        mctsCandidateSignature(candidates.get(bestAlt), game, source),
+                        bestProb));
+            }
+        }
+        return Collections.singletonList(bestAlt);
+    }
+
+    private String spyTimingMaskReason(String signature, int libraryTrueLands, Game game) {
+        if (signature == null || signature.isEmpty()) {
+            return null;
+        }
+        String lower = signature.toLowerCase(Locale.ROOT);
+        if (lower.contains("balustrade spy") && lower.contains("cast") && libraryTrueLands > 0) {
+            return "spy_with_lands";
+        }
+        if (SPY_TIMING_MASK_BLOCK_DREAD
+                && lower.contains("dread return")
+                && (lower.contains("flashback") || lower.contains("cast"))
+                && !dreadReturnComboReady(game)) {
+            return "dread_not_ready";
+        }
+        return null;
+    }
+
+    private boolean dreadReturnComboReady(Game game) {
+        return graveyardContains(game, "Lotleth Giant") && countOwnCreatures(game) >= 3;
+    }
+
+    private boolean graveyardContains(Game game, String name) {
+        try {
+            Player player = game == null ? null : game.getPlayer(playerId);
+            if (player == null || name == null) {
+                return false;
+            }
+            for (Card card : player.getGraveyard().getCards(game)) {
+                if (card != null && name.equalsIgnoreCase(card.getName())) {
+                    return true;
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return false;
+    }
+
+    private int countLibraryTrueLands(Game game) {
+        int count = 0;
+        try {
+            Player player = game == null ? null : game.getPlayer(playerId);
+            if (player == null) {
+                return 0;
+            }
+            for (Card card : player.getLibrary().getCards(game)) {
+                if (card != null && card.isLand(game)) {
+                    count++;
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return count;
     }
 
     private <T> void logCandidateExplosionDebug(
@@ -2176,6 +4188,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return false;
     }
 
+    private boolean matchesValueActionGateKeyword(String signature) {
+        if (signature == null || signature.isEmpty()) {
+            return false;
+        }
+        String lower = signature.toLowerCase(Locale.ROOT);
+        for (String keyword : VALUE_ACTION_GATE_KEYWORDS) {
+            if (!keyword.isEmpty() && lower.contains(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private String mctsCandidateSignature(Object candidate, Game game, Ability source) {
         try {
             if (candidate instanceof ActivatedAbility) {
@@ -2204,6 +4229,152 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return String.valueOf(candidate);
     }
 
+    private static MctsRootSubset buildMctsRootSubset(
+            List<mage.abilities.Ability> candidates,
+            float[] priors,
+            int candidateCount
+    ) {
+        int n = Math.min(candidateCount, candidates == null ? 0 : candidates.size());
+        int topK = Math.max(0, MCTS_ROOT_TOP_K);
+        if (topK <= 0 || n <= topK) {
+            return MctsRootSubset.identity(candidates, priors);
+        }
+
+        boolean[] include = new boolean[n];
+        int included = 0;
+        if (MCTS_ROOT_INCLUDE_PASS && n > 0 && candidates.get(0) instanceof PassAbility) {
+            include[0] = true;
+            included++;
+        }
+
+        List<Integer> order = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            order.add(i);
+        }
+        order.sort((a, b) -> Float.compare(safeMctsPrior(priors, b), safeMctsPrior(priors, a)));
+        for (Integer idx : order) {
+            if (idx == null || idx < 0 || idx >= n || include[idx]) {
+                continue;
+            }
+            include[idx] = true;
+            included++;
+            if (included >= topK) {
+                break;
+            }
+        }
+        if (included <= 0 || included >= n) {
+            return MctsRootSubset.identity(candidates, priors);
+        }
+
+        List<mage.abilities.Ability> subsetCandidates = new ArrayList<>(included);
+        float[] subsetPriors = new float[included];
+        int[] originalIndices = new int[included];
+        int out = 0;
+        for (int i = 0; i < n; i++) {
+            if (!include[i]) {
+                continue;
+            }
+            subsetCandidates.add(candidates.get(i));
+            subsetPriors[out] = safeMctsPrior(priors, i);
+            originalIndices[out] = i;
+            out++;
+        }
+        normalizeMctsPriorsInPlace(subsetPriors);
+        return new MctsRootSubset(subsetCandidates, subsetPriors, originalIndices);
+    }
+
+    private static float safeMctsPrior(float[] priors, int idx) {
+        if (priors == null || idx < 0 || idx >= priors.length) {
+            return 0f;
+        }
+        float p = priors[idx];
+        return Float.isNaN(p) || Float.isInfinite(p) || p < 0f ? 0f : p;
+    }
+
+    private static void normalizeMctsPriorsInPlace(float[] priors) {
+        if (priors == null || priors.length == 0) {
+            return;
+        }
+        float sum = 0f;
+        for (float p : priors) {
+            if (p > 0f && !Float.isNaN(p) && !Float.isInfinite(p)) {
+                sum += p;
+            }
+        }
+        if (sum <= 1e-6f) {
+            float uniform = 1.0f / priors.length;
+            Arrays.fill(priors, uniform);
+            return;
+        }
+        for (int i = 0; i < priors.length; i++) {
+            priors[i] = priors[i] > 0f && !Float.isNaN(priors[i]) && !Float.isInfinite(priors[i])
+                    ? priors[i] / sum
+                    : 0f;
+        }
+    }
+
+    private static final class MctsRootSubset {
+        final List<mage.abilities.Ability> candidates;
+        final float[] priors;
+        final int[] originalIndices;
+
+        private MctsRootSubset(List<mage.abilities.Ability> candidates, float[] priors, int[] originalIndices) {
+            this.candidates = candidates;
+            this.priors = priors;
+            this.originalIndices = originalIndices;
+        }
+
+        static MctsRootSubset identity(List<mage.abilities.Ability> candidates, float[] priors) {
+            return new MctsRootSubset(candidates, priors, null);
+        }
+
+        int toOriginalIndex(int searchIndex) {
+            if (originalIndices == null) {
+                return searchIndex;
+            }
+            if (searchIndex < 0 || searchIndex >= originalIndices.length) {
+                return -1;
+            }
+            return originalIndices[searchIndex];
+        }
+
+        int[] expandVisits(int[] visits, int originalCount) {
+            if (originalIndices == null) {
+                return visits;
+            }
+            int[] expanded = new int[originalCount];
+            if (visits == null) {
+                return expanded;
+            }
+            int n = Math.min(visits.length, originalIndices.length);
+            for (int i = 0; i < n; i++) {
+                int original = originalIndices[i];
+                if (original >= 0 && original < expanded.length) {
+                    expanded[original] = visits[i];
+                }
+            }
+            return expanded;
+        }
+
+        float[] expandValues(float[] values, int originalCount) {
+            if (originalIndices == null) {
+                return values;
+            }
+            float[] expanded = new float[originalCount];
+            if (values == null) {
+                return expanded;
+            }
+            int n = Math.min(values.length, originalIndices.length);
+            for (int i = 0; i < n; i++) {
+                int original = originalIndices[i];
+                if (original >= 0 && original < expanded.length) {
+                    expanded[original] = values[i];
+                }
+            }
+            return expanded;
+        }
+    }
+
     private static String headForActionType(StateSequenceBuilder.ActionType t) {
         if (t == null) {
             return "action";
@@ -2211,6 +4382,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         switch (t) {
             case SELECT_TARGETS:
                 return "target";
+            case MULLIGAN:
+                return "mulligan";
             case LONDON_MULLIGAN:
             case SELECT_CARD:
                 return "card_select";
@@ -2252,6 +4425,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 System.out.println("[SKIP] skipped=" + skippedInfer.get() + " inferred=" + profileCount.get()
                         + " skip_rate=" + String.format("%.1f%%", 100.0 * skippedInfer.get() / total));
             }
+            return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(policy, 0.0f);
+        }
+        if (Boolean.TRUE.equals(activationValidationSimulation.get())) {
+            float[] policy = new float[candidateCount];
+            for (int i = 0; i < candidateCount; i++) {
+                if (candidateMask[i] != 0) {
+                    policy[i] = 1.0f;
+                    break;
+                }
+            }
+            skippedInfer.incrementAndGet();
             return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(policy, 0.0f);
         }
         if (RANDOM_DECISIONS) {
@@ -2327,17 +4511,28 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (candidate instanceof mage.abilities.Ability) {
                 mage.abilities.Ability ab = (mage.abilities.Ability) candidate;
                 MageObject srcObj = game.getObject(ab.getSourceId());
+                if (srcObj == null && game != null) {
+                    srcObj = game.getCard(ab.getSourceId());
+                }
                 String srcName = srcObj != null ? srcObj.getName() : "unknown";
                 base += ":ABILITY:" + srcName + ":" + ab.getClass().getSimpleName();
+            } else if (candidate instanceof Card) {
+                Card card = (Card) candidate;
+                base += ":CARD:" + (card.getName() == null ? "unknown" : card.getName());
             } else if (candidate instanceof java.util.UUID) {
                 java.util.UUID tid = (java.util.UUID) candidate;
                 MageObject obj = game.getObject(tid);
                 if (obj != null) {
                     base += ":TARGET:" + obj.getName();
-                } else if (game.getPlayer(tid) != null) {
-                    base += ":TARGET:PLAYER";
                 } else {
-                    base += ":TARGET:UNKNOWN";
+                    Card card = game.getCard(tid);
+                    if (card != null) {
+                        base += ":CARD:" + card.getName();
+                    } else if (game.getPlayer(tid) != null) {
+                        base += ":TARGET:PLAYER";
+                    } else {
+                        base += ":TARGET:UNKNOWN";
+                    }
                 }
             } else if (candidate instanceof mage.abilities.Mode) {
                 mage.abilities.Mode mode = (mage.abilities.Mode) candidate;
@@ -2386,6 +4581,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 f[3] = spellCount / 7.0f;
                 f[22] = handSize / 7.0f;
                 f[24] = mulligansTaken / 3.0f;
+                fillMulliganHandFeatures(f, game);
                 return f;
             }
 
@@ -2508,6 +4704,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (candidate instanceof mage.abilities.Ability) {
                 mage.abilities.Ability ab = (mage.abilities.Ability) candidate;
                 MageObject srcObj = game.getObject(ab.getSourceId());
+                if (srcObj == null && game != null) {
+                    srcObj = game.getCard(ab.getSourceId());
+                }
+                if (baseState != null && ab.getSourceId() != null) {
+                    Integer tokenIdx = baseState.uuidToTokenIndex.get(ab.getSourceId());
+                    f[27] = (tokenIdx != null) ? 1.0f : 0.0f;
+                    f[28] = (tokenIdx != null) ? tokenIdx / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
+                }
                 if (srcObj instanceof Permanent) {
                     Permanent p = (Permanent) srcObj;
                     f[2] = p.isCreature() ? 1.0f : 0.0f;
@@ -2529,14 +4733,27 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     f[36] = p.getAbilities(game).containsKey(LifelinkAbility.getInstance().getId()) ? 1.0f : 0.0f;
                     f[37] = p.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId()) ? 1.0f : 0.0f;
                     f[38] = p.getAbilities(game).containsKey(TrampleAbility.getInstance().getId()) ? 1.0f : 0.0f;
+                } else if (srcObj instanceof Card) {
+                    fillCardCandidateFeatures(f, (Card) srcObj, game, baseState);
                 }
                 // rough target count
                 f[7] = ab.getTargets() != null ? ab.getTargets().size() / 5.0f : 0.0f;
                 f[8] = ab.isUsesStack() ? 1.0f : 0.0f;
                 // Mana cost
                 f[9] = ab.getManaCostsToPay().manaValue() / 10.0f;
-                // Is spell from hand (distinguishes from activated abilities on battlefield)
+                // Is spell (distinguishes spell candidates from activated abilities).
                 f[24] = (ab instanceof SpellAbility) ? 1.0f : 0.0f;
+                fillGenericSourceZoneCandidateFeatures(f, ab, game);
+                if (GENERIC_ACTION_CLASS_FEATURES_ENABLE) {
+                    f[10] = (ab instanceof ManaAbility) ? 1.0f : 0.0f;
+                    f[11] = (ab instanceof PlayLandAbility) ? 1.0f : 0.0f;
+                    f[12] = (ab instanceof SpellAbility) ? 1.0f : 0.0f;
+                    f[13] = (!(ab instanceof ManaAbility)
+                            && !(ab instanceof PlayLandAbility)
+                            && !(ab instanceof SpellAbility)) ? 1.0f : 0.0f;
+                    f[14] = ab.isUsesStack() ? 1.0f : 0.0f;
+                }
+                fillSpyComboActionCandidateFeatures(f, ab, srcObj, game);
             }
 
             // Target candidate features
@@ -2581,6 +4798,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         f[40] = perm.getAbilities(game).containsKey(IndestructibleAbility.getInstance().getId()) ? 1.0f : 0.0f;
                         f[41] = (perm instanceof PermanentToken) ? 1.0f : 0.0f;
                         f[42] = Math.min(perm.getCounters(game).getCount(CounterType.P1P1), 10) / 10.0f;
+                    } else {
+                        Card card = game.getCard(tid);
+                        if (card != null) {
+                            fillCardCandidateFeatures(f, card, game, baseState);
+                        }
                     }
                 }
                 // Include source-ability context for target selection so the model can
@@ -2595,6 +4817,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         f[47] = sourceTokenIdx != null ? sourceTokenIdx / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
                     }
                 }
+            }
+
+            if (candidate instanceof Card) {
+                fillCardCandidateFeatures(f, (Card) candidate, game, baseState);
             }
 
             // Mode candidate features (CHOOSE_MODE)
@@ -2648,6 +4874,187 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             // leave zeros
         }
         return f;
+    }
+
+    private void fillGenericSourceZoneCandidateFeatures(float[] f, Ability ability, Game game) {
+        if (!GENERIC_SOURCE_ZONE_FEATURES_ENABLE || f == null || ability == null
+                || game == null || game.getState() == null) {
+            return;
+        }
+        try {
+            Zone sourceZone = game.getState().getZone(ability.getSourceId());
+            Zone abilityZone = ability.getZone();
+            Zone effectiveZone = sourceZone != null ? sourceZone : abilityZone;
+            if (effectiveZone == null) {
+                return;
+            }
+            f[15] = Zone.HAND.match(effectiveZone) ? 1.0f : 0.0f;
+            f[16] = Zone.GRAVEYARD.match(effectiveZone) ? 1.0f : 0.0f;
+            f[17] = Zone.BATTLEFIELD.match(effectiveZone) ? 1.0f : 0.0f;
+            f[25] = Zone.EXILED.match(effectiveZone) ? 1.0f : 0.0f;
+            f[26] = (ability instanceof SpellAbility && !Zone.HAND.match(effectiveZone)) ? 1.0f : 0.0f;
+            if (abilityZone != null && !abilityZone.match(effectiveZone)) {
+                f[29] = Zone.HAND.match(abilityZone) ? 1.0f : 0.0f;
+                f[30] = Zone.GRAVEYARD.match(abilityZone) ? 1.0f : 0.0f;
+                f[31] = Zone.BATTLEFIELD.match(abilityZone) ? 1.0f : 0.0f;
+            }
+        } catch (Exception ignored) {
+            // Optional generic representation features only.
+        }
+    }
+
+    private void fillSpyComboActionCandidateFeatures(float[] f, Ability ability, MageObject sourceObject, Game game) {
+        if (!SPY_COMBO_CANDIDATE_FEATURES_ENABLE || f == null || ability == null || sourceObject == null) {
+            return;
+        }
+        try {
+            String name = sourceObject.getName();
+            if (name == null || name.isEmpty()) {
+                return;
+            }
+            String lower = name.toLowerCase(Locale.ROOT);
+            boolean spell = ability instanceof SpellAbility;
+            if (spell && lower.contains("balustrade spy")) {
+                int trueLands = countLibraryTrueLands(game);
+                f[43] = 1.0f; // is Balustrade Spy spell candidate
+                f[44] = Math.min(Math.max(trueLands, 0), 4) / 4.0f;
+                f[45] = trueLands == 0 ? 1.0f : 0.0f;
+            }
+            if (spell && lower.contains("dread return")) {
+                f[46] = 1.0f; // is Dread Return spell/flashback candidate
+                f[47] = dreadReturnComboReady(game) ? 1.0f : 0.0f;
+            }
+        } catch (Exception ignored) {
+            // optional representation features only
+        }
+    }
+
+    private void fillCardCandidateFeatures(float[] f, Card card, Game game, StateSequenceBuilder.SequenceOutput baseState) {
+        if (f == null || card == null) {
+            return;
+        }
+        try {
+            f[2] = card.isCreature(game) ? 1.0f : 0.0f;
+            f[3] = card.isLand(game) ? 1.0f : 0.0f;
+            f[5] = Math.max(0, card.getPower().getValue()) / 10.0f;
+            f[6] = Math.max(0, card.getToughness().getValue()) / 10.0f;
+            f[9] = Math.max(0, card.getManaValue()) / 10.0f;
+            if (baseState != null) {
+                Integer tokenIdx = baseState.uuidToTokenIndex.get(card.getId());
+                f[27] = (tokenIdx != null) ? 1.0f : 0.0f;
+                f[28] = (tokenIdx != null) ? tokenIdx / (float) StateSequenceBuilder.MAX_LEN : 0.0f;
+            }
+            f[32] = card.isArtifact(game) ? 1.0f : 0.0f;
+            f[33] = card.isInstant(game) ? 1.0f : 0.0f;
+            f[34] = card.isSorcery(game) ? 1.0f : 0.0f;
+            f[35] = card.isEnchantment(game) ? 1.0f : 0.0f;
+            f[36] = card.isCreature(game) ? 1.0f : 0.0f;
+            f[37] = card.isLand(game) ? 1.0f : 0.0f;
+
+            Mana total = new Mana();
+            for (mage.abilities.costs.mana.ManaCost cost : card.getManaCost()) {
+                total.add(cost.getMana());
+            }
+            f[40] = Math.max(0, total.getWhite()) / 10.0f;
+            f[41] = Math.max(0, total.getBlue()) / 10.0f;
+            f[42] = Math.max(0, total.getBlack()) / 10.0f;
+            f[43] = Math.max(0, total.getRed()) / 10.0f;
+            f[44] = Math.max(0, total.getGreen()) / 10.0f;
+
+            String name = card.getName();
+            if (name != null) {
+                if ("Plains".equals(name)) f[40] = 1.0f;
+                if ("Island".equals(name)) f[41] = 1.0f;
+                if ("Swamp".equals(name)) f[42] = 1.0f;
+                if ("Mountain".equals(name)) f[43] = 1.0f;
+                if ("Forest".equals(name)) f[44] = 1.0f;
+                int hash = name.hashCode();
+                int bucket = Math.floorMod(hash, 3);
+                f[45 + bucket] = ((hash & 0x10000) == 0) ? 1.0f : -1.0f;
+            }
+        } catch (Exception ignored) {
+            // Candidate identity features are auxiliary; never break a decision.
+        }
+    }
+
+    private void fillMulliganHandFeatures(float[] f, Game game) {
+        if (f == null || f.length <= 25 || getHand() == null) {
+            return;
+        }
+        try {
+            List<Card> cards = new ArrayList<>(getHand().getCards(game));
+            int handSize = Math.max(1, cards.size());
+            int creatures = 0;
+            int instants = 0;
+            int sorceries = 0;
+            int artifacts = 0;
+            int enchantments = 0;
+            int zeroMv = 0;
+            int oneMv = 0;
+            int twoMv = 0;
+            int threePlusMv = 0;
+            double manaValueSum = 0.0;
+
+            for (Card card : cards) {
+                if (card == null) {
+                    continue;
+                }
+                int manaValue = Math.max(0, card.getManaValue());
+                manaValueSum += manaValue;
+                if (manaValue == 0) {
+                    zeroMv++;
+                } else if (manaValue == 1) {
+                    oneMv++;
+                } else if (manaValue == 2) {
+                    twoMv++;
+                } else {
+                    threePlusMv++;
+                }
+                if (card.isCreature(game)) {
+                    creatures++;
+                }
+                if (card.isInstant(game)) {
+                    instants++;
+                }
+                if (card.isSorcery(game)) {
+                    sorceries++;
+                }
+                if (card.isArtifact(game)) {
+                    artifacts++;
+                }
+                if (card.isEnchantment(game)) {
+                    enchantments++;
+                }
+
+                String name = card.getName();
+                if (name != null && f.length > 35) {
+                    int hash = name.hashCode();
+                    int bucketCount = Math.min(13, f.length - 35);
+                    if (bucketCount > 0) {
+                        int bucket = Math.floorMod(hash, bucketCount);
+                        float sign = ((hash & 0x10000) == 0) ? 1.0f : -1.0f;
+                        f[35 + bucket] += sign / (float) Math.sqrt(handSize);
+                    }
+                }
+            }
+
+            f[25] = creatures / 7.0f;
+            f[26] = instants / 7.0f;
+            f[27] = sorceries / 7.0f;
+            f[28] = artifacts / 7.0f;
+            f[29] = enchantments / 7.0f;
+            f[30] = (float) Math.min(1.0, (manaValueSum / handSize) / 6.0);
+            f[31] = zeroMv / 7.0f;
+            f[32] = oneMv / 7.0f;
+            f[33] = twoMv / 7.0f;
+            f[34] = threePlusMv / 7.0f;
+
+            for (int i = 35; i < Math.min(f.length, 48); i++) {
+                f[i] = Math.max(-1.0f, Math.min(1.0f, f[i]));
+            }
+        } catch (Exception ignored) {
+            // Feature enrichment must never break a mulligan decision.
+        }
     }
 
     private double computeStepReward(StateSequenceBuilder.ActionType actionType, Object candidate, Game game) {
@@ -3085,6 +5492,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             java.util.List<UUID> possible = new java.util.ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
             final UUID ctrlId = abilityControllerId;
             possible.removeIf(id -> id == null || chosen.contains(id) || !target.canTarget(ctrlId, id, source, game));
+            sortTargetsForStableChoice(possible, game);
 
             int chosenPower = requiredTapPower > 0 ? computeTotalPowerForTargets(chosen, game) : 0;
             boolean allowStop = chosenCount >= minTargets
@@ -3183,11 +5591,40 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     float[] actionProbs = prediction.policyScores;
                     float valueScore = prediction.valueScores;
                     SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+                    List<Integer> forcedChoice = forcedChoiceIndices(
+                            StateSequenceBuilder.ActionType.SELECT_TARGETS, possible, 1, 1, game, source);
+                    if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                        int forcedIdx = forcedChoice.get(0);
+                        if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
+                            pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                        }
+                    }
                     int chosenIdx = pickResult.chosenIdx;
                     picked = possible.get(chosenIdx);
                     String pickName = picked == null ? "STOP" : (game.getObject(picked) != null ? game.getObject(picked).getName() : "unknown");
                     trace(String.format("chooseTarget: RL model picked idx=%d, target=%s, behavior_prob=%.3f, mode=%s",
                             chosenIdx, pickName, pickResult.selectedBehaviorProb, pickResult.behavior.mode));
+                    if (shouldLogReplayDecision(StateSequenceBuilder.ActionType.SELECT_TARGETS)) {
+                        List<String> replayOptionNames = new ArrayList<>();
+                        List<String> replayObjectIds = new ArrayList<>();
+                        for (int i = 0; i < candidateCount; i++) {
+                            UUID tid = possible.get(i);
+                            replayOptionNames.add(tid == null ? "STOP" : describeTargetWithOwner(tid, game));
+                            replayObjectIds.add(tid == null ? "sentinel:STOP" : tid.toString());
+                        }
+                        logReplayDecision(
+                                StateSequenceBuilder.ActionType.SELECT_TARGETS,
+                                replayOptionNames,
+                                Collections.singletonList(chosenIdx),
+                                pickResult.behavior.behaviorProbs,
+                                candidateCount,
+                                valueScore,
+                                game,
+                                source,
+                                replayObjectIds,
+                                Collections.emptyList()
+                        );
+                    }
 
                     // Record training data for this target selection
                     if (trainingEnabled && !game.isSimulation()) {
@@ -3288,6 +5725,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             java.util.List<UUID> possible = new java.util.ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
             final UUID ctrlId = abilityControllerId;
             possible.removeIf(id -> id == null || chosen.contains(id) || !target.canTarget(ctrlId, id, source, game));
+            sortTargetsForStableChoice(possible, game);
             if (possible.isEmpty()) {
                 trace("chooseTarget: no targets available to fill minTargets, breaking");
                 break;
@@ -3308,6 +5746,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 java.util.List<UUID> possible = new java.util.ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
                 final UUID ctrlId = abilityControllerId;
                 possible.removeIf(id -> id == null || chosen.contains(id) || !target.canTarget(ctrlId, id, source, game));
+                sortTargetsForStableChoice(possible, game);
                 if (possible.isEmpty()) {
                     break;
                 }
@@ -3386,6 +5825,38 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return 0;
     }
 
+    private void sortTargetsForStableChoice(List<UUID> targets, Game game) {
+        if (targets == null || targets.size() < 2) {
+            return;
+        }
+        targets.sort(Comparator
+                .comparing((UUID id) -> stableTargetSortName(id, game), Comparator.nullsFirst(String::compareTo))
+                .thenComparing(id -> id == null ? "" : id.toString()));
+    }
+
+    private String stableTargetSortName(UUID targetId, Game game) {
+        if (targetId == null) {
+            return "";
+        }
+        try {
+            Player player = game == null ? null : game.getPlayer(targetId);
+            if (player != null) {
+                return "0|" + player.getName();
+            }
+            MageObject object = game == null ? null : game.getObject(targetId);
+            if (object != null) {
+                String controllerName = "";
+                if (object instanceof Permanent) {
+                    Player controller = game.getPlayer(((Permanent) object).getControllerId());
+                    controllerName = controller == null ? "" : controller.getName();
+                }
+                return "1|" + object.getName() + "|" + controllerName;
+            }
+        } catch (Exception ignored) {
+        }
+        return "9|" + targetId;
+    }
+
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         // Route to chooseTarget which uses the RL model
@@ -3411,6 +5882,137 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     @Override
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
+        boolean actualHookTrace = isReplayActualAgentSearchTraceActive();
+        if (isReplayAgentSearchTraceActive() && !actualHookTrace) {
+            return super.searchLibrary(target, source, game, targetPlayerId);
+        }
+        ReplayAgentSearchTraceContext replaySearchTrace = null;
+        if (actualHookTrace && shouldTraceReplayAgentSearch(game, source, targetPlayerId)) {
+            try {
+                List<Card> libraryCards = replayTraceLibraryCards(game);
+                replaySearchTrace = new ReplayAgentSearchTraceContext(
+                        this,
+                        game,
+                        source,
+                        target,
+                        libraryCards,
+                        replayTraceLibraryMatches(target, libraryCards, getId(), source, game));
+            } catch (Throwable ignored) {
+                replaySearchTrace = null;
+            }
+        }
+        boolean result;
+        try (RandomUtil.WrapperTraceContext ignored = RandomUtil.withWrapperTraceContext(
+                replaySearchTrace == null ? String.valueOf(replayDecisionOrdinal) : replaySearchTrace.decisionOrdinalNext,
+                replaySearchTrace == null ? replayTraceSourceName(source, game) : replaySearchTrace.sourceName)) {
+            result = super.searchLibrary(target, source, game, targetPlayerId);
+        }
+        if (replaySearchTrace != null) {
+            try {
+                replaySearchTrace.randomUtilCountAfterSearch = RandomUtil.getConsumptionCount();
+                replaySearchTrace.randomUtilDirectCountAfterSearch =
+                        RandomUtil.getDirectGetRandomConsumptionCount();
+                replaySearchTrace.randomUtilDirectAccessAfterSearch =
+                        RandomUtil.getDirectGetRandomAccessCount();
+                replaySearchTrace.searchResult = result;
+                List<Card> chosenCards = replayTraceCardsByIds(target == null ? null : target.getTargets(), game);
+                replaySearchTrace.chosenNames = cardNamesForReplay(chosenCards, 0);
+                replaySearchTrace.chosenNameIds = cardNameIdsForReplay(chosenCards, 0);
+                if (!chosenCards.isEmpty()) {
+                    List<Card> duplicates = replayTraceCopiesByName(
+                            replaySearchTrace.searchableCards, chosenCards.get(0).getName());
+                    replaySearchTrace.duplicateCopyCandidateIds = cardNameIdsForReplay(duplicates, 0);
+                    if (duplicates.size() > 1) {
+                        replaySearchTrace.copyPickMarker = useReplayLibraryCopyDeterminism()
+                                ? "deduped_name_copy_selected_by_library_order"
+                                : "deduped_name_copy_selected_by_unseeded_java_util_Random";
+                    } else {
+                        replaySearchTrace.copyPickMarker = "single_matching_copy";
+                    }
+                } else {
+                    replaySearchTrace.copyPickMarker = "no_card_chosen";
+                }
+                enqueueReplayAgentSearchTrace(replaySearchTrace, source);
+            } catch (Throwable ignored) {
+                // Diagnostics must never affect gameplay.
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void shuffleLibrary(Ability source, Game game) {
+        boolean actualHookTrace = isReplayActualAgentSearchTraceActive();
+        if (isReplayAgentSearchTraceActive() && !actualHookTrace) {
+            super.shuffleLibrary(source, game);
+            return;
+        }
+        if (!actualHookTrace || game == null) {
+            super.shuffleLibrary(source, game);
+            return;
+        }
+        ReplayAgentSearchTraceContext replaySearchTrace = pollReplayAgentSearchTrace(source);
+        if (replaySearchTrace == null) {
+            try {
+                List<Card> libraryBeforeShuffle = replayTraceLibraryCards(game);
+                replaySearchTrace = new ReplayAgentSearchTraceContext(
+                        this,
+                        game,
+                        source,
+                        null,
+                        libraryBeforeShuffle,
+                        Collections.emptyList());
+                replaySearchTrace.randomUtilCountAfterSearch = replaySearchTrace.randomUtilCountBeforeSearch;
+                replaySearchTrace.randomUtilDirectCountAfterSearch =
+                        replaySearchTrace.randomUtilDirectCountBeforeSearch;
+                replaySearchTrace.randomUtilDirectAccessAfterSearch =
+                        replaySearchTrace.randomUtilDirectAccessBeforeSearch;
+                replaySearchTrace.searchResult = true;
+                replaySearchTrace.copyPickMarker = "shuffle_trace_without_search_context";
+            } catch (Throwable ignored) {
+                super.shuffleLibrary(source, game);
+                return;
+            }
+        }
+        try {
+            List<Card> libraryBeforeShuffle = replayTraceLibraryCards(game);
+            replaySearchTrace.libraryTopBeforeShuffle =
+                    cardNamesForReplay(libraryBeforeShuffle, REPLAY_AGENT_SEARCH_TRACE_TOP);
+            replaySearchTrace.handBeforeShuffle = cardNamesForReplay(replayTraceHandCards(game), 0);
+            replaySearchTrace.graveyardBeforeShuffle = cardNamesForReplay(replayTraceGraveyardCards(game), 0);
+            replaySearchTrace.shuffleMarker =
+                    "Library.shuffle uses RandomUtil.nextInt(n+1) for n=size-1..1";
+            replaySearchTrace.shuffleRandomNextIntCalls = Math.max(0, libraryBeforeShuffle.size() - 1);
+            replaySearchTrace.randomUtilCountBeforeShuffle = RandomUtil.getConsumptionCount();
+            replaySearchTrace.randomUtilDirectCountBeforeShuffle =
+                    RandomUtil.getDirectGetRandomConsumptionCount();
+            replaySearchTrace.randomUtilDirectAccessBeforeShuffle =
+                    RandomUtil.getDirectGetRandomAccessCount();
+        } catch (Throwable ignored) {
+        }
+        try (RandomUtil.WrapperTraceContext ignored = RandomUtil.withWrapperTraceContext(
+                replaySearchTrace.decisionOrdinalNext,
+                replaySearchTrace.sourceName)) {
+            super.shuffleLibrary(source, game);
+        }
+        try {
+            replaySearchTrace.randomUtilCountAfterShuffle = RandomUtil.getConsumptionCount();
+            replaySearchTrace.randomUtilDirectCountAfterShuffle =
+                    RandomUtil.getDirectGetRandomConsumptionCount();
+            replaySearchTrace.randomUtilDirectAccessAfterShuffle =
+                    RandomUtil.getDirectGetRandomAccessCount();
+            replaySearchTrace.libraryTopAfterShuffle =
+                    cardNamesForReplay(replayTraceLibraryCards(game), REPLAY_AGENT_SEARCH_TRACE_TOP);
+            replaySearchTrace.handAfterShuffle = cardNamesForReplay(replayTraceHandCards(game), 0);
+            replaySearchTrace.graveyardAfterShuffle = cardNamesForReplay(replayTraceGraveyardCards(game), 0);
+            writeReplayAgentSearchTrace(replaySearchTrace);
+        } catch (Throwable ignored) {
+            // Diagnostics must never affect gameplay.
+        }
+    }
+
+    @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         // Trace entry
         String targetName = target != null ? target.getTargetName() : "null";
@@ -3432,6 +6034,24 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             filteredCards = new ArrayList<>(cards.getCards(target.getFilter(), this.getId(), source, game));
         } else {
             filteredCards = new ArrayList<>(cards.getCards(game));
+        }
+
+        ReplayAgentSearchTraceContext replaySearchTrace = null;
+        if (target instanceof TargetCardInLibrary
+                && isReplayActualAgentSearchTraceActive()
+                && shouldTraceReplayAgentSearch(game, source, getId())) {
+            try {
+                List<Card> libraryCards = replayTraceLibraryCards(game);
+                replaySearchTrace = new ReplayAgentSearchTraceContext(
+                        this,
+                        game,
+                        source,
+                        (TargetCardInLibrary) target,
+                        libraryCards,
+                        replayTraceLibraryMatches((TargetCardInLibrary) target, libraryCards, getId(), source, game));
+            } catch (Throwable ignored) {
+                replaySearchTrace = null;
+            }
         }
         
         if (filteredCards.isEmpty()) {
@@ -3557,8 +6177,40 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     float[] actionProbs = prediction.policyScores;
                     float valueScore = prediction.valueScores;
                     SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+                    List<Integer> forcedChoice = forcedChoiceIndices(
+                            StateSequenceBuilder.ActionType.SELECT_CARD, remainingNames, 1, 1, game, source);
+                    if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                        int forcedIdx = forcedChoice.get(0);
+                        if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
+                            pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                        }
+                    }
                     int chosenIdx = pickResult.chosenIdx;
                     pickedName = remainingNames.get(chosenIdx);
+                    if (shouldLogReplayDecision(StateSequenceBuilder.ActionType.SELECT_CARD)) {
+                        List<String> replayOptionNames = new ArrayList<>();
+                        for (int i = 0; i < candidateCount; i++) {
+                            String name = remainingNames.get(i);
+                            replayOptionNames.add(name == null ? "STOP" : name);
+                        }
+                        List<String> replayObjectIds = replayCardCandidateObjectIds(
+                                remainingNames,
+                                cardsByName,
+                                chosen,
+                                candidateCount);
+                        logReplayDecision(
+                                StateSequenceBuilder.ActionType.SELECT_CARD,
+                                replayOptionNames,
+                                Collections.singletonList(chosenIdx),
+                                pickResult.behavior.behaviorProbs,
+                                candidateCount,
+                                valueScore,
+                                game,
+                                source,
+                                replayObjectIds,
+                                Collections.emptyList()
+                        );
+                    }
 
                     // Record training data for this card selection
                     if (trainingEnabled && !game.isSimulation()) {
@@ -3647,8 +6299,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     }
                 }
                 if (!availableCopies.isEmpty()) {
-                    // Randomly select one copy from available copies
-                    picked = availableCopies.get(new java.util.Random().nextInt(availableCopies.size()));
+                    if (target instanceof TargetCardInLibrary && useReplayLibraryCopyDeterminism()) {
+                        // Replay metadata needs the same physical library copy before the following shuffle.
+                        picked = availableCopies.get(0);
+                    } else {
+                        // Preserve the historical behavior outside replay-validation paths.
+                        picked = availableCopies.get(new java.util.Random().nextInt(availableCopies.size()));
+                    }
                 }
             }
 
@@ -3684,6 +6341,36 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         boolean result = chosenCount >= minTargets;
+        if (replaySearchTrace != null) {
+            try {
+                replaySearchTrace.randomUtilCountAfterSearch = RandomUtil.getConsumptionCount();
+                replaySearchTrace.randomUtilDirectCountAfterSearch =
+                        RandomUtil.getDirectGetRandomConsumptionCount();
+                replaySearchTrace.randomUtilDirectAccessAfterSearch =
+                        RandomUtil.getDirectGetRandomAccessCount();
+                replaySearchTrace.searchResult = result;
+                List<Card> chosenCards = replayTraceCardsByIds(target.getTargets(), game);
+                replaySearchTrace.chosenNames = cardNamesForReplay(chosenCards, 0);
+                replaySearchTrace.chosenNameIds = cardNameIdsForReplay(chosenCards, 0);
+                if (!chosenCards.isEmpty()) {
+                    List<Card> duplicates = replayTraceCopiesByName(
+                            replaySearchTrace.searchableCards, chosenCards.get(0).getName());
+                    replaySearchTrace.duplicateCopyCandidateIds = cardNameIdsForReplay(duplicates, 0);
+                    if (duplicates.size() > 1) {
+                        replaySearchTrace.copyPickMarker = useReplayLibraryCopyDeterminism()
+                                ? "deduped_name_copy_selected_by_library_order"
+                                : "deduped_name_copy_selected_by_unseeded_java_util_Random";
+                    } else {
+                        replaySearchTrace.copyPickMarker = "single_matching_copy";
+                    }
+                } else {
+                    replaySearchTrace.copyPickMarker = "no_card_chosen";
+                }
+                enqueueReplayAgentSearchTrace(replaySearchTrace, source);
+            } catch (Throwable ignored) {
+                // Diagnostics must never affect gameplay.
+            }
+        }
         trace(String.format("chooseTarget(Cards) EXIT: chosenCount=%d, minTargets=%d, result=%s",
             chosenCount, minTargets, result));
         return result;
@@ -4062,6 +6749,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
             SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+            List<Integer> forcedChoice = forcedChoiceIndices(
+                    StateSequenceBuilder.ActionType.CHOOSE_MODE, availableModes, 1, 1, game, source);
+            if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                int forcedIdx = forcedChoice.get(0);
+                if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
+                    pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                }
+            }
             int appliedIdx = pickResult.chosenIdx;
 
             if (trainingEnabled && !game.isSimulation()) {
@@ -4221,6 +6916,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
             SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+            List<Integer> forcedChoice = forcedChoiceIndices(
+                    StateSequenceBuilder.ActionType.ANNOUNCE_X, xValues, 1, 1, game, source);
+            if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                int forcedIdx = forcedChoice.get(0);
+                if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
+                    pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                }
+            }
             int chosenIdx = pickResult.chosenIdx;
 
             int chosenX = xValues.get(chosenIdx);
@@ -4404,6 +7107,21 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
             SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+            List<String> forcedChoiceLabels = Arrays.asList(
+                    trueText != null ? trueText : "Yes",
+                    falseText != null ? falseText : "No"
+            );
+            List<Integer> forcedChoice = forcedChoiceIndices(
+                    StateSequenceBuilder.ActionType.CHOOSE_USE,
+                    forcedChoiceLabels,
+                    1,
+                    1,
+                    game,
+                    source
+            );
+            if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                pickResult = forceSinglePick(pickResult, forcedChoice.get(0), candidateCount);
+            }
             int chosenIdx = pickResult.chosenIdx;
             boolean useIt = (chosenIdx == 0);
 
@@ -4563,6 +7281,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     candidateCount,
                     game
             );
+            List<Integer> forcedChoice = forcedChoiceIndices(
+                    StateSequenceBuilder.ActionType.DECLARE_ATTACKS,
+                    phase1Candidates,
+                    candidateCount,
+                    0,
+                    game,
+                    null
+            );
+            if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                attackPickResult = forceSequentialPick(attackPickResult, forcedChoice, candidateCount);
+            }
             List<Integer> selectedIndices = attackPickResult.selectedIndices;
             float oldLogpTotal = attackPickResult.oldLogpTotal;
             List<Permanent> selectedAttackers = new ArrayList<>();
@@ -4775,6 +7504,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         candidateCount,
                         game
                 );
+                List<Integer> forcedChoice = forcedChoiceIndices(
+                        StateSequenceBuilder.ActionType.DECLARE_BLOCKS,
+                        blockCandidates,
+                        candidateCount,
+                        0,
+                        game,
+                        source
+                );
+                if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                    blockPickResult = forceSequentialPick(blockPickResult, forcedChoice, candidateCount);
+                }
                 List<Integer> selectedIndices = blockPickResult.selectedIndices;
                 float oldLogpTotal = blockPickResult.oldLogpTotal;
                 List<Permanent> selectedBlockers = new ArrayList<>();
@@ -4783,6 +7523,24 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         break;
                     }
                     selectedBlockers.add(blockCandidates.get(pickIdx).creature);
+                }
+
+                if (!selectedIndices.isEmpty() && shouldLogReplayDecision(StateSequenceBuilder.ActionType.DECLARE_BLOCKS)) {
+                    List<String> replayBlockerNames = blockCandidates.stream()
+                            .map(cc -> cc.isDone() ? "DONE" : cc.creature.getName())
+                            .collect(Collectors.toList());
+                    logReplayDecision(
+                            StateSequenceBuilder.ActionType.DECLARE_BLOCKS,
+                            replayBlockerNames,
+                            selectedIndices,
+                            blockPickResult.behavior.behaviorProbs,
+                            candidateCount,
+                            valueScore,
+                            game,
+                            source,
+                            replayCandidateObjectIds(blockCandidates, candidateCount, game),
+                            Collections.emptyList()
+                    );
                 }
 
                 // Record TrainingData for this attacker's block decision
@@ -4937,7 +7695,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             candidateActionIds[1] = toVocabId(StateSequenceBuilder.ActionType.MULLIGAN.name() + "_MULL");
             candidateFeatures[1] = computeCandidateFeatures(StateSequenceBuilder.ActionType.MULLIGAN, game, null, Boolean.FALSE, candFeatDim, baseState);
 
-            String headId = headForActionType(StateSequenceBuilder.ActionType.MULLIGAN); // "action"
+            String headId = headForActionType(StateSequenceBuilder.ActionType.MULLIGAN);
             mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
                     baseState,
                     candidateActionIds,
@@ -4953,12 +7711,33 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             float[] actionProbs = prediction.policyScores;
             float valueScore = prediction.valueScores;
-            SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+            SinglePickResult pickResult = sampleSinglePick(
+                    actionProbs,
+                    candidateMask,
+                    candidateCount,
+                    game,
+                    StateSequenceBuilder.ActionType.MULLIGAN
+            );
+            Integer forcedChoice = forcedMulliganChoiceIndex(game, handSizeNow, landCount);
+            if (forcedChoice != null) {
+                pickResult = forceSinglePick(pickResult, forcedChoice, candidateCount);
+            }
             int chosenIdx = pickResult.chosenIdx;
             boolean shouldMulligan = (chosenIdx == 1);
 
             float pKeep = pickResult.behavior.behaviorProbs[0];
             float pMull = pickResult.behavior.behaviorProbs[1];
+            lastMulliganPKeep = pKeep;
+            lastMulliganPMull = pMull;
+            lastMulliganMode = pickResult.behavior.mode;
+            logReplayPregameDecision(
+                    StateSequenceBuilder.ActionType.MULLIGAN,
+                    Arrays.asList("KEEP", "MULLIGAN"),
+                    Collections.singletonList(chosenIdx),
+                    pickResult.behavior.behaviorProbs,
+                    candidateCount,
+                    game
+            );
 
             // Record training data
             if (trainingEnabled && !game.isSimulation()) {
@@ -5075,6 +7854,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             // Fallback: mulligan only if 0-1 lands or 6+ lands
             int landCount = countLandsInHand(game);
             boolean shouldMulligan = landCount <= 1 || landCount >= 6;
+            lastMulliganPKeep = Float.NaN;
+            lastMulliganPMull = Float.NaN;
+            lastMulliganMode = "fallback";
             int handSizeNow = getHand() != null ? getHand().size() : -1;
             int handFp = computeHandFingerprint(game);
             try {
@@ -5453,7 +8235,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 }
                 currentAbility = calculateRLAction(game);
                 act(game, (ActivatedAbility) currentAbility);
-                return true;
+                return !(currentAbility instanceof PassAbility);
             case BEGIN_COMBAT:
                 pass(game);
                 return false;
@@ -5484,7 +8266,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 }
                 currentAbility = calculateRLAction(game);
                 act(game, (ActivatedAbility) currentAbility);
-                return true;
+                return !(currentAbility instanceof PassAbility);
             case END_TURN:
             case CLEANUP:
                 pass(game);
@@ -6189,19 +8971,24 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // IMPORTANT: simulation activation may trigger target/choice callbacks.
         // Do not pollute per-game gamelogs with simulation-internal prompts.
         GameLogger prevGameLogger = RLTrainer.threadLocalGameLogger.get();
+        Boolean prevValidationSimulation = activationValidationSimulation.get();
         RLTrainer.threadLocalGameLogger.set(GameLogger.create(false));
-        Game sim = null;
+        activationValidationSimulation.set(Boolean.TRUE);
         boolean defaultWorks = false;
         try {
-            sim = game.createSimulationForAI();
             if (ACTIVATION_DIAG) {
                 RLTrainer.threadLocalLogger.get().info(
                         "ALTCOST-TEST: Created simulation, about to activate..."
                 );
             }
-            defaultWorks = sim.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim);
+            defaultWorks = activateAbilityInValidationSimulation(ability, game, "default");
         } finally {
             RLTrainer.threadLocalGameLogger.set(prevGameLogger);
+            if (prevValidationSimulation == null) {
+                activationValidationSimulation.remove();
+            } else {
+                activationValidationSimulation.set(prevValidationSimulation);
+            }
         }
 
         if (ACTIVATION_DIAG) {
@@ -6251,13 +9038,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
                 // Disable gamelog during simulation (see above).
                 GameLogger prev2 = RLTrainer.threadLocalGameLogger.get();
+                Boolean prevValidationSimulation2 = activationValidationSimulation.get();
                 RLTrainer.threadLocalGameLogger.set(GameLogger.create(false));
+                activationValidationSimulation.set(Boolean.TRUE);
                 boolean works = false;
                 try {
-                    Game sim2 = game.createSimulationForAI();
-                    works = sim2.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim2);
+                    works = activateAbilityInValidationSimulation(ability, game, "option:" + option);
                 } finally {
                     RLTrainer.threadLocalGameLogger.set(prev2);
+                    if (prevValidationSimulation2 == null) {
+                        activationValidationSimulation.remove();
+                    } else {
+                        activationValidationSimulation.set(prevValidationSimulation2);
+                    }
                 }
                 if (works) {
                     validChoices.add(option);
@@ -6290,6 +9083,16 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     protected Ability calculateRLAction(Game game) {
+        if (shouldIsolateReplayValidationRandom()) {
+            try (RandomUtil.RandomIsolation ignored = RandomUtil.isolateThreadLocalRandom(
+                    replayValidationIsolationSeed(null, game, "calculateRLAction"))) {
+                return calculateRLActionPrepared(game);
+            }
+        }
+        return calculateRLActionPrepared(game);
+    }
+
+    private Ability calculateRLActionPrepared(Game game) {
         long actionSelectionStartNanos = System.nanoTime();
         List<ActivatedAbility> flattenedOptions = getPlayableForCurrentState(game);
         int rawOptionCount = flattenedOptions.size();
@@ -6367,6 +9170,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             validOptionCount = validOptions.size();
         }
         flattenedOptions = validOptions;
+        if (FILTER_PRIORITY_MANA_ACTIONS) {
+            List<ActivatedAbility> nonManaOptions = flattenedOptions.stream()
+                    .filter(a -> !(a instanceof ManaAbility))
+                    .collect(Collectors.toList());
+            if (!nonManaOptions.isEmpty()) {
+                flattenedOptions = nonManaOptions;
+            }
+        }
 
         // Finally, ensure PassAbility maps to index 0
         flattenedOptions.add(0, new PassAbility());
@@ -6504,13 +9315,98 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private int lastBeliefLoggedTurn = -1;
 
     private static final boolean ISMCTS_ENABLE = "1".equals(System.getenv("ISMCTS_ENABLE"));
+    private static final boolean ISMCTS_RANDOM_ROLLOUT_ROOT =
+            mage.player.ai.rl.EnvConfig.bool("ISMCTS_RANDOM_ROLLOUT_ROOT", false);
     private static final int ISMCTS_ROLLOUTS_PER_TURN = mage.player.ai.rl.EnvConfig.i32("ISMCTS_ROLLOUTS_PER_TURN", 0);
     private static final boolean MCTS_TRAINING_ENABLE = "1".equals(System.getenv("MCTS_TRAINING_ENABLE"));
     private static final float MCTS_SKIP_TOP_PROB = (float) mage.player.ai.rl.EnvConfig.f64("MCTS_SKIP_TOP_PROB", 0.85);
+    private static final float MCTS_TRAINING_SAMPLE_PROB = Math.max(0.0f, Math.min(1.0f,
+            (float) mage.player.ai.rl.EnvConfig.f64("MCTS_TRAINING_SAMPLE_PROB", 1.0)));
+    private static final boolean MCTS_TRAINING_FORCE_ACTION =
+            mage.player.ai.rl.EnvConfig.bool("MCTS_TRAINING_FORCE_ACTION", true);
+    private static final int MCTS_ROOT_TOP_K =
+            Math.max(0, mage.player.ai.rl.EnvConfig.i32("MCTS_ROOT_TOP_K", 0));
+    private static final boolean MCTS_ROOT_INCLUDE_PASS =
+            mage.player.ai.rl.EnvConfig.bool("MCTS_ROOT_INCLUDE_PASS", true);
+    private static final boolean CARD_BELIEF_DETERMINIZATION_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("RL_CARD_BELIEF_DETERMINIZATION_ENABLE", false);
+    private static final boolean FILTER_PRIORITY_MANA_ACTIONS = mage.player.ai.rl.EnvConfig.bool("RL_FILTER_PRIORITY_MANA_ACTIONS", false);
     private static final boolean MCTS_SELECTIVE_ENABLE = mage.player.ai.rl.EnvConfig.bool("MCTS_SELECTIVE_ENABLE", false);
     private static final boolean MCTS_SELECTIVE_ALLOW_ANY = mage.player.ai.rl.EnvConfig.bool("MCTS_SELECTIVE_ALLOW_ANY", false);
     private static final List<String> MCTS_SELECTIVE_KEYWORDS =
             parseMctsSelectiveKeywords(mage.player.ai.rl.EnvConfig.str("MCTS_SELECTIVE_KEYWORDS", ""));
+    private static final boolean VALUE_ACTION_GATE_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("RL_VALUE_ACTION_GATE_ENABLE", false);
+    private static final float VALUE_ACTION_GATE_MIN =
+            (float) mage.player.ai.rl.EnvConfig.f64("RL_VALUE_ACTION_GATE_MIN", 0.10);
+    private static final List<String> VALUE_ACTION_GATE_KEYWORDS =
+            parseMctsSelectiveKeywords(mage.player.ai.rl.EnvConfig.str("RL_VALUE_ACTION_GATE_KEYWORDS", ""));
+    private static final boolean SPY_TIMING_MASK_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("RL_SPY_TIMING_MASK_ENABLE", false);
+    private static final boolean SPY_TIMING_MASK_BLOCK_DREAD =
+            mage.player.ai.rl.EnvConfig.bool("RL_SPY_TIMING_MASK_BLOCK_DREAD", false);
+    private static final boolean SPY_TIMING_MASK_LOG =
+            mage.player.ai.rl.EnvConfig.bool("RL_SPY_TIMING_MASK_LOG", true);
+    private static final boolean SPY_COMBO_CANDIDATE_FEATURES_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("RL_SPY_COMBO_CANDIDATE_FEATURES_ENABLE", false);
+    private static final boolean GENERIC_ACTION_CLASS_FEATURES_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("RL_GENERIC_ACTION_CLASS_FEATURES_ENABLE", false);
+    private static final boolean GENERIC_SOURCE_ZONE_FEATURES_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("RL_GENERIC_SOURCE_ZONE_FEATURES_ENABLE", false);
+    private static final boolean ONLINE_PREFIX_SEARCH_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_SEARCH_ENABLE", false);
+    private static final int ONLINE_PREFIX_SEARCH_MAX_NODES =
+            mage.player.ai.rl.EnvConfig.i32("RL_ONLINE_PREFIX_SEARCH_MAX_NODES", 7);
+    private static final int ONLINE_PREFIX_SEARCH_MAX_DEPTH =
+            mage.player.ai.rl.EnvConfig.i32("RL_ONLINE_PREFIX_SEARCH_MAX_DEPTH", 6);
+    private static final int ONLINE_PREFIX_SEARCH_TOP_K =
+            mage.player.ai.rl.EnvConfig.i32("RL_ONLINE_PREFIX_SEARCH_TOP_K", 3);
+    private static final int ONLINE_PREFIX_SEARCH_MAX_ACTIVATIONS =
+            mage.player.ai.rl.EnvConfig.i32("RL_ONLINE_PREFIX_SEARCH_MAX_ACTIVATIONS", 6);
+    private static final int ONLINE_PREFIX_SEARCH_MAX_GAME_TURNS =
+            mage.player.ai.rl.EnvConfig.i32("RL_ONLINE_PREFIX_SEARCH_MAX_GAME_TURNS", 0);
+    private static final long ONLINE_PREFIX_SEARCH_TOTAL_TIMEOUT_MS =
+            mage.player.ai.rl.EnvConfig.i64("RL_ONLINE_PREFIX_SEARCH_TOTAL_TIMEOUT_MS", 1500L);
+    private static final long ONLINE_PREFIX_SEARCH_BRANCH_TIMEOUT_MS =
+            mage.player.ai.rl.EnvConfig.i64("RL_ONLINE_PREFIX_SEARCH_BRANCH_TIMEOUT_MS", 350L);
+    private static final boolean ONLINE_PREFIX_SEARCH_LOG =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_SEARCH_LOG", false);
+    private static final boolean ONLINE_PREFIX_MODEL_GUIDED_FALLBACK =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_MODEL_GUIDED_FALLBACK", false);
+    private static final boolean ONLINE_PREFIX_GENERIC_BRANCH_ORDER =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_GENERIC_BRANCH_ORDER", false);
+    private static final boolean ONLINE_PREFIX_AUTOPILOT_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_AUTOPILOT_ENABLE", false);
+    private static final boolean ONLINE_PREFIX_SEARCH_DURING_TRAINING =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_SEARCH_DURING_TRAINING", false);
+    private static final boolean ONLINE_PREFIX_AUTOPILOT_DURING_TRAINING =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_AUTOPILOT_DURING_TRAINING", false);
+    private static final boolean ONLINE_PREFIX_AUTOPILOT_TARGETS =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_AUTOPILOT_TARGETS", false);
+    private static final boolean MULLIGAN_HARD_OVERRIDES_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_OVERRIDES_ENABLE", false);
+    private static final boolean MULLIGAN_HARD_APPLY_DURING_TRAINING =
+            mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_APPLY_DURING_TRAINING", false);
+    private static final boolean MULLIGAN_HARD_USE_EFFECTIVE_LANDS =
+            mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_USE_EFFECTIVE_LANDS", true);
+    private static final int MULLIGAN_HARD_MIN_EFFECTIVE_LANDS =
+            mage.player.ai.rl.EnvConfig.i32("MULLIGAN_HARD_MIN_EFFECTIVE_LANDS",
+                    mage.player.ai.rl.EnvConfig.i32("MULLIGAN_HARD_MIN_LANDS", 1));
+    private static final int MULLIGAN_HARD_MAX_EFFECTIVE_LANDS =
+            mage.player.ai.rl.EnvConfig.i32("MULLIGAN_HARD_MAX_EFFECTIVE_LANDS",
+                    mage.player.ai.rl.EnvConfig.i32("MULLIGAN_HARD_MAX_LANDS", 5));
+    private static final int MULLIGAN_HARD_MAX_MULLIGANS =
+            mage.player.ai.rl.EnvConfig.i32("MULLIGAN_HARD_MAX_MULLIGANS", 2);
+    private static final boolean MULLIGAN_HARD_FORCE_KEEP_AFTER_MAX =
+            mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_FORCE_KEEP_AFTER_MAX", true);
+    private static final boolean MULLIGAN_HARD_FORCE_KEEP_GOOD =
+            mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_FORCE_KEEP_GOOD", false);
+    private static final boolean MULLIGAN_HARD_LOG =
+            mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_LOG", true);
+    private static final List<String> MULLIGAN_HARD_PSEUDO_LAND_NAMES =
+            parseMctsSelectiveKeywords(mage.player.ai.rl.EnvConfig.str(
+                    "MULLIGAN_HARD_PSEUDO_LANDS",
+                    "Land Grant,Lotus Petal,Generous Ent,Troll of Khazad-dum"));
     /** Opt into the new multi-ply factored MCTS (branches on every sub-decision
      *  including target choices). Default off while being validated; flip on via
      *  MULTI_PLY_MCTS=1. Falls back to PolicyValueMCTS (flat 1-ply) when false. */
@@ -6525,14 +9421,31 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_FEWCAND = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_WRONGTYPE = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_CONFIDENT = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_SAMPLED_OUT = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger MCTS_GATE_NOT_TACTICAL = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger CARD_BELIEF_DETERMINIZATION_COUNT = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger GENERIC_CHOOSE_DIAG_COUNT = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger ONLINE_PREFIX_SEARCH_CALLS = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger ONLINE_PREFIX_SEARCH_FOUND = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger ONLINE_PREFIX_SEARCH_OVERRIDES = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger ONLINE_PREFIX_SEARCH_TIMEOUTS = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger ONLINE_PREFIX_AUTOPILOT_STARTED = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger ONLINE_PREFIX_AUTOPILOT_APPLIED = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger ONLINE_PREFIX_AUTOPILOT_MISSES = new java.util.concurrent.atomic.AtomicInteger();
     public static int getMctsActivationCount() { return MCTS_ACTIVATION_COUNT.get(); }
     public static String getMctsGateStats() {
-        return String.format("total=%d sampler_null=%d fewcand=%d wrongtype=%d confident=%d not_tactical=%d activations=%d",
+        return String.format("total=%d sampler_null=%d fewcand=%d wrongtype=%d confident=%d sampled_out=%d not_tactical=%d activations=%d card_belief_dets=%d",
                 MCTS_GATE_TOTAL.get(), MCTS_GATE_SAMPLER_NULL.get(), MCTS_GATE_FEWCAND.get(),
-                MCTS_GATE_WRONGTYPE.get(), MCTS_GATE_CONFIDENT.get(), MCTS_GATE_NOT_TACTICAL.get(),
-                MCTS_ACTIVATION_COUNT.get());
+                MCTS_GATE_WRONGTYPE.get(), MCTS_GATE_CONFIDENT.get(), MCTS_GATE_SAMPLED_OUT.get(),
+                MCTS_GATE_NOT_TACTICAL.get(),
+                MCTS_ACTIVATION_COUNT.get(), CARD_BELIEF_DETERMINIZATION_COUNT.get());
+    }
+    public static String getOnlinePrefixSearchStats() {
+        return String.format("calls=%d found=%d overrides=%d timeouts=%d autopilot_started=%d autopilot_applied=%d autopilot_misses=%d",
+                ONLINE_PREFIX_SEARCH_CALLS.get(), ONLINE_PREFIX_SEARCH_FOUND.get(),
+                ONLINE_PREFIX_SEARCH_OVERRIDES.get(), ONLINE_PREFIX_SEARCH_TIMEOUTS.get(),
+                ONLINE_PREFIX_AUTOPILOT_STARTED.get(), ONLINE_PREFIX_AUTOPILOT_APPLIED.get(),
+                ONLINE_PREFIX_AUTOPILOT_MISSES.get());
     }
     private static List<String> parseMctsSelectiveKeywords(String raw) {
         if (raw == null || raw.trim().isEmpty()) {
@@ -6548,21 +9461,41 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return Collections.unmodifiableList(out);
     }
     private static final mage.player.ai.rl.DeterminizationSampler DETERMINIZATION_SAMPLER;
+    private static final String DETERMINIZATION_SAMPLER_SOURCE;
     static {
         mage.player.ai.rl.DeterminizationSampler tmp = null;
+        String samplerSource = "null";
         if (ISMCTS_ENABLE || MCTS_TRAINING_ENABLE) {
             try {
-                tmp = mage.player.ai.rl.DeterminizationSampler.pauperDefaults();
+                String deckListPrior = mage.player.ai.rl.EnvConfig.str("ISMCTS_ARCHETYPE_DECK_LIST", "").trim();
+                if (!deckListPrior.isEmpty()) {
+                    tmp = mage.player.ai.rl.DeterminizationSampler.loadFromDeckListFile(deckListPrior);
+                    if (tmp != null && !tmp.getArchetypes().isEmpty()) {
+                        samplerSource = "deck-list:" + deckListPrior;
+                    } else {
+                        tmp = null;
+                        System.out.println("[ISMCTS-INIT] deck-list sampler empty, falling back to pauper defaults: " + deckListPrior);
+                    }
+                }
+                if (tmp == null) {
+                    tmp = mage.player.ai.rl.DeterminizationSampler.pauperDefaults();
+                    samplerSource = "pauper-defaults";
+                }
             } catch (Throwable t) {
                 System.out.println("[ISMCTS-INIT] failed to load sampler: " + t.getMessage());
             }
         }
         DETERMINIZATION_SAMPLER = tmp;
+        DETERMINIZATION_SAMPLER_SOURCE = samplerSource;
         System.out.println("[ISMCTS-INIT] ismctsEnabled=" + ISMCTS_ENABLE
+                + " randomRolloutRoot=" + ISMCTS_RANDOM_ROLLOUT_ROOT
                 + " mctsTrainingEnabled=" + MCTS_TRAINING_ENABLE
                 + " rolloutsPerTurn=" + ISMCTS_ROLLOUTS_PER_TURN
+                + " trainingSampleProb=" + MCTS_TRAINING_SAMPLE_PROB
+                + " trainingForceAction=" + MCTS_TRAINING_FORCE_ACTION
                 + " selective=" + MCTS_SELECTIVE_ENABLE
                 + " selectiveKeywords=" + MCTS_SELECTIVE_KEYWORDS
+                + " samplerSource=" + DETERMINIZATION_SAMPLER_SOURCE
                 + " sampler=" + (DETERMINIZATION_SAMPLER != null ? DETERMINIZATION_SAMPLER.getArchetypes() : "null"));
     }
 
@@ -6590,7 +9523,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
             int bestIdx = 0;
             for (int i = 1; i < probs.length; i++) if (probs[i] > probs[bestIdx]) bestIdx = i;
-            String[] names = {"Wildfire", "Rally", "Affinity", "Elves"};
+            String[] names = {"Wildfire", "Rally", "Affinity", "Elves", "SpyCombo", "Burn", "Terror", "CawGates", "Faeries"};
             String predicted = bestIdx < names.length ? names[bestIdx] : ("archetype_" + bestIdx);
             StringBuilder sb = new StringBuilder();
             sb.append(String.format("[BELIEF] turn=%d predicted=%s conf=%.3f [",
@@ -6625,12 +9558,48 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return sb.append("]").toString();
     }
 
+    private boolean installCardBeliefDeterminization(StateSequenceBuilder.SequenceOutput baseState) {
+        if (!CARD_BELIEF_DETERMINIZATION_ENABLE || model == null || baseState == null) {
+            return false;
+        }
+        int dim = StateSequenceBuilder.cardBeliefDim();
+        if (dim <= 0) {
+            return false;
+        }
+        try {
+            float[] predictions = model.predictCardBelief(baseState);
+            if (predictions == null || predictions.length != dim) {
+                return false;
+            }
+            mage.player.ai.rl.DeterminizationSampler.setThreadLocalCardBelief(
+                    StateSequenceBuilder.cardBeliefVocab(),
+                    StateSequenceBuilder.cardBeliefMaxCounts(),
+                    predictions);
+            CARD_BELIEF_DETERMINIZATION_COUNT.incrementAndGet();
+            return true;
+        } catch (Throwable t) {
+            return false;
+        }
+    }
+
+    protected boolean shouldRecordTrainingData(StateSequenceBuilder.TrainingData td, Game game) {
+        return true;
+    }
+
     private void recordTrainingData(StateSequenceBuilder.TrainingData td, Game game) {
+        if (!shouldRecordTrainingData(td, game)) {
+            return;
+        }
         try {
             int label = StateSequenceBuilder.computeArchetypeLabel(game, this.getId());
             td.setBeliefArchetypeLabel(label);
         } catch (Throwable t) {
             // Label is best-effort; -1 means python skips the aux loss.
+        }
+        try {
+            td.setCardBeliefLabels(StateSequenceBuilder.computeCardBeliefLabels(game, this.getId()));
+        } catch (Throwable t) {
+            // Card-belief labels are best-effort; absent rows are skipped by Python.
         }
         this.trainingBuffer.add(td);
     }
@@ -6668,6 +9637,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
      */
     public float getLastValueScore() {
         return lastValueScore;
+    }
+
+    protected float[] getLastActionProbsSnapshot() {
+        return lastActionProbs == null ? null : lastActionProbs.clone();
     }
 
     // Trace mana payment for debugging activation failures
@@ -7753,6 +10726,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         boolean isDone() {
             return creature == null;
+        }
+
+        @Override
+        public String toString() {
+            return isDone() ? "DONE" : creature.getName();
         }
     }
 }

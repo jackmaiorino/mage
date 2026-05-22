@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -23,6 +24,7 @@ import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -133,6 +135,37 @@ public class StateSequenceBuilder {
     // Slots 83-114: pre-computed text embeddings (32 dims, filled by CardTextEmbeddings).
     private static final int TEXT_EMBED_SLOT_START = 83;
     public static final int TEXT_EMBED_DIM = 32;
+    private static final boolean ZONE_COUNT_FEATURES_ENABLED =
+            "1".equals(System.getenv().getOrDefault("RL_ZONE_COUNT_FEATURES_ENABLE", "0"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_ZONE_COUNT_FEATURES_ENABLE", "0"));
+    private static final boolean LIBRARY_COUNT_FEATURES_ENABLED =
+            "1".equals(System.getenv().getOrDefault("RL_LIBRARY_COUNT_FEATURES_ENABLE", "0"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_LIBRARY_COUNT_FEATURES_ENABLE", "0"));
+    private static final boolean PUBLIC_BOARD_FEATURES_ENABLED =
+            "1".equals(System.getenv().getOrDefault("RL_PUBLIC_BOARD_FEATURES_ENABLE", "0"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_PUBLIC_BOARD_FEATURES_ENABLE", "0"));
+    private static final int PUBLIC_BOARD_SLOT_START = 56;
+    private static final int PUBLIC_BOARD_SLOT_COUNT = 12;
+    private static final boolean EXTENDED_EFFECT_FLAGS_ENABLED =
+            "1".equals(System.getenv().getOrDefault("RL_EXTENDED_EFFECT_FLAGS_ENABLE", "0"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_EXTENDED_EFFECT_FLAGS_ENABLE", "0"));
+    private static final boolean ARCHETYPE_BELIEF_FEATURES_ENABLED =
+            "1".equals(System.getenv().getOrDefault("RL_ARCHETYPE_BELIEF_FEATURES_ENABLE", "0"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_ARCHETYPE_BELIEF_FEATURES_ENABLE", "0"));
+    private static final int ARCHETYPE_BELIEF_SLOT_START = 40;
+    private static final DeterminizationSampler ARCHETYPE_BELIEF_SAMPLER =
+            ARCHETYPE_BELIEF_FEATURES_ENABLED ? loadArchetypeBeliefSampler() : null;
+    private static final boolean TRUE_ARCHETYPE_LABELS_ENABLED =
+            "1".equals(System.getenv().getOrDefault("RL_BELIEF_TRUE_ARCHETYPE_LABELS_ENABLE", "0"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_BELIEF_TRUE_ARCHETYPE_LABELS_ENABLE", "0"));
+    private static final ThreadLocal<Map<UUID, Integer>> THREAD_LOCAL_KNOWN_ARCHETYPE_LABELS = new ThreadLocal<>();
+    private static final boolean CARD_BELIEF_LABELS_ENABLED =
+            "1".equals(System.getenv().getOrDefault("RL_CARD_BELIEF_LABELS_ENABLE", "0"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_CARD_BELIEF_LABELS_ENABLE", "0"));
+    private static final int CARD_BELIEF_MAX_CARDS =
+            Math.max(0, parseEnvInt("RL_CARD_BELIEF_MAX_CARDS", 256));
+    private static final CardBeliefVocab CARD_BELIEF_VOCAB =
+            CARD_BELIEF_LABELS_ENABLED ? loadCardBeliefVocab() : CardBeliefVocab.empty();
 
     public enum ZoneType {
         HAND,
@@ -182,13 +215,14 @@ public class StateSequenceBuilder {
          * 1. Resolve active player (mirrors original logic)
          * ----------------------------------------------------------
          */
-        Player player = game.getPlayer(game.getActivePlayerId());
+        UUID choosingPlayerId = game.getState() == null ? null : game.getState().getChoosingPlayerId();
+        Player player = choosingPlayerId == null ? null : game.getPlayer(choosingPlayerId);
         if (player == null) {
-            player = game.getPlayer(game.getState().getChoosingPlayerId());
-            if (player == null) {
-                logger.severe("No active player found in game " + game.getId());
-                throw new IllegalStateException("Cannot build state sequence: no active player");
-            }
+            player = game.getPlayer(game.getActivePlayerId());
+        }
+        if (player == null) {
+            logger.severe("No perspective player found in game " + game.getId());
+            throw new IllegalStateException("Cannot build state sequence: no perspective player");
         }
 
         /*
@@ -338,6 +372,41 @@ public class StateSequenceBuilder {
         return new SequenceOutput(tokens, mask, tokenIds);
     }
 
+    /**
+     * Return a sequence whose player-stats token carries compact, generic
+     * recent-action history. This does not add tokens or shift entity indexes,
+     * so candidate token-link features remain valid.
+     */
+    public static SequenceOutput withActionHistoryFeatures(SequenceOutput baseState, float[] historyFeatures) {
+        if (baseState == null || historyFeatures == null || historyFeatures.length == 0
+                || baseState.tokens == null || baseState.tokens.length <= 2) {
+            return baseState;
+        }
+        List<float[]> tokens = new ArrayList<>(baseState.tokens.length);
+        Collections.addAll(tokens, baseState.tokens);
+        float[] playerStats = tokens.get(2).clone();
+        int start = 23;
+        int limit = Math.min(historyFeatures.length, playerStats.length - start);
+        for (int i = 0; i < limit; i++) {
+            float value = historyFeatures[i];
+            if (Float.isNaN(value) || Float.isInfinite(value)) {
+                value = 0.0f;
+            }
+            playerStats[start + i] = value;
+        }
+        tokens.set(2, playerStats);
+
+        List<Integer> mask = new ArrayList<>(baseState.mask.length);
+        for (int value : baseState.mask) {
+            mask.add(value);
+        }
+        List<Integer> tokenIds = new ArrayList<>(baseState.tokenIds.length);
+        for (int tokenId : baseState.tokenIds) {
+            tokenIds.add(tokenId);
+        }
+        return new SequenceOutput(tokens, mask, tokenIds, baseState.uuidToTokenIndex);
+    }
+
     /* === EMBEDDING HELPERS ============================================== */
     private static int toVocabId(String key) {
         if (key == null || key.isEmpty()) {
@@ -399,8 +468,74 @@ public class StateSequenceBuilder {
         v[15] = elfCount / 10.0f;
         v[16] = creatureCount / 10.0f;
 
+        if (PUBLIC_BOARD_FEATURES_ENABLED) {
+            writePublicBoardFeatures(v, p, g);
+        }
+
+        // Optional generic zone-count features. These expose counts the player
+        // can derive from known zones/deck contents without adding deck-specific
+        // rules, rewards, or action constraints. Kept opt-in because old models
+        // were trained with these slots at zero.
+        if (ZONE_COUNT_FEATURES_ENABLED || LIBRARY_COUNT_FEATURES_ENABLED) {
+            int handLands = 0;
+            int handCreatures = 0;
+            if (ZONE_COUNT_FEATURES_ENABLED) {
+                for (Card c : p.getHand().getCards(g)) {
+                    if (c.isLand(g)) handLands++;
+                    if (c.isCreature(g)) handCreatures++;
+                }
+            }
+            int libraryLands = 0;
+            int libraryCreatures = 0;
+            for (Card c : p.getLibrary().getCards(g)) {
+                if (c.isLand(g)) libraryLands++;
+                if (c.isCreature(g)) libraryCreatures++;
+            }
+            int graveyardLands = 0;
+            int graveyardCreatures = 0;
+            if (ZONE_COUNT_FEATURES_ENABLED) {
+                for (Card c : p.getGraveyard().getCards(g)) {
+                    if (c.isLand(g)) graveyardLands++;
+                    if (c.isCreature(g)) graveyardCreatures++;
+                }
+            }
+            if (ZONE_COUNT_FEATURES_ENABLED) {
+                v[17] = handLands / 10.0f;
+                v[18] = handCreatures / 10.0f;
+            }
+            v[19] = libraryLands / 20.0f;
+            v[20] = libraryCreatures / 60.0f;
+            if (ZONE_COUNT_FEATURES_ENABLED) {
+                v[21] = graveyardLands / 20.0f;
+                v[22] = graveyardCreatures / 30.0f;
+            }
+        }
+        if (ARCHETYPE_BELIEF_FEATURES_ENABLED && ARCHETYPE_BELIEF_SAMPLER != null) {
+            try {
+                Map<String, Float> posterior = ARCHETYPE_BELIEF_SAMPLER.classifyArchetype(g, p.getId());
+                List<String> archetypes = ARCHETYPE_BELIEF_SAMPLER.getArchetypes();
+                int limit = Math.min(TrainingData.NUM_ARCHETYPES, archetypes.size());
+                for (int i = 0; i < limit && ARCHETYPE_BELIEF_SLOT_START + i < v.length; i++) {
+                    Float prob = posterior.get(archetypes.get(i));
+                    v[ARCHETYPE_BELIEF_SLOT_START + i] = prob == null ? 0.0f : sanitizeUnit(prob);
+                }
+            } catch (Throwable ignored) {
+                // Belief features are optional diagnostics/training inputs; never
+                // let a decklist or transient game-state issue disrupt gameplay.
+            }
+        }
+
         // Validate normalized values
-        for (int i = 0; i < 17; i++) {
+        int validateLimit = 23;
+        if (PUBLIC_BOARD_FEATURES_ENABLED) {
+            validateLimit = Math.max(validateLimit,
+                    Math.min(v.length, PUBLIC_BOARD_SLOT_START + PUBLIC_BOARD_SLOT_COUNT));
+        }
+        if (ARCHETYPE_BELIEF_FEATURES_ENABLED) {
+            validateLimit = Math.max(validateLimit,
+                    Math.min(v.length, ARCHETYPE_BELIEF_SLOT_START + TrainingData.NUM_ARCHETYPES));
+        }
+        for (int i = 0; i < validateLimit; i++) {
             if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
                 logger.severe(String.format("Invalid normalized value at index %d: %f", i, v[i]));
                 v[i] = 0.0f;
@@ -408,6 +543,90 @@ public class StateSequenceBuilder {
         }
 
         return v;
+    }
+
+    private static void writePublicBoardFeatures(float[] v, Player p, Game g) {
+        int permanents = 0;
+        int nonlandPermanents = 0;
+        int untappedCreatures = 0;
+        int tappedCreatures = 0;
+        int attackingCreatures = 0;
+        int blockingCreatures = 0;
+        int summoningSickCreatures = 0;
+        int tokenPermanents = 0;
+        int totalPower = 0;
+        int untappedPower = 0;
+        int attackingPower = 0;
+        int maxPower = 0;
+
+        for (Permanent perm : g.getBattlefield().getAllActivePermanents(p.getId())) {
+            permanents++;
+            if (!perm.isLand(g)) {
+                nonlandPermanents++;
+            }
+            if (perm instanceof PermanentToken) {
+                tokenPermanents++;
+            }
+            if (!perm.isCreature(g)) {
+                continue;
+            }
+            int power = Math.max(0, perm.getPower().getValue());
+            totalPower += power;
+            maxPower = Math.max(maxPower, power);
+            if (perm.isTapped()) {
+                tappedCreatures++;
+            } else {
+                untappedCreatures++;
+                untappedPower += power;
+            }
+            if (perm.isAttacking()) {
+                attackingCreatures++;
+                attackingPower += power;
+            }
+            if (perm.isBlocked(g)) {
+                blockingCreatures++;
+            }
+            if (perm.hasSummoningSickness()) {
+                summoningSickCreatures++;
+            }
+        }
+
+        int slot = PUBLIC_BOARD_SLOT_START;
+        if (slot < v.length) v[slot++] = permanents / 20.0f;
+        if (slot < v.length) v[slot++] = nonlandPermanents / 20.0f;
+        if (slot < v.length) v[slot++] = untappedCreatures / 20.0f;
+        if (slot < v.length) v[slot++] = tappedCreatures / 20.0f;
+        if (slot < v.length) v[slot++] = attackingCreatures / 10.0f;
+        if (slot < v.length) v[slot++] = blockingCreatures / 10.0f;
+        if (slot < v.length) v[slot++] = summoningSickCreatures / 10.0f;
+        if (slot < v.length) v[slot++] = tokenPermanents / 20.0f;
+        if (slot < v.length) v[slot++] = totalPower / 30.0f;
+        if (slot < v.length) v[slot++] = untappedPower / 30.0f;
+        if (slot < v.length) v[slot++] = attackingPower / 30.0f;
+        if (slot < v.length) v[slot] = maxPower / 15.0f;
+    }
+
+    private static DeterminizationSampler loadArchetypeBeliefSampler() {
+        try {
+            return DeterminizationSampler.pauperDefaults();
+        } catch (Throwable t) {
+            logger.warning("RL_ARCHETYPE_BELIEF_FEATURES_ENABLE requested but sampler failed to load: "
+                    + t.getMessage());
+            return null;
+        }
+    }
+
+    private static float sanitizeUnit(Float value) {
+        if (value == null || Float.isNaN(value) || Float.isInfinite(value)) {
+            return 0.0f;
+        }
+        if (value < 0.0f) {
+            return 0.0f;
+        }
+        if (value > 1.0f) {
+            return 1.0f;
+        }
+        return value;
     }
 
     private static void addCardList(List<float[]> t, List<Integer> m, List<Integer> ids,
@@ -614,9 +833,9 @@ public class StateSequenceBuilder {
         boolean fHasETB = ability instanceof EntersBattlefieldTriggeredAbility;
 
         for (Effect effect : ability.getAllEffects()) {
-            if (effect instanceof DamageTargetEffect || effect instanceof DamagePlayersEffect) fDealsDamage = true;
+            if (isDamageEffect(effect)) fDealsDamage = true;
             if (effect instanceof DestroyTargetEffect || effect instanceof DestroyAllEffect) fDestroys = true;
-            if (effect instanceof ExileTargetEffect || effect instanceof ExileAllEffect) fExiles = true;
+            if (isExileEffect(effect)) fExiles = true;
             if (effect instanceof ReturnToHandTargetEffect || effect instanceof ReturnToHandFromBattlefieldAllEffect) fBounces = true;
             if (effect instanceof DrawCardSourceControllerEffect || effect instanceof DrawCardTargetEffect) fDraws = true;
             if (effect instanceof GainLifeEffect) fGainsLife = true;
@@ -657,6 +876,44 @@ public class StateSequenceBuilder {
             // rather than overwriting them
             if (ef[i]) v[EFFECT_SLOT_START + i] = 1.0f;
         }
+    }
+
+    private static boolean isDamageEffect(Effect effect) {
+        if (effect == null) {
+            return false;
+        }
+        if (effect instanceof DamageTargetEffect
+                || effect instanceof DamagePlayersEffect) {
+            return true;
+        }
+        if (!EXTENDED_EFFECT_FLAGS_ENABLED) {
+            return false;
+        }
+        if (effect instanceof DamageAllEffect) {
+            return true;
+        }
+        String simpleName = effect.getClass().getSimpleName();
+        return simpleName != null && simpleName.startsWith("Damage");
+    }
+
+    private static boolean isExileEffect(Effect effect) {
+        if (effect == null) {
+            return false;
+        }
+        if (effect instanceof ExileTargetEffect || effect instanceof ExileAllEffect) {
+            return true;
+        }
+        if (!EXTENDED_EFFECT_FLAGS_ENABLED) {
+            return false;
+        }
+        String simpleName = effect.getClass().getSimpleName();
+        if (simpleName == null) {
+            return false;
+        }
+        String lower = simpleName.toLowerCase(Locale.ROOT);
+        return simpleName.startsWith("Exile")
+                || lower.contains("andexile")
+                || (lower.contains("graveyard") && lower.contains("exile"));
     }
 
     private static float[] embedCard(Card card, Zone zone, Game game) {
@@ -905,11 +1162,11 @@ public class StateSequenceBuilder {
                     fHasETB = true;
                 }
                 for (Effect effect : ability.getAllEffects()) {
-                    if (effect instanceof DamageTargetEffect || effect instanceof DamagePlayersEffect)
+                    if (isDamageEffect(effect))
                         fDealsDamage = true;
                     if (effect instanceof DestroyTargetEffect || effect instanceof DestroyAllEffect)
                         fDestroys = true;
-                    if (effect instanceof ExileTargetEffect || effect instanceof ExileAllEffect)
+                    if (isExileEffect(effect))
                         fExiles = true;
                     if (effect instanceof ReturnToHandTargetEffect || effect instanceof ReturnToHandFromBattlefieldAllEffect)
                         fBounces = true;
@@ -1125,10 +1382,12 @@ public class StateSequenceBuilder {
 
         /**
          * Number of deck archetypes predicted by the belief head (Phase 1).
-         * Order must match {@link #computeArchetypeLabel}:
-         *   0 = Wildfire, 1 = Rally, 2 = Affinity, 3 = Elves.
+         * Order must match {@link #computeArchetypeLabel} and
+         * {@link DeterminizationSampler#pauperDefaults()}:
+         *   0 = Wildfire, 1 = Rally, 2 = Affinity, 3 = Elves,
+         *   4 = SpyCombo, 5 = Burn, 6 = Terror, 7 = CawGates, 8 = Faeries.
          */
-        public static final int NUM_ARCHETYPES = 4;
+        public static final int NUM_ARCHETYPES = 9;
 
         public final SequenceOutput state;
         public final int candidateCount;
@@ -1151,6 +1410,11 @@ public class StateSequenceBuilder {
         // All-zero array signals "no MCTS target for this step" -- python skips
         // the KL-divergence loss in that case and falls back to PPO only.
         public float[] mctsVisitTargets;  // [MAX_CANDIDATES]
+
+        // Generic hidden-card belief target: normalized opponent hand+library
+        // counts over the deck-pool vocabulary. Null means absent; the bridge
+        // serializes absent rows as -1 so Python skips them.
+        public float[] cardBeliefLabels;
 
         public TrainingData(SequenceOutput state,
                 int candidateCount,
@@ -1176,6 +1440,7 @@ public class StateSequenceBuilder {
             this.stepReward = stepReward;
             this.beliefArchetypeLabel = -1;  // unknown until populated
             this.mctsVisitTargets = new float[MAX_CANDIDATES];  // all zeros = no MCTS target
+            this.cardBeliefLabels = null;
         }
 
         public void setBeliefArchetypeLabel(int label) {
@@ -1187,23 +1452,91 @@ public class StateSequenceBuilder {
                 this.mctsVisitTargets = targets;
             }
         }
+
+        public void setCardBeliefLabels(float[] labels) {
+            int dim = StateSequenceBuilder.cardBeliefDim();
+            if (labels != null && dim > 0 && labels.length == dim) {
+                this.cardBeliefLabels = labels;
+            }
+        }
+    }
+
+    private static final class CardBeliefVocab {
+        final String[] cardNames;
+        final Map<String, Integer> indexByName;
+        final float[] maxCounts;
+
+        CardBeliefVocab(String[] cardNames, Map<String, Integer> indexByName, float[] maxCounts) {
+            this.cardNames = cardNames;
+            this.indexByName = indexByName;
+            this.maxCounts = maxCounts;
+        }
+
+        static CardBeliefVocab empty() {
+            return new CardBeliefVocab(new String[0], Collections.emptyMap(), new float[0]);
+        }
+    }
+
+    public static int cardBeliefDim() {
+        return CARD_BELIEF_VOCAB.cardNames.length;
+    }
+
+    public static List<String> cardBeliefVocab() {
+        List<String> names = new ArrayList<>();
+        Collections.addAll(names, CARD_BELIEF_VOCAB.cardNames);
+        return Collections.unmodifiableList(names);
+    }
+
+    public static float[] cardBeliefMaxCounts() {
+        return CARD_BELIEF_VOCAB.maxCounts.clone();
     }
 
     // Signature cards that uniquely identify each archetype. Ordered to match
-    // TrainingData.NUM_ARCHETYPES: 0 = Wildfire, 1 = Rally, 2 = Affinity, 3 = Elves.
+    // TrainingData.NUM_ARCHETYPES and DeterminizationSampler.pauperDefaults().
     // If any of these appears anywhere in the opponent's zones, we label the
     // opponent with the corresponding archetype id.
     private static final String[][] ARCHETYPE_SIGNATURE_CARDS = {
             {"Cleansing Wildfire"},                              // Wildfire (Jund Wildfire: cleansing-target artifact lands)
             {"Kuldotha Rebirth", "Goblin Bushwhacker"},         // Rally (Mono Red Rally: aggro go-wide)
             {"Refurbished Familiar", "Drossforge Bridge"},      // Affinity (Grixis Affinity: artifact synergy)
-            {"Nettle Sentinel", "Elvish Mystic", "Lys Alana Huntmaster"} // Elves (tribal)
+            {"Nettle Sentinel", "Elvish Mystic", "Lys Alana Huntmaster"}, // Elves (tribal)
+            {"Balustrade Spy", "Dread Return", "Lotleth Giant"}, // SpyCombo
+            {"Guttersnipe", "Fireblast", "Lava Dart"},          // Burn
+            {"Tolarian Terror", "Cryptic Serpent"},              // Terror
+            {"Basilisk Gate", "Squadron Hawk", "The Modern Age"}, // CawGates
+            {"Spellstutter Sprite", "Faerie Seer", "Moon-Circuit Hacker"} // Faeries
     };
 
+    public static void setThreadLocalKnownArchetypeLabels(Map<UUID, Integer> labels) {
+        if (labels == null || labels.isEmpty()) {
+            THREAD_LOCAL_KNOWN_ARCHETYPE_LABELS.remove();
+            return;
+        }
+        THREAD_LOCAL_KNOWN_ARCHETYPE_LABELS.set(new HashMap<>(labels));
+    }
+
+    public static void clearThreadLocalKnownArchetypeLabels() {
+        THREAD_LOCAL_KNOWN_ARCHETYPE_LABELS.remove();
+    }
+
+    public static int computeArchetypeLabelFromDeckName(String deckName) {
+        String normalized = deckName == null ? "" : deckName.toLowerCase(java.util.Locale.ROOT);
+        if (normalized.contains("wildfire")) return 0;
+        if (normalized.contains("rally")) return 1;
+        if (normalized.contains("affinity")) return 2;
+        if (normalized.contains("elves")) return 3;
+        if (normalized.contains("spy")) return 4;
+        if (normalized.contains("burn")) return 5;
+        if (normalized.contains("terror")) return 6;
+        if (normalized.contains("caw")) return 7;
+        if (normalized.contains("faerie")) return 8;
+        return -1;
+    }
+
     /**
-     * Determine the opponent's deck archetype by scanning their current zones
-     * for a signature card. Returns the archetype id (0..NUM_ARCHETYPES-1), or
-     * -1 if no signature matches (e.g., off-meta deck; python skips loss).
+     * Determine the opponent's deck archetype from public information only.
+     * Returns the archetype id (0..NUM_ARCHETYPES-1), or -1 if no visible
+     * signature matches (e.g., unknown/off-meta deck; python skips loss).
      */
     public static int computeArchetypeLabel(Game game, UUID viewerId) {
         if (game == null || viewerId == null) return -1;
@@ -1213,15 +1546,37 @@ public class StateSequenceBuilder {
             break;
         }
         if (oppId == null) return -1;
+
+        if (TRUE_ARCHETYPE_LABELS_ENABLED) {
+            Map<UUID, Integer> knownLabels = THREAD_LOCAL_KNOWN_ARCHETYPE_LABELS.get();
+            if (knownLabels != null) {
+                Integer known = knownLabels.get(oppId);
+                if (known != null && known >= 0 && known < TrainingData.NUM_ARCHETYPES) {
+                    return known;
+                }
+            }
+        }
+
         Player opp = game.getPlayer(oppId);
         if (opp == null) return -1;
 
         java.util.Set<String> names = new java.util.HashSet<>();
         try {
-            for (Card c : opp.getLibrary().getCards(game)) if (c != null) names.add(c.getName());
-            for (Card c : opp.getHand().getCards(game)) if (c != null) names.add(c.getName());
             for (Permanent p : game.getBattlefield().getAllActivePermanents(oppId)) if (p != null) names.add(p.getName());
             for (Card c : opp.getGraveyard().getCards(game)) if (c != null) names.add(c.getName());
+            for (Card c : game.getExile().getAllCards(game)) {
+                if (c != null && oppId.equals(c.getOwnerId())) {
+                    names.add(c.getName());
+                }
+            }
+            for (StackObject so : game.getStack()) {
+                if (so != null && oppId.equals(so.getControllerId())) {
+                    String name = so.getName();
+                    if (name != null && !name.isEmpty()) {
+                        names.add(name);
+                    }
+                }
+            }
         } catch (Throwable t) {
             return -1;
         }
@@ -1231,5 +1586,113 @@ public class StateSequenceBuilder {
             }
         }
         return -1;
+    }
+
+    public static float[] computeCardBeliefLabels(Game game, UUID viewerId) {
+        if (!CARD_BELIEF_LABELS_ENABLED || CARD_BELIEF_VOCAB.cardNames.length == 0
+                || game == null || viewerId == null) {
+            return null;
+        }
+        UUID oppId = null;
+        for (UUID pid : game.getOpponents(viewerId)) {
+            oppId = pid;
+            break;
+        }
+        if (oppId == null) {
+            return null;
+        }
+        Player opp = game.getPlayer(oppId);
+        if (opp == null) {
+            return null;
+        }
+
+        float[] labels = new float[CARD_BELIEF_VOCAB.cardNames.length];
+        try {
+            for (Card c : opp.getHand().getCards(game)) {
+                addCardBeliefCount(labels, c);
+            }
+            for (Card c : opp.getLibrary().getCards(game)) {
+                addCardBeliefCount(labels, c);
+            }
+        } catch (Throwable t) {
+            return null;
+        }
+
+        for (int i = 0; i < labels.length; i++) {
+            float maxCount = i < CARD_BELIEF_VOCAB.maxCounts.length
+                    ? CARD_BELIEF_VOCAB.maxCounts[i]
+                    : 1.0f;
+            labels[i] = Math.max(0.0f, Math.min(1.0f, labels[i] / Math.max(1.0f, maxCount)));
+        }
+        return labels;
+    }
+
+    private static void addCardBeliefCount(float[] labels, Card card) {
+        if (labels == null || card == null) {
+            return;
+        }
+        Integer idx = CARD_BELIEF_VOCAB.indexByName.get(card.getName());
+        if (idx != null && idx >= 0 && idx < labels.length) {
+            labels[idx] += 1.0f;
+        }
+    }
+
+    private static CardBeliefVocab loadCardBeliefVocab() {
+        String deckList = System.getenv().getOrDefault("RL_CARD_BELIEF_DECK_LIST", "").trim();
+        if (deckList.isEmpty()) {
+            deckList = System.getenv().getOrDefault("DECK_LIST_FILE", "").trim();
+        }
+        DeterminizationSampler sampler = deckList.isEmpty()
+                ? DeterminizationSampler.pauperDefaults()
+                : DeterminizationSampler.loadFromDeckListFile(deckList);
+        if (sampler == null || sampler.getArchetypes().isEmpty()) {
+            return CardBeliefVocab.empty();
+        }
+
+        Map<String, Integer> maxCounts = new java.util.TreeMap<>();
+        for (String archetype : sampler.getArchetypes()) {
+            Map<String, Integer> counts = sampler.decklistCounts(archetype);
+            for (Map.Entry<String, Integer> e : counts.entrySet()) {
+                String name = e.getKey();
+                int count = e.getValue() == null ? 0 : e.getValue();
+                if (name == null || name.trim().isEmpty() || count <= 0) {
+                    continue;
+                }
+                Integer prev = maxCounts.get(name);
+                if (prev == null || count > prev) {
+                    maxCounts.put(name, count);
+                }
+            }
+        }
+        if (maxCounts.isEmpty()) {
+            return CardBeliefVocab.empty();
+        }
+
+        List<Map.Entry<String, Integer>> entries = new ArrayList<>(maxCounts.entrySet());
+        Collections.sort(entries, (a, b) -> {
+            int byCount = Integer.compare(b.getValue(), a.getValue());
+            return byCount != 0 ? byCount : a.getKey().compareTo(b.getKey());
+        });
+        int limit = CARD_BELIEF_MAX_CARDS <= 0 ? entries.size() : Math.min(CARD_BELIEF_MAX_CARDS, entries.size());
+        String[] names = new String[limit];
+        float[] max = new float[limit];
+        Map<String, Integer> index = new HashMap<>();
+        for (int i = 0; i < limit; i++) {
+            Map.Entry<String, Integer> e = entries.get(i);
+            names[i] = e.getKey();
+            max[i] = Math.max(1, e.getValue());
+            index.put(names[i], i);
+        }
+        logger.info("Loaded generic card-belief vocabulary: dim=" + names.length
+                + " deckList=" + (deckList.isEmpty() ? "<pauperDefaults>" : deckList));
+        return new CardBeliefVocab(names, Collections.unmodifiableMap(index), max);
+    }
+
+    private static int parseEnvInt(String key, int fallback) {
+        try {
+            return Integer.parseInt(System.getenv().getOrDefault(key, Integer.toString(fallback)).trim());
+        } catch (Exception e) {
+            return fallback;
+        }
     }
 }

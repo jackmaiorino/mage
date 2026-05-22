@@ -1,0 +1,5 @@
+# Active specialist profile pool for cross-profile RL training and CP7 eval.
+Deck - Spy Combo.dek
+Deck - Jund Wildfire.dek
+Deck - Mono Red Rally.dek
+Deck - Grixis Affinity.dek

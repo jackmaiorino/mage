@@ -1,5 +1,7 @@
 package mage.player.ai.rl;
 
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -7,6 +9,7 @@ import mage.players.Player;
 import mage.player.ai.SimulatedPlayerMCTS;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -31,6 +34,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class BeliefISMCTS {
 
     private static final long ROLLOUT_TIMEOUT_MS = EnvConfig.i32("ISMCTS_ROLLOUT_TIMEOUT_MS", 5000);
+    private static final int ROOT_DETERMINIZATIONS = EnvConfig.i32(
+            "ISMCTS_ROOT_DETERMINIZATIONS", EnvConfig.i32("ISMCTS_DETERMINIZATIONS", 1));
+    private static final int ROOT_ROLLOUTS_PER_ACTION = EnvConfig.i32("ISMCTS_ROOT_ROLLOUTS_PER_ACTION", 1);
+    private static final long ROOT_SEARCH_TIMEOUT_MS = EnvConfig.i64("ISMCTS_ROOT_SEARCH_TIMEOUT_MS", 3000L);
     private static final int ROLLOUT_WIN = 1;
     private static final int ROLLOUT_LOSS = -1;
     private static final int ROLLOUT_DRAW_OR_ERROR = 0;
@@ -58,6 +65,25 @@ public final class BeliefISMCTS {
         public double winRate() {
             int n = completed();
             return n == 0 ? 0.0 : (double) wins / (double) n;
+        }
+    }
+
+    public static final class SearchResult {
+        public final int bestActionIndex;
+        public final int[] aggregateVisits;
+        public final float[] aggregateValues;
+        public final int determinizationsRun;
+        public final long wallMs;
+        public final String predictedArchetype;
+
+        SearchResult(int bestActionIndex, int[] aggregateVisits, float[] aggregateValues,
+                     int determinizationsRun, long wallMs, String predictedArchetype) {
+            this.bestActionIndex = bestActionIndex;
+            this.aggregateVisits = aggregateVisits;
+            this.aggregateValues = aggregateValues;
+            this.determinizationsRun = determinizationsRun;
+            this.wallMs = wallMs;
+            this.predictedArchetype = predictedArchetype;
         }
     }
 
@@ -135,6 +161,148 @@ public final class BeliefISMCTS {
             else other++;
         }
         return new RolloutStats(wins, losses, other, System.currentTimeMillis() - started);
+    }
+
+    /**
+     * Eval-only root selector using belief determinization plus terminal random
+     * rollouts. This deliberately avoids the value head used by PolicyValueMCTS:
+     * each candidate is force-applied in a simulation clone, then the rest of
+     * the game is played out by {@link SimulatedPlayerMCTS}. The result is too
+     * expensive/noisy for training, but it is a useful diagnostic for whether
+     * imperfect-information rollout search has any policy-improvement signal at
+     * critical Spy decisions.
+     */
+    public static SearchResult searchRoot(Game liveGame, UUID selfId,
+                                          List<? extends Ability> candidates,
+                                          float[] policyPriors,
+                                          DeterminizationSampler sampler) {
+        int numCandidates = candidates == null ? 0 : candidates.size();
+        if (liveGame == null || selfId == null || sampler == null || numCandidates <= 0) {
+            return new SearchResult(0, new int[Math.max(0, numCandidates)],
+                    new float[Math.max(0, numCandidates)], 0, 0L, "");
+        }
+
+        UUID oppId = null;
+        for (UUID pid : liveGame.getOpponents(selfId)) {
+            oppId = pid;
+            break;
+        }
+        if (oppId == null) {
+            return new SearchResult(0, new int[numCandidates], new float[numCandidates], 0, 0L, "");
+        }
+
+        int[] visits = new int[numCandidates];
+        float[] sums = new float[numCandidates];
+        long started = System.currentTimeMillis();
+        Random rng = new Random();
+        int detsCompleted = 0;
+        String predictedArch = "";
+
+        int dets = Math.max(1, ROOT_DETERMINIZATIONS);
+        int rolloutsPerAction = Math.max(1, ROOT_ROLLOUTS_PER_ACTION);
+        for (int d = 0; d < dets; d++) {
+            if ((System.currentTimeMillis() - started) >= ROOT_SEARCH_TIMEOUT_MS) {
+                break;
+            }
+            DeterminizationSampler.Determinization det;
+            try {
+                det = sampler.sample(liveGame, oppId, rng);
+                if (d == 0 && det != null) {
+                    predictedArch = det.archetype;
+                }
+            } catch (Throwable t) {
+                continue;
+            }
+            for (int c = 0; c < numCandidates; c++) {
+                for (int k = 0; k < rolloutsPerAction; k++) {
+                    if ((System.currentTimeMillis() - started) >= ROOT_SEARCH_TIMEOUT_MS) {
+                        break;
+                    }
+                    int result = runSingleBeliefActionRollout(liveGame, selfId, oppId, det, candidates.get(c));
+                    visits[c]++;
+                    if (result == ROLLOUT_WIN) {
+                        sums[c] += 1.0f;
+                    } else if (result == ROLLOUT_LOSS) {
+                        sums[c] -= 1.0f;
+                    }
+                }
+            }
+            detsCompleted++;
+        }
+
+        float[] means = new float[numCandidates];
+        for (int i = 0; i < numCandidates; i++) {
+            means[i] = visits[i] > 0 ? sums[i] / visits[i] : 0.0f;
+        }
+        int bestIdx = bestMeanIndex(means, visits, policyPriors);
+        return new SearchResult(bestIdx, visits, means, detsCompleted,
+                System.currentTimeMillis() - started, predictedArch);
+    }
+
+    private static int bestMeanIndex(float[] means, int[] visits, float[] policyPriors) {
+        int best = 0;
+        float bestValue = Float.NEGATIVE_INFINITY;
+        int bestVisits = -1;
+        float bestPrior = Float.NEGATIVE_INFINITY;
+        for (int i = 0; i < means.length; i++) {
+            if (visits[i] <= 0) {
+                continue;
+            }
+            float prior = policyPriors != null && i < policyPriors.length ? policyPriors[i] : 0.0f;
+            if (means[i] > bestValue
+                    || (means[i] == bestValue && visits[i] > bestVisits)
+                    || (means[i] == bestValue && visits[i] == bestVisits && prior > bestPrior)) {
+                best = i;
+                bestValue = means[i];
+                bestVisits = visits[i];
+                bestPrior = prior;
+            }
+        }
+        return best;
+    }
+
+    private static int runSingleBeliefActionRollout(Game liveGame, UUID selfId,
+                                                    UUID oppId,
+                                                    DeterminizationSampler.Determinization det,
+                                                    Ability candidate) {
+        Game sim = liveGame.createSimulationForAI();
+
+        for (Player oldPlayer : new ArrayList<>(sim.getState().getPlayers().values())) {
+            Player livePlayer = liveGame.getState().getPlayers().get(oldPlayer.getId());
+            if (livePlayer == null) {
+                continue;
+            }
+            Player origPlayer = livePlayer.copy();
+            SimulatedPlayerMCTS newPlayer = new SimulatedPlayerMCTS(oldPlayer, true);
+            newPlayer.restore(origPlayer);
+            sim.getState().getPlayers().put(oldPlayer.getId(), newPlayer);
+        }
+
+        DeterminizationSampler.applyToClone(sim, selfId, oppId, det);
+
+        Player simSelf = sim.getPlayer(selfId);
+        if (simSelf == null || !(candidate instanceof ActivatedAbility)) {
+            return ROLLOUT_DRAW_OR_ERROR;
+        }
+        try {
+            boolean activated = simSelf.activateAbility((ActivatedAbility) candidate.copy(), sim);
+            if (!activated) {
+                return ROLLOUT_DRAW_OR_ERROR;
+            }
+        } catch (Throwable t) {
+            return ROLLOUT_DRAW_OR_ERROR;
+        }
+
+        try {
+            sim.resume();
+        } catch (Throwable t) {
+            return ROLLOUT_DRAW_OR_ERROR;
+        }
+        Player me = sim.getPlayer(selfId);
+        if (me == null) return ROLLOUT_DRAW_OR_ERROR;
+        if (me.hasWon()) return ROLLOUT_WIN;
+        if (me.hasLost()) return ROLLOUT_LOSS;
+        return ROLLOUT_DRAW_OR_ERROR;
     }
 
     private static int runSingleBeliefRollout(Game liveGame, UUID selfId,

@@ -25,7 +25,7 @@ import java.util.UUID;
 /**
  * Deterministic ISMCTS determinization sampler.
  * <p>
- * No neural networks involved: given 4 known archetype decklists, archetype
+ * No neural networks involved: given the known Pauper archetype decklists, archetype
  * classification is Bayesian elimination over visible cards, hand sampling
  * is uniform-without-replacement from the remaining pool, and library is
  * a shuffled remainder. See mcts_implementation_plan_apr2026.md for why
@@ -44,11 +44,41 @@ public final class DeterminizationSampler {
      * and for sanity checks during sampling.
      */
     private final Map<String, Integer> archetypeDeckSizes;
+    private static final ThreadLocal<CardBeliefContext> THREAD_LOCAL_CARD_BELIEF = new ThreadLocal<>();
 
     private DeterminizationSampler(Map<String, Map<String, Integer>> decklists,
                                    Map<String, Integer> sizes) {
         this.archetypeDecklists = decklists;
         this.archetypeDeckSizes = sizes;
+    }
+
+    private static final class CardBeliefContext {
+        final List<String> vocab;
+        final float[] maxCounts;
+        final float[] predictions;
+
+        CardBeliefContext(List<String> vocab, float[] maxCounts, float[] predictions) {
+            this.vocab = vocab == null ? Collections.emptyList() : new ArrayList<>(vocab);
+            this.maxCounts = maxCounts == null ? new float[0] : Arrays.copyOf(maxCounts, maxCounts.length);
+            this.predictions = predictions == null ? new float[0] : Arrays.copyOf(predictions, predictions.length);
+        }
+
+        boolean usable() {
+            return !vocab.isEmpty() && predictions.length == vocab.size();
+        }
+    }
+
+    public static void setThreadLocalCardBelief(List<String> vocab, float[] maxCounts, float[] predictions) {
+        CardBeliefContext ctx = new CardBeliefContext(vocab, maxCounts, predictions);
+        if (ctx.usable()) {
+            THREAD_LOCAL_CARD_BELIEF.set(ctx);
+        } else {
+            THREAD_LOCAL_CARD_BELIEF.remove();
+        }
+    }
+
+    public static void clearThreadLocalCardBelief() {
+        THREAD_LOCAL_CARD_BELIEF.remove();
     }
 
     /**
@@ -75,6 +105,45 @@ public final class DeterminizationSampler {
             sizes.put(arch, total);
         }
         return new DeterminizationSampler(decklists, sizes);
+    }
+
+    /**
+     * Load archetypes from a deck-list file such as the training/eval pool
+     * files used by RLTrainer. Relative entries are resolved against the
+     * deck-list file's parent directory.
+     */
+    public static DeterminizationSampler loadFromDeckListFile(String deckListFile) {
+        if (deckListFile == null || deckListFile.trim().isEmpty()) {
+            return new DeterminizationSampler(Collections.emptyMap(), Collections.emptyMap());
+        }
+        Path listPath = Paths.get(deckListFile.trim());
+        if (!Files.exists(listPath)) {
+            return new DeterminizationSampler(Collections.emptyMap(), Collections.emptyMap());
+        }
+        Path base = listPath.getParent();
+        Map<String, String> paths = new LinkedHashMap<>();
+        try {
+            for (String raw : Files.readAllLines(listPath)) {
+                String line = raw == null ? "" : raw.trim();
+                if (line.isEmpty() || line.startsWith("#")) {
+                    continue;
+                }
+                Path deckPath = Paths.get(line);
+                if (!deckPath.isAbsolute() && base != null) {
+                    deckPath = base.resolve(deckPath).normalize();
+                }
+                String archetype = archetypeNameFromDeckPath(deckPath);
+                String unique = archetype;
+                int suffix = 2;
+                while (paths.containsKey(unique)) {
+                    unique = archetype + suffix++;
+                }
+                paths.put(unique, deckPath.toString());
+            }
+        } catch (Exception e) {
+            return new DeterminizationSampler(Collections.emptyMap(), Collections.emptyMap());
+        }
+        return loadArchetypes(paths);
     }
 
     private static Deck loadDeck(String path) {
@@ -104,6 +173,30 @@ public final class DeterminizationSampler {
         paths.put("CawGates", base + "/Deck - Caw-Gates.dek");
         paths.put("Faeries", base + "/Deck - Mono-Blue Faeries.dek");
         return loadArchetypes(paths);
+    }
+
+    private static String archetypeNameFromDeckPath(Path deckPath) {
+        String name = deckPath == null || deckPath.getFileName() == null
+                ? "Archetype"
+                : deckPath.getFileName().toString();
+        if (name.endsWith(".dek")) {
+            name = name.substring(0, name.length() - 4);
+        }
+        if (name.startsWith("Deck - ")) {
+            name = name.substring("Deck - ".length());
+        }
+        StringBuilder out = new StringBuilder();
+        boolean capitalize = true;
+        for (int i = 0; i < name.length(); i++) {
+            char c = name.charAt(i);
+            if (Character.isLetterOrDigit(c)) {
+                out.append(capitalize ? Character.toUpperCase(c) : c);
+                capitalize = false;
+            } else {
+                capitalize = true;
+            }
+        }
+        return out.length() == 0 ? "Archetype" : out.toString();
     }
 
     public List<String> getArchetypes() {
@@ -203,9 +296,31 @@ public final class DeterminizationSampler {
      * (hand + library) given the current public state.
      */
     public Determinization sample(Game game, UUID oppId, Random rng) {
+        CardBeliefContext cardCtx = THREAD_LOCAL_CARD_BELIEF.get();
+        if (cardCtx != null && cardCtx.usable()) {
+            return sampleWithCardBelief(game, oppId, cardCtx.vocab, cardCtx.maxCounts, cardCtx.predictions, rng);
+        }
         Map<String, Float> posterior = classifyArchetype(game, oppId);
         String archetype = sampleFromPosterior(posterior, rng);
         return sampleForArchetype(game, oppId, archetype, posterior, rng);
+    }
+
+    /**
+     * Sample a determinization from the usual public-card archetype posterior,
+     * but order the remaining hidden card pool by generic neural card-belief
+     * predictions. This keeps the decklist/archetype prior intact while using
+     * learned hidden-zone expectations to bias which plausible cards land in
+     * hand versus deeper library.
+     */
+    public Determinization sampleWithCardBelief(Game game, UUID oppId,
+                                                List<String> vocab,
+                                                float[] maxCounts,
+                                                float[] predictions,
+                                                Random rng) {
+        Map<String, Float> posterior = classifyArchetype(game, oppId);
+        String archetype = sampleFromPosterior(posterior, rng);
+        return sampleForArchetypeWithCardBelief(game, oppId, archetype, posterior,
+                vocab, maxCounts, predictions, rng);
     }
 
     /**
@@ -261,6 +376,101 @@ public final class DeterminizationSampler {
         List<String> hand = new ArrayList<>(pool.subList(0, effHand));
         List<String> library = new ArrayList<>(pool.subList(effHand, pool.size()));
         return new Determinization(archetype, hand, library, posterior);
+    }
+
+    private Determinization sampleForArchetypeWithCardBelief(Game game,
+                                                             UUID oppId,
+                                                             String archetype,
+                                                             Map<String, Float> posterior,
+                                                             List<String> vocab,
+                                                             float[] maxCounts,
+                                                             float[] predictions,
+                                                             Random rng) {
+        Map<String, Integer> decklist = archetypeDecklists.get(archetype);
+        if (decklist == null || vocab == null || predictions == null || vocab.isEmpty()) {
+            return sampleForArchetype(game, oppId, archetype, posterior, rng);
+        }
+        Map<String, Integer> visible = collectVisibleCardCounts(game, oppId);
+        int handSize = 0;
+        if (game != null && oppId != null) {
+            Player opp = game.getPlayer(oppId);
+            if (opp != null) {
+                handSize = opp.getHand().size();
+            }
+        }
+
+        Map<String, Integer> remaining = new HashMap<>(decklist);
+        if (visible != null) {
+            for (Map.Entry<String, Integer> e : visible.entrySet()) {
+                remaining.merge(e.getKey(), -e.getValue(), Integer::sum);
+            }
+        }
+        remaining.values().removeIf(v -> v <= 0);
+
+        Map<String, Float> weightByName = new HashMap<>();
+        int limit = Math.min(vocab.size(), predictions.length);
+        for (int i = 0; i < limit; i++) {
+            String name = vocab.get(i);
+            if (name == null || name.isEmpty()) {
+                continue;
+            }
+            float pred = predictions[i];
+            if (Float.isNaN(pred) || Float.isInfinite(pred)) {
+                pred = 0.0f;
+            }
+            float maxCount = maxCounts != null && i < maxCounts.length ? maxCounts[i] : 1.0f;
+            float expectedCount = Math.max(0.0f, Math.min(1.0f, pred)) * Math.max(1.0f, maxCount);
+            weightByName.put(name, expectedCount);
+        }
+
+        List<String> pool = new ArrayList<>();
+        for (Map.Entry<String, Integer> e : remaining.entrySet()) {
+            for (int i = 0; i < e.getValue(); i++) {
+                pool.add(e.getKey());
+            }
+        }
+        List<String> ordered = weightedShuffle(pool, weightByName, rng);
+        int effHand = Math.max(0, Math.min(handSize, ordered.size()));
+        List<String> hand = new ArrayList<>(ordered.subList(0, effHand));
+        List<String> library = new ArrayList<>(ordered.subList(effHand, ordered.size()));
+        return new Determinization(archetype, hand, library, posterior);
+    }
+
+    private static List<String> weightedShuffle(List<String> pool, Map<String, Float> weightByName, Random rng) {
+        List<String> remaining = new ArrayList<>(pool == null ? Collections.emptyList() : pool);
+        List<String> ordered = new ArrayList<>(remaining.size());
+        Random safeRng = rng == null ? new Random() : rng;
+        while (!remaining.isEmpty()) {
+            double total = 0.0;
+            for (String name : remaining) {
+                total += cardWeight(name, weightByName);
+            }
+            if (total <= 0.0 || Double.isNaN(total) || Double.isInfinite(total)) {
+                Collections.shuffle(remaining, safeRng);
+                ordered.addAll(remaining);
+                break;
+            }
+            double r = safeRng.nextDouble() * total;
+            int pick = remaining.size() - 1;
+            double seen = 0.0;
+            for (int i = 0; i < remaining.size(); i++) {
+                seen += cardWeight(remaining.get(i), weightByName);
+                if (r <= seen) {
+                    pick = i;
+                    break;
+                }
+            }
+            ordered.add(remaining.remove(pick));
+        }
+        return ordered;
+    }
+
+    private static double cardWeight(String name, Map<String, Float> weightByName) {
+        float w = weightByName == null ? 0.0f : weightByName.getOrDefault(name, 0.0f);
+        if (Float.isNaN(w) || Float.isInfinite(w) || w < 0.0f) {
+            w = 0.0f;
+        }
+        return 0.05 + w;
     }
 
     /**

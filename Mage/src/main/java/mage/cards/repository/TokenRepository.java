@@ -45,6 +45,8 @@ public enum TokenRepository {
     public static final String XMAGE_IMAGE_NAME_THE_RING = "The Ring";
     public static final String XMAGE_IMAGE_NAME_HELPER_EMBLEM = "Helper Emblem";
     public static final String XMAGE_IMAGE_NAME_SPEED = "Speed";
+    private static final String TOKEN_METADATA_RNG_ISOLATION = "EVAL_REPLAY_TOKEN_METADATA_RNG_ISOLATION";
+    private static final String TOKEN_METADATA_RNG_TRACE = "EVAL_REPLAY_TOKEN_METADATA_RNG_TRACE";
 
     private static final Logger logger = Logger.getLogger(TokenRepository.class);
 
@@ -395,10 +397,81 @@ public enum TokenRepository {
 
         // also will return diff image number for tokens
         if (needList.size() > 0) {
-            return RandomUtil.randomFromCollection(needList);
+            return randomTokenInfo(needList, preferredSetCode);
         } else {
             return null;
         }
+    }
+
+    private static TokenInfo randomTokenInfo(List<TokenInfo> needList, String preferredSetCode) {
+        boolean isolate = settingFlag(TOKEN_METADATA_RNG_ISOLATION);
+        boolean trace = isolate || settingFlag(TOKEN_METADATA_RNG_TRACE);
+        if (!isolate && !trace) {
+            return RandomUtil.randomFromCollection(needList);
+        }
+        try (RandomUtil.WrapperTraceContext ignoredTrace = trace
+                     ? RandomUtil.withWrapperTraceContext(null, tokenMetadataTraceName(needList, preferredSetCode))
+                     : null;
+             RandomUtil.RandomIsolation ignoredIsolation = isolate
+                     ? RandomUtil.isolateThreadLocalRandom(tokenMetadataSeed(needList, preferredSetCode))
+                     : null) {
+            return RandomUtil.randomFromCollection(needList);
+        }
+    }
+
+    private static long tokenMetadataSeed(List<TokenInfo> needList, String preferredSetCode) {
+        long seed = 0x9E3779B97F4A7C15L;
+        seed = mix(seed, setting("xmage.replay.random_util_seed"));
+        seed = mix(seed, setting("xmage.replay.seed"));
+        seed = mix(seed, preferredSetCode);
+        for (TokenInfo info : needList) {
+            seed = mix(seed, info.getTokenType().name());
+            seed = mix(seed, info.getSetCode());
+            seed = mix(seed, info.getName());
+            seed = mix(seed, info.getFullClassFileName());
+            seed = mix(seed, String.valueOf(info.getImageNumber()));
+        }
+        return seed;
+    }
+
+    private static long mix(long seed, String value) {
+        long result = seed;
+        String safe = value == null ? "" : value;
+        for (int i = 0; i < safe.length(); i++) {
+            result ^= safe.charAt(i);
+            result *= 0x100000001B3L;
+        }
+        return result;
+    }
+
+    private static String tokenMetadataTraceName(List<TokenInfo> needList, String preferredSetCode) {
+        TokenInfo first = needList.get(0);
+        return "token_metadata preferred_set=" + safeTrace(preferredSetCode)
+                + " candidate_count=" + needList.size()
+                + " first_name=" + safeTrace(first.getName())
+                + " first_set=" + safeTrace(first.getSetCode())
+                + " first_image=" + safeTrace(String.valueOf(first.getImageNumber()))
+                + " first_class=" + safeTrace(first.getFullClassFileName());
+    }
+
+    private static String safeTrace(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replace('\n', ' ').replace('\r', ' ').trim();
+    }
+
+    private static boolean settingFlag(String key) {
+        String value = setting(key);
+        return "1".equals(value) || "true".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value);
+    }
+
+    private static String setting(String key) {
+        String value = System.getenv(key);
+        if (value == null || value.trim().isEmpty()) {
+            value = System.getProperty(key);
+        }
+        return value == null ? "" : value.trim();
     }
 
     /**
@@ -410,6 +483,19 @@ public enum TokenRepository {
      */
     public TokenInfo findPreferredTokenInfoForClass(String className, String preferredSetCode) {
         return findPreferredTokenInfo(TokenRepository.instance.getByClassName(className), preferredSetCode);
+    }
+
+    public void consumePreferredTokenInfoForReplayParity(String className, String preferredSetCode, int count) {
+        if (count <= 0) {
+            return;
+        }
+        List<TokenInfo> possibleList = TokenRepository.instance.getByClassName(className);
+        if (possibleList.isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < count; i++) {
+            findPreferredTokenInfo(possibleList, preferredSetCode);
+        }
     }
 
     /**

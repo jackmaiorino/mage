@@ -98,6 +98,11 @@ public final class MultiProfileOnnxRouter implements PythonModel {
     }
 
     @Override
+    public boolean awaitTrainingDrained(long timeoutMs) {
+        return currentProfileModel().awaitTrainingDrained(timeoutMs);
+    }
+
+    @Override
     public void saveModel(String path) {
         currentProfileModel().saveModel(path);
     }
@@ -136,6 +141,11 @@ public final class MultiProfileOnnxRouter implements PythonModel {
     @Override
     public float[] predictArchetype(StateSequenceBuilder.SequenceOutput state) {
         return currentProfileModel().predictArchetype(state);
+    }
+
+    @Override
+    public float[] predictCardBelief(StateSequenceBuilder.SequenceOutput state) {
+        return currentProfileModel().predictCardBelief(state);
     }
 
     @Override

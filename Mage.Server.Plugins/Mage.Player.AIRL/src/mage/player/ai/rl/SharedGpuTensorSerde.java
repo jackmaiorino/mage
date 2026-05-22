@@ -13,6 +13,11 @@ import java.util.List;
  */
 final class SharedGpuTensorSerde {
 
+    private static final double MULLIGAN_SAMPLE_WEIGHT =
+            Math.max(0.0, EnvConfig.f64("MULLIGAN_SAMPLE_WEIGHT", 1.0));
+    private static final double LONDON_MULLIGAN_SAMPLE_WEIGHT =
+            Math.max(0.0, EnvConfig.f64("LONDON_MULLIGAN_SAMPLE_WEIGHT", MULLIGAN_SAMPLE_WEIGHT));
+
     private SharedGpuTensorSerde() {
     }
 
@@ -30,6 +35,10 @@ final class SharedGpuTensorSerde {
                 intsToBytes(candidateActionIds),
                 intsToBytes(candidateMask)
         };
+    }
+
+    static byte[] buildStateSequenceBytes(StateSequenceBuilder.SequenceOutput state) {
+        return state == null ? new byte[0] : floats2dToBytes(state.getSequence());
     }
 
     static byte[] packSegments(byte[]... segments) {
@@ -110,6 +119,11 @@ final class SharedGpuTensorSerde {
         int[] headIdx = new int[batchSize];
         int[] beliefArchetypeLabels = new int[batchSize];
         float[] mctsVisitTargets = new float[batchSize * maxCandidates];
+        int cardBeliefDim = StateSequenceBuilder.cardBeliefDim();
+        float[] cardBeliefLabels = new float[batchSize * cardBeliefDim];
+        if (cardBeliefDim > 0) {
+            java.util.Arrays.fill(cardBeliefLabels, -1.0f);
+        }
 
         int seqOffset = 0;
         int maskOffset = 0;
@@ -142,6 +156,12 @@ final class SharedGpuTensorSerde {
                 System.arraycopy(item.mctsVisitTargets, 0, mctsVisitTargets,
                         i * maxCandidates, maxCandidates);
             }
+            if (cardBeliefDim > 0
+                    && item.cardBeliefLabels != null
+                    && item.cardBeliefLabels.length == cardBeliefDim) {
+                System.arraycopy(item.cardBeliefLabels, 0, cardBeliefLabels,
+                        i * cardBeliefDim, cardBeliefDim);
+            }
 
             rewardValues[i] = rewards != null && i < rewards.size() && rewards.get(i) != null
                     ? rewards.get(i).floatValue()
@@ -149,7 +169,7 @@ final class SharedGpuTensorSerde {
             chosenCount[i] = item.chosenCount;
             oldLogpTotal[i] = item.oldLogpTotal;
             oldValue[i] = item.oldValue;
-            sampleWeights[i] = 1.0f;
+            sampleWeights[i] = (float) actionTypeSampleWeight(item.actionType);
             dones[i] = (i == batchSize - 1) ? 1 : 0;
             headIdx[i] = actionTypeToHeadIdx(item.actionType);
         }
@@ -170,7 +190,8 @@ final class SharedGpuTensorSerde {
                 intsToBytes(dones),
                 intsToBytes(headIdx),
                 intsToBytes(beliefArchetypeLabels),
-                floatsToBytes(mctsVisitTargets)
+                floatsToBytes(mctsVisitTargets),
+                floatsToBytes(cardBeliefLabels)
         );
     }
 
@@ -247,6 +268,8 @@ final class SharedGpuTensorSerde {
         switch (actionType) {
             case SELECT_TARGETS:
                 return 1;
+            case MULLIGAN:
+                return 5;
             case LONDON_MULLIGAN:
             case SELECT_CARD:
                 return 2;
@@ -258,5 +281,15 @@ final class SharedGpuTensorSerde {
             default:
                 return 0;
         }
+    }
+
+    private static double actionTypeSampleWeight(StateSequenceBuilder.ActionType actionType) {
+        if (actionType == StateSequenceBuilder.ActionType.MULLIGAN) {
+            return MULLIGAN_SAMPLE_WEIGHT;
+        }
+        if (actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN) {
+            return LONDON_MULLIGAN_SAMPLE_WEIGHT;
+        }
+        return 1.0;
     }
 }

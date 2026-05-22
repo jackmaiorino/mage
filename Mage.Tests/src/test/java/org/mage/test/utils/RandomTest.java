@@ -56,6 +56,35 @@ public class RandomTest {
     }
 
     @Test
+    public void test_CaptureAndRestoreState() {
+        RandomUtil.setSeed(123);
+        for (int i = 0; i < 7; i++) {
+            RandomUtil.nextInt();
+        }
+        RandomUtil.State captured = RandomUtil.captureState();
+
+        List<Integer> expected = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            expected.add(RandomUtil.nextInt(100000));
+        }
+        long expectedCount = RandomUtil.getConsumptionCount();
+
+        RandomUtil.setSeed(98765);
+        for (int i = 0; i < 3; i++) {
+            RandomUtil.nextBoolean();
+        }
+        RandomUtil.restoreState(captured);
+
+        List<Integer> actual = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            actual.add(RandomUtil.nextInt(100000));
+        }
+
+        Assert.assertEquals("restored state must reproduce next values", expected, actual);
+        Assert.assertEquals("restored wrapper counter must continue from checkpoint", expectedCount, RandomUtil.getConsumptionCount());
+    }
+
+    @Test
     public void test_SeedAndSameRandomDecks() {
         RandomUtil.setSeed(123);
         DeckCardLists listSameA = DeckTestUtils.buildRandomDeckAndInitCards("WGUBR", false, "GRN");

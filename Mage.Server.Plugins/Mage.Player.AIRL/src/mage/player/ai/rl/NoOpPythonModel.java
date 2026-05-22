@@ -38,7 +38,19 @@ final class NoOpPythonModel implements PythonModel {
         for (int i = 0; i < policy.length; i++) {
             policy[i] = rng.nextFloat();
         }
-        return new PythonMLBatchManager.PredictionResult(policy, 0.0f);
+        return new PythonMLBatchManager.PredictionResult(
+                policy,
+                0.0f,
+                "noop_random",
+                "",
+                "",
+                -1,
+                -1,
+                Thread.currentThread().getName(),
+                "random_scores",
+                true,
+                "NoOpPythonModel"
+        );
     }
 
     @Override

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -51,6 +52,7 @@ public class PythonMLBatchManager {
     private final Object py4jLock;
     private final List<PredictRequest> predictionQueue;
     private final java.util.concurrent.ScheduledExecutorService scheduler;
+    private final AtomicLong predictionBatchSeq;
 
     PythonMLBatchManager(PythonEntryPoint entryPoint, Object py4jLock) {
         this.entryPoint = entryPoint;
@@ -59,6 +61,7 @@ public class PythonMLBatchManager {
         this.lock = new Object();
         this.py4jLock = py4jLock;
         this.predictionQueue = new java.util.ArrayList<>();
+        this.predictionBatchSeq = new AtomicLong(1L);
         this.scheduler = java.util.concurrent.Executors.newSingleThreadScheduledExecutor(r -> {
             Thread t = new Thread(r, "PyBatchFlush");
             t.setDaemon(true);
@@ -302,6 +305,7 @@ public class PythonMLBatchManager {
         byte[] candMaskBytes = convertIntegersToBytes(allCandMask);
 
         byte[] resultsBytes;
+        long batchId = predictionBatchSeq.getAndIncrement();
         synchronized (py4jLock) { // ensure exclusive Py4J channel (but don't block enqueueing)
             // Multi-backend: Java acquires GPU lock for inference.
             // Single-backend: Python uses an in-process mutex to pause inference during training.
@@ -342,7 +346,19 @@ public class PythonMLBatchManager {
             float value = resBuf.getFloat();
 
             PredictRequest req = batch.get(bi);
-            req.future.complete(new PredictionResult(policy, value));
+            req.future.complete(new PredictionResult(
+                    policy,
+                    value,
+                    "py4j_batch_manager",
+                    req.id.toString(),
+                    "py4j-" + batchId,
+                    bi,
+                    batchSize,
+                    Thread.currentThread().getName(),
+                    "policy_scores",
+                    false,
+                    "policyKey=" + policyKey + ";headId=" + headId + ";maxBatchSize=" + MAX_BATCH_SIZE
+            ));
             pendingPredictions.remove(req.id);
         }
     }
@@ -528,6 +544,22 @@ public class PythonMLBatchManager {
             byte[] headIdxBytes = convertIntegersToBytes(trainingData.stream()
                     .map(d -> actionTypeToHeadIdx(d.actionType))
                     .collect(Collectors.toList()));
+            byte[] archetypeLabelsBytes = convertIntegersToBytes(trainingData.stream()
+                    .map(d -> d.beliefArchetypeLabel)
+                    .collect(Collectors.toList()));
+            byte[] mctsVisitsBytes = convertFloatArraysToBytes(trainingData.stream()
+                    .map(d -> d.mctsVisitTargets != null && d.mctsVisitTargets.length == maxCandidates
+                            ? d.mctsVisitTargets
+                            : new float[maxCandidates])
+                    .collect(Collectors.toList()));
+            int cardBeliefDim = StateSequenceBuilder.cardBeliefDim();
+            byte[] cardBeliefLabelsBytes = cardBeliefDim > 0
+                    ? convertFloatArraysToBytes(trainingData.stream()
+                            .map(d -> d.cardBeliefLabels != null && d.cardBeliefLabels.length == cardBeliefDim
+                                    ? d.cardBeliefLabels
+                                    : missingCardBeliefLabels(cardBeliefDim))
+                            .collect(Collectors.toList()))
+                    : new byte[0];
 
             int batchSize = trainingData.size();
             int seqLen = trainingData.get(0).state.getSequence().length;
@@ -554,7 +586,12 @@ public class PythonMLBatchManager {
                         seqLen,
                         dModel,
                         maxCandidates,
-                        candFeatDim);
+                        candFeatDim,
+                        archetypeLabelsBytes,
+                        StateSequenceBuilder.TrainingData.NUM_ARCHETYPES,
+                        mctsVisitsBytes,
+                        cardBeliefLabelsBytes,
+                        cardBeliefDim);
             }
 
             future.complete(true);
@@ -576,6 +613,12 @@ public class PythonMLBatchManager {
             }
         }
         return buffer.array();
+    }
+
+    private static float[] missingCardBeliefLabels(int dim) {
+        float[] labels = new float[Math.max(0, dim)];
+        Arrays.fill(labels, -1.0f);
+        return labels;
     }
 
     private byte[] convertIntegersToBytes(List<Integer> data) {
@@ -606,14 +649,16 @@ public class PythonMLBatchManager {
     }
 
     /**
-     * Maps ActionType to a head index matching Python HEAD_NAMES = ["action", "target", "card_select"].
-     * 0 = action head (default), 1 = target head, 2 = card_select head.
+     * Maps ActionType to a head index matching Python HEAD_NAMES.
+     * 0 = action, 1 = target, 2 = card_select, 3 = attack, 4 = block, 5 = mulligan.
      */
     private static int actionTypeToHeadIdx(StateSequenceBuilder.ActionType actionType) {
         if (actionType == null) return 0;
         switch (actionType) {
             case SELECT_TARGETS:
                 return 1;
+            case MULLIGAN:
+                return 5;
             case LONDON_MULLIGAN:
             case SELECT_CARD:
                 return 2;
@@ -631,10 +676,45 @@ public class PythonMLBatchManager {
 
         public final float[] policyScores;
         public final float valueScores;
+        public final String backendPath;
+        public final String requestId;
+        public final String batchId;
+        public final int batchIndex;
+        public final int batchSize;
+        public final String backendThreadName;
+        public final String rawScoreKind;
+        public final boolean fallback;
+        public final String backendDetails;
 
         public PredictionResult(float[] policyScores, float valueScores) {
+            this(policyScores, valueScores, "", "", "", -1, -1,
+                    Thread.currentThread().getName(), "policy_scores", false, "");
+        }
+
+        public PredictionResult(
+                float[] policyScores,
+                float valueScores,
+                String backendPath,
+                String requestId,
+                String batchId,
+                int batchIndex,
+                int batchSize,
+                String backendThreadName,
+                String rawScoreKind,
+                boolean fallback,
+                String backendDetails
+        ) {
             this.policyScores = policyScores;
             this.valueScores = valueScores;
+            this.backendPath = backendPath == null ? "" : backendPath;
+            this.requestId = requestId == null ? "" : requestId;
+            this.batchId = batchId == null ? "" : batchId;
+            this.batchIndex = batchIndex;
+            this.batchSize = batchSize;
+            this.backendThreadName = backendThreadName == null ? "" : backendThreadName;
+            this.rawScoreKind = rawScoreKind == null ? "" : rawScoreKind;
+            this.fallback = fallback;
+            this.backendDetails = backendDetails == null ? "" : backendDetails;
         }
     }
 }

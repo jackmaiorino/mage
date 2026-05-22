@@ -152,7 +152,12 @@ public interface PythonEntryPoint {
             int seqLen,
             int dModel,
             int maxCandidates,
-            int candFeatDim
+            int candFeatDim,
+            byte[] archetypeLabelsBytes,
+            int numArchetypes,
+            byte[] mctsVisitsBytes,
+            byte[] cardBeliefLabelsBytes,
+            int cardBeliefDim
     );
 
     /**

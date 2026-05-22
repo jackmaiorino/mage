@@ -48,6 +48,8 @@ public final class SharedGpuProtocol {
     public static final int OP_SAVE_MULLIGAN_MODEL = 14;
     public static final int OP_GET_VALUE_HEAD_METRICS = 15;
     public static final int OP_CLOSE_PROFILE = 16;
+    public static final int OP_PREDICT_ARCHETYPE = 17;
+    public static final int OP_PREDICT_CARD_BELIEF = 18;
 
     public static final int STATUS_OK = 0;
     public static final int STATUS_ERROR = 1;

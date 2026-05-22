@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class OnnxInferenceModel implements PythonModel {
 
     private static final Logger logger = Logger.getLogger(OnnxInferenceModel.class);
-    private static final String[] HEAD_IDS = {"action", "target", "card_select", "attack", "block"};
+    private static final String[] HEAD_IDS = {"action", "target", "card_select", "attack", "block", "mulligan"};
 
     private static final int BATCH_TIMEOUT_MS = EnvConfig.i32("ONNX_BATCH_TIMEOUT_MS", 20);
     private static final int BATCH_TIMEOUT_MAX_MS = EnvConfig.i32("ONNX_BATCH_TIMEOUT_MAX_MS", 100);
@@ -34,6 +34,7 @@ public final class OnnxInferenceModel implements PythonModel {
 
     private final Map<String, OrtSession> sessions = new ConcurrentHashMap<>();
     private final Path onnxDir;
+    private volatile Path activeOnnxDir;
     private final String modelsDir;
     private final boolean forceCpu;
     private PythonModel trainingDelegate;
@@ -50,6 +51,7 @@ public final class OnnxInferenceModel implements PythonModel {
     private final AtomicLong totalFlushes = new AtomicLong();
     private volatile long lastOnnxReloadMs = System.currentTimeMillis();
     private volatile long lastOnnxMtime = 0; // mtime of model_action.onnx at last load
+    private volatile String lastOnnxIdentity = "";
 
     // Adaptive batch timeout: scale up when batches are small (death spiral prevention)
     private volatile int adaptiveBatchTimeoutMs = BATCH_TIMEOUT_MS;
@@ -88,6 +90,8 @@ public final class OnnxInferenceModel implements PythonModel {
         final int originalCandCount;
         final BatchKey key;
         final CompletableFuture<PythonMLBatchManager.PredictionResult> future;
+        int batchIndex = -1;
+        int batchSize = -1;
 
         ScoreRequest(StateSequenceBuilder.SequenceOutput state,
                      int[] candidateActionIds, float[][] candidateFeatures,
@@ -112,6 +116,7 @@ public final class OnnxInferenceModel implements PythonModel {
     public OnnxInferenceModel(String modelsDir, boolean forceCpu) {
         this.modelsDir = modelsDir;
         this.onnxDir = Paths.get(modelsDir, "onnx");
+        this.activeOnnxDir = resolveActiveOnnxDir();
         this.forceCpu = forceCpu;
         initOrtEnvironment();
         if (env != null && sessionOpts != null) {
@@ -130,6 +135,7 @@ public final class OnnxInferenceModel implements PythonModel {
     public OnnxInferenceModel(String modelsDir, OrtEnvironment sharedEnv, OrtSession.SessionOptions sharedOpts) {
         this.modelsDir = modelsDir;
         this.onnxDir = Paths.get(modelsDir, "onnx");
+        this.activeOnnxDir = resolveActiveOnnxDir();
         this.forceCpu = false;
         this.sharedSessionOpts = true;
         this.env = sharedEnv;
@@ -158,8 +164,9 @@ public final class OnnxInferenceModel implements PythonModel {
         opts.setOptimizationLevel(OrtSession.SessionOptions.OptLevel.ALL_OPT);
         if (!forceCpu && !EnvConfig.bool("ONNX_FORCE_CPU", false)) {
             try {
+                int cudaDeviceId = EnvConfig.i32("ONNX_CUDA_DEVICE_ID", inferCudaDeviceIdDefault());
                 ai.onnxruntime.providers.OrtCUDAProviderOptions cudaOpts =
-                        new ai.onnxruntime.providers.OrtCUDAProviderOptions(0);
+                        new ai.onnxruntime.providers.OrtCUDAProviderOptions(cudaDeviceId);
                 // Reduce fragmentation: use kSameAsRequested so the arena doesn't
                 // over-allocate and fragment VRAM with geometrically growing blocks.
                 cudaOpts.add("arena_extend_strategy", "kSameAsRequested");
@@ -171,9 +178,11 @@ public final class OnnxInferenceModel implements PythonModel {
                 cudaOpts.add("gpu_mem_limit", String.valueOf(onnxMemLimitMb * 1024 * 1024));
                 if (EnvConfig.bool("ONNX_CUDA_GRAPH", false)) {
                     cudaOpts.add("enable_cuda_graph", "1");
-                    System.out.println("[ONNX] CUDA GPU provider added with CUDA graphs + arena_extend=SameAsRequested");
+                    System.out.println("[ONNX] CUDA GPU provider added device=" + cudaDeviceId
+                            + " with CUDA graphs + arena_extend=SameAsRequested");
                 } else {
-                    System.out.println("[ONNX] CUDA GPU provider added (arena_extend=SameAsRequested)");
+                    System.out.println("[ONNX] CUDA GPU provider added device=" + cudaDeviceId
+                            + " (arena_extend=SameAsRequested)");
                 }
                 opts.addCUDA(cudaOpts);
             } catch (Exception e) {
@@ -183,6 +192,22 @@ public final class OnnxInferenceModel implements PythonModel {
             System.out.println("[ONNX] Forced CPU mode" + (forceCpu ? " (forceCpu=true)" : " (ONNX_FORCE_CPU=1)"));
         }
         return opts;
+    }
+
+    private int inferCudaDeviceIdDefault() {
+        String inferDevice = System.getenv("INFER_CUDA_DEVICE");
+        if (inferDevice == null) {
+            return 0;
+        }
+        String trimmed = inferDevice.trim().toLowerCase();
+        if (!trimmed.startsWith("cuda:")) {
+            return 0;
+        }
+        try {
+            return Math.max(0, Integer.parseInt(trimmed.substring("cuda:".length())));
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     /** Expose for shared-arena multi-profile construction. */
@@ -209,8 +234,9 @@ public final class OnnxInferenceModel implements PythonModel {
     }
 
     private void loadSessions() {
+        Path loadDir = activeOnnxDir != null ? activeOnnxDir : resolveActiveOnnxDir();
         for (String headId : HEAD_IDS) {
-            Path onnxPath = onnxDir.resolve("model_" + headId + ".onnx");
+            Path onnxPath = loadDir.resolve("model_" + headId + ".onnx");
             if (Files.exists(onnxPath)) {
                 try {
                     OrtSession session = env.createSession(onnxPath.toString(), sessionOpts);
@@ -225,7 +251,7 @@ public final class OnnxInferenceModel implements PythonModel {
             }
         }
         // Phase 2 belief head: archetype classifier from shared encoder CLS.
-        Path beliefPath = onnxDir.resolve("model_belief.onnx");
+        Path beliefPath = loadDir.resolve("model_belief.onnx");
         if (Files.exists(beliefPath)) {
             try {
                 OrtSession beliefSession = env.createSession(beliefPath.toString(), sessionOpts);
@@ -236,17 +262,58 @@ public final class OnnxInferenceModel implements PythonModel {
             }
         }
         if (sessions.isEmpty()) {
-            logger.warn("No ONNX models loaded from " + onnxDir);
+            logger.warn("No ONNX models loaded from " + loadDir);
         } else {
-            logger.info("Loaded " + sessions.size() + " ONNX models from " + onnxDir);
+            logger.info("Loaded " + sessions.size() + " ONNX models from " + loadDir);
         }
         lastOnnxReloadMs = System.currentTimeMillis();
+        lastOnnxIdentity = onnxIdentity(loadDir);
+    }
+
+    private Path resolveActiveOnnxDir() {
+        Path pointer = onnxDir.resolve(".active_dir");
+        if (Files.exists(pointer)) {
+            try {
+                String raw = new String(Files.readAllBytes(pointer), java.nio.charset.StandardCharsets.UTF_8).trim();
+                if (!raw.isEmpty()) {
+                    Path resolved = Paths.get(raw);
+                    if (!resolved.isAbsolute()) {
+                        resolved = onnxDir.resolve(resolved);
+                    }
+                    if (Files.isDirectory(resolved)) {
+                        return resolved;
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        return onnxDir;
+    }
+
+    private String onnxIdentity(Path dir) {
+        if (dir == null) {
+            return "";
+        }
+        long mtime = 0L;
+        try {
+            Path action = dir.resolve("model_action.onnx");
+            if (Files.exists(action)) {
+                mtime = Files.getLastModifiedTime(action).toMillis();
+            }
+        } catch (Exception ignored) {
+        }
+        try {
+            return dir.toAbsolutePath().normalize().toString() + "#" + mtime;
+        } catch (Exception e) {
+            return dir.toString() + "#" + mtime;
+        }
     }
 
     /**
      * Phase 2: predict opponent's deck archetype from public state via the
      * belief head. Returns softmax probabilities [num_archetypes] in the
-     * order {Wildfire, Rally, Affinity, Elves}, or null if belief model
+     * order {Wildfire, Rally, Affinity, Elves, SpyCombo, Burn, Terror,
+     * CawGates, Faeries}, or null if belief model
      * unavailable. Runs single-sample inference (no batching); callers
      * should invoke sparingly (e.g., once per turn).
      */
@@ -410,19 +477,16 @@ public final class OnnxInferenceModel implements PythonModel {
         long nowMs = System.currentTimeMillis();
         if (reloadCheckMs > 0 && (nowMs - lastOnnxReloadMs) >= reloadCheckMs) {
             lastOnnxReloadMs = nowMs;
-            Path actionOnnx = onnxDir.resolve("model_action.onnx");
-            long currentMtime = 0;
-            try {
-                if (Files.exists(actionOnnx)) {
-                    currentMtime = Files.getLastModifiedTime(actionOnnx).toMillis();
-                }
-            } catch (Exception ignored) {}
-            if (currentMtime > 0 && currentMtime != lastOnnxMtime) {
-                System.out.println("[ONNX] Detected updated ONNX files (mtime changed), reloading at flush #" + batchNum);
+            Path resolvedDir = resolveActiveOnnxDir();
+            String currentIdentity = onnxIdentity(resolvedDir);
+            if (!currentIdentity.isEmpty() && !currentIdentity.equals(lastOnnxIdentity)) {
+                System.out.println("[ONNX] Detected updated ONNX export, reloading at flush #" + batchNum
+                        + " dir=" + resolvedDir.getFileName());
                 for (OrtSession s : sessions.values()) {
                     try { s.close(); } catch (OrtException ignored) {}
                 }
                 sessions.clear();
+                activeOnnxDir = resolvedDir;
                 loadSessions();
                 // Reset adaptive timeout after reload
                 lastBatchSizeEma = BATCH_MAX_SIZE * 100L;
@@ -502,9 +566,10 @@ public final class OnnxInferenceModel implements PythonModel {
 
     private void runBatchedInference(BatchKey key, List<ScoreRequest> requests) {
         OrtSession session = sessions.get(key.headId);
+        long runBatchId = totalFlushes.get();
         if (session == null) {
             for (ScoreRequest r : requests) {
-                r.future.complete(uniformResult(r.candidateMask));
+                r.future.complete(uniformResult(r.candidateMask, "onnx_missing_session", key.headId));
             }
             return;
         }
@@ -521,6 +586,10 @@ public final class OnnxInferenceModel implements PythonModel {
         int batchSize = requests.size();
         int seqLen = key.seqLen;
         int paddedBatch = EnvConfig.bool("ONNX_CUDA_GRAPH", false) ? BATCH_MAX_SIZE : batchSize;
+        for (int i = 0; i < requests.size(); i++) {
+            requests.get(i).batchIndex = i;
+            requests.get(i).batchSize = batchSize;
+        }
 
         try {
             long tensorStart = System.nanoTime();
@@ -609,7 +678,18 @@ public final class OnnxInferenceModel implements PythonModel {
                             System.arraycopy(probs[b], 0, trimmed, 0, r.originalCandCount);
                         }
                         r.future.complete(new PythonMLBatchManager.PredictionResult(
-                                trimmed, values[b][0]));
+                                trimmed,
+                                values[b][0],
+                                "onnx_local",
+                                "",
+                                "onnx-" + runBatchId,
+                                r.batchIndex,
+                                r.batchSize,
+                                Thread.currentThread().getName(),
+                                "policy_scores",
+                                false,
+                                "headId=" + key.headId + ";seqLen=" + key.seqLen + ";modelsDir=" + modelsDir
+                        ));
                     }
                 }
             }
@@ -617,7 +697,7 @@ public final class OnnxInferenceModel implements PythonModel {
             logger.error("ONNX batched inference failed for head=" + key.headId
                     + " batch=" + batchSize + " seqLen=" + seqLen + ": " + e.getMessage());
             for (ScoreRequest r : requests) {
-                r.future.complete(uniformResult(r.candidateMask));
+                r.future.complete(uniformResult(r.candidateMask, "onnx_exception", e.getClass().getSimpleName()));
             }
         }
     }
@@ -627,6 +707,14 @@ public final class OnnxInferenceModel implements PythonModel {
     // -----------------------------------------------------------------------
 
     private static PythonMLBatchManager.PredictionResult uniformResult(int[] candidateMask) {
+        return uniformResult(candidateMask, "onnx_uniform", "");
+    }
+
+    private static PythonMLBatchManager.PredictionResult uniformResult(
+            int[] candidateMask,
+            String backendPath,
+            String detail
+    ) {
         float[] uniform = new float[candidateMask.length];
         int validCount = 0;
         for (int m : candidateMask) if (m != 0) validCount++;
@@ -634,7 +722,19 @@ public final class OnnxInferenceModel implements PythonModel {
         for (int i = 0; i < candidateMask.length; i++) {
             uniform[i] = candidateMask[i] != 0 ? p : 0.0f;
         }
-        return new PythonMLBatchManager.PredictionResult(uniform, 0.0f);
+        return new PythonMLBatchManager.PredictionResult(
+                uniform,
+                0.0f,
+                backendPath,
+                "",
+                "",
+                -1,
+                -1,
+                Thread.currentThread().getName(),
+                "uniform_fallback",
+                true,
+                detail
+        );
     }
 
     static int bucketSeqLen(int seqLen) {
@@ -666,6 +766,11 @@ public final class OnnxInferenceModel implements PythonModel {
     @Override
     public void enqueueTraining(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> rewards) {
         if (trainingDelegate != null) trainingDelegate.enqueueTraining(trainingData, rewards);
+    }
+
+    @Override
+    public boolean awaitTrainingDrained(long timeoutMs) {
+        return trainingDelegate == null || trainingDelegate.awaitTrainingDrained(timeoutMs);
     }
 
     @Override

@@ -80,6 +80,7 @@ public final class SharedGpuPythonModel implements PythonModel {
     private final int endpointPort;
     private final MetricsCollector metrics = MetricsCollector.getInstance();
     private final AtomicLong requestIdSeq = new AtomicLong(1L);
+    private final AtomicLong scoreBatchSeq = new AtomicLong(1L);
     private final AtomicBoolean shutdown = new AtomicBoolean(false);
     private final Object predictionLock = new Object();
     private final Object trainLock = new Object();
@@ -650,6 +651,104 @@ public final class SharedGpuPythonModel implements PythonModel {
     }
 
     @Override
+    public float[] predictArchetype(StateSequenceBuilder.SequenceOutput state) {
+        if (state == null || state.getSequence() == null || state.getSequence().length == 0) {
+            return null;
+        }
+        int seqLen = state.getSequence().length;
+        int dModel = state.getSequence()[0] == null ? 0 : state.getSequence()[0].length;
+        if (dModel <= 0) {
+            return null;
+        }
+
+        Map<String, String> headers = singletonProfileHeaders();
+        headers.put("batch_size", "1");
+        headers.put("seq_len", Integer.toString(seqLen));
+        headers.put("d_model", Integer.toString(dModel));
+        headers.put("num_archetypes", Integer.toString(StateSequenceBuilder.TrainingData.NUM_ARCHETYPES));
+
+        byte[] payload = SharedGpuTensorSerde.packSegments(
+                SharedGpuTensorSerde.buildStateSequenceBytes(state),
+                SharedGpuTensorSerde.intsToBytes(state.getMask()),
+                SharedGpuTensorSerde.intsToBytes(state.getTokenIds())
+        );
+        try {
+            // Belief inference is implemented by the Python shared-GPU host, even when
+            // candidate scoring is routed through a separate inference endpoint.
+            SharedGpuProtocol.ResponseFrame response = invoke(
+                    SharedGpuProtocol.OP_PREDICT_ARCHETYPE,
+                    headers,
+                    payload,
+                    SCORE_TIMEOUT_MS
+            );
+            int expected = parseIntHeader(response.headers, "num_archetypes",
+                    StateSequenceBuilder.TrainingData.NUM_ARCHETYPES);
+            ByteBuffer buffer = ByteBuffer.wrap(response.payload == null ? new byte[0] : response.payload)
+                    .order(ByteOrder.LITTLE_ENDIAN);
+            int count = Math.max(0, Math.min(expected, buffer.remaining() / 4));
+            if (count == 0) {
+                return null;
+            }
+            float[] probs = new float[count];
+            for (int i = 0; i < count; i++) {
+                probs[i] = buffer.getFloat();
+            }
+            return probs;
+        } catch (Exception e) {
+            logger.fine("Shared GPU belief inference unavailable: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public float[] predictCardBelief(StateSequenceBuilder.SequenceOutput state) {
+        if (state == null || state.getSequence() == null || state.getSequence().length == 0) {
+            return null;
+        }
+        int seqLen = state.getSequence().length;
+        int dModel = state.getSequence()[0] == null ? 0 : state.getSequence()[0].length;
+        int cardBeliefDim = StateSequenceBuilder.cardBeliefDim();
+        if (dModel <= 0 || cardBeliefDim <= 0) {
+            return null;
+        }
+
+        Map<String, String> headers = singletonProfileHeaders();
+        headers.put("batch_size", "1");
+        headers.put("seq_len", Integer.toString(seqLen));
+        headers.put("d_model", Integer.toString(dModel));
+        headers.put("card_belief_dim", Integer.toString(cardBeliefDim));
+
+        byte[] payload = SharedGpuTensorSerde.packSegments(
+                SharedGpuTensorSerde.buildStateSequenceBytes(state),
+                SharedGpuTensorSerde.intsToBytes(state.getMask()),
+                SharedGpuTensorSerde.intsToBytes(state.getTokenIds())
+        );
+        try {
+            SharedGpuProtocol.ResponseFrame response = invoke(
+                    SharedGpuProtocol.OP_PREDICT_CARD_BELIEF,
+                    headers,
+                    payload,
+                    SCORE_TIMEOUT_MS
+            );
+            int expected = parseIntHeader(response.headers, "card_belief_dim", cardBeliefDim);
+            ByteBuffer buffer = ByteBuffer.wrap(response.payload == null ? new byte[0] : response.payload)
+                    .order(ByteOrder.LITTLE_ENDIAN);
+            int count = Math.max(0, Math.min(expected, buffer.remaining() / 4));
+            if (count == 0) {
+                return null;
+            }
+            float[] probs = new float[count];
+            for (int i = 0; i < count; i++) {
+                probs[i] = buffer.getFloat();
+            }
+            return probs;
+        } catch (Exception e) {
+            logger.fine("Shared GPU card-belief inference unavailable: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
     public void shutdown() {
         if (!shutdown.compareAndSet(false, true)) {
             return;
@@ -809,6 +908,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         headers.put("d_model", Integer.toString(key.dModel));
         headers.put("max_candidates", Integer.toString(key.maxCandidates));
         headers.put("cand_feat_dim", Integer.toString(key.candFeatDim));
+        long localBatchId = scoreBatchSeq.getAndIncrement();
 
         try {
             byte[] payload = buildMergedScorePayload(batch);
@@ -834,7 +934,8 @@ public final class SharedGpuPythonModel implements PythonModel {
                     ByteBuffer buffer = ByteBuffer.wrap(response.payload == null ? new byte[0] : response.payload)
                             .order(ByteOrder.LITTLE_ENDIAN);
                     int paddedCandCount = key.maxCandidates;
-                    for (ScoreRequest request : batch) {
+                    for (int bi = 0; bi < batch.size(); bi++) {
+                        ScoreRequest request = batch.get(bi);
                         int expectedBytes = (paddedCandCount + 1) * 4;
                         if (buffer.remaining() < expectedBytes) {
                             throw new IllegalStateException("Shared GPU batch score response truncated");
@@ -846,7 +947,19 @@ public final class SharedGpuPythonModel implements PythonModel {
                         float value = buffer.getFloat();
                         int origCount = request.originalCandidateCount;
                         float[] policy = origCount == paddedCandCount ? paddedPolicy : Arrays.copyOf(paddedPolicy, origCount);
-                        request.future.complete(new PythonMLBatchManager.PredictionResult(policy, value));
+                        request.future.complete(new PythonMLBatchManager.PredictionResult(
+                                policy,
+                                value,
+                                "shared_gpu_socket",
+                                Long.toString(response.requestId),
+                                "shared-gpu-" + localBatchId,
+                                bi,
+                                batch.size(),
+                                Thread.currentThread().getName(),
+                                "policy_scores",
+                                false,
+                                "profileId=" + key.profileId + ";policyKey=" + key.policyKey + ";headId=" + key.headId
+                        ));
                     }
                 } catch (Exception e) {
                     for (ScoreRequest request : batch) {
@@ -917,6 +1030,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         headers.put("max_candidates", Integer.toString(key.maxCandidates));
         headers.put("cand_feat_dim", Integer.toString(key.candFeatDim));
         headers.put("num_archetypes", Integer.toString(StateSequenceBuilder.TrainingData.NUM_ARCHETYPES));
+        headers.put("card_belief_dim", Integer.toString(StateSequenceBuilder.cardBeliefDim()));
         headers.put("local_flush_reason", dueToFull ? "full" : "timeout");
         byte[] payload = SharedGpuTensorSerde.buildTrainPayload(mergedTrainingData, mergedRewards);
         try {

@@ -8,7 +8,7 @@ public interface PythonModel extends AutoCloseable {
     /**
      * Candidate scoring with explicit policy head selection.
      *
-     * headId: "action" | "target" | "card_select"
+     * headId: "action" | "target" | "card_select" | "attack" | "block" | "mulligan"
      */
     PythonMLBatchManager.PredictionResult scoreCandidates(
             StateSequenceBuilder.SequenceOutput state,
@@ -38,6 +38,10 @@ public interface PythonModel extends AutoCloseable {
 
     void enqueueTraining(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> rewards);
 
+    default boolean awaitTrainingDrained(long timeoutMs) {
+        return true;
+    }
+
     void saveModel(String path);
 
     String getDeviceInfo();
@@ -58,6 +62,14 @@ public interface PythonModel extends AutoCloseable {
      * or null if belief head is not available for this backend.
      */
     default float[] predictArchetype(StateSequenceBuilder.SequenceOutput state) {
+        return null;
+    }
+
+    /**
+     * Predict normalized hidden-card counts over {@link StateSequenceBuilder#cardBeliefVocab()}.
+     * Returns null when the backend/model does not expose the card-belief head.
+     */
+    default float[] predictCardBelief(StateSequenceBuilder.SequenceOutput state) {
         return null;
     }
 
