@@ -232,3 +232,12 @@ Next exact unit:
 - Preserve the action row over same-decision target-preview payloads if the bridge sees the D070-style repeated-payload shape.
 - Admit evidence only if checkpoint capture and reentry match, the source continuation is terminal loss, and a sibling continuation reaches terminal win.
 - Do not start training or HPC from this manifest alone.
+
+## v232 Blocker Repairs
+
+Two blockers from the v232 handoff were repaired before the D086 checkpoint probe:
+
+- The failure-corpus collector now exports compact replay metadata (`action_counterfactual_compatible`, scenario, seed, `random_util_seed`, and replay-random scope), and the target-selection manifest builder can also parse those fields directly from compact log headers. Regenerating the v231 corpus keeps `1,988` loss-decision rows and now ranks `game_20260522_140523_0001_D086` first with `replay_ready=true`, scenario `1`, seed `763880686`, and random-util seed `7640891576595197415`.
+- The detached CLI worker harness now launches Codex children with a sanitized environment (`CODEX_HOME`, `HOME`, `USERPROFILE`, `APPDATA`, and `LOCALAPPDATA` pinned to Jack's profile and app-thread inheritance removed), classifies Responses transport failures in `status.json`, and exposes a no-lease `transport-smoke` command through both `cli_worker.py` and `cli_orchestrator.py`. The post-repair smoke returned `cli transport smoke ok`.
+
+Next exact unit remains unchanged: run the D086 forced-prefix bridge and checkpoint-branch probe directly through the repaired local path, and only admit evidence under the terminal-loss/source and terminal-win/sibling gate.
