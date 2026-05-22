@@ -14,6 +14,8 @@ Validate whether in-memory engine checkpoints can replace forced-prefix log reco
 - Reentered checkpoint clones twice to verify deterministic candidate/action/state hashes, then attempted source and alternate continuations when the source checkpoint matched the target row.
 - Added `captured_checkpoints.csv` as a small diagnostic manifest for checkpoint probe runs.
 - Added `scripts/run_spy_line_replay_probe.ps1 -CheckpointBranchProbe`.
+- Corrected the checkpoint probe to use replay prefix choices only for initial checkpoint capture, then branch source and alternate continuations directly from the in-memory checkpoint.
+- Aligned the local Py4J bridge with `RLLogPaths.MODEL_FILE_PATH` so profile-scoped source-policy probes load the same model path Java uses for training/eval.
 - Fixed isolated workspace copy rules outside the repo so real source packages under `Mage/src/main/java/mage/target` and `Mage/src/main/java/mage/cards/repository` are not accidentally excluded.
 
 ## Validation
@@ -44,13 +46,16 @@ Runs:
 | `20260522_d030_checkpoint_branch_probe_noop_manifest` | `none` with target-aware selector | Captured 111 checkpoint surfaces, including 11 `SELECT_TARGETS`, but not the exact D030 candidate set. |
 | `20260522_d030_checkpoint_branch_probe_local_profile_after_install` | `local` | Source-policy path blocked by repeated `Failed to install PyTorch, exit code: 1`; source run timed out before checkpoints. |
 | `20260522_d030_checkpoint_branch_probe_onnx` | `onnx` | Captured 72 checkpoint surfaces and 13 `SELECT_TARGETS`, but still did not reach the exact D030 candidate set. |
+| `20260522_d030_checkpoint_branch_probe_local_py312` | `local` with Python 3.12 venv | Removed the PyTorch install blocker, but autonomous source replay still did not reach D030 because first-search RandomUtil count started at `0` instead of source `172`. |
+| `20260522_d030_checkpoint_branch_probe_prefix_capture_py312` | `local` with Python 3.12 venv and forced-prefix checkpoint capture | Captured exact D030 checkpoint, reentered source choice twice, source continuation lost terminal, alternate `Balustrade Spy` continuation lost terminal; classified clean negative. |
 
 Conclusion:
 
 - In-memory checkpoint capture and deterministic reentry are implemented and mechanically validated.
-- The D030 acceptance gate is not met yet because the available no-op/ONNX source trajectories do not present the exact source D030 candidate surface, and the local PyTorch source-policy backend is blocked before a usable source trajectory.
-- No training should start from this work. The next exact unit is to repair or bypass the local source-policy backend, then rerun the D030 checkpoint probe and require exact target-surface capture before considering correction evidence.
+- The D030 branchability gate is now met for this target: the captured checkpoint presented the exact source candidate set and source choice (`Lotleth Giant`), both reentry probes matched the candidate hash, and both source and alternate continuations reached terminal losses.
+- This is a clean negative, not correction evidence. No training should start from this D030 result.
+- The important implementation distinction is that prefix replay is used once to seed the checkpoint; source and alternate terminal continuations do not reconstruct the prefix.
 
 ## Artifact Handling
 
-Raw probe directories were generated under ignored `local-training/local_pbt/spy_line_replay/20260522_d030_checkpoint_branch_probe*`. They were summarized here and are disposable local artifacts, not commit material.
+Raw probe directories were generated under ignored `local-training/local_pbt/spy_line_replay/20260522_d030_checkpoint_branch_probe*`. They were summarized here and are disposable local artifacts, not commit material. The successful local probe used a generated Python 3.12 venv outside the repo at `C:\Users\Jack\.codex\cache\mage-mtgrl-venv-py312` with dependency install disabled to avoid the Python 3.14 PyTorch wheel blocker.

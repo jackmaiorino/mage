@@ -1067,7 +1067,7 @@ public final class ActionCounterfactualTrainer {
         List<EngineDecisionCheckpoint> capturedCheckpoints = new ArrayList<>();
         long started = System.currentTimeMillis();
         boolean previousForcedPrefixReplay = args.forcedPrefixReplay;
-        args.forcedPrefixReplay = false;
+        args.forcedPrefixReplay = true;
         try {
             int completed = 0;
             for (ReplayGroup group : groupList) {
@@ -1075,12 +1075,35 @@ public final class ActionCounterfactualTrainer {
                         group.agentOpeningHandNames.isEmpty() ? args.agentOpeningHandNames : group.agentOpeningHandNames,
                         group.agentOpeningLibraryNames,
                         group.oppOpeningHandNames.isEmpty() ? args.oppOpeningHandNames : group.oppOpeningHandNames);
-                PrefixRunResult sourceRun = runPrefixBranch(
-                        trainer, job, args,
-                        Collections.emptyList(), Collections.emptyList(),
-                        Collections.emptyList(), Collections.emptyList(), null);
-                capturedCheckpoints.addAll(sourceRun.checkpoints);
+                Map<Integer, ReplayExpectation> byOrdinal = new HashMap<>();
+                for (ReplayExpectation expectation : group.expectations) {
+                    byOrdinal.put(expectation.ordinal, expectation);
+                }
                 for (ReplayExpectation expected : replayTargets(group)) {
+                    List<List<Integer>> prefix = new ArrayList<>();
+                    List<List<String>> prefixTexts = new ArrayList<>();
+                    List<StateSequenceBuilder.ActionType> prefixActionTypes = new ArrayList<>();
+                    List<ReplayExpectation> prefixExpectations = new ArrayList<>();
+                    for (int ordinal = 0; ordinal < expected.ordinal; ordinal++) {
+                        ReplayExpectation prior = byOrdinal.get(ordinal);
+                        if (prior == null || prior.expectedIndices.isEmpty()) {
+                            prefix.add(Collections.emptyList());
+                            prefixTexts.add(Collections.emptyList());
+                            prefixActionTypes.add(null);
+                            prefixExpectations.add(null);
+                        } else {
+                            prefix.add(new ArrayList<>(prior.expectedIndices));
+                            prefixTexts.add(prior.expectedTexts == null
+                                    ? Collections.emptyList()
+                                    : new ArrayList<>(prior.expectedTexts));
+                            prefixActionTypes.add(prior.actionType);
+                            prefixExpectations.add(prior);
+                        }
+                    }
+                    PrefixRunResult sourceRun = runPrefixBranch(
+                            trainer, job, args,
+                            prefix, prefixTexts, prefixActionTypes, prefixExpectations, expected);
+                    capturedCheckpoints.addAll(sourceRun.checkpoints);
                     records.add(probeCheckpointTarget(job, expected, sourceRun, args));
                 }
                 completed++;
@@ -6521,7 +6544,8 @@ public final class ActionCounterfactualTrainer {
         sb.append("date: ").append(LocalDateTime.now()).append('\n');
         sb.append("replay_file: ").append(args.replayFile).append('\n');
         sb.append("checkpoint_branch_probe: ").append(args.checkpointBranchProbe).append('\n');
-        sb.append("forced_prefix_replay_bypassed: true\n");
+        sb.append("checkpoint_capture_uses_forced_prefix: true\n");
+        sb.append("checkpoint_continuations_replay_prefix: false\n");
         sb.append("random_util_seeded_from_replay_seed: ").append(args.replayFile != null).append('\n');
         sb.append("completed_groups: ").append(completedGroups).append('/').append(totalGroups).append('\n');
         sb.append("records: ").append(records.size()).append('\n');

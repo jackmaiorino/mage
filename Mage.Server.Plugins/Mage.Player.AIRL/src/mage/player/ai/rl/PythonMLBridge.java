@@ -506,9 +506,15 @@ public class PythonMLBridge implements AutoCloseable {
                 "--role", pyRole
         );
 
-        // Set model path environment variable to a specific model file
-        String modelPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt").getAbsolutePath();
-        File modelDir = new File(modelPath).getParentFile();
+        // Set model path environment variable to the same profile-aware path
+        // Java uses for saving. Hardcoding the legacy flat path here makes
+        // profile-scoped train/eval silently load the wrong checkpoint.
+        File modelFile = new File(RLLogPaths.MODEL_FILE_PATH);
+        if (!modelFile.isAbsolute()) {
+            modelFile = new File(projectRoot, RLLogPaths.MODEL_FILE_PATH);
+        }
+        String modelPath = modelFile.getAbsolutePath();
+        File modelDir = modelFile.getParentFile();
         if (!modelDir.exists()) {
             if (logger.isLoggable(Level.INFO)) {
                 logger.info("Creating models directory at: " + modelDir.getAbsolutePath());
@@ -519,6 +525,7 @@ public class PythonMLBridge implements AutoCloseable {
         }
 
         pb.environment().put("MTG_MODEL_PATH", modelPath);
+        pb.environment().put("MODEL_LATEST_PATH", new File(modelDir, "model_latest.pt").getAbsolutePath());
         // Keep Python console output quiet by default. Override via MTG_AI_LOG_LEVEL if desired.
         pb.environment().put("MTG_AI_LOG_LEVEL", System.getenv().getOrDefault("MTG_AI_LOG_LEVEL", "WARNING"));
         pb.environment().put("PY_BACKEND_MODE", System.getenv().getOrDefault("PY_BACKEND_MODE", "multi"));
