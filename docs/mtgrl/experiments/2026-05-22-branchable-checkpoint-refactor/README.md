@@ -147,3 +147,41 @@ Conclusion:
 ## Artifact Handling
 
 Raw probe directories were generated under ignored `local-training/local_pbt/spy_line_replay/20260522_d030_checkpoint_branch_probe*`, `20260522_d033_checkpoint_branch_probe*`, and `20260522_d070_checkpoint_branch_probe*`, with bridge CSVs under ignored `local-training/local_pbt/corpora/20260522_v211_*` through `20260522_v216_*`. They were summarized here and are disposable local artifacts, not commit material. The successful local probes used a generated Python 3.12 venv outside the repo at `C:\Users\Jack\.codex\cache\mage-mtgrl-venv-py312` with dependency install disabled to avoid the Python 3.14 PyTorch wheel blocker.
+
+## v221 Candidate Sweep
+
+Summary artifact:
+
+- `local-training/local_pbt/corpora/20260522_v221_checkpoint_candidate_sweep/v221_checkpoint_candidate_sweep_summary.csv`
+
+Scope:
+
+- Native controller sweep over the remaining strict non-chunk001 v204 Affinity targets after D030, D070, chunk013 D033, chunk009 D033, chunk009 D041, and chunk009 D046 had already been classified.
+- All 18 bridge/probe rows completed with `bridge_status=ok` and `probe_status=ok`.
+
+Classification counts:
+
+| Classification | Count | Interpretation |
+| --- | ---: | --- |
+| `source_prefix_divergence` | 12 | The bridge was strict enough to build, but the forced capture path did not reach the target checkpoint surface. The dominant visible blocker was D059 stack context drift; secondary blockers were D046 object id mismatch and early action type mismatch. |
+| `clean_negative` | 3 | Checkpoint captured, reentry matched, source continuation lost, and the first alternate also lost. These are branchability evidence, not correction evidence. |
+| `checkpoint_reentry_mismatch` | 2 | Checkpoint captured and source choice matched the expected source row, but the clone reentry resumed into a later `ACTIVATE_ABILITY_OR_SPELL` surface instead of the captured pending `SELECT_TARGETS`/`DECLARE_BLOCKS` prompt. These rows need richer pending-choice snapshot/reentry support before they can be admitted or rejected. |
+| `source_terminal_not_loss` | 1 | Checkpoint captured and reentered, but the source branch was not a terminal loss. |
+| `correction_candidate` | 0 | No new checkpoint-derived correction evidence. |
+
+Notable rows:
+
+| Candidate | Classification | Notes |
+| --- | --- | --- |
+| `chunk005_D110_ord091_ACTIVATE_ABILITY_OR_SPELL` | `clean_negative` | Source and alternate both lost terminal; candidate hash `22056cdfaee3efaa3a40b4c7233bb52bd8c20f85bcee5f3b457dac24a411ab2a`. |
+| `chunk016_D060_ord021_ACTIVATE_ABILITY_OR_SPELL` | `clean_negative` | Source and alternate both lost terminal; candidate hash `12b90b2311146c80c10e89dc3072c230813512a2bc799f98f24eaea130a9619e`. |
+| `chunk005_D125_ord096_ACTIVATE_ABILITY_OR_SPELL` | `clean_negative` | Source and alternate both lost terminal; candidate hash `efaa0a6841817cd834d462873d781b20d9966059e02e97ee980723850a720fb9`. |
+| `chunk014_D022_ord011_ACTIVATE_ABILITY_OR_SPELL` | `source_terminal_not_loss` | Source and alternate both won terminal, so it is not correction evidence. |
+| `chunk015_D111_ord092_DECLARE_BLOCKS` | `checkpoint_reentry_mismatch` | Captured `DECLARE_BLOCKS` candidates `Saruli Caretaker||Balustrade Spy||DONE`, but clone reentry resumed into a `Generous Ent`/`Saruli Caretaker` activation surface. |
+| `chunk015_D099_ord080_SELECT_TARGETS` | `checkpoint_reentry_mismatch` | Captured player target candidates `Player:ACF-CP7||Player:ACF-Prefix`, but clone reentry resumed into the same later activation surface. |
+
+Conclusion:
+
+- v221 found zero new correction candidates. The only admitted checkpoint-derived correction candidate remains `chunk009_D033_ord015_ACTIVATE_ABILITY_OR_SPELL`, where source `Cast Balustrade Spy` lost terminal and alternate `Ability: Pass` won terminal.
+- Training, HPC, and promotion remain blocked under the accepted CP7 Grixis Affinity gate: one correction candidate is far below the durable prior that calls for a much larger accepted-policy failure set with terminal-winning corrected siblings.
+- The next unit should broaden accepted-policy failure collection and candidate mining rather than retry v221 rows unchanged. Separately, the two `checkpoint_reentry_mismatch` rows identify a real checkpoint-completeness gap for pending non-priority choices; that is a checkpoint-engine follow-up, not training evidence.
