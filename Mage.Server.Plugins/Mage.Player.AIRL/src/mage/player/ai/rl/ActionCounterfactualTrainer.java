@@ -6476,6 +6476,14 @@ public final class ActionCounterfactualTrainer {
         try (BufferedWriter out = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
             out.write("scenario,agent_deck,opp_deck,seed,ordinal,source_decision_number,source_anchor_id,expected_action_type,"
                     + "checkpoint_captured,captured_checkpoint_count,source_actual_decisions,source_run_timed_out,source_run_error,"
+                    + "source_prefix_failure_ordinal,source_prefix_failure_reason,source_prefix_failure_detail,"
+                    + "source_prefix_expected_action_type,source_prefix_actual_action_type,"
+                    + "source_prefix_expected_indices,source_prefix_expected_texts,"
+                    + "source_prefix_actual_candidate_indices,source_prefix_actual_candidate_texts,"
+                    + "source_prefix_actual_selected_indices,source_prefix_actual_selected_texts,"
+                    + "source_prefix_failure_forced_count,source_prefix_source_decision_number,"
+                    + "source_prefix_source_anchor_id,source_prefix_source_turn,source_prefix_source_phase,"
+                    + "source_prefix_source_actor,source_prefix_state,"
                     + "source_choice_matches_expected,source_choice_reentry_matched,classification,checkpoint_action_type,"
                     + "checkpoint_candidate_count,source_indices,source_texts,checkpoint_candidates,candidate_hash,state_hash,rng_state_hash,"
                     + "source_choice_a_candidate_hash,source_choice_b_candidate_hash,"
@@ -7843,6 +7851,8 @@ public final class ActionCounterfactualTrainer {
         final List<String> legalCandidateTexts;
         final List<String> plannedCandidateObjectIds;
         final List<String> legalCandidateObjectIds;
+        final List<String> visibleSelfBattlefieldNames;
+        final List<String> visibleOpponentBattlefieldNames;
         final List<String> visibleSelfBattlefieldObjectIds;
         final List<String> visibleOpponentBattlefieldObjectIds;
         final List<String> visibleBattlefieldObjectIds;
@@ -7868,13 +7878,15 @@ public final class ActionCounterfactualTrainer {
                                  List<String> targetObjectIds,
                                  List<String> tapSourceObjectIds,
                                  List<String> manaPaymentSourceObjectIds,
-                                 List<String> plannedCandidateTexts,
-                                 List<String> legalCandidateTexts,
-                                 List<String> plannedCandidateObjectIds,
-                                 List<String> legalCandidateObjectIds,
-                                 List<String> visibleSelfBattlefieldObjectIds,
-                                 List<String> visibleOpponentBattlefieldObjectIds,
-                                 List<String> visibleBattlefieldObjectIds,
+                                  List<String> plannedCandidateTexts,
+                                  List<String> legalCandidateTexts,
+                                  List<String> plannedCandidateObjectIds,
+                                  List<String> legalCandidateObjectIds,
+                                  List<String> visibleSelfBattlefieldNames,
+                                  List<String> visibleOpponentBattlefieldNames,
+                                  List<String> visibleSelfBattlefieldObjectIds,
+                                  List<String> visibleOpponentBattlefieldObjectIds,
+                                  List<String> visibleBattlefieldObjectIds,
                                  List<String> attachmentObjectIds,
                                  List<String> attachedToObjectIds,
                                  List<String> attachmentContext,
@@ -7915,6 +7927,8 @@ public final class ActionCounterfactualTrainer {
             this.legalCandidateTexts = copyList(legalCandidateTexts);
             this.plannedCandidateObjectIds = copyList(plannedCandidateObjectIds);
             this.legalCandidateObjectIds = copyList(legalCandidateObjectIds);
+            this.visibleSelfBattlefieldNames = copyList(visibleSelfBattlefieldNames);
+            this.visibleOpponentBattlefieldNames = copyList(visibleOpponentBattlefieldNames);
             this.visibleSelfBattlefieldObjectIds = copyList(visibleSelfBattlefieldObjectIds);
             this.visibleOpponentBattlefieldObjectIds = copyList(visibleOpponentBattlefieldObjectIds);
             this.visibleBattlefieldObjectIds = copyList(visibleBattlefieldObjectIds);
@@ -7960,6 +7974,8 @@ public final class ActionCounterfactualTrainer {
                         jsonStringArray(obj, "legal_candidate_texts"),
                         jsonStringArray(obj, "planned_candidate_object_ids"),
                         jsonStringArray(obj, "legal_candidate_object_ids"),
+                        jsonStringArray(obj, "visible_self_battlefield_names"),
+                        jsonStringArray(obj, "visible_opponent_battlefield_names"),
                         jsonStringArray(obj, "visible_self_battlefield_object_ids"),
                         jsonStringArray(obj, "visible_opponent_battlefield_object_ids"),
                         jsonStringArray(obj, "visible_battlefield_object_ids"),
@@ -8057,7 +8073,7 @@ public final class ActionCounterfactualTrainer {
             if (battlefieldFailure.failed()) {
                 return battlefieldFailure;
             }
-            if (!sourceObjectIds.isEmpty()) {
+            if (!sourceObjectIds.isEmpty() && !sourceObjectHasNameProvenance()) {
                 ObjectContextFailure sourceFailure = verifyResolvableObjectIds(game, sourceObjectIds,
                         "source_object_id_mismatch", "source object id missing in live replay");
                 if (sourceFailure.failed()) {
@@ -8142,23 +8158,45 @@ public final class ActionCounterfactualTrainer {
 
         private ObjectContextFailure verifyBattlefieldObjectIds(Game game, Player actorPlayer) {
             if (!visibleSelfBattlefieldObjectIds.isEmpty()) {
-                List<String> liveSelfIds = battlefieldObjectIds(game, actorPlayer.getId());
-                if (!idSet(visibleSelfBattlefieldObjectIds).equals(idSet(liveSelfIds))) {
-                    return ObjectContextFailure.failed(
-                            "opponent_battlefield_object_context_mismatch",
-                            "source/live opponent self battlefield ids differ"
-                                    + " expected=" + joinTexts(visibleSelfBattlefieldObjectIds)
-                                    + " live=" + joinTexts(liveSelfIds));
+                if (!visibleSelfBattlefieldNames.isEmpty()) {
+                    List<String> liveSelfNames = battlefieldNames(game, actorPlayer.getId());
+                    if (!nameMultisetMatches(visibleSelfBattlefieldNames, liveSelfNames)) {
+                        return ObjectContextFailure.failed(
+                                "opponent_battlefield_name_context_mismatch",
+                                "source/live opponent self battlefield names differ"
+                                        + " expected=" + joinTexts(visibleSelfBattlefieldNames)
+                                        + " live=" + joinTexts(liveSelfNames));
+                    }
+                } else {
+                    List<String> liveSelfIds = battlefieldObjectIds(game, actorPlayer.getId());
+                    if (!idSet(visibleSelfBattlefieldObjectIds).equals(idSet(liveSelfIds))) {
+                        return ObjectContextFailure.failed(
+                                "opponent_battlefield_object_context_mismatch",
+                                "source/live opponent self battlefield ids differ"
+                                        + " expected=" + joinTexts(visibleSelfBattlefieldObjectIds)
+                                        + " live=" + joinTexts(liveSelfIds));
+                    }
                 }
             }
             if (!visibleOpponentBattlefieldObjectIds.isEmpty()) {
-                List<String> liveOpponentIds = opponentBattlefieldObjectIds(game, actorPlayer.getId());
-                if (!idSet(visibleOpponentBattlefieldObjectIds).equals(idSet(liveOpponentIds))) {
-                    return ObjectContextFailure.failed(
-                            "opponent_battlefield_object_context_mismatch",
-                            "source/live opponent-view opposing battlefield ids differ"
-                                    + " expected=" + joinTexts(visibleOpponentBattlefieldObjectIds)
-                                    + " live=" + joinTexts(liveOpponentIds));
+                if (!visibleOpponentBattlefieldNames.isEmpty()) {
+                    List<String> liveOpponentNames = opponentBattlefieldNames(game, actorPlayer.getId());
+                    if (!nameMultisetMatches(visibleOpponentBattlefieldNames, liveOpponentNames)) {
+                        return ObjectContextFailure.failed(
+                                "opponent_battlefield_name_context_mismatch",
+                                "source/live opponent-view opposing battlefield names differ"
+                                        + " expected=" + joinTexts(visibleOpponentBattlefieldNames)
+                                        + " live=" + joinTexts(liveOpponentNames));
+                    }
+                } else {
+                    List<String> liveOpponentIds = opponentBattlefieldObjectIds(game, actorPlayer.getId());
+                    if (!idSet(visibleOpponentBattlefieldObjectIds).equals(idSet(liveOpponentIds))) {
+                        return ObjectContextFailure.failed(
+                                "opponent_battlefield_object_context_mismatch",
+                                "source/live opponent-view opposing battlefield ids differ"
+                                        + " expected=" + joinTexts(visibleOpponentBattlefieldObjectIds)
+                                        + " live=" + joinTexts(liveOpponentIds));
+                    }
                 }
             } else if (!visibleBattlefieldObjectIds.isEmpty()) {
                 List<String> liveAllIds = new ArrayList<>();
@@ -8173,6 +8211,12 @@ public final class ActionCounterfactualTrainer {
                 }
             }
             return ObjectContextFailure.none();
+        }
+
+        private boolean sourceObjectHasNameProvenance() {
+            String sourceName = actionSourceName(chosenActionText);
+            return !sourceName.isEmpty()
+                    && (containsCardName(actorHandNames, sourceName) || visibleStateContainsSource(sourceName));
         }
 
         private ObjectContextFailure verifyResolvableObjectIds(Game game, List<String> ids,
@@ -8219,6 +8263,19 @@ public final class ActionCounterfactualTrainer {
             return out;
         }
 
+        private static List<String> battlefieldNames(Game game, UUID controllerId) {
+            if (game == null || game.getBattlefield() == null || controllerId == null) {
+                return Collections.emptyList();
+            }
+            List<String> out = new ArrayList<>();
+            for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+                if (permanent != null && controllerId.equals(permanent.getControllerId())) {
+                    out.add(permanent.getName());
+                }
+            }
+            return out;
+        }
+
         private static List<String> opponentBattlefieldObjectIds(Game game, UUID actorId) {
             if (game == null || actorId == null) {
                 return Collections.emptyList();
@@ -8227,6 +8284,20 @@ public final class ActionCounterfactualTrainer {
             try {
                 for (UUID opponentId : game.getOpponents(actorId)) {
                     out.addAll(battlefieldObjectIds(game, opponentId));
+                }
+            } catch (Exception ignored) {
+            }
+            return out;
+        }
+
+        private static List<String> opponentBattlefieldNames(Game game, UUID actorId) {
+            if (game == null || actorId == null) {
+                return Collections.emptyList();
+            }
+            List<String> out = new ArrayList<>();
+            try {
+                for (UUID opponentId : game.getOpponents(actorId)) {
+                    out.addAll(battlefieldNames(game, opponentId));
                 }
             } catch (Exception ignored) {
             }
@@ -10487,18 +10558,25 @@ public final class ActionCounterfactualTrainer {
                 StateSequenceBuilder.ActionType expectedActionType
         ) {
             List<String> texts = prefixChoiceTextsAt(ordinal);
-            if (hasNonBlankText(texts)
-                    || expectedActionType != StateSequenceBuilder.ActionType.DECLARE_ATTACKS) {
+            if (hasNonBlankText(texts)) {
                 return texts;
             }
             ReplayExpectation expected = prefixExpectationAt(ordinal);
             if (expected == null
                     || expected.sourceSelectedText == null
-                    || expected.sourceSelectedText.trim().isEmpty()
-                    || isNoAttackersText(expected.sourceSelectedText)) {
+                    || expected.sourceSelectedText.trim().isEmpty()) {
                 return texts;
             }
-            return Collections.singletonList(expected.sourceSelectedText);
+            if (expectedActionType == StateSequenceBuilder.ActionType.DECLARE_ATTACKS) {
+                return isNoAttackersText(expected.sourceSelectedText)
+                        ? texts
+                        : Collections.singletonList(expected.sourceSelectedText);
+            }
+            if (expectedActionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                    || expectedActionType == StateSequenceBuilder.ActionType.CHOOSE_USE) {
+                return Collections.singletonList(expected.sourceSelectedText);
+            }
+            return texts;
         }
 
         private boolean hasNonBlankText(List<String> texts) {
@@ -12917,6 +12995,7 @@ public final class ActionCounterfactualTrainer {
         final int sourceActualDecisions;
         final boolean sourceRunTimedOut;
         final String sourceRunError;
+        final PrefixDivergence sourcePrefixDivergence;
         final boolean checkpointCaptured;
         final boolean sourceChoiceMatchesExpected;
         final boolean sourceChoiceReentryMatched;
@@ -12947,6 +13026,7 @@ public final class ActionCounterfactualTrainer {
             this.sourceActualDecisions = sourceRun == null ? 0 : sourceRun.decisions.size();
             this.sourceRunTimedOut = sourceRun != null && sourceRun.timedOut;
             this.sourceRunError = sourceRun == null ? "" : sourceRun.error;
+            this.sourcePrefixDivergence = sourceRun == null ? null : sourceRun.prefixDivergence;
             this.checkpointCaptured = checkpoint != null;
             this.sourceChoiceMatchesExpected = sourceChoiceMatchesExpected;
             this.sourceChoiceReentryMatched = sourceChoiceReentryMatched;
@@ -12970,6 +13050,9 @@ public final class ActionCounterfactualTrainer {
 
         private String classify() {
             if (!checkpointCaptured) {
+                if (sourcePrefixDivergence != null) {
+                    return "source_prefix_divergence";
+                }
                 return "no_checkpoint";
             }
             if (!sourceChoiceReentryMatched) {
@@ -13007,6 +13090,7 @@ public final class ActionCounterfactualTrainer {
                     + "," + sourceActualDecisions
                     + "," + sourceRunTimedOut
                     + "," + csv(sourceRunError)
+                    + "," + prefixDivergenceFields(sourcePrefixDivergence)
                     + "," + sourceChoiceMatchesExpected
                     + "," + sourceChoiceReentryMatched
                     + "," + csv(classification)
@@ -13024,6 +13108,47 @@ public final class ActionCounterfactualTrainer {
                     + "," + alternateIndex
                     + "," + csv(checkpoint == null ? "" : checkpoint.candidateText(alternateIndex))
                     + "," + resultFields(alternateTerminal);
+        }
+
+        private static String prefixDivergenceFields(PrefixDivergence divergence) {
+            if (divergence == null) {
+                return "-1"
+                        + "," + csv("")
+                        + "," + csv("")
+                        + ","
+                        + ","
+                        + "," + csv("")
+                        + "," + csv("")
+                        + "," + csv("")
+                        + "," + csv("")
+                        + "," + csv("")
+                        + "," + csv("")
+                        + ",-1"
+                        + "," + csv("")
+                        + "," + csv("")
+                        + "," + csv("")
+                        + "," + csv("")
+                        + "," + csv("")
+                        + "," + csv("");
+            }
+            return divergence.ordinal
+                    + "," + csv(divergence.reason)
+                    + "," + csv(divergence.detail)
+                    + "," + (divergence.expectedActionType == null ? "" : divergence.expectedActionType)
+                    + "," + (divergence.actualActionType == null ? "" : divergence.actualActionType)
+                    + "," + csv(joinInts(divergence.expectedIndices))
+                    + "," + csv(joinTexts(divergence.expectedTexts))
+                    + "," + csv(joinInts(divergence.actualCandidateIndices))
+                    + "," + csv(indexedTexts(divergence.actualCandidateTexts))
+                    + "," + csv(joinInts(divergence.actualSelectedIndices))
+                    + "," + csv(joinTexts(divergence.actualSelectedTexts))
+                    + "," + divergence.forcedPrefixCount
+                    + "," + csv(divergence.sourceDecisionNumber)
+                    + "," + csv(divergence.sourceAnchorId)
+                    + "," + csv(divergence.sourceTurn)
+                    + "," + csv(divergence.sourcePhase)
+                    + "," + csv(divergence.sourceActor)
+                    + "," + csv(divergence.state == null ? "" : divergence.state.toCompactText());
         }
 
         private static String reentryHash(CheckpointContinuationResult result) {
