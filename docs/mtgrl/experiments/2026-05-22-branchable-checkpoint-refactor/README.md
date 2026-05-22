@@ -16,6 +16,7 @@ Validate whether in-memory engine checkpoints can replace forced-prefix log reco
 - Added `scripts/run_spy_line_replay_probe.ps1 -CheckpointBranchProbe`.
 - Added a fail-fast guard requiring `--force-opponent-transcript` / `-ForceOpponentTranscript` to run with `--opponent=cp7` / `-Opponent cp7`, because an RL opponent does not replay the transcript.
 - Corrected the checkpoint probe to use replay prefix choices only for initial checkpoint capture, then branch source and alternate continuations directly from the in-memory checkpoint.
+- Corrected checkpoint source-choice reentry matching to use the replay text matcher for selected text comparisons, so source-log action text like `Cast Balustrade Spy` can match checkpoint candidate text like `Balustrade Spy: Cast Balustrade Spy` when the candidate index and candidate set also match.
 - Aligned the local Py4J bridge with `RLLogPaths.MODEL_FILE_PATH` so profile-scoped source-policy probes load the same model path Java uses for training/eval.
 - Fixed isolated workspace copy rules outside the repo so real source packages under `Mage/src/main/java/mage/target` and `Mage/src/main/java/mage/cards/repository` are not accidentally excluded.
 
@@ -58,6 +59,29 @@ Conclusion:
 - The important implementation distinction is that prefix replay is used once to seed the checkpoint; source and alternate terminal continuations do not reconstruct the prefix.
 
 ## Follow-Up Target Probes
+
+### Chunk009 D033 Fallback
+
+Target:
+
+- Replay file: `local-training/local_pbt/corpora/20260522_v217_chunk009_d033_checkpoint_branch_probe/forced_prefix_replay_game_20260521_163356_0001_through_D033_target_D033_v217_bridge.csv`
+- Source log: `local-training/local_pbt/cp7_eval_sweeps/20260521_v203_affinity_richer_metadata_g16/game_logs/Pauper-Spy-Combo-Value__Deck_-_Spy_Combo__vs__Deck_-_Grixis_Affinity__chunk_009/game_20260521_163356_0001.txt`
+- Source anchor: `game_20260521_163356_0001_D033`
+- Expected action: `ACTIVATE_ABILITY_OR_SPELL`
+- Expected source choice: `Cast Balustrade Spy`
+
+Runs:
+
+| Run ID | Mode | Result |
+| --- | --- | --- |
+| `20260522_chunk009_d033_checkpoint_branch_probe_cp7_py312` | local policy with `-Opponent cp7 -ForceOpponentTranscript` | Captured the exact checkpoint and reproduced candidate hashes twice, but classified `checkpoint_reentry_mismatch` because selected text comparison required exact normalized equality between `Cast Balustrade Spy` and `Balustrade Spy: Cast Balustrade Spy`. |
+| `20260522_chunk009_d033_checkpoint_branch_probe_cp7_py312_reentryfix` | same run after selected-text reentry matcher fix | Correction candidate. Captured exact D033 checkpoint with candidate hash `81fea6d964305aa1b7db596aa0a4043067710f23eaf7279fcd371b5d9e0afe14`, state hash `a41dd289e93ffd72a7005bd5370a507291a17b72e1cc537f14432045ef3e588e`, and RNG state hash `23842d84168976f`. Source choice reentered twice. Source continuation (`Cast Balustrade Spy`) lost terminal at turn 9; alternate `Ability: Pass` won terminal at turn 9. |
+
+Conclusion:
+
+- This is the first checkpoint-derived correction candidate in this lane.
+- The successful result validates the branchable checkpoint path on an independent fallback target, not only on the chunk013/D030 and chunk005/D070 diagnostics.
+- The source prefix still records an early opponent transcript diagnostic (`D009`, `transcript_empty`), but terminal branch continuations are launched from the in-memory checkpoint and do not replay that prefix. This field should remain diagnostic metadata, not an admission blocker after checkpoint reentry succeeds.
 
 ### D033
 

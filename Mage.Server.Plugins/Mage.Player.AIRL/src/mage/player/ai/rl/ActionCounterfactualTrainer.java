@@ -12983,7 +12983,12 @@ public final class ActionCounterfactualTrainer {
             return reentryProbe.actionType == checkpoint.actionType
                     && normalizedTexts(reentryProbe.candidateTexts).equals(normalizedTexts(checkpoint.candidateTexts))
                     && reentryProbe.selectedIndices.equals(checkpoint.sourceChosenIndices)
-                    && normalizedTexts(reentryProbe.selectedTexts).equals(normalizedTexts(checkpoint.sourceChosenTexts));
+                    && selectedTextsMatch(checkpoint);
+        }
+
+        private boolean selectedTextsMatch(EngineDecisionCheckpoint checkpoint) {
+            return checkpoint.sourceChosenTexts.isEmpty()
+                    || textListsMatchExpected(checkpoint.sourceChosenTexts, reentryProbe.selectedTexts);
         }
     }
 
