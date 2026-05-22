@@ -208,3 +208,27 @@ Next action when v231 completes:
 
 - Mine the v231 compact logs into a fresh target manifest, preferring terminal losses with strict pressure, bounded alternatives, stable source/target metadata, and non-duplicated surfaces.
 - Run checkpoint-branch probes on the best new target(s). Do not start training or HPC until checkpoint-derived correction evidence expands beyond the single chunk009 D033 candidate.
+
+## v232 v231 Metadata Mining
+
+The accepted-policy refresh `20260522_v231_affinity_richer_metadata_g32_cpu` completed `13/32` against CP7 Grixis Affinity. All 32 compact game logs included replay-compatible metadata (`action_counterfactual_compatible=true` plus `REPLAY_RANDOM`), and the run produced 19 terminal losses for checkpoint target mining.
+
+Local v232 mining consumed the v231 logs after the detached CLI worker hit the known pre-lease Responses transport blocker. The loss corpus contains 19 losing games and 1,988 loss-decision rows. The raw target manifest contains 369 candidates: 332 fresh v231 failure candidates, 37 older current-family candidates, and 97 pressure candidates. Its top raw ranks still prefer old v77/current-family rows that are already excluded by the v115/v221 ladder, and the manifest builder only marks the older current-family rows `replay_ready`; direct log inspection verified the fresh v231 rows are replay-compatible.
+
+Filtered next target:
+
+- Source log: `local-training/local_pbt/cp7_eval_sweeps/20260522_v231_affinity_richer_metadata_g32_cpu/game_logs/Pauper-Spy-Combo-Value__Deck_-_Spy_Combo__vs__Deck_-_Grixis_Affinity__chunk_001/game_20260522_140523_0001.txt`
+- Candidate: `game_20260522_140523_0001_D086`
+- Replay metadata: scenario `1`, seed `763880686`, random-util seed `7640891576595197415`
+- Decision: ordinal `39`, action type `ACTIVATE_ABILITY_OR_SPELL`
+- Source choice: `Cast Dread Return`
+- First alternate to probe: `Cast Masked Vandal`
+- Candidate set: `Pass||Cast Dread Return||Cast Lead the Stampede||Cast Masked Vandal||Cast Land Grant||{T}: Add {G}.||{T}: Add {G} for each creature you control with defender.||{T}: Add {B}.||{T}: Add {B}. {this} deals 1 damage to you.`
+- Pressure context: opponent permanents `10`, own life `14`, own graveyard count `5`
+
+Next exact unit:
+
+- Build a forced-prefix bridge for `game_20260522_140523_0001_D086` and run a checkpoint-branch probe.
+- Preserve the action row over same-decision target-preview payloads if the bridge sees the D070-style repeated-payload shape.
+- Admit evidence only if checkpoint capture and reentry match, the source continuation is terminal loss, and a sibling continuation reaches terminal win.
+- Do not start training or HPC from this manifest alone.
