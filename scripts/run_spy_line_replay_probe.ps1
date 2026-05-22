@@ -48,6 +48,10 @@ if ([string]::IsNullOrWhiteSpace($ReplayFile)) {
     throw "-ReplayFile is required"
 }
 
+if ($ForceOpponentTranscript -and $Opponent.Trim().ToLowerInvariant() -ne "cp7") {
+    throw "-ForceOpponentTranscript requires -Opponent cp7; current -Opponent '$Opponent' would not replay the transcript."
+}
+
 $repo = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $ReplayFile = (Resolve-Path $ReplayFile).Path
 

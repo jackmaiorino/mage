@@ -316,6 +316,10 @@ public final class ActionCounterfactualTrainer {
         }
         Files.createDirectories(outDir);
         parsed.outDir = outDir;
+        if (parsed.forceOpponentTranscript && !"cp7".equals(parsed.opponentMode)) {
+            throw new IllegalArgumentException("--force-opponent-transcript requires --opponent=cp7; opponent="
+                    + parsed.opponentMode + " would not replay the transcript");
+        }
         if (parsed.forceOpponentTranscript && parsed.opponentTranscriptMismatchPath == null) {
             parsed.opponentTranscriptMismatchPath = outDir.resolve("opponent_transcript_mismatch.csv");
         }

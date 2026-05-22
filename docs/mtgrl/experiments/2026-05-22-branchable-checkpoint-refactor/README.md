@@ -14,6 +14,7 @@ Validate whether in-memory engine checkpoints can replace forced-prefix log reco
 - Reentered checkpoint clones twice to verify deterministic candidate/action/state hashes, then attempted source and alternate continuations when the source checkpoint matched the target row.
 - Added `captured_checkpoints.csv` as a small diagnostic manifest for checkpoint probe runs.
 - Added `scripts/run_spy_line_replay_probe.ps1 -CheckpointBranchProbe`.
+- Added a fail-fast guard requiring `--force-opponent-transcript` / `-ForceOpponentTranscript` to run with `--opponent=cp7` / `-Opponent cp7`, because an RL opponent does not replay the transcript.
 - Corrected the checkpoint probe to use replay prefix choices only for initial checkpoint capture, then branch source and alternate continuations directly from the in-memory checkpoint.
 - Aligned the local Py4J bridge with `RLLogPaths.MODEL_FILE_PATH` so profile-scoped source-policy probes load the same model path Java uses for training/eval.
 - Fixed isolated workspace copy rules outside the repo so real source packages under `Mage/src/main/java/mage/target` and `Mage/src/main/java/mage/cards/repository` are not accidentally excluded.
@@ -56,6 +57,53 @@ Conclusion:
 - This is a clean negative, not correction evidence. No training should start from this D030 result.
 - The important implementation distinction is that prefix replay is used once to seed the checkpoint; source and alternate terminal continuations do not reconstruct the prefix.
 
+## Follow-Up Target Probes
+
+### D033
+
+Target:
+
+- Replay file: `local-training/local_pbt/corpora/20260522_v212_chunk013_d033_checkpoint_branch_probe/forced_prefix_replay_game_20260521_163738_0001_through_D033_target_D033_v212_bridge.csv`
+- Source anchor: `game_20260521_163738_0001_D033`
+- Expected action: `SELECT_TARGETS`
+- Expected candidates: `Balustrade Spy||Balustrade Spy||Dread Return||Generous Ent||Overgrown Battlement`
+- Expected source choice: `Dread Return`
+
+Runs:
+
+| Run ID | Mode | Result |
+| --- | --- | --- |
+| `20260522_d033_checkpoint_branch_probe_py312` | local policy, default RL opponent | `no_checkpoint`; the source path reproduced D030 at ordinal 16 but reached an `ACTIVATE_ABILITY_OR_SPELL` surface at ordinal 17 instead of D033. |
+| `20260522_d033_checkpoint_branch_probe_forced_opp_py312` | forced opponent transcript requested, default RL opponent | Same `no_checkpoint`; this exposed that transcript forcing was ineffective unless the opponent mode is `cp7`. |
+| `20260522_d033_checkpoint_branch_probe_forced_cp7_py312` | local policy with `-Opponent cp7 -ForceOpponentTranscript` | Captured exact D033 checkpoint, source choice reentered twice with matching candidate hash `47fe1b8cfc397be3ab224652d827b5206009cefac6e3ba5c39488b664544ac84`. Source continuation won terminal and first alternate `Balustrade Spy` also won terminal, so it is not correction evidence. |
+
+Conclusion:
+
+- D033 proves branchable in-memory checkpoints can work for a post-D030 target when the cp7 opponent transcript is actually replayed.
+- The current classification is `source_terminal_not_loss`, not `clean_negative` and not `correction_candidate`.
+- The run recorded an early opponent object-id mismatch while still reaching the D033 surface; this is a diagnostic warning for object-id strictness, not a branchability failure for this target.
+
+### D070
+
+Target:
+
+- Replay file: `local-training/local_pbt/corpora/20260522_v211_chunk005_d070_checkpoint_branch_probe/forced_prefix_replay_game_20260521_162902_0001_through_D070_target_D070_v211_bridge.csv`
+- Source anchor: `game_20260521_162902_0001_D070`
+- Expected action: `SELECT_TARGETS`
+- Expected source choice: `Lotleth Giant`
+
+Runs:
+
+| Run ID | Mode | Result |
+| --- | --- | --- |
+| `20260522_d070_checkpoint_branch_probe_py312` | local policy, default RL opponent | `no_checkpoint`; ordinal 63 reached an `ACTIVATE_ABILITY_OR_SPELL` surface instead of D070. |
+| `20260522_d070_checkpoint_branch_probe_forced_cp7_py312` | local policy with `-Opponent cp7 -ForceOpponentTranscript` | Still `no_checkpoint`; the bridge reaches repeated `ACTIVATE_ABILITY_OR_SPELL`/Quirion Ranger surfaces around D066-D072 and misses the D070 target surface. |
+
+Conclusion:
+
+- D070 is not evidence against checkpoint copy/reentry. It is blocked by bridge shape: the source log has repeated same-decision target/action pairs around D066-D072, and the generated bridge does not preserve the preceding `SELECT_TARGETS` surfaces needed to line up the D070 target.
+- Do not admit D070 as policy evidence until the bridge builder preserves those repeated same-decision target/action pairs.
+
 ## Artifact Handling
 
-Raw probe directories were generated under ignored `local-training/local_pbt/spy_line_replay/20260522_d030_checkpoint_branch_probe*`. They were summarized here and are disposable local artifacts, not commit material. The successful local probe used a generated Python 3.12 venv outside the repo at `C:\Users\Jack\.codex\cache\mage-mtgrl-venv-py312` with dependency install disabled to avoid the Python 3.14 PyTorch wheel blocker.
+Raw probe directories were generated under ignored `local-training/local_pbt/spy_line_replay/20260522_d030_checkpoint_branch_probe*`, `20260522_d033_checkpoint_branch_probe*`, and `20260522_d070_checkpoint_branch_probe*`, with bridge CSVs under ignored `local-training/local_pbt/corpora/20260522_v211_*` and `20260522_v212_*`. They were summarized here and are disposable local artifacts, not commit material. The successful local probes used a generated Python 3.12 venv outside the repo at `C:\Users\Jack\.codex\cache\mage-mtgrl-venv-py312` with dependency install disabled to avoid the Python 3.14 PyTorch wheel blocker.
