@@ -83,6 +83,18 @@ Conclusion:
 - The successful result validates the branchable checkpoint path on an independent fallback target, not only on the chunk013/D030 and chunk005/D070 diagnostics.
 - The source prefix still records an early opponent transcript diagnostic (`D009`, `transcript_empty`), but terminal branch continuations are launched from the in-memory checkpoint and do not replay that prefix. This field should remain diagnostic metadata, not an admission blocker after checkpoint reentry succeeds.
 
+Same-log follow-ons:
+
+| Target | Run ID | Result |
+| --- | --- | --- |
+| `chunk009_D041_ord017_SELECT_TARGETS` | `20260522_chunk009_d041_checkpoint_branch_probe_cp7_py312` | Bridge built with 14 rows and stable target object metadata, but checkpoint capture stopped at 13 decisions and never reached the D041 object-target surface. Classification: `source_prefix_divergence` / no checkpoint. |
+| `chunk009_D046_ord018_SELECT_TARGETS` | `20260522_chunk009_d046_checkpoint_branch_probe_cp7_py312` | Bridge built with 15 rows and stable target object metadata, but checkpoint capture again stopped at 13 decisions and never reached the D046 object-target surface. Classification: `source_prefix_divergence` / no checkpoint. |
+
+Interpretation:
+
+- D041 and D046 are not evidence and should not be retried unchanged. The source branch that produced the D033 correction candidate does not expose those later target surfaces under the current checkpoint-capture replay path.
+- The next candidate-mining unit should move away from later chunk009 rows unless the checkpoint capture path is extended to branch from D033 first and then search deeper surfaces inside that branch.
+
 ### D033
 
 Target:
