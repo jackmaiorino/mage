@@ -2,6 +2,7 @@ package mage.player.ai.rl;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.repository.TokenRepository;
@@ -8655,6 +8656,10 @@ public final class ActionCounterfactualTrainer {
             this.agentOrdinalContext = ordinal;
         }
 
+        boolean agentOrdinalAtLeast(int minOrdinal) {
+            return agentOrdinalContext >= minOrdinal;
+        }
+
         boolean hasMismatchAtOrBefore(int ordinalLimit) {
             if (firstMismatch == null) {
                 return false;
@@ -8943,6 +8948,8 @@ public final class ActionCounterfactualTrainer {
 
     private static final class TranscriptReplayingComputerPlayer7 extends StackResolvingComputerPlayer7 {
 
+        private static final int STRICT_TRANSCRIPT_REPLAY_MIN_AGENT_ORDINAL = 26;
+
         private final OpponentTranscriptCursor transcript;
         private List<String> pendingTranscriptSacrificeNames = Collections.emptyList();
         private OpponentDecision pendingTranscriptSacrificeDecision = null;
@@ -9190,6 +9197,10 @@ public final class ActionCounterfactualTrainer {
             OpponentDecision expected = transcript.consumeForContext(
                     "PRIORITY", game, actionTexts, "priority_action");
             if (expected == null) {
+                if (strictTranscriptReplay(game)) {
+                    passForTranscriptGap(game);
+                    return;
+                }
                 super.act(game);
                 return;
             }
@@ -9233,6 +9244,10 @@ public final class ActionCounterfactualTrainer {
             }
             transcript.recordChoiceMismatch(expected, game, transcriptCandidateDebug(actionTexts, playableTexts),
                     "opponent priority transcript action was not present in CP7 planned or legal playable candidates");
+            if (strictTranscriptReplay(game)) {
+                passForTranscriptGap(game);
+                return;
+            }
             super.act(game);
         }
 
@@ -9354,6 +9369,19 @@ public final class ActionCounterfactualTrainer {
             transcript.recordChoiceMismatch(expected, game, candidateNames,
                     "non-empty blocker transcript forcing is not implemented in this validation hook");
             super.selectBlockers(source, game, defendingPlayerId);
+        }
+
+        private boolean strictTranscriptReplay(Game game) {
+            return game != null
+                    && !game.isSimulation()
+                    && !transcript.isEmpty()
+                    && transcript.agentOrdinalAtLeast(STRICT_TRANSCRIPT_REPLAY_MIN_AGENT_ORDINAL)
+                    && compactSourceTurn(safeTurn(game)) >= 4;
+        }
+
+        private void passForTranscriptGap(Game game) {
+            actions.clear();
+            pass(game);
         }
 
         private boolean sourceSkippedNoBlockerPrompt(OpponentDecision next, Game game) {
@@ -9868,6 +9896,9 @@ public final class ActionCounterfactualTrainer {
         private List<String> checkpointForcedTexts = Collections.emptyList();
         private boolean checkpointStopAtReentry = false;
         private CheckpointReentryProbe lastCheckpointReentryProbe = null;
+        private int pendingReplayPaymentOrdinal = -1;
+        private Set<String> activeReplayPaymentReservedManaSourceIds = Collections.emptySet();
+        private static final int REPLAY_PAYMENT_RESERVATION_MIN_ORDINAL = 26;
 
         private ActionPlayer(
                 String name,
@@ -9975,6 +10006,10 @@ public final class ActionCounterfactualTrainer {
             this.opponentTranscriptCursor = player.opponentTranscriptCursor == null
                     ? null
                     : player.opponentTranscriptCursor.copy();
+            this.pendingReplayPaymentOrdinal = player.pendingReplayPaymentOrdinal;
+            this.activeReplayPaymentReservedManaSourceIds = player.activeReplayPaymentReservedManaSourceIds == null
+                    ? Collections.emptySet()
+                    : new LinkedHashSet<>(player.activeReplayPaymentReservedManaSourceIds);
         }
 
         @Override
@@ -10042,6 +10077,30 @@ public final class ActionCounterfactualTrainer {
 
         CheckpointReentryProbe getLastCheckpointReentryProbe() {
             return lastCheckpointReentryProbe;
+        }
+
+        @Override
+        public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
+            Set<String> previousReserved = activeReplayPaymentReservedManaSourceIds;
+            if (shouldApplyReplayPaymentReservation(ability)) {
+                activeReplayPaymentReservedManaSourceIds =
+                        replayPaymentReservedManaSourceIds(pendingReplayPaymentOrdinal);
+            }
+            try {
+                return super.playMana(ability, unpaid, promptText, game);
+            } finally {
+                activeReplayPaymentReservedManaSourceIds = previousReserved;
+            }
+        }
+
+        @Override
+        public List<MageObject> getAvailableManaProducers(Game game) {
+            return filterReplayReservedManaSources(super.getAvailableManaProducers(game));
+        }
+
+        @Override
+        public List<Permanent> getAvailableManaProducersWithCost(Game game) {
+            return filterReplayReservedManaSources(super.getAvailableManaProducersWithCost(game));
         }
 
         @Override
@@ -10327,6 +10386,7 @@ public final class ActionCounterfactualTrainer {
                     if (objectChoice.indices != null && !objectChoice.indices.isEmpty()) {
                         maybeAdvanceRandomUtilToSourceSearchCount(prefixExpectationAt(ordinal));
                         forcedPrefixCount++;
+                        markPendingReplayPayment(ordinal, expectedActionType);
                         appendLivePrefixTrace(ordinal, actionType, objectChoice.indices, texts, state);
                         return objectChoice.indices;
                     }
@@ -10336,6 +10396,7 @@ public final class ActionCounterfactualTrainer {
                 if (forced != null && !forced.isEmpty()) {
                     maybeAdvanceRandomUtilToSourceSearchCount(prefixExpectationAt(ordinal));
                     forcedPrefixCount++;
+                    markPendingReplayPayment(ordinal, expectedActionType);
                     appendLivePrefixTrace(ordinal, actionType, forced, texts, state);
                 } else {
                     recordPrefixDivergence(ordinal, prefixFailureReason(prefixChoices.get(ordinal),
@@ -10355,6 +10416,7 @@ public final class ActionCounterfactualTrainer {
                 if (forced != null && !forced.isEmpty()) {
                     maybeAdvanceRandomUtilToSourceSearchCount(prefixExpectationAt(ordinal));
                     targetForced = true;
+                    markPendingReplayPayment(ordinal, actionType);
                 }
                 return forced;
             }
@@ -10366,6 +10428,111 @@ public final class ActionCounterfactualTrainer {
                 }
             }
             return null;
+        }
+
+        private void markPendingReplayPayment(int ordinal, StateSequenceBuilder.ActionType actionType) {
+            ReplayExpectation expected = prefixExpectationAt(ordinal);
+            if (actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) {
+                return;
+            }
+            if (ordinal < REPLAY_PAYMENT_RESERVATION_MIN_ORDINAL) {
+                clearPendingReplayPayment();
+                return;
+            }
+            if (!isReplaySpellCastExpectation(actionType, expected)) {
+                clearPendingReplayPayment();
+                return;
+            }
+            Set<String> reserved = replayPaymentReservedManaSourceIds(ordinal);
+            if (reserved.isEmpty()) {
+                clearPendingReplayPayment();
+                return;
+            }
+            pendingReplayPaymentOrdinal = ordinal;
+        }
+
+        private void clearPendingReplayPayment() {
+            pendingReplayPaymentOrdinal = -1;
+        }
+
+        private boolean shouldApplyReplayPaymentReservation(Ability ability) {
+            return pendingReplayPaymentOrdinal >= 0
+                    && !replayPaymentReservedManaSourceIds(pendingReplayPaymentOrdinal).isEmpty();
+        }
+
+        private Set<String> replayPaymentReservedManaSourceIds(int ordinal) {
+            ReplayExpectation current = prefixExpectationAt(ordinal);
+            if (current == null || current.sourceTurn.isEmpty()) {
+                return Collections.emptySet();
+            }
+            Set<String> out = new LinkedHashSet<>();
+            for (int i = ordinal + 1; i < prefixExpectations.size(); i++) {
+                if (targetOrdinal >= 0 && i > targetOrdinal) {
+                    break;
+                }
+                ReplayExpectation future = prefixExpectationAt(i);
+                if (future == null) {
+                    continue;
+                }
+                if (!future.sourceTurn.isEmpty() && !current.sourceTurn.equals(future.sourceTurn)) {
+                    break;
+                }
+                int limit = Math.min(future.sourceCandidateTexts.size(), future.sourceCandidateObjectIds.size());
+                for (int j = 0; j < limit; j++) {
+                    if (!isReplayManaAbilityText(future.sourceCandidateTexts.get(j))) {
+                        continue;
+                    }
+                    String sourceId = normalizeObjectId(future.sourceCandidateObjectIds.get(j));
+                    if (!sourceId.isEmpty()) {
+                        out.add(sourceId);
+                    }
+                }
+            }
+            return out;
+        }
+
+        private boolean isReplaySpellCastExpectation(
+                StateSequenceBuilder.ActionType actionType,
+                ReplayExpectation expected
+        ) {
+            if (actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL || expected == null) {
+                return false;
+            }
+            if (isReplaySpellCastText(expected.sourceSelectedText) || isReplaySpellCastText(expected.expectedText)) {
+                return true;
+            }
+            for (String text : expected.expectedTexts) {
+                if (isReplaySpellCastText(text)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private boolean isReplaySpellCastText(String text) {
+            String normalized = normalizeText(text);
+            return normalized.startsWith("cast ") || normalized.contains(": cast ");
+        }
+
+        private boolean isReplayManaAbilityText(String text) {
+            String normalized = normalizeText(text);
+            return normalized.contains("add {") || normalized.contains("add one mana");
+        }
+
+        private <T extends MageObject> List<T> filterReplayReservedManaSources(List<T> producers) {
+            if (producers == null || producers.isEmpty()
+                    || activeReplayPaymentReservedManaSourceIds == null
+                    || activeReplayPaymentReservedManaSourceIds.isEmpty()) {
+                return producers;
+            }
+            List<T> filtered = new ArrayList<>(producers.size());
+            for (T producer : producers) {
+                String id = producer == null ? "" : normalizeObjectId(producer.getId());
+                if (!activeReplayPaymentReservedManaSourceIds.contains(id)) {
+                    filtered.add(producer);
+                }
+            }
+            return filtered;
         }
 
         private void maybeCaptureEngineDecisionCheckpoint(

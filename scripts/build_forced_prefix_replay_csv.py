@@ -109,6 +109,7 @@ OBJECT_TEXT_PHASE_MARKERS = (
     "CARD_PICK",
     "SELECT_CARD",
 )
+SINGLETON_COMBAT_PASS_ACTION_TYPES = {"DECLARE_ATTACKS", "DECLARE_BLOCKS"}
 UNSTABLE_FALLBACK_TEXTS = {"", "PASS", "DONE", "STOP"}
 NO_OBJECT_CHOICE_IDS = {
     "DONE": "__NO_OBJECT_CHOICE_DONE__",
@@ -275,6 +276,14 @@ def iter_search_metadata(block: Sequence[str]) -> Iterable[Tuple[str, str, str, 
         ).strip()
         decision_ordinal_next = str(payload.get("decision_ordinal_next") or "").strip()
         chosen_names = str_list(payload.get("chosen_names"))
+        target_name = str(payload.get("target_name") or "").strip()
+        copy_pick_marker = str(payload.get("copy_pick_marker") or "").strip().lower()
+        if (
+            not chosen_names
+            and not target_name
+            and "without_search_context" in copy_pick_marker
+        ):
+            continue
         yield source_name, str(count), normalized_source_selector(source_selector), decision_ordinal_next, chosen_names
 
 
@@ -410,6 +419,29 @@ def acf_eligible_choice(candidate_count: int, chosen_count: int) -> bool:
     return candidate_count >= 2 and chosen_count >= 1
 
 
+def is_singleton_combat_pass(
+    action_type: str,
+    selected_text: str,
+    candidate_count: int,
+    decision_payloads: Sequence[Dict[str, object]],
+) -> bool:
+    if decision_payloads:
+        return False
+    if (action_type or "").upper() not in SINGLETON_COMBAT_PASS_ACTION_TYPES:
+        return False
+    if candidate_count > 1:
+        return False
+    return (selected_text or "").strip().upper() in {"", "PASS", "DONE"}
+
+
+def combat_pass_choice_text(action_type: str, selected_text: str) -> str:
+    if (action_type or "").upper() in SINGLETON_COMBAT_PASS_ACTION_TYPES:
+        value = (selected_text or "").strip().upper()
+        if value in {"", "PASS", "DONE"}:
+            return "DONE"
+    return selected_text
+
+
 def is_acf_pre_choose_use_priority_pass(
     decision_number: int,
     turn: str,
@@ -470,9 +502,23 @@ def card_choice_indices(candidates: Sequence[str], chosen: Sequence[str]) -> Lis
 def infer_action_type(phase: str, selected_text: str) -> str:
     phase_key = (phase or "").upper()
     combined = f"{phase or ''} {selected_text or ''}".upper()
-    if "(DECLARE_ATTACKS)" in phase_key or "(DECLARE_ATTACKERS)" in phase_key:
+    if (
+        "(DECLARE_ATTACKS)" in phase_key
+        or "(DECLARE_ATTACKERS)" in phase_key
+        or "DECLARE ATTACKS" in phase_key
+        or "DECLARE_ATTACKS" in phase_key
+        or "DECLARE ATTACKERS" in phase_key
+        or "DECLARE_ATTACKERS" in phase_key
+    ):
         return "DECLARE_ATTACKS"
-    if "(DECLARE_BLOCKS)" in phase_key:
+    if (
+        "(DECLARE_BLOCKS)" in phase_key
+        or "(DECLARE_BLOCKERS)" in phase_key
+        or "DECLARE BLOCKS" in phase_key
+        or "DECLARE_BLOCKS" in phase_key
+        or "DECLARE BLOCKERS" in phase_key
+        or "DECLARE_BLOCKERS" in phase_key
+    ):
         return "DECLARE_BLOCKS"
     if "TARGET_PICK" in combined:
         return "SELECT_TARGETS"
@@ -920,8 +966,32 @@ def object_text_prefix_row(row: Dict[str, str]) -> bool:
     action_type = str(row.get("action_type", "")).upper()
     if action_type in OBJECT_TEXT_ACTION_TYPES:
         return True
+    if singleton_combat_pass_prefix_row(row):
+        return True
     phase = str(row.get("phase", "")).upper()
     return any(marker in phase for marker in OBJECT_TEXT_PHASE_MARKERS)
+
+
+def singleton_combat_pass_prefix_row(row: Dict[str, str]) -> bool:
+    action_type = str(row.get("action_type", "")).upper()
+    if action_type not in SINGLETON_COMBAT_PASS_ACTION_TYPES:
+        return False
+    try:
+        candidate_count = int(str(row.get("source_candidate_count", "") or "0"))
+    except ValueError:
+        candidate_count = 0
+    if candidate_count > 1:
+        return False
+    texts = split_joined_texts(str(row.get("chosen_texts", "")))
+    if not texts:
+        best_text = str(row.get("best_text", "")).strip()
+        if best_text:
+            texts.append(best_text)
+    if not texts:
+        selected_text = str(row.get("source_selected_text", "")).strip()
+        if selected_text:
+            texts.append(selected_text)
+    return any(text.strip().upper() == "DONE" for text in texts)
 
 
 def split_joined_texts(value: str) -> List[str]:
@@ -1037,6 +1107,8 @@ def read_log_rows(
     skip_pre_choose_use_priority_pass: bool,
     append_uuid_select_card_stop: bool,
     preserve_opening_state_from_pregame: bool,
+    include_singleton_combat_passes: bool,
+    singleton_combat_pass_sources: Sequence[str],
 ) -> List[Dict[str, str]]:
     if through_decision <= 0:
         raise PrefixBuildError("--through-decision must be positive")
@@ -1085,6 +1157,11 @@ def read_log_rows(
     parsed_decision_rows = 0
     seen_decisions: set[int] = set()
     target_source_set = {value.strip() for value in target_sources if value.strip()}
+    singleton_combat_pass_source_set = {
+        normalized_source_selector(value)
+        for value in singleton_combat_pass_sources
+        if value
+    }
     idx = 0
     while idx < len(lines):
         decision_match = DECISION_RE.match(lines[idx])
@@ -1114,6 +1191,7 @@ def read_log_rows(
         top_indices, top_texts, starred_idx = parse_top(top_line)
         top_candidate_count = parse_top_candidate_count(top_line, top_indices)
         action_type = infer_action_type(phase, selected_text)
+        source_decision_key = normalized_source_selector(str(decision_number))
         decision_payloads = replay_decision_by_number.get(decision_number, [])
         if decision_payloads:
             json_candidate_count = max(replay_payload_candidate_count(payload) for payload in decision_payloads)
@@ -1121,7 +1199,16 @@ def read_log_rows(
         else:
             json_candidate_count = top_candidate_count
             json_chosen_count = 1
-        if ordinal_space == ORDINAL_SPACE_ACF and not acf_eligible_choice(json_candidate_count, json_chosen_count):
+        include_singleton_combat_pass = (
+            (include_singleton_combat_passes or source_decision_key in singleton_combat_pass_source_set)
+            and ordinal_space == ORDINAL_SPACE_ACF
+            and is_singleton_combat_pass(action_type, selected_text, json_candidate_count, decision_payloads)
+        )
+        if (
+            ordinal_space == ORDINAL_SPACE_ACF
+            and not acf_eligible_choice(json_candidate_count, json_chosen_count)
+            and not include_singleton_combat_pass
+        ):
             continue
         if (
             skip_pre_choose_use_priority_pass
@@ -1183,6 +1270,17 @@ def read_log_rows(
                 continue
         else:
             ordinal = len(rows) + (1 if one_based_ordinals else 0)
+            emitted_selected_text = combat_pass_choice_text(action_type, selected_text)
+            emitted_candidate_texts = (
+                [emitted_selected_text]
+                if include_singleton_combat_pass
+                else top_texts
+            )
+            emitted_candidate_indices = (
+                [0]
+                if include_singleton_combat_pass
+                else top_indices
+            )
             rows.append(
                 row_for_choice(
                     replay,
@@ -1190,7 +1288,7 @@ def read_log_rows(
                     ordinal,
                     action_type,
                     [selected_idx],
-                    [selected_text],
+                    [emitted_selected_text],
                     str(decision_number),
                     f"{log_path.stem}_D{decision_number:03d}",
                     target_marker,
@@ -1200,9 +1298,9 @@ def read_log_rows(
                     selected_prob,
                     selected_line,
                     top_line,
-                    top_candidate_count,
-                    top_indices,
-                    top_texts,
+                    max(1, top_candidate_count) if include_singleton_combat_pass else top_candidate_count,
+                    emitted_candidate_indices,
+                    emitted_candidate_texts,
                     source_stack_count,
                     source_stack_top,
                 )
@@ -1403,6 +1501,24 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--include-singleton-combat-passes",
+        action="store_true",
+        help=(
+            "In --ordinal-space acf, retain compact singleton Declare Attackers/Blockers pass rows as DONE "
+            "prefix choices. This is for logs where replay surfaces those compact pass rows as non-singleton "
+            "combat prompts before the next ACF target."
+        ),
+    )
+    parser.add_argument(
+        "--include-singleton-combat-pass-source",
+        action="append",
+        default=[],
+        help=(
+            "Retain one compact singleton Declare Attackers/Blockers pass row by source decision number "
+            "(for example D067 or 67). Can be repeated. This is safer than retaining all singleton combat passes."
+        ),
+    )
+    parser.add_argument(
         "--allow-missing-targets",
         action="store_true",
         help=(
@@ -1435,6 +1551,8 @@ def main() -> int:
         args.skip_pre_choose_use_priority_pass,
         args.append_uuid_select_card_stop,
         args.preserve_opening_state_from_pregame,
+        args.include_singleton_combat_passes,
+        args.include_singleton_combat_pass_source,
     )
     apply_prefix_choice_mode(
         rows,
@@ -1483,6 +1601,8 @@ def main() -> int:
         "append_uuid_select_card_stop": args.append_uuid_select_card_stop,
         "preserve_opening_state_from_pregame": args.preserve_opening_state_from_pregame,
         "index_only_prefix_targets": args.index_only_prefix_targets,
+        "include_singleton_combat_passes": args.include_singleton_combat_passes,
+        "include_singleton_combat_pass_sources": args.include_singleton_combat_pass_source,
         "allow_missing_targets": args.allow_missing_targets,
         "first_priority_hand_rows": sum(1 for row in rows if row.get("first_priority_hand")),
         "source_hand_rows": sum(1 for row in rows if row.get("source_hand")),

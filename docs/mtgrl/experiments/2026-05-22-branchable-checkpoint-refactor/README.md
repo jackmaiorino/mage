@@ -241,3 +241,28 @@ Two blockers from the v232 handoff were repaired before the D086 checkpoint prob
 - The detached CLI worker harness now launches Codex children with a sanitized environment (`CODEX_HOME`, `HOME`, `USERPROFILE`, `APPDATA`, and `LOCALAPPDATA` pinned to Jack's profile and app-thread inheritance removed), classifies Responses transport failures in `status.json`, and exposes a no-lease `transport-smoke` command through both `cli_worker.py` and `cli_orchestrator.py`. The post-repair smoke returned `cli transport smoke ok`.
 
 Next exact unit remains unchanged: run the D086 forced-prefix bridge and checkpoint-branch probe directly through the repaired local path, and only admit evidence under the terminal-loss/source and terminal-win/sibling gate.
+
+## v242-v256 D086 Replay Parity Repairs
+
+D086 was used as the first fresh v231 loss target after the v232 mining repair. The probe did not produce admissible checkpoint evidence, but it isolated and repaired several replay-prefix blockers:
+
+- The bridge builder can now retain targeted singleton combat pass rows in ACF ordinal mode via `--include-singleton-combat-pass-source`. For D086 this preserves source D062 as a `DONE` declare-blockers row without retaining every singleton combat pass.
+- The bridge builder now ignores shuffle-only search metadata payloads marked `without_search_context`, avoiding false source provenance on secondary shuffle rows.
+- Opponent transcript replay now has a late strict-priority fallback: after agent ordinal 26 and source turn 4, missing or non-legal opponent priority transcript actions pass instead of allowing autonomous CP7 actions to create a new branch. Combat selection remains on the previous fallback path because strict combat no-op was too broad.
+- Forced-prefix spell payment now reserves mana sources that the source log shows as available in later same-turn prefix rows. This is gated to late prefix ordinals to avoid perturbing early mana lines.
+
+Representative runs:
+
+| Run ID | Result |
+| --- | --- |
+| `20260522_v242_d086_checkpoint_branch_probe_cp7_py312_combatpass_d062_only` | D062 retention got past the earlier combat pass surface, then failed at D068 because the opponent replay branch cast Refurbished Familiar before the source line. |
+| `20260522_v243_d086_checkpoint_branch_probe_cp7_py312_strict_transcript` | Strict combat handling was too broad and failed early at D043. Combat strictness was reverted. |
+| `20260522_v246_d086_checkpoint_branch_probe_cp7_py312_priority_strict_ord26` | Gated strict priority got past D068 and exposed D073 mana-payment divergence: the replay tapped Overgrown Battlement to cast Sagu Wildling, leaving Quirion Ranger uncastable. |
+| `20260522_v249_d086_checkpoint_branch_probe_cp7_py312_payment_reservation_ord26` | Late payment reservation got past D073 and captured the later ordinal-42 surface, but the D086 target still did not match. The next blocker was source-prefix stack context around D077/Refurbished Familiar. |
+| `20260522_v256_d086_checkpoint_branch_probe_cp7_py312_final_scoped` | Final scoped code compiled and retained the D073 candidate surface, but D086 remains `source_prefix_divergence`; no checkpoint evidence is admitted. |
+
+Conclusion:
+
+- These repairs improve the replay bridge but do not validate D086 as evidence. `checkpoint_captured=false` remains the correct classification for the D086 target.
+- Speculative combat and player-target object-id relaxations were tried and backed out because they regressed early prefix parity.
+- The next exact unit is not training. It is source/opponent transcript completeness around the remaining prefix mismatch: either make combat/player-target transcript validation advance without corrupting early mana parity, or pick a fresh v231 target whose checkpoint surface is not behind this transcript stack-context ladder.
