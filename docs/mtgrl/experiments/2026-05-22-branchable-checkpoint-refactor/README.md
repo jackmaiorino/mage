@@ -185,3 +185,26 @@ Conclusion:
 - v221 found zero new correction candidates. The only admitted checkpoint-derived correction candidate remains `chunk009_D033_ord015_ACTIVATE_ABILITY_OR_SPELL`, where source `Cast Balustrade Spy` lost terminal and alternate `Ability: Pass` won terminal.
 - Training, HPC, and promotion remain blocked under the accepted CP7 Grixis Affinity gate: one correction candidate is far below the durable prior that calls for a much larger accepted-policy failure set with terminal-winning corrected siblings.
 - The next unit should broaden accepted-policy failure collection and candidate mining rather than retry v221 rows unchanged. Separately, the two `checkpoint_reentry_mismatch` rows identify a real checkpoint-completeness gap for pending non-priority choices; that is a checkpoint-engine follow-up, not training evidence.
+
+## Accepted-Policy Metadata Refresh
+
+Purpose:
+
+- After v221 found no new correction candidates, the next research unit pivoted back to accepted-policy CP7 Grixis Affinity failure collection so the checkpoint branch probe has a larger, current replay-metadata surface to mine.
+
+Environment repair:
+
+- `20260522_v227_affinity_richer_metadata_g32` is invalid infrastructure output. It launched under a Python 3.14 `.mtgrl_venv` with only `pip`/`py4j`, so every chunk failed with `No module named 'torch'` and the summary stayed `0/0`.
+- The local generated `.mtgrl_venv` was rebuilt with Python 3.12 and the ML runtime dependencies (`torch`, `numpy`, `py4j`, `transformers`).
+- `20260522_v229_affinity_richer_metadata_g2_envfix_smoke` produced real logs but is also invalid for accepted-policy mining because the shared service still defaulted to `INFER_CUDA_DEVICE=cuda:0` while the repaired torch install is CPU-only; the JVM fell back on failed shared-GPU requests.
+- `20260522_v230_affinity_richer_metadata_g1_cpu_smoke` is the clean environment gate: `1/1`, replay metadata present, shared service `infer=cpu train=cpu`, and no `Shared GPU batch request failed` or CUDA assertion.
+
+Durable run:
+
+- `20260522_v231_affinity_richer_metadata_g32_cpu` was launched as the accepted-policy metadata refresh with `INFER_CUDA_DEVICE=cpu`, `TRAIN_CUDA_DEVICE=cpu`, `MULLIGAN_DEVICE=cpu`, `--games-per-matchup 32`, `--games-per-job 1`, `--parallel 1`, `--eval-game-logging`, `--game-log-format compact`, and `--replay-metadata`.
+- First verified chunk: chunk 1 completed `0/1` in 39.1 seconds, wrote replay-compatible compact metadata (`action_counterfactual_compatible=true` plus `REPLAY_RANDOM`), and had no shared-GPU fallback or CUDA errors.
+
+Next action when v231 completes:
+
+- Mine the v231 compact logs into a fresh target manifest, preferring terminal losses with strict pressure, bounded alternatives, stable source/target metadata, and non-duplicated surfaces.
+- Run checkpoint-branch probes on the best new target(s). Do not start training or HPC until checkpoint-derived correction evidence expands beyond the single chunk009 D033 candidate.
