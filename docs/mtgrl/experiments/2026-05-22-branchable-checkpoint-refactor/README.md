@@ -545,3 +545,33 @@ Interpretation:
 - `stable` mode is deterministic and cheap; it is suitable for artifact gates and reproducibility checks.
 - `sample` mode explores downstream continuation variation; it is the knob to scale on local background runs or Slurm/HPC after local smoke gates.
 - No trainer import is attached yet. The next unit is to run a larger value-tree mining slice and export only high-confidence value-tree corrections into the dataset gate.
+
+## v292-v293 Value-Tree Slice And Weighted Export
+
+v292 run:
+
+- Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v292_value_tree_ranked_sample_slice20`.
+- Scope: ranked top 20 `ACTIVATE_ABILITY_OR_SPELL` v262 live checkpoints, `--ranked-max-per-game 4`, `--tree-max-actions 6`, `--tree-rollouts 2`, sampled continuation policy, `120s` rollout timeout.
+- Result: 20 checkpoint summaries, 119 action rows, and classification counts `{no_better_action=15, strong_correction=3, dominant_correction=2}`.
+
+Top weighted rows:
+
+| Classification | Source loss | Best sampled target | Source win rate | Target win rate | Delta | Importance |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| `dominant_correction` | `Cast Balustrade Spy` | `{T}: Add {G}.` | `0.000000` | `1.000000` | `1.000000` | `1.000000` |
+| `dominant_correction` | `Cast Gatecreeper Vine` | `Cast Roost Seek` | `0.000000` | `1.000000` | `1.000000` | `1.000000` |
+| `strong_correction` | `Cast Masked Vandal` | `Cast Lead the Stampede` | `0.000000` | `0.500000` | `0.500000` | `0.500000` |
+| `strong_correction` | `Cast Generous Ent` | `{T}: Add {G}.` | `0.000000` | `0.500000` | `0.500000` | `0.500000` |
+| `strong_correction` | `Cast Sagu Wildling` | `Cast Lead the Stampede` | `0.000000` | `0.500000` | `0.500000` | `0.500000` |
+
+v293 export:
+
+- Added `scripts/mtgrl/export_value_tree_corrections.py`.
+- The export gate is `value_tree_source_loss_best_win_delta`.
+- Defaults admit only `dominant_correction` and `strong_correction` rows with source loss rate `>=1.0`, source and target terminal rates `>=1.0`, target win rate `>=0.5`, delta `>=0.5`, positive importance, and matched reentry hashes.
+- Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v293_value_tree_correction_manifest`.
+- Result: `admitted_rows=5`, `rejected_rows=15`; rejected rows were all `no_better_action` or below the value/importance thresholds.
+
+Next unit:
+
+- Attach a weighted dataset builder or extend `build_checkpoint_correction_dataset.py` so both strict binary checkpoint corrections and weighted value-tree corrections can feed a single supervised dataset schema without losing admission-gate provenance.
