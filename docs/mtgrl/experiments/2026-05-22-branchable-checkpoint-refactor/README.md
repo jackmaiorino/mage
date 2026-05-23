@@ -440,4 +440,38 @@ Current admitted evidence:
 Conclusion:
 
 - The live-checkpoint branch path has now produced three isolated, repeat-confirmed deterministic correction rows from v262.
-- Training/HPC still should not start automatically from the raw miner outputs. The next implementation unit is a checkpoint-derived correction export path that records the source-loss/sibling-win pair plus the isolated-reprobe proof fields, or a wider deterministic mining pass to increase the accepted correction set before export.
+- Training/HPC still should not start automatically from the raw miner outputs. Correction evidence must come from the fail-closed export gate below, not from raw batch `clean_positive_needs_isolated_reprobe` rows.
+
+## v287 Confirmed Correction Manifest
+
+Purpose:
+
+- Add a checkpoint-derived correction export path that records only source-loss/sibling-win rows that passed deterministic reentry and isolated positive confirmation.
+
+Implementation:
+
+- Added `scripts/mtgrl/export_checkpoint_corrections.py`.
+- Inputs can be probe CSV files or run directories containing `live_checkpoint_branch_probe.csv`.
+- The admission gate is `source_loss_alternate_win_isolated_reentry_confirmed`.
+- A row is admitted only when it is `clean_positive`, has at least two candidates, source reentry A/B matched, reentry candidate/state hashes match the captured candidate/state hashes, the source branch is a terminal loss, the selected sibling branch is a terminal win, there are no branch errors, and all positive confirmation repeats pass.
+- The script writes `confirmed_checkpoint_corrections.csv`, `confirmed_checkpoint_corrections.jsonl`, `rejected_checkpoint_corrections.csv`, `manifest_summary.json`, and an optional generated README under the requested output directory.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python -m py_compile scripts/mtgrl/export_checkpoint_corrections.py` | Passed. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v287_confirmed_correction_manifest` | Exported v282/v283/v286 with `admitted_rows=3`, `rejected_rows=0`. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v287_confirmed_correction_manifest_audit` | Audited v282/v283/v284/v285/v286 with `input_rows=82`, `admitted_rows=3`, `rejected_rows=79`. The rejected audit rows include all `clean_positive_needs_isolated_reprobe` and `clean_positive_unstable` outcomes. |
+
+Admitted manifest rows:
+
+| Artifact | Source | Confirmed sibling | Candidate hash | State hash | RNG hash |
+| --- | --- | --- | --- | --- | --- |
+| `v282_isolated_reprobe_chunk004_ord027` | `Cast Saruli Caretaker` terminal loss | `Cast Lead the Stampede` terminal win | `4afec00e0b8824ce9106834d4468e76ca332ed5790df1887711554d82b5e6846` | `a2446accbda286e63d8b85b88e3df6536fc61b26b17aac1e9d6cbd66a1629b67` | `3991df502d5ac7cb` |
+| `v283_isolated_reprobe_chunk004_ord053` | `Cast Balustrade Spy` terminal loss | `Cast Lead the Stampede` terminal win | `deda1a2784be4abcac67a9b3c2e39c47f75f40e7cd7c8496f403873007960adf` | `253f322f2bf7bbc18c378efdeea82639a5cb5a922a028f55213c53ddead12114` | `27e9ff743915f11b` |
+| `v286_isolated_reprobe_chunk005_ord036` | `Cast Tinder Wall` terminal loss | `Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.` terminal win | `5739755198258cfa501cac89d8e615899257172df23fc2a5e788c79b34542404` | `75b107292cdce353ad97c8993afa7ab38c4032233ac12496c5c9c0ad6c9e0298` | `d7a77237c52bb781` |
+
+Next unit:
+
+- Build a gated training-data generation path that consumes `confirmed_checkpoint_corrections.csv` only, writes a small supervised correction dataset with provenance and hashes, and refuses to run when the manifest has zero admitted rows or any row fails the same admission invariants.
