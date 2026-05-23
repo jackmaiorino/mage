@@ -655,3 +655,43 @@ Validation:
 Next unit:
 
 - Rerun the 29 v297 `strong_correction`/`moderate_correction` rows with higher sampled rollout count to refine weights and promote only rows that stay above the strict admission gate.
+
+## v301-v304 Focused High-Rollout Preference Tier
+
+v301 focused rerun:
+
+- Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v301_value_tree_focus29_r12_s8`.
+- Input list: 29 snapshots from v297 whose first pass classified as `strong_correction` or `moderate_correction`.
+- Scope: 8 local JVM shards, `--tree-max-actions 8`, `--tree-rollouts 12`, sampled continuation policy, `120s` rollout timeout.
+- Result: all 8 shard exit codes `0`; merged output has 29 summaries and 197 action rows in 398 seconds.
+- Classification counts after higher rollout: `{no_better_action=12, weak_correction=11, moderate_correction=6}`.
+
+Strict gate:
+
+- Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v302_value_tree_focus29_strict_manifest`.
+- Result: `admitted_rows=0`.
+- Interpretation: none of the v297 strong/moderate rows stayed above the strict `target_win_rate >= 0.5` / `delta >= 0.5` correction threshold after 12 sampled continuations per root action.
+
+Preference tier:
+
+- Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v303_value_tree_focus29_preference_manifest`.
+- Thresholds: admit `moderate_correction` or stronger rows with source loss rate `>=1.0`, source/target terminal rates `>=1.0`, target win rate `>=0.25`, and delta `>=0.25`.
+- Result: `admitted_rows=6`, `rejected_rows=23`.
+- Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v304_value_tree_focus29_preference_dataset`.
+- Dataset result: 6 `weighted_checkpoint_correction_v1` examples, `errors=0`.
+
+Preference rows:
+
+| Source loss | Preferred action | Target win rate | Label weight | Terminal rollouts |
+| --- | --- | ---: | ---: | ---: |
+| `Cast Tinder Wall` | `Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.` | `0.333333` | `0.333333` | `72` |
+| `Cast Lotleth Giant` | `{T}: Add {G} for each creature you control with defender.` | `0.250000` | `0.250000` | `72` |
+| `Play Forest` | `Pass` | `0.250000` | `0.250000` | `72` |
+| `Cast Generous Ent` | `Cast Roost Seek` | `0.250000` | `0.250000` | `96` |
+| `Cast Overgrown Battlement` | `Cast Saruli Caretaker` | `0.333333` | `0.333333` | `72` |
+| `Cast Lotus Petal` | `Forestcycling {1}` | `0.416667` | `0.416667` | `96` |
+
+Conclusion:
+
+- Full exhaustive MTG branching is still intractable, but branchable checkpoints now support a scalable sampled tree: broad sharded discovery, focused high-rollout confirmation, strict correction export, and lower-weight preference export.
+- The current high-rollout result argues against treating v297 as hard correction evidence, but it does produce calibrated preference weights that can support a separate lower-confidence training lane.
