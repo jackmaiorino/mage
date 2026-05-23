@@ -327,3 +327,30 @@ Conclusion:
 - The long-term live snapshot branch path is now real: serialized v262 snapshots can be deserialized after code changes, cloned, reentered twice with identical hashes, and resumed into a source terminal-loss branch without prefix replay.
 - The current remaining blocker is not forced-prefix reconstruction. It is terminal mining throughput/completeness after the branch: local policy inference is falling back because the Python gateway is unavailable, and pass-like alternates often do not produce a terminal result inside the bounded probe.
 - No new training evidence is admitted from v263. The next research unit should run the miner against a larger v262/v264 live-checkpoint slice with a healthy policy backend or an explicit post-branch autopilot mode, then admit only rows where source loses terminal and a non-pass sibling wins terminal.
+
+## v264 Terminal Mining Repair
+
+Problem:
+
+- The v263 terminal miner rejected alternate branches during reentry because the same source-choice match check was used for source probes and sibling probes. A valid sibling choice therefore looked like `source_choice_mismatch` and could stop before the alternate branch actually played.
+
+Implementation:
+
+- Split branch reentry validation into source-choice probes and alternate-choice probes. Source reentry and source terminal continuation still require the captured source indices/texts to match. Alternate continuations require the same action type and candidate set, plus a valid forced sibling index, but intentionally do not require the source-selected choice.
+- Added `--max-alternates` and `--alternate-timeout-sec` so a snapshot can try multiple non-source siblings and report each attempt.
+- Added CSV fields `alternate_attempt_count`, `alternate_terminal_count`, `alternate_win_count`, and `alternate_outcomes` so terminal mining quality is visible instead of hidden behind one selected alternate.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python "$env:USERPROFILE\.codex\skills\mage-research-agent\scripts\airl_maven.py" compile` | Passed. |
+| `mvn -o -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests install` | Passed. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v264_alt_semantics_ord001/live_checkpoint_branch_probe.csv` | `ord001_D001` classified `clean_negative`: source `Cast Land Grant` lost terminal, alternate `Pass` lost terminal, `alternate_attempt_count=1`, `alternate_terminal_count=1`. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v264_alt_semantics_ord003/live_checkpoint_branch_probe.csv` | Five-candidate `ord003_D003` classified `clean_negative`: source lost terminal, two non-pass alternates lost terminal, and the third alternate timeout was explicitly recorded in `alternate_outcomes`. |
+
+Conclusion:
+
+- The immediate terminal-mining quality blocker is fixed: alternate branches now execute as alternates, multi-alternate attempts are visible, and bounded terminal losses are recorded from serialized live checkpoints without prefix replay.
+- These two rows are clean negatives, not correction evidence. The next evidence-mining step is to run the live snapshot miner across a larger accepted-policy live-checkpoint slice and look for rows where the source branch loses terminal and at least one sibling branch wins terminal.
+- The remaining quality caveat is branch throughput under unavailable Python gateway/autopilot paths. Timeout/error outcomes are now visible per alternate, so they can be filtered or used to prioritize a backend/autopilot repair without corrupting admitted evidence.

@@ -38,6 +38,7 @@ public final class LiveCheckpointBranchMiner {
                     + "candidate_hash,state_hash,rng_state_hash,source_reentry_a_matched,source_reentry_b_matched,"
                     + "classification,source_terminal,source_won,source_lost,source_error,alternate_indices,"
                     + "alternate_texts,alternate_terminal,alternate_won,alternate_lost,alternate_error,"
+                    + "alternate_attempt_count,alternate_terminal_count,alternate_win_count,alternate_outcomes,"
                     + "reentry_a_candidate_hash,reentry_b_candidate_hash,reentry_a_state_hash,reentry_b_state_hash,"
                     + "reentry_a_reason,reentry_b_reason\n";
 
@@ -97,8 +98,8 @@ public final class LiveCheckpointBranchMiner {
             return row;
         }
 
-        BranchOutcome reentryA = runProbe(snapshot, sourceIndices, true, "source_reentry_a", cfg.timeoutSec);
-        BranchOutcome reentryB = runProbe(snapshot, sourceIndices, true, "source_reentry_b", cfg.timeoutSec);
+        BranchOutcome reentryA = runProbe(snapshot, sourceIndices, true, true, "source_reentry_a", cfg.timeoutSec);
+        BranchOutcome reentryB = runProbe(snapshot, sourceIndices, true, true, "source_reentry_b", cfg.timeoutSec);
         row.applyReentry(reentryA, reentryB);
         if (!reentryA.reentryMatched || !reentryB.reentryMatched) {
             row.classification = "checkpoint_reentry_mismatch";
@@ -109,7 +110,7 @@ public final class LiveCheckpointBranchMiner {
             return row;
         }
 
-        BranchOutcome source = runProbe(snapshot, sourceIndices, false, "source_terminal", cfg.timeoutSec);
+        BranchOutcome source = runProbe(snapshot, sourceIndices, false, true, "source_terminal", cfg.timeoutSec);
         row.applySource(source);
         if (!source.error.isEmpty()) {
             row.classification = "source_error";
@@ -124,26 +125,12 @@ public final class LiveCheckpointBranchMiner {
             return row;
         }
 
-        List<Integer> alternateIndices = firstAlternateIndices(snapshot, sourceIndices);
-        row.alternateIndices = joinInts(alternateIndices);
-        row.alternateTexts = joinStrings(selectedTexts(snapshot.candidateTexts, alternateIndices));
-        if (alternateIndices.isEmpty()) {
+        List<List<Integer>> alternateChoices = alternateChoices(snapshot, sourceIndices, cfg.maxAlternates);
+        if (alternateChoices.isEmpty()) {
             row.classification = "alternate_unavailable";
             return row;
         }
-        BranchOutcome alternate = runProbe(snapshot, alternateIndices, false, "alternate_terminal", cfg.timeoutSec);
-        row.applyAlternate(alternate);
-        if (!alternate.error.isEmpty()) {
-            row.classification = "alternate_error";
-        } else if (!alternate.terminal) {
-            row.classification = "alternate_not_terminal";
-        } else if (alternate.won) {
-            row.classification = "clean_positive";
-        } else if (alternate.lost) {
-            row.classification = "clean_negative";
-        } else {
-            row.classification = "alternate_terminal_draw";
-        }
+        applyBestAlternate(row, snapshot, alternateChoices, cfg);
         return row;
     }
 
@@ -151,13 +138,14 @@ public final class LiveCheckpointBranchMiner {
             LiveCheckpointRecorder.Snapshot snapshot,
             List<Integer> forcedIndices,
             boolean stopAtReentry,
+            boolean requireSourceChoiceMatch,
             String label,
             int timeoutSec
     ) {
         RandomUtil.State previousRandom = RandomUtil.captureState();
         Game game = null;
         SnapshotBranchController controller =
-                new SnapshotBranchController(snapshot, forcedIndices, stopAtReentry);
+                new SnapshotBranchController(snapshot, forcedIndices, stopAtReentry, requireSourceChoiceMatch);
         BranchOutcome outcome = new BranchOutcome(label);
         try {
             RandomUtil.restoreState(snapshot.randomState);
@@ -292,23 +280,112 @@ public final class LiveCheckpointBranchMiner {
         return out;
     }
 
-    private static List<Integer> firstAlternateIndices(
+    private static void applyBestAlternate(
+            BranchRow row,
             LiveCheckpointRecorder.Snapshot snapshot,
-            List<Integer> sourceIndices
+            List<List<Integer>> alternateChoices,
+            Config cfg
     ) {
+        BranchOutcome best = null;
+        List<Integer> bestIndices = Collections.emptyList();
+        List<String> outcomeSummaries = new ArrayList<>();
+        int terminalCount = 0;
+        int winCount = 0;
+        int attempt = 0;
+        for (List<Integer> alternateIndices : alternateChoices) {
+            attempt++;
+            BranchOutcome alternate = runProbe(
+                    snapshot,
+                    alternateIndices,
+                    false,
+                    false,
+                    "alternate_terminal_" + attempt,
+                    cfg.alternateTimeoutSec);
+            if (alternate.terminal) {
+                terminalCount++;
+            }
+            if (alternate.won) {
+                winCount++;
+            }
+            outcomeSummaries.add(joinInts(alternateIndices)
+                    + ":"
+                    + joinStrings(selectedTexts(snapshot.candidateTexts, alternateIndices))
+                    + ":"
+                    + alternate.shortClassification());
+            if (best == null || alternateRank(alternate) > alternateRank(best)) {
+                best = alternate;
+                bestIndices = alternateIndices;
+            }
+            if (alternate.terminal && alternate.won) {
+                break;
+            }
+        }
+        row.alternateAttemptCount = attempt;
+        row.alternateTerminalCount = terminalCount;
+        row.alternateWinCount = winCount;
+        row.alternateOutcomes = joinStrings(outcomeSummaries);
+        row.alternateIndices = joinInts(bestIndices);
+        row.alternateTexts = joinStrings(selectedTexts(snapshot.candidateTexts, bestIndices));
+        row.applyAlternate(best);
+        if (best == null) {
+            row.classification = "alternate_unavailable";
+        } else if (best.terminal && best.won) {
+            row.classification = "clean_positive";
+        } else if (best.terminal && best.lost) {
+            row.classification = "clean_negative";
+        } else if (best.terminal) {
+            row.classification = "alternate_terminal_draw";
+        } else if (!best.error.isEmpty()) {
+            row.classification = "alternate_error";
+        } else {
+            row.classification = "alternate_not_terminal";
+        }
+    }
+
+    private static int alternateRank(BranchOutcome outcome) {
+        if (outcome == null) {
+            return 0;
+        }
+        if (outcome.terminal && outcome.won) {
+            return 50;
+        }
+        if (outcome.terminal && outcome.lost) {
+            return 40;
+        }
+        if (outcome.terminal) {
+            return 30;
+        }
+        if (outcome.error.isEmpty()) {
+            return 20;
+        }
+        return 10;
+    }
+
+    private static List<List<Integer>> alternateChoices(
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<Integer> sourceIndices,
+            int maxAlternates
+    ) {
+        List<List<Integer>> out = new ArrayList<>();
         int candidateCount = snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size();
         Set<Integer> source = new HashSet<>(sourceIndices == null ? Collections.emptyList() : sourceIndices);
         for (int i = 0; i < candidateCount; i++) {
             if (!source.contains(i) && !isPassLike(snapshot.candidateTexts.get(i))) {
-                return alternateReplacingFirstSource(sourceIndices, i, candidateCount);
+                out.add(alternateReplacingFirstSource(sourceIndices, i, candidateCount));
+                if (maxAlternates > 0 && out.size() >= maxAlternates) {
+                    return out;
+                }
             }
         }
         for (int i = 0; i < candidateCount; i++) {
-            if (!source.contains(i)) {
-                return alternateReplacingFirstSource(sourceIndices, i, candidateCount);
+            if (!source.contains(i) && isPassLike(snapshot.candidateTexts.get(i))) {
+                out.add(alternateReplacingFirstSource(sourceIndices, i, candidateCount));
+                if (maxAlternates > 0 && out.size() >= maxAlternates) {
+                    return out;
+                }
             }
         }
-        return Collections.emptyList();
+        return out;
     }
 
     private static List<Integer> alternateReplacingFirstSource(List<Integer> sourceIndices, int alternate, int candidateCount) {
@@ -373,6 +450,8 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- discovered: ").append(discovered).append("\n");
         sb.append("- reentry_only: ").append(cfg.reentryOnly).append("\n");
         sb.append("- timeout_sec: ").append(cfg.timeoutSec).append("\n");
+        sb.append("- alternate_timeout_sec: ").append(cfg.alternateTimeoutSec).append("\n");
+        sb.append("- max_alternates: ").append(cfg.maxAlternates).append("\n");
         sb.append("- csv: ").append(csvPath).append("\n");
         sb.append("- classification_counts: ").append(counts.values).append("\n");
         Files.write(cfg.outDir.resolve("README.md"), sb.toString().getBytes(StandardCharsets.UTF_8),
@@ -414,6 +493,7 @@ public final class LiveCheckpointBranchMiner {
         private final LiveCheckpointRecorder.Snapshot snapshot;
         private final List<Integer> forcedIndices;
         private final boolean stopAtReentry;
+        private final boolean requireSourceChoiceMatch;
 
         private boolean seen;
         private boolean reentryMatched;
@@ -427,13 +507,15 @@ public final class LiveCheckpointBranchMiner {
         private SnapshotBranchController(
                 LiveCheckpointRecorder.Snapshot snapshot,
                 List<Integer> forcedIndices,
-                boolean stopAtReentry
+                boolean stopAtReentry,
+                boolean requireSourceChoiceMatch
         ) {
             this.snapshot = snapshot;
             this.forcedIndices = forcedIndices == null
                     ? Collections.emptyList()
                     : new ArrayList<>(forcedIndices);
             this.stopAtReentry = stopAtReentry;
+            this.requireSourceChoiceMatch = requireSourceChoiceMatch;
         }
 
         @Override
@@ -458,15 +540,20 @@ public final class LiveCheckpointBranchMiner {
             boolean candidatesMatched = context.candidateTexts.equals(snapshot.candidateTexts);
             boolean selectedIndicesMatched = sanitized.equals(sanitizeIndices(snapshot.selectedIndices, context.candidateCount));
             boolean selectedTextsMatched = selectedTexts.equals(snapshot.selectedTexts);
-            reentryMatched = actionMatched && candidatesMatched && selectedIndicesMatched && selectedTextsMatched;
+            reentryMatched = actionMatched
+                    && candidatesMatched
+                    && (!requireSourceChoiceMatch || (selectedIndicesMatched && selectedTextsMatched))
+                    && !sanitized.isEmpty();
             if (!actionMatched) {
                 reason = "action_type_mismatch";
             } else if (!candidatesMatched) {
                 reason = "candidate_text_mismatch";
             } else if (sanitized.isEmpty()) {
                 reason = "forced_indices_invalid";
-            } else if (!selectedIndicesMatched || !selectedTextsMatched) {
+            } else if (requireSourceChoiceMatch && (!selectedIndicesMatched || !selectedTextsMatched)) {
                 reason = "source_choice_mismatch";
+            } else if (!requireSourceChoiceMatch) {
+                reason = "alternate_choice_matched";
             } else {
                 reason = "reentry_matched";
             }
@@ -522,6 +609,25 @@ public final class LiveCheckpointBranchMiner {
                 error = error.isEmpty() ? errorSummary(t) : error;
             }
         }
+
+        private String shortClassification() {
+            if (!error.isEmpty()) {
+                return "error=" + error;
+            }
+            if (terminal && won) {
+                return "terminal_win";
+            }
+            if (terminal && lost) {
+                return "terminal_loss";
+            }
+            if (terminal) {
+                return "terminal_draw";
+            }
+            if (!reason.isEmpty()) {
+                return "not_terminal=" + reason;
+            }
+            return "not_terminal";
+        }
     }
 
     private static final class BranchRow {
@@ -548,6 +654,10 @@ public final class LiveCheckpointBranchMiner {
         private boolean alternateWon = false;
         private boolean alternateLost = false;
         private String alternateError = "";
+        private int alternateAttemptCount = 0;
+        private int alternateTerminalCount = 0;
+        private int alternateWinCount = 0;
+        private String alternateOutcomes = "";
         private String reentryACandidateHash = "";
         private String reentryBCandidateHash = "";
         private String reentryAStateHash = "";
@@ -630,6 +740,10 @@ public final class LiveCheckpointBranchMiner {
             cells.add(String.valueOf(alternateWon));
             cells.add(String.valueOf(alternateLost));
             cells.add(csv(alternateError));
+            cells.add(String.valueOf(alternateAttemptCount));
+            cells.add(String.valueOf(alternateTerminalCount));
+            cells.add(String.valueOf(alternateWinCount));
+            cells.add(csv(alternateOutcomes));
             cells.add(csv(reentryACandidateHash));
             cells.add(csv(reentryBCandidateHash));
             cells.add(csv(reentryAStateHash));
@@ -655,6 +769,8 @@ public final class LiveCheckpointBranchMiner {
         private Path outDir = defaultOutDir();
         private int maxSnapshots = 0;
         private int timeoutSec = 30;
+        private int alternateTimeoutSec = 30;
+        private int maxAlternates = 1;
         private boolean reentryOnly = false;
         private Set<String> actionTypes = Collections.emptySet();
 
@@ -675,6 +791,14 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("timeout-sec")) {
                 cfg.timeoutSec = Integer.parseInt(values.get("timeout-sec"));
+            }
+            if (values.containsKey("alternate-timeout-sec")) {
+                cfg.alternateTimeoutSec = Integer.parseInt(values.get("alternate-timeout-sec"));
+            } else {
+                cfg.alternateTimeoutSec = cfg.timeoutSec;
+            }
+            if (values.containsKey("max-alternates")) {
+                cfg.maxAlternates = Integer.parseInt(values.get("max-alternates"));
             }
             if (values.containsKey("reentry-only")) {
                 cfg.reentryOnly = Boolean.parseBoolean(values.get("reentry-only"));
