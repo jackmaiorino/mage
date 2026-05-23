@@ -545,8 +545,21 @@ public final class LiveCheckpointBranchMiner {
             out.add(cfg.snapshotPath);
             return out;
         }
+        if (cfg.snapshotListPath != null) {
+            for (String line : Files.readAllLines(cfg.snapshotListPath, StandardCharsets.UTF_8)) {
+                String value = line == null ? "" : line.trim();
+                if (!value.isEmpty() && value.charAt(0) == '\uFEFF') {
+                    value = value.substring(1).trim();
+                }
+                if (value.isEmpty() || value.startsWith("#")) {
+                    continue;
+                }
+                out.add(Paths.get(value));
+            }
+            return out;
+        }
         if (cfg.checkpointRoot == null) {
-            throw new IllegalArgumentException("--checkpoint-root or --snapshot is required");
+            throw new IllegalArgumentException("--checkpoint-root, --snapshot, or --snapshot-list is required");
         }
         try (Stream<Path> stream = Files.walk(cfg.checkpointRoot)) {
             out.addAll(stream
@@ -2056,6 +2069,7 @@ public final class LiveCheckpointBranchMiner {
     private static final class Config {
         private Path checkpointRoot;
         private Path snapshotPath;
+        private Path snapshotListPath;
         private Path outDir = defaultOutDir();
         private int maxSnapshots = 0;
         private int timeoutSec = 30;
@@ -2086,6 +2100,9 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("snapshot")) {
                 cfg.snapshotPath = Paths.get(values.get("snapshot"));
+            }
+            if (values.containsKey("snapshot-list")) {
+                cfg.snapshotListPath = Paths.get(values.get("snapshot-list"));
             }
             if (values.containsKey("out")) {
                 cfg.outDir = Paths.get(values.get("out"));

@@ -33,7 +33,8 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
             "selection sharding, then merge their CSV outputs."
         )
     )
-    parser.add_argument("--checkpoint-root", required=True)
+    parser.add_argument("--checkpoint-root", default="")
+    parser.add_argument("--snapshot-list", default="")
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--shards", type=int, default=max(1, min(4, os.cpu_count() or 1)))
     parser.add_argument("--max-snapshots", type=int, default=100)
@@ -59,7 +60,6 @@ def bool_arg(value: str) -> str:
 
 def miner_args(args: argparse.Namespace, shard_index: int, shard_dir: Path) -> str:
     parts = [
-        "--checkpoint-root", args.checkpoint_root,
         "--out", str(shard_dir),
         "--selection-mode", args.selection_mode,
         "--ranked-max-per-game", str(args.ranked_max_per_game),
@@ -75,6 +75,10 @@ def miner_args(args: argparse.Namespace, shard_index: int, shard_dir: Path) -> s
         "--selection-shards", str(args.shards),
         "--selection-shard-index", str(shard_index),
     ]
+    if args.snapshot_list:
+        parts[0:0] = ["--snapshot-list", args.snapshot_list]
+    else:
+        parts[0:0] = ["--checkpoint-root", args.checkpoint_root]
     return " ".join(parts)
 
 
@@ -170,6 +174,8 @@ def write_readme(output_dir: Path, summary: Dict[str, object]) -> None:
 def run(args: argparse.Namespace) -> int:
     if args.shards < 1:
         raise ValueError("--shards must be >= 1")
+    if not args.checkpoint_root and not args.snapshot_list:
+        raise ValueError("--checkpoint-root or --snapshot-list is required")
     output_dir = Path(args.output_dir)
     if output_dir.exists() and not args.force:
         raise FileExistsError(f"output directory already exists: {output_dir}")
@@ -225,6 +231,7 @@ def run(args: argparse.Namespace) -> int:
 
     summary = {
         "checkpoint_root": args.checkpoint_root,
+        "snapshot_list": args.snapshot_list,
         "output_dir": str(output_dir),
         "shards": args.shards,
         "max_snapshots": args.max_snapshots,

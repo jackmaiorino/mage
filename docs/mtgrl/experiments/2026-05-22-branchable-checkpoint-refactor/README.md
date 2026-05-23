@@ -623,3 +623,35 @@ Validation:
 Next unit:
 
 - Relaunch the wider v295 shape through the sharded runner with enough local workers to use available CPU, then export admitted weighted corrections from the merged output.
+
+## v297-v300 Sharded Scale Run And Focused Lists
+
+v297 sharded run:
+
+- Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v297_value_tree_sharded_slice100_r4_s8`.
+- Scope: 8 local JVM shards on the v262 live-checkpoint corpus, ranked top 100 request, `--ranked-max-per-game 10`, `--tree-max-actions 8`, `--tree-rollouts 4`, sampled continuation policy, `120s` rollout timeout.
+- Result: all 8 shard exit codes `0`; the merged output contains 78 selected summaries and 467 action rows in 300 seconds.
+- Classification counts: `{no_better_action=49, moderate_correction=23, strong_correction=6}`.
+
+v298-v299 export:
+
+- Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v298_value_tree_sharded_correction_manifest`.
+- Strict default gate admitted 4 weighted corrections and rejected 74 rows. The two rejected `strong_correction` rows had `source_loss_rate=0.750000`, so they were correctly held out rather than treated as confirmed source mistakes.
+- Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v299_value_tree_sharded_correction_dataset`.
+- Dataset result: 4 `weighted_checkpoint_correction_v1` examples, `errors=0`.
+
+Focused-list support:
+
+- Added `LiveCheckpointBranchMiner --snapshot-list <file>` and `scripts/mtgrl/run_value_tree_shards.py --snapshot-list <file>`.
+- Snapshot lists support deterministic sharding like checkpoint roots, so a broad low-rollout pass can feed a narrower high-rollout confirmation pass.
+- The Java list reader strips a leading UTF-8 BOM to tolerate PowerShell-generated list files.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v300_snapshot_list_sharded_smoke` | 2 shards over 4 focused paths, 3 root actions, 1 stable rollout. Exit codes `0`; merged output has 4 summaries and 12 action rows with no snapshot load errors. |
+
+Next unit:
+
+- Rerun the 29 v297 `strong_correction`/`moderate_correction` rows with higher sampled rollout count to refine weights and promote only rows that stay above the strict admission gate.
