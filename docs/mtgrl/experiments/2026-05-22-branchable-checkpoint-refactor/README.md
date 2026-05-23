@@ -417,6 +417,9 @@ v268-v280 reproducibility closeout:
 | `v281_ranked_autopilot_stable_slice40_retry` | ranked top 40 after stable-order autopilot | Completed 40 rows: 19 `source_terminal_not_loss`, 19 `clean_negative`, 2 `clean_positive_needs_isolated_reprobe`. No batch positive was admitted directly. |
 | `v282_isolated_reprobe_chunk004_ord027` | `chunk_004` `ord027_D054_ACTIVATE_ABILITY_OR_SPELL` | Fresh-JVM direct reprobe classified `clean_positive` with `confirm_positive_repeats=2`. Source `Cast Saruli Caretaker` lost terminal; sibling `Cast Lead the Stampede` won terminal. |
 | `v283_isolated_reprobe_chunk004_ord053` | `chunk_004` `ord053_D089_ACTIVATE_ABILITY_OR_SPELL` | Fresh-JVM direct reprobe classified `clean_positive` with `confirm_positive_repeats=2`. Source `Cast Balustrade Spy` lost terminal; sibling `Cast Lead the Stampede` won terminal. |
+| `v284_ranked_autopilot_stable_slice100` | ranked wider slice after stable-order autopilot | Completed 78 selected rows under `--ranked-max-per-game 10`: 44 `source_terminal_not_loss`, 26 `clean_negative`, 4 `clean_positive_needs_isolated_reprobe`, and 4 `clean_positive_unstable`. |
+| `v285_isolated_reprobe_chunk005_ord016` | `chunk_005` `ord016_D020_ACTIVATE_ABILITY_OR_SPELL` | Fresh-JVM direct reprobe classified `clean_positive_unstable`: the first alternate attempt won, but both repeat confirmations made the sibling lose. Not admitted. |
+| `v286_isolated_reprobe_chunk005_ord036` | `chunk_005` `ord036_D042_ACTIVATE_ABILITY_OR_SPELL` | Fresh-JVM direct reprobe classified `clean_positive` with `confirm_positive_repeats=2`. Source `Cast Tinder Wall` lost terminal; sibling `Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.` won terminal. |
 
 Harness repair:
 
@@ -432,8 +435,9 @@ Current admitted evidence:
 | --- | --- | --- | --- | --- | --- |
 | `v282_isolated_reprobe_chunk004_ord027` | `Cast Saruli Caretaker` terminal loss | `Cast Lead the Stampede` terminal win | `4afec00e0b8824ce9106834d4468e76ca332ed5790df1887711554d82b5e6846` | `a2446accbda286e63d8b85b88e3df6536fc61b26b17aac1e9d6cbd66a1629b67` | `3991df502d5ac7cb` |
 | `v283_isolated_reprobe_chunk004_ord053` | `Cast Balustrade Spy` terminal loss | `Cast Lead the Stampede` terminal win | `deda1a2784be4abcac67a9b3c2e39c47f75f40e7cd7c8496f403873007960adf` | `253f322f2bf7bbc18c378efdeea82639a5cb5a922a028f55213c53ddead12114` | `27e9ff743915f11b` |
+| `v286_isolated_reprobe_chunk005_ord036` | `Cast Tinder Wall` terminal loss | `Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.` terminal win | `5739755198258cfa501cac89d8e615899257172df23fc2a5e788c79b34542404` | `75b107292cdce353ad97c8993afa7ab38c4032233ac12496c5c9c0ad6c9e0298` | `d7a77237c52bb781` |
 
 Conclusion:
 
-- The live-checkpoint branch path has now produced two isolated, repeat-confirmed deterministic correction rows from v262.
+- The live-checkpoint branch path has now produced three isolated, repeat-confirmed deterministic correction rows from v262.
 - Training/HPC still should not start automatically from the raw miner outputs. The next implementation unit is a checkpoint-derived correction export path that records the source-loss/sibling-win pair plus the isolated-reprobe proof fields, or a wider deterministic mining pass to increase the accepted correction set before export.
