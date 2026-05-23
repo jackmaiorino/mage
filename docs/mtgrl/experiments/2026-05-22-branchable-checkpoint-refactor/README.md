@@ -572,6 +572,27 @@ v293 export:
 - Artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v293_value_tree_correction_manifest`.
 - Result: `admitted_rows=5`, `rejected_rows=15`; rejected rows were all `no_better_action` or below the value/importance thresholds.
 
+## v294 Weighted Value-Tree Dataset
+
+Purpose:
+
+- Convert the admitted value-tree manifest into training-shaped examples without flattening graded branch evidence into a binary label.
+
+Implementation:
+
+- Added `scripts/mtgrl/build_value_tree_correction_dataset.py`.
+- Dataset version: `weighted_checkpoint_correction_v1`.
+- The builder rechecks manifest status, admission gate, candidate/state/RNG anchors, local snapshot presence, source/target index ranges, duplicate ids, reentry hashes, positive source-loss/target-win rates, terminal outcome coverage, and positive `label_weight`.
+- JSONL examples keep structured `label`, `negative`, `decision`, `value_tree`, `proof`, and `provenance` blocks. CSV examples expose the same training-critical fields plus `label_weight`.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python -m py_compile scripts/mtgrl/build_value_tree_correction_dataset.py` | Passed. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v294_value_tree_correction_dataset` | Built 5 examples from v293 with `errors=0`; classification counts `{dominant_correction=2, strong_correction=3}`. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v294_rejected_value_tree_dataset_gate_check` | Expected fail-closed run against rejected v293 rows: `examples=0`, `errors=15`; no rejected row entered the dataset. |
+
 Next unit:
 
-- Attach a weighted dataset builder or extend `build_checkpoint_correction_dataset.py` so both strict binary checkpoint corrections and weighted value-tree corrections can feed a single supervised dataset schema without losing admission-gate provenance.
+- Scale the miner on a wider local/HPC-ready slice using the same value-tree knobs, then compare yield and label-weight distribution before attaching trainer import.
