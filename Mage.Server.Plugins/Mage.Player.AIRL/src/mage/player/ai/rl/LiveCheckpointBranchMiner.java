@@ -61,6 +61,19 @@ public final class LiveCheckpointBranchMiner {
                     + "importance_score,actions_evaluated,total_rollouts,terminal_rollouts,reentry_a_matched,"
                     + "reentry_b_matched,reentry_a_candidate_hash,reentry_b_candidate_hash,reentry_a_state_hash,"
                     + "reentry_b_state_hash,reentry_a_reason,reentry_b_reason,error\n";
+    private static final String SEQUENCE_TREE_CSV_HEADER =
+            "snapshot_path,ordinal,decision_number,action_type,candidate_count,candidate_hash,state_hash,rng_state_hash,"
+                    + "pair_key,order_label,rollout,sequence_indices,sequence_texts,forced_steps_requested,"
+                    + "forced_steps_completed,prefix_complete,prefix_reason,post_prefix_state_hash,"
+                    + "post_prefix_candidate_hash,post_prefix_action_type,terminal,won,lost,error,outcome\n";
+    private static final String SEQUENCE_TREE_SUMMARY_CSV_HEADER =
+            "snapshot_path,ordinal,decision_number,action_type,candidate_count,candidate_hash,state_hash,rng_state_hash,"
+                    + "pair_key,first_indices,first_texts,second_indices,second_texts,classification,"
+                    + "forward_rollouts,reverse_rollouts,forward_prefix_complete,reverse_prefix_complete,"
+                    + "converged_post_prefix_count,compared_post_prefix_count,forward_terminal_count,"
+                    + "reverse_terminal_count,forward_win_count,reverse_win_count,forward_loss_count,"
+                    + "reverse_loss_count,forward_error_count,reverse_error_count,forward_post_prefix_hashes,"
+                    + "reverse_post_prefix_hashes,forward_outcomes,reverse_outcomes\n";
 
     private LiveCheckpointBranchMiner() {
     }
@@ -104,14 +117,25 @@ public final class LiveCheckpointBranchMiner {
     private static void runValueTreeMode(Config cfg, Selection selection) throws Exception {
         Path actionCsv = cfg.outDir.resolve("counterfactual_value_tree.csv");
         Path summaryCsv = cfg.outDir.resolve("counterfactual_value_tree_summary.csv");
+        Path sequenceCsv = cfg.outDir.resolve("counterfactual_sequence_tree.csv");
+        Path sequenceSummaryCsv = cfg.outDir.resolve("counterfactual_sequence_tree_summary.csv");
         Files.write(actionCsv, VALUE_TREE_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         Files.write(summaryCsv, VALUE_TREE_SUMMARY_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        if (cfg.sequenceTree) {
+            Files.write(sequenceCsv, SEQUENCE_TREE_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(sequenceSummaryCsv, SEQUENCE_TREE_SUMMARY_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        }
 
         int processed = 0;
         int actionRows = 0;
+        int sequenceRows = 0;
+        int sequenceSummaryRows = 0;
         Counts counts = new Counts();
+        Counts sequenceCounts = new Counts();
         for (SnapshotCandidate candidate : selection.selected) {
             if (cfg.maxSnapshots > 0 && processed >= cfg.maxSnapshots) {
                 break;
@@ -124,16 +148,31 @@ public final class LiveCheckpointBranchMiner {
                 summary = result.summary;
                 actionRows += result.actions.size();
                 appendValueActionRows(actionCsv, result.actions);
+                if (cfg.sequenceTree) {
+                    sequenceRows += result.sequenceRows.size();
+                    sequenceSummaryRows += result.sequenceSummaries.size();
+                    appendSequenceRows(sequenceCsv, result.sequenceRows);
+                    appendSequenceSummaries(sequenceSummaryCsv, result.sequenceSummaries);
+                    for (SequencePairSummary sequenceSummary : result.sequenceSummaries) {
+                        sequenceCounts.add(sequenceSummary.classification);
+                    }
+                }
             }
             appendValueSummary(summaryCsv, summary);
             counts.add(summary.classification);
             processed++;
         }
         writeValueTreeReadme(cfg, actionCsv, summaryCsv, processed,
-                selection.discoveredPathCount, selection.eligibleCount, actionRows, counts);
+                selection.discoveredPathCount, selection.eligibleCount, actionRows,
+                sequenceRows, sequenceSummaryRows, counts, sequenceCounts);
         System.out.println("counterfactual value tree wrote " + actionRows + " action row(s) to " + actionCsv);
         System.out.println("counterfactual value tree wrote " + processed + " summary row(s) to " + summaryCsv);
         System.out.println("classification counts: " + counts.values);
+        if (cfg.sequenceTree) {
+            System.out.println("counterfactual sequence tree wrote " + sequenceRows + " row(s) to " + sequenceCsv);
+            System.out.println("counterfactual sequence tree wrote " + sequenceSummaryRows + " summary row(s) to " + sequenceSummaryCsv);
+            System.out.println("sequence classification counts: " + sequenceCounts.values);
+        }
     }
 
     private static ValueTreeResult probeValueTree(Path snapshotPath, LiveCheckpointRecorder.Snapshot snapshot, Config cfg) {
@@ -246,7 +285,10 @@ public final class LiveCheckpointBranchMiner {
         summary.totalRollouts = totalRollouts;
         summary.terminalRollouts = terminalRollouts;
         summary.classification = valueTreeClassification(source, best, delta, importance);
-        return new ValueTreeResult(summary, actions);
+        SequenceTreeResult sequences = cfg.sequenceTree
+                ? probeSequenceTree(snapshotPath, snapshot, cfg, choices)
+                : SequenceTreeResult.empty();
+        return new ValueTreeResult(summary, actions, sequences.rows, sequences.summaries);
     }
 
     private static BranchRow probeSnapshot(Path snapshotPath, LiveCheckpointRecorder.Snapshot snapshot, Config cfg) {
@@ -1108,6 +1150,30 @@ public final class LiveCheckpointBranchMiner {
                 StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
+    private static void appendSequenceRows(Path csvPath, List<SequenceTreeRow> rows) throws Exception {
+        if (rows == null || rows.isEmpty()) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder(rows.size() * 256);
+        for (SequenceTreeRow row : rows) {
+            sb.append(row.toCsvLine());
+        }
+        Files.write(csvPath, sb.toString().getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
+    private static void appendSequenceSummaries(Path csvPath, List<SequencePairSummary> rows) throws Exception {
+        if (rows == null || rows.isEmpty()) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder(rows.size() * 256);
+        for (SequencePairSummary row : rows) {
+            sb.append(row.toCsvLine());
+        }
+        Files.write(csvPath, sb.toString().getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
     private static void writeValueTreeReadme(
             Config cfg,
             Path actionCsv,
@@ -1116,7 +1182,10 @@ public final class LiveCheckpointBranchMiner {
             int discovered,
             int eligible,
             int actionRows,
-            Counts counts
+            int sequenceRows,
+            int sequenceSummaryRows,
+            Counts counts,
+            Counts sequenceCounts
     ) throws Exception {
         StringBuilder sb = new StringBuilder();
         sb.append("# Counterfactual Value Tree Miner\n\n");
@@ -1124,6 +1193,14 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- discovered: ").append(discovered).append("\n");
         sb.append("- eligible: ").append(eligible).append("\n");
         sb.append("- action_rows: ").append(actionRows).append("\n");
+        sb.append("- sequence_tree: ").append(cfg.sequenceTree).append("\n");
+        if (cfg.sequenceTree) {
+            sb.append("- sequence_rows: ").append(sequenceRows).append("\n");
+            sb.append("- sequence_summary_rows: ").append(sequenceSummaryRows).append("\n");
+            sb.append("- tree_sequence_depth: ").append(cfg.treeSequenceDepth).append("\n");
+            sb.append("- tree_sequence_beam: ").append(cfg.treeSequenceBeam).append("\n");
+            sb.append("- tree_sequence_rollouts: ").append(cfg.treeSequenceRollouts).append("\n");
+        }
         sb.append("- selection_mode: ").append(cfg.selectionMode).append("\n");
         sb.append("- ranked_max_per_game: ").append(cfg.rankedMaxPerGame).append("\n");
         sb.append("- selection_shards: ").append(cfg.selectionShards).append("\n");
@@ -1139,9 +1216,18 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- action_csv: ").append(actionCsv).append("\n");
         sb.append("- summary_csv: ").append(summaryCsv).append("\n");
         sb.append("- classification_counts: ").append(counts.values).append("\n\n");
+        if (cfg.sequenceTree) {
+            sb.append("- sequence_csv: ").append(cfg.outDir.resolve("counterfactual_sequence_tree.csv")).append("\n");
+            sb.append("- sequence_summary_csv: ").append(cfg.outDir.resolve("counterfactual_sequence_tree_summary.csv")).append("\n");
+            sb.append("- sequence_classification_counts: ").append(sequenceCounts.values).append("\n\n");
+        }
         sb.append("This mode estimates action importance at each serialized checkpoint by forcing each selected root action, ")
                 .append("running configurable continuations, and comparing action win rates against the accepted-policy source action. ")
                 .append("It is a bounded sampled tree, not an exhaustive Magic game tree.\n");
+        if (cfg.sequenceTree) {
+            sb.append("\nSequence mode additionally forces short ordered prefixes such as A then B and B then A, ")
+                    .append("records post-prefix state hashes when another decision is reached, and flags converged versus order-sensitive pairs.\n");
+        }
         Files.write(cfg.outDir.resolve("README.md"), sb.toString().getBytes(StandardCharsets.UTF_8),
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
@@ -1238,6 +1324,196 @@ public final class LiveCheckpointBranchMiner {
         return "weak_correction";
     }
 
+    private static SequenceTreeResult probeSequenceTree(
+            Path snapshotPath,
+            LiveCheckpointRecorder.Snapshot snapshot,
+            Config cfg,
+            List<List<Integer>> rootChoices
+    ) {
+        if (snapshot == null || snapshot.candidateTexts == null || rootChoices == null || rootChoices.size() < 2) {
+            return SequenceTreeResult.empty();
+        }
+        int beam = cfg.treeSequenceBeam <= 0
+                ? rootChoices.size()
+                : Math.min(cfg.treeSequenceBeam, rootChoices.size());
+        int depth = Math.max(2, cfg.treeSequenceDepth);
+        int rollouts = Math.max(1, cfg.treeSequenceRollouts);
+        List<SequenceTreeRow> rows = new ArrayList<>();
+        List<SequencePairSummary> summaries = new ArrayList<>();
+        for (int i = 0; i < beam; i++) {
+            for (int j = i + 1; j < beam; j++) {
+                List<Integer> first = rootChoices.get(i);
+                List<Integer> second = rootChoices.get(j);
+                SequencePairSummary pair = SequencePairSummary.fromSnapshot(snapshotPath, snapshot, first, second);
+                String pairKey = sequenceKey(first, second);
+                for (int rollout = 0; rollout < rollouts; rollout++) {
+                    SequenceTreeRow forward = runSequenceRow(
+                            snapshotPath,
+                            snapshot,
+                            pairKey,
+                            "forward",
+                            rollout,
+                            sequenceChoices(first, second, depth),
+                            cfg);
+                    SequenceTreeRow reverse = runSequenceRow(
+                            snapshotPath,
+                            snapshot,
+                            pairKey,
+                            "reverse",
+                            rollout,
+                            sequenceChoices(second, first, depth),
+                            cfg);
+                    rows.add(forward);
+                    rows.add(reverse);
+                    pair.add(forward, reverse);
+                }
+                pair.classify();
+                summaries.add(pair);
+            }
+        }
+        return new SequenceTreeResult(rows, summaries);
+    }
+
+    private static SequenceTreeRow runSequenceRow(
+            Path snapshotPath,
+            LiveCheckpointRecorder.Snapshot snapshot,
+            String pairKey,
+            String orderLabel,
+            int rollout,
+            List<List<Integer>> sequenceChoices,
+            Config cfg
+    ) {
+        SequenceTreeRow row = SequenceTreeRow.fromSnapshot(snapshotPath, snapshot, pairKey, orderLabel, rollout, sequenceChoices);
+        long seed = sequenceRolloutSeed(cfg, snapshot, sequenceChoices, rollout);
+        BranchOutcome outcome = runSequenceProbe(
+                snapshot,
+                sequenceChoices,
+                "sequence_tree_" + pairKey + "_" + orderLabel + "_r" + rollout,
+                cfg.treeTimeoutSec,
+                cfg.postBranchAutopilot,
+                cfg.treeContinuationPolicy,
+                seed);
+        row.apply(outcome);
+        return row;
+    }
+
+    private static BranchOutcome runSequenceProbe(
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<List<Integer>> sequenceChoices,
+            String label,
+            int timeoutSec,
+            boolean postBranchAutopilot,
+            ContinuationPolicy continuationPolicy,
+            long rolloutSeed
+    ) {
+        List<ForcedStep> steps = forcedSteps(snapshot, sequenceChoices);
+        RandomUtil.State previousRandom = RandomUtil.captureState();
+        Game game = null;
+        SnapshotBranchController controller =
+                new SnapshotBranchController(
+                        snapshot,
+                        steps,
+                        true,
+                        false,
+                        false,
+                        postBranchAutopilot,
+                        continuationPolicy,
+                        rolloutSeed);
+        BranchOutcome outcome = new BranchOutcome(label);
+        try {
+            RandomUtil.restoreState(snapshot.randomState);
+            game = snapshot.gameSnapshot.createSimulationForAI();
+            Player player = game.getPlayer(snapshot.playerId);
+            if (!(player instanceof ComputerPlayerRL)) {
+                outcome.error = "checkpoint_player_copy_type_mismatch:"
+                        + (player == null ? "null" : player.getClass().getName());
+                return outcome;
+            }
+            installBranchControllers(game, (ComputerPlayerRL) player, controller, postBranchAutopilot);
+            try {
+                resumeGameInGameThread(game, timeoutSec, label);
+            } catch (EngineDecisionBranchController.BranchTerminated terminated) {
+                outcome.terminationReason = terminated.getReason();
+            }
+            outcome.captureController(controller);
+            outcome.captureTerminal(game, snapshot.playerName);
+            return outcome;
+        } catch (Throwable t) {
+            outcome.captureController(controller);
+            outcome.error = errorSummary(t);
+            return outcome;
+        } finally {
+            if (game != null) {
+                try {
+                    game.end();
+                } catch (Throwable ignored) {
+                    // ignore cleanup failures
+                }
+                try {
+                    game.cleanUp();
+                } catch (Throwable ignored) {
+                    // ignore cleanup failures
+                }
+            }
+            RandomUtil.restoreState(previousRandom);
+        }
+    }
+
+    private static List<List<Integer>> sequenceChoices(List<Integer> first, List<Integer> second, int depth) {
+        List<List<Integer>> out = new ArrayList<>();
+        out.add(first == null ? Collections.emptyList() : new ArrayList<>(first));
+        if (depth >= 2) {
+            out.add(second == null ? Collections.emptyList() : new ArrayList<>(second));
+        }
+        return out;
+    }
+
+    private static List<ForcedStep> forcedSteps(
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<List<Integer>> sequenceChoices
+    ) {
+        if (snapshot == null || sequenceChoices == null || sequenceChoices.isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<ForcedStep> steps = new ArrayList<>();
+        for (int i = 0; i < sequenceChoices.size(); i++) {
+            List<Integer> indices = sanitizeIndices(sequenceChoices.get(i),
+                    snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size());
+            List<String> texts = selectedTexts(snapshot.candidateTexts, indices);
+            if (i == 0) {
+                steps.add(ForcedStep.root(indices, texts, snapshot.actionType));
+            } else {
+                steps.add(ForcedStep.byText(texts, snapshot.actionType));
+            }
+        }
+        return steps;
+    }
+
+    private static long sequenceRolloutSeed(
+            Config cfg,
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<List<Integer>> sequenceChoices,
+            int rollout
+    ) {
+        long seed = cfg.treeSeed;
+        seed = 31L * seed + (snapshot == null || snapshot.candidateHash == null ? 0 : snapshot.candidateHash.hashCode());
+        seed = 31L * seed + (snapshot == null || snapshot.stateHash == null ? 0 : snapshot.stateHash.hashCode());
+        seed = 31L * seed + sequenceKey(sequenceChoices).hashCode();
+        seed = 31L * seed + rollout;
+        return seed;
+    }
+
+    private static String sequenceKey(List<List<Integer>> sequenceChoices) {
+        if (sequenceChoices == null || sequenceChoices.isEmpty()) {
+            return "";
+        }
+        return sequenceChoices.stream().map(LiveCheckpointBranchMiner::joinInts).collect(Collectors.joining(">"));
+    }
+
+    private static String sequenceKey(List<Integer> first, List<Integer> second) {
+        return joinInts(first) + "_vs_" + joinInts(second);
+    }
+
     private static String joinInts(List<Integer> values) {
         if (values == null || values.isEmpty()) {
             return "";
@@ -1276,9 +1552,69 @@ public final class LiveCheckpointBranchMiner {
         return t.getClass().getSimpleName() + (message == null || message.isEmpty() ? "" : ": " + message);
     }
 
+    private static final class ForcedStep {
+        private final List<Integer> rootIndices;
+        private final List<String> expectedTexts;
+        private final String actionType;
+        private final boolean root;
+
+        private ForcedStep(List<Integer> rootIndices, List<String> expectedTexts, String actionType, boolean root) {
+            this.rootIndices = rootIndices == null ? Collections.emptyList() : new ArrayList<>(rootIndices);
+            this.expectedTexts = expectedTexts == null ? Collections.emptyList() : new ArrayList<>(expectedTexts);
+            this.actionType = actionType == null ? "" : actionType;
+            this.root = root;
+        }
+
+        private static ForcedStep root(List<Integer> indices, List<String> texts, String actionType) {
+            return new ForcedStep(indices, texts, actionType, true);
+        }
+
+        private static ForcedStep byText(List<String> texts, String actionType) {
+            return new ForcedStep(Collections.emptyList(), texts, actionType, false);
+        }
+
+        private boolean actionTypeMatches(StateSequenceBuilder.ActionType actual) {
+            String actualType = actual == null ? "" : actual.name();
+            return actionType.isEmpty() || actionType.equals(actualType);
+        }
+
+        private <T> List<Integer> resolve(EngineDecisionBranchController.DecisionContext<T> context) {
+            if (context == null || context.candidateCount <= 0) {
+                return Collections.emptyList();
+            }
+            if (root) {
+                return sanitizeIndices(rootIndices, context.candidateCount);
+            }
+            if (!actionTypeMatches(context.actionType) || expectedTexts.isEmpty()) {
+                return Collections.emptyList();
+            }
+            List<Integer> out = new ArrayList<>();
+            Set<Integer> used = new HashSet<>();
+            for (String expected : expectedTexts) {
+                int found = -1;
+                for (int i = 0; i < context.candidateCount; i++) {
+                    if (used.contains(i)) {
+                        continue;
+                    }
+                    String actual = candidateText(context, i);
+                    if (choiceTextMatches(expected, actual)) {
+                        found = i;
+                        break;
+                    }
+                }
+                if (found < 0) {
+                    return Collections.emptyList();
+                }
+                used.add(found);
+                out.add(found);
+            }
+            return out;
+        }
+    }
+
     private static final class SnapshotBranchController implements EngineDecisionBranchController {
         private final LiveCheckpointRecorder.Snapshot snapshot;
-        private final List<Integer> forcedIndices;
+        private final List<ForcedStep> forcedSteps;
         private final boolean stopAtReentry;
         private final boolean requireSourceChoiceMatch;
         private final boolean postBranchAutopilot;
@@ -1287,10 +1623,18 @@ public final class LiveCheckpointBranchMiner {
 
         private boolean seen;
         private boolean reentryMatched;
+        private int forcedStepIndex;
+        private int forcedStepsCompleted;
+        private boolean prefixComplete;
+        private boolean postPrefixCaptured;
         private String reason = "";
+        private String prefixReason = "";
         private String actualActionType = "";
         private String actualCandidateHash = "";
         private String actualStateHash = "";
+        private String postPrefixActionType = "";
+        private String postPrefixCandidateHash = "";
+        private String postPrefixStateHash = "";
         private List<String> actualCandidateTexts = Collections.emptyList();
         private List<String> selectedTexts = Collections.emptyList();
 
@@ -1303,10 +1647,34 @@ public final class LiveCheckpointBranchMiner {
                 ContinuationPolicy continuationPolicy,
                 long rolloutSeed
         ) {
+            this(
+                    snapshot,
+                    Collections.singletonList(ForcedStep.root(
+                            forcedIndices,
+                            Collections.emptyList(),
+                            snapshot == null ? "" : snapshot.actionType)),
+                    false,
+                    stopAtReentry,
+                    requireSourceChoiceMatch,
+                    postBranchAutopilot,
+                    continuationPolicy,
+                    rolloutSeed);
+        }
+
+        private SnapshotBranchController(
+                LiveCheckpointRecorder.Snapshot snapshot,
+                List<ForcedStep> forcedSteps,
+                boolean sequenceController,
+                boolean stopAtReentry,
+                boolean requireSourceChoiceMatch,
+                boolean postBranchAutopilot,
+                ContinuationPolicy continuationPolicy,
+                long rolloutSeed
+        ) {
             this.snapshot = snapshot;
-            this.forcedIndices = forcedIndices == null
+            this.forcedSteps = forcedSteps == null
                     ? Collections.emptyList()
-                    : new ArrayList<>(forcedIndices);
+                    : new ArrayList<>(forcedSteps);
             this.stopAtReentry = stopAtReentry;
             this.requireSourceChoiceMatch = requireSourceChoiceMatch;
             this.postBranchAutopilot = postBranchAutopilot;
@@ -1327,7 +1695,7 @@ public final class LiveCheckpointBranchMiner {
         @Override
         public <T> Choice onDecision(DecisionContext<T> context) {
             if (seen) {
-                return postBranchAutopilotChoice(context);
+                return onPostRootDecision(context);
             }
             if (context == null
                     || context.player == null
@@ -1342,7 +1710,10 @@ public final class LiveCheckpointBranchMiner {
             actualStateHash = context.stateHash;
             actualCandidateTexts = new ArrayList<>(context.candidateTexts);
 
-            List<Integer> sanitized = sanitizeIndices(forcedIndices, context.candidateCount);
+            ForcedStep rootStep = forcedSteps.isEmpty()
+                    ? ForcedStep.root(Collections.emptyList(), Collections.emptyList(), snapshot.actionType)
+                    : forcedSteps.get(0);
+            List<Integer> sanitized = rootStep.resolve(context);
             selectedTexts = LiveCheckpointBranchMiner.selectedTexts(context.candidateTexts, sanitized);
             boolean actionMatched = actualActionType.equals(snapshot.actionType);
             boolean candidatesMatched = context.candidateTexts.equals(snapshot.candidateTexts);
@@ -1369,7 +1740,54 @@ public final class LiveCheckpointBranchMiner {
             if (stopAtReentry || !reentryMatched) {
                 return Choice.chooseAndTerminate(sanitized, reason);
             }
+            forcedStepIndex = 1;
+            forcedStepsCompleted = 1;
+            if (forcedStepIndex >= forcedSteps.size()) {
+                prefixComplete = true;
+                prefixReason = "prefix_complete";
+            }
             return Choice.choose(sanitized);
+        }
+
+        private <T> Choice onPostRootDecision(DecisionContext<T> context) {
+            if (forcedStepIndex >= forcedSteps.size()) {
+                capturePostPrefix(context);
+                return postBranchAutopilotChoice(context);
+            }
+            if (context == null
+                    || context.player == null
+                    || snapshot == null
+                    || snapshot.playerId == null
+                    || !snapshot.playerId.equals(context.player.getId())) {
+                return postBranchAutopilotChoice(context);
+            }
+            ForcedStep step = forcedSteps.get(forcedStepIndex);
+            if (!step.actionTypeMatches(context.actionType)) {
+                return postBranchAutopilotChoice(context);
+            }
+            List<Integer> indices = step.resolve(context);
+            if (indices.isEmpty()) {
+                prefixReason = "prefix_step_" + forcedStepIndex + "_unavailable";
+                reason = prefixReason;
+                return Choice.chooseAndTerminate(Collections.emptyList(), prefixReason);
+            }
+            forcedStepIndex++;
+            forcedStepsCompleted++;
+            if (forcedStepIndex >= forcedSteps.size()) {
+                prefixComplete = true;
+                prefixReason = "prefix_complete";
+            }
+            return Choice.choose(indices);
+        }
+
+        private <T> void capturePostPrefix(DecisionContext<T> context) {
+            if (postPrefixCaptured || !prefixComplete || context == null) {
+                return;
+            }
+            postPrefixCaptured = true;
+            postPrefixActionType = context.actionType == null ? "" : context.actionType.name();
+            postPrefixCandidateHash = context.candidateHash;
+            postPrefixStateHash = context.stateHash;
         }
 
         private <T> Choice postBranchAutopilotChoice(DecisionContext<T> context) {
@@ -1546,6 +1964,24 @@ public final class LiveCheckpointBranchMiner {
         return text == null ? "" : text;
     }
 
+    private static boolean choiceTextMatches(String expected, String actual) {
+        String left = normalizeChoiceText(expected);
+        String right = normalizeChoiceText(actual);
+        if (left.isEmpty() || right.isEmpty()) {
+            return false;
+        }
+        return left.equals(right)
+                || left.endsWith(": " + right)
+                || right.endsWith(": " + left);
+    }
+
+    private static String normalizeChoiceText(String text) {
+        if (text == null) {
+            return "";
+        }
+        return text.trim().replaceAll("\\s+", " ").toLowerCase(Locale.US);
+    }
+
     private static String candidateObjectId(EngineDecisionBranchController.DecisionContext<?> context, int index) {
         if (context == null || context.candidateObjectIds == null || index < 0 || index >= context.candidateObjectIds.size()) {
             return "";
@@ -1578,13 +2014,338 @@ public final class LiveCheckpointBranchMiner {
         }
     }
 
+    private static final class SequenceTreeResult {
+        private final List<SequenceTreeRow> rows;
+        private final List<SequencePairSummary> summaries;
+
+        private SequenceTreeResult(List<SequenceTreeRow> rows, List<SequencePairSummary> summaries) {
+            this.rows = rows == null ? Collections.emptyList() : rows;
+            this.summaries = summaries == null ? Collections.emptyList() : summaries;
+        }
+
+        private static SequenceTreeResult empty() {
+            return new SequenceTreeResult(Collections.emptyList(), Collections.emptyList());
+        }
+    }
+
+    private static final class SequenceTreeRow {
+        private String snapshotPath = "";
+        private int ordinal = -1;
+        private int decisionNumber = -1;
+        private String actionType = "";
+        private int candidateCount = 0;
+        private String candidateHash = "";
+        private String stateHash = "";
+        private String randomStateHash = "";
+        private String pairKey = "";
+        private String orderLabel = "";
+        private int rollout = 0;
+        private String sequenceIndices = "";
+        private String sequenceTexts = "";
+        private int forcedStepsRequested = 0;
+        private int forcedStepsCompleted = 0;
+        private boolean prefixComplete = false;
+        private String prefixReason = "";
+        private String postPrefixStateHash = "";
+        private String postPrefixCandidateHash = "";
+        private String postPrefixActionType = "";
+        private boolean terminal = false;
+        private boolean won = false;
+        private boolean lost = false;
+        private String error = "";
+        private String outcome = "";
+
+        private static SequenceTreeRow fromSnapshot(
+                Path path,
+                LiveCheckpointRecorder.Snapshot snapshot,
+                String pairKey,
+                String orderLabel,
+                int rollout,
+                List<List<Integer>> sequenceChoices
+        ) {
+            SequenceTreeRow row = new SequenceTreeRow();
+            row.snapshotPath = path == null ? "" : path.toString();
+            row.pairKey = pairKey == null ? "" : pairKey;
+            row.orderLabel = orderLabel == null ? "" : orderLabel;
+            row.rollout = rollout;
+            row.sequenceIndices = sequenceKey(sequenceChoices);
+            if (snapshot != null) {
+                row.ordinal = snapshot.ordinal;
+                row.decisionNumber = snapshot.decisionNumber;
+                row.actionType = snapshot.actionType;
+                row.candidateCount = snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size();
+                row.candidateHash = snapshot.candidateHash;
+                row.stateHash = snapshot.stateHash;
+                row.randomStateHash = snapshot.randomStateHash;
+                List<String> texts = new ArrayList<>();
+                if (sequenceChoices != null) {
+                    for (List<Integer> choice : sequenceChoices) {
+                        texts.add(joinStrings(selectedTexts(snapshot.candidateTexts, choice)));
+                    }
+                }
+                row.sequenceTexts = joinStrings(texts);
+            }
+            return row;
+        }
+
+        private void apply(BranchOutcome outcome) {
+            if (outcome == null) {
+                error = "null_outcome";
+                this.outcome = "error=null_outcome";
+                return;
+            }
+            forcedStepsRequested = outcome.forcedStepsRequested;
+            forcedStepsCompleted = outcome.forcedStepsCompleted;
+            prefixComplete = outcome.prefixComplete;
+            prefixReason = outcome.prefixReason.isEmpty() ? outcome.reason : outcome.prefixReason;
+            postPrefixStateHash = outcome.postPrefixStateHash;
+            postPrefixCandidateHash = outcome.postPrefixCandidateHash;
+            postPrefixActionType = outcome.postPrefixActionType;
+            terminal = outcome.terminal;
+            won = outcome.won;
+            lost = outcome.lost;
+            error = outcome.error;
+            this.outcome = outcome.shortClassification();
+        }
+
+        private String toCsvLine() {
+            List<String> cells = new ArrayList<>();
+            cells.add(csv(snapshotPath));
+            cells.add(String.valueOf(ordinal));
+            cells.add(String.valueOf(decisionNumber));
+            cells.add(csv(actionType));
+            cells.add(String.valueOf(candidateCount));
+            cells.add(csv(candidateHash));
+            cells.add(csv(stateHash));
+            cells.add(csv(randomStateHash));
+            cells.add(csv(pairKey));
+            cells.add(csv(orderLabel));
+            cells.add(String.valueOf(rollout));
+            cells.add(csv(sequenceIndices));
+            cells.add(csv(sequenceTexts));
+            cells.add(String.valueOf(forcedStepsRequested));
+            cells.add(String.valueOf(forcedStepsCompleted));
+            cells.add(String.valueOf(prefixComplete));
+            cells.add(csv(prefixReason));
+            cells.add(csv(postPrefixStateHash));
+            cells.add(csv(postPrefixCandidateHash));
+            cells.add(csv(postPrefixActionType));
+            cells.add(String.valueOf(terminal));
+            cells.add(String.valueOf(won));
+            cells.add(String.valueOf(lost));
+            cells.add(csv(error));
+            cells.add(csv(outcome));
+            return String.join(",", cells) + "\n";
+        }
+    }
+
+    private static final class SequencePairSummary {
+        private String snapshotPath = "";
+        private int ordinal = -1;
+        private int decisionNumber = -1;
+        private String actionType = "";
+        private int candidateCount = 0;
+        private String candidateHash = "";
+        private String stateHash = "";
+        private String randomStateHash = "";
+        private String pairKey = "";
+        private String firstIndices = "";
+        private String firstTexts = "";
+        private String secondIndices = "";
+        private String secondTexts = "";
+        private String classification = "";
+        private int forwardRollouts = 0;
+        private int reverseRollouts = 0;
+        private int forwardPrefixComplete = 0;
+        private int reversePrefixComplete = 0;
+        private int convergedPostPrefixCount = 0;
+        private int comparedPostPrefixCount = 0;
+        private int forwardTerminalCount = 0;
+        private int reverseTerminalCount = 0;
+        private int forwardWinCount = 0;
+        private int reverseWinCount = 0;
+        private int forwardLossCount = 0;
+        private int reverseLossCount = 0;
+        private int forwardErrorCount = 0;
+        private int reverseErrorCount = 0;
+        private final List<String> forwardPostPrefixHashes = new ArrayList<>();
+        private final List<String> reversePostPrefixHashes = new ArrayList<>();
+        private final List<String> forwardOutcomes = new ArrayList<>();
+        private final List<String> reverseOutcomes = new ArrayList<>();
+
+        private static SequencePairSummary fromSnapshot(
+                Path path,
+                LiveCheckpointRecorder.Snapshot snapshot,
+                List<Integer> first,
+                List<Integer> second
+        ) {
+            SequencePairSummary row = new SequencePairSummary();
+            row.snapshotPath = path == null ? "" : path.toString();
+            row.pairKey = sequenceKey(first, second);
+            row.firstIndices = joinInts(first);
+            row.secondIndices = joinInts(second);
+            if (snapshot != null) {
+                row.ordinal = snapshot.ordinal;
+                row.decisionNumber = snapshot.decisionNumber;
+                row.actionType = snapshot.actionType;
+                row.candidateCount = snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size();
+                row.candidateHash = snapshot.candidateHash;
+                row.stateHash = snapshot.stateHash;
+                row.randomStateHash = snapshot.randomStateHash;
+                row.firstTexts = joinStrings(selectedTexts(snapshot.candidateTexts, first));
+                row.secondTexts = joinStrings(selectedTexts(snapshot.candidateTexts, second));
+            }
+            return row;
+        }
+
+        private void add(SequenceTreeRow forward, SequenceTreeRow reverse) {
+            forwardRollouts++;
+            reverseRollouts++;
+            if (forward != null) {
+                if (forward.prefixComplete) {
+                    forwardPrefixComplete++;
+                }
+                if (forward.terminal) {
+                    forwardTerminalCount++;
+                }
+                if (forward.won) {
+                    forwardWinCount++;
+                }
+                if (forward.lost) {
+                    forwardLossCount++;
+                }
+                if (!forward.error.isEmpty()) {
+                    forwardErrorCount++;
+                }
+                if (!forward.postPrefixStateHash.isEmpty()) {
+                    forwardPostPrefixHashes.add(forward.postPrefixStateHash);
+                }
+                forwardOutcomes.add(forward.outcome);
+            }
+            if (reverse != null) {
+                if (reverse.prefixComplete) {
+                    reversePrefixComplete++;
+                }
+                if (reverse.terminal) {
+                    reverseTerminalCount++;
+                }
+                if (reverse.won) {
+                    reverseWinCount++;
+                }
+                if (reverse.lost) {
+                    reverseLossCount++;
+                }
+                if (!reverse.error.isEmpty()) {
+                    reverseErrorCount++;
+                }
+                if (!reverse.postPrefixStateHash.isEmpty()) {
+                    reversePostPrefixHashes.add(reverse.postPrefixStateHash);
+                }
+                reverseOutcomes.add(reverse.outcome);
+            }
+            if (forward != null
+                    && reverse != null
+                    && !forward.postPrefixStateHash.isEmpty()
+                    && !reverse.postPrefixStateHash.isEmpty()) {
+                comparedPostPrefixCount++;
+                if (forward.postPrefixStateHash.equals(reverse.postPrefixStateHash)) {
+                    convergedPostPrefixCount++;
+                }
+            }
+        }
+
+        private void classify() {
+            if (forwardRollouts <= 0 || reverseRollouts <= 0) {
+                classification = "sequence_not_run";
+                return;
+            }
+            if (forwardPrefixComplete <= 0 || reversePrefixComplete <= 0) {
+                classification = "sequence_incomplete";
+                return;
+            }
+            if (forwardErrorCount > 0 || reverseErrorCount > 0) {
+                classification = "sequence_error";
+                return;
+            }
+            if (comparedPostPrefixCount > 0 && convergedPostPrefixCount == comparedPostPrefixCount) {
+                classification = "order_converged";
+                return;
+            }
+            double forwardWinRate = ((double) forwardWinCount) / Math.max(1, forwardRollouts);
+            double reverseWinRate = ((double) reverseWinCount) / Math.max(1, reverseRollouts);
+            if (forwardWinRate > reverseWinRate) {
+                classification = "order_sensitive_forward_better";
+                return;
+            }
+            if (reverseWinRate > forwardWinRate) {
+                classification = "order_sensitive_reverse_better";
+                return;
+            }
+            if (forwardTerminalCount <= 0 && reverseTerminalCount <= 0) {
+                classification = "order_diverged_no_terminal";
+                return;
+            }
+            classification = "order_diverged_same_value";
+        }
+
+        private String toCsvLine() {
+            List<String> cells = new ArrayList<>();
+            cells.add(csv(snapshotPath));
+            cells.add(String.valueOf(ordinal));
+            cells.add(String.valueOf(decisionNumber));
+            cells.add(csv(actionType));
+            cells.add(String.valueOf(candidateCount));
+            cells.add(csv(candidateHash));
+            cells.add(csv(stateHash));
+            cells.add(csv(randomStateHash));
+            cells.add(csv(pairKey));
+            cells.add(csv(firstIndices));
+            cells.add(csv(firstTexts));
+            cells.add(csv(secondIndices));
+            cells.add(csv(secondTexts));
+            cells.add(csv(classification));
+            cells.add(String.valueOf(forwardRollouts));
+            cells.add(String.valueOf(reverseRollouts));
+            cells.add(String.valueOf(forwardPrefixComplete));
+            cells.add(String.valueOf(reversePrefixComplete));
+            cells.add(String.valueOf(convergedPostPrefixCount));
+            cells.add(String.valueOf(comparedPostPrefixCount));
+            cells.add(String.valueOf(forwardTerminalCount));
+            cells.add(String.valueOf(reverseTerminalCount));
+            cells.add(String.valueOf(forwardWinCount));
+            cells.add(String.valueOf(reverseWinCount));
+            cells.add(String.valueOf(forwardLossCount));
+            cells.add(String.valueOf(reverseLossCount));
+            cells.add(String.valueOf(forwardErrorCount));
+            cells.add(String.valueOf(reverseErrorCount));
+            cells.add(csv(joinStrings(forwardPostPrefixHashes)));
+            cells.add(csv(joinStrings(reversePostPrefixHashes)));
+            cells.add(csv(joinStrings(forwardOutcomes)));
+            cells.add(csv(joinStrings(reverseOutcomes)));
+            return String.join(",", cells) + "\n";
+        }
+    }
+
     private static final class ValueTreeResult {
         private final ValueTreeSummary summary;
         private final List<ValueActionStats> actions;
+        private final List<SequenceTreeRow> sequenceRows;
+        private final List<SequencePairSummary> sequenceSummaries;
 
         private ValueTreeResult(ValueTreeSummary summary, List<ValueActionStats> actions) {
+            this(summary, actions, Collections.emptyList(), Collections.emptyList());
+        }
+
+        private ValueTreeResult(
+                ValueTreeSummary summary,
+                List<ValueActionStats> actions,
+                List<SequenceTreeRow> sequenceRows,
+                List<SequencePairSummary> sequenceSummaries
+        ) {
             this.summary = summary == null ? new ValueTreeSummary() : summary;
             this.actions = actions == null ? Collections.emptyList() : actions;
+            this.sequenceRows = sequenceRows == null ? Collections.emptyList() : sequenceRows;
+            this.sequenceSummaries = sequenceSummaries == null ? Collections.emptyList() : sequenceSummaries;
         }
     }
 
@@ -1822,11 +2583,19 @@ public final class LiveCheckpointBranchMiner {
         private boolean terminal;
         private boolean won;
         private boolean lost;
+        private int forcedStepsRequested;
+        private int forcedStepsCompleted;
+        private boolean prefixComplete;
         private String error = "";
         private String terminationReason = "";
         private String actionType = "";
         private String candidateHash = "";
         private String stateHash = "";
+        private String prefixReason = "";
+        private String postPrefixActionType = "";
+        private String postPrefixCandidateHash = "";
+        private String postPrefixStateHash = "";
+        private String finalStateHash = "";
         private String reason = "";
 
         private BranchOutcome(String label) {
@@ -1843,6 +2612,13 @@ public final class LiveCheckpointBranchMiner {
             candidateHash = controller.actualCandidateHash;
             stateHash = controller.actualStateHash;
             reason = controller.reason;
+            forcedStepsRequested = controller.forcedSteps.size();
+            forcedStepsCompleted = controller.forcedStepsCompleted;
+            prefixComplete = controller.prefixComplete;
+            prefixReason = controller.prefixReason;
+            postPrefixActionType = controller.postPrefixActionType;
+            postPrefixCandidateHash = controller.postPrefixCandidateHash;
+            postPrefixStateHash = controller.postPrefixStateHash;
             if (!firstDecisionSeen && error.isEmpty()) {
                 error = "checkpoint_no_reentry_decision";
             }
@@ -1855,6 +2631,19 @@ public final class LiveCheckpointBranchMiner {
                 String name = perspectiveName == null ? "" : perspectiveName;
                 won = terminal && winner != null && !winner.isEmpty() && !name.isEmpty() && winner.contains(name);
                 lost = terminal && winner != null && !winner.isEmpty() && !won;
+                Player perspective = null;
+                if (game != null && game.getPlayers() != null) {
+                    for (Player player : game.getPlayers().values()) {
+                        String playerName = player == null || player.getName() == null ? "" : player.getName();
+                        if (player != null && (name.isEmpty() || playerName.contains(name) || name.contains(playerName))) {
+                            perspective = player;
+                            break;
+                        }
+                    }
+                }
+                if (game != null) {
+                    finalStateHash = LiveCheckpointRecorder.sha256(LiveCheckpointRecorder.compactState(game, perspective));
+                }
             } catch (Throwable t) {
                 error = error.isEmpty() ? errorSummary(t) : error;
             }
@@ -2096,6 +2885,10 @@ public final class LiveCheckpointBranchMiner {
         private int treeTimeoutSec = 30;
         private long treeSeed = 1337L;
         private ContinuationPolicy treeContinuationPolicy = ContinuationPolicy.STABLE;
+        private boolean sequenceTree = false;
+        private int treeSequenceDepth = 2;
+        private int treeSequenceBeam = 4;
+        private int treeSequenceRollouts = 1;
 
         private static Config parse(String[] args) {
             Config cfg = new Config();
@@ -2187,6 +2980,18 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("tree-continuation-policy")) {
                 cfg.treeContinuationPolicy = ContinuationPolicy.parse(values.get("tree-continuation-policy"));
+            }
+            if (values.containsKey("sequence-tree")) {
+                cfg.sequenceTree = Boolean.parseBoolean(values.get("sequence-tree"));
+            }
+            if (values.containsKey("tree-sequence-depth")) {
+                cfg.treeSequenceDepth = Math.max(2, Integer.parseInt(values.get("tree-sequence-depth")));
+            }
+            if (values.containsKey("tree-sequence-beam")) {
+                cfg.treeSequenceBeam = Math.max(0, Integer.parseInt(values.get("tree-sequence-beam")));
+            }
+            if (values.containsKey("tree-sequence-rollouts")) {
+                cfg.treeSequenceRollouts = Math.max(1, Integer.parseInt(values.get("tree-sequence-rollouts")));
             }
             if (cfg.selectionShards < 1) {
                 throw new IllegalArgumentException("--selection-shards must be >= 1");

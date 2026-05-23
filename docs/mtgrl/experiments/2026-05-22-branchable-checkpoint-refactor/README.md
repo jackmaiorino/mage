@@ -764,3 +764,46 @@ Interpretation:
 - This is the first true-model-continuation focused run to produce a final correction flag, but it is still a low-sample signal: one rollout per evaluated root action and only 3 of 4 evaluated actions reached terminal.
 - The flagged row is stronger than the invalidated `Play Forest` -> `Pass` row because both reentry checks matched and the source/preferred branches each reached terminal with opposite outcomes.
 - Shard logs still show RL activation failures on mana/untap abilities and recurring no-source continuous-effect logs, so this event should be treated as a rerun target before training admission rather than immediate dataset evidence.
+
+## v311-v313 Sequence-Aware Order Probes
+
+Problem:
+
+- One-step branch labels can confuse "bad first action" with "good action but bad follow-up order".
+- In Magic, many action orders are equivalent, but some are not. The miner needed a way to force short prefixes such as `A then B` and `B then A`, record whether the resulting states converge, and keep order-sensitive cases out of immediate one-step training evidence.
+
+Implementation:
+
+- Added optional value-tree sequence mode:
+  - `--sequence-tree true`
+  - `--tree-sequence-depth <N>`; v1 supports depth 2 ordered pairs.
+  - `--tree-sequence-beam <N>`; pairs are formed from the first N value-tree root choices.
+  - `--tree-sequence-rollouts <N>`.
+- Added `counterfactual_sequence_tree.csv`, one row per forced ordered prefix rollout.
+- Added `counterfactual_sequence_tree_summary.csv`, one row per unordered pair with forward/reverse aggregate classification.
+- Extended `SnapshotBranchController` to force a root checkpoint choice by index, then force later same-action-type source decisions by candidate text. This lets the controller test `A then B` even though the second candidate index is only known after `A` changes the game state.
+- Sequence rows record forced-step completion, prefix failure reason, post-prefix state hash, terminal result, and errors/timeouts.
+- Sequence summaries classify pairs as `order_converged`, `order_sensitive_forward_better`, `order_sensitive_reverse_better`, `order_diverged_same_value`, `sequence_incomplete`, or `sequence_error`.
+- `scripts/mtgrl/run_value_tree_shards.py` now exposes the sequence flags and merges the two new sequence CSV artifacts.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python -m py_compile scripts/mtgrl/run_value_tree_shards.py` | Passed. |
+| `python "$env:USERPROFILE\.codex\skills\mage-research-agent\scripts\airl_maven.py" compile` | Passed. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v312_sequence_order_flagged_smoke_classifier` | Single true-model checkpoint smoke on the v310 flagged snapshot. Wrote 4 value rows, 1 value summary, 12 sequence rows, and 6 sequence summaries. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v313_sequence_sharded_runner_smoke` | 1-shard runner smoke over one snapshot-list entry. Exit code `0`; merged 3 value rows, 1 value summary, 6 sequence rows, and 3 sequence summaries. |
+
+v312 flagged-pair result:
+
+| Pair | Forward | Reverse | Classification | State convergence |
+| --- | --- | --- | --- | --- |
+| `Cast Lotus Petal` / `Cast Winding Way` | `Cast Lotus Petal` then `Cast Winding Way`: terminal loss | `Cast Winding Way` then `Cast Lotus Petal`: terminal loss | `order_diverged_same_value` | Post-prefix hashes differed, so the orders did not converge, but both sampled continuations lost. |
+
+Interpretation:
+
+- The earlier v310 one-step `Cast Lotus Petal` -> `Cast Winding Way` dominant flag does not survive this sequence-aware confirmation smoke as immediate training evidence.
+- The pair is not order-equivalent: both orders completed and produced different post-prefix state hashes.
+- In this smoke it is also not a clean order-sensitive correction: both completed orders reached terminal losses.
+- The new sequence mode gives the miner the missing distinction between commutative orders, truly order-sensitive wins/losses, and incomplete or timed-out forced-prefix attempts.

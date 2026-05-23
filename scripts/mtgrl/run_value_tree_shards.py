@@ -23,6 +23,8 @@ MERGED_FILES = [
     "selected_snapshots.csv",
     "counterfactual_value_tree.csv",
     "counterfactual_value_tree_summary.csv",
+    "counterfactual_sequence_tree.csv",
+    "counterfactual_sequence_tree_summary.csv",
 ]
 
 
@@ -47,6 +49,10 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--tree-continuation-policy", default="sample", choices=["stable", "sample"])
     parser.add_argument("--tree-timeout-sec", type=int, default=120)
     parser.add_argument("--tree-seed", type=int, default=2026052301)
+    parser.add_argument("--sequence-tree", default="false")
+    parser.add_argument("--tree-sequence-depth", type=int, default=2)
+    parser.add_argument("--tree-sequence-beam", type=int, default=4)
+    parser.add_argument("--tree-sequence-rollouts", type=int, default=1)
     parser.add_argument("--post-branch-autopilot", default="true")
     parser.add_argument(
         "--model-continuation-backend",
@@ -89,6 +95,10 @@ def miner_args(args: argparse.Namespace, shard_index: int, shard_dir: Path) -> s
         "--tree-continuation-policy", args.tree_continuation_policy,
         "--tree-timeout-sec", str(args.tree_timeout_sec),
         "--tree-seed", str(args.tree_seed),
+        "--sequence-tree", bool_arg(args.sequence_tree),
+        "--tree-sequence-depth", str(args.tree_sequence_depth),
+        "--tree-sequence-beam", str(args.tree_sequence_beam),
+        "--tree-sequence-rollouts", str(args.tree_sequence_rollouts),
         "--post-branch-autopilot", bool_arg(args.post_branch_autopilot),
         "--selection-shards", str(args.shards),
         "--selection-shard-index", str(shard_index),
@@ -202,6 +212,10 @@ def classification_counts(summary_csv: Path) -> Dict[str, int]:
     return dict(sorted(counts.items()))
 
 
+def sequence_classification_counts(summary_csv: Path) -> Dict[str, int]:
+    return classification_counts(summary_csv)
+
+
 def write_readme(output_dir: Path, summary: Dict[str, object]) -> None:
     lines = [
         "# Sharded Counterfactual Value Tree Miner",
@@ -214,6 +228,11 @@ def write_readme(output_dir: Path, summary: Dict[str, object]) -> None:
         f"- action_rows: `{summary['counterfactual_value_tree.csv_rows']}`",
         f"- summary_rows: `{summary['counterfactual_value_tree_summary.csv_rows']}`",
         f"- classification_counts: `{summary['classification_counts']}`",
+        f"- sequence_classification_counts: `{summary['sequence_classification_counts']}`",
+        f"- sequence_tree: `{summary['sequence_tree']}`",
+        f"- tree_sequence_depth: `{summary['tree_sequence_depth']}`",
+        f"- tree_sequence_beam: `{summary['tree_sequence_beam']}`",
+        f"- tree_sequence_rollouts: `{summary['tree_sequence_rollouts']}`",
         f"- post_branch_autopilot: `{summary['post_branch_autopilot']}`",
         f"- model_continuation_backend: `{summary['model_continuation_backend']}`",
         f"- py4j_port_stride: `{summary['py4j_port_stride']}`",
@@ -304,12 +323,19 @@ def run(args: argparse.Namespace) -> int:
         "tree_continuation_policy": args.tree_continuation_policy,
         "tree_timeout_sec": args.tree_timeout_sec,
         "tree_seed": args.tree_seed,
+        "sequence_tree": bool_arg(args.sequence_tree),
+        "tree_sequence_depth": args.tree_sequence_depth,
+        "tree_sequence_beam": args.tree_sequence_beam,
+        "tree_sequence_rollouts": args.tree_sequence_rollouts,
         "post_branch_autopilot": bool_arg(args.post_branch_autopilot),
         "model_continuation_backend": args.model_continuation_backend,
         "py4j_port_stride": args.py4j_port_stride,
         "exit_codes": exit_codes,
         "elapsed_sec": round(time.time() - start, 3),
         "classification_counts": classification_counts(output_dir / "counterfactual_value_tree_summary.csv"),
+        "sequence_classification_counts": sequence_classification_counts(
+            output_dir / "counterfactual_sequence_tree_summary.csv"
+        ),
     }
     summary.update(merged_counts)
     (output_dir / "shard_summary.json").write_text(
