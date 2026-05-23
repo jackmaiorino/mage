@@ -354,3 +354,30 @@ Conclusion:
 - The immediate terminal-mining quality blocker is fixed: alternate branches now execute as alternates, multi-alternate attempts are visible, and bounded terminal losses are recorded from serialized live checkpoints without prefix replay.
 - These two rows are clean negatives, not correction evidence. The next evidence-mining step is to run the live snapshot miner across a larger accepted-policy live-checkpoint slice and look for rows where the source branch loses terminal and at least one sibling branch wins terminal.
 - The remaining quality caveat is branch throughput under unavailable Python gateway/autopilot paths. Timeout/error outcomes are now visible per alternate, so they can be filtered or used to prioritize a backend/autopilot repair without corrupting admitted evidence.
+
+## v265-v266 Live Checkpoint Mining
+
+v265 sorted-prefix slice:
+
+- Run artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v265_live_checkpoint_mining_slice40`.
+- Scope: first 40 sorted `ACTIVATE_ABILITY_OR_SPELL` snapshots from the v262 live-checkpoint corpus, source timeout 90 seconds, alternate timeout 45 seconds, up to 3 alternates.
+- Result: 40 rows completed with 22 `clean_negative`, 9 `alternate_error`, 7 `source_terminal_not_loss`, and 2 `source_error`.
+- Correction candidates: 0. Alternate terminal wins: 0.
+
+Interpretation:
+
+- The live snapshot branch miner works mechanically at slice scale, but sorted path-order mining over-samples adjacent early decisions. The first 40 rows were mostly clean negatives plus timeout/errors, not correction evidence.
+- The next harness improvement is candidate selection before terminal probing, not a larger blind sorted run.
+
+v266 ranked selection:
+
+- Added `LiveCheckpointBranchMiner --selection-mode ranked`, `--ranked-max-per-game`, and `selected_snapshots.csv`.
+- The selector scores snapshots by candidate breadth, non-pass alternates, spell-like choices, later turn/decision depth, low policy confidence, negative value, low-life/graveyard/opponent-board pressure, and penalties for pass/mana/land-play-only surfaces.
+- Validation artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v266_ranked_selection_reentry_smoke`.
+- Reentry smoke command selected 12 ranked snapshots with `--ranked-max-per-game 6` and `--reentry-only true`.
+- Result: 12/12 `reentry_matched`.
+- The top selected rows are later, high-branching spell decisions across multiple chunks, for example `Cast Generous Ent`, `Cast Sagu Wildling`, `Cast Balustrade Spy`, and `Cast Masked Vandal`, rather than the first chronological decisions.
+
+Next action:
+
+- Run a ranked terminal slice from the same v262 corpus. Admit evidence only if a ranked source-loss row has an alternate terminal win. If the ranked slice still yields zero correction candidates, the next bottleneck becomes corpus/target scarcity or branch backend/autopilot quality, not checkpoint reentry.

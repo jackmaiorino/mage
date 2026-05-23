@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -41,6 +42,11 @@ public final class LiveCheckpointBranchMiner {
                     + "alternate_attempt_count,alternate_terminal_count,alternate_win_count,alternate_outcomes,"
                     + "reentry_a_candidate_hash,reentry_b_candidate_hash,reentry_a_state_hash,reentry_b_state_hash,"
                     + "reentry_a_reason,reentry_b_reason\n";
+    private static final String SELECTION_CSV_HEADER =
+            "rank,snapshot_path,score,game_key,ordinal,decision_number,action_type,candidate_count,"
+                    + "selected_indices,selected_texts,selected_prob,value_score,nonpass_candidate_count,"
+                    + "nonpass_alternate_count,spell_candidate_count,mana_candidate_count,pass_candidate_count,"
+                    + "turn,own_life,own_graveyard_count,opponent_permanent_count,score_reasons,load_error\n";
 
     private LiveCheckpointBranchMiner() {
     }
@@ -52,32 +58,27 @@ public final class LiveCheckpointBranchMiner {
         Files.write(csvPath, CSV_HEADER.getBytes(StandardCharsets.UTF_8),
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 
-        List<Path> snapshots = discoverSnapshots(cfg);
+        Selection selection = selectSnapshots(cfg);
+        writeSelectionManifest(cfg, selection.selected);
         int processed = 0;
         Counts counts = new Counts();
-        for (Path snapshotPath : snapshots) {
+        for (SnapshotCandidate candidate : selection.selected) {
             if (cfg.maxSnapshots > 0 && processed >= cfg.maxSnapshots) {
                 break;
             }
-            LiveCheckpointRecorder.Snapshot snapshot;
-            try {
-                snapshot = loadSnapshot(snapshotPath);
-            } catch (Throwable t) {
-                BranchRow row = BranchRow.loadError(snapshotPath, errorSummary(t));
+            if (candidate.loadError != null && !candidate.loadError.isEmpty()) {
+                BranchRow row = BranchRow.loadError(candidate.path, candidate.loadError);
                 appendRow(csvPath, row);
                 counts.add(row.classification);
                 processed++;
                 continue;
             }
-            if (!cfg.actionTypes.isEmpty() && !cfg.actionTypes.contains(snapshot.actionType)) {
-                continue;
-            }
-            BranchRow row = probeSnapshot(snapshotPath, snapshot, cfg);
+            BranchRow row = probeSnapshot(candidate.path, candidate.snapshot, cfg);
             appendRow(csvPath, row);
             counts.add(row.classification);
             processed++;
         }
-        writeReadme(cfg, csvPath, processed, snapshots.size(), counts);
+        writeReadme(cfg, csvPath, processed, selection.discoveredPathCount, selection.eligibleCount, counts);
         System.out.println("live checkpoint branch miner wrote " + processed + " row(s) to " + csvPath);
         System.out.println("classification counts: " + counts.values);
     }
@@ -261,7 +262,54 @@ public final class LiveCheckpointBranchMiner {
         }
     }
 
-    private static List<Path> discoverSnapshots(Config cfg) throws Exception {
+    private static Selection selectSnapshots(Config cfg) throws Exception {
+        List<Path> paths = discoverSnapshotPaths(cfg);
+        List<SnapshotCandidate> eligible = new ArrayList<>();
+        for (Path path : paths) {
+            SnapshotCandidate candidate = new SnapshotCandidate(path);
+            try {
+                candidate.snapshot = loadSnapshot(path);
+                if (!cfg.actionTypes.isEmpty() && !cfg.actionTypes.contains(candidate.snapshot.actionType)) {
+                    continue;
+                }
+                scoreSnapshot(candidate);
+            } catch (Throwable t) {
+                candidate.loadError = errorSummary(t);
+                candidate.score = Integer.MIN_VALUE;
+                candidate.scoreReasons = "load_error";
+                if ("ranked".equalsIgnoreCase(cfg.selectionMode)) {
+                    continue;
+                }
+            }
+            eligible.add(candidate);
+        }
+        if ("ranked".equalsIgnoreCase(cfg.selectionMode)) {
+            eligible.sort(Comparator
+                    .comparingInt((SnapshotCandidate c) -> c.score).reversed()
+                    .thenComparing(c -> c.path == null ? "" : c.path.toString()));
+        }
+        List<SnapshotCandidate> selected = new ArrayList<>();
+        Map<String, Integer> perGame = new LinkedHashMap<>();
+        int limit = cfg.maxSnapshots <= 0 ? Integer.MAX_VALUE : cfg.maxSnapshots;
+        for (SnapshotCandidate candidate : eligible) {
+            if (selected.size() >= limit) {
+                break;
+            }
+            if ("ranked".equalsIgnoreCase(cfg.selectionMode) && cfg.rankedMaxPerGame > 0) {
+                String key = candidate.gameKey;
+                int count = perGame.getOrDefault(key, 0);
+                if (count >= cfg.rankedMaxPerGame) {
+                    continue;
+                }
+                perGame.put(key, count + 1);
+            }
+            candidate.rank = selected.size() + 1;
+            selected.add(candidate);
+        }
+        return new Selection(paths.size(), eligible.size(), selected);
+    }
+
+    private static List<Path> discoverSnapshotPaths(Config cfg) throws Exception {
         List<Path> out = new ArrayList<>();
         if (cfg.snapshotPath != null) {
             out.add(cfg.snapshotPath);
@@ -278,6 +326,119 @@ public final class LiveCheckpointBranchMiner {
                     .collect(Collectors.toList()));
         }
         return out;
+    }
+
+    private static void scoreSnapshot(SnapshotCandidate candidate) {
+        LiveCheckpointRecorder.Snapshot snapshot = candidate.snapshot;
+        if (snapshot == null) {
+            candidate.score = Integer.MIN_VALUE;
+            candidate.scoreReasons = "snapshot_missing";
+            return;
+        }
+        List<String> candidates = snapshot.candidateTexts == null ? Collections.emptyList() : snapshot.candidateTexts;
+        int candidateCount = candidates.size();
+        List<Integer> sourceIndices = sanitizeIndices(snapshot.selectedIndices, candidateCount);
+        Set<Integer> source = new HashSet<>(sourceIndices);
+        String sourceText = sourceIndices.isEmpty()
+                ? ""
+                : candidates.get(sourceIndices.get(0));
+        int nonPassCandidateCount = 0;
+        int nonPassAlternateCount = 0;
+        int spellCandidateCount = 0;
+        int manaCandidateCount = 0;
+        int passCandidateCount = 0;
+        for (int i = 0; i < candidateCount; i++) {
+            String text = candidates.get(i);
+            if (isPassLike(text)) {
+                passCandidateCount++;
+            } else {
+                nonPassCandidateCount++;
+                if (!source.contains(i)) {
+                    nonPassAlternateCount++;
+                }
+            }
+            if (isSpellLike(text)) {
+                spellCandidateCount++;
+            }
+            if (isManaLike(text)) {
+                manaCandidateCount++;
+            }
+        }
+
+        candidate.gameKey = gameKey(candidate.path);
+        candidate.nonPassCandidateCount = nonPassCandidateCount;
+        candidate.nonPassAlternateCount = nonPassAlternateCount;
+        candidate.spellCandidateCount = spellCandidateCount;
+        candidate.manaCandidateCount = manaCandidateCount;
+        candidate.passCandidateCount = passCandidateCount;
+        candidate.turn = parseIntAfter(snapshot.compactState, "turn=");
+        candidate.ownLife = parsePerspectiveInt(snapshot.compactState, "life");
+        candidate.ownGraveyardCount = parsePerspectiveInt(snapshot.compactState, "graveyard");
+        candidate.opponentPermanentCount = countOpponentPermanents(snapshot.compactState);
+
+        List<String> reasons = new ArrayList<>();
+        int score = 0;
+        score += addScore(reasons, "candidate_count", candidateCount * 4);
+        score += addScore(reasons, "nonpass_alternates", nonPassAlternateCount * 18);
+        score += addScore(reasons, "spell_candidates", spellCandidateCount * 8);
+        score += addScore(reasons, "decision_depth", Math.min(Math.max(snapshot.decisionNumber, 0), 120) / 2);
+        score += addScore(reasons, "turn_depth", Math.min(Math.max(candidate.turn, 0), 12) * 6);
+        if (!isPassLike(sourceText)) {
+            score += addScore(reasons, "source_nonpass", 18);
+        } else {
+            score += addScore(reasons, "source_pass_penalty", -35);
+        }
+        if (isSpellLike(sourceText)) {
+            score += addScore(reasons, "source_spell", 20);
+        }
+        if (isManaLike(sourceText)) {
+            score += addScore(reasons, "source_mana_penalty", -30);
+        }
+        if (isLandPlayLike(sourceText)) {
+            score += addScore(reasons, "source_land_play_penalty", -14);
+        }
+        if (nonPassAlternateCount <= 0) {
+            score += addScore(reasons, "no_nonpass_alternates_penalty", -80);
+        }
+        if (nonPassCandidateCount > 0 && nonPassCandidateCount == manaCandidateCount) {
+            score += addScore(reasons, "all_mana_nonpass_penalty", -35);
+        }
+        if (candidateCount <= 2) {
+            score += addScore(reasons, "small_candidate_set_penalty", -10);
+        }
+        if (!Float.isNaN(snapshot.selectedProb)) {
+            if (snapshot.selectedProb < 0.35f) {
+                score += addScore(reasons, "low_policy_confidence", 14);
+            } else if (snapshot.selectedProb < 0.55f) {
+                score += addScore(reasons, "medium_policy_confidence", 8);
+            }
+        }
+        if (!Float.isNaN(snapshot.valueScore) && snapshot.valueScore < 0.0f) {
+            score += addScore(reasons, "negative_value", Math.min(20, Math.round(-snapshot.valueScore * 80.0f)));
+        }
+        if (candidate.ownLife > 0 && candidate.ownLife <= 8) {
+            score += addScore(reasons, "low_life_pressure", 16);
+        } else if (candidate.ownLife > 0 && candidate.ownLife <= 14) {
+            score += addScore(reasons, "life_pressure", 8);
+        }
+        if (candidate.ownGraveyardCount >= 5) {
+            score += addScore(reasons, "graveyard_pressure", 8);
+        }
+        if (candidate.opponentPermanentCount >= 8) {
+            score += addScore(reasons, "opponent_board_pressure", 10);
+        } else if (candidate.opponentPermanentCount >= 5) {
+            score += addScore(reasons, "opponent_board", 5);
+        }
+
+        candidate.score = score;
+        candidate.scoreReasons = joinStrings(reasons);
+    }
+
+    private static int addScore(List<String> reasons, String name, int value) {
+        if (value != 0) {
+            reasons.add(name + "=" + value);
+        }
+        return value;
     }
 
     private static void applyBestAlternate(
@@ -403,6 +564,122 @@ public final class LiveCheckpointBranchMiner {
         return "Pass".equalsIgnoreCase(value) || "PASS".equals(value);
     }
 
+    private static boolean isSpellLike(String text) {
+        String value = text == null ? "" : text.trim();
+        if (value.isEmpty() || isPassLike(value) || isManaLike(value) || isLandPlayLike(value)) {
+            return false;
+        }
+        return value.startsWith("Cast ")
+                || value.startsWith("Activate ")
+                || value.startsWith("Attack")
+                || value.startsWith("Block")
+                || value.contains(": Cast ");
+    }
+
+    private static boolean isManaLike(String text) {
+        String value = text == null ? "" : text.trim().toLowerCase(Locale.US);
+        return value.contains("add {")
+                || value.contains("add one mana")
+                || value.contains("add one mana of any color")
+                || (value.startsWith("{t}") && value.contains("add"));
+    }
+
+    private static boolean isLandPlayLike(String text) {
+        String value = text == null ? "" : text.trim();
+        return value.startsWith("Play ");
+    }
+
+    private static String gameKey(Path path) {
+        if (path == null) {
+            return "";
+        }
+        String fileName = path.getFileName() == null ? "" : path.getFileName().toString();
+        int ord = fileName.indexOf("_ord");
+        String game = ord > 0 ? fileName.substring(0, ord) : fileName;
+        Path parent = path.getParent();
+        String matchup = parent == null || parent.getFileName() == null ? "" : parent.getFileName().toString();
+        return matchup + "/" + game;
+    }
+
+    private static int parseIntAfter(String text, String key) {
+        if (text == null || key == null || key.isEmpty()) {
+            return -1;
+        }
+        int start = text.indexOf(key);
+        if (start < 0) {
+            return -1;
+        }
+        start += key.length();
+        int end = start;
+        while (end < text.length() && (Character.isDigit(text.charAt(end)) || text.charAt(end) == '-')) {
+            end++;
+        }
+        if (end <= start) {
+            return -1;
+        }
+        try {
+            return Integer.parseInt(text.substring(start, end));
+        } catch (NumberFormatException nfe) {
+            return -1;
+        }
+    }
+
+    private static int parsePerspectiveInt(String compactState, String fieldName) {
+        if (compactState == null || compactState.isEmpty()) {
+            return -1;
+        }
+        String perspective = textBetween(compactState, "perspective=", ";");
+        if (perspective.isEmpty()) {
+            return -1;
+        }
+        String playerPrefix = ";player=" + perspective + ":";
+        int playerStart = compactState.indexOf(playerPrefix);
+        if (playerStart < 0) {
+            return -1;
+        }
+        int playerEnd = compactState.indexOf(";player=", playerStart + 1);
+        int battlefieldStart = compactState.indexOf(";battlefield=", playerStart + 1);
+        int end = playerEnd >= 0 ? playerEnd : (battlefieldStart >= 0 ? battlefieldStart : compactState.length());
+        String player = compactState.substring(playerStart, Math.max(playerStart, end));
+        return parseIntAfter(player, ":" + fieldName + "=");
+    }
+
+    private static int countOpponentPermanents(String compactState) {
+        if (compactState == null || compactState.isEmpty()) {
+            return 0;
+        }
+        String perspective = textBetween(compactState, "perspective=", ";");
+        int start = compactState.indexOf(";battlefield=");
+        if (start < 0) {
+            return 0;
+        }
+        int end = compactState.indexOf(";stack=", start + 1);
+        String battlefield = compactState.substring(start, end >= 0 ? end : compactState.length());
+        int count = 0;
+        for (String permanent : battlefield.split("\\|")) {
+            if (permanent.contains(":ctrl=") && (perspective.isEmpty() || !permanent.contains(":ctrl=" + perspective))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static String textBetween(String text, String startToken, String endToken) {
+        if (text == null || startToken == null || endToken == null) {
+            return "";
+        }
+        int start = text.indexOf(startToken);
+        if (start < 0) {
+            return "";
+        }
+        start += startToken.length();
+        int end = text.indexOf(endToken, start);
+        if (end < 0) {
+            end = text.length();
+        }
+        return text.substring(start, end);
+    }
+
     private static List<Integer> sanitizeIndices(List<Integer> values, int candidateCount) {
         if (values == null || values.isEmpty() || candidateCount <= 0) {
             return Collections.emptyList();
@@ -437,21 +714,65 @@ public final class LiveCheckpointBranchMiner {
                 StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
+    private static void writeSelectionManifest(Config cfg, List<SnapshotCandidate> selected) throws Exception {
+        Path manifest = cfg.outDir.resolve("selected_snapshots.csv");
+        Files.write(manifest, SELECTION_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        if (selected == null || selected.isEmpty()) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder(selected.size() * 256);
+        for (SnapshotCandidate candidate : selected) {
+            LiveCheckpointRecorder.Snapshot snapshot = candidate.snapshot;
+            sb.append(candidate.rank)
+                    .append(",").append(csv(candidate.path == null ? "" : candidate.path.toString()))
+                    .append(",").append(candidate.score)
+                    .append(",").append(csv(candidate.gameKey))
+                    .append(",").append(snapshot == null ? -1 : snapshot.ordinal)
+                    .append(",").append(snapshot == null ? -1 : snapshot.decisionNumber)
+                    .append(",").append(csv(snapshot == null ? "" : snapshot.actionType))
+                    .append(",").append(snapshot == null || snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size())
+                    .append(",").append(csv(snapshot == null ? "" : joinInts(snapshot.selectedIndices)))
+                    .append(",").append(csv(snapshot == null ? "" : joinStrings(snapshot.selectedTexts)))
+                    .append(",").append(String.format(Locale.US, "%.8f", snapshot == null ? 0.0f : snapshot.selectedProb))
+                    .append(",").append(String.format(Locale.US, "%.8f", snapshot == null ? 0.0f : snapshot.valueScore))
+                    .append(",").append(candidate.nonPassCandidateCount)
+                    .append(",").append(candidate.nonPassAlternateCount)
+                    .append(",").append(candidate.spellCandidateCount)
+                    .append(",").append(candidate.manaCandidateCount)
+                    .append(",").append(candidate.passCandidateCount)
+                    .append(",").append(candidate.turn)
+                    .append(",").append(candidate.ownLife)
+                    .append(",").append(candidate.ownGraveyardCount)
+                    .append(",").append(candidate.opponentPermanentCount)
+                    .append(",").append(csv(candidate.scoreReasons))
+                    .append(",").append(csv(candidate.loadError))
+                    .append("\n");
+        }
+        Files.write(manifest, sb.toString().getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
     private static void writeReadme(
             Config cfg,
             Path csvPath,
             int processed,
             int discovered,
+            int eligible,
             Counts counts
     ) throws Exception {
         StringBuilder sb = new StringBuilder();
         sb.append("# Live Checkpoint Branch Miner\n\n");
         sb.append("- processed: ").append(processed).append("\n");
         sb.append("- discovered: ").append(discovered).append("\n");
+        sb.append("- eligible: ").append(eligible).append("\n");
+        sb.append("- selection_mode: ").append(cfg.selectionMode).append("\n");
+        sb.append("- ranked_max_per_game: ").append(cfg.rankedMaxPerGame).append("\n");
         sb.append("- reentry_only: ").append(cfg.reentryOnly).append("\n");
         sb.append("- timeout_sec: ").append(cfg.timeoutSec).append("\n");
         sb.append("- alternate_timeout_sec: ").append(cfg.alternateTimeoutSec).append("\n");
         sb.append("- max_alternates: ").append(cfg.maxAlternates).append("\n");
+        sb.append("- selected_snapshots_csv: ").append(cfg.outDir.resolve("selected_snapshots.csv")).append("\n");
         sb.append("- csv: ").append(csvPath).append("\n");
         sb.append("- classification_counts: ").append(counts.values).append("\n");
         Files.write(cfg.outDir.resolve("README.md"), sb.toString().getBytes(StandardCharsets.UTF_8),
@@ -754,6 +1075,42 @@ public final class LiveCheckpointBranchMiner {
         }
     }
 
+    private static final class Selection {
+        private final int discoveredPathCount;
+        private final int eligibleCount;
+        private final List<SnapshotCandidate> selected;
+
+        private Selection(int discoveredPathCount, int eligibleCount, List<SnapshotCandidate> selected) {
+            this.discoveredPathCount = discoveredPathCount;
+            this.eligibleCount = eligibleCount;
+            this.selected = selected == null ? Collections.emptyList() : selected;
+        }
+    }
+
+    private static final class SnapshotCandidate {
+        private final Path path;
+        private LiveCheckpointRecorder.Snapshot snapshot;
+        private String loadError = "";
+        private int rank = 0;
+        private int score = 0;
+        private String scoreReasons = "";
+        private String gameKey = "";
+        private int nonPassCandidateCount = 0;
+        private int nonPassAlternateCount = 0;
+        private int spellCandidateCount = 0;
+        private int manaCandidateCount = 0;
+        private int passCandidateCount = 0;
+        private int turn = -1;
+        private int ownLife = -1;
+        private int ownGraveyardCount = -1;
+        private int opponentPermanentCount = 0;
+
+        private SnapshotCandidate(Path path) {
+            this.path = path;
+            this.gameKey = gameKey(path);
+        }
+    }
+
     private static final class Counts {
         private final Map<String, Integer> values = new LinkedHashMap<>();
 
@@ -771,6 +1128,8 @@ public final class LiveCheckpointBranchMiner {
         private int timeoutSec = 30;
         private int alternateTimeoutSec = 30;
         private int maxAlternates = 1;
+        private String selectionMode = "path";
+        private int rankedMaxPerGame = 0;
         private boolean reentryOnly = false;
         private Set<String> actionTypes = Collections.emptySet();
 
@@ -799,6 +1158,15 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("max-alternates")) {
                 cfg.maxAlternates = Integer.parseInt(values.get("max-alternates"));
+            }
+            if (values.containsKey("selection-mode")) {
+                cfg.selectionMode = values.get("selection-mode").trim().toLowerCase(Locale.US);
+            }
+            if (values.containsKey("ranked")) {
+                cfg.selectionMode = Boolean.parseBoolean(values.get("ranked")) ? "ranked" : "path";
+            }
+            if (values.containsKey("ranked-max-per-game")) {
+                cfg.rankedMaxPerGame = Integer.parseInt(values.get("ranked-max-per-game"));
             }
             if (values.containsKey("reentry-only")) {
                 cfg.reentryOnly = Boolean.parseBoolean(values.get("reentry-only"));
