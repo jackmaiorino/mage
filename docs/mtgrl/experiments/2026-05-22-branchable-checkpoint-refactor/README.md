@@ -596,3 +596,30 @@ Validation:
 Next unit:
 
 - Scale the miner on a wider local/HPC-ready slice using the same value-tree knobs, then compare yield and label-weight distribution before attaching trainer import.
+
+## v295-v296 Parallel Value-Tree Sharding
+
+Problem:
+
+- v295 proved the wider sampled value-tree run was productive, but it used one JVM and therefore underused the machine. It was stopped as a partial single-worker run after 45 summaries: `{no_better_action=25, moderate_correction=15, strong_correction=5}`.
+
+Implementation:
+
+- Added deterministic selection sharding to `LiveCheckpointBranchMiner`:
+  - `--selection-shards N`
+  - `--selection-shard-index I`
+  - aliases: `--shards`, `--shard-index`
+- Added `scripts/mtgrl/run_value_tree_shards.py`, a local process-level shard launcher. It starts one Maven/JVM miner per shard, writes per-shard logs and CSVs, then merges `selected_snapshots.csv`, `counterfactual_value_tree.csv`, and `counterfactual_value_tree_summary.csv`.
+- Sharding partitions the already-ranked selected checkpoint set by modulo over selection rank. That keeps every shard on the same top-N frontier and avoids duplicated checkpoint work.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python -m py_compile scripts/mtgrl/run_value_tree_shards.py` | Passed. |
+| `python "$env:USERPROFILE\.codex\skills\mage-research-agent\scripts\airl_maven.py" compile` | Passed after Java sharding patch. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v296_value_tree_sharded_smoke` | 2 shards, 4 ranked snapshots, 3 root actions, 1 stable rollout each. Both shard exit codes `0`; merged output has 4 summary rows and 12 action rows. |
+
+Next unit:
+
+- Relaunch the wider v295 shape through the sharded runner with enough local workers to use available CPU, then export admitted weighted corrections from the merged output.

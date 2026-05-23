@@ -522,7 +522,21 @@ public final class LiveCheckpointBranchMiner {
             candidate.rank = selected.size() + 1;
             selected.add(candidate);
         }
+        selected = applySelectionShard(selected, cfg);
         return new Selection(paths.size(), eligible.size(), selected);
+    }
+
+    private static List<SnapshotCandidate> applySelectionShard(List<SnapshotCandidate> selected, Config cfg) {
+        if (selected == null || selected.isEmpty() || cfg.selectionShards <= 1) {
+            return selected;
+        }
+        List<SnapshotCandidate> sharded = new ArrayList<>();
+        for (int i = 0; i < selected.size(); i++) {
+            if (i % cfg.selectionShards == cfg.selectionShardIndex) {
+                sharded.add(selected.get(i));
+            }
+        }
+        return sharded;
     }
 
     private static List<Path> discoverSnapshotPaths(Config cfg) throws Exception {
@@ -1048,6 +1062,8 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- eligible: ").append(eligible).append("\n");
         sb.append("- selection_mode: ").append(cfg.selectionMode).append("\n");
         sb.append("- ranked_max_per_game: ").append(cfg.rankedMaxPerGame).append("\n");
+        sb.append("- selection_shards: ").append(cfg.selectionShards).append("\n");
+        sb.append("- selection_shard_index: ").append(cfg.selectionShardIndex).append("\n");
         sb.append("- reentry_only: ").append(cfg.reentryOnly).append("\n");
         sb.append("- post_branch_autopilot: ").append(cfg.postBranchAutopilot).append("\n");
         sb.append("- confirm_positive_repeats: ").append(cfg.confirmPositiveRepeats).append("\n");
@@ -1097,6 +1113,8 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- action_rows: ").append(actionRows).append("\n");
         sb.append("- selection_mode: ").append(cfg.selectionMode).append("\n");
         sb.append("- ranked_max_per_game: ").append(cfg.rankedMaxPerGame).append("\n");
+        sb.append("- selection_shards: ").append(cfg.selectionShards).append("\n");
+        sb.append("- selection_shard_index: ").append(cfg.selectionShardIndex).append("\n");
         sb.append("- tree_rollouts: ").append(cfg.treeRollouts).append("\n");
         sb.append("- tree_max_actions: ").append(cfg.treeMaxActions).append("\n");
         sb.append("- tree_include_pass: ").append(cfg.treeIncludePass).append("\n");
@@ -2045,6 +2063,8 @@ public final class LiveCheckpointBranchMiner {
         private int maxAlternates = 1;
         private String selectionMode = "path";
         private int rankedMaxPerGame = 0;
+        private int selectionShards = 1;
+        private int selectionShardIndex = 0;
         private boolean postBranchAutopilot = true;
         private int confirmPositiveRepeats = 1;
         private boolean requireIsolatedPositiveReprobe = true;
@@ -2093,6 +2113,18 @@ public final class LiveCheckpointBranchMiner {
             if (values.containsKey("ranked-max-per-game")) {
                 cfg.rankedMaxPerGame = Integer.parseInt(values.get("ranked-max-per-game"));
             }
+            if (values.containsKey("selection-shards")) {
+                cfg.selectionShards = Integer.parseInt(values.get("selection-shards"));
+            }
+            if (values.containsKey("shards")) {
+                cfg.selectionShards = Integer.parseInt(values.get("shards"));
+            }
+            if (values.containsKey("selection-shard-index")) {
+                cfg.selectionShardIndex = Integer.parseInt(values.get("selection-shard-index"));
+            }
+            if (values.containsKey("shard-index")) {
+                cfg.selectionShardIndex = Integer.parseInt(values.get("shard-index"));
+            }
             if (values.containsKey("post-branch-autopilot")) {
                 cfg.postBranchAutopilot = Boolean.parseBoolean(values.get("post-branch-autopilot"));
             }
@@ -2133,6 +2165,12 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("tree-continuation-policy")) {
                 cfg.treeContinuationPolicy = ContinuationPolicy.parse(values.get("tree-continuation-policy"));
+            }
+            if (cfg.selectionShards < 1) {
+                throw new IllegalArgumentException("--selection-shards must be >= 1");
+            }
+            if (cfg.selectionShardIndex < 0 || cfg.selectionShardIndex >= cfg.selectionShards) {
+                throw new IllegalArgumentException("--selection-shard-index must be between 0 and selection-shards - 1");
             }
             return cfg;
         }
