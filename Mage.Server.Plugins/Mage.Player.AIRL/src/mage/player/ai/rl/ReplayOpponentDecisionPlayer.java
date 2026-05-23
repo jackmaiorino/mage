@@ -50,7 +50,7 @@ public final class ReplayOpponentDecisionPlayer extends ComputerPlayer7 {
 
     private final int scenario;
     private final long seed;
-    private final GameLogger gameLogger;
+    private final transient GameLogger gameLogger;
     private int decisionIndex = 0;
 
     public static ComputerPlayer7 create(String name, RangeOfInfluence range, int skill,

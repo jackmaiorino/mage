@@ -1,5 +1,7 @@
 package mage.player.ai;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -75,6 +77,7 @@ import mage.player.ai.rl.DraftPythonMLBridge;
 import mage.player.ai.rl.DraftStateBuilder;
 import mage.player.ai.rl.EnvConfig;
 import mage.player.ai.rl.GameLogger;
+import mage.player.ai.rl.LiveCheckpointRecorder;
 import mage.player.ai.rl.MetricsCollector;
 import mage.player.ai.rl.MulliganLogger;
 import mage.player.ai.rl.PythonModel;
@@ -212,7 +215,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final ThreadLocal<Integer> playManaDepth = ThreadLocal.withInitial(() -> 0);
     private static final ThreadLocal<String> currentUnpaidManaText = new ThreadLocal<>();
 
-    private PythonModel model;
+    private transient PythonModel model;
     protected StateSequenceBuilder.SequenceOutput currentState;
     private transient StateSequenceBuilder.SequenceOutput cachedBaseState;
     private transient int cachedBaseStateHash = Integer.MIN_VALUE;
@@ -2818,6 +2821,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             sb.append(',');
             appendJsonBoolean(sb, "training_enabled", trainingEnabled);
             sb.append('}');
+            LiveCheckpointRecorder.maybeCapture(
+                    game,
+                    this,
+                    actionType,
+                    ordinal,
+                    decisionNumber,
+                    candidateTexts,
+                    safeCandidateObjectIds,
+                    selectedIndices,
+                    chosenTexts,
+                    safeChosenObjectIds,
+                    selectedProb,
+                    valueScore);
             gameLogger.log("REPLAY_DECISION_JSON: " + sb.toString());
         } catch (Throwable ignored) {
             // Replay diagnostics must never change game behavior.
@@ -3017,6 +3033,37 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.attachedGameLogger = player.attachedGameLogger;
         this.pendingReplayAgentSearchTraces = new ArrayDeque<>();
         // strict choose mode enforced via method override
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        this.model = RLTrainer.getSharedModel();
+        this.cachedBaseState = null;
+        this.cachedBaseStateHash = Integer.MIN_VALUE;
+        this.cachedBaseStateGameId = null;
+        this.cachedBaseStatePhase = null;
+        this.cachedBaseStateActivePlayerId = null;
+        this.cachedBaseStatePriorityPlayerId = null;
+        this.cachedBaseStateChoosingPlayerId = null;
+        this.cachedBaseStateTurnNum = Integer.MIN_VALUE;
+        this.cachedBaseStateStepNum = Integer.MIN_VALUE;
+        this.cachedBaseStateApplyEffectsCounter = Integer.MIN_VALUE;
+        this.cachedBaseStateStackSize = Integer.MIN_VALUE;
+        this.cachedBaseStateHandFingerprint = Integer.MIN_VALUE;
+        this.cachedBaseStateZoneFingerprint = Integer.MIN_VALUE;
+        this.cachedAlternativeCostValidation = createLruCache(ALTERNATIVE_COST_SIM_CACHE_MAX_ENTRIES);
+        this.cachedPlayableStateKey = null;
+        this.cachedPlayableOptions = null;
+        this.onlinePrefixSearchActivations = 0;
+        this.onlinePrefixAutopilot = new ArrayDeque<>();
+        this.onlinePrefixAutopilotGameId = null;
+        this.attachedGameLogger = null;
+        this.pendingReplayAgentSearchTraces = new ArrayDeque<>();
+        this.genericActionHistory = new ArrayDeque<>();
+        this.genericActionHistoryGameId = null;
+        this.lastMulliganPKeep = Float.NaN;
+        this.lastMulliganPMull = Float.NaN;
+        this.lastMulliganMode = "";
     }
 
     @Override

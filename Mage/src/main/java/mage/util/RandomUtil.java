@@ -1,6 +1,7 @@
 package mage.util;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -420,7 +421,9 @@ public final class RandomUtil {
         return out.toString();
     }
 
-    public static final class State {
+    public static final class State implements Serializable {
+        private static final long serialVersionUID = 1L;
+
         private final CopyableRandom.RandomState randomState;
         private final long consumptionCount;
         private final long directGetRandomAccessCount;
@@ -560,7 +563,9 @@ public final class RandomUtil {
             return (seed ^ MULTIPLIER) & MASK;
         }
 
-        private static final class RandomState {
+        private static final class RandomState implements Serializable {
+            private static final long serialVersionUID = 1L;
+
             private final long seed;
             private final boolean haveNextNextGaussian;
             private final double nextNextGaussian;

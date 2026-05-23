@@ -266,3 +266,30 @@ Conclusion:
 - These repairs improve the replay bridge but do not validate D086 as evidence. `checkpoint_captured=false` remains the correct classification for the D086 target.
 - Speculative combat and player-target object-id relaxations were tried and backed out because they regressed early prefix parity.
 - The next exact unit is not training. It is source/opponent transcript completeness around the remaining prefix mismatch: either make combat/player-target transcript validation advance without corrupting early mana parity, or pick a fresh v231 target whose checkpoint surface is not behind this transcript stack-context ladder.
+
+## Live Checkpoint Capture Pivot
+
+The D086 repair ladder shows the long-term problem clearly: forced-prefix replay can be useful as a diagnostic, but it is too fragile as the primary branch source for deep accepted-policy losses. The opponent transcript, mana payment choices, stack context, and search RNG all have enough valid degrees of freedom that a replay from the game start may legally miss the historical surface even when the target log is real.
+
+Implementation:
+
+- Added opt-in live checkpoint recording in `LiveCheckpointRecorder`, called from `ComputerPlayerRL.logReplayDecision` before each `REPLAY_DECISION_JSON` line.
+- Each captured checkpoint stores a `game.createSimulationForAI()` snapshot, the acting player id/name, ordinal, decision number, action type, candidate texts/object ids, selected indices/texts/object ids, value/probability metadata, compact state hash, and `RandomUtil.State`.
+- `RandomUtil.State` and the owned copyable RNG state are now serializable so checkpoint artifacts can be written as `*.ser.gz`.
+- `ComputerPlayerRL.model` and `ReplayOpponentDecisionPlayer.gameLogger` are transient so the simulation snapshot does not try to serialize the live Python model bridge or logger.
+- `scripts/run_cp7_eval_sweep.py` can enable this path with `--live-checkpoints`, writing manifests under `<run>/live_checkpoints/<matchup>/manifest.csv`.
+
+Validation:
+
+| Run ID | Result |
+| --- | --- |
+| `20260522_v258_live_checkpoint_smoke_g1` | One-game smoke reached terminal, but checkpoint serialization failed on `LazyPythonModel`. |
+| `20260522_v259_live_checkpoint_smoke_g1_model_transient` | Model serialization was fixed; checkpoint serialization then failed on `GameLogger`. |
+| `20260522_v260_live_checkpoint_smoke_g1_transient_loggers` | Logger serialization was fixed; stale installed `Mage` artifact still loaded the old non-serializable `RandomUtil.State`. |
+| `20260522_v261_live_checkpoint_smoke_g1_after_install` | Passed after offline reactor install. The game completed `0/1`, wrote 91 `*.ser.gz` checkpoints, and the manifest had 91 `captured` rows with no errors. |
+
+Conclusion:
+
+- The long-term path is now live checkpoint collection during accepted-policy evaluation. That bypasses the old-log startup drift because the branchable snapshot is captured at the original policy decision, not reconstructed later from a prefix.
+- Existing forced-prefix probes remain useful for diagnosis and targeted historical validation, but should not block corpus growth.
+- No training or HPC promotion is admitted from live checkpoints alone. The next unit is a larger accepted-policy live-checkpoint collection run, followed by a loader/miner that branches from the serialized snapshots and only emits correction evidence when source continuation loses terminal and a sibling continuation wins terminal.
