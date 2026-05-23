@@ -1,0 +1,2 @@
+# Thesis-clean single-opponent pressure list for local diagnostics.
+Deck - Grixis Affinity.dek

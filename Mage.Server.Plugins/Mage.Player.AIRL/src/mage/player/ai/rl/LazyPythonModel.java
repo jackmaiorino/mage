@@ -71,6 +71,15 @@ final class LazyPythonModel implements PythonModel {
     }
 
     @Override
+    public boolean awaitTrainingDrained(long timeoutMs) {
+        PythonModel current = delegate;
+        if (current == null) {
+            return true;
+        }
+        return current.awaitTrainingDrained(timeoutMs);
+    }
+
+    @Override
     public void saveModel(String path) {
         model().saveModel(path);
     }
@@ -108,6 +117,11 @@ final class LazyPythonModel implements PythonModel {
     @Override
     public float[] predictArchetype(StateSequenceBuilder.SequenceOutput state) {
         return model().predictArchetype(state);
+    }
+
+    @Override
+    public float[] predictCardBelief(StateSequenceBuilder.SequenceOutput state) {
+        return model().predictCardBelief(state);
     }
 
     @Override

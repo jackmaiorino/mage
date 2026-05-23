@@ -72,6 +72,11 @@ OUTPUT_COLUMNS = (
     "candidate_indices",
     "candidate_probs",
     "candidate_texts",
+    "source_decision_number",
+    "source_anchor_id",
+    "turn",
+    "phase",
+    "actor",
     "source_game_path",
     "source_log_line",
     "decision_line",
@@ -157,6 +162,11 @@ def row_value(row: Dict[str, str], name: str) -> str:
     return (row.get(name) or "").strip()
 
 
+def infer_actor(decision_line: str) -> str:
+    parts = [part.strip() for part in (decision_line or "").split(" - ") if part.strip()]
+    return parts[-1] if len(parts) >= 2 else ""
+
+
 def convert_row(row: Dict[str, str], strict: bool, stack_agent_opening_hand: bool) -> Dict[str, str]:
     anchor_id = row_value(row, "anchor_id")
     if strict and not truthy(row.get("replay_ready")):
@@ -214,6 +224,11 @@ def convert_row(row: Dict[str, str], strict: bool, stack_agent_opening_hand: boo
         "candidate_indices": ";".join(str(i) for i in top_indices),
         "candidate_probs": ";".join(top_probs),
         "candidate_texts": join_replay_texts(top_texts),
+        "source_decision_number": row_value(row, "decision_number"),
+        "source_anchor_id": anchor_id,
+        "turn": row_value(row, "turn"),
+        "phase": row_value(row, "phase"),
+        "actor": infer_actor(row_value(row, "decision_line")),
         "source_game_path": row_value(row, "game_path"),
         "source_log_line": row_value(row, "log_line"),
         "decision_line": row_value(row, "decision_line"),

@@ -18,6 +18,13 @@ class SnapshotManager:
         self.snapshot_save_every_steps = int(os.getenv('SNAPSHOT_SAVE_EVERY_STEPS', '1000'))
         self.snapshot_max_files = int(os.getenv('SNAPSHOT_MAX_FILES', '20'))
         self.snapshot_cache_size = int(os.getenv('SNAPSHOT_CACHE_SIZE', '2'))
+        self.model_kwargs = {
+            "d_model": int(os.getenv("MODEL_D_MODEL", "128")),
+            "nhead": int(os.getenv("MODEL_NHEAD", "4")),
+            "num_layers": int(os.getenv("MODEL_NUM_LAYERS", "2")),
+            "dim_feedforward": int(os.getenv("MODEL_DIM_FEEDFORWARD", "512")),
+            "cand_feat_dim": 48,
+        }
         self.snapshot_models = OrderedDict()  # LRU: key -> model
 
         try:
@@ -54,7 +61,7 @@ class SnapshotManager:
         import time
         for attempt in range(2):
             try:
-                m = MTGTransformerModel().to('cpu')
+                m = MTGTransformerModel(**self.model_kwargs).to('cpu')
                 m.load(path)
                 m = m.to(self.device)
                 m.eval()

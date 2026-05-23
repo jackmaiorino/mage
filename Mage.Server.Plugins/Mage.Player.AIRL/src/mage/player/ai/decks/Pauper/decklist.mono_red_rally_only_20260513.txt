@@ -1,0 +1,2 @@
+# Thesis-clean single-opponent diagnostic pool.
+Deck - Mono Red Rally.dek

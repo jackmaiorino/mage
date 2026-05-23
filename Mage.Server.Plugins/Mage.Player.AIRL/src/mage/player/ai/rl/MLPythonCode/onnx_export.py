@@ -17,7 +17,7 @@ import torch.nn.functional as F
 sys.path.insert(0, str(Path(__file__).parent))
 from mtg_transformer import MTGTransformerModel, SingleHeadScorer
 
-HEAD_IDS = ["action", "target", "card_select", "attack", "block"]
+HEAD_IDS = ["action", "target", "card_select", "attack", "block", "mulligan"]
 
 
 class BeliefHeadScorer(nn.Module):
@@ -25,7 +25,7 @@ class BeliefHeadScorer(nn.Module):
 
     Input: (sequences, masks, token_ids) — same signature as action heads,
     so the Java side can build tensors once and call either model.
-    Output: logits [B, num_archetypes].
+    Output: logits [B, num_archetypes] in the Java archetype-label order.
     """
 
     def __init__(self, model: 'MTGTransformerModel'):

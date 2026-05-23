@@ -8,11 +8,14 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
@@ -20,6 +23,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
@@ -30,6 +34,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
@@ -43,6 +48,7 @@ import mage.player.ai.ComputerPlayer;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerRL;
 import mage.players.Player;
+import mage.util.RandomUtil;
 import mage.util.ThreadUtils;
 
 public class RLTrainer {
@@ -83,13 +89,41 @@ public class RLTrainer {
     private static final AsyncLineWriter ASYNC_LINE_WRITER = new AsyncLineWriter("RLTrainer-AsyncLineWriter", logger);
     public static final PythonModel sharedModel = new LazyPythonModel(PythonModelFactory::getInstance);
     public static final MetricsCollector metrics = MetricsCollector.getInstance();
+    private static final boolean ACTOR_LEARNER_ASYNC = EnvConfig.bool("ACTOR_LEARNER_ASYNC", true);
+    private static final int ACTOR_LEARNER_QUEUE_MAX = Math.max(1, EnvConfig.i32("ACTOR_LEARNER_QUEUE_MAX", 512));
+    private static final int ACTOR_LEARNER_WORKERS = Math.max(1, EnvConfig.i32("ACTOR_LEARNER_WORKERS", 2));
+    private static final String ACTOR_LEARNER_BACKPRESSURE =
+            EnvConfig.str("ACTOR_LEARNER_BACKPRESSURE", "block").trim().toLowerCase();
+    private static final int ACTOR_LEARNER_OFFER_TIMEOUT_MS =
+            Math.max(1, EnvConfig.i32("ACTOR_LEARNER_OFFER_TIMEOUT_MS", 30000));
+    private static final int ACTOR_LEARNER_DRAIN_TIMEOUT_MS =
+            Math.max(0, EnvConfig.i32("ACTOR_LEARNER_DRAIN_TIMEOUT_MS", 10000));
+    private static final ActorLearnerDispatcher ACTOR_LEARNER = new ActorLearnerDispatcher(
+            ACTOR_LEARNER_ASYNC, ACTOR_LEARNER_QUEUE_MAX, ACTOR_LEARNER_WORKERS,
+            ACTOR_LEARNER_BACKPRESSURE, ACTOR_LEARNER_OFFER_TIMEOUT_MS);
 
     // Global episode counter to track total episodes across all threads
     private static final AtomicInteger EPISODE_COUNTER = new AtomicInteger(0);
     private static final AtomicInteger ACTIVE_EPISODES = new AtomicInteger(0);
     private static final boolean TRAIN_DIAG = EnvConfig.bool("TRAIN_DIAG", false);
     private static final int TRAIN_DIAG_EVERY = EnvConfig.i32("TRAIN_DIAG_EVERY", 50);
+    private static final int TRAIN_MAX_TRAJECTORY_STEPS_PER_PLAYER =
+            Math.max(0, EnvConfig.i32("TRAIN_MAX_TRAJECTORY_STEPS_PER_PLAYER", 0));
+    private static final boolean AWR_SELECTED_ACTION_TARGETS_ENABLE =
+            EnvConfig.bool("RL_AWR_SELECTED_ACTION_TARGETS_ENABLE", false);
+    private static final double AWR_GAMMA =
+            Math.max(0.0, Math.min(1.0, EnvConfig.f64("RL_AWR_GAMMA", 0.99)));
+    private static final double AWR_TEMPERATURE =
+            Math.max(1e-6, EnvConfig.f64("RL_AWR_TEMPERATURE", 0.50));
+    private static final double AWR_MIN_WEIGHT =
+            Math.max(0.0, EnvConfig.f64("RL_AWR_MIN_WEIGHT", 0.05));
+    private static final double AWR_MAX_WEIGHT =
+            Math.max(AWR_MIN_WEIGHT, EnvConfig.f64("RL_AWR_MAX_WEIGHT", 5.0));
+    private static final boolean AWR_POSITIVE_ADVANTAGE_ONLY =
+            EnvConfig.bool("RL_AWR_POSITIVE_ADVANTAGE_ONLY", false);
     private static final long RL_BASE_SEED = EnvConfig.i64("RL_BASE_SEED", -1L);
+    private static final boolean EVAL_REPLAY_METADATA = EnvConfig.bool("EVAL_REPLAY_METADATA", false);
+    private static final long EVAL_REPLAY_SEED_BASE = EnvConfig.i64("EVAL_REPLAY_SEED_BASE", 7777L);
 
     private static Random newSeededRandom(long salt) {
         if (RL_BASE_SEED < 0L) {
@@ -97,6 +131,46 @@ public class RLTrainer {
         }
         long mixed = RL_BASE_SEED ^ (salt * 0x5DEECE66DL);
         return new Random(mixed);
+    }
+
+    private static long evalReplaySeed(int gameIndex) {
+        return EVAL_REPLAY_SEED_BASE + 7919L * (long) (gameIndex + 1);
+    }
+
+    private static long replayRandomUtilSeed(long replaySeed) {
+        return replaySeed ^ 0x6A09E667F3BCC909L;
+    }
+
+    private static void setReplayTraceContext(int scenario, long replaySeed, String scope) {
+        System.setProperty("xmage.replay.scenario", String.valueOf(scenario));
+        System.setProperty("xmage.replay.seed", String.valueOf(replaySeed));
+        System.setProperty("xmage.replay.random_util_seed", String.valueOf(replayRandomUtilSeed(replaySeed)));
+        System.setProperty("xmage.replay.scope", scope == null ? "" : scope);
+    }
+
+    private static Deck replayShuffledCopy(Deck source, long seed) {
+        Deck deck = source.copy();
+        List<Card> cards = new ArrayList<>(deck.getCards());
+        Collections.shuffle(cards, new Random(seed));
+        deck.getCards().clear();
+        for (Card card : cards) {
+            deck.getCards().add(card);
+        }
+        return deck;
+    }
+
+    private static void forceReplayLibraryOrder(Player player, Deck deck, Game game) {
+        if (player == null || deck == null || game == null) {
+            return;
+        }
+        LinkedHashSet<Card> ordered = new LinkedHashSet<>();
+        for (Card card : deck.getCards()) {
+            if (card != null && !card.isExtraDeckCard()) {
+                ordered.add(card);
+            }
+        }
+        player.getLibrary().clear();
+        player.getLibrary().addAll(ordered, game);
     }
 
     // ============================================================
@@ -207,7 +281,7 @@ public class RLTrainer {
     // ============================================================
     // League-style opponent sampling (bots never go to zero)
     // ============================================================
-    private static final String OPPONENT_SAMPLER = EnvConfig.str("OPPONENT_SAMPLER", "league"); // league|adaptive|fixed|meta
+    private static final String OPPONENT_SAMPLER = EnvConfig.str("OPPONENT_SAMPLER", "league"); // league|adaptive|fixed|meta|ladder|skillmix|hybrid|meta_hybrid|self
     private static final String LEAGUE_MODE = EnvConfig.str("LEAGUE_MODE", ""); // "rl_only" = no CP7 fallback
 
     // Eval benchmark settings
@@ -272,6 +346,10 @@ public class RLTrainer {
     private static final int LADDER_TICK_EPISODES = EnvConfig.i32("LADDER_TICK_EPISODES", 5000);
     private static final int LADDER_GAMES_PER_MATCHUP = EnvConfig.i32("LADDER_GAMES_PER_MATCHUP", 6);
     private static final double LADDER_MIX_LOWER_P = EnvConfig.f64("LADDER_MIX_LOWER_P", 0.20);
+    private static final String SKILL_MIX = EnvConfig.str("SKILL_MIX", "1:1.0");
+    private static final double HYBRID_SELFPLAY_P = EnvConfig.f64("HYBRID_SELFPLAY_P", 0.25);
+    private static final double META_HYBRID_META_P = EnvConfig.f64("META_HYBRID_META_P", 0.75);
+    private static final boolean SELFPLAY_OPPONENT_TRAINING = EnvConfig.bool("SELFPLAY_OPPONENT_TRAINING", true);
 
     private static final Object LEAGUE_LOCK = new Object();
     private static LeagueState LEAGUE_STATE = null;
@@ -1731,6 +1809,239 @@ public class RLTrainer {
             () -> GameLogger.create(false) // Default: disabled
     );
 
+    private static final class ActorLearnerDispatcher {
+
+        private enum TaskType {
+            TRAINING,
+            GAME_RESULT
+        }
+
+        private static final class Task {
+            final TaskType type;
+            final ProfileContext context;
+            final List<StateSequenceBuilder.TrainingData> trainingData;
+            final List<Double> rewards;
+            final float lastValue;
+            final boolean won;
+            final String source;
+
+            Task(ProfileContext context,
+                 List<StateSequenceBuilder.TrainingData> trainingData,
+                 List<Double> rewards,
+                 String source) {
+                this.type = TaskType.TRAINING;
+                this.context = context;
+                this.trainingData = new ArrayList<>(trainingData);
+                this.rewards = new ArrayList<>(rewards);
+                this.lastValue = 0.0f;
+                this.won = false;
+                this.source = source;
+            }
+
+            Task(ProfileContext context, float lastValue, boolean won, String source) {
+                this.type = TaskType.GAME_RESULT;
+                this.context = context;
+                this.trainingData = Collections.emptyList();
+                this.rewards = Collections.emptyList();
+                this.lastValue = lastValue;
+                this.won = won;
+                this.source = source;
+            }
+        }
+
+        private final boolean async;
+        private final int capacity;
+        private final int workerCount;
+        private final String backpressureMode;
+        private final int offerTimeoutMs;
+        private final BlockingQueue<Task> queue;
+        private final List<Thread> workers = new ArrayList<>();
+        private final AtomicBoolean started = new AtomicBoolean(false);
+        private final AtomicBoolean shutdown = new AtomicBoolean(false);
+
+        ActorLearnerDispatcher(boolean async,
+                               int capacity,
+                               int workerCount,
+                               String backpressureMode,
+                               int offerTimeoutMs) {
+            this.async = async;
+            this.capacity = capacity;
+            this.workerCount = workerCount;
+            this.backpressureMode = normalizeBackpressureMode(backpressureMode);
+            this.offerTimeoutMs = offerTimeoutMs;
+            this.queue = async ? new ArrayBlockingQueue<>(capacity) : null;
+            metrics.setActorLearnerQueueDepth(0, async ? capacity : 0);
+        }
+
+        void enqueueTraining(ProfileContext context,
+                             List<StateSequenceBuilder.TrainingData> trainingData,
+                             List<Double> rewards,
+                             String source) {
+            if (trainingData == null || trainingData.isEmpty()) {
+                return;
+            }
+            enqueue(new Task(context, trainingData, rewards, source));
+        }
+
+        void enqueueGameResult(ProfileContext context, float lastValue, boolean won, String source) {
+            enqueue(new Task(context, lastValue, won, source));
+        }
+
+        private void enqueue(Task task) {
+            if (!async) {
+                metrics.recordActorLearnerEnqueued(0, 0);
+                runTask(task);
+                return;
+            }
+            startWorkers();
+            if (shutdown.get()) {
+                metrics.recordActorLearnerDropped(queue.size(), capacity);
+                return;
+            }
+            if (queue.offer(task)) {
+                metrics.recordActorLearnerEnqueued(queue.size(), capacity);
+                return;
+            }
+            if ("drop_oldest".equals(backpressureMode)) {
+                queue.poll();
+                metrics.recordActorLearnerDropped(queue.size(), capacity);
+                if (queue.offer(task)) {
+                    metrics.recordActorLearnerEnqueued(queue.size(), capacity);
+                } else {
+                    metrics.recordActorLearnerDropped(queue.size(), capacity);
+                }
+                return;
+            }
+            if ("drop_newest".equals(backpressureMode)) {
+                metrics.recordActorLearnerDropped(queue.size(), capacity);
+                return;
+            }
+            enqueueWithBackpressure(task);
+        }
+
+        private void enqueueWithBackpressure(Task task) {
+            long waitStartNanos = System.nanoTime();
+            while (!shutdown.get()) {
+                try {
+                    if (queue.offer(task, offerTimeoutMs, TimeUnit.MILLISECONDS)) {
+                        long waitMs = (System.nanoTime() - waitStartNanos) / 1_000_000L;
+                        metrics.recordActorLearnerBackpressureWait(waitMs, queue.size(), capacity);
+                        metrics.recordActorLearnerEnqueued(queue.size(), capacity);
+                        return;
+                    }
+                    long waitMs = (System.nanoTime() - waitStartNanos) / 1_000_000L;
+                    logger.warn("Actor learner queue has been full for " + waitMs
+                            + "ms; backpressuring game runners instead of dropping training data");
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    metrics.recordActorLearnerDropped(queue.size(), capacity);
+                    return;
+                }
+            }
+            metrics.recordActorLearnerDropped(queue.size(), capacity);
+        }
+
+        private void startWorkers() {
+            if (!started.compareAndSet(false, true)) {
+                return;
+            }
+            for (int i = 0; i < workerCount; i++) {
+                Thread worker = new Thread(this::workerLoop, "ACTOR-LEARNER-" + i);
+                worker.setDaemon(true);
+                worker.setPriority(Thread.NORM_PRIORITY);
+                workers.add(worker);
+                worker.start();
+            }
+        }
+
+        private void workerLoop() {
+            while (!shutdown.get() || !queue.isEmpty()) {
+                try {
+                    Task task = queue.poll(250, TimeUnit.MILLISECONDS);
+                    if (task != null) {
+                        runTask(task);
+                    } else {
+                        metrics.setActorLearnerQueueDepth(queue.size(), capacity);
+                    }
+                } catch (InterruptedException e) {
+                    if (shutdown.get()) {
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
+                }
+            }
+            metrics.setActorLearnerQueueDepth(queue.size(), capacity);
+        }
+
+        private void runTask(Task task) {
+            ProfileContext previous = ProfileContext.current();
+            try {
+                ProfileContext.setCurrent(task.context);
+                if (task.type == TaskType.TRAINING) {
+                    sharedModel.enqueueTraining(task.trainingData, task.rewards);
+                } else {
+                    sharedModel.recordGameResult(task.lastValue, task.won);
+                }
+                metrics.recordActorLearnerSent(queueDepth(), queueCapacity());
+            } catch (Throwable t) {
+                metrics.recordActorLearnerFailed(queueDepth(), queueCapacity());
+                logger.warn("Actor learner task failed"
+                        + (task.source == null || task.source.isEmpty() ? "" : " source=" + task.source)
+                        + ": " + t.getMessage(), t);
+            } finally {
+                ProfileContext.setCurrent(previous);
+            }
+        }
+
+        private int queueDepth() {
+            return async ? queue.size() : 0;
+        }
+
+        private int queueCapacity() {
+            return async ? capacity : 0;
+        }
+
+        private static String normalizeBackpressureMode(String value) {
+            String mode = value == null ? "" : value.trim().toLowerCase();
+            if ("drop".equals(mode)) {
+                return "drop_oldest";
+            }
+            if ("drop_oldest".equals(mode) || "drop_newest".equals(mode) || "block".equals(mode)) {
+                return mode;
+            }
+            return "block";
+        }
+
+        void shutdownAndDrain(long timeoutMs) {
+            if (!async) {
+                return;
+            }
+            shutdown.set(true);
+            long deadline = System.currentTimeMillis() + Math.max(0L, timeoutMs);
+            for (Thread worker : workers) {
+                long remaining = Math.max(0L, deadline - System.currentTimeMillis());
+                if (remaining <= 0L && worker.isAlive()) {
+                    break;
+                }
+                try {
+                    worker.join(remaining);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+            if (!queue.isEmpty()) {
+                int remaining = queue.size();
+                queue.clear();
+                for (int i = 0; i < remaining; i++) {
+                    metrics.recordActorLearnerDropped(0, capacity);
+                }
+                logger.warn("Actor learner shutdown dropped " + remaining + " queued tasks after drain timeout");
+            }
+            metrics.setActorLearnerQueueDepth(queue.size(), capacity);
+        }
+    }
+
     // Multi-profile support: when set, per-profile state comes from this context
     // instead of the static fields.  Null means legacy single-profile mode.
     private final ProfileContext profileContext;
@@ -1878,6 +2189,10 @@ public class RLTrainer {
         } finally {
             // Ensure CLI invocations exit cleanly (no lingering metrics scheduler / py4j ports).
             try {
+                ACTOR_LEARNER.shutdownAndDrain(ACTOR_LEARNER_DRAIN_TIMEOUT_MS);
+            } catch (Exception ignored) {
+            }
+            try {
                 metrics.stop();
             } catch (Exception ignored) {
             }
@@ -2019,6 +2334,7 @@ public class RLTrainer {
 
                     while (episodeCounter().get() < NUM_EPISODES) {
                       try {
+                        StateSequenceBuilder.clearThreadLocalKnownArchetypeLabels();
                         int epNumber = episodeCounter().incrementAndGet();
                         if (epNumber > NUM_EPISODES) {
                             break; // Another thread reached the target
@@ -2101,6 +2417,13 @@ public class RLTrainer {
                         game.addPlayer(opponentPlayer, opponentDeckThread);
                         match.addPlayer(opponentPlayer, opponentDeckThread);
 
+                        java.util.Map<UUID, Integer> knownArchetypeLabels = new java.util.HashMap<>();
+                        knownArchetypeLabels.put(rlPlayer.getId(),
+                                StateSequenceBuilder.computeArchetypeLabelFromDeckName(rlPlayerDeckPath == null ? "" : rlPlayerDeckPath.toString()));
+                        knownArchetypeLabels.put(opponentPlayer.getId(),
+                                StateSequenceBuilder.computeArchetypeLabelFromDeckName(opponentDeckPath == null ? "" : opponentDeckPath.toString()));
+                        StateSequenceBuilder.setThreadLocalKnownArchetypeLabels(knownArchetypeLabels);
+
                         String opponentTag = formatOpponentTag(opponentPlayer);
                         if (gameLogger.isEnabled()) {
                             gameLogger.log("OPPONENT: " + opponentTag + " (name=" + opponentPlayer.getName() + ")");
@@ -2165,7 +2488,8 @@ public class RLTrainer {
                         }
 
                         // Log head usage statistics
-                        logHeadUsageStats(epNumber, rlPlayer, opponentPlayer, turns, rlPlayerWon);
+                        logHeadUsageStats(epNumber, rlPlayer, opponentPlayer, turns, rlPlayerWon,
+                                rlPlayerDeckPath, opponentDeckPath);
 
                         logGameResult(game, rlPlayer);
                         long rewardStartNanos = System.nanoTime();
@@ -2252,9 +2576,11 @@ public class RLTrainer {
                                             valueAccuracy, VALUE_ACCURACY_MCTS_THRESHOLD, epNumber));
                                 }
                                 logger.info(String.format(
-                                        "  Reward diag (last ep): won=%s steps=%d finalReward=%.3f mc_return0=%.3f sum_rewards=%.3f last_reward=%.3f",
-                                        rewardDiag.won, rewardDiag.steps, rewardDiag.finalReward,
-                                        rewardDiag.mcReturn0, rewardDiag.sumRewards, rewardDiag.lastReward
+                                        "  Reward diag (last ep): won=%s steps=%d/%d opp_steps=%d/%d finalReward=%.3f mc_return0=%.3f sum_rewards=%.3f last_reward=%.3f",
+                                        rewardDiag.won, rewardDiag.steps, rewardDiag.rawSteps,
+                                        rewardDiag.opponentSteps, rewardDiag.opponentRawSteps,
+                                        rewardDiag.finalReward, rewardDiag.mcReturn0,
+                                        rewardDiag.sumRewards, rewardDiag.lastReward
                                 ));
                             }
                         }
@@ -2372,11 +2698,13 @@ public class RLTrainer {
                         healthMonitor = null;
                         gameLogger = null;
                         threadLocalGameLogger.remove();
+                        StateSequenceBuilder.clearThreadLocalKnownArchetypeLabels();
                       } catch (Exception e) {
                         // Log but don't kill the runner thread -- keep playing games
                         logger.error("Game runner exception (continuing): " + e.getMessage());
                         activeEps().decrementAndGet();
                         metrics.setActiveEpisodes(activeEps().get());
+                        StateSequenceBuilder.clearThreadLocalKnownArchetypeLabels();
                       }
                     }
                     return null;
@@ -2413,8 +2741,11 @@ public class RLTrainer {
             logger.info("Games Run Per Minute: " + gamesRunPerMinute);
             logger.info("Total Training Time: " + (totalTime / 1_000_000_000.0) + " seconds");
             logger.info("Health summary: " + healthStats.getSummary());
+            logger.info("MCTS_GATE: " + ComputerPlayerRL.getMctsGateStats());
+            logger.info(PolicyValueMCTS.getMctsTimingStats());
 
             if (!multiProfile) {
+                ACTOR_LEARNER.shutdownAndDrain(ACTOR_LEARNER_DRAIN_TIMEOUT_MS);
                 sharedModel.shutdown();
             }
             if (heartbeat != null) {
@@ -2554,7 +2885,14 @@ public class RLTrainer {
                 logger.error("Profile future failed", e);
             }
         }
+        ACTOR_LEARNER.shutdownAndDrain(ACTOR_LEARNER_DRAIN_TIMEOUT_MS);
         logger.info("Multi-profile training complete for all " + profileNames.size() + " profiles");
+        String mctsGate = "MCTS_GATE: " + ComputerPlayerRL.getMctsGateStats();
+        String mctsTiming = PolicyValueMCTS.getMctsTimingStats();
+        logger.info(mctsGate);
+        logger.info(mctsTiming);
+        System.out.println(mctsGate);
+        System.out.println(mctsTiming);
     }
 
     private String formatOpponentTag(Player opponentPlayer) {
@@ -3704,38 +4042,69 @@ public class RLTrainer {
 
         for (int i = 0; i < EVAL_NUM_GAMES; i++) {
             try {
+                long replaySeed = evalReplaySeed(i);
                 Path agentDeckPath = agentDecks.get(rand.nextInt(agentDecks.size()));
                 Deck agentDeck = loadDeck(agentDeckPath.toString());
                 Deck oppDeckCopy = loadDeckFresh(oppDeckPath.toString());
                 if (agentDeck == null || oppDeckCopy == null) continue;
+                if (EVAL_REPLAY_METADATA) {
+                    RandomUtil.setSeed(replayRandomUtilSeed(replaySeed));
+                    setReplayTraceContext(i + 1, replaySeed, "league_bench");
+                    agentDeck = replayShuffledCopy(agentDeck, replaySeed ^ 0x5DEECE66DL);
+                    oppDeckCopy = replayShuffledCopy(oppDeckCopy, replaySeed ^ 0xC0FFEE1234L);
+                }
 
-                // Set up game logger -- GAME_LOG_DIR env var directs output
-                GameLogger gameLogger = GameLogger.create(true);
+                // Set up game logger -- GAME_LOG_DIR env var directs output.
+                // Default off for benchmark sweeps; enable with EVAL_GAME_LOGGING=1.
+                GameLogger gameLogger = GameLogger.create(EnvConfig.bool("EVAL_GAME_LOGGING", false));
                 threadLocalGameLogger.set(gameLogger);
                 if (gameLogger.isEnabled()) {
                     gameLogger.log("MODE=league_bench_eval");
                     gameLogger.log("MATCHUP: agent=" + agentDeckPath.getFileName()
                             + " vs opp=" + oppDeckPath.getFileName());
+                    if (EVAL_REPLAY_METADATA) {
+                        gameLogger.log("REPLAY: scenario=" + (i + 1)
+                                + " seed=" + replaySeed
+                                + " agent_deck=" + agentDeckPath.getFileName()
+                                + " opp_deck=" + oppDeckPath.getFileName()
+                                + " action_counterfactual_compatible=true");
+                        gameLogger.log("REPLAY_RANDOM: scenario=" + (i + 1)
+                                + " seed=" + replaySeed
+                                + " random_util_seed=" + replayRandomUtilSeed(replaySeed)
+                                + " scope=league_bench");
+                    }
                 }
 
                 TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("BenchMatch", "BenchMatch", false));
                 match.startGame();
                 Game game = match.getGames().get(0);
 
-                ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel, true);
+                // Evaluation must disable training so ISMCTS_ENABLE can trigger
+                // eval-time MCTS override instead of the training distillation path.
+                ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel,
+                        true, false, "train");
                 rlPlayer.setCurrentEpisode(-(i + 1));
                 rlPlayer.setAttachedGameLogger(gameLogger);
                 game.addPlayer(rlPlayer, agentDeck);
                 match.addPlayer(rlPlayer, agentDeck);
 
-                ComputerPlayer7 opponent = new ComputerPlayer7(
-                        "EvalBot-Skill" + EVAL_OPPONENT_SKILL, RangeOfInfluence.ALL, EVAL_OPPONENT_SKILL);
+                ComputerPlayer7 opponent = ReplayOpponentDecisionPlayer.create(
+                        "EvalBot-Skill" + EVAL_OPPONENT_SKILL, RangeOfInfluence.ALL, EVAL_OPPONENT_SKILL,
+                        i + 1, replaySeed, gameLogger);
                 game.addPlayer(opponent, oppDeckCopy);
                 match.addPlayer(opponent, oppDeckCopy);
 
                 game.loadCards(agentDeck.getCards(), rlPlayer.getId());
                 game.loadCards(oppDeckCopy.getCards(), opponent.getId());
-                game.setGameOptions(new GameOptions());
+                if (EVAL_REPLAY_METADATA) {
+                    forceReplayLibraryOrder(rlPlayer, agentDeck, game);
+                    forceReplayLibraryOrder(opponent, oppDeckCopy, game);
+                }
+                GameOptions options = new GameOptions();
+                if (EVAL_REPLAY_METADATA) {
+                    options.skipInitShuffling = true;
+                }
+                game.setGameOptions(options);
 
                 GameHealthMonitor healthMonitor = GameHealthMonitor.createAndStart(game);
                 startGameInGameThread(game, rlPlayer.getId(), 300);
@@ -3758,14 +4127,17 @@ public class RLTrainer {
         }
 
         double winrate = total > 0 ? (double) wins / total : 0.0;
-        String result = String.format("EVAL_RESULT: wins=%d total=%d winrate=%.4f profile=%s",
-                wins, total, winrate, MODEL_PROFILE_NAME);
+        int mctsActivations = ComputerPlayerRL.getMctsActivationCount();
+        String result = String.format("EVAL_RESULT: wins=%d total=%d winrate=%.4f profile=%s mcts_activations=%d",
+                wins, total, winrate, MODEL_PROFILE_NAME, mctsActivations);
         logger.info(result);
         System.out.println(result);
+        System.out.println("MCTS_GATE: " + ComputerPlayerRL.getMctsGateStats());
+        System.out.println(PolicyValueMCTS.getMctsTimingStats());
 
         if (!EVAL_RESULTS_FILE.isEmpty()) {
             try (java.io.FileWriter fw = new java.io.FileWriter(EVAL_RESULTS_FILE)) {
-                fw.write(String.format("%d,%d,%.4f,%s\n", wins, total, winrate, MODEL_PROFILE_NAME));
+                fw.write(String.format("%d,%d,%.4f,%s,%d\n", wins, total, winrate, MODEL_PROFILE_NAME, mctsActivations));
             } catch (Exception e) {
                 logger.error("Failed to write eval results: " + e.getMessage());
             }
@@ -4226,9 +4598,12 @@ public class RLTrainer {
      * Log head usage statistics to CSV for tracking how each decision head is being trained.
      * Groups ActionTypes by actual neural network head.
      */
-    private static void logHeadUsageStats(int episodeNum, ComputerPlayerRL rlPlayer, Player opponentPlayer, int turns, boolean rlPlayerWon) {
+    private void logHeadUsageStats(int episodeNum, ComputerPlayerRL rlPlayer, Player opponentPlayer,
+                                   int turns, boolean rlPlayerWon, Path rlDeckPath, Path oppDeckPath) {
         try {
-            Path logPath = Paths.get(RLLogPaths.HEAD_USAGE_LOG_PATH);
+            Path logPath = Paths.get(profileContext != null
+                    ? profileContext.paths.headUsageLogPath
+                    : RLLogPaths.HEAD_USAGE_LOG_PATH);
 
             // Get decision counts for both players
             java.util.Map<StateSequenceBuilder.ActionType, Integer> rlCounts = rlPlayer.getDecisionCountsByHead();
@@ -4279,12 +4654,19 @@ public class RLTrainer {
                 opponentType = opponentPlayer.getClass().getSimpleName();
             }
 
+            String rlDeck = rlDeckPath != null
+                    ? rlDeckPath.getFileName().toString().replaceAll("\\.[^.]+$", "")
+                    : "unknown";
+            String oppDeck = oppDeckPath != null
+                    ? oppDeckPath.getFileName().toString().replaceAll("\\.[^.]+$", "")
+                    : "unknown";
+
             // Build CSV line
-            String line = String.format("%d,%d,%d,%s,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                    episodeNum, turns, rlPlayerWon ? 1 : 0, opponentType,
+            String line = String.format("%d,%s,%s,%d,%d,%s,%d,%d,%d,%d,%d,%d,%d,%d\n",
+                    episodeNum, rlDeck, oppDeck, turns, rlPlayerWon ? 1 : 0, opponentType,
                     rlTotal, rlActionHead, rlTargetHead, rlCardSelectHead,
                     oppTotal, oppActionHead, oppTargetHead, oppCardSelectHead);
-            String header = "episode,turns,won,opponent_type," +
+            String header = "episode,rl_deck,opp_deck,turns,won,opponent_type," +
                     "rl_total,rl_action_head,rl_target_head,rl_card_select_head," +
                     "opp_total,opp_action_head,opp_target_head,opp_card_select_head\n";
             ASYNC_LINE_WRITER.append(logPath, header, line);
@@ -4314,7 +4696,17 @@ public class RLTrainer {
         try {
             StringBuilder warnings = new StringBuilder();
             mage.cards.decks.DeckCardLists lists = mage.cards.decks.importer.DeckImporter.importDeckFromFile(filePath, warnings, false);
-            return Deck.load(lists, false, false, null);
+            if (lists == null || lists.getCards().isEmpty()) {
+                String detail = warnings.length() > 0 ? " warnings=" + warnings : "";
+                logger.error("Error loading fresh deck: empty maindeck for " + filePath + detail);
+                return null;
+            }
+            Deck deck = Deck.load(lists, false, false, null);
+            if (deck == null || deck.getCards().isEmpty()) {
+                logger.error("Error loading fresh deck: no playable cards for " + filePath);
+                return null;
+            }
+            return deck;
         } catch (Exception e) {
             logger.error("Error loading fresh deck: " + filePath, e);
             return null;
@@ -4323,6 +4715,7 @@ public class RLTrainer {
 
     private RewardDiag updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, Player opponentPlayer) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
+        ProfileContext mainTrainingContext = profileContext;
 
         // ------------------------------------------------------------------
         // 1.  Terminal win / loss reward (ground-truth)
@@ -4342,29 +4735,51 @@ public class RLTrainer {
         List<StateSequenceBuilder.TrainingData> rlPlayerTrainingData = rlPlayer.getTrainingBuffer();
 
         List<StateSequenceBuilder.TrainingData> opponentTrainingData = new ArrayList<>();
+        ProfileContext opponentTrainingContext = mainTrainingContext;
+        boolean trainOpponent = false;
         if (opponentPlayer instanceof ComputerPlayerRL) {
-            opponentTrainingData = ((ComputerPlayerRL) opponentPlayer).getTrainingBuffer();
+            ComputerPlayerRL rlOpponent = (ComputerPlayerRL) opponentPlayer;
+            trainOpponent = rlOpponent.isTrainingEnabled() && !isSnapshotPolicyKey(rlOpponent.getPolicyKey());
+            if (trainOpponent) {
+                opponentTrainingContext = trainingContextForPolicyKey(rlOpponent.getPolicyKey(), mainTrainingContext);
+                opponentTrainingData = rlOpponent.getTrainingBuffer();
+            }
         }
+
+        int rlRawSteps = rlPlayerTrainingData.size();
+        int opponentRawSteps = opponentTrainingData.size();
+        rlPlayerTrainingData = capTrajectorySuffix(rlPlayerTrainingData, TRAIN_MAX_TRAJECTORY_STEPS_PER_PLAYER);
+        opponentTrainingData = capTrajectorySuffix(opponentTrainingData, TRAIN_MAX_TRAJECTORY_STEPS_PER_PLAYER);
 
         // --- Calculate immediate rewards for each step (GAE will compute advantages in Python) ---
         List<Double> rlPlayerRewards = calculateImmediateRewards(rlPlayerTrainingData, finalReward);
         List<Double> opponentRewards = calculateImmediateRewards(opponentTrainingData, -finalReward); // Opposite reward for opponent
+        if (AWR_SELECTED_ACTION_TARGETS_ENABLE) {
+            attachAwrSelectedActionTargets(rlPlayerTrainingData, rlPlayerRewards);
+            attachAwrSelectedActionTargets(opponentTrainingData, opponentRewards);
+        }
 
         // Update the model with all states and immediate rewards (Python will apply GAE)
         if (!rlPlayerTrainingData.isEmpty()) {
-            sharedModel.enqueueTraining(rlPlayerTrainingData, rlPlayerRewards);
+            ACTOR_LEARNER.enqueueTraining(mainTrainingContext, rlPlayerTrainingData, rlPlayerRewards, "main");
         }
-        if (!opponentTrainingData.isEmpty()) {
-            sharedModel.enqueueTraining(opponentTrainingData, opponentRewards); // Opposite reward for opponent
+        if (trainOpponent && !opponentTrainingData.isEmpty()) {
+            ACTOR_LEARNER.enqueueTraining(opponentTrainingContext, opponentTrainingData, opponentRewards, "opponent");
         }
 
         // Record value head prediction for auto-GAE tracking
         float lastValue = rlPlayer.getLastValueScore();
         metrics.recordValuePrediction(lastValue, rlPlayerWon);
-        sharedModel.recordGameResult(lastValue, rlPlayerWon);
+        if (trainOpponent && opponentPlayer instanceof ComputerPlayerRL) {
+            float opponentLastValue = ((ComputerPlayerRL) opponentPlayer).getLastValueScore();
+            metrics.recordValuePrediction(opponentLastValue, !rlPlayerWon);
+        }
 
         RewardDiag diag = new RewardDiag();
         diag.won = rlPlayerWon;
+        diag.rawSteps = rlRawSteps;
+        diag.opponentRawSteps = opponentRawSteps;
+        diag.opponentSteps = opponentRewards.size();
         diag.finalReward = finalReward;
         diag.steps = rlPlayerRewards.size();
         diag.sumRewards = rlPlayerRewards.stream().mapToDouble(d -> d).sum();
@@ -4373,10 +4788,89 @@ public class RLTrainer {
         return diag;
     }
 
+    private static List<StateSequenceBuilder.TrainingData> capTrajectorySuffix(
+            List<StateSequenceBuilder.TrainingData> trajectory,
+            int maxSteps
+    ) {
+        if (trajectory == null || trajectory.isEmpty() || maxSteps <= 0 || trajectory.size() <= maxSteps) {
+            return trajectory == null ? new ArrayList<>() : trajectory;
+        }
+        return new ArrayList<>(trajectory.subList(trajectory.size() - maxSteps, trajectory.size()));
+    }
+
+    private static void attachAwrSelectedActionTargets(
+            List<StateSequenceBuilder.TrainingData> trajectory,
+            List<Double> rewards
+    ) {
+        if (trajectory == null || trajectory.isEmpty() || rewards == null || rewards.size() != trajectory.size()) {
+            return;
+        }
+        double runningReturn = 0.0;
+        for (int i = trajectory.size() - 1; i >= 0; i--) {
+            Double reward = rewards.get(i);
+            runningReturn = (reward == null ? 0.0 : reward) + AWR_GAMMA * runningReturn;
+            StateSequenceBuilder.TrainingData td = trajectory.get(i);
+            if (td == null || td.chosenCount <= 0 || td.candidateCount <= 0) {
+                continue;
+            }
+            double advantage = runningReturn - td.oldValue;
+            if (AWR_POSITIVE_ADVANTAGE_ONLY && advantage <= 0.0) {
+                continue;
+            }
+            double weight = Math.exp(advantage / AWR_TEMPERATURE);
+            if (!Double.isFinite(weight)) {
+                weight = advantage >= 0.0 ? AWR_MAX_WEIGHT : AWR_MIN_WEIGHT;
+            }
+            weight = Math.max(AWR_MIN_WEIGHT, Math.min(AWR_MAX_WEIGHT, weight));
+
+            float[] target = new float[StateSequenceBuilder.TrainingData.MAX_CANDIDATES];
+            int count = 0;
+            int max = Math.min(td.candidateCount, StateSequenceBuilder.TrainingData.MAX_CANDIDATES);
+            for (int j = 0; j < Math.min(td.chosenCount, td.chosenIndices.length); j++) {
+                int idx = td.chosenIndices[j];
+                if (idx >= 0 && idx < max && td.candidateMask[idx] == 1) {
+                    count++;
+                }
+            }
+            if (count <= 0) {
+                continue;
+            }
+            float perChoice = (float) (weight / count);
+            for (int j = 0; j < Math.min(td.chosenCount, td.chosenIndices.length); j++) {
+                int idx = td.chosenIndices[j];
+                if (idx >= 0 && idx < max && td.candidateMask[idx] == 1) {
+                    target[idx] += perChoice;
+                }
+            }
+            td.setMctsVisitTargets(target);
+        }
+    }
+
+    private static boolean isSnapshotPolicyKey(String policyKey) {
+        return policyKey != null && policyKey.trim().startsWith("snap:");
+    }
+
+    private static ProfileContext trainingContextForPolicyKey(String policyKey, ProfileContext fallback) {
+        String key = policyKey == null ? "" : policyKey.trim();
+        if (key.isEmpty() || "train".equals(key)) {
+            return fallback;
+        }
+        if (key.startsWith("profile:")) {
+            String name = key.substring("profile:".length()).trim();
+            ProfileContext ctx = ProfileContext.byName(name);
+            return ctx != null ? ctx : fallback;
+        }
+        ProfileContext ctx = ProfileContext.byName(key);
+        return ctx != null ? ctx : fallback;
+    }
+
     private static final class RewardDiag {
 
         boolean won;
+        int rawSteps;
         int steps;
+        int opponentRawSteps;
+        int opponentSteps;
         double finalReward;
         double mcReturn0;
         double sumRewards;
@@ -4699,7 +5193,7 @@ public class RLTrainer {
         String mode = OPPONENT_SAMPLER == null ? "league" : OPPONENT_SAMPLER.trim().toLowerCase();
         switch (mode) {
             case "self":
-                return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+                return createSelfPlayOpponent();
             case "meta":
                 return createMetaOpponent(rand);
             case "adaptive":
@@ -4710,10 +5204,29 @@ public class RLTrainer {
                 return createFixedOpponent(episodeNum, rand);
             case "ladder":
                 return createLadderOpponent(episodeNum, rand);
+            case "skillmix":
+                return createSkillMixOpponent(rand);
+            case "hybrid":
+                return createHybridOpponent(rand);
+            case "meta_hybrid":
+            case "metahybrid":
+            case "profile_hybrid":
+            case "profilehybrid":
+                return createMetaHybridOpponent(rand);
             case "league":
             default:
                 return createLeagueOpponent(episodeNum, rand);
         }
+    }
+
+    private Player createSelfPlayOpponent() {
+        lastOpponentType = "SELFPLAY";
+        return newSelfPlayOpponent("SelfPlay");
+    }
+
+    private Player newSelfPlayOpponent(String name) {
+        return new ComputerPlayerRL(name, RangeOfInfluence.ALL, sharedModel,
+                false, SELFPLAY_OPPONENT_TRAINING, "train");
     }
 
     private Player createMetaOpponent(Random rand) {
@@ -4722,7 +5235,7 @@ public class RLTrainer {
             Path registryPath = leagueRegistryPath();
             if (!Files.exists(registryPath)) {
                 logger.warn("Meta opponent: registry not found, falling back to self-play");
-                return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+                return createSelfPlayOpponent();
             }
             String json = new String(Files.readAllBytes(registryPath), java.nio.charset.StandardCharsets.UTF_8);
             com.google.gson.JsonArray entries = com.google.gson.JsonParser.parseString(json).getAsJsonArray();
@@ -4749,7 +5262,7 @@ public class RLTrainer {
                 }
             }
             if (active.isEmpty()) {
-                return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+                return createSelfPlayOpponent();
             }
             // Pick random profile (can be self -- that's fine, acts as self-play fraction)
             com.google.gson.JsonObject chosen = active.get(rand.nextInt(active.size()));
@@ -4774,7 +5287,7 @@ public class RLTrainer {
             return new ComputerPlayerRL("Meta-" + oppProfile, RangeOfInfluence.ALL, sharedModel, false, true, oppProfile);
         } catch (Exception e) {
             logger.warn("Meta opponent: failed to load registry: " + e.getMessage() + ", falling back to self-play");
-            return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+            return createSelfPlayOpponent();
         }
     }
 
@@ -4791,7 +5304,7 @@ public class RLTrainer {
             if (rand.nextDouble() < botFloor) {
                 return pickBotFromMix(rand);
             }
-            return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+            return newSelfPlayOpponent("SelfPlay");
         }
     }
 
@@ -4925,6 +5438,65 @@ public class RLTrainer {
         int skill = tiers[currentTier];
         lastOpponentType = "L-CP7(skill=" + skill + ",tier=" + currentTier + ")";
         return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
+    }
+
+    private Player createSkillMixOpponent(Random rand) {
+        java.util.ArrayList<Integer> skills = new java.util.ArrayList<>();
+        java.util.ArrayList<Double> weights = new java.util.ArrayList<>();
+        if (SKILL_MIX != null) {
+            for (String part : SKILL_MIX.split(",")) {
+                String token = part == null ? "" : part.trim();
+                if (token.isEmpty()) {
+                    continue;
+                }
+                String[] pieces = token.split("[:=]", 2);
+                try {
+                    int skill = Integer.parseInt(pieces[0].trim());
+                    double weight = pieces.length > 1 ? Double.parseDouble(pieces[1].trim()) : 1.0;
+                    if (skill >= 1 && weight > 0.0 && Double.isFinite(weight)) {
+                        skills.add(skill);
+                        weights.add(weight);
+                    }
+                } catch (NumberFormatException ignored) {
+                }
+            }
+        }
+        if (skills.isEmpty()) {
+            skills.add(1);
+            weights.add(1.0);
+        }
+        double total = 0.0;
+        for (double w : weights) {
+            total += w;
+        }
+        double r = rand.nextDouble() * total;
+        int pick = skills.get(skills.size() - 1);
+        double seen = 0.0;
+        for (int i = 0; i < skills.size(); i++) {
+            seen += weights.get(i);
+            if (r <= seen) {
+                pick = skills.get(i);
+                break;
+            }
+        }
+        lastOpponentType = "MIX-CP7(skill=" + pick + ")";
+        return new ComputerPlayer7("Bot-Skill" + pick, RangeOfInfluence.ALL, pick);
+    }
+
+    private Player createHybridOpponent(Random rand) {
+        double pSelf = clamp01(HYBRID_SELFPLAY_P);
+        if (rand.nextDouble() < pSelf) {
+            return createSelfPlayOpponent();
+        }
+        return createSkillMixOpponent(rand);
+    }
+
+    private Player createMetaHybridOpponent(Random rand) {
+        double pMeta = clamp01(META_HYBRID_META_P);
+        if (rand.nextDouble() < pMeta) {
+            return createMetaOpponent(rand);
+        }
+        return createSkillMixOpponent(rand);
     }
 
     private static double clamp01(double v) {
@@ -5170,7 +5742,7 @@ public class RLTrainer {
                     // Mostly self-play with occasional strong heuristic for stability
                     if (rand.nextDouble() < 0.9) {
                         opType = "SELFPLAY";
-                        opponent = new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+                        opponent = newSelfPlayOpponent("SelfPlay");
                     } else {
                         opType = "STRONG-CP7(skill=3)";
                         opponent = new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, 3);
@@ -5219,7 +5791,7 @@ public class RLTrainer {
             } else {
                 // Pure self-play after threshold
                 return rand.nextDouble() < 0.9
-                        ? new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel)
+                        ? newSelfPlayOpponent("SelfPlay")
                         : new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, 3);
             }
         }

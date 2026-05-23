@@ -77,12 +77,20 @@ class ProfileContext:
         if self.role == "learner":
             self._ensure_model_initialized()
 
+    @contextmanager
+    def _profile_env(self):
+        # PythonEntryPoint reads architecture and path settings lazily in
+        # initialize/reload code paths, not only during construction.
+        with _temporary_env(self.env):
+            yield
+
     def _ensure_model_initialized(self) -> None:
         with self.lock:
             model = getattr(self.entry, "model", None)
             optimizer = getattr(self.entry, "optimizer", None)
             if model is None or optimizer is None:
-                self.entry.initializeModel()
+                with self._profile_env():
+                    self.entry.initializeModel()
 
     def score_batch(
         self,
@@ -108,6 +116,7 @@ class ProfileContext:
                 seq_bytes, mask_bytes, token_bytes,
                 cand_feat_bytes, cand_ids_bytes, cand_mask_bytes,
                 head_id, batch_size, seq_len, d_model, max_candidates, cand_feat_dim)
+        self._ensure_model_initialized()
         with self.lock:
             if self._cuda_stream is not None:
                 import torch
@@ -145,6 +154,168 @@ class ProfileContext:
         out = np.concatenate((probs, value), axis=1)
         return out.astype('<f4').tobytes()
 
+    def predict_archetype(
+        self,
+        seq_bytes: bytes,
+        mask_bytes: bytes,
+        token_bytes: bytes,
+        batch_size: int,
+        seq_len: int,
+        d_model: int,
+    ) -> bytes:
+        """Return softmax belief-head probabilities for the supplied state batch."""
+        import numpy as np
+        import torch
+
+        if batch_size <= 0 or seq_len <= 0 or d_model <= 0:
+            return b""
+        self._ensure_model_initialized()
+
+        seq = np.frombuffer(seq_bytes, dtype='<f4').reshape(batch_size, seq_len, d_model)
+        mask = np.frombuffer(mask_bytes, dtype='<i4').reshape(batch_size, seq_len)
+        tok = np.frombuffer(token_bytes, dtype='<i4').reshape(batch_size, seq_len)
+
+        def _run() -> bytes:
+            device = self.entry.device
+            seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
+            mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
+            tok_t = torch.tensor(tok, dtype=torch.long, device=device)
+
+            model = self.entry._get_policy_model("train")
+            if model is None:
+                self.entry._ensure_main_model_initialized()
+                model = self.entry._get_policy_model("train")
+            if model is None:
+                raise RuntimeError("No policy model available for belief inference")
+
+            was_training = bool(model.training)
+            model.eval()
+            try:
+                with torch.inference_mode():
+                    cls = model.encode_state(seq_t, mask_t, tok_t)
+                    logits = model.belief_logits_from_cls(cls)
+                    probs = torch.softmax(logits.float(), dim=-1)
+                    return probs.detach().cpu().numpy().astype('<f4').tobytes()
+            finally:
+                if was_training:
+                    model.train()
+
+        with self.lock:
+            lock_held = False
+            acquired_gpu_lock_here = False
+            try:
+                if getattr(self.entry, "backend_mode", "") == "single":
+                    self.entry._gpu_mutex.acquire()
+                    lock_held = True
+                else:
+                    device = self.entry.device
+                    gpu_lock = getattr(self.entry, "gpu_lock", None)
+                    if (gpu_lock is not None
+                            and torch.cuda.is_available()
+                            and str(device).startswith("cuda")
+                            and not gpu_lock.is_locked):
+                        gpu_lock.acquire(timeout=None, process_name=self.entry.process_name)
+                        acquired_gpu_lock_here = True
+
+                if self._cuda_stream is not None:
+                    with torch.cuda.stream(self._cuda_stream):
+                        result = _run()
+                    self._cuda_stream.synchronize()
+                    return result
+                return _run()
+            finally:
+                if acquired_gpu_lock_here:
+                    try:
+                        self.entry.gpu_lock.release(process_name=self.entry.process_name)
+                    except Exception:
+                        pass
+                if lock_held:
+                    try:
+                        self.entry._gpu_mutex.release()
+                    except Exception:
+                        pass
+
+    def predict_card_belief(
+        self,
+        seq_bytes: bytes,
+        mask_bytes: bytes,
+        token_bytes: bytes,
+        batch_size: int,
+        seq_len: int,
+        d_model: int,
+        card_belief_dim: int,
+    ) -> bytes:
+        """Return sigmoid card-belief predictions for the supplied state batch."""
+        import numpy as np
+        import torch
+
+        if batch_size <= 0 or seq_len <= 0 or d_model <= 0 or card_belief_dim <= 0:
+            return b""
+        self._ensure_model_initialized()
+
+        seq = np.frombuffer(seq_bytes, dtype='<f4').reshape(batch_size, seq_len, d_model)
+        mask = np.frombuffer(mask_bytes, dtype='<i4').reshape(batch_size, seq_len)
+        tok = np.frombuffer(token_bytes, dtype='<i4').reshape(batch_size, seq_len)
+
+        def _run() -> bytes:
+            device = self.entry.device
+            seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
+            mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
+            tok_t = torch.tensor(tok, dtype=torch.long, device=device)
+
+            model = self.entry._get_policy_model("train")
+            if model is None:
+                self.entry._ensure_main_model_initialized()
+                model = self.entry._get_policy_model("train")
+            if model is None:
+                raise RuntimeError("No policy model available for card-belief inference")
+            if int(getattr(model, "card_belief_dim", 0) or 0) != int(card_belief_dim):
+                return b""
+
+            was_training = bool(model.training)
+            model.eval()
+            try:
+                with torch.inference_mode():
+                    cls = model.encode_state(seq_t, mask_t, tok_t)
+                    logits = model.card_belief_logits_from_cls(cls)
+                    preds = torch.sigmoid(logits.float())
+                    return preds.detach().cpu().numpy().astype('<f4').tobytes()
+            finally:
+                if was_training:
+                    model.train()
+
+        with self.lock:
+            lock_held = False
+            acquired_gpu_lock_here = False
+            try:
+                if getattr(self.entry, "backend_mode", "") == "single":
+                    self.entry._gpu_mutex.acquire()
+                    lock_held = True
+                else:
+                    device = self.entry.device
+                    gpu_lock = getattr(self.entry, "gpu_lock", None)
+                    if (gpu_lock is not None
+                            and torch.cuda.is_available()
+                            and str(device).startswith("cuda")
+                            and not gpu_lock.is_locked):
+                        gpu_lock.acquire(timeout=None, process_name=self.entry.process_name)
+                        acquired_gpu_lock_here = True
+
+                if self._cuda_stream is not None:
+                    with torch.cuda.stream(self._cuda_stream):
+                        result = _run()
+                    self._cuda_stream.synchronize()
+                    return result
+                return _run()
+            finally:
+                if acquired_gpu_lock_here:
+                    self.entry.gpu_lock.release(process_name=self.entry.process_name)
+                if lock_held:
+                    try:
+                        self.entry._gpu_mutex.release()
+                    except Exception:
+                        pass
+
     def train_batch(
         self,
         sequences: bytes,
@@ -169,6 +340,8 @@ class ProfileContext:
         archetype_labels: Optional[bytes] = None,
         num_archetypes: int = 0,
         mcts_visits: Optional[bytes] = None,
+        card_belief_labels: Optional[bytes] = None,
+        card_belief_dim: int = 0,
     ) -> bool:
         self._ensure_model_initialized()
         with self.lock:
@@ -196,6 +369,8 @@ class ProfileContext:
                     archetype_labels,
                     num_archetypes,
                     mcts_visits,
+                    card_belief_labels,
+                    card_belief_dim,
                 )
             )
 
@@ -246,7 +421,8 @@ class ProfileContext:
 
     def reload_latest_model_if_newer(self, path: Optional[str] = None) -> bool:
         with self.lock:
-            reloaded = bool(self.entry.reloadLatestModelIfNewer(path))
+            with self._profile_env():
+                reloaded = bool(self.entry.reloadLatestModelIfNewer(path))
             if reloaded and self._trt_ctx is not None:
                 self._trt_ctx.ensure_exported(self.entry.model)
             return reloaded
@@ -269,11 +445,21 @@ class ProfileContext:
                 "train_samples": int(self.entry.mulligan_train_sample_counter),
             }
 
-    def get_health_stats(self) -> Dict[str, int]:
+    def get_health_stats(self) -> Dict[str, object]:
         with self.lock:
-            return {
+            stats = {
                 "gpu_oom_count": int(self.entry.cuda_mgr.get_oom_count()),
             }
+            try:
+                auto_metrics = self.entry.cuda_mgr.get_auto_batch_metrics()
+                for key, value in auto_metrics.items():
+                    if value is None:
+                        continue
+                    if isinstance(value, (int, float)):
+                        stats[f"gpu_{key}"] = value
+            except Exception:
+                pass
+            return stats
 
     def reset_health_stats(self) -> None:
         with self.lock:

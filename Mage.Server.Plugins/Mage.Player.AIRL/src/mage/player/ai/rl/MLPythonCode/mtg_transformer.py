@@ -32,6 +32,9 @@ class MTGTransformerModel(nn.Module):
         self.token_vocab = token_vocab
         self.action_vocab = action_vocab
         self.cand_feat_dim = cand_feat_dim
+        self.value_use_separate_critic = os.getenv(
+            "VALUE_USE_SEPARATE_CRITIC_ENCODER", "0").strip().lower() in ("1", "true", "yes", "on")
+        self.candidate_q_blend = float(os.getenv("CANDIDATE_Q_BLEND", "0.0"))
 
         # Input scaling and normalization
         # NOTE: Was 0.1, increased to 1.0 to avoid vanishing activations
@@ -122,6 +125,18 @@ class MTGTransformerModel(nn.Module):
             nn.ReLU(),
             nn.Linear(d_model // 2, 1),
         )
+        self.policy_scorer_mulligan = nn.Sequential(
+            nn.LayerNorm(d_model * 2),
+            nn.Linear(d_model * 2, d_model // 2),
+            nn.ReLU(),
+            nn.Linear(d_model // 2, 1),
+        )
+        self.candidate_q_scorer = nn.Sequential(
+            nn.LayerNorm(d_model * 2),
+            nn.Linear(d_model * 2, d_model // 2),
+            nn.ReLU(),
+            nn.Linear(d_model // 2, 1),
+        )
 
         # Legacy fixed-action actor head (kept for backwards compatibility / debugging)
         self.actor_norm = nn.LayerNorm(d_model)
@@ -157,17 +172,27 @@ class MTGTransformerModel(nn.Module):
 
         # Belief head (Phase 1 aux loss): classifier over deck archetypes.
         # Input: shared encoder CLS. Output: logits over NUM_ARCHETYPES classes
-        # (0=Wildfire, 1=Rally, 2=Affinity, 3=Elves). Trained only on the
+        # (0=Wildfire, 1=Rally, 2=Affinity, 3=Elves, 4=SpyCombo, 5=Burn,
+        # 6=Terror, 7=CawGates, 8=Faeries). Trained only on the
         # public state the policy sees -- it must INFER the archetype, not
         # be told it. At inference, softmax(belief_head(cls)) gives the
         # archetype distribution for ISMCTS determinization sampling.
-        self.num_archetypes = int(os.getenv('NUM_ARCHETYPES', '4'))
+        self.num_archetypes = int(os.getenv('NUM_ARCHETYPES', '9'))
         self.belief_head = nn.Sequential(
             nn.LayerNorm(d_model),
             nn.Linear(d_model, d_model // 2),
             nn.ReLU(),
             nn.Linear(d_model // 2, self.num_archetypes),
         )
+        self.card_belief_dim = max(0, int(os.getenv('CARD_BELIEF_DIM', '0')))
+        self.card_belief_head = None
+        if self.card_belief_dim > 0:
+            self.card_belief_head = nn.Sequential(
+                nn.LayerNorm(d_model),
+                nn.Linear(d_model, d_model // 2),
+                nn.ReLU(),
+                nn.Linear(d_model // 2, self.card_belief_dim),
+            )
 
         # Learnable scaling factors
         self.value_scale = nn.Parameter(torch.tensor(1.0))
@@ -197,7 +222,8 @@ class MTGTransformerModel(nn.Module):
         # Collect MLP scorer linears for special initialization
         scorer_linears = set()
         for scorer in [self.policy_scorer, self.policy_scorer_target, self.policy_scorer_card_select,
-                       self.policy_scorer_attack, self.policy_scorer_block]:
+                       self.policy_scorer_attack, self.policy_scorer_block, self.policy_scorer_mulligan,
+                       self.candidate_q_scorer]:
             for module in scorer.modules():
                 if isinstance(module, nn.Linear):
                     scorer_linears.add(module)
@@ -240,7 +266,8 @@ class MTGTransformerModel(nn.Module):
                 token_ids: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         cls = self.encode_state(sequences, masks, token_ids)
 
-        # Process policy from shared encoder CLS, value from independent critic
+        # Process policy from shared encoder CLS. The value path is selected
+        # by VALUE_USE_SEPARATE_CRITIC_ENCODER for critic-isolation runs.
         policy_logits, policy_probs = self._process_policy(cls, action_masks)
         value_scores = self._process_value(sequences, masks, token_ids)
 
@@ -314,14 +341,18 @@ class MTGTransformerModel(nn.Module):
                          pick_index: int = 0,
                          min_targets: int = 0,
                          max_targets: int = 0,
-                         return_cls: bool = False):
+                         return_cls: bool = False,
+                         return_logits: bool = False,
+                         return_candidate_q: bool = False):
         """Return (candidate_probs, value_scores). If return_cls, also returns the shared-encoder CLS as the 3rd element."""
-        # Encode full state sequence for cross-attention. The CLS token is
-        # reused by the value head (shared encoder) so gradient flows from
-        # both the policy and value losses into the same transformer_layers.
+        # Encode full state sequence for cross-attention and candidate policy.
         state_seq, state_pad_mask = self.encode_state_full(sequences, masks, token_ids)
         cls = state_seq[:, 0]                     # [B, d_model]
-        value_scores = self._process_value_from_cls(cls)
+        if self.value_use_separate_critic:
+            value_cls = self.encode_state_critic(sequences, masks, token_ids)
+        else:
+            value_cls = cls
+        value_scores = self._process_value_from_cls(value_cls)
 
         # Build candidate representations
         cand_feat = self.cand_feat_proj(candidate_features.float())
@@ -362,13 +393,20 @@ class MTGTransformerModel(nn.Module):
             scorer = self.policy_scorer_attack
         elif hid == "block":
             scorer = self.policy_scorer_block
+        elif hid == "mulligan":
+            scorer = self.policy_scorer_mulligan
         else:
             scorer = self.policy_scorer
         
         scores = scorer(combined).squeeze(-1)  # [B, N]
+        candidate_q = torch.tanh(self.candidate_q_scorer(combined).squeeze(-1))  # [B, N], terminal-return scale
         valid = candidate_mask.bool()
         # Numeric safety: if any score is NaN/Inf, treat it as invalid
         scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
+        candidate_q = torch.nan_to_num(candidate_q, nan=0.0, posinf=1.0, neginf=-1.0)
+        candidate_q = candidate_q.masked_fill(~valid, 0.0)
+        if self.candidate_q_blend != 0.0:
+            scores = scores + (float(self.candidate_q_blend) * candidate_q)
         scores = scores.masked_fill(~valid, -1e9)
 
         probs = torch.softmax(scores, dim=-1)
@@ -380,9 +418,14 @@ class MTGTransformerModel(nn.Module):
         fallback = valid.float() / (valid.float().sum(dim=-1, keepdim=True) + 1e-8)
         probs = torch.where(row_sum > 0, probs / (row_sum + 1e-8), fallback)
 
+        result = [probs, value_scores]
         if return_cls:
-            return probs, value_scores, cls
-        return probs, value_scores
+            result.append(cls)
+        if return_logits:
+            result.append(scores)
+        if return_candidate_q:
+            result.append(candidate_q)
+        return tuple(result)
 
     def belief_logits_from_cls(self, cls: torch.Tensor) -> torch.Tensor:
         """Archetype classifier logits from shared-encoder CLS.
@@ -394,6 +437,12 @@ class MTGTransformerModel(nn.Module):
             [B, num_archetypes] logits over deck archetypes.
         """
         return self.belief_head(cls)
+
+    def card_belief_logits_from_cls(self, cls: torch.Tensor) -> torch.Tensor:
+        """Hidden-card count logits from shared-encoder CLS."""
+        if self.card_belief_head is None:
+            return cls.new_zeros((cls.shape[0], 0))
+        return self.card_belief_head(cls)
 
     def predict_batch(self,
                       sequences: np.ndarray,
@@ -467,18 +516,34 @@ class MTGTransformerModel(nn.Module):
         """Load weights from file (ignores config—assumes same architecture).
         Returns dict of extra state (optimizer, counters, etc.) if present."""
         ckpt = torch.load(path, map_location='cpu')
-        # Backward compatible loads: allow missing keys (e.g., newly added heads).
-        res = self.load_state_dict(ckpt['state_dict'], strict=False)
+        state = ckpt['state_dict']
+        own_state = self.state_dict()
+        filtered_state = {}
+        skipped_incompatible = []
+        for key, value in state.items():
+            if key in own_state:
+                try:
+                    if tuple(value.shape) != tuple(own_state[key].shape):
+                        skipped_incompatible.append(key)
+                        continue
+                except Exception:
+                    pass
+            filtered_state[key] = value
+        # Backward compatible loads: allow missing keys (e.g., newly added or widened heads).
+        res = self.load_state_dict(filtered_state, strict=False)
         try:
-            if res.missing_keys or res.unexpected_keys:
+            if res.missing_keys or res.unexpected_keys or skipped_incompatible:
                 logger.warning(
-                    "Non-strict load: missing_keys=%d unexpected_keys=%d",
-                    len(res.missing_keys), len(res.unexpected_keys)
+                    "Non-strict load: missing_keys=%d unexpected_keys=%d skipped_incompatible=%d",
+                    len(res.missing_keys), len(res.unexpected_keys), len(skipped_incompatible)
                 )
         except Exception:
             pass
         # Return non-model keys for caller to restore (optimizer, counters, etc.)
-        return {k: v for k, v in ckpt.items() if k not in ('state_dict', 'config')}
+        extra = {k: v for k, v in ckpt.items() if k not in ('state_dict', 'config')}
+        if skipped_incompatible:
+            extra['_skipped_incompatible_state_keys'] = skipped_incompatible
+        return extra
 
     # ------------------------------------------------------------------
     # Helper functions for policy and value heads (actor / critic)
@@ -535,15 +600,7 @@ class MTGTransformerModel(nn.Module):
         return logits, probs
 
     def _process_value_from_cls(self, cls: torch.Tensor) -> torch.Tensor:
-        """Scalar value from any [B, d_model] feature (shared-encoder path).
-
-        This is the active value head after the critic-encoder refactor: the
-        value MLP operates on the *same* CLS token the policy uses, so the
-        encoder is shared and gets gradient from both the policy and value
-        losses. The old separate `critic_transformer` encoder is retained in
-        the state_dict only for backward-compat with existing checkpoints;
-        its parameters no longer receive gradient.
-        """
+        """Scalar value from a shared-policy or separate-critic CLS feature."""
         x = self.critic_norm(cls)
         x = self.critic_proj1(x)
         x = F.relu(x)
@@ -563,8 +620,11 @@ class MTGTransformerModel(nn.Module):
                        sequences: torch.Tensor,
                        masks: torch.Tensor,
                        token_ids: Optional[torch.Tensor] = None) -> torch.Tensor:
-        """Backward-compat wrapper: uses shared encoder + critic head."""
-        cls = self.encode_state(sequences, masks, token_ids)
+        """Value wrapper used by forward and legacy callers."""
+        if self.value_use_separate_critic:
+            cls = self.encode_state_critic(sequences, masks, token_ids)
+        else:
+            cls = self.encode_state(sequences, masks, token_ids)
         return self._process_value_from_cls(cls)
 
     # ------------------------------------------------------------------
@@ -597,7 +657,8 @@ class MTGTransformerModel(nn.Module):
     def get_config(self):
         return dict(input_dim=self.input_dim, d_model=self.d_model, nhead=self.transformer_layers[0].self_attn.num_heads,
                     num_layers=len(self.transformer_layers), dim_feedforward=self.transformer_layers[0].linear1.out_features,
-                    dropout=self.transformer_layers[0].dropout.p, num_actions=self.num_actions)
+                    dropout=self.transformer_layers[0].dropout.p, num_actions=self.num_actions,
+                    card_belief_dim=self.card_belief_dim)
 
 
 class SingleHeadScorer(nn.Module):
@@ -620,8 +681,11 @@ class SingleHeadScorer(nn.Module):
             self.scorer = model.policy_scorer_attack
         elif hid == "block":
             self.scorer = model.policy_scorer_block
+        elif hid == "mulligan":
+            self.scorer = model.policy_scorer_mulligan
         else:
             self.scorer = model.policy_scorer
+        self.candidate_q_blend = float(getattr(model, "candidate_q_blend", 0.0))
 
     @staticmethod
     def _unfused_encoder_layer(layer, x, src_key_padding_mask):
@@ -671,13 +735,17 @@ class SingleHeadScorer(nn.Module):
 
     def forward(self, sequences, masks, token_ids, cand_features, cand_ids, cand_mask):
         m = self.model
-        # Encode state (unfused for ONNX export). Shared encoder: CLS token
-        # feeds BOTH policy scorer and value head (see _process_value_from_cls).
+        # Encode policy state (unfused for ONNX export).
         state_seq, state_pad_mask = self._encode_state_unfused(sequences, masks, token_ids)
         cls = state_seq[:, 0]
 
-        # Value head: MLP on top of shared CLS (same as _process_value_from_cls).
-        v = m.critic_norm(cls)
+        if m.value_use_separate_critic:
+            value_cls = self._encode_state_critic_unfused(sequences, masks, token_ids)
+        else:
+            value_cls = cls
+
+        # Value head: MLP on top of selected value CLS.
+        v = m.critic_norm(value_cls)
         v = m.critic_proj1(v)
         v = torch.relu(v)
         v = m.critic_norm1(v)
@@ -709,10 +777,15 @@ class SingleHeadScorer(nn.Module):
         cls_expanded = cls.unsqueeze(1).expand(-1, attended.size(1), -1)
         combined = torch.cat([cls_expanded, attended], dim=-1)
         scores = self.scorer(combined).squeeze(-1)
+        candidate_q = torch.tanh(m.candidate_q_scorer(combined).squeeze(-1))
 
         # Mask + softmax (no data-dependent if-checks)
         valid = cand_mask.bool()
         scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
+        candidate_q = torch.nan_to_num(candidate_q, nan=0.0, posinf=1.0, neginf=-1.0)
+        candidate_q = candidate_q.masked_fill(~valid, 0.0)
+        if self.candidate_q_blend != 0.0:
+            scores = scores + (self.candidate_q_blend * candidate_q)
         scores = scores.masked_fill(~valid, -1e9)
         probs = torch.softmax(scores, dim=-1)
         probs = torch.nan_to_num(probs, nan=0.0, posinf=0.0, neginf=0.0)

@@ -188,17 +188,25 @@ public final class MCTSSimPlayer extends SimulatedPlayerMCTS {
     @Override
     protected List<ActivatedAbility> getPlayableAbilities(Game game) {
         List<ActivatedAbility> playables = getPlayableFast(game, true, Zone.ALL, true);
-        playables.add(new PassAbility());
+        // ComputerPlayerRL exposes Pass at slot 0. Keep the simulation
+        // convention aligned so fallback index-based root choices are sane.
+        playables.add(0, new PassAbility());
         return playables;
     }
 
     @Override
     public boolean priority(Game game) {
         if (halted.get()) {
+            if (inlineController != null) {
+                throw WalkTerminated.INSTANCE;
+            }
             return false;  // stop participating; engine should advance to turn end
         }
         if (System.nanoTime() >= deadlineNanos) {
             halted.set(true);
+            if (inlineController != null) {
+                throw WalkTerminated.INSTANCE;
+            }
             return false;
         }
         List<ActivatedAbility> playables = getPlayableAbilities(game);
@@ -252,6 +260,9 @@ public final class MCTSSimPlayer extends SimulatedPlayerMCTS {
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (halted.get() || System.nanoTime() >= deadlineNanos) {
+            if (inlineController != null) {
+                throw WalkTerminated.INSTANCE;
+            }
             return super.chooseTarget(outcome, target, source, game);
         }
         java.util.Set<UUID> possible;

@@ -75,6 +75,9 @@ import java.util.stream.Collectors;
 public abstract class PlayerImpl implements Player, Serializable {
 
     private static final Logger logger = Logger.getLogger(PlayerImpl.class);
+    private static final Object REPLAY_ENGINE_BOUNDARY_TRACE_LOCK = new Object();
+    private static final java.util.concurrent.atomic.AtomicLong REPLAY_ENGINE_BOUNDARY_TRACE_SEQ =
+            new java.util.concurrent.atomic.AtomicLong(0L);
 
     /**
      * During some steps we can't play anything
@@ -100,6 +103,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Cards sideboard;
     protected Cards hand;
     protected Graveyard graveyard;
+    private transient Deque<ReplayEngineBoundarySearchTrace> replayEngineBoundarySearchTraces = new ArrayDeque<>();
     protected Set<UUID> commandersIds = new HashSet<>();
 
     protected Abilities<Ability> abilities;
@@ -1877,15 +1881,730 @@ public abstract class PlayerImpl implements Player, Serializable {
         return game.isActivePlayer(this.playerId);
     }
 
+    private static String replayEngineBoundarySetting(String key) {
+        String value = System.getenv(key);
+        if (value == null || value.trim().isEmpty()) {
+            value = System.getProperty(key);
+        }
+        return value == null ? "" : value.trim();
+    }
+
+    private static boolean replayEngineBoundaryFlag(String key) {
+        return replayEngineBoundaryFlag(key, false);
+    }
+
+    private static boolean replayEngineBoundaryFlag(String key, boolean defaultValue) {
+        String value = replayEngineBoundarySetting(key);
+        if (value == null) {
+            return defaultValue;
+        }
+        value = value.trim();
+        if (value.isEmpty()) {
+            return defaultValue;
+        }
+        if ("1".equals(value) || "true".equalsIgnoreCase(value)) {
+            return true;
+        }
+        if ("0".equals(value) || "false".equalsIgnoreCase(value)) {
+            return false;
+        }
+        return defaultValue;
+    }
+
+    private static String replayEngineBoundaryProperty(String key) {
+        String value = System.getProperty(key);
+        return value == null ? "" : value.trim();
+    }
+
+    private static String replayEngineBoundaryTraceFile() {
+        String value = System.getenv("EVAL_AGENT_SEARCH_TRACE_FILE");
+        if (value == null || value.trim().isEmpty()) {
+            value = System.getProperty("EVAL_AGENT_SEARCH_TRACE_FILE");
+        }
+        if (value == null || value.trim().isEmpty()) {
+            value = replayEngineBoundaryProperty("xmage.replay.agent_search_trace_file");
+        }
+        return value == null ? "" : value.trim();
+    }
+
+    private static boolean isReplayEngineBoundaryTraceActive() {
+        if (suppressEngineBoundaryTraceForActualHook()) {
+            return false;
+        }
+        return replayEngineBoundaryFlag("EVAL_AGENT_SEARCH_TRACE_JSON")
+                || replayEngineBoundaryFlag("EVAL_REPLAY_METADATA")
+                || !replayEngineBoundaryProperty("xmage.replay.seed").isEmpty()
+                || !replayEngineBoundaryTraceFile().isEmpty();
+    }
+
+    private static boolean suppressEngineBoundaryTraceForActualHook() {
+        boolean actualHookTrace = replayEngineBoundaryFlag("EVAL_AGENT_ACTUAL_SEARCH_TRACE_JSON")
+                || replayEngineBoundaryFlag("EVAL_SOURCE_ACTUAL_SEARCH_TRACE_JSON");
+        if (!actualHookTrace || isActionCounterfactualReplayScope()) {
+            return false;
+        }
+        String scope = replayEngineBoundaryProperty("xmage.replay.scope");
+        boolean sourceScope = scope.isEmpty() || "league_bench".equalsIgnoreCase(scope);
+        return sourceScope && replayEngineBoundaryFlag("EVAL_SUPPRESS_ENGINE_BOUNDARY_SEARCH_TRACE_FOR_ACTUAL", true);
+    }
+
+    private static boolean isActionCounterfactualReplayScope() {
+        String scope = replayEngineBoundaryProperty("xmage.replay.scope");
+        return scope.toLowerCase(Locale.ROOT).startsWith("action_counterfactual");
+    }
+
+    private static boolean isSourceDiagnosticSimulatedPlayerIsolationScope() {
+        String scope = replayEngineBoundaryProperty("xmage.replay.scope");
+        return scope.isEmpty() || "league_bench".equalsIgnoreCase(scope);
+    }
+
+    private boolean shouldIsolateReplaySimulatedPlayerRandom(Game game) {
+        if (game == null || !"mage.player.ai.SimulatedPlayer2".equals(getClass().getName())) {
+            return false;
+        }
+        boolean enabled = replayEngineBoundaryFlag(
+                "EVAL_REPLAY_SIMULATED_PLAYER_RNG_ISOLATION",
+                replayEngineBoundaryFlag("EVAL_REPLAY_VALIDATION_RNG_ISOLATION", true));
+        if (enabled && (isActionCounterfactualReplayScope()
+                || replayEngineBoundaryFlag("EVAL_REPLAY_SIMULATED_PLAYER_RNG_ISOLATION", false))) {
+            return true;
+        }
+        return replayEngineBoundaryFlag("EVAL_SOURCE_SIMULATED_PLAYER_RNG_ISOLATION", false)
+                && isSourceDiagnosticSimulatedPlayerIsolationScope();
+    }
+
+    private long replaySimulatedPlayerIsolationSeed(Ability source, Game game, String boundary) {
+        long seed = 0xD1B54A32D192ED03L;
+        String replaySeed = replayEngineBoundaryProperty("xmage.replay.random_util_seed");
+        if (replaySeed.isEmpty()) {
+            replaySeed = replayEngineBoundaryProperty("xmage.replay.seed");
+        }
+        seed = seed * 31L + replaySeed.hashCode();
+        seed = seed * 31L + RandomUtil.getConsumptionCount();
+        seed = seed * 31L + (boundary == null ? 0L : boundary.hashCode());
+        seed = seed * 31L + (source == null || source.getSourceId() == null ? 0L : source.getSourceId().hashCode());
+        try {
+            seed = seed * 31L + game.getTurnNum();
+            seed = seed * 31L + (game.getStep() == null || game.getStep().getType() == null
+                    ? 0L
+                    : game.getStep().getType().toString().hashCode());
+        } catch (Exception ignored) {
+        }
+        return seed;
+    }
+
+    private RandomUtil.RandomIsolation beginReplaySimulatedPlayerRandomIsolation(
+            Ability source,
+            Game game,
+            String boundary
+    ) {
+        if (!shouldIsolateReplaySimulatedPlayerRandom(game)) {
+            return null;
+        }
+        return RandomUtil.isolateThreadLocalRandom(replaySimulatedPlayerIsolationSeed(source, game, boundary));
+    }
+
+    private static int replayEngineBoundaryTurn(Game game) {
+        try {
+            return game == null ? -1 : game.getTurnNum();
+        } catch (Exception ignored) {
+            return -1;
+        }
+    }
+
+    private static String replayEngineBoundaryPhase(Game game) {
+        try {
+            if (game == null || game.getStep() == null || game.getStep().getType() == null) {
+                return "";
+            }
+            return game.getStep().getType().toString();
+        } catch (Exception ignored) {
+            return "";
+        }
+    }
+
+    private static String replayEngineBoundarySourceName(Ability source, Game game) {
+        try {
+            MageObject object = game == null || source == null ? null : game.getObject(source.getSourceId());
+            if (object != null) {
+                return object.getName();
+            }
+        } catch (Exception ignored) {
+        }
+        return source == null || source.getSourceId() == null ? "" : String.valueOf(source.getSourceId());
+    }
+
+    private static String replayEngineBoundarySourceRule(Ability source) {
+        try {
+            return source == null ? "" : source.getRule();
+        } catch (Exception ignored) {
+            return "";
+        }
+    }
+
+    private static List<Card> replayEngineBoundaryCards(Iterable<Card> cards) {
+        List<Card> out = new ArrayList<>();
+        if (cards == null) {
+            return out;
+        }
+        for (Card card : cards) {
+            if (card != null) {
+                out.add(card);
+            }
+        }
+        return out;
+    }
+
+    private static List<Card> replayEngineBoundaryCardsByIds(Iterable<UUID> ids, Game game) {
+        List<Card> out = new ArrayList<>();
+        if (ids == null || game == null) {
+            return out;
+        }
+        for (UUID id : ids) {
+            try {
+                Card card = game.getCard(id);
+                if (card != null) {
+                    out.add(card);
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        return out;
+    }
+
+    private static List<String> replayEngineBoundaryCardNames(Iterable<Card> cards, int maxCards) {
+        List<String> out = new ArrayList<>();
+        if (cards == null) {
+            return out;
+        }
+        int limit = maxCards <= 0 ? Integer.MAX_VALUE : maxCards;
+        for (Card card : cards) {
+            if (card == null) {
+                continue;
+            }
+            if (out.size() >= limit) {
+                break;
+            }
+            out.add(card.getName());
+        }
+        return out;
+    }
+
+    private static List<String> replayEngineBoundaryCardNameIds(Iterable<Card> cards, int maxCards) {
+        List<String> out = new ArrayList<>();
+        if (cards == null) {
+            return out;
+        }
+        int limit = maxCards <= 0 ? Integer.MAX_VALUE : maxCards;
+        for (Card card : cards) {
+            if (card == null) {
+                continue;
+            }
+            if (out.size() >= limit) {
+                break;
+            }
+            out.add(card.getName() + "#" + card.getId());
+        }
+        return out;
+    }
+
+    private static List<Card> replayEngineBoundaryCopiesByName(List<Card> cards, String name) {
+        List<Card> out = new ArrayList<>();
+        if (cards == null || name == null) {
+            return out;
+        }
+        for (Card card : cards) {
+            if (card != null && name.equals(card.getName())) {
+                out.add(card);
+            }
+        }
+        return out;
+    }
+
+    private List<Card> replayEngineBoundaryHandCards(Game game) {
+        try {
+            return hand == null ? Collections.emptyList() : replayEngineBoundaryCards(hand.getCards(game));
+        } catch (Exception ignored) {
+            return Collections.emptyList();
+        }
+    }
+
+    private List<Card> replayEngineBoundaryGraveyardCards(Game game) {
+        try {
+            return graveyard == null ? Collections.emptyList() : replayEngineBoundaryCards(graveyard.getCards(game));
+        } catch (Exception ignored) {
+            return Collections.emptyList();
+        }
+    }
+
+    private List<Card> replayEngineBoundaryLibraryCards(Game game) {
+        try {
+            return library == null ? Collections.emptyList() : replayEngineBoundaryCards(library.getCards(game));
+        } catch (Exception ignored) {
+            return Collections.emptyList();
+        }
+    }
+
+    private static String replayEngineBoundaryJsonEscape(String value) {
+        if (value == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder(value.length() + 16);
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            switch (c) {
+                case '"':
+                    sb.append("\\\"");
+                    break;
+                case '\\':
+                    sb.append("\\\\");
+                    break;
+                case '\b':
+                    sb.append("\\b");
+                    break;
+                case '\f':
+                    sb.append("\\f");
+                    break;
+                case '\n':
+                    sb.append("\\n");
+                    break;
+                case '\r':
+                    sb.append("\\r");
+                    break;
+                case '\t':
+                    sb.append("\\t");
+                    break;
+                default:
+                    if (c < 0x20) {
+                        sb.append(String.format("\\u%04x", (int) c));
+                    } else {
+                        sb.append(c);
+                    }
+                    break;
+            }
+        }
+        return sb.toString();
+    }
+
+    private static void replayEngineBoundaryAppendString(StringBuilder sb, String name, String value) {
+        sb.append('"').append(name).append("\":\"")
+                .append(replayEngineBoundaryJsonEscape(value)).append('"');
+    }
+
+    private static void replayEngineBoundaryAppendNumber(StringBuilder sb, String name, long value) {
+        sb.append('"').append(name).append("\":").append(value);
+    }
+
+    private static void replayEngineBoundaryAppendBoolean(StringBuilder sb, String name, boolean value) {
+        sb.append('"').append(name).append("\":").append(value);
+    }
+
+    private static void replayEngineBoundaryAppendArray(StringBuilder sb, String name, List<String> values) {
+        sb.append('"').append(name).append("\":[");
+        if (values != null) {
+            for (int i = 0; i < values.size(); i++) {
+                if (i > 0) {
+                    sb.append(',');
+                }
+                sb.append('"').append(replayEngineBoundaryJsonEscape(values.get(i))).append('"');
+            }
+        }
+        sb.append(']');
+    }
+
+    private ReplayEngineBoundarySearchTrace beginReplayEngineBoundarySearchTrace(
+            TargetCardInLibrary target,
+            Ability source,
+            Game game,
+            Player targetPlayer
+    ) {
+        if (!isReplayEngineBoundaryTraceActive() || target == null || game == null || targetPlayer == null) {
+            return null;
+        }
+        try {
+            List<Card> libraryCards = replayEngineBoundaryCards(targetPlayer.getLibrary().getCards(game));
+            List<Card> searchableCards = new ArrayList<>();
+            for (Card card : libraryCards) {
+                try {
+                    if (card != null && (target.getFilter() == null
+                            || target.getFilter().match(card, playerId, source, game))) {
+                        searchableCards.add(card);
+                    }
+                } catch (Exception ignored) {
+                }
+            }
+            return new ReplayEngineBoundarySearchTrace(game, source, target, targetPlayer, libraryCards, searchableCards);
+        } catch (Throwable ignored) {
+            return null;
+        }
+    }
+
+    private void finishReplayEngineBoundarySearchTrace(
+            ReplayEngineBoundarySearchTrace trace,
+            TargetCardInLibrary target,
+            Game game,
+            boolean result
+    ) {
+        if (trace == null) {
+            return;
+        }
+        try {
+            trace.randomUtilCountAfterSearch = RandomUtil.getConsumptionCount();
+            trace.randomUtilDirectCountAfterSearch = RandomUtil.getDirectGetRandomConsumptionCount();
+            trace.randomUtilDirectAccessAfterSearch = RandomUtil.getDirectGetRandomAccessCount();
+            trace.searchResult = result;
+            List<Card> chosenCards = replayEngineBoundaryCardsByIds(target == null ? null : target.getTargets(), game);
+            trace.chosenNames = replayEngineBoundaryCardNames(chosenCards, 0);
+            trace.chosenNameIds = replayEngineBoundaryCardNameIds(chosenCards, 0);
+            if (chosenCards.isEmpty()) {
+                trace.copyPickMarker = "engine_boundary_no_card_chosen";
+            } else {
+                List<Card> duplicates = replayEngineBoundaryCopiesByName(trace.searchableCards, chosenCards.get(0).getName());
+                trace.duplicateCopyCandidateIds = replayEngineBoundaryCardNameIds(duplicates, 0);
+                trace.copyPickMarker = duplicates.size() > 1
+                        ? "engine_boundary_duplicate_copy_observed"
+                        : "engine_boundary_single_matching_copy";
+            }
+            enqueueReplayEngineBoundarySearchTrace(trace);
+        } catch (Throwable ignored) {
+            // Diagnostics must never affect gameplay.
+        }
+    }
+
+    private void enqueueReplayEngineBoundarySearchTrace(ReplayEngineBoundarySearchTrace trace) {
+        if (trace == null) {
+            return;
+        }
+        if (replayEngineBoundarySearchTraces == null) {
+            replayEngineBoundarySearchTraces = new ArrayDeque<>();
+        }
+        replayEngineBoundarySearchTraces.addLast(trace);
+    }
+
+    private ReplayEngineBoundarySearchTrace pollReplayEngineBoundarySearchTrace(Ability source) {
+        if (replayEngineBoundarySearchTraces == null || replayEngineBoundarySearchTraces.isEmpty()) {
+            return null;
+        }
+        String sourceId = source == null || source.getSourceId() == null ? "" : source.getSourceId().toString();
+        Iterator<ReplayEngineBoundarySearchTrace> it = replayEngineBoundarySearchTraces.iterator();
+        while (it.hasNext()) {
+            ReplayEngineBoundarySearchTrace trace = it.next();
+            if (trace == null || sourceId.isEmpty() || sourceId.equals(trace.sourceId)) {
+                it.remove();
+                return trace;
+            }
+        }
+        return replayEngineBoundarySearchTraces.pollFirst();
+    }
+
+    private ReplayEngineBoundarySearchTrace beginReplayEngineBoundaryShuffleTrace(Ability source, Game game) {
+        if (!isReplayEngineBoundaryTraceActive() || game == null) {
+            return null;
+        }
+        try {
+            ReplayEngineBoundarySearchTrace trace = pollReplayEngineBoundarySearchTrace(source);
+            List<Card> libraryCards = replayEngineBoundaryLibraryCards(game);
+            if (trace == null) {
+                trace = new ReplayEngineBoundarySearchTrace(game, source, null, this, libraryCards, Collections.emptyList());
+                trace.randomUtilCountAfterSearch = trace.randomUtilCountBeforeSearch;
+                trace.randomUtilDirectCountAfterSearch = trace.randomUtilDirectCountBeforeSearch;
+                trace.randomUtilDirectAccessAfterSearch = trace.randomUtilDirectAccessBeforeSearch;
+                trace.searchResult = true;
+                trace.copyPickMarker = "engine_boundary_shuffle_without_search_context";
+            }
+            trace.libraryTopBeforeShuffle = replayEngineBoundaryCardNames(libraryCards, 12);
+            trace.handBeforeShuffle = replayEngineBoundaryCardNames(replayEngineBoundaryHandCards(game), 0);
+            trace.graveyardBeforeShuffle = replayEngineBoundaryCardNames(replayEngineBoundaryGraveyardCards(game), 0);
+            trace.shuffleMarker = "engine_boundary_PlayerImpl.shuffleLibrary_to_Library.shuffle_RandomUtil.nextInt";
+            trace.shuffleRandomNextIntCalls = Math.max(0, libraryCards.size() - 1);
+            trace.randomUtilCountBeforeShuffle = RandomUtil.getConsumptionCount();
+            trace.randomUtilDirectCountBeforeShuffle = RandomUtil.getDirectGetRandomConsumptionCount();
+            trace.randomUtilDirectAccessBeforeShuffle = RandomUtil.getDirectGetRandomAccessCount();
+            return trace;
+        } catch (Throwable ignored) {
+            return null;
+        }
+    }
+
+    private void finishReplayEngineBoundaryShuffleTrace(
+            ReplayEngineBoundarySearchTrace trace,
+            Ability source,
+            Game game,
+            boolean shuffled
+    ) {
+        if (trace == null) {
+            return;
+        }
+        try {
+            trace.shuffleResult = shuffled;
+            trace.randomUtilCountAfterShuffle = RandomUtil.getConsumptionCount();
+            trace.randomUtilDirectCountAfterShuffle = RandomUtil.getDirectGetRandomConsumptionCount();
+            trace.randomUtilDirectAccessAfterShuffle = RandomUtil.getDirectGetRandomAccessCount();
+            trace.libraryTopAfterShuffle = replayEngineBoundaryCardNames(replayEngineBoundaryLibraryCards(game), 12);
+            trace.handAfterShuffle = replayEngineBoundaryCardNames(replayEngineBoundaryHandCards(game), 0);
+            trace.graveyardAfterShuffle = replayEngineBoundaryCardNames(replayEngineBoundaryGraveyardCards(game), 0);
+            writeReplayEngineBoundarySearchTrace(trace);
+        } catch (Throwable ignored) {
+            // Diagnostics must never affect gameplay.
+        }
+    }
+
+    private void writeReplayEngineBoundarySearchTrace(ReplayEngineBoundarySearchTrace trace) {
+        if (trace == null) {
+            return;
+        }
+        try {
+            String traceFile = replayEngineBoundaryTraceFile();
+            if (traceFile.isEmpty()) {
+                return;
+            }
+            long deltaSearch = Math.max(0L, trace.randomUtilCountAfterSearch - trace.randomUtilCountBeforeSearch);
+            long deltaShuffle = Math.max(0L, trace.randomUtilCountAfterShuffle - trace.randomUtilCountBeforeShuffle);
+            long directDeltaSearch = Math.max(0L,
+                    trace.randomUtilDirectCountAfterSearch - trace.randomUtilDirectCountBeforeSearch);
+            long directDeltaShuffle = Math.max(0L,
+                    trace.randomUtilDirectCountAfterShuffle - trace.randomUtilDirectCountBeforeShuffle);
+            long directAccessDeltaSearch = Math.max(0L,
+                    trace.randomUtilDirectAccessAfterSearch - trace.randomUtilDirectAccessBeforeSearch);
+            long directAccessDeltaShuffle = Math.max(0L,
+                    trace.randomUtilDirectAccessAfterShuffle - trace.randomUtilDirectAccessBeforeShuffle);
+            StringBuilder sb = new StringBuilder(4096);
+            sb.append('{');
+            replayEngineBoundaryAppendString(sb, "event", "search_shuffle");
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "trace_origin", "engine_boundary_fallback");
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "boundary", "PlayerImpl.searchLibrary/PlayerImpl.shuffleLibrary");
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "seq", String.valueOf(trace.sequence));
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "scenario", trace.scenario);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "seed", trace.seed);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "random_util_seed", trace.randomUtilSeed);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_count_before_search", trace.randomUtilCountBeforeSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_count_after_search", trace.randomUtilCountAfterSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_count_before_shuffle", trace.randomUtilCountBeforeShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_count_after_shuffle", trace.randomUtilCountAfterShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_count_before_search",
+                    trace.randomUtilDirectCountBeforeSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_count_after_search",
+                    trace.randomUtilDirectCountAfterSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_count_before_shuffle",
+                    trace.randomUtilDirectCountBeforeShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_count_after_shuffle",
+                    trace.randomUtilDirectCountAfterShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_access_before_search",
+                    trace.randomUtilDirectAccessBeforeSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_access_after_search",
+                    trace.randomUtilDirectAccessAfterSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_access_before_shuffle",
+                    trace.randomUtilDirectAccessBeforeShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_access_after_shuffle",
+                    trace.randomUtilDirectAccessAfterShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_delta_search", deltaSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_delta_shuffle", deltaShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_delta_search", directDeltaSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_delta_shuffle", directDeltaShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_access_delta_search",
+                    directAccessDeltaSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_direct_getrandom_access_delta_shuffle",
+                    directAccessDeltaShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_count_during_search", deltaSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "random_util_count_during_shuffle", deltaShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "scope", trace.scope);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "actor", trace.actor);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "actor_class", trace.actorClass);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "target_player", trace.targetPlayer);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "turn", trace.turn);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "phase", trace.phase);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "source_id", trace.sourceId);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "source_name", trace.sourceName);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "source_rule", trace.sourceRule);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "target_name", trace.targetName);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "target_filter", trace.targetFilter);
+            sb.append(',');
+            replayEngineBoundaryAppendBoolean(sb, "search_result", trace.searchResult);
+            sb.append(',');
+            replayEngineBoundaryAppendBoolean(sb, "shuffle_result", trace.shuffleResult);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "searchable_names", trace.searchableNames);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "searchable_name_ids", trace.searchableNameIds);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "chosen_names", trace.chosenNames);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "chosen_name_ids", trace.chosenNameIds);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "duplicate_copy_candidate_ids", trace.duplicateCopyCandidateIds);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "copy_pick_marker", trace.copyPickMarker);
+            sb.append(',');
+            replayEngineBoundaryAppendString(sb, "shuffle_marker", trace.shuffleMarker);
+            sb.append(',');
+            replayEngineBoundaryAppendNumber(sb, "shuffle_random_next_int_calls", trace.shuffleRandomNextIntCalls);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "library_top_before_search", trace.libraryTopBeforeSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "library_top_before_shuffle", trace.libraryTopBeforeShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "library_top_after_shuffle", trace.libraryTopAfterShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "hand_before_search", trace.handBeforeSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "hand_before_shuffle", trace.handBeforeShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "hand_after_shuffle", trace.handAfterShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "graveyard_before_search", trace.graveyardBeforeSearch);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "graveyard_before_shuffle", trace.graveyardBeforeShuffle);
+            sb.append(',');
+            replayEngineBoundaryAppendArray(sb, "graveyard_after_shuffle", trace.graveyardAfterShuffle);
+            sb.append('}');
+            java.nio.file.Path path = java.nio.file.Paths.get(traceFile);
+            java.nio.file.Path parent = path.getParent();
+            if (parent != null) {
+                java.nio.file.Files.createDirectories(parent);
+            }
+            byte[] bytes = ("REPLAY_AGENT_SEARCH_JSON: " + sb.toString() + System.lineSeparator())
+                    .getBytes(java.nio.charset.StandardCharsets.UTF_8);
+            synchronized (REPLAY_ENGINE_BOUNDARY_TRACE_LOCK) {
+                java.nio.file.Files.write(path, bytes, java.nio.file.StandardOpenOption.CREATE,
+                        java.nio.file.StandardOpenOption.WRITE, java.nio.file.StandardOpenOption.APPEND);
+            }
+        } catch (Throwable ignored) {
+            // Diagnostics must never affect gameplay.
+        }
+    }
+
+    private final class ReplayEngineBoundarySearchTrace {
+        final long sequence = REPLAY_ENGINE_BOUNDARY_TRACE_SEQ.incrementAndGet();
+        final String scenario = replayEngineBoundaryProperty("xmage.replay.scenario");
+        final String seed = replayEngineBoundaryProperty("xmage.replay.seed");
+        final String randomUtilSeed = replayEngineBoundaryProperty("xmage.replay.random_util_seed");
+        final String scope = replayEngineBoundaryProperty("xmage.replay.scope");
+        final String actor = getName();
+        final String actorClass = PlayerImpl.this.getClass().getName();
+        final String targetPlayer;
+        final int turn;
+        final String phase;
+        final String sourceId;
+        final String sourceName;
+        final String sourceRule;
+        final String targetName;
+        final String targetFilter;
+        final List<Card> searchableCards;
+        final List<String> searchableNames;
+        final List<String> searchableNameIds;
+        final List<String> libraryTopBeforeSearch;
+        final List<String> handBeforeSearch;
+        final List<String> graveyardBeforeSearch;
+        final long randomUtilCountBeforeSearch = RandomUtil.getConsumptionCount();
+        final long randomUtilDirectCountBeforeSearch = RandomUtil.getDirectGetRandomConsumptionCount();
+        final long randomUtilDirectAccessBeforeSearch = RandomUtil.getDirectGetRandomAccessCount();
+        long randomUtilCountAfterSearch = -1L;
+        long randomUtilCountBeforeShuffle = -1L;
+        long randomUtilCountAfterShuffle = -1L;
+        long randomUtilDirectCountAfterSearch = -1L;
+        long randomUtilDirectCountBeforeShuffle = -1L;
+        long randomUtilDirectCountAfterShuffle = -1L;
+        long randomUtilDirectAccessAfterSearch = -1L;
+        long randomUtilDirectAccessBeforeShuffle = -1L;
+        long randomUtilDirectAccessAfterShuffle = -1L;
+        boolean searchResult = false;
+        boolean shuffleResult = false;
+        List<String> chosenNames = Collections.emptyList();
+        List<String> chosenNameIds = Collections.emptyList();
+        List<String> duplicateCopyCandidateIds = Collections.emptyList();
+        String copyPickMarker = "";
+        String shuffleMarker = "";
+        int shuffleRandomNextIntCalls = 0;
+        List<String> libraryTopBeforeShuffle = Collections.emptyList();
+        List<String> libraryTopAfterShuffle = Collections.emptyList();
+        List<String> handBeforeShuffle = Collections.emptyList();
+        List<String> handAfterShuffle = Collections.emptyList();
+        List<String> graveyardBeforeShuffle = Collections.emptyList();
+        List<String> graveyardAfterShuffle = Collections.emptyList();
+
+        ReplayEngineBoundarySearchTrace(
+                Game game,
+                Ability source,
+                TargetCardInLibrary target,
+                Player targetPlayer,
+                List<Card> libraryCards,
+                List<Card> searchableCards
+        ) {
+            this.targetPlayer = targetPlayer == null ? "" : targetPlayer.getName();
+            this.turn = replayEngineBoundaryTurn(game);
+            this.phase = replayEngineBoundaryPhase(game);
+            this.sourceId = source == null || source.getSourceId() == null ? "" : source.getSourceId().toString();
+            this.sourceName = replayEngineBoundarySourceName(source, game);
+            this.sourceRule = replayEngineBoundarySourceRule(source);
+            this.targetName = target == null ? "" : target.getTargetName();
+            this.targetFilter = target == null || target.getFilter() == null ? "" : target.getFilter().getMessage();
+            this.searchableCards = searchableCards == null ? Collections.emptyList() : new ArrayList<>(searchableCards);
+            this.searchableNames = replayEngineBoundaryCardNames(this.searchableCards, 0);
+            this.searchableNameIds = replayEngineBoundaryCardNameIds(this.searchableCards, 0);
+            this.libraryTopBeforeSearch = replayEngineBoundaryCardNames(libraryCards, 12);
+            this.handBeforeSearch = replayEngineBoundaryCardNames(replayEngineBoundaryHandCards(game), 0);
+            this.graveyardBeforeSearch = replayEngineBoundaryCardNames(replayEngineBoundaryGraveyardCards(game), 0);
+        }
+    }
+
     @Override
     public void shuffleLibrary(Ability source, Game game) {
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SHUFFLE_LIBRARY, playerId, source, playerId))) {
-            this.library.shuffle();
-            if (!game.isSimulation()) {
-                game.informPlayers(getLogName() + "'s library is shuffled" + CardUtil.getSourceLogName(game, source));
+        ReplayEngineBoundarySearchTrace replayTrace = beginReplayEngineBoundaryShuffleTrace(source, game);
+        boolean shuffled = false;
+        RandomUtil.RandomIsolation replayIsolation =
+                beginReplaySimulatedPlayerRandomIsolation(source, game, "shuffleLibrary");
+        try {
+            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SHUFFLE_LIBRARY, playerId, source, playerId))) {
+                this.library.shuffle();
+                shuffled = true;
+                if (!game.isSimulation()) {
+                    game.informPlayers(getLogName() + "'s library is shuffled" + CardUtil.getSourceLogName(game, source));
+                }
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SHUFFLED, playerId, source, playerId));
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SHUFFLED, playerId, source, playerId));
+        } finally {
+            if (replayIsolation != null) {
+                replayIsolation.close();
+            }
         }
+        finishReplayEngineBoundaryShuffleTrace(replayTrace, source, game, shuffled);
     }
 
     @Override
@@ -2930,9 +3649,14 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         Library searchingLibrary = targetPlayer.getLibrary();
         TargetCardInLibrary newTarget = target.copy();
+        ReplayEngineBoundarySearchTrace replayTrace =
+                beginReplayEngineBoundarySearchTrace(target, source, game, targetPlayer);
         int count;
         int librarySearchLimit = searchEvent.getAmount();
         List<Card> cardsFromTop = null;
+        RandomUtil.RandomIsolation replayIsolation =
+                beginReplaySimulatedPlayerRandomIsolation(source, game, "searchLibrary");
+        try {
         do {
             // TODO: prevent shuffling from moving the visualized cards
             if (librarySearchLimit == Integer.MAX_VALUE) {
@@ -2977,8 +3701,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.replaceEvent(searchedEvent)) {
                 game.fireEvent(searchedEvent);
             }
+            finishReplayEngineBoundarySearchTrace(replayTrace, target, game, true);
             break;
         } while (true);
+        } finally {
+            if (replayIsolation != null) {
+                replayIsolation.close();
+            }
+        }
 
         return true;
     }

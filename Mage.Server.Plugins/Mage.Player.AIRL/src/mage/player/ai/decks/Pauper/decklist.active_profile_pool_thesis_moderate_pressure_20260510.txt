@@ -1,0 +1,17 @@
+# Thesis-clean moderate stabilization pressure pool from the 2026-05-10
+# Rally+Affinity-pressure rejection. Entries are repeated to bias generic
+# self-play toward hard matchups without naming actions/cards or adding
+# Spy-specific rewards/features.
+Deck - Spy Combo.dek
+Deck - Jund Wildfire.dek
+Deck - Jund Wildfire.dek
+Deck - Jund Wildfire.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek

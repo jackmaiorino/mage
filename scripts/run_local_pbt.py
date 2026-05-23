@@ -7,8 +7,12 @@ Usage:
 
 Env vars:
     TRAIN_PROFILES       Number of profiles to train (default: 4)
-    NUM_GAME_RUNNERS     Runners per profile (default: 64)
+    NUM_GAME_RUNNERS     Total game runners; Java splits them across active profiles (default: 64)
     TOTAL_EPISODES       Episodes before exit (default: 1000000)
+    TOTAL_EPISODES_DELTA Additional episodes from current profile counters.
+                         If >0, overrides TOTAL_EPISODES by setting the absolute
+                         target to max(selected profile current episodes) + delta.
+    MAX_WALL_SECONDS     Wall-clock seconds before graceful exit (default: 0 = disabled)
     WINRATE_WINDOW       Rolling winrate window (default: 200)
     PBT_EXPLOIT_INTERVAL Minutes between exploit attempts (default: 10)
     PBT_MIN_EPISODES     Min episodes before first exploit (default: 200)
@@ -23,6 +27,7 @@ import csv
 import json
 import os
 import random
+import re
 import shutil
 import signal
 import subprocess
@@ -94,6 +99,42 @@ def _prepend_cuda_paths(env: dict) -> None:
     if additions:
         sep = ";" if sys.platform == "win32" else ":"
         env["PATH"] = sep.join(additions) + sep + env.get("PATH", "")
+
+
+def _visible_nvidia_gpu_count() -> Optional[int]:
+    nvidia_smi = shutil.which("nvidia-smi")
+    if not nvidia_smi:
+        return None
+    try:
+        cp = subprocess.run(
+            [nvidia_smi, "-L"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+            check=False,
+        )
+    except Exception:
+        return None
+    if cp.returncode != 0:
+        return None
+    return sum(1 for line in cp.stdout.splitlines() if line.strip().startswith("GPU "))
+
+
+def _validate_cuda_device_visible(env: dict, key: str) -> None:
+    raw = str(env.get(key, "")).strip().lower()
+    match = re.fullmatch(r"cuda:(\d+)", raw)
+    if not match:
+        return
+    requested = int(match.group(1))
+    count = _visible_nvidia_gpu_count()
+    if count is None:
+        log(f"WARNING: unable to validate {key}={raw}; nvidia-smi is unavailable")
+        return
+    if requested >= count:
+        raise RuntimeError(
+            f"{key}={raw} requested GPU index {requested}, but nvidia-smi only exposes "
+            f"{count} CUDA-visible NVIDIA GPU(s). Refusing to start to avoid silent CPU fallback."
+        )
 
 
 PBT_BOUNDS: Dict[str, Tuple[float, float]] = {
@@ -178,6 +219,82 @@ def copy_model_weights(src_profile: str, dst_profile: str) -> bool:
     return copied
 
 
+def _stop_process_tree(process: subprocess.Popen, label: str, timeout: int) -> None:
+    """Stop a process and its children without touching unrelated Java/Python jobs."""
+    if process.poll() is not None:
+        return
+    pid = process.pid
+    if sys.platform == "win32":
+        try:
+            subprocess.run(
+                ["taskkill", "/T", "/PID", str(pid)],
+                capture_output=True,
+                timeout=timeout,
+                check=False,
+            )
+        except Exception as exc:
+            log(f"WARNING: graceful {label} tree stop failed for pid={pid}: {exc}")
+        try:
+            process.wait(timeout=timeout)
+            return
+        except subprocess.TimeoutExpired:
+            pass
+        try:
+            subprocess.run(
+                ["taskkill", "/F", "/T", "/PID", str(pid)],
+                capture_output=True,
+                timeout=10,
+                check=False,
+            )
+            process.wait(timeout=10)
+            return
+        except Exception as exc:
+            log(f"WARNING: forced {label} tree stop failed for pid={pid}: {exc}")
+            process.kill()
+            return
+
+    process.terminate()
+    try:
+        process.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        process.wait(timeout=10)
+
+
+def _resolve_active_onnx_dir(onnx_dir: Path) -> Path:
+    pointer = onnx_dir / ".active_dir"
+    if pointer.exists():
+        try:
+            raw = pointer.read_text(encoding="utf-8").strip()
+            if raw:
+                active = Path(raw)
+                if not active.is_absolute():
+                    active = onnx_dir / active
+                if active.is_dir():
+                    return active
+        except Exception:
+            pass
+    return onnx_dir
+
+
+def _prune_versioned_onnx_dirs(onnx_dir: Path, keep: int = 3) -> None:
+    try:
+        versions = sorted(
+            [p for p in onnx_dir.iterdir() if p.is_dir() and p.name.startswith("v")],
+            key=lambda p: p.stat().st_mtime,
+            reverse=True,
+        )
+    except Exception:
+        return
+    for old in versions[keep:]:
+        try:
+            shutil.rmtree(old)
+            log(f"[TRT] Removed stale ONNX export {old}")
+        except Exception:
+            # ONNX Runtime can still hold the previous directory briefly on Windows.
+            pass
+
+
 class LocalPBT:
     def __init__(self):
         self.port = env_int("GPU_SERVICE_PORT", 26100)
@@ -185,8 +302,11 @@ class LocalPBT:
         self.train_profiles = env_int("TRAIN_PROFILES", 4)
         self.num_runners = env_int("NUM_GAME_RUNNERS", 64)
         self.total_episodes = env_int("TOTAL_EPISODES", 500000)
+        self.total_episodes_delta = env_int("TOTAL_EPISODES_DELTA", 0)
+        self.max_wall_seconds = env_int("MAX_WALL_SECONDS", 0)
         self.winrate_window = env_int("WINRATE_WINDOW", 200)
         self.exploit_interval_min = env_float("PBT_EXPLOIT_INTERVAL", 60.0)
+        self.onnx_export_interval_ticks = env_int("ONNX_EXPORT_INTERVAL_TICKS", 20)
         self.min_episodes = env_int("PBT_MIN_EPISODES", 200)
         self.episode_delta = env_int("PBT_EPISODE_DELTA", 100)
         self.min_winner_gap = env_float("PBT_MIN_WINNER_GAP", 0.02)
@@ -203,7 +323,9 @@ class LocalPBT:
         self.last_exploit_episode: Dict[str, int] = {}
         self.exploit_count: Dict[str, int] = {}
         self.eval_results: Dict[str, float] = {}
+        self.start_episodes: Dict[str, int] = {}
         self._last_eval_time: float = time.time()  # skip immediate eval on startup
+        self.trainer_log_path = REPO_ROOT / "local-training" / "local_pbt" / "trainer.log"
 
     def _cleanup_temp_files(self) -> None:
         """Remove leaked ORT temp dirs and oversized log files on startup."""
@@ -241,6 +363,29 @@ class LocalPBT:
         active.sort(key=lambda e: (int(e.get("priority", 1000)), str(e.get("profile", ""))))
         return active[:self.train_profiles]
 
+    def _apply_episode_delta_target(self) -> None:
+        """Translate TOTAL_EPISODES_DELTA into Java's absolute TOTAL_EPISODES target."""
+        if self.total_episodes_delta <= 0:
+            return
+        starts: Dict[str, int] = {}
+        for entry in self.selected_profiles:
+            profile = str(entry["profile"])
+            episode, _ = read_winrate(profile, 1)
+            starts[profile] = episode
+        self.start_episodes = starts
+        max_start = max(starts.values()) if starts else 0
+        previous_target = self.total_episodes
+        self.total_episodes = max_start + self.total_episodes_delta
+        log(
+            "TOTAL_EPISODES_DELTA="
+            f"{self.total_episodes_delta} from selected profile counters; "
+            f"absolute TOTAL_EPISODES target set to {self.total_episodes} "
+            f"(previous TOTAL_EPISODES={previous_target})"
+        )
+        for profile, start in sorted(starts.items()):
+            planned = max(0, self.total_episodes - start)
+            log(f"[TARGET] {profile}: start_episode={start} planned_delta_at_least={planned}")
+
     def _common_train_env(self, key: str) -> Optional[str]:
         values = {
             str(e.get("train_env", {}).get(key, "")).strip()
@@ -263,8 +408,8 @@ class LocalPBT:
         sys.path.insert(0, str(MLCODE))
         try:
             from onnx_export import export_all_heads
-        except ImportError:
-            log("ONNX export not available, skipping TRT")
+        except ImportError as exc:
+            log(f"ONNX export not available, skipping TRT: {exc}")
             return
         for entry in self.selected_profiles:
             profile = str(entry["profile"])
@@ -301,24 +446,53 @@ class LocalPBT:
                     except Exception as e:
                         log(f"[TRT] Failed to initialize fresh model for {profile}: {e}; skipping export")
                         continue
-                # Skip if ONNX already exists, is newer than model, AND matches current export version.
-                # Bump ONNX_EXPORT_VERSION when export format changes to force re-export.
+                # Skip if the active ONNX export is newer than the model and
+                # matches the current export version. Active exports are
+                # versioned directories selected by .active_dir; this avoids
+                # overwriting files held open by ONNX Runtime on Windows.
                 ONNX_EXPORT_VERSION = "3"  # v3 = adds belief head for archetype classification
-                onnx_action = onnx_dir / "model_action.onnx"
-                onnx_ver_file = onnx_dir / ".export_version"
+                pointer = onnx_dir / ".active_dir"
+                active_onnx_dir = _resolve_active_onnx_dir(onnx_dir)
+                onnx_action = active_onnx_dir / "model_action.onnx"
+                onnx_ver_file = active_onnx_dir / ".export_version"
                 current_ver = onnx_ver_file.read_text().strip() if onnx_ver_file.exists() else ""
-                if (onnx_action.exists()
+                if (pointer.exists()
+                        and onnx_action.exists()
                         and onnx_action.stat().st_mtime >= model_path.stat().st_mtime
                         and current_ver == ONNX_EXPORT_VERSION):
                     log(f"[TRT] ONNX up-to-date for {profile}")
                     continue
                 log(f"[TRT] Exporting ONNX for {profile}...")
                 try:
-                    export_all_heads(str(model_path), str(onnx_dir))
-                    onnx_ver_file.write_text(ONNX_EXPORT_VERSION)
-                    log(f"[TRT] Exported {profile}")
+                    stamp = datetime.now(timezone.utc).strftime("v%Y%m%dT%H%M%S_%f")
+                    stage_dir = onnx_dir / (stamp + "_staging")
+                    final_dir = onnx_dir / stamp
+                    if stage_dir.exists():
+                        shutil.rmtree(stage_dir, ignore_errors=True)
+                    stage_dir.mkdir(parents=True, exist_ok=True)
+                    export_all_heads(str(model_path), str(stage_dir))
+                    (stage_dir / ".export_version").write_text(ONNX_EXPORT_VERSION, encoding="utf-8")
+                    last_rename_error = None
+                    for attempt in range(6):
+                        try:
+                            stage_dir.rename(final_dir)
+                            last_rename_error = None
+                            break
+                        except PermissionError as e:
+                            last_rename_error = e
+                            time.sleep(0.5 * (attempt + 1))
+                    if last_rename_error is not None:
+                        raise last_rename_error
+                    pointer.write_text(final_dir.name, encoding="utf-8")
+                    log(f"[TRT] Exported {profile} -> {final_dir.name}")
+                    _prune_versioned_onnx_dirs(onnx_dir, keep=3)
                 except Exception as e:
                     log(f"[TRT] Export failed for {profile}: {e}")
+                    try:
+                        if 'stage_dir' in locals() and stage_dir.exists():
+                            shutil.rmtree(stage_dir, ignore_errors=True)
+                    except Exception:
+                        pass
             finally:
                 if old_profile is None:
                     os.environ.pop("MODEL_PROFILE", None)
@@ -370,18 +544,45 @@ class LocalPBT:
         env["PYTHONIOENCODING"] = "utf-8"
         env["GPU_SERVICE_PORT"] = str(self.port)
         env["GPU_SERVICE_METRICS_PORT"] = str(self.metrics_port)
+        # The shared learner must instantiate the same model shape as the
+        # Java/ONNX side. Apply any train_env values that are common to all
+        # selected profiles before Python loads checkpoints.
+        common_keys = {
+            str(k)
+            for entry in self.selected_profiles
+            for k in (entry.get("train_env") or {}).keys()
+        }
+        for key in sorted(common_keys):
+            value = self._common_train_env(key)
+            if value is not None:
+                env.setdefault(key, value)
         env["PY_BATCH_TIMEOUT_MS"] = os.getenv("PY_BATCH_TIMEOUT_MS", "25")
         env["PY_BATCH_MAX_SIZE"] = os.getenv("PY_BATCH_MAX_SIZE", "256")
-        env["TRAIN_WORKER_THREADS"] = os.getenv("TRAIN_WORKER_THREADS", "3")
+        env["GPU_SERVICE_TRAIN_BATCH_TIMEOUT_MS"] = os.getenv(
+            "GPU_SERVICE_TRAIN_BATCH_TIMEOUT_MS",
+            os.getenv("GPU_SERVICE_LOCAL_TRAIN_BATCH_TIMEOUT_MS", "250"),
+        )
+        env["TRAIN_WORKER_THREADS"] = os.getenv("TRAIN_WORKER_THREADS", "2")
+        env["TRAIN_GPU_MAX_CONCURRENT"] = os.getenv("TRAIN_GPU_MAX_CONCURRENT", "1")
         # Cap pending train queue so memory stays bounded when JVMs generate
-        # episodes faster than the GPU can train. Dropped tasks are the oldest.
+        # episodes faster than the GPU can train. Default policy blocks
+        # producers instead of silently dropping completed self-play games.
         env.setdefault("PENDING_TRAIN_MAX", "32")
+        env["PENDING_TRAIN_BACKPRESSURE"] = os.getenv("PENDING_TRAIN_BACKPRESSURE", "block")
+        env["PENDING_TRAIN_OFFER_TIMEOUT_MS"] = os.getenv("PENDING_TRAIN_OFFER_TIMEOUT_MS", "30000")
         env["SCORE_WORKER_THREADS"] = os.getenv("SCORE_WORKER_THREADS", "0")
         env["USE_TRT_INFERENCE"] = os.getenv("USE_TRT_INFERENCE", "0")
         # Smaller batches reduce PyTorch peak VRAM during forward/backward pass,
         # critical when sharing GPU with ONNX inference.
-        env["LEARNER_BATCH_MAX_EPISODES"] = os.getenv("LEARNER_BATCH_MAX_EPISODES", "4")
-        env["LEARNER_BATCH_MAX_STEPS"] = os.getenv("LEARNER_BATCH_MAX_STEPS", "2048")
+        env["LEARNER_BATCH_MAX_EPISODES"] = os.getenv("LEARNER_BATCH_MAX_EPISODES", "2")
+        env["LEARNER_BATCH_MAX_STEPS"] = os.getenv("LEARNER_BATCH_MAX_STEPS", "1024")
+        env["TRAIN_MULTI_MAX_STEPS"] = os.getenv("TRAIN_MULTI_MAX_STEPS", "1024")
+        env["TRAIN_CHUNK_SIZE"] = os.getenv("TRAIN_CHUNK_SIZE", "128")
+        env["TRAIN_VRAM_GUARD_ENABLE"] = os.getenv("TRAIN_VRAM_GUARD_ENABLE", "1")
+        env["TRAIN_MIN_FREE_VRAM_MB"] = os.getenv("TRAIN_MIN_FREE_VRAM_MB", "2048")
+        env["TRAIN_MAX_USED_VRAM_FRAC"] = os.getenv("TRAIN_MAX_USED_VRAM_FRAC", "0.84")
+        env["AUTO_TRAIN_MB_PER_STEP_INIT"] = os.getenv("AUTO_TRAIN_MB_PER_STEP_INIT", "2.5")
+        env["CUDA_EMPTY_CACHE_AFTER_TRAIN"] = os.getenv("CUDA_EMPTY_CACHE_AFTER_TRAIN", "1")
         env["TRAIN_CUDA_DEVICE"] = os.getenv("TRAIN_CUDA_DEVICE", "cuda:0")
         # Disable PPO value clipping -- vf_clip=0.2 traps the value head
         # at whatever constant it first converges to
@@ -401,6 +602,15 @@ class LocalPBT:
         env.setdefault("TRAIN_CUDA_DEVICE", "cuda:0")
         env.setdefault("INFER_CUDA_DEVICE", "cpu")
         env.setdefault("CUDA_MEM_FRACTION", "0.55")
+        _validate_cuda_device_visible(env, "TRAIN_CUDA_DEVICE")
+        _validate_cuda_device_visible(env, "INFER_CUDA_DEVICE")
+        log("GPU service config: "
+            f"train_device={env.get('TRAIN_CUDA_DEVICE')} "
+            f"infer_device={env.get('INFER_CUDA_DEVICE')} "
+            f"train_concurrency={env.get('TRAIN_GPU_MAX_CONCURRENT')} "
+            f"train_workers={env.get('TRAIN_WORKER_THREADS')} "
+            f"learner_batch_episodes={env.get('LEARNER_BATCH_MAX_EPISODES')} "
+            f"learner_batch_steps={env.get('LEARNER_BATCH_MAX_STEPS')}")
         log_path = REPO_ROOT / "local-training" / "local_pbt" / "gpu_service.log"
         log_path.parent.mkdir(parents=True, exist_ok=True)
         log_handle = log_path.open("w", encoding="utf-8", errors="replace")
@@ -427,7 +637,17 @@ class LocalPBT:
         deck_paths = list({str(e["deck_path"]) for e in self.selected_profiles})
         env = dict(os.environ)
         _prepend_cuda_paths(env)
+        # In hybrid mode Java ONNX handles inference directly and the shared
+        # Python GPU service is used only for training. Keep that fast path by
+        # default, but let INFER_CUDA_DEVICE=cuda:N steer ONNX to a secondary
+        # GPU. Set PY_SERVICE_MODE=shared_gpu explicitly to route scoring
+        # through the Python service instead.
+        infer_device = os.getenv("INFER_CUDA_DEVICE", "").strip().lower()
+        if infer_device.startswith("cuda:") and not os.getenv("ONNX_CUDA_DEVICE_ID", "").strip():
+            env["ONNX_CUDA_DEVICE_ID"] = infer_device.split(":", 1)[1]
         env["PY_SERVICE_MODE"] = os.getenv("PY_SERVICE_MODE", "hybrid")
+        _validate_cuda_device_visible(env, "TRAIN_CUDA_DEVICE")
+        _validate_cuda_device_visible(env, "INFER_CUDA_DEVICE")
         env["ONNX_FORCE_CPU"] = os.getenv("ONNX_FORCE_CPU", "0")
         ext_endpoint = os.getenv("GPU_SERVICE_ENDPOINT", "")
         if ext_endpoint and ext_endpoint != f"localhost:{self.port}":
@@ -482,6 +702,13 @@ class LocalPBT:
             train_env = entry.get("train_env", {})
             for k, v in train_env.items():
                 env.setdefault(str(k), str(v))
+        log("Trainer config: "
+            f"service_mode={env.get('PY_SERVICE_MODE')} "
+            f"infer_device={env.get('INFER_CUDA_DEVICE', 'cpu')} "
+            f"onnx_device_id={env.get('ONNX_CUDA_DEVICE_ID', '')} "
+            f"opponent_sampler={env.get('OPPONENT_SAMPLER')} "
+            f"onnx_mem_limit_mb={env.get('ONNX_GPU_MEM_LIMIT_MB')} "
+            f"total_episodes={env.get('TOTAL_EPISODES')}")
         args_str = "trainAll " + " ".join(profile_names)
         mvn_exe = shutil.which("mvn") or shutil.which("mvn.cmd") or "mvn.cmd"
         cmd = [
@@ -494,26 +721,45 @@ class LocalPBT:
             "-Dexec.mainClass=mage.player.ai.rl.RLTrainer",
             "-Dexec.args=" + args_str,
         ]
-        log_path = REPO_ROOT / "local-training" / "local_pbt" / "trainer.log"
-        log_handle = log_path.open("w")
+        log_handle = self.trainer_log_path.open("w", encoding="utf-8", errors="replace")
         self.trainer_process = subprocess.Popen(
             cmd, env=env, cwd=str(REPO_ROOT),
             stdout=log_handle, stderr=subprocess.STDOUT,
         )
         log(f"Trainer started pid={self.trainer_process.pid} profiles={profiles_str} runners={self.num_runners}")
 
+    def _archive_trainer_log(self, reason: str) -> None:
+        """Preserve trainer diagnostics that would otherwise be overwritten on restart."""
+        log_path = self.trainer_log_path
+        if not log_path.exists():
+            return
+        try:
+            safe_reason = re.sub(r"[^A-Za-z0-9_.-]+", "_", reason).strip("_") or "trainer"
+            stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+            archive_dir = REPO_ROOT / "local-training" / "local_pbt" / "trainer_logs"
+            archive_dir.mkdir(parents=True, exist_ok=True)
+            archive_path = archive_dir / f"{stamp}_{safe_reason}.log"
+            shutil.copy2(str(log_path), str(archive_path))
+            log(f"Archived trainer log: {archive_path}")
+            interesting = (
+                "MCTS_GATE", "EVAL_SUMMARY", "GENERIC_CHOOSE_DIAG",
+                "ISMCTS-INIT", "MCTS_STATS", "mcts_activations", "PolicyValueMCTS"
+            )
+            emitted = 0
+            with log_path.open("r", encoding="utf-8", errors="replace") as fh:
+                recent = deque(fh, maxlen=400)
+            for line in recent:
+                if any(token in line for token in interesting):
+                    log("[TRAINER] " + line.rstrip())
+                    emitted += 1
+            if emitted == 0:
+                log("[TRAINER] no MCTS/eval diagnostics found in trainer log tail")
+        except Exception as exc:
+            log(f"Failed to archive trainer log: {exc}")
+
     def stop_trainer(self) -> None:
         if self.trainer_process and self.trainer_process.poll() is None:
-            self.trainer_process.terminate()
-            try:
-                self.trainer_process.wait(timeout=15)
-            except subprocess.TimeoutExpired:
-                self.trainer_process.kill()
-        # Kill ALL java processes spawned by this session (shell=True spawns cmd.exe -> java)
-        try:
-            subprocess.run(["taskkill", "/F", "/IM", "java.exe"], capture_output=True, timeout=10)
-        except Exception:
-            pass
+            _stop_process_tree(self.trainer_process, "trainer", timeout=15)
         self.trainer_process = None
         time.sleep(2)
         log("Trainer stopped")
@@ -527,18 +773,7 @@ class LocalPBT:
     def _restart_gpu_service(self) -> None:
         """Restart GPU service to flush leaked connections and reclaim memory."""
         if self.gpu_process and self.gpu_process.poll() is None:
-            pid = self.gpu_process.pid
-            self.gpu_process.terminate()
-            try:
-                self.gpu_process.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                # Kill the specific process tree, not all python
-                try:
-                    subprocess.run(["taskkill", "/F", "/T", "/PID", str(pid)],
-                                  capture_output=True, timeout=10)
-                except Exception:
-                    pass
-                self.gpu_process.kill()
+            _stop_process_tree(self.gpu_process, "GPU service", timeout=10)
         self.gpu_process = None
         time.sleep(2)
         self.start_gpu_service()
@@ -857,14 +1092,28 @@ class LocalPBT:
 
     def monitor_loop(self) -> None:
         tick = 0
+        started_at = time.time()
         while not self.stop_requested:
             time.sleep(30)
             tick += 1
+            if self.max_wall_seconds > 0 and (time.time() - started_at) >= self.max_wall_seconds:
+                log(f"MAX_WALL_SECONDS={self.max_wall_seconds} reached; stopping orchestrator")
+                self.stop_requested = True
+                break
 
             # Check trainer alive
             if self.trainer_process and self.trainer_process.poll() is not None:
                 rc = self.trainer_process.returncode
                 log(f"Trainer exited with rc={rc}")
+                self._archive_trainer_log(f"trainer_exit_rc_{rc}")
+                if rc == 0 and self._all_profiles_reached_target():
+                    log(f"All selected profiles reached TOTAL_EPISODES={self.total_episodes}; stopping orchestrator")
+                    self.stop_requested = True
+                    break
+                if rc == 0 and self._all_profiles_within_target_tolerance():
+                    log(f"Selected profiles reached TOTAL_EPISODES={self.total_episodes} within tolerance; stopping orchestrator")
+                    self.stop_requested = True
+                    break
                 if not self.stop_requested:
                     self.restart_trainer(f"exit rc={rc}")
                 continue
@@ -917,14 +1166,47 @@ class LocalPBT:
             #     self._start_eval_background()
 
             # Auto-export ONNX for profiles whose model has updated since last export.
-            # Every 20 ticks = ~10 min. Export+reload disrupts inference for ~30s,
-            # so less frequent exports improve steady-state throughput.
-            if tick % 20 == 0:
+            # Default is every 20 ticks = ~10 min. Export+reload disrupts inference
+            # briefly, so long autonomous runs can raise this interval for steadier
+            # throughput at the cost of slightly staler inference weights.
+            if self.onnx_export_interval_ticks > 0 and tick % self.onnx_export_interval_ticks == 0:
                 self._auto_export_onnx()
 
             # PBT exploitation check every other tick
             if tick % 2 == 0:
                 self.check_exploit()
+
+    def _all_profiles_reached_target(self) -> bool:
+        if self.total_episodes <= 0:
+            return False
+        for entry in self.selected_profiles:
+            profile = str(entry["profile"])
+            ep_total, _ = read_winrate(profile, 1)
+            if ep_total < self.total_episodes:
+                return False
+        return True
+
+    def _all_profiles_within_target_tolerance(self) -> bool:
+        if self.total_episodes <= 0:
+            return False
+        tolerance = env_int("PBT_TARGET_EXIT_TOLERANCE", max(1, self.num_runners))
+        if tolerance <= 0:
+            return False
+        threshold = max(0, self.total_episodes - tolerance)
+        for entry in self.selected_profiles:
+            profile = str(entry["profile"])
+            ep_total, _ = read_winrate(profile, 1)
+            if ep_total < threshold:
+                return False
+        return True
+
+    def _validate_startup_cuda_devices(self) -> None:
+        env = {
+            "TRAIN_CUDA_DEVICE": os.getenv("TRAIN_CUDA_DEVICE", "cuda:0"),
+            "INFER_CUDA_DEVICE": os.getenv("INFER_CUDA_DEVICE", "cpu"),
+        }
+        _validate_cuda_device_visible(env, "TRAIN_CUDA_DEVICE")
+        _validate_cuda_device_visible(env, "INFER_CUDA_DEVICE")
 
     def run(self) -> int:
         signal.signal(signal.SIGINT, lambda *_: setattr(self, 'stop_requested', True))
@@ -945,9 +1227,15 @@ class LocalPBT:
             groups.setdefault(g, []).append(str(e["profile"]))
         log(f"Profiles: {profile_names}")
         log(f"Population groups: {dict(groups)}")
-        log(f"Runners per profile: {self.num_runners}")
+        log(f"Requested total game runners: {self.num_runners} (Java trainAll splits across profiles)")
+        self._apply_episode_delta_target()
+        if self.max_wall_seconds > 0:
+            log(f"Wall-clock stop: MAX_WALL_SECONDS={self.max_wall_seconds}")
+        if self.total_episodes_delta > 0:
+            log(f"Episode-delta stop: TOTAL_EPISODES_DELTA={self.total_episodes_delta}")
         log(f"PBT: exploit_interval={self.exploit_interval_min}min min_episodes={self.min_episodes} "
             f"episode_delta={self.episode_delta} min_gap={self.min_winner_gap} mutation={self.mutation_pct}")
+        self._validate_startup_cuda_devices()
 
         try:
             self.export_onnx_models()
@@ -959,7 +1247,7 @@ class LocalPBT:
         finally:
             self.stop_trainer()
             if self.gpu_process:
-                self.gpu_process.terminate()
+                _stop_process_tree(self.gpu_process, "GPU service", timeout=10)
                 log("GPU service stopped")
         return 0
 

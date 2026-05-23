@@ -280,18 +280,24 @@ public final class PolicyValueMCTS {
     private static final java.util.concurrent.atomic.AtomicInteger COUNT_CLONES = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger COUNT_ROLLOUTS = new java.util.concurrent.atomic.AtomicInteger();
     private static final java.util.concurrent.atomic.AtomicInteger COUNT_LEAVES = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger COUNT_ACTIVATE_OK = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger COUNT_ACTIVATE_FALSE = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger COUNT_ACTIVATE_ERROR = new java.util.concurrent.atomic.AtomicInteger();
     public static String getMctsTimingStats() {
         long c = COUNT_CLONES.get();
         long r = COUNT_ROLLOUTS.get();
         long l = COUNT_LEAVES.get();
         double toMs = 1e6;
         return String.format(
-                "MCTS_TIMING clones=%d(%.1fms avg) dets=%.1fms activates=%.1fms rollouts=%d(%.1fms avg) leaves=%d(%.1fms avg)",
+                "MCTS_TIMING clones=%d(%.1fms avg) dets=%.1fms activates=%.1fms rollouts=%d(%.1fms avg) leaves=%d(%.1fms avg) activate_ok=%d activate_false=%d activate_error=%d",
                 c, c > 0 ? TIME_CLONE_NS.get() / toMs / c : 0,
                 TIME_DET_NS.get() / toMs,
                 TIME_ACTIVATE_NS.get() / toMs,
                 r, r > 0 ? TIME_ROLLOUT_NS.get() / toMs / r : 0,
-                l, l > 0 ? TIME_LEAF_NS.get() / toMs / l : 0
+                l, l > 0 ? TIME_LEAF_NS.get() / toMs / l : 0,
+                COUNT_ACTIVATE_OK.get(),
+                COUNT_ACTIVATE_FALSE.get(),
+                COUNT_ACTIVATE_ERROR.get()
         );
     }
 
@@ -322,8 +328,16 @@ public final class PolicyValueMCTS {
                 Ability chosen = candidates.get(actionIndex);
                 if (chosen instanceof ActivatedAbility) {
                     try {
-                        simSelf.activateAbility((ActivatedAbility) chosen, sim);
+                        Ability chosenCopy = chosen.copy();
+                        boolean activated = chosenCopy instanceof ActivatedAbility
+                                && simSelf.activateAbility((ActivatedAbility) chosenCopy, sim);
+                        if (activated) {
+                            COUNT_ACTIVATE_OK.incrementAndGet();
+                        } else {
+                            COUNT_ACTIVATE_FALSE.incrementAndGet();
+                        }
                     } catch (Throwable t) {
+                        COUNT_ACTIVATE_ERROR.incrementAndGet();
                         // Activation failed — fall through to evaluate current state.
                     }
                 }

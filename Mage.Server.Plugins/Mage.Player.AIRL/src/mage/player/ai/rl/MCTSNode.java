@@ -22,6 +22,9 @@ import java.util.Arrays;
  */
 public final class MCTSNode {
 
+    private static final boolean VISIT_UNEXPLORED_FIRST =
+            EnvConfig.bool("MCTS_VISIT_UNEXPLORED_FIRST", true);
+
     public enum Kind { DECISION, LEAF, TERMINAL }
 
     /** Set once when the node is first expanded. */
@@ -147,6 +150,19 @@ public final class MCTSNode {
         if (kind != Kind.DECISION || numChildren == 0) {
             throw new IllegalStateException("PUCT on non-DECISION node or zero children");
         }
+        if (VISIT_UNEXPLORED_FIRST) {
+            int bestUnvisited = -1;
+            float bestPrior = Float.NEGATIVE_INFINITY;
+            for (int i = 0; i < numChildren; i++) {
+                if (visits[i] == 0 && priors[i] > bestPrior) {
+                    bestPrior = priors[i];
+                    bestUnvisited = i;
+                }
+            }
+            if (bestUnvisited >= 0) {
+                return bestUnvisited;
+            }
+        }
         int bestIdx = 0;
         float bestScore = Float.NEGATIVE_INFINITY;
         float sqrtTotal = (float) Math.sqrt(Math.max(1, totalVisits));
@@ -180,6 +196,37 @@ public final class MCTSNode {
         int best = 0;
         for (int i = 1; i < numChildren; i++) {
             if (visits[i] > visits[best]) best = i;
+        }
+        return best;
+    }
+
+    /**
+     * Return index of the visited child with highest mean value.
+     *
+     * This is useful for very small-budget value-guided searches where visits
+     * can mostly reflect priors or tie-breaking rather than a robust visit
+     * distribution. Ties prefer more visits, then higher prior.
+     */
+    public int bestActionByMeanValue() {
+        if (kind != Kind.DECISION) return 0;
+        int best = 0;
+        float bestMean = Float.NEGATIVE_INFINITY;
+        int bestVisits = -1;
+        float bestPrior = Float.NEGATIVE_INFINITY;
+        for (int i = 0; i < numChildren; i++) {
+            if (visits[i] <= 0) {
+                continue;
+            }
+            float mean = values[i] / visits[i];
+            float prior = priors != null && i < priors.length ? priors[i] : 0f;
+            if (mean > bestMean
+                    || (mean == bestMean && visits[i] > bestVisits)
+                    || (mean == bestMean && visits[i] == bestVisits && prior > bestPrior)) {
+                best = i;
+                bestMean = mean;
+                bestVisits = visits[i];
+                bestPrior = prior;
+            }
         }
         return best;
     }

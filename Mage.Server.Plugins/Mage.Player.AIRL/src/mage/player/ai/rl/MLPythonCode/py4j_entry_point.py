@@ -16,6 +16,8 @@ import argparse
 from collections import deque
 import struct
 import random
+import hashlib
+import csv
 from contextlib import nullcontext
 
 # Import new modules
@@ -25,7 +27,9 @@ from snapshot_manager import SnapshotManager
 from metrics_collector import MetricsCollector
 from model_persistence import ModelPersistence
 from gpu_lock import GPULock
-from profile_paths import profile_models_dir
+from profile_paths import profile_models_dir, profile_logs_dir
+
+HEAD_NAMES = ["action", "target", "card_select", "attack", "block", "mulligan"]
 
 # Now we can safely log initialization
 logger.info(LogCategory.SYSTEM_INIT, f"Logging to file: {log_file}")
@@ -258,6 +262,45 @@ class PythonEntryPoint:
         self.snapshot_mgr = SnapshotManager(self.device)
         self.metrics = MetricsCollector()
         self.persistence = ModelPersistence()
+        self.model_load_determinism_gate = self._env_flag(
+            "RL_MODEL_LOAD_DETERMINISM_GATE",
+            "EVAL_REPLAY_MODEL_LOAD_DETERMINISM_GATE",
+        )
+        self.model_load_determinism_gate_path = (
+            os.getenv("RL_MODEL_LOAD_DETERMINISM_GATE_FILE", "").strip()
+            or os.getenv("EVAL_REPLAY_MODEL_LOAD_DETERMINISM_GATE_FILE", "").strip()
+        )
+        if self.model_load_determinism_gate and not self.model_load_determinism_gate_path:
+            self.model_load_determinism_gate_path = os.path.join(
+                profile_logs_dir(), "python_model_load_determinism_gate.csv")
+        self._model_load_determinism_gate_lock = threading.Lock()
+        self._model_load_determinism_snapshot = {}
+        self.fail_on_skipped_incompatible = self._env_flag(
+            "RL_FAIL_ON_SKIPPED_INCOMPATIBLE",
+            "EVAL_REPLAY_FAIL_ON_SKIPPED_INCOMPATIBLE",
+        )
+        if self.model_load_determinism_gate:
+            self._initialize_model_load_determinism_gate()
+        self.python_inference_duplicate_probe = self._env_flag(
+            "RL_PYTHON_INFERENCE_DUPLICATE_PROBE",
+            "EVAL_REPLAY_PYTHON_INFERENCE_DUPLICATE_PROBE",
+        )
+        self.python_inference_duplicate_probe_path = (
+            os.getenv("RL_PYTHON_INFERENCE_DUPLICATE_PROBE_FILE", "").strip()
+            or os.getenv("EVAL_REPLAY_PYTHON_INFERENCE_DUPLICATE_PROBE_FILE", "").strip()
+        )
+        if self.python_inference_duplicate_probe and not self.python_inference_duplicate_probe_path:
+            self.python_inference_duplicate_probe_path = os.path.join(
+                profile_logs_dir(), "python_inference_duplicate_probe.csv")
+        self.python_inference_duplicate_probe_max_rows = self._env_int(
+            "RL_PYTHON_INFERENCE_DUPLICATE_PROBE_MAX_ROWS",
+            "EVAL_REPLAY_PYTHON_INFERENCE_DUPLICATE_PROBE_MAX_ROWS",
+            default=256,
+        )
+        self._python_inference_duplicate_probe_rows = 0
+        self._python_inference_duplicate_probe_lock = threading.Lock()
+        if self.python_inference_duplicate_probe:
+            self._initialize_python_inference_duplicate_probe()
 
         # PPO configuration
         self.ppo_epsilon = float(os.getenv('PPO_EPSILON', '0.2'))
@@ -272,6 +315,12 @@ class PythonEntryPoint:
         self.freeze_encoder_in_warmup = bool(
             int(os.getenv('FREEZE_ENCODER_IN_WARMUP', '1')))
         self._encoder_frozen = False
+        self.distill_head_only = bool(int(os.getenv('DISTILL_HEAD_ONLY', '0')))
+        self.distill_policy_path_only = bool(int(os.getenv('DISTILL_POLICY_PATH_ONLY', '0')))
+        self.candidate_q_only = bool(int(os.getenv('CANDIDATE_Q_ONLY', '0')))
+        self.value_pair_rank_critic_only = bool(int(os.getenv('VALUE_PAIR_RANK_CRITIC_ONLY', '0')))
+        self.belief_head_only = bool(int(os.getenv('BELIEF_HEAD_ONLY', '0')))
+        self.card_belief_head_only = bool(int(os.getenv('CARD_BELIEF_HEAD_ONLY', '0')))
 
         # Loss coefficients
         self.policy_loss_coef_warmup = float(
@@ -287,10 +336,26 @@ class PythonEntryPoint:
             os.getenv('ENTROPY_LOSS_MULT', '1.0'))
         # Phase 1 belief auxiliary loss coefficient. 0 disables the loss.
         self.belief_loss_coef = float(os.getenv('BELIEF_LOSS_COEF', '0.3'))
+        # Generic hidden-card belief auxiliary loss coefficient. 0 disables.
+        self.card_belief_loss_coef = float(os.getenv('CARD_BELIEF_LOSS_COEF', '0.0'))
         # AlphaZero policy distillation loss: cross-entropy between the model's
         # policy and the MCTS visit distribution at steps where MCTS was run.
         # 0 disables the loss (use when MCTS-generated targets aren't present).
         self.mcts_kl_loss_coef = float(os.getenv('MCTS_KL_LOSS_COEF', '1.0'))
+        # Optional frozen-reference policy anchor. This is generic: it keeps
+        # candidate distributions close to a previous checkpoint without using
+        # action text, card names, or deck-specific labels.
+        self.reference_policy_kl_coef = float(os.getenv('REFERENCE_POLICY_KL_COEF', '0.0'))
+        self.mcts_reference_model_path = os.getenv('MCTS_REFERENCE_MODEL_PATH', '').strip()
+        self.mcts_reference_model = None
+        self.policy_ensemble_model_paths = self._parse_env_paths(
+            os.getenv('POLICY_ENSEMBLE_MODEL_PATHS', ''))
+        self.policy_ensemble_weight_spec = os.getenv(
+            'POLICY_ENSEMBLE_WEIGHTS', '').strip()
+        self.policy_ensemble_models = []
+        self.policy_ensemble_weights = []
+        self._policy_ensemble_loaded = False
+        self._policy_ensemble_runtime_failures = set()
 
         # Auto-batching state (kept for backward compatibility)
         self._infer_safe_max = None
@@ -431,8 +496,571 @@ class PythonEntryPoint:
     def _should_split_for_paging(self, estimated_extra_mb: float):
         return self.cuda_mgr.should_split_for_paging(estimated_extra_mb)
 
+    def _train_has_vram_headroom(self, estimated_extra_mb: float, wait: bool = False, tag: str = "train"):
+        return self.cuda_mgr.train_has_headroom(estimated_extra_mb, wait=wait, tag=tag)
+
     def _update_mem_ema(self, kind: str, extra_mb: float, n: int):
         self.cuda_mgr.update_mem_ema(kind, extra_mb, n)
+
+    @staticmethod
+    def _env_flag(*keys) -> bool:
+        for key in keys:
+            value = os.getenv(key, "").strip().lower()
+            if value in ("1", "true", "yes", "y", "on"):
+                return True
+        return False
+
+    @staticmethod
+    def _env_int(*keys, default: int = 0) -> int:
+        for key in keys:
+            value = os.getenv(key, "").strip()
+            if not value:
+                continue
+            try:
+                return int(value)
+            except Exception:
+                continue
+        return int(default)
+
+    def _initialize_python_inference_duplicate_probe(self):
+        path = str(self.python_inference_duplicate_probe_path or "").strip()
+        if not path:
+            return
+        try:
+            parent = os.path.dirname(path)
+            if parent:
+                os.makedirs(parent, exist_ok=True)
+            with open(path, "w", newline="", encoding="utf-8") as fh:
+                writer = csv.writer(fh)
+                writer.writerow([
+                    "call_index",
+                    "batch_row",
+                    "policy_key",
+                    "head_id",
+                    "batch_size",
+                    "seq_len",
+                    "d_model",
+                    "max_candidates",
+                    "cand_feat_dim",
+                    "candidate_count",
+                    "pid",
+                    "thread_name",
+                    "thread_id",
+                    "device",
+                    "py_role",
+                    "backend_mode",
+                    "global_seed",
+                    "torch_initial_seed",
+                    "torch_rng_digest",
+                    "numpy_rng_digest",
+                    "python_rng_digest",
+                    "cuda_rng_digest",
+                    "torch_deterministic_algorithms",
+                    "cudnn_enabled",
+                    "cudnn_deterministic",
+                    "cudnn_benchmark",
+                    "cuda_matmul_allow_tf32",
+                    "cudnn_allow_tf32",
+                    "amp_enable",
+                    "amp_dtype",
+                    "model_class",
+                    "model_object_id",
+                    "model_training_before",
+                    "model_training_after",
+                    "dropout_summary",
+                    "model_path",
+                    "model_path_exists",
+                    "model_path_mtime_ns",
+                    "model_latest_path",
+                    "model_latest_exists",
+                    "model_latest_mtime_ns",
+                    "model_load_snapshot_digest",
+                    "model_load_path",
+                    "model_load_path_mtime_ns",
+                    "model_load_global_seed",
+                    "model_load_torch_initial_seed",
+                    "model_load_skipped_incompatible_count",
+                    "model_load_skipped_incompatible_sample",
+                    "model_load_skipped_incompatible_digest",
+                    "model_load_state_digest",
+                    "model_load_state_sample",
+                    "input_sha256",
+                    "sequence_sha256",
+                    "mask_sha256",
+                    "token_ids_sha256",
+                    "candidate_features_sha256",
+                    "candidate_ids_sha256",
+                    "candidate_mask_sha256",
+                    "pass0_probs",
+                    "pass1_probs",
+                    "pass0_logits",
+                    "pass1_logits",
+                    "pass0_value",
+                    "pass1_value",
+                    "max_abs_prob_diff",
+                    "max_abs_logit_diff",
+                    "value_abs_diff",
+                    "duplicate_match",
+                ])
+        except Exception as e:
+            try:
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "Failed to initialize python inference duplicate probe: %s", str(e))
+            except Exception:
+                pass
+
+    def _initialize_model_load_determinism_gate(self):
+        path = str(self.model_load_determinism_gate_path or "").strip()
+        if not path:
+            return
+        try:
+            parent = os.path.dirname(path)
+            if parent:
+                os.makedirs(parent, exist_ok=True)
+            with open(path, "w", newline="", encoding="utf-8") as fh:
+                writer = csv.writer(fh)
+                writer.writerow([
+                    "event",
+                    "pid",
+                    "thread_name",
+                    "thread_id",
+                    "device",
+                    "py_role",
+                    "backend_mode",
+                    "global_seed",
+                    "torch_initial_seed",
+                    "torch_rng_digest",
+                    "numpy_rng_digest",
+                    "python_rng_digest",
+                    "cuda_rng_digest",
+                    "model_path",
+                    "model_path_exists",
+                    "model_path_mtime_ns",
+                    "model_latest_path",
+                    "model_latest_exists",
+                    "model_latest_mtime_ns",
+                    "model_class",
+                    "model_object_id",
+                    "model_arch",
+                    "skipped_incompatible_count",
+                    "skipped_incompatible_sample",
+                    "skipped_incompatible_digest",
+                    "healed_params",
+                    "healed_digest",
+                    "model_state_digest",
+                    "model_state_sample",
+                    "snapshot_digest",
+                ])
+        except Exception as e:
+            try:
+                logger.warning(LogCategory.MODEL_LOAD,
+                               "Failed to initialize model-load determinism gate: %s", str(e))
+            except Exception:
+                pass
+
+    @staticmethod
+    def _short_digest_bytes(data: bytes) -> str:
+        try:
+            return hashlib.sha256(data).hexdigest()[:16]
+        except Exception:
+            return ""
+
+    @staticmethod
+    def _short_digest_text(text: str) -> str:
+        try:
+            return PythonEntryPoint._short_digest_bytes(
+                str(text or "").encode("utf-8", "replace"))
+        except Exception:
+            return ""
+
+    @staticmethod
+    def _short_digest_array(arr) -> str:
+        try:
+            return PythonEntryPoint._short_digest_bytes(np.ascontiguousarray(arr).tobytes())
+        except Exception:
+            return ""
+
+    @staticmethod
+    def _tensor_digest_payload(tensor):
+        try:
+            cpu = tensor.detach().cpu().contiguous()
+            dtype_name = str(cpu.dtype)
+            shape_name = "x".join(str(int(x)) for x in tuple(cpu.shape))
+            try:
+                raw = cpu.numpy().tobytes()
+            except Exception:
+                raw = cpu.float().numpy().tobytes()
+            return dtype_name, shape_name, raw
+        except Exception as e:
+            return "unavailable", str(getattr(tensor, "shape", "")), repr(e).encode("utf-8", "replace")
+
+    @staticmethod
+    def _model_state_digest(model, sample_limit: int = 16):
+        try:
+            state = model.state_dict() if model is not None else {}
+            digest = hashlib.sha256()
+            samples = []
+            for name in sorted(state.keys()):
+                tensor = state[name]
+                dtype_name, shape_name, raw = PythonEntryPoint._tensor_digest_payload(tensor)
+                digest.update(str(name).encode("utf-8", "replace"))
+                digest.update(b"\0")
+                digest.update(dtype_name.encode("utf-8", "replace"))
+                digest.update(b"\0")
+                digest.update(shape_name.encode("utf-8", "replace"))
+                digest.update(b"\0")
+                digest.update(raw)
+                digest.update(b"\0")
+                if len(samples) < int(sample_limit):
+                    tensor_digest = hashlib.sha256(raw).hexdigest()[:16]
+                    samples.append(f"{name}:{dtype_name}:{shape_name}:{tensor_digest}")
+            return digest.hexdigest()[:16], "|".join(samples)
+        except Exception as e:
+            return "", f"unavailable:{e.__class__.__name__}"
+
+    @staticmethod
+    def _model_arch_summary(model) -> str:
+        try:
+            return ";".join([
+                f"class={model.__class__.__name__}",
+                f"d_model={getattr(model, 'd_model', '')}",
+                f"input_dim={getattr(model, 'input_dim', '')}",
+                f"num_actions={getattr(model, 'num_actions', '')}",
+                f"token_vocab={getattr(model, 'token_vocab', '')}",
+                f"action_vocab={getattr(model, 'action_vocab', '')}",
+                f"cand_feat_dim={getattr(model, 'cand_feat_dim', '')}",
+                f"layers={len(getattr(model, 'transformer_layers', []))}",
+            ])
+        except Exception as e:
+            return f"unavailable:{e.__class__.__name__}"
+
+    def _record_model_load_determinism_gate(self, path, extra, skipped_incompatible, healed):
+        if not self.model_load_determinism_gate:
+            return
+        gate_path = str(self.model_load_determinism_gate_path or "").strip()
+        if not gate_path:
+            return
+        try:
+            skipped = list(skipped_incompatible or [])
+            skipped_sample = "|".join(str(x) for x in skipped[:24])
+            skipped_digest = self._short_digest_text("|".join(str(x) for x in skipped))
+            healed_params = "|".join(str(x) for x in list(healed or [])[:24])
+            healed_digest = self._short_digest_text("|".join(str(x) for x in list(healed or [])))
+            model_state_digest, model_state_sample = self._model_state_digest(self.model)
+            model_path = str(path or getattr(self, "model_path", "") or "")
+            latest_path = str(getattr(self, "model_latest_path", "") or "")
+            arch = self._model_arch_summary(self.model)
+            stable_snapshot = "|".join([
+                f"global_seed={'' if self.global_seed is None else int(self.global_seed)}",
+                f"torch_initial_seed={int(torch.initial_seed())}",
+                f"model_path={model_path}",
+                f"model_path_mtime_ns={self._file_mtime_ns(model_path)}",
+                f"latest_path={latest_path}",
+                f"latest_mtime_ns={self._file_mtime_ns(latest_path)}",
+                f"arch={arch}",
+                f"skipped_count={len(skipped)}",
+                f"skipped_digest={skipped_digest}",
+                f"healed_digest={healed_digest}",
+                f"model_state_digest={model_state_digest}",
+            ])
+            snapshot_digest = self._short_digest_text(stable_snapshot)
+            snapshot = {
+                "snapshot_digest": snapshot_digest,
+                "path": model_path,
+                "path_mtime_ns": self._file_mtime_ns(model_path),
+                "global_seed": "" if self.global_seed is None else int(self.global_seed),
+                "torch_initial_seed": int(torch.initial_seed()),
+                "skipped_incompatible_count": len(skipped),
+                "skipped_incompatible_sample": skipped_sample,
+                "skipped_incompatible_digest": skipped_digest,
+                "model_state_digest": model_state_digest,
+                "model_state_sample": model_state_sample,
+            }
+            self._model_load_determinism_snapshot = snapshot
+            row = [
+                "loadModel",
+                int(os.getpid()),
+                threading.current_thread().name,
+                int(threading.get_ident()),
+                str(self.device),
+                str(getattr(self, "py_role", "")),
+                str(getattr(self, "backend_mode", "")),
+                "" if self.global_seed is None else int(self.global_seed),
+                int(torch.initial_seed()),
+                self._rng_state_digest(torch.random.get_rng_state),
+                self._short_digest_array(np.random.get_state()[1]),
+                self._short_digest_bytes(repr(random.getstate()).encode("utf-8", "replace")),
+                self._rng_state_digest(lambda: torch.cuda.get_rng_state(self.device)) if torch.cuda.is_available() and str(self.device).startswith("cuda") else "",
+                model_path,
+                int(bool(model_path and os.path.exists(model_path))),
+                self._file_mtime_ns(model_path),
+                latest_path,
+                int(bool(latest_path and os.path.exists(latest_path))),
+                self._file_mtime_ns(latest_path),
+                self.model.__class__.__name__ if self.model is not None else "",
+                int(id(self.model)) if self.model is not None else "",
+                arch,
+                len(skipped),
+                skipped_sample,
+                skipped_digest,
+                healed_params,
+                healed_digest,
+                model_state_digest,
+                model_state_sample,
+                snapshot_digest,
+            ]
+            with self._model_load_determinism_gate_lock:
+                with open(gate_path, "a", newline="", encoding="utf-8") as fh:
+                    writer = csv.writer(fh)
+                    writer.writerow(row)
+            logger.info(
+                LogCategory.MODEL_LOAD,
+                "Model-load determinism snapshot digest=%s skipped_incompatible=%d model_state=%s",
+                snapshot_digest,
+                len(skipped),
+                model_state_digest,
+            )
+        except Exception as e:
+            try:
+                logger.warning(LogCategory.MODEL_LOAD,
+                               "Failed to record model-load determinism gate: %s", str(e))
+            except Exception:
+                pass
+
+    @staticmethod
+    def _file_mtime_ns(path: str) -> int:
+        try:
+            return int(os.stat(path).st_mtime_ns)
+        except Exception:
+            return 0
+
+    @staticmethod
+    def _rng_state_digest(getter) -> str:
+        try:
+            state = getter()
+            if hasattr(state, "detach"):
+                state = state.detach().cpu().numpy()
+            return PythonEntryPoint._short_digest_array(state)
+        except Exception:
+            return ""
+
+    @staticmethod
+    def _format_indexed_values(values, mask=None) -> str:
+        try:
+            arr = values.detach().float().cpu().numpy() if hasattr(values, "detach") else np.asarray(values, dtype=np.float32)
+            if arr.ndim > 1:
+                arr = arr.reshape(-1)
+            mask_arr = None
+            if mask is not None:
+                mask_arr = mask.detach().bool().cpu().numpy() if hasattr(mask, "detach") else np.asarray(mask).astype(bool)
+                mask_arr = mask_arr.reshape(-1)
+            parts = []
+            for idx in range(int(arr.shape[0])):
+                if mask_arr is not None and idx < int(mask_arr.shape[0]) and not bool(mask_arr[idx]):
+                    continue
+                value = float(arr[idx])
+                parts.append(f"{idx}:{value:.9g}")
+            return ";".join(parts)
+        except Exception:
+            return ""
+
+    @staticmethod
+    def _max_abs_diff(a, b, mask=None) -> float:
+        try:
+            aa = a.detach().float().cpu().numpy() if hasattr(a, "detach") else np.asarray(a, dtype=np.float32)
+            bb = b.detach().float().cpu().numpy() if hasattr(b, "detach") else np.asarray(b, dtype=np.float32)
+            aa = aa.reshape(-1)
+            bb = bb.reshape(-1)
+            n = min(int(aa.shape[0]), int(bb.shape[0]))
+            if n <= 0:
+                return 0.0
+            aa = aa[:n]
+            bb = bb[:n]
+            if mask is not None:
+                mm = mask.detach().bool().cpu().numpy() if hasattr(mask, "detach") else np.asarray(mask).astype(bool)
+                mm = mm.reshape(-1)[:n]
+                if mm.shape[0] == n:
+                    aa = aa[mm]
+                    bb = bb[mm]
+            if aa.size == 0:
+                return 0.0
+            return float(np.max(np.abs(aa - bb)))
+        except Exception:
+            return float("nan")
+
+    @staticmethod
+    def _dropout_summary(model) -> str:
+        try:
+            items = []
+            total = 0
+            training = 0
+            for name, module in model.named_modules():
+                cls_name = module.__class__.__name__
+                if "Dropout" not in cls_name:
+                    continue
+                total += 1
+                if bool(getattr(module, "training", False)):
+                    training += 1
+                if len(items) < 12:
+                    p = getattr(module, "p", "")
+                    items.append(f"{name}:{cls_name}:training={int(bool(getattr(module, 'training', False)))}:p={p}")
+            return f"count={total};training={training};" + "|".join(items)
+        except Exception as e:
+            return f"unavailable:{e.__class__.__name__}"
+
+    def _append_python_inference_duplicate_probe(
+            self,
+            call_index: int,
+            start: int,
+            policy_key,
+            head_id,
+            batch_size: int,
+            seq_len: int,
+            d_model: int,
+            max_candidates: int,
+            cand_feat_dim: int,
+            model,
+            model_training_before: bool,
+            model_training_after: bool,
+            probe_inputs,
+            probs0,
+            value0,
+            logits0,
+            probs1,
+            value1,
+            logits1,
+            cand_mask_t):
+        if not self.python_inference_duplicate_probe:
+            return
+        path = str(self.python_inference_duplicate_probe_path or "").strip()
+        if not path:
+            return
+        if self._python_inference_duplicate_probe_rows >= int(self.python_inference_duplicate_probe_max_rows):
+            return
+        try:
+            seq_np = probe_inputs.get("seq")
+            mask_np = probe_inputs.get("mask")
+            tok_np = probe_inputs.get("token_ids")
+            cand_feat_np = probe_inputs.get("candidate_features")
+            cand_ids_np = probe_inputs.get("candidate_ids")
+            cand_mask_np = probe_inputs.get("candidate_mask")
+            input_digest = self._short_digest_bytes(
+                np.ascontiguousarray(seq_np).tobytes()
+                + np.ascontiguousarray(mask_np).tobytes()
+                + np.ascontiguousarray(tok_np).tobytes()
+                + np.ascontiguousarray(cand_feat_np).tobytes()
+                + np.ascontiguousarray(cand_ids_np).tobytes()
+                + np.ascontiguousarray(cand_mask_np).tobytes())
+            row_count = int(probs0.shape[0]) if hasattr(probs0, "shape") else 0
+            rows = []
+            for local_row in range(row_count):
+                if self._python_inference_duplicate_probe_rows + len(rows) >= int(self.python_inference_duplicate_probe_max_rows):
+                    break
+                mask_row = cand_mask_t[local_row] if cand_mask_t is not None else None
+                candidate_count = 0
+                try:
+                    candidate_count = int(mask_row.detach().bool().sum().item()) if mask_row is not None else 0
+                except Exception:
+                    candidate_count = 0
+                prob_diff = self._max_abs_diff(probs0[local_row], probs1[local_row], mask_row)
+                logit_diff = self._max_abs_diff(logits0[local_row], logits1[local_row], mask_row)
+                try:
+                    v0 = float(value0[local_row].detach().float().cpu().reshape(-1)[0].item())
+                    v1 = float(value1[local_row].detach().float().cpu().reshape(-1)[0].item())
+                except Exception:
+                    v0 = 0.0
+                    v1 = 0.0
+                duplicate_match = (prob_diff <= 1.0e-7) and (logit_diff <= 1.0e-6) and (abs(v0 - v1) <= 1.0e-7)
+                model_path = str(getattr(self, "model_path", "") or "")
+                latest_path = str(getattr(self, "model_latest_path", "") or "")
+                load_snapshot = getattr(self, "_model_load_determinism_snapshot", {}) or {}
+                rows.append([
+                    int(call_index),
+                    int(start + local_row),
+                    str(policy_key),
+                    str(head_id),
+                    int(batch_size),
+                    int(seq_len),
+                    int(d_model),
+                    int(max_candidates),
+                    int(cand_feat_dim),
+                    candidate_count,
+                    int(os.getpid()),
+                    threading.current_thread().name,
+                    int(threading.get_ident()),
+                    str(self.device),
+                    str(getattr(self, "py_role", "")),
+                    str(getattr(self, "backend_mode", "")),
+                    "" if self.global_seed is None else int(self.global_seed),
+                    int(torch.initial_seed()),
+                    self._rng_state_digest(torch.random.get_rng_state),
+                    self._short_digest_array(np.random.get_state()[1]),
+                    self._short_digest_bytes(repr(random.getstate()).encode("utf-8", "replace")),
+                    self._rng_state_digest(lambda: torch.cuda.get_rng_state(self.device)) if torch.cuda.is_available() and str(self.device).startswith("cuda") else "",
+                    int(bool(torch.are_deterministic_algorithms_enabled())),
+                    int(bool(torch.backends.cudnn.enabled)),
+                    int(bool(torch.backends.cudnn.deterministic)),
+                    int(bool(torch.backends.cudnn.benchmark)),
+                    int(bool(torch.backends.cuda.matmul.allow_tf32)) if hasattr(torch.backends, "cuda") else "",
+                    int(bool(torch.backends.cudnn.allow_tf32)),
+                    int(bool(getattr(self, "amp_enable", False))),
+                    str(getattr(self, "amp_dtype_name", "")),
+                    model.__class__.__name__,
+                    int(id(model)),
+                    int(bool(model_training_before)),
+                    int(bool(model_training_after)),
+                    self._dropout_summary(model),
+                    model_path,
+                    int(bool(model_path and os.path.exists(model_path))),
+                    self._file_mtime_ns(model_path),
+                    latest_path,
+                    int(bool(latest_path and os.path.exists(latest_path))),
+                    self._file_mtime_ns(latest_path),
+                    load_snapshot.get("snapshot_digest", ""),
+                    load_snapshot.get("path", ""),
+                    load_snapshot.get("path_mtime_ns", ""),
+                    load_snapshot.get("global_seed", ""),
+                    load_snapshot.get("torch_initial_seed", ""),
+                    load_snapshot.get("skipped_incompatible_count", ""),
+                    load_snapshot.get("skipped_incompatible_sample", ""),
+                    load_snapshot.get("skipped_incompatible_digest", ""),
+                    load_snapshot.get("model_state_digest", ""),
+                    load_snapshot.get("model_state_sample", ""),
+                    input_digest,
+                    self._short_digest_array(seq_np[local_row]),
+                    self._short_digest_array(mask_np[local_row]),
+                    self._short_digest_array(tok_np[local_row]),
+                    self._short_digest_array(cand_feat_np[local_row]),
+                    self._short_digest_array(cand_ids_np[local_row]),
+                    self._short_digest_array(cand_mask_np[local_row]),
+                    self._format_indexed_values(probs0[local_row], mask_row),
+                    self._format_indexed_values(probs1[local_row], mask_row),
+                    self._format_indexed_values(logits0[local_row], mask_row),
+                    self._format_indexed_values(logits1[local_row], mask_row),
+                    f"{v0:.9g}",
+                    f"{v1:.9g}",
+                    f"{prob_diff:.9g}",
+                    f"{logit_diff:.9g}",
+                    f"{abs(v0 - v1):.9g}",
+                    int(bool(duplicate_match)),
+                ])
+            if not rows:
+                return
+            with self._python_inference_duplicate_probe_lock:
+                if self._python_inference_duplicate_probe_rows >= int(self.python_inference_duplicate_probe_max_rows):
+                    return
+                allowed = int(self.python_inference_duplicate_probe_max_rows) - self._python_inference_duplicate_probe_rows
+                rows = rows[:max(0, allowed)]
+                with open(path, "a", newline="", encoding="utf-8") as fh:
+                    writer = csv.writer(fh)
+                    writer.writerows(rows)
+                self._python_inference_duplicate_probe_rows += len(rows)
+        except Exception as e:
+            try:
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "Failed to append python inference duplicate probe: %s", str(e))
+            except Exception:
+                pass
 
     def _measure_peak_extra_mb(self, fn):
         return self.cuda_mgr.measure_peak_extra_mb(fn)
@@ -458,6 +1086,79 @@ class PythonEntryPoint:
             if name.startswith(prefixes):
                 p.requires_grad = requires_grad
 
+    def _set_distill_head_only_requires_grad(self):
+        """
+        Restrict terminal-prefix distillation to policy scorer heads.
+        This keeps mulligan state routing, shared encoder features, candidate
+        embeddings, and critic/belief parameters fixed while allowing per-head
+        candidate ranking to absorb searched labels.
+        """
+        if self.model is None:
+            return
+        trainable_prefixes = (
+            'policy_scorer.',
+            'policy_scorer_target.',
+            'policy_scorer_card_select.',
+            'policy_scorer_attack.',
+            'policy_scorer_block.',
+            'policy_scorer_mulligan.',
+        )
+        for name, p in self.model.named_parameters():
+            p.requires_grad = name.startswith(trainable_prefixes)
+
+    def _set_distill_policy_path_only_requires_grad(self):
+        """
+        Restrict distillation to candidate-policy routing while freezing the
+        state encoder and critic. This lets BC teach candidate distinctions
+        such as KEEP vs MULLIGAN without rewriting the learned state features.
+        """
+        if self.model is None:
+            return
+        trainable_prefixes = (
+            'action_id_emb.',
+            'cand_feat_proj.',
+            'cross_attn.',
+            'cross_attn_norm.',
+            'cand_self_attn.',
+            'cand_self_attn_norm.',
+            'policy_scorer.',
+            'policy_scorer_target.',
+            'policy_scorer_card_select.',
+            'policy_scorer_attack.',
+            'policy_scorer_block.',
+            'policy_scorer_mulligan.',
+        )
+        for name, p in self.model.named_parameters():
+            p.requires_grad = name.startswith(trainable_prefixes)
+
+    def _set_candidate_q_only_requires_grad(self):
+        """Train only the action-conditioned terminal value scorer."""
+        if self.model is None:
+            return
+        for name, p in self.model.named_parameters():
+            p.requires_grad = name.startswith('candidate_q_scorer.')
+
+    def _set_value_pair_rank_critic_only_requires_grad(self):
+        """Train only the scalar value path for branch-pair ranking imports."""
+        if self.model is None:
+            return
+        for name, p in self.model.named_parameters():
+            p.requires_grad = name.startswith('critic_') or name == 'value_scale'
+
+    def _set_belief_head_only_requires_grad(self):
+        """Train only the opponent-archetype belief classifier."""
+        if self.model is None:
+            return
+        for name, p in self.model.named_parameters():
+            p.requires_grad = name.startswith('belief_head.')
+
+    def _set_card_belief_head_only_requires_grad(self):
+        """Train only the generic hidden-card belief regressor."""
+        if self.model is None:
+            return
+        for name, p in self.model.named_parameters():
+            p.requires_grad = name.startswith('card_belief_head.')
+
     def _ensure_main_model_initialized(self):
         if self.model is not None:
             return
@@ -478,6 +1179,18 @@ class PythonEntryPoint:
                 dim_feedforward=int(os.getenv('MODEL_DIM_FEEDFORWARD', '512')),
                 cand_feat_dim=48,
             ).to(self.device)
+            if self.distill_head_only:
+                self._set_distill_head_only_requires_grad()
+            elif self.distill_policy_path_only:
+                self._set_distill_policy_path_only_requires_grad()
+            elif self.candidate_q_only:
+                self._set_candidate_q_only_requires_grad()
+            elif self.value_pair_rank_critic_only:
+                self._set_value_pair_rank_critic_only_requires_grad()
+            elif self.belief_head_only:
+                self._set_belief_head_only_requires_grad()
+            elif self.card_belief_head_only:
+                self._set_card_belief_head_only_requires_grad()
 
             # Separate LR groups: actor head, critic head, everything else
             actor_param_names = [
@@ -545,6 +1258,168 @@ class PythonEntryPoint:
                 pass
 
             self._did_initial_load = True
+
+        self._ensure_mcts_reference_model()
+        self._ensure_policy_ensemble_models()
+
+    @staticmethod
+    def _parse_env_paths(raw: str):
+        """Parse model paths from an env var without breaking Windows drive letters."""
+        raw = str(raw or '').strip()
+        if not raw:
+            return []
+        if ';' in raw:
+            parts = raw.split(';')
+        elif '\n' in raw:
+            parts = raw.splitlines()
+        elif os.pathsep != ':' and os.pathsep in raw:
+            parts = raw.split(os.pathsep)
+        elif ',' in raw:
+            parts = raw.split(',')
+        else:
+            parts = [raw]
+        return [p.strip().strip('"').strip("'") for p in parts if p and p.strip()]
+
+    @staticmethod
+    def _parse_float_list(raw: str):
+        raw = str(raw or '').strip()
+        if not raw:
+            return []
+        values = []
+        for part in raw.replace(';', ',').split(','):
+            part = part.strip()
+            if not part:
+                continue
+            try:
+                values.append(float(part))
+            except Exception:
+                return []
+        return values
+
+    def _ensure_mcts_reference_model(self):
+        """Load an optional frozen policy reference for prefix/MCTS target mixing."""
+        if self.mcts_reference_model is not None:
+            return
+        path = self.mcts_reference_model_path
+        if not path:
+            return
+        if not os.path.exists(path):
+            logger.warning(LogCategory.MODEL_INIT,
+                           "MCTS reference model path does not exist: %s", path)
+            print(f"[REF_POLICY] reference model missing: {path}", flush=True)
+            return
+        try:
+            ref = MTGTransformerModel(
+                d_model=int(os.getenv('MODEL_D_MODEL', '128')),
+                nhead=int(os.getenv('MODEL_NHEAD', '4')),
+                num_layers=int(os.getenv('MODEL_NUM_LAYERS', '2')),
+                dim_feedforward=int(os.getenv('MODEL_DIM_FEEDFORWARD', '512')),
+                cand_feat_dim=48,
+            ).to(self.device)
+            ref.load(path)
+            ref.eval()
+            for p in ref.parameters():
+                p.requires_grad = False
+            self.mcts_reference_model = ref
+            logger.info(LogCategory.MODEL_INIT,
+                        "Loaded MCTS reference model from %s", path)
+            print(
+                f"[REF_POLICY] loaded reference model path={path} coef={self.reference_policy_kl_coef:.4f}",
+                flush=True)
+        except Exception as e:
+            logger.warning(LogCategory.MODEL_INIT,
+                           "Failed to load MCTS reference model from %s: %s",
+                           path, str(e))
+            self.mcts_reference_model = None
+
+    def _ensure_policy_ensemble_models(self):
+        """Load optional frozen companion policies for eval-time ensemble diagnostics."""
+        if self._policy_ensemble_loaded:
+            return
+        self._policy_ensemble_loaded = True
+        paths = list(self.policy_ensemble_model_paths or [])
+        if not paths:
+            return
+
+        loaded = []
+        for path in paths:
+            if not os.path.exists(path):
+                logger.warning(LogCategory.MODEL_INIT,
+                               "Policy ensemble model path does not exist: %s", path)
+                print(f"[POLICY_ENSEMBLE] model missing: {path}", flush=True)
+                continue
+            try:
+                ens = MTGTransformerModel(
+                    d_model=int(os.getenv('MODEL_D_MODEL', '128')),
+                    nhead=int(os.getenv('MODEL_NHEAD', '4')),
+                    num_layers=int(os.getenv('MODEL_NUM_LAYERS', '2')),
+                    dim_feedforward=int(os.getenv('MODEL_DIM_FEEDFORWARD', '512')),
+                    cand_feat_dim=48,
+                ).to(self.device)
+                ens.load(path)
+                ens.eval()
+                for p in ens.parameters():
+                    p.requires_grad = False
+                loaded.append((path, ens))
+                logger.info(LogCategory.MODEL_INIT,
+                            "Loaded policy ensemble model from %s", path)
+                print(f"[POLICY_ENSEMBLE] loaded model path={path}", flush=True)
+            except Exception as e:
+                logger.warning(LogCategory.MODEL_INIT,
+                               "Failed to load policy ensemble model from %s: %s",
+                               path, str(e))
+
+        self.policy_ensemble_models = [model for _path, model in loaded]
+        weights = self._parse_float_list(self.policy_ensemble_weight_spec)
+        expected_with_primary = 1 + len(self.policy_ensemble_models)
+        if not self.policy_ensemble_models:
+            self.policy_ensemble_weights = []
+            return
+        if len(weights) == expected_with_primary:
+            normalized = weights
+        elif len(weights) == len(self.policy_ensemble_models):
+            normalized = [1.0] + weights
+        else:
+            normalized = [1.0] * expected_with_primary
+            if self.policy_ensemble_weight_spec:
+                logger.warning(LogCategory.MODEL_INIT,
+                               "Ignoring POLICY_ENSEMBLE_WEIGHTS length=%d expected=%d or %d",
+                               len(weights), expected_with_primary,
+                               len(self.policy_ensemble_models))
+        normalized = [max(0.0, float(w)) for w in normalized]
+        total = sum(normalized)
+        if total <= 0.0:
+            normalized = [1.0] * expected_with_primary
+            total = float(expected_with_primary)
+        self.policy_ensemble_weights = [float(w) / total for w in normalized]
+        logger.info(LogCategory.MODEL_INIT,
+                    "Policy ensemble active: companions=%d weights=%s",
+                    len(self.policy_ensemble_models), self.policy_ensemble_weights)
+        print(
+            f"[POLICY_ENSEMBLE] active companions={len(self.policy_ensemble_models)} weights={self.policy_ensemble_weights}",
+            flush=True)
+
+    def _score_reference_policy_chunk(self, seq, mask, token_ids, candidate_features,
+                                      candidate_ids, candidate_mask, head_idx,
+                                      max_candidates, autocast_ctx):
+        """Score a chunk with the frozen reference model, matching per-head routing."""
+        ref = self.mcts_reference_model
+        if ref is None:
+            return None
+        chunk_n = seq.shape[0]
+        ref_probs = torch.zeros(chunk_n, max_candidates, device=self.device)
+        with torch.no_grad():
+            with autocast_ctx:
+                for hid_val, hid_name in enumerate(HEAD_NAMES):
+                    hmask = (head_idx == hid_val)
+                    if not hmask.any():
+                        continue
+                    p_h, _v_h = ref.score_candidates(
+                        seq[hmask], mask[hmask], token_ids[hmask],
+                        candidate_features[hmask], candidate_ids[hmask],
+                        candidate_mask[hmask], head_id=hid_name)
+                    ref_probs[hmask] = p_h.float()
+        return torch.clamp(ref_probs, min=1e-8, max=1.0).detach()
 
 
     # ------------------------------------------------------------------
@@ -669,6 +1544,17 @@ class PythonEntryPoint:
                 cand_mask_t = torch.tensor(
                     cand_mask, dtype=torch.bool, device=device)
 
+                probe_inputs = None
+                if self.python_inference_duplicate_probe:
+                    probe_inputs = {
+                        "seq": np.ascontiguousarray(seq),
+                        "mask": np.ascontiguousarray(mask),
+                        "token_ids": np.ascontiguousarray(tok_ids),
+                        "candidate_features": np.ascontiguousarray(cand_feat),
+                        "candidate_ids": np.ascontiguousarray(cand_ids),
+                        "candidate_mask": np.ascontiguousarray(cand_mask),
+                    }
+
                 # Release numpy slices immediately
                 del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask
 
@@ -680,6 +1566,7 @@ class PythonEntryPoint:
                 if model is None:
                     raise RuntimeError("No policy model available for scoring")
                 model.eval()
+                self._ensure_policy_ensemble_models()
 
                 acquired_gpu_lock_here = False
                 if self.backend_mode != "single":
@@ -695,9 +1582,82 @@ class PythonEntryPoint:
 
                 try:
                     with torch.inference_mode():
-                        probs, value = model.score_candidates(
-                            seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
-                            head_id, int(pick_index), int(min_targets), int(max_targets))
+                        model_training_before = bool(getattr(model, "training", False))
+                        if self.python_inference_duplicate_probe:
+                            probs, value, logits = model.score_candidates(
+                                seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
+                                head_id, int(pick_index), int(min_targets), int(max_targets),
+                                return_logits=True)
+                            duplicate_probs, duplicate_value, duplicate_logits = model.score_candidates(
+                                seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
+                                head_id, int(pick_index), int(min_targets), int(max_targets),
+                                return_logits=True)
+                            probe_probs, probe_value = probs, value
+                        else:
+                            probs, value = model.score_candidates(
+                                seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
+                                head_id, int(pick_index), int(min_targets), int(max_targets))
+                            logits = duplicate_probs = duplicate_value = duplicate_logits = None
+                            probe_probs = probe_value = None
+                        if self.policy_ensemble_models:
+                            weights = self.policy_ensemble_weights
+                            primary_weight = float(weights[0]) if weights else 1.0
+                            probs_acc = probs.float() * primary_weight
+                            value_acc = value.float() * primary_weight
+                            active_weight = primary_weight
+                            for ens_idx, ens_model in enumerate(self.policy_ensemble_models):
+                                weight_idx = ens_idx + 1
+                                ens_weight = float(weights[weight_idx]) if weight_idx < len(weights) else 1.0
+                                if ens_weight <= 0.0:
+                                    continue
+                                try:
+                                    ens_probs, ens_value = ens_model.score_candidates(
+                                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
+                                        head_id, int(pick_index), int(min_targets), int(max_targets))
+                                    if ens_probs.shape != probs.shape or ens_value.shape != value.shape:
+                                        raise RuntimeError(
+                                            f"shape mismatch probs={tuple(ens_probs.shape)} value={tuple(ens_value.shape)}")
+                                    probs_acc = probs_acc + ens_probs.float() * ens_weight
+                                    value_acc = value_acc + ens_value.float() * ens_weight
+                                    active_weight += ens_weight
+                                except Exception as e:
+                                    if ens_idx not in self._policy_ensemble_runtime_failures:
+                                        self._policy_ensemble_runtime_failures.add(ens_idx)
+                                        logger.warning(
+                                            LogCategory.MODEL_INIT,
+                                            "Policy ensemble companion %d failed during scoring; skipping it: %s",
+                                            ens_idx, str(e))
+                            if active_weight > 0.0:
+                                probs = probs_acc / float(active_weight)
+                                valid = cand_mask_t.bool()
+                                probs = torch.nan_to_num(probs, nan=0.0, posinf=0.0, neginf=0.0)
+                                probs = probs * valid.float()
+                                row_sum = probs.sum(dim=-1, keepdim=True)
+                                fallback = valid.float() / (valid.float().sum(dim=-1, keepdim=True) + 1e-8)
+                                probs = torch.where(row_sum > 0, probs / (row_sum + 1e-8), fallback)
+                                value = value_acc / float(active_weight)
+                        if self.python_inference_duplicate_probe:
+                            self._append_python_inference_duplicate_probe(
+                                int(self.score_call_counter) + 1,
+                                int(start),
+                                policy_key,
+                                head_id,
+                                int(batch_size),
+                                int(seq_len),
+                                int(d_model),
+                                int(max_candidates),
+                                int(cand_feat_dim),
+                                model,
+                                model_training_before,
+                                bool(getattr(model, "training", False)),
+                                probe_inputs or {},
+                                probe_probs,
+                                probe_value,
+                                logits,
+                                duplicate_probs,
+                                duplicate_value,
+                                duplicate_logits,
+                                cand_mask_t)
                 finally:
                     if acquired_gpu_lock_here:
                         self.gpu_lock.release(process_name=self.process_name)
@@ -1547,11 +2507,14 @@ class PythonEntryPoint:
                                  cand_feat_dim,
                                  archetype_labels_bytes=None,
                                  num_archetypes=0,
-                                 mcts_visits_bytes=None):
+                                 mcts_visits_bytes=None,
+                                 card_belief_labels_bytes=None,
+                                 card_belief_dim=0):
         """
         Train on a batch that concatenates multiple episodes.
         dones marks episode ends (1=end-of-episode), so GAE/returns do not leak across boundaries.
-        head_ids_bytes: per-step head index (0=action, 1=target, 2=card_select).
+        head_ids_bytes: per-step head index
+            (0=action, 1=target, 2=card_select, 3=attack, 4=block, 5=mulligan).
         """
         t_start = time.perf_counter()
         lock_held = False
@@ -1616,6 +2579,18 @@ class PythonEntryPoint:
                 except Exception:
                     mcts_visits_np = None
 
+            # Generic card-level hidden-state belief labels. Rows filled with
+            # -1 are absent and skipped by the loss.
+            card_belief_labels_np = None
+            _card_belief_dim = int(card_belief_dim or 0)
+            if _card_belief_dim > 0 and card_belief_labels_bytes:
+                try:
+                    card_belief_labels_np = np.frombuffer(
+                        card_belief_labels_bytes, dtype='<f4').reshape(
+                        batch_size, _card_belief_dim)[start:end]
+                except Exception:
+                    card_belief_labels_np = None
+
             _nb = str(device).startswith("cuda")
             seq_t = torch.tensor(seq, dtype=torch.float32).to(device, non_blocking=_nb)
             mask_t = torch.tensor(mask, dtype=torch.bool).to(device, non_blocking=_nb)
@@ -1642,14 +2617,23 @@ class PythonEntryPoint:
                 mcts_visits_t = torch.tensor(
                     mcts_visits_np, dtype=torch.float32).to(device, non_blocking=_nb)
 
+            card_belief_labels_t = None
+            if card_belief_labels_np is not None:
+                card_belief_labels_t = torch.tensor(
+                    card_belief_labels_np, dtype=torch.float32).to(device, non_blocking=_nb)
+
             if _nb:
                 torch.cuda.synchronize(device)
 
             # Release numpy slices immediately
             del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value, sample_weights, dones, head_ids
             archetype_labels_np = None
+            card_belief_labels_np = None
 
             local_batch_size = int(end - start)
+            mcts_signed_targets = bool(int(os.getenv(
+                "CANDIDATE_Q_MCTS_SIGNED_TARGETS",
+                os.getenv("CANDIDATE_Q_BRANCH_RETURN_TARGETS", "0"))))
 
             _bad = torch.stack([
                 ~torch.isfinite(seq_t).all(),
@@ -1710,7 +2694,7 @@ class PythonEntryPoint:
                 # step-wise chunks. Pass 1 (below) does a no_grad forward for GAE;
                 # Pass 2 (after advantage normalization) does grad forward + loss + backward
                 # per chunk so activations from earlier chunks are freed before the next.
-                _HEAD_NAMES = ["action", "target", "card_select", "attack", "block"]
+                _HEAD_NAMES = ["action", "target", "card_select", "attack", "block", "mulligan"]
                 train_chunk_size = int(os.getenv("TRAIN_CHUNK_SIZE", "256"))
                 if train_chunk_size <= 0 or train_chunk_size >= local_batch_size:
                     chunk_starts = [0]
@@ -1719,6 +2703,244 @@ class PythonEntryPoint:
                     chunk_starts = list(range(0, local_batch_size, train_chunk_size))
                     effective_chunk = train_chunk_size
 
+                if bool(int(os.getenv("BC_DIRECT_LOSS", "0"))):
+                    if mcts_visits_t is not None and not mcts_signed_targets:
+                        targets_full = mcts_visits_t.float().clone()
+                    else:
+                        targets_full = torch.zeros(local_batch_size, max_candidates, device=device)
+                    targets_full = torch.nan_to_num(targets_full, nan=0.0, posinf=0.0, neginf=0.0).clamp_min(0.0)
+                    row_sum = targets_full.sum(dim=-1)
+
+                    # Fallback for older data: if no MCTS/BC distribution exists,
+                    # convert chosenIndices into a uniform multi-label target.
+                    empty_rows = row_sum <= 1e-6
+                    if empty_rows.any():
+                        fallback = torch.zeros_like(targets_full)
+                        max_choices = min(int(chosen_indices_t.shape[1]), max_candidates)
+                        for _pick in range(max_choices):
+                            _idx = chosen_indices_t[:, _pick]
+                            _valid = (
+                                empty_rows
+                                & (_pick < chosen_count_t)
+                                & (_idx >= 0)
+                                & (_idx < max_candidates)
+                                & cand_mask_t.gather(1, _idx.clamp(0, max_candidates - 1).unsqueeze(1)).squeeze(1)
+                            )
+                            if _valid.any():
+                                fallback[_valid, _idx[_valid].long()] = 1.0
+                        fallback_sum = fallback.sum(dim=-1)
+                        use_fallback = empty_rows & (fallback_sum > 1e-6)
+                        targets_full[use_fallback] = fallback[use_fallback]
+                        row_sum = targets_full.sum(dim=-1)
+
+                    valid_rows = row_sum > 1e-6
+                    if not valid_rows.any():
+                        logger.warning(LogCategory.MODEL_TRAIN,
+                                       "BC_DIRECT_LOSS requested but batch has no target rows")
+                        return
+                    if bool(int(os.getenv("BC_HARDEN_BINARY_TARGETS", "0"))):
+                        valid_count_full = cand_mask_t.bool().sum(dim=-1)
+                        binary_rows = valid_rows & (valid_count_full == 2)
+                        if binary_rows.any():
+                            masked_targets = targets_full.masked_fill(~cand_mask_t.bool(), -1.0)
+                            hard_indices = masked_targets.argmax(dim=-1).long()
+                            force_binary_idx = os.getenv("BC_FORCE_BINARY_TARGET_IDX", "").strip()
+                            if force_binary_idx:
+                                try:
+                                    forced_idx = int(force_binary_idx)
+                                    if 0 <= forced_idx < max_candidates:
+                                        hard_indices = hard_indices.clone()
+                                        hard_indices[binary_rows] = forced_idx
+                                except Exception:
+                                    pass
+                            hard_targets = torch.zeros_like(targets_full)
+                            hard_targets.scatter_(1, hard_indices.unsqueeze(1), 1.0)
+                            if not getattr(self, "_bc_harden_binary_diag_emitted", False):
+                                hard_indices_cpu = hard_indices[binary_rows].detach().to(torch.long).cpu()
+                                head_idx_cpu = head_idx_t[binary_rows].detach().to(torch.long).cpu()
+                                head_counts = torch.bincount(head_idx_cpu, minlength=len(_HEAD_NAMES)).tolist()
+                                target_counts = torch.bincount(
+                                    hard_indices_cpu, minlength=max_candidates).tolist()
+                                logger.info(
+                                    LogCategory.MODEL_TRAIN,
+                                    "BC_HARDEN_BINARY_TARGETS active binaryRows=%d headCounts=%s targetArgmaxCountsFirst8=%s",
+                                    int(binary_rows.detach().sum().item()),
+                                    str({name: int(head_counts[i]) for i, name in enumerate(_HEAD_NAMES)}),
+                                    str([int(v) for v in target_counts[:8]])
+                                )
+                                print(
+                                    "BC_HARDEN_BINARY_TARGETS active "
+                                    f"binaryRows={int(binary_rows.detach().sum().item())} "
+                                    f"headCounts={{{', '.join(f'{name}: {int(head_counts[i])}' for i, name in enumerate(_HEAD_NAMES))}}} "
+                                    f"targetArgmaxCountsFirst8={[int(v) for v in target_counts[:8]]}",
+                                    flush=True
+                                )
+                                diag_file = os.getenv("BC_HARDEN_BINARY_DIAG_FILE", "").strip()
+                                if diag_file:
+                                    try:
+                                        with open(diag_file, "a", encoding="utf-8") as _diag:
+                                            _diag.write(
+                                                "BC_HARDEN_BINARY_TARGETS active "
+                                                f"binaryRows={int(binary_rows.detach().sum().item())} "
+                                                f"headCounts={{{', '.join(f'{name}: {int(head_counts[i])}' for i, name in enumerate(_HEAD_NAMES))}}} "
+                                                f"targetArgmaxCountsFirst8={[int(v) for v in target_counts[:8]]}\n"
+                                            )
+                                    except Exception:
+                                        pass
+                                self._bc_harden_binary_diag_emitted = True
+                            targets_full[binary_rows] = hard_targets[binary_rows]
+                            row_sum = targets_full.sum(dim=-1)
+                    targets_full = targets_full / row_sum.unsqueeze(1).clamp_min(1e-6)
+                    targets_full = targets_full * cand_mask_t.float()
+                    targets_full = targets_full / targets_full.sum(dim=-1, keepdim=True).clamp_min(1e-6)
+
+                    bc_coef = float(os.getenv("BC_DIRECT_LOSS_COEF", str(self.mcts_kl_loss_coef)))
+                    effective_sample_w_t = sample_w_t
+                    if bool(int(os.getenv("BC_BALANCE_BINARY_TARGETS", "0"))):
+                        valid_count_full = cand_mask_t.bool().sum(dim=-1)
+                        balance_rows = valid_rows & (valid_count_full == 2)
+                        if balance_rows.any():
+                            target_idx_for_weight = targets_full.argmax(dim=-1).long()
+                            idx_cpu = target_idx_for_weight[balance_rows].detach().to(torch.long).cpu()
+                            counts = torch.bincount(idx_cpu, minlength=max_candidates).float()
+                            active = counts > 0
+                            class_count = float(active.sum().item())
+                            if class_count > 1.0:
+                                total_binary = float(balance_rows.detach().sum().item())
+                                class_weights = torch.ones(max_candidates, device=device)
+                                for _i in range(max_candidates):
+                                    if counts[_i].item() > 0:
+                                        class_weights[_i] = total_binary / (class_count * float(counts[_i].item()))
+                                effective_sample_w_t = sample_w_t.clone()
+                                effective_sample_w_t[balance_rows] = (
+                                    effective_sample_w_t[balance_rows]
+                                    * class_weights[target_idx_for_weight[balance_rows]]
+                                )
+                                diag_file = os.getenv("BC_HARDEN_BINARY_DIAG_FILE", "").strip()
+                                if diag_file and not getattr(self, "_bc_balance_binary_diag_emitted", False):
+                                    try:
+                                        with open(diag_file, "a", encoding="utf-8") as _diag:
+                                            _diag.write(
+                                                "BC_BALANCE_BINARY_TARGETS active "
+                                                f"binaryRows={int(balance_rows.detach().sum().item())} "
+                                                f"countsFirst8={[int(v) for v in counts[:8].tolist()]} "
+                                                f"weightsFirst8={[float(v) for v in class_weights[:8].detach().cpu().tolist()]}\n"
+                                            )
+                                    except Exception:
+                                        pass
+                                    self._bc_balance_binary_diag_emitted = True
+                    total_bc_weight = effective_sample_w_t[valid_rows].sum().clamp_min(1e-8).detach()
+                    self.optimizer.zero_grad(set_to_none=True)
+                    total_loss = 0.0
+                    total_rows = 0
+                    for _c_start in chunk_starts:
+                        _c_end = min(_c_start + effective_chunk, local_batch_size)
+                        _head_idx_c = head_idx_t[_c_start:_c_end]
+                        _seq_c = seq_t[_c_start:_c_end]
+                        _mask_c = mask_t[_c_start:_c_end]
+                        _tok_c = tok_t[_c_start:_c_end]
+                        _cf_c = cand_feat_t[_c_start:_c_end]
+                        _ci_c = cand_ids_t[_c_start:_c_end]
+                        _cm_c = cand_mask_t[_c_start:_c_end]
+                        _chunk_N = _c_end - _c_start
+                        _logits_c = torch.zeros(_chunk_N, max_candidates, device=device)
+                        with autocast_ctx:
+                            for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
+                                _hmask = (_head_idx_c == _hid_val)
+                                if not _hmask.any():
+                                    continue
+                                _, _, _logits_h = self.model.score_candidates(
+                                    _seq_c[_hmask], _mask_c[_hmask], _tok_c[_hmask],
+                                    _cf_c[_hmask], _ci_c[_hmask], _cm_c[_hmask],
+                                    head_id=_hid_name, return_logits=True)
+                                _logits_c[_hmask] = _logits_h.float()
+                            _targets_c = targets_full[_c_start:_c_end]
+                            _valid_c = valid_rows[_c_start:_c_end]
+                            if not _valid_c.any():
+                                continue
+                            _log_probs_c = torch.log_softmax(_logits_c.float(), dim=-1)
+                            _loss_per = -(_targets_c * _log_probs_c).sum(dim=-1)
+                            _weights_c = effective_sample_w_t[_c_start:_c_end]
+                            _chunk_loss = bc_coef * ((_loss_per[_valid_c] * _weights_c[_valid_c]).sum() / total_bc_weight)
+                        if scaler is not None:
+                            scaler.scale(_chunk_loss).backward()
+                        else:
+                            _chunk_loss.backward()
+                        total_loss += float(_chunk_loss.detach().item())
+                        total_rows += int(_valid_c.detach().sum().item())
+
+                    if scaler is not None:
+                        try:
+                            scaler.unscale_(self.optimizer)
+                        except Exception:
+                            pass
+                    _probe_name = None
+                    _probe_param = None
+                    for _name, _param in self.model.named_parameters():
+                        if _name.startswith("policy_scorer_mulligan.") and _param.requires_grad:
+                            _probe_name = _name
+                            _probe_param = _param
+                            break
+                    _probe_before = (
+                        float(_probe_param.detach().float().flatten()[0].item())
+                        if _probe_param is not None and _probe_param.numel() > 0 else 0.0
+                    )
+                    _mull_grad_sq = 0.0
+                    _mull_grad_count = 0
+                    for _name, _param in self.model.named_parameters():
+                        if _name.startswith("policy_scorer_mulligan.") and _param.grad is not None:
+                            _gn = float(_param.grad.detach().float().norm().item())
+                            _mull_grad_sq += _gn * _gn
+                            _mull_grad_count += 1
+                    _grad_norm = torch.nn.utils.clip_grad_norm_(
+                        self.model.parameters(), self.model.max_grad_norm)
+                    if scaler is not None:
+                        scaler.step(self.optimizer)
+                        scaler.update()
+                    else:
+                        self.optimizer.step()
+                    if not getattr(self, "_bc_grad_diag_emitted", False):
+                        _probe_after = (
+                            float(_probe_param.detach().float().flatten()[0].item())
+                            if _probe_param is not None and _probe_param.numel() > 0 else 0.0
+                        )
+                        diag_file = os.getenv("BC_HARDEN_BINARY_DIAG_FILE", "").strip()
+                        if diag_file:
+                            try:
+                                with open(diag_file, "a", encoding="utf-8") as _diag:
+                                    _diag.write(
+                                        "BC_DIRECT_LOSS gradDiag "
+                                        f"gradNorm={float(_grad_norm):.8f} "
+                                        f"mullGradNorm={(_mull_grad_sq ** 0.5):.8f} "
+                                        f"mullGradParamCount={_mull_grad_count} "
+                                        f"probe={_probe_name} "
+                                        f"probeBefore={_probe_before:.10f} "
+                                        f"probeAfter={_probe_after:.10f} "
+                                        f"lrs={[float(g.get('lr', 0.0)) for g in self.optimizer.param_groups]}\n"
+                                    )
+                            except Exception:
+                                pass
+                        self._bc_grad_diag_emitted = True
+
+                    self.train_step_counter = next_step
+                    self.main_train_sample_counter += int(local_batch_size)
+                    logger.info(LogCategory.MODEL_TRAIN,
+                                "trainCandidatesMultiFlat BC_DIRECT_LOSS loss=%.4f rows=%d coef=%.4f batch=%d",
+                                total_loss, total_rows, bc_coef, local_batch_size)
+                    self.metrics.record_train_losses(
+                        total_loss=total_loss,
+                        policy_loss=0.0,
+                        value_loss=0.0,
+                        entropy=0.0,
+                        entropy_coef=0.0,
+                        clip_frac=0.0,
+                        approx_kl=0.0,
+                        batch_size=local_batch_size,
+                        advantage_mean=0.0
+                    )
+                    self._write_training_losses_csv(episodes_in_batch=ep_count)
+                    return
+
                 # Pass 1 is only needed when we plan to backward per chunk (multi-chunk):
                 # we need all values BEFORE any Pass 2 chunk starts loss computation
                 # because GAE requires the full value trajectory.
@@ -1726,9 +2948,15 @@ class PythonEntryPoint:
                 # the grad graph alive from a single forward that serves BOTH GAE (via
                 # detach) AND the loss+backward. Saves one full forward pass.
                 _multi_chunk = len(chunk_starts) > 1
+                candidate_q_loss_coef = float(os.getenv("CANDIDATE_Q_LOSS_COEF", "0.0"))
+                candidate_q_critical_only = bool(int(os.getenv("CANDIDATE_Q_CRITICAL_ONLY", "0")))
+                candidate_q_huber_beta = float(os.getenv("CANDIDATE_Q_HUBER_BETA", "0.25"))
+                candidate_q_from_mcts_targets = bool(int(os.getenv("CANDIDATE_Q_FROM_MCTS_TARGETS", "0")))
+                candidate_q_mcts_signed_targets = mcts_signed_targets
                 _single_pass_probs = None
                 _single_pass_value = None
                 _single_pass_cls = None
+                _single_pass_candidate_q = None
                 probs = torch.zeros(local_batch_size, max_candidates, device=device)
                 value = torch.zeros(local_batch_size, 1, device=device)
                 if _multi_chunk:
@@ -1780,17 +3008,26 @@ class PythonEntryPoint:
                         _sp_probs = torch.zeros(local_batch_size, max_candidates, device=device)
                         _sp_value = torch.zeros(local_batch_size, 1, device=device)
                         _sp_cls = torch.zeros(local_batch_size, self.model.d_model, device=device)
+                        _sp_candidate_q = torch.zeros(local_batch_size, max_candidates, device=device) if candidate_q_loss_coef > 0.0 else None
                         for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
                             _hmask = (head_idx_t == _hid_val)
                             if not _hmask.any():
                                 continue
-                            _p_h, _v_h, _cls_h = self.model.score_candidates(
-                                seq_t[_hmask], mask_t[_hmask], tok_t[_hmask],
-                                cand_feat_t[_hmask], cand_ids_t[_hmask], cand_mask_t[_hmask],
-                                head_id=_hid_name, return_cls=True)
+                            if candidate_q_loss_coef > 0.0:
+                                _p_h, _v_h, _cls_h, _q_h = self.model.score_candidates(
+                                    seq_t[_hmask], mask_t[_hmask], tok_t[_hmask],
+                                    cand_feat_t[_hmask], cand_ids_t[_hmask], cand_mask_t[_hmask],
+                                    head_id=_hid_name, return_cls=True, return_candidate_q=True)
+                            else:
+                                _p_h, _v_h, _cls_h = self.model.score_candidates(
+                                    seq_t[_hmask], mask_t[_hmask], tok_t[_hmask],
+                                    cand_feat_t[_hmask], cand_ids_t[_hmask], cand_mask_t[_hmask],
+                                    head_id=_hid_name, return_cls=True)
                             _sp_probs[_hmask] = _p_h.float()
                             _sp_value[_hmask] = _v_h.float()
                             _sp_cls[_hmask] = _cls_h.float()
+                            if _sp_candidate_q is not None:
+                                _sp_candidate_q[_hmask] = _q_h.float()
                     if torch.isnan(_sp_probs).any() or torch.isnan(_sp_value).any():
                         logger.warning(LogCategory.MODEL_TRAIN,
                                        "Model produced NaN outputs - skipping batch (probs_nan=%s, value_nan=%s)",
@@ -1801,6 +3038,7 @@ class PythonEntryPoint:
                     _single_pass_probs = _sp_probs
                     _single_pass_value = _sp_value
                     _single_pass_cls = _sp_cls
+                    _single_pass_candidate_q = _sp_candidate_q
                     # Use detached copy for diagnostics / GAE; the live-grad copies
                     # live in _single_pass_probs / _single_pass_value for the loss.
                     probs = _sp_probs.detach()
@@ -1935,9 +3173,39 @@ class PythonEntryPoint:
                 total_loss_policy = 0.0
                 total_loss_value = 0.0
                 total_loss_belief = 0.0
+                total_loss_card_belief = 0.0
+                total_loss_candidate_q = 0.0
+                total_loss_branch_return_policy = 0.0
+                total_loss_reference_policy = 0.0
+                total_loss_return_contrastive = 0.0
+                total_loss_value_pair_rank = 0.0
+                total_loss_policy_pair_rank = 0.0
+                total_loss_trajectory_pair_rank = 0.0
+                total_loss_action_pair_rank = 0.0
                 total_entropy_sum = 0.0
                 new_logp_chunks = []
                 ratio_raw_chunks = []
+                mcts_debug = bool(int(os.getenv("MCTS_KL_DEBUG", "0")))
+                value_pair_rank_coef = float(os.getenv("VALUE_PAIR_RANK_LOSS_COEF", "0.0"))
+                value_pair_rank_margin = max(0.0, float(os.getenv("VALUE_PAIR_RANK_MARGIN", "0.20")))
+                policy_pair_rank_coef = float(os.getenv("POLICY_PAIR_RANK_LOSS_COEF", "0.0"))
+                policy_pair_rank_margin = max(0.0, float(os.getenv("POLICY_PAIR_RANK_MARGIN", "0.20")))
+                trajectory_pair_rank_coef = float(os.getenv("TRAJECTORY_PAIR_RANK_LOSS_COEF", "0.0"))
+                trajectory_pair_rank_margin = max(0.0, float(os.getenv("TRAJECTORY_PAIR_RANK_MARGIN", "0.20")))
+                action_pair_rank_coef = float(os.getenv("ACTION_PAIR_RANK_LOSS_COEF", "0.0"))
+                action_pair_rank_margin = max(0.0, float(os.getenv("ACTION_PAIR_RANK_MARGIN", "0.20")))
+                action_pair_rank_min_gap = max(0.0, float(os.getenv("ACTION_PAIR_RANK_MIN_GAP", "0.25")))
+                branch_return_policy_coef = float(os.getenv("BRANCH_RETURN_POLICY_LOSS_COEF", "0.0"))
+                branch_return_policy_temp = max(
+                    1e-3, float(os.getenv("BRANCH_RETURN_POLICY_TEMPERATURE", "0.50")))
+                branch_return_policy_min_gap = max(
+                    0.0, float(os.getenv("BRANCH_RETURN_POLICY_MIN_GAP", "0.25")))
+                branch_return_policy_target_mix = max(
+                    0.0, min(1.0, float(os.getenv("BRANCH_RETURN_POLICY_TARGET_MIX", "1.0"))))
+                return_contrastive_coef = float(os.getenv("RETURN_CONTRASTIVE_POLICY_LOSS_COEF", "0.0"))
+                return_contrastive_eps = float(os.getenv("RETURN_CONTRASTIVE_RETURN_EPS", "0.05"))
+                return_contrastive_neg_prob_floor = float(os.getenv("RETURN_CONTRASTIVE_NEG_PROB_FLOOR", "0.20"))
+                return_contrastive_critical_only = bool(int(os.getenv("RETURN_CONTRASTIVE_CRITICAL_ONLY", "1")))
 
                 for _c_start in chunk_starts:
                     _c_end = min(_c_start + effective_chunk, local_batch_size)
@@ -1954,6 +3222,7 @@ class PythonEntryPoint:
                     _adv_c = advantages_normalized[_c_start:_c_end]
                     _old_logp_c = old_logp_t[_c_start:_c_end]
                     _old_value_c = old_value_t[_c_start:_c_end]
+                    _rewards_c = rewards_t[_c_start:_c_end]
                     _value_targets_c = value_targets[_c_start:_c_end]
                     _chunk_N = _c_end - _c_start
 
@@ -1962,22 +3231,32 @@ class PythonEntryPoint:
                         _probs_c = _single_pass_probs
                         _value_c = _single_pass_value
                         _cls_c = _single_pass_cls
+                        _candidate_q_c = _single_pass_candidate_q
                     else:
                         with autocast_ctx:
                             _probs_c = torch.zeros(_chunk_N, max_candidates, device=device)
                             _value_c = torch.zeros(_chunk_N, 1, device=device)
                             _cls_c = torch.zeros(_chunk_N, self.model.d_model, device=device)
+                            _candidate_q_c = torch.zeros(_chunk_N, max_candidates, device=device) if candidate_q_loss_coef > 0.0 else None
                             for _hid_val, _hid_name in enumerate(_HEAD_NAMES):
                                 _hmask = (_head_idx_c == _hid_val)
                                 if not _hmask.any():
                                     continue
-                                _p_h, _v_h, _cls_h = self.model.score_candidates(
-                                    _seq_c[_hmask], _mask_c[_hmask], _tok_c[_hmask],
-                                    _cf_c[_hmask], _ci_c[_hmask], _cm_c[_hmask],
-                                    head_id=_hid_name, return_cls=True)
+                                if candidate_q_loss_coef > 0.0:
+                                    _p_h, _v_h, _cls_h, _q_h = self.model.score_candidates(
+                                        _seq_c[_hmask], _mask_c[_hmask], _tok_c[_hmask],
+                                        _cf_c[_hmask], _ci_c[_hmask], _cm_c[_hmask],
+                                        head_id=_hid_name, return_cls=True, return_candidate_q=True)
+                                else:
+                                    _p_h, _v_h, _cls_h = self.model.score_candidates(
+                                        _seq_c[_hmask], _mask_c[_hmask], _tok_c[_hmask],
+                                        _cf_c[_hmask], _ci_c[_hmask], _cm_c[_hmask],
+                                        head_id=_hid_name, return_cls=True)
                                 _probs_c[_hmask] = _p_h.float()
                                 _value_c[_hmask] = _v_h.float()
                                 _cls_c[_hmask] = _cls_h.float()
+                                if _candidate_q_c is not None:
+                                    _candidate_q_c[_hmask] = _q_h.float()
 
                     _probs_safe_c = torch.clamp(_probs_c, min=1e-8, max=1.0)
                     _new_logp_c = self._joint_logp_from_probs(
@@ -2004,7 +3283,9 @@ class PythonEntryPoint:
                         # (e.g., many samples hit the ratio cap simultaneously),
                         # skip this update entirely. The data is too stale.
                         _policy_loss_threshold = float(os.getenv("PPO_POLICY_LOSS_SKIP_THRESHOLD", "100.0"))
-                        if torch.isfinite(_loss_policy_c) and _loss_policy_c.abs().item() > _policy_loss_threshold:
+                        if (policy_loss_coef > 0.0
+                                and torch.isfinite(_loss_policy_c)
+                                and _loss_policy_c.abs().item() > _policy_loss_threshold):
                             logger.warning(LogCategory.MODEL_TRAIN,
                                 "Skipping update: policy_loss=%.1f exceeds threshold %.1f (stale rollouts or pathological ratios)",
                                 float(_loss_policy_c.item()), _policy_loss_threshold)
@@ -2025,9 +3306,208 @@ class PythonEntryPoint:
                         _vf_c = (_value_c_sq - _value_targets_c).pow(2)
                         _loss_value_c = value_loss_coef * ((_vf_c * _norm_w_c).sum() / total_norm_w_sum)
 
+                    # Decision-local value ranking for paired branch states.
+                    # Paired episodes come from generic terminal branch
+                    # outcomes, not action text or card-specific rules.
+                    _loss_value_pair_rank_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if value_pair_rank_coef > 0.0 and _chunk_N >= 2:
+                        _pair_left_c = torch.arange(0, _chunk_N - 1, 2, device=device)
+                        if _pair_left_c.numel() > 0:
+                            _pair_right_c = _pair_left_c + 1
+                            _reward_gap_c = _rewards_c[_pair_left_c] - _rewards_c[_pair_right_c]
+                            _value_gap_c = _value_c_sq[_pair_left_c] - _value_c_sq[_pair_right_c]
+                            _valid_pair_c = (
+                                torch.isfinite(_reward_gap_c)
+                                & torch.isfinite(_value_gap_c)
+                                & (_reward_gap_c.abs() > 1e-6)
+                            )
+                            if _valid_pair_c.any():
+                                _pair_sign_c = torch.sign(_reward_gap_c[_valid_pair_c]).detach()
+                                _pair_margin_c = value_pair_rank_margin - (
+                                    _pair_sign_c * _value_gap_c[_valid_pair_c]
+                                )
+                                _pair_loss_c = F.relu(_pair_margin_c)
+                                _pair_w_c = _reward_gap_c[_valid_pair_c].abs().detach().clamp(min=1e-6, max=2.0)
+                                _loss_value_pair_rank_c = value_pair_rank_coef * (
+                                    (_pair_loss_c * _pair_w_c).sum() / _pair_w_c.sum().clamp_min(1e-8)
+                                )
+
                     _log_probs_c = torch.log(_probs_safe_c)
                     _entropy_per_step_c = -(_probs_safe_c * _log_probs_c).sum(dim=-1)
                     _loss_entropy_c = -entropy_coef * _entropy_per_step_c.sum() / float(max(local_batch_size, 1))
+
+                    # Decision-local policy ranking for paired branch records.
+                    # Adjacent records are generic terminal branch alternatives:
+                    # the higher-return record's selected action should receive
+                    # higher log probability than the lower-return record's
+                    # selected action. This is a policy-side analogue of the
+                    # value pair-rank loss and does not inspect card/action text.
+                    _loss_policy_pair_rank_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if policy_pair_rank_coef > 0.0 and _chunk_N >= 2:
+                        _pair_left_c = torch.arange(0, _chunk_N - 1, 2, device=device)
+                        if _pair_left_c.numel() > 0:
+                            _pair_right_c = _pair_left_c + 1
+                            _reward_gap_c = _rewards_c[_pair_left_c] - _rewards_c[_pair_right_c]
+                            _logp_gap_c = _new_logp_c[_pair_left_c] - _new_logp_c[_pair_right_c]
+                            _valid_pair_c = (
+                                torch.isfinite(_reward_gap_c)
+                                & torch.isfinite(_logp_gap_c)
+                                & (_reward_gap_c.abs() > 1e-6)
+                            )
+                            if _valid_pair_c.any():
+                                _pair_sign_c = torch.sign(_reward_gap_c[_valid_pair_c]).detach()
+                                _rank_margin_c = policy_pair_rank_margin - (
+                                    _pair_sign_c * _logp_gap_c[_valid_pair_c]
+                                )
+                                _pair_loss_c = F.softplus(_rank_margin_c)
+                                _pair_w_c = _reward_gap_c[_valid_pair_c].abs().detach().clamp(min=1e-6, max=2.0)
+                                _loss_policy_pair_rank_c = policy_pair_rank_coef * (
+                                    (_pair_loss_c * _pair_w_c).sum() / _pair_w_c.sum().clamp_min(1e-8)
+                                )
+
+                    # Trajectory-level policy ranking for adjacent branch
+                    # episodes. The collector emits paired branch episodes in
+                    # adjacent order; this compares the sum of selected-action
+                    # log-probs over each whole episode using only terminal
+                    # outcome gaps. It is generic preference learning: no
+                    # action text, card names, or deck-specific rules.
+                    _loss_trajectory_pair_rank_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if trajectory_pair_rank_coef > 0.0 and _chunk_N >= 2:
+                        _done_c = dones_t[_c_start:_c_end].view(-1)
+                        _done_idx_c = torch.nonzero(_done_c > 0.5, as_tuple=False).view(-1)
+                        _episode_ranges_c = []
+                        _ep_start_c = 0
+                        for _ep_end_t in _done_idx_c.detach().cpu().tolist():
+                            _ep_end = int(_ep_end_t)
+                            if _ep_end >= _ep_start_c:
+                                _episode_ranges_c.append((_ep_start_c, _ep_end))
+                            _ep_start_c = _ep_end + 1
+                        if len(_episode_ranges_c) >= 2:
+                            _traj_losses_c = []
+                            _traj_weights_c = []
+                            for _pair_i in range(0, len(_episode_ranges_c) - 1, 2):
+                                _l0, _l1 = _episode_ranges_c[_pair_i]
+                                _r0, _r1 = _episode_ranges_c[_pair_i + 1]
+                                _reward_gap_t = _rewards_c[_l1] - _rewards_c[_r1]
+                                if (not torch.isfinite(_reward_gap_t)) or float(_reward_gap_t.detach().abs().item()) <= 1e-6:
+                                    continue
+                                _logp_gap_t = _new_logp_c[_l0:_l1 + 1].sum() - _new_logp_c[_r0:_r1 + 1].sum()
+                                if not torch.isfinite(_logp_gap_t):
+                                    continue
+                                _pair_sign_t = torch.sign(_reward_gap_t).detach()
+                                _traj_losses_c.append(F.softplus(
+                                    trajectory_pair_rank_margin - (_pair_sign_t * _logp_gap_t)))
+                                _traj_weights_c.append(_reward_gap_t.detach().abs().clamp(min=1e-6, max=2.0))
+                            if _traj_losses_c:
+                                _traj_loss_t = torch.stack(_traj_losses_c)
+                                _traj_weight_t = torch.stack(_traj_weights_c)
+                                _loss_trajectory_pair_rank_c = trajectory_pair_rank_coef * (
+                                    (_traj_loss_t * _traj_weight_t).sum()
+                                    / _traj_weight_t.sum().clamp_min(1e-8)
+                                )
+
+                    # Decision-local action ranking from signed branch returns.
+                    # This is weaker than matching the full branch-return target
+                    # distribution: it only asks the current policy to rank the
+                    # best observed sibling above the worst observed sibling.
+                    # The targets are generic terminal outcomes and do not use
+                    # action text, card names, or deck-specific rules.
+                    _loss_action_pair_rank_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if (action_pair_rank_coef > 0.0
+                            and mcts_signed_targets
+                            and mcts_visits_t is not None):
+                        _branch_rank_c = mcts_visits_t[_c_start:_c_end].float()
+                        _obs_rank_c = (
+                            torch.isfinite(_branch_rank_c)
+                            & (_branch_rank_c >= -1.0)
+                            & (_branch_rank_c <= 1.0)
+                            & _cm_c.bool()
+                        )
+                        _obs_count_rank_c = _obs_rank_c.sum(dim=-1)
+                        _best_rank_ret_c, _best_rank_idx_c = _branch_rank_c.masked_fill(
+                            ~_obs_rank_c, -1e9).max(dim=-1)
+                        _worst_rank_ret_c, _worst_rank_idx_c = _branch_rank_c.masked_fill(
+                            ~_obs_rank_c, 1e9).min(dim=-1)
+                        _rank_gap_c = _best_rank_ret_c - _worst_rank_ret_c
+                        _valid_rank_rows_c = (
+                            (_obs_count_rank_c >= 2)
+                            & torch.isfinite(_rank_gap_c)
+                            & (_rank_gap_c >= action_pair_rank_min_gap)
+                        )
+                        if _valid_rank_rows_c.any():
+                            _rank_rows_c = torch.arange(_chunk_N, device=device)
+                            _best_lp_c = _log_probs_c[
+                                _rank_rows_c, _best_rank_idx_c.clamp(0, max_candidates - 1)]
+                            _worst_lp_c = _log_probs_c[
+                                _rank_rows_c, _worst_rank_idx_c.clamp(0, max_candidates - 1)]
+                            _logp_gap_c = _best_lp_c - _worst_lp_c
+                            _rank_per_c = F.softplus(action_pair_rank_margin - _logp_gap_c)
+                            _rank_w_c = _rank_gap_c.detach().clamp(min=1e-6, max=2.0)
+                            _rank_denom_c = _rank_w_c[_valid_rank_rows_c].sum().clamp_min(1e-8)
+                            _loss_action_pair_rank_c = action_pair_rank_coef * (
+                                (_rank_per_c[_valid_rank_rows_c] * _rank_w_c[_valid_rank_rows_c]).sum()
+                                / _rank_denom_c
+                            )
+
+                    # Action-conditioned terminal value. In online RL this
+                    # trains Q(s,a) only for the action actually taken, using
+                    # the Monte Carlo terminal return target. For terminal
+                    # counterfactual imports, CANDIDATE_Q_FROM_MCTS_TARGETS=1
+                    # trains the Q scorer from branch-derived candidate targets
+                    # carried in the MCTS target tensor.
+                    _loss_candidate_q_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if candidate_q_loss_coef > 0.0 and _candidate_q_c is not None:
+                        if candidate_q_from_mcts_targets and mcts_visits_t is not None:
+                            _mcts_q_c = mcts_visits_t[_c_start:_c_end].float()
+                            if candidate_q_mcts_signed_targets:
+                                _target_mask_c = (
+                                    torch.isfinite(_mcts_q_c)
+                                    & (_mcts_q_c >= -1.0)
+                                    & (_mcts_q_c <= 1.0)
+                                    & cand_mask_t[_c_start:_c_end].bool()
+                                )
+                            else:
+                                _target_mask_c = (_mcts_q_c > 1e-8) & cand_mask_t[_c_start:_c_end].bool()
+                            if candidate_q_critical_only:
+                                _critical_c = (_cf_c[:, :, 24] > 0.5) | (_head_idx_c.view(-1, 1) == 5)
+                                _target_mask_c = _target_mask_c & _critical_c
+                            if _target_mask_c.any():
+                                if candidate_q_mcts_signed_targets:
+                                    _q_target_c = _mcts_q_c.clamp(-1.0, 1.0).detach()
+                                else:
+                                    _q_target_c = (2.0 * _mcts_q_c - 1.0).clamp(-1.0, 1.0).detach()
+                                _q_per_c = F.smooth_l1_loss(
+                                    _candidate_q_c.float(),
+                                    _q_target_c.float(),
+                                    beta=candidate_q_huber_beta,
+                                    reduction='none')
+                                _loss_candidate_q_c = candidate_q_loss_coef * _q_per_c[_target_mask_c].mean()
+                        else:
+                            _first_idx_c = _chosen_idx_c[:, 0].long()
+                            _has_choice_c = (_chosen_cnt_c > 0) & (_first_idx_c >= 0) & (_first_idx_c < max_candidates)
+                            if _has_choice_c.any():
+                                _safe_idx_c = _first_idx_c.clamp(0, max_candidates - 1)
+                                _row_idx_c = torch.arange(_chunk_N, device=device)
+                                _selected_feat_c = _cf_c[_row_idx_c, _safe_idx_c]
+                                _selected_is_spell_c = _selected_feat_c[:, 24] > 0.5
+                                _selected_is_mull_c = (_head_idx_c == 5)
+                                if candidate_q_critical_only:
+                                    _eligible_q_c = _has_choice_c & (_selected_is_spell_c | _selected_is_mull_c)
+                                else:
+                                    _eligible_q_c = _has_choice_c
+                                if _eligible_q_c.any():
+                                    _selected_q_c = _candidate_q_c[_row_idx_c, _safe_idx_c]
+                                    _q_target_c = _value_targets_c.detach().clamp(-1.0, 1.0)
+                                    _q_per_c = F.smooth_l1_loss(
+                                        _selected_q_c.float(),
+                                        _q_target_c.float(),
+                                        beta=candidate_q_huber_beta,
+                                        reduction='none')
+                                    _q_w_c = _norm_w_c.detach()
+                                    _q_denom_c = _q_w_c[_eligible_q_c].sum().clamp_min(1e-8)
+                                    _loss_candidate_q_c = candidate_q_loss_coef * (
+                                        (_q_per_c[_eligible_q_c] * _q_w_c[_eligible_q_c]).sum() / _q_denom_c
+                                    )
 
                     # Phase 1 belief auxiliary loss: classify opponent's deck archetype
                     # from the shared encoder CLS. Only samples with a known label
@@ -2046,27 +3526,228 @@ class PythonEntryPoint:
                             _loss_belief_c = self.belief_loss_coef * torch.nn.functional.cross_entropy(
                                 _sel_logits, _sel_labels, reduction='mean')
 
+                    # Generic card-level belief auxiliary loss: regress the
+                    # normalized hidden hand+library count vector from public
+                    # state. This is deck-pool generic; rows with -1 sentinels
+                    # are skipped.
+                    _loss_card_belief_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    _model_card_dim = int(getattr(self.model, "card_belief_dim", 0) or 0)
+                    if (card_belief_labels_t is not None
+                            and _card_belief_dim > 0
+                            and _model_card_dim == _card_belief_dim
+                            and self.card_belief_loss_coef > 0.0):
+                        _card_labels_c = card_belief_labels_t[_c_start:_c_end]
+                        _card_valid_c = torch.isfinite(_card_labels_c).all(dim=-1) & (_card_labels_c >= 0.0).all(dim=-1)
+                        if _card_valid_c.any():
+                            with autocast_ctx:
+                                _card_logits_c = self.model.card_belief_logits_from_cls(_cls_c)
+                            _card_pred_c = torch.sigmoid(_card_logits_c[_card_valid_c].float())
+                            _card_target_c = _card_labels_c[_card_valid_c].float().clamp(0.0, 1.0)
+                            _loss_card_belief_c = self.card_belief_loss_coef * torch.nn.functional.mse_loss(
+                                _card_pred_c, _card_target_c, reduction='mean')
+
                     # AlphaZero policy distillation loss: KL(policy || MCTS_visits)
                     # for steps where MCTS was run (non-zero visit distribution).
                     _loss_mcts_kl_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
-                    if mcts_visits_t is not None and self.mcts_kl_loss_coef > 0.0:
+                    if (mcts_visits_t is not None
+                            and self.mcts_kl_loss_coef > 0.0
+                            and not mcts_signed_targets):
                         _mcts_c = mcts_visits_t[_c_start:_c_end]
                         # Mask steps that have any positive visit target.
                         _mcts_row_sum = _mcts_c.sum(dim=-1)
                         _mcts_valid = (_mcts_row_sum > 1e-6)
+                        anchor_source = "none"
                         if _mcts_valid.any():
                             _probs_c_valid = _probs_safe_c[_mcts_valid]
                             _targets_valid = _mcts_c[_mcts_valid]
                             # Normalize each MCTS row (in case not exactly 1.0).
                             _targets_valid = _targets_valid / _targets_valid.sum(dim=-1, keepdim=True).clamp(min=1e-6)
+                            target_policy_mix = float(os.getenv("MCTS_TARGET_POLICY_MIX", "1.0"))
+                            target_policy_mix = max(0.0, min(1.0, target_policy_mix))
+                            anchor_source = "current"
+                            if target_policy_mix < 1.0:
+                                ref_probs_c = self._score_reference_policy_chunk(
+                                    _seq_c, _mask_c, _tok_c, _cf_c, _ci_c, _cm_c,
+                                    _head_idx_c, max_candidates, autocast_ctx)
+                                if ref_probs_c is not None:
+                                    anchor = ref_probs_c[_mcts_valid]
+                                    anchor_source = "reference"
+                                else:
+                                    anchor = _probs_c_valid.detach()
+                                anchor = anchor / anchor.sum(dim=-1, keepdim=True).clamp(min=1e-6)
+                                _targets_valid = (
+                                    (target_policy_mix * _targets_valid)
+                                    + ((1.0 - target_policy_mix) * anchor)
+                                )
+                                _targets_valid = _targets_valid / _targets_valid.sum(dim=-1, keepdim=True).clamp(min=1e-6)
                             # KL(targets || probs) = sum(targets * (log(targets) - log(probs)))
                             # We only care about the gradient on probs: sum(-targets * log(probs)) + const
                             # Use cross-entropy form which is what matters for gradient.
                             _log_probs_valid = torch.log(_probs_c_valid.clamp(min=1e-8))
                             _ce = -(_targets_valid * _log_probs_valid).sum(dim=-1)
-                            _loss_mcts_kl_c = self.mcts_kl_loss_coef * _ce.mean()
+                            if bool(int(os.getenv("MCTS_TARGET_ROW_SUM_WEIGHT_ENABLE", "0"))):
+                                _row_w = _mcts_row_sum[_mcts_valid].detach().float()
+                                _row_w = torch.nan_to_num(
+                                    _row_w, nan=0.0, posinf=0.0, neginf=0.0).clamp_min(0.0)
+                                _row_w_max = float(os.getenv("MCTS_TARGET_ROW_SUM_WEIGHT_MAX", "10.0"))
+                                if _row_w_max > 0:
+                                    _row_w = _row_w.clamp(max=_row_w_max)
+                                _row_w_sum = _row_w.sum().clamp_min(1e-8)
+                                _loss_mcts_kl_c = self.mcts_kl_loss_coef * ((_ce * _row_w).sum() / _row_w_sum)
+                            else:
+                                _loss_mcts_kl_c = self.mcts_kl_loss_coef * _ce.mean()
+                        if mcts_debug and _c_start == 0:
+                            try:
+                                _head_counts = torch.bincount(_head_idx_c.detach().cpu(), minlength=len(_HEAD_NAMES)).tolist()
+                                _valid_count = int(_mcts_valid.detach().sum().item())
+                                _mean_ce = float(_ce.detach().mean().item()) if _mcts_valid.any() else 0.0
+                                _msg = (
+                                    "MCTS_KL_DEBUG "
+                                    f"coef={float(self.mcts_kl_loss_coef):.3f} "
+                                    f"target_policy_mix={float(os.getenv('MCTS_TARGET_POLICY_MIX', '1.0')):.3f} "
+                                    f"anchor={anchor_source} "
+                                    f"batch={int(local_batch_size)} "
+                                    f"chunk={int(_chunk_N)} "
+                                    f"head_counts={_head_counts} "
+                                    f"valid={_valid_count} "
+                                    f"mean_ce={_mean_ce:.6f} "
+                                    f"loss={float(_loss_mcts_kl_c.detach().item()):.6f}"
+                                )
+                                print(_msg, flush=True)
+                                _debug_file = os.getenv("MCTS_KL_DEBUG_FILE", "").strip()
+                                if _debug_file:
+                                    _rows = min(8, int(_chunk_N))
+                                    _target_rows = _mcts_c[:_rows, :min(8, max_candidates)].detach().cpu().tolist()
+                                    _prob_rows = _probs_safe_c[:_rows, :min(8, max_candidates)].detach().cpu().tolist()
+                                    _chosen_rows = _chosen_idx_c[:_rows, :min(8, max_candidates)].detach().cpu().tolist()
+                                    os.makedirs(os.path.dirname(_debug_file), exist_ok=True)
+                                    with open(_debug_file, "a", encoding="utf-8") as _fh:
+                                        _fh.write(_msg + "\n")
+                                        _fh.write(f"targets={_target_rows}\n")
+                                        _fh.write(f"probs={_prob_rows}\n")
+                                        _fh.write(f"chosen={_chosen_rows}\n")
+                            except Exception:
+                                pass
 
-                    _chunk_loss = (policy_loss_coef * _loss_policy_c) + _loss_value_c + _loss_entropy_c + _loss_belief_c + _loss_mcts_kl_c
+                    # Signed terminal branch-return policy loss. Branch-return
+                    # rows use mcts_visits_t as per-candidate terminal returns
+                    # in [-1, 1] with -2 as unobserved. This trains the policy
+                    # on generic terminal outcome preferences among branch-
+                    # evaluated legal candidates without action text or
+                    # strategy-specific labels.
+                    _loss_branch_return_policy_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if (branch_return_policy_coef > 0.0
+                            and mcts_signed_targets
+                            and mcts_visits_t is not None):
+                        _branch_c = mcts_visits_t[_c_start:_c_end].float()
+                        _obs_c = (
+                            torch.isfinite(_branch_c)
+                            & (_branch_c >= -1.0)
+                            & (_branch_c <= 1.0)
+                            & _cm_c.bool()
+                        )
+                        _obs_count_c = _obs_c.sum(dim=-1)
+                        _masked_returns_c = _branch_c.masked_fill(~_obs_c, -1e9)
+                        _best_ret_c = _masked_returns_c.max(dim=-1).values
+                        _worst_ret_c = _branch_c.masked_fill(~_obs_c, 1e9).min(dim=-1).values
+                        _gap_c = _best_ret_c - _worst_ret_c
+                        _valid_branch_rows_c = (_obs_count_c >= 2) & (_gap_c >= branch_return_policy_min_gap)
+                        if _valid_branch_rows_c.any():
+                            _scores_c = (_branch_c / branch_return_policy_temp).masked_fill(~_obs_c, -1e9)
+                            _target_c = torch.softmax(_scores_c.float(), dim=-1)
+                            _obs_probs_c = (_probs_safe_c * _obs_c.float()).clamp(min=1e-8)
+                            _obs_probs_c = _obs_probs_c / _obs_probs_c.sum(dim=-1, keepdim=True).clamp(min=1e-8)
+                            if branch_return_policy_target_mix < 1.0:
+                                _target_c = (
+                                    branch_return_policy_target_mix * _target_c
+                                    + (1.0 - branch_return_policy_target_mix) * _obs_probs_c.detach()
+                                )
+                                _target_c = _target_c / _target_c.sum(dim=-1, keepdim=True).clamp(min=1e-8)
+                            _branch_ce_c = -(_target_c * torch.log(_obs_probs_c.clamp(min=1e-8))).sum(dim=-1)
+                            _row_w_c = _gap_c.detach().clamp(min=1e-6, max=2.0)
+                            _denom_c = _row_w_c[_valid_branch_rows_c].sum().clamp_min(1e-8)
+                            _loss_branch_return_policy_c = branch_return_policy_coef * (
+                                (_branch_ce_c[_valid_branch_rows_c] * _row_w_c[_valid_branch_rows_c]).sum()
+                                / _denom_c
+                            )
+
+                    # Generic frozen-reference policy anchor. This loss uses
+                    # the current legal candidate set and a frozen checkpoint's
+                    # policy distribution. It is independent of MCTS targets and
+                    # stays thesis-clean because it does not inspect action text,
+                    # card names, or Spy-specific state.
+                    _loss_reference_policy_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if self.reference_policy_kl_coef > 0.0 and self.mcts_reference_model is not None:
+                        ref_probs_c = self._score_reference_policy_chunk(
+                            _seq_c, _mask_c, _tok_c, _cf_c, _ci_c, _cm_c,
+                            _head_idx_c, max_candidates, autocast_ctx)
+                        if ref_probs_c is not None:
+                            _legal_c = (_cm_c > 0.5).float()
+                            _ref_target_c = (ref_probs_c.float() * _legal_c).clamp(min=0.0)
+                            _ref_target_c = _ref_target_c / _ref_target_c.sum(
+                                dim=-1, keepdim=True).clamp(min=1e-8)
+                            _cur_probs_ref_c = (_probs_safe_c * _legal_c).clamp(min=1e-8)
+                            _cur_probs_ref_c = _cur_probs_ref_c / _cur_probs_ref_c.sum(
+                                dim=-1, keepdim=True).clamp(min=1e-8)
+                            _ref_ce_c = -(_ref_target_c.detach() * torch.log(
+                                _cur_probs_ref_c.clamp(min=1e-8))).sum(dim=-1)
+                            _loss_reference_policy_c = self.reference_policy_kl_coef * _ref_ce_c.mean()
+
+                    # Terminal-only critical-action contrastive loss. Won
+                    # trajectories imitate selected critical actions; lost
+                    # trajectories push down high-probability selected critical
+                    # actions. By default this is restricted to spell choices
+                    # and mulligan decisions so ordinary land sequencing is not
+                    # punished just because a game was lost later.
+                    _loss_return_contrastive_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if return_contrastive_coef > 0.0:
+                        _first_idx_c = _chosen_idx_c[:, 0].long()
+                        _has_choice_c = (_chosen_cnt_c > 0) & (_first_idx_c >= 0) & (_first_idx_c < max_candidates)
+                        if _has_choice_c.any():
+                            _safe_idx_c = _first_idx_c.clamp(0, max_candidates - 1)
+                            _row_idx_c = torch.arange(_chunk_N, device=device)
+                            _selected_feat_c = _cf_c[_row_idx_c, _safe_idx_c]
+                            _selected_is_spell_c = _selected_feat_c[:, 24] > 0.5
+                            _selected_is_mull_c = (_head_idx_c == 5)
+                            if return_contrastive_critical_only:
+                                _eligible_c = _has_choice_c & (_selected_is_spell_c | _selected_is_mull_c)
+                            else:
+                                _eligible_c = _has_choice_c
+                            if _eligible_c.any():
+                                _joint_prob_c = torch.exp(_new_logp_c).clamp(1e-6, 1.0 - 1e-6)
+                                _ret_c = _value_targets_c.detach()
+                                _pos_c = _eligible_c & (_ret_c > return_contrastive_eps)
+                                _neg_c = _eligible_c & (_ret_c < -return_contrastive_eps) & (
+                                    _joint_prob_c > return_contrastive_neg_prob_floor)
+                                _valid_contrast_c = _pos_c | _neg_c
+                                if _valid_contrast_c.any():
+                                    _per_c = torch.zeros_like(_new_logp_c)
+                                    _per_c[_pos_c] = -_new_logp_c[_pos_c]
+                                    _per_c[_neg_c] = -torch.log1p(-_joint_prob_c[_neg_c])
+                                    _ret_w_c = _ret_c.abs().clamp(max=1.0)
+                                    _contrast_w_c = (_norm_w_c * _ret_w_c).detach()
+                                    _denom_c = _contrast_w_c[_valid_contrast_c].sum().clamp_min(1e-8)
+                                    _loss_return_contrastive_c = return_contrastive_coef * (
+                                        (_per_c[_valid_contrast_c] * _contrast_w_c[_valid_contrast_c]).sum()
+                                        / _denom_c
+                                    )
+
+                    _chunk_loss = (
+                        (policy_loss_coef * _loss_policy_c)
+                        + _loss_value_c
+                        + _loss_value_pair_rank_c
+                        + _loss_candidate_q_c
+                        + _loss_entropy_c
+                        + _loss_belief_c
+                        + _loss_card_belief_c
+                        + _loss_mcts_kl_c
+                        + _loss_policy_pair_rank_c
+                        + _loss_trajectory_pair_rank_c
+                        + _loss_action_pair_rank_c
+                        + _loss_branch_return_policy_c
+                        + _loss_reference_policy_c
+                        + _loss_return_contrastive_c
+                    )
 
                     if torch.isnan(_chunk_loss) or torch.isinf(_chunk_loss):
                         logger.warning(LogCategory.MODEL_TRAIN,
@@ -2088,6 +3769,42 @@ class PythonEntryPoint:
                     total_loss_value += _loss_value_c.item()
                     try:
                         total_loss_belief += float(_loss_belief_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_card_belief += float(_loss_card_belief_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_candidate_q += float(_loss_candidate_q_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_branch_return_policy += float(_loss_branch_return_policy_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_reference_policy += float(_loss_reference_policy_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_return_contrastive += float(_loss_return_contrastive_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_value_pair_rank += float(_loss_value_pair_rank_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_policy_pair_rank += float(_loss_policy_pair_rank_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_trajectory_pair_rank += float(_loss_trajectory_pair_rank_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_action_pair_rank += float(_loss_action_pair_rank_c.item())
                     except Exception:
                         pass
                     total_entropy_sum += _entropy_per_step_c.detach().sum().item()
@@ -2162,8 +3879,8 @@ class PythonEntryPoint:
                     clip_frac = ((ratio_raw < 1.0 - self.ppo_epsilon) |
                                  (ratio_raw > 1.0 + self.ppo_epsilon)).float().mean()
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f belief=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
-                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), total_loss_belief,
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f ent=%.4f belief=%.4f cardBelief=%.4f refPolicy=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
+                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_reference_policy,
                             entropy_coef, clip_frac.item() * 100, approx_kl.item())
                 # Record loss components for metrics export
                 self.metrics.record_train_losses(
@@ -2181,8 +3898,8 @@ class PythonEntryPoint:
                 self._write_training_losses_csv(episodes_in_batch=ep_count)
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f belief=%.4f (coeff: %.4f)",
-                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), total_loss_belief, float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f ent=%.4f belief=%.4f cardBelief=%.4f refPolicy=%.4f (coeff: %.4f)",
+                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_reference_policy, float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
                 # Record loss components for metrics export
                 self.metrics.record_train_losses(
                     total_loss=loss.item(),
@@ -2307,6 +4024,15 @@ class PythonEntryPoint:
             del d, ends
             return spans
 
+        def _estimated_train_extra_mb(steps: int):
+            per_step = self._train_mb_per_step
+            if per_step is None or float(per_step) <= 0.0:
+                try:
+                    per_step = float(os.getenv("AUTO_TRAIN_MB_PER_STEP_INIT", "2.0"))
+                except Exception:
+                    per_step = 2.0
+            return max(0.0, float(per_step) * float(max(1, int(steps))))
+
         def _train_spans(spans):
             if not spans:
                 return True
@@ -2329,6 +4055,7 @@ class PythonEntryPoint:
             start = spans[0][0]
             end = spans[-1][1]
             steps = int(end - start)
+            estimated_extra_mb = _estimated_train_extra_mb(steps)
             # Fixed microbatching (episode-aligned) to reduce peak activations / avoid paging cliffs.
             max_steps_cap = int(os.getenv("TRAIN_MULTI_MAX_STEPS", "512"))
             if max_steps_cap > 0 and steps > int(max_steps_cap) and len(spans) > 1:
@@ -2350,12 +4077,39 @@ class PythonEntryPoint:
                 for g in groups:
                     out = _train_spans(g) and out
                 return out
+            # Hard VRAM guard: never start a training allocation that is expected to
+            # eat our configured headroom. Multi-episode batches split; single
+            # episodes wait for headroom instead of falling into WDDM shared RAM.
+            if self.auto_batch_enable and torch.cuda.is_available():
+                has_room = self._train_has_vram_headroom(
+                    estimated_extra_mb,
+                    wait=False,
+                    tag=f"train:{steps}steps:{len(spans)}episodes",
+                )
+                if not has_room:
+                    if len(spans) > 1:
+                        try:
+                            self._autobatch_counts["train_splits_paging"] += 1
+                        except Exception:
+                            pass
+                        mid = len(spans) // 2
+                        ok0 = _train_spans(spans[:mid])
+                        ok1 = _train_spans(spans[mid:])
+                        return ok0 and ok1
+                    if not self._train_has_vram_headroom(
+                        estimated_extra_mb,
+                        wait=True,
+                        tag=f"train:{steps}steps:single_episode",
+                    ):
+                        raise RuntimeError(
+                            "VRAM_GUARD_NO_HEADROOM "
+                            f"steps={steps} estimated_extra_mb={estimated_extra_mb:.1f} "
+                            f"free_mb={self._autobatch_last_free_mb:.1f} "
+                            f"need_mb={self.cuda_mgr._train_guard_last_need_mb:.1f}"
+                        )
             # Proactive paging avoidance: estimate extra VRAM for this slice and split episodes if needed.
             if self.auto_batch_enable and self.auto_avoid_paging and torch.cuda.is_available() and len(spans) > 1:
-                est = 0.0
-                if self._train_mb_per_step is not None:
-                    est = float(self._train_mb_per_step) * float(steps)
-                if self._should_split_for_paging(est):
+                if self._should_split_for_paging(estimated_extra_mb):
                     try:
                         self._autobatch_counts["train_splits_paging"] += 1
                     except Exception:
@@ -2504,6 +4258,14 @@ class PythonEntryPoint:
         # saved dict. Adam's momentum for those params is driving them back to
         # zero, so we also discard the saved optimizer state when we heal.
         healed = self._heal_collapsed_scales()
+        skipped_incompatible = extra.get('_skipped_incompatible_state_keys') if extra else None
+        self._record_model_load_determinism_gate(path, extra, skipped_incompatible, healed)
+        if self.fail_on_skipped_incompatible and skipped_incompatible:
+            sample = ", ".join(str(x) for x in list(skipped_incompatible)[:12])
+            raise RuntimeError(
+                "SKIPPED_INCOMPATIBLE_CHECKPOINT_TENSORS "
+                f"count={len(skipped_incompatible)} sample=[{sample}]"
+            )
         if healed and extra and extra.get('optimizer_state_dict') is not None:
             extra = dict(extra)
             extra['optimizer_state_dict'] = None
@@ -2512,28 +4274,53 @@ class PythonEntryPoint:
                 "Cleared saved optimizer_state_dict because scale collapse was healed; "
                 "momentum from old (broken) gradients would otherwise re-collapse the scale.",
             )
+        if skipped_incompatible and extra and extra.get('optimizer_state_dict') is not None:
+            extra = dict(extra)
+            extra['optimizer_state_dict'] = None
+            logger.warning(
+                LogCategory.MODEL_LOAD,
+                "Cleared saved optimizer_state_dict because %d checkpoint tensors were skipped "
+                "for shape incompatibility.",
+                len(skipped_incompatible),
+            )
 
-        # Restore optimizer state and training counters if present
+        # Restore optimizer state and training counters if present. Repair and
+        # distillation passes can intentionally reset Adam momentum/LR while
+        # keeping model weights by setting LOAD_OPTIMIZER_STATE=0.
+        load_optimizer_state = bool(int(os.getenv("LOAD_OPTIMIZER_STATE", "1")))
         if extra and self.optimizer:
-            if 'optimizer_state_dict' in extra and extra['optimizer_state_dict'] is not None:
+            if load_optimizer_state and 'optimizer_state_dict' in extra and extra['optimizer_state_dict'] is not None:
                 try:
                     self.optimizer.load_state_dict(extra['optimizer_state_dict'])
                     logger.info(LogCategory.MODEL_LOAD, "Restored optimizer state")
                 except Exception as e:
                     logger.warning(LogCategory.MODEL_LOAD, "Could not restore optimizer state: %s", e)
+            elif not load_optimizer_state and 'optimizer_state_dict' in extra and extra['optimizer_state_dict'] is not None:
+                logger.info(LogCategory.MODEL_LOAD, "Skipped optimizer state restore because LOAD_OPTIMIZER_STATE=0")
             
-            if 'train_step_counter' in extra:
-                self.train_step_counter = int(extra['train_step_counter'])
-                logger.info(LogCategory.MODEL_LOAD, "Restored train_step_counter: %d", self.train_step_counter)
-            
-            if 'main_train_sample_counter' in extra:
-                self.main_train_sample_counter = int(extra['main_train_sample_counter'])
-                logger.info(LogCategory.MODEL_LOAD, "Restored main_train_sample_counter: %d", self.main_train_sample_counter)
-            
-            if 'gae_enabled_step' in extra:
-                self.metrics.gae_enabled_step = extra['gae_enabled_step']
-                if self.metrics.gae_enabled_step is not None:
-                    logger.info(LogCategory.MODEL_LOAD, "Restored gae_enabled_step: %d", self.metrics.gae_enabled_step)
+            reset_training_state = bool(int(os.getenv("RESET_TRAINING_STATE_ON_LOAD", "0")))
+            if reset_training_state:
+                self.train_step_counter = 0
+                self.main_train_sample_counter = 0
+                self.metrics.gae_enabled_step = 0 if self.metrics.use_gae else None
+                logger.info(
+                    LogCategory.MODEL_LOAD,
+                    "Reset training counters on load: train_step_counter=0 main_train_sample_counter=0 gae_enabled_step=%s",
+                    str(self.metrics.gae_enabled_step),
+                )
+            else:
+                if 'train_step_counter' in extra:
+                    self.train_step_counter = int(extra['train_step_counter'])
+                    logger.info(LogCategory.MODEL_LOAD, "Restored train_step_counter: %d", self.train_step_counter)
+
+                if 'main_train_sample_counter' in extra:
+                    self.main_train_sample_counter = int(extra['main_train_sample_counter'])
+                    logger.info(LogCategory.MODEL_LOAD, "Restored main_train_sample_counter: %d", self.main_train_sample_counter)
+
+                if 'gae_enabled_step' in extra:
+                    self.metrics.gae_enabled_step = extra['gae_enabled_step']
+                    if self.metrics.gae_enabled_step is not None:
+                        logger.info(LogCategory.MODEL_LOAD, "Restored gae_enabled_step: %d", self.metrics.gae_enabled_step)
             
             # Log summary of restored training state
             entropy_coef = self.get_entropy_coefficient()
@@ -2570,7 +4357,9 @@ class PythonEntryPoint:
 
     def trainMulligan(self, features_bytes, decisions_bytes, outcomes_bytes, game_lengths_bytes, early_land_scores_bytes, overrides_bytes, batch_size):
         """
-        Train mulligan model using Q-learning with survival + land-drop reward shaping.
+        Train the legacy standalone mulligan model. By default this keeps the old
+        survival + land-drop shaping path; MULLIGAN_TERMINAL_ONLY=1 uses only the
+        terminal game outcome target.
 
         Args:
             features_bytes: Raw bytes of mulligan features [batch_size * 71 * 4]
@@ -2844,28 +4633,32 @@ class PythonEntryPoint:
                         # At +/-5, sigmoid is 0.993/0.007 -- still exploratory
                         logits = logits.clamp(-5.0, 5.0)
 
-                        # Reward shaping (same as before)
-                        survival_alpha = float(
-                            os.getenv("MULLIGAN_SURVIVAL_ALPHA", "0.3"))
-                        survival_max = float(
-                            os.getenv("MULLIGAN_SURVIVAL_MAX_TURNS", "12"))
-                        land_drop_alpha = float(
-                            os.getenv("MULLIGAN_LAND_DROP_ALPHA", "0.2"))
-                        game_len_t = torch.tensor(
-                            game_len_mb, dtype=torch.float32, device=mdev)
-                        survival = (game_len_t.clamp(
-                            min=1.0, max=survival_max) / survival_max)
-                        early_land_t = torch.tensor(
-                            early_land_mb, dtype=torch.float32, device=mdev)
-                        has_land_data = (early_land_t >= 0.0).float()
-                        land_bonus = land_drop_alpha * early_land_t.clamp(min=0.0) * has_land_data
-                        reward = outcomes_t + \
-                            (1.0 - outcomes_t) * (survival_alpha * survival + land_bonus)
-                        # Override mask: overridden decisions get reward=0
-                        overridden_t = torch.tensor(
-                            overridden_mb, dtype=torch.float32, device=mdev)
-                        override_mask = (overridden_t > 0.5).float()
-                        reward = (1.0 - override_mask) * reward
+                        terminal_only = str(os.getenv("MULLIGAN_TERMINAL_ONLY", "0")).lower() in ("1", "true", "yes")
+                        if terminal_only:
+                            reward = outcomes_t
+                        else:
+                            # Legacy reward shaping path.
+                            survival_alpha = float(
+                                os.getenv("MULLIGAN_SURVIVAL_ALPHA", "0.3"))
+                            survival_max = float(
+                                os.getenv("MULLIGAN_SURVIVAL_MAX_TURNS", "12"))
+                            land_drop_alpha = float(
+                                os.getenv("MULLIGAN_LAND_DROP_ALPHA", "0.2"))
+                            game_len_t = torch.tensor(
+                                game_len_mb, dtype=torch.float32, device=mdev)
+                            survival = (game_len_t.clamp(
+                                min=1.0, max=survival_max) / survival_max)
+                            early_land_t = torch.tensor(
+                                early_land_mb, dtype=torch.float32, device=mdev)
+                            has_land_data = (early_land_t >= 0.0).float()
+                            land_bonus = land_drop_alpha * early_land_t.clamp(min=0.0) * has_land_data
+                            reward = outcomes_t + \
+                                (1.0 - outcomes_t) * (survival_alpha * survival + land_bonus)
+                            # Override mask: overridden decisions get reward=0
+                            overridden_t = torch.tensor(
+                                overridden_mb, dtype=torch.float32, device=mdev)
+                            override_mask = (overridden_t > 0.5).float()
+                            reward = (1.0 - override_mask) * reward
 
                         # REINFORCE: log P(action_taken)
                         # P(keep) = sigmoid(logit), P(mull) = 1 - sigmoid(logit)

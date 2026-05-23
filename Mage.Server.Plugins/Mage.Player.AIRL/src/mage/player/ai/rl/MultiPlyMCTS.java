@@ -2,12 +2,14 @@ package mage.player.ai.rl;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.common.PassAbility;
 import mage.game.Game;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
@@ -65,6 +67,8 @@ public final class MultiPlyMCTS {
      *  has few interactions. */
     private static final int MAX_OUR_ACTIONS =
             EnvConfig.i32("MCTS_MAX_OUR_ACTIONS", 1);
+    private static final String FINAL_SELECTION =
+            EnvConfig.str("MCTS_FINAL_SELECTION", "visits").trim().toLowerCase();
 
     /** If non-zero, stop iterating once the top root child's visit share
      *  exceeds this threshold (and at least MIN_ITERS iterations have run).
@@ -409,7 +413,9 @@ public final class MultiPlyMCTS {
             }
         }
 
-        int bestIdx = root.bestActionByVisits();
+        int bestIdx = "value".equals(FINAL_SELECTION)
+                ? root.bestActionByMeanValue()
+                : root.bestActionByVisits();
         long wallMs = System.currentTimeMillis() - started;
         // Aggregate stats logged every N searches so we can see cost-vs-depth
         // without spamming the log.
@@ -437,6 +443,7 @@ public final class MultiPlyMCTS {
                     + " setup=" + setupMs
                     + " walk=" + walkMs
                     + " eval=" + evalMs + "]"
+                    + " root_map=" + ROOT_MAP_HITS.get() + "/" + (ROOT_MAP_HITS.get() + ROOT_MAP_MISSES.get())
                     + " transpositions=" + trans
                     + " session_resets=" + inval);
         }
@@ -451,6 +458,10 @@ public final class MultiPlyMCTS {
     private static final java.util.concurrent.atomic.AtomicLong TOTAL_ITERATIONS =
             new java.util.concurrent.atomic.AtomicLong();
     private static final java.util.concurrent.atomic.AtomicLong EARLY_STOP_COUNT =
+            new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong ROOT_MAP_HITS =
+            new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong ROOT_MAP_MISSES =
             new java.util.concurrent.atomic.AtomicLong();
 
     /** Phase 3b inline walk: run engine on the main thread, drive priority
@@ -622,7 +633,19 @@ public final class MultiPlyMCTS {
                 throw MCTSSimPlayer.WalkTerminated.INSTANCE;
             }
 
+            boolean atRootActivate = st.currentNode == root
+                    && req.choiceType == MCTSSimPlayer.ChoiceType.ACTIVATE_ABILITY;
             int childIdx = st.currentNode.selectChildPUCT(C_PUCT);
+            int responseIdx = childIdx;
+            if (atRootActivate) {
+                int mapped = requestIndexForRootChild(root, childIdx, req.options);
+                if (mapped >= 0) {
+                    responseIdx = mapped;
+                    ROOT_MAP_HITS.incrementAndGet();
+                } else {
+                    ROOT_MAP_MISSES.incrementAndGet();
+                }
+            }
             st.path.push(new PathStep(st.currentNode, childIdx));
 
             MCTSNode child = st.currentNode.getChild(childIdx);
@@ -634,7 +657,7 @@ public final class MultiPlyMCTS {
             if (req.choiceType == MCTSSimPlayer.ChoiceType.ACTIVATE_ABILITY) {
                 st.ourActionsSeen++;
             }
-            return childIdx;
+            return responseIdx;
         };
 
         // Opp controller: random. Never throws (opp plays the whole sim out
@@ -829,12 +852,24 @@ public final class MultiPlyMCTS {
                     break;
                 }
 
+                boolean atRootActivate = currentNode == root
+                        && req.choiceType == MCTSSimPlayer.ChoiceType.ACTIVATE_ABILITY;
                 int childIdx = currentNode.selectChildPUCT(C_PUCT);
+                int responseIdx = childIdx;
+                if (atRootActivate) {
+                    int mapped = requestIndexForRootChild(root, childIdx, req.options);
+                    if (mapped >= 0) {
+                        responseIdx = mapped;
+                        ROOT_MAP_HITS.incrementAndGet();
+                    } else {
+                        ROOT_MAP_MISSES.incrementAndGet();
+                    }
+                }
                 path.push(new PathStep(currentNode, childIdx));
 
                 // Send response for the engine to proceed
                 MCTSSimPlayer.sendResponse(
-                        responseQueueFor(rep, req.playerId), childIdx);
+                        responseQueueFor(rep, req.playerId), responseIdx);
 
                 // Move to child (create if absent)
                 MCTSNode child = currentNode.getChild(childIdx);
@@ -1041,6 +1076,12 @@ public final class MultiPlyMCTS {
                     && req.choiceType == MCTSSimPlayer.ChoiceType.ACTIVATE_ABILITY) {
                 st.forcedConsumed = true;
                 st.ourActionsSeen++;
+                int mapped = requestIndexForRootChild(root, forcedRootChildIdx, req.options);
+                if (mapped >= 0) {
+                    ROOT_MAP_HITS.incrementAndGet();
+                    return mapped;
+                }
+                ROOT_MAP_MISSES.incrementAndGet();
                 if (forcedRootChildIdx >= 0 && forcedRootChildIdx < n) {
                     return forcedRootChildIdx;
                 }
@@ -1259,6 +1300,63 @@ public final class MultiPlyMCTS {
         return ch.responseQueue;
     }
 
+    /**
+     * Root candidates come from ComputerPlayerRL's validated/deduped live list
+     * (with Pass at slot 0). The simulation player re-enumerates legal options
+     * from a clone, so raw indices are not guaranteed to line up. Search values
+     * must be backed up to the live root child, while the engine response must
+     * use the matching index in the simulation request.
+     */
+    private static int requestIndexForRootChild(MCTSNode root, int rootChildIdx, List<?> requestOptions) {
+        if (root == null || requestOptions == null || rootChildIdx < 0) {
+            return -1;
+        }
+        Object[] rootRefs = root.candidateRefs();
+        if (rootRefs == null || rootChildIdx >= rootRefs.length) {
+            return -1;
+        }
+        Object wanted = rootRefs[rootChildIdx];
+        if (!(wanted instanceof Ability)) {
+            return -1;
+        }
+        Ability wantedAbility = (Ability) wanted;
+        int looseMatch = -1;
+        int looseMatches = 0;
+        for (int i = 0; i < requestOptions.size(); i++) {
+            Object option = requestOptions.get(i);
+            if (!(option instanceof Ability)) {
+                continue;
+            }
+            Ability optionAbility = (Ability) option;
+            if (sameAbilityForMcts(wantedAbility, optionAbility, true)) {
+                return i;
+            }
+            if (sameAbilityForMcts(wantedAbility, optionAbility, false)) {
+                looseMatch = i;
+                looseMatches++;
+            }
+        }
+        return looseMatches == 1 ? looseMatch : -1;
+    }
+
+    private static boolean sameAbilityForMcts(Ability a, Ability b, boolean requireSourceId) {
+        if (a == b) {
+            return true;
+        }
+        if (a == null || b == null) {
+            return false;
+        }
+        boolean aPass = a instanceof PassAbility;
+        boolean bPass = b instanceof PassAbility;
+        if (aPass || bPass) {
+            return aPass && bPass;
+        }
+        if (requireSourceId && !Objects.equals(a.getSourceId(), b.getSourceId())) {
+            return false;
+        }
+        return Objects.equals(String.valueOf(a), String.valueOf(b));
+    }
+
     private static Random ThreadLocalRandom() {
         return java.util.concurrent.ThreadLocalRandom.current();
     }
@@ -1319,6 +1417,7 @@ public final class MultiPlyMCTS {
                     + " eval=" + evalUs
                     + " fin=" + finUs
                     + " sum=" + totalUs + "]"
+                    + " root_map=" + ROOT_MAP_HITS.get() + "/" + (ROOT_MAP_HITS.get() + ROOT_MAP_MISSES.get())
                     + " early_stops=" + EARLY_STOP_COUNT.get();
             System.out.println(msg);
             System.err.println(msg);

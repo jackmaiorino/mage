@@ -262,6 +262,16 @@ class SharedGpuHost:
         self._training_profiles: set = set()  # profile ids currently being trained
         self._score_worker_count = 0
         self.train_worker_threads = max(1, env_int("TRAIN_WORKER_THREADS", 3))
+        default_train_concurrency = 1 if (not self.train_cuda_device or self.train_cuda_device.lower().startswith("cuda")) else self.train_worker_threads
+        self.train_gpu_max_concurrent = max(1, env_int("TRAIN_GPU_MAX_CONCURRENT", default_train_concurrency))
+        self.train_vram_guard_requeue_sleep_s = max(0.1, env_int("TRAIN_VRAM_GUARD_REQUEUE_SLEEP_MS", 1000) / 1000.0)
+        self.pending_train_max = max(0, env_int("PENDING_TRAIN_MAX", 32))
+        self.pending_train_backpressure = env_str("PENDING_TRAIN_BACKPRESSURE", "block").lower()
+        if self.pending_train_backpressure == "drop":
+            self.pending_train_backpressure = "drop_oldest"
+        if self.pending_train_backpressure not in ("block", "drop_oldest", "drop_newest"):
+            self.pending_train_backpressure = "block"
+        self.pending_train_offer_timeout_s = max(0.1, env_int("PENDING_TRAIN_OFFER_TIMEOUT_MS", 30000) / 1000.0)
         self._train_rr = 0
         self._score_batches = 0
         self._train_batches = 0
@@ -273,6 +283,11 @@ class SharedGpuHost:
         self._score_flush_full_total = 0
         self._score_flush_eager_total = 0
         self._last_error = ""
+        self._active_train_batches = 0
+        self._train_requeues_vram = 0
+        self._train_tasks_dropped = 0
+        self._train_enqueue_waits = 0
+        self._train_enqueue_wait_ms = 0.0
         self._mulligan_saves = 0
         self._sigterm_saves = 0
         self._shutdown_event = threading.Event()
@@ -323,21 +338,41 @@ class SharedGpuHost:
             state.pending_scores.append(task)
             self._lock.notify_all()
 
-    def enqueue_train(self, state: ProfileState, task: TrainTask) -> None:
+    def enqueue_train(self, state: ProfileState, task: TrainTask) -> Tuple[bool, int, float]:
+        wait_started = None
+        dropped = 0
         with self._lock:
-            # Soft cap: drop oldest queued tasks when backpressure builds up so
-            # memory stays bounded. Each train task holds the full segment bytes
-            # (~10-20MB per task at scale), so an unbounded queue becomes a
-            # multi-GB memory leak when training can't keep up with generation.
-            max_pending = env_int("PENDING_TRAIN_MAX", 32)
-            if max_pending > 0:
-                while len(state.pending_trains) >= max_pending:
-                    dropped = state.pending_trains.popleft()
-                    self._train_tasks_dropped = getattr(self, "_train_tasks_dropped", 0) + 1
+            # Hard cap: each train task holds full serialized trajectory bytes.
+            # In block mode, learner saturation propagates back to JVM actors
+            # instead of silently discarding completed self-play games.
+            while self.pending_train_max > 0 and len(state.pending_trains) >= self.pending_train_max:
+                if self.pending_train_backpressure == "drop_oldest":
+                    dropped_task = state.pending_trains.popleft()
+                    self._train_tasks_dropped += 1
+                    dropped += 1
                     if self._train_tasks_dropped % 50 == 1:
-                        print(f"[BACKPRESSURE] dropped oldest train task (profile={dropped.profile_id}, total_dropped={self._train_tasks_dropped}, pending={len(state.pending_trains)})", flush=True)
+                        print(f"[BACKPRESSURE] dropped oldest train task (profile={dropped_task.profile_id}, total_dropped={self._train_tasks_dropped}, pending={len(state.pending_trains)})", flush=True)
+                    continue
+                if self.pending_train_backpressure == "drop_newest":
+                    self._train_tasks_dropped += 1
+                    if self._train_tasks_dropped % 50 == 1:
+                        print(f"[BACKPRESSURE] dropped newest train task (profile={task.profile_id}, total_dropped={self._train_tasks_dropped}, pending={len(state.pending_trains)})", flush=True)
+                    return False, dropped + 1, 0.0
+                if wait_started is None:
+                    wait_started = time.monotonic()
+                self._lock.wait(timeout=self.pending_train_offer_timeout_s)
+                waited_ms = (time.monotonic() - wait_started) * 1000.0
+                if len(state.pending_trains) >= self.pending_train_max:
+                    print(f"[BACKPRESSURE] train queue full for {waited_ms:.0f}ms "
+                          f"(profile={state.infer_context.profile_id}, pending={len(state.pending_trains)}, "
+                          f"max={self.pending_train_max}); blocking producer", flush=True)
             state.pending_trains.append(task)
+            waited_ms = 0.0 if wait_started is None else (time.monotonic() - wait_started) * 1000.0
+            if waited_ms > 0.0:
+                self._train_enqueue_waits += 1
+                self._train_enqueue_wait_ms += waited_ms
             self._lock.notify_all()
+            return True, dropped, waited_ms
 
     def _maybe_publish_latest_model(self, state: ProfileState, now: Optional[float] = None) -> None:
         if state is None or self.model_publish_every_ms <= 0:
@@ -546,23 +581,40 @@ class SharedGpuHost:
             work = None
             sleep_for = 0.25
             with self._lock:
+                if self._active_train_batches >= self.train_gpu_max_concurrent:
+                    self._lock.wait(timeout=0.05)
+                    continue
                 work, sleep_for = self._select_train_work_locked()
                 if work is None:
                     self._lock.wait(timeout=sleep_for)
                     continue
                 profile_key = work[0].infer_context.profile_id
                 self._training_profiles.add(profile_key)
+                self._active_train_batches += 1
             state, tasks = work
             try:
                 self._run_train_batch(state, tasks)
             except Exception as exc:
-                self._last_error = f"{type(exc).__name__}: {exc}"
-                with self._lock:
-                    self._train_failures += 1
-                traceback.print_exc()
+                if "VRAM_GUARD_NO_HEADROOM" in str(exc):
+                    with self._lock:
+                        for task in reversed(tasks):
+                            state.pending_trains.appendleft(task)
+                        self._train_requeues_vram += len(tasks)
+                        self._last_error = f"VRAM guard requeued {len(tasks)} train episode(s): {exc}"
+                        self._lock.notify_all()
+                    print(f"[VRAM_GUARD] requeued train batch episodes={len(tasks)} "
+                          f"profile={state.infer_context.profile_id}; sleeping "
+                          f"{self.train_vram_guard_requeue_sleep_s:.1f}s", flush=True)
+                    time.sleep(self.train_vram_guard_requeue_sleep_s)
+                else:
+                    self._last_error = f"{type(exc).__name__}: {exc}"
+                    with self._lock:
+                        self._train_failures += 1
+                    traceback.print_exc()
             finally:
                 with self._lock:
                     self._training_profiles.discard(profile_key)
+                    self._active_train_batches = max(0, self._active_train_batches - 1)
                     self._lock.notify_all()
                 _memory_log_counter += 1
                 if _memory_log_counter % 10 == 0:
@@ -734,6 +786,8 @@ class SharedGpuHost:
             steps += task.step_count
         if not tasks and state.pending_trains:
             tasks.append(state.pending_trains.popleft())
+        if tasks:
+            self._lock.notify_all()
         return (state, tasks) if tasks else None
 
     def _pop_score_batch_locked(self, state: ProfileState) -> List[ScoreTask]:
@@ -878,7 +932,9 @@ class SharedGpuHost:
         try:
             archetype_labels = merged[14] if len(merged) > 14 else None
             mcts_visits = merged[15] if len(merged) > 15 else None
+            card_belief_labels = merged[16] if len(merged) > 16 else None
             num_archetypes = int(first.headers.get("num_archetypes", "0"))
+            card_belief_dim = int(first.headers.get("card_belief_dim", "0"))
             state.learner_context.train_batch(
                 merged[0],
                 merged[1],
@@ -902,6 +958,8 @@ class SharedGpuHost:
                 archetype_labels,
                 num_archetypes,
                 mcts_visits,
+                card_belief_labels,
+                card_belief_dim,
             )
         finally:
             # Release cached GPU memory after every training batch so ONNX
@@ -995,7 +1053,9 @@ class SharedGpuHost:
             stats = {k: str(max(int(learner_stats.get(k, 0)), int(infer_stats.get(k, 0)))) for k in set(learner_stats) | set(infer_stats)}
             with self._lock:
                 stats["train_queue_depth"] = str(len(state.pending_trains))
-                stats["dropped_train_episodes"] = "0"
+                stats["dropped_train_episodes"] = str(self._train_tasks_dropped)
+                stats["train_vram_requeues"] = str(self._train_requeues_vram)
+                stats["train_gpu_active"] = str(self._active_train_batches)
             session.reply(0, request_id, stats)
         elif opcode == 9:
             state.learner_context.reset_health_stats()
@@ -1030,6 +1090,33 @@ class SharedGpuHost:
             session.reply(0, request_id, {k: str(v) for k, v in metrics.items()})
         elif opcode == 16:
             session.reply(0, request_id)
+        elif opcode == 17:
+            segments = unpack_segments(payload)
+            self._maybe_reload_inference_model(state)
+            probs = state.infer_context.predict_archetype(
+                segments[0],
+                segments[1],
+                segments[2],
+                int(headers.get("batch_size", "1")),
+                int(headers.get("seq_len", "0")),
+                int(headers.get("d_model", "0")),
+            )
+            num_archetypes = int(headers.get("num_archetypes", "0"))
+            session.reply(0, request_id, {"num_archetypes": str(num_archetypes)}, payload=probs)
+        elif opcode == 18:
+            segments = unpack_segments(payload)
+            self._maybe_reload_inference_model(state)
+            card_belief_dim = int(headers.get("card_belief_dim", "0"))
+            preds = state.infer_context.predict_card_belief(
+                segments[0],
+                segments[1],
+                segments[2],
+                int(headers.get("batch_size", "1")),
+                int(headers.get("seq_len", "0")),
+                int(headers.get("d_model", "0")),
+                card_belief_dim,
+            )
+            session.reply(0, request_id, {"card_belief_dim": str(card_belief_dim)}, payload=preds)
         else:
             raise ValueError(f"unknown control opcode {opcode}")
 
@@ -1058,6 +1145,15 @@ class SharedGpuHost:
                 "# HELP gpu_service_pending_trains Total pending train episodes",
                 "# TYPE gpu_service_pending_trains gauge",
                 f"gpu_service_pending_trains {pending_trains}",
+                "# HELP gpu_service_pending_train_max Per-profile pending train queue cap",
+                "# TYPE gpu_service_pending_train_max gauge",
+                f"gpu_service_pending_train_max {self.pending_train_max}",
+                "# HELP gpu_service_train_gpu_max_concurrent Maximum concurrent CUDA train batches allowed by shared host",
+                "# TYPE gpu_service_train_gpu_max_concurrent gauge",
+                f"gpu_service_train_gpu_max_concurrent {self.train_gpu_max_concurrent}",
+                "# HELP gpu_service_train_gpu_active Current active train batches consuming learner GPU",
+                "# TYPE gpu_service_train_gpu_active gauge",
+                f"gpu_service_train_gpu_active {self._active_train_batches}",
                 "# HELP gpu_service_pending_trains_oldest_ms Age of the oldest pending train request in milliseconds",
                 "# TYPE gpu_service_pending_trains_oldest_ms gauge",
                 f"gpu_service_pending_trains_oldest_ms {self._oldest_age_ms(pending_train_times):.3f}",
@@ -1109,6 +1205,18 @@ class SharedGpuHost:
                 "# HELP gpu_service_train_failures_total Train batches that failed after dequeue",
                 "# TYPE gpu_service_train_failures_total counter",
                 f"gpu_service_train_failures_total {self._train_failures}",
+                "# HELP gpu_service_train_tasks_dropped_total Train tasks dropped by GPU-host backpressure policy",
+                "# TYPE gpu_service_train_tasks_dropped_total counter",
+                f"gpu_service_train_tasks_dropped_total {self._train_tasks_dropped}",
+                "# HELP gpu_service_train_vram_requeues_total Train episodes requeued because learner VRAM guard had no headroom",
+                "# TYPE gpu_service_train_vram_requeues_total counter",
+                f"gpu_service_train_vram_requeues_total {self._train_requeues_vram}",
+                "# HELP gpu_service_train_enqueue_backpressure_wait_total Train enqueue calls that waited for pending queue capacity",
+                "# TYPE gpu_service_train_enqueue_backpressure_wait_total counter",
+                f"gpu_service_train_enqueue_backpressure_wait_total {self._train_enqueue_waits}",
+                "# HELP gpu_service_train_enqueue_backpressure_wait_ms_total Total milliseconds producers waited for pending train capacity",
+                "# TYPE gpu_service_train_enqueue_backpressure_wait_ms_total counter",
+                f"gpu_service_train_enqueue_backpressure_wait_ms_total {self._train_enqueue_wait_ms:.3f}",
                 "# HELP gpu_service_model_publishes_total Learner-to-inference model publish operations",
                 "# TYPE gpu_service_model_publishes_total counter",
                 f"gpu_service_model_publishes_total {self._model_publishes}",
@@ -1238,10 +1346,20 @@ def connection_loop(host: SharedGpuHost, session: ConnectionSession) -> None:
             elif opcode == 3:
                 profile_id = headers.get("profile_id", "").strip()
                 state = host.require_profile(profile_id)
-                host.enqueue_train(state, TrainTask(profile_id=profile_id, headers=headers, segments=unpack_segments(payload)))
+                queued, dropped, waited_ms = host.enqueue_train(
+                    state,
+                    TrainTask(profile_id=profile_id, headers=headers, segments=unpack_segments(payload))
+                )
                 with host._lock:
                     queue_depth = len(state.pending_trains)
-                session.reply(0, request_id, {"queued": "1", "queue_depth": str(queue_depth), "dropped_train_episodes": "0"})
+                    dropped_total = host._train_tasks_dropped
+                session.reply(0, request_id, {
+                    "queued": "1" if queued else "0",
+                    "queue_depth": str(queue_depth),
+                    "dropped_train_episodes": str(dropped_total),
+                    "enqueue_wait_ms": f"{waited_ms:.3f}",
+                    "dropped_this_request": str(dropped),
+                })
             else:
                 host.handle_control(session, opcode, request_id, headers, payload)
             current_request_id = -1

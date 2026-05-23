@@ -37,6 +37,7 @@ public final class DeterminizationSamplerTest {
         testCountExceedsDecklistEliminates(s);
         testDeterminizationValidity(s);
         testDeterminizationWithVisibleSubtraction(s);
+        testLoadFromDeckListFile();
 
         System.out.println();
         System.out.println("Total: " + (passed + failed) + "  Passed: " + passed + "  Failed: " + failed);
@@ -203,6 +204,25 @@ public final class DeterminizationSamplerTest {
             }
         }
         pass("determinization-with-visible-subtraction");
+    }
+
+    private static void testLoadFromDeckListFile() {
+        String path = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/"
+                + "decklist.active_profile_pool_thesis_eval_unique_20260510.txt";
+        DeterminizationSampler s = DeterminizationSampler.loadFromDeckListFile(path);
+        if (s == null || s.getArchetypes().size() != 4) {
+            fail("load-from-deck-list-file", "expected 4 archetypes, got "
+                    + (s == null ? "null" : s.getArchetypes()));
+            return;
+        }
+        if (!s.getArchetypes().contains("SpyCombo")
+                || !s.getArchetypes().contains("JundWildfire")
+                || !s.getArchetypes().contains("MonoRedRally")
+                || !s.getArchetypes().contains("GrixisAffinity")) {
+            fail("load-from-deck-list-file", "unexpected archetypes " + s.getArchetypes());
+            return;
+        }
+        pass("load-from-deck-list-file");
     }
 
     private static boolean approxEq(float a, float b, float eps) {

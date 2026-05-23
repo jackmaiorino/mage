@@ -9,6 +9,16 @@ scrape_configs:
       - targets: ['host.docker.internal:9090']
     metrics_path: '/metrics'
 
+  - job_name: 'mage-gpu-service'
+    static_configs:
+      - targets: ['host.docker.internal:27100']
+    metrics_path: '/metrics'
+
+  - job_name: 'mage-profile-exporter'
+    static_configs:
+      - targets: ['host.docker.internal:9102']
+    metrics_path: '/metrics'
+
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']

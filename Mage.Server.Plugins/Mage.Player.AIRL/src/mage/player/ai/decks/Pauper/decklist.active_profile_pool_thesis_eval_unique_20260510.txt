@@ -1,0 +1,5 @@
+# Thesis-clean eval pool: one copy of each matchup deck.
+Deck - Spy Combo.dek
+Deck - Jund Wildfire.dek
+Deck - Mono Red Rally.dek
+Deck - Grixis Affinity.dek

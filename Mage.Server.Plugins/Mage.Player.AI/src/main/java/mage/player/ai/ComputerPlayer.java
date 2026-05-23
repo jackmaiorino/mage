@@ -64,7 +64,29 @@ public class ComputerPlayer extends PlayerImpl {
     // * use yours CPU cores for best performance
     // TODO: add server config to control max AI threads (with CPU cores by default)
     // TODO: rework AI implementation to use multiple sims calculation instead one by one
-    final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 5;//DebugUtil.AI_ENABLE_DEBUG_MODE ? 1 : 5;
+    final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = readComputerMaxThreadsForSimulations();
+
+    private static int readComputerMaxThreadsForSimulations() {
+        int defaultThreads = 5; // DebugUtil.AI_ENABLE_DEBUG_MODE ? 1 : 5;
+        String configured = System.getProperty("AI_MAX_THREADS_FOR_SIMULATIONS");
+        if (configured == null || configured.trim().isEmpty()) {
+            configured = System.getenv("AI_MAX_THREADS_FOR_SIMULATIONS");
+        }
+        if (configured == null || configured.trim().isEmpty()) {
+            logger.info("AI_MAX_THREADS_FOR_SIMULATIONS not set; using default " + defaultThreads);
+            return defaultThreads;
+        }
+        try {
+            int threads = Integer.parseInt(configured.trim());
+            if (threads > 0) {
+                logger.info("AI_MAX_THREADS_FOR_SIMULATIONS=" + threads);
+                return threads;
+            }
+        } catch (NumberFormatException e) {
+            logger.warn("Invalid AI_MAX_THREADS_FOR_SIMULATIONS value: " + configured);
+        }
+        return defaultThreads;
+    }
 
 
     // remember picked cards for better draft choices

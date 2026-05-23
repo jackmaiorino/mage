@@ -1,0 +1,16 @@
+# Thesis-clean Affinity-pressure pool from the 2026-05-10 9h hard-matchup eval.
+# Entries are repeated to oversample lower-winrate opponents without adding
+# card-specific Spy knowledge.
+Deck - Spy Combo.dek
+Deck - Jund Wildfire.dek
+Deck - Jund Wildfire.dek
+Deck - Jund Wildfire.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek

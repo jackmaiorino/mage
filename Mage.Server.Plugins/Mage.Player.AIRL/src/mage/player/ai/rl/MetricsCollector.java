@@ -40,6 +40,15 @@ public class MetricsCollector {
     private final AtomicLong trainingUpdates = new AtomicLong(0);
     private final AtomicLong gpuMemoryUsed = new AtomicLong(0);
     private final AtomicLong gpuMemoryTotal = new AtomicLong(0);
+    private final AtomicLong actorLearnerQueueDepth = new AtomicLong(0);
+    private final AtomicLong actorLearnerQueueCapacity = new AtomicLong(0);
+    private final AtomicLong actorLearnerQueueMaxDepth = new AtomicLong(0);
+    private final AtomicLong actorLearnerEnqueuedTotal = new AtomicLong(0);
+    private final AtomicLong actorLearnerDroppedTotal = new AtomicLong(0);
+    private final AtomicLong actorLearnerSentTotal = new AtomicLong(0);
+    private final AtomicLong actorLearnerFailedTotal = new AtomicLong(0);
+    private final AtomicLong actorLearnerBackpressureWaitTotal = new AtomicLong(0);
+    private final AtomicLong actorLearnerBackpressureWaitMsTotal = new AtomicLong(0);
 
     // Upstream actor-side bottleneck metrics
     private final AtomicLong baseStateCacheHitsTotal = new AtomicLong(0);
@@ -853,6 +862,38 @@ public class MetricsCollector {
         componentMetrics.get("learner_batches").incrementAndGet();
     }
 
+    public void setActorLearnerQueueDepth(int depth, int capacity) {
+        actorLearnerQueueDepth.set(Math.max(0, depth));
+        actorLearnerQueueCapacity.set(Math.max(0, capacity));
+        actorLearnerQueueMaxDepth.accumulateAndGet(Math.max(0, depth), Math::max);
+    }
+
+    public void recordActorLearnerEnqueued(int depth, int capacity) {
+        actorLearnerEnqueuedTotal.incrementAndGet();
+        setActorLearnerQueueDepth(depth, capacity);
+    }
+
+    public void recordActorLearnerDropped(int depth, int capacity) {
+        actorLearnerDroppedTotal.incrementAndGet();
+        setActorLearnerQueueDepth(depth, capacity);
+    }
+
+    public void recordActorLearnerSent(int depth, int capacity) {
+        actorLearnerSentTotal.incrementAndGet();
+        setActorLearnerQueueDepth(depth, capacity);
+    }
+
+    public void recordActorLearnerFailed(int depth, int capacity) {
+        actorLearnerFailedTotal.incrementAndGet();
+        setActorLearnerQueueDepth(depth, capacity);
+    }
+
+    public void recordActorLearnerBackpressureWait(long waitMs, int depth, int capacity) {
+        actorLearnerBackpressureWaitTotal.incrementAndGet();
+        actorLearnerBackpressureWaitMsTotal.addAndGet(Math.max(0L, waitMs));
+        setActorLearnerQueueDepth(depth, capacity);
+    }
+
     public void recordOptimalBatchSize(int size) {
         optimalBatchSize.set(size);
     }
@@ -1591,6 +1632,34 @@ public class MetricsCollector {
             sb.append("# TYPE ").append(metricName).append(" counter\n");
             sb.append(metricName).append(" ").append(entry.getValue().get()).append("\n");
         }
+
+        sb.append("# HELP mage_actor_learner_queue_depth Pending actor-generated learner tasks\n");
+        sb.append("# TYPE mage_actor_learner_queue_depth gauge\n");
+        sb.append("mage_actor_learner_queue_depth ").append(actorLearnerQueueDepth.get()).append("\n");
+        sb.append("# HELP mage_actor_learner_queue_capacity Actor learner queue capacity\n");
+        sb.append("# TYPE mage_actor_learner_queue_capacity gauge\n");
+        sb.append("mage_actor_learner_queue_capacity ").append(actorLearnerQueueCapacity.get()).append("\n");
+        sb.append("# HELP mage_actor_learner_queue_max_depth Max actor learner queue depth seen\n");
+        sb.append("# TYPE mage_actor_learner_queue_max_depth gauge\n");
+        sb.append("mage_actor_learner_queue_max_depth ").append(actorLearnerQueueMaxDepth.get()).append("\n");
+        sb.append("# HELP mage_actor_learner_enqueued_total Actor learner tasks enqueued\n");
+        sb.append("# TYPE mage_actor_learner_enqueued_total counter\n");
+        sb.append("mage_actor_learner_enqueued_total ").append(actorLearnerEnqueuedTotal.get()).append("\n");
+        sb.append("# HELP mage_actor_learner_dropped_total Actor learner tasks dropped under backpressure\n");
+        sb.append("# TYPE mage_actor_learner_dropped_total counter\n");
+        sb.append("mage_actor_learner_dropped_total ").append(actorLearnerDroppedTotal.get()).append("\n");
+        sb.append("# HELP mage_actor_learner_sent_total Actor learner tasks sent to model backend\n");
+        sb.append("# TYPE mage_actor_learner_sent_total counter\n");
+        sb.append("mage_actor_learner_sent_total ").append(actorLearnerSentTotal.get()).append("\n");
+        sb.append("# HELP mage_actor_learner_failed_total Actor learner tasks that failed while sending\n");
+        sb.append("# TYPE mage_actor_learner_failed_total counter\n");
+        sb.append("mage_actor_learner_failed_total ").append(actorLearnerFailedTotal.get()).append("\n");
+        sb.append("# HELP mage_actor_learner_backpressure_wait_total Actor learner enqueue calls that waited for queue capacity\n");
+        sb.append("# TYPE mage_actor_learner_backpressure_wait_total counter\n");
+        sb.append("mage_actor_learner_backpressure_wait_total ").append(actorLearnerBackpressureWaitTotal.get()).append("\n");
+        sb.append("# HELP mage_actor_learner_backpressure_wait_ms_total Total milliseconds spent waiting for actor learner queue capacity\n");
+        sb.append("# TYPE mage_actor_learner_backpressure_wait_ms_total counter\n");
+        sb.append("mage_actor_learner_backpressure_wait_ms_total ").append(actorLearnerBackpressureWaitMsTotal.get()).append("\n");
 
         // System info
         Runtime runtime = Runtime.getRuntime();
