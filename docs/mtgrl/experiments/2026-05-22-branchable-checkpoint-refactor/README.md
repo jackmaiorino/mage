@@ -475,3 +475,36 @@ Admitted manifest rows:
 Next unit:
 
 - Build a gated training-data generation path that consumes `confirmed_checkpoint_corrections.csv` only, writes a small supervised correction dataset with provenance and hashes, and refuses to run when the manifest has zero admitted rows or any row fails the same admission invariants.
+
+## v288 Gated Correction Dataset
+
+Purpose:
+
+- Convert the confirmed v287 manifest into a supervised first-action correction dataset while preserving the snapshot/hash proof needed to replay or audit each label.
+
+Implementation:
+
+- Added `scripts/mtgrl/build_checkpoint_correction_dataset.py`.
+- The script consumes `confirmed_checkpoint_corrections.csv`, revalidates the same admission invariants, requires non-empty examples, checks source/target indices, requires local snapshot files by default, joins `selected_snapshots.csv` ranking context, and writes JSONL/CSV examples plus `dataset_summary.json`.
+- Each example labels the terminal-winning sibling as `target_indices`/`target_texts` and records the accepted-policy terminal-loss source action under `negative`.
+- This is dataset generation only. It does not import into a trainer or launch training.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python -m py_compile scripts/mtgrl/build_checkpoint_correction_dataset.py` | Passed. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v288_checkpoint_correction_dataset` | Generated `checkpoint_correction_v1` with `examples=3`, `errors=0`. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v288_rejected_manifest_dataset_gate_check` | Expected fail-closed check against `rejected_checkpoint_corrections.csv`: `examples=0`, `errors=79`; all rows failed the manifest/admission proof fields. |
+
+Dataset rows:
+
+| Example | Source loss | Target win | Selected prob | Value score | Turn | Pressure |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| `e54e81574c0753ee1d615a39` | `Cast Saruli Caretaker` | `Cast Lead the Stampede` | `0.14072587` | `-0.25376269` | `9` | own life `16`, opponent permanents `3` |
+| `48eb0eb2a60db9c087cfbc96` | `Cast Balustrade Spy` | `Cast Lead the Stampede` | `0.26092055` | `0.00349175` | `15` | own life `9`, opponent permanents `7` |
+| `23ffdd4cf59398c4f11f35c4` | `Cast Tinder Wall` | `Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.` | `0.20412067` | `-0.13766083` | `7` | own life `18`, opponent permanents `5` |
+
+Next unit:
+
+- Mine a larger deterministic live-checkpoint slice from the accepted-policy v262/v231-family checkpoint corpus to grow this dataset beyond 3 examples before considering any trainer import.
