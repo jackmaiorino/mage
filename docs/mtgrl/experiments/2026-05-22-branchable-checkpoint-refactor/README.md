@@ -293,3 +293,37 @@ Conclusion:
 - The long-term path is now live checkpoint collection during accepted-policy evaluation. That bypasses the old-log startup drift because the branchable snapshot is captured at the original policy decision, not reconstructed later from a prefix.
 - Existing forced-prefix probes remain useful for diagnosis and targeted historical validation, but should not block corpus growth.
 - No training or HPC promotion is admitted from live checkpoints alone. The next unit is a larger accepted-policy live-checkpoint collection run, followed by a loader/miner that branches from the serialized snapshots and only emits correction evidence when source continuation loses terminal and a sibling continuation wins terminal.
+
+## v263 Live Snapshot Branch Miner
+
+Purpose:
+
+- Implement the long-term path for serialized live checkpoints: load a `LiveCheckpointRecorder.Snapshot`, attach branch control to the normal copied `ComputerPlayerRL`, and resume directly from the captured engine state without reconstructing any replay prefix.
+
+Implementation:
+
+- Added `EngineDecisionBranchController` as a reusable transient branch-control hook on `ComputerPlayerRL`.
+- Added `LiveCheckpointBranchMiner`, a CLI that recursively loads `*.ser.gz` live snapshots, restores `RandomUtil.State`, verifies source reentry twice, then attempts source and alternate terminal continuations.
+- Pinned `ComputerPlayerRL.serialVersionUID` to the v262 snapshot stream value so checkpoint artifacts remain readable after adding transient branch-control fields.
+- Made `LiveCheckpointRecorder.compactState` and `sha256` reusable so reentry probes compare the same state and candidate hashes that live capture wrote.
+- Fixed durable snapshot compatibility in the engine: `Exile` now uses a stable permanent exile-zone id, migrates legacy serialized permanent zones on read/copy, and `ZonesHandler` defensively recreates the permanent exile zone before placing cards there. This removed the terminal-branch crash where old snapshots deserialized with an unreachable permanent exile zone.
+- Updated the branch runner to keep resuming until terminal or timeout, including the Maven `main` thread path that XMage treats as a game thread.
+- Alternate selection now prefers a non-pass sibling when available instead of blindly choosing the first non-source candidate.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python "$env:USERPROFILE\.codex\skills\mage-research-agent\scripts\airl_maven.py" compile` | Passed after each source patch. |
+| `mvn -o -q -pl Mage -am -DskipTests install` | Required so `exec:java` used the fixed engine classes instead of stale installed `mage` artifacts. |
+| `mvn -o -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests install` | Passed after the live miner and branch runner changes. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v263_smoke_reentry/live_checkpoint_branch_probe.csv` | Single v262 checkpoint reentered twice with matching candidate hash `97b74ddf7697b1fea210f56f71da4d467989dd339b1ef5814453ca7ed5fc038a` and state hash `24acacb2a740cf70d278a938906360cc63519ddfbb98d30fe77d7885c560c02e`. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v263_smoke_reentry_3/live_checkpoint_branch_probe.csv` | Three v262 checkpoints classified `reentry_matched`; both clones reproduced source candidate/state hashes. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v263_smoke_terminal_exilefix_installed/live_checkpoint_branch_probe.csv` | Source branch from `ord001_D001_ACTIVATE_ABILITY_OR_SPELL` reached terminal loss from the serialized live checkpoint. Alternate `Pass` branch did not terminate in the bounded probe. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v263_smoke_terminal_ord004/live_checkpoint_branch_probe.csv` | Deeper source branch reentered cleanly but timed out under the unavailable local Python policy gateway; classified `source_error`, not evidence. |
+
+Conclusion:
+
+- The long-term live snapshot branch path is now real: serialized v262 snapshots can be deserialized after code changes, cloned, reentered twice with identical hashes, and resumed into a source terminal-loss branch without prefix replay.
+- The current remaining blocker is not forced-prefix reconstruction. It is terminal mining throughput/completeness after the branch: local policy inference is falling back because the Python gateway is unavailable, and pass-like alternates often do not produce a terminal result inside the bounded probe.
+- No new training evidence is admitted from v263. The next research unit should run the miner against a larger v262/v264 live-checkpoint slice with a healthy policy backend or an explicit post-branch autopilot mode, then admit only rows where source loses terminal and a non-pass sibling wins terminal.

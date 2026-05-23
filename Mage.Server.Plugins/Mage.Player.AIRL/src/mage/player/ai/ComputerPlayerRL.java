@@ -75,6 +75,7 @@ import mage.player.ai.rl.DraftLogger;
 import mage.player.ai.rl.DraftPickRecord;
 import mage.player.ai.rl.DraftPythonMLBridge;
 import mage.player.ai.rl.DraftStateBuilder;
+import mage.player.ai.rl.EngineDecisionBranchController;
 import mage.player.ai.rl.EnvConfig;
 import mage.player.ai.rl.GameLogger;
 import mage.player.ai.rl.LiveCheckpointRecorder;
@@ -96,6 +97,8 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 
 public class ComputerPlayerRL extends ComputerPlayer7 {
+
+    private static final long serialVersionUID = 9004457178527336690L;
 
     // When true, skip model inference and return uniform random scores.
     // Use to benchmark pure game-engine throughput without GPU dependency.
@@ -245,6 +248,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private int lastLoggedTurn = -1; // Track turn changes for game logging
     // Fallback logger attachment for callbacks that may run off the trainer thread.
     private transient GameLogger attachedGameLogger = null;
+    private transient EngineDecisionBranchController branchController = null;
     private transient Deque<ReplayAgentSearchTraceContext> pendingReplayAgentSearchTraces = new ArrayDeque<>();
     private int lastExplorationTurn = Integer.MIN_VALUE;
     private boolean turnForceUniform = false;
@@ -2486,6 +2490,30 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return out;
     }
 
+    private <T> List<String> branchCandidateTexts(
+            StateSequenceBuilder.ActionType actionType,
+            List<T> candidates,
+            int candidateCount,
+            Game game
+    ) {
+        if (actionType != StateSequenceBuilder.ActionType.SELECT_TARGETS) {
+            return replayCandidateTexts(candidates, candidateCount);
+        }
+        List<String> out = new ArrayList<>();
+        int limit = candidates == null ? 0 : Math.min(candidateCount, candidates.size());
+        for (int i = 0; i < limit; i++) {
+            Object candidate = candidates.get(i);
+            if (candidate == null) {
+                out.add("STOP");
+            } else if (candidate instanceof UUID) {
+                out.add(describeTargetWithOwner((UUID) candidate, game));
+            } else {
+                out.add(replayCandidateText(candidate));
+            }
+        }
+        return out;
+    }
+
     private String replayCandidateObjectId(Object candidate, Game game) {
         try {
             if (candidate == null) {
@@ -3031,6 +3059,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.policyKey = player.policyKey;
         this.trainingEnabled = player.trainingEnabled;
         this.attachedGameLogger = player.attachedGameLogger;
+        this.branchController = null;
         this.pendingReplayAgentSearchTraces = new ArrayDeque<>();
         // strict choose mode enforced via method override
     }
@@ -3058,6 +3087,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.onlinePrefixAutopilot = new ArrayDeque<>();
         this.onlinePrefixAutopilotGameId = null;
         this.attachedGameLogger = null;
+        this.branchController = null;
         this.pendingReplayAgentSearchTraces = new ArrayDeque<>();
         this.genericActionHistory = new ArrayDeque<>();
         this.genericActionHistoryGameId = null;
@@ -3193,7 +3223,108 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             Game game,
             Ability source
     ) {
-        return null;
+        EngineDecisionBranchController controller = branchController;
+        if (controller == null) {
+            return null;
+        }
+        int candidateCount = candidates == null
+                ? 0
+                : Math.min(candidates.size(), StateSequenceBuilder.TrainingData.MAX_CANDIDATES);
+        try {
+            List<String> candidateTexts = branchCandidateTexts(actionType, candidates, candidateCount, game);
+            List<String> candidateObjectIds = replayCandidateObjectIds(candidates, candidateCount, game);
+            String compactState = LiveCheckpointRecorder.compactState(game, this);
+            EngineDecisionBranchController.DecisionContext<T> context =
+                    new EngineDecisionBranchController.DecisionContext<>(
+                            this,
+                            game,
+                            source,
+                            actionType,
+                            candidates,
+                            candidateTexts,
+                            candidateObjectIds,
+                            compactState,
+                            candidateCount,
+                            maxTargets,
+                            minTargets);
+            EngineDecisionBranchController.Choice choice = controller.onDecision(context);
+            if (choice == null || choice.isNone()) {
+                return null;
+            }
+            if (choice.isTerminateAfterDecision()) {
+                String reason = choice.getReason();
+                if (reason == null || reason.isEmpty()) {
+                    reason = "branch_controller_terminated";
+                }
+                throw new EngineDecisionBranchController.BranchTerminated(reason);
+            }
+            return choice.getIndices();
+        } catch (EngineDecisionBranchController.BranchTerminated terminated) {
+            throw terminated;
+        } catch (Throwable t) {
+            try {
+                RLTrainer.threadLocalLogger.get().warn(
+                        "Engine branch controller failed; falling back to policy choice: " + t.getMessage());
+            } catch (Exception ignored) {
+                // ignore diagnostic failures
+            }
+            return null;
+        }
+    }
+
+    private <T> List<Integer> preModelForcedChoiceIndices(
+            StateSequenceBuilder.ActionType actionType,
+            List<T> candidates,
+            int maxTargets,
+            int minTargets,
+            int candidateCount,
+            Game game,
+            Ability source
+    ) {
+        EngineDecisionBranchController controller = branchController;
+        if (controller == null || !controller.shouldEvaluateBeforeModel(actionType)) {
+            return null;
+        }
+        List<Integer> forced = forcedChoiceIndices(actionType, candidates, maxTargets, minTargets, game, source);
+        return sanitizeForcedChoiceIndices(forced, candidateCount, null, maxTargets, minTargets);
+    }
+
+    private List<Integer> sanitizeForcedChoiceIndices(
+            List<Integer> forcedIndices,
+            int candidateCount,
+            int[] candidateMask,
+            int maxTargets,
+            int minTargets
+    ) {
+        if (forcedIndices == null || forcedIndices.isEmpty() || candidateCount <= 0) {
+            return null;
+        }
+        List<Integer> sanitized = new ArrayList<>();
+        Set<Integer> seenForced = new HashSet<>();
+        int limit = maxTargets <= 0 ? candidateCount : Math.min(maxTargets, candidateCount);
+        for (Integer idx : forcedIndices) {
+            if (idx == null
+                    || idx < 0
+                    || idx >= candidateCount
+                    || (candidateMask != null && candidateMask[idx] == 0)
+                    || seenForced.contains(idx)) {
+                continue;
+            }
+            sanitized.add(idx);
+            seenForced.add(idx);
+            if (sanitized.size() >= limit) {
+                break;
+            }
+        }
+        return !sanitized.isEmpty() && sanitized.size() >= Math.max(0, minTargets) ? sanitized : null;
+    }
+
+    public void setEngineDecisionBranchController(EngineDecisionBranchController controller) {
+        this.branchController = controller;
+    }
+
+    public EngineDecisionBranchController getEngineDecisionBranchController() {
+        return branchController;
     }
 
     @Override
@@ -3204,6 +3335,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         try {
             result = priorityPlay(game);
         } catch (Throwable t) {
+            if (t instanceof EngineDecisionBranchController.BranchTerminated) {
+                throw (EngineDecisionBranchController.BranchTerminated) t;
+            }
             if (isFatalEmbeddingError(t)) {
                 try {
                     RLTrainer.threadLocalLogger.get().error(
@@ -3286,6 +3420,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return Arrays.asList(0);
         } else if (candidateCount == 0) {
             return Arrays.asList();
+        }
+
+        List<Integer> preModelForced = preModelForcedChoiceIndices(
+                actionType, candidates, maxTargets, minTargets, candidateCount, game, source);
+        if (preModelForced != null && !preModelForced.isEmpty()) {
+            return preModelForced;
         }
 
         StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
@@ -3552,19 +3692,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         boolean forcedApplied = false;
         List<Integer> forcedIndices = forcedChoiceIndices(actionType, candidates, maxTargets, minTargets, game, source);
         if (forcedIndices != null && !forcedIndices.isEmpty()) {
-            List<Integer> sanitized = new ArrayList<>();
-            Set<Integer> seenForced = new HashSet<>();
-            for (Integer idx : forcedIndices) {
-                if (idx == null || idx < 0 || idx >= candidateCount || candidateMask[idx] == 0 || seenForced.contains(idx)) {
-                    continue;
-                }
-                sanitized.add(idx);
-                seenForced.add(idx);
-                if (sanitized.size() >= maxTargets) {
-                    break;
-                }
-            }
-            if (!sanitized.isEmpty() && sanitized.size() >= minTargets) {
+            List<Integer> sanitized = sanitizeForcedChoiceIndices(
+                    forcedIndices, candidateCount, candidateMask, maxTargets, minTargets);
+            if (sanitized != null && !sanitized.isEmpty() && sanitized.size() >= minTargets) {
                 selectedIndices = sanitized;
                 oldLogpTotal = 0.0f;
                 forcedApplied = true;

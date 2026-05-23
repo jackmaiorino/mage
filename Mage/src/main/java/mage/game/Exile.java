@@ -5,6 +5,8 @@ import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.util.Copyable;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
@@ -15,7 +17,10 @@ import java.util.stream.Collectors;
  */
 public class Exile implements Serializable, Copyable<Exile> {
 
-    private static final UUID PERMANENT = UUID.randomUUID();
+    private static final long serialVersionUID = 968132318574358067L;
+    public static final UUID PERMANENT_ZONE_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+    private static final UUID PERMANENT = PERMANENT_ZONE_ID;
+    private static final String PERMANENT_NAME = "Permanent - Exile";
 
     private final Map<UUID, ExileZone> exileZones = new HashMap<>();
 
@@ -27,6 +32,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         for (Entry<UUID, ExileZone> entry : exile.exileZones.entrySet()) {
             exileZones.put(entry.getKey(), entry.getValue().copy());
         }
+        ensurePermanentZone();
     }
 
     public Collection<ExileZone> getExileZones() {
@@ -34,6 +40,7 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     public ExileZone getPermanentExile() {
+        ensurePermanentZone();
         return exileZones.get(PERMANENT);
     }
 
@@ -42,7 +49,7 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     public void add(Card card) {
-        exileZones.get(PERMANENT).add(card);
+        getPermanentExile().add(card);
     }
 
     public ExileZone createZone(UUID id, String name) {
@@ -157,6 +164,37 @@ public class Exile implements Serializable, Copyable<Exile> {
     @Override
     public Exile copy() {
         return new Exile(this);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        ensurePermanentZone();
+    }
+
+    private void ensurePermanentZone() {
+        if (exileZones.get(PERMANENT) != null) {
+            return;
+        }
+        exileZones.remove(PERMANENT);
+        UUID legacyKey = null;
+        ExileZone legacyZone = null;
+        for (Entry<UUID, ExileZone> entry : exileZones.entrySet()) {
+            ExileZone zone = entry.getValue();
+            if (zone != null && PERMANENT_NAME.equals(zone.getName())) {
+                legacyKey = entry.getKey();
+                legacyZone = zone;
+                break;
+            }
+        }
+        if (legacyKey != null) {
+            exileZones.remove(legacyKey);
+            ExileZone migrated = new ExileZone(PERMANENT, PERMANENT_NAME);
+            migrated.addAll(legacyZone);
+            migrated.setCleanupOnEndTurn(legacyZone.isCleanupOnEndTurn());
+            exileZones.put(PERMANENT, migrated);
+        } else {
+            createZone(PERMANENT, "Permanent");
+        }
     }
 
     public boolean containsId(UUID cardId, Game game) {

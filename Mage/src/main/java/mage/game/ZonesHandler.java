@@ -263,7 +263,11 @@ public final class ZonesHandler {
                             ZoneChangeInfo.Exile exileInfo = (ZoneChangeInfo.Exile) info;
                             game.getExile().createZone(exileInfo.id, exileInfo.name).add(card);
                         } else {
-                            game.getExile().getPermanentExile().add(card);
+                            ExileZone permanentExile = game.getExile().getPermanentExile();
+                            if (permanentExile == null) {
+                                permanentExile = game.getExile().createZone(Exile.PERMANENT_ZONE_ID, "Permanent");
+                            }
+                            permanentExile.add(card);
                         }
                     }
                     break;

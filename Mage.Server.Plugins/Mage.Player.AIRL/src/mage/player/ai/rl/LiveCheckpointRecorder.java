@@ -264,7 +264,7 @@ public final class LiveCheckpointRecorder {
         }
     }
 
-    private static String compactState(Game game, Player perspective) {
+    public static String compactState(Game game, Player perspective) {
         StringBuilder sb = new StringBuilder(2048);
         try {
             sb.append("game=").append(game.getId())
@@ -382,7 +382,7 @@ public final class LiveCheckpointRecorder {
         return v.isEmpty() ? "unknown" : v;
     }
 
-    private static String sha256(String value) {
+    public static String sha256(String value) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] bytes = digest.digest((value == null ? "" : value).getBytes(StandardCharsets.UTF_8));
