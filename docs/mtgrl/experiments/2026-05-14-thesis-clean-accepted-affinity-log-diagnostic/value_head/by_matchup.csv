@@ -1,0 +1,2 @@
+acc_value_ge_0,auc,base_winrate,brier_affine,losses,max_score,mean_loss_score,mean_max_prob,mean_score,mean_selected_prob,mean_win_score,min_score,n,p10_score,p50_score,p90_score,pearson,score_gap_win_minus_loss,selected_top_rate,subset,wins
+0.485239,0.660896,0.194847,0.242840,1500,0.754504,-0.027795,0.682831,-0.014637,0.682474,0.039738,-0.513722,1863,-0.202400,0.000000,0.162962,0.150976,0.067533,0.996243,Deck - Grixis Affinity,363

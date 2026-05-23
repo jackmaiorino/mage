@@ -1,0 +1,213 @@
+# MTGRL Session Handoff - 2026-05-08
+
+Latest detailed logs:
+
+- `docs/mtgrl/experiments/2026-05-08-spy-shallow-terminal-prefix-search/README.md`
+- `docs/mtgrl/experiments/2026-05-08-spy-terminal-branch-counterfactual-q/README.md`
+- `docs/mtgrl/experiments/2026-05-09-spy-belief-representation/README.md`
+- `docs/mtgrl/experiments/2026-05-09-spy-belief-rollout-root/README.md`
+- `docs/mtgrl/experiments/2026-05-09-spy-iterative-dagger/README.md`
+- `docs/mtgrl/experiments/2026-05-09-spy-model-guided-prefix-search/README.md`
+
+Current state:
+
+- No MTGRL training, eval, or counterfactual collection process was left running.
+- Most recent completed eval: `20260509_online_prefix_nomodel_n3_alt_eval4`, result 1/4.
+- Best recent full CP1 result remains the mixed avoid-loss import at 48/128, but action health was still poor.
+- The strongest current insight is that terminal prefix search is a strong teacher but does not distill through the current one-step supervised path.
+- Shallow terminal prefix search results:
+  - Root tactic only: `20260508_spy_root_tactic_autopilot_cp1_n128`, 20/128.
+  - 7 nodes/depth 6: `20260508_spy_search_budget_nodes7_n128`, 59/128.
+  - 15 nodes/depth 6: `20260508_spy_search_budget_nodes15_n128`, 77/128.
+  - 31 nodes/depth 6: `20260508_spy_shallow_search_autopilot_cp1_n128_nodes31_ser`, 84/128.
+  - 63 nodes/depth 8: `20260508_spy_shallow_search_autopilot_cp1_n128_nodes63_depth8_ser`, 86/128, with many scenario timeouts and uneven matchup shift.
+- Wider teacher branch:
+  - `20260509_spy_shallow_search_wide_top3r1_cp1_n128_nodes31`: 106/128 with `top_k=3`, `random_extra=1`, elapsed 2517.4s.
+  - Accepted score on those prefix tensors: 607/625 top-1.
+  - Accepted replay: 60/106 searched starts won; exported 13 deviation and 777 DAgger tensors.
+  - DAgger export score: 569/777 top-1; pure deviation score: 0/13.
+  - `20260509_spy_shallow_search_top3r0_cp1_n64_nodes31`: 53/64 with `top_k=3`, `random_extra=0`, elapsed 1237.5s.
+  - Accepted score on those prefix tensors: 308/311 top-1.
+  - Accepted replay: 31/53 searched starts won; exported 6 deviation and 381 DAgger tensors.
+  - DAgger export score: 285/381 top-1; pure deviation score: 0/6.
+  - `20260509_spy_shallow_search_top3r0_cp1_n128_nodes31`: 111/128 with `top_k=3`, `random_extra=0`, elapsed 2301.8s.
+  - Accepted score on those prefix tensors: 634/657 top-1.
+  - Accepted replay: 70/111 searched starts won; exported 18 deviation and 892 DAgger tensors.
+  - DAgger export score: 604/892 top-1; pure deviation score: 0/18.
+  - Conclusion: `top_k=3` is the current best teacher-side improvement; random extra branches are not needed.
+- Top-3 DAgger distillation is not promotable:
+  - Profile: `Pauper-Spy-Combo-Top3R0DaggerR16-20260509`, seeded from the accepted `Pauper-Spy-Combo-FastT5Contrast-20260506` checkpoint.
+  - Fit: `20260509_top3r0_dagger_r16_fit_e4p1`, 892 anchored DAgger tensors, 4 epochs, 1 permutation.
+  - Score after fit: 620/892 top-1, mean target probability 0.669081.
+  - Same-start replay: 71/111 wins, 519/666 matched.
+  - Reduced CP1: `20260509_top3r0_dagger_r16_cp1_eval16`, 12/63 completed games.
+  - Conclusion: even with the strongest teacher corpus so far, one-step DAgger distillation barely changes replay wins and fails CP1.
+- Iterative DAgger is also not promotable:
+  - Cycle 2 export replayed the top-3 nodes31 teacher corpus with `Pauper-Spy-Combo-Top3R0DaggerR16-20260509`.
+  - Export run: `20260509_replay_top3r0_dagger_r16_iter2_export_r16`, 62/111 replay wins, 525/666 matched, 22 fresh deviations, 930 anchored DAgger examples.
+  - Fit profile: `Pauper-Spy-Combo-Top3R0DaggerR16Iter2-20260509`, seeded from iter1 DAgger.
+  - Fit run: `20260509_top3r0_dagger_iter2_agg_fit_e2p1`, aggregated cycle1+cycle2 DAgger data, 1750 imported examples, 3500 train passes.
+  - Clean same-start replay improved to 74/111 but exact match fell to 443/666.
+  - Reduced CP1 eval: `20260509_top3r0_dagger_iter2_cp1_eval4`, 1/16.
+  - Conclusion: simple aggregate DAgger cycles can improve saved-start replay while making fresh CP1 play worse. Do not continue this loop without a different data source or policy-improvement mechanism.
+  - Infrastructure note: `scripts/run_cp7_eval_sweep.py` now supports `--output-root` / `CP7_EVAL_SWEEP_ROOT` because the default `cp7_eval_sweeps` junction points at a nearly full volume.
+- Top-3 budget curve:
+  - `20260509_spy_shallow_search_top3r0_cp1_n128_nodes15`: 104/128 with 15 nodes, depth 6, elapsed 1977.0s.
+  - Accepted score on tensors: 598/615 top-1.
+  - Accepted replay: `20260509_replay_top3r0_n128_nodes15_accepted`, 62/104 starts won, 519/624 matched.
+  - Node count alone is a weak runtime lever: nodes15 kept most quality but only saved about 14% wall-clock versus nodes31.
+  - Turn distribution points to terminal rollout length as the real cost lever: top-3 nodes31 average winning turn 12.91 with 34 wins after turn 17; original top2 nodes31 average winning turn 8.10 with all wins by turn 9.
+  - `20260509_spy_shallow_search_top3r0_cp1_n128_nodes31_turn17`: 103/128 with 31 nodes, depth 6, `max_game_turns=17`, elapsed 2618.5s.
+  - Turn cap is negative: it loses 8 wins versus uncapped nodes31 and is slower, likely because late wins become no-win searches that exhaust more branches.
+  - `20260509_spy_shallow_search_top3r0_cp1_n128_nodes7`: 100/128 with 7 nodes, depth 6, elapsed 1136.9s.
+  - Accepted score on tensors: 590/594 top-1.
+  - Accepted replay: `20260509_replay_top3r0_n128_nodes7_accepted`, 66/100 starts won, 483/600 matched.
+  - Nodes7 is the current best cost-quality point and the leading candidate budget for an online/search-improvement prototype.
+  - `20260509_spy_shallow_search_top3r0_cp1_n128_nodes3`: 75/128 with 3 nodes, depth 6, elapsed 918.4s.
+  - Accepted score on tensors: 443/445 top-1.
+  - Nodes3 is below the useful knee: cheaper than nodes7, but it gives up too much quality and is not better than earlier narrow 15-node search.
+  - `20260509_spy_shallow_search_top3r0_cp1_n128_nodes5`: 87/128 with 5 nodes, depth 6, elapsed 1154.8s.
+  - Accepted score on tensors: 515/518 top-1.
+  - Nodes5 is also below the useful knee: weaker than nodes7 and slightly slower on this seed.
+- Model-guided prefix search is a better diagnostic teacher but not a training path:
+  - Offline collect-only run: `20260509_spy_modelguided_top3r0_cp1_n64_nodes7`, accepted profile, CP1, 64 starts, 7 nodes, depth 6, top_k=3, model scoring enabled.
+  - Result: 51/64 searched wins, 303 exported prefix tensors, about 270s.
+  - Accepted score: `20260509_score_modelguided_top3r0_n64_nodes7_accepted`, 300/303 top-1, mean target probability 0.951149.
+  - Accepted replay/export: `20260509_replay_modelguided_top3r0_n64_nodes7_accepted`, 35/51 replay wins, 251/306 matched, only 1 first-deviation example.
+  - Interpretation: model-guided search is closer to the policy and more efficient than unguided nodes31 on n64, but it mostly produces labels the accepted policy already knows.
+  - Online hook change: `TerminalPrefixSearch.Config.modelGuidedFallback`, wired through `RL_ONLINE_PREFIX_MODEL_GUIDED_FALLBACK`.
+  - Online eval: `20260509_online_prefix_modelguided_trace_n7_cp1_eval4`, 3/16. Action health stayed broken with 9/12 Spy casts into hidden lands and 18/18 premature Dread Return flashbacks.
+  - Longer-prefix control: `20260509_spy_modelguided_top3r0_cp1_n32_nodes7_depth12`, 20/32 searched wins with 223 exported decisions, but accepted replay was only 11/20 with 111/240 matched.
+  - Depth-12 node-budget control: `20260509_spy_modelguided_top3r0_cp1_n32_nodes15_depth12`, 24/32 searched wins with 267 exported decisions. Accepted replay improved to 16/24, but exact match stayed low at 146/288.
+  - Conclusion: do not train on the model-guided prefix tensors and do not scale online model-guided prefix autopilot. Longer prefixes expose more drift; more nodes recover some terminal wins but still do not create a clean supervised policy-improvement target.
+- Online terminal-prefix root override prototype is negative so far:
+  - Implemented opt-in hook: `RL_ONLINE_PREFIX_SEARCH_ENABLE=1`, default off.
+  - Added `TerminalPrefixSearch` and an eval-only hook in `ComputerPlayerRL`.
+  - `MCTSSimPlayer` branch backend was clean and bounded but too weak because it only controls priority/targets.
+  - `ComputerPlayerRL` search-subclass backend controls generic Spy choices but is slow and overoptimistic.
+  - `20260509_online_prefix_nomodel_n3_eval8`: 0/8, 24 search calls, 10 simulated terminal wins, 0 overrides; all simulated wins were same-action wins.
+  - Same-action wins were then ignored as a search terminal condition.
+  - `20260509_online_prefix_nomodel_n3_alt_eval4`: 1/4, 12 search calls, 0 alternate-root wins.
+  - Conclusion: do not scale this online root override hook as a CP1 gate without better branch fidelity or a real search-as-training loop.
+- Search-as-policy-improvement follow-up is also not promotable:
+  - Tiny flat-MCTS train smoke: `Pauper-Spy-Combo-MCTSTrainSmoke-20260509`, run `20260509_spy_mcts_train_smoke_r8_e200`, 200 episodes with terminal rewards and selective 1-ply MCTS targets.
+  - Reduced CP1: `20260509_spy_mcts_train_smoke_cp1_eval16`, `0/64`.
+  - Accepted same-runner sanity: `20260509_accepted_cp1_eval4_sanity`, `3/16`.
+  - Matched accepted+tiny-flat-MCTS eval: `20260509_accepted_flatmcts_tiny_kw_cp1_eval4`, `1/16` with 200 MCTS activations.
+  - Conclusion: the current value-net flat-MCTS target is a bad teacher; do not scale AlphaZero training on it.
+  - Online prefix autopilot was implemented to force suffixes from same-root terminal traces:
+    - `20260509_online_prefix_autopilot_trace_n3_nooverwrite_cp1_eval4`: `3/16`.
+    - `20260509_online_prefix_autopilot_trace_n7_cp1_eval4`: `4/16`.
+  - Conclusion: executed-trace forcing works mechanically but does not clear a promotion gate and remains slow/overoptimistic.
+  - Train-time online prefix trace smoke was attempted:
+    - Profile/harness: `Pauper-Spy-Combo-OnlinePrefixTraceTrain-20260509`, `20260509_spy_online_prefix_trace_train_r4_e80`.
+    - Added default-off flags for train-time search/autopilot targets, but the run was aborted with 0 completed episodes because live `deadline` exceptions caused forced passes.
+    - Conclusion: do not relaunch train-time prefix search from live `priority()`; use offline/queued data generation if revisiting this teacher.
+  - Root-only train-time prefix search smoke completed cleanly:
+    - Profile/harness: `Pauper-Spy-Combo-OnlinePrefixRootTrain-20260509`, registry `20260509_spy_online_prefix_root_targets_registry.json`.
+    - 80 episodes, 4 runners, root search only: 3 nodes, depth 6, 2 activations per game, suffix autopilot disabled, one-hot target logging enabled.
+    - Health was clean, but throughput was slow: 80 episodes in about 35 minutes. Final training winrate 0.32, value accuracy 0.1786.
+    - Reduced CP1 full eval `20260509_online_prefix_root_train_e80_cp1_eval16_full`: 12/64 total; mirror 8/16, Wildfire 1/16, Rally 1/16, Affinity 2/16.
+    - Conclusion: root-only train-time prefix search is a plumbing success but not a promotable learner at this setting. Do not scale this exact root-search config.
+- Nine-archetype belief representation smoke is wired but not promotable:
+  - `StateSequenceBuilder.TrainingData.NUM_ARCHETYPES` was widened from 4 to 9 to match `DeterminizationSampler.pauperDefaults()`.
+  - `mtg_transformer.py` now defaults `NUM_ARCHETYPES=9` and skips incompatible checkpoint tensors, clearing old optimizer state when the widened belief projection is reinitialized.
+  - `DeterminizationSamplerTest` passed with all nine archetypes loaded.
+  - Profile/harness: `Pauper-Spy-Combo-Belief9RL-20260509`, `20260509_spy_belief9_rl_r16_e1000`, seeded from accepted FastT5Contrast.
+  - Training completed 1000/1000 episodes cleanly, but `value_accuracy.csv` ended at 0.0000 for episodes 960, 970, 990, and 1000.
+  - Reduced CP1 evals: `20260509_spy_belief9_rl_cp1_eval4` was 3/16; logged rerun `20260509_spy_belief9_rl_cp1_eval4_logged` was 2/16.
+  - Logged action health stayed broken: 16/17 Spy cast opportunities still had hidden lands estimated, 4/5 selected Spy casts had hidden lands, and 4/4 Dread Return flashbacks were premature.
+  - Conclusion: do not scale belief as a plain auxiliary terminal-RL loss. Revisit only as part of a real card-level belief/determinization search loop.
+- Belief-driven root rollout ISMCTS smoke is also not promotable:
+  - Added `ISMCTS_RANDOM_ROLLOUT_ROOT=1`, an eval-only backend that samples a determinization, force-applies each root action, and scores candidates by terminal `SimulatedPlayerMCTS` rollout result.
+  - Smoke: `20260509_accepted_belief_rollout_root_smoke_g1`, accepted profile, CP1, one game per matchup.
+  - Result: `1/4` with 21 MCTS activations and about 192 seconds wall-clock.
+  - Action health stayed broken: 19/20 Spy cast opportunities had hidden lands estimated, 6/6 selected Spy casts had hidden lands, and the one Dread Return flashback was premature.
+  - MCTS rows were mostly all terminal losses, so random rollouts could not rank Spy tactical candidates.
+  - Conclusion: do not scale terminal random-rollout ISMCTS. Belief/search needs a stronger rollout policy or a TerminalPrefixSearch-like teacher, not random playouts.
+- Branch-subtree Q is not promotable:
+  - `ActionCounterfactualTrainer` now remaps forced replay by candidate text where possible, and has `--branch-subtree-search-nodes` for bounded terminal-prefix subtree labels from a forced branch.
+  - Text-remapped critical branch-return collection stayed sparse: `20260509_textremap_branchret_smoke64` produced 15 examples from 512 scenarios, and `20260509_textremap_zonecounts_branchret_collect64` produced 23 examples from 512 scenarios.
+  - Critical branch-subtree labels were also sparse: `20260509_branch_subtree_smoke_n128_s7` produced 5 examples from 128 scenarios.
+  - All-action branch-subtree labels were dense: `20260509_branch_subtree_allactions_collect128_s7` produced 128 examples after 52 scenarios, with 401 true forced applications and 14 false.
+  - The accepted checkpoint scored that all-action dataset at only 30/128 top-1 but 127/128 target-set top-1, showing the labels mostly identify an acceptable set rather than one sharp action.
+  - Q-only fit profile `Pauper-Spy-Combo-BranchSubtreeQ128-20260509`, run `20260509_branch_subtree_q128_import_e8p2_signed`, then blend 0.1 reduced CP1 `20260509_branch_subtree_q128_blend01_cp1_eval16` scored 10/64.
+  - Policy-target control `20260509_branch_subtree_policytargets_collect128_s7` produced 130 soft labels from 80 scenarios. Accepted scored 48/130 top-1 but 125/130 target-set top-1; many rows had all tested candidates positive and some best labels were `Pass`.
+  - Head-only KL fit `Pauper-Spy-Combo-BranchSubtreePolicy128-20260509` did not move same-data score. Direct-BC fit `Pauper-Spy-Combo-BranchSubtreePolicyDirect128-20260509` regressed same-data top-1 to 45/130.
+  - Skip-pass control `20260509_branch_subtree_policytargets_skip_pass_collect64_s7` produced 64 examples after 45 scenarios. Accepted already scored 38/64 top-1 and 62/64 target-set top-1, with average target probability 0.592657.
+  - Smaller-budget skip-pass control `20260509_branch_subtree_policytargets_skip_pass_collect64_s3` produced 66 examples after 35 scenarios, but still had 0 negative candidates in all 66 rows. Accepted scored 38/66 top-1 and 64/66 target-set top-1.
+  - Strict critical avoid-losing probe `20260509_critical_strict_avoid_subtree_mask_collect32_s7` found only 2 examples in 512 scenarios: one baseline `Balustrade Spy` repaired to Forest mana, and one baseline `Dread Return` repaired to `Mesmeric Fiend`.
+  - Conclusion: do not continue branch-subtree Q or policy-target sweeps. The labeler works mechanically, but the usable labels are too soft/noisy and dominated by early resource sequencing.
+- Accepted checkpoint already scores the 31-node search tensors at 461/490 top-1, so the failure is sequential compounding/distribution drift rather than local one-step ranking.
+- Bulk prefix fit is negative:
+  - Profile: `Pauper-Spy-Combo-ShallowSearchPrefixFit-20260508`.
+  - Same-start replay improved only to 56/84 and reduced CP1 was 12/64.
+- Prefix-sibling contrast collection is not a promising training target:
+  - Dataset: `20260508_spy_prefix_sibling_contrast_natural_cp1`, 269 examples.
+  - Accepted score: 249/269 top-1, 264/269 target-set top-1.
+- First-deviation export was implemented in `ActionCounterfactualTrainer` and `scripts/run_spy_line_replay_probe.ps1`.
+  - Accepted first-deviation repair tensors: 14 examples, scored 0/14 top-1 with mean target probability 0.015639.
+  - High-dose repair profile `Pauper-Spy-Combo-FirstDeviationRepair-20260508`: score 11/14 on repair tensors, same-start replay 61/84, but CP1 only 8/64 and exact replay match collapsed.
+  - Low-dose repair profile `Pauper-Spy-Combo-FirstDeviationLowDose-20260508`: score stayed 0/14, same-start replay 55/84.
+  - Anchored DAgger export was also implemented with `--replay-dagger-training-data-file` and `--replay-deviation-repeat`.
+  - DAgger dataset `20260508_replay_shallow_search_accepted_dagger_export_r16`: 621 examples, accepted score 461/621 top-1.
+  - DAgger profile `Pauper-Spy-Combo-DaggerAnchoredR16-20260508`: score improved to 495/621 but same-start replay fell to 50/84.
+  - Scaled DAgger dataset `20260509_replay_shallow_search_n512_accepted_dagger_export_r16`: 1,800 examples from a 512-scenario search corpus, accepted score 1448/1800 top-1.
+  - Scaled DAgger profile `Pauper-Spy-Combo-DaggerN512R16-20260509`: same-start replay improved from 168/265 to 183/265, but reduced CP1 was only 14/64.
+  - Conclusion: first-deviation/anchored supervised patches either do not move enough or perturb early sequencing; do not promote.
+- Multi-ply MCTS revisit is not scalable enough yet:
+  - Run: `20260508_accepted_multiply_mcts_unlimited_probe_g2`.
+  - Accepted profile, CP1, 2 games per matchup, broad multi-ply MCTS (`MULTI_PLY_MCTS=1`, `MCTS_MAX_OUR_ACTIONS=0`, 8 iterations, 1 determinization, 2.5s search timeout).
+  - Result: 3/8; single-game jobs took up to 325.6s with as many as 90 MCTS activations.
+  - Conclusion: do not start AlphaZero-scale training on the current online MCTS/value stack.
+- Earlier value/Q branch insight still stands: the value head has useful terminal signal, but direct value gating and current branch-Q targets did not translate into better Spy play.
+- Follow-up implementation added `--branch-return-targets` for explicit per-candidate branch returns carried through the existing target tensor with `+1/-1` labels.
+- Smoke run `20260508_branch_returns_smoke_broad` produced 2 collect-only examples; `action_training_samples.csv` confirmed mixed `-1/+1` and all-loss `-1/-1` rows.
+- Zaratan HPC remains available for about 30 more days; use it when branch-return collection or training becomes local wall-clock limited.
+- First signed branch-return Q cycle (`20260508_spy_zone_counts_branchret_q_collect128` -> `Pauper-Spy-Combo-ZoneCountsBranchQ128-20260508`) is not promotable:
+  - Blend 0.1 reduced CP1: 22/64.
+  - Blend 0.25 reduced CP1: 22/64.
+  - Blend 0.5 reduced CP1: 18/64.
+- Scaled signed branch-return Q cycle (`20260508_spy_zone_counts_branchret_q_collect512` -> `Pauper-Spy-Combo-ZoneCountsBranchQ512-20260508`) is also not promotable:
+  - Blend 0.1 reduced CP1: 21/64.
+  - Blend 0.25 reduced CP1: 23/64.
+  - Blend 0.5 reduced CP1: 20/64.
+- Hard eval-only timing mask diagnostic was implemented in `ComputerPlayerRL` and compiled cleanly:
+  - `RL_SPY_TIMING_MASK_ENABLE=1`, Dread mask off: `20260508_spy_maskbase_spytiming_mask_cp1_logged8`, 11/32. The mask fired 92 times and selected Spy casts dropped to zero, but the policy did not choose later no-hidden-land Spy windows.
+  - `RL_SPY_TIMING_MASK_ENABLE=1`, `RL_SPY_TIMING_MASK_BLOCK_DREAD=1`: `20260508_spy_maskbase_spydread_timing_mask_cp1_logged8`, 7/32. The mask fired 291 times and hurt winrate.
+  - Conclusion: fixing Spy/Dread timing alone does not reveal a winning underlying policy.
+- Q-auxiliary terminal RL from the zone-count maskbase seed is also not promotable:
+  - Run: `20260508_spy_zone_counts_qaux_r24_b4`, profile `Pauper-Spy-Combo-ZoneCountsQAuxRL-20260508`.
+  - Reduced CP1: `20260508_spy_zone_counts_qaux_cp1_eval16`, 26/64.
+  - Full CP1: `20260508_spy_zone_counts_qaux_cp1_eval32`, 42/128.
+  - Logged action health: `20260508_spy_zone_counts_qaux_cp1_logged8`, 9/32; 32/32 keeps, 18/18 Spy casts with hidden lands estimated, 14/14 premature Dread flashbacks.
+- Hard eval-only mulligan override diagnostic was implemented in `ComputerPlayerRL` and compiled cleanly:
+  - `MULLIGAN_HARD_MIN_EFFECTIVE_LANDS=1`: `20260508_spy_qaux_hardmull_eff1_cp1_logged8`, 11/32. The override fired only 2 times; Spy/Dread timing remained broken.
+  - `MULLIGAN_HARD_MIN_EFFECTIVE_LANDS=2`: `20260508_spy_qaux_hardmull_eff2_cp1_logged8`, 9/32. The override fired 22 times and hurt winrate; 26/26 Spy casts still had hidden lands estimated.
+  - Conclusion: fixing obvious no-resource keeps is not enough to reveal a winning post-mulligan policy.
+- Spy action-candidate timing facts were implemented and tested:
+  - Feature flag: `RL_SPY_COMBO_CANDIDATE_FEATURES_ENABLE=1`.
+  - Run: `20260508_spy_zone_counts_actionfacts_r24_b4`, profile `Pauper-Spy-Combo-ZoneCountsActionFactsRL-20260508`.
+  - Reduced CP1: `20260508_spy_zone_counts_actionfacts_cp1_eval16`, 14/64.
+  - Logged action health: `20260508_spy_zone_counts_actionfacts_cp1_logged8`, 17/32; 32/32 keeps, 31/33 Spy casts with hidden lands estimated, 23/23 premature Dread flashbacks.
+  - Conclusion: explicit Spy/Dread candidate facts alone do not fix the policy under the same 5k terminal-RL recipe.
+- Selective multi-ply MCTS on the action-facts checkpoint is also negative:
+  - Run: `20260508_spy_actionfacts_selective_mpmcts8_cp1_logged4`, 5/16 with 74 MCTS activations.
+  - Action health: 17/17 Spy casts with hidden lands estimated, 4/4 premature Dread flashbacks, and 7 pass-over-land cases.
+  - Conclusion: current online search/value stack does not justify an AlphaZero-style local training loop as-is.
+
+Next recommended work:
+
+- Do not continue small one-off BC/Q/prefix-BC/DagGER variants without changing the policy-improvement mechanism.
+- The live blocker is now sequential compounding: accepted logits locally score most searched winning-prefix tensors correctly, but unforced play drifts away from winning lines.
+- Highest-EV next branches:
+  - improve branch simulation fidelity only if it becomes part of a real search-as-training loop,
+  - commit to the planned belief/ISMCTS implementation,
+  - or redesign AlphaZero/search-as-policy-improvement around a stronger search target than current flat MCTS or root-only terminal-prefix search.
+- Do not scale bulk positive prefix BC, sibling-contrast BC, or tiny first-deviation patches as standalone profile variants.
+- Q-auxiliary self-play was tried once and did not clear the gate; do not scale it locally without a better target or search policy.
+- Branch-subtree Q/policy labels and root-only train-time prefix search are now negative too; do not spend another local cycle on epoch/blend/node-budget tweaks for those exact mechanisms.
+- The tactical patch diagnostics are now negative: hard Spy timing, hard Dread timing, and hard mulligan filters do not produce a strong agent.
+- The short representation branch is now negative too: zone counts plus explicit Spy/Dread candidate facts still leave action health broken.
+- Online selective MCTS has now failed before and after explicit action facts.
+- Promote only if a full 128-game CP1 sweep beats 48/128 and logged action health improves.
