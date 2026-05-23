@@ -1306,7 +1306,13 @@ public final class LiveCheckpointBranchMiner {
         if (source == null || best == null) {
             return "no_value_tree_evidence";
         }
-        if (source.terminalCount <= 0 && best.terminalCount <= 0) {
+        if (source.terminalCount <= 0) {
+            return "source_not_terminal";
+        }
+        if (source.lossCount <= 0) {
+            return "source_terminal_not_loss";
+        }
+        if (best.terminalCount <= 0) {
             return "no_terminal_evidence";
         }
         if (best == source || delta <= 0.0) {

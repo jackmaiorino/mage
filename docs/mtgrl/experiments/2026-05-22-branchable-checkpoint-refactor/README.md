@@ -846,3 +846,64 @@ Interpretation:
 - v314 invalidates the remaining focused-list true-model sequence candidates as immediate training evidence. The v310 one-step positive was already rejected by v312; the full 29-row focused sequence pass found no terminal-winning value or ordered-prefix branch.
 - The checkpoint and sequence machinery is working, but true-model continuation quality is currently sparse: roughly one third of sequence rows terminalized, roughly one quarter timed out, and many ordered pairs were legitimately infeasible because the second action was unavailable after the first.
 - The next unit should move from this exhausted focused list back to corpus density: collect or mine a larger accepted-policy Affinity live-checkpoint set, then use the summarizer as the first quality gate. Do not train from v314.
+
+## v315-v316 Fresh Affinity Live-Checkpoint Corpus
+
+Artifacts:
+
+- `local-training/local_pbt/cp7_eval_sweeps/20260523_v315_affinity_live_checkpoints_g16_cpu`
+- `local-training/local_pbt/live_checkpoint_branch_miner/v316_v315_loss_true_model_value_r1_s4`
+
+Scope:
+
+- v315 collected a fresh accepted-policy `Pauper-Spy-Combo-Value` vs CP7 `Grixis Affinity` corpus with compact replay metadata and live checkpoints.
+- The run produced 16 live-checkpoint manifests and 840 serialized checkpoint snapshots.
+- Counted eval result was 6 wins over 15 counted games; chunk 2 reported `0/0`.
+- v316 mined 427 snapshots from counted-loss chunks 1, 5, 6, 8, 9, 13, 14, 15, and 16.
+- The value-tree pass selected 60 ranked snapshots, used 4 local shards, `--tree-max-actions 4`, `--tree-rollouts 1`, sampled true-model continuation, `--tree-timeout-sec 45`, and no sequence tree.
+
+Result:
+
+- All 4 v316 shard exit codes were `0`.
+- Runtime was 2310 seconds.
+- Merged value-tree output has 60 summaries and 231 action rows.
+- Classification counts before the source-terminal label repair: `{no_better_action=35, no_terminal_evidence=24, strong_correction=1}`.
+- Strict value candidates: `0`.
+- Value action wins: `1`.
+- Value terminal rate: `0.562771`.
+
+False-positive label:
+
+| Snapshot | Source action | Best action | Source result | Best result | Prior label | Strict gate |
+| --- | --- | --- | --- | --- | --- | --- |
+| `chunk_001/game_2f3f7172-5e40-4b98-917d-50f8ac7b1123_ord003_D003_ACTIVATE_ABILITY_OR_SPELL.ser.gz` | `Cast Land Grant` | `Cast Roost Seek` | timeout / nonterminal | terminal win | `strong_correction` | rejected |
+
+Interpretation:
+
+- The raw v316 `strong_correction` label was not admissible evidence because the source branch never reached terminal loss.
+- The strict gate correctly rejected it, but the broad label was misleading for triage and summaries.
+- Do not train from v316.
+
+## v317 Source-Terminal Classification Repair
+
+Implementation:
+
+- `LiveCheckpointBranchMiner.valueTreeClassification` now requires terminal source evidence before any correction label can be emitted.
+- If the source action never terminalizes, the value-tree summary is classified as `source_not_terminal`.
+- If the source terminalizes but does not lose, the summary is classified as `source_terminal_not_loss`.
+- If the source loses but the best sibling never terminalizes, the summary remains `no_terminal_evidence`.
+- Correction labels are now reserved for cases with source terminal-loss evidence plus a better terminal sibling.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python "$env:USERPROFILE\.codex\skills\mage-research-agent\scripts\airl_maven.py" compile` | Passed. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v317_v316_source_unresolved_classification_smoke` | One-snapshot smoke on the v316 false-positive checkpoint. The source and sibling branches timed out; the summary classified as `source_not_terminal`, not a correction. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v317b_v316_seed_source_unresolved_smoke` | Same checkpoint with the v316 seed. This rerun terminalized all four root choices as losses and classified as `no_better_action`; strict candidates remained `0`. |
+
+Interpretation:
+
+- The false-positive mechanism is fixed at the classifier gate: a nonterminal source branch can no longer produce `strong_correction` from a sibling win-rate delta.
+- The exact continuation outcome remains stochastic enough that a single checkpoint rerun may not reproduce the same sibling win from v316, so source-terminal gating must remain the primary evidence guard.
+- The next mining pass should use the repaired labels and continue corpus-density search, with training still blocked until strict checkpoint-derived correction evidence exists.
