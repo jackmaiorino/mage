@@ -400,7 +400,7 @@ Interpretation:
 
 - Ranked selection is still useful, because it moved mining away from adjacent early decisions and surfaced richer branch points than the sorted-prefix v265 slice.
 - The two apparent v267 positives are not admitted evidence. Fresh-process reprobes did not reproduce the terminal-winning sibling outcomes.
-- Training remains blocked until checkpoint-derived positives pass deterministic continuation and confirmation gates.
+- At this point, training still remained blocked until checkpoint-derived positives passed deterministic continuation and isolated confirmation gates.
 
 v268-v280 reproducibility closeout:
 
@@ -414,6 +414,9 @@ v268-v280 reproducibility closeout:
 | `v278_ranked_autopilot_smoke5` | ranked top 5 | Found one same-process `clean_positive` with repeat confirmation, but it was not admitted because direct fresh-process reprobe was still required. |
 | `v279_autopilot_positive_reprobe_chunk007_ord016` | `chunk_007` `ord016_D052_ACTIVATE_ABILITY_OR_SPELL` | Fresh-process direct reprobe of the v278 apparent positive classified `source_terminal_not_loss`; the same-process positive was invalidated. |
 | `v280_ranked_autopilot_stable_smoke5` | ranked top 5 after stable-order autopilot | Stable candidate-text/object-id ordering removed the batch-only positive: 3 `source_terminal_not_loss`, 2 `clean_negative`, 0 positives. No Py4J gateway warnings occurred. |
+| `v281_ranked_autopilot_stable_slice40_retry` | ranked top 40 after stable-order autopilot | Completed 40 rows: 19 `source_terminal_not_loss`, 19 `clean_negative`, 2 `clean_positive_needs_isolated_reprobe`. No batch positive was admitted directly. |
+| `v282_isolated_reprobe_chunk004_ord027` | `chunk_004` `ord027_D054_ACTIVATE_ABILITY_OR_SPELL` | Fresh-JVM direct reprobe classified `clean_positive` with `confirm_positive_repeats=2`. Source `Cast Saruli Caretaker` lost terminal; sibling `Cast Lead the Stampede` won terminal. |
+| `v283_isolated_reprobe_chunk004_ord053` | `chunk_004` `ord053_D089_ACTIVATE_ABILITY_OR_SPELL` | Fresh-JVM direct reprobe classified `clean_positive` with `confirm_positive_repeats=2`. Source `Cast Balustrade Spy` lost terminal; sibling `Cast Lead the Stampede` won terminal. |
 
 Harness repair:
 
@@ -422,3 +425,15 @@ Harness repair:
 - Apparent terminal-winning sibling rows now require `--confirm-positive-repeats` repeat confirmation before the miner can label them `clean_positive`; otherwise they are classified as `clean_positive_unstable`.
 - Batch runs from `--checkpoint-root` also require an isolated direct reprobe before admission. A batch-discovered positive is downgraded to `clean_positive_needs_isolated_reprobe` unless it is rerun via `--snapshot` in a fresh JVM and passes the same source-loss/sibling-win confirmation gate.
 - The deterministic autopilot now chooses later candidates by stable candidate text plus object-id ordering rather than raw engine list position, which avoids admitting branch results that only appear after prior same-JVM snapshots perturb later candidate order.
+
+Current admitted evidence:
+
+| Artifact | Source | Confirmed sibling | Candidate hash | State hash | RNG hash |
+| --- | --- | --- | --- | --- | --- |
+| `v282_isolated_reprobe_chunk004_ord027` | `Cast Saruli Caretaker` terminal loss | `Cast Lead the Stampede` terminal win | `4afec00e0b8824ce9106834d4468e76ca332ed5790df1887711554d82b5e6846` | `a2446accbda286e63d8b85b88e3df6536fc61b26b17aac1e9d6cbd66a1629b67` | `3991df502d5ac7cb` |
+| `v283_isolated_reprobe_chunk004_ord053` | `Cast Balustrade Spy` terminal loss | `Cast Lead the Stampede` terminal win | `deda1a2784be4abcac67a9b3c2e39c47f75f40e7cd7c8496f403873007960adf` | `253f322f2bf7bbc18c378efdeea82639a5cb5a922a028f55213c53ddead12114` | `27e9ff743915f11b` |
+
+Conclusion:
+
+- The live-checkpoint branch path has now produced two isolated, repeat-confirmed deterministic correction rows from v262.
+- Training/HPC still should not start automatically from the raw miner outputs. The next implementation unit is a checkpoint-derived correction export path that records the source-loss/sibling-win pair plus the isolated-reprobe proof fields, or a wider deterministic mining pass to increase the accepted correction set before export.
