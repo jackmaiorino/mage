@@ -725,3 +725,42 @@ Conclusion:
 - The `Play Forest` -> `Pass` preference should not be admitted as training evidence. Under true model continuation, `Pass` no longer wins; it ties the source as a terminal loss in the smoke probes.
 - The earlier preference row is best classified as a post-root autopilot artifact, not a model-policy counterfactual.
 - Batching is still the right scaling direction for true model continuations, but it needs a frontier/service design: branch workers should enqueue model-decision states to a central batched inference service and resume when policy/value results return. The current runner batches only within a single Python bridge and otherwise relies on process-level JVM sharding.
+
+## v310 Focused True-Model Continuation Pass
+
+Artifact:
+
+- `local-training/local_pbt/live_checkpoint_branch_miner/v310_focus29_true_model_r1_s4`.
+
+Scope:
+
+- Reused the v301 focused 29-snapshot list.
+- Ran 4 local shards with `--post-branch-autopilot false`, `model_continuation_backend=single`, `--tree-max-actions 4`, `--tree-rollouts 1`, sampled continuation policy, and `60s` branch timeout.
+
+Result:
+
+- All 4 shard exit codes were `0`.
+- Runtime was 1290 seconds.
+- Merged output has 29 selected summaries and 115 action rows.
+- Classification counts: `{dominant_correction=1, no_better_action=19, no_terminal_evidence=9}`.
+
+Flagged event:
+
+| Snapshot | Source action | Preferred action | Source result | Preferred result | Delta | Notes |
+| --- | --- | --- | --- | --- | ---: | --- |
+| `chunk_004/game_2a141cb3-4106-4c74-95fa-770c53b4b1ee_ord026_D053_ACTIVATE_ABILITY_OR_SPELL.ser.gz` | `Cast Lotus Petal` | `Cast Winding Way` | `0/1` wins, terminal loss | `1/1` wins, terminal win | `1.000000` | Reentry matched twice; candidate hash `a09a41fc65348151dcece6de73dcd2933cef61b22ed7b2ff542384ea4de53ecd`; state hash `b2ddc771eba7e7603a6f431c60194b6b9412bd2c42e28b4cabed4521c507058e`. |
+
+Candidate-set detail for the flagged snapshot:
+
+| Action | Result |
+| --- | --- |
+| `Cast Lotus Petal` | `terminal_loss` |
+| `Pass` | `error=IllegalStateException: Live checkpoint branch timeout` |
+| `Cast Lead the Stampede` | `terminal_loss` |
+| `Cast Winding Way` | `terminal_win` |
+
+Interpretation:
+
+- This is the first true-model-continuation focused run to produce a final correction flag, but it is still a low-sample signal: one rollout per evaluated root action and only 3 of 4 evaluated actions reached terminal.
+- The flagged row is stronger than the invalidated `Play Forest` -> `Pass` row because both reentry checks matched and the source/preferred branches each reached terminal with opposite outcomes.
+- Shard logs still show RL activation failures on mana/untap abilities and recurring no-source continuous-effect logs, so this event should be treated as a rerun target before training admission rather than immediate dataset evidence.
