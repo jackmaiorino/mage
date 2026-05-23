@@ -807,3 +807,42 @@ Interpretation:
 - The pair is not order-equivalent: both orders completed and produced different post-prefix state hashes.
 - In this smoke it is also not a clean order-sensitive correction: both completed orders reached terminal losses.
 - The new sequence mode gives the miner the missing distinction between commutative orders, truly order-sensitive wins/losses, and incomplete or timed-out forced-prefix attempts.
+
+## v314 Focused Sequence True-Model Pass
+
+Artifact:
+
+- `local-training/local_pbt/live_checkpoint_branch_miner/v314_focus29_sequence_true_model_r1_s4`
+
+Scope:
+
+- Reused the v301 focused 29-snapshot list.
+- Ran 4 local JVM shards with `--post-branch-autopilot false`, `model_continuation_backend=single`, `--tree-max-actions 4`, `--tree-rollouts 1`, sampled continuation policy, `--tree-timeout-sec 30`, and sequence-tree depth 2 / beam 4 / 1 rollout.
+
+Result:
+
+- All 4 shard exit codes were `0`.
+- Runtime was `1980.243` seconds.
+- Merged value-tree output has 29 summaries and 115 action rows.
+- Value-tree classification counts: `{no_better_action=19, no_terminal_evidence=10}`.
+- Strict value candidates: `0`.
+- Value action wins: `0`.
+- Merged sequence-tree output has 342 ordered-prefix rows and 171 pair summaries.
+- Sequence classification counts: `{sequence_incomplete=116, order_diverged_same_value=24, sequence_error=25, order_converged=6}`.
+- Sequence row outcomes: `terminal_loss=114`, `prefix_step_1_unavailable=136`, `timeout=92`, terminal wins `0`.
+- Sequence prefix completion rate: `206/342 = 60.23%`.
+- Sequence terminal rate: `114/342 = 33.33%`.
+- Sequence timeout rate: `92/342 = 26.90%`.
+
+Artifact summarizer:
+
+- Added `scripts/mtgrl/summarize_value_tree_run.py`.
+- The script reads merged or sharded value-tree/sequence-tree CSVs and writes compact JSON/Markdown quality reports with value classification counts, strict-candidate count, terminal rates, sequence prefix-completion rates, timeout rates, and top value rows.
+- Validation: `python -m py_compile scripts/mtgrl/summarize_value_tree_run.py`.
+- Final v314 reports: `artifact_summary.json` and `artifact_summary.md` under the v314 artifact directory.
+
+Interpretation:
+
+- v314 invalidates the remaining focused-list true-model sequence candidates as immediate training evidence. The v310 one-step positive was already rejected by v312; the full 29-row focused sequence pass found no terminal-winning value or ordered-prefix branch.
+- The checkpoint and sequence machinery is working, but true-model continuation quality is currently sparse: roughly one third of sequence rows terminalized, roughly one quarter timed out, and many ordered pairs were legitimately infeasible because the second action was unavailable after the first.
+- The next unit should move from this exhausted focused list back to corpus density: collect or mine a larger accepted-policy Affinity live-checkpoint set, then use the summarizer as the first quality gate. Do not train from v314.
