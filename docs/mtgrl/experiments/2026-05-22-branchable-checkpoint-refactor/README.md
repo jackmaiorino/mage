@@ -508,3 +508,40 @@ Dataset rows:
 Next unit:
 
 - Mine a larger deterministic live-checkpoint slice from the accepted-policy v262/v231-family checkpoint corpus to grow this dataset beyond 3 examples before considering any trainer import.
+
+## v289-v291 Counterfactual Value Tree
+
+Purpose:
+
+- Move beyond binary source-vs-one-sibling correction rows toward graded action-importance estimates: "the source action loses in all sampled continuations, while action C wins in most/all sampled continuations" should be stronger evidence than a small win-rate gap.
+
+Implementation:
+
+- Extended `LiveCheckpointBranchMiner` with `--value-tree=true`.
+- Value-tree mode reuses serialized live checkpoints, validates source reentry twice, enumerates root action choices, runs configurable continuations for each action, and writes:
+  - `counterfactual_value_tree.csv`: one row per root action with rollout counts, terminal/win/loss/error counts, win/loss/terminal rates, delta vs source, and importance score.
+  - `counterfactual_value_tree_summary.csv`: one row per checkpoint with source-vs-best action rates, classification, reentry hashes, and aggregate rollout counts.
+- Scalable knobs:
+  - `--tree-rollouts N`: sampled continuations per root action.
+  - `--tree-max-actions K`: cap root action branching; `0` means all legal root candidates.
+  - `--tree-include-pass true|false`: include or skip pass/done/stop-like root choices, while always retaining the source action.
+  - `--tree-continuation-policy stable|sample`: deterministic stable autopilot or seeded sampled autopilot after the forced root action.
+  - `--tree-timeout-sec N`: per-rollout terminal bound.
+  - `--tree-seed N`: reproducible sampled-continuation seed.
+- This is a bounded sampled tree, not an exhaustive MTG game tree. HPC scaling should increase checkpoints, root actions, and rollouts; it should not assume exhaustive game enumeration is tractable.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python "$env:USERPROFILE\.codex\skills\mage-research-agent\scripts\airl_maven.py" compile` | Passed after the value-tree patch. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v289_value_tree_smoke_v286` | Stable continuation, v286 snapshot, all 6 root actions, 1 rollout each. Classification `dominant_correction`; source `Cast Tinder Wall` win rate `0.000000`, best action win rate `1.000000`, importance `1.000000`. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v290_value_tree_sample_smoke_v286` | Sampled continuation, v286 snapshot, 3 root actions, 2 rollouts each. Classification `strong_correction`; source win rate `0.000000`, best sampled action win rate `0.500000`, importance `0.500000`. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v291_branch_miner_legacy_reentry_smoke` | Legacy non-value-tree mode still reentered the same v286 snapshot and classified `reentry_matched`. |
+
+Interpretation:
+
+- The value-tree path now captures exactly the graded evidence shape we wanted: source action loss rate, alternate action win rate, delta, terminal coverage, and an importance score.
+- `stable` mode is deterministic and cheap; it is suitable for artifact gates and reproducibility checks.
+- `sample` mode explores downstream continuation variation; it is the knob to scale on local background runs or Slurm/HPC after local smoke gates.
+- No trainer import is attached yet. The next unit is to run a larger value-tree mining slice and export only high-confidence value-tree corrections into the dataset gate.

@@ -22,6 +22,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -48,6 +49,18 @@ public final class LiveCheckpointBranchMiner {
                     + "selected_indices,selected_texts,selected_prob,value_score,nonpass_candidate_count,"
                     + "nonpass_alternate_count,spell_candidate_count,mana_candidate_count,pass_candidate_count,"
                     + "turn,own_life,own_graveyard_count,opponent_permanent_count,score_reasons,load_error\n";
+    private static final String VALUE_TREE_CSV_HEADER =
+            "snapshot_path,ordinal,decision_number,action_type,candidate_count,candidate_hash,state_hash,rng_state_hash,"
+                    + "action_indices,action_texts,is_source,rollouts,terminal_count,win_count,loss_count,draw_count,"
+                    + "error_count,not_terminal_count,win_rate,loss_rate,terminal_rate,value_mean,delta_vs_source,"
+                    + "importance_score,outcomes\n";
+    private static final String VALUE_TREE_SUMMARY_CSV_HEADER =
+            "snapshot_path,ordinal,decision_number,action_type,candidate_count,candidate_hash,state_hash,rng_state_hash,"
+                    + "classification,source_indices,source_texts,source_win_rate,source_loss_rate,source_terminal_rate,"
+                    + "best_indices,best_texts,best_win_rate,best_loss_rate,best_terminal_rate,delta_win_rate,"
+                    + "importance_score,actions_evaluated,total_rollouts,terminal_rollouts,reentry_a_matched,"
+                    + "reentry_b_matched,reentry_a_candidate_hash,reentry_b_candidate_hash,reentry_a_state_hash,"
+                    + "reentry_b_state_hash,reentry_a_reason,reentry_b_reason,error\n";
 
     private LiveCheckpointBranchMiner() {
     }
@@ -55,12 +68,16 @@ public final class LiveCheckpointBranchMiner {
     public static void main(String[] args) throws Exception {
         Config cfg = Config.parse(args);
         Files.createDirectories(cfg.outDir);
+        Selection selection = selectSnapshots(cfg);
+        writeSelectionManifest(cfg, selection.selected);
+        if (cfg.valueTree) {
+            runValueTreeMode(cfg, selection);
+            return;
+        }
+
         Path csvPath = cfg.outDir.resolve("live_checkpoint_branch_probe.csv");
         Files.write(csvPath, CSV_HEADER.getBytes(StandardCharsets.UTF_8),
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-
-        Selection selection = selectSnapshots(cfg);
-        writeSelectionManifest(cfg, selection.selected);
         int processed = 0;
         Counts counts = new Counts();
         for (SnapshotCandidate candidate : selection.selected) {
@@ -82,6 +99,154 @@ public final class LiveCheckpointBranchMiner {
         writeReadme(cfg, csvPath, processed, selection.discoveredPathCount, selection.eligibleCount, counts);
         System.out.println("live checkpoint branch miner wrote " + processed + " row(s) to " + csvPath);
         System.out.println("classification counts: " + counts.values);
+    }
+
+    private static void runValueTreeMode(Config cfg, Selection selection) throws Exception {
+        Path actionCsv = cfg.outDir.resolve("counterfactual_value_tree.csv");
+        Path summaryCsv = cfg.outDir.resolve("counterfactual_value_tree_summary.csv");
+        Files.write(actionCsv, VALUE_TREE_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        Files.write(summaryCsv, VALUE_TREE_SUMMARY_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
+        int processed = 0;
+        int actionRows = 0;
+        Counts counts = new Counts();
+        for (SnapshotCandidate candidate : selection.selected) {
+            if (cfg.maxSnapshots > 0 && processed >= cfg.maxSnapshots) {
+                break;
+            }
+            ValueTreeSummary summary;
+            if (candidate.loadError != null && !candidate.loadError.isEmpty()) {
+                summary = ValueTreeSummary.loadError(candidate.path, candidate.loadError);
+            } else {
+                ValueTreeResult result = probeValueTree(candidate.path, candidate.snapshot, cfg);
+                summary = result.summary;
+                actionRows += result.actions.size();
+                appendValueActionRows(actionCsv, result.actions);
+            }
+            appendValueSummary(summaryCsv, summary);
+            counts.add(summary.classification);
+            processed++;
+        }
+        writeValueTreeReadme(cfg, actionCsv, summaryCsv, processed,
+                selection.discoveredPathCount, selection.eligibleCount, actionRows, counts);
+        System.out.println("counterfactual value tree wrote " + actionRows + " action row(s) to " + actionCsv);
+        System.out.println("counterfactual value tree wrote " + processed + " summary row(s) to " + summaryCsv);
+        System.out.println("classification counts: " + counts.values);
+    }
+
+    private static ValueTreeResult probeValueTree(Path snapshotPath, LiveCheckpointRecorder.Snapshot snapshot, Config cfg) {
+        ValueTreeSummary summary = ValueTreeSummary.fromSnapshot(snapshotPath, snapshot);
+        List<ValueActionStats> actions = new ArrayList<>();
+        if (snapshot == null || snapshot.gameSnapshot == null) {
+            summary.classification = "snapshot_missing_game";
+            summary.error = "snapshot_missing_game";
+            return new ValueTreeResult(summary, actions);
+        }
+        if (snapshot.candidateTexts == null || snapshot.candidateTexts.size() < 2) {
+            summary.classification = "snapshot_too_few_candidates";
+            summary.error = "snapshot_too_few_candidates";
+            return new ValueTreeResult(summary, actions);
+        }
+        List<Integer> sourceIndices = sanitizeIndices(snapshot.selectedIndices, snapshot.candidateTexts.size());
+        if (sourceIndices.isEmpty()) {
+            summary.classification = "snapshot_missing_source_choice";
+            summary.error = "snapshot_missing_source_choice";
+            return new ValueTreeResult(summary, actions);
+        }
+        BranchOutcome reentryA = runProbe(snapshot, sourceIndices, true, true,
+                "value_tree_reentry_a", cfg.timeoutSec, false);
+        BranchOutcome reentryB = runProbe(snapshot, sourceIndices, true, true,
+                "value_tree_reentry_b", cfg.timeoutSec, false);
+        summary.applyReentry(reentryA, reentryB);
+        if (!reentryA.reentryMatched || !reentryB.reentryMatched) {
+            summary.classification = "checkpoint_reentry_mismatch";
+            summary.error = "checkpoint_reentry_mismatch";
+            return new ValueTreeResult(summary, actions);
+        }
+
+        List<List<Integer>> choices = valueTreeChoices(snapshot, sourceIndices, cfg);
+        if (choices.isEmpty()) {
+            summary.classification = "no_tree_actions";
+            summary.error = "no_tree_actions";
+            return new ValueTreeResult(summary, actions);
+        }
+        for (List<Integer> choice : choices) {
+            boolean isSource = choice.equals(sourceIndices);
+            ValueActionStats stats = ValueActionStats.fromSnapshot(snapshotPath, snapshot, choice, isSource);
+            int rollouts = Math.max(1, cfg.treeRollouts);
+            for (int rollout = 0; rollout < rollouts; rollout++) {
+                long seed = treeRolloutSeed(cfg, snapshot, choice, rollout);
+                BranchOutcome outcome = runProbe(
+                        snapshot,
+                        choice,
+                        false,
+                        isSource,
+                        "value_tree_" + joinInts(choice) + "_r" + rollout,
+                        cfg.treeTimeoutSec,
+                        cfg.postBranchAutopilot,
+                        cfg.treeContinuationPolicy,
+                        seed);
+                stats.add(outcome);
+            }
+            actions.add(stats);
+        }
+        ValueActionStats source = null;
+        ValueActionStats best = null;
+        int terminalRollouts = 0;
+        int totalRollouts = 0;
+        for (ValueActionStats stats : actions) {
+            totalRollouts += stats.rollouts;
+            terminalRollouts += stats.terminalCount;
+            if (stats.source) {
+                source = stats;
+            }
+            if (best == null || valueActionRank(stats) > valueActionRank(best)) {
+                best = stats;
+            }
+        }
+        if (source == null) {
+            summary.classification = "source_action_missing";
+            summary.error = "source_action_missing";
+            return new ValueTreeResult(summary, actions);
+        }
+        double sourceWinRate = source.winRate();
+        double sourceLossRate = source.lossRate();
+        double sourceTerminalRate = source.terminalRate();
+        double bestWinRate = best == null ? 0.0 : best.winRate();
+        double bestLossRate = best == null ? 0.0 : best.lossRate();
+        double bestTerminalRate = best == null ? 0.0 : best.terminalRate();
+        double delta = bestWinRate - sourceWinRate;
+        double importance = Math.max(0.0, delta)
+                * Math.max(0.0, sourceLossRate)
+                * Math.min(sourceTerminalRate, bestTerminalRate);
+        for (ValueActionStats stats : actions) {
+            stats.deltaVsSource = stats.winRate() - sourceWinRate;
+            stats.importanceScore = Math.max(0.0, stats.deltaVsSource)
+                    * Math.max(0.0, sourceLossRate)
+                    * Math.min(sourceTerminalRate, stats.terminalRate());
+        }
+
+        summary.sourceIndices = source.actionIndices;
+        summary.sourceTexts = source.actionTexts;
+        summary.sourceWinRate = sourceWinRate;
+        summary.sourceLossRate = sourceLossRate;
+        summary.sourceTerminalRate = sourceTerminalRate;
+        if (best != null) {
+            summary.bestIndices = best.actionIndices;
+            summary.bestTexts = best.actionTexts;
+        }
+        summary.bestWinRate = bestWinRate;
+        summary.bestLossRate = bestLossRate;
+        summary.bestTerminalRate = bestTerminalRate;
+        summary.deltaWinRate = delta;
+        summary.importanceScore = importance;
+        summary.actionsEvaluated = actions.size();
+        summary.totalRollouts = totalRollouts;
+        summary.terminalRollouts = terminalRollouts;
+        summary.classification = valueTreeClassification(source, best, delta, importance);
+        return new ValueTreeResult(summary, actions);
     }
 
     private static BranchRow probeSnapshot(Path snapshotPath, LiveCheckpointRecorder.Snapshot snapshot, Config cfg) {
@@ -155,6 +320,21 @@ public final class LiveCheckpointBranchMiner {
             int timeoutSec,
             boolean postBranchAutopilot
     ) {
+        return runProbe(snapshot, forcedIndices, stopAtReentry, requireSourceChoiceMatch,
+                label, timeoutSec, postBranchAutopilot, ContinuationPolicy.STABLE, 0L);
+    }
+
+    private static BranchOutcome runProbe(
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<Integer> forcedIndices,
+            boolean stopAtReentry,
+            boolean requireSourceChoiceMatch,
+            String label,
+            int timeoutSec,
+            boolean postBranchAutopilot,
+            ContinuationPolicy continuationPolicy,
+            long rolloutSeed
+    ) {
         RandomUtil.State previousRandom = RandomUtil.captureState();
         Game game = null;
         SnapshotBranchController controller =
@@ -163,7 +343,9 @@ public final class LiveCheckpointBranchMiner {
                         forcedIndices,
                         stopAtReentry,
                         requireSourceChoiceMatch,
-                        postBranchAutopilot);
+                        postBranchAutopilot,
+                        continuationPolicy,
+                        rolloutSeed);
         BranchOutcome outcome = new BranchOutcome(label);
         try {
             RandomUtil.restoreState(snapshot.randomState);
@@ -880,6 +1062,151 @@ public final class LiveCheckpointBranchMiner {
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
+    private static void appendValueActionRows(Path csvPath, List<ValueActionStats> rows) throws Exception {
+        if (rows == null || rows.isEmpty()) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder(rows.size() * 256);
+        for (ValueActionStats row : rows) {
+            sb.append(row.toCsvLine());
+        }
+        Files.write(csvPath, sb.toString().getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
+    private static void appendValueSummary(Path csvPath, ValueTreeSummary summary) throws Exception {
+        Files.write(csvPath, summary.toCsvLine().getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
+    private static void writeValueTreeReadme(
+            Config cfg,
+            Path actionCsv,
+            Path summaryCsv,
+            int processed,
+            int discovered,
+            int eligible,
+            int actionRows,
+            Counts counts
+    ) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        sb.append("# Counterfactual Value Tree Miner\n\n");
+        sb.append("- processed: ").append(processed).append("\n");
+        sb.append("- discovered: ").append(discovered).append("\n");
+        sb.append("- eligible: ").append(eligible).append("\n");
+        sb.append("- action_rows: ").append(actionRows).append("\n");
+        sb.append("- selection_mode: ").append(cfg.selectionMode).append("\n");
+        sb.append("- ranked_max_per_game: ").append(cfg.rankedMaxPerGame).append("\n");
+        sb.append("- tree_rollouts: ").append(cfg.treeRollouts).append("\n");
+        sb.append("- tree_max_actions: ").append(cfg.treeMaxActions).append("\n");
+        sb.append("- tree_include_pass: ").append(cfg.treeIncludePass).append("\n");
+        sb.append("- tree_continuation_policy: ").append(cfg.treeContinuationPolicy.name().toLowerCase(Locale.US)).append("\n");
+        sb.append("- tree_timeout_sec: ").append(cfg.treeTimeoutSec).append("\n");
+        sb.append("- tree_seed: ").append(cfg.treeSeed).append("\n");
+        sb.append("- post_branch_autopilot: ").append(cfg.postBranchAutopilot).append("\n");
+        sb.append("- selected_snapshots_csv: ").append(cfg.outDir.resolve("selected_snapshots.csv")).append("\n");
+        sb.append("- action_csv: ").append(actionCsv).append("\n");
+        sb.append("- summary_csv: ").append(summaryCsv).append("\n");
+        sb.append("- classification_counts: ").append(counts.values).append("\n\n");
+        sb.append("This mode estimates action importance at each serialized checkpoint by forcing each selected root action, ")
+                .append("running configurable continuations, and comparing action win rates against the accepted-policy source action. ")
+                .append("It is a bounded sampled tree, not an exhaustive Magic game tree.\n");
+        Files.write(cfg.outDir.resolve("README.md"), sb.toString().getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    private static List<List<Integer>> valueTreeChoices(
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<Integer> sourceIndices,
+            Config cfg
+    ) {
+        int candidateCount = snapshot == null || snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size();
+        if (candidateCount <= 0) {
+            return Collections.emptyList();
+        }
+        List<List<Integer>> out = new ArrayList<>();
+        Set<String> seen = new HashSet<>();
+        List<Integer> source = sanitizeIndices(sourceIndices, candidateCount);
+        addValueTreeChoice(out, seen, source);
+        for (int i = 0; i < candidateCount; i++) {
+            if (cfg.treeMaxActions > 0 && out.size() >= cfg.treeMaxActions) {
+                break;
+            }
+            String text = snapshot.candidateTexts.get(i);
+            if (!cfg.treeIncludePass && isTerminalChoiceText(text) && !(source.size() == 1 && source.get(0) == i)) {
+                continue;
+            }
+            List<Integer> choice = alternateReplacingFirstSource(source, i, candidateCount);
+            addValueTreeChoice(out, seen, choice);
+        }
+        return out;
+    }
+
+    private static void addValueTreeChoice(List<List<Integer>> out, Set<String> seen, List<Integer> choice) {
+        List<Integer> sanitized = choice == null ? Collections.emptyList() : new ArrayList<>(choice);
+        String key = joinInts(sanitized);
+        if (key.isEmpty() || seen.contains(key)) {
+            return;
+        }
+        seen.add(key);
+        out.add(sanitized);
+    }
+
+    private static boolean isTerminalChoiceText(String text) {
+        return isPassLike(text) || isDoneLike(text) || isStopLike(text);
+    }
+
+    private static long treeRolloutSeed(
+            Config cfg,
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<Integer> choice,
+            int rollout
+    ) {
+        long seed = cfg.treeSeed;
+        seed = 31L * seed + (snapshot == null || snapshot.candidateHash == null ? 0 : snapshot.candidateHash.hashCode());
+        seed = 31L * seed + (snapshot == null || snapshot.stateHash == null ? 0 : snapshot.stateHash.hashCode());
+        seed = 31L * seed + joinInts(choice).hashCode();
+        seed = 31L * seed + rollout;
+        return seed;
+    }
+
+    private static double valueActionRank(ValueActionStats stats) {
+        if (stats == null) {
+            return Double.NEGATIVE_INFINITY;
+        }
+        return stats.winRate() * 10_000.0
+                + stats.terminalRate() * 100.0
+                - stats.lossRate()
+                - (stats.source ? 0.0001 : 0.0);
+    }
+
+    private static String valueTreeClassification(
+            ValueActionStats source,
+            ValueActionStats best,
+            double delta,
+            double importance
+    ) {
+        if (source == null || best == null) {
+            return "no_value_tree_evidence";
+        }
+        if (source.terminalCount <= 0 && best.terminalCount <= 0) {
+            return "no_terminal_evidence";
+        }
+        if (best == source || delta <= 0.0) {
+            return "no_better_action";
+        }
+        if (source.lossRate() >= 0.999 && best.winRate() >= 0.999) {
+            return "dominant_correction";
+        }
+        if (importance >= 0.50 || delta >= 0.50) {
+            return "strong_correction";
+        }
+        if (importance >= 0.20 || delta >= 0.20) {
+            return "moderate_correction";
+        }
+        return "weak_correction";
+    }
+
     private static String joinInts(List<Integer> values) {
         if (values == null || values.isEmpty()) {
             return "";
@@ -903,6 +1230,13 @@ public final class LiveCheckpointBranchMiner {
         return "\"" + s.replace("\"", "\"\"").replace("\r", " ").replace("\n", " ") + "\"";
     }
 
+    private static String formatDouble(double value) {
+        if (Double.isNaN(value) || Double.isInfinite(value)) {
+            return "0.000000";
+        }
+        return String.format(Locale.US, "%.6f", value);
+    }
+
     private static String errorSummary(Throwable t) {
         if (t == null) {
             return "";
@@ -917,6 +1251,8 @@ public final class LiveCheckpointBranchMiner {
         private final boolean stopAtReentry;
         private final boolean requireSourceChoiceMatch;
         private final boolean postBranchAutopilot;
+        private final ContinuationPolicy continuationPolicy;
+        private final Random rolloutRandom;
 
         private boolean seen;
         private boolean reentryMatched;
@@ -932,7 +1268,9 @@ public final class LiveCheckpointBranchMiner {
                 List<Integer> forcedIndices,
                 boolean stopAtReentry,
                 boolean requireSourceChoiceMatch,
-                boolean postBranchAutopilot
+                boolean postBranchAutopilot,
+                ContinuationPolicy continuationPolicy,
+                long rolloutSeed
         ) {
             this.snapshot = snapshot;
             this.forcedIndices = forcedIndices == null
@@ -941,6 +1279,8 @@ public final class LiveCheckpointBranchMiner {
             this.stopAtReentry = stopAtReentry;
             this.requireSourceChoiceMatch = requireSourceChoiceMatch;
             this.postBranchAutopilot = postBranchAutopilot;
+            this.continuationPolicy = continuationPolicy == null ? ContinuationPolicy.STABLE : continuationPolicy;
+            this.rolloutRandom = new Random(rolloutSeed);
         }
 
         @Override
@@ -1000,7 +1340,9 @@ public final class LiveCheckpointBranchMiner {
             if (!postBranchAutopilot || context == null || context.candidateCount <= 0) {
                 return Choice.none();
             }
-            List<Integer> indices = deterministicAutopilotIndices(context);
+            List<Integer> indices = continuationPolicy == ContinuationPolicy.SAMPLE
+                    ? sampledAutopilotIndices(context, rolloutRandom)
+                    : deterministicAutopilotIndices(context);
             if (indices.isEmpty()) {
                 return Choice.none();
             }
@@ -1051,6 +1393,43 @@ public final class LiveCheckpointBranchMiner {
             }
         }
         return indices;
+    }
+
+    private static <T> List<Integer> sampledAutopilotIndices(
+            EngineDecisionBranchController.DecisionContext<T> context,
+            Random random
+    ) {
+        int candidateCount = context == null ? 0 : context.candidateCount;
+        if (candidateCount <= 0) {
+            return Collections.emptyList();
+        }
+        Random rng = random == null ? new Random(0L) : random;
+        int pickLimit = context.maxTargets <= 0
+                ? candidateCount
+                : Math.min(context.maxTargets, candidateCount);
+        int minTargets = Math.max(0, context.minTargets);
+        List<Integer> pool = stableNonTerminalIndices(context, candidateCount);
+        if (pool.isEmpty()) {
+            for (int i = 0; i < candidateCount; i++) {
+                pool.add(i);
+            }
+        }
+        Collections.shuffle(pool, rng);
+        int required = Math.max(minTargets, 1);
+        int maxPick = Math.max(required, pickLimit);
+        int count = Math.min(pool.size(), maxPick <= required ? required : required + rng.nextInt(maxPick - required + 1));
+        List<Integer> out = new ArrayList<>(pool.subList(0, count));
+        if (out.size() < minTargets) {
+            for (int i = 0; i < candidateCount && out.size() < minTargets; i++) {
+                if (!out.contains(i)) {
+                    out.add(i);
+                }
+            }
+        }
+        if (pickLimit >= 0 && out.size() > pickLimit) {
+            out = new ArrayList<>(out.subList(0, pickLimit));
+        }
+        return out;
     }
 
     private static int stableBestIndex(
@@ -1145,6 +1524,259 @@ public final class LiveCheckpointBranchMiner {
                 + candidateObjectId(context, index).trim().toLowerCase(Locale.US)
                 + "\u0001"
                 + String.format(Locale.US, "%04d", index);
+    }
+
+    private enum ContinuationPolicy {
+        STABLE,
+        SAMPLE;
+
+        private static ContinuationPolicy parse(String raw) {
+            if (raw == null || raw.trim().isEmpty()) {
+                return STABLE;
+            }
+            String value = raw.trim().toUpperCase(Locale.US);
+            if ("SAMPLED".equals(value) || "RANDOM".equals(value)) {
+                return SAMPLE;
+            }
+            return ContinuationPolicy.valueOf(value);
+        }
+    }
+
+    private static final class ValueTreeResult {
+        private final ValueTreeSummary summary;
+        private final List<ValueActionStats> actions;
+
+        private ValueTreeResult(ValueTreeSummary summary, List<ValueActionStats> actions) {
+            this.summary = summary == null ? new ValueTreeSummary() : summary;
+            this.actions = actions == null ? Collections.emptyList() : actions;
+        }
+    }
+
+    private static final class ValueActionStats {
+        private String snapshotPath = "";
+        private int ordinal = -1;
+        private int decisionNumber = -1;
+        private String actionType = "";
+        private int candidateCount = 0;
+        private String candidateHash = "";
+        private String stateHash = "";
+        private String randomStateHash = "";
+        private String actionIndices = "";
+        private String actionTexts = "";
+        private boolean source = false;
+        private int rollouts = 0;
+        private int terminalCount = 0;
+        private int winCount = 0;
+        private int lossCount = 0;
+        private int drawCount = 0;
+        private int errorCount = 0;
+        private int notTerminalCount = 0;
+        private double deltaVsSource = 0.0;
+        private double importanceScore = 0.0;
+        private final List<String> outcomes = new ArrayList<>();
+
+        private static ValueActionStats fromSnapshot(
+                Path path,
+                LiveCheckpointRecorder.Snapshot snapshot,
+                List<Integer> actionIndices,
+                boolean source
+        ) {
+            ValueActionStats stats = new ValueActionStats();
+            stats.snapshotPath = path == null ? "" : path.toString();
+            if (snapshot != null) {
+                stats.ordinal = snapshot.ordinal;
+                stats.decisionNumber = snapshot.decisionNumber;
+                stats.actionType = snapshot.actionType;
+                stats.candidateCount = snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size();
+                stats.candidateHash = snapshot.candidateHash;
+                stats.stateHash = snapshot.stateHash;
+                stats.randomStateHash = snapshot.randomStateHash;
+                stats.actionIndices = joinInts(actionIndices);
+                stats.actionTexts = joinStrings(selectedTexts(snapshot.candidateTexts, actionIndices));
+            }
+            stats.source = source;
+            return stats;
+        }
+
+        private void add(BranchOutcome outcome) {
+            rollouts++;
+            if (outcome == null) {
+                errorCount++;
+                outcomes.add("null_outcome");
+                return;
+            }
+            if (!outcome.error.isEmpty()) {
+                errorCount++;
+            } else if (outcome.terminal && outcome.won) {
+                terminalCount++;
+                winCount++;
+            } else if (outcome.terminal && outcome.lost) {
+                terminalCount++;
+                lossCount++;
+            } else if (outcome.terminal) {
+                terminalCount++;
+                drawCount++;
+            } else {
+                notTerminalCount++;
+            }
+            outcomes.add(outcome.shortClassification());
+        }
+
+        private double winRate() {
+            return rollouts <= 0 ? 0.0 : ((double) winCount) / rollouts;
+        }
+
+        private double lossRate() {
+            return rollouts <= 0 ? 0.0 : ((double) lossCount) / rollouts;
+        }
+
+        private double terminalRate() {
+            return rollouts <= 0 ? 0.0 : ((double) terminalCount) / rollouts;
+        }
+
+        private double valueMean() {
+            return rollouts <= 0 ? 0.0 : ((double) winCount + 0.5d * drawCount) / rollouts;
+        }
+
+        private String toCsvLine() {
+            List<String> cells = new ArrayList<>();
+            cells.add(csv(snapshotPath));
+            cells.add(String.valueOf(ordinal));
+            cells.add(String.valueOf(decisionNumber));
+            cells.add(csv(actionType));
+            cells.add(String.valueOf(candidateCount));
+            cells.add(csv(candidateHash));
+            cells.add(csv(stateHash));
+            cells.add(csv(randomStateHash));
+            cells.add(csv(actionIndices));
+            cells.add(csv(actionTexts));
+            cells.add(String.valueOf(source));
+            cells.add(String.valueOf(rollouts));
+            cells.add(String.valueOf(terminalCount));
+            cells.add(String.valueOf(winCount));
+            cells.add(String.valueOf(lossCount));
+            cells.add(String.valueOf(drawCount));
+            cells.add(String.valueOf(errorCount));
+            cells.add(String.valueOf(notTerminalCount));
+            cells.add(formatDouble(winRate()));
+            cells.add(formatDouble(lossRate()));
+            cells.add(formatDouble(terminalRate()));
+            cells.add(formatDouble(valueMean()));
+            cells.add(formatDouble(deltaVsSource));
+            cells.add(formatDouble(importanceScore));
+            cells.add(csv(joinStrings(outcomes)));
+            return String.join(",", cells) + "\n";
+        }
+    }
+
+    private static final class ValueTreeSummary {
+        private String snapshotPath = "";
+        private int ordinal = -1;
+        private int decisionNumber = -1;
+        private String actionType = "";
+        private int candidateCount = 0;
+        private String candidateHash = "";
+        private String stateHash = "";
+        private String randomStateHash = "";
+        private String classification = "";
+        private String sourceIndices = "";
+        private String sourceTexts = "";
+        private double sourceWinRate = 0.0;
+        private double sourceLossRate = 0.0;
+        private double sourceTerminalRate = 0.0;
+        private String bestIndices = "";
+        private String bestTexts = "";
+        private double bestWinRate = 0.0;
+        private double bestLossRate = 0.0;
+        private double bestTerminalRate = 0.0;
+        private double deltaWinRate = 0.0;
+        private double importanceScore = 0.0;
+        private int actionsEvaluated = 0;
+        private int totalRollouts = 0;
+        private int terminalRollouts = 0;
+        private boolean reentryAMatched = false;
+        private boolean reentryBMatched = false;
+        private String reentryACandidateHash = "";
+        private String reentryBCandidateHash = "";
+        private String reentryAStateHash = "";
+        private String reentryBStateHash = "";
+        private String reentryAReason = "";
+        private String reentryBReason = "";
+        private String error = "";
+
+        private static ValueTreeSummary fromSnapshot(Path path, LiveCheckpointRecorder.Snapshot snapshot) {
+            ValueTreeSummary summary = new ValueTreeSummary();
+            summary.snapshotPath = path == null ? "" : path.toString();
+            if (snapshot != null) {
+                summary.ordinal = snapshot.ordinal;
+                summary.decisionNumber = snapshot.decisionNumber;
+                summary.actionType = snapshot.actionType;
+                summary.candidateCount = snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size();
+                summary.candidateHash = snapshot.candidateHash;
+                summary.stateHash = snapshot.stateHash;
+                summary.randomStateHash = snapshot.randomStateHash;
+                summary.sourceIndices = joinInts(snapshot.selectedIndices);
+                summary.sourceTexts = joinStrings(snapshot.selectedTexts);
+            }
+            return summary;
+        }
+
+        private static ValueTreeSummary loadError(Path path, String error) {
+            ValueTreeSummary summary = new ValueTreeSummary();
+            summary.snapshotPath = path == null ? "" : path.toString();
+            summary.classification = "snapshot_load_error";
+            summary.error = error == null ? "" : error;
+            return summary;
+        }
+
+        private void applyReentry(BranchOutcome a, BranchOutcome b) {
+            reentryAMatched = a != null && a.reentryMatched;
+            reentryBMatched = b != null && b.reentryMatched;
+            reentryACandidateHash = a == null ? "" : a.candidateHash;
+            reentryBCandidateHash = b == null ? "" : b.candidateHash;
+            reentryAStateHash = a == null ? "" : a.stateHash;
+            reentryBStateHash = b == null ? "" : b.stateHash;
+            reentryAReason = a == null ? "" : (a.reason.isEmpty() ? a.error : a.reason);
+            reentryBReason = b == null ? "" : (b.reason.isEmpty() ? b.error : b.reason);
+        }
+
+        private String toCsvLine() {
+            List<String> cells = new ArrayList<>();
+            cells.add(csv(snapshotPath));
+            cells.add(String.valueOf(ordinal));
+            cells.add(String.valueOf(decisionNumber));
+            cells.add(csv(actionType));
+            cells.add(String.valueOf(candidateCount));
+            cells.add(csv(candidateHash));
+            cells.add(csv(stateHash));
+            cells.add(csv(randomStateHash));
+            cells.add(csv(classification));
+            cells.add(csv(sourceIndices));
+            cells.add(csv(sourceTexts));
+            cells.add(formatDouble(sourceWinRate));
+            cells.add(formatDouble(sourceLossRate));
+            cells.add(formatDouble(sourceTerminalRate));
+            cells.add(csv(bestIndices));
+            cells.add(csv(bestTexts));
+            cells.add(formatDouble(bestWinRate));
+            cells.add(formatDouble(bestLossRate));
+            cells.add(formatDouble(bestTerminalRate));
+            cells.add(formatDouble(deltaWinRate));
+            cells.add(formatDouble(importanceScore));
+            cells.add(String.valueOf(actionsEvaluated));
+            cells.add(String.valueOf(totalRollouts));
+            cells.add(String.valueOf(terminalRollouts));
+            cells.add(String.valueOf(reentryAMatched));
+            cells.add(String.valueOf(reentryBMatched));
+            cells.add(csv(reentryACandidateHash));
+            cells.add(csv(reentryBCandidateHash));
+            cells.add(csv(reentryAStateHash));
+            cells.add(csv(reentryBStateHash));
+            cells.add(csv(reentryAReason));
+            cells.add(csv(reentryBReason));
+            cells.add(csv(error));
+            return String.join(",", cells) + "\n";
+        }
     }
 
     private static final class BranchOutcome {
@@ -1418,6 +2050,13 @@ public final class LiveCheckpointBranchMiner {
         private boolean requireIsolatedPositiveReprobe = true;
         private boolean reentryOnly = false;
         private Set<String> actionTypes = Collections.emptySet();
+        private boolean valueTree = false;
+        private int treeRollouts = 1;
+        private int treeMaxActions = 0;
+        private boolean treeIncludePass = true;
+        private int treeTimeoutSec = 30;
+        private long treeSeed = 1337L;
+        private ContinuationPolicy treeContinuationPolicy = ContinuationPolicy.STABLE;
 
         private static Config parse(String[] args) {
             Config cfg = new Config();
@@ -1471,6 +2110,29 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("action-types")) {
                 cfg.actionTypes = parseSet(values.get("action-types"));
+            }
+            if (values.containsKey("value-tree")) {
+                cfg.valueTree = Boolean.parseBoolean(values.get("value-tree"));
+            }
+            if (values.containsKey("tree-rollouts")) {
+                cfg.treeRollouts = Math.max(1, Integer.parseInt(values.get("tree-rollouts")));
+            }
+            if (values.containsKey("tree-max-actions")) {
+                cfg.treeMaxActions = Math.max(0, Integer.parseInt(values.get("tree-max-actions")));
+            }
+            if (values.containsKey("tree-include-pass")) {
+                cfg.treeIncludePass = Boolean.parseBoolean(values.get("tree-include-pass"));
+            }
+            if (values.containsKey("tree-timeout-sec")) {
+                cfg.treeTimeoutSec = Math.max(1, Integer.parseInt(values.get("tree-timeout-sec")));
+            } else {
+                cfg.treeTimeoutSec = cfg.alternateTimeoutSec;
+            }
+            if (values.containsKey("tree-seed")) {
+                cfg.treeSeed = Long.parseLong(values.get("tree-seed"));
+            }
+            if (values.containsKey("tree-continuation-policy")) {
+                cfg.treeContinuationPolicy = ContinuationPolicy.parse(values.get("tree-continuation-policy"));
             }
             return cfg;
         }
