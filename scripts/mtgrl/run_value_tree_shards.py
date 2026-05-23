@@ -47,6 +47,23 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--tree-continuation-policy", default="sample", choices=["stable", "sample"])
     parser.add_argument("--tree-timeout-sec", type=int, default=120)
     parser.add_argument("--tree-seed", type=int, default=2026052301)
+    parser.add_argument("--post-branch-autopilot", default="true")
+    parser.add_argument(
+        "--model-continuation-backend",
+        default="single",
+        choices=["single", "inherit"],
+        help=(
+            "When post-branch autopilot is false, default to a single local "
+            "Python backend so tiny branch probes do not start learner+inference "
+            "worker pools per JVM. Use inherit to keep the caller environment."
+        ),
+    )
+    parser.add_argument(
+        "--py4j-port-stride",
+        type=int,
+        default=32,
+        help="Port stride applied per shard for true model-continuation runs.",
+    )
     parser.add_argument("--maven", default="mvn")
     parser.add_argument("--online", action="store_true", help="Do not pass -o to Maven.")
     parser.add_argument("--poll-sec", type=float, default=10.0)
@@ -72,6 +89,7 @@ def miner_args(args: argparse.Namespace, shard_index: int, shard_dir: Path) -> s
         "--tree-continuation-policy", args.tree_continuation_policy,
         "--tree-timeout-sec", str(args.tree_timeout_sec),
         "--tree-seed", str(args.tree_seed),
+        "--post-branch-autopilot", bool_arg(args.post_branch_autopilot),
         "--selection-shards", str(args.shards),
         "--selection-shard-index", str(shard_index),
     ]
@@ -99,6 +117,38 @@ def maven_command(args: argparse.Namespace, exec_args: str) -> List[str]:
         ]
     )
     return cmd
+
+
+def shard_env(args: argparse.Namespace, shard_index: int) -> Dict[str, str]:
+    env = os.environ.copy()
+    if bool_arg(args.post_branch_autopilot) == "false":
+        if args.model_continuation_backend == "single":
+            env.setdefault("PY_BACKEND_MODE", "single")
+            env.setdefault("INFER_WORKERS", "0")
+            env.setdefault("MODEL_RELOAD_EVERY_MS", "0")
+        env.setdefault("PY_BRIDGE_CONNECT_RETRIES", "60")
+        env.setdefault("PY_BRIDGE_CONNECT_RETRY_DELAY_MS", "1000")
+        env.setdefault("PY_SCORE_TIMEOUT_MS", "120000")
+        base_port = int(env.get("PY4J_BASE_PORT", env.get("PY4J_PORT", "25334")))
+        shard_port = base_port + (max(1, args.py4j_port_stride) * shard_index)
+        env["PY4J_BASE_PORT"] = str(shard_port)
+        env["PY4J_PORT"] = str(shard_port)
+    return env
+
+
+def command_env_summary(env: Dict[str, str]) -> Dict[str, str]:
+    keys = [
+        "PY_SERVICE_MODE",
+        "PY_BACKEND_MODE",
+        "INFER_WORKERS",
+        "MODEL_RELOAD_EVERY_MS",
+        "PY4J_BASE_PORT",
+        "PY4J_PORT",
+        "PY_BRIDGE_CONNECT_RETRIES",
+        "PY_BRIDGE_CONNECT_RETRY_DELAY_MS",
+        "PY_SCORE_TIMEOUT_MS",
+    ]
+    return {key: env[key] for key in keys if key in env}
 
 
 def resolve_maven(value: str) -> str:
@@ -164,6 +214,9 @@ def write_readme(output_dir: Path, summary: Dict[str, object]) -> None:
         f"- action_rows: `{summary['counterfactual_value_tree.csv_rows']}`",
         f"- summary_rows: `{summary['counterfactual_value_tree_summary.csv_rows']}`",
         f"- classification_counts: `{summary['classification_counts']}`",
+        f"- post_branch_autopilot: `{summary['post_branch_autopilot']}`",
+        f"- model_continuation_backend: `{summary['model_continuation_backend']}`",
+        f"- py4j_port_stride: `{summary['py4j_port_stride']}`",
         "",
         "Each shard is an isolated JVM over a deterministic modulo partition of the same selected ranked checkpoint set.",
         "",
@@ -188,15 +241,24 @@ def run(args: argparse.Namespace) -> int:
         shard_dir.mkdir(parents=True, exist_ok=True)
         exec_args = miner_args(args, shard_index, shard_dir)
         cmd = maven_command(args, exec_args)
+        env = shard_env(args, shard_index)
         stdout_path = shard_dir / "stdout.log"
         stderr_path = shard_dir / "stderr.log"
         (shard_dir / "command.json").write_text(
-            json.dumps({"cmd": cmd, "exec_args": exec_args}, indent=2) + "\n",
+            json.dumps(
+                {
+                    "cmd": cmd,
+                    "exec_args": exec_args,
+                    "env": command_env_summary(env),
+                },
+                indent=2,
+                sort_keys=True,
+            ) + "\n",
             encoding="utf-8",
         )
         stdout = stdout_path.open("w", encoding="utf-8", newline="")
         stderr = stderr_path.open("w", encoding="utf-8", newline="")
-        proc = subprocess.Popen(cmd, stdout=stdout, stderr=stderr)
+        proc = subprocess.Popen(cmd, stdout=stdout, stderr=stderr, env=env)
         processes.append(
             {
                 "index": shard_index,
@@ -242,6 +304,9 @@ def run(args: argparse.Namespace) -> int:
         "tree_continuation_policy": args.tree_continuation_policy,
         "tree_timeout_sec": args.tree_timeout_sec,
         "tree_seed": args.tree_seed,
+        "post_branch_autopilot": bool_arg(args.post_branch_autopilot),
+        "model_continuation_backend": args.model_continuation_backend,
+        "py4j_port_stride": args.py4j_port_stride,
         "exit_codes": exit_codes,
         "elapsed_sec": round(time.time() - start, 3),
         "classification_counts": classification_counts(output_dir / "counterfactual_value_tree_summary.csv"),

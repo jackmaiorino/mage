@@ -4639,7 +4639,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         for (int i = 0; i < candidateCount; i++) {
             if (candidateMask[i] != 0) validCount++;
         }
-        if (branchController != null) {
+        if (branchController != null && branchController.shouldBypassModelInference()) {
             float[] policy = firstValidPolicy(candidateMask, candidateCount);
             skippedInfer.incrementAndGet();
             return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(policy, 0.0f);

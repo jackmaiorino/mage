@@ -695,3 +695,33 @@ Conclusion:
 
 - Full exhaustive MTG branching is still intractable, but branchable checkpoints now support a scalable sampled tree: broad sharded discovery, focused high-rollout confirmation, strict correction export, and lower-weight preference export.
 - The current high-rollout result argues against treating v297 as hard correction evidence, but it does produce calibrated preference weights that can support a separate lower-confidence training lane.
+
+## v305-v309 True Model Continuation Probe
+
+Problem:
+
+- The v301/v304 preference tier included a suspicious row where source `Play Forest` was labeled worse than `Pass`.
+- Investigation found that the original value-tree continuation mode was still using post-root branch autopilot for model decisions whenever a branch controller was installed. A previous `--post-branch-autopilot false` probe was therefore not a true model-continuation run.
+
+Implementation:
+
+- Added `EngineDecisionBranchController.shouldBypassModelInference()`.
+- `ComputerPlayerRL` now skips model inference for branch controllers only when that hook returns true.
+- `LiveCheckpointBranchMiner` returns `postBranchAutopilot` from the hook, so `--post-branch-autopilot false` forces only the root checkpoint decision and then lets normal model scoring handle later decisions for both players.
+- `scripts/mtgrl/run_value_tree_shards.py` now records `--post-branch-autopilot`, injects safe single-backend local Python defaults for true model-continuation probes, and assigns per-shard Py4J ports. This avoids the earlier learner-plus-four-inference-worker startup storm for tiny branch probes.
+
+Validation:
+
+| Command / Artifact | Result |
+| --- | --- |
+| `python -m py_compile scripts/mtgrl/run_value_tree_shards.py` | Passed. |
+| `python "$env:USERPROFILE\.codex\skills\mage-research-agent\scripts\airl_maven.py" compile` | Passed. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v307_play_forest_true_model_continuation_probe` | Failed before evidence: default local multi-backend launched learner plus four inference gateways and hit repeated Py4J channel failures while Python workers spun. Processes were stopped. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v308_play_forest_true_model_single_backend_smoke` | True model continuation, source `Play Forest` and alternate `Pass`, 1 rollout each. Reentry matched twice; both branches reached terminal loss; classification `no_better_action`. |
+| `local-training/local_pbt/live_checkpoint_branch_miner/v309_play_forest_true_model_all_actions_r1` | True model continuation, all 6 root actions, 1 rollout each. Reentry matched twice; all six actions reached terminal loss; classification `no_better_action`. |
+
+Conclusion:
+
+- The `Play Forest` -> `Pass` preference should not be admitted as training evidence. Under true model continuation, `Pass` no longer wins; it ties the source as a terminal loss in the smoke probes.
+- The earlier preference row is best classified as a post-root autopilot artifact, not a model-policy counterfactual.
+- Batching is still the right scaling direction for true model continuations, but it needs a frontier/service design: branch workers should enqueue model-decision states to a central batched inference service and resume when policy/value results return. The current runner batches only within a single Python bridge and otherwise relies on process-level JVM sharding.

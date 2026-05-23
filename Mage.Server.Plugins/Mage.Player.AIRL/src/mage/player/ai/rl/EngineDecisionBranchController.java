@@ -18,6 +18,10 @@ public interface EngineDecisionBranchController {
         return false;
     }
 
+    default boolean shouldBypassModelInference() {
+        return true;
+    }
+
     <T> Choice onDecision(DecisionContext<T> context);
 
     final class DecisionContext<T> {

@@ -1320,6 +1320,11 @@ public final class LiveCheckpointBranchMiner {
         }
 
         @Override
+        public boolean shouldBypassModelInference() {
+            return postBranchAutopilot;
+        }
+
+        @Override
         public <T> Choice onDecision(DecisionContext<T> context) {
             if (seen) {
                 return postBranchAutopilotChoice(context);
