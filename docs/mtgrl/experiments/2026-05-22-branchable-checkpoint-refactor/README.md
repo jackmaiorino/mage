@@ -381,3 +381,23 @@ v266 ranked selection:
 Next action:
 
 - Run a ranked terminal slice from the same v262 corpus. Admit evidence only if a ranked source-loss row has an alternate terminal win. If the ranked slice still yields zero correction candidates, the next bottleneck becomes corpus/target scarcity or branch backend/autopilot quality, not checkpoint reentry.
+
+v267 ranked terminal slice:
+
+- Run artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v267_ranked_terminal_slice40`.
+- Scope: ranked top 40 `ACTIVATE_ABILITY_OR_SPELL` snapshots from the v262 live-checkpoint corpus, `--ranked-max-per-game 6`, source timeout 90 seconds, alternate timeout 45 seconds, up to 3 alternates.
+- Result: 40 rows completed with 2 `clean_positive`, 35 `clean_negative`, 2 `alternate_error`, and 1 `source_terminal_not_loss`.
+- Correction candidates: 2.
+
+Correction rows:
+
+| Rank | Snapshot | Source loss | Winning alternate | Other alternate outcomes |
+| ---: | --- | --- | --- | --- |
+| 1 | `chunk_002` `ord038_D092_ACTIVATE_ABILITY_OR_SPELL` | `Cast Generous Ent` | `Cast Overgrown Battlement` | `Cast Lotleth Giant` loss; `Cast Lead the Stampede` loss |
+| 38 | `chunk_003` `ord037_D048_ACTIVATE_ABILITY_OR_SPELL` | `Cast Lotleth Giant` | `{T}: Add {G}.` | first attempted alternate won |
+
+Interpretation:
+
+- Ranked live-checkpoint mining recovered checkpoint-derived correction evidence from the existing v262 corpus, where the sorted-prefix v265 slice found none.
+- This validates the next harness direction: candidate ranking should be part of the live snapshot mining path before any larger corpus run.
+- This still is not a training launch gate by itself; the correction set is small and should be expanded or cross-checked before generating training data.
