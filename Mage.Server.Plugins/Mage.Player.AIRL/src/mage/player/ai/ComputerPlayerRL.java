@@ -1145,6 +1145,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return new SinglePickResult(clampedChosenIdx, oldLogp, selectedBehaviorProb, selectedOldProb, oldLogpSource, source.behavior);
     }
 
+    private SinglePickResult branchForcedSinglePick(int forcedIdx, int candidateCount) {
+        BehaviorPolicyView behavior = branchForcedBehavior(candidateCount);
+        int clampedChosenIdx = Math.max(0, Math.min(forcedIdx, candidateCount - 1));
+        float prob = behavior.behaviorProbs[clampedChosenIdx];
+        return new SinglePickResult(clampedChosenIdx, 0.0f, prob, prob, "branch_forced", behavior);
+    }
+
     private SequentialPickResult sampleSequentialWithoutReplacement(
             float[] actionScores,
             int[] candidateMask,
@@ -1255,6 +1262,33 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
         return new SequentialPickResult(selectedIndices, oldLogpTotal,
                 policyOldLogp ? "policy" : "behavior", source.behavior);
+    }
+
+    private SequentialPickResult branchForcedSequentialPick(List<Integer> forcedIndices, int candidateCount) {
+        List<Integer> selectedIndices = new ArrayList<>();
+        boolean[] selected = new boolean[Math.max(0, candidateCount)];
+        if (forcedIndices != null) {
+            for (Integer forcedIdx : forcedIndices) {
+                if (forcedIdx == null || forcedIdx < 0 || forcedIdx >= candidateCount || selected[forcedIdx]) {
+                    continue;
+                }
+                selected[forcedIdx] = true;
+                selectedIndices.add(forcedIdx);
+            }
+        }
+        return new SequentialPickResult(selectedIndices, 0.0f, "branch_forced", branchForcedBehavior(candidateCount));
+    }
+
+    private BehaviorPolicyView branchForcedBehavior(int candidateCount) {
+        int size = Math.max(StateSequenceBuilder.TrainingData.MAX_CANDIDATES, Math.max(candidateCount, 1));
+        float[] policy = new float[size];
+        float[] behavior = new float[size];
+        float p = candidateCount > 0 ? 1.0f / candidateCount : 1.0f;
+        for (int i = 0; i < candidateCount && i < size; i++) {
+            policy[i] = p;
+            behavior[i] = p;
+        }
+        return new BehaviorPolicyView(policy, behavior, "branch_forced", 0.0, 0.0);
     }
 
     private String explorationAnnotation(BehaviorPolicyView behavior, int chosenIdx, String oldLogpSource) {
@@ -3281,12 +3315,26 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             Game game,
             Ability source
     ) {
+        return preModelForcedChoiceIndices(
+                actionType, candidates, maxTargets, minTargets, candidateCount, null, game, source);
+    }
+
+    private <T> List<Integer> preModelForcedChoiceIndices(
+            StateSequenceBuilder.ActionType actionType,
+            List<T> candidates,
+            int maxTargets,
+            int minTargets,
+            int candidateCount,
+            int[] candidateMask,
+            Game game,
+            Ability source
+    ) {
         EngineDecisionBranchController controller = branchController;
         if (controller == null || !controller.shouldEvaluateBeforeModel(actionType)) {
             return null;
         }
         List<Integer> forced = forcedChoiceIndices(actionType, candidates, maxTargets, minTargets, game, source);
-        return sanitizeForcedChoiceIndices(forced, candidateCount, null, maxTargets, minTargets);
+        return sanitizeForcedChoiceIndices(forced, candidateCount, candidateMask, maxTargets, minTargets);
     }
 
     private List<Integer> sanitizeForcedChoiceIndices(
@@ -4591,11 +4639,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         for (int i = 0; i < candidateCount; i++) {
             if (candidateMask[i] != 0) validCount++;
         }
+        if (branchController != null) {
+            float[] policy = firstValidPolicy(candidateMask, candidateCount);
+            skippedInfer.incrementAndGet();
+            return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(policy, 0.0f);
+        }
         if (validCount <= 1) {
-            float[] policy = new float[candidateCount];
-            for (int i = 0; i < candidateCount; i++) {
-                policy[i] = candidateMask[i] != 0 ? 1.0f : 0.0f;
-            }
+            float[] policy = firstValidPolicy(candidateMask, candidateCount);
             skippedInfer.incrementAndGet();
             long total = skippedInfer.get() + profileCount.get();
             if (total > 0 && total % 5000 == 0) {
@@ -4605,13 +4655,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(policy, 0.0f);
         }
         if (Boolean.TRUE.equals(activationValidationSimulation.get())) {
-            float[] policy = new float[candidateCount];
-            for (int i = 0; i < candidateCount; i++) {
-                if (candidateMask[i] != 0) {
-                    policy[i] = 1.0f;
-                    break;
-                }
-            }
+            float[] policy = firstValidPolicy(candidateMask, candidateCount);
             skippedInfer.incrementAndGet();
             return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(policy, 0.0f);
         }
@@ -4647,6 +4691,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             System.out.println("[PROFILE] n=" + count + " prep_avg=" + prepAvg + "us infer_avg=" + inferAvg + "us");
         }
         return result;
+    }
+
+    private float[] firstValidPolicy(int[] candidateMask, int candidateCount) {
+        float[] policy = new float[candidateCount];
+        for (int i = 0; i < candidateCount; i++) {
+            if (candidateMask == null || candidateMask[i] != 0) {
+                policy[i] = 1.0f;
+                break;
+            }
+        }
+        return policy;
     }
 
     private static int toVocabId(String key) {
@@ -5753,27 +5808,42 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source, cand, candFeatDim, baseState);
                     }
 
-                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
-                            baseState,
-                            candidateActionIds,
-                            candidateFeatures,
-                            candidateMask,
-                            "target",
-                            chosenCount,
-                            minTargets,
-                            maxTargets,
+                    float valueScore = 0.0f;
+                    SinglePickResult pickResult;
+                    List<Integer> preModelForced = preModelForcedChoiceIndices(
+                            StateSequenceBuilder.ActionType.SELECT_TARGETS,
+                            possible,
+                            1,
+                            1,
                             candidateCount,
-                            prepStartNanos
-                    );
-                    float[] actionProbs = prediction.policyScores;
-                    float valueScore = prediction.valueScores;
-                    SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
-                    List<Integer> forcedChoice = forcedChoiceIndices(
-                            StateSequenceBuilder.ActionType.SELECT_TARGETS, possible, 1, 1, game, source);
-                    if (forcedChoice != null && !forcedChoice.isEmpty()) {
-                        int forcedIdx = forcedChoice.get(0);
-                        if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
-                            pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                            candidateMask,
+                            game,
+                            source);
+                    if (preModelForced != null && !preModelForced.isEmpty()) {
+                        pickResult = branchForcedSinglePick(preModelForced.get(0), candidateCount);
+                    } else {
+                        mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                                baseState,
+                                candidateActionIds,
+                                candidateFeatures,
+                                candidateMask,
+                                "target",
+                                chosenCount,
+                                minTargets,
+                                maxTargets,
+                                candidateCount,
+                                prepStartNanos
+                        );
+                        float[] actionProbs = prediction.policyScores;
+                        valueScore = prediction.valueScores;
+                        pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+                        List<Integer> forcedChoice = forcedChoiceIndices(
+                                StateSequenceBuilder.ActionType.SELECT_TARGETS, possible, 1, 1, game, source);
+                        if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                            int forcedIdx = forcedChoice.get(0);
+                            if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
+                                pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                            }
                         }
                     }
                     int chosenIdx = pickResult.chosenIdx;
@@ -6339,27 +6409,42 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.SELECT_CARD, game, source, cid, candFeatDim, baseState);
                     }
 
-                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
-                            baseState,
-                            candidateActionIds,
-                            candidateFeatures,
-                            candidateMask,
-                            "card_select",
-                            chosenCount,
-                            minTargets,
-                            maxTargets,
+                    float valueScore = 0.0f;
+                    SinglePickResult pickResult;
+                    List<Integer> preModelForced = preModelForcedChoiceIndices(
+                            StateSequenceBuilder.ActionType.SELECT_CARD,
+                            remainingNames,
+                            1,
+                            1,
                             candidateCount,
-                            prepStartNanos
-                    );
-                    float[] actionProbs = prediction.policyScores;
-                    float valueScore = prediction.valueScores;
-                    SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
-                    List<Integer> forcedChoice = forcedChoiceIndices(
-                            StateSequenceBuilder.ActionType.SELECT_CARD, remainingNames, 1, 1, game, source);
-                    if (forcedChoice != null && !forcedChoice.isEmpty()) {
-                        int forcedIdx = forcedChoice.get(0);
-                        if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
-                            pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                            candidateMask,
+                            game,
+                            source);
+                    if (preModelForced != null && !preModelForced.isEmpty()) {
+                        pickResult = branchForcedSinglePick(preModelForced.get(0), candidateCount);
+                    } else {
+                        mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                                baseState,
+                                candidateActionIds,
+                                candidateFeatures,
+                                candidateMask,
+                                "card_select",
+                                chosenCount,
+                                minTargets,
+                                maxTargets,
+                                candidateCount,
+                                prepStartNanos
+                        );
+                        float[] actionProbs = prediction.policyScores;
+                        valueScore = prediction.valueScores;
+                        pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+                        List<Integer> forcedChoice = forcedChoiceIndices(
+                                StateSequenceBuilder.ActionType.SELECT_CARD, remainingNames, 1, 1, game, source);
+                        if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                            int forcedIdx = forcedChoice.get(0);
+                            if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
+                                pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                            }
                         }
                     }
                     int chosenIdx = pickResult.chosenIdx;
@@ -6919,19 +7004,34 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 return fallback;
             }
 
-            String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_MODE);
-            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
-                    baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, 1, candidateCount, prepStartNanos);
+            float valueScore = 0.0f;
+            SinglePickResult pickResult;
+            List<Integer> preModelForced = preModelForcedChoiceIndices(
+                    StateSequenceBuilder.ActionType.CHOOSE_MODE,
+                    availableModes,
+                    1,
+                    1,
+                    candidateCount,
+                    candidateMask,
+                    game,
+                    source);
+            if (preModelForced != null && !preModelForced.isEmpty()) {
+                pickResult = branchForcedSinglePick(preModelForced.get(0), candidateCount);
+            } else {
+                String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_MODE);
+                mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                        baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, 1, candidateCount, prepStartNanos);
 
-            float[] actionProbs = prediction.policyScores;
-            float valueScore = prediction.valueScores;
-            SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
-            List<Integer> forcedChoice = forcedChoiceIndices(
-                    StateSequenceBuilder.ActionType.CHOOSE_MODE, availableModes, 1, 1, game, source);
-            if (forcedChoice != null && !forcedChoice.isEmpty()) {
-                int forcedIdx = forcedChoice.get(0);
-                if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
-                    pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                float[] actionProbs = prediction.policyScores;
+                valueScore = prediction.valueScores;
+                pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+                List<Integer> forcedChoice = forcedChoiceIndices(
+                        StateSequenceBuilder.ActionType.CHOOSE_MODE, availableModes, 1, 1, game, source);
+                if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                    int forcedIdx = forcedChoice.get(0);
+                    if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
+                        pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                    }
                 }
             }
             int appliedIdx = pickResult.chosenIdx;
@@ -7086,19 +7186,34 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.ANNOUNCE_X, game, source, xValues.get(i), candFeatDim, baseState);
             }
 
-            String headId = headForActionType(StateSequenceBuilder.ActionType.ANNOUNCE_X);
-            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
-                    baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, 1, candidateCount, prepStartNanos);
+            float valueScore = 0.0f;
+            SinglePickResult pickResult;
+            List<Integer> preModelForced = preModelForcedChoiceIndices(
+                    StateSequenceBuilder.ActionType.ANNOUNCE_X,
+                    xValues,
+                    1,
+                    1,
+                    candidateCount,
+                    candidateMask,
+                    game,
+                    source);
+            if (preModelForced != null && !preModelForced.isEmpty()) {
+                pickResult = branchForcedSinglePick(preModelForced.get(0), candidateCount);
+            } else {
+                String headId = headForActionType(StateSequenceBuilder.ActionType.ANNOUNCE_X);
+                mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                        baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, 1, candidateCount, prepStartNanos);
 
-            float[] actionProbs = prediction.policyScores;
-            float valueScore = prediction.valueScores;
-            SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
-            List<Integer> forcedChoice = forcedChoiceIndices(
-                    StateSequenceBuilder.ActionType.ANNOUNCE_X, xValues, 1, 1, game, source);
-            if (forcedChoice != null && !forcedChoice.isEmpty()) {
-                int forcedIdx = forcedChoice.get(0);
-                if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
-                    pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                float[] actionProbs = prediction.policyScores;
+                valueScore = prediction.valueScores;
+                pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+                List<Integer> forcedChoice = forcedChoiceIndices(
+                        StateSequenceBuilder.ActionType.ANNOUNCE_X, xValues, 1, 1, game, source);
+                if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                    int forcedIdx = forcedChoice.get(0);
+                    if (forcedIdx >= 0 && forcedIdx < candidateCount && candidateMask[forcedIdx] == 1) {
+                        pickResult = forceSinglePick(pickResult, forcedIdx, candidateCount);
+                    }
                 }
             }
             int chosenIdx = pickResult.chosenIdx;
@@ -7267,37 +7382,53 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.CHOOSE_USE, game, source, candidates.get(i), candFeatDim, baseState);
             }
 
-            String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_USE);
-            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
-                    baseState,
-                    candidateActionIds,
-                    candidateFeatures,
-                    candidateMask,
-                    headId,
-                    0,
-                    1,
-                    1,
-                    candidateCount,
-                    prepStartNanos
-            );
-
-            float[] actionProbs = prediction.policyScores;
-            float valueScore = prediction.valueScores;
-            SinglePickResult pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
             List<String> forcedChoiceLabels = Arrays.asList(
                     trueText != null ? trueText : "Yes",
                     falseText != null ? falseText : "No"
             );
-            List<Integer> forcedChoice = forcedChoiceIndices(
+            float valueScore = 0.0f;
+            SinglePickResult pickResult;
+            List<Integer> preModelForced = preModelForcedChoiceIndices(
                     StateSequenceBuilder.ActionType.CHOOSE_USE,
                     forcedChoiceLabels,
                     1,
                     1,
+                    candidateCount,
+                    candidateMask,
                     game,
                     source
             );
-            if (forcedChoice != null && !forcedChoice.isEmpty()) {
-                pickResult = forceSinglePick(pickResult, forcedChoice.get(0), candidateCount);
+            if (preModelForced != null && !preModelForced.isEmpty()) {
+                pickResult = branchForcedSinglePick(preModelForced.get(0), candidateCount);
+            } else {
+                String headId = headForActionType(StateSequenceBuilder.ActionType.CHOOSE_USE);
+                mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                        baseState,
+                        candidateActionIds,
+                        candidateFeatures,
+                        candidateMask,
+                        headId,
+                        0,
+                        1,
+                        1,
+                        candidateCount,
+                        prepStartNanos
+                );
+
+                float[] actionProbs = prediction.policyScores;
+                valueScore = prediction.valueScores;
+                pickResult = sampleSinglePick(actionProbs, candidateMask, candidateCount, game);
+                List<Integer> forcedChoice = forcedChoiceIndices(
+                        StateSequenceBuilder.ActionType.CHOOSE_USE,
+                        forcedChoiceLabels,
+                        1,
+                        1,
+                        game,
+                        source
+                );
+                if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                    pickResult = forceSinglePick(pickResult, forcedChoice.get(0), candidateCount);
+                }
             }
             int chosenIdx = pickResult.chosenIdx;
             boolean useIt = (chosenIdx == 0);
@@ -7445,29 +7576,44 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.DECLARE_ATTACKS, game, null, phase1Candidates.get(i), candFeatDim, baseState);
             }
 
-            String headId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_ATTACKS);
-            mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
-                    baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, candidateCount, candidateCount, prepStartNanos);
-
-            float[] actionProbs = prediction.policyScores;
-            float valueScore = prediction.valueScores;
-            SequentialPickResult attackPickResult = sampleSequentialWithoutReplacement(
-                    actionProbs,
-                    candidateMask,
-                    candidateCount,
-                    candidateCount,
-                    game
-            );
-            List<Integer> forcedChoice = forcedChoiceIndices(
+            float valueScore = 0.0f;
+            SequentialPickResult attackPickResult;
+            List<Integer> preModelForced = preModelForcedChoiceIndices(
                     StateSequenceBuilder.ActionType.DECLARE_ATTACKS,
                     phase1Candidates,
                     candidateCount,
                     0,
+                    candidateCount,
+                    candidateMask,
                     game,
-                    null
-            );
-            if (forcedChoice != null && !forcedChoice.isEmpty()) {
-                attackPickResult = forceSequentialPick(attackPickResult, forcedChoice, candidateCount);
+                    null);
+            if (preModelForced != null && !preModelForced.isEmpty()) {
+                attackPickResult = branchForcedSequentialPick(preModelForced, candidateCount);
+            } else {
+                String headId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_ATTACKS);
+                mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                        baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, candidateCount, candidateCount, prepStartNanos);
+
+                float[] actionProbs = prediction.policyScores;
+                valueScore = prediction.valueScores;
+                attackPickResult = sampleSequentialWithoutReplacement(
+                        actionProbs,
+                        candidateMask,
+                        candidateCount,
+                        candidateCount,
+                        game
+                );
+                List<Integer> forcedChoice = forcedChoiceIndices(
+                        StateSequenceBuilder.ActionType.DECLARE_ATTACKS,
+                        phase1Candidates,
+                        candidateCount,
+                        0,
+                        game,
+                        null
+                );
+                if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                    attackPickResult = forceSequentialPick(attackPickResult, forcedChoice, candidateCount);
+                }
             }
             List<Integer> selectedIndices = attackPickResult.selectedIndices;
             float oldLogpTotal = attackPickResult.oldLogpTotal;
@@ -7536,13 +7682,28 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         p2Feats[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET, game, null, phase2Candidates.get(i), candFeatDim, baseState);
                     }
 
-                    String p2HeadId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET);
-                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult p2Pred = scoreCandidatesWithMetrics(
-                            baseState, p2Ids, p2Feats, p2Mask, p2HeadId, 0, 1, 1, p2Count, attackTargetPrepStartNanos);
+                    float p2Value = 0.0f;
+                    SinglePickResult p2Pick;
+                    List<Integer> p2PreModelForced = preModelForcedChoiceIndices(
+                            StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET,
+                            phase2Candidates,
+                            1,
+                            1,
+                            p2Count,
+                            p2Mask,
+                            game,
+                            null);
+                    if (p2PreModelForced != null && !p2PreModelForced.isEmpty()) {
+                        p2Pick = branchForcedSinglePick(p2PreModelForced.get(0), p2Count);
+                    } else {
+                        String p2HeadId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_ATTACK_TARGET);
+                        mage.player.ai.rl.PythonMLBatchManager.PredictionResult p2Pred = scoreCandidatesWithMetrics(
+                                baseState, p2Ids, p2Feats, p2Mask, p2HeadId, 0, 1, 1, p2Count, attackTargetPrepStartNanos);
 
-                    float[] p2Probs = p2Pred.policyScores;
-                    float p2Value = p2Pred.valueScores;
-                    SinglePickResult p2Pick = sampleSinglePick(p2Probs, p2Mask, p2Count, game);
+                        float[] p2Probs = p2Pred.policyScores;
+                        p2Value = p2Pred.valueScores;
+                        p2Pick = sampleSinglePick(p2Probs, p2Mask, p2Count, game);
+                    }
                     int p2PickIdx = p2Pick.chosenIdx;
                     float p2LogP = p2Pick.oldLogp;
                     UUID chosenDefId = (UUID) phase2Candidates.get(p2PickIdx).context;
@@ -7668,29 +7829,44 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     candidateFeatures[i] = computeCandidateFeatures(StateSequenceBuilder.ActionType.DECLARE_BLOCKS, game, null, blockCandidates.get(i), candFeatDim, baseState);
                 }
 
-                String headId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_BLOCKS);
-                mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
-                        baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, candidateCount, candidateCount, prepStartNanos);
-
-                float[] actionProbs = prediction.policyScores;
-                float valueScore = prediction.valueScores;
-                SequentialPickResult blockPickResult = sampleSequentialWithoutReplacement(
-                        actionProbs,
-                        candidateMask,
-                        candidateCount,
-                        candidateCount,
-                        game
-                );
-                List<Integer> forcedChoice = forcedChoiceIndices(
+                float valueScore = 0.0f;
+                SequentialPickResult blockPickResult;
+                List<Integer> preModelForced = preModelForcedChoiceIndices(
                         StateSequenceBuilder.ActionType.DECLARE_BLOCKS,
                         blockCandidates,
                         candidateCount,
                         0,
+                        candidateCount,
+                        candidateMask,
                         game,
-                        source
-                );
-                if (forcedChoice != null && !forcedChoice.isEmpty()) {
-                    blockPickResult = forceSequentialPick(blockPickResult, forcedChoice, candidateCount);
+                        source);
+                if (preModelForced != null && !preModelForced.isEmpty()) {
+                    blockPickResult = branchForcedSequentialPick(preModelForced, candidateCount);
+                } else {
+                    String headId = headForActionType(StateSequenceBuilder.ActionType.DECLARE_BLOCKS);
+                    mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = scoreCandidatesWithMetrics(
+                            baseState, candidateActionIds, candidateFeatures, candidateMask, headId, 0, 1, candidateCount, candidateCount, prepStartNanos);
+
+                    float[] actionProbs = prediction.policyScores;
+                    valueScore = prediction.valueScores;
+                    blockPickResult = sampleSequentialWithoutReplacement(
+                            actionProbs,
+                            candidateMask,
+                            candidateCount,
+                            candidateCount,
+                            game
+                    );
+                    List<Integer> forcedChoice = forcedChoiceIndices(
+                            StateSequenceBuilder.ActionType.DECLARE_BLOCKS,
+                            blockCandidates,
+                            candidateCount,
+                            0,
+                            game,
+                            source
+                    );
+                    if (forcedChoice != null && !forcedChoice.isEmpty()) {
+                        blockPickResult = forceSequentialPick(blockPickResult, forcedChoice, candidateCount);
+                    }
                 }
                 List<Integer> selectedIndices = blockPickResult.selectedIndices;
                 float oldLogpTotal = blockPickResult.oldLogpTotal;
@@ -9677,7 +9853,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     private void maybeLogBeliefPrediction(Game game) {
-        if (game == null || model == null) return;
+        if (game == null || model == null || branchController != null) return;
         int turn;
         try {
             turn = game.getTurnNum();
@@ -9736,7 +9912,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     private boolean installCardBeliefDeterminization(StateSequenceBuilder.SequenceOutput baseState) {
-        if (!CARD_BELIEF_DETERMINIZATION_ENABLE || model == null || baseState == null) {
+        if (!CARD_BELIEF_DETERMINIZATION_ENABLE || model == null || baseState == null || branchController != null) {
             return false;
         }
         int dim = StateSequenceBuilder.cardBeliefDim();

@@ -40,6 +40,7 @@ public final class LiveCheckpointBranchMiner {
                     + "classification,source_terminal,source_won,source_lost,source_error,alternate_indices,"
                     + "alternate_texts,alternate_terminal,alternate_won,alternate_lost,alternate_error,"
                     + "alternate_attempt_count,alternate_terminal_count,alternate_win_count,alternate_outcomes,"
+                    + "positive_confirmation_count,positive_confirmation_pass_count,positive_confirmation_outcomes,"
                     + "reentry_a_candidate_hash,reentry_b_candidate_hash,reentry_a_state_hash,reentry_b_state_hash,"
                     + "reentry_a_reason,reentry_b_reason\n";
     private static final String SELECTION_CSV_HEADER =
@@ -99,8 +100,8 @@ public final class LiveCheckpointBranchMiner {
             return row;
         }
 
-        BranchOutcome reentryA = runProbe(snapshot, sourceIndices, true, true, "source_reentry_a", cfg.timeoutSec);
-        BranchOutcome reentryB = runProbe(snapshot, sourceIndices, true, true, "source_reentry_b", cfg.timeoutSec);
+        BranchOutcome reentryA = runProbe(snapshot, sourceIndices, true, true, "source_reentry_a", cfg.timeoutSec, false);
+        BranchOutcome reentryB = runProbe(snapshot, sourceIndices, true, true, "source_reentry_b", cfg.timeoutSec, false);
         row.applyReentry(reentryA, reentryB);
         if (!reentryA.reentryMatched || !reentryB.reentryMatched) {
             row.classification = "checkpoint_reentry_mismatch";
@@ -111,7 +112,14 @@ public final class LiveCheckpointBranchMiner {
             return row;
         }
 
-        BranchOutcome source = runProbe(snapshot, sourceIndices, false, true, "source_terminal", cfg.timeoutSec);
+        BranchOutcome source = runProbe(
+                snapshot,
+                sourceIndices,
+                false,
+                true,
+                "source_terminal",
+                cfg.timeoutSec,
+                cfg.postBranchAutopilot);
         row.applySource(source);
         if (!source.error.isEmpty()) {
             row.classification = "source_error";
@@ -131,7 +139,10 @@ public final class LiveCheckpointBranchMiner {
             row.classification = "alternate_unavailable";
             return row;
         }
-        applyBestAlternate(row, snapshot, alternateChoices, cfg);
+        applyBestAlternate(row, snapshot, sourceIndices, alternateChoices, cfg);
+        if ("clean_positive".equals(row.classification) && cfg.snapshotPath == null && cfg.requireIsolatedPositiveReprobe) {
+            row.classification = "clean_positive_needs_isolated_reprobe";
+        }
         return row;
     }
 
@@ -141,12 +152,18 @@ public final class LiveCheckpointBranchMiner {
             boolean stopAtReentry,
             boolean requireSourceChoiceMatch,
             String label,
-            int timeoutSec
+            int timeoutSec,
+            boolean postBranchAutopilot
     ) {
         RandomUtil.State previousRandom = RandomUtil.captureState();
         Game game = null;
         SnapshotBranchController controller =
-                new SnapshotBranchController(snapshot, forcedIndices, stopAtReentry, requireSourceChoiceMatch);
+                new SnapshotBranchController(
+                        snapshot,
+                        forcedIndices,
+                        stopAtReentry,
+                        requireSourceChoiceMatch,
+                        postBranchAutopilot);
         BranchOutcome outcome = new BranchOutcome(label);
         try {
             RandomUtil.restoreState(snapshot.randomState);
@@ -157,7 +174,7 @@ public final class LiveCheckpointBranchMiner {
                         + (player == null ? "null" : player.getClass().getName());
                 return outcome;
             }
-            ((ComputerPlayerRL) player).setEngineDecisionBranchController(controller);
+            installBranchControllers(game, (ComputerPlayerRL) player, controller, postBranchAutopilot);
             try {
                 resumeGameInGameThread(game, timeoutSec, label);
             } catch (EngineDecisionBranchController.BranchTerminated terminated) {
@@ -184,6 +201,23 @@ public final class LiveCheckpointBranchMiner {
                 }
             }
             RandomUtil.restoreState(previousRandom);
+        }
+    }
+
+    private static void installBranchControllers(
+            Game game,
+            ComputerPlayerRL sourcePlayer,
+            SnapshotBranchController controller,
+            boolean postBranchAutopilot
+    ) {
+        if (!postBranchAutopilot || game == null || game.getPlayers() == null) {
+            sourcePlayer.setEngineDecisionBranchController(controller);
+            return;
+        }
+        for (Player player : game.getPlayers().values()) {
+            if (player instanceof ComputerPlayerRL) {
+                ((ComputerPlayerRL) player).setEngineDecisionBranchController(controller);
+            }
         }
     }
 
@@ -444,6 +478,7 @@ public final class LiveCheckpointBranchMiner {
     private static void applyBestAlternate(
             BranchRow row,
             LiveCheckpointRecorder.Snapshot snapshot,
+            List<Integer> sourceIndices,
             List<List<Integer>> alternateChoices,
             Config cfg
     ) {
@@ -461,7 +496,8 @@ public final class LiveCheckpointBranchMiner {
                     false,
                     false,
                     "alternate_terminal_" + attempt,
-                    cfg.alternateTimeoutSec);
+                    cfg.alternateTimeoutSec,
+                    cfg.postBranchAutopilot);
             if (alternate.terminal) {
                 terminalCount++;
             }
@@ -491,7 +527,11 @@ public final class LiveCheckpointBranchMiner {
         if (best == null) {
             row.classification = "alternate_unavailable";
         } else if (best.terminal && best.won) {
-            row.classification = "clean_positive";
+            PositiveConfirmation confirmation = confirmPositive(snapshot, sourceIndices, bestIndices, cfg);
+            row.positiveConfirmationCount = confirmation.requested;
+            row.positiveConfirmationPassCount = confirmation.passed;
+            row.positiveConfirmationOutcomes = confirmation.outcomes;
+            row.classification = confirmation.isConfirmed() ? "clean_positive" : "clean_positive_unstable";
         } else if (best.terminal && best.lost) {
             row.classification = "clean_negative";
         } else if (best.terminal) {
@@ -501,6 +541,54 @@ public final class LiveCheckpointBranchMiner {
         } else {
             row.classification = "alternate_not_terminal";
         }
+    }
+
+    private static PositiveConfirmation confirmPositive(
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<Integer> sourceIndices,
+            List<Integer> alternateIndices,
+            Config cfg
+    ) {
+        int requested = Math.max(0, cfg.confirmPositiveRepeats);
+        if (requested <= 0) {
+            return new PositiveConfirmation(0, 0, "");
+        }
+        int passed = 0;
+        List<String> summaries = new ArrayList<>();
+        for (int i = 1; i <= requested; i++) {
+            BranchOutcome source = runProbe(
+                    snapshot,
+                    sourceIndices,
+                    false,
+                    true,
+                    "positive_confirm_source_" + i,
+                    cfg.timeoutSec,
+                    cfg.postBranchAutopilot);
+            BranchOutcome alternate = runProbe(
+                    snapshot,
+                    alternateIndices,
+                    false,
+                    false,
+                    "positive_confirm_alternate_" + i,
+                    cfg.alternateTimeoutSec,
+                    cfg.postBranchAutopilot);
+            boolean ok = source.error.isEmpty()
+                    && alternate.error.isEmpty()
+                    && source.reentryMatched
+                    && alternate.reentryMatched
+                    && source.terminal
+                    && source.lost
+                    && alternate.terminal
+                    && alternate.won;
+            if (ok) {
+                passed++;
+            }
+            summaries.add("repeat" + i
+                    + ":source=" + source.shortClassification()
+                    + ";alternate=" + alternate.shortClassification()
+                    + ";pass=" + ok);
+        }
+        return new PositiveConfirmation(requested, passed, joinStrings(summaries));
     }
 
     private static int alternateRank(BranchOutcome outcome) {
@@ -562,6 +650,16 @@ public final class LiveCheckpointBranchMiner {
     private static boolean isPassLike(String text) {
         String value = text == null ? "" : text.trim();
         return "Pass".equalsIgnoreCase(value) || "PASS".equals(value);
+    }
+
+    private static boolean isDoneLike(String text) {
+        String value = text == null ? "" : text.trim();
+        return "DONE".equalsIgnoreCase(value);
+    }
+
+    private static boolean isStopLike(String text) {
+        String value = text == null ? "" : text.trim();
+        return "STOP".equalsIgnoreCase(value);
     }
 
     private static boolean isSpellLike(String text) {
@@ -769,6 +867,9 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- selection_mode: ").append(cfg.selectionMode).append("\n");
         sb.append("- ranked_max_per_game: ").append(cfg.rankedMaxPerGame).append("\n");
         sb.append("- reentry_only: ").append(cfg.reentryOnly).append("\n");
+        sb.append("- post_branch_autopilot: ").append(cfg.postBranchAutopilot).append("\n");
+        sb.append("- confirm_positive_repeats: ").append(cfg.confirmPositiveRepeats).append("\n");
+        sb.append("- require_isolated_positive_reprobe: ").append(cfg.requireIsolatedPositiveReprobe).append("\n");
         sb.append("- timeout_sec: ").append(cfg.timeoutSec).append("\n");
         sb.append("- alternate_timeout_sec: ").append(cfg.alternateTimeoutSec).append("\n");
         sb.append("- max_alternates: ").append(cfg.maxAlternates).append("\n");
@@ -815,6 +916,7 @@ public final class LiveCheckpointBranchMiner {
         private final List<Integer> forcedIndices;
         private final boolean stopAtReentry;
         private final boolean requireSourceChoiceMatch;
+        private final boolean postBranchAutopilot;
 
         private boolean seen;
         private boolean reentryMatched;
@@ -829,7 +931,8 @@ public final class LiveCheckpointBranchMiner {
                 LiveCheckpointRecorder.Snapshot snapshot,
                 List<Integer> forcedIndices,
                 boolean stopAtReentry,
-                boolean requireSourceChoiceMatch
+                boolean requireSourceChoiceMatch,
+                boolean postBranchAutopilot
         ) {
             this.snapshot = snapshot;
             this.forcedIndices = forcedIndices == null
@@ -837,6 +940,7 @@ public final class LiveCheckpointBranchMiner {
                     : new ArrayList<>(forcedIndices);
             this.stopAtReentry = stopAtReentry;
             this.requireSourceChoiceMatch = requireSourceChoiceMatch;
+            this.postBranchAutopilot = postBranchAutopilot;
         }
 
         @Override
@@ -847,6 +951,13 @@ public final class LiveCheckpointBranchMiner {
         @Override
         public <T> Choice onDecision(DecisionContext<T> context) {
             if (seen) {
+                return postBranchAutopilotChoice(context);
+            }
+            if (context == null
+                    || context.player == null
+                    || snapshot == null
+                    || snapshot.playerId == null
+                    || !snapshot.playerId.equals(context.player.getId())) {
                 return Choice.none();
             }
             seen = true;
@@ -884,6 +995,156 @@ public final class LiveCheckpointBranchMiner {
             }
             return Choice.choose(sanitized);
         }
+
+        private <T> Choice postBranchAutopilotChoice(DecisionContext<T> context) {
+            if (!postBranchAutopilot || context == null || context.candidateCount <= 0) {
+                return Choice.none();
+            }
+            List<Integer> indices = deterministicAutopilotIndices(context);
+            if (indices.isEmpty()) {
+                return Choice.none();
+            }
+            return Choice.choose(indices);
+        }
+    }
+
+    private static <T> List<Integer> deterministicAutopilotIndices(EngineDecisionBranchController.DecisionContext<T> context) {
+        int candidateCount = context == null ? 0 : context.candidateCount;
+        if (candidateCount <= 0) {
+            return Collections.emptyList();
+        }
+        int pickLimit = context.maxTargets <= 0
+                ? candidateCount
+                : Math.min(context.maxTargets, candidateCount);
+        int minTargets = Math.max(0, context.minTargets);
+        StateSequenceBuilder.ActionType actionType = context.actionType;
+        if (actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) {
+            int spell = stableBestIndex(context, true, false, false, false);
+            if (spell >= 0) {
+                return Collections.singletonList(spell);
+            }
+            int pass = stableTerminalIndex(context);
+            if (pass >= 0) {
+                return Collections.singletonList(pass);
+            }
+            return Collections.singletonList(0);
+        }
+        if (actionType == StateSequenceBuilder.ActionType.DECLARE_ATTACKS
+                || actionType == StateSequenceBuilder.ActionType.DECLARE_BLOCKS) {
+            List<Integer> combat = stableNonTerminalIndices(context, pickLimit);
+            if (!combat.isEmpty()) {
+                return combat;
+            }
+            int done = stableTerminalIndex(context);
+            return done >= 0 ? Collections.singletonList(done) : Collections.emptyList();
+        }
+        if (pickLimit == 1) {
+            int nonStop = stableBestIndex(context, false, true, true, false);
+            return Collections.singletonList(nonStop >= 0 ? nonStop : 0);
+        }
+        List<Integer> indices = stableNonTerminalIndices(context, pickLimit);
+        if (indices.size() < minTargets) {
+            for (int i = 0; i < candidateCount && indices.size() < Math.max(minTargets, 1); i++) {
+                if (!indices.contains(i)) {
+                    indices.add(i);
+                }
+            }
+        }
+        return indices;
+    }
+
+    private static int stableBestIndex(
+            EngineDecisionBranchController.DecisionContext<?> context,
+            boolean requireNonPass,
+            boolean allowMana,
+            boolean allowLandPlay,
+            boolean allowTerminal
+    ) {
+        int candidateCount = context == null ? 0 : context.candidateCount;
+        int best = -1;
+        String bestKey = "";
+        for (int i = 0; i < candidateCount; i++) {
+            String text = candidateText(context, i);
+            if (requireNonPass && isPassLike(text)) {
+                continue;
+            }
+            if (!allowTerminal && (isPassLike(text) || isDoneLike(text) || isStopLike(text))) {
+                continue;
+            }
+            if (!allowMana && isManaLike(text)) {
+                continue;
+            }
+            if (!allowLandPlay && isLandPlayLike(text)) {
+                continue;
+            }
+            String key = candidateSortKey(context, i);
+            if (best < 0 || key.compareTo(bestKey) < 0) {
+                best = i;
+                bestKey = key;
+            }
+        }
+        return best;
+    }
+
+    private static List<Integer> stableNonTerminalIndices(
+            EngineDecisionBranchController.DecisionContext<?> context,
+            int maxTargets
+    ) {
+        List<Integer> indices = new ArrayList<>();
+        int candidateCount = context == null ? 0 : context.candidateCount;
+        for (int i = 0; i < candidateCount; i++) {
+            String text = candidateText(context, i);
+            if (isPassLike(text) || isDoneLike(text) || isStopLike(text)) {
+                continue;
+            }
+            indices.add(i);
+        }
+        indices.sort((a, b) -> candidateSortKey(context, a).compareTo(candidateSortKey(context, b)));
+        if (maxTargets >= 0 && indices.size() > maxTargets) {
+            return new ArrayList<>(indices.subList(0, maxTargets));
+        }
+        return indices;
+    }
+
+    private static int stableTerminalIndex(EngineDecisionBranchController.DecisionContext<?> context) {
+        int candidateCount = context == null ? 0 : context.candidateCount;
+        int best = -1;
+        String bestKey = "";
+        for (int i = 0; i < candidateCount; i++) {
+            String text = candidateText(context, i);
+            if (isPassLike(text) || isDoneLike(text) || isStopLike(text)) {
+                String key = candidateSortKey(context, i);
+                if (best < 0 || key.compareTo(bestKey) < 0) {
+                    best = i;
+                    bestKey = key;
+                }
+            }
+        }
+        return best;
+    }
+
+    private static String candidateText(EngineDecisionBranchController.DecisionContext<?> context, int index) {
+        if (context == null || context.candidateTexts == null || index < 0 || index >= context.candidateTexts.size()) {
+            return "";
+        }
+        String text = context.candidateTexts.get(index);
+        return text == null ? "" : text;
+    }
+
+    private static String candidateObjectId(EngineDecisionBranchController.DecisionContext<?> context, int index) {
+        if (context == null || context.candidateObjectIds == null || index < 0 || index >= context.candidateObjectIds.size()) {
+            return "";
+        }
+        String id = context.candidateObjectIds.get(index);
+        return id == null ? "" : id;
+    }
+
+    private static String candidateSortKey(EngineDecisionBranchController.DecisionContext<?> context, int index) {
+        return candidateText(context, index).trim().toLowerCase(Locale.US)
+                + "\u0001"
+                + candidateObjectId(context, index).trim().toLowerCase(Locale.US)
+                + "\u0001"
+                + String.format(Locale.US, "%04d", index);
     }
 
     private static final class BranchOutcome {
@@ -979,6 +1240,9 @@ public final class LiveCheckpointBranchMiner {
         private int alternateTerminalCount = 0;
         private int alternateWinCount = 0;
         private String alternateOutcomes = "";
+        private int positiveConfirmationCount = 0;
+        private int positiveConfirmationPassCount = 0;
+        private String positiveConfirmationOutcomes = "";
         private String reentryACandidateHash = "";
         private String reentryBCandidateHash = "";
         private String reentryAStateHash = "";
@@ -1065,6 +1329,9 @@ public final class LiveCheckpointBranchMiner {
             cells.add(String.valueOf(alternateTerminalCount));
             cells.add(String.valueOf(alternateWinCount));
             cells.add(csv(alternateOutcomes));
+            cells.add(String.valueOf(positiveConfirmationCount));
+            cells.add(String.valueOf(positiveConfirmationPassCount));
+            cells.add(csv(positiveConfirmationOutcomes));
             cells.add(csv(reentryACandidateHash));
             cells.add(csv(reentryBCandidateHash));
             cells.add(csv(reentryAStateHash));
@@ -1072,6 +1339,22 @@ public final class LiveCheckpointBranchMiner {
             cells.add(csv(reentryAReason));
             cells.add(csv(reentryBReason));
             return String.join(",", cells) + "\n";
+        }
+    }
+
+    private static final class PositiveConfirmation {
+        private final int requested;
+        private final int passed;
+        private final String outcomes;
+
+        private PositiveConfirmation(int requested, int passed, String outcomes) {
+            this.requested = requested;
+            this.passed = passed;
+            this.outcomes = outcomes == null ? "" : outcomes;
+        }
+
+        private boolean isConfirmed() {
+            return requested <= 0 || requested == passed;
         }
     }
 
@@ -1130,6 +1413,9 @@ public final class LiveCheckpointBranchMiner {
         private int maxAlternates = 1;
         private String selectionMode = "path";
         private int rankedMaxPerGame = 0;
+        private boolean postBranchAutopilot = true;
+        private int confirmPositiveRepeats = 1;
+        private boolean requireIsolatedPositiveReprobe = true;
         private boolean reentryOnly = false;
         private Set<String> actionTypes = Collections.emptySet();
 
@@ -1167,6 +1453,18 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("ranked-max-per-game")) {
                 cfg.rankedMaxPerGame = Integer.parseInt(values.get("ranked-max-per-game"));
+            }
+            if (values.containsKey("post-branch-autopilot")) {
+                cfg.postBranchAutopilot = Boolean.parseBoolean(values.get("post-branch-autopilot"));
+            }
+            if (values.containsKey("confirm-positive-repeats")) {
+                cfg.confirmPositiveRepeats = Integer.parseInt(values.get("confirm-positive-repeats"));
+            }
+            if (values.containsKey("positive-confirmations")) {
+                cfg.confirmPositiveRepeats = Integer.parseInt(values.get("positive-confirmations"));
+            }
+            if (values.containsKey("require-isolated-positive-reprobe")) {
+                cfg.requireIsolatedPositiveReprobe = Boolean.parseBoolean(values.get("require-isolated-positive-reprobe"));
             }
             if (values.containsKey("reentry-only")) {
                 cfg.reentryOnly = Boolean.parseBoolean(values.get("reentry-only"));

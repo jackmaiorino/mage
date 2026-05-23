@@ -386,10 +386,10 @@ v267 ranked terminal slice:
 
 - Run artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v267_ranked_terminal_slice40`.
 - Scope: ranked top 40 `ACTIVATE_ABILITY_OR_SPELL` snapshots from the v262 live-checkpoint corpus, `--ranked-max-per-game 6`, source timeout 90 seconds, alternate timeout 45 seconds, up to 3 alternates.
-- Result: 40 rows completed with 2 `clean_positive`, 35 `clean_negative`, 2 `alternate_error`, and 1 `source_terminal_not_loss`.
-- Correction candidates: 2.
+- Initial result: 40 rows completed with 2 `clean_positive`, 35 `clean_negative`, 2 `alternate_error`, and 1 `source_terminal_not_loss`.
+- Admitted correction candidates: 0 after reproducibility checks.
 
-Correction rows:
+Initial apparent correction rows:
 
 | Rank | Snapshot | Source loss | Winning alternate | Other alternate outcomes |
 | ---: | --- | --- | --- | --- |
@@ -398,6 +398,27 @@ Correction rows:
 
 Interpretation:
 
-- Ranked live-checkpoint mining recovered checkpoint-derived correction evidence from the existing v262 corpus, where the sorted-prefix v265 slice found none.
-- This validates the next harness direction: candidate ranking should be part of the live snapshot mining path before any larger corpus run.
-- This still is not a training launch gate by itself; the correction set is small and should be expanded or cross-checked before generating training data.
+- Ranked selection is still useful, because it moved mining away from adjacent early decisions and surfaced richer branch points than the sorted-prefix v265 slice.
+- The two apparent v267 positives are not admitted evidence. Fresh-process reprobes did not reproduce the terminal-winning sibling outcomes.
+- Training remains blocked until checkpoint-derived positives pass deterministic continuation and confirmation gates.
+
+v268-v280 reproducibility closeout:
+
+| Run | Snapshot | Result |
+| --- | --- | --- |
+| `v268_positive_reprobe_chunk002_ord038` | `chunk_002` `ord038_D092_ACTIVATE_ABILITY_OR_SPELL` | Source reentry and source terminal loss reproduced, but alternates timed out under the 45 second sibling bound. |
+| `v269_positive_reprobe_chunk002_ord038_longtimeout` | same | With 120 second sibling timeout, all three alternates terminalized as losses. The v267 `Cast Overgrown Battlement` terminal win did not reproduce. |
+| `v270_positive_reprobe_chunk003_ord037_longtimeout` | `chunk_003` `ord037_D048_ACTIVATE_ABILITY_OR_SPELL` | With 120 second sibling timeout, all three alternates terminalized as losses. The v267 `{T}: Add {G}.` terminal win did not reproduce. |
+| `v276_autopilot_no_belief_model_reprobe_chunk002_ord038` | `chunk_002` `ord038_D092_ACTIVATE_ABILITY_OR_SPELL` | Deterministic post-branch continuation classified `source_terminal_not_loss`; no sibling branch was admitted. No Py4J gateway warnings occurred. |
+| `v277_autopilot_no_belief_model_reprobe_chunk003_ord037` | `chunk_003` `ord037_D048_ACTIVATE_ABILITY_OR_SPELL` | Deterministic post-branch continuation classified `source_terminal_not_loss`; no sibling branch was admitted. No Py4J gateway warnings occurred. |
+| `v278_ranked_autopilot_smoke5` | ranked top 5 | Found one same-process `clean_positive` with repeat confirmation, but it was not admitted because direct fresh-process reprobe was still required. |
+| `v279_autopilot_positive_reprobe_chunk007_ord016` | `chunk_007` `ord016_D052_ACTIVATE_ABILITY_OR_SPELL` | Fresh-process direct reprobe of the v278 apparent positive classified `source_terminal_not_loss`; the same-process positive was invalidated. |
+| `v280_ranked_autopilot_stable_smoke5` | ranked top 5 after stable-order autopilot | Stable candidate-text/object-id ordering removed the batch-only positive: 3 `source_terminal_not_loss`, 2 `clean_negative`, 0 positives. No Py4J gateway warnings occurred. |
+
+Harness repair:
+
+- `LiveCheckpointBranchMiner` now defaults to deterministic post-branch autopilot. The captured source/sibling decision is still forced from the checkpoint, but later AIRL choices for all branch-controlled RL players use the same deterministic branch policy instead of the normal model path.
+- `ComputerPlayerRL` now lets active branch controllers force target, card, mode, X, optional-use, attack, attack-target, and block choices before model scoring. It also bypasses candidate inference and belief/card-belief prediction when a branch controller is active, preventing unavailable local Python gateway state from contaminating branch outcomes.
+- Apparent terminal-winning sibling rows now require `--confirm-positive-repeats` repeat confirmation before the miner can label them `clean_positive`; otherwise they are classified as `clean_positive_unstable`.
+- Batch runs from `--checkpoint-root` also require an isolated direct reprobe before admission. A batch-discovered positive is downgraded to `clean_positive_needs_isolated_reprobe` unless it is rerun via `--snapshot` in a fresh JVM and passes the same source-loss/sibling-win confirmation gate.
+- The deterministic autopilot now chooses later candidates by stable candidate text plus object-id ordering rather than raw engine list position, which avoids admitting branch results that only appear after prior same-JVM snapshots perturb later candidate order.
