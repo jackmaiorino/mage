@@ -907,3 +907,57 @@ Interpretation:
 - The false-positive mechanism is fixed at the classifier gate: a nonterminal source branch can no longer produce `strong_correction` from a sibling win-rate delta.
 - The exact continuation outcome remains stochastic enough that a single checkpoint rerun may not reproduce the same sibling win from v316, so source-terminal gating must remain the primary evidence guard.
 - The next mining pass should use the repaired labels and continue corpus-density search, with training still blocked until strict checkpoint-derived correction evidence exists.
+
+## v318-v319 Repaired-Label Mining and Confirmation
+
+Artifacts:
+
+- `local-training/local_pbt/live_checkpoint_branch_miner/v318_v315_loss_true_model_value_r1_s8_more`
+- `local-training/local_pbt/live_checkpoint_branch_miner/v319_v318_strict_sequence_confirm_r3_s2`
+
+v318 scope:
+
+- Reused the v315 counted-loss snapshot list.
+- Selected up to 160 ranked snapshots with `ranked_max_per_game=16`.
+- Ran 8 local shards with repaired source-terminal labels, `--tree-max-actions 4`, `--tree-rollouts 1`, sampled true-model continuation, `--tree-timeout-sec 60`, no sequence tree, and no post-branch autopilot.
+
+v318 result:
+
+- All 8 shard exit codes were `0`.
+- Runtime was 2100 seconds.
+- Merged value-tree output has 127 summaries and 411 action rows.
+- Classification counts: `{no_better_action=77, source_not_terminal=41, source_terminal_not_loss=7, dominant_correction=2}`.
+- Strict value candidates: `2`.
+- Value action wins: `16`.
+- Value terminal rate: `0.695864`.
+
+v318 strict candidates:
+
+| Snapshot | Source action | Best action | Source result | Best result | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `chunk_014/game_d0e844fd-bc6c-4a5b-b4c8-449c034046de_ord013_D025_ACTIVATE_ABILITY_OR_SPELL.ser.gz` | `Play Swamp` | `Flashback sacrifice three creatures` | 1/1 terminal loss | 1/1 terminal win | One-rollout `dominant_correction`. |
+| `chunk_008/game_04d8b181-859f-47e3-8a68-53e1b567bc95_ord052_D080_ACTIVATE_ABILITY_OR_SPELL.ser.gz` | `Pass` | `Forestcycling {1}` | 1/1 terminal loss | 1/1 terminal win | One-rollout `dominant_correction`. |
+
+v319 confirmation scope:
+
+- Rechecked the two v318 strict candidates only.
+- Ran 2 local shards with `--tree-rollouts 3`, sequence tree enabled, depth 2, beam 4, `--tree-sequence-rollouts 2`, sampled true-model continuation, `--tree-timeout-sec 90`, and no post-branch autopilot.
+
+v319 result:
+
+- All 2 shard exit codes were `0`.
+- Runtime was 240 seconds.
+- Merged value-tree output has 2 summaries and 7 action rows.
+- Value classification counts: `{no_better_action=2}`.
+- Strict value candidates: `0`.
+- Every root action terminalized and lost: 21 terminal losses over 21 value rollouts, with no value wins and no errors.
+- Sequence output has 36 rows and 9 pair summaries.
+- Sequence classification counts: `{order_diverged_same_value=7, sequence_incomplete=2}`.
+- Sequence rows produced 30 terminal losses, 6 unavailable second steps, no wins, no errors, and no timeouts.
+
+Interpretation:
+
+- The two v318 positives were one-rollout noise, not training evidence.
+- Sequence checks were useful but did not rescue either candidate: completed ordered prefixes generally diverged in state hash while preserving the same terminal-loss value.
+- The next broad mining pass should use repeat value rollouts as the first-stage gate. One-rollout scans are useful for corpus coverage, but they are too noisy to form a correction shortlist without immediate repeat confirmation.
+- Do not train from v318 or v319.
