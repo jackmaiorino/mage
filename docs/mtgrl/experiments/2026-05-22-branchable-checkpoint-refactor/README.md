@@ -1283,3 +1283,45 @@ Interpretation:
 
 - The pipeline can now convert terminal-only branch search evidence into actual AIRL training tensors without replaying from the original game log.
 - This is still a tiny local fit smoke, not an evaluation result. The next unit is to run the same value-target export and serialized TrainingData bridge on the v329 Zaratan scale artifact, then train a candidate model from the larger dataset before launching a policy evaluation sweep.
+
+## v331 v329 Value Target Export
+
+Implementation:
+
+- Added `--snapshot-path-prefix-from` / `--snapshot-path-prefix-to` to `TerminalLineValueTargetTrainingDataExporter`.
+- This lets locally downloaded Zaratan snapshot corpora be reentered without rewriting value-target CSV artifacts by hand.
+
+Artifact:
+
+- Value target export: `local-training/local_pbt/terminal_line_value_targets/v331_v329_value_targets_softpass`
+- Diagnostic export with suspect pass-best rows visible: `local-training/local_pbt/terminal_line_value_targets/v331_v329_value_targets_softpass_diagnostic`
+
+Validation result on the v329 Zaratan common-seed scale artifact:
+
+- Value-target CSV:
+  - checkpoint groups: 30
+  - trainable examples: 2
+  - rejected groups: 28
+  - suspect pass-best exclusions: 8
+  - low-delta rejections: 14
+- TrainingData export:
+  - exported records: 2 / 2
+  - both rows reentered with matching candidate hash and state hash
+  - both rows captured `TrainingData`
+  - both soft targets normalized to sum 1.0
+- Imported score probe:
+  - examples scored: 2
+  - strict top1: 1 / 2
+  - target-set top1: 2 / 2
+  - average target probability: 0.407844
+- BC-direct fit-score smoke:
+  - train passes: 16
+  - strict top1 stayed 1 / 2
+  - target-set top1 stayed 2 / 2
+  - average target-set mass improved from 0.441548 to 0.507690
+
+Interpretation:
+
+- The local replay bridge for HPC snapshot corpora is validated.
+- v329 is too sparse for a meaningful model/evaluation sweep: only two clean trainable value-target examples survived the current admission gate.
+- The diagnostic suspect pass-best rows mostly remain low-value or low-delta pass-over-setup cases, so the correct next unit is more terminal-line mining breadth/depth, not training from suspect pass-best examples.

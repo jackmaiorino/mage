@@ -95,7 +95,7 @@ public final class TerminalLineValueTargetTrainingDataExporter {
     }
 
     private static ExportResult exportRow(CsvRow row, Config cfg) throws Exception {
-        Path snapshotPath = Paths.get(row.get("snapshot_path"));
+        Path snapshotPath = cfg.resolveSnapshotPath(row.get("snapshot_path"));
         LiveCheckpointRecorder.Snapshot snapshot = loadSnapshot(snapshotPath);
         float[] target = parseTargetDistribution(row.get("target_distribution"));
         List<Integer> bestIndices = parseIndices(row.get("best_indices"));
@@ -598,6 +598,8 @@ public final class TerminalLineValueTargetTrainingDataExporter {
         private Path valueTargets;
         private Path outFile;
         private Path summaryFile;
+        private String snapshotPathPrefixFrom = "";
+        private String snapshotPathPrefixTo = "";
         private int timeoutSec = 30;
         private int maxRecords = 0;
         private int expectRecords = -1;
@@ -614,6 +616,15 @@ public final class TerminalLineValueTargetTrainingDataExporter {
             if (values.containsKey("summary")) {
                 cfg.summaryFile = Paths.get(values.get("summary"));
             }
+            if (values.containsKey("snapshot-path-prefix-from")) {
+                cfg.snapshotPathPrefixFrom = values.get("snapshot-path-prefix-from");
+            }
+            if (values.containsKey("snapshot-path-prefix-to")) {
+                cfg.snapshotPathPrefixTo = values.get("snapshot-path-prefix-to");
+            }
+            if (cfg.snapshotPathPrefixFrom.isEmpty() != cfg.snapshotPathPrefixTo.isEmpty()) {
+                throw new IllegalArgumentException("--snapshot-path-prefix-from and --snapshot-path-prefix-to must be provided together");
+            }
             if (values.containsKey("timeout-sec")) {
                 cfg.timeoutSec = Math.max(1, Integer.parseInt(values.get("timeout-sec")));
             }
@@ -624,6 +635,37 @@ public final class TerminalLineValueTargetTrainingDataExporter {
                 cfg.expectRecords = Integer.parseInt(values.get("expect-records"));
             }
             return cfg;
+        }
+
+        private Path resolveSnapshotPath(String rawPath) {
+            String pathText = rawPath == null ? "" : rawPath.trim();
+            if (!snapshotPathPrefixFrom.isEmpty()) {
+                String normalizedPath = normalizeSnapshotPrefix(pathText);
+                String normalizedFrom = normalizeSnapshotPrefix(snapshotPathPrefixFrom);
+                if (normalizedPath.equals(normalizedFrom) || normalizedPath.startsWith(normalizedFrom + "/")) {
+                    String suffix = normalizedPath.length() == normalizedFrom.length()
+                            ? ""
+                            : normalizedPath.substring(normalizedFrom.length() + 1);
+                    Path path = Paths.get(snapshotPathPrefixTo);
+                    if (!suffix.isEmpty()) {
+                        for (String part : suffix.split("/")) {
+                            if (!part.isEmpty()) {
+                                path = path.resolve(part);
+                            }
+                        }
+                    }
+                    return path;
+                }
+            }
+            return Paths.get(pathText);
+        }
+
+        private static String normalizeSnapshotPrefix(String text) {
+            String normalized = text == null ? "" : text.trim().replace('\\', '/');
+            while (normalized.endsWith("/") && normalized.length() > 1) {
+                normalized = normalized.substring(0, normalized.length() - 1);
+            }
+            return normalized;
         }
 
         private static Map<String, String> parseArgs(String[] args) {
