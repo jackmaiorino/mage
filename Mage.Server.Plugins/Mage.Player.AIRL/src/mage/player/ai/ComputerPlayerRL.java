@@ -3655,13 +3655,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     if (mctsEvalOverride) {
                         GameLogger gl = resolveGameLogger();
                         if (gl != null && gl.isEnabled()) {
-                            gl.log(String.format("[MCTS] backend=%s arch=%s dets/iters=%d visits=%s values=%s picked=%d wallMs=%d",
+                            gl.log(String.format("[MCTS] backend=%s arch=%s dets/iters=%d visits=%s values=%s picked=%d wallMs=%d candidates=%s",
                                     ISMCTS_RANDOM_ROLLOUT_ROOT ? "belief-rollout"
                                             : (MULTI_PLY_MCTS ? "multiply" : "flat"),
                                     searchArch, searchDets,
                                     java.util.Arrays.toString(aggregateVisits),
                                     formatFloats(aggregateValues),
-                                    bestActionIndex, searchWallMs));
+                                    bestActionIndex, searchWallMs,
+                                    formatMctsCandidateLabels(candidates, candidateCount, game, source)));
                         }
                         this.lastActionProbs = actionProbs.clone();
                         this.lastValueScore = valueScore;
@@ -4434,6 +4435,18 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
         }
         return false;
+    }
+
+    private <T> String formatMctsCandidateLabels(List<T> candidates, int candidateCount, Game game, Ability source) {
+        if (candidates == null || candidates.isEmpty() || candidateCount <= 0) {
+            return "[]";
+        }
+        int n = Math.min(candidateCount, candidates.size());
+        List<String> out = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            out.add("[" + i + "] " + mctsCandidateSignature(candidates.get(i), game, source));
+        }
+        return out.toString();
     }
 
     private String mctsCandidateSignature(Object candidate, Game game, Ability source) {

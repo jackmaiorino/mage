@@ -1492,3 +1492,39 @@ Interpretation:
 
 - Simple confidence gating reduces some live perturbation but also gives up offline sibling-ranking lift. It did not improve the Affinity gate.
 - This confirms that the next step should not be more direct Q logit blending. The terminal-line signal needs a decision-local search/verification consumer or richer value data, not another global score-shaping variant.
+
+## v342-v343 Playtime Search Diagnostic
+
+Setup:
+
+- Used the existing eval-time `ISMCTS_ENABLE` path in `ComputerPlayerRL` with `BeliefISMCTS.searchRoot`.
+- Q blending was disabled (`CANDIDATE_Q_BLEND=0.0`) so the test isolated playtime root search.
+- Root-search settings were intentionally small:
+  - `ISMCTS_RANDOM_ROLLOUT_ROOT=1`
+  - `ISMCTS_ROOT_DETERMINIZATIONS=1`
+  - `ISMCTS_ROOT_ROLLOUTS_PER_ACTION=1`
+  - `MCTS_ROOT_TOP_K=4`
+  - `MCTS_SELECTIVE_ENABLE=1`
+  - Spy-relevant selective keywords.
+
+Results:
+
+- First v342 attempt without `run_cp7_eval_sweep.py --mcts` did not activate MCTS:
+  - logged `ismctsEnabled=false`
+  - `mcts_activations=0`
+  - root cause: the eval harness overwrites `ISMCTS_ENABLE` unless launched with `--mcts`.
+- Corrected v342 playtime-search diagnostic:
+  - artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v342_playtime_belief_rollout_mcts_affinity_g4_logs_gpu`
+  - result vs Grixis Affinity skill 7: 2 / 4.
+  - MCTS activations: 43 across 4 games.
+  - gate stats showed selective filtering was active: many candidate decisions were skipped as `not_tactical`, while Spy-relevant roots did activate.
+- v343 one-game logging smoke:
+  - artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v343_mcts_log_labels_affinity_g1_logs_gpu`
+  - result: 1 / 1, with 18 MCTS activations.
+  - Added candidate labels to `[MCTS]` game-log lines so visits/values/picked indices can be audited directly.
+
+Interpretation:
+
+- Playtime branching exists and can fire from the live evaluator when the harness `--mcts` switch is used.
+- The tiny random-rollout root setup is too noisy to treat as a promotion signal. Many root values are single-sample `-1/0/1`, and timeout/top-k effects can leave useful candidates unvisited.
+- This path is still the right shape for a decision-local consumer, but it needs a cleaner branch budget/admission rule and candidate-labelled diagnostics before a larger sweep.
