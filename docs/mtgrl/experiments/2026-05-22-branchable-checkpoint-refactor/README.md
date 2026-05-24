@@ -1373,3 +1373,31 @@ Interpretation:
 - The v334 1 / 16 result should be treated as a clean but pessimistic unlogged eval, not the sole policy conclusion. Replay-logged v336 is the better comparator for this lane.
 - Action-health diagnostics on v336 found no pass-over-land issue. The notable deltas versus the v315 logged baseline were more mulligans/London bottoms, much higher mana-ability churn, more Quirion Ranger untap usage, and fewer Spy/Dread Return executions per game.
 - The next unit should train a safer low-weight or mixed replay candidate before any HPC promotion sweep. The likely issue is that direct BC/value import on sparse, off-policy terminal-line roots perturbs general play and mulligan/trunk behavior while only improving the offline terminal-line target set.
+
+## v337 Low-Weight Terminal-Line Import
+
+Artifact:
+
+- Candidate profile: `Pauper-Spy-Combo-Value-TerminalLine-v337-LowWeight`
+- Import output: `local-training/local_pbt/terminal_line_value_targets/v332_v315_full_common_seed_r64_s12_softpass/import_train_candidate_v337_lowweight`
+- Score probe: `local-training/local_pbt/terminal_line_value_targets/v332_v315_full_common_seed_r64_s12_softpass/candidate_v337_lowweight_score_probe`
+- Eval: `local-training/local_pbt/cp7_eval_sweeps/20260524_v337_lowweight_terminal_line_candidate_affinity_g16_logs_gpu`
+
+Setup:
+
+- Started from the current `Pauper-Spy-Combo-Value` baseline model.
+- Imported the same 166 v332 terminal-line value-target examples.
+- Used `BC_DIRECT_LOSS_COEF=0.20`, `train-epochs=2`, `candidate-permutations=1`.
+
+Result:
+
+- Import training passes: 332.
+- Score probe: strict top1 43 / 166, target-set top1 166 / 166, average target probability 0.248136, average rank 2.7892.
+- Logged GPU eval vs Grixis Affinity skill 7: 3 / 16, win rate 0.1875.
+- Action-health scan again found no pass-over-land issue.
+
+Interpretation:
+
+- Lowering the direct-loss coefficient reduced offline overfit relative to v332 while still improving over baseline on the terminal-line target set.
+- It did not preserve live play. The current terminal-line direct-import recipe should not be promoted or scaled to HPC.
+- The next training direction should avoid trunk-wide direct BC import as the first use of terminal-line evidence. Prefer either a candidate-value/ranking head, a mixed replay anchor with baseline-policy retention, or a playtime search consumer that uses branch values without immediately distorting the policy.
