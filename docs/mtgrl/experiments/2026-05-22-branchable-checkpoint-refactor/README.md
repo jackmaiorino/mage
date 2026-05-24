@@ -1678,11 +1678,26 @@ v351 broader disk-light metric sweep:
   - Jund Wildfire: 2 / 8
   - Mono Red Rally: 3 / 8
 
+v352 baseline-matched comparator:
+
+- Artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v352_baseline_broader_active_pool_g8_metric_gpu`
+- Settings: baseline `Pauper-Spy-Combo-Value`, same v351 opponent filter, skill, no-MCTS setting, replay seed base `4242`, one-game job chunking, no live checkpoints, and DB cleanup after each chunk.
+- Results:
+  - Overall: 14 / 24
+  - Spy mirror: 5 / 8
+  - Jund Wildfire: 6 / 8
+  - Mono Red Rally: 3 / 8
+- Matched-slice delta for v350 direct Q blend versus baseline:
+  - Overall: -3 wins
+  - Spy mirror: +1 win
+  - Jund Wildfire: -4 wins
+  - Mono Red Rally: 0 wins
+
 Cleanup / archival:
 
 - Preserved CSV summaries, manifests, logs, checkpoints, and value-target artifacts.
 - Removed generated DB and model-snapshot copies from the failed partial seed8888 run.
-- Removed reconstructable generated DB and model-snapshot copies from recent v347/v350/v351 eval runs after summaries/logs/checkpoints were preserved.
+- Removed reconstructable generated DB and model-snapshot copies from recent v347/v350/v351/v352 eval runs after summaries/logs/checkpoints were preserved.
 - Removed stale generated isolated CLI workspaces from `D:\codex-mage-cli-workspaces`.
 - D: free space recovered from 0 bytes to about 5 GB after cleanup.
 
@@ -1690,7 +1705,6 @@ Interpretation:
 
 - The signed-target fix is important. Unsigned Q import is a blocker because it teaches "all observed positive entries are good" and collapses Q discrimination.
 - Signed local sibling advantages now produce a measurable offline ranking signal and a stronger local live result than the earlier q-only variants.
-- The current evidence is promising but not yet a promotion gate: v350 achieved 4 / 8 and then 4 / 16 in independent Grixis checks, plus 11 / 24 over the other active-pool opponents. This supports continued local iteration and a broader baseline-matched evaluation sweep, not HPC-scale training yet.
-- The next unit should either:
-  - run a broader light metric sweep for v350 across more Pauper opponents, or
-  - mine the v350 live checkpoints from the 4 / 8 run and repeat the on-policy target/training loop with disk-light settings.
+- The baseline-matched v352 sweep rejects v350 direct Q blending as a promotion candidate: v350's broader 11 / 24 is below the same-slice baseline 14 / 24, with the main regression concentrated against Jund Wildfire.
+- The outcome-only branch targets remain thesis-aligned evidence for a value/ranking teacher, but the live consumer should not be a global `CANDIDATE_Q_BLEND=1.0` policy perturbation.
+- The next unit should diagnose/replace the consumer rather than scale v350: either inspect a small logged Jund Wildfire matched slice to identify the direct-blend failure mode, or implement a decision-local/gated consumer that only consults branch value where the checkpoint-derived target distribution is applicable.
