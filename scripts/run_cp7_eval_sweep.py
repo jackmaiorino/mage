@@ -54,6 +54,22 @@ PROFILES_ROOT = (
     / "rl"
     / "profiles"
 )
+DETERMINISTIC_EVAL_ENV = {
+    "GPU_SERVICE_NUM_CHANNELS": "1",
+    "PY_BATCH_MAX_SIZE": "1",
+    "PY_BATCH_TIMEOUT_MS": "1",
+    "SCORE_WORKER_THREADS": "1",
+    "GPU_SERVICE_MODEL_RELOAD_EVERY_MS": "0",
+    "PY_GLOBAL_SEED": "5151",
+    "RL_BASE_SEED": "5151",
+    "PYTHONHASHSEED": "0",
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "TORCH_DETERMINISTIC_EVAL": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+}
 
 
 def maven_executable() -> str:
@@ -226,6 +242,7 @@ def start_gpu_service(
     metrics_port: int,
     log_path: Path,
     train_env: Dict[str, str],
+    env_overrides: Optional[Dict[str, str]] = None,
 ) -> subprocess.Popen:
     env = os.environ.copy()
     for key, value in train_env.items():
@@ -249,6 +266,8 @@ def start_gpu_service(
             "MULLIGAN_DEVICE": env.get("MULLIGAN_DEVICE", "cpu"),
         }
     )
+    if env_overrides:
+        env.update({str(key): str(value) for key, value in env_overrides.items()})
     log_path.parent.mkdir(parents=True, exist_ok=True)
     log_handle = log_path.open("w", encoding="utf-8", errors="replace")
     proc = subprocess.Popen(
@@ -315,6 +334,7 @@ def job_env(
     live_checkpoints: bool,
     live_checkpoint_max_per_game: int,
     live_checkpoint_action_types: str,
+    env_overrides: Optional[Dict[str, str]] = None,
 ) -> Dict[str, str]:
     env = base_env.copy()
     train_env = entry.get("train_env") or {}
@@ -365,6 +385,8 @@ def job_env(
     )
     if mcts_enabled:
         env.update(mcts_env)
+    if env_overrides:
+        env.update({str(key): str(value) for key, value in env_overrides.items()})
     return env
 
 
@@ -700,8 +722,21 @@ def main() -> int:
         default=1,
         help="Run this many eval jobs serially before launching the parallel pool. This warms the shared GPU service.",
     )
+    parser.add_argument(
+        "--deterministic-eval",
+        action="store_true",
+        help=(
+            "Force single-job, single-channel, batch-size-1 inference for replay-comparable "
+            "gate runs. This is slower but reduces shared GPU service ordering noise."
+        ),
+    )
     args = parser.parse_args()
     selected_chunk_indices = parse_chunk_indices(args.chunk_indices)
+    deterministic_env = dict(DETERMINISTIC_EVAL_ENV) if args.deterministic_eval else {}
+    if args.deterministic_eval:
+        args.parallel = 1
+        args.ai_threads = 1
+        args.serial_warmup_jobs = max(args.serial_warmup_jobs, 1)
 
     registry = resolve_repo_path(args.registry)
     entries = filter_entries(load_active_entries(registry), args.profiles)
@@ -749,6 +784,8 @@ def main() -> int:
         "parallel": args.parallel,
         "serial_warmup_jobs": args.serial_warmup_jobs,
         "ai_threads": args.ai_threads,
+        "deterministic_eval": bool(args.deterministic_eval),
+        "deterministic_eval_env": deterministic_env,
         "profiles_filter": args.profiles,
         "opponents_filter": args.opponents,
         "split_agent_decks": bool(args.split_agent_decks),
@@ -776,6 +813,7 @@ def main() -> int:
             args.gpu_metrics_port,
             logs_dir / "gpu_service.log",
             gpu_service_train_env,
+            deterministic_env,
         )
 
     rows: List[dict] = []
@@ -902,6 +940,7 @@ def main() -> int:
                                     args.live_checkpoints,
                                     args.live_checkpoint_max_per_game,
                                     args.live_checkpoint_action_types,
+                                    deterministic_env,
                                 ),
                             }
                         )

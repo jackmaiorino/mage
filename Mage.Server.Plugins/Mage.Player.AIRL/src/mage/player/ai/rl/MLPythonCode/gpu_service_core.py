@@ -7,6 +7,10 @@ from typing import Dict, List, Optional
 _ENV_LOCK = threading.Lock()
 
 
+def _env_truthy(name: str) -> bool:
+    return os.getenv(name, "").strip().lower() in ("1", "true", "yes", "on")
+
+
 def _header_env(headers: Dict[str, str]) -> Dict[str, str]:
     env = {}
     for key, value in headers.items():
@@ -66,7 +70,7 @@ class ProfileContext:
             self.entry = PythonEntryPoint()
         # Create a dedicated CUDA stream for inference so it can overlap with
         # training on the default stream.  Learner keeps the default stream.
-        if self.role == "inference":
+        if self.role == "inference" and not _env_truthy("TORCH_DETERMINISTIC_EVAL"):
             try:
                 import torch
                 if torch.cuda.is_available():

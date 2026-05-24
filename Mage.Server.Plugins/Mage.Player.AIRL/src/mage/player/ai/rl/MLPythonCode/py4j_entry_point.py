@@ -72,7 +72,38 @@ def _maybe_set_cuda_memory_fraction():
             pass
 
 
+def _env_truthy(name):
+    return os.getenv(name, "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def _maybe_configure_deterministic_eval():
+    if not _env_truthy("TORCH_DETERMINISTIC_EVAL"):
+        return
+    try:
+        if hasattr(torch, "use_deterministic_algorithms"):
+            try:
+                torch.use_deterministic_algorithms(True, warn_only=True)
+            except TypeError:
+                torch.use_deterministic_algorithms(True)
+        try:
+            torch.backends.cudnn.benchmark = False
+            torch.backends.cudnn.deterministic = True
+            torch.backends.cudnn.allow_tf32 = False
+        except Exception:
+            pass
+        try:
+            torch.backends.cuda.matmul.allow_tf32 = False
+        except Exception:
+            pass
+        logger.info(LogCategory.SYSTEM_INIT,
+                    "Enabled deterministic eval torch settings")
+    except Exception as e:
+        logger.warning(LogCategory.SYSTEM_INIT,
+                       "Failed to configure deterministic eval torch settings: %s", str(e))
+
+
 _maybe_set_cuda_memory_fraction()
+_maybe_configure_deterministic_eval()
 
 # ------------------------------
 # Runtime tuning via environment
