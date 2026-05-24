@@ -1186,3 +1186,56 @@ Interpretation:
 - Terminal-line search is finding wins and combo-pattern wins, but one-sample hard labels are not stable enough for training.
 - Common continuation seeds make the comparison fairer and reveal that many root choices share the same downstream winning continuation. This supports treating the miner as a value-estimation teacher first, not as a hard correction-label generator yet.
 - The next scale unit should mine many more checkpoints with common continuation seeds, aggregate paired value estimates, and train only from labels that survive repeat gates or use low-weight pairwise/value targets rather than hard corrections.
+
+## v329 Zaratan Common-Seed Scale Smoke
+
+Artifact:
+
+- Remote run: `/home/jmaior/scratch.msml603/jmaior/mage/local-training/hpc/terminal_line_common_seed/v329_terminal_line_common_seed_r32_s8`
+- Slurm job: `19379200`
+- Runtime bundle: `rl-runtime-86711ab584-20260523-234430.tar.gz`
+
+Scope:
+
+- 48-snapshot v323 payload.
+- 8 Java shards.
+- `--line-attempts 32`
+- `--line-max-root-actions 8`
+- `--line-stop-on-win false`
+- `--line-common-continuation-seeds true`
+- Post-run compact summary plus paired-label export.
+
+Result:
+
+- Slurm completed successfully in 4 minutes 29 seconds.
+- All eight shards exited `0`.
+- Selected snapshots: 30.
+- Merged terminal-line rows: 960.
+- Outcome counts: `{terminal_loss=747, terminal_win=213}`.
+- Compact summary:
+  - terminal rows: 960 / 960
+  - win rate: 0.221875
+  - Spy rows: 772
+  - Spy wins: 102
+  - Dread Return rows: 696
+  - Lotleth target rows: 370
+  - full combo-pattern wins: 56
+  - max combo score: 11
+- Paired-label export:
+  - checkpoint groups: 30
+  - admitted moderate labels: 3
+  - rejected groups: 27
+
+Admitted paired moderate labels:
+
+| Target | Source | Notes |
+| --- | --- | --- |
+| `Cast Tinder Wall` | `Cast Saruli Caretaker` | moderate paired terminal delta |
+| `Forestcycling {1}` | `Cast Generous Ent` | moderate paired terminal delta |
+| `Cast Quirion Ranger` | `Cast Roost Seek` | moderate paired terminal delta |
+
+Interpretation:
+
+- The common-seed terminal-line miner scales cleanly on Zaratan and produces many terminal wins without combo-specific rewards.
+- Even at 960 terminal rows, strict hard-correction labels remain sparse; the useful signal is currently moderate paired value deltas.
+- Next unit: build a value-target dataset/export that preserves paired win-rate deltas and confidence weights instead of forcing every surviving comparison into a hard correction target.
