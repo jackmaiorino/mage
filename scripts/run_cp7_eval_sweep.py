@@ -22,7 +22,7 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Dict, Iterable, List, Optional, Set, Tuple
 from urllib.request import urlopen
 
 
@@ -373,6 +373,30 @@ def stable_seed_offset(key: str) -> int:
     return int(digest[:12], 16) % 1_000_000_000
 
 
+def parse_chunk_indices(raw: str) -> Optional[Set[int]]:
+    text = (raw or "").strip()
+    if not text:
+        return None
+    selected: Set[int] = set()
+    for part in text.replace(";", ",").split(","):
+        token = part.strip()
+        if not token:
+            continue
+        if "-" in token:
+            start_s, end_s = token.split("-", 1)
+            start = int(start_s)
+            end = int(end_s)
+            if start <= 0 or end <= 0 or end < start:
+                raise ValueError(f"Invalid chunk range: {token}")
+            selected.update(range(start, end + 1))
+        else:
+            value = int(token)
+            if value <= 0:
+                raise ValueError(f"Invalid chunk index: {token}")
+            selected.add(value)
+    return selected
+
+
 def prepare_db_copy(slot_dir: Path) -> Path:
     slot_dir.mkdir(parents=True, exist_ok=True)
     override = os.environ.get("CP7_EVAL_DB_SOURCE", "").strip()
@@ -594,6 +618,15 @@ def main() -> int:
         help="Directory that receives <run-id>; defaults to local-training/local_pbt/cp7_eval_sweeps.",
     )
     parser.add_argument("--limit-matchups", type=int, default=0)
+    parser.add_argument(
+        "--chunk-indices",
+        default="",
+        help=(
+            "Optional comma-separated 1-based chunk indices or ranges to run after "
+            "chunking, e.g. '3,7,8,11,14'. Chunk numbers and replay seeds remain "
+            "the same as the full sweep."
+        ),
+    )
     parser.add_argument("--profiles", default="")
     parser.add_argument("--opponents", default="")
     parser.add_argument("--split-agent-decks", action="store_true")
@@ -668,6 +701,7 @@ def main() -> int:
         help="Run this many eval jobs serially before launching the parallel pool. This warms the shared GPU service.",
     )
     args = parser.parse_args()
+    selected_chunk_indices = parse_chunk_indices(args.chunk_indices)
 
     registry = resolve_repo_path(args.registry)
     entries = filter_entries(load_active_entries(registry), args.profiles)
@@ -710,6 +744,7 @@ def main() -> int:
         "registry": str(registry),
         "games_per_matchup": args.games_per_matchup,
         "games_per_job": args.games_per_job,
+        "chunk_indices_filter": args.chunk_indices,
         "skill": args.skill,
         "parallel": args.parallel,
         "serial_warmup_jobs": args.serial_warmup_jobs,
@@ -808,10 +843,20 @@ def main() -> int:
                     chunk_index = 1
                     while remaining > 0:
                         chunk_games = min(games_per_job, remaining)
-                        key = base_key if chunk_count == 1 else f"{base_key}__chunk_{chunk_index:03d}"
+                        current_chunk_index = chunk_index
+                        remaining -= chunk_games
+                        chunk_index += 1
+                        if (
+                            selected_chunk_indices is not None
+                            and current_chunk_index not in selected_chunk_indices
+                        ):
+                            continue
+                        key = base_key if chunk_count == 1 else (
+                            f"{base_key}__chunk_{current_chunk_index:03d}"
+                        )
                         if args.seed_key_mode == "matchup":
                             seed_key = matchup_seed_base_key if chunk_count == 1 else (
-                                f"{matchup_seed_base_key}__chunk_{chunk_index:03d}"
+                                f"{matchup_seed_base_key}__chunk_{current_chunk_index:03d}"
                             )
                         else:
                             seed_key = key
@@ -833,7 +878,7 @@ def main() -> int:
                                 "mcts_enabled": args.mcts,
                                 "maven_offline": args.maven_offline,
                                 "compile_exec": args.compile_exec,
-                                "chunk_index": chunk_index,
+                                "chunk_index": current_chunk_index,
                                 "chunk_count": chunk_count,
                                 "env": job_env(
                                     base_env,
@@ -860,10 +905,10 @@ def main() -> int:
                                 ),
                             }
                         )
-                        remaining -= chunk_games
-                        chunk_index += 1
         if args.limit_matchups > 0:
             jobs = jobs[: args.limit_matchups]
+        if not jobs:
+            raise RuntimeError("No eval jobs selected; check --profiles, --opponents, and --chunk-indices.")
 
         print(
             f"CP7 eval sweep {args.run_id}: {len(jobs)} jobs, "
