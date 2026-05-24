@@ -1060,3 +1060,47 @@ Interpretation:
 - The true combo/win line is findable from a real branchable checkpoint with terminal-only reward; no combo-specific reward was needed for this proof.
 - This is not yet correction-quality evidence because it starts from a late checkpoint in a game already known to be winnable.
 - The repeat reproduced win/loss outcomes and root choices, but the winning final state hash was not identical across runs. Treat v322 as a findability proof and keep exact deterministic-line stability as a separate engineering gate before using full traces as supervised training targets.
+
+## v323 Local Terminal-Line Batch
+
+Implementation:
+
+- Extended `scripts/mtgrl/run_value_tree_shards.py` with `--mode terminal-line` so checkpoint terminal-line search can run across local JVM shards and merge `terminal_line_search.csv`.
+- Added `scripts/mtgrl/summarize_terminal_line_search.py`, which converts raw `line_trace` fields into compact per-attempt markers: terminal outcome, root action, decision count, Spy/Dread Return/Lotleth markers, pass/mana/cast counts, and key event steps.
+
+Artifact:
+
+- `local-training/local_pbt/live_checkpoint_branch_miner/v323_winning_late_mid_terminal_line_r8_s4`
+
+Scope:
+
+- 48 late and midgame snapshots from the six v315 counted winning chunks.
+- 4 local shards.
+- `--mode terminal-line`
+- `--line-attempts 8`
+- `--line-max-root-actions 8`
+- `--line-timeout-sec 20`
+- `--tree-continuation-policy explore`
+- `--line-stop-on-win true`
+- `--line-stop-on-win-all false`
+
+Result:
+
+- All four shards exited `0`.
+- Runtime was 70 seconds.
+- Merged `terminal_line_search.csv` has 253 attempts.
+- Outcome counts: `{terminal_win=18, terminal_loss=134, not_terminal=action_type_mismatch=96, error=checkpoint_no_reentry_decision=5}`.
+- Compact summary counts:
+  - terminal rows: 152 / 253
+  - valid terminal wins: 18
+  - Spy rows: 137
+  - Spy wins: 13
+  - Dread Return rows: 131
+  - Lotleth target rows: 53
+  - full combo-pattern wins: 6
+
+Interpretation:
+
+- The local search now repeatedly finds terminal wins and multiple full combo-pattern wins from real branchable checkpoints.
+- The many `action_type_mismatch` rows are mostly a checkpoint/reentry quality signal, especially from target-selection surfaces. The next larger run should favor `ACTIVATE_ABILITY_OR_SPELL` checkpoints first and treat target-selection roots as a separate repair lane.
+- This is enough for an artifact-only HPC smoke: scale terminal-line mining and compact summaries, but do not start training yet.
