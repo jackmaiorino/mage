@@ -1239,3 +1239,47 @@ Interpretation:
 - The common-seed terminal-line miner scales cleanly on Zaratan and produces many terminal wins without combo-specific rewards.
 - Even at 960 terminal rows, strict hard-correction labels remain sparse; the useful signal is currently moderate paired value deltas.
 - Next unit: build a value-target dataset/export that preserves paired win-rate deltas and confidence weights instead of forcing every surviving comparison into a hard correction target.
+
+## v330 Terminal-Line Value Target Bridge
+
+Implementation:
+
+- Added `scripts/mtgrl/export_terminal_line_value_targets.py`.
+- The exporter groups terminal-line rows by checkpoint, prefers paired common-continuation win rates when available, and emits soft candidate distributions plus confidence weights.
+- Pass-best rows are not treated as universally invalid. They stay visible through `quality_flags`; likely phase-artifact rows such as low-evidence `Pass` over setup actions are excluded from training manifests by default as `suspect_pass_best`, with `--include-suspect-pass-best` available for diagnostics.
+- Added `TerminalLineValueTargetTrainingDataExporter`, which reloads the checkpoint snapshot, reenters the root decision, captures the normal AIRL candidate tensors, attaches the soft value target as `mctsVisitTargets`, and writes serialized `TrainingData`.
+- Added a branch-controller training-data capture hook so simulation checkpoint copies can export tensors without enabling normal simulation training.
+
+Local validation artifact:
+
+- Value target export: `local-training/local_pbt/terminal_line_value_targets/v330_v328_value_targets_softpass`
+
+Validation result on the v328 common-seed repeat artifact:
+
+- Value-target CSV:
+  - checkpoint groups: 9
+  - trainable examples: 5
+  - rejected groups: 4
+  - suspect pass-best exclusions: 1
+  - normal low-delta rejections: 3
+- TrainingData export:
+  - exported records: 5 / 5
+  - all five rows reentered with matching candidate hash and state hash
+  - all five rows captured `TrainingData`
+  - all five soft targets normalized to sum 1.0
+- Imported score probe:
+  - examples scored: 5
+  - top1: 1 / 5
+  - target-set top1: 5 / 5
+  - average target probability: 0.171492
+- BC-direct fit-score smoke:
+  - train passes: 40
+  - before strict top1: 0 / 5
+  - after strict top1: 4 / 5
+  - before average target probability: 0.152297
+  - after average target probability: 0.286678
+
+Interpretation:
+
+- The pipeline can now convert terminal-only branch search evidence into actual AIRL training tensors without replaying from the original game log.
+- This is still a tiny local fit smoke, not an evaluation result. The next unit is to run the same value-target export and serialized TrainingData bridge on the v329 Zaratan scale artifact, then train a candidate model from the larger dataset before launching a policy evaluation sweep.

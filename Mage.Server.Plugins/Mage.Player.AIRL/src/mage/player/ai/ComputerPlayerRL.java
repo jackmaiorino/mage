@@ -3895,9 +3895,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             );
         }
 
-        // Record training data for decisions (store full action + joint log-prob)
-        if (trainingEnabled && !selectedIndices.isEmpty()) {
-            if (game != null && game.isSimulation()) {
+        // Record or externally capture decision tensors (store full action + joint log-prob).
+        EngineDecisionBranchController captureController = branchController;
+        boolean branchTrainingCapture = captureController != null && captureController.shouldCaptureTrainingData();
+        if ((trainingEnabled || branchTrainingCapture) && !selectedIndices.isEmpty()) {
+            boolean simulationGame = game != null && game.isSimulation();
+            if (simulationGame && !branchTrainingCapture) {
                 // Never record training from simulation copies (alt-cost testing, playable checks, etc).
                 SIMULATION_TRAINING_SKIPPED.incrementAndGet();
                 return selectedIndices;
@@ -3926,19 +3929,26 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             if (mctsVisitTargets != null) {
                 td.setMctsVisitTargets(mctsVisitTargets);
             }
-            recordTrainingData(td, game);
+            if (branchTrainingCapture) {
+                captureController.onTrainingData(td);
+            }
+            if (trainingEnabled && !simulationGame) {
+                recordTrainingData(td, game);
 
-            // Track decision count by head
-            decisionCountsByHead.put(actionType, decisionCountsByHead.getOrDefault(actionType, 0) + 1);
+                // Track decision count by head
+                decisionCountsByHead.put(actionType, decisionCountsByHead.getOrDefault(actionType, 0) + 1);
 
-            if (actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN) {
-                mulliganTraceJsonl(
-                        "bottom_td_recorded",
-                        "\"method\":\"genericChoose\","
-                        + "\"actionType\":\"" + actionType.name() + "\","
-                        + "\"candidateCount\":" + candidateCount + ","
-                        + "\"chosenCount\":" + chosenCount
-                );
+                if (actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN) {
+                    mulliganTraceJsonl(
+                            "bottom_td_recorded",
+                            "\"method\":\"genericChoose\","
+                            + "\"actionType\":\"" + actionType.name() + "\","
+                            + "\"candidateCount\":" + candidateCount + ","
+                            + "\"chosenCount\":" + chosenCount
+                    );
+                }
+            } else if (trainingEnabled && simulationGame) {
+                SIMULATION_TRAINING_SKIPPED.incrementAndGet();
             }
         }
 

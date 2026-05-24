@@ -22,6 +22,13 @@ public interface EngineDecisionBranchController {
         return true;
     }
 
+    default boolean shouldCaptureTrainingData() {
+        return false;
+    }
+
+    default void onTrainingData(StateSequenceBuilder.TrainingData trainingData) {
+    }
+
     <T> Choice onDecision(DecisionContext<T> context);
 
     final class DecisionContext<T> {
