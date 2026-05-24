@@ -253,7 +253,7 @@ public final class LiveCheckpointBranchMiner {
                         isSource,
                         "terminal_line_" + processed + "_" + attempt,
                         cfg.lineTimeoutSec,
-                        true,
+                        cfg.postBranchAutopilot,
                         cfg.treeContinuationPolicy,
                         seed);
                 TerminalLineRow row = TerminalLineRow.fromSnapshot(
@@ -1270,6 +1270,7 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- line_stop_on_win: ").append(cfg.lineStopOnWin).append("\n");
         sb.append("- line_stop_on_win_all: ").append(cfg.lineStopOnWinAll).append("\n");
         sb.append("- line_common_continuation_seeds: ").append(cfg.lineCommonContinuationSeeds).append("\n");
+        sb.append("- post_branch_autopilot: ").append(cfg.postBranchAutopilot).append("\n");
         sb.append("- tree_max_actions: ").append(cfg.treeMaxActions).append("\n");
         sb.append("- tree_include_pass: ").append(cfg.treeIncludePass).append("\n");
         sb.append("- tree_continuation_policy: ").append(cfg.treeContinuationPolicy.name().toLowerCase(Locale.US)).append("\n");
@@ -1278,7 +1279,8 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- terminal_line_search_csv: ").append(csvPath).append("\n");
         sb.append("- classification_counts: ").append(counts.values).append("\n\n");
         sb.append("This mode is a bounded proof search over serialized checkpoints. It forces a root action, ")
-                .append("uses the branch controller for subsequent sampled continuations, records the resulting decision trace, ")
+                .append("uses either branch-controller autopilot or the normal model path for subsequent continuations, ")
+                .append("records the resulting decision trace, ")
                 .append("and stops when a terminal win is found if configured. It uses terminal win/loss only; it does not add combo-specific rewards.\n");
         Files.write(cfg.outDir.resolve("README.md"), sb.toString().getBytes(StandardCharsets.UTF_8),
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);

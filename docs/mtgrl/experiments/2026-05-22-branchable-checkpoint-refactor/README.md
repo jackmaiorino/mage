@@ -1817,3 +1817,38 @@ Deterministic active-three follow-up:
 - Updated active-three interpretation:
   - The deterministic harness preserves a positive v350 signal, but the margin shrinks from the earlier shared-service read of 14 / 24 versus 8 / 24 to 13 / 24 versus 11 / 24.
   - This supports continuing the outcome-only branch-value path, but it argues against immediate HPC scale-up from v350 alone. The next higher-value work is mining deterministic disagreement surfaces, especially the Grixis chunk 7 loss and active-three net-positive chunks, to expand terminal-line evidence without adding human combo heuristics.
+
+## v383-v385 Live Checkpoint Model-Continuation Probe
+
+Purpose:
+
+- Test whether checkpoints from a deterministic winning Grixis chunk can reproduce a terminal win without replaying the original prefix.
+- Keep the reward/evidence thesis-clean: terminal win/loss only, no combo-specific intermediate reward or action labels.
+
+Artifacts:
+
+- Live checkpoint capture: `local-training/local_pbt/cp7_eval_sweeps/20260524_v383_v350_grixis_chunks07_14_detmode_livecheckpoints`
+  - Deterministic eval, v350 candidate, Grixis chunks 7 and 14, compact logs, replay metadata, and live checkpoints.
+  - Results matched the deterministic gate: chunk 7 loss, chunk 14 win.
+  - Captured 135 checkpoint snapshots under `live_checkpoints`.
+- Autopilot miner artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v383_grixis_det_line_r16_ranked12`
+  - Ranked 12 snapshots, 192 terminal-line attempts, 0 wins.
+  - Classification counts: 176 terminal losses and 16 `checkpoint_no_reentry_decision` errors.
+  - Diagnosis: terminal-line search was forcing root actions, then unconditionally using the miner's heuristic autopilot for continuation. This did not test the trained model's continuation policy.
+- Local Py4J model-continuation artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v384_grixis_chunk14_ord073_source_model_cont`
+  - Forced the known chunk 14 `Cast Balustrade Spy` root from snapshot `ord073_D147_ACTIVATE_ABILITY_OR_SPELL`.
+  - Result: terminal loss, but the Maven exec log showed repeated Python gateway connection failures. This was a launcher/environment artifact, not valid model-continuation evidence.
+- Shared-GPU model-continuation artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v385_grixis_chunk14_ord073_source_sharedgpu`
+  - Same snapshot and forced root as v384, but launched through the deterministic shared GPU service from the v383 eval manifest.
+  - Result: 1 / 1 terminal win, source root `Cast Balustrade Spy`, reentry matched, final state hash `6306f436014520f8a1e4fe0ab6dd06f6e6996db47e786ced06c970854e23d1e8`.
+
+Code checkpoint:
+
+- `LiveCheckpointBranchMiner` terminal-line mode now honors `--post-branch-autopilot`; with `false`, the forced root is applied and later decisions use the normal model path.
+- Added `scripts/run_live_checkpoint_branch_miner.py`, which loads an eval manifest, starts the same deterministic shared GPU service/model snapshot, and runs `LiveCheckpointBranchMiner` under that environment.
+
+Conclusion:
+
+- Branchable checkpoints can reproduce at least one known winning combo line from a captured in-memory game state when continuation uses the trained model through the correct shared GPU service.
+- The v383 zero-win autopilot slice is reclassified as a harness diagnostic, not evidence against the checkpoint or model.
+- The next unit is a broader shared-GPU terminal-line mining pass over the deterministic Grixis chunk 14 checkpoint set, then a separate pass over chunk 7 to compare source losing lines against any terminal-winning siblings.
