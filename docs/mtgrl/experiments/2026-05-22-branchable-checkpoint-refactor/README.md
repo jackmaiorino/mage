@@ -1528,3 +1528,71 @@ Interpretation:
 - Playtime branching exists and can fire from the live evaluator when the harness `--mcts` switch is used.
 - The tiny random-rollout root setup is too noisy to treat as a promotion signal. Many root values are single-sample `-1/0/1`, and timeout/top-k effects can leave useful candidates unvisited.
 - This path is still the right shape for a decision-local consumer, but it needs a cleaner branch budget/admission rule and candidate-labelled diagnostics before a larger sweep.
+
+## v344-v345 Outcome-Only All-Action Value Discovery
+
+Purpose:
+
+- Re-center the checkpoint branch work on the core thesis: terminal wins/losses are the only training signal, with no hand-authored Spy Combo milestones used as labels or rewards.
+- Broaden terminal-line mining beyond `ACTIVATE_ABILITY_OR_SPELL` roots so target and selection decisions can also receive terminal-derived value.
+- Keep pass-best cases visible as diagnostics, but do not promote low-evidence pass-over-setup rows into the strict training set.
+
+v344 fresh capture:
+
+- Eval artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v344_outcome_only_checkpoint_capture_g4_logs_gpu`
+- Policy/profile: baseline `Pauper-Spy-Combo-Value`
+- Opponent/gate: CP7 `Grixis Affinity`, skill 7
+- MCTS and candidate-Q blending: disabled
+- Result: 1 / 4
+- Live checkpoints: 262 total
+  - `ACTIVATE_ABILITY_OR_SPELL`: 214
+  - `SELECT_TARGETS`: 37
+  - `SELECT_CARD`: 6
+  - `DECLARE_BLOCKS`: 5
+
+v344 terminal-line mining:
+
+- Miner artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v344_outcome_only_g4_r16_s8_allactions`
+- Settings: 8 shards, all captured action types, `line_attempts=16`, `line_max_root_actions=8`, common continuation seeds, `tree_continuation_policy=explore`
+- Terminal-line rows: 4,192
+- Terminal wins/losses: 600 wins, 2,952 losses
+- Diagnostics: 624 `action_type_mismatch`, 16 `checkpoint_no_reentry_decision`
+- Strict value targets: `local-training/local_pbt/terminal_line_value_targets/v344_outcome_only_g4_r16_s8_allactions_softpass`
+  - Checkpoint groups: 222
+  - Admitted examples: 87
+  - Rejected groups: 135
+  - Suspect pass-best exclusions: 82
+  - Low-delta rejections: 96
+  - Action mix: 82 `ACTIVATE_ABILITY_OR_SPELL`, 5 `SELECT_TARGETS`
+  - TrainingData export: 87 / 87 reentered and serialized
+  - Baseline score probe: strict top1 28 / 87, target-set top1 86 / 87, average target probability 0.328188, average rank 2.4483
+- Diagnostic inclusive value targets: `local-training/local_pbt/terminal_line_value_targets/v344_outcome_only_g4_r16_s8_allactions_include_pass_diagnostic`
+  - Admitted examples with suspect pass-best included: 126
+
+v345 all-action scale-up on the existing v315 corpus:
+
+- Source checkpoint corpus: `local-training/local_pbt/cp7_eval_sweeps/20260523_v315_affinity_live_checkpoints_g16_cpu/live_checkpoints`
+- Miner artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v345_outcome_only_v315_g16_r16_s8_allactions`
+- Settings: 12 shards, all captured action types, `line_attempts=16`, `line_max_root_actions=8`, common continuation seeds, `tree_continuation_policy=explore`
+- Selected snapshots: 840
+- Terminal-line rows: 13,440
+- Terminal wins/losses: 1,110 wins, 10,506 losses
+- Diagnostics: 1,696 `action_type_mismatch`, 128 `checkpoint_no_reentry_decision`
+- Strict value targets: `local-training/local_pbt/terminal_line_value_targets/v345_outcome_only_v315_g16_r16_s8_allactions_softpass`
+  - Checkpoint groups: 726
+  - Admitted examples: 255
+  - Rejected groups: 471
+  - Suspect pass-best exclusions: 310
+  - Low-delta rejections: 344
+  - Action mix: 246 `ACTIVATE_ABILITY_OR_SPELL`, 8 `SELECT_TARGETS`, 1 `SELECT_CARD`
+  - TrainingData export: 255 / 255 reentered and serialized
+  - Baseline score probe: strict top1 88 / 255, target-set top1 254 / 255, average target probability 0.340051, average rank 2.3059
+- Diagnostic inclusive value targets: `local-training/local_pbt/terminal_line_value_targets/v345_outcome_only_v315_g16_r16_s8_allactions_include_pass_diagnostic`
+  - Admitted examples with suspect pass-best included: 382
+
+Interpretation:
+
+- The outcome-only branch pipeline now produces more strict value targets by broadening action types, without adding Spy-specific labels or rewards.
+- The larger v345 strict dataset is mechanically usable: every admitted row reentered its checkpoint and serialized into normal AIRL `TrainingData`.
+- The baseline model already keeps nearly every target action inside its support set, but often does not rank the terminal-derived best sibling first. That makes this dataset useful as a ranking/value-head teacher, not as evidence for another direct policy overwrite.
+- The next thesis-aligned unit is to train a contained candidate-Q or ranking-head candidate from v345, evaluate it as an offline score probe first, and only then consider a small live eval. Do not mutate the baseline profile with fit probes; use a cloned candidate profile or Q-head-only import.
