@@ -1742,3 +1742,57 @@ Interpretation:
 - The v351/v352 negative read was an evaluation-control error, not a reliable policy result. Exact paired seeds show the v350 signed-Q candidate at 14 / 24 against an 8 / 24 baseline over Spy mirror, Jund Wildfire, and Mono Red Rally.
 - The original Grixis Affinity hard gate remains negative under exact pairing: v350 is 5 / 16 against an 8 / 16 baseline. This blocks promotion and HPC scaling of the current v350 direct-blend consumer.
 - The next unit should inspect or mine the exact Grixis disagreement chunks, especially baseline-win/candidate-loss chunks 3, 7, 8, and 11, to determine whether the Q consumer is misranking concrete decisions or whether the current outcome-derived corpus simply lacks Affinity-pressure coverage.
+
+## v364-v380 Deterministic Eval Repair and Grixis Reclassification
+
+Reason for reopening v362/v363:
+
+- The exact Grixis gate result changed when the same chunks were replayed in different run shapes.
+- The Java eval side was deterministic-greedy for the RL player, but the shared Python inference path still used four service channels, batching, score-worker concurrency, a dedicated CUDA stream, and normal torch/CUDA settings.
+- This made close policy decisions unstable enough that the v362/v363 Grixis "hard gate" could not be trusted as promotion evidence.
+
+Code checkpoint:
+
+- Commit `eee0889e73` (`RL: Add deterministic eval mode`).
+- `scripts/run_cp7_eval_sweep.py` now supports `--deterministic-eval`, which forces `parallel=1`, `ai_threads=1`, `GPU_SERVICE_NUM_CHANNELS=1`, score-worker count 1, batch size 1, fixed seed env, `CUBLAS_WORKSPACE_CONFIG`, and `TORCH_DETERMINISTIC_EVAL=1`.
+- `gpu_service_core.py` skips the dedicated CUDA inference stream when deterministic eval is enabled.
+- `py4j_entry_point.py` disables torch benchmark/TF32 paths and enables deterministic algorithms in warn-only mode when deterministic eval is enabled.
+- Validation: Python compile checks, `git diff --check`, and AIRL Maven compile passed before commit.
+
+Deterministic proof runs:
+
+- `20260524_v375_v350_grixis_chunk007_detmode_a`: v350 chunk 7 exact repeat, 0 / 1.
+- `20260524_v376_v350_grixis_chunk007_detmode_b`: same command and seed as v375, 0 / 1.
+- v375/v376 show the previously unstable chunk 7 is repeatable under deterministic eval mode.
+
+Logged disagreement slice under deterministic eval:
+
+- Candidate artifact: `20260524_v377_v350_grixis_disagreement_chunks_detmode_logs`
+  - Chunks 3, 7, 8, 11, 14: 4 / 5.
+  - Wins: 3, 8, 11, 14. Loss: 7.
+- Baseline artifact: `20260524_v378_baseline_grixis_disagreement_chunks_detmode_logs`
+  - Same chunks and seeds: 4 / 5.
+  - Wins: 3, 7, 8, 11. Loss: 14.
+- First divergent decisions:
+  - Chunk 7: v350 chooses `Forestcycling {1}` on turn 3 Precombat Main where baseline chooses `Pass`; v350 loses and baseline wins.
+  - Chunk 14: v350 chooses the Quirion Ranger line `Return a Forest you control to its owner's hand: Untap target creature` on turn 1 Precombat Main where baseline chooses `Pass`; v350 wins and baseline loses.
+- These are real setup-timing disagreements, not explicit combo labels or hard-coded pass rules.
+
+Full deterministic Grixis gate:
+
+- Candidate artifact: `20260524_v379_v350_grixis_g16_detmode_nolog`
+  - v350 full blend: 9 / 16.
+- Baseline artifact: `20260524_v380_baseline_grixis_g16_detmode_nolog`
+  - Baseline `Pauper-Spy-Combo-Value`: 9 / 16.
+- Paired deltas:
+  - All chunks match except 7 and 14.
+  - Candidate loses where baseline wins: chunk 7.
+  - Candidate wins where baseline loses: chunk 14.
+  - Net: 0.
+
+Updated interpretation:
+
+- The v362/v363 Grixis hard-gate result is reclassified as nondeterministic eval evidence, not a reliable policy blocker.
+- Under the deterministic eval harness, v350 ties the exact Grixis seed set rather than losing it.
+- This still is not promotion evidence: v350 needs broader deterministic paired evaluation and likely more Affinity-pressure terminal-line data before HPC scale-up.
+- The next thesis-aligned unit is to run the deterministic exact paired controls across the active three-matchup pool, then decide whether to mine additional live checkpoints from the deterministic v350/baseline disagreement surfaces.
