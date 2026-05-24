@@ -1325,3 +1325,46 @@ Interpretation:
 - The local replay bridge for HPC snapshot corpora is validated.
 - v329 is too sparse for a meaningful model/evaluation sweep: only two clean trainable value-target examples survived the current admission gate.
 - The diagnostic suspect pass-best rows mostly remain low-value or low-delta pass-over-setup cases, so the correct next unit is more terminal-line mining breadth/depth, not training from suspect pass-best examples.
+
+## v332-v334 Full-Corpus Value Target Candidate
+
+Artifacts:
+
+- Full-corpus miner: `local-training/local_pbt/live_checkpoint_branch_miner/v332_v315_full_common_seed_r64_s12`
+- Value targets: `local-training/local_pbt/terminal_line_value_targets/v332_v315_full_common_seed_r64_s12_softpass`
+- Candidate eval: `local-training/local_pbt/cp7_eval_sweeps/20260524_v334_terminal_line_v332_candidate_affinity_g16_gpu`
+
+v332 full-corpus terminal-line result:
+
+- Selected checkpoint groups: 706.
+- Terminal rows: 45,184 / 45,184.
+- Terminal wins: 4,313.
+- Win rate: 0.095454.
+- Spy rows: 33,675.
+- Spy wins: 3,396.
+- Dread Return rows: 28,712.
+- Lotleth target rows: 10,855.
+- Full combo-pattern wins: 1,328.
+
+Value-target bridge result:
+
+- Admitted value-target examples: 166.
+- Rejected groups: 540.
+- Major rejection reasons: `value_delta_below_threshold=477`, `suspect_pass_best=282`.
+- TrainingData export: 166 / 166 records reentered and captured.
+- Baseline score probe on exported records: strict top1 25 / 166, target-set top1 164 / 166, average target probability 0.227512.
+- Fit-score probe after four local epochs: strict top1 61 / 166, target-set top1 166 / 166, average target probability 0.261963.
+- Candidate profile score probe after import training: strict top1 60 / 166, target-set top1 166 / 166, average target probability 0.252503.
+
+Eval result:
+
+- The first attempted candidate eval, `20260524_v333_terminal_line_v332_candidate_affinity_g16`, is invalid. The shared inference service launched from `.mtgrl_venv` while that venv still had `torch 2.12.0+cpu`, then failed repeatedly with `AssertionError: Torch not compiled with CUDA enabled`.
+- `.mtgrl_venv` was repaired locally to `torch 2.12.0+cu130`; the clean v334 eval logged `split-device mode: infer=cuda:0 train=cpu`.
+- Clean v334 candidate result vs Grixis Affinity skill 7: 1 / 16, win rate 0.0625.
+- Recent v315 comparator artifact, `local-training/local_pbt/cp7_eval_sweeps/20260523_v315_affinity_live_checkpoints_g16_cpu`, was 6 / 15, win rate 0.4.
+
+Interpretation:
+
+- The terminal-line value-target bridge scales mechanically: checkpoint reentry, tensor export, and supervised import training all work on a 166-example full-corpus dataset.
+- The imported terminal-line candidate is not a promotion candidate. It improves the offline value-target score probe but materially hurts live policy evaluation against the current Affinity gate.
+- The next unit should diagnose the policy regression before any HPC promotion sweep. The most likely issue is that direct BC/value import on sparse, off-policy terminal-line roots overfits local candidate preferences without preserving the broader live-play policy; compare action distributions and early-game decisions between v315 and the v332 candidate, then train a lower-weight or mixed replay version only if the regression mechanism is clear.
