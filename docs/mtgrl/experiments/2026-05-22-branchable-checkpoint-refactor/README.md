@@ -995,3 +995,68 @@ Interpretation:
 - Repeat-rollout gating sharply reduced the one-rollout noise: only 1 of 96 ranked snapshots survived the strict correction gate.
 - This D018 row is the strongest local checkpoint-derived candidate in this lane so far, but it is not yet training evidence. It needs isolated repeat confirmation plus sequence/order probing to make sure the win signal is not a short-prefix or continuation-order artifact.
 - Next unit: run a focused confirmation pass on this snapshot with more value rollouts and sequence tree enabled.
+
+## v321 D018 Sequence Confirmation
+
+Artifact:
+
+- `local-training/local_pbt/live_checkpoint_branch_miner/v321_v320_d018_sequence_confirm_r7_s1`
+
+Scope:
+
+- Rechecked the surviving v320 candidate only: `chunk_008/...ord010_D018_ACTIVATE_ABILITY_OR_SPELL.ser.gz`.
+- Ran one local shard with `--tree-rollouts 7`, `--tree-max-actions 4`, sequence tree enabled, depth 2, beam 4, `--tree-sequence-rollouts 3`, sampled true-model continuation, `--tree-timeout-sec 90`, and no post-branch autopilot.
+
+Result:
+
+- The focused confirmation produced one value summary, four value rows, 36 sequence rows, and six sequence pair summaries.
+- Value classification counts: `{no_better_action=1}`.
+- Source action `Cast Overgrown Battlement`: 0/7 wins, 7/7 terminal losses.
+- Previously best action `Cast Tinder Wall`: 0/7 wins, 7/7 terminal losses.
+- Sequence classifications were `{order_diverged_same_value=3, sequence_incomplete=3}` with no terminal wins.
+
+Interpretation:
+
+- The v320 D018 candidate did not survive isolated repeat confirmation.
+- Do not train from v320 or v321.
+- The remaining question is no longer whether this specific D018 correction is real; it is whether the branchable checkpoint search can find a true Spy Combo terminal-win line at all under terminal-only reward.
+
+## v322 Terminal-Line Findability Proof
+
+Implementation:
+
+- Added `LiveCheckpointBranchMiner --terminal-line-search true`.
+- The mode forces a root checkpoint action, uses the branch controller for subsequent sampled continuations, records a bounded decision trace, and writes `terminal_line_search.csv`.
+- Added `--tree-continuation-policy explore`, which still uses only terminal outcomes but samples spells, mana, and pass/done choices instead of always preferring nonterminal actions. This makes phase advancement reachable during controlled search.
+
+Artifacts:
+
+- `local-training/local_pbt/live_checkpoint_branch_miner/v322_terminal_line_search_findable_smoke`
+- `local-training/local_pbt/live_checkpoint_branch_miner/v322_terminal_line_search_findable_repeat`
+
+Command shape:
+
+```powershell
+mvn -o -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests '-Dexec.mainClass=mage.player.ai.rl.LiveCheckpointBranchMiner' '-Dexec.args=--snapshot-list <winning_late_snapshots.txt> --out <run_dir> --terminal-line-search true --max-snapshots 6 --tree-max-actions 8 --line-max-root-actions 8 --line-attempts 24 --line-timeout-sec 20 --tree-timeout-sec 20 --tree-seed 2026052401 --tree-continuation-policy explore --tree-include-pass true --selection-mode path' exec:java
+```
+
+Result:
+
+- The smoke searched late checkpoints from the six v315 counted winning chunks.
+- It stopped after the first processed checkpoint, `chunk_011/...ord128_D230_ACTIVATE_ABILITY_OR_SPELL.ser.gz`.
+- Attempt 0 forced `{T}: Add {G} for each creature you control with defender.` and reached a terminal loss.
+- Attempt 1 forced `Pass` and reached `terminal_win`.
+- Smoke classification counts: `{terminal_loss=1, terminal_win=1}`.
+- Repeat run with the same seed, same first snapshot, and two attempts reproduced the same root outcomes: attempt 0 terminal loss, attempt 1 terminal win.
+
+Winning-line evidence:
+
+- Root: `Pass` at ordinal 128 / decision 230.
+- Recorded trace length: 166 decisions in the smoke artifact.
+- The trace includes `Cast Balustrade Spy`, opponent target selection, later `Flashback sacrifice three creatures`, target selections including `Lotleth Giant`, and terminal win.
+
+Interpretation:
+
+- The true combo/win line is findable from a real branchable checkpoint with terminal-only reward; no combo-specific reward was needed for this proof.
+- This is not yet correction-quality evidence because it starts from a late checkpoint in a game already known to be winnable.
+- The repeat reproduced win/loss outcomes and root choices, but the winning final state hash was not identical across runs. Treat v322 as a findability proof and keep exact deterministic-line stability as a separate engineering gate before using full traces as supervised training targets.
