@@ -35,6 +35,8 @@ class MTGTransformerModel(nn.Module):
         self.value_use_separate_critic = os.getenv(
             "VALUE_USE_SEPARATE_CRITIC_ENCODER", "0").strip().lower() in ("1", "true", "yes", "on")
         self.candidate_q_blend = float(os.getenv("CANDIDATE_Q_BLEND", "0.0"))
+        self.candidate_q_blend_min_top_q = float(os.getenv("CANDIDATE_Q_BLEND_MIN_TOP_Q", "-1.0"))
+        self.candidate_q_blend_min_margin = float(os.getenv("CANDIDATE_Q_BLEND_MIN_MARGIN", "0.0"))
 
         # Input scaling and normalization
         # NOTE: Was 0.1, increased to 1.0 to avoid vanishing activations
@@ -406,7 +408,7 @@ class MTGTransformerModel(nn.Module):
         candidate_q = torch.nan_to_num(candidate_q, nan=0.0, posinf=1.0, neginf=-1.0)
         candidate_q = candidate_q.masked_fill(~valid, 0.0)
         if self.candidate_q_blend != 0.0:
-            scores = scores + (float(self.candidate_q_blend) * candidate_q)
+            scores = scores + self._candidate_q_blend_bonus(candidate_q, valid)
         scores = scores.masked_fill(~valid, -1e9)
 
         probs = torch.softmax(scores, dim=-1)
@@ -426,6 +428,29 @@ class MTGTransformerModel(nn.Module):
         if return_candidate_q:
             result.append(candidate_q)
         return tuple(result)
+
+    def _candidate_q_blend_bonus(self, candidate_q: torch.Tensor, valid: torch.Tensor) -> torch.Tensor:
+        blend = float(getattr(self, "candidate_q_blend", 0.0))
+        if blend == 0.0:
+            return torch.zeros_like(candidate_q)
+        min_top_q = float(getattr(self, "candidate_q_blend_min_top_q", -1.0))
+        min_margin = float(getattr(self, "candidate_q_blend_min_margin", 0.0))
+        if min_top_q <= -1.0 and min_margin <= 0.0:
+            return blend * candidate_q
+
+        valid_q = candidate_q.masked_fill(~valid, -1e9)
+        top_q = valid_q.max(dim=-1).values
+        gate = torch.ones_like(top_q, dtype=torch.bool)
+        if min_top_q > -1.0:
+            gate = gate & (top_q >= min_top_q)
+        if min_margin > 0.0:
+            if candidate_q.size(-1) > 1:
+                top2 = torch.topk(valid_q, k=2, dim=-1).values
+                margin = top2[:, 0] - top2[:, 1]
+            else:
+                margin = torch.zeros_like(top_q)
+            gate = gate & (margin >= min_margin)
+        return blend * candidate_q * gate.to(candidate_q.dtype).unsqueeze(-1)
 
     def belief_logits_from_cls(self, cls: torch.Tensor) -> torch.Tensor:
         """Archetype classifier logits from shared-encoder CLS.
@@ -785,7 +810,7 @@ class SingleHeadScorer(nn.Module):
         candidate_q = torch.nan_to_num(candidate_q, nan=0.0, posinf=1.0, neginf=-1.0)
         candidate_q = candidate_q.masked_fill(~valid, 0.0)
         if self.candidate_q_blend != 0.0:
-            scores = scores + (self.candidate_q_blend * candidate_q)
+            scores = scores + m._candidate_q_blend_bonus(candidate_q, valid)
         scores = scores.masked_fill(~valid, -1e9)
         probs = torch.softmax(scores, dim=-1)
         probs = torch.nan_to_num(probs, nan=0.0, posinf=0.0, neginf=0.0)

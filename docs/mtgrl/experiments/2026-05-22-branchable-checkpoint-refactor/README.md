@@ -1467,3 +1467,28 @@ Interpretation:
 - The candidate-Q head now carries a measurable terminal-line sibling-ranking signal. The v340 advantage target is the first form that clearly improves offline Q ranking.
 - Directly blending that Q signal into live action logits is not a promotion path yet. It remains below the replay-logged v336 direct candidate result of 5 / 16 and the recent v315 comparator of 6 / 15, and it still shows premature Dread Return behavior.
 - The evidence supports keeping terminal-line search as a value/ranking teacher, not as a direct policy overwrite. The next useful direction is a gated playtime-search consumer or branch-relevant decision hook that consults the Q/value signal only where branch evidence is applicable, plus broader terminal-line data before any HPC-scale promotion sweep.
+
+## v341 Candidate-Q Blend Gate Probe
+
+Implementation:
+
+- Added optional inference-time gates for `CANDIDATE_Q_BLEND`:
+  - `CANDIDATE_Q_BLEND_MIN_TOP_Q`: require the top candidate-Q value to clear a threshold.
+  - `CANDIDATE_Q_BLEND_MIN_MARGIN`: require the top candidate-Q value to beat the runner-up by a threshold.
+- Defaults preserve the existing behavior: no gate is active unless one of those environment variables is set.
+
+Local probes:
+
+- top-Q gate `CANDIDATE_Q_BLEND_MIN_TOP_Q=0.0`, blend 0.25:
+  - offline strict top1: 39 / 166.
+- top-Q gate `CANDIDATE_Q_BLEND_MIN_TOP_Q=-0.10`, blend 0.25:
+  - offline strict top1: 42 / 166.
+- margin gate `CANDIDATE_Q_BLEND_MIN_MARGIN=0.02`, blend 0.25:
+  - offline strict top1: 45 / 166.
+  - logged GPU eval vs Grixis Affinity skill 7: 2 / 8.
+  - action-health scan: 2 Spy-cast games / 8, 1 premature Dread Return flashback, and no Lotleth-ready Dread Return target opportunities.
+
+Interpretation:
+
+- Simple confidence gating reduces some live perturbation but also gives up offline sibling-ranking lift. It did not improve the Affinity gate.
+- This confirms that the next step should not be more direct Q logit blending. The terminal-line signal needs a decision-local search/verification consumer or richer value data, not another global score-shaping variant.
