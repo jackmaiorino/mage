@@ -1596,3 +1596,89 @@ Interpretation:
 - The larger v345 strict dataset is mechanically usable: every admitted row reentered its checkpoint and serialized into normal AIRL `TrainingData`.
 - The baseline model already keeps nearly every target action inside its support set, but often does not rank the terminal-derived best sibling first. That makes this dataset useful as a ranking/value-head teacher, not as evidence for another direct policy overwrite.
 - The next thesis-aligned unit is to train a contained candidate-Q or ranking-head candidate from v345, evaluate it as an offline score probe first, and only then consider a small live eval. Do not mutate the baseline profile with fit probes; use a cloned candidate profile or Q-head-only import.
+
+## v346-v350 Signed Candidate-Q and On-Policy Iteration
+
+Purpose:
+
+- Test whether v345 outcome-only all-action terminal targets can train a contained candidate-Q head without policy overwrite.
+- Keep the training target thesis-clean: all labels come from downstream terminal wins/losses, not Spy-specific combo detectors.
+- Use live checkpoints from the improved candidate as the next on-policy branch corpus.
+
+v346 unsigned target failure:
+
+- Candidate profile: `Pauper-Spy-Combo-Value-TerminalLine-v346-QOnlyAdvantageAllAction`
+- Training data: v345 advantage-value `TrainingData`, 255 examples, 4 epochs, 1,020 train passes.
+- Mistake: imported with `-CandidateQFromMctsTargets` but without signed branch-return mode.
+- Result: offline top1 did not improve:
+  - blend 0.00: 83 / 255
+  - blend 0.25: 82 / 255
+  - blend 0.50: 82 / 255
+  - blend 1.00: 82 / 255
+- Diagnosis: Q values saturated near 1.0 for nearly all candidates because the unsigned MCTS-target loss masks non-positive advantage entries and trains only positive entries.
+
+v347 signed target repair:
+
+- Candidate profile: `Pauper-Spy-Combo-Value-TerminalLine-v347-QOnlySignedAdvantageAllAction`
+- Same 255 v345 examples, but trained with `-BranchReturnTargets` so the Q loss consumes signed candidate advantages and masks only out-of-range sentinel values.
+- Offline score probe:
+  - baseline, blend 0.00 on same `.ser`: 88 / 255, average rank 2.3059
+  - baseline, blend 1.00 on same `.ser`: 91 / 255, average rank 2.3333
+  - v347 blend 0.00: 83 / 255, average rank 2.3294
+  - v347 blend 0.25: 92 / 255, average rank 2.2902
+  - v347 blend 0.50: 102 / 255, average rank 2.2471
+  - v347 blend 1.00: 106 / 255, average rank 2.2314
+- Direct Q diagnostic at blend 1.00: Q top1 125 / 255, average Q rank 2.267, with non-saturated negative-valued advantage outputs.
+- Live eval artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v347_qonly_signed_advantage_blend10_affinity_g8_logs_gpu`
+  - Grixis Affinity skill 7, no MCTS, `CANDIDATE_Q_BLEND=1.0`
+  - Result: 2 / 8
+  - Captured 562 live checkpoint files.
+  - Log mining showed at least one clean Spy -> Dread Return -> Lotleth Giant win, plus one loss that reached the combo shell but did not convert.
+
+v348-v349 on-policy terminal-line mining:
+
+- v348 smoke miner artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v348_onpolicy_v347_g8_r16_s8_allactions`
+  - Default `ranked_max_per_game=10` selected only 80 checkpoints.
+  - Rows: 1,280; terminal wins/losses: 48 / 992.
+  - Strict value targets: 18 admitted examples. This was a useful smoke but too small for the next candidate.
+- v349 expanded miner artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v349_onpolicy_v347_g8_r16_s12_allactions_rank96`
+  - `ranked_max_per_game=96`, 12 shards, 530 selected checkpoints.
+  - Rows: 8,480.
+  - Terminal wins/losses: 416 / 7,232.
+  - Diagnostics: 736 `action_type_mismatch`, 96 `checkpoint_no_reentry_decision`.
+  - Strict value targets: `local-training/local_pbt/terminal_line_value_targets/v349_onpolicy_v347_g8_r16_s12_allactions_rank96_softpass`
+    - Checkpoint groups: 478
+    - Admitted examples: 134
+    - Rejected groups: 344
+    - Suspect pass-best exclusions: 201
+    - Low-delta rejections: 300
+    - Advantage `TrainingData` export: 134 / 134 reentered and serialized.
+
+v350 combined signed-Q candidate:
+
+- Candidate profile: `Pauper-Spy-Combo-Value-TerminalLine-v350-QOnlySignedAdvantageCombined`
+- Training data: combined v345 + v349 signed advantage exports, 389 examples total.
+- Training: Q-head-only import from a fresh baseline clone, 4 epochs, 1,556 train passes, `-BranchReturnTargets`.
+- Offline combined score probe:
+  - blend 0.00: 121 / 389, average rank 2.3188
+  - blend 0.50: 149 / 389, average rank 2.2416
+  - blend 1.00: 170 / 389, average rank 2.1877
+- Live eval artifacts:
+  - `local-training/local_pbt/cp7_eval_sweeps/20260524_v350_qonly_signed_advantage_combined_blend10_affinity_g8_logs_gpu`: 4 / 8 vs Grixis Affinity skill 7, no MCTS.
+  - `local-training/local_pbt/cp7_eval_sweeps/20260524_v350_qonly_signed_advantage_combined_blend10_affinity_g16_seed9999_metric_gpu`: 4 / 16 vs Grixis Affinity skill 7, no MCTS.
+  - `local-training/local_pbt/cp7_eval_sweeps/20260524_v350_qonly_signed_advantage_combined_blend10_affinity_g16_seed8888_logs_gpu`: partial 1 / 9 before disk-full during DB copy; treat as an infra-interrupted diagnostic, not a completed sweep.
+
+Cleanup / archival:
+
+- Preserved CSV summaries, manifests, logs, checkpoints, and value-target artifacts.
+- Removed generated DB and model-snapshot copies from the failed partial seed8888 run.
+- Removed stale generated isolated CLI workspaces from `D:\codex-mage-cli-workspaces`, freeing D: from 0 bytes to about 3.2 GB.
+
+Interpretation:
+
+- The signed-target fix is important. Unsigned Q import is a blocker because it teaches "all observed positive entries are good" and collapses Q discrimination.
+- Signed local sibling advantages now produce a measurable offline ranking signal and a stronger local live result than the earlier q-only variants.
+- The current evidence is promising but not yet a promotion gate: v350 achieved 4 / 8 and then 4 / 16 in independent Grixis checks. This supports continued local iteration and a broader evaluation sweep, not HPC-scale training yet.
+- The next unit should either:
+  - run a broader light metric sweep for v350 across more Pauper opponents, or
+  - mine the v350 live checkpoints from the 4 / 8 run and repeat the on-policy target/training loop with disk-light settings.
