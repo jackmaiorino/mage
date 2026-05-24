@@ -1796,3 +1796,24 @@ Updated interpretation:
 - Under the deterministic eval harness, v350 ties the exact Grixis seed set rather than losing it.
 - This still is not promotion evidence: v350 needs broader deterministic paired evaluation and likely more Affinity-pressure terminal-line data before HPC scale-up.
 - The next thesis-aligned unit is to run the deterministic exact paired controls across the active three-matchup pool, then decide whether to mine additional live checkpoints from the deterministic v350/baseline disagreement surfaces.
+
+Deterministic active-three follow-up:
+
+- Candidate artifact: `20260524_v381_v350_active3_g8_detmode_nolog`
+  - Overall: 13 / 24.
+  - Spy mirror: 6 / 8.
+  - Jund Wildfire: 4 / 8.
+  - Mono Red Rally: 3 / 8.
+- Baseline artifact: `20260524_v382_baseline_active3_g8_detmode_nolog`
+  - Overall: 11 / 24.
+  - Spy mirror: 7 / 8.
+  - Jund Wildfire: 3 / 8.
+  - Mono Red Rally: 1 / 8.
+- Paired deltas:
+  - Candidate gains Jund chunk 1.
+  - Candidate gains Mono Red Rally chunks 5 and 6.
+  - Candidate loses Spy mirror chunk 4.
+  - Net: +2 wins for v350.
+- Updated active-three interpretation:
+  - The deterministic harness preserves a positive v350 signal, but the margin shrinks from the earlier shared-service read of 14 / 24 versus 8 / 24 to 13 / 24 versus 11 / 24.
+  - This supports continuing the outcome-only branch-value path, but it argues against immediate HPC scale-up from v350 alone. The next higher-value work is mining deterministic disagreement surfaces, especially the Grixis chunk 7 loss and active-three net-positive chunks, to expand terminal-line evidence without adding human combo heuristics.
