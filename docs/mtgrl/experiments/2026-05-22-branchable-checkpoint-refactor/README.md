@@ -1104,3 +1104,41 @@ Interpretation:
 - The local search now repeatedly finds terminal wins and multiple full combo-pattern wins from real branchable checkpoints.
 - The many `action_type_mismatch` rows are mostly a checkpoint/reentry quality signal, especially from target-selection surfaces. The next larger run should favor `ACTIVATE_ABILITY_OR_SPELL` checkpoints first and treat target-selection roots as a separate repair lane.
 - This is enough for an artifact-only HPC smoke: scale terminal-line mining and compact summaries, but do not start training yet.
+
+## v325 Zaratan Terminal-Line Smoke
+
+Implementation:
+
+- Built and uploaded runtime bundle `rl-runtime-d31e5d942a-20260523-231808.tar.gz`.
+- Uploaded a compact 48-snapshot payload from v323 plus the terminal-line summarizer.
+- Ran the AIRL miner directly from the runtime bundle classpath in Slurm, without depending on the remote source checkout.
+- Fixed the summarizer for Zaratan's default Python 3.6 in commit `69ca3f2f3e`.
+
+Artifacts:
+
+- Remote run: `/home/jmaior/scratch.msml603/jmaior/mage/local-training/hpc/terminal_line_smoke/v325_terminal_line_hpc_smoke`
+- Local payload staging: `local-training/hpc/terminal_line_v325_payload_69ca3f2f3e`
+
+Result:
+
+- Slurm job `19379187` completed successfully in 97 seconds on `compute-a5-8`.
+- All four Java shards exited `0`.
+- Snapshot count: 48.
+- Selected snapshots: 30.
+- Merged `terminal_line_search.csv` rows: 145.
+- Outcome counts: `{terminal_loss=126, terminal_win=19}`.
+- Compact summary counts:
+  - terminal rows: 145 / 145
+  - valid terminal wins: 19
+  - Spy rows: 125
+  - Spy wins: 13
+  - Dread Return rows: 114
+  - Lotleth target rows: 57
+  - full combo-pattern wins: 5
+  - max combo score: 11
+
+Interpretation:
+
+- The terminal-line miner is now proven to run on Zaratan from a branchable checkpoint corpus, with direct-jar execution and compact summary artifacts.
+- Restricting the smoke to `ACTIVATE_ABILITY_OR_SPELL` roots removed the v323 `action_type_mismatch` noise and produced only terminal outcomes.
+- This still is not training evidence by itself. The next quality gate is a teacher-label extractor that groups terminal-line rows by checkpoint/root action, requires paired terminal siblings, and emits preference labels only when win-rate or terminal-value separation clears strict thresholds.
