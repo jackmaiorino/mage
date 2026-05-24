@@ -934,6 +934,9 @@ public final class SharedGpuPythonModel implements PythonModel {
                     ByteBuffer buffer = ByteBuffer.wrap(response.payload == null ? new byte[0] : response.payload)
                             .order(ByteOrder.LITTLE_ENDIAN);
                     int paddedCandCount = key.maxCandidates;
+                    int newRecordBytes = ((paddedCandCount * 2) + 1) * Float.BYTES;
+                    boolean hasCandidateQ = response.payload != null
+                            && response.payload.length >= batch.size() * newRecordBytes;
                     for (int bi = 0; bi < batch.size(); bi++) {
                         ScoreRequest request = batch.get(bi);
                         int expectedBytes = (paddedCandCount + 1) * 4;
@@ -945,11 +948,22 @@ public final class SharedGpuPythonModel implements PythonModel {
                             paddedPolicy[i] = buffer.getFloat();
                         }
                         float value = buffer.getFloat();
+                        float[] paddedCandidateQ = null;
+                        if (hasCandidateQ) {
+                            paddedCandidateQ = new float[paddedCandCount];
+                            for (int i = 0; i < paddedCandCount; i++) {
+                                paddedCandidateQ[i] = buffer.getFloat();
+                            }
+                        }
                         int origCount = request.originalCandidateCount;
                         float[] policy = origCount == paddedCandCount ? paddedPolicy : Arrays.copyOf(paddedPolicy, origCount);
+                        float[] candidateQ = paddedCandidateQ == null
+                                ? null
+                                : (origCount == paddedCandCount ? paddedCandidateQ : Arrays.copyOf(paddedCandidateQ, origCount));
                         request.future.complete(new PythonMLBatchManager.PredictionResult(
                                 policy,
                                 value,
+                                candidateQ,
                                 "shared_gpu_socket",
                                 Long.toString(response.requestId),
                                 "shared-gpu-" + localBatchId,

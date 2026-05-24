@@ -1401,3 +1401,69 @@ Interpretation:
 - Lowering the direct-loss coefficient reduced offline overfit relative to v332 while still improving over baseline on the terminal-line target set.
 - It did not preserve live play. The current terminal-line direct-import recipe should not be promoted or scaled to HPC.
 - The next training direction should avoid trunk-wide direct BC import as the first use of terminal-line evidence. Prefer either a candidate-value/ranking head, a mixed replay anchor with baseline-policy retention, or a playtime search consumer that uses branch values without immediately distorting the policy.
+
+## v338-v340 Candidate-Q Value Head Integration
+
+Implementation:
+
+- Extended `TerminalLineValueTargetTrainingDataExporter` with `--target-mode`:
+  - `distribution`: existing soft target distribution.
+  - `signed-values`: observed candidate win rates mapped to `[-1, 1]`, with unobserved candidates masked out.
+  - `advantage-values`: observed candidates mapped to decision-local relative value from `-1` for the worst observed sibling to `+1` for the best observed sibling.
+- Exposed per-candidate Q predictions through the Py4J and shared-GPU inference paths.
+- Added score-probe diagnostics for the direct Q vector: target Q, Q-top index, Q rank, Q-top target mass, and policy/Q agreement.
+
+Artifacts:
+
+- v338 profile: `Pauper-Spy-Combo-Value-TerminalLine-v338-QOnly`
+- v339 profile: `Pauper-Spy-Combo-Value-TerminalLine-v339-QOnlySigned`
+- v340 profile: `Pauper-Spy-Combo-Value-TerminalLine-v340-QOnlyAdvantage`
+- Training corpus root: `local-training/local_pbt/terminal_line_value_targets/v332_v315_full_common_seed_r64_s12_softpass`
+- v338 eval: `local-training/local_pbt/cp7_eval_sweeps/20260524_v338_qonly_blend025_affinity_g8_logs_gpu`
+- v340 evals:
+  - `local-training/local_pbt/cp7_eval_sweeps/20260524_v340_qonly_advantage_blend10_affinity_g8_logs_gpu`
+  - `local-training/local_pbt/cp7_eval_sweeps/20260524_v340_qonly_advantage_blend025_affinity_g8_logs_gpu`
+
+v338 soft-distribution Q-only result:
+
+- Trained only the candidate-Q head from the 166 soft terminal-line examples.
+- Offline score probe barely moved with Q blending:
+  - blend 0.00: strict top1 39 / 166, average target probability 0.252359.
+  - blend 0.25: strict top1 43 / 166, average target probability 0.252323.
+  - blend 1.00: strict top1 43 / 166, average target probability 0.252207.
+- Logged GPU eval vs Grixis Affinity skill 7 at blend 0.25: 2 / 8.
+- Action-health scan: 5 Spy-cast games / 8, 3 premature Dread Return flashbacks, and no Lotleth-ready Dread Return target opportunities.
+
+v339 signed absolute-return Q-only diagnosis:
+
+- Re-exported the same 166 terminal-line examples as signed absolute terminal values.
+- Offline score probes stayed weak: strict top1 39-42 / 166 across blends 0.00-1.00.
+- Direct Q diagnostic at blend 0.00:
+  - Q top1: 48 / 166.
+  - Average target Q: -0.8383.
+  - Average top Q: -0.8150.
+  - Q-top positive-target count: 6 / 166.
+- Corpus diagnosis explains the pessimism: best observed sibling win rate averaged only 0.2576, and only 6 / 166 trainable rows had best sibling value above 0.5. Most decisions in this corpus are "least bad" local choices, not absolute winning actions.
+
+v340 advantage-value Q-only result:
+
+- Re-exported the 166 rows as decision-local sibling advantages, preserving relative action quality even when all siblings usually lose.
+- Offline score probes improved monotonically with Q blending:
+  - blend 0.00: strict top1 39 / 166, average target probability 0.252359, average rank 2.8193.
+  - blend 0.25: strict top1 47 / 166, average target probability 0.255176, average rank 2.7892.
+  - blend 0.50: strict top1 53 / 166, average target probability 0.257894, average rank 2.7711.
+  - blend 1.00: strict top1 56 / 166, average target probability 0.263027, average rank 2.7470.
+- Direct Q diagnostic at blend 0.00:
+  - Q top1: 53 / 166.
+  - Average Q rank: 2.6265.
+  - Q-top positive-target count: 79 / 166.
+- Logged GPU eval vs Grixis Affinity skill 7:
+  - blend 1.00: 1 / 8.
+  - blend 0.25: 2 / 8.
+- Blend 0.25 action-health scan: 5 Spy-cast games / 8, 2 premature Dread Return flashbacks, and no Lotleth-ready Dread Return target opportunities.
+
+Interpretation:
+
+- The candidate-Q head now carries a measurable terminal-line sibling-ranking signal. The v340 advantage target is the first form that clearly improves offline Q ranking.
+- Directly blending that Q signal into live action logits is not a promotion path yet. It remains below the replay-logged v336 direct candidate result of 5 / 16 and the recent v315 comparator of 6 / 15, and it still shows premature Dread Return behavior.
+- The evidence supports keeping terminal-line search as a value/ranking teacher, not as a direct policy overwrite. The next useful direction is a gated playtime-search consumer or branch-relevant decision hook that consults the Q/value signal only where branch evidence is applicable, plus broader terminal-line data before any HPC-scale promotion sweep.

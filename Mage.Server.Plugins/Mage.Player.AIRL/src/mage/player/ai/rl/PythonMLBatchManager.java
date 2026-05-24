@@ -338,17 +338,27 @@ public class PythonMLBatchManager {
         }
 
         java.nio.ByteBuffer resBuf = java.nio.ByteBuffer.wrap(resultsBytes).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+        boolean hasCandidateQ = resultsBytes != null
+                && resultsBytes.length >= batchSize * ((maxCandidates * 2) + 1) * Float.BYTES;
         for (int bi = 0; bi < batchSize; bi++) {
             float[] policy = new float[maxCandidates];
             for (int i = 0; i < maxCandidates; i++) {
                 policy[i] = resBuf.getFloat();
             }
             float value = resBuf.getFloat();
+            float[] candidateQ = null;
+            if (hasCandidateQ) {
+                candidateQ = new float[maxCandidates];
+                for (int i = 0; i < maxCandidates; i++) {
+                    candidateQ[i] = resBuf.getFloat();
+                }
+            }
 
             PredictRequest req = batch.get(bi);
             req.future.complete(new PredictionResult(
                     policy,
                     value,
+                    candidateQ,
                     "py4j_batch_manager",
                     req.id.toString(),
                     "py4j-" + batchId,
@@ -675,6 +685,7 @@ public class PythonMLBatchManager {
     public static class PredictionResult {
 
         public final float[] policyScores;
+        public final float[] candidateQScores;
         public final float valueScores;
         public final String backendPath;
         public final String requestId;
@@ -687,7 +698,7 @@ public class PythonMLBatchManager {
         public final String backendDetails;
 
         public PredictionResult(float[] policyScores, float valueScores) {
-            this(policyScores, valueScores, "", "", "", -1, -1,
+            this(policyScores, valueScores, null, "", "", "", -1, -1,
                     Thread.currentThread().getName(), "policy_scores", false, "");
         }
 
@@ -704,7 +715,26 @@ public class PythonMLBatchManager {
                 boolean fallback,
                 String backendDetails
         ) {
+            this(policyScores, valueScores, null, backendPath, requestId, batchId, batchIndex, batchSize,
+                    backendThreadName, rawScoreKind, fallback, backendDetails);
+        }
+
+        public PredictionResult(
+                float[] policyScores,
+                float valueScores,
+                float[] candidateQScores,
+                String backendPath,
+                String requestId,
+                String batchId,
+                int batchIndex,
+                int batchSize,
+                String backendThreadName,
+                String rawScoreKind,
+                boolean fallback,
+                String backendDetails
+        ) {
             this.policyScores = policyScores;
+            this.candidateQScores = candidateQScores;
             this.valueScores = valueScores;
             this.backendPath = backendPath == null ? "" : backendPath;
             this.requestId = requestId == null ? "" : requestId;

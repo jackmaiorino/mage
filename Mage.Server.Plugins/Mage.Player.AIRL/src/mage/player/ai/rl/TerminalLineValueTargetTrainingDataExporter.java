@@ -97,13 +97,13 @@ public final class TerminalLineValueTargetTrainingDataExporter {
     private static ExportResult exportRow(CsvRow row, Config cfg) throws Exception {
         Path snapshotPath = cfg.resolveSnapshotPath(row.get("snapshot_path"));
         LiveCheckpointRecorder.Snapshot snapshot = loadSnapshot(snapshotPath);
-        float[] target = parseTargetDistribution(row.get("target_distribution"));
+        float[] target = parseTarget(row, cfg.targetMode);
         List<Integer> bestIndices = parseIndices(row.get("best_indices"));
-        if (targetSum(target) <= 0.0f) {
-            return new ExportResult(null, ExportSummary.error(row, "empty_target_distribution"));
+        if (!hasTargetSignal(target, cfg.targetMode)) {
+            return new ExportResult(null, ExportSummary.error(row, "empty_" + cfg.targetMode.optionName + "_target"));
         }
         if (bestIndices.isEmpty()) {
-            bestIndices = bestIndicesFromTarget(target);
+            bestIndices = bestIndicesFromTarget(target, cfg.targetMode);
         }
         if (bestIndices.isEmpty()) {
             return new ExportResult(null, ExportSummary.error(row, "missing_best_indices"));
@@ -296,8 +296,88 @@ public final class TerminalLineValueTargetTrainingDataExporter {
         return value;
     }
 
+    private static float[] parseTarget(CsvRow row, TargetMode mode) {
+        if (mode == TargetMode.SIGNED_VALUES) {
+            return parseSignedValueTargets(row.get("candidate_value_estimates"), row.get("candidate_attempts"));
+        }
+        if (mode == TargetMode.ADVANTAGE_VALUES) {
+            return parseAdvantageValueTargets(row.get("candidate_value_estimates"), row.get("candidate_attempts"));
+        }
+        return parseTargetDistribution(row.get("target_distribution"));
+    }
+
     private static float[] parseTargetDistribution(String raw) {
         float[] out = new float[StateSequenceBuilder.TrainingData.MAX_CANDIDATES];
+        if (raw == null || raw.trim().isEmpty()) {
+            return out;
+        }
+        for (Map.Entry<Integer, Float> entry : parseFloatPairs(raw).entrySet()) {
+            int idx = entry.getKey();
+            float value = entry.getValue();
+            if (idx >= 0 && idx < out.length && value > 0.0f) {
+                out[idx] = value;
+            }
+        }
+        float sum = targetSum(out);
+        if (sum > 0.0f) {
+            for (int i = 0; i < out.length; i++) {
+                out[i] /= sum;
+            }
+        }
+        return out;
+    }
+
+    private static float[] parseSignedValueTargets(String rawValues, String rawAttempts) {
+        float[] out = new float[StateSequenceBuilder.TrainingData.MAX_CANDIDATES];
+        Arrays.fill(out, -2.0f);
+        Map<Integer, Float> values = parseFloatPairs(rawValues);
+        Map<Integer, Integer> attempts = parseIntPairs(rawAttempts);
+        for (Map.Entry<Integer, Integer> entry : attempts.entrySet()) {
+            int idx = entry.getKey();
+            int attemptCount = entry.getValue();
+            if (idx < 0 || idx >= out.length || attemptCount <= 0) {
+                continue;
+            }
+            float value = values.containsKey(idx) ? values.get(idx) : 0.0f;
+            out[idx] = Math.max(-1.0f, Math.min(1.0f, 2.0f * value - 1.0f));
+        }
+        return out;
+    }
+
+    private static float[] parseAdvantageValueTargets(String rawValues, String rawAttempts) {
+        float[] out = new float[StateSequenceBuilder.TrainingData.MAX_CANDIDATES];
+        Arrays.fill(out, -2.0f);
+        Map<Integer, Float> values = parseFloatPairs(rawValues);
+        Map<Integer, Integer> attempts = parseIntPairs(rawAttempts);
+        List<Integer> observed = new ArrayList<>();
+        float min = Float.POSITIVE_INFINITY;
+        float max = Float.NEGATIVE_INFINITY;
+        for (Map.Entry<Integer, Integer> entry : attempts.entrySet()) {
+            int idx = entry.getKey();
+            int attemptCount = entry.getValue();
+            if (idx < 0 || idx >= out.length || attemptCount <= 0) {
+                continue;
+            }
+            float value = values.containsKey(idx) ? values.get(idx) : 0.0f;
+            observed.add(idx);
+            min = Math.min(min, value);
+            max = Math.max(max, value);
+        }
+        if (observed.isEmpty()) {
+            return out;
+        }
+        float range = max - min;
+        for (Integer idx : observed) {
+            float value = values.containsKey(idx) ? values.get(idx) : 0.0f;
+            out[idx] = range <= 1e-6f
+                    ? 0.0f
+                    : Math.max(-1.0f, Math.min(1.0f, (2.0f * ((value - min) / range)) - 1.0f));
+        }
+        return out;
+    }
+
+    private static Map<Integer, Float> parseFloatPairs(String raw) {
+        Map<Integer, Float> out = new LinkedHashMap<>();
         if (raw == null || raw.trim().isEmpty()) {
             return out;
         }
@@ -309,16 +389,30 @@ public final class TerminalLineValueTargetTrainingDataExporter {
             try {
                 int idx = Integer.parseInt(bits[0].trim());
                 float value = Float.parseFloat(bits[1].trim());
-                if (idx >= 0 && idx < out.length && !Float.isNaN(value) && !Float.isInfinite(value) && value > 0.0f) {
-                    out[idx] = value;
+                if (!Float.isNaN(value) && !Float.isInfinite(value)) {
+                    out.put(idx, value);
                 }
             } catch (NumberFormatException ignored) {
             }
         }
-        float sum = targetSum(out);
-        if (sum > 0.0f) {
-            for (int i = 0; i < out.length; i++) {
-                out[i] /= sum;
+        return out;
+    }
+
+    private static Map<Integer, Integer> parseIntPairs(String raw) {
+        Map<Integer, Integer> out = new LinkedHashMap<>();
+        if (raw == null || raw.trim().isEmpty()) {
+            return out;
+        }
+        for (String part : raw.split("\\|")) {
+            String[] bits = part.split(":", 2);
+            if (bits.length != 2) {
+                continue;
+            }
+            try {
+                int idx = Integer.parseInt(bits[0].trim());
+                int value = Integer.parseInt(bits[1].trim());
+                out.put(idx, value);
+            } catch (NumberFormatException ignored) {
             }
         }
         return out;
@@ -341,16 +435,38 @@ public final class TerminalLineValueTargetTrainingDataExporter {
         return out;
     }
 
-    private static List<Integer> bestIndicesFromTarget(float[] target) {
+    private static List<Integer> bestIndicesFromTarget(float[] target, TargetMode mode) {
         int best = -1;
-        float bestValue = 0.0f;
+        float bestValue = mode.usesObservedTargets() ? -2.1f : 0.0f;
         for (int i = 0; i < target.length; i++) {
+            if (mode.usesObservedTargets() && !isObservedSignedTarget(target[i])) {
+                continue;
+            }
             if (target[i] > bestValue) {
                 bestValue = target[i];
                 best = i;
             }
         }
         return best < 0 ? Collections.emptyList() : Collections.singletonList(best);
+    }
+
+    private static boolean hasTargetSignal(float[] target, TargetMode mode) {
+        if (target == null) {
+            return false;
+        }
+        if (mode.usesObservedTargets()) {
+            for (float value : target) {
+                if (isObservedSignedTarget(value)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return targetSum(target) > 0.0f;
+    }
+
+    private static boolean isObservedSignedTarget(float value) {
+        return !Float.isNaN(value) && !Float.isInfinite(value) && value >= -1.0f && value <= 1.0f;
     }
 
     private static float targetSum(float[] target) {
@@ -411,6 +527,38 @@ public final class TerminalLineValueTargetTrainingDataExporter {
         }
         String message = t.getMessage();
         return t.getClass().getSimpleName() + (message == null || message.isEmpty() ? "" : ":" + message);
+    }
+
+    private enum TargetMode {
+        DISTRIBUTION("distribution"),
+        SIGNED_VALUES("signed-values"),
+        ADVANTAGE_VALUES("advantage-values");
+
+        private final String optionName;
+
+        TargetMode(String optionName) {
+            this.optionName = optionName;
+        }
+
+        private static TargetMode parse(String raw) {
+            String normalized = raw == null ? "" : raw.trim().toLowerCase(Locale.ROOT);
+            if (normalized.isEmpty() || "distribution".equals(normalized) || "soft".equals(normalized)) {
+                return DISTRIBUTION;
+            }
+            if ("signed-values".equals(normalized) || "signed_value".equals(normalized)
+                    || "signed-values-from-candidate-values".equals(normalized)) {
+                return SIGNED_VALUES;
+            }
+            if ("advantage-values".equals(normalized) || "relative-values".equals(normalized)
+                    || "rank-values".equals(normalized) || "sibling-advantage".equals(normalized)) {
+                return ADVANTAGE_VALUES;
+            }
+            throw new IllegalArgumentException("Unsupported --target-mode: " + raw);
+        }
+
+        private boolean usesObservedTargets() {
+            return this != DISTRIBUTION;
+        }
     }
 
     private static final class CaptureController implements EngineDecisionBranchController {
@@ -600,6 +748,7 @@ public final class TerminalLineValueTargetTrainingDataExporter {
         private Path summaryFile;
         private String snapshotPathPrefixFrom = "";
         private String snapshotPathPrefixTo = "";
+        private TargetMode targetMode = TargetMode.DISTRIBUTION;
         private int timeoutSec = 30;
         private int maxRecords = 0;
         private int expectRecords = -1;
@@ -621,6 +770,9 @@ public final class TerminalLineValueTargetTrainingDataExporter {
             }
             if (values.containsKey("snapshot-path-prefix-to")) {
                 cfg.snapshotPathPrefixTo = values.get("snapshot-path-prefix-to");
+            }
+            if (values.containsKey("target-mode")) {
+                cfg.targetMode = TargetMode.parse(values.get("target-mode"));
             }
             if (cfg.snapshotPathPrefixFrom.isEmpty() != cfg.snapshotPathPrefixTo.isEmpty()) {
                 throw new IllegalArgumentException("--snapshot-path-prefix-from and --snapshot-path-prefix-to must be provided together");

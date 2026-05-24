@@ -1584,19 +1584,20 @@ class PythonEntryPoint:
                     with torch.inference_mode():
                         model_training_before = bool(getattr(model, "training", False))
                         if self.python_inference_duplicate_probe:
-                            probs, value, logits = model.score_candidates(
+                            probs, value, logits, candidate_q = model.score_candidates(
                                 seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
                                 head_id, int(pick_index), int(min_targets), int(max_targets),
-                                return_logits=True)
-                            duplicate_probs, duplicate_value, duplicate_logits = model.score_candidates(
+                                return_logits=True, return_candidate_q=True)
+                            duplicate_probs, duplicate_value, duplicate_logits, _duplicate_q = model.score_candidates(
                                 seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
                                 head_id, int(pick_index), int(min_targets), int(max_targets),
-                                return_logits=True)
+                                return_logits=True, return_candidate_q=True)
                             probe_probs, probe_value = probs, value
                         else:
-                            probs, value = model.score_candidates(
+                            probs, value, candidate_q = model.score_candidates(
                                 seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t,
-                                head_id, int(pick_index), int(min_targets), int(max_targets))
+                                head_id, int(pick_index), int(min_targets), int(max_targets),
+                                return_candidate_q=True)
                             logits = duplicate_probs = duplicate_value = duplicate_logits = None
                             probe_probs = probe_value = None
                         if self.policy_ensemble_models:
@@ -1664,11 +1665,12 @@ class PythonEntryPoint:
 
                 probs_np = probs.detach().cpu().numpy()
                 value_np = value.detach().cpu().numpy()
+                candidate_q_np = candidate_q.detach().cpu().numpy()
 
                 # Release GPU tensors immediately (in this scope where they're defined)
-                del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t, probs, value
+                del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t, probs, value, candidate_q
 
-                return probs_np, value_np
+                return probs_np, value_np, candidate_q_np
             finally:
                 if lock_held:
                     try:
@@ -1679,7 +1681,11 @@ class PythonEntryPoint:
         def _score_with_oom_splitting(start: int, end: int):
             n = int(end - start)
             if n <= 0:
-                return np.zeros((0, max_candidates), dtype=np.float32), np.zeros((0, 1), dtype=np.float32)
+                return (
+                    np.zeros((0, max_candidates), dtype=np.float32),
+                    np.zeros((0, 1), dtype=np.float32),
+                    np.zeros((0, max_candidates), dtype=np.float32),
+                )
             # Proactive cap if configured or learned.
             cap = self._infer_safe_max if (
                 self.auto_batch_enable and self._infer_safe_max) else None
@@ -1690,18 +1696,21 @@ class PythonEntryPoint:
                     pass
                 probs_parts = []
                 value_parts = []
+                q_parts = []
                 i = start
                 while i < end:
                     j = min(end, i + int(cap))
-                    p, v = _score_with_oom_splitting(i, j)
+                    p, v, q = _score_with_oom_splitting(i, j)
                     probs_parts.append(p)
                     value_parts.append(v)
+                    q_parts.append(q)
                     i = j
                 result_probs = np.concatenate(probs_parts, axis=0)
                 result_values = np.concatenate(value_parts, axis=0)
+                result_q = np.concatenate(q_parts, axis=0)
                 # Clean up intermediate parts
-                del probs_parts, value_parts
-                return result_probs, result_values
+                del probs_parts, value_parts, q_parts
+                return result_probs, result_values, result_q
 
             # Proactive paging avoidance: if we'd exceed headroom, split before we start paging/thrashing.
             if self.auto_batch_enable and self.auto_avoid_paging and torch.cuda.is_available():
@@ -1714,16 +1723,20 @@ class PythonEntryPoint:
                     except Exception:
                         pass
                     mid = start + (n // 2)
-                    p0, v0 = _score_with_oom_splitting(start, mid)
-                    p1, v1 = _score_with_oom_splitting(mid, end)
-                    return np.concatenate((p0, p1), axis=0), np.concatenate((v0, v1), axis=0)
+                    p0, v0, q0 = _score_with_oom_splitting(start, mid)
+                    p1, v1, q1 = _score_with_oom_splitting(mid, end)
+                    return (
+                        np.concatenate((p0, p1), axis=0),
+                        np.concatenate((v0, v1), axis=0),
+                        np.concatenate((q0, q1), axis=0),
+                    )
 
             try:
-                (p, v), extra_mb = self._measure_peak_extra_mb(
+                (p, v, q), extra_mb = self._measure_peak_extra_mb(
                     lambda: _score_numpy_range(start, end))
                 # Update per-sample estimate from measured peak delta.
                 self._update_mem_ema("infer", extra_mb, n)
-                return p, v
+                return p, v, q
             except RuntimeError as e:
                 if self.auto_batch_enable and self._is_cuda_oom(e):
                     self._cuda_cleanup_after_oom()
@@ -1740,13 +1753,14 @@ class PythonEntryPoint:
                         logger.warning(
                             LogCategory.GPU_BATCH, "AutoBatch(infer): OOM -> shrinking infer cap to %d", int(self._infer_safe_max))
                     mid = start + (n // 2)
-                    p0, v0 = _score_with_oom_splitting(start, mid)
-                    p1, v1 = _score_with_oom_splitting(mid, end)
+                    p0, v0, q0 = _score_with_oom_splitting(start, mid)
+                    p1, v1, q1 = _score_with_oom_splitting(mid, end)
                     result_probs = np.concatenate((p0, p1), axis=0)
                     result_values = np.concatenate((v0, v1), axis=0)
+                    result_q = np.concatenate((q0, q1), axis=0)
                     # Clean up splits
-                    del p0, v0, p1, v1
-                    return result_probs, result_values
+                    del p0, v0, q0, p1, v1, q1
+                    return result_probs, result_values, result_q
                 raise
 
         try:
@@ -1757,18 +1771,21 @@ class PythonEntryPoint:
             if infer_chunk and infer_chunk > 0 and n_total > infer_chunk:
                 probs_parts = []
                 value_parts = []
+                q_parts = []
                 i = 0
                 while i < n_total:
                     j = min(n_total, i + int(infer_chunk))
-                    p, v = _score_with_oom_splitting(i, j)
+                    p, v, q = _score_with_oom_splitting(i, j)
                     probs_parts.append(p)
                     value_parts.append(v)
+                    q_parts.append(q)
                     i = j
                 probs_np = np.concatenate(probs_parts, axis=0)
                 value_np = np.concatenate(value_parts, axis=0)
-                del probs_parts, value_parts
+                candidate_q_np = np.concatenate(q_parts, axis=0)
+                del probs_parts, value_parts, q_parts
             else:
-                probs_np, value_np = _score_with_oom_splitting(0, n_total)
+                probs_np, value_np, candidate_q_np = _score_with_oom_splitting(0, n_total)
 
             # -------------------------------------------------------
             # Debug: confirm inputs vary + value isn't flatlined
@@ -1826,11 +1843,11 @@ class PythonEntryPoint:
             elapsed_ms = (time.perf_counter() - t_start) * 1000.0
             self.metrics.update_timing_metric("infer", elapsed_ms)
 
-            out = np.concatenate((probs_np, value_np), axis=1)
+            out = np.concatenate((probs_np, value_np, candidate_q_np), axis=1)
             result_bytes = out.astype('<f4').tobytes()
 
             # Clean up numpy arrays to prevent accumulation
-            del probs_np, value_np, out
+            del probs_np, value_np, candidate_q_np, out
             self._log_cuda_mem("scoreCandidatesPolicyFlat:end")
 
             return result_bytes

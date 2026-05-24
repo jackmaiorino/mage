@@ -90,7 +90,17 @@ final class SharedGpuTensorSerde {
             policy[i] = buffer.getFloat();
         }
         float value = buffer.remaining() >= 4 ? buffer.getFloat() : 0.0f;
-        return new PythonMLBatchManager.PredictionResult(policy, value);
+        float[] candidateQ = null;
+        if (buffer.remaining() >= maxCandidates * Float.BYTES) {
+            candidateQ = new float[maxCandidates];
+            for (int i = 0; i < maxCandidates; i++) {
+                candidateQ[i] = buffer.getFloat();
+            }
+        }
+        return new PythonMLBatchManager.PredictionResult(
+                policy, value, candidateQ,
+                "", "", "", -1, -1,
+                Thread.currentThread().getName(), "policy_scores", false, "");
     }
 
     static byte[] buildTrainPayload(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> rewards) {

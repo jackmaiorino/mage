@@ -2634,6 +2634,7 @@ public final class ActionCounterfactualTrainer {
     private static final class PolicyScoreResult {
         final float[] policyScores;
         final float[] rawScores;
+        final float[] candidateQScores;
         final float valueScore;
         final String policyKey;
         final String headId;
@@ -2658,6 +2659,7 @@ public final class ActionCounterfactualTrainer {
         private PolicyScoreResult(
                 float[] policyScores,
                 float[] rawScores,
+                float[] candidateQScores,
                 float valueScore,
                 String policyKey,
                 String headId,
@@ -2682,6 +2684,7 @@ public final class ActionCounterfactualTrainer {
             this.policyScores = policyScores == null ? new float[0] : Arrays.copyOf(policyScores, policyScores.length);
             this.rawScores = rawScores == null ? Arrays.copyOf(this.policyScores, this.policyScores.length)
                     : Arrays.copyOf(rawScores, rawScores.length);
+            this.candidateQScores = candidateQScores == null ? new float[0] : Arrays.copyOf(candidateQScores, candidateQScores.length);
             this.valueScore = valueScore;
             this.policyKey = safeText(policyKey);
             this.headId = safeText(headId);
@@ -2720,6 +2723,7 @@ public final class ActionCounterfactualTrainer {
             return new PolicyScoreResult(
                     scores,
                     result == null ? scores : result.policyScores,
+                    result == null ? null : result.candidateQScores,
                     result == null ? 0.0f : result.valueScores,
                     policyKey,
                     headId,
@@ -2757,7 +2761,7 @@ public final class ActionCounterfactualTrainer {
                 String backendPath,
                 String error
         ) {
-            return new PolicyScoreResult(scores, scores, 0.0f, policyKey, headId, pickIndex, minTargets, maxTargets,
+            return new PolicyScoreResult(scores, scores, null, 0.0f, policyKey, headId, pickIndex, minTargets, maxTargets,
                     modelClass, deviceInfo, backendPath, "", "", -1, -1, callerThreadName, callerThreadId,
                     Thread.currentThread().getName(), "uniform_fallback", true, "", error);
         }
@@ -5497,10 +5501,10 @@ public final class ActionCounterfactualTrainer {
         double topTargetMassSum = 0.0;
         double rankSum = 0.0;
         try (BufferedWriter samples = Files.newBufferedWriter(samplesPath, StandardCharsets.UTF_8)) {
-            samples.write("ordinal,action_type,candidate_count,target_idx,top_idx,target_prob,top_prob,target_rank,top1_match,valid_count,state_hash,candidate_hash,mcts_target_sum,cand0_id,cand1_id,cand0_feat_hash,cand1_feat_hash,cand01_feat_equal,target_positive_count,top_target_mass,target_set_match\n");
+            samples.write("ordinal,action_type,candidate_count,target_idx,top_idx,target_prob,top_prob,target_rank,top1_match,valid_count,state_hash,candidate_hash,mcts_target_sum,cand0_id,cand1_id,cand0_feat_hash,cand1_feat_hash,cand01_feat_equal,target_positive_count,top_target_mass,target_set_match,target_q,top_q,q_top_idx,q_target_rank,q_top_target_mass,q_top1_match\n");
             for (StateSequenceBuilder.TrainingData td : records) {
-                float[] policy = scoreTrainingData(td);
-                ScoreProbeRecord record = ScoreProbeRecord.from(total, td, policy);
+                PolicyScoreResult scored = scoreTrainingDataDetailed(td, null);
+                ScoreProbeRecord record = ScoreProbeRecord.from(total, td, scored.policyScores, scored.candidateQScores);
                 total++;
                 if (record.targetIdx < 0) {
                     missingTarget++;
@@ -13814,6 +13818,12 @@ public final class ActionCounterfactualTrainer {
         final int targetPositiveCount;
         final float topTargetMass;
         final boolean targetSetMatch;
+        final float targetQ;
+        final float topQ;
+        final int qTopIdx;
+        final int qTargetRank;
+        final float qTopTargetMass;
+        final boolean qTop1Match;
 
         private ScoreProbeRecord(
                 int ordinal,
@@ -13835,7 +13845,12 @@ public final class ActionCounterfactualTrainer {
                 boolean cand01FeatEqual,
                 int targetPositiveCount,
                 float topTargetMass,
-                boolean targetSetMatch
+                boolean targetSetMatch,
+                float targetQ,
+                float topQ,
+                int qTopIdx,
+                int qTargetRank,
+                float qTopTargetMass
         ) {
             this.ordinal = ordinal;
             this.actionType = actionType;
@@ -13858,9 +13873,19 @@ public final class ActionCounterfactualTrainer {
             this.targetPositiveCount = targetPositiveCount;
             this.topTargetMass = topTargetMass;
             this.targetSetMatch = targetSetMatch;
+            this.targetQ = targetQ;
+            this.topQ = topQ;
+            this.qTopIdx = qTopIdx;
+            this.qTargetRank = qTargetRank;
+            this.qTopTargetMass = qTopTargetMass;
+            this.qTop1Match = targetIdx >= 0 && targetIdx == qTopIdx;
         }
 
         static ScoreProbeRecord from(int ordinal, StateSequenceBuilder.TrainingData td, float[] policy) {
+            return from(ordinal, td, policy, null);
+        }
+
+        static ScoreProbeRecord from(int ordinal, StateSequenceBuilder.TrainingData td, float[] policy, float[] candidateQ) {
             int max = Math.min(td.candidateCount, StateSequenceBuilder.TrainingData.MAX_CANDIDATES);
             int targetIdx = -1;
             float targetMass = Float.NEGATIVE_INFINITY;
@@ -13918,13 +13943,47 @@ public final class ActionCounterfactualTrainer {
                 topTargetMass = 1.0f;
             }
             boolean targetSetMatch = observedTargetValue(topTargetMass, branchTargets);
+            int qTopIdx = -1;
+            float topQ = Float.NEGATIVE_INFINITY;
+            if (candidateQ != null) {
+                for (int i = 0; i < max && i < candidateQ.length; i++) {
+                    if (td.candidateMask[i] == 0) {
+                        continue;
+                    }
+                    float q = candidateQ[i];
+                    if (Float.isFinite(q) && q > topQ) {
+                        topQ = q;
+                        qTopIdx = i;
+                    }
+                }
+            }
+            if (!Float.isFinite(topQ)) {
+                topQ = 0.0f;
+            }
+            float targetQ = targetIdx >= 0 && candidateQ != null && targetIdx < candidateQ.length
+                    ? candidateQ[targetIdx]
+                    : 0.0f;
+            int qRank = 0;
+            if (targetIdx >= 0 && candidateQ != null && targetIdx < candidateQ.length) {
+                qRank = 1;
+                for (int i = 0; i < max && i < candidateQ.length; i++) {
+                    if (td.candidateMask[i] != 0 && i != targetIdx && candidateQ[i] > targetQ) {
+                        qRank++;
+                    }
+                }
+            }
+            float qTopTargetMass = 0.0f;
+            if (td.mctsVisitTargets != null && qTopIdx >= 0 && qTopIdx < td.mctsVisitTargets.length) {
+                qTopTargetMass = td.mctsVisitTargets[qTopIdx];
+            }
             return new ScoreProbeRecord(ordinal, td.actionType, td.candidateCount,
                     targetIdx, topIdx, targetProb, topProb, rank, validCount,
                     hashState(td), hashCandidates(td), targetSum,
                     candidateId(td, 0), candidateId(td, 1),
                     candidateFeatureHash(td, 0), candidateFeatureHash(td, 1),
                     candidateFeaturesEqual(td, 0, 1), targetPositiveCount,
-                    topTargetMass, targetSetMatch);
+                    topTargetMass, targetSetMatch,
+                    targetQ, topQ, qTopIdx, qRank, qTopTargetMass);
         }
 
         private static int candidateId(StateSequenceBuilder.TrainingData td, int idx) {
@@ -13993,7 +14052,13 @@ public final class ActionCounterfactualTrainer {
                     + "," + cand01FeatEqual
                     + "," + targetPositiveCount
                     + "," + String.format(Locale.US, "%.6f", topTargetMass)
-                    + "," + targetSetMatch;
+                    + "," + targetSetMatch
+                    + "," + String.format(Locale.US, "%.6f", targetQ)
+                    + "," + String.format(Locale.US, "%.6f", topQ)
+                    + "," + qTopIdx
+                    + "," + qTargetRank
+                    + "," + String.format(Locale.US, "%.6f", qTopTargetMass)
+                    + "," + qTop1Match;
         }
     }
 
