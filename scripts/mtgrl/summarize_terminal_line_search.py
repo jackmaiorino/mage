@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """Summarize terminal-line checkpoint search traces into compact training-gate artifacts."""
 
-from __future__ import annotations
-
 import argparse
 import csv
 import json
 import re
 from collections import Counter
 from pathlib import Path
-from typing import Dict, Iterable, List, Sequence
+from typing import Dict, Iterable, List, Optional, Sequence
 
 
 TERMINAL_LINE_CSV = "terminal_line_search.csv"
@@ -20,7 +18,7 @@ TRACE_RE = re.compile(
 )
 
 
-def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
+def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Summarize terminal-line branch search CSVs and extract compact combo markers."
     )
@@ -301,7 +299,7 @@ def markdown_report(summary: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parse_args(argv)
     run_dir = Path(args.run_dir)
     summary = summarize(run_dir, args.prefer_merged)
