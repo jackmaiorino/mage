@@ -1715,11 +1715,23 @@ v357-v361 exact-seed paired controls:
   - Per matchup: Jund Wildfire 6 / 8, Spy mirror 6 / 8, Mono Red Rally 2 / 8.
 - Interpretation of the control: the seed-pairing repair, not the head allow-list, explains the reversal from the v351/v352 read. The head allow-list remains useful as a generic safety knob, but it is not proven to improve this small live slice.
 
+v362-v363 exact-seed Grixis Affinity hard-gate check:
+
+- Exact paired seed mode: `--seed-key-mode matchup`, replay seed base `5151`, skill 7, no MCTS, no live checkpoints, DB cleanup after each chunk.
+- Candidate artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v362_v350_fullblend_exactseed_grixis_g16_metric_gpu`
+  - v350 full blend: 5 / 16.
+- Baseline artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v363_baseline_exactseed_grixis_g16_metric_gpu`
+  - Baseline `Pauper-Spy-Combo-Value`: 8 / 16.
+- Paired chunk deltas:
+  - Candidate lost where baseline won: chunks 3, 7, 8, 11.
+  - Candidate won where baseline lost: chunk 14.
+  - Net: -3 wins for v350 on this exact Grixis slice.
+
 Cleanup / archival:
 
 - Preserved CSV summaries, manifests, logs, checkpoints, and value-target artifacts.
 - Removed generated DB and model-snapshot copies from the failed partial seed8888 run.
-- Removed reconstructable generated DB and model-snapshot copies from recent v347/v350/v351/v352/v354/v356/v357/v358/v359/v360/v361 eval runs after summaries/logs/checkpoints were preserved.
+- Removed reconstructable generated DB and model-snapshot copies from recent v347/v350/v351/v352/v354/v356/v357/v358/v359/v360/v361/v362/v363 eval runs after summaries/logs/checkpoints were preserved.
 - Removed stale generated isolated CLI workspaces from `D:\codex-mage-cli-workspaces`.
 - D: free space recovered from 0 bytes to about 5 GB after cleanup.
 
@@ -1727,6 +1739,6 @@ Interpretation:
 
 - The signed-target fix is important. Unsigned Q import is a blocker because it teaches "all observed positive entries are good" and collapses Q discrimination.
 - Signed local sibling advantages now produce a measurable offline ranking signal and a stronger local live result than the earlier q-only variants.
-- The v351/v352 negative read was an evaluation-control error, not a reliable policy result. Exact paired seeds show the v350 signed-Q candidate at 14 / 24 against an 8 / 24 baseline over the same three-opponent active-pool slice.
-- This is still not an HPC promotion gate: it is only 24 exact paired games and excludes Grixis Affinity, the original hard gate. It does justify continued local exact-paired evaluation instead of abandoning the candidate-Q path.
-- The next unit should run a larger exact-paired disk-light sweep, using `--seed-key-mode matchup`, across Grixis Affinity and/or the broader active Pauper pool. Only after the exact-paired lift survives a larger sample should this move to HPC scale.
+- The v351/v352 negative read was an evaluation-control error, not a reliable policy result. Exact paired seeds show the v350 signed-Q candidate at 14 / 24 against an 8 / 24 baseline over Spy mirror, Jund Wildfire, and Mono Red Rally.
+- The original Grixis Affinity hard gate remains negative under exact pairing: v350 is 5 / 16 against an 8 / 16 baseline. This blocks promotion and HPC scaling of the current v350 direct-blend consumer.
+- The next unit should inspect or mine the exact Grixis disagreement chunks, especially baseline-win/candidate-loss chunks 3, 7, 8, and 11, to determine whether the Q consumer is misranking concrete decisions or whether the current outcome-derived corpus simply lacks Affinity-pressure coverage.
