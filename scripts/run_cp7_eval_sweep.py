@@ -624,6 +624,16 @@ def main() -> int:
         help="Base seed for replay metadata; each matchup chunk gets a stable offset.",
     )
     parser.add_argument(
+        "--seed-key-mode",
+        choices=("profile", "matchup"),
+        default="profile",
+        help=(
+            "Controls the stable offset key for replay seeds. "
+            "'profile' preserves historical behavior; 'matchup' shares exact "
+            "per-chunk seeds across profiles for paired candidate/baseline comparisons."
+        ),
+    )
+    parser.add_argument(
         "--live-checkpoints",
         action="store_true",
         help="Capture durable branchable engine checkpoints during replay-logged live eval decisions.",
@@ -712,6 +722,7 @@ def main() -> int:
         "game_log_format": args.game_log_format,
         "replay_metadata": bool(args.replay_metadata),
         "replay_seed_base": args.replay_seed_base,
+        "seed_key_mode": args.seed_key_mode,
         "live_checkpoints": bool(args.live_checkpoints),
         "live_checkpoint_max_per_game": args.live_checkpoint_max_per_game,
         "live_checkpoint_action_types": args.live_checkpoint_action_types,
@@ -788,6 +799,7 @@ def main() -> int:
                 for opponent in opponent_decks:
                     opponent_label = opponent.stem
                     base_key = f"{entry['profile']}__{agent_label}__vs__{opponent_label}".replace(" ", "_")
+                    matchup_seed_base_key = f"{agent_label}__vs__{opponent_label}".replace(" ", "_")
                     games_per_job = args.games_per_matchup
                     if args.games_per_job > 0:
                         games_per_job = min(args.games_per_job, args.games_per_matchup)
@@ -797,6 +809,12 @@ def main() -> int:
                     while remaining > 0:
                         chunk_games = min(games_per_job, remaining)
                         key = base_key if chunk_count == 1 else f"{base_key}__chunk_{chunk_index:03d}"
+                        if args.seed_key_mode == "matchup":
+                            seed_key = matchup_seed_base_key if chunk_count == 1 else (
+                                f"{matchup_seed_base_key}__chunk_{chunk_index:03d}"
+                            )
+                        else:
+                            seed_key = key
                         result_file = results_dir / f"{key}.csv"
                         db_dir = db_root / key
                         jobs.append(
@@ -835,7 +853,7 @@ def main() -> int:
                                     args.eval_game_logging,
                                     args.game_log_format,
                                     args.replay_metadata,
-                                    args.replay_seed_base + stable_seed_offset(key),
+                                    args.replay_seed_base + stable_seed_offset(seed_key),
                                     args.live_checkpoints,
                                     args.live_checkpoint_max_per_game,
                                     args.live_checkpoint_action_types,

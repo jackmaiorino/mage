@@ -1668,7 +1668,7 @@ v350 combined signed-Q candidate:
   - `local-training/local_pbt/cp7_eval_sweeps/20260524_v350_qonly_signed_advantage_combined_blend10_affinity_g16_seed9999_metric_gpu`: 4 / 16 vs Grixis Affinity skill 7, no MCTS.
   - `local-training/local_pbt/cp7_eval_sweeps/20260524_v350_qonly_signed_advantage_combined_blend10_affinity_g16_seed8888_logs_gpu`: partial 1 / 9 before disk-full during DB copy; treat as an infra-interrupted diagnostic, not a completed sweep.
 
-v351 broader disk-light metric sweep:
+v351-v352 broader disk-light metric sweep and seed-key correction:
 
 - Artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v351_v350_broader_active_pool_g8_metric_gpu`
 - Settings: v350 candidate, `CANDIDATE_Q_BLEND=1.0`, skill 7, no MCTS, no game logs or live checkpoints, DB hardlinks enabled.
@@ -1678,8 +1678,6 @@ v351 broader disk-light metric sweep:
   - Jund Wildfire: 2 / 8
   - Mono Red Rally: 3 / 8
 
-v352 baseline-matched comparator:
-
 - Artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v352_baseline_broader_active_pool_g8_metric_gpu`
 - Settings: baseline `Pauper-Spy-Combo-Value`, same v351 opponent filter, skill, no-MCTS setting, replay seed base `4242`, one-game job chunking, no live checkpoints, and DB cleanup after each chunk.
 - Results:
@@ -1687,17 +1685,41 @@ v352 baseline-matched comparator:
   - Spy mirror: 5 / 8
   - Jund Wildfire: 6 / 8
   - Mono Red Rally: 3 / 8
-- Matched-slice delta for v350 direct Q blend versus baseline:
-  - Overall: -3 wins
-  - Spy mirror: +1 win
-  - Jund Wildfire: -4 wins
-  - Mono Red Rally: 0 wins
+- Correction: v351/v352 were not exact paired seeds. `run_cp7_eval_sweep.py` historically included the profile name in the stable replay-seed offset key, so two profiles with the same `--replay-seed-base` saw different per-chunk shuffled games.
+- Resulting code repair: `scripts/run_cp7_eval_sweep.py` now supports `--seed-key-mode matchup`, which removes the profile name from the seed offset key while preserving it in output filenames. Use this mode for candidate/baseline paired comparisons.
+
+v353-v356 Q-blend consumer probes:
+
+- Added `CANDIDATE_Q_BLEND_HEADS` to the Python model as a generic runtime allow-list for Q blending by decision head. Default remains all heads for backward compatibility; `action,target,card_select` matches the current terminal-line evidence coverage.
+- Offline v353 gate sweep on the 389 combined v350 value records:
+  - Full blend baseline: 170 / 389, average rank 2.1877.
+  - Margin-only gate `CANDIDATE_Q_BLEND_MIN_MARGIN=0.05`: 170 / 389, average rank 2.1774.
+  - Positive top-Q gates fell back to baseline-like behavior: 121 / 389, average rank 2.3188. The Q head is mostly relative/negative on these records, so absolute positive-Q thresholding is the wrong confidence signal.
+- Live Jund probes before exact seed repair:
+  - `20260524_v354_v350_qgate_margin005_jund_g8_metric_gpu`: 2 / 8.
+  - `20260524_v356_v350_qhead_action_target_card_jund_g8_metric_gpu`: 2 / 8.
+  - These are now classified as unpaired smoke results, not candidate-vs-baseline evidence, because they used the old profile-key seed mode.
+- Offline v355 head-gate sanity probe:
+  - `CANDIDATE_Q_BLEND_HEADS=action,target,card_select`: 170 / 389, average rank 2.1877, matching full blend on the terminal-line evidence records.
+
+v357-v361 exact-seed paired controls:
+
+- Exact paired seed mode: `--seed-key-mode matchup`, replay seed base `4242`, skill 7, no MCTS, no live checkpoints, DB cleanup after each chunk.
+- Head-gated v350 (`CANDIDATE_Q_BLEND_HEADS=action,target,card_select`) versus exact baseline:
+  - Jund Wildfire: v357 6 / 8, baseline v358 2 / 8.
+  - Spy mirror: v359 6 / 8, baseline v360 4 / 8.
+  - Mono Red Rally: v359 2 / 8, baseline v360 2 / 8.
+  - Combined: v350 head-gated 14 / 24, baseline 8 / 24.
+- Full-blend exact control:
+  - `20260524_v361_v350_fullblend_exactseed_active3_g8_metric_gpu`: 14 / 24.
+  - Per matchup: Jund Wildfire 6 / 8, Spy mirror 6 / 8, Mono Red Rally 2 / 8.
+- Interpretation of the control: the seed-pairing repair, not the head allow-list, explains the reversal from the v351/v352 read. The head allow-list remains useful as a generic safety knob, but it is not proven to improve this small live slice.
 
 Cleanup / archival:
 
 - Preserved CSV summaries, manifests, logs, checkpoints, and value-target artifacts.
 - Removed generated DB and model-snapshot copies from the failed partial seed8888 run.
-- Removed reconstructable generated DB and model-snapshot copies from recent v347/v350/v351/v352 eval runs after summaries/logs/checkpoints were preserved.
+- Removed reconstructable generated DB and model-snapshot copies from recent v347/v350/v351/v352/v354/v356/v357/v358/v359/v360/v361 eval runs after summaries/logs/checkpoints were preserved.
 - Removed stale generated isolated CLI workspaces from `D:\codex-mage-cli-workspaces`.
 - D: free space recovered from 0 bytes to about 5 GB after cleanup.
 
@@ -1705,6 +1727,6 @@ Interpretation:
 
 - The signed-target fix is important. Unsigned Q import is a blocker because it teaches "all observed positive entries are good" and collapses Q discrimination.
 - Signed local sibling advantages now produce a measurable offline ranking signal and a stronger local live result than the earlier q-only variants.
-- The baseline-matched v352 sweep rejects v350 direct Q blending as a promotion candidate: v350's broader 11 / 24 is below the same-slice baseline 14 / 24, with the main regression concentrated against Jund Wildfire.
-- The outcome-only branch targets remain thesis-aligned evidence for a value/ranking teacher, but the live consumer should not be a global `CANDIDATE_Q_BLEND=1.0` policy perturbation.
-- The next unit should diagnose/replace the consumer rather than scale v350: either inspect a small logged Jund Wildfire matched slice to identify the direct-blend failure mode, or implement a decision-local/gated consumer that only consults branch value where the checkpoint-derived target distribution is applicable.
+- The v351/v352 negative read was an evaluation-control error, not a reliable policy result. Exact paired seeds show the v350 signed-Q candidate at 14 / 24 against an 8 / 24 baseline over the same three-opponent active-pool slice.
+- This is still not an HPC promotion gate: it is only 24 exact paired games and excludes Grixis Affinity, the original hard gate. It does justify continued local exact-paired evaluation instead of abandoning the candidate-Q path.
+- The next unit should run a larger exact-paired disk-light sweep, using `--seed-key-mode matchup`, across Grixis Affinity and/or the broader active Pauper pool. Only after the exact-paired lift survives a larger sample should this move to HPC scale.

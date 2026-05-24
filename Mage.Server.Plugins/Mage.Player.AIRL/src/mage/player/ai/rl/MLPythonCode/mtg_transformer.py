@@ -37,6 +37,8 @@ class MTGTransformerModel(nn.Module):
         self.candidate_q_blend = float(os.getenv("CANDIDATE_Q_BLEND", "0.0"))
         self.candidate_q_blend_min_top_q = float(os.getenv("CANDIDATE_Q_BLEND_MIN_TOP_Q", "-1.0"))
         self.candidate_q_blend_min_margin = float(os.getenv("CANDIDATE_Q_BLEND_MIN_MARGIN", "0.0"))
+        self.candidate_q_blend_heads = self._parse_candidate_q_blend_heads(
+            os.getenv("CANDIDATE_Q_BLEND_HEADS", "*"))
 
         # Input scaling and normalization
         # NOTE: Was 0.1, increased to 1.0 to avoid vanishing activations
@@ -407,7 +409,7 @@ class MTGTransformerModel(nn.Module):
         scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
         candidate_q = torch.nan_to_num(candidate_q, nan=0.0, posinf=1.0, neginf=-1.0)
         candidate_q = candidate_q.masked_fill(~valid, 0.0)
-        if self.candidate_q_blend != 0.0:
+        if self.candidate_q_blend != 0.0 and self._candidate_q_blend_enabled_for_head(hid):
             scores = scores + self._candidate_q_blend_bonus(candidate_q, valid)
         scores = scores.masked_fill(~valid, -1e9)
 
@@ -451,6 +453,48 @@ class MTGTransformerModel(nn.Module):
                 margin = torch.zeros_like(top_q)
             gate = gate & (margin >= min_margin)
         return blend * candidate_q * gate.to(candidate_q.dtype).unsqueeze(-1)
+
+    @staticmethod
+    def _parse_candidate_q_blend_heads(raw: str):
+        text = str(raw or "*").strip().lower()
+        if text in ("", "*", "all"):
+            return None
+        if text in ("none", "off", "false", "0"):
+            return set()
+        aliases = {
+            "actions": "action",
+            "default": "action",
+            "spell": "action",
+            "spells": "action",
+            "ability": "action",
+            "abilities": "action",
+            "targets": "target",
+            "select_targets": "target",
+            "select_target": "target",
+            "card": "card_select",
+            "cards": "card_select",
+            "select_card": "card_select",
+            "card_select": "card_select",
+            "attacks": "attack",
+            "declare_attacks": "attack",
+            "blocks": "block",
+            "declare_blocks": "block",
+            "mulligans": "mulligan",
+            "london_mulligan": "mulligan",
+        }
+        heads = set()
+        for part in text.replace(";", ",").split(","):
+            token = part.strip().lower()
+            if token:
+                heads.add(aliases.get(token, token))
+        return heads
+
+    def _candidate_q_blend_enabled_for_head(self, head_id: str) -> bool:
+        heads = getattr(self, "candidate_q_blend_heads", None)
+        if heads is None:
+            return True
+        hid = str(head_id or "action").strip().lower()
+        return hid in heads
 
     def belief_logits_from_cls(self, cls: torch.Tensor) -> torch.Tensor:
         """Archetype classifier logits from shared-encoder CLS.
@@ -710,6 +754,7 @@ class SingleHeadScorer(nn.Module):
             self.scorer = model.policy_scorer_mulligan
         else:
             self.scorer = model.policy_scorer
+        self.head_id = hid
         self.candidate_q_blend = float(getattr(model, "candidate_q_blend", 0.0))
 
     @staticmethod
@@ -809,7 +854,7 @@ class SingleHeadScorer(nn.Module):
         scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
         candidate_q = torch.nan_to_num(candidate_q, nan=0.0, posinf=1.0, neginf=-1.0)
         candidate_q = candidate_q.masked_fill(~valid, 0.0)
-        if self.candidate_q_blend != 0.0:
+        if self.candidate_q_blend != 0.0 and m._candidate_q_blend_enabled_for_head(self.head_id):
             scores = scores + m._candidate_q_blend_bonus(candidate_q, valid)
         scores = scores.masked_fill(~valid, -1e9)
         probs = torch.softmax(scores, dim=-1)
