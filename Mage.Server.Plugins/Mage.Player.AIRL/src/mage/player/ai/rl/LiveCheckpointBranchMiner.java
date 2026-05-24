@@ -76,7 +76,7 @@ public final class LiveCheckpointBranchMiner {
                     + "reverse_post_prefix_hashes,forward_outcomes,reverse_outcomes\n";
     private static final String TERMINAL_LINE_SEARCH_CSV_HEADER =
             "snapshot_path,ordinal,decision_number,action_type,candidate_count,candidate_hash,state_hash,rng_state_hash,"
-                    + "attempt,root_indices,root_texts,terminal,won,lost,error,outcome,decision_count,"
+                    + "attempt,continuation_sample,continuation_seed,root_indices,root_texts,terminal,won,lost,error,outcome,decision_count,"
                     + "forced_steps_requested,forced_steps_completed,prefix_complete,final_state_hash,line_trace\n";
     private static final int MAX_DECISION_TRACE_ROWS = 256;
 
@@ -244,7 +244,8 @@ public final class LiveCheckpointBranchMiner {
             for (int attempt = 0; attempt < lineAttempts; attempt++) {
                 List<Integer> rootChoice = rootChoices.get(attempt % rootLimit);
                 boolean isSource = rootChoice.equals(sourceIndices);
-                long seed = terminalLineSeed(cfg, snapshot, rootChoice, attempt);
+                int continuationSample = cfg.lineCommonContinuationSeeds ? attempt / rootLimit : attempt;
+                long seed = terminalLineSeed(cfg, snapshot, rootChoice, attempt, continuationSample);
                 BranchOutcome outcome = runProbe(
                         snapshot,
                         rootChoice,
@@ -255,7 +256,8 @@ public final class LiveCheckpointBranchMiner {
                         true,
                         cfg.treeContinuationPolicy,
                         seed);
-                TerminalLineRow row = TerminalLineRow.fromSnapshot(candidate.path, snapshot, attempt, rootChoice);
+                TerminalLineRow row = TerminalLineRow.fromSnapshot(
+                        candidate.path, snapshot, attempt, continuationSample, seed, rootChoice);
                 row.apply(outcome);
                 appendTerminalLineRow(csvPath, row);
                 counts.add(row.classification());
@@ -1267,6 +1269,7 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- line_timeout_sec: ").append(cfg.lineTimeoutSec).append("\n");
         sb.append("- line_stop_on_win: ").append(cfg.lineStopOnWin).append("\n");
         sb.append("- line_stop_on_win_all: ").append(cfg.lineStopOnWinAll).append("\n");
+        sb.append("- line_common_continuation_seeds: ").append(cfg.lineCommonContinuationSeeds).append("\n");
         sb.append("- tree_max_actions: ").append(cfg.treeMaxActions).append("\n");
         sb.append("- tree_include_pass: ").append(cfg.treeIncludePass).append("\n");
         sb.append("- tree_continuation_policy: ").append(cfg.treeContinuationPolicy.name().toLowerCase(Locale.US)).append("\n");
@@ -1439,9 +1442,18 @@ public final class LiveCheckpointBranchMiner {
             Config cfg,
             LiveCheckpointRecorder.Snapshot snapshot,
             List<Integer> rootChoice,
-            int attempt
+            int attempt,
+            int continuationSample
     ) {
-        long seed = treeRolloutSeed(cfg, snapshot, rootChoice, attempt);
+        long seed;
+        if (cfg.lineCommonContinuationSeeds) {
+            seed = cfg.treeSeed;
+            seed = 31L * seed + (snapshot == null || snapshot.candidateHash == null ? 0 : snapshot.candidateHash.hashCode());
+            seed = 31L * seed + (snapshot == null || snapshot.stateHash == null ? 0 : snapshot.stateHash.hashCode());
+            seed = 31L * seed + continuationSample;
+        } else {
+            seed = treeRolloutSeed(cfg, snapshot, rootChoice, attempt);
+        }
         seed = 31L * seed + 0x54_4c_49_4eL;
         return seed;
     }
@@ -2937,6 +2949,8 @@ public final class LiveCheckpointBranchMiner {
         private String stateHash = "";
         private String randomStateHash = "";
         private int attempt = 0;
+        private int continuationSample = -1;
+        private long continuationSeed = 0L;
         private String rootIndices = "";
         private String rootTexts = "";
         private boolean terminal = false;
@@ -2955,11 +2969,15 @@ public final class LiveCheckpointBranchMiner {
                 Path path,
                 LiveCheckpointRecorder.Snapshot snapshot,
                 int attempt,
+                int continuationSample,
+                long continuationSeed,
                 List<Integer> rootChoice
         ) {
             TerminalLineRow row = new TerminalLineRow();
             row.snapshotPath = path == null ? "" : path.toString();
             row.attempt = attempt;
+            row.continuationSample = continuationSample;
+            row.continuationSeed = continuationSeed;
             if (snapshot != null) {
                 row.ordinal = snapshot.ordinal;
                 row.decisionNumber = snapshot.decisionNumber;
@@ -2983,7 +3001,7 @@ public final class LiveCheckpointBranchMiner {
         }
 
         private static TerminalLineRow failure(Path path, LiveCheckpointRecorder.Snapshot snapshot, String error) {
-            TerminalLineRow row = fromSnapshot(path, snapshot, 0, Collections.emptyList());
+            TerminalLineRow row = fromSnapshot(path, snapshot, 0, -1, 0L, Collections.emptyList());
             row.error = error == null ? "" : error;
             row.outcome = "error=" + row.error;
             return row;
@@ -3035,6 +3053,8 @@ public final class LiveCheckpointBranchMiner {
             cells.add(csv(stateHash));
             cells.add(csv(randomStateHash));
             cells.add(String.valueOf(attempt));
+            cells.add(String.valueOf(continuationSample));
+            cells.add(String.valueOf(continuationSeed));
             cells.add(csv(rootIndices));
             cells.add(csv(rootTexts));
             cells.add(String.valueOf(terminal));
@@ -3274,6 +3294,7 @@ public final class LiveCheckpointBranchMiner {
         private int lineTimeoutSec = 30;
         private boolean lineStopOnWin = true;
         private boolean lineStopOnWinAll = true;
+        private boolean lineCommonContinuationSeeds = false;
         private boolean sequenceTree = false;
         private int treeSequenceDepth = 2;
         private int treeSequenceBeam = 4;
@@ -3389,6 +3410,9 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("line-stop-on-win-all")) {
                 cfg.lineStopOnWinAll = Boolean.parseBoolean(values.get("line-stop-on-win-all"));
+            }
+            if (values.containsKey("line-common-continuation-seeds")) {
+                cfg.lineCommonContinuationSeeds = Boolean.parseBoolean(values.get("line-common-continuation-seeds"));
             }
             if (values.containsKey("sequence-tree")) {
                 cfg.sequenceTree = Boolean.parseBoolean(values.get("sequence-tree"));

@@ -1142,3 +1142,47 @@ Interpretation:
 - The terminal-line miner is now proven to run on Zaratan from a branchable checkpoint corpus, with direct-jar execution and compact summary artifacts.
 - Restricting the smoke to `ACTIVATE_ABILITY_OR_SPELL` roots removed the v323 `action_type_mismatch` noise and produced only terminal outcomes.
 - This still is not training evidence by itself. The next quality gate is a teacher-label extractor that groups terminal-line rows by checkpoint/root action, requires paired terminal siblings, and emits preference labels only when win-rate or terminal-value separation clears strict thresholds.
+
+## v326-v328 Teacher-Label Quality Gate
+
+Implementation:
+
+- Added `scripts/mtgrl/export_terminal_line_teacher_labels.py`.
+- The exporter groups terminal-line rows by checkpoint and compares root actions using terminal win/loss only.
+- Labels are admitted only when a target root is paired against a worse source root from the same checkpoint and clears configured win-rate, terminal-rate, attempt-count, and delta thresholds.
+- Added `LiveCheckpointBranchMiner --line-common-continuation-seeds true` and runner support so sibling roots can be evaluated under the same continuation sample ids.
+- New terminal-line CSVs include `continuation_sample` and `continuation_seed`.
+
+Artifacts:
+
+- One-sample local labels: `local-training/local_pbt/terminal_line_teacher_labels/v326_v323_strict_labels`
+- One-sample HPC-smoke labels: `local-training/hpc/terminal_line_v325_results/teacher_labels_strict`
+- Repeat confirmation without common seeds: `local-training/local_pbt/live_checkpoint_branch_miner/v327_v325_label_repeat_confirm`
+- Repeat confirmation with common seeds: `local-training/local_pbt/live_checkpoint_branch_miner/v328_v325_label_repeat_common_seed`
+- Paired-label export: `local-training/local_pbt/terminal_line_teacher_labels/v328_common_seed_paired_labels`
+
+Result:
+
+- v323 one-sample strict gate admitted 4 labels from 31 checkpoint groups.
+- v325 one-sample strict gate admitted 9 labels from 30 checkpoint groups.
+- v327 repeated those 9 candidate-label checkpoints with 32 attempts per snapshot and `line_stop_on_win=false`; strict repeat gate admitted 0 labels.
+- v328 repeated the same slice with common continuation seeds:
+  - 288 terminal rows
+  - 57 wins
+  - 21 full combo-pattern wins
+  - strict repeat gate admitted 0 labels
+  - moderate paired gate admitted 3 labels
+
+Moderate paired labels from v328:
+
+| Target | Source | Paired wins | Aggregate rates |
+| --- | --- | --- | --- |
+| `Cast Mesmeric Fiend` | `Cast Roost Seek` | 2/4 vs 0/4 | 0.50 vs 0.00 |
+| `Cast Overgrown Battlement` | `{T}: Add {G}.` | 2/4 vs 0/4 | 0.50 vs 0.00 |
+| `{T}, Sacrifice {this}: Add one mana of any color.` | `Cast Dread Return` | 3/5 vs 1/5 | 0.60 vs 0.166667 |
+
+Interpretation:
+
+- Terminal-line search is finding wins and combo-pattern wins, but one-sample hard labels are not stable enough for training.
+- Common continuation seeds make the comparison fairer and reveal that many root choices share the same downstream winning continuation. This supports treating the miner as a value-estimation teacher first, not as a hard correction-label generator yet.
+- The next scale unit should mine many more checkpoints with common continuation seeds, aggregate paired value estimates, and train only from labels that survive repeat gates or use low-weight pairwise/value targets rather than hard corrections.

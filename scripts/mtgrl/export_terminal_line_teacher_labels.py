@@ -44,6 +44,10 @@ LABEL_FIELDS = [
     "target_win_rate",
     "target_loss_rate",
     "target_terminal_rate",
+    "paired_samples",
+    "paired_target_wins",
+    "paired_source_wins",
+    "paired_win_delta_rate",
     "delta_win_rate",
     "combo_score_delta",
     "importance_score",
@@ -101,6 +105,8 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--min-delta", type=float, default=1.0)
     parser.add_argument("--min-source-terminal-rate", type=float, default=1.0)
     parser.add_argument("--min-target-terminal-rate", type=float, default=1.0)
+    parser.add_argument("--min-paired-samples", type=int, default=0)
+    parser.add_argument("--min-paired-win-delta-rate", type=float, default=0.0)
     parser.add_argument(
         "--min-target-combo-score",
         type=int,
@@ -208,6 +214,13 @@ def aggregate_action(rows: List[Dict[str, object]]) -> Dict[str, object]:
         if str(row.get("outcome", "")).strip() == "terminal_win"
     ]
     combo_scores = [as_int(row, "combo_score") for row in rows]
+    sample_outcomes = {}
+    for row in rows:
+        sample = str(row.get("continuation_sample", "")).strip()
+        if not sample:
+            sample = str(row.get("attempt", "")).strip()
+        if sample:
+            sample_outcomes[sample] = str(row.get("outcome", "")).strip()
     first = rows[0] if rows else {}
     return {
         "indices": str(first.get("root_indices", "")).strip(),
@@ -222,6 +235,29 @@ def aggregate_action(rows: List[Dict[str, object]]) -> Dict[str, object]:
         "max_combo_score": max(combo_scores) if combo_scores else 0,
         "min_win_decisions": min(win_decisions) if win_decisions else 0,
         "outcomes": "|".join(str(row.get("outcome", "")).strip() for row in rows),
+        "sample_outcomes": sample_outcomes,
+    }
+
+
+def paired_stats(source: Dict[str, object], target: Dict[str, object]) -> Dict[str, object]:
+    source_samples = source.get("sample_outcomes", {})
+    target_samples = target.get("sample_outcomes", {})
+    if not isinstance(source_samples, dict) or not isinstance(target_samples, dict):
+        return {
+            "paired_samples": 0,
+            "paired_target_wins": 0,
+            "paired_source_wins": 0,
+            "paired_win_delta_rate": 0.0,
+        }
+    keys = sorted(set(source_samples.keys()).intersection(target_samples.keys()))
+    target_wins = sum(1 for key in keys if target_samples.get(key) == "terminal_win")
+    source_wins = sum(1 for key in keys if source_samples.get(key) == "terminal_win")
+    delta_rate = pct(target_wins - source_wins, len(keys))
+    return {
+        "paired_samples": len(keys),
+        "paired_target_wins": target_wins,
+        "paired_source_wins": source_wins,
+        "paired_win_delta_rate": delta_rate,
     }
 
 
@@ -274,6 +310,11 @@ def rejection_reasons(
         reasons.append("source_win_rate_above_threshold")
     if as_float(target, "win_rate") - as_float(source, "win_rate") < args.min_delta:
         reasons.append("delta_below_threshold")
+    paired = paired_stats(source, target)
+    if args.min_paired_samples > 0 and as_int(paired, "paired_samples") < args.min_paired_samples:
+        reasons.append("paired_samples_below_threshold")
+    if args.min_paired_samples > 0 and as_float(paired, "paired_win_delta_rate") < args.min_paired_win_delta_rate:
+        reasons.append("paired_win_delta_rate_below_threshold")
     if as_int(target, "max_combo_score") < args.min_target_combo_score:
         reasons.append("target_combo_score_below_threshold")
     return reasons
@@ -312,6 +353,7 @@ def admitted_row(
 ) -> Dict[str, object]:
     delta = round(as_float(target, "win_rate") - as_float(source, "win_rate"), 6)
     combo_delta = as_int(target, "max_combo_score") - as_int(source, "max_combo_score")
+    paired = paired_stats(source, target)
     confidence = math.sqrt(min(as_int(source, "attempts"), as_int(target, "attempts")))
     importance = round(min(1.0, max(0.0, delta) * confidence), 6)
     return {
@@ -343,6 +385,10 @@ def admitted_row(
         "target_win_rate": target.get("win_rate", 0.0),
         "target_loss_rate": target.get("loss_rate", 0.0),
         "target_terminal_rate": target.get("terminal_rate", 0.0),
+        "paired_samples": paired.get("paired_samples", 0),
+        "paired_target_wins": paired.get("paired_target_wins", 0),
+        "paired_source_wins": paired.get("paired_source_wins", 0),
+        "paired_win_delta_rate": paired.get("paired_win_delta_rate", 0.0),
         "delta_win_rate": delta,
         "combo_score_delta": combo_delta,
         "importance_score": importance,
@@ -529,6 +575,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "min_target_win_rate": args.min_target_win_rate,
         "max_source_win_rate": args.max_source_win_rate,
         "min_delta": args.min_delta,
+        "min_paired_samples": args.min_paired_samples,
+        "min_paired_win_delta_rate": args.min_paired_win_delta_rate,
         "min_target_combo_score": args.min_target_combo_score,
     }
 

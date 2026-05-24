@@ -56,6 +56,7 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--line-timeout-sec", type=int, default=120)
     parser.add_argument("--line-stop-on-win", default="true")
     parser.add_argument("--line-stop-on-win-all", default="false")
+    parser.add_argument("--line-common-continuation-seeds", default="false")
     parser.add_argument("--sequence-tree", default="false")
     parser.add_argument("--tree-sequence-depth", type=int, default=2)
     parser.add_argument("--tree-sequence-beam", type=int, default=4)
@@ -118,6 +119,7 @@ def miner_args(args: argparse.Namespace, shard_index: int, shard_dir: Path) -> s
                 "--line-timeout-sec", str(args.line_timeout_sec),
                 "--line-stop-on-win", bool_arg(args.line_stop_on_win),
                 "--line-stop-on-win-all", bool_arg(args.line_stop_on_win_all),
+                "--line-common-continuation-seeds", bool_arg(args.line_common_continuation_seeds),
             ]
         )
     else:
@@ -269,6 +271,7 @@ def write_readme(output_dir: Path, summary: Dict[str, object]) -> None:
         f"- line_timeout_sec: `{summary['line_timeout_sec']}`",
         f"- line_stop_on_win: `{summary['line_stop_on_win']}`",
         f"- line_stop_on_win_all: `{summary['line_stop_on_win_all']}`",
+        f"- line_common_continuation_seeds: `{summary['line_common_continuation_seeds']}`",
         f"- post_branch_autopilot: `{summary['post_branch_autopilot']}`",
         f"- model_continuation_backend: `{summary['model_continuation_backend']}`",
         f"- py4j_port_stride: `{summary['py4j_port_stride']}`",
@@ -365,6 +368,7 @@ def run(args: argparse.Namespace) -> int:
         "line_timeout_sec": args.line_timeout_sec,
         "line_stop_on_win": bool_arg(args.line_stop_on_win),
         "line_stop_on_win_all": bool_arg(args.line_stop_on_win_all),
+        "line_common_continuation_seeds": bool_arg(args.line_common_continuation_seeds),
         "sequence_tree": bool_arg(args.sequence_tree),
         "tree_sequence_depth": args.tree_sequence_depth,
         "tree_sequence_beam": args.tree_sequence_beam,
