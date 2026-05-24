@@ -961,3 +961,37 @@ Interpretation:
 - Sequence checks were useful but did not rescue either candidate: completed ordered prefixes generally diverged in state hash while preserving the same terminal-loss value.
 - The next broad mining pass should use repeat value rollouts as the first-stage gate. One-rollout scans are useful for corpus coverage, but they are too noisy to form a correction shortlist without immediate repeat confirmation.
 - Do not train from v318 or v319.
+
+## v320 Repeat-Rollout Value Gate
+
+Artifact:
+
+- `local-training/local_pbt/live_checkpoint_branch_miner/v320_v315_loss_true_model_value_r3_s8_repeat_gate`
+
+Scope:
+
+- Reused the v315 counted-loss snapshot list after v319 invalidated the v318 one-rollout positives.
+- Selected up to 96 ranked snapshots with `ranked_max_per_game=12`.
+- Ran 8 local shards with `--tree-rollouts 3`, `--tree-max-actions 4`, sampled true-model continuation, `--tree-timeout-sec 75`, no sequence tree, and no post-branch autopilot.
+
+Result:
+
+- All 8 shard exit codes were `0`.
+- Runtime was 5281 seconds.
+- Merged value-tree output has 96 summaries and 339 action rows.
+- Classification counts: `{no_better_action=70, source_not_terminal=22, source_terminal_not_loss=3, strong_correction=1}`.
+- Strict value candidates: `1`.
+- Value action wins: `27`.
+- Value terminal rate: `0.738446`.
+
+Surviving repeat-rollout candidate:
+
+| Snapshot | Source action | Best action | Source result | Best result | Classification |
+| --- | --- | --- | --- | --- | --- |
+| `chunk_008/game_04d8b181-859f-47e3-8a68-53e1b567bc95_ord010_D018_ACTIVATE_ABILITY_OR_SPELL.ser.gz` | `Cast Overgrown Battlement` | `Cast Tinder Wall` | 0/3 wins, 3/3 terminal losses | 2/3 wins, 3/3 terminal | `strong_correction` |
+
+Interpretation:
+
+- Repeat-rollout gating sharply reduced the one-rollout noise: only 1 of 96 ranked snapshots survived the strict correction gate.
+- This D018 row is the strongest local checkpoint-derived candidate in this lane so far, but it is not yet training evidence. It needs isolated repeat confirmation plus sequence/order probing to make sure the win signal is not a short-prefix or continuation-order artifact.
+- Next unit: run a focused confirmation pass on this snapshot with more value rollouts and sequence tree enabled.
