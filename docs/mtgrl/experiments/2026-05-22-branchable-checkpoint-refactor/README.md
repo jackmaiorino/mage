@@ -1362,9 +1362,14 @@ Eval result:
 - `.mtgrl_venv` was repaired locally to `torch 2.12.0+cu130`; the clean v334 eval logged `split-device mode: infer=cuda:0 train=cpu`.
 - Clean v334 candidate result vs Grixis Affinity skill 7: 1 / 16, win rate 0.0625.
 - Recent v315 comparator artifact, `local-training/local_pbt/cp7_eval_sweeps/20260523_v315_affinity_live_checkpoints_g16_cpu`, was 6 / 15, win rate 0.4.
+- Because v334 did not include replay metadata or live logs, two follow-up logged GPU diagnostics were run:
+  - v335 small logged diagnostic: `local-training/local_pbt/cp7_eval_sweeps/20260524_v335_terminal_line_v332_candidate_affinity_g4_logs_gpu`, 2 / 4.
+  - v336 replay-logged/live-checkpoint candidate eval: `local-training/local_pbt/cp7_eval_sweeps/20260524_v336_terminal_line_v332_candidate_affinity_g16_logs_gpu`, 5 / 16, win rate 0.3125.
 
 Interpretation:
 
 - The terminal-line value-target bridge scales mechanically: checkpoint reentry, tensor export, and supervised import training all work on a 166-example full-corpus dataset.
-- The imported terminal-line candidate is not a promotion candidate. It improves the offline value-target score probe but materially hurts live policy evaluation against the current Affinity gate.
-- The next unit should diagnose the policy regression before any HPC promotion sweep. The most likely issue is that direct BC/value import on sparse, off-policy terminal-line roots overfits local candidate preferences without preserving the broader live-play policy; compare action distributions and early-game decisions between v315 and the v332 candidate, then train a lower-weight or mixed replay version only if the regression mechanism is clear.
+- The imported terminal-line candidate is not a promotion candidate. It improves the offline value-target score probe but does not improve the current Affinity gate; the best replay-logged comparison is v336 at 5 / 16 versus v315 at 6 / 15.
+- The v334 1 / 16 result should be treated as a clean but pessimistic unlogged eval, not the sole policy conclusion. Replay-logged v336 is the better comparator for this lane.
+- Action-health diagnostics on v336 found no pass-over-land issue. The notable deltas versus the v315 logged baseline were more mulligans/London bottoms, much higher mana-ability churn, more Quirion Ranger untap usage, and fewer Spy/Dread Return executions per game.
+- The next unit should train a safer low-weight or mixed replay candidate before any HPC promotion sweep. The likely issue is that direct BC/value import on sparse, off-policy terminal-line roots perturbs general play and mulligan/trunk behavior while only improving the offline terminal-line target set.
