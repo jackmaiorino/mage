@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import atexit
 import csv
 import json
 import os
@@ -14,6 +15,13 @@ import time
 from collections import Counter
 from pathlib import Path
 from typing import Dict, Iterable, List, Sequence
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+SCRIPTS_DIR = SCRIPT_DIR.parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+import run_cp7_eval_sweep as sweep
 
 
 MAIN_CLASS = "mage.player.ai.rl.LiveCheckpointBranchMiner"
@@ -38,6 +46,12 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     )
     parser.add_argument("--checkpoint-root", default="")
     parser.add_argument("--snapshot-list", default="")
+    parser.add_argument(
+        "--manifest",
+        default="",
+        help="Optional eval manifest for MODEL_PROFILE/RL_ARTIFACTS_ROOT; auto-detected from <run>/live_checkpoints when omitted.",
+    )
+    parser.add_argument("--profile", default="", help="MODEL_PROFILE override when --manifest is supplied or auto-detected.")
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--mode", default="value-tree", choices=["value-tree", "terminal-line"])
     parser.add_argument("--shards", type=int, default=max(1, min(4, os.cpu_count() or 1)))
@@ -80,6 +94,24 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     )
     parser.add_argument("--maven", default="mvn")
     parser.add_argument("--online", action="store_true", help="Do not pass -o to Maven.")
+    parser.add_argument("--gpu-port", type=int, default=26384)
+    parser.add_argument("--gpu-metrics-port", type=int, default=27384)
+    parser.add_argument(
+        "--shared-gpu-service",
+        default="auto",
+        choices=["auto", "on", "off"],
+        help="Start a shared GPU inference service for manifest-backed snapshots.",
+    )
+    parser.add_argument(
+        "--skip-compile",
+        action="store_true",
+        help="Skip the one-time AIRL compile before shard exec:java launches.",
+    )
+    parser.add_argument(
+        "--skip-shard-compile",
+        action="store_true",
+        help="Do not include compile in each shard Maven compile exec:java invocation.",
+    )
     parser.add_argument("--poll-sec", type=float, default=10.0)
     parser.add_argument("--force", action="store_true", help="Allow an existing output directory.")
     return parser.parse_args(argv)
@@ -142,28 +174,114 @@ def maven_command(args: argparse.Namespace, exec_args: str) -> List[str]:
             MODULE,
             "-am",
             "-DskipTests",
+        ]
+    )
+    if not args.skip_shard_compile:
+        cmd.append("compile")
+    cmd.extend(
+        [
+            "exec:java",
             f"-Dexec.mainClass={MAIN_CLASS}",
             f"-Dexec.args={exec_args}",
-            "exec:java",
         ]
     )
     return cmd
 
 
-def shard_env(args: argparse.Namespace, shard_index: int) -> Dict[str, str]:
+def load_manifest(args: argparse.Namespace) -> Dict[str, object]:
+    candidates: List[Path] = []
+    if args.manifest:
+        candidates.append(Path(args.manifest))
+    if args.checkpoint_root:
+        root = Path(args.checkpoint_root)
+        if root.name == "live_checkpoints":
+            candidates.append(root.parent / "manifest.json")
+    for path in candidates:
+        if path.is_file():
+            return json.loads(path.read_text(encoding="utf-8"))
+    return {}
+
+
+def profile_from_manifest(manifest: Dict[str, object], requested: str) -> str:
+    if requested.strip():
+        return requested.strip()
+    profiles = manifest.get("profiles") if manifest else None
+    if isinstance(profiles, list) and profiles:
+        first = profiles[0]
+        if isinstance(first, dict) and first.get("profile"):
+            return str(first["profile"])
+    return ""
+
+
+def manifest_env(manifest: Dict[str, object], profile: str) -> Dict[str, str]:
+    env: Dict[str, str] = {}
+    if not manifest:
+        return env
+    train_env = manifest.get("gpu_service_train_env")
+    if isinstance(train_env, dict):
+        for key, value in train_env.items():
+            env[str(key)] = str(value)
+    deterministic_env = manifest.get("deterministic_eval_env")
+    if isinstance(deterministic_env, dict):
+        for key, value in deterministic_env.items():
+            env[str(key)] = str(value)
+    snapshot_root = str(manifest.get("snapshot_root") or "").strip()
+    if snapshot_root:
+        env["RL_ARTIFACTS_ROOT"] = snapshot_root
+    if profile:
+        env["MODEL_PROFILE"] = profile
+    return env
+
+
+def manifest_train_env(manifest: Dict[str, object]) -> Dict[str, str]:
+    train_env = manifest.get("gpu_service_train_env") if manifest else None
+    if not isinstance(train_env, dict):
+        return {}
+    return {str(key): str(value) for key, value in train_env.items()}
+
+
+def manifest_deterministic_env(manifest: Dict[str, object]) -> Dict[str, str]:
+    deterministic_env = manifest.get("deterministic_eval_env") if manifest else None
+    if not isinstance(deterministic_env, dict):
+        return {}
+    return {str(key): str(value) for key, value in deterministic_env.items()}
+
+
+def compile_command(args: argparse.Namespace) -> List[str]:
+    cmd = [resolve_maven(args.maven)]
+    if not args.online:
+        cmd.append("-o")
+    cmd.extend(["-q", "-pl", MODULE, "-am", "-DskipTests", "compile"])
+    return cmd
+
+
+def stop_process(proc: subprocess.Popen) -> None:
+    if proc is None or proc.poll() is not None:
+        return
+    proc.terminate()
+    try:
+        proc.wait(timeout=10)
+    except subprocess.TimeoutExpired:
+        proc.kill()
+
+
+def shard_env(args: argparse.Namespace, shard_index: int, base_overrides: Dict[str, str]) -> Dict[str, str]:
     env = os.environ.copy()
+    env.update(base_overrides)
     if bool_arg(args.post_branch_autopilot) == "false":
-        if args.model_continuation_backend == "single":
+        using_shared_gpu = env.get("PY_SERVICE_MODE", "").strip().lower() == "shared_gpu"
+        if args.model_continuation_backend == "single" and not using_shared_gpu:
             env.setdefault("PY_BACKEND_MODE", "single")
             env.setdefault("INFER_WORKERS", "0")
             env.setdefault("MODEL_RELOAD_EVERY_MS", "0")
-        env.setdefault("PY_BRIDGE_CONNECT_RETRIES", "60")
-        env.setdefault("PY_BRIDGE_CONNECT_RETRY_DELAY_MS", "1000")
-        env.setdefault("PY_SCORE_TIMEOUT_MS", "120000")
-        base_port = int(env.get("PY4J_BASE_PORT", env.get("PY4J_PORT", "25334")))
-        shard_port = base_port + (max(1, args.py4j_port_stride) * shard_index)
-        env["PY4J_BASE_PORT"] = str(shard_port)
-        env["PY4J_PORT"] = str(shard_port)
+        if not using_shared_gpu:
+            env.setdefault("PY_BRIDGE_CONNECT_RETRIES", "60")
+            env.setdefault("PY_BRIDGE_CONNECT_RETRY_DELAY_MS", "1000")
+            env.setdefault("PY_SCORE_TIMEOUT_MS", "120000")
+            base_port = int(env.get("PY4J_BASE_PORT", env.get("PY4J_PORT", "25334")))
+            shard_port = base_port + (max(1, args.py4j_port_stride) * shard_index)
+            env["PY4J_BASE_PORT"] = str(shard_port)
+            env["PY4J_PORT"] = str(shard_port)
     return env
 
 
@@ -178,6 +296,12 @@ def command_env_summary(env: Dict[str, str]) -> Dict[str, str]:
         "PY_BRIDGE_CONNECT_RETRIES",
         "PY_BRIDGE_CONNECT_RETRY_DELAY_MS",
         "PY_SCORE_TIMEOUT_MS",
+        "MODEL_PROFILE",
+        "RL_ARTIFACTS_ROOT",
+        "TORCH_DETERMINISTIC_EVAL",
+        "PY_SERVICE_MODE",
+        "GPU_SERVICE_ENDPOINT",
+        "GPU_SERVICE_NUM_CHANNELS",
     ]
     return {key: env[key] for key in keys if key in env}
 
@@ -291,6 +415,42 @@ def run(args: argparse.Namespace) -> int:
     if output_dir.exists() and not args.force:
         raise FileExistsError(f"output directory already exists: {output_dir}")
     output_dir.mkdir(parents=True, exist_ok=True)
+    manifest = load_manifest(args)
+    profile = profile_from_manifest(manifest, args.profile)
+    env_overrides = manifest_env(manifest, profile)
+
+    if not args.skip_compile:
+        cmd = compile_command(args)
+        print("compiling AIRL module before shard launch", flush=True)
+        subprocess.run(cmd, check=True)
+
+    gpu_proc = None
+    shared_gpu_requested = args.shared_gpu_service == "on" or (
+        args.shared_gpu_service == "auto" and bool(manifest)
+    )
+    if shared_gpu_requested:
+        service_overrides = manifest_deterministic_env(manifest)
+        service_overrides["GPU_SERVICE_NUM_CHANNELS"] = str(max(1, args.shards))
+        print(
+            f"starting shared GPU service on port {args.gpu_port} for shard JVMs",
+            flush=True,
+        )
+        gpu_proc = sweep.start_gpu_service(
+            args.gpu_port,
+            args.gpu_metrics_port,
+            output_dir / "gpu_service.log",
+            manifest_train_env(manifest),
+            service_overrides,
+        )
+        atexit.register(stop_process, gpu_proc)
+        env_overrides.update(
+            {
+                "PY_SERVICE_MODE": "shared_gpu",
+                "GPU_SERVICE_ENDPOINT": f"localhost:{args.gpu_port}",
+                "GPU_SERVICE_NUM_GPUS": "1",
+                "GPU_SERVICE_NUM_CHANNELS": str(max(1, args.shards)),
+            }
+        )
 
     shard_dirs = [output_dir / f"shard_{i:02d}_of_{args.shards:02d}" for i in range(args.shards)]
     processes = []
@@ -299,7 +459,7 @@ def run(args: argparse.Namespace) -> int:
         shard_dir.mkdir(parents=True, exist_ok=True)
         exec_args = miner_args(args, shard_index, shard_dir)
         cmd = maven_command(args, exec_args)
-        env = shard_env(args, shard_index)
+        env = shard_env(args, shard_index, env_overrides)
         stdout_path = shard_dir / "stdout.log"
         stderr_path = shard_dir / "stderr.log"
         (shard_dir / "command.json").write_text(
@@ -352,6 +512,9 @@ def run(args: argparse.Namespace) -> int:
     summary = {
         "checkpoint_root": args.checkpoint_root,
         "snapshot_list": args.snapshot_list,
+        "manifest": args.manifest,
+        "manifest_auto_detected": bool(manifest) and not bool(args.manifest),
+        "profile": profile,
         "output_dir": str(output_dir),
         "mode": args.mode,
         "shards": args.shards,
@@ -376,6 +539,12 @@ def run(args: argparse.Namespace) -> int:
         "post_branch_autopilot": bool_arg(args.post_branch_autopilot),
         "model_continuation_backend": args.model_continuation_backend,
         "py4j_port_stride": args.py4j_port_stride,
+        "skip_compile": bool(args.skip_compile),
+        "skip_shard_compile": bool(args.skip_shard_compile),
+        "shared_gpu_service": args.shared_gpu_service,
+        "shared_gpu_started": gpu_proc is not None,
+        "gpu_port": args.gpu_port,
+        "gpu_metrics_port": args.gpu_metrics_port,
         "exit_codes": exit_codes,
         "elapsed_sec": round(time.time() - start, 3),
         "classification_counts": classification_counts(output_dir / "counterfactual_value_tree_summary.csv"),
@@ -391,6 +560,9 @@ def run(args: argparse.Namespace) -> int:
     )
     write_readme(output_dir, summary)
     print(json.dumps(summary, indent=2, sort_keys=True))
+
+    if gpu_proc is not None:
+        stop_process(gpu_proc)
 
     return 0 if all(code == 0 for code in exit_codes.values()) else 3
 

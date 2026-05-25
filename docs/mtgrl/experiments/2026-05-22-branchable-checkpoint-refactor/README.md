@@ -2085,3 +2085,35 @@ Conclusion:
 
 - No-log live checkpoint capture works again, and snapshots from the repaired path are branchable.
 - The next unit is to relaunch the baseline-losing Grixis capture across chunks 1, 2, 4, 5, 6, 12, 15, and 16, then mine terminal/value evidence from those snapshots instead of extending the neutral v392 candidate.
+
+## v451-v461 Baseline-Loss Corpus and Sharded Miner Repair
+
+Purpose:
+
+- Build a fresh outcome-only branch corpus from baseline-losing deterministic Grixis chunks, then mine it with model continuation.
+- Keep this as evidence generation only: no explicit combo heuristics, no training admission until terminal rows are summarized and gated.
+
+Artifacts and results:
+
+| Run ID | Scope | Result |
+| --- | --- | --- |
+| `20260524_v451_baseline_grixis_loss_chunks_livecheckpoints_nolog_autocompileexec` | Baseline Grixis loss chunks 1, 2, 4, 5, 6, 12, 15, and 16, deterministic no-log live checkpoints. | All 8 chunks lost (`0 / 8`); captured 552 snapshots with zero serialization errors. Action-root snapshots by chunk: 70, 73, 69, 71, 75, 77, 0, 77. |
+| `v452_v451_grixis_loss_action_root16_model_rank64` / `v454_v451_grixis_loss_action_root16_model_rank64_compile` | Initial sharded ranked terminal-line attempts. | Both exited 0 but selected 0 rows; not evidence. |
+| `v453_v451_path_reentry_debug`, `v455_v451_ranked_reentry_debug`, `v456_v451_ranked_shard0_reentry_debug` | Direct wrapper debug probes. | Confirmed v451 snapshots load, ranked selection works, and sharding works when launched through the manifest-aware compile+exec wrapper. |
+| `v460_v451_sharded_path_loaderror_debug` | Sharded path-mode load-error probe. | Exposed `InvalidClassException: mage.player.ai.ComputerPlayer6`; ranked mode had hidden the load errors by dropping failed snapshots. |
+| `v461_v451_sharded_compileexec_smoke` | Patched sharded runner smoke, 2 shards, 4 ranked snapshots, 1 root attempt each. | Selected 4 snapshots and wrote 4 terminal-line rows: 2 terminal wins, 2 terminal losses. |
+
+Code checkpoint:
+
+- `scripts/mtgrl/run_value_tree_shards.py` now:
+  - auto-detects the eval manifest from `<eval-run>/live_checkpoints`;
+  - injects `MODEL_PROFILE`, `RL_ARTIFACTS_ROOT`, and deterministic eval env into shard JVMs;
+  - starts a shared GPU inference service for manifest-backed snapshots;
+  - includes `compile exec:java` in each shard Maven invocation by default, avoiding stale reactor classpaths during snapshot deserialization;
+  - retains opt-outs for compile and shared-GPU behavior for explicit diagnostic use.
+
+Conclusion:
+
+- v451 is the first repaired baseline-losing Grixis checkpoint corpus after the deterministic control cleanup.
+- The sharded miner failure was harness infrastructure, not lack of branchable snapshots.
+- The next unit is a full v451 ranked action-root terminal-line pass: 64 ranked snapshots, 16 root attempts/checkpoint, common continuation seeds, model continuation, 4 shards.
