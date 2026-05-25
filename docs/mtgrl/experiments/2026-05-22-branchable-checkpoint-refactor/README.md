@@ -2026,3 +2026,31 @@ Conclusion:
 - The chunk 1 deterministic-control blocker is resolved for the normal deterministic eval command shape.
 - The stale exec-classpath failure mode is now guarded by script behavior, so future deterministic paired gates should exercise the just-compiled AI.MA code.
 - Next unit: run paired deterministic no-log checks for v392/v393 versus baseline on the remaining Grixis blocker chunks, starting with chunks 1 and 11, before considering any HPC scale-up.
+
+## v440-v446 Refreshed Grixis Hard Gate
+
+Purpose:
+
+- Re-run the v392 Q-head candidate against baseline after the deterministic CP7 eval repairs, using the same Grixis Affinity chunk seeds and no game-log overhead.
+
+Runs:
+
+| Run ID | Profile | Scope | Result |
+| --- | --- | --- | --- |
+| `20260524_v440_v392_grixis_chunks0111_deterministic_eval_blend0_autocompileexec` | v392 candidate | chunks 1, 11 | `1 / 2`: chunk 1 lost, chunk 11 won. |
+| `20260524_v441_baseline_grixis_chunks0111_deterministic_eval_autocompileexec` | baseline | chunks 1, 11 | `1 / 2`: chunk 1 lost, chunk 11 won. |
+| `20260524_v442_v392_grixis_g16_deterministic_eval_blend0_autocompileexec` | v392 candidate | all 16 chunks | `7 / 15` counted; chunk 8 invalid `0 / 0`. |
+| `20260524_v443_baseline_grixis_g16_deterministic_eval_autocompileexec` | baseline | all 16 chunks | `7 / 15` counted; chunk 8 invalid `0 / 0`. |
+| `20260524_v445_v392_grixis_chunk008_no_roottrace_rerun` | v392 candidate | chunk 8 rerun after root-trace hotfix | Repeated invalid `0 / 0`. |
+| `20260524_v446_baseline_grixis_chunk008_no_roottrace_rerun` | baseline | chunk 8 rerun after root-trace hotfix | Repeated invalid `0 / 0`. |
+
+Chunk-level comparison:
+
+- Candidate and baseline have identical outcomes on every completed chunk: losses on 1, 2, 4, 5, 6, 12, 15, 16; wins on 3, 7, 9, 10, 11, 13, 14.
+- Chunk 8 is a shared deterministic game-thread timeout for both profiles, including after disabling leaked root-trace output. The clean rerun logs are small and show the same `Game thread did not finish after timeout and forced end` failure.
+
+Conclusion:
+
+- v392/v393 no longer shows a Grixis regression under the repaired deterministic eval, but it also does not beat baseline. It is a neutral candidate, not a promotion or HPC-scale candidate.
+- The immediate thesis path should move back to outcome-derived evidence quality: mine or generate new terminal-line evidence that actually changes policy/Q choices in baseline-losing chunks, rather than scaling v392 as-is.
+- Chunk 8 is a separate deterministic evaluation-health issue. Because it is shared by candidate and baseline, it should not drive model selection, but it should be tracked if Grixis hard-gate accounting requires all 16 chunks.
