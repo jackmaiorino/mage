@@ -2201,3 +2201,43 @@ Interpretation:
 - v463 converts v462's mixed one-row diagnostics into strict, trainable, terminal-derived value targets without adding combo labels or intermediate rewards.
 - The pass-best rows remain useful diagnostics but are not admitted to the clean soft-pass set because all 4 were flagged `suspect_pass_best`.
 - Seven examples is too small to train or promote. The next unit is to scale the same dense no-stop sampling from the 11 mixed proof back to the full 64 ranked v451 snapshots, then export the common-seed target set before considering any model update.
+
+## v464 Full Dense Ranked Terminal-Line Rerun
+
+Purpose:
+
+- Scale the v463 dense/no-stop proof from the 11 known mixed groups back to the full 64 ranked v451 `ACTIVATE_ABILITY_OR_SPELL` snapshot set.
+- Measure whether the clean common-seed value-target count grows enough to justify a model update.
+
+Run:
+
+| Run ID | Scope | Result |
+| --- | --- | --- |
+| `v464_v451_grixis_loss_action_root16_model_rank64_dense_nostop` | v451 ranked `ACTIVATE_ABILITY_OR_SPELL` roots, 64 snapshots, 4 shards, `line_attempts=32`, common continuation seeds, `line_stop_on_win=false`, model continuation, shared GPU service. | Selected 64 snapshots and wrote 2,048 terminal-line rows: 764 terminal wins, 1,284 terminal losses, terminal rate `1.0`. |
+
+Terminal summary:
+
+- Win rate across sampled rows: `764 / 2048 = 37.30%`.
+- `summarize_terminal_line_search.py` reported `spy_rows=0`, `full_combo_wins=0`, `dread_return_rows=5`, and `max_combo_score=3`.
+- Root actions with many samples included `Pass`, mana abilities, `Forestcycling`, `Cast Roost Seek`, `Cast Tinder Wall`, `Cast Overgrown Battlement`, and `Cast Winding Way`.
+
+Strict export:
+
+| Export | Gate | Result |
+| --- | --- | --- |
+| `v464_v451_grixis_loss_action_root16_model_rank64_dense_nostop_softpass_diagnostic` | Common-seed value target gate, suspect pass-best rows excluded. | `13` admitted examples, `51` rejected groups; classifications were 4 strong deltas and 9 moderate deltas. |
+| `v464_v451_grixis_loss_action_root16_model_rank64_dense_nostop_include_pass` | Same gate, suspect pass-best rows included for diagnosis. | `18` admitted examples, `46` rejected groups; classifications were 9 strong deltas and 9 moderate deltas. |
+
+Clean soft-pass target examples:
+
+- chunk 2 D063: `Cast Tinder Wall` over `{T}: Add {G}.`, value delta `1.0`.
+- chunk 4 D030: `Cast Sagu Wildling` over `Cast Roost Seek`, value delta `1.0`.
+- chunk 4 D045: `Cast Winding Way` over `{T}: Add {B}. {this} deals 1 damage to you.`, value delta `1.0`.
+- chunk 4 D046: `Cast Troll of Khazad-dum` over `{T}, Tap an untapped creature you control: Add one mana of any color.`, value delta `1.0`.
+- chunk 5 D065 and chunk 6/16 Winding Way/Roost Seek decisions repeated the v463 signal.
+
+Interpretation:
+
+- The dense no-stop method scales mechanically and produces more strict outcome-derived value targets than the sparse v462 pass.
+- The yield is still too low for a fresh model update: `13 / 64` clean groups, with 21 pass-best groups held out as suspect and 46 groups rejected for low value delta.
+- The next unit is a larger dense ACTIVATE pass over lower-ranked v451 snapshots by raising `ranked_max_per_game`; target is roughly 50 clean soft-pass examples before training or candidate-Q import.
