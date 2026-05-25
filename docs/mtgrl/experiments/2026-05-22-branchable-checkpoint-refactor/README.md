@@ -2273,3 +2273,36 @@ Interpretation:
 - The clean strict target count scaled from `13 / 64` in v464 to `39 / 256` in v465.
 - This is close to the rough 50-example clean threshold, but the clean set still falls short; the pass-including diagnostic set reaches 52 but is not acceptable as the main training source because 156 groups are still flagged `suspect_pass_best`.
 - The next unit is one more broader dense ACTIVATE run over a larger ranked slice, then export the clean soft-pass set before deciding whether to train a small candidate-Q/value consumer.
+
+## v468 Online Terminal-Mining Harness Smoke
+
+Purpose:
+
+- Validate the online-distribution loop: let the current model play a real deterministic eval game, capture live branchable checkpoints from the states it actually reaches, then terminal-line mine those checkpoints.
+- Keep the teacher signal terminal-only: no combo milestone labels, no card-name rewards, and no hand-authored combo-ready detector.
+
+Code checkpoints:
+
+| Commit | Change |
+| --- | --- |
+| `8d7ae098de` | Added `scripts/mtgrl/run_online_terminal_mining_loop.py`, which chains live checkpoint eval, terminal-line mining, summary, and value-target export into one manifest-backed run. |
+| `9c4cac9b42` | Added a fail-fast guard against skipping both miner compile stages after online eval. The v467 fast smoke showed this can produce stale-classpath `InvalidClassException` load errors and zero ranked selections. |
+
+Run:
+
+| Run ID | Scope | Result |
+| --- | --- | --- |
+| `v468_online_terminal_mining_smoke_compiled_grixis_g1_rank2` | One deterministic online Grixis eval game, live checkpoint cap 16, ranked ACTIVATE mining over 2 snapshots, 1 shard, 2 root attempts/checkpoint, common continuation seeds, no stop-on-win. | Eval completed and wrote live checkpoints. Miner selected 2 ranked snapshots and wrote 4 terminal-line rows, all terminal losses. |
+
+Target export:
+
+| Export | Result |
+| --- | --- |
+| Soft-pass strict export | `0` admitted examples; `2` checkpoint groups rejected with `eligible_actions_lt_min`. |
+| Include-pass diagnostic export | `0` admitted examples; same rejection shape. |
+
+Interpretation:
+
+- The online-distribution harness works end to end when eval and miner classpaths are compiled consistently.
+- The tiny smoke is intentionally too small to produce value targets; it only proves that live online checkpoints can flow into terminal-outcome mining and export without replay reconstruction.
+- This is directly useful for local and HPC scaling: increase games, snapshots, shards, and attempts, and the same artifact structure will produce online-distribution terminal-derived targets.
