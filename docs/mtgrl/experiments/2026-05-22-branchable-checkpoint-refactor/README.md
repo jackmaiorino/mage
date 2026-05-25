@@ -2384,3 +2384,57 @@ Interpretation:
 - The full loop works mechanically end to end on online-reached states.
 - A 16-example Q-only branch-return update produced a candidate that beat the source comparator by one exact-seed Grixis chunk, but the sample is far too small to conclude policy improvement.
 - This supports the path, not the candidate. The next useful unit is a broader online loop, likely 8-16 Grixis games and/or more snapshots/attempts, then a paired exact-seed eval with enough games to see whether the one-chunk gain persists.
+
+## v471-v472 Online-Distribution Iteration From v470
+
+Purpose:
+
+- Continue the thesis-clean closed loop from the generated v470 model rather than returning to the base profile.
+- Test whether online-reached checkpoint mining can produce another terminal-only branch-return update without combo-state labels, card-specific rewards, or hand-authored setup detectors.
+
+Implementation delta:
+
+- Commit `7657c204ce` added `--play-profile` to `scripts/mtgrl/run_online_mining_training_loop.py`.
+- This lets a generated model such as `Pauper-Spy-Combo-Value-OnlineLoop-v470` play cycle 1 while reusing the base registry deck/env entry from `Pauper-Spy-Combo-Value`.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| Online loop run | `local-training/local_pbt/online_mining_training_loop/v471_online_loop_from_v470_grixis_g8_r96_a16` |
+| Resume/train/eval run | `local-training/local_pbt/online_mining_training_loop/v472_train_v471_from_v471_18strict_grixis` |
+| Source play profile | `Pauper-Spy-Combo-Value-OnlineLoop-v470` |
+| Candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v471` |
+
+v471 online mining:
+
+- Online eval source: v470 vs Grixis Affinity, skill 7, deterministic exact-seed mode, 8 chunk attempts.
+- Valid online eval result: `3 / 7`; one chunk produced a `0 / 0` game-thread timeout.
+- Live-checkpoint mining selected 96 ranked `ACTIVATE_ABILITY_OR_SPELL` snapshots.
+- Terminal-line rows: `1536`.
+- Terminal outcomes: `816` wins, `720` losses.
+- Strict soft-pass value targets: `18 / 96` checkpoint groups admitted.
+- Include-pass diagnostic value targets: `28 / 96` admitted, but 16 groups were flagged `suspect_pass_best`; these were excluded from training.
+- v471 initially stopped at `insufficient_targets` because this run set `--min-trainable-targets 30`.
+
+v472 resume/training:
+
+- Reused the completed v471 online-mining run via `--existing-online-run-dir`.
+- Lowered the train gate to `--min-trainable-targets 16`, matching the already validated v470 scale, and trained only from the 18 strict soft-pass targets.
+- Advantage-value `TrainingData` export: `18 / 18` rows reentered with matching candidate hash and state hash.
+- All 18 rows captured TrainingData from checkpoint reentry.
+- Candidate training: cloned from v470 into `Pauper-Spy-Combo-Value-OnlineLoop-v471`, Q-head only, `-BranchReturnTargets`, 4 epochs, 72 train-pass samples.
+
+Exact-seed Grixis eval:
+
+| Profile | Result | Notes |
+| --- | ---: | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v471` | `3 / 14` | Two chunks produced `0 / 0` timeouts. |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v470` source comparator | `1 / 14` | Same seed base and chunk split; two chunks produced `0 / 0` timeouts. |
+
+Interpretation:
+
+- This is another weak-positive mechanical result: the next generated model beat the previous generated model on the paired exact-seed Grixis comparator, but the absolute win rate is still low and the eval contains timeout noise.
+- The important thesis signal is not the candidate strength yet; it is that online-reached states can be mined into strict terminal-only branch-return targets, exported through checkpoint reentry, and consumed by the Q-head without replay reconstruction or explicit combo rewards.
+- The current bottleneck is target density and label quality. v471 mined 96 online checkpoints but only 18 strict trainable targets; 68 groups were below the value-delta threshold and 16 more were excluded as suspect pass-best rows.
+- Next useful unit: scale online capture/mining enough to produce at least roughly 50 strict non-pass-suspect targets from online-reached states, then train a candidate and rerun the same paired exact-seed comparator. Good knobs are more online games, more ranked snapshots per game, and more root attempts/common samples before changing the reward formulation.
