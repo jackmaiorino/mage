@@ -2161,3 +2161,43 @@ Next unit:
 
 - Rerun only the 11 v462 mixed checkpoint groups with `line_stop_on_win=false`, common continuation seeds, and denser attempts per root action.
 - Admit training/value evidence only if the repeated pass clears the same common-seed value-target exporter without relaxing the outcome-only constraints.
+
+## v463 Dense Mixed Terminal-Line Rerun
+
+Purpose:
+
+- Test whether the v462 zero-export result was caused by sparse one-row action samples and early stop-on-win behavior.
+- Rerun only the 11 v462 mixed checkpoint groups with denser outcome-only sampling.
+
+Run:
+
+| Run ID | Scope | Result |
+| --- | --- | --- |
+| `v463_v462_mixed_commonseed_dense` | 11 mixed v462 checkpoints, 4 shards, `line_attempts=32`, common continuation seeds, `line_stop_on_win=false`, model continuation, shared GPU service via the v451 manifest. | Selected 11 snapshots and wrote 352 terminal-line rows: 126 terminal wins, 226 terminal losses, terminal rate `1.0`. |
+
+Terminal summary:
+
+- Win rate across sampled rows: `126 / 352 = 35.80%`.
+- `summarize_terminal_line_search.py` reported `spy_rows=0`, `full_combo_wins=0`, `dread_return_rows=5`, and `max_combo_score=3`.
+- The repeated rows confirm the same broad pattern as v462: the brancher can find terminal-winning siblings in baseline-losing checkpoints, but this slice still is not discovering the full Spy combo finish.
+
+Strict export:
+
+| Export | Gate | Result |
+| --- | --- | --- |
+| `v463_v462_mixed_commonseed_dense_softpass_diagnostic` | Common-seed value target gate, suspect pass-best rows excluded. | `7` admitted examples, `4` rejected suspect pass-best groups; classifications were 1 strong delta and 6 moderate deltas. |
+| `v463_v462_mixed_commonseed_dense_include_pass` | Same gate, suspect pass-best rows included for diagnosis. | `11` admitted examples; classifications were 5 strong deltas and 6 moderate deltas. |
+
+Clean soft-pass top targets:
+
+- chunk 2 D063: `Cast Tinder Wall` over `{T}: Add {G}.`, value delta `1.0`, weight `0.866`.
+- chunk 5 D065: `Forestcycling` and `Cast Gatecreeper Vine` both reached value `1.0` in the soft target distribution, over `{T}: Add {G}.`.
+- chunk 6 D039: `Cast Roost Seek` over `{T}: Add {G} for each creature you control with defender.`, value delta `1.0`.
+- chunk 6 D072 and chunk 16 D006/D007: `Cast Winding Way` over mana-only actions, value delta `1.0`.
+- chunk 12 D046: `Cast Overgrown Battlement` over `Cast Lead the Stampede`, value delta `0.75`.
+
+Interpretation:
+
+- v463 converts v462's mixed one-row diagnostics into strict, trainable, terminal-derived value targets without adding combo labels or intermediate rewards.
+- The pass-best rows remain useful diagnostics but are not admitted to the clean soft-pass set because all 4 were flagged `suspect_pass_best`.
+- Seven examples is too small to train or promote. The next unit is to scale the same dense no-stop sampling from the 11 mixed proof back to the full 64 ranked v451 snapshots, then export the common-seed target set before considering any model update.
