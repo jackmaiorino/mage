@@ -2117,3 +2117,47 @@ Conclusion:
 - v451 is the first repaired baseline-losing Grixis checkpoint corpus after the deterministic control cleanup.
 - The sharded miner failure was harness infrastructure, not lack of branchable snapshots.
 - The next unit is a full v451 ranked action-root terminal-line pass: 64 ranked snapshots, 16 root attempts/checkpoint, common continuation seeds, model continuation, 4 shards.
+
+## v462 Baseline-Loss Terminal-Line Mining
+
+Purpose:
+
+- Run the first full terminal-line mining pass over the repaired v451 baseline-losing Grixis checkpoint corpus.
+- Keep the pass outcome-only: no Spy-specific labels, no combo-ready detector, no intermediate reward shaping.
+
+Run:
+
+| Run ID | Scope | Result |
+| --- | --- | --- |
+| `v462_v451_grixis_loss_action_root16_model_rank64` | v451 ranked `ACTIVATE_ABILITY_OR_SPELL` roots, 64 snapshots, 4 shards, 16 attempts/checkpoint, common continuation seeds, model continuation, `post_branch_autopilot=false`, shared GPU service. | Selected 64 snapshots and wrote 547 terminal-line rows: 33 terminal wins, 514 terminal losses, terminal rate `1.0`. |
+
+Outcome summary:
+
+- Checkpoint groups: 64.
+- Mixed win/loss groups: 11.
+- All-win groups: 22.
+- All-loss groups: 31.
+- `summarize_terminal_line_search.py` reported `spy_rows=0`, `full_combo_wins=0`, `dread_return_rows=1`, and `max_combo_score=3`; this pass found terminal-winning siblings, but not the true Spy combo line.
+- Representative mixed rows included:
+  - chunk 2, D063: `Cast Tinder Wall` won while `Cast Elves of Deep Shadow`, `Forestcycling`, and `Pass` lost.
+  - chunk 6, D072: `Cast Winding Way` won while `Flashback sacrifice three creatures` and `Pass` lost.
+  - chunk 16, D007/D006: `Cast Winding Way` won in both nearby checkpoint groups.
+  - chunk 5, D065: `Forestcycling` won while available siblings lost.
+
+Strict export:
+
+| Export | Gate | Result |
+| --- | --- | --- |
+| `v462_v451_grixis_loss_action_root16_model_rank64_softpass_diagnostic` | Common-seed value target gate, suspect pass-best rows excluded. | `0` admitted examples; rejection counts were `actions_lt_min=22`, `eligible_actions_lt_min=33`, `suspect_pass_best=16`, `value_delta_below_threshold=31`. |
+| `v462_v451_grixis_loss_action_root16_model_rank64_include_pass` | Same gate, suspect pass-best rows included. | `0` admitted examples; rejection counts were `actions_lt_min=22`, `eligible_actions_lt_min=33`, `value_delta_below_threshold=31`. |
+
+Interpretation:
+
+- v462 proves that fresh baseline-losing Grixis checkpoints contain terminal-winning sibling continuations under model-driven outcome-only search.
+- The zero-example strict export is a sampling-density issue, not a snapshot/reentry failure: `line_stop_on_win=true` and sparse one-row action samples did not provide enough paired common-seed evidence per root action.
+- Pass-best mixed groups remain diagnostic until they clear pass-specific common-sample, value, and delta gates.
+
+Next unit:
+
+- Rerun only the 11 v462 mixed checkpoint groups with `line_stop_on_win=false`, common continuation seeds, and denser attempts per root action.
+- Admit training/value evidence only if the repeated pass clears the same common-seed value-target exporter without relaxing the outcome-only constraints.
