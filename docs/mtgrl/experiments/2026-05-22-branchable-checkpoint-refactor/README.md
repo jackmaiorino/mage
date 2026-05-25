@@ -2333,3 +2333,54 @@ Current execution state:
 
 - v469 is still active in the mining stage while this harness is committed.
 - Once v469 writes `terminal_line_value_target_summary.json`, the next command is to run the closed-loop driver with `--existing-online-run-dir local-training/local_pbt/online_terminal_mining/v469_online_terminal_mining_grixis_g4_rank32_a16`.
+
+## v469-v470 First Closed-Loop Completion
+
+Purpose:
+
+- Complete the first full online-distribution loop: model play -> live checkpoints -> terminal-line mining -> value targets -> TrainingData -> Q-head candidate -> exact-seed eval.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| Online mining run | `local-training/local_pbt/online_terminal_mining/v469_online_terminal_mining_grixis_g4_rank32_a16` |
+| Closed-loop run | `local-training/local_pbt/online_mining_training_loop/v470_closed_loop_from_v469` |
+| Candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v470` |
+
+v469 result:
+
+- Eval source: `Pauper-Spy-Combo-Value` vs Grixis Affinity, skill 7, deterministic exact-seed mode, 4 games.
+- Online eval result before mining: `2 / 4`.
+- Live-checkpoint mining selected 32 ranked `ACTIVATE_ABILITY_OR_SPELL` snapshots.
+- Terminal-line rows: `512`.
+- Terminal outcomes: `308` wins, `204` losses.
+- Strict soft-pass value targets: `16 / 32` checkpoint groups admitted.
+- Include-pass diagnostic value targets: `17 / 32` admitted.
+- The only pass-best training exclusion was flagged as `suspect_pass_best`; the clean set excluded it.
+
+v470 bridge/training result:
+
+- Advantage-value `TrainingData` export: `16 / 16` rows reentered with matching candidate hash and state hash.
+- All 16 rows captured TrainingData from checkpoint reentry.
+- Candidate training: cloned from `Pauper-Spy-Combo-Value`, Q-head only, `-BranchReturnTargets`, 4 epochs, 64 train-pass samples.
+- Training run: `local-training/local_pbt/action_counterfactual/v470_closed_loop_from_v469_cycle01_train_Pauper-Spy-Combo-Value-OnlineLoop-v470`.
+
+Exact-seed Grixis eval:
+
+| Profile | Result | Notes |
+| --- | ---: | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v470` | `1 / 4` | Won chunk 4. |
+| `Pauper-Spy-Combo-Value` source comparator | `0 / 4` | Same matchup seed base and chunk split. |
+
+Target-row interpretation:
+
+- The admitted actions were generic terminal-outcome discoveries, not hand-authored combo milestones: examples include `Cast Land Grant`, `Cast Saruli Caretaker`, `Cast Overgrown Battlement`, `Cast Balustrade Spy`, `Cast Lead the Stampede`, `Cast Wall of Roots`, `Cast Winding Way`, and mana/Forestcycling actions.
+- `14 / 16` admitted rows had value delta `1.0`; `2 / 16` had value delta `0.5`.
+- The target rows are still small and mostly moderate-delta by the current classifier, so this is mechanical proof and a weak positive eval signal, not promotion evidence.
+
+Interpretation:
+
+- The full loop works mechanically end to end on online-reached states.
+- A 16-example Q-only branch-return update produced a candidate that beat the source comparator by one exact-seed Grixis chunk, but the sample is far too small to conclude policy improvement.
+- This supports the path, not the candidate. The next useful unit is a broader online loop, likely 8-16 Grixis games and/or more snapshots/attempts, then a paired exact-seed eval with enough games to see whether the one-chunk gain persists.
