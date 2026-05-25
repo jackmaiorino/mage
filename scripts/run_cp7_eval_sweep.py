@@ -66,6 +66,10 @@ DETERMINISTIC_EVAL_ENV = {
     "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
     "CUDA_LAUNCH_BLOCKING": "1",
     "TORCH_DETERMINISTIC_EVAL": "1",
+    "AI_DETERMINISTIC_TIEBREAKS": "1",
+    "AI_DETERMINISTIC_SEARCH": "1",
+    "AI_DETERMINISTIC_MAX_NODES": "5000",
+    "EVAL_SOURCE_SIMULATED_PLAYER_RNG_ISOLATION": "1",
     "OMP_NUM_THREADS": "1",
     "MKL_NUM_THREADS": "1",
     "NUMEXPR_NUM_THREADS": "1",
@@ -730,10 +734,20 @@ def main() -> int:
             "gate runs. This is slower but reduces shared GPU service ordering noise."
         ),
     )
+    parser.add_argument(
+        "--deterministic-root-trace",
+        action="store_true",
+        help="Emit CP7_ROOT_SCORE_JSON rows during deterministic eval root-action scoring.",
+    )
     args = parser.parse_args()
     selected_chunk_indices = parse_chunk_indices(args.chunk_indices)
     deterministic_env = dict(DETERMINISTIC_EVAL_ENV) if args.deterministic_eval else {}
     if args.deterministic_eval:
+        if args.deterministic_root_trace:
+            deterministic_env["AI_DETERMINISTIC_ROOT_TRACE"] = "1"
+        # Maven exec can otherwise run against stale reactor dependency classes
+        # after AI.MA changes, even when a separate compile has already passed.
+        args.compile_exec = True
         args.parallel = 1
         args.ai_threads = 1
         args.serial_warmup_jobs = max(args.serial_warmup_jobs, 1)

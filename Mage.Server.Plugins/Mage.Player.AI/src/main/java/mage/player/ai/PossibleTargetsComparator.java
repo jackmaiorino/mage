@@ -87,8 +87,12 @@ public class PossibleTargetsComparator {
         return PossibleTargetsSelector.isMyItem(this.abilityControllerId, item);
     }
 
-    // sort by name-id at the end, so AI will use same choices in all simulations
+    // sort by name-position-id at the end, so AI will use same choices in all simulations
     private final Comparator<MageItem> BY_NAME = (o1, o2) -> getName(o2).compareTo(getName(o1));
+    private final Comparator<MageItem> BY_POSITION = (o1, o2) -> Integer.compare(
+            getBattlefieldSortIndex(o1),
+            getBattlefieldSortIndex(o2)
+    );
     private final Comparator<MageItem> BY_ID = Comparator.comparing(MageItem::getId);
 
     private final Comparator<MageItem> BY_ME = (o1, o2) -> Boolean.compare(
@@ -139,6 +143,7 @@ public class PossibleTargetsComparator {
     public final Comparator<MageItem> ANY_MOST_VALUABLE_FIRST = BY_TYPES
             .thenComparing(BY_BIGGER_SCORE)
             .thenComparing(BY_NAME)
+            .thenComparing(BY_POSITION)
             .thenComparing(BY_ID);
     public final Comparator<MageItem> ANY_MOST_VALUABLE_LAST = ANY_MOST_VALUABLE_FIRST.reversed();
 
@@ -148,5 +153,19 @@ public class PossibleTargetsComparator {
     public final Comparator<MageItem> ANY_UNPLAYABLE_AND_USELESS = BY_LAND.reversed()
             .thenComparing(BY_PLAYABLE.reversed())
             .thenComparing(ANY_MOST_VALUABLE_FIRST);
+
+    private int getBattlefieldSortIndex(MageItem item) {
+        if (!(item instanceof Permanent) || item.getId() == null) {
+            return Integer.MAX_VALUE;
+        }
+        int index = 0;
+        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+            if (item.getId().equals(permanent.getId())) {
+                return index;
+            }
+            index++;
+        }
+        return Integer.MAX_VALUE;
+    }
 
 }

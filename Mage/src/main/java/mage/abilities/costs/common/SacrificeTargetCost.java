@@ -9,6 +9,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
@@ -58,8 +59,11 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         // can be cancelled by user
-        if (this.getTargets().choose(Outcome.Sacrifice, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : this.getTargets().get(0).getTargets()) {
+        Target target = this.getTargets().get(0);
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(controllerId);
+        if (target.isChoiceCompleted(abilityControllerId, source, game, null)
+                || this.getTargets().choose(Outcome.Sacrifice, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
                     return false;
@@ -67,7 +71,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
                 addSacrificeTarget(game, permanent);
                 paid |= permanent.sacrifice(source, game);
             }
-            if (!paid && this.getTargets().get(0).getMinNumberOfTargets() == 0) {
+            if (!paid && target.getMinNumberOfTargets() == 0) {
                 paid = true; // e.g. for Devouring Rage
             }
         }

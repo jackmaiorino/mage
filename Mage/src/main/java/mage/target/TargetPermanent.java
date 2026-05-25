@@ -8,7 +8,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -90,7 +90,7 @@ public class TargetPermanent extends TargetObject {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         // TODO: check if possible targets works with setTargetController from some cards like Nicol Bolas, Dragon-God
-        Set<UUID> possibleTargets = new HashSet<>();
+        Set<UUID> possibleTargets = new LinkedHashSet<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
             possibleTargets.add(permanent.getId());
         }

@@ -13,6 +13,7 @@ import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -118,7 +119,7 @@ public interface Target extends Copyable<Target>, Serializable {
         // do not override
         return possibleTargets(sourceControllerId, source, game).stream()
                 .filter(id -> cards == null || cards.contains(id))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**
@@ -154,7 +155,7 @@ public interface Target extends Copyable<Target>, Serializable {
                     }
                     return true;
                 })
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**

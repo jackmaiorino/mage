@@ -435,6 +435,7 @@ public class ComputerPlayer extends PlayerImpl {
             cost = unpaid;
             producers = this.getAvailableManaProducers(game);
             producers.addAll(this.getAvailableManaProducersWithCost(game));
+            producers = sortManaProducersByStableOrder(producers, game);
         }
 
         // use fully compatible colored mana producers first
@@ -733,7 +734,7 @@ public class ComputerPlayer extends PlayerImpl {
     private List<MageObject> getSortedProducers(ManaCosts<ManaCost> unpaid, Game game) {
         List<MageObject> unsorted = this.getAvailableManaProducers(game);
         unsorted.addAll(this.getAvailableManaProducersWithCost(game));
-        Map<MageObject, Integer> scored = new HashMap<>();
+        List<Entry<MageObject, Integer>> scored = new ArrayList<>();
         for (MageObject mageObject : unsorted) {
             int score = 0;
             for (ManaCost cost : unpaid) {
@@ -756,19 +757,75 @@ public class ComputerPlayer extends PlayerImpl {
                     score += 2;
                 }
             }
-            scored.put(mageObject, score);
+            scored.add(new AbstractMap.SimpleEntry<>(mageObject, score));
         }
-        return sortByValue(scored);
+        return sortByValue(scored, game);
     }
 
-    private List<MageObject> sortByValue(Map<MageObject, Integer> map) {
-        List<Entry<MageObject, Integer>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, Comparator.comparing(Entry::getValue));
+    private List<MageObject> sortByValue(List<Entry<MageObject, Integer>> scored, Game game) {
+        List<Entry<MageObject, Integer>> list = new ArrayList<>(scored);
+        Collections.sort(list, (entry1, entry2) -> {
+            int compare = entry1.getValue().compareTo(entry2.getValue());
+            if (compare != 0) {
+                return compare;
+            }
+            compare = Integer.compare(
+                    getBattlefieldSortIndex(entry1.getKey(), game),
+                    getBattlefieldSortIndex(entry2.getKey(), game)
+            );
+            if (compare != 0) {
+                return compare;
+            }
+            compare = getStableObjectName(entry1.getKey()).compareTo(getStableObjectName(entry2.getKey()));
+            if (compare != 0) {
+                return compare;
+            }
+            return 0;
+        });
         List<MageObject> result = new ArrayList<>();
         for (Entry<MageObject, Integer> entry : list) {
             result.add(entry.getKey());
         }
         return result;
+    }
+
+    private List<MageObject> sortManaProducersByStableOrder(List<MageObject> producers, Game game) {
+        List<MageObject> result = new ArrayList<>(producers);
+        Collections.sort(result, (producer1, producer2) -> compareManaProducerStableOrder(producer1, producer2, game));
+        return result;
+    }
+
+    private int compareManaProducerStableOrder(MageObject producer1, MageObject producer2, Game game) {
+        int compare = Integer.compare(
+                getBattlefieldSortIndex(producer1, game),
+                getBattlefieldSortIndex(producer2, game)
+        );
+        if (compare != 0) {
+            return compare;
+        }
+        compare = getStableObjectName(producer1).compareTo(getStableObjectName(producer2));
+        if (compare != 0) {
+            return compare;
+        }
+        return 0;
+    }
+
+    private int getBattlefieldSortIndex(MageObject mageObject, Game game) {
+        if (mageObject == null || game == null || mageObject.getId() == null) {
+            return Integer.MAX_VALUE;
+        }
+        int index = 0;
+        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+            if (mageObject.getId().equals(permanent.getId())) {
+                return index;
+            }
+            index++;
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    private String getStableObjectName(MageObject mageObject) {
+        return mageObject == null || mageObject.getName() == null ? "" : mageObject.getName();
     }
 
     @Override

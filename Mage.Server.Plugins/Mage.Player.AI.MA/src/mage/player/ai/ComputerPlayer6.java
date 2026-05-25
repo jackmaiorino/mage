@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.common.PassAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
@@ -53,6 +54,11 @@ public class ComputerPlayer6 extends ComputerPlayer {
     // TODO: increase maxNodes due AI skill level like max depth?
     private static final int MAX_SIMULATED_NODES_PER_CALC = 5000;
     private static final int MAX_SIMULATED_NODES_PER_ERROR = 5100; // TODO: debug only, set low value to find big calculations
+    private static final boolean DETERMINISTIC_TIEBREAKS = readDeterministicFlag("AI_DETERMINISTIC_TIEBREAKS");
+    private static final boolean DETERMINISTIC_SEARCH = readDeterministicFlag("AI_DETERMINISTIC_SEARCH");
+    private static final boolean DETERMINISTIC_ROOT_TRACE = readDeterministicFlag("AI_DETERMINISTIC_ROOT_TRACE");
+    private static final int DETERMINISTIC_MAX_SIMULATED_NODES =
+            readPositiveInt("AI_DETERMINISTIC_MAX_NODES", MAX_SIMULATED_NODES_PER_CALC);
 
     // same params as Executors.newFixedThreadPool
     // no needs errors check in afterExecute here cause that pool used for FutureTask with result check already
@@ -78,6 +84,49 @@ public class ComputerPlayer6 extends ComputerPlayer {
 
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<>();
+
+    private static boolean readDeterministicFlag(String flagName) {
+        String configured = System.getProperty(flagName);
+        if (configured == null || configured.trim().isEmpty()) {
+            configured = System.getenv(flagName);
+        }
+        if (configured == null || configured.trim().isEmpty()) {
+            configured = System.getenv("TORCH_DETERMINISTIC_EVAL");
+        }
+        return isEnabled(configured);
+    }
+
+    private static boolean isEnabled(String value) {
+        if (value == null) {
+            return false;
+        }
+        String normalized = value.trim().toLowerCase(Locale.ROOT);
+        return "1".equals(normalized) || "true".equals(normalized) || "yes".equals(normalized);
+    }
+
+    private static int readPositiveInt(String flagName, int defaultValue) {
+        String configured = System.getProperty(flagName);
+        if (configured == null || configured.trim().isEmpty()) {
+            configured = System.getenv(flagName);
+        }
+        if (configured == null || configured.trim().isEmpty()) {
+            return defaultValue;
+        }
+        try {
+            int value = Integer.parseInt(configured.trim());
+            return value > 0 ? value : defaultValue;
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    private int getMaxSimulatedNodesPerError() {
+        if (!DETERMINISTIC_SEARCH) {
+            return MAX_SIMULATED_NODES_PER_ERROR;
+        }
+        return Math.max(MAX_SIMULATED_NODES_PER_ERROR, DETERMINISTIC_MAX_SIMULATED_NODES + 100);
+    }
+
     protected int lastLoggedTurn = 0; // for debug logs: mark start of the turn
     protected static final String BLANKS = "...............................................";
 
@@ -97,8 +146,8 @@ public class ComputerPlayer6 extends ComputerPlayer {
             maxDepth = skill;
         }
         maxThinkTimeSecs = skill * 2;
-        maxNodes = MAX_SIMULATED_NODES_PER_CALC;
-        this.actionCache = new HashSet<>();
+        maxNodes = DETERMINISTIC_SEARCH ? DETERMINISTIC_MAX_SIMULATED_NODES : MAX_SIMULATED_NODES_PER_CALC;
+        this.actionCache = new LinkedHashSet<>();
     }
 
     public ComputerPlayer6(final ComputerPlayer6 player) {
@@ -218,7 +267,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             return GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
         }
         // Condition to stop deeper simulation
-        if (SimulationNode2.nodeCount > MAX_SIMULATED_NODES_PER_ERROR) {
+        if (SimulationNode2.nodeCount > getMaxSimulatedNodesPerError()) {
             // how-to fix: make sure you are disabled debug mode by COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS = false
             throw new IllegalStateException("AI ERROR: too much nodes (possible actions)");
         }
@@ -298,6 +347,9 @@ public class ComputerPlayer6 extends ComputerPlayer {
     }
 
     protected boolean getNextAction(Game game) {
+        if (DETERMINISTIC_SEARCH) {
+            return false;
+        }
         if (root != null
                 && !root.children.isEmpty()) {
             SimulationNode2 test = root;
@@ -341,18 +393,21 @@ public class ComputerPlayer6 extends ComputerPlayer {
             if (alpha >= beta) {
                 break;
             }
-            if (SimulationNode2.nodeCount > MAX_SIMULATED_NODES_PER_ERROR) {
+            if (SimulationNode2.nodeCount > getMaxSimulatedNodesPerError()) {
                 throw new IllegalStateException("AI ERROR: too much nodes (possible actions)");
             }
             if (SimulationNode2.nodeCount > maxNodes) {
                 break;
             }
             int val = addActions(child, depth - 1, alpha, beta);
-            if (!currentPlayerId.equals(playerId)) {
-                if (val < beta) {
-                    beta = val;
-                    bestChild = child;
-                    if (node.getCombat() == null) {
+                if (!currentPlayerId.equals(playerId)) {
+                    if (val < beta
+                            || (DETERMINISTIC_TIEBREAKS
+                            && val == beta
+                            && shouldReplaceBestNodeAction(node.getGame(), child, bestChild))) {
+                        beta = val;
+                        bestChild = child;
+                        if (node.getCombat() == null) {
                         node.setCombat(_combat);
                         bestChild.setCombat(_combat);
                     }
@@ -362,11 +417,14 @@ public class ComputerPlayer6 extends ComputerPlayer {
                     logger.debug("lose - break");
                     break;
                 }
-            } else {
-                if (val > alpha) {
-                    alpha = val;
-                    bestChild = child;
-                    if (node.getCombat() == null) {
+                } else {
+                    if (val > alpha
+                            || (DETERMINISTIC_TIEBREAKS
+                            && val == alpha
+                            && shouldReplaceBestNodeAction(node.getGame(), child, bestChild))) {
+                        alpha = val;
+                        bestChild = child;
+                        if (node.getCombat() == null) {
                         node.setCombat(_combat);
                         bestChild.setCombat(_combat);
                     }
@@ -443,11 +501,11 @@ public class ComputerPlayer6 extends ComputerPlayer {
         // TODO: all actions added and calculated one by one,
         //  multithreading do not supported here
         // run new game simulation in parallel thread
-        FutureTask<Integer> task = new FutureTask<>(() -> addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE));
+        FutureTask<Integer> task = new FutureTask<>(this::addActionsWithOptionalRandomIsolation);
         threadPoolSimulations.execute(task);
         try {
             int maxSeconds = maxThinkTimeSecs;
-            if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS) {
+            if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS || DETERMINISTIC_SEARCH) {
                 maxSeconds = 3600;
             }
             logger.debug("maxThink: " + maxSeconds + " seconds ");
@@ -483,6 +541,15 @@ public class ComputerPlayer6 extends ComputerPlayer {
         }
         //TODO: timeout handling
         return 0;
+    }
+
+    private Integer addActionsWithOptionalRandomIsolation() {
+        if (!DETERMINISTIC_SEARCH) {
+            return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        }
+        try (RandomUtil.RandomIsolation ignored = RandomUtil.isolateThreadLocalRandom(1592639710L)) {
+            return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        }
     }
 
     private void printFreezeNode(SimulationNode2 root) {
@@ -543,6 +610,13 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 logger.info("Sim Prio [" + depth + "] -- interrupted");
                 break;
             }
+            boolean shouldTraceRootAction = DETERMINISTIC_ROOT_TRACE && depth == maxDepth;
+            int alphaBeforeAction = alpha;
+            int betaBeforeAction = beta;
+            String bestBeforeActionKey = shouldTraceRootAction ? getStableNodeActionKey(game, bestNode) : "";
+            String actionTraceKey = shouldTraceRootAction ? getStableActionKey(game, action) : "";
+            String actionTraceInfo = shouldTraceRootAction ? getAbilityAndSourceInfo(game, action, true) : "";
+            boolean replacedBestAction = false;
             Game sim = game.createSimulationForAI();
             if (!(action instanceof StaticAbility) //for MorphAbility, etc
                     && sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
@@ -676,12 +750,18 @@ public class ComputerPlayer6 extends ComputerPlayer {
                             && action instanceof PassAbility) {
                         finalScore = finalScore - PASSIVITY_PENALTY; // passivity penalty
                     }
-                    if (finalScore > alpha
+                    if (bestNode == null
+                            || finalScore > alpha
                             || (depth == maxDepth
                             && finalScore == alpha
-                            && RandomUtil.nextBoolean())) { // Adding random for equal value to get change sometimes
+                            && !DETERMINISTIC_TIEBREAKS
+                            && RandomUtil.nextBoolean())
+                            || (DETERMINISTIC_TIEBREAKS
+                            && finalScore == alpha
+                            && shouldReplaceBestNodeAction(game, newNode, bestNode))) { // Adding random for equal value to get change sometimes
                         alpha = finalScore;
                         bestNode = newNode;
+                        replacedBestAction = true;
                         bestNode.setScore(finalScore);
                         if (!newNode.getChildren().isEmpty()) {
                             // TODO: wtf, must review all code to remove shared objects
@@ -703,9 +783,14 @@ public class ComputerPlayer6 extends ComputerPlayer {
                         break;
                     }
                 } else {
-                    if (finalScore < beta) {
+                    if (bestNode == null
+                            || finalScore < beta
+                            || (DETERMINISTIC_TIEBREAKS
+                            && finalScore == beta
+                            && shouldReplaceBestNodeAction(game, newNode, bestNode))) {
                         beta = finalScore;
                         bestNode = newNode;
+                        replacedBestAction = true;
                         bestNode.setScore(finalScore);
                         if (!newNode.getChildren().isEmpty()) {
                             bestNode.setCombat(newNode.getChildren().get(0).getCombat());
@@ -718,10 +803,28 @@ public class ComputerPlayer6 extends ComputerPlayer {
                         break;
                     }
                 }
+                if (shouldTraceRootAction) {
+                    traceDeterministicRootAction(
+                            game,
+                            currentPlayer.getId(),
+                            actionNumber,
+                            actionTraceKey,
+                            actionTraceInfo,
+                            finalScore,
+                            startedScore,
+                            alphaBeforeAction,
+                            betaBeforeAction,
+                            alpha,
+                            beta,
+                            bestBeforeActionKey,
+                            getStableNodeActionKey(game, bestNode),
+                            replacedBestAction
+                    );
+                }
                 if (alpha >= beta) {
                     break;
                 }
-                if (SimulationNode2.nodeCount > MAX_SIMULATED_NODES_PER_ERROR) {
+                if (SimulationNode2.nodeCount > getMaxSimulatedNodesPerError()) {
                     throw new IllegalStateException("AI ERROR: too many nodes (possible actions)");
                 }
                 if (SimulationNode2.nodeCount > maxNodes) {
@@ -800,11 +903,301 @@ public class ComputerPlayer6 extends ComputerPlayer {
         return abilityInfo + (targetsInfo.isEmpty() ? "" : " -> " + targetsInfo);
     }
 
+    private boolean shouldReplaceBestNodeAction(Game game, SimulationNode2 candidate, SimulationNode2 currentBest) {
+        if (currentBest == null) {
+            return true;
+        }
+        return getStableNodeActionKey(game, candidate).compareTo(getStableNodeActionKey(game, currentBest)) < 0;
+    }
+
+    private String getStableNodeActionKey(Game game, SimulationNode2 node) {
+        if (node == null) {
+            return "";
+        }
+        Ability ability = getFirstNodeAbility(node);
+        if (ability != null) {
+            return getStableActionKey(game, ability);
+        }
+        StringBuilder sb = new StringBuilder("node");
+        appendStableIdList(sb, "targets", node.getTargets(), game);
+        if (node.getChoices() != null && !node.getChoices().isEmpty()) {
+            sb.append("|choices[");
+            node.getChoices().stream()
+                    .map(this::sanitizeStableKeyPart)
+                    .sorted()
+                    .forEach(choice -> sb.append(choice).append(';'));
+            sb.append(']');
+        }
+        return sb.toString();
+    }
+
+    private Ability getFirstNodeAbility(SimulationNode2 node) {
+        if (node == null || node.getAbilities() == null || node.getAbilities().isEmpty()) {
+            return null;
+        }
+        return node.getAbilities().get(0);
+    }
+
+    private String getStableActionKey(Game game, Ability ability) {
+        if (ability == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("class=").append(ability.getClass().getName());
+        sb.append("|rule=").append(sanitizeStableKeyPart(ability.getRule()));
+        sb.append("|source=").append(getStableObjectKey(game, ability.getSourceId()));
+        appendTargetKeys(sb, "selected", ability.getAllSelectedTargets(), game);
+        appendCostTargetKeys(sb, "costs", ability.getCosts(), game);
+        return sb.toString();
+    }
+
+    private void appendCostTargetKeys(StringBuilder sb, String label, Collection<? extends Cost> costs, Game game) {
+        sb.append('|').append(label).append('[');
+        if (costs != null) {
+            for (Cost cost : costs) {
+                if (cost == null) {
+                    continue;
+                }
+                sb.append(cost.getClass().getName())
+                        .append(':')
+                        .append(sanitizeStableKeyPart(cost.getText()))
+                        .append('{');
+                appendTargetKeys(sb, "target", cost.getTargets(), game);
+                sb.append('}');
+            }
+        }
+        sb.append(']');
+    }
+
+    private void appendTargetKeys(StringBuilder sb, String label, Collection<Target> targets, Game game) {
+        sb.append('|').append(label).append('[');
+        if (targets != null) {
+            for (Target target : targets) {
+                if (target == null) {
+                    continue;
+                }
+                sb.append(sanitizeStableKeyPart(target.getTargetName()))
+                        .append(':')
+                        .append(target.getMinNumberOfTargets())
+                        .append('-')
+                        .append(target.getMaxNumberOfTargets())
+                        .append('{');
+                for (UUID selectedId : target.getTargets()) {
+                    sb.append(getStableObjectKey(game, selectedId));
+                    if (target instanceof TargetAmount) {
+                        sb.append("#x").append(target.getTargetAmount(selectedId));
+                    }
+                    sb.append(';');
+                }
+                sb.append('}');
+            }
+        }
+        sb.append(']');
+    }
+
+    private void appendStableIdList(StringBuilder sb, String label, Collection<UUID> ids, Game game) {
+        sb.append('|').append(label).append('[');
+        if (ids != null) {
+            ids.stream()
+                    .map(id -> getStableObjectKey(game, id))
+                    .sorted()
+                    .forEach(key -> sb.append(key).append(';'));
+        }
+        sb.append(']');
+    }
+
+    private String getStableObjectKey(Game game, UUID id) {
+        if (id == null) {
+            return "null";
+        }
+        Player player = game.getPlayer(id);
+        if (player != null) {
+            return "player|" + sanitizeStableKeyPart(player.getName());
+        }
+        Permanent permanent = game.getPermanent(id);
+        if (permanent != null) {
+            return getStablePermanentKey(game, permanent);
+        }
+        StackObject stackObject = game.getState().getStack().getStackObject(id);
+        if (stackObject != null) {
+            return "stack|"
+                    + sanitizeStableKeyPart(stackObject.getName())
+                    + "|controller="
+                    + getStablePlayerName(game, stackObject.getControllerId());
+        }
+        MageObject object = game.getObject(id);
+        if (object != null) {
+            return "object|" + sanitizeStableKeyPart(object.getName());
+        }
+        return "unknown|" + id;
+    }
+
+    private String getStablePermanentKey(Game game, Permanent permanent) {
+        return "permanent|pos="
+                + getBattlefieldSortIndex(game, permanent.getId())
+                + "|name="
+                + sanitizeStableKeyPart(permanent.getName())
+                + "|controller="
+                + getStablePlayerName(game, permanent.getControllerId())
+                + "|tapped="
+                + permanent.isTapped()
+                + "|damage="
+                + permanent.getDamage()
+                + "|types="
+                + sanitizeStableKeyPart(String.valueOf(permanent.getCardType(game)))
+                + "|subtypes="
+                + sanitizeStableKeyPart(String.valueOf(permanent.getSubtype(game)))
+                + "|counters="
+                + permanent.getCounters(game).getTotalCount()
+                + "|attachments="
+                + permanent.getAttachments().size()
+                + "|attached="
+                + (permanent.getAttachedTo() != null)
+                + "|rules="
+                + sanitizeStableKeyPart(String.join(";", permanent.getRules(game)));
+    }
+
+    private int getBattlefieldSortIndex(Game game, UUID permanentId) {
+        int index = 0;
+        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+            if (Objects.equals(permanent.getId(), permanentId)) {
+                return index;
+            }
+            index++;
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    private String getStablePlayerName(Game game, UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        if (player == null) {
+            return "";
+        }
+        return sanitizeStableKeyPart(player.getName());
+    }
+
+    private String sanitizeStableKeyPart(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replace('|', '/')
+                .replace('[', '(')
+                .replace(']', ')')
+                .replace('{', '(')
+                .replace('}', ')')
+                .replace('\r', ' ')
+                .replace('\n', ' ');
+    }
+
     private String printDiffScore(int score) {
         if (score >= 0) {
             return "+" + score;
         } else {
             return "" + score;
+        }
+    }
+
+    private void traceDeterministicRootAction(
+            Game game,
+            UUID currentPlayerId,
+            int actionNumber,
+            String actionKey,
+            String actionInfo,
+            int finalScore,
+            int startedScore,
+            int alphaBefore,
+            int betaBefore,
+            int alphaAfter,
+            int betaAfter,
+            String bestBeforeKey,
+            String bestAfterKey,
+            boolean replacedBest
+    ) {
+        if (!DETERMINISTIC_ROOT_TRACE) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder("CP7_ROOT_SCORE_JSON: {");
+        appendJsonString(sb, "player", getStablePlayerName(game, currentPlayerId), false);
+        appendJsonString(sb, "priority_player", getStablePlayerName(game, game.getPriorityPlayerId()), true);
+        appendJsonNumber(sb, "turn", game.getTurnNum(), true);
+        appendJsonString(sb, "step", String.valueOf(game.getTurnStepType()), true);
+        appendJsonNumber(sb, "depth", maxDepth, true);
+        appendJsonNumber(sb, "action_number", actionNumber, true);
+        appendJsonNumber(sb, "started_score", startedScore, true);
+        appendJsonNumber(sb, "final_score", finalScore, true);
+        appendJsonNumber(sb, "score_delta", finalScore - startedScore, true);
+        appendJsonNumber(sb, "alpha_before", alphaBefore, true);
+        appendJsonNumber(sb, "beta_before", betaBefore, true);
+        appendJsonNumber(sb, "alpha_after", alphaAfter, true);
+        appendJsonNumber(sb, "beta_after", betaAfter, true);
+        appendJsonNumber(sb, "node_count", SimulationNode2.nodeCount, true);
+        appendJsonNumber(sb, "max_nodes", maxNodes, true);
+        appendJsonNumber(sb, "random_util_count", RandomUtil.getConsumptionCount(), true);
+        appendJsonBoolean(sb, "replaced_best", replacedBest, true);
+        appendJsonString(sb, "action_key", actionKey, true);
+        appendJsonString(sb, "best_before_key", bestBeforeKey, true);
+        appendJsonString(sb, "best_after_key", bestAfterKey, true);
+        appendJsonString(sb, "action", actionInfo, true);
+        sb.append('}');
+        System.out.println(sb);
+    }
+
+    private void appendJsonString(StringBuilder sb, String name, String value, boolean commaBefore) {
+        appendJsonName(sb, name, commaBefore);
+        sb.append('"');
+        appendJsonEscaped(sb, value);
+        sb.append('"');
+    }
+
+    private void appendJsonNumber(StringBuilder sb, String name, long value, boolean commaBefore) {
+        appendJsonName(sb, name, commaBefore);
+        sb.append(value);
+    }
+
+    private void appendJsonBoolean(StringBuilder sb, String name, boolean value, boolean commaBefore) {
+        appendJsonName(sb, name, commaBefore);
+        sb.append(value);
+    }
+
+    private void appendJsonName(StringBuilder sb, String name, boolean commaBefore) {
+        if (commaBefore) {
+            sb.append(',');
+        }
+        sb.append('"');
+        appendJsonEscaped(sb, name);
+        sb.append("\":");
+    }
+
+    private void appendJsonEscaped(StringBuilder sb, String value) {
+        if (value == null) {
+            return;
+        }
+        for (int i = 0; i < value.length(); i++) {
+            char ch = value.charAt(i);
+            switch (ch) {
+                case '\\':
+                    sb.append("\\\\");
+                    break;
+                case '"':
+                    sb.append("\\\"");
+                    break;
+                case '\r':
+                    sb.append("\\r");
+                    break;
+                case '\n':
+                    sb.append("\\n");
+                    break;
+                case '\t':
+                    sb.append("\\t");
+                    break;
+                default:
+                    if (ch < 0x20) {
+                        sb.append(String.format(Locale.ROOT, "\\u%04x", (int) ch));
+                    } else {
+                        sb.append(ch);
+                    }
+                    break;
+            }
         }
     }
 
@@ -817,6 +1210,18 @@ public class ComputerPlayer6 extends ComputerPlayer {
     protected void optimize(Game game, List<Ability> allActions) {
         for (TreeOptimizer optimizer : optimizers) {
             optimizer.optimize(game, allActions);
+        }
+        if (DETERMINISTIC_TIEBREAKS) {
+            Map<String, Ability> uniqueActions = new LinkedHashMap<>();
+            for (Ability ability : allActions) {
+                String key = getStableActionKey(game, ability);
+                Ability existing = uniqueActions.get(key);
+                if (existing == null || compareStableActionInstanceOrder(game, ability, existing) < 0) {
+                    uniqueActions.put(key, ability);
+                }
+            }
+            allActions.clear();
+            allActions.addAll(uniqueActions.values());
         }
         Collections.sort(allActions, new Comparator<Ability>() {
             @Override
@@ -858,9 +1263,60 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 }
 
                 // default
-                return ability1.getRule().compareTo(ability2.getRule());
+                int compare = ability1.getRule().compareTo(ability2.getRule());
+                if (compare != 0 || !DETERMINISTIC_TIEBREAKS) {
+                    return compare;
+                }
+                return getStableActionKey(game, ability1).compareTo(getStableActionKey(game, ability2));
             }
         });
+    }
+
+    private int compareStableActionInstanceOrder(Game game, Ability ability1, Ability ability2) {
+        return getStableActionInstanceOrderKey(game, ability1)
+                .compareTo(getStableActionInstanceOrderKey(game, ability2));
+    }
+
+    private String getStableActionInstanceOrderKey(Game game, Ability ability) {
+        if (ability == null) {
+            return "";
+        }
+        return getStableSourceInstanceKey(game, ability.getSourceId(), ability.getControllerId());
+    }
+
+    private String getStableSourceInstanceKey(Game game, UUID sourceId, UUID controllerId) {
+        if (game == null || sourceId == null) {
+            return "";
+        }
+        Player controller = controllerId == null ? null : game.getPlayer(controllerId);
+        String controllerName = controller == null ? "" : sanitizeStableKeyPart(controller.getName());
+        if (controller != null) {
+            int handIndex = 0;
+            for (UUID handId : controller.getHand()) {
+                if (Objects.equals(handId, sourceId)) {
+                    return "hand|controller=" + controllerName + "|index=" + handIndex + "|"
+                            + getStableObjectKey(game, sourceId);
+                }
+                handIndex++;
+            }
+            int graveyardIndex = 0;
+            for (UUID graveyardId : controller.getGraveyard()) {
+                if (Objects.equals(graveyardId, sourceId)) {
+                    return "graveyard|controller=" + controllerName + "|index=" + graveyardIndex + "|"
+                            + getStableObjectKey(game, sourceId);
+                }
+                graveyardIndex++;
+            }
+            int libraryIndex = 0;
+            for (UUID libraryId : controller.getLibrary().getCardList()) {
+                if (Objects.equals(libraryId, sourceId)) {
+                    return "library|controller=" + controllerName + "|index=" + libraryIndex + "|"
+                            + getStableObjectKey(game, sourceId);
+                }
+                libraryIndex++;
+            }
+        }
+        return getStableObjectKey(game, sourceId);
     }
 
     protected boolean allPassed(Game game) {

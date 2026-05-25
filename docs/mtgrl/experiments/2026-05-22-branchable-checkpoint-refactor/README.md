@@ -1977,3 +1977,48 @@ Conclusion:
 - The London-bottom Q-blend contamination is fixed without changing the policy scorer used for London-bottom decisions.
 - v393 is still not a promotion or HPC-scale candidate because the Grixis hard gate remains below the 9 / 16 v350 and baseline controls.
 - The next research unit is to inspect chunks 1 and 11 as the remaining outcome-derived blockers, likely by comparing candidate-Q deltas against baseline/v350 choices and either gating low-confidence Q application or adding more terminal evidence for Affinity-pressure states.
+
+## v438 Deterministic CP7 Eval Stability Gate
+
+Purpose:
+
+- Repair the local deterministic-eval control before comparing v392/v393 against baseline on the remaining Grixis chunks.
+- Keep the fix generic: deterministic ordering, stable replay/search choices, and fresh Maven exec classpaths only. No combo-specific reward, no card-specific action override, and no hard-coded "pass cannot be best" rule.
+
+Diagnosis:
+
+- Earlier paired full-log repeats still diverged from the same visible and hidden state at opponent decision D39 on Grixis chunk 1: one run chose `Thoughtcast`, another chose `Silverbluff Bridge`.
+- Increasing `AI_DETERMINISTIC_MAX_NODES` to 20000 did not solve the split and made one repeat time out.
+- The first actionable root cause was stale Maven exec classpaths: `run_cp7_eval_sweep.py --skip-compile` could run `exec:java` against an older AI.MA dependency even after a separate compile had passed. The CP7 root trace hook only appeared when the job used compile and exec in the same Maven invocation.
+
+Code checkpoint:
+
+- Deterministic CP7 eval now:
+  - disables random equal-score root tie breaks;
+  - disables carried-forward planned-action reuse;
+  - uses stable action, source-copy, mana-producer, target, and combat ordering;
+  - isolates CP7 simulation RNG for deterministic search;
+  - exposes guarded `AI_DETERMINISTIC_ROOT_TRACE` / `--deterministic-root-trace` diagnostics;
+  - automatically uses compile+exec in the same Maven invocation for `--deterministic-eval` jobs.
+- Related engine option ordering fixes use insertion-stable collections and deterministic cost-target/source selection in the replay-relevant paths.
+
+Validation:
+
+- Compile/script checks passed:
+  - `python -m py_compile scripts\run_cp7_eval_sweep.py`
+  - `git diff --check`
+  - `python %USERPROFILE%\.codex\skills\mage-research-agent\scripts\airl_maven.py compile`
+- Root-trace classpath proof:
+  - `20260524_v436_baseline_chunk001_fulllog_roottrace_compileexec_a`
+  - `20260524_v437_baseline_chunk001_fulllog_roottrace_compileexec_b`
+  - Both completed `0 / 1`, emitted CP7 root score rows, and produced 198 normalized decision rows with no semantic diff.
+- Normal no-trace deterministic proof:
+  - `20260524_v438_baseline_chunk001_fulllog_autocompileexec_a`
+  - `20260524_v439_baseline_chunk001_fulllog_autocompileexec_b`
+  - Both completed `0 / 1`, produced 198 normalized decision rows, and had no first diff, including RNG/probability fields.
+
+Conclusion:
+
+- The chunk 1 deterministic-control blocker is resolved for the normal deterministic eval command shape.
+- The stale exec-classpath failure mode is now guarded by script behavior, so future deterministic paired gates should exercise the just-compiled AI.MA code.
+- Next unit: run paired deterministic no-log checks for v392/v393 versus baseline on the remaining Grixis blocker chunks, starting with chunks 1 and 11, before considering any HPC scale-up.

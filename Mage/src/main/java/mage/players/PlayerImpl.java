@@ -78,6 +78,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     private static final Object REPLAY_ENGINE_BOUNDARY_TRACE_LOCK = new Object();
     private static final java.util.concurrent.atomic.AtomicLong REPLAY_ENGINE_BOUNDARY_TRACE_SEQ =
             new java.util.concurrent.atomic.AtomicLong(0L);
+    private static final boolean AI_DETERMINISTIC_TIEBREAKS = readDeterministicFlag("AI_DETERMINISTIC_TIEBREAKS");
+    private static final boolean AI_DETERMINISTIC_SEARCH = readDeterministicFlag("AI_DETERMINISTIC_SEARCH");
 
     /**
      * During some steps we can't play anything
@@ -1980,9 +1982,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             replaySeed = replayEngineBoundaryProperty("xmage.replay.seed");
         }
         seed = seed * 31L + replaySeed.hashCode();
-        seed = seed * 31L + RandomUtil.getConsumptionCount();
         seed = seed * 31L + (boundary == null ? 0L : boundary.hashCode());
-        seed = seed * 31L + (source == null || source.getSourceId() == null ? 0L : source.getSourceId().hashCode());
+        if (AI_DETERMINISTIC_SEARCH) {
+            seed = seed * 31L + stableReplaySimulatedPlayerSeedKey(source, game).hashCode();
+        } else {
+            seed = seed * 31L + RandomUtil.getConsumptionCount();
+            seed = seed * 31L + (source == null || source.getSourceId() == null ? 0L : source.getSourceId().hashCode());
+        }
         try {
             seed = seed * 31L + game.getTurnNum();
             seed = seed * 31L + (game.getStep() == null || game.getStep().getType() == null
@@ -1991,6 +1997,24 @@ public abstract class PlayerImpl implements Player, Serializable {
         } catch (Exception ignored) {
         }
         return seed;
+    }
+
+    private String stableReplaySimulatedPlayerSeedKey(Ability source, Game game) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("player=").append(getName());
+        sb.append("|active=").append(stableReplayPlayerName(game, game == null ? null : game.getActivePlayerId()));
+        sb.append("|priority=").append(stableReplayPlayerName(game, game == null ? null : game.getPlayerList().get()));
+        sb.append("|sourceName=").append(replayEngineBoundarySourceName(source, game));
+        sb.append("|sourceRule=").append(replayEngineBoundarySourceRule(source));
+        return sb.toString();
+    }
+
+    private String stableReplayPlayerName(Game game, UUID playerId) {
+        if (game == null || playerId == null) {
+            return "";
+        }
+        Player player = game.getPlayer(playerId);
+        return player == null ? "" : player.getName();
     }
 
     private RandomUtil.RandomIsolation beginReplaySimulatedPlayerRandomIsolation(
@@ -5145,7 +5169,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         // eliminate duplicate activated abilities (uses for AI plays)
-        Map<String, ActivatedAbility> activatedUnique = new HashMap<>();
+        Map<String, ActivatedAbility> activatedUnique = new LinkedHashMap<>();
         List<ActivatedAbility> activatedAll = new ArrayList<>();
 
         // activated abilities from battlefield objects
@@ -5377,15 +5401,110 @@ public abstract class PlayerImpl implements Player, Serializable {
      * AI related code
      */
     private void addCostTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
-        for (UUID targetId : option.getCosts().getTargets().get(targetNum).possibleTargets(playerId, option, game)) {
+        List<UUID> possibleTargetIds = new ArrayList<>(option.getCosts().getTargets().get(targetNum).possibleTargets(playerId, option, game));
+        possibleTargetIds.sort((targetId1, targetId2) -> compareTargetIdsForAiOptions(targetId1, targetId2, game));
+        if (AI_DETERMINISTIC_TIEBREAKS) {
+            Map<String, UUID> canonicalTargets = new LinkedHashMap<>();
+            for (UUID targetId : possibleTargetIds) {
+                canonicalTargets.putIfAbsent(getStableCostTargetEquivalenceKey(targetId, game), targetId);
+            }
+            possibleTargetIds = new ArrayList<>(canonicalTargets.values());
+        }
+        for (UUID targetId : possibleTargetIds) {
             Ability newOption = option.copy();
-            newOption.getCosts().getTargets().get(targetNum).addTarget(targetId, option, game, true);
+            newOption.getCosts().getTargets().get(targetNum).addTarget(targetId, newOption, game, true);
             if (targetNum < option.getCosts().getTargets().size() - 1) {
                 addCostTargetOptions(options, newOption, targetNum + 1, game);
             } else {
                 options.add(newOption);
             }
         }
+    }
+
+    private static boolean readDeterministicFlag(String flagName) {
+        String configured = System.getProperty(flagName);
+        if (configured == null || configured.trim().isEmpty()) {
+            configured = System.getenv(flagName);
+        }
+        if (configured == null || configured.trim().isEmpty()) {
+            return false;
+        }
+        configured = configured.trim();
+        return "1".equals(configured)
+                || "true".equalsIgnoreCase(configured)
+                || "yes".equalsIgnoreCase(configured)
+                || "on".equalsIgnoreCase(configured);
+    }
+
+    private int compareTargetIdsForAiOptions(UUID targetId1, UUID targetId2, Game game) {
+        int compare = Integer.compare(
+                getBattlefieldSortIndex(targetId1, game),
+                getBattlefieldSortIndex(targetId2, game)
+        );
+        if (compare != 0) {
+            return compare;
+        }
+        compare = getStableTargetName(targetId1, game).compareTo(getStableTargetName(targetId2, game));
+        if (compare != 0) {
+            return compare;
+        }
+        return targetId1.compareTo(targetId2);
+    }
+
+    private String getStableCostTargetEquivalenceKey(UUID targetId, Game game) {
+        if (targetId == null || game == null) {
+            return "";
+        }
+        Permanent permanent = game.getPermanent(targetId);
+        if (permanent != null) {
+            Player controller = game.getPlayer(permanent.getControllerId());
+            Player owner = game.getPlayer(permanent.getOwnerId());
+            return String.join("|",
+                    "permanent",
+                    permanent.getName(),
+                    controller == null ? "" : controller.getName(),
+                    owner == null ? "" : owner.getName(),
+                    String.valueOf(permanent.isTapped()),
+                    String.valueOf(permanent.getDamage()),
+                    String.valueOf(permanent.getCardType(game)),
+                    String.valueOf(permanent.getSubtype(game)),
+                    String.valueOf(permanent.getCounters(game).getTotalCount()),
+                    String.valueOf(permanent.getAttachments().size()),
+                    String.valueOf(permanent.getAttachedTo() != null),
+                    String.valueOf(permanent.getAbilities(game).size()),
+                    String.valueOf(permanent.getRules(game))
+            );
+        }
+        return targetId.toString();
+    }
+
+    private int getBattlefieldSortIndex(UUID targetId, Game game) {
+        if (targetId == null || game == null) {
+            return Integer.MAX_VALUE;
+        }
+        int index = 0;
+        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+            if (targetId.equals(permanent.getId())) {
+                return index;
+            }
+            index++;
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    private String getStableTargetName(UUID targetId, Game game) {
+        if (targetId == null || game == null) {
+            return "";
+        }
+        Player player = game.getPlayer(targetId);
+        if (player != null && player.getName() != null) {
+            return player.getName();
+        }
+        MageObject mageObject = game.getObject(targetId);
+        if (mageObject != null && mageObject.getName() != null) {
+            return mageObject.getName();
+        }
+        return "";
     }
 
     @Override

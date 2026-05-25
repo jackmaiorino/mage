@@ -11,6 +11,7 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.combat.Combat;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
@@ -236,7 +237,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     }
 
     public List<Combat> addAttackers(Game game) {
-        Map<Integer, Combat> engagements = new HashMap<>();
+        Map<String, Combat> engagements = new LinkedHashMap<>();
         //useful only for two player games - will only attack first opponent
         UUID defenderId = game.getOpponents(playerId, true).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
@@ -258,7 +259,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
                     }
                 }
             }
-            if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
+            if (engagements.put(getStableCombatKey(sim, sim.getCombat()), sim.getCombat()) != null) {
                 logger.debug("simulating -- found redundant attack combination");
             } else {
                 logger.debug("simulating -- attack:" + sim.getCombat().getGroups().size());
@@ -275,7 +276,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     }
 
     public List<Combat> addBlockers(Game game) {
-        Map<Integer, Combat> engagements = new HashMap<>();
+        Map<String, Combat> engagements = new LinkedHashMap<>();
         int numGroups = game.getCombat().getGroups().size();
         if (numGroups == 0) {
             return Collections.emptyList();
@@ -283,7 +284,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
 
         //add a node with no blockers
         Game sim = game.createSimulationForAI();
-        engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat());
+        engagements.put(getStableCombatKey(sim, sim.getCombat()), sim.getCombat());
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
 
         List<Permanent> blockers = getAvailableBlockers(game);
@@ -292,7 +293,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
         return new ArrayList<>(engagements.values());
     }
 
-    protected void addBlocker(Game game, List<Permanent> blockers, Map<Integer, Combat> engagements) {
+    protected void addBlocker(Game game, List<Permanent> blockers, Map<String, Combat> engagements) {
         if (blockers.isEmpty()) {
             return;
         }
@@ -305,13 +306,68 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
             if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
                 Game sim = game.createSimulationForAI();
                 sim.getCombat().getGroups().get(i).addBlocker(blocker.getId(), playerId, sim);
-                if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
+                if (engagements.put(getStableCombatKey(sim, sim.getCombat()), sim.getCombat()) != null) {
                     logger.debug("simulating -- found redundant block combination");
                 }
                 addBlocker(sim, remaining, engagements);  // and recurse minus the used blocker
             }
         }
         addBlocker(game, remaining, engagements);
+    }
+
+    private String getStableCombatKey(Game game, Combat combat) {
+        StringBuilder sb = new StringBuilder();
+        for (CombatGroup group : combat.getGroups()) {
+            sb.append("def=").append(getStablePermanentOrPlayerKey(game, group.getDefenderId()));
+            sb.append(";defPlayer=").append(getStablePermanentOrPlayerKey(game, group.getDefendingPlayerId()));
+            sb.append(";attackers=");
+            appendStableIdList(sb, game, group.getAttackers());
+            sb.append(";blockers=");
+            appendStableIdList(sb, game, group.getBlockers());
+            sb.append('|');
+        }
+        return sb.toString();
+    }
+
+    private void appendStableIdList(StringBuilder sb, Game game, List<UUID> ids) {
+        boolean first = true;
+        for (UUID id : ids) {
+            if (!first) {
+                sb.append(',');
+            }
+            sb.append(getStablePermanentOrPlayerKey(game, id));
+            first = false;
+        }
+    }
+
+    private String getStablePermanentOrPlayerKey(Game game, UUID id) {
+        if (id == null) {
+            return "";
+        }
+        Player player = game.getPlayer(id);
+        if (player != null) {
+            return "player:" + player.getName();
+        }
+        Permanent permanent = game.getPermanent(id);
+        if (permanent != null) {
+            return "permanent:" + getBattlefieldSortIndex(game, id) + ':' + permanent.getName();
+        }
+        MageObject mageObject = game.getObject(id);
+        if (mageObject != null) {
+            return "object:" + mageObject.getName();
+        }
+        return "unknown";
+    }
+
+    private int getBattlefieldSortIndex(Game game, UUID id) {
+        int index = 0;
+        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+            if (id.equals(permanent.getId())) {
+                return index;
+            }
+            index++;
+        }
+        return Integer.MAX_VALUE;
     }
 
     @Override
