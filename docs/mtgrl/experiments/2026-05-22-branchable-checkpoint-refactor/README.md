@@ -1841,14 +1841,43 @@ Artifacts:
 - Shared-GPU model-continuation artifact: `local-training/local_pbt/live_checkpoint_branch_miner/v385_grixis_chunk14_ord073_source_sharedgpu`
   - Same snapshot and forced root as v384, but launched through the deterministic shared GPU service from the v383 eval manifest.
   - Result: 1 / 1 terminal win, source root `Cast Balustrade Spy`, reentry matched, final state hash `6306f436014520f8a1e4fe0ab6dd06f6e6996db47e786ced06c970854e23d1e8`.
+- Chunk 14 source-continuation sweep: `local-training/local_pbt/live_checkpoint_branch_miner/v386_grixis_chunk14_source_model_path24`
+  - First 24 chunk 14 checkpoints, source root only, model continuation.
+  - Result: 21 terminal wins, 1 terminal loss, 2 nonterminal action-type mismatches.
+- Chunk 14 root-sibling sweep: `local-training/local_pbt/live_checkpoint_branch_miner/v387_grixis_chunk14_root8_model_path24`
+  - Same first 24 chunk 14 checkpoints, up to 8 root choices per checkpoint, model continuation.
+  - Result: 157 terminal wins, 19 terminal losses, 16 nonterminal action-type mismatches.
+  - Mixed-outcome setup states included `D071` with 2 wins / 6 losses and several earlier states with 50% to 75% terminal win rates across siblings.
+- Chunk 7 root-sibling sweep: `local-training/local_pbt/live_checkpoint_branch_miner/v388_grixis_chunk7_root8_model_path24`
+  - First 24 chunk 7 checkpoints, up to 8 root choices per checkpoint, model continuation.
+  - Result: 93 terminal wins, 43 terminal losses, 56 nonterminal action-type mismatches.
+  - Even the deterministic-loss chunk contains terminal-winning siblings, including late states where one or two root actions recovered wins from otherwise loss-heavy surfaces.
+- Action-only ranked sweep: `local-training/local_pbt/live_checkpoint_branch_miner/v389_grixis_action_root8_model_rank64`
+  - Ranked 64 `ACTIVATE_ABILITY_OR_SPELL` checkpoints across chunks 7 and 14, up to 8 root choices per checkpoint.
+  - Result: 512 / 512 terminal rows, 265 wins and 247 losses, with zero action-type mismatches.
+  - Chunk split: chunk 14 was 227 wins / 29 losses; chunk 7 was 38 wins / 218 losses.
+- Denser action-only ranked sweep: `local-training/local_pbt/live_checkpoint_branch_miner/v390_grixis_action_root16_model_rank64`
+  - Same ranked 64 action-only checkpoint set, 16 attempts per checkpoint, common continuation seeds.
+  - Result: 1,024 / 1,024 terminal rows, 527 wins and 497 losses, with zero action-type mismatches.
+  - Chunk split: chunk 14 was 452 wins / 60 losses; chunk 7 was 75 wins / 437 losses.
+- Value-target export: `local-training/local_pbt/terminal_line_value_targets/v390_grixis_action_root16_model_rank64_include_pass`
+  - Gate: `min_actions=2`, `min_attempts_per_action=2`, terminal rate 1.0, common samples required, min value delta 0.10.
+  - Primary export keeps pass-best rows trainable when explicitly requested, while preserving pass-best quality flags for diagnostics.
+  - Exported 18 admitted value examples and 18 serialized advantage-value `TrainingData` records.
+- Diagnostic soft-pass export: `local-training/local_pbt/terminal_line_value_targets/v390_grixis_action_root16_model_rank64_softpass_diagnostic`
+  - Same inputs and thresholds, but default pass-best exclusion.
+  - Admitted 16 value examples, showing that only two v390 trainable rows depend on allowing pass-best.
 
 Code checkpoint:
 
 - `LiveCheckpointBranchMiner` terminal-line mode now honors `--post-branch-autopilot`; with `false`, the forced root is applied and later decisions use the normal model path.
 - Added `scripts/run_live_checkpoint_branch_miner.py`, which loads an eval manifest, starts the same deterministic shared GPU service/model snapshot, and runs `LiveCheckpointBranchMiner` under that environment.
+- Corrected `scripts/mtgrl/export_terminal_line_value_targets.py --include-suspect-pass-best` so explicitly included pass-best rows are trainable, not merely kept in the CSV as non-trainable suspect rows.
 
 Conclusion:
 
 - Branchable checkpoints can reproduce at least one known winning combo line from a captured in-memory game state when continuation uses the trained model through the correct shared GPU service.
 - The v383 zero-win autopilot slice is reclassified as a harness diagnostic, not evidence against the checkpoint or model.
-- The next unit is a broader shared-GPU terminal-line mining pass over the deterministic Grixis chunk 14 checkpoint set, then a separate pass over chunk 7 to compare source losing lines against any terminal-winning siblings.
+- Shared-GPU model-continuation mining now finds outcome-only branch contrast on both the deterministic winning chunk 14 and deterministic losing chunk 7.
+- Action-only mining removes the current pending-choice reentry noise and yields clean terminal-only value targets without combo-specific labels.
+- The next unit is to scale the action-only shared-GPU miner across all eligible checkpoints in v383, then combine the resulting terminal-line value data with the existing v345/v349 corpus for the next small Q-head import candidate.

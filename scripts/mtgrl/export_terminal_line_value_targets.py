@@ -448,11 +448,12 @@ def example_row(
         candidate_count,
     )
     suspect = "suspect_pass_best" in quality_flags
+    train_suspect = suspect and args.include_suspect_pass_best
     row = {
         "example_id": make_example_id(base, distribution),
         "dataset_version": DATASET_VERSION,
-        "manifest_status": "suspect" if suspect else "admitted",
-        "training_status": "excluded_suspect" if suspect else "trainable",
+        "manifest_status": "admitted" if (not suspect or train_suspect) else "suspect",
+        "training_status": "trainable" if (not suspect or train_suspect) else "excluded_suspect",
         "admission_gate": ADMISSION_GATE,
         "input_run_id": input_run_id,
         "snapshot_path": base.get("snapshot_path", ""),
