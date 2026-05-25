@@ -84,6 +84,8 @@ def build_eval_command(args: argparse.Namespace, cycle: int, eval_run_id: str, e
     cmd = [
         sys.executable,
         "scripts/run_cp7_eval_sweep.py",
+        "--registry",
+        args.registry,
         "--run-id",
         eval_run_id,
         "--output-root",
@@ -269,6 +271,10 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--run-id", default=timestamp_id())
     parser.add_argument("--output-root", default=str(DEFAULT_ROOT))
     parser.add_argument("--cycles", type=int, default=1)
+    parser.add_argument(
+        "--registry",
+        default="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json",
+    )
     parser.add_argument("--profiles", default="Pauper-Spy-Combo-Value")
     parser.add_argument("--opponents", default="grixis")
     parser.add_argument("--games-per-matchup", type=int, default=1)

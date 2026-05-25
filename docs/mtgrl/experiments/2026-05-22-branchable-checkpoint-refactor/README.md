@@ -2306,3 +2306,30 @@ Interpretation:
 - The online-distribution harness works end to end when eval and miner classpaths are compiled consistently.
 - The tiny smoke is intentionally too small to produce value targets; it only proves that live online checkpoints can flow into terminal-outcome mining and export without replay reconstruction.
 - This is directly useful for local and HPC scaling: increase games, snapshots, shards, and attempts, and the same artifact structure will produce online-distribution terminal-derived targets.
+
+## v470 Closed Online Mining Training Loop Harness
+
+Purpose:
+
+- Wire the promising online-distribution evidence path into a full iteration loop instead of stopping at target export.
+- Keep the learning signal thesis-clean: terminal win/loss outcomes only, no combo-state labels, no card-specific reward, and no intermediate combo milestones.
+
+Implementation:
+
+- Added `scripts/mtgrl/run_online_mining_training_loop.py`.
+- The driver runs: online eval with live checkpoint capture -> terminal-line mining -> clean soft-pass value-target export -> `TerminalLineValueTargetTrainingDataExporter` -> cloned-profile candidate-Q-only training -> deterministic post-train eval.
+- Training uses `advantage-values` by default, `-CandidateQOnly`, and `-BranchReturnTargets`, matching the signed local sibling-ranking path that previously gave the cleanest offline Q signal.
+- Candidate profiles are cloned from the current play profile before import training; the loop never overwrites the source profile.
+- Added `--existing-online-run-dir` and `--wait-existing-online-run-sec` so an already-running online-mining artifact, such as v469, can be consumed as soon as its value-target summary exists.
+- Added `--registry` pass-through to `run_online_terminal_mining_loop.py` so generated one-profile registries can run candidate profiles that are not in the default PBT registry.
+
+Validation:
+
+- `python -m py_compile scripts\mtgrl\run_online_terminal_mining_loop.py scripts\mtgrl\run_online_mining_training_loop.py`
+- `python %USERPROFILE%\.codex\skills\mage-research-agent\scripts\airl_maven.py compile`
+- Dry-run command construction was checked with a one-game, one-snapshot plan.
+
+Current execution state:
+
+- v469 is still active in the mining stage while this harness is committed.
+- Once v469 writes `terminal_line_value_target_summary.json`, the next command is to run the closed-loop driver with `--existing-online-run-dir local-training/local_pbt/online_terminal_mining/v469_online_terminal_mining_grixis_g4_rank32_a16`.
