@@ -752,6 +752,12 @@ def main() -> int:
         args.ai_threads = 1
         args.serial_warmup_jobs = max(args.serial_warmup_jobs, 1)
 
+    if args.live_checkpoints:
+        # Live snapshots are keyed to replay decision hooks and deterministic
+        # deck/RNG metadata. Keep the CLI fail-closed instead of allowing a
+        # silent zero-checkpoint run when only --live-checkpoints is supplied.
+        args.replay_metadata = True
+
     registry = resolve_repo_path(args.registry)
     entries = filter_entries(load_active_entries(registry), args.profiles)
     output_root = Path(args.output_root) if args.output_root else (
@@ -805,6 +811,7 @@ def main() -> int:
         "split_agent_decks": bool(args.split_agent_decks),
         "mcts_enabled": bool(args.mcts),
         "mcts_env": mcts_env if args.mcts else {},
+        "eval_game_logging": bool(args.eval_game_logging),
         "game_log_format": args.game_log_format,
         "replay_metadata": bool(args.replay_metadata),
         "replay_seed_base": args.replay_seed_base,

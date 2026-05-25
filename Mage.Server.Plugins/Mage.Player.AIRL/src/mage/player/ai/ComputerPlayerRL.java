@@ -2724,10 +2724,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return;
         }
         try {
-            GameLogger gameLogger = resolveGameLogger();
-            if (gameLogger == null || !gameLogger.isEnabled()) {
-                return;
-            }
             int ordinal = replayDecisionOrdinal++;
             List<String> chosenTexts = chosenReplayTexts(candidateTexts, selectedIndices);
             List<String> safeCandidateObjectIds = candidateObjectIds == null
@@ -2771,7 +2767,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             int decisionNumber = (actionType == StateSequenceBuilder.ActionType.MULLIGAN
                     || actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN)
                     ? -1
-                    : gameLogger.getNextDecisionNumber();
+                    : ordinal + 1;
+            GameLogger gameLogger = resolveGameLogger();
+            boolean logEnabled = gameLogger != null && gameLogger.isEnabled();
+            if (logEnabled) {
+                decisionNumber = gameLogger.getNextDecisionNumber();
+            }
             String sourceId = source == null || source.getSourceId() == null ? "" : source.getSourceId().toString();
             String sourceName = replayTraceSourceName(source, game);
             String sourceRule = replayTraceSourceRule(source);
@@ -2896,7 +2897,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     safeChosenObjectIds,
                     selectedProb,
                     valueScore);
-            gameLogger.log("REPLAY_DECISION_JSON: " + sb.toString());
+            if (logEnabled) {
+                gameLogger.log("REPLAY_DECISION_JSON: " + sb.toString());
+            }
         } catch (Throwable ignored) {
             // Replay diagnostics must never change game behavior.
         }

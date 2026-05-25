@@ -65,6 +65,11 @@ def quote_exec_args(args: List[str]) -> str:
     return " ".join(subprocess.list2cmdline([arg]) for arg in args)
 
 
+def has_branch_arg(args: List[str], name: str) -> bool:
+    prefix = f"--{name}="
+    return f"--{name}" in args or any(arg.startswith(prefix) for arg in args)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", required=True, help="Eval manifest that owns the checkpoint/model snapshot.")
@@ -96,6 +101,8 @@ def main() -> int:
         for key, value in (manifest.get("deterministic_eval_env") or {}).items()
     }
     run_dir = sweep.REPO / "local-training" / "local_pbt" / "live_checkpoint_branch_miner" / args.run_id
+    if not has_branch_arg(branch_args, "out"):
+        branch_args = ["--out", str(run_dir)] + branch_args
     logs_dir = run_dir / "runner_logs"
     logs_dir.mkdir(parents=True, exist_ok=True)
 

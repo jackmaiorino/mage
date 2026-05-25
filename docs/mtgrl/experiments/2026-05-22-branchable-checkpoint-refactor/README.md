@@ -2054,3 +2054,34 @@ Conclusion:
 - v392/v393 no longer shows a Grixis regression under the repaired deterministic eval, but it also does not beat baseline. It is a neutral candidate, not a promotion or HPC-scale candidate.
 - The immediate thesis path should move back to outcome-derived evidence quality: mine or generate new terminal-line evidence that actually changes policy/Q choices in baseline-losing chunks, rather than scaling v392 as-is.
 - Chunk 8 is a separate deterministic evaluation-health issue. Because it is shared by candidate and baseline, it should not drive model selection, but it should be tracked if Grixis hard-gate accounting requires all 16 chunks.
+
+## v447-v450 Live Checkpoint Capture Repair
+
+Purpose:
+
+- Collect branchable live checkpoints from baseline-losing Grixis chunks without paying compact game-log overhead.
+- Keep the path thesis-clean: no combo labels, no intermediate combo reward, only terminal-loss states and later branch outcomes.
+
+Diagnosis:
+
+- `20260524_v447_baseline_grixis_loss_chunks_livecheckpoints_autocompileexec` was launched over chunks 1, 2, 4, 5, 6, 12, 15, and 16 with `--live-checkpoints` and `--replay-metadata`, but without `--eval-game-logging`.
+- Chunks 1, 2, 4, and 5 all reached terminal losses, yet no `live_checkpoints` directory was produced.
+- Root cause: `LiveCheckpointRecorder.maybeCapture(...)` was called inside `ComputerPlayerRL.logReplayDecision(...)` only after resolving an enabled `GameLogger`, so no-log capture runs silently returned before snapshot serialization.
+
+Code checkpoint:
+
+- `ComputerPlayerRL.logReplayDecision(...)` now computes replay metadata and calls `LiveCheckpointRecorder` even when text game logging is disabled; `REPLAY_DECISION_JSON` still only writes when `GameLogger` is enabled.
+- `scripts/run_cp7_eval_sweep.py --live-checkpoints` now implies replay metadata, preventing silent zero-checkpoint runs where the replay decision hook is inactive.
+- `scripts/run_live_checkpoint_branch_miner.py` now injects `--out <run_dir>` unless explicitly overridden, so wrapper run IDs own the Java miner outputs instead of leaving probes in a timestamped default directory.
+
+Validation:
+
+| Run ID | Scope | Result |
+| --- | --- | --- |
+| `20260524_v448_live_checkpoint_no_gamelog_smoke` | Baseline Grixis chunk 4, deterministic no-game-log live checkpoint smoke. | Terminal loss `0 / 1`; manifest has `eval_game_logging=false`, `replay_metadata=true`, `live_checkpoints=true`; wrote 24 captured snapshots and 24 manifest rows with no errors. |
+| `v450_v448_no_gamelog_reentry_smoke_outfix` | Branch-miner reentry over the first two v448 snapshots. | Wrote `live_checkpoint_branch_probe.csv` inside the requested run dir; both rows classified `reentry_matched` with matching candidate and state hashes. |
+
+Conclusion:
+
+- No-log live checkpoint capture works again, and snapshots from the repaired path are branchable.
+- The next unit is to relaunch the baseline-losing Grixis capture across chunks 1, 2, 4, 5, 6, 12, 15, and 16, then mine terminal/value evidence from those snapshots instead of extending the neutral v392 candidate.
