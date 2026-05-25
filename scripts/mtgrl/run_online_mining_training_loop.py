@@ -590,6 +590,14 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--cycles", type=int, default=1)
     parser.add_argument("--registry", default=DEFAULT_REGISTRY)
     parser.add_argument("--base-profile", default="Pauper-Spy-Combo-Value")
+    parser.add_argument(
+        "--play-profile",
+        default="",
+        help=(
+            "Profile to use for cycle-1 online play. When omitted, uses --base-profile. "
+            "This lets generated candidates reuse the base profile's registry deck/env entry."
+        ),
+    )
     parser.add_argument("--candidate-profile", default="")
     parser.add_argument("--candidate-profile-prefix", default="Pauper-Spy-Combo-Value-OnlineLoop")
     parser.add_argument("--force-profile-clone", action="store_true")
@@ -716,13 +724,14 @@ def main(argv: Sequence[str]) -> int:
         "run_id": args.run_id,
         "started_utc": utc_now(),
         "base_profile": args.base_profile,
+        "initial_play_profile": args.play_profile.strip() or args.base_profile,
         "base_registry": rel(base_registry_path),
         "output_root": rel(output_root),
         "cycle_summaries": [],
     }
     write_json(run_dir / "manifest.json", manifest)
 
-    current_profile = args.base_profile
+    current_profile = args.play_profile.strip() or args.base_profile
     current_q_blend = args.initial_q_blend
 
     for cycle_index in range(max(1, args.cycles)):
