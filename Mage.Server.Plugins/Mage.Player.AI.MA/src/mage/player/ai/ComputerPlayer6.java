@@ -56,7 +56,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
     private static final int MAX_SIMULATED_NODES_PER_ERROR = 5100; // TODO: debug only, set low value to find big calculations
     private static final boolean DETERMINISTIC_TIEBREAKS = readDeterministicFlag("AI_DETERMINISTIC_TIEBREAKS");
     private static final boolean DETERMINISTIC_SEARCH = readDeterministicFlag("AI_DETERMINISTIC_SEARCH");
-    private static final boolean DETERMINISTIC_ROOT_TRACE = readDeterministicFlag("AI_DETERMINISTIC_ROOT_TRACE");
+    private static final boolean DETERMINISTIC_ROOT_TRACE = readExplicitFlag("AI_DETERMINISTIC_ROOT_TRACE");
     private static final int DETERMINISTIC_MAX_SIMULATED_NODES =
             readPositiveInt("AI_DETERMINISTIC_MAX_NODES", MAX_SIMULATED_NODES_PER_CALC);
 
@@ -84,6 +84,14 @@ public class ComputerPlayer6 extends ComputerPlayer {
 
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<>();
+
+    private static boolean readExplicitFlag(String flagName) {
+        String configured = System.getProperty(flagName);
+        if (configured == null || configured.trim().isEmpty()) {
+            configured = System.getenv(flagName);
+        }
+        return isEnabled(configured);
+    }
 
     private static boolean readDeterministicFlag(String flagName) {
         String configured = System.getProperty(flagName);

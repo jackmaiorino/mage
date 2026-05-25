@@ -2016,6 +2016,10 @@ Validation:
   - `20260524_v438_baseline_chunk001_fulllog_autocompileexec_a`
   - `20260524_v439_baseline_chunk001_fulllog_autocompileexec_b`
   - Both completed `0 / 1`, produced 198 normalized decision rows, and had no first diff, including RNG/probability fields.
+- Root-trace leakage hotfix:
+  - The initial diagnostic flag accidentally inherited the generic `TORCH_DETERMINISTIC_EVAL` fallback and emitted `CP7_ROOT_SCORE_JSON` rows for normal deterministic eval jobs.
+  - `AI_DETERMINISTIC_ROOT_TRACE` now requires its own explicit env/property.
+  - `20260524_v444_baseline_chunk003_no_roottrace_leak_sanity` completed `1 / 1`; the job log contained no `CP7_ROOT_SCORE_JSON` rows and stayed at normal diagnostic size.
 
 Conclusion:
 
