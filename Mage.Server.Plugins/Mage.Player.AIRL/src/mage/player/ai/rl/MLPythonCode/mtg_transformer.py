@@ -388,7 +388,7 @@ class MTGTransformerModel(nn.Module):
         combined = torch.cat([cls_expanded, attended], dim=-1)             # [B, N, d_model*2]
         
         # Route head selection (ignore pick_index/min/max for now; plumbed for future conditioning)
-        hid = str(head_id).strip().lower() if head_id is not None else "action"
+        hid, q_blend_hid = self._split_head_ids(head_id)
         if hid == "target":
             scorer = self.policy_scorer_target
         elif hid == "card_select":
@@ -409,7 +409,7 @@ class MTGTransformerModel(nn.Module):
         scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
         candidate_q = torch.nan_to_num(candidate_q, nan=0.0, posinf=1.0, neginf=-1.0)
         candidate_q = candidate_q.masked_fill(~valid, 0.0)
-        if self.candidate_q_blend != 0.0 and self._candidate_q_blend_enabled_for_head(hid):
+        if self.candidate_q_blend != 0.0 and self._candidate_q_blend_enabled_for_head(q_blend_hid):
             scores = scores + self._candidate_q_blend_bonus(candidate_q, valid)
         scores = scores.masked_fill(~valid, -1e9)
 
@@ -455,12 +455,8 @@ class MTGTransformerModel(nn.Module):
         return blend * candidate_q * gate.to(candidate_q.dtype).unsqueeze(-1)
 
     @staticmethod
-    def _parse_candidate_q_blend_heads(raw: str):
-        text = str(raw or "*").strip().lower()
-        if text in ("", "*", "all"):
-            return None
-        if text in ("none", "off", "false", "0"):
-            return set()
+    def _canonical_head_id(raw: str) -> str:
+        text = str(raw or "action").strip().lower()
         aliases = {
             "actions": "action",
             "default": "action",
@@ -475,25 +471,48 @@ class MTGTransformerModel(nn.Module):
             "cards": "card_select",
             "select_card": "card_select",
             "card_select": "card_select",
+            "london": "london_mulligan",
+            "london_bottom": "london_mulligan",
+            "london_mulligan": "london_mulligan",
             "attacks": "attack",
             "declare_attacks": "attack",
             "blocks": "block",
             "declare_blocks": "block",
             "mulligans": "mulligan",
-            "london_mulligan": "mulligan",
         }
+        return aliases.get(text, text or "action")
+
+    @classmethod
+    def _split_head_ids(cls, raw):
+        text = str(raw or "action").strip().lower()
+        q_text = None
+        for sep in ("|q=", ";q=", "::q="):
+            if sep in text:
+                text, q_text = text.split(sep, 1)
+                break
+        policy_head = cls._canonical_head_id(text)
+        q_blend_head = cls._canonical_head_id(q_text) if q_text else policy_head
+        return policy_head, q_blend_head
+
+    @classmethod
+    def _parse_candidate_q_blend_heads(cls, raw: str):
+        text = str(raw or "*").strip().lower()
+        if text in ("", "*", "all"):
+            return None
+        if text in ("none", "off", "false", "0"):
+            return set()
         heads = set()
         for part in text.replace(";", ",").split(","):
             token = part.strip().lower()
             if token:
-                heads.add(aliases.get(token, token))
+                heads.add(cls._canonical_head_id(token))
         return heads
 
     def _candidate_q_blend_enabled_for_head(self, head_id: str) -> bool:
         heads = getattr(self, "candidate_q_blend_heads", None)
         if heads is None:
             return True
-        hid = str(head_id or "action").strip().lower()
+        hid = self._canonical_head_id(head_id)
         return hid in heads
 
     def belief_logits_from_cls(self, cls: torch.Tensor) -> torch.Tensor:
@@ -741,7 +760,7 @@ class SingleHeadScorer(nn.Module):
         super().__init__()
         self.model = model
         # Resolve the scorer at construction time (not in forward)
-        hid = head_id.lower().strip()
+        hid, q_blend_hid = model._split_head_ids(head_id)
         if hid == "target":
             self.scorer = model.policy_scorer_target
         elif hid == "card_select":
@@ -755,6 +774,7 @@ class SingleHeadScorer(nn.Module):
         else:
             self.scorer = model.policy_scorer
         self.head_id = hid
+        self.q_blend_head_id = q_blend_hid
         self.candidate_q_blend = float(getattr(model, "candidate_q_blend", 0.0))
 
     @staticmethod
@@ -854,7 +874,7 @@ class SingleHeadScorer(nn.Module):
         scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
         candidate_q = torch.nan_to_num(candidate_q, nan=0.0, posinf=1.0, neginf=-1.0)
         candidate_q = candidate_q.masked_fill(~valid, 0.0)
-        if self.candidate_q_blend != 0.0 and m._candidate_q_blend_enabled_for_head(self.head_id):
+        if self.candidate_q_blend != 0.0 and m._candidate_q_blend_enabled_for_head(self.q_blend_head_id):
             scores = scores + m._candidate_q_blend_bonus(candidate_q, valid)
         scores = scores.masked_fill(~valid, -1e9)
         probs = torch.softmax(scores, dim=-1)

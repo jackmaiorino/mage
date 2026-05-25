@@ -115,7 +115,7 @@ class ProfileContext:
         max_candidates: int,
         cand_feat_dim: int,
     ) -> bytes:
-        if self._trt_ctx is not None:
+        if self._trt_ctx is not None and "|q=" not in str(head_id) and ";q=" not in str(head_id) and "::q=" not in str(head_id):
             return self._score_batch_trt(
                 seq_bytes, mask_bytes, token_bytes,
                 cand_feat_bytes, cand_ids_bytes, cand_mask_bytes,

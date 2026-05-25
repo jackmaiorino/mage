@@ -1937,3 +1937,43 @@ Conclusion:
 - v392 improves the offline candidate-Q ranking signal and slightly improves the active-three control, but it fails the Grixis Affinity hard gate.
 - This is not an HPC or promotion candidate.
 - The next thesis-aligned unit is to log and inspect the v392 Grixis regressions, especially chunks 3 and 11, then decide whether the issue is Q-consumer overreach, noisy/suspect v391 pass-best rows, or missing Affinity-pressure coverage in the outcome-derived corpus.
+
+## v393 London-Bottom Q-Blend Gate
+
+Purpose:
+
+- Test whether the v392 Grixis hard-gate regression came from applying terminal-line candidate-Q evidence to London-bottom card ordering.
+- Keep the change generic: no card-specific rule, no combo-state reward, and no explicit "good Spy hand" heuristic.
+
+Diagnosis:
+
+- Focused v392 Grixis chunk 3 with `CANDIDATE_Q_BLEND_HEADS=action,target,card_select` still lost.
+- The bad path came from London-bottom card ordering: Q blending on the `card_select` head also affected `LONDON_MULLIGAN`, so terminal-line action evidence could perturb pregame bottoming.
+- Splitting London into a separate model policy head fixed chunk 3 but changed v350 chunk 1 behavior, so that approach was too broad.
+
+Code checkpoint:
+
+- London-bottom now keeps the historical `card_select` policy scorer but sends a composite head id, `card_select|q=london_mulligan`.
+- `mtg_transformer.py` parses composite head ids into a policy head and a separate candidate-Q blend gate head.
+- The shared GPU PyTorch path honors the separate gate; the ONNX/TensorRT fast path is bypassed for composite head ids to avoid stale exported-head routing.
+
+Validation:
+
+- Compile checks passed:
+  - `python -m py_compile Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/mtg_transformer.py Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_core.py Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/py4j_entry_point.py`
+  - `python %USERPROFILE%/.codex/skills/mage-research-agent/scripts/airl_maven.py compile`
+- Focused fixed chunk: `local-training/local_pbt/cp7_eval_sweeps/20260524_v393_grixis_chunk003_detmode_nolog_composite_qhead`
+  - Result: 1 / 1 win on Grixis chunk 3.
+- Completed pre-composite diagnostic gate: `local-training/local_pbt/cp7_eval_sweeps/20260524_v393_london_headsplit_grixis_g16_detmode_nolog`
+  - Result: 6 / 16, with chunk 3 fixed but chunks 1, 11, and 14 still losing.
+- Composite-head disagreement slice: `local-training/local_pbt/cp7_eval_sweeps/20260524_v393_grixis_disagreement_chunks011114_detmode_nolog_composite_qhead`
+  - Chunk 1: 0 / 1.
+  - Chunk 11: 0 / 1.
+  - Chunk 14: 1 / 1.
+  - Expected Grixis hard-gate count after this fix is 7 / 16 if all other chunks remain unchanged.
+
+Conclusion:
+
+- The London-bottom Q-blend contamination is fixed without changing the policy scorer used for London-bottom decisions.
+- v393 is still not a promotion or HPC-scale candidate because the Grixis hard gate remains below the 9 / 16 v350 and baseline controls.
+- The next research unit is to inspect chunks 1 and 11 as the remaining outcome-derived blockers, likely by comparing candidate-Q deltas against baseline/v350 choices and either gating low-confidence Q application or adding more terminal evidence for Affinity-pressure states.

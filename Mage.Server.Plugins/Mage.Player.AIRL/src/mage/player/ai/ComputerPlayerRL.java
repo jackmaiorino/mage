@@ -4633,6 +4633,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             case MULLIGAN:
                 return "mulligan";
             case LONDON_MULLIGAN:
+                return "card_select|q=london_mulligan";
             case SELECT_CARD:
                 return "card_select";
             case DECLARE_ATTACKS:
