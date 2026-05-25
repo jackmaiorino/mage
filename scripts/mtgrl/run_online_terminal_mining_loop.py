@@ -298,6 +298,15 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--skip-eval-compile", action="store_true")
     parser.add_argument("--skip-mine-compile", action="store_true")
     parser.add_argument("--skip-shard-compile", action="store_true")
+    parser.add_argument(
+        "--allow-stale-miner-classpath",
+        action="store_true",
+        help=(
+            "Allow mining to skip both the one-time compile and shard compile. "
+            "This is unsafe for fresh online snapshots unless target/classes is "
+            "known to match the eval JVM that serialized them."
+        ),
+    )
     parser.add_argument("--online-maven", action="store_true")
     parser.add_argument("--mine-shards", type=int, default=4)
     parser.add_argument("--max-snapshots", type=int, default=64)
@@ -326,6 +335,15 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
 
 def main(argv: Sequence[str]) -> int:
     args = parse_args(argv)
+    if args.skip_mine_compile and args.skip_shard_compile and not args.allow_stale_miner_classpath:
+        print(
+            "refusing unsafe classpath mix: online eval snapshots may be serialized by a freshly "
+            "compiled JVM, but mining would skip both the one-time compile and shard compile. "
+            "Drop --skip-mine-compile or --skip-shard-compile, or pass "
+            "--allow-stale-miner-classpath only when target/classes is known to match.",
+            file=sys.stderr,
+        )
+        return 2
     output_root = Path(args.output_root)
     if not output_root.is_absolute():
         output_root = REPO / output_root
