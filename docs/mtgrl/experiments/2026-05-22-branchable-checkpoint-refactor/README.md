@@ -2241,3 +2241,35 @@ Interpretation:
 - The dense no-stop method scales mechanically and produces more strict outcome-derived value targets than the sparse v462 pass.
 - The yield is still too low for a fresh model update: `13 / 64` clean groups, with 21 pass-best groups held out as suspect and 46 groups rejected for low value delta.
 - The next unit is a larger dense ACTIVATE pass over lower-ranked v451 snapshots by raising `ranked_max_per_game`; target is roughly 50 clean soft-pass examples before training or candidate-Q import.
+
+## v465 Rank-256 Dense ACTIVATE Terminal-Line Expansion
+
+Purpose:
+
+- Increase terminal-line evidence breadth from the v464 top-64 ranked ACTIVATE slice toward a training-scale clean value-target set.
+- Keep the exact same outcome-only settings: terminal win/loss value, common continuation seeds, no stop-on-win, no combo labels, and no intermediate reward shaping.
+
+Run:
+
+| Run ID | Scope | Result |
+| --- | --- | --- |
+| `v465_v451_grixis_loss_action_root16_model_rank256_dense_nostop` | v451 ranked `ACTIVATE_ABILITY_OR_SPELL` roots, `ranked_max_per_game=40`, 256 snapshots, 4 shards, `line_attempts=32`, common continuation seeds, `line_stop_on_win=false`, model continuation, shared GPU service. | Selected 256 snapshots and wrote 8,192 terminal-line rows: 3,719 terminal wins, 4,473 terminal losses, terminal rate `1.0`. |
+
+Terminal summary:
+
+- Win rate across sampled rows: `3719 / 8192 = 45.40%`.
+- `summarize_terminal_line_search.py` reported `spy_rows=0`, `full_combo_wins=0`, `dread_return_rows=5`, and `max_combo_score=3`.
+- High-volume root actions included `Pass`, mana abilities, `Forestcycling`, `Return a Forest`, `Cast Roost Seek`, `Cast Land Grant`, `Cast Tinder Wall`, and `Cast Winding Way`.
+
+Strict export:
+
+| Export | Gate | Result |
+| --- | --- | --- |
+| `v465_v451_grixis_loss_action_root16_model_rank256_dense_nostop_softpass_diagnostic` | Common-seed value target gate, suspect pass-best rows excluded. | `39` admitted examples, `217` rejected groups; classifications were 24 strong deltas, 14 moderate deltas, and 1 weak delta. |
+| `v465_v451_grixis_loss_action_root16_model_rank256_dense_nostop_include_pass` | Same gate, suspect pass-best rows included for diagnosis. | `52` admitted examples, `204` rejected groups; classifications were 33 strong deltas, 18 moderate deltas, and 1 weak delta. |
+
+Interpretation:
+
+- The clean strict target count scaled from `13 / 64` in v464 to `39 / 256` in v465.
+- This is close to the rough 50-example clean threshold, but the clean set still falls short; the pass-including diagnostic set reaches 52 but is not acceptable as the main training source because 156 groups are still flagged `suspect_pass_best`.
+- The next unit is one more broader dense ACTIVATE run over a larger ranked slice, then export the clean soft-pass set before deciding whether to train a small candidate-Q/value consumer.
