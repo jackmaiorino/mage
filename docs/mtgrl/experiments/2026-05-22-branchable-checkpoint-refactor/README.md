@@ -1892,3 +1892,48 @@ Conclusion:
 - Shared-GPU model-continuation mining now finds outcome-only branch contrast on both the deterministic winning chunk 14 and deterministic losing chunk 7.
 - Action-only mining removes the current pending-choice reentry noise and yields clean terminal-only value targets without combo-specific labels; v391 scales this across all eligible v383 action checkpoints.
 - The next unit is to combine v391 with the existing v345/v349 terminal-line corpus for the next small Q-head import candidate, then evaluate it under deterministic paired controls before considering any HPC scale-up.
+
+## v392 Combined v345/v349/v391 Q-Head Candidate
+
+Purpose:
+
+- Test whether the new v391 Grixis action-only terminal-line evidence improves the contained signed candidate-Q path without adding combo-specific reward shaping.
+- Keep the import narrow: fresh clone of baseline `Pauper-Spy-Combo-Value`, Q-head-only training, signed branch-return targets, no direct policy overwrite.
+
+Artifacts:
+
+- Combined import data: `local-training/local_pbt/terminal_line_value_targets/v392_combined_v345_v349_v391_signed_advantage_import_data`
+  - v345: 255 examples.
+  - v349: 134 examples.
+  - v391: 22 examples.
+  - Total: 411 serialized advantage-value `TrainingData` examples.
+- Candidate profile: `Pauper-Spy-Combo-Value-TerminalLine-v392-QOnlySignedAdvantageGrixisAction`
+- Import run: `local-training/local_pbt/action_counterfactual/20260524_v392_combined_qonly_signed_advantage_import`
+  - 411 examples, 4 epochs, 1,644 Q-head train passes, `branch_return_targets=true`.
+- Offline score probes on the same 411-example corpus:
+  - Blend 0.00: 127 / 411 top-1, average rank 2.3698.
+  - Blend 0.50: 163 / 411 top-1, average rank 2.2798.
+  - Blend 1.00: 189 / 411 top-1, average rank 2.1946.
+
+Deterministic paired eval:
+
+- Active-three candidate artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v392_active3_g8_detmode_nolog`
+  - Overall: 14 / 24.
+  - Spy mirror: 7 / 8.
+  - Jund Wildfire: 5 / 8.
+  - Mono Red Rally: 2 / 8.
+- Paired comparison on the same seed set:
+  - v350: 13 / 24.
+  - Baseline: 11 / 24.
+  - v392 gains Jund chunk 7 and Spy mirror chunk 4 versus v350, but loses Mono Red Rally chunk 6.
+- Grixis hard-gate candidate artifact: `local-training/local_pbt/cp7_eval_sweeps/20260524_v392_grixis_g16_detmode_nolog`
+  - Result: 6 / 15 counted games, with chunk 1 invalid at 0 / 0 after game-thread timeout.
+  - Even if the invalid chunk were rerun as a win, the best case would be 7 / 16.
+  - v350 and baseline both scored 9 / 16 on the matching deterministic Grixis seed set.
+  - Regressions versus both v350 and baseline occurred on Grixis chunks 3 and 11; v392 still preserves the chunk 14 gain over baseline.
+
+Conclusion:
+
+- v392 improves the offline candidate-Q ranking signal and slightly improves the active-three control, but it fails the Grixis Affinity hard gate.
+- This is not an HPC or promotion candidate.
+- The next thesis-aligned unit is to log and inspect the v392 Grixis regressions, especially chunks 3 and 11, then decide whether the issue is Q-consumer overreach, noisy/suspect v391 pass-best rows, or missing Affinity-pressure coverage in the outcome-derived corpus.
