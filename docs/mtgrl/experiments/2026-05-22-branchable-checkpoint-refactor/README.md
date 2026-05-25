@@ -1818,7 +1818,7 @@ Deterministic active-three follow-up:
   - The deterministic harness preserves a positive v350 signal, but the margin shrinks from the earlier shared-service read of 14 / 24 versus 8 / 24 to 13 / 24 versus 11 / 24.
   - This supports continuing the outcome-only branch-value path, but it argues against immediate HPC scale-up from v350 alone. The next higher-value work is mining deterministic disagreement surfaces, especially the Grixis chunk 7 loss and active-three net-positive chunks, to expand terminal-line evidence without adding human combo heuristics.
 
-## v383-v385 Live Checkpoint Model-Continuation Probe
+## v383-v391 Live Checkpoint Model-Continuation Probe
 
 Purpose:
 
@@ -1867,6 +1867,17 @@ Artifacts:
 - Diagnostic soft-pass export: `local-training/local_pbt/terminal_line_value_targets/v390_grixis_action_root16_model_rank64_softpass_diagnostic`
   - Same inputs and thresholds, but default pass-best exclusion.
   - Admitted 16 value examples, showing that only two v390 trainable rows depend on allowing pass-best.
+- Full action-only ranked sweep: `local-training/local_pbt/live_checkpoint_branch_miner/v391_grixis_action_root16_model_rank110`
+  - All 110 eligible `ACTIVATE_ABILITY_OR_SPELL` checkpoints from the v383 live-checkpoint capture, 16 attempts per checkpoint, common continuation seeds.
+  - Result: 1,760 / 1,760 terminal rows, 1,116 wins and 644 losses, with zero action-type mismatches.
+  - Chunk split: chunk 14 was 925 wins / 67 losses; chunk 7 was 191 wins / 577 losses.
+  - Snapshot groups: 22 mixed-outcome groups, 57 all-win groups, and 31 all-loss groups.
+- Full action-only value-target export: `local-training/local_pbt/terminal_line_value_targets/v391_grixis_action_root16_model_rank110_include_pass`
+  - Same gate as v390, with explicit pass-best inclusion preserved for the primary import.
+  - Exported 22 admitted value examples and 22 serialized advantage-value `TrainingData` records.
+- Full action-only soft-pass diagnostic export: `local-training/local_pbt/terminal_line_value_targets/v391_grixis_action_root16_model_rank110_softpass_diagnostic`
+  - Same inputs and thresholds, but default pass-best exclusion.
+  - Admitted 17 value examples, so five v391 rows depend on explicitly allowing pass-best.
 
 Code checkpoint:
 
@@ -1879,5 +1890,5 @@ Conclusion:
 - Branchable checkpoints can reproduce at least one known winning combo line from a captured in-memory game state when continuation uses the trained model through the correct shared GPU service.
 - The v383 zero-win autopilot slice is reclassified as a harness diagnostic, not evidence against the checkpoint or model.
 - Shared-GPU model-continuation mining now finds outcome-only branch contrast on both the deterministic winning chunk 14 and deterministic losing chunk 7.
-- Action-only mining removes the current pending-choice reentry noise and yields clean terminal-only value targets without combo-specific labels.
-- The next unit is to scale the action-only shared-GPU miner across all eligible checkpoints in v383, then combine the resulting terminal-line value data with the existing v345/v349 corpus for the next small Q-head import candidate.
+- Action-only mining removes the current pending-choice reentry noise and yields clean terminal-only value targets without combo-specific labels; v391 scales this across all eligible v383 action checkpoints.
+- The next unit is to combine v391 with the existing v345/v349 terminal-line corpus for the next small Q-head import candidate, then evaluate it under deterministic paired controls before considering any HPC scale-up.
