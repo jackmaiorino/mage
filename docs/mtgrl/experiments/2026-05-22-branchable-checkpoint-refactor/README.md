@@ -2820,3 +2820,54 @@ Interpretation:
 - This is still not promotion evidence: the aggregate result is only `6 / 32`, and the margin over v479 source is still `+1 / 32`.
 - The bigger blocker remains evaluation quality and statistical power. `--allow-deterministic-parallel` is useful for throughput, but exact comparison claims need serial deterministic evals or larger repeated sweeps.
 - The next unit should move to a larger thesis-clean target corpus instead of spending more local time on this marginal v481 comparison.
+
+## v482 Larger Diverse Rare-Edge Corpus
+
+Purpose:
+
+- Scale the thesis-clean rare-edge/diversity selector from v481 to a larger fresh online corpus.
+- Keep the target labels terminal-outcome-only: no combo card rewards, no combo-ready state labels, and no human-authored intermediate milestones.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| Initial v482 online/mining run | `local-training/local_pbt/online_mining_training_loop/v482_large_diverse_rare_edge_from_v481_grixis_g64_r1024_a24` |
+| Successful capped mining retry | `local-training/local_pbt/online_mining_training_loop/v482_large_diverse_rare_edge_from_v481_grixis_g64_r1024_a24/online_mining/v482_large_diverse_rare_edge_from_v481_grixis_g64_r1024_a24_cycle01_online_Pauper-Spy-Combo-Value-OnlineLoop-v481-DiverseRa/mining/v482_large_diverse_rare_edge_from_v481_grixis_g64_r1024_a24_cycle01_mine_retry_mc2` |
+| Value targets | `local-training/local_pbt/online_mining_training_loop/v482_large_diverse_rare_edge_from_v481_grixis_g64_r1024_a24/online_mining/v482_large_diverse_rare_edge_from_v481_grixis_g64_r1024_a24_cycle01_online_Pauper-Spy-Combo-Value-OnlineLoop-v481-DiverseRa/value_targets/v482_large_diverse_retry_mc2_softpass` |
+| Train/eval continuation | `local-training/local_pbt/online_mining_training_loop/v482_large_diverse_retry_mc2_train_eval` |
+| Source profile | `Pauper-Spy-Combo-Value-OnlineLoop-v481-DiverseRareEdge` |
+| Candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v482-LargeDiverseRareEdge` |
+
+Mining and targets:
+
+- Online source play used v481 with Q blending enabled and scored `21 / 64` against Grixis.
+- The first local mining attempt selected `512` snapshots and wrote `12,288` terminal rows, but half the shard JVMs failed with Windows pagefile/native allocation errors.
+- Commit `0988c6ba28` added `--max-concurrent-shards` / `--max-concurrent-mine-shards` so shard count can stay high while only a bounded number of JVMs run at once.
+- The retry used `8` shards with `max_concurrent_shards=2` and completed successfully.
+- The successful retry selected `1024` snapshots and wrote `24,576` terminal-line rows.
+- Terminal outcomes were `14,077` wins and `10,499` losses.
+- Rare-edge/diversity export admitted `42 / 1024` checkpoint groups.
+- Classification counts: `29` moderate terminal-value deltas and `13` strong terminal-value deltas.
+- The exporter excluded `228` suspect pass-best-over-setup groups before training.
+- The most common admitted best labels remained broad setup/mana/card-flow actions: Forestcycling (`5`), `Cast Land Grant` (`5`), `Cast Winding Way` (`3`), `Play Forest` (`3`), `Cast Masked Vandal` (`3`), plus two `Cast Dread Return` labels.
+
+Training and eval:
+
+- TrainingData export reentered and captured `42 / 42` rows.
+- Candidate Q-head training used Q-only branch-return targets, 4 epochs, and `168` train-pass samples.
+- The paired post-train comparator was run serially with `parallel=1`, `ai_threads=1`, seed base `12161`, and seed key mode `matchup`.
+- Serial eval was intentionally low-utilization: previous parallel deterministic evals produced inconsistent paired outcomes, so exact local comparison claims use serial eval even though it underuses CPU/GPU.
+
+| Profile | Seed Base | Result | Winning chunks |
+| --- | ---: | ---: | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v482-LargeDiverseRareEdge` candidate | `12161` | `2 / 16` | `7,11` |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v481-DiverseRareEdge` source | `12161` | `2 / 16` | `4,15` |
+
+Interpretation:
+
+- v482 is mechanically healthy but performance-neutral: the larger target corpus trained and evaluated cleanly, but tied the source `2 / 16` to `2 / 16`.
+- The larger corpus did not convert more terminal evidence into better online play pressure.
+- The target set is still dominated by generic setup/mana/card-flow labels rather than dense terminal finish or high-leverage sequencing labels.
+- The local utilization issue is understood: mining was capped to avoid pagefile OOM, and serial post-eval was chosen for reliable paired evidence. Higher utilization should come from discovery/mining scale-out or HPC sharding, while serial local eval remains the final sanity gate.
+- The next thesis-relevant unit should improve credit assignment from mined terminal endings, not simply admit more rare-edge rows from the same selector.
