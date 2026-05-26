@@ -2907,3 +2907,32 @@ Interpretation:
 - This is a harness win, not a model-quality result yet.
 - It directly targets the likely v482 blocker: the model was only seeing sparse root labels, while the terminal lines contain many downstream decisions that can be credited from terminal outcomes.
 - The next experiment should train a v483 candidate from the captured trajectory-return records, either alone or mixed with the existing root value targets, then run the same serial paired Grixis comparator.
+
+## v483 Pre-Load Shard Selection Fix
+
+Problem found during the first bounded v483 restart:
+
+- The wrapper launched two shard JVMs, but each Java shard deserialized the full checkpoint corpus before applying `selection-shard-index`.
+- That duplicated the most expensive memory work, delayed terminal CSV creation, and pushed both JVMs above `20 GB` working set before useful branch output appeared.
+- This was a scaling/utilization blocker: higher shard counts looked like low useful progress at startup and then became pagefile pressure.
+
+Fix:
+
+- `LiveCheckpointBranchMiner` now applies path sharding before loading snapshots.
+- `--max-snapshots` keeps its wrapper-level meaning as total desired snapshots; each shard selects `ceil(maxSnapshots / selectionShards)` from its path slice.
+- Ranked selection is now local to each shard slice. That is a deliberate tradeoff for mining throughput; exact global ranking can be restored later with a separate selection-manifest phase if needed.
+
+Validation:
+
+| Check | Result |
+| --- | --- |
+| Java compile | `mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile` passed. |
+| Shard smoke | `E:/mage-research/local_pbt/debug/v483_preload_shard_smoke` |
+| Smoke shape | `2` shards, `4` total selected snapshots, `1` terminal-line attempt per snapshot. |
+| Smoke outputs | `4` terminal-line rows, `4` training-data summary rows, `3` wins and `1` loss. |
+| Captured records | `16` continuation records written, `0` skipped, across two shard `terminal_line_training_data.ser` files. |
+
+Interpretation:
+
+- The run is still branch-simulation bound, but shards no longer duplicate full-corpus snapshot loading.
+- The next v483 experiment should use this fixed sharding and store trajectory-return artifacts on `E:` to keep the nearly full `C:` drive out of the critical path.

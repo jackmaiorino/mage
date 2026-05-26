@@ -742,6 +742,8 @@ public final class LiveCheckpointBranchMiner {
 
     private static Selection selectSnapshots(Config cfg) throws Exception {
         List<Path> paths = discoverSnapshotPaths(cfg);
+        int discoveredPathCount = paths.size();
+        paths = applyPathShard(paths, cfg);
         List<SnapshotCandidate> eligible = new ArrayList<>();
         int loadErrorCount = 0;
         List<String> loadErrorExamples = new ArrayList<>();
@@ -775,7 +777,7 @@ public final class LiveCheckpointBranchMiner {
         }
         List<SnapshotCandidate> selected = new ArrayList<>();
         Map<String, Integer> perGame = new LinkedHashMap<>();
-        int limit = cfg.maxSnapshots <= 0 ? Integer.MAX_VALUE : cfg.maxSnapshots;
+        int limit = selectionLimitForShard(cfg);
         for (SnapshotCandidate candidate : eligible) {
             if (selected.size() >= limit) {
                 break;
@@ -791,21 +793,30 @@ public final class LiveCheckpointBranchMiner {
             candidate.rank = selected.size() + 1;
             selected.add(candidate);
         }
-        selected = applySelectionShard(selected, cfg);
-        return new Selection(paths.size(), eligible.size(), loadErrorCount, loadErrorExamples, selected);
+        return new Selection(discoveredPathCount, eligible.size(), loadErrorCount, loadErrorExamples, selected);
     }
 
-    private static List<SnapshotCandidate> applySelectionShard(List<SnapshotCandidate> selected, Config cfg) {
-        if (selected == null || selected.isEmpty() || cfg.selectionShards <= 1) {
-            return selected;
+    private static List<Path> applyPathShard(List<Path> paths, Config cfg) {
+        if (paths == null || paths.isEmpty() || cfg.selectionShards <= 1) {
+            return paths;
         }
-        List<SnapshotCandidate> sharded = new ArrayList<>();
-        for (int i = 0; i < selected.size(); i++) {
+        List<Path> sharded = new ArrayList<>();
+        for (int i = 0; i < paths.size(); i++) {
             if (i % cfg.selectionShards == cfg.selectionShardIndex) {
-                sharded.add(selected.get(i));
+                sharded.add(paths.get(i));
             }
         }
         return sharded;
+    }
+
+    private static int selectionLimitForShard(Config cfg) {
+        if (cfg.maxSnapshots <= 0) {
+            return Integer.MAX_VALUE;
+        }
+        if (cfg.selectionShards <= 1) {
+            return cfg.maxSnapshots;
+        }
+        return Math.max(1, (cfg.maxSnapshots + cfg.selectionShards - 1) / cfg.selectionShards);
     }
 
     private static List<Path> discoverSnapshotPaths(Config cfg) throws Exception {
