@@ -349,6 +349,8 @@ def build_online_mining_command(
         "--poll-sec",
         str(args.poll_sec),
     ]
+    if args.allow_deterministic_parallel:
+        cmd.append("--allow-deterministic-parallel")
     if args.chunk_indices:
         cmd.extend(["--chunk-indices", args.chunk_indices])
     if args.eval_game_logging:
@@ -520,6 +522,8 @@ def build_eval_command(
     if args.post_eval_game_logging:
         cmd.append("--eval-game-logging")
         cmd.extend(["--game-log-format", args.game_log_format])
+    if args.allow_deterministic_parallel:
+        cmd.append("--allow-deterministic-parallel")
     if args.no_compile_exec:
         pass
     else:
@@ -648,7 +652,20 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--chunk-indices", default="")
     parser.add_argument("--skill", type=int, default=7)
     parser.add_argument("--eval-parallel", type=int, default=1)
-    parser.add_argument("--post-eval-parallel", type=int, default=1)
+    parser.add_argument(
+        "--post-eval-parallel",
+        type=int,
+        default=0,
+        help="Post-train eval parallelism. Defaults to --eval-parallel when unset or <= 0.",
+    )
+    parser.add_argument(
+        "--allow-deterministic-parallel",
+        action="store_true",
+        help=(
+            "Allow deterministic online/post evals to honor parallelism. Without this, "
+            "run_cp7_eval_sweep keeps deterministic evals serial for strict replay comparability."
+        ),
+    )
     parser.add_argument("--serial-warmup-jobs", type=int, default=1)
     parser.add_argument("--ai-threads", type=int, default=1)
     parser.add_argument("--eval-timeout-sec", type=int, default=1800)
@@ -739,6 +756,8 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
 
 def main(argv: Sequence[str]) -> int:
     args = parse_args(argv)
+    if args.post_eval_parallel <= 0:
+        args.post_eval_parallel = args.eval_parallel
     output_root = Path(args.output_root)
     if not output_root.is_absolute():
         output_root = REPO / output_root

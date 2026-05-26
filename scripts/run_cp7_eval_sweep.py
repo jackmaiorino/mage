@@ -739,6 +739,15 @@ def main() -> int:
         action="store_true",
         help="Emit CP7_ROOT_SCORE_JSON rows during deterministic eval root-action scoring.",
     )
+    parser.add_argument(
+        "--allow-deterministic-parallel",
+        action="store_true",
+        help=(
+            "Keep deterministic eval env settings but honor --parallel/--ai-threads. "
+            "Use for throughput-oriented online/mining evals where exact single-channel "
+            "request ordering is less important than CPU utilization."
+        ),
+    )
     args = parser.parse_args()
     selected_chunk_indices = parse_chunk_indices(args.chunk_indices)
     deterministic_env = dict(DETERMINISTIC_EVAL_ENV) if args.deterministic_eval else {}
@@ -748,8 +757,9 @@ def main() -> int:
         # Maven exec can otherwise run against stale reactor dependency classes
         # after AI.MA changes, even when a separate compile has already passed.
         args.compile_exec = True
-        args.parallel = 1
-        args.ai_threads = 1
+        if not args.allow_deterministic_parallel:
+            args.parallel = 1
+            args.ai_threads = 1
         args.serial_warmup_jobs = max(args.serial_warmup_jobs, 1)
 
     if args.live_checkpoints:
@@ -805,6 +815,7 @@ def main() -> int:
         "serial_warmup_jobs": args.serial_warmup_jobs,
         "ai_threads": args.ai_threads,
         "deterministic_eval": bool(args.deterministic_eval),
+        "allow_deterministic_parallel": bool(args.allow_deterministic_parallel),
         "deterministic_eval_env": deterministic_env,
         "profiles_filter": args.profiles,
         "opponents_filter": args.opponents,

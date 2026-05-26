@@ -123,6 +123,8 @@ def build_eval_command(args: argparse.Namespace, cycle: int, eval_run_id: str, e
         args.seed_key_mode,
         "--deterministic-eval",
     ]
+    if args.allow_deterministic_parallel:
+        cmd.append("--allow-deterministic-parallel")
     if args.chunk_indices:
         cmd.extend(["--chunk-indices", args.chunk_indices])
     if args.eval_game_logging:
@@ -296,6 +298,14 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--chunk-indices", default="")
     parser.add_argument("--skill", type=int, default=7)
     parser.add_argument("--eval-parallel", type=int, default=1)
+    parser.add_argument(
+        "--allow-deterministic-parallel",
+        action="store_true",
+        help=(
+            "Pass through to run_cp7_eval_sweep so deterministic online capture can "
+            "honor --eval-parallel instead of forcing serial execution."
+        ),
+    )
     parser.add_argument("--serial-warmup-jobs", type=int, default=1)
     parser.add_argument("--ai-threads", type=int, default=1)
     parser.add_argument("--eval-timeout-sec", type=int, default=1800)
