@@ -41,6 +41,12 @@ VALUE_FIELDS = [
     "candidate_hash",
     "state_hash",
     "rng_state_hash",
+    "source_indices",
+    "source_texts",
+    "source_value",
+    "source_regret",
+    "source_attempts",
+    "source_wins",
     "actions_evaluated",
     "eligible_actions",
     "total_terminal_attempts",
@@ -80,6 +86,10 @@ REJECT_FIELDS = [
     "candidate_hash",
     "state_hash",
     "rng_state_hash",
+    "source_indices",
+    "source_texts",
+    "source_value",
+    "source_regret",
     "actions_evaluated",
     "eligible_actions",
     "total_terminal_attempts",
@@ -157,6 +167,15 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         help="Candidate terminal value threshold used by the positive-action quality gates.",
     )
     parser.add_argument(
+        "--min-source-regret",
+        type=float,
+        default=0.0,
+        help=(
+            "Reject groups where the searched best action improves over the source-selected "
+            "action by less than this terminal value margin. Zero disables the gate."
+        ),
+    )
+    parser.add_argument(
         "--include-suspect-pass-best",
         action="store_true",
         help="Keep pass-best rows flagged as suspect in the main manifest instead of excluding them to diagnostics.",
@@ -216,6 +235,56 @@ def action_identifier(action: Dict[str, object]) -> str:
     indices = str(action.get("indices", "")).strip()
     texts = str(action.get("texts", "")).strip().replace("|", "/")
     return "{}={}".format(indices, texts)
+
+
+def normalize_path(path: str) -> str:
+    return str(path or "").replace("\\", "/")
+
+
+def selection_key(row: Dict[str, object]) -> Tuple[str, str, str, str, str]:
+    return (
+        normalize_path(str(row.get("snapshot_path", ""))),
+        str(row.get("ordinal", "")).strip(),
+        str(row.get("decision_number", "")).strip(),
+        str(row.get("action_type", "")).strip(),
+        str(row.get("candidate_count", "")).strip(),
+    )
+
+
+def read_selection_metadata(raw_input: str) -> Dict[Tuple[str, str, str, str, str], Dict[str, str]]:
+    path = Path(raw_input)
+    if path.is_dir():
+        selection_path = path / "selected_snapshots.csv"
+    elif path.is_file():
+        selection_path = path.parent / "selected_snapshots.csv"
+    else:
+        return {}
+    if not selection_path.is_file():
+        return {}
+    metadata: Dict[Tuple[str, str, str, str, str], Dict[str, str]] = {}
+    with selection_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        for row in csv.DictReader(handle):
+            metadata[selection_key(row)] = dict(row)
+    return metadata
+
+
+def attach_selection_metadata(
+        raw_input: str,
+        rows: Sequence[Dict[str, str]],
+) -> List[Dict[str, str]]:
+    metadata = read_selection_metadata(raw_input)
+    if not metadata:
+        return list(rows)
+    out: List[Dict[str, str]] = []
+    for row in rows:
+        merged = dict(row)
+        selected = metadata.get(selection_key(row))
+        if selected:
+            for field in ("selected_indices", "selected_texts", "selected_prob", "value_score"):
+                if field in selected:
+                    merged[field] = selected.get(field, "")
+        out.append(merged)
+    return out
 
 
 def is_pass_action(action: Optional[Dict[str, object]]) -> bool:
@@ -359,6 +428,59 @@ def candidate_attempt_map(actions: Sequence[Dict[str, object]], candidate_count:
     return out
 
 
+def action_indices_equal(left: object, right: object) -> bool:
+    return parse_indices(left) == parse_indices(right)
+
+
+def source_choice_stats(
+        base: Dict[str, object],
+        eligible: Sequence[Dict[str, object]],
+        values: Dict[int, float],
+) -> Dict[str, object]:
+    source_indices = str(base.get("selected_indices", "")).strip()
+    source_texts = str(base.get("selected_texts", "")).strip()
+    out: Dict[str, object] = {
+        "source_indices": source_indices,
+        "source_texts": source_texts,
+        "source_value": "",
+        "source_regret": "",
+        "source_attempts": "",
+        "source_wins": "",
+        "source_action_index": "",
+    }
+    if not source_indices and not source_texts:
+        return out
+    ranked = sorted(
+        ((index, action, values.get(index, 0.0)) for index, action in enumerate(eligible)),
+        key=action_rank_key,
+        reverse=True,
+    )
+    if not ranked:
+        return out
+    best_value = ranked[0][2]
+    for index, action, value in ranked:
+        if action_indices_equal(action.get("indices", ""), source_indices):
+            out.update({
+                "source_value": value,
+                "source_regret": max(0.0, best_value - value),
+                "source_attempts": action.get("attempts", 0),
+                "source_wins": action.get("wins", 0),
+                "source_action_index": index,
+            })
+            return out
+    for index, action, value in ranked:
+        if source_texts and str(action.get("texts", "")).strip() == source_texts:
+            out.update({
+                "source_value": value,
+                "source_regret": max(0.0, best_value - value),
+                "source_attempts": action.get("attempts", 0),
+                "source_wins": action.get("wins", 0),
+                "source_action_index": index,
+            })
+            return out
+    return out
+
+
 def positive_candidate_stats(
         actions: Sequence[Dict[str, object]],
         values: Dict[int, float],
@@ -437,6 +559,10 @@ def rejection_row(
         "candidate_hash": base.get("candidate_hash", ""),
         "state_hash": base.get("state_hash", ""),
         "rng_state_hash": base.get("rng_state_hash", ""),
+        "source_indices": base.get("selected_indices", ""),
+        "source_texts": base.get("selected_texts", ""),
+        "source_value": "",
+        "source_regret": "",
         "actions_evaluated": len(actions),
         "eligible_actions": len(eligible),
         "total_terminal_attempts": sum(as_int(action, "terminal") for action in actions),
@@ -493,6 +619,9 @@ def example_row(
     )
     suspect = "suspect_pass_best" in quality_flags
     train_suspect = suspect and args.include_suspect_pass_best
+    source_stats = source_choice_stats(base, eligible, values)
+    source_value = source_stats.get("source_value", "")
+    source_regret = source_stats.get("source_regret", "")
     row = {
         "example_id": make_example_id(base, distribution),
         "dataset_version": DATASET_VERSION,
@@ -508,6 +637,12 @@ def example_row(
         "candidate_hash": base.get("candidate_hash", ""),
         "state_hash": base.get("state_hash", ""),
         "rng_state_hash": base.get("rng_state_hash", ""),
+        "source_indices": source_stats.get("source_indices", ""),
+        "source_texts": source_stats.get("source_texts", ""),
+        "source_value": "" if source_value == "" else format_float(float(source_value)),
+        "source_regret": "" if source_regret == "" else format_float(float(source_regret)),
+        "source_attempts": source_stats.get("source_attempts", ""),
+        "source_wins": source_stats.get("source_wins", ""),
         "actions_evaluated": len(actions),
         "eligible_actions": len(eligible),
         "total_terminal_attempts": sum(as_int(action, "terminal") for action in actions),
@@ -541,6 +676,13 @@ def example_row(
             "candidate_attempts": attempts_map,
             "candidate_win_rates": win_rate_map,
             "target_distribution": distribution,
+            "source_choice": {
+                "indices": source_stats.get("source_indices", ""),
+                "texts": source_stats.get("source_texts", ""),
+                "value": source_value,
+                "regret": source_regret,
+                "action_index": source_stats.get("source_action_index", ""),
+            },
             "actions": [
                 {
                     "indices": action.get("indices", ""),
@@ -641,6 +783,14 @@ def process_input(
                 reasons.append("positive_actions_gt_max")
             if args.max_positive_fraction < 1.0 and positive_fraction > args.max_positive_fraction:
                 reasons.append("positive_fraction_gt_max")
+            source_stats = source_choice_stats(base, eligible, values)
+            source_value = source_stats.get("source_value", "")
+            source_regret = source_stats.get("source_regret", "")
+            if args.min_source_regret > 0.0:
+                if source_value == "":
+                    reasons.append("source_choice_not_evaluated")
+                elif float(source_regret) < args.min_source_regret:
+                    reasons.append("source_regret_below_threshold")
             if "suspect_pass_best" in quality_flags and not args.include_suspect_pass_best:
                 reasons.append("suspect_pass_best")
             if candidate_count <= 1:
@@ -664,6 +814,7 @@ def read_all_inputs(args: argparse.Namespace) -> Tuple[List[Dict[str, object]], 
     total = Counter()
     for raw_input in args.inputs:
         input_run_id, rows = resolve_input_rows(raw_input, args.prefer_merged)
+        rows = attach_selection_metadata(raw_input, rows)
         input_examples, input_rejects, counters = process_input(input_run_id, rows, args)
         examples.extend(input_examples)
         rejects.extend(input_rejects)
@@ -780,6 +931,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "max_positive_actions": args.max_positive_actions,
         "max_positive_fraction": args.max_positive_fraction,
         "positive_value_threshold": args.positive_value_threshold,
+        "min_source_regret": args.min_source_regret,
         "quality_flag_counts": dict(sorted(quality_flag_counts.items())),
         "include_suspect_pass_best": args.include_suspect_pass_best,
         "pass_best_min_common_samples": args.pass_best_min_common_samples,

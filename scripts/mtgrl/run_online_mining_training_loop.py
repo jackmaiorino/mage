@@ -338,6 +338,8 @@ def build_online_mining_command(
         str(args.max_positive_fraction),
         "--positive-value-threshold",
         str(args.positive_value_threshold),
+        "--min-source-regret",
+        str(args.min_source_regret),
         "--poll-sec",
         str(args.poll_sec),
     ]
@@ -618,6 +620,14 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
         default=0,
         help="When reusing an online run, wait this long for its value-target summary to appear.",
     )
+    parser.add_argument(
+        "--existing-target-dir",
+        default="",
+        help=(
+            "When reusing an online run, train from this explicit terminal-line value-target "
+            "directory instead of the reused run's clean_targets_dir."
+        ),
+    )
     parser.add_argument("--wait-poll-sec", type=float, default=30.0)
     parser.add_argument("--initial-q-blend", type=float, default=0.0)
     parser.add_argument("--candidate-q-blend", type=float, default=1.0)
@@ -685,6 +695,7 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--max-positive-actions", type=int, default=0)
     parser.add_argument("--max-positive-fraction", type=float, default=1.0)
     parser.add_argument("--positive-value-threshold", type=float, default=0.0)
+    parser.add_argument("--min-source-regret", type=float, default=0.0)
     parser.add_argument("--poll-sec", type=float, default=20.0)
 
     parser.add_argument("--target-mode", choices=("distribution", "signed-values", "advantage-values"), default="advantage-values")
@@ -800,6 +811,12 @@ def main(argv: Sequence[str]) -> int:
                 return online_rc
 
         target_paths = cycle_target_paths(online_run_dir)
+        if cycle_index == 0 and args.existing_target_dir.strip():
+            override_dir = resolve_repo_path(args.existing_target_dir)
+            target_paths["clean_targets_dir"] = override_dir
+            target_paths["target_csv"] = override_dir / "terminal_line_value_targets.csv"
+            target_paths["target_summary"] = override_dir / "terminal_line_value_target_summary.json"
+            cycle_summary["target_override_dir"] = rel(override_dir)
         target_csv = target_paths.get("target_csv", online_run_dir / "missing.csv")
         target_summary = read_json(target_paths.get("target_summary", online_run_dir / "missing.json"))
         admitted = admitted_examples(target_summary)
