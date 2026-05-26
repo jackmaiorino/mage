@@ -353,6 +353,8 @@ def build_online_mining_command(
         "--poll-sec",
         str(args.poll_sec),
     ]
+    if args.max_concurrent_mine_shards > 0:
+        cmd.extend(["--max-concurrent-mine-shards", str(args.max_concurrent_mine_shards)])
     if args.allow_deterministic_parallel:
         cmd.append("--allow-deterministic-parallel")
     if args.chunk_indices:
@@ -732,6 +734,12 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--online-maven", action="store_true")
 
     parser.add_argument("--mine-shards", type=int, default=2)
+    parser.add_argument(
+        "--max-concurrent-mine-shards",
+        type=int,
+        default=0,
+        help="Limit concurrent mining shard JVMs while preserving --mine-shards selection partitions.",
+    )
     parser.add_argument("--max-snapshots", type=int, default=32)
     parser.add_argument("--selection-mode", default="ranked")
     parser.add_argument("--ranked-max-per-game", type=int, default=16)

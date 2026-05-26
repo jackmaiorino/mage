@@ -55,6 +55,12 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--mode", default="value-tree", choices=["value-tree", "terminal-line"])
     parser.add_argument("--shards", type=int, default=max(1, min(4, os.cpu_count() or 1)))
+    parser.add_argument(
+        "--max-concurrent-shards",
+        type=int,
+        default=0,
+        help="Limit concurrent shard JVMs while preserving --shards selection partitions; 0 means all shards.",
+    )
     parser.add_argument("--max-snapshots", type=int, default=100)
     parser.add_argument("--selection-mode", default="ranked")
     parser.add_argument("--ranked-max-per-game", type=int, default=10)
@@ -378,6 +384,7 @@ def write_readme(output_dir: Path, summary: Dict[str, object]) -> None:
         "",
         f"- mode: `{summary['mode']}`",
         f"- shards: `{summary['shards']}`",
+        f"- max_concurrent_shards: `{summary['max_concurrent_shards']}`",
         f"- exit_codes: `{summary['exit_codes']}`",
         f"- selected_rows: `{summary['selected_snapshots.csv_rows']}`",
         f"- action_rows: `{summary['counterfactual_value_tree.csv_rows']}`",
@@ -409,6 +416,10 @@ def write_readme(output_dir: Path, summary: Dict[str, object]) -> None:
 def run(args: argparse.Namespace) -> int:
     if args.shards < 1:
         raise ValueError("--shards must be >= 1")
+    if args.max_concurrent_shards < 0:
+        raise ValueError("--max-concurrent-shards must be >= 0")
+    max_concurrent_shards = args.max_concurrent_shards or args.shards
+    max_concurrent_shards = max(1, min(args.shards, max_concurrent_shards))
     if not args.checkpoint_root and not args.snapshot_list:
         raise ValueError("--checkpoint-root or --snapshot-list is required")
     output_dir = Path(args.output_dir)
@@ -430,7 +441,7 @@ def run(args: argparse.Namespace) -> int:
     )
     if shared_gpu_requested:
         service_overrides = manifest_deterministic_env(manifest)
-        service_overrides["GPU_SERVICE_NUM_CHANNELS"] = str(max(1, args.shards))
+        service_overrides["GPU_SERVICE_NUM_CHANNELS"] = str(max_concurrent_shards)
         print(
             f"starting shared GPU service on port {args.gpu_port} for shard JVMs",
             flush=True,
@@ -448,14 +459,16 @@ def run(args: argparse.Namespace) -> int:
                 "PY_SERVICE_MODE": "shared_gpu",
                 "GPU_SERVICE_ENDPOINT": f"localhost:{args.gpu_port}",
                 "GPU_SERVICE_NUM_GPUS": "1",
-                "GPU_SERVICE_NUM_CHANNELS": str(max(1, args.shards)),
+                "GPU_SERVICE_NUM_CHANNELS": str(max_concurrent_shards),
             }
         )
 
     shard_dirs = [output_dir / f"shard_{i:02d}_of_{args.shards:02d}" for i in range(args.shards)]
     processes = []
     start = time.time()
-    for shard_index, shard_dir in enumerate(shard_dirs):
+    active = []
+
+    def launch_shard(shard_index: int, shard_dir: Path) -> Dict[str, object]:
         shard_dir.mkdir(parents=True, exist_ok=True)
         exec_args = miner_args(args, shard_index, shard_dir)
         cmd = maven_command(args, exec_args)
@@ -477,25 +490,30 @@ def run(args: argparse.Namespace) -> int:
         stdout = stdout_path.open("w", encoding="utf-8", newline="")
         stderr = stderr_path.open("w", encoding="utf-8", newline="")
         proc = subprocess.Popen(cmd, stdout=stdout, stderr=stderr, env=env)
-        processes.append(
-            {
-                "index": shard_index,
-                "dir": str(shard_dir),
-                "pid": proc.pid,
-                "process": proc,
-                "stdout": stdout,
-                "stderr": stderr,
-                "cmd": cmd,
-            }
-        )
+        entry = {
+            "index": shard_index,
+            "dir": str(shard_dir),
+            "pid": proc.pid,
+            "process": proc,
+            "stdout": stdout,
+            "stderr": stderr,
+            "cmd": cmd,
+        }
         print(f"started shard {shard_index}/{args.shards} pid={proc.pid} dir={shard_dir}", flush=True)
+        return entry
 
-    while True:
-        running = [entry for entry in processes if entry["process"].poll() is None]
-        if not running:
-            break
-        print("running shards: " + ",".join(str(entry["index"]) for entry in running), flush=True)
-        time.sleep(max(1.0, args.poll_sec))
+    next_shard = 0
+    while next_shard < len(shard_dirs) or active:
+        while next_shard < len(shard_dirs) and len(active) < max_concurrent_shards:
+            entry = launch_shard(next_shard, shard_dirs[next_shard])
+            processes.append(entry)
+            active.append(entry)
+            next_shard += 1
+        running = [entry for entry in active if entry["process"].poll() is None]
+        if running:
+            print("running shards: " + ",".join(str(entry["index"]) for entry in running), flush=True)
+            time.sleep(max(1.0, args.poll_sec))
+        active = [entry for entry in active if entry["process"].poll() is None]
 
     exit_codes = {}
     for entry in processes:
@@ -518,6 +536,7 @@ def run(args: argparse.Namespace) -> int:
         "output_dir": str(output_dir),
         "mode": args.mode,
         "shards": args.shards,
+        "max_concurrent_shards": max_concurrent_shards,
         "max_snapshots": args.max_snapshots,
         "ranked_max_per_game": args.ranked_max_per_game,
         "tree_rollouts": args.tree_rollouts,
