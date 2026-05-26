@@ -2561,3 +2561,45 @@ Next useful unit:
 - Keep the same terminal-only reward thesis, but change target selection rather than adding heuristic combo rewards.
 - Prioritize online/mined checkpoints whose terminal-line search exposes rare high-leverage wins or source/candidate disagreements, then train a small candidate and rerun the same exact-seed comparator.
 - The immediate local implementation target is a selector/export gate that increases density of rare, high-delta terminal wins while staying card-name agnostic in the reward itself.
+
+## v477 Source-Regret Gate
+
+Purpose:
+
+- Test whether the v475 labels were weak because they included decisions where the searched best action was not clearly better than the source policy's selected action.
+- Stay thesis-clean: the gate uses only terminal branch outcomes and the actual source-selected candidate metadata. It does not encode card names, combo predicates, or intermediate setup rewards.
+
+Implementation:
+
+- Commit `3c0fe65b28` added source-selected action metadata to terminal value-target export and introduced `--min-source-regret`.
+- The export rejects a checkpoint group when the searched best action improves over the source-selected action by less than the requested terminal-value margin.
+- v477 reused the repaired v475 mining artifact and trained only on the `--min-source-regret 0.10` target subset.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| Source-regret target export | `local-training/local_pbt/debug/v475_source_regret010_value_targets` |
+| v477 train/eval run | `local-training/local_pbt/online_mining_training_loop/v477_train_v475_source_regret010_grixis` |
+| Source profile | `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive` |
+| Candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v477-Regret010` |
+
+Target export:
+
+- Source-regret gate admitted `14` trainable rows from the v475 repaired mining artifact.
+- TrainingData export reentered and captured `14 / 14` rows with matching candidate hashes and state hashes.
+- Candidate training used Q-only branch-return targets, 4 epochs, and `56` train-pass samples.
+- The admitted labels still skewed toward broad setup and midrange corrections. Most common best labels were `Cast Masked Vandal` (`3`), forestcycling (`2`), `Cast Quirion Ranger` (`2`), `Cast Lead the Stampede` (`2`), and singletons including `Cast Balustrade Spy`.
+
+Exact-seed Grixis eval:
+
+| Profile | Result | Win Chunks | Notes |
+| --- | ---: | --- | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v477-Regret010` candidate | `2 / 16` | `10,11` | Completed without zero-total chunks. |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive` source | `3 / 16` | `4,10,12` | Completed without zero-total chunks under the eval timeout fix. |
+
+Interpretation:
+
+- The source-regret gate worked mechanically, but it was not a useful promotion step: v477 lost the paired exact-seed comparator (`2 / 16` vs `3 / 16`) and was also weaker than v476's broader 32-row update (`3 / 16`).
+- The result rejects source-regret as a standalone target-quality filter. It overfiltered the dataset to 14 rows while still leaving mostly broad setup/midrange labels.
+- The next unit should not add card-name rewards. It should make the terminal-only selector more selective for rare high-leverage terminal wins, for example by measuring how exceptional the best action is relative to the checkpoint's overall terminal win rate.
