@@ -46,6 +46,8 @@ VALUE_FIELDS = [
     "total_terminal_attempts",
     "min_action_attempts",
     "common_samples",
+    "positive_candidates",
+    "positive_fraction",
     "value_source",
     "best_indices",
     "best_texts",
@@ -129,6 +131,30 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         type=int,
         default=8,
         help="Evidence count that maps a full value delta to weight 1.0.",
+    )
+    parser.add_argument(
+        "--max-positive-actions",
+        type=int,
+        default=0,
+        help=(
+            "Reject groups where more than this many candidate indices have terminal value above "
+            "--positive-value-threshold. Zero disables the count gate."
+        ),
+    )
+    parser.add_argument(
+        "--max-positive-fraction",
+        type=float,
+        default=1.0,
+        help=(
+            "Reject groups where the fraction of candidate indices above --positive-value-threshold "
+            "exceeds this value. Use values below 1.0 to keep only more decisive labels."
+        ),
+    )
+    parser.add_argument(
+        "--positive-value-threshold",
+        type=float,
+        default=0.0,
+        help="Candidate terminal value threshold used by the positive-action quality gates.",
     )
     parser.add_argument(
         "--include-suspect-pass-best",
@@ -333,6 +359,18 @@ def candidate_attempt_map(actions: Sequence[Dict[str, object]], candidate_count:
     return out
 
 
+def positive_candidate_stats(
+        actions: Sequence[Dict[str, object]],
+        values: Dict[int, float],
+        candidate_count: int,
+        threshold: float,
+) -> Tuple[int, float]:
+    value_map = candidate_value_map(actions, values, candidate_count)
+    positive = sum(1 for value in value_map if value > threshold)
+    fraction = (float(positive) / float(candidate_count)) if candidate_count > 0 else 0.0
+    return positive, fraction
+
+
 def classify(delta: float, confidence: float) -> str:
     if delta >= 0.75 and confidence >= 0.75:
         return "terminal_value_strong_delta"
@@ -426,6 +464,12 @@ def example_row(
         args: argparse.Namespace,
 ) -> Dict[str, object]:
     candidate_count = as_int(base, "candidate_count")
+    positive_candidates, positive_fraction = positive_candidate_stats(
+        eligible,
+        values,
+        candidate_count,
+        args.positive_value_threshold,
+    )
     ranked = sorted(
         ((index, action, values.get(index, 0.0)) for index, action in enumerate(eligible)),
         key=action_rank_key,
@@ -469,6 +513,8 @@ def example_row(
         "total_terminal_attempts": sum(as_int(action, "terminal") for action in actions),
         "min_action_attempts": min(as_int(action, "attempts") for action in eligible),
         "common_samples": len(samples),
+        "positive_candidates": positive_candidates,
+        "positive_fraction": format_float(positive_fraction),
         "value_source": value_source,
         "best_indices": best.get("indices", ""),
         "best_texts": best.get("texts", ""),
@@ -570,6 +616,13 @@ def process_input(
             elif not values:
                 reasons.append("missing_value_estimates")
         if not reasons:
+            candidate_count = as_int(base, "candidate_count")
+            positive_candidates, positive_fraction = positive_candidate_stats(
+                eligible,
+                values,
+                candidate_count,
+                args.positive_value_threshold,
+            )
             ranked = sorted(
                 ((index, action, values.get(index, 0.0)) for index, action in enumerate(eligible)),
                 key=action_rank_key,
@@ -584,11 +637,15 @@ def process_input(
                 best, eligible, best_value, delta, len(samples), args)
             if delta < args.min_value_delta:
                 reasons.append("value_delta_below_threshold")
+            if args.max_positive_actions > 0 and positive_candidates > args.max_positive_actions:
+                reasons.append("positive_actions_gt_max")
+            if args.max_positive_fraction < 1.0 and positive_fraction > args.max_positive_fraction:
+                reasons.append("positive_fraction_gt_max")
             if "suspect_pass_best" in quality_flags and not args.include_suspect_pass_best:
                 reasons.append("suspect_pass_best")
-            if as_int(base, "candidate_count") <= 1:
+            if candidate_count <= 1:
                 reasons.append("candidate_count_lt_2")
-            if not softmax_distribution(eligible, values, as_int(base, "candidate_count"), args.target_temperature):
+            if not softmax_distribution(eligible, values, candidate_count, args.target_temperature):
                 reasons.append("empty_target_distribution")
         if reasons:
             rejects.append(rejection_row(input_run_id, base, actions, eligible, best, worst, delta, quality_flags, reasons))
@@ -720,6 +777,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "require_common_samples": args.require_common_samples,
         "target_temperature": args.target_temperature,
         "confidence_attempts": args.confidence_attempts,
+        "max_positive_actions": args.max_positive_actions,
+        "max_positive_fraction": args.max_positive_fraction,
+        "positive_value_threshold": args.positive_value_threshold,
         "quality_flag_counts": dict(sorted(quality_flag_counts.items())),
         "include_suspect_pass_best": args.include_suspect_pass_best,
         "pass_best_min_common_samples": args.pass_best_min_common_samples,

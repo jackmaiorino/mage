@@ -220,6 +220,12 @@ def build_export_command(
         str(args.min_common_samples),
         "--min-attempts-per-action",
         str(args.min_attempts_per_action),
+        "--max-positive-actions",
+        str(args.max_positive_actions),
+        "--max-positive-fraction",
+        str(args.max_positive_fraction),
+        "--positive-value-threshold",
+        str(args.positive_value_threshold),
     ]
     if include_pass:
         cmd.append("--include-suspect-pass-best")
@@ -333,6 +339,9 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--min-value-delta", type=float, default=0.1)
     parser.add_argument("--min-common-samples", type=int, default=2)
     parser.add_argument("--min-attempts-per-action", type=int, default=2)
+    parser.add_argument("--max-positive-actions", type=int, default=0)
+    parser.add_argument("--max-positive-fraction", type=float, default=1.0)
+    parser.add_argument("--positive-value-threshold", type=float, default=0.0)
     parser.add_argument("--poll-sec", type=float, default=20.0)
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
