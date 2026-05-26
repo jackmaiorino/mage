@@ -2603,3 +2603,54 @@ Interpretation:
 - The source-regret gate worked mechanically, but it was not a useful promotion step: v477 lost the paired exact-seed comparator (`2 / 16` vs `3 / 16`) and was also weaker than v476's broader 32-row update (`3 / 16`).
 - The result rejects source-regret as a standalone target-quality filter. It overfiltered the dataset to 14 rows while still leaving mostly broad setup/midrange labels.
 - The next unit should not add card-name rewards. It should make the terminal-only selector more selective for rare high-leverage terminal wins, for example by measuring how exceptional the best action is relative to the checkpoint's overall terminal win rate.
+
+## v478 Rare-Edge Terminal Selector
+
+Purpose:
+
+- Test whether target quality improves when the exporter keeps checkpoints where the best terminal action is both high-value and exceptional relative to the checkpoint's overall terminal win rate.
+- Stay thesis-clean: the gate uses only terminal branch outcomes. It does not name combo cards, define combo-ready state, or reward setup milestones.
+
+Implementation:
+
+- Commit `da85249e77` added terminal rarity metadata and gates to `scripts/mtgrl/export_terminal_line_value_targets.py`:
+  - `group_terminal_wins`, `group_terminal_attempts`, and `group_win_rate`
+  - `best_over_group_edge`
+  - `--min-best-value`
+  - `--max-group-win-rate`
+  - `--min-best-over-group-edge`
+- The same knobs are threaded through the online mining and online mining training loop drivers.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| Rare-edge target export | `local-training/local_pbt/debug/v475_rare_edge050_gwr045_value_targets` |
+| v478 train/eval run | `local-training/local_pbt/online_mining_training_loop/v478_train_v475_rare_edge050_gwr045_grixis` |
+| Exact-seed candidate rerun | `local-training/local_pbt/online_mining_training_loop/v478_train_v475_rare_edge050_gwr045_grixis/post_train_eval_reruns/v478_rare_edge_candidate_seed12161` |
+| Source profile | `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive` |
+| Candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v478-RareEdge` |
+
+Target export:
+
+- Gate: `--min-best-value 0.9 --max-group-win-rate 0.45 --min-best-over-group-edge 0.5`, layered on the existing decisive target gates.
+- Rare-edge targets admitted `17 / 383` checkpoint groups.
+- Classification counts: `14` moderate terminal-value deltas, `3` strong terminal-value deltas.
+- Mean admitted `group_win_rate` was about `0.313`; mean `best_over_group_edge` was about `0.687`.
+- TrainingData export reentered and captured `17 / 17` rows.
+- Candidate training used Q-only branch-return targets, 4 epochs, and `68` train-pass samples.
+
+Evaluation:
+
+| Profile | Seed Base | Result | Win Chunks | Notes |
+| --- | ---: | ---: | --- | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v478-RareEdge` candidate | `7161` | `4 / 16` | `6,9,10,13` | Initial run used default post-eval seed base. |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive` source | `7161` | `3 / 16` | `3,12,13` | Same accidental paired seed as candidate. |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v478-RareEdge` candidate | `12161` | `4 / 16` | `3,4,11,16` | Direct exact-seed rerun for comparison to v476/v477 family. |
+
+Interpretation:
+
+- v478 is a weak-positive selector result, not a promotion result.
+- It is the best candidate in the v475-derived training family so far: v476 scored `3 / 16`, v477 scored `2 / 16`, and v478 scored `4 / 16` on the exact `12161` seed base.
+- The accidental paired smoke comparator also favored v478 by one game (`4 / 16` vs source `3 / 16`), but the known source measurements around seed `12161` are noisy (`3 / 16` to `4 / 16`), so this is not enough to claim model improvement.
+- The useful signal is that card-agnostic rare-edge target selection improved over source-regret and broad decisive filtering. The next unit should scale this selector to a larger online-mined corpus before HPC promotion, using `--post-eval-seed-base 12161` explicitly for paired local evals.
