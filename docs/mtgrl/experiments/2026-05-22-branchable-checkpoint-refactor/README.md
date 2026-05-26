@@ -2798,8 +2798,22 @@ Parallel-eval reproducibility finding:
 - Despite that, chunk outcomes differed between v480 and v481 source evals. Example: source chunk 1 was a win in v480 but a loss in v481.
 - A serial deterministic chunk-1 probe repeated twice under `local-training/local_pbt/debug/v479_source_serial_repro_12161` produced stable losses both times, matching v481 and contradicting the v480 parallel result.
 
+Serial paired eval:
+
+| Profile | Seed Base | Result | Winning chunks |
+| --- | ---: | ---: | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v481-DiverseRareEdge` candidate | `12161` | `4 / 16` | `2,4,10,16` |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeScaled` source | `12161` | `3 / 16` | `7,8,13` |
+
+Artifacts:
+
+- `local-training/local_pbt/debug/v481_diverse_serial_pair_seed12161/v481_diverse_serial_pair_seed12161_r2`
+- `profile_summary.csv`: v481 `4 / 16`; v479 source `3 / 16`.
+- This was run with `parallel=1`, so it is the trustworthy local comparison, unlike the earlier `parallel=4` smoke.
+
 Interpretation:
 
-- The diversity gate is mechanically valid and useful as data hygiene, but the v481 result is not promotion evidence. The candidate still scored only `4 / 16`.
-- The bigger blocker is evaluation quality: `--allow-deterministic-parallel` is useful for throughput, but not for exact paired claims. Promotion or comparison claims should use serial deterministic eval, or larger repeated sweeps, not a single 16-game parallel smoke.
-- A full serial paired v481/source eval was launched under `local-training/local_pbt/debug/v481_diverse_serial_pair_seed12161` to get a trustworthy local comparison.
+- The diversity gate is mechanically valid and useful as data hygiene, and v481 passes the first serial paired local gate by one game.
+- This is still not promotion evidence: the absolute result is only `4 / 16`, and the margin over v479 source is `+1 / 16`.
+- The bigger blocker remains evaluation quality and statistical power. `--allow-deterministic-parallel` is useful for throughput, but exact comparison claims need serial deterministic evals or larger repeated sweeps.
+- The next unit should replicate the serial comparison across additional seed bases or move to a larger thesis-clean target corpus before spending HPC time.
