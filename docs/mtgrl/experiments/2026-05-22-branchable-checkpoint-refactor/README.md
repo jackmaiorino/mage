@@ -2438,3 +2438,65 @@ Interpretation:
 - The important thesis signal is not the candidate strength yet; it is that online-reached states can be mined into strict terminal-only branch-return targets, exported through checkpoint reentry, and consumed by the Q-head without replay reconstruction or explicit combo rewards.
 - The current bottleneck is target density and label quality. v471 mined 96 online checkpoints but only 18 strict trainable targets; 68 groups were below the value-delta threshold and 16 more were excluded as suspect pass-best rows.
 - Next useful unit: scale online capture/mining enough to produce at least roughly 50 strict non-pass-suspect targets from online-reached states, then train a candidate and rerun the same paired exact-seed comparator. Good knobs are more online games, more ranked snapshots per game, and more root attempts/common samples before changing the reward formulation.
+
+## v473-v474 Decisive Terminal-Target Gate
+
+Purpose:
+
+- Test whether the scaled online loop failed because branch labels were too diffuse, not because checkpoint mining or combo discovery stopped working.
+- Stay thesis-clean: the new filter uses only terminal win-rate spread across candidate actions. It does not encode card names, combo milestones, setup predicates, or "pass is bad" rules.
+
+Implementation:
+
+- Commit `84c30f5c63` added positive-action quality gates to `scripts/mtgrl/export_terminal_line_value_targets.py` and threaded them through both online loop drivers:
+  - `--max-positive-actions`
+  - `--max-positive-fraction`
+  - `--positive-value-threshold`
+- The gate rejects checkpoint groups where too many legal candidates have positive terminal value. This preserves decisive "few actions win, alternatives lose" labels and filters broad states where many different actions all reach terminal wins.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| Scaled broad-label loop | `local-training/local_pbt/online_mining_training_loop/v473_online_loop_from_v471_grixis_g16_r256_a24_s6` |
+| Decisive re-export/train run | `local-training/local_pbt/online_mining_training_loop/v474_decisive_train_from_v473_pos3_frac50` |
+| Decisive candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive` |
+
+v473 scaled broad-label result:
+
+- Online play profile: `Pauper-Spy-Combo-Value-OnlineLoop-v471`.
+- Live-checkpoint mining selected `256` ranked `ACTIVATE_ABILITY_OR_SPELL` snapshots from 16 Grixis games.
+- Terminal-line rows: `6144`.
+- Terminal outcomes: `2919` wins, `3225` losses.
+- The search still found combo-relevant roots, including `Cast Balustrade Spy` and `Flashback sacrifice three creatures`.
+- Strict soft-pass value targets: `72 / 256` checkpoint groups admitted.
+- TrainingData export: `72 / 72` rows reentered with matching candidate hash and state hash.
+- Broad candidate `Pauper-Spy-Combo-Value-OnlineLoop-v472` eval: `2 / 14`.
+- Source comparator `Pauper-Spy-Combo-Value-OnlineLoop-v471` eval: `4 / 16`.
+
+Diagnosis:
+
+- v473 was mechanically healthy but label quality was weak.
+- Many admitted groups assigned positive value to most legal candidates, so the Q update was broad and noisy. Examples had 5, 6, or 7 positive candidates out of the candidate list, meaning the target was often "many actions are fine" rather than "this choice is important."
+
+v474 decisive re-export:
+
+- Reused the completed v473 terminal-line mining artifact.
+- Gate: `--max-positive-actions 3 --max-positive-fraction 0.5 --positive-value-threshold 0.0`.
+- Decisive targets admitted: `16 / 256`.
+- Classification counts: `6` strong delta, `10` moderate delta.
+- Rejections newly attributable to decisiveness: `positive_actions_gt_max=116`, `positive_fraction_gt_max=120`.
+- TrainingData export: `16 / 16` rows reentered and captured.
+- Candidate training: cloned v471 into `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive`, Q-only branch-return update, 4 epochs, 64 train-pass samples.
+- Eval: `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive` scored `5 / 16` vs Grixis Affinity on deterministic seed base `12161`.
+
+Interpretation:
+
+- This is the first evidence that label-quality filtering matters in the online-mining loop: the same v473 search artifact produced a worse broad candidate (`2 / 14`) and a better decisive candidate (`5 / 16`) after filtering diffuse states.
+- The result is promising but not promotion-grade. The margin over the v471 comparator is one game, and the dataset is only 16 decisive rows.
+- The next thesis-relevant unit is another online loop from `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive` with the decisive gate enabled during target export, then a paired exact-seed comparator against the v473-Decisive source.
+
+Storage note:
+
+- Completed cold v469-v472 local artifacts were moved to `E:\mage-archive\IdeaProjects\mage` and NTFS junctions were left at the original `local-training` paths.
+- Active v473 and v474 artifacts remain on `C:` for immediate analysis.
