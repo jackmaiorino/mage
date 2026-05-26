@@ -179,6 +179,10 @@ def build_mine_command(args: argparse.Namespace, cycle: int, checkpoint_root: Pa
         "false",
         "--line-common-continuation-seeds",
         "true",
+        "--line-capture-training-data",
+        "true" if args.line_capture_training_data else "false",
+        "--line-training-max-records-per-branch",
+        str(args.line_training_max_records_per_branch),
         "--post-branch-autopilot",
         "false",
         "--model-continuation-backend",
@@ -358,6 +362,8 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--line-attempts", type=int, default=32)
     parser.add_argument("--line-max-root-actions", type=int, default=16)
     parser.add_argument("--line-timeout-sec", type=int, default=120)
+    parser.add_argument("--line-capture-training-data", action="store_true")
+    parser.add_argument("--line-training-max-records-per-branch", type=int, default=64)
     parser.add_argument("--tree-timeout-sec", type=int, default=120)
     parser.add_argument("--tree-seed", type=int, default=2026052506)
     parser.add_argument("--tree-continuation-policy", choices=("stable", "sample", "explore"), default="explore")

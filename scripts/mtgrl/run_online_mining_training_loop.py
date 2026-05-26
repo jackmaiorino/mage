@@ -324,6 +324,8 @@ def build_online_mining_command(
         str(args.tree_seed + cycle * 1000),
         "--tree-continuation-policy",
         args.tree_continuation_policy,
+        "--line-training-max-records-per-branch",
+        str(args.line_training_max_records_per_branch),
         "--model-continuation-backend",
         args.model_continuation_backend,
         "--min-value-delta",
@@ -353,6 +355,8 @@ def build_online_mining_command(
         "--poll-sec",
         str(args.poll_sec),
     ]
+    if args.line_capture_training_data:
+        cmd.append("--line-capture-training-data")
     if args.max_concurrent_mine_shards > 0:
         cmd.extend(["--max-concurrent-mine-shards", str(args.max_concurrent_mine_shards)])
     if args.allow_deterministic_parallel:
@@ -747,6 +751,8 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--line-attempts", type=int, default=16)
     parser.add_argument("--line-max-root-actions", type=int, default=16)
     parser.add_argument("--line-timeout-sec", type=int, default=120)
+    parser.add_argument("--line-capture-training-data", action="store_true")
+    parser.add_argument("--line-training-max-records-per-branch", type=int, default=64)
     parser.add_argument("--tree-timeout-sec", type=int, default=120)
     parser.add_argument("--tree-seed", type=int, default=2026052511)
     parser.add_argument("--tree-continuation-policy", choices=("stable", "sample", "explore"), default="explore")

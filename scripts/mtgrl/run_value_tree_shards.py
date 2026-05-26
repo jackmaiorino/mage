@@ -34,6 +34,7 @@ MERGED_FILES = [
     "counterfactual_sequence_tree.csv",
     "counterfactual_sequence_tree_summary.csv",
     "terminal_line_search.csv",
+    "terminal_line_training_data_summary.csv",
 ]
 
 
@@ -77,6 +78,8 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--line-stop-on-win", default="true")
     parser.add_argument("--line-stop-on-win-all", default="false")
     parser.add_argument("--line-common-continuation-seeds", default="false")
+    parser.add_argument("--line-capture-training-data", default="false")
+    parser.add_argument("--line-training-max-records-per-branch", type=int, default=64)
     parser.add_argument("--sequence-tree", default="false")
     parser.add_argument("--tree-sequence-depth", type=int, default=2)
     parser.add_argument("--tree-sequence-beam", type=int, default=4)
@@ -158,6 +161,8 @@ def miner_args(args: argparse.Namespace, shard_index: int, shard_dir: Path) -> s
                 "--line-stop-on-win", bool_arg(args.line_stop_on_win),
                 "--line-stop-on-win-all", bool_arg(args.line_stop_on_win_all),
                 "--line-common-continuation-seeds", bool_arg(args.line_common_continuation_seeds),
+                "--line-capture-training-data", bool_arg(args.line_capture_training_data),
+                "--line-training-max-records-per-branch", str(args.line_training_max_records_per_branch),
             ]
         )
     else:
@@ -403,6 +408,8 @@ def write_readme(output_dir: Path, summary: Dict[str, object]) -> None:
         f"- line_stop_on_win: `{summary['line_stop_on_win']}`",
         f"- line_stop_on_win_all: `{summary['line_stop_on_win_all']}`",
         f"- line_common_continuation_seeds: `{summary['line_common_continuation_seeds']}`",
+        f"- line_capture_training_data: `{summary['line_capture_training_data']}`",
+        f"- terminal_line_training_data_summary_rows: `{summary['terminal_line_training_data_summary.csv_rows']}`",
         f"- post_branch_autopilot: `{summary['post_branch_autopilot']}`",
         f"- model_continuation_backend: `{summary['model_continuation_backend']}`",
         f"- py4j_port_stride: `{summary['py4j_port_stride']}`",
@@ -551,6 +558,8 @@ def run(args: argparse.Namespace) -> int:
         "line_stop_on_win": bool_arg(args.line_stop_on_win),
         "line_stop_on_win_all": bool_arg(args.line_stop_on_win_all),
         "line_common_continuation_seeds": bool_arg(args.line_common_continuation_seeds),
+        "line_capture_training_data": bool_arg(args.line_capture_training_data),
+        "line_training_max_records_per_branch": args.line_training_max_records_per_branch,
         "sequence_tree": bool_arg(args.sequence_tree),
         "tree_sequence_depth": args.tree_sequence_depth,
         "tree_sequence_beam": args.tree_sequence_beam,

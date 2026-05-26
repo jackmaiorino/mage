@@ -2871,3 +2871,39 @@ Interpretation:
 - The target set is still dominated by generic setup/mana/card-flow labels rather than dense terminal finish or high-leverage sequencing labels.
 - The local utilization issue is understood: mining was capped to avoid pagefile OOM, and serial post-eval was chosen for reliable paired evidence. Higher utilization should come from discovery/mining scale-out or HPC sharding, while serial local eval remains the final sanity gate.
 - The next thesis-relevant unit should improve credit assignment from mined terminal endings, not simply admit more rare-edge rows from the same selector.
+
+## v483 Terminal-Line Trajectory Capture Harness
+
+Purpose:
+
+- Address the core v482 failure mode: terminal-line mining found many winning endings, but the training path collapsed them into one root-action label per checkpoint.
+- Add a thesis-clean path for terminal return credit over the model's own post-root continuation decisions. This still uses only terminal win/loss; it does not add combo card rewards or combo-state labels.
+
+Implementation:
+
+- `LiveCheckpointBranchMiner` now supports opt-in `--line-capture-training-data=true`.
+- When enabled in terminal-line mode, the miner captures `TrainingData` from model-selected continuation decisions after the forced root action.
+- Each captured continuation decision gets signed branch-return candidate-Q targets:
+  - chosen candidate = `+1.0` if the branch won;
+  - chosen candidate = `-1.0` if the branch lost;
+  - unobserved candidates = `-2.0`, matching existing branch-return target semantics.
+- The root forced action is still represented by `terminal_line_search.csv`; the new serialized records are additional continuation-credit data.
+- `run_value_tree_shards.py`, `run_online_terminal_mining_loop.py`, and `run_online_mining_training_loop.py` now thread the capture flags through.
+
+Validation:
+
+| Check | Result |
+| --- | --- |
+| Python script compile | `python -m py_compile scripts/mtgrl/run_value_tree_shards.py scripts/mtgrl/run_online_terminal_mining_loop.py scripts/mtgrl/run_online_mining_training_loop.py` passed. |
+| Java compile | `mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile` passed. |
+| Capture smoke | `local-training/local_pbt/debug/v483_terminal_line_capture_smoke` |
+| Smoke inputs | Existing v482 live checkpoints, `4` selected snapshots, `16` terminal-line branch attempts. |
+| Smoke outcomes | `13` terminal wins and `3` terminal losses. |
+| Captured records | `205` continuation `TrainingData` records written to shard `terminal_line_training_data.ser`; `0` skipped. |
+| Import score probe | `local-training/local_pbt/action_counterfactual/v483_capture_import_score_smoke` loaded the generated `.ser` directory and scored `8` examples. |
+
+Interpretation:
+
+- This is a harness win, not a model-quality result yet.
+- It directly targets the likely v482 blocker: the model was only seeing sparse root labels, while the terminal lines contain many downstream decisions that can be credited from terminal outcomes.
+- The next experiment should train a v483 candidate from the captured trajectory-return records, either alone or mixed with the existing root value targets, then run the same serial paired Grixis comparator.
