@@ -17,6 +17,7 @@ import java.util.LinkedList;
 public class ComputerPlayer7 extends ComputerPlayer6 {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer7.class);
+    private static final long serialVersionUID = -83445782362215531L;
     private static final boolean VERBOSE_SIM
             = "1".equals(System.getenv().getOrDefault("AI_VERBOSE_SIM", "0"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("AI_VERBOSE_SIM", "0"));

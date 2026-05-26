@@ -48,6 +48,7 @@ import java.util.Map.Entry;
 public class ComputerPlayer extends PlayerImpl {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer.class);
+    private static final long serialVersionUID = -2005336442580439080L;
 
     protected static final int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are available
 

@@ -75,6 +75,7 @@ import java.util.stream.Collectors;
 public abstract class PlayerImpl implements Player, Serializable {
 
     private static final Logger logger = Logger.getLogger(PlayerImpl.class);
+    private static final long serialVersionUID = -7328456395957705805L;
     private static final Object REPLAY_ENGINE_BOUNDARY_TRACE_LOCK = new Object();
     private static final java.util.concurrent.atomic.AtomicLong REPLAY_ENGINE_BOUNDARY_TRACE_SEQ =
             new java.util.concurrent.atomic.AtomicLong(0L);

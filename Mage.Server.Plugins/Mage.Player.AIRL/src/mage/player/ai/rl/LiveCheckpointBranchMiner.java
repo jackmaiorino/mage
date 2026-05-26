@@ -6,7 +6,11 @@ import mage.player.ai.ComputerPlayerRL;
 import mage.util.RandomUtil;
 import mage.util.ThreadUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
+import java.io.ObjectStreamClass;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +26,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
@@ -118,7 +123,8 @@ public final class LiveCheckpointBranchMiner {
             counts.add(row.classification);
             processed++;
         }
-        writeReadme(cfg, csvPath, processed, selection.discoveredPathCount, selection.eligibleCount, counts);
+        writeReadme(cfg, csvPath, processed, selection.discoveredPathCount, selection.eligibleCount,
+                selection.loadErrorCount, selection.loadErrorExamples, counts);
         System.out.println("live checkpoint branch miner wrote " + processed + " row(s) to " + csvPath);
         System.out.println("classification counts: " + counts.values);
     }
@@ -172,7 +178,8 @@ public final class LiveCheckpointBranchMiner {
             processed++;
         }
         writeValueTreeReadme(cfg, actionCsv, summaryCsv, processed,
-                selection.discoveredPathCount, selection.eligibleCount, actionRows,
+                selection.discoveredPathCount, selection.eligibleCount,
+                selection.loadErrorCount, selection.loadErrorExamples, actionRows,
                 sequenceRows, sequenceSummaryRows, counts, sequenceCounts);
         System.out.println("counterfactual value tree wrote " + actionRows + " action row(s) to " + actionCsv);
         System.out.println("counterfactual value tree wrote " + processed + " summary row(s) to " + summaryCsv);
@@ -276,7 +283,8 @@ public final class LiveCheckpointBranchMiner {
             }
         }
         writeTerminalLineSearchReadme(cfg, csvPath, processed,
-                selection.discoveredPathCount, selection.eligibleCount, attempts, wins, counts);
+                selection.discoveredPathCount, selection.eligibleCount,
+                selection.loadErrorCount, selection.loadErrorExamples, attempts, wins, counts);
         System.out.println("terminal line search wrote " + attempts + " attempt row(s) to " + csvPath);
         System.out.println("terminal line wins: " + wins);
         System.out.println("classification counts: " + counts.values);
@@ -617,7 +625,15 @@ public final class LiveCheckpointBranchMiner {
     }
 
     private static LiveCheckpointRecorder.Snapshot loadSnapshot(Path path) throws Exception {
-        try (ObjectInputStream in = new ObjectInputStream(new GZIPInputStream(Files.newInputStream(path)))) {
+        try {
+            return loadSnapshot(path, false);
+        } catch (InvalidClassException e) {
+            return loadSnapshot(path, true);
+        }
+    }
+
+    private static LiveCheckpointRecorder.Snapshot loadSnapshot(Path path, boolean tolerateMageSerialVersionDrift) throws Exception {
+        try (ObjectInputStream in = snapshotInputStream(path, tolerateMageSerialVersionDrift)) {
             Object obj = in.readObject();
             if (!(obj instanceof LiveCheckpointRecorder.Snapshot)) {
                 throw new IllegalArgumentException("Unexpected snapshot object: "
@@ -627,9 +643,51 @@ public final class LiveCheckpointBranchMiner {
         }
     }
 
+    private static ObjectInputStream snapshotInputStream(Path path, boolean tolerateMageSerialVersionDrift) throws IOException {
+        InputStream gzip = new GZIPInputStream(Files.newInputStream(path));
+        if (tolerateMageSerialVersionDrift) {
+            return new MageSnapshotObjectInputStream(gzip);
+        }
+        return new ObjectInputStream(gzip);
+    }
+
+    private static final class MageSnapshotObjectInputStream extends ObjectInputStream {
+
+        MageSnapshotObjectInputStream(InputStream in) throws IOException {
+            super(in);
+        }
+
+        @Override
+        protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
+            ObjectStreamClass streamDescriptor = super.readClassDescriptor();
+            String className = streamDescriptor == null ? "" : streamDescriptor.getName();
+            if (!isMageSnapshotClass(className)) {
+                return streamDescriptor;
+            }
+            Class<?> localClass;
+            try {
+                localClass = Class.forName(className, false, Thread.currentThread().getContextClassLoader());
+            } catch (ClassNotFoundException e) {
+                return streamDescriptor;
+            }
+            ObjectStreamClass localDescriptor = ObjectStreamClass.lookup(localClass);
+            if (localDescriptor != null
+                    && localDescriptor.getSerialVersionUID() != streamDescriptor.getSerialVersionUID()) {
+                return localDescriptor;
+            }
+            return streamDescriptor;
+        }
+
+        private static boolean isMageSnapshotClass(String className) {
+            return className != null && (className.startsWith("mage.") || className.startsWith("[Lmage."));
+        }
+    }
+
     private static Selection selectSnapshots(Config cfg) throws Exception {
         List<Path> paths = discoverSnapshotPaths(cfg);
         List<SnapshotCandidate> eligible = new ArrayList<>();
+        int loadErrorCount = 0;
+        List<String> loadErrorExamples = new ArrayList<>();
         for (Path path : paths) {
             SnapshotCandidate candidate = new SnapshotCandidate(path);
             try {
@@ -642,6 +700,11 @@ public final class LiveCheckpointBranchMiner {
                 candidate.loadError = errorSummary(t);
                 candidate.score = Integer.MIN_VALUE;
                 candidate.scoreReasons = "load_error";
+                loadErrorCount++;
+                if (loadErrorExamples.size() < 5) {
+                    loadErrorExamples.add((candidate.path == null ? "" : candidate.path.toString())
+                            + " :: " + candidate.loadError);
+                }
                 if ("ranked".equalsIgnoreCase(cfg.selectionMode)) {
                     continue;
                 }
@@ -672,7 +735,7 @@ public final class LiveCheckpointBranchMiner {
             selected.add(candidate);
         }
         selected = applySelectionShard(selected, cfg);
-        return new Selection(paths.size(), eligible.size(), selected);
+        return new Selection(paths.size(), eligible.size(), loadErrorCount, loadErrorExamples, selected);
     }
 
     private static List<SnapshotCandidate> applySelectionShard(List<SnapshotCandidate> selected, Config cfg) {
@@ -1220,6 +1283,8 @@ public final class LiveCheckpointBranchMiner {
             int processed,
             int discovered,
             int eligible,
+            int loadErrors,
+            List<String> loadErrorExamples,
             Counts counts
     ) throws Exception {
         StringBuilder sb = new StringBuilder();
@@ -1227,6 +1292,8 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- processed: ").append(processed).append("\n");
         sb.append("- discovered: ").append(discovered).append("\n");
         sb.append("- eligible: ").append(eligible).append("\n");
+        sb.append("- load_errors: ").append(loadErrors).append("\n");
+        appendLoadErrorExamples(sb, loadErrorExamples);
         sb.append("- selection_mode: ").append(cfg.selectionMode).append("\n");
         sb.append("- ranked_max_per_game: ").append(cfg.rankedMaxPerGame).append("\n");
         sb.append("- selection_shards: ").append(cfg.selectionShards).append("\n");
@@ -1245,12 +1312,25 @@ public final class LiveCheckpointBranchMiner {
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
+    private static void appendLoadErrorExamples(StringBuilder sb, List<String> examples) {
+        if (examples == null || examples.isEmpty()) {
+            return;
+        }
+        int index = 1;
+        for (String example : examples) {
+            sb.append("- load_error_example_").append(index).append(": ").append(example).append("\n");
+            index++;
+        }
+    }
+
     private static void writeTerminalLineSearchReadme(
             Config cfg,
             Path csvPath,
             int processed,
             int discovered,
             int eligible,
+            int loadErrors,
+            List<String> loadErrorExamples,
             int attempts,
             int wins,
             Counts counts
@@ -1260,6 +1340,8 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- processed: ").append(processed).append("\n");
         sb.append("- discovered: ").append(discovered).append("\n");
         sb.append("- eligible: ").append(eligible).append("\n");
+        sb.append("- load_errors: ").append(loadErrors).append("\n");
+        appendLoadErrorExamples(sb, loadErrorExamples);
         sb.append("- attempts: ").append(attempts).append("\n");
         sb.append("- wins: ").append(wins).append("\n");
         sb.append("- selection_mode: ").append(cfg.selectionMode).append("\n");
@@ -1334,6 +1416,8 @@ public final class LiveCheckpointBranchMiner {
             int processed,
             int discovered,
             int eligible,
+            int loadErrors,
+            List<String> loadErrorExamples,
             int actionRows,
             int sequenceRows,
             int sequenceSummaryRows,
@@ -1345,6 +1429,8 @@ public final class LiveCheckpointBranchMiner {
         sb.append("- processed: ").append(processed).append("\n");
         sb.append("- discovered: ").append(discovered).append("\n");
         sb.append("- eligible: ").append(eligible).append("\n");
+        sb.append("- load_errors: ").append(loadErrors).append("\n");
+        appendLoadErrorExamples(sb, loadErrorExamples);
         sb.append("- action_rows: ").append(actionRows).append("\n");
         sb.append("- sequence_tree: ").append(cfg.sequenceTree).append("\n");
         if (cfg.sequenceTree) {
@@ -1731,6 +1817,38 @@ public final class LiveCheckpointBranchMiner {
         return t.getClass().getSimpleName() + (message == null || message.isEmpty() ? "" : ": " + message);
     }
 
+    private static String candidateTextMismatchReason(List<String> expected, List<String> actual) {
+        List<String> left = expected == null ? Collections.emptyList() : expected;
+        List<String> right = actual == null ? Collections.emptyList() : actual;
+        int limit = Math.min(left.size(), right.size());
+        int firstMismatch = -1;
+        for (int i = 0; i < limit; i++) {
+            if (!Objects.equals(left.get(i), right.get(i))) {
+                firstMismatch = i;
+                break;
+            }
+        }
+        if (firstMismatch < 0 && left.size() != right.size()) {
+            firstMismatch = limit;
+        }
+        String expectedText = firstMismatch >= 0 && firstMismatch < left.size() ? left.get(firstMismatch) : "<missing>";
+        String actualText = firstMismatch >= 0 && firstMismatch < right.size() ? right.get(firstMismatch) : "<missing>";
+        return "candidate_text_mismatch"
+                + ":expected_size=" + left.size()
+                + ":actual_size=" + right.size()
+                + ":first=" + firstMismatch
+                + ":expected=" + compactReasonText(expectedText)
+                + ":actual=" + compactReasonText(actualText);
+    }
+
+    private static String compactReasonText(String value) {
+        if (value == null) {
+            return "";
+        }
+        String compact = value.replace('\r', ' ').replace('\n', ' ').replace('|', '/');
+        return compact.length() <= 80 ? compact : compact.substring(0, 80) + "...";
+    }
+
     private static final class ForcedStep {
         private final List<Integer> rootIndices;
         private final List<String> expectedTexts;
@@ -1900,16 +2018,23 @@ public final class LiveCheckpointBranchMiner {
             boolean candidatesMatched = context.candidateTexts.equals(snapshot.candidateTexts);
             boolean selectedIndicesMatched = sanitized.equals(sanitizeIndices(snapshot.selectedIndices, context.candidateCount));
             boolean selectedTextsMatched = selectedTexts.equals(snapshot.selectedTexts);
+            boolean forcedTextsMatched = forcedTextsMatch(snapshot, rootStep, sanitized, selectedTexts);
+            boolean anchoredCandidateMatch = snapshot.candidateTexts != null
+                    && context.candidateTexts != null
+                    && snapshot.candidateTexts.size() == context.candidateTexts.size()
+                    && forcedTextsMatched;
             reentryMatched = actionMatched
-                    && candidatesMatched
+                    && (candidatesMatched || anchoredCandidateMatch)
                     && (!requireSourceChoiceMatch || (selectedIndicesMatched && selectedTextsMatched))
                     && !sanitized.isEmpty();
             if (!actionMatched) {
                 reason = "action_type_mismatch";
-            } else if (!candidatesMatched) {
-                reason = "candidate_text_mismatch";
             } else if (sanitized.isEmpty()) {
                 reason = "forced_indices_invalid";
+            } else if (!forcedTextsMatched) {
+                reason = "forced_text_mismatch";
+            } else if (!candidatesMatched) {
+                reason = "candidate_anchor_matched:" + candidateTextMismatchReason(snapshot.candidateTexts, context.candidateTexts);
             } else if (requireSourceChoiceMatch && (!selectedIndicesMatched || !selectedTextsMatched)) {
                 reason = "source_choice_mismatch";
             } else if (!requireSourceChoiceMatch) {
@@ -1930,6 +2055,21 @@ public final class LiveCheckpointBranchMiner {
             }
             recordDecision("root", context, sanitized, reason);
             return Choice.choose(sanitized);
+        }
+
+        private static boolean forcedTextsMatch(
+                LiveCheckpointRecorder.Snapshot snapshot,
+                ForcedStep rootStep,
+                List<Integer> sanitized,
+                List<String> actualSelectedTexts
+        ) {
+            if (snapshot == null || rootStep == null || sanitized == null || sanitized.isEmpty()) {
+                return false;
+            }
+            List<String> expectedTexts = rootStep.root
+                    ? LiveCheckpointBranchMiner.selectedTexts(snapshot.candidateTexts, sanitized)
+                    : rootStep.expectedTexts;
+            return choiceTextsMatch(expectedTexts, actualSelectedTexts);
         }
 
         private <T> Choice onPostRootDecision(DecisionContext<T> context) {
@@ -2237,6 +2377,18 @@ public final class LiveCheckpointBranchMiner {
         return left.equals(right)
                 || left.endsWith(": " + right)
                 || right.endsWith(": " + left);
+    }
+
+    private static boolean choiceTextsMatch(List<String> expected, List<String> actual) {
+        if (expected == null || actual == null || expected.size() != actual.size()) {
+            return false;
+        }
+        for (int i = 0; i < expected.size(); i++) {
+            if (!choiceTextMatches(expected.get(i), actual.get(i))) {
+                return false;
+            }
+        }
+        return !expected.isEmpty();
     }
 
     private static String normalizeChoiceText(String text) {
@@ -3223,11 +3375,21 @@ public final class LiveCheckpointBranchMiner {
     private static final class Selection {
         private final int discoveredPathCount;
         private final int eligibleCount;
+        private final int loadErrorCount;
+        private final List<String> loadErrorExamples;
         private final List<SnapshotCandidate> selected;
 
-        private Selection(int discoveredPathCount, int eligibleCount, List<SnapshotCandidate> selected) {
+        private Selection(
+                int discoveredPathCount,
+                int eligibleCount,
+                int loadErrorCount,
+                List<String> loadErrorExamples,
+                List<SnapshotCandidate> selected
+        ) {
             this.discoveredPathCount = discoveredPathCount;
             this.eligibleCount = eligibleCount;
+            this.loadErrorCount = loadErrorCount;
+            this.loadErrorExamples = loadErrorExamples == null ? Collections.emptyList() : loadErrorExamples;
             this.selected = selected == null ? Collections.emptyList() : selected;
         }
     }

@@ -49,6 +49,7 @@ import java.util.stream.Collectors;
 public class ComputerPlayer6 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer6.class);
+    private static final long serialVersionUID = -3145429999864364896L;
 
     // TODO: add and research maxNodes logs, is it good to increase from 5000 to 50000 for better results?
     // TODO: increase maxNodes due AI skill level like max depth?
