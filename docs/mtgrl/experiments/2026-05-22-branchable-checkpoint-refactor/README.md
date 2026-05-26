@@ -2708,3 +2708,98 @@ Interpretation:
 - The admitted target set is still mostly broad setup and card-flow decisions rather than dense combo-finish decisions, so the next thesis-relevant unit should improve the way terminal wins are converted into online policy pressure.
 - Harness issue: post-train eval still ran with `parallel=1`, despite the earlier need for better CPU utilization. Fixing the post-eval parallelism plumbing should happen before the next longer local/HPC run.
 - Harness caveat: the cycle-1 source play/profile comparison used the old `--initial-q-blend 0.0` default, while the trained candidate eval used `CANDIDATE_Q_BLEND=1.0`. Treat the paired source result as a smoke baseline, not a clean v478-Q comparison. The next run should start supplied generated `--play-profile` values with Q blending enabled.
+
+## v480 Parallel Rare-Edge Follow-Up
+
+Purpose:
+
+- Rerun the scaled rare-edge loop from v479 with both throughput fixes active:
+  - deterministic evals may opt into `parallel=4` via `--allow-deterministic-parallel`;
+  - generated `--play-profile` starts now default to `CANDIDATE_Q_BLEND=1.0`.
+- Keep the reward thesis-clean: terminal outcomes only, no combo-state labels, card-specific rewards, or hand-authored combo milestones.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| v480 online/training/eval run | `local-training/local_pbt/online_mining_training_loop/v480_parallel_rare_edge_from_v479_grixis_g32_r512_a24` |
+| Online mining run | `local-training/local_pbt/online_mining_training_loop/v480_parallel_rare_edge_from_v479_grixis_g32_r512_a24/online_mining/v480_parallel_rare_edge_from_v479_grixis_g32_r512_a24_cycle01_online_Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeS` |
+| Rare-edge value targets | `local-training/local_pbt/online_mining_training_loop/v480_parallel_rare_edge_from_v479_grixis_g32_r512_a24/online_mining/v480_parallel_rare_edge_from_v479_grixis_g32_r512_a24_cycle01_online_Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeS/value_targets/v480_parallel_rare_edge_from_v479_grixis_g32_r512_a24_cycle01_online_Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeS_cycle01_mine_softpass` |
+| Source profile | `Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeScaled` |
+| Candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v480-RareEdgeParallel` |
+
+Mining and targets:
+
+- Online source play scored `10 / 32` against Grixis with Q blending enabled.
+- Terminal-line mining wrote `12,288` terminal rows from `512` selected checkpoints using `8` mining shards.
+- Terminal outcomes: `6,208` wins and `6,080` losses.
+- Combo-relevant mined rows remained present without combo rewards: `116` `Cast Balustrade Spy` rows with `73` wins, `71` Dread Return rows, `6` Lotleth Giant win rows, `0` full-combo wins by the current detector, and max combo score `3`.
+- Soft-pass rare-edge target export admitted `27 / 512` checkpoint groups.
+- Classification counts: `21` moderate terminal-value deltas and `6` strong terminal-value deltas.
+- TrainingData export reentered and captured `27 / 27` rows with matching candidate/state hashes.
+- Candidate training used Q-only branch-return targets, 4 epochs, and `108` train-pass samples.
+- The admitted best labels were still mostly setup/mana/card-flow decisions: Forestcycling (`5`), `{T}, Tap an untapped creature you control: Add one mana of any color.` (`4`), `Cast Mesmeric Fiend` (`3`), `Cast Lead the Stampede` (`3`), `Cast Winding Way` (`2`), and one `Cast Balustrade Spy`.
+
+Parallel paired eval:
+
+| Profile | Seed Base | Result | Notes |
+| --- | ---: | ---: | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v480-RareEdgeParallel` candidate | `12161` | `4 / 16` | Completed with `parallel=4`. |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeScaled` source | `12161` | `5 / 16` | Same seed base and profile model hash as later checks. |
+
+Interpretation:
+
+- v480 was mechanically healthy and faster: online eval used 4 JVMs after warmup, mining used 8 shard JVMs, and the root README now records actual eval summaries rather than ambiguous return-code zeroes.
+- It was not a promotion result. The candidate lost the paired smoke by one game (`4 / 16` vs `5 / 16`).
+- The target set is small and clustered: `27` admitted rows came from only `14` source games, with repeated adjacent decisions from the same games. This can overrepresent one local state without adding new terminal evidence.
+
+## v481 Diversified Rare-Edge Re-Export
+
+Purpose:
+
+- Test a generic target-diversity gate on the completed v480 mining artifact before spending another full mining run.
+- The gate is thesis-clean: it does not inspect card names or reward combo milestones. It only limits correlated admitted labels from the same source game.
+
+Implementation:
+
+- Added `--max-targets-per-game` and `--min-ordinal-gap-per-game` to `export_terminal_line_value_targets.py`.
+- Threaded both options through the online mining and online mining training loop drivers.
+- Added clearer top-level loop README columns: `Train RC`, `Candidate Eval`, and `Source Eval`.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| Diversity target export | `local-training/local_pbt/debug/v480_rare_edge_diversity_m2_gap8_value_targets` |
+| v481 train/eval run | `local-training/local_pbt/online_mining_training_loop/v481_diverse_rare_edge_from_v479_v480artifact_grixis` |
+| Candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v481-DiverseRareEdge` |
+| Source profile | `Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeScaled` |
+
+Diversity target export:
+
+- Gate layered on v480 rare-edge targets: `--max-targets-per-game 2 --min-ordinal-gap-per-game 8`.
+- Admitted examples dropped from `27` to `17`.
+- Diversity rejection counts: `diversity_ordinal_gap_per_game=10`, `diversity_max_targets_per_game=4`.
+- Classification counts: `11` moderate terminal-value deltas and `6` strong terminal-value deltas.
+- TrainingData export reentered and captured `17 / 17` rows.
+- Candidate training used Q-only branch-return targets, 4 epochs, and `68` train-pass samples.
+
+Parallel paired eval:
+
+| Profile | Seed Base | Result | Notes |
+| --- | ---: | ---: | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v481-DiverseRareEdge` candidate | `12161` | `4 / 16` | Same win count as v480. |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeScaled` source | `12161` | `3 / 16` | Same model hash and manifest settings as v480 source, but different chunk outcomes. |
+
+Parallel-eval reproducibility finding:
+
+- The v479 source model hash matched across the v480 source snapshot, the v481 source snapshot, and the live profile model: `7E1EEDC6338787EA898B4A27B598C47E48F77119318B9C54EBAA31605E298768`.
+- Source eval manifests also matched on profile, Q blend, deterministic env, seed base `12161`, seed key mode `matchup`, `parallel=4`, and `allow_deterministic_parallel=true`.
+- Despite that, chunk outcomes differed between v480 and v481 source evals. Example: source chunk 1 was a win in v480 but a loss in v481.
+- A serial deterministic chunk-1 probe repeated twice under `local-training/local_pbt/debug/v479_source_serial_repro_12161` produced stable losses both times, matching v481 and contradicting the v480 parallel result.
+
+Interpretation:
+
+- The diversity gate is mechanically valid and useful as data hygiene, but the v481 result is not promotion evidence. The candidate still scored only `4 / 16`.
+- The bigger blocker is evaluation quality: `--allow-deterministic-parallel` is useful for throughput, but not for exact paired claims. Promotion or comparison claims should use serial deterministic eval, or larger repeated sweeps, not a single 16-game parallel smoke.
+- A full serial paired v481/source eval was launched under `local-training/local_pbt/debug/v481_diverse_serial_pair_seed12161` to get a trustworthy local comparison.

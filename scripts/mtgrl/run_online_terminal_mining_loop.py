@@ -236,6 +236,10 @@ def build_export_command(
         str(args.max_group_win_rate),
         "--min-best-over-group-edge",
         str(args.min_best_over_group_edge),
+        "--max-targets-per-game",
+        str(args.max_targets_per_game),
+        "--min-ordinal-gap-per-game",
+        str(args.min_ordinal_gap_per_game),
     ]
     if include_pass:
         cmd.append("--include-suspect-pass-best")
@@ -364,6 +368,8 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--min-best-value", type=float, default=0.0)
     parser.add_argument("--max-group-win-rate", type=float, default=1.0)
     parser.add_argument("--min-best-over-group-edge", type=float, default=0.0)
+    parser.add_argument("--max-targets-per-game", type=int, default=0)
+    parser.add_argument("--min-ordinal-gap-per-game", type=int, default=0)
     parser.add_argument("--poll-sec", type=float, default=20.0)
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--dry-run", action="store_true")

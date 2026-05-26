@@ -346,6 +346,10 @@ def build_online_mining_command(
         str(args.max_group_win_rate),
         "--min-best-over-group-edge",
         str(args.min_best_over_group_edge),
+        "--max-targets-per-game",
+        str(args.max_targets_per_game),
+        "--min-ordinal-gap-per-game",
+        str(args.min_ordinal_gap_per_game),
         "--poll-sec",
         str(args.poll_sec),
     ]
@@ -566,6 +570,22 @@ def admitted_examples(summary: Dict[str, object]) -> int:
     return 0
 
 
+def profile_summary_text(eval_run_dir: object, returncode: object) -> str:
+    if eval_run_dir:
+        summary_csv = resolve_repo_path(str(eval_run_dir)) / "profile_summary.csv"
+        rows = list(read_csv_rows(summary_csv))
+        if rows:
+            row = rows[0]
+            wins = row.get("wins", "")
+            total = row.get("total", "")
+            winrate = row.get("winrate", "")
+            if wins != "" and total != "":
+                return f"{wins}/{total} ({winrate})"
+    if returncode != "":
+        return f"rc={returncode}"
+    return ""
+
+
 def write_readme(run_dir: Path, manifest: Dict[str, object]) -> None:
     lines = [
         "# Online Mining Training Loop",
@@ -580,21 +600,28 @@ def write_readme(run_dir: Path, manifest: Dict[str, object]) -> None:
         "",
         "## Cycles",
         "",
-        "| Cycle | Play Profile | Targets | TrainingData | Candidate | Train | Eval | Status |",
-        "| --- | --- | ---: | ---: | --- | --- | --- | --- |",
+        "| Cycle | Play Profile | Targets | TrainingData | Candidate | Train RC | Candidate Eval | Source Eval | Status |",
+        "| --- | --- | ---: | ---: | --- | ---: | --- | --- | --- |",
     ]
     for cycle in manifest.get("cycle_summaries", []):
         if not isinstance(cycle, dict):
             continue
         lines.append(
-            "| {cycle} | `{play}` | {targets} | {records} | `{candidate}` | {train} | {eval} | {status} |".format(
+            "| {cycle} | `{play}` | {targets} | {records} | `{candidate}` | {train} | {candidate_eval} | {source_eval} | {status} |".format(
                 cycle=cycle.get("cycle", ""),
                 play=cycle.get("play_profile", ""),
                 targets=cycle.get("admitted_targets", ""),
                 records=cycle.get("exported_training_records", ""),
                 candidate=cycle.get("candidate_profile", ""),
                 train=cycle.get("train_returncode", ""),
-                eval=cycle.get("candidate_eval_returncode", ""),
+                candidate_eval=profile_summary_text(
+                    cycle.get("candidate_eval_run_dir", ""),
+                    cycle.get("candidate_eval_returncode", ""),
+                ),
+                source_eval=profile_summary_text(
+                    cycle.get("source_eval_run_dir", ""),
+                    cycle.get("source_eval_returncode", ""),
+                ),
                 status=cycle.get("status", ""),
             )
         )
@@ -730,6 +757,8 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--min-best-value", type=float, default=0.0)
     parser.add_argument("--max-group-win-rate", type=float, default=1.0)
     parser.add_argument("--min-best-over-group-edge", type=float, default=0.0)
+    parser.add_argument("--max-targets-per-game", type=int, default=0)
+    parser.add_argument("--min-ordinal-gap-per-game", type=int, default=0)
     parser.add_argument("--poll-sec", type=float, default=20.0)
 
     parser.add_argument("--target-mode", choices=("distribution", "signed-values", "advantage-values"), default="advantage-values")

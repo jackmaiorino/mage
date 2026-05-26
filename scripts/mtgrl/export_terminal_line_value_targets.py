@@ -6,6 +6,7 @@ import csv
 import hashlib
 import json
 import math
+import re
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
@@ -229,6 +230,21 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         type=float,
         default=0.50,
         help="Best-vs-worst value delta required before pass-over-setup rows stop being low-margin suspect rows.",
+    )
+    parser.add_argument(
+        "--max-targets-per-game",
+        type=int,
+        default=0,
+        help="Keep at most this many admitted targets per source game. Zero disables the diversity gate.",
+    )
+    parser.add_argument(
+        "--min-ordinal-gap-per-game",
+        type=int,
+        default=0,
+        help=(
+            "When the per-game diversity gate is active, reject lower-ranked admitted targets whose "
+            "ordinal is within this gap of a higher-ranked target from the same source game."
+        ),
     )
     parser.add_argument("--expect-examples", type=int, default=None)
     parser.add_argument("--write-readme", action="store_true")
@@ -775,6 +791,74 @@ def group_actions(group_rows: Sequence[Dict[str, object]]) -> List[Dict[str, obj
     return [action for action in actions if as_int(action, "attempts") > 0]
 
 
+def source_game_key(row: Dict[str, object]) -> str:
+    path = str(row.get("snapshot_path", "") or "")
+    match = re.search(r"(game_[^_/\\]+)", path)
+    if match:
+        return match.group(1)
+    return path
+
+
+def diversity_rank(row: Dict[str, object]) -> Tuple[float, float, float, int, float, float]:
+    return (
+        as_float(row, "label_weight"),
+        as_float(row, "value_delta"),
+        as_float(row, "best_over_group_edge"),
+        as_int(row, "common_samples"),
+        as_float(row, "best_value"),
+        -as_float(row, "group_win_rate"),
+    )
+
+
+def diversity_rejection_row(row: Dict[str, object], reasons: Sequence[str]) -> Dict[str, object]:
+    reject = {field: row.get(field, "") for field in REJECT_FIELDS}
+    reject["rejection_reasons"] = "|".join(reasons)
+    return reject
+
+
+def apply_diversity_gate(
+        examples: Sequence[Dict[str, object]],
+        args: argparse.Namespace,
+) -> Tuple[List[Dict[str, object]], List[Dict[str, object]], Counter]:
+    if args.max_targets_per_game <= 0 and args.min_ordinal_gap_per_game <= 0:
+        return list(examples), [], Counter()
+
+    by_game: Dict[str, List[Tuple[int, Dict[str, object]]]] = defaultdict(list)
+    for order, row in enumerate(examples):
+        by_game[source_game_key(row)].append((order, row))
+
+    kept_orders = set()
+    rejects: List[Dict[str, object]] = []
+    counters = Counter()
+    for _, game_rows in sorted(by_game.items(), key=lambda item: item[0]):
+        selected: List[Tuple[int, Dict[str, object]]] = []
+        ranked = sorted(
+            game_rows,
+            key=lambda item: (diversity_rank(item[1]), -item[0]),
+            reverse=True,
+        )
+        for order, row in ranked:
+            reasons: List[str] = []
+            ordinal = as_int(row, "ordinal")
+            if args.min_ordinal_gap_per_game > 0:
+                for _, selected_row in selected:
+                    if abs(ordinal - as_int(selected_row, "ordinal")) < args.min_ordinal_gap_per_game:
+                        reasons.append("diversity_ordinal_gap_per_game")
+                        break
+            if args.max_targets_per_game > 0 and len(selected) >= args.max_targets_per_game:
+                reasons.append("diversity_max_targets_per_game")
+            if reasons:
+                rejects.append(diversity_rejection_row(row, reasons))
+                for reason in reasons:
+                    counters["reject_" + reason] += 1
+                continue
+            selected.append((order, row))
+            kept_orders.add(order)
+
+    kept = [row for order, row in enumerate(examples) if order in kept_orders]
+    return kept, rejects, counters
+
+
 def process_input(
         input_run_id: str,
         raw_rows: List[Dict[str, str]],
@@ -874,7 +958,11 @@ def process_input(
                 counters["reject_" + reason] += 1
             continue
         examples.append(example_row(input_run_id, base, actions, eligible, values, value_source, samples, quality_flags, args))
-        counters["admitted"] += 1
+
+    examples, diversity_rejects, diversity_counters = apply_diversity_gate(examples, args)
+    rejects.extend(diversity_rejects)
+    counters.update(diversity_counters)
+    counters["admitted"] += len(examples)
 
     return examples, rejects, counters
 
@@ -1011,6 +1099,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "pass_best_min_common_samples": args.pass_best_min_common_samples,
         "pass_best_min_value": args.pass_best_min_value,
         "pass_best_min_delta": args.pass_best_min_delta,
+        "max_targets_per_game": args.max_targets_per_game,
+        "min_ordinal_gap_per_game": args.min_ordinal_gap_per_game,
     }
 
     write_csv(output_dir / "terminal_line_value_targets.csv", VALUE_FIELDS, examples)
