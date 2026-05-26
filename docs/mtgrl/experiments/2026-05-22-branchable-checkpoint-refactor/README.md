@@ -2654,3 +2654,56 @@ Interpretation:
 - It is the best candidate in the v475-derived training family so far: v476 scored `3 / 16`, v477 scored `2 / 16`, and v478 scored `4 / 16` on the exact `12161` seed base.
 - The accidental paired smoke comparator also favored v478 by one game (`4 / 16` vs source `3 / 16`), but the known source measurements around seed `12161` are noisy (`3 / 16` to `4 / 16`), so this is not enough to claim model improvement.
 - The useful signal is that card-agnostic rare-edge target selection improved over source-regret and broad decisive filtering. The next unit should scale this selector to a larger online-mined corpus before HPC promotion, using `--post-eval-seed-base 12161` explicitly for paired local evals.
+
+## v479 Scaled Rare-Edge Online Loop
+
+Purpose:
+
+- Scale the v478 rare-edge terminal selector from the repaired v475 artifact into a fresh online-mined corpus.
+- Keep the experiment thesis-clean: target admission still uses terminal branch outcomes only, without naming combo cards or defining combo-ready state.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| v479 online/training/eval run | `local-training/local_pbt/online_mining_training_loop/v479_scaled_rare_edge_from_v478_grixis_g32_r512_a24` |
+| Online mining run | `local-training/local_pbt/online_mining_training_loop/v479_scaled_rare_edge_from_v478_grixis_g32_r512_a24/online_mining/v479_scaled_rare_edge_from_v478_grixis_g32_r512_a24_cycle01_online_Pauper-Spy-Combo-Value-OnlineLoop-v478-RareEdge` |
+| Rare-edge value targets | `local-training/local_pbt/online_mining_training_loop/v479_scaled_rare_edge_from_v478_grixis_g32_r512_a24/online_mining/v479_scaled_rare_edge_from_v478_grixis_g32_r512_a24_cycle01_online_Pauper-Spy-Combo-Value-OnlineLoop-v478-RareEdge/value_targets/v479_scaled_rare_edge_from_v478_grixis_g32_r512_a24_cycle01_online_Pauper-Spy-Combo-Value-OnlineLoop-v478-RareEdge_cycle01_mine_softpass` |
+| Candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeScaled` |
+| Source profile | `Pauper-Spy-Combo-Value-OnlineLoop-v478-RareEdge` |
+
+Setup:
+
+- Started from `Pauper-Spy-Combo-Value-OnlineLoop-v478-RareEdge`.
+- Online play used `32` Grixis games, `--max-snapshots 512`, `--ranked-max-per-game 24`, `--line-attempts 24`, and `8` mining shards.
+- Rare-edge gate reused v478's thresholds: `--min-best-value 0.9 --max-group-win-rate 0.45 --min-best-over-group-edge 0.5`.
+- Paired post-train eval explicitly used `--post-eval-seed-base 12161`.
+
+Mining:
+
+- Online source play scored `11 / 32` against Grixis.
+- Terminal-line mining wrote `12,288` terminal rows from `512` selected checkpoints.
+- Terminal outcomes: `7,027` wins and `5,261` losses.
+- Combo-relevant mined rows were present without combo-specific rewards: `119` `Cast Balustrade Spy` rows with `89` wins, and `99` `Flashback sacrifice three creatures` rows. `full_combo_wins` remained `0`, but `max_combo_score` was `3`.
+
+Target export and training:
+
+- Rare-edge target export admitted `31 / 512` checkpoint groups.
+- Classification counts: `26` moderate terminal-value deltas and `5` strong terminal-value deltas.
+- TrainingData export reentered and captured `31 / 31` rows with matching candidate/state hashes.
+- Candidate training used Q-only branch-return targets, 4 epochs, and `124` train-pass samples.
+- Most common admitted best labels were `Cast Winding Way` (`6`), `Cast Roost Seek` (`5`), Forestcycling (`5`), Swampcycling (`4`), `Sacrifice {this}: Add {R}{R}.` (`2`), and `Cast Saruli Caretaker` (`2`). One admitted label was `Cast Balustrade Spy`.
+
+Evaluation:
+
+| Profile | Seed Base | Result | Win Chunks | Notes |
+| --- | ---: | ---: | --- | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v479-RareEdgeScaled` candidate | `12161` | `4 / 16` | `2,12,13,16` | Completed without zero-total chunks. |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v478-RareEdge` source | `12161` | `3 / 16` | `2,3,6` | Same exact paired seed set. |
+
+Interpretation:
+
+- v479 is a weak-positive result: it beat the paired source by one game (`4 / 16` vs `3 / 16`), but this is not enough for promotion or an HPC-scale claim.
+- The scaled selector kept the useful thesis signal from v478: branch mining found real terminal Spy/Dread Return wins, and terminal-only target filtering produced trainable labels without human combo heuristics.
+- The admitted target set is still mostly broad setup and card-flow decisions rather than dense combo-finish decisions, so the next thesis-relevant unit should improve the way terminal wins are converted into online policy pressure.
+- Harness issue: post-train eval still ran with `parallel=1`, despite the earlier need for better CPU utilization. Fixing the post-eval parallelism plumbing should happen before the next longer local/HPC run.
