@@ -340,6 +340,12 @@ def build_online_mining_command(
         str(args.positive_value_threshold),
         "--min-source-regret",
         str(args.min_source_regret),
+        "--min-best-value",
+        str(args.min_best_value),
+        "--max-group-win-rate",
+        str(args.max_group_win_rate),
+        "--min-best-over-group-edge",
+        str(args.min_best_over_group_edge),
         "--poll-sec",
         str(args.poll_sec),
     ]
@@ -696,6 +702,9 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--max-positive-fraction", type=float, default=1.0)
     parser.add_argument("--positive-value-threshold", type=float, default=0.0)
     parser.add_argument("--min-source-regret", type=float, default=0.0)
+    parser.add_argument("--min-best-value", type=float, default=0.0)
+    parser.add_argument("--max-group-win-rate", type=float, default=1.0)
+    parser.add_argument("--min-best-over-group-edge", type=float, default=0.0)
     parser.add_argument("--poll-sec", type=float, default=20.0)
 
     parser.add_argument("--target-mode", choices=("distribution", "signed-values", "advantage-values"), default="advantage-values")

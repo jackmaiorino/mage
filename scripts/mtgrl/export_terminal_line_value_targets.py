@@ -50,6 +50,9 @@ VALUE_FIELDS = [
     "actions_evaluated",
     "eligible_actions",
     "total_terminal_attempts",
+    "group_terminal_wins",
+    "group_terminal_attempts",
+    "group_win_rate",
     "min_action_attempts",
     "common_samples",
     "positive_candidates",
@@ -66,6 +69,7 @@ VALUE_FIELDS = [
     "worst_attempts",
     "worst_wins",
     "value_delta",
+    "best_over_group_edge",
     "label_weight",
     "confidence",
     "target_temperature",
@@ -93,6 +97,9 @@ REJECT_FIELDS = [
     "actions_evaluated",
     "eligible_actions",
     "total_terminal_attempts",
+    "group_terminal_wins",
+    "group_terminal_attempts",
+    "group_win_rate",
     "best_indices",
     "best_texts",
     "best_value",
@@ -100,6 +107,7 @@ REJECT_FIELDS = [
     "worst_texts",
     "worst_value",
     "value_delta",
+    "best_over_group_edge",
     "quality_flags",
     "rejection_reasons",
 ]
@@ -173,6 +181,30 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         help=(
             "Reject groups where the searched best action improves over the source-selected "
             "action by less than this terminal value margin. Zero disables the gate."
+        ),
+    )
+    parser.add_argument(
+        "--min-best-value",
+        type=float,
+        default=0.0,
+        help="Reject groups where the searched best action's terminal value is below this threshold.",
+    )
+    parser.add_argument(
+        "--max-group-win-rate",
+        type=float,
+        default=1.0,
+        help=(
+            "Reject groups whose eligible root actions collectively win above this raw terminal "
+            "rate. Values below 1.0 favor rarer winning-branch checkpoints."
+        ),
+    )
+    parser.add_argument(
+        "--min-best-over-group-edge",
+        type=float,
+        default=0.0,
+        help=(
+            "Reject groups where best_value minus the eligible group's raw terminal win rate is "
+            "below this margin. Zero disables the gate."
         ),
     )
     parser.add_argument(
@@ -493,6 +525,16 @@ def positive_candidate_stats(
     return positive, fraction
 
 
+def group_terminal_stats(actions: Sequence[Dict[str, object]]) -> Dict[str, float]:
+    wins = sum(as_int(action, "wins") for action in actions)
+    terminal = sum(as_int(action, "terminal") for action in actions)
+    return {
+        "wins": float(wins),
+        "terminal": float(terminal),
+        "win_rate": pct(wins, terminal),
+    }
+
+
 def classify(delta: float, confidence: float) -> str:
     if delta >= 0.75 and confidence >= 0.75:
         return "terminal_value_strong_delta"
@@ -550,6 +592,9 @@ def rejection_row(
         quality_flags: Sequence[str],
         reasons: Sequence[str],
 ) -> Dict[str, object]:
+    group_stats = group_terminal_stats(eligible)
+    group_win_rate = float(group_stats["win_rate"])
+    best_value = "" if best is None else as_float(best, "target_value")
     return {
         "input_run_id": input_run_id,
         "snapshot_path": base.get("snapshot_path", ""),
@@ -566,13 +611,17 @@ def rejection_row(
         "actions_evaluated": len(actions),
         "eligible_actions": len(eligible),
         "total_terminal_attempts": sum(as_int(action, "terminal") for action in actions),
+        "group_terminal_wins": "" if not eligible else int(group_stats["wins"]),
+        "group_terminal_attempts": "" if not eligible else int(group_stats["terminal"]),
+        "group_win_rate": "" if not eligible else format_float(group_win_rate),
         "best_indices": "" if best is None else best.get("indices", ""),
         "best_texts": "" if best is None else best.get("texts", ""),
-        "best_value": "" if best is None else format_float(as_float(best, "target_value")),
+        "best_value": "" if best is None else format_float(float(best_value)),
         "worst_indices": "" if worst is None else worst.get("indices", ""),
         "worst_texts": "" if worst is None else worst.get("texts", ""),
         "worst_value": "" if worst is None else format_float(as_float(worst, "target_value")),
         "value_delta": format_float(delta),
+        "best_over_group_edge": "" if best is None or not eligible else format_float(float(best_value) - group_win_rate),
         "quality_flags": "|".join(quality_flags),
         "rejection_reasons": "|".join(reasons),
     }
@@ -604,6 +653,9 @@ def example_row(
     best_index, best, best_value = ranked[0]
     worst_index, worst, worst_value = ranked[-1]
     delta = max(0.0, best_value - worst_value)
+    group_stats = group_terminal_stats(eligible)
+    group_win_rate = float(group_stats["win_rate"])
+    best_over_group_edge = best_value - group_win_rate
     evidence_n = len(samples) if value_source == "paired_common_win_rate" else min(
         as_int(action, "attempts") for action in eligible
     )
@@ -646,6 +698,9 @@ def example_row(
         "actions_evaluated": len(actions),
         "eligible_actions": len(eligible),
         "total_terminal_attempts": sum(as_int(action, "terminal") for action in actions),
+        "group_terminal_wins": int(group_stats["wins"]),
+        "group_terminal_attempts": int(group_stats["terminal"]),
+        "group_win_rate": format_float(group_win_rate),
         "min_action_attempts": min(as_int(action, "attempts") for action in eligible),
         "common_samples": len(samples),
         "positive_candidates": positive_candidates,
@@ -662,6 +717,7 @@ def example_row(
         "worst_attempts": worst.get("attempts", 0),
         "worst_wins": worst.get("wins", 0),
         "value_delta": format_float(delta),
+        "best_over_group_edge": format_float(best_over_group_edge),
         "label_weight": format_float(label_weight),
         "confidence": format_float(confidence),
         "target_temperature": format_float(args.target_temperature),
@@ -682,6 +738,12 @@ def example_row(
                 "value": source_value,
                 "regret": source_regret,
                 "action_index": source_stats.get("source_action_index", ""),
+            },
+            "group_terminal": {
+                "wins": int(group_stats["wins"]),
+                "attempts": int(group_stats["terminal"]),
+                "win_rate": group_win_rate,
+                "best_over_group_edge": best_over_group_edge,
             },
             "actions": [
                 {
@@ -775,8 +837,17 @@ def process_input(
             best["target_value"] = best_value
             worst["target_value"] = worst_value
             delta = best_value - worst_value
+            group_stats = group_terminal_stats(eligible)
+            group_win_rate = float(group_stats["win_rate"])
+            best_over_group_edge = best_value - group_win_rate
             quality_flags = pass_best_quality_flags(
                 best, eligible, best_value, delta, len(samples), args)
+            if best_value < args.min_best_value:
+                reasons.append("best_value_below_threshold")
+            if args.max_group_win_rate < 1.0 and group_win_rate > args.max_group_win_rate:
+                reasons.append("group_win_rate_above_threshold")
+            if best_over_group_edge < args.min_best_over_group_edge:
+                reasons.append("best_over_group_edge_below_threshold")
             if delta < args.min_value_delta:
                 reasons.append("value_delta_below_threshold")
             if args.max_positive_actions > 0 and positive_candidates > args.max_positive_actions:
@@ -932,6 +1003,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "max_positive_fraction": args.max_positive_fraction,
         "positive_value_threshold": args.positive_value_threshold,
         "min_source_regret": args.min_source_regret,
+        "min_best_value": args.min_best_value,
+        "max_group_win_rate": args.max_group_win_rate,
+        "min_best_over_group_edge": args.min_best_over_group_edge,
         "quality_flag_counts": dict(sorted(quality_flag_counts.items())),
         "include_suspect_pass_best": args.include_suspect_pass_best,
         "pass_best_min_common_samples": args.pass_best_min_common_samples,
