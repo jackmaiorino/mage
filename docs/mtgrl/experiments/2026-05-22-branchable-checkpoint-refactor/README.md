@@ -2500,3 +2500,64 @@ Storage note:
 
 - Completed cold v469-v472 local artifacts were moved to `E:\mage-archive\IdeaProjects\mage` and NTFS junctions were left at the original `local-training` paths.
 - Active v473 and v474 artifacts remain on `C:` for immediate analysis.
+
+## v475-v476 Repaired Anchor Mining Follow-Up
+
+Purpose:
+
+- Continue the thesis-clean online loop from `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive`.
+- Validate that repaired live-checkpoint loading and anchor-based checkpoint reentry can mine, export, train, and evaluate from the v475 online run without forced-prefix replay.
+- Keep the reward signal terminal-only: no combo-state labels, card-specific intermediate rewards, or hard-coded "pass is bad" rules.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| v475 online run and repaired mining artifact | `local-training/local_pbt/online_mining_training_loop/v475_decisive_loop_from_v473_decisive_grixis_g24_r384_a24_pos3` |
+| v476 train/eval run | `local-training/local_pbt/online_mining_training_loop/v476_train_from_v475_anchor_retry_grixis_g24_r384_pos3` |
+| Source profile | `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive` |
+| Candidate profile | `Pauper-Spy-Combo-Value-OnlineLoop-v475-Decisive` |
+| Source chunk-6 timeout rerun | `local-training/local_pbt/online_mining_training_loop/v476_train_from_v475_anchor_retry_grixis_g24_r384_pos3/post_train_eval_reruns/v476_source_chunk006_timeoutfix_rerun` |
+
+v475 repaired mining:
+
+- Online play profile: `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive`.
+- Online eval scored `11 / 24` vs Grixis Affinity before mining.
+- Live-checkpoint mining selected `384` ranked `ACTIVATE_ABILITY_OR_SPELL` snapshots from the v475 online eval.
+- Terminal-line rows: `9216`.
+- Terminal outcomes: `4472` wins, `3298` losses, `1436` forced-text mismatches, and `10` anchor text/size mismatches.
+- Terminal rate after filtering: `7770 / 9216` (`0.843099`).
+- Combo-relevant terminal mining was present but sparse: `83` Spy rows, `63` Spy wins, `60` Dread Return rows, `0` full-combo wins, max combo score `3`.
+- Decisive soft-pass value targets admitted `32 / 383` checkpoint groups.
+- Classification counts: `26` moderate terminal-value deltas, `6` strong terminal-value deltas.
+- TrainingData export reentered and captured `32 / 32` rows with matching candidate hashes and state hashes.
+
+v476 train/eval:
+
+- Candidate training cloned v473-Decisive into `Pauper-Spy-Combo-Value-OnlineLoop-v475-Decisive`.
+- Training used Q-only branch-return targets, 4 epochs, and `128` train-pass samples.
+- Exact-seed Grixis eval used seed base `12161`, 16 chunks, one game per chunk.
+
+| Profile | Result | Win Chunks | Notes |
+| --- | ---: | --- | --- |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v475-Decisive` candidate | `3 / 16` | `9,10,12` | Completed without zero-total chunks. |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v473-Decisive` source | `4 / 16` | `8,10,13,15` | Main source eval had chunk 6 as `0 / 0`; rerun after timeout fix produced a real loss. |
+
+Harness fix:
+
+- The eval path started `GameHealthMonitor` with `GAME_TIMEOUT_SEC=900` but still joined the game thread with a hard-coded `300` second timeout.
+- Chunk 6 of the source comparator hit that mismatch and produced `0 / 0`.
+- The eval join now honors `EVAL_GAME_THREAD_TIMEOUT_SEC`, falling back to `GAME_TIMEOUT_SEC`, plus a 30 second shutdown margin.
+
+Interpretation:
+
+- Mechanically, the checkpoint mining/training loop is now healthy: repaired v475 checkpoints can be mined, exported, trained, and evaluated without prefix replay startup.
+- The v476 policy update was not a promotion candidate: it lost the paired comparator by one game (`3 / 16` vs repaired source `4 / 16`).
+- The admitted v475 labels were decisive but still midrange-heavy. The most common best labels were `Cast Lead the Stampede` (`5`), `Cast Winding Way` (`4`), `Cast Masked Vandal` (`4`), `Cast Balustrade Spy` (`3`), `Cast Gatecreeper Vine` (`3`), and `Cast Quirion Ranger` (`3`).
+- This result supports the current diagnosis: terminal-only branch mining is viable, but online target selection still does not put enough high-quality pressure on combo-relevant decision states.
+
+Next useful unit:
+
+- Keep the same terminal-only reward thesis, but change target selection rather than adding heuristic combo rewards.
+- Prioritize online/mined checkpoints whose terminal-line search exposes rare high-leverage wins or source/candidate disagreements, then train a small candidate and rerun the same exact-seed comparator.
+- The immediate local implementation target is a selector/export gate that increases density of rare, high-delta terminal wins while staying card-name agnostic in the reward itself.

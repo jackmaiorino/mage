@@ -4107,7 +4107,9 @@ public class RLTrainer {
                 game.setGameOptions(options);
 
                 GameHealthMonitor healthMonitor = GameHealthMonitor.createAndStart(game);
-                startGameInGameThread(game, rlPlayer.getId(), 300);
+                int evalJoinTimeoutSec = Math.max(60,
+                        EnvConfig.i32("EVAL_GAME_THREAD_TIMEOUT_SEC", EnvConfig.i32("GAME_TIMEOUT_SEC", 300))) + 30;
+                startGameInGameThread(game, rlPlayer.getId(), evalJoinTimeoutSec);
                 healthMonitor.stop();
 
                 boolean won;
