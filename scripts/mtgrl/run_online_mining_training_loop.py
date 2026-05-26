@@ -639,7 +639,15 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
         ),
     )
     parser.add_argument("--wait-poll-sec", type=float, default=30.0)
-    parser.add_argument("--initial-q-blend", type=float, default=0.0)
+    parser.add_argument(
+        "--initial-q-blend",
+        type=float,
+        default=None,
+        help=(
+            "Q blend for the cycle-1 play profile. Defaults to --candidate-q-blend "
+            "when --play-profile is supplied, otherwise 0.0 for a base-profile start."
+        ),
+    )
     parser.add_argument("--candidate-q-blend", type=float, default=1.0)
     parser.add_argument("--candidate-q-blend-heads", default="action,target,card_select")
     parser.add_argument("--candidate-q-blend-min-margin", type=float, default=0.0)
@@ -758,6 +766,8 @@ def main(argv: Sequence[str]) -> int:
     args = parse_args(argv)
     if args.post_eval_parallel <= 0:
         args.post_eval_parallel = args.eval_parallel
+    if args.initial_q_blend is None:
+        args.initial_q_blend = args.candidate_q_blend if args.play_profile else 0.0
     output_root = Path(args.output_root)
     if not output_root.is_absolute():
         output_root = REPO / output_root
