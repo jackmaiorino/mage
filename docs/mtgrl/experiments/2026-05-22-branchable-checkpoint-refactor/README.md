@@ -3010,6 +3010,7 @@ Implementation:
   - `--branch-return-max-negatives-per-positive=N`.
 - Balanced import scans eligible branch-return records, keeps positive terminal-return examples, and samples negative terminal-return examples up to the configured cap.
 - The PowerShell trainer wrapper and `run_online_mining_training_loop.py` pass these controls through for follow-on train/eval loops.
+- `run_terminal_line_return_training.py` provides the post-mining local driver for mining-only runs: summarize, pre-score, balanced train, and post-score from a completed terminal-line return corpus.
 
 Validation:
 
@@ -3021,6 +3022,8 @@ Validation:
 | v483 training-record balance | `1,150` written records: `112` positive, `1,038` negative, positive-record rate `0.097391`, negative-to-positive ratio `9.267857`. |
 | Balanced import smoke | `local-training/local_pbt/action_counterfactual/v484_branch_return_balance_smoke` |
 | Smoke import behavior | Full scan saw `112` positive / `1,038` negative eligible records; with `1:1` cap and `MaxTrainExamples=64`, the smoke trained `34` positive and `30` negative examples. |
+| Post-mining driver compile | `python -m py_compile scripts/mtgrl/run_terminal_line_return_training.py` passed. |
+| Post-mining driver dry run | `local-training/local_pbt/terminal_line_return_training/v484_terminal_line_return_driver_dryrun` wrote the expected summarize, pre-score, train, and post-score command manifest. |
 
 Interpretation:
 
