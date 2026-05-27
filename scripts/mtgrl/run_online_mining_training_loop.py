@@ -473,6 +473,12 @@ def build_train_command(
         "-BranchReturnTargets",
         "-SkipCompile",
     ]
+    if args.branch_return_balance:
+        cmd.append("-BranchReturnBalance")
+        cmd.extend([
+            "-BranchReturnMaxNegativesPerPositive",
+            str(args.branch_return_max_negatives_per_positive),
+        ])
     if args.skip_optimizer_state_load:
         cmd.append("-SkipOptimizerStateLoad")
     if args.reset_training_state_on_load:
@@ -788,6 +794,8 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--model-num-layers", type=int, default=2)
     parser.add_argument("--candidate-q-loss-coef", type=float, default=1.0)
     parser.add_argument("--candidate-q-huber-beta", type=float, default=0.25)
+    parser.add_argument("--branch-return-balance", action="store_true")
+    parser.add_argument("--branch-return-max-negatives-per-positive", type=int, default=1)
     parser.add_argument("--post-train-wait-ms", type=int, default=3600000)
     parser.add_argument("--skip-optimizer-state-load", action="store_true", default=True)
     parser.add_argument("--load-optimizer-state", dest="skip_optimizer_state_load", action="store_false")

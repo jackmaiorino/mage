@@ -2993,3 +2993,36 @@ HPC readiness fix:
   - `ONLINE_LINE_TRAINING_MAX_RECORDS_PER_BRANCH` sets `--line-training-max-records-per-branch`;
   - `ONLINE_MAX_CONCURRENT_MINE_SHARDS` limits concurrent mining JVMs independently of `ONLINE_MINE_SHARDS`.
 - Syntax validation: `bash -n scripts/hpc/submit_online_terminal_mining.slurm scripts/hpc/zaratan_online_terminal_mining.sh` passed.
+
+## v484 Trajectory-Return Import Quality Controls
+
+Purpose:
+
+- Prepare the training side for the larger v484 HPC mining corpus instead of waiting on Slurm with only v483's loss-heavy import path.
+- Keep the fix thesis-clean: balance terminal win/loss return records, but do not add card-name, combo-state, or setup-step reward heuristics.
+
+Implementation:
+
+- `summarize_terminal_line_search.py` now reads `terminal_line_training_data_summary.csv` alongside `terminal_line_search.csv`.
+- The report exposes captured/written/skipped continuation records, positive/negative record counts, positive-record rate, negative-to-positive ratio, and imbalance warnings.
+- `ActionCounterfactualTrainer` now has opt-in branch-return import balancing:
+  - `--branch-return-balance=true`;
+  - `--branch-return-max-negatives-per-positive=N`.
+- Balanced import scans eligible branch-return records, keeps positive terminal-return examples, and samples negative terminal-return examples up to the configured cap.
+- The PowerShell trainer wrapper and `run_online_mining_training_loop.py` pass these controls through for follow-on train/eval loops.
+
+Validation:
+
+| Check | Result |
+| --- | --- |
+| Python script compile | `python -m py_compile scripts/mtgrl/summarize_terminal_line_search.py scripts/mtgrl/run_online_mining_training_loop.py` passed. |
+| Java compile | `mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile` passed. |
+| v483 summary artifact | `E:/mage-research/local_pbt/trajectory_returns/v483_traj_s64_a2_preselected_from_v482/terminal_line_summary.md` |
+| v483 training-record balance | `1,150` written records: `112` positive, `1,038` negative, positive-record rate `0.097391`, negative-to-positive ratio `9.267857`. |
+| Balanced import smoke | `local-training/local_pbt/action_counterfactual/v484_branch_return_balance_smoke` |
+| Smoke import behavior | Full scan saw `112` positive / `1,038` negative eligible records; with `1:1` cap and `MaxTrainExamples=64`, the smoke trained `34` positive and `30` negative examples. |
+
+Interpretation:
+
+- v483's local model result was very likely polluted by record-level imbalance, not just by small corpus size.
+- v484 training should use the HPC-mined corpus with `--branch-return-balance` enabled first, then compare against an unbalanced import only if the balanced candidate shows no Q-rank or eval lift.

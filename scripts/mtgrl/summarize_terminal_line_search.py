@@ -11,6 +11,7 @@ from typing import Dict, Iterable, List, Optional, Sequence
 
 
 TERMINAL_LINE_CSV = "terminal_line_search.csv"
+TRAINING_SUMMARY_CSV = "terminal_line_training_data_summary.csv"
 TRACE_RE = re.compile(
     r"^(?P<step>\d+):(?P<role>[^:]*):action=(?P<action>.*?):indices=(?P<indices>.*?):"
     r"texts=(?P<texts>.*?):candidates=(?P<candidates>\d+):candidate_hash=(?P<candidate_hash>.*?):"
@@ -55,6 +56,27 @@ def read_csvs(run_dir: Path, prefer_merged: bool) -> List[dict]:
     return rows
 
 
+def read_named_csvs(run_dir: Path, file_name: str, prefer_merged: bool) -> List[dict]:
+    root_file = run_dir / file_name
+    if prefer_merged and root_file.exists():
+        paths = [root_file]
+    else:
+        paths = [
+            path for path in sorted(run_dir.rglob(file_name))
+            if path.is_file() and path.stat().st_size > 0
+        ]
+        if root_file.exists() and len(paths) > 1:
+            paths = [path for path in paths if path != root_file]
+    rows: List[dict] = []
+    for path in paths:
+        with path.open(newline="", encoding="utf-8-sig") as fh:
+            for row in csv.DictReader(fh):
+                out = dict(row)
+                out["_artifact"] = str(path)
+                rows.append(out)
+    return rows
+
+
 def boolish(row: dict, key: str) -> bool:
     return str(row.get(key, "")).strip().lower() == "true"
 
@@ -71,6 +93,16 @@ def as_int(row: dict, key: str, default: int = 0) -> int:
 
 def pct(numer: int, denom: int) -> float:
     return 0.0 if denom <= 0 else round(numer / denom, 6)
+
+
+def as_float(row: dict, key: str, default: float = 0.0) -> float:
+    raw = str(row.get(key, "")).strip()
+    if not raw:
+        return default
+    try:
+        return float(raw)
+    except ValueError:
+        return default
 
 
 def split_trace(raw: str) -> List[dict]:
@@ -195,6 +227,46 @@ def counts(rows: Iterable[dict], key: str) -> Dict[str, int]:
     return dict(sorted(counter.items(), key=lambda item: (-item[1], item[0])))
 
 
+def training_data_summary(run_dir: Path, prefer_merged: bool) -> dict:
+    rows = read_named_csvs(run_dir, TRAINING_SUMMARY_CSV, prefer_merged)
+    captured_records = sum(as_int(row, "captured_records") for row in rows)
+    written_records = sum(as_int(row, "written_records") for row in rows)
+    skipped_records = sum(as_int(row, "skipped_records") for row in rows)
+    positive_rows = [row for row in rows if as_float(row, "terminal_return") > 0.0]
+    negative_rows = [row for row in rows if as_float(row, "terminal_return") < 0.0]
+    neutral_rows = [
+        row for row in rows
+        if as_float(row, "terminal_return") == 0.0
+        and not str(row.get("outcome", "")).startswith("terminal_")
+    ]
+    positive_records = sum(as_int(row, "written_records") for row in positive_rows)
+    negative_records = sum(as_int(row, "written_records") for row in negative_rows)
+    observed_records = positive_records + negative_records
+    warnings: List[str] = []
+    if observed_records > 0 and pct(positive_records, observed_records) < 0.10:
+        warnings.append("loss_heavy_training_records")
+    if rows and positive_records == 0:
+        warnings.append("no_positive_training_records")
+    return {
+        "rows": len(rows),
+        "outcome_counts": counts(rows, "outcome"),
+        "captured_records": captured_records,
+        "written_records": written_records,
+        "skipped_records": skipped_records,
+        "positive_rows": len(positive_rows),
+        "negative_rows": len(negative_rows),
+        "neutral_rows": len(neutral_rows),
+        "positive_records": positive_records,
+        "negative_records": negative_records,
+        "observed_records": observed_records,
+        "positive_record_rate": pct(positive_records, observed_records),
+        "negative_to_positive_record_ratio": (
+            None if positive_records <= 0 else round(negative_records / positive_records, 6)
+        ),
+        "warnings": warnings,
+    }
+
+
 def summarize(run_dir: Path, prefer_merged: bool) -> dict:
     rows = read_csvs(run_dir, prefer_merged)
     compact = [trace_features(row) for row in rows]
@@ -237,6 +309,7 @@ def summarize(run_dir: Path, prefer_merged: bool) -> dict:
             key=lambda row: (int(row["combo_score"]), -int(row["decision_count"])),
             reverse=True,
         )[:20],
+        "training_data": training_data_summary(run_dir, prefer_merged),
         "compact_rows": compact,
     }
 
@@ -269,6 +342,19 @@ def markdown_report(summary: dict) -> str:
         f"- lotleth_target_rows: `{summary['lotleth_target_rows']}`",
         f"- full_combo_wins: `{summary['full_combo_wins']}`",
         f"- max_combo_score: `{summary['max_combo_score']}`",
+        "",
+        "## Captured Training Data",
+        "",
+        f"- rows: `{summary['training_data']['rows']}`",
+        f"- captured_records: `{summary['training_data']['captured_records']}`",
+        f"- written_records: `{summary['training_data']['written_records']}`",
+        f"- skipped_records: `{summary['training_data']['skipped_records']}`",
+        f"- positive_records: `{summary['training_data']['positive_records']}`",
+        f"- negative_records: `{summary['training_data']['negative_records']}`",
+        f"- positive_record_rate: `{summary['training_data']['positive_record_rate']}`",
+        f"- negative_to_positive_record_ratio: `{summary['training_data']['negative_to_positive_record_ratio']}`",
+        f"- warnings: `{summary['training_data']['warnings']}`",
+        f"- outcome_counts: `{summary['training_data']['outcome_counts']}`",
         "",
         "## Winning Rows",
         "",

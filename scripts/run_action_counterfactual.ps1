@@ -86,6 +86,8 @@ param(
     [double]$BranchReturnPolicyTargetMix = 1.0,
     [Alias("CandidateQBranchReturns")]
     [switch]$BranchReturnTargets,
+    [switch]$BranchReturnBalance,
+    [int]$BranchReturnMaxNegativesPerPositive = 1,
     [switch]$DirectBcLoss,
     [double]$DirectBcLossCoef = 1.0,
     [switch]$DistillHeadOnly,
@@ -271,6 +273,8 @@ $execArgs = @(
     "--loss-turn-bonus=$LossTurnBonus",
     "--trajectory-final-reward=$TrajectoryFinalReward",
     "--branch-return-targets=$([bool]$BranchReturnTargets)",
+    "--branch-return-balance=$([bool]$BranchReturnBalance)",
+    "--branch-return-max-negatives-per-positive=$BranchReturnMaxNegativesPerPositive",
     "--terminal-mode=$TerminalMode",
     "--skip-pass-training=$([bool]$SkipPassTraining)",
     "--skip-blank-training=$([bool]$SkipBlankTraining)",

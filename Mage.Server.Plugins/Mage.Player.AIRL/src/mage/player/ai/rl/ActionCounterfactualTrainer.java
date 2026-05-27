@@ -4950,21 +4950,24 @@ public final class ActionCounterfactualTrainer {
         if (files.isEmpty()) {
             throw new IllegalArgumentException("No serialized training data found at " + args.importTrainingDataPath);
         }
-        int records = args.importFlatAsTerminalEpisodes
-                ? trainSerializedFlatTerminalEpisodes(files, args)
+        ImportTrainingStats importStats = args.importFlatAsTerminalEpisodes
+                ? ImportTrainingStats.unbalanced(
+                        trainSerializedFlatTerminalEpisodes(files, args),
+                        args.trainEpochs,
+                        args.candidatePermutations)
                 : trainSerializedTrainingData(files, args);
         saveSharedModelLatest();
-        Map<String, Integer> stats = RLTrainer.sharedModel.getMainModelTrainingStats();
+        Map<String, Integer> modelStats = RLTrainer.sharedModel.getMainModelTrainingStats();
         writeTensorReplayRecords(outDir.resolve("tensor_replay_samples.csv"), Collections.emptyList());
         writeTensorReplayReadme(outDir.resolve("tensor_replay_summary.md"), Collections.emptyList());
-        writeImportedTrainingReadme(outDir.resolve("README.md"), args, records,
-                records * args.trainEpochs * args.candidatePermutations,
+        writeImportedTrainingReadme(outDir.resolve("README.md"), args, importStats,
                 System.currentTimeMillis() - started);
         System.out.println("Action counterfactual import output: " + outDir);
-        System.out.println("importedTrainingExamples=" + records
+        System.out.println("importedTrainingExamples=" + importStats.trainingExamples
                 + " importFlatAsTerminalEpisodes=" + args.importFlatAsTerminalEpisodes
-                + " trainPassSamples=" + (records * args.trainEpochs * args.candidatePermutations)
-                + " stats=" + stats);
+                + " trainPassSamples=" + importStats.trainPassSamples
+                + branchReturnBalanceStatsLine(importStats.branchReturnBalanceStats)
+                + " stats=" + modelStats);
     }
 
     private static void runImportedTrajectoryTraining(Args args, Path outDir) throws Exception {
@@ -5093,18 +5096,33 @@ public final class ActionCounterfactualTrainer {
         return data;
     }
 
-    private static int trainSerializedTrainingData(List<Path> files, Args args)
+    private static ImportTrainingStats trainSerializedTrainingData(List<Path> files, Args args)
             throws IOException, ClassNotFoundException {
         Random rand = new Random(args.seed ^ 0x51A7EBC0DEL);
         int baseRecords = 0;
         long totalTrainPasses = 0L;
         int maxBaseRecords = args.maxTrainExamples > 0 ? args.maxTrainExamples : Integer.MAX_VALUE;
+        BranchReturnBalanceStats branchStats = args.branchReturnBalance
+                ? countEligibleBranchReturnLabels(files, args)
+                : null;
+        if (branchStats != null) {
+            System.out.println("branchReturnBalanceScan"
+                    + " positive=" + branchStats.eligiblePositive
+                    + " negative=" + branchStats.eligibleNegative
+                    + " none=" + branchStats.eligibleNone
+                    + " maxNegativesPerPositive=" + args.branchReturnMaxNegativesPerPositive);
+        }
         for (int epoch = 0; epoch < args.trainEpochs; epoch++) {
             List<Path> epochFiles = new ArrayList<>(files);
             Collections.shuffle(epochFiles, rand);
             int epochBaseRecords = 0;
             int fileOrdinal = 0;
             long epochTrainPasses = 0L;
+            int maxEpochNegatives = branchStats == null
+                    ? Integer.MAX_VALUE
+                    : branchStats.maxAcceptedNegative(args.branchReturnMaxNegativesPerPositive);
+            int remainingEpochNegatives = branchStats == null ? 0 : branchStats.eligibleNegative;
+            int acceptedEpochNegatives = 0;
             List<StateSequenceBuilder.TrainingData> batch = new ArrayList<>();
             List<Double> rewards = new ArrayList<>();
             for (Path file : epochFiles) {
@@ -5119,17 +5137,36 @@ public final class ActionCounterfactualTrainer {
                     if (epochBaseRecords >= maxBaseRecords) {
                         break;
                     }
-                    if (!args.targetTypes.contains(record.actionType)) {
+                    if (!passesSerializedImportFilters(record, args)) {
                         continue;
                     }
-                    if (args.skipPassTraining && isLikelyPassTarget(record)) {
-                        continue;
-                    }
-                    if (!passesTargetMargin(record, args)) {
-                        continue;
-                    }
-                    if (!passesPolicyMissFilter(record, args)) {
-                        continue;
+                    BranchReturnLabel branchLabel = BranchReturnLabel.NONE;
+                    if (branchStats != null) {
+                        branchLabel = branchReturnLabel(record, args);
+                        if (branchLabel == BranchReturnLabel.NONE) {
+                            if (epoch == 0) {
+                                branchStats.skippedNone++;
+                            }
+                            continue;
+                        }
+                        if (branchLabel == BranchReturnLabel.NEGATIVE) {
+                            boolean acceptNegative = acceptBalancedNegative(
+                                    rand,
+                                    acceptedEpochNegatives,
+                                    maxEpochNegatives,
+                                    remainingEpochNegatives);
+                            remainingEpochNegatives--;
+                            if (!acceptNegative) {
+                                if (epoch == 0) {
+                                    branchStats.skippedNegative++;
+                                }
+                                continue;
+                            }
+                            acceptedEpochNegatives++;
+                        }
+                        if (epoch == 0) {
+                            branchStats.accept(branchLabel);
+                        }
                     }
                     if (epoch == 0) {
                         baseRecords++;
@@ -5173,7 +5210,7 @@ public final class ActionCounterfactualTrainer {
                     "importEpochDrain epoch=%d/%d epochTrainPasses=%d totalTrainPasses=%d",
                     epoch + 1, args.trainEpochs, epochTrainPasses, totalTrainPasses));
         }
-        return baseRecords;
+        return new ImportTrainingStats(baseRecords, totalTrainPasses, branchStats);
     }
 
     private static int trainSerializedFlatTerminalEpisodes(List<Path> files, Args args)
@@ -5200,16 +5237,7 @@ public final class ActionCounterfactualTrainer {
                     if (epochBaseRecords >= maxBaseRecords) {
                         break;
                     }
-                    if (!args.targetTypes.contains(record.actionType)) {
-                        continue;
-                    }
-                    if (args.skipPassTraining && isLikelyPassTarget(record)) {
-                        continue;
-                    }
-                    if (!passesTargetMargin(record, args)) {
-                        continue;
-                    }
-                    if (!passesPolicyMissFilter(record, args)) {
+                    if (!passesSerializedImportFilters(record, args)) {
                         continue;
                     }
                     if (epoch == 0) {
@@ -5383,16 +5411,7 @@ public final class ActionCounterfactualTrainer {
                 if (out.size() >= max) {
                     break;
                 }
-                if (!args.targetTypes.contains(record.actionType)) {
-                    continue;
-                }
-                if (args.skipPassTraining && isLikelyPassTarget(record)) {
-                    continue;
-                }
-                if (!passesTargetMargin(record, args)) {
-                    continue;
-                }
-                if (!passesPolicyMissFilter(record, args)) {
+                if (!passesSerializedImportFilters(record, args)) {
                     continue;
                 }
                 out.add(record);
@@ -5401,6 +5420,96 @@ public final class ActionCounterfactualTrainer {
             System.gc();
         }
         return out;
+    }
+
+    private static boolean passesSerializedImportFilters(StateSequenceBuilder.TrainingData record, Args args) {
+        if (record == null || args == null) {
+            return false;
+        }
+        if (!args.targetTypes.contains(record.actionType)) {
+            return false;
+        }
+        if (args.skipPassTraining && isLikelyPassTarget(record)) {
+            return false;
+        }
+        if (!passesTargetMargin(record, args)) {
+            return false;
+        }
+        return passesPolicyMissFilter(record, args);
+    }
+
+    private static BranchReturnBalanceStats countEligibleBranchReturnLabels(List<Path> files, Args args)
+            throws IOException, ClassNotFoundException {
+        BranchReturnBalanceStats stats = new BranchReturnBalanceStats();
+        for (Path file : files) {
+            List<StateSequenceBuilder.TrainingData> records = loadSerializedTrainingDataFile(file);
+            for (StateSequenceBuilder.TrainingData record : records) {
+                if (!passesSerializedImportFilters(record, args)) {
+                    continue;
+                }
+                stats.addEligible(branchReturnLabel(record, args));
+            }
+            records.clear();
+            System.gc();
+        }
+        return stats;
+    }
+
+    private static boolean acceptBalancedNegative(
+            Random rand,
+            int acceptedNegatives,
+            int maxNegatives,
+            int remainingNegativesIncludingCurrent
+    ) {
+        if (maxNegatives <= acceptedNegatives || remainingNegativesIncludingCurrent <= 0) {
+            return false;
+        }
+        int quota = maxNegatives - acceptedNegatives;
+        if (quota >= remainingNegativesIncludingCurrent) {
+            return true;
+        }
+        return rand.nextDouble() < ((double) quota / (double) remainingNegativesIncludingCurrent);
+    }
+
+    private static BranchReturnLabel branchReturnLabel(StateSequenceBuilder.TrainingData record, Args args) {
+        if (record == null || record.mctsVisitTargets == null || record.candidateCount <= 0) {
+            return BranchReturnLabel.NONE;
+        }
+        boolean branchTargets = (args != null && args.branchReturnTargets) || usesBranchReturnTargets(record);
+        int limit = Math.min(record.candidateCount, record.mctsVisitTargets.length);
+        boolean observed = false;
+        float bestObserved = -Float.MAX_VALUE;
+        for (int i = 0; i < limit; i++) {
+            if (record.candidateMask != null && i < record.candidateMask.length && record.candidateMask[i] == 0) {
+                continue;
+            }
+            float v = record.mctsVisitTargets[i];
+            if (!observedTargetValue(v, branchTargets)) {
+                continue;
+            }
+            observed = true;
+            if (v > bestObserved) {
+                bestObserved = v;
+            }
+        }
+        if (!observed) {
+            return BranchReturnLabel.NONE;
+        }
+        return bestObserved > 0.0f ? BranchReturnLabel.POSITIVE : BranchReturnLabel.NEGATIVE;
+    }
+
+    private static String branchReturnBalanceStatsLine(BranchReturnBalanceStats stats) {
+        if (stats == null) {
+            return "";
+        }
+        return " branchReturnBalance="
+                + "eligiblePositive=" + stats.eligiblePositive
+                + ",eligibleNegative=" + stats.eligibleNegative
+                + ",eligibleNone=" + stats.eligibleNone
+                + ",acceptedPositive=" + stats.acceptedPositive
+                + ",acceptedNegative=" + stats.acceptedNegative
+                + ",skippedNegative=" + stats.skippedNegative
+                + ",skippedNone=" + stats.skippedNone;
     }
 
     private static boolean passesTargetMargin(StateSequenceBuilder.TrainingData record, Args args) {
@@ -7490,8 +7599,7 @@ public final class ActionCounterfactualTrainer {
     private static void writeImportedTrainingReadme(
             Path path,
             Args args,
-            int trainingExamples,
-            int trainPassSamples,
+            ImportTrainingStats importStats,
             long elapsedMs
     ) throws IOException {
         if (path.getParent() != null) {
@@ -7506,12 +7614,25 @@ public final class ActionCounterfactualTrainer {
             sb.append("trajectory_final_reward: ")
                     .append(String.format(Locale.US, "%.4f", args.trajectoryFinalReward)).append('\n');
         }
-        sb.append("training_examples: ").append(trainingExamples).append('\n');
+        sb.append("training_examples: ").append(importStats.trainingExamples).append('\n');
         sb.append("train_epochs: ").append(args.trainEpochs).append('\n');
         sb.append("candidate_permutations: ").append(args.candidatePermutations).append('\n');
         sb.append("batch_size: ").append(args.batchSize).append('\n');
         sb.append("branch_return_targets: ").append(args.branchReturnTargets).append('\n');
-        sb.append("train_pass_samples: ").append(trainPassSamples).append('\n');
+        sb.append("branch_return_balance: ").append(args.branchReturnBalance).append('\n');
+        sb.append("branch_return_max_negatives_per_positive: ")
+                .append(args.branchReturnMaxNegativesPerPositive).append('\n');
+        if (importStats.branchReturnBalanceStats != null) {
+            BranchReturnBalanceStats balance = importStats.branchReturnBalanceStats;
+            sb.append("branch_return_eligible_positive: ").append(balance.eligiblePositive).append('\n');
+            sb.append("branch_return_eligible_negative: ").append(balance.eligibleNegative).append('\n');
+            sb.append("branch_return_eligible_none: ").append(balance.eligibleNone).append('\n');
+            sb.append("branch_return_accepted_positive: ").append(balance.acceptedPositive).append('\n');
+            sb.append("branch_return_accepted_negative: ").append(balance.acceptedNegative).append('\n');
+            sb.append("branch_return_skipped_negative: ").append(balance.skippedNegative).append('\n');
+            sb.append("branch_return_skipped_none: ").append(balance.skippedNone).append('\n');
+        }
+        sb.append("train_pass_samples: ").append(importStats.trainPassSamples).append('\n');
         sb.append("post_train_wait_ms: ").append(args.postTrainWaitMs).append('\n');
         sb.append("seed: ").append(args.seed).append('\n');
         sb.append("elapsed_sec: ").append(String.format(Locale.US, "%.1f", elapsedMs / 1000.0)).append('\n');
@@ -13447,6 +13568,82 @@ public final class ActionCounterfactualTrainer {
         }
     }
 
+    private enum BranchReturnLabel {
+        POSITIVE,
+        NEGATIVE,
+        NONE
+    }
+
+    private static final class BranchReturnBalanceStats {
+
+        int eligiblePositive;
+        int eligibleNegative;
+        int eligibleNone;
+        int acceptedPositive;
+        int acceptedNegative;
+        int skippedNegative;
+        int skippedNone;
+
+        void addEligible(BranchReturnLabel label) {
+            switch (label) {
+                case POSITIVE:
+                    eligiblePositive++;
+                    break;
+                case NEGATIVE:
+                    eligibleNegative++;
+                    break;
+                default:
+                    eligibleNone++;
+                    break;
+            }
+        }
+
+        void accept(BranchReturnLabel label) {
+            switch (label) {
+                case POSITIVE:
+                    acceptedPositive++;
+                    break;
+                case NEGATIVE:
+                    acceptedNegative++;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        int maxAcceptedNegative(int maxNegativePerPositive) {
+            if (maxNegativePerPositive < 0) {
+                return eligibleNegative;
+            }
+            long max = (long) eligiblePositive * (long) maxNegativePerPositive;
+            return (int) Math.min((long) eligibleNegative, Math.max(0L, max));
+        }
+    }
+
+    private static final class ImportTrainingStats {
+
+        final int trainingExamples;
+        final long trainPassSamples;
+        final BranchReturnBalanceStats branchReturnBalanceStats;
+
+        private ImportTrainingStats(
+                int trainingExamples,
+                long trainPassSamples,
+                BranchReturnBalanceStats branchReturnBalanceStats
+        ) {
+            this.trainingExamples = trainingExamples;
+            this.trainPassSamples = trainPassSamples;
+            this.branchReturnBalanceStats = branchReturnBalanceStats;
+        }
+
+        static ImportTrainingStats unbalanced(int trainingExamples, int trainEpochs, int candidatePermutations) {
+            long trainPassSamples = (long) trainingExamples
+                    * (long) Math.max(1, trainEpochs)
+                    * (long) Math.max(1, candidatePermutations);
+            return new ImportTrainingStats(trainingExamples, trainPassSamples, null);
+        }
+    }
+
     private static final class TrainingExample {
 
         final int scenario;
@@ -15533,6 +15730,8 @@ public final class ActionCounterfactualTrainer {
         boolean avoidLosingStrictNegative = false;
         boolean avoidLosingMaskBaselineOnly = false;
         boolean branchReturnTargets = false;
+        boolean branchReturnBalance = false;
+        int branchReturnMaxNegativesPerPositive = 1;
         boolean baselineLosingAlternativeOnly = false;
         boolean branchValueProbe = false;
         boolean branchTrajectoryMode = false;
@@ -15742,6 +15941,10 @@ public final class ActionCounterfactualTrainer {
             if (kv.containsKey("avoid-losing-mask-baseline-only")) out.avoidLosingMaskBaselineOnly = Boolean.parseBoolean(kv.get("avoid-losing-mask-baseline-only"));
             if (kv.containsKey("branch-return-targets")) out.branchReturnTargets = Boolean.parseBoolean(kv.get("branch-return-targets"));
             if (kv.containsKey("candidate-q-branch-returns")) out.branchReturnTargets = Boolean.parseBoolean(kv.get("candidate-q-branch-returns"));
+            if (kv.containsKey("branch-return-balance")) out.branchReturnBalance = Boolean.parseBoolean(kv.get("branch-return-balance"));
+            if (kv.containsKey("branch-return-max-negatives-per-positive")) {
+                out.branchReturnMaxNegativesPerPositive = Integer.parseInt(kv.get("branch-return-max-negatives-per-positive"));
+            }
             if (kv.containsKey("baseline-losing-alternative-only")) out.baselineLosingAlternativeOnly = Boolean.parseBoolean(kv.get("baseline-losing-alternative-only"));
             if (kv.containsKey("branch-value-probe")) out.branchValueProbe = Boolean.parseBoolean(kv.get("branch-value-probe"));
             if (kv.containsKey("branch-trajectory-mode")) out.branchTrajectoryMode = Boolean.parseBoolean(kv.get("branch-trajectory-mode"));
@@ -15803,6 +16006,10 @@ public final class ActionCounterfactualTrainer {
             out.targetTemperature = Math.max(0.01, Math.min(10.0, out.targetTemperature));
             out.winTurnBonus = Math.max(0.0, Math.min(1.0, out.winTurnBonus));
             out.lossTurnBonus = Math.max(0.0, Math.min(0.99, out.lossTurnBonus));
+            out.branchReturnMaxNegativesPerPositive = Math.max(0, Math.min(1000, out.branchReturnMaxNegativesPerPositive));
+            if (out.branchReturnBalance && !out.branchReturnTargets) {
+                throw new IllegalArgumentException("--branch-return-balance requires --branch-return-targets");
+            }
             if (!"rl".equals(out.opponentMode) && !"cp7".equals(out.opponentMode)) {
                 throw new IllegalArgumentException("--opponent must be rl or cp7");
             }
