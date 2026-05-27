@@ -94,6 +94,7 @@ cmd=(
   --run-id "$run_id"
   --output-root "$output_root"
   --cycles "${ONLINE_CYCLES:-1}"
+  --registry "${ONLINE_REGISTRY:-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json}"
   --profiles "${ONLINE_PROFILES:-Pauper-Spy-Combo-Value}"
   --opponents "${ONLINE_OPPONENTS:-grixis}"
   --games-per-matchup "${ONLINE_GAMES_PER_MATCHUP:-8}"
