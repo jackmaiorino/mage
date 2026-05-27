@@ -109,6 +109,7 @@ cmd=(
   --ranked-max-per-game "${ONLINE_RANKED_MAX_PER_GAME:-32}"
   --action-types "${ONLINE_ACTION_TYPES:-ACTIVATE_ABILITY_OR_SPELL}"
   --mine-shards "${ONLINE_MINE_SHARDS:-8}"
+  --line-training-max-records-per-branch "${ONLINE_LINE_TRAINING_MAX_RECORDS_PER_BRANCH:-64}"
   --line-attempts "${ONLINE_LINE_ATTEMPTS:-32}"
   --line-max-root-actions "${ONLINE_LINE_MAX_ROOT_ACTIONS:-16}"
   --line-timeout-sec "${ONLINE_LINE_TIMEOUT_SEC:-120}"
@@ -122,6 +123,12 @@ cmd=(
 
 if [[ -n "${ONLINE_CHUNK_INDICES:-}" ]]; then
   cmd+=(--chunk-indices "$ONLINE_CHUNK_INDICES")
+fi
+if [[ "${ONLINE_LINE_CAPTURE_TRAINING_DATA:-0}" == "1" || "${ONLINE_LINE_CAPTURE_TRAINING_DATA:-}" == "true" ]]; then
+  cmd+=(--line-capture-training-data)
+fi
+if [[ -n "${ONLINE_MAX_CONCURRENT_MINE_SHARDS:-}" ]]; then
+  cmd+=(--max-concurrent-mine-shards "$ONLINE_MAX_CONCURRENT_MINE_SHARDS")
 fi
 if [[ "${ONLINE_FORCE:-1}" == "1" || "${ONLINE_FORCE:-}" == "true" ]]; then
   cmd+=(--force)

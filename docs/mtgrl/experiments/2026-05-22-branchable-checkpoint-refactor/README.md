@@ -2936,3 +2936,60 @@ Interpretation:
 
 - The run is still branch-simulation bound, but shards no longer duplicate full-corpus snapshot loading.
 - The next v483 experiment should use this fixed sharding and store trajectory-return artifacts on `E:` to keep the nearly full `C:` drive out of the critical path.
+
+## v483 Local Trajectory-Return Diagnostic
+
+Purpose:
+
+- Run a first end-to-end trajectory-return candidate after the capture harness and pre-load sharding fixes.
+- Treat this as a local diagnostic only, not a scale conclusion. The mined corpus is intentionally small and strongly loss-heavy.
+
+Mining:
+
+- Artifact root: `E:/mage-research/local_pbt/trajectory_returns/v483_traj_s64_a2_preselected_from_v482`.
+- The run reused `64` preselected v482 checkpoint paths to avoid re-ranking/deserializing the full checkpoint corpus.
+- Shape: `2` shards, `2` terminal-line attempts per snapshot, `2` max root actions, `60s` branch timeout.
+- Terminal-line rows: `122`.
+- Outcomes: `7` terminal wins, `95` terminal losses, `19` branch timeouts, `1` forced-text mismatch.
+- Trajectory-return records: `1,454` captured, `1,150` written, `304` skipped.
+
+Training:
+
+- Candidate profile: `Pauper-Spy-Combo-Value-OnlineLoop-v483-TrajectoryReturns`.
+- Source clone: `Pauper-Spy-Combo-Value-OnlineLoop-v481-DiverseRareEdge`.
+- Training path: `E:/mage-research/local_pbt/trajectory_returns/v483_traj_s64_a2_preselected_from_v482`.
+- Trainer run: `local-training/local_pbt/action_counterfactual/v483_traj_returns_train`.
+- Imported `1,150` examples for `4` epochs, `4,600` train-pass samples, Q-head-only branch-return targets.
+
+Score probes:
+
+| Probe | Policy top1 | Q top1 | Q avg target rank |
+| --- | ---: | ---: | ---: |
+| Pretrain `v483_traj_returns_pretrain_score` | `117 / 256` | `150 / 256` | `2.078` |
+| Posttrain `v483_traj_returns_posttrain_score` | `117 / 256` | `148 / 256` | `1.934` |
+
+The unchanged policy score is expected because this run trained only the Q head. The Q rank improved slightly, but Q top1 did not; this is a weak learning signal.
+
+Serial paired Grixis eval:
+
+- Eval root: `E:/mage-research/local_pbt/eval_sweeps/v483_traj_returns_serial_grixis_g16_seed12161_retry`.
+- Seed base: `12161`; seed key mode: `matchup`; `16` serial paired games against Grixis.
+
+| Profile | Result |
+| --- | ---: |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v483-TrajectoryReturns` | `1 / 16` |
+| `Pauper-Spy-Combo-Value-OnlineLoop-v481-DiverseRareEdge` | `2 / 16` |
+
+Interpretation:
+
+- Do not promote v483. The trajectory-return-only local candidate underperformed the v481 source.
+- This does not reject trajectory returns or HPC scaling. The local corpus had only `7` winning branches and was too small/loss-heavy for a thesis-scale conclusion.
+- The next scale run should generate a larger and less loss-dominated trajectory-return corpus, then train/evaluate with paired multi-seed evidence.
+
+HPC readiness fix:
+
+- `scripts/hpc/submit_online_terminal_mining.slurm` now forwards trajectory-capture controls to the online terminal-mining harness:
+  - `ONLINE_LINE_CAPTURE_TRAINING_DATA=1` adds `--line-capture-training-data`;
+  - `ONLINE_LINE_TRAINING_MAX_RECORDS_PER_BRANCH` sets `--line-training-max-records-per-branch`;
+  - `ONLINE_MAX_CONCURRENT_MINE_SHARDS` limits concurrent mining JVMs independently of `ONLINE_MINE_SHARDS`.
+- Syntax validation: `bash -n scripts/hpc/submit_online_terminal_mining.slurm scripts/hpc/zaratan_online_terminal_mining.sh` passed.
