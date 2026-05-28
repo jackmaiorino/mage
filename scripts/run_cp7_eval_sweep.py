@@ -121,7 +121,18 @@ def read_deck_pool(deck_path: str) -> List[Path]:
 
 def load_active_entries(registry_path: Path) -> List[dict]:
     data = json.loads(registry_path.read_text(encoding="utf-8"))
-    entries = [e for e in data if e.get("active", False)]
+    if isinstance(data, list):
+        raw_entries = data
+    elif isinstance(data, dict) and isinstance(data.get("profiles"), list):
+        raw_entries = data["profiles"]
+    elif isinstance(data, dict) and "profile" in data:
+        raw_entries = [data]
+    else:
+        raise RuntimeError(
+            f"Registry must be a list of profile entries, an object with profiles[], "
+            f"or a single profile object: {registry_path}"
+        )
+    entries = [e for e in raw_entries if isinstance(e, dict) and e.get("active", False)]
     if not entries:
         raise RuntimeError(f"No active profiles in {registry_path}")
     return entries

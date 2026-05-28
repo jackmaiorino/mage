@@ -117,6 +117,34 @@ echo "Python executable: $python_bin"
 run_id="${ONLINE_RUN_ID:-hpc_${SLURM_JOB_ID:-manual}_online_terminal_mining}"
 output_root="${ONLINE_OUTPUT_ROOT:-local-training/local_pbt/online_terminal_mining_hpc}"
 
+preflight_cmd=(
+  "$python_bin" scripts/mtgrl/preflight_online_terminal_mining.py
+  --registry "${ONLINE_REGISTRY:-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json}"
+  --profiles "${ONLINE_PROFILES:-Pauper-Spy-Combo-Value}"
+  --opponents "${ONLINE_OPPONENTS:-grixis}"
+  --require-maven
+  --check-gpu
+  --output-json "$output_root/$run_id/preflight/compute_preflight.json"
+)
+if [[ "${ONLINE_PREFLIGHT_MAVEN_COMPILE:-0}" == "1" || "${ONLINE_PREFLIGHT_MAVEN_COMPILE:-}" == "true" ]]; then
+  preflight_cmd+=(--check-maven-compile)
+fi
+if [[ "${ONLINE_PREFLIGHT_MAVEN_ONLINE:-0}" == "1" || "${ONLINE_PREFLIGHT_MAVEN_ONLINE:-}" == "true" ||
+      "${ONLINE_MAVEN_ONLINE:-0}" == "1" || "${ONLINE_MAVEN_ONLINE:-}" == "true" ]]; then
+  preflight_cmd+=(--maven-online)
+fi
+if [[ "${ONLINE_PREFLIGHT_REACTOR_MODULES:-1}" == "1" || "${ONLINE_PREFLIGHT_REACTOR_MODULES:-}" == "true" ]]; then
+  preflight_cmd+=(--check-reactor-modules)
+fi
+
+if [[ "${ONLINE_PREFLIGHT_ONLY:-0}" == "1" || "${ONLINE_PREFLIGHT_ONLY:-}" == "true" ]]; then
+  printf 'Preflight command:'
+  printf ' %q' "${preflight_cmd[@]}"
+  printf '\n'
+  "${preflight_cmd[@]}"
+  exit $?
+fi
+
 cmd=(
   "$python_bin" scripts/mtgrl/run_online_terminal_mining_loop.py
   --run-id "$run_id"
@@ -164,6 +192,21 @@ if [[ "${ONLINE_FORCE:-1}" == "1" || "${ONLINE_FORCE:-}" == "true" ]]; then
 fi
 if [[ "${ONLINE_MAVEN_ONLINE:-0}" == "1" || "${ONLINE_MAVEN_ONLINE:-}" == "true" ]]; then
   cmd+=(--online-maven)
+fi
+if [[ "${ONLINE_NO_COMPILE_EXEC:-0}" == "1" || "${ONLINE_NO_COMPILE_EXEC:-}" == "true" ]]; then
+  cmd+=(--no-compile-exec)
+fi
+if [[ "${ONLINE_SKIP_EVAL_COMPILE:-0}" == "1" || "${ONLINE_SKIP_EVAL_COMPILE:-}" == "true" ]]; then
+  cmd+=(--skip-eval-compile)
+fi
+if [[ "${ONLINE_SKIP_MINE_COMPILE:-0}" == "1" || "${ONLINE_SKIP_MINE_COMPILE:-}" == "true" ]]; then
+  cmd+=(--skip-mine-compile)
+fi
+if [[ "${ONLINE_SKIP_SHARD_COMPILE:-0}" == "1" || "${ONLINE_SKIP_SHARD_COMPILE:-}" == "true" ]]; then
+  cmd+=(--skip-shard-compile)
+fi
+if [[ "${ONLINE_ALLOW_STALE_MINER_CLASSPATH:-0}" == "1" || "${ONLINE_ALLOW_STALE_MINER_CLASSPATH:-}" == "true" ]]; then
+  cmd+=(--allow-stale-miner-classpath)
 fi
 
 printf 'Command:'
