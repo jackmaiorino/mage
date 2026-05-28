@@ -85,6 +85,10 @@ ensure_maven_cmd() {
 
 REPO_ROOT="${REPO_ROOT:-$SLURM_SUBMIT_DIR}"
 cd "$REPO_ROOT"
+runtime_bundle_requested=0
+if [[ -n "${MAGE_RL_RUNTIME_DIR:-}" || -n "${MAGE_RL_RUNTIME_TARBALL:-}" ]]; then
+  runtime_bundle_requested=1
+fi
 
 echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] Starting online terminal mining"
 echo "SLURM_JOB_ID=${SLURM_JOB_ID:-}"
@@ -93,9 +97,11 @@ echo "SLURM_JOB_GPUS=${SLURM_JOB_GPUS:-}"
 echo "REPO_ROOT=$REPO_ROOT"
 if ensure_maven_cmd; then
   echo "Maven executable: $(command -v mvn)"
-else
+elif [[ "$runtime_bundle_requested" -eq 0 ]]; then
   echo "Maven unavailable on compute node; set MAVEN_BIN, MAVEN_HOME, or install Maven under local-training/hpc/tools/." >&2
   exit 1
+else
+  echo "Maven unavailable; continuing with runtime bundle"
 fi
 
 export MTG_VENV_PATH="${MTG_VENV_PATH:-$REPO_ROOT/.mtgrl_venv_hpc}"
@@ -140,10 +146,15 @@ preflight_cmd=(
   --registry "${ONLINE_REGISTRY:-Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json}"
   --profiles "${ONLINE_PROFILES:-Pauper-Spy-Combo-Value}"
   --opponents "${ONLINE_OPPONENTS:-grixis}"
-  --require-maven
-  --check-gpu
   --output-json "$output_root/$run_id/preflight/compute_preflight.json"
 )
+if [[ "$runtime_bundle_requested" -eq 0 ]]; then
+  preflight_cmd+=(--require-maven)
+fi
+if [[ "${ONLINE_PREFLIGHT_CHECK_GPU:-auto}" == "1" || "${ONLINE_PREFLIGHT_CHECK_GPU:-}" == "true" ||
+      ( "${ONLINE_PREFLIGHT_CHECK_GPU:-auto}" == "auto" && -n "${SLURM_JOB_GPUS:-}" ) ]]; then
+  preflight_cmd+=(--check-gpu)
+fi
 if [[ "${ONLINE_PREFLIGHT_MAVEN_COMPILE:-0}" == "1" || "${ONLINE_PREFLIGHT_MAVEN_COMPILE:-}" == "true" ]]; then
   preflight_cmd+=(--check-maven-compile)
 fi
