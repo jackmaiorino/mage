@@ -226,7 +226,7 @@ def check_maven_reactor_modules(results: List[Dict[str, object]], enabled: bool)
     )
 
 
-def check_maven_compile(results: List[Dict[str, object]], enabled: bool, online: bool) -> None:
+def check_maven_compile(results: List[Dict[str, object]], enabled: bool, online: bool, timeout_sec: int) -> None:
     if not enabled:
         return
     mvn = shutil.which("mvn") or shutil.which("mvn.cmd")
@@ -245,7 +245,7 @@ def check_maven_compile(results: List[Dict[str, object]], enabled: bool, online:
         "compile",
     ])
     try:
-        proc = run_probe(command, timeout_sec=900)
+        proc = run_probe(command, timeout_sec=max(1, int(timeout_sec)))
         mode = "online" if online else "offline"
         detail = f"{mode} compile passed" if proc.returncode == 0 else (proc.stdout or "")[-4000:]
         add_result(results, f"maven_{mode}_compile", proc.returncode == 0, detail.strip())
@@ -264,6 +264,12 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--check-gpu", action="store_true")
     parser.add_argument("--check-maven-compile", action="store_true")
     parser.add_argument("--maven-online", action="store_true", help="Allow Maven to fetch dependencies during compile preflight.")
+    parser.add_argument(
+        "--maven-compile-timeout-sec",
+        type=int,
+        default=1800,
+        help="Timeout for the Maven compile preflight.",
+    )
     parser.add_argument(
         "--check-reactor-modules",
         action="store_true",
@@ -284,7 +290,7 @@ def main(argv: Sequence[str]) -> int:
         check_registry(results, registry, args.profiles, args.opponents)
     check_executables(results, args.require_maven, args.check_gpu)
     check_maven_reactor_modules(results, args.check_reactor_modules or args.check_maven_compile)
-    check_maven_compile(results, args.check_maven_compile, args.maven_online)
+    check_maven_compile(results, args.check_maven_compile, args.maven_online, args.maven_compile_timeout_sec)
     ok = all(bool(result["ok"]) for result in results)
     payload = {
         "ok": ok,

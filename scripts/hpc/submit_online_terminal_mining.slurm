@@ -129,6 +129,9 @@ preflight_cmd=(
 if [[ "${ONLINE_PREFLIGHT_MAVEN_COMPILE:-0}" == "1" || "${ONLINE_PREFLIGHT_MAVEN_COMPILE:-}" == "true" ]]; then
   preflight_cmd+=(--check-maven-compile)
 fi
+if [[ -n "${ONLINE_PREFLIGHT_MAVEN_TIMEOUT_SEC:-}" ]]; then
+  preflight_cmd+=(--maven-compile-timeout-sec "$ONLINE_PREFLIGHT_MAVEN_TIMEOUT_SEC")
+fi
 if [[ "${ONLINE_PREFLIGHT_MAVEN_ONLINE:-0}" == "1" || "${ONLINE_PREFLIGHT_MAVEN_ONLINE:-}" == "true" ||
       "${ONLINE_MAVEN_ONLINE:-0}" == "1" || "${ONLINE_MAVEN_ONLINE:-}" == "true" ]]; then
   preflight_cmd+=(--maven-online)
