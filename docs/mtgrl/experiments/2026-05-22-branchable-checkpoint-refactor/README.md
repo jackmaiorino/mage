@@ -3029,3 +3029,24 @@ Interpretation:
 
 - v483's local model result was very likely polluted by record-level imbalance, not just by small corpus size.
 - v484 training should use the HPC-mined corpus with `--branch-return-balance` enabled first, then compare against an unbalanced import only if the balanced candidate shows no Q-rank or eval lift.
+
+## v484 HPC Maven Launch Repair
+
+Status:
+
+- Zaratan job `19393378` started on `2026-05-26T23:11:15` and failed after `1s`.
+- Slurm state: `FAILED`, exit code `1:0`.
+- Failure line: `Maven unavailable on compute node; expected 'mvn' on PATH.`
+
+Repair:
+
+- Installed Apache Maven `3.9.8` under the remote checkout at `local-training/hpc/tools/apache-maven`.
+- `submit_online_terminal_mining.slurm` now discovers Maven from:
+  - `MAVEN_BIN`;
+  - `MAVEN_HOME/bin/mvn`;
+  - `local-training/hpc/tools/apache-maven/bin/mvn`;
+  - `local-training/hpc/tools/apache-maven-3.9.8/bin/mvn`;
+  - fallback user-local Maven directories;
+  - cluster modules if they exist.
+- The launcher prepends the discovered Maven `bin` directory to `PATH` so downstream Python helpers that call `shutil.which("mvn")` also work.
+- Validation: `bash -n scripts/hpc/submit_online_terminal_mining.slurm` passed locally and remotely; remote Maven reports `Apache Maven 3.9.8`.

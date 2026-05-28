@@ -44,6 +44,43 @@ load_first_module_match() {
   module load "$mod_name" >/dev/null 2>&1
 }
 
+prepend_maven_path_if_present() {
+  local mvn_path="$1"
+  if [[ -n "$mvn_path" && -x "$mvn_path" ]]; then
+    export PATH="$(dirname "$mvn_path"):$PATH"
+    return 0
+  fi
+  return 1
+}
+
+ensure_maven_cmd() {
+  if command -v mvn >/dev/null 2>&1; then
+    return 0
+  fi
+  if prepend_maven_path_if_present "${MAVEN_BIN:-}"; then
+    return 0
+  fi
+  if [[ -n "${MAVEN_HOME:-}" ]] && prepend_maven_path_if_present "$MAVEN_HOME/bin/mvn"; then
+    return 0
+  fi
+  local candidate
+  for candidate in \
+    "$REPO_ROOT/local-training/hpc/tools/apache-maven/bin/mvn" \
+    "$REPO_ROOT/local-training/hpc/tools/apache-maven-3.9.8/bin/mvn" \
+    "$HOME/.local/apache-maven/bin/mvn" \
+    "$HOME/.local/apache-maven-3.9.8/bin/mvn"; do
+    if prepend_maven_path_if_present "$candidate"; then
+      return 0
+    fi
+  done
+  if ensure_module_cmd; then
+    module load maven >/dev/null 2>&1 || \
+    module load apache-maven >/dev/null 2>&1 || \
+    load_first_module_match maven || true
+  fi
+  command -v mvn >/dev/null 2>&1
+}
+
 REPO_ROOT="${REPO_ROOT:-$SLURM_SUBMIT_DIR}"
 cd "$REPO_ROOT"
 
@@ -52,19 +89,10 @@ echo "SLURM_JOB_ID=${SLURM_JOB_ID:-}"
 echo "SLURM_CPUS_ON_NODE=${SLURM_CPUS_ON_NODE:-}"
 echo "SLURM_JOB_GPUS=${SLURM_JOB_GPUS:-}"
 echo "REPO_ROOT=$REPO_ROOT"
-
-if ! command -v mvn >/dev/null 2>&1; then
-  if ensure_module_cmd; then
-    module load maven >/dev/null 2>&1 || \
-    module load apache-maven >/dev/null 2>&1 || \
-    load_first_module_match maven || true
-  fi
-fi
-
-if command -v mvn >/dev/null 2>&1; then
+if ensure_maven_cmd; then
   echo "Maven executable: $(command -v mvn)"
 else
-  echo "Maven unavailable on compute node; expected 'mvn' on PATH." >&2
+  echo "Maven unavailable on compute node; set MAVEN_BIN, MAVEN_HOME, or install Maven under local-training/hpc/tools/." >&2
   exit 1
 fi
 
