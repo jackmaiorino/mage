@@ -6,7 +6,7 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$repo_root"
 
 partition="${ONLINE_PARTITION:-gpu-a100}"
-gres="${ONLINE_GRES:-gpu:a100:1}"
+gres="${ONLINE_GRES-gpu:a100:1}"
 cpus_per_task="${ONLINE_CPUS_PER_TASK:-24}"
 mem="${ONLINE_MEM:-64G}"
 time_limit="${ONLINE_TIME:-04:00:00}"
