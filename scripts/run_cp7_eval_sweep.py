@@ -80,6 +80,44 @@ def maven_executable() -> str:
     return shutil.which("mvn") or shutil.which("mvn.cmd") or "mvn"
 
 
+def java_executable(env: dict = None) -> str:
+    env = env or os.environ
+    configured = str(env.get("JAVA_BIN", "")).strip()
+    if configured:
+        return configured
+    return shutil.which("java") or "java"
+
+
+def runtime_dir_from_env(env: dict = None) -> Path:
+    env = env or os.environ
+    raw = str(env.get("MAGE_RL_RUNTIME_DIR", "")).strip()
+    if not raw:
+        return None
+    path = Path(raw)
+    if not path.is_absolute():
+        path = REPO / path
+    return path
+
+
+def runtime_classpath(runtime_dir: Path) -> str:
+    return os.pathsep.join([
+        str(runtime_dir / "app" / "*"),
+        str(runtime_dir / "lib" / "*"),
+    ])
+
+
+def java_runtime_command(main_class: str, args: Sequence[str], env: dict = None) -> List[str]:
+    runtime_dir = runtime_dir_from_env(env)
+    if runtime_dir is None:
+        raise RuntimeError("MAGE_RL_RUNTIME_DIR is not set")
+    return [
+        java_executable(env),
+        "-cp",
+        runtime_classpath(runtime_dir),
+        main_class,
+    ] + [str(arg) for arg in args]
+
+
 def python_executable() -> str:
     if os.name == "nt":
         candidate = REPO / ".mtgrl_venv" / "Scripts" / "python.exe"
@@ -468,19 +506,14 @@ def maven_command(offline: bool) -> List[str]:
     return cmd
 
 
-def run_job(job: dict) -> dict:
-    start = time.time()
-    started_utc = utc_now()
-    log_file: Path = job["log_file"]
-    result_file: Path = job["result_file"]
-    db_dir: Path = job["db_dir"]
-    result_file.parent.mkdir(parents=True, exist_ok=True)
-    log_file.parent.mkdir(parents=True, exist_ok=True)
-    prepare_db_copy(db_dir)
+def eval_command(job: dict) -> List[str]:
+    env = job["env"]
+    if runtime_dir_from_env(env) is not None:
+        return java_runtime_command("mage.player.ai.rl.RLTrainer", ["league_bench"], env)
     goals = ["exec:java"]
     if bool(job.get("compile_exec", False)):
         goals.insert(0, "compile")
-    cmd = maven_command(bool(job.get("maven_offline", False))) + [
+    return maven_command(bool(job.get("maven_offline", False))) + [
         "-q",
         "-pl",
         MODULE,
@@ -490,6 +523,18 @@ def run_job(job: dict) -> dict:
         "-Dexec.mainClass=mage.player.ai.rl.RLTrainer",
         "-Dexec.args=league_bench",
     ]
+
+
+def run_job(job: dict) -> dict:
+    start = time.time()
+    started_utc = utc_now()
+    log_file: Path = job["log_file"]
+    result_file: Path = job["result_file"]
+    db_dir: Path = job["db_dir"]
+    result_file.parent.mkdir(parents=True, exist_ok=True)
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+    prepare_db_copy(db_dir)
+    cmd = eval_command(job)
     stdout = ""
     stderr = ""
     returncode = -1

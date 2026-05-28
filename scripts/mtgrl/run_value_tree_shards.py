@@ -8,6 +8,7 @@ import atexit
 import csv
 import json
 import os
+import shlex
 import shutil
 import subprocess
 import sys
@@ -197,6 +198,12 @@ def maven_command(args: argparse.Namespace, exec_args: str) -> List[str]:
         ]
     )
     return cmd
+
+
+def shard_command(args: argparse.Namespace, exec_args: str, env: Dict[str, str]) -> List[str]:
+    if sweep.runtime_dir_from_env(env) is not None:
+        return sweep.java_runtime_command(MAIN_CLASS, shlex.split(exec_args), env)
+    return maven_command(args, exec_args)
 
 
 def load_manifest(args: argparse.Namespace) -> Dict[str, object]:
@@ -437,7 +444,10 @@ def run(args: argparse.Namespace) -> int:
     profile = profile_from_manifest(manifest, args.profile)
     env_overrides = manifest_env(manifest, profile)
 
-    if not args.skip_compile:
+    runtime_dir = sweep.runtime_dir_from_env(os.environ)
+    if runtime_dir is not None:
+        print(f"using runtime bundle at {runtime_dir}; skipping Maven compile", flush=True)
+    elif not args.skip_compile:
         cmd = compile_command(args)
         print("compiling AIRL module before shard launch", flush=True)
         subprocess.run(cmd, check=True)
@@ -478,8 +488,8 @@ def run(args: argparse.Namespace) -> int:
     def launch_shard(shard_index: int, shard_dir: Path) -> Dict[str, object]:
         shard_dir.mkdir(parents=True, exist_ok=True)
         exec_args = miner_args(args, shard_index, shard_dir)
-        cmd = maven_command(args, exec_args)
         env = shard_env(args, shard_index, env_overrides)
+        cmd = shard_command(args, exec_args, env)
         stdout_path = shard_dir / "stdout.log"
         stderr_path = shard_dir / "stderr.log"
         (shard_dir / "command.json").write_text(

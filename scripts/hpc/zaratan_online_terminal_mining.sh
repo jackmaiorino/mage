@@ -15,16 +15,22 @@ job_name="${ONLINE_JOB_NAME:-online-mine}"
 echo "Submitting online terminal mining"
 echo "partition=${partition} gres=${gres} cpus=${cpus_per_task} mem=${mem} time=${time_limit}"
 
+sbatch_args=(
+    --parsable
+    --job-name="${job_name}"
+    --partition="${partition}"
+    --cpus-per-task="${cpus_per_task}"
+    --mem="${mem}"
+    --time="${time_limit}"
+    --export=ALL
+)
+if [[ -n "${gres}" ]]; then
+  sbatch_args+=(--gres="${gres}")
+fi
+sbatch_args+=(scripts/hpc/submit_online_terminal_mining.slurm "$@")
+
 job_id="$(
-  sbatch --parsable \
-    --job-name="${job_name}" \
-    --partition="${partition}" \
-    --gres="${gres}" \
-    --cpus-per-task="${cpus_per_task}" \
-    --mem="${mem}" \
-    --time="${time_limit}" \
-    --export=ALL \
-    scripts/hpc/submit_online_terminal_mining.slurm "$@"
+  sbatch "${sbatch_args[@]}"
 )"
 
 echo "Submitted JOB_ID=${job_id}"

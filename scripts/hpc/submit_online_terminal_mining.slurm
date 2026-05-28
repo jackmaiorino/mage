@@ -6,8 +6,10 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=24
 #SBATCH --mem=64G
-#SBATCH --partition=gpu-a100
-#SBATCH --gres=gpu:a100:1
+## Partition and GPU/CPU resources are supplied by zaratan_online_terminal_mining.sh.
+## The wrapper defaults to gpu-a100, but CPU-only runs can pass ONLINE_GRES="".
+## #SBATCH --partition=gpu-a100
+## #SBATCH --gres=gpu:a100:1
 ## Optional site-specific settings (uncomment and set):
 ## #SBATCH --account=<account>
 ## #SBATCH --qos=<qos>
@@ -116,6 +118,22 @@ echo "Python executable: $python_bin"
 
 run_id="${ONLINE_RUN_ID:-hpc_${SLURM_JOB_ID:-manual}_online_terminal_mining}"
 output_root="${ONLINE_OUTPUT_ROOT:-local-training/local_pbt/online_terminal_mining_hpc}"
+
+if [[ -z "${MAGE_RL_RUNTIME_DIR:-}" && -n "${MAGE_RL_RUNTIME_TARBALL:-}" ]]; then
+  runtime_extract_base="${ONLINE_RUNTIME_EXTRACT_BASE:-$output_root/$run_id/runtime}"
+  mkdir -p "$runtime_extract_base"
+  echo "Extracting runtime tarball: $MAGE_RL_RUNTIME_TARBALL"
+  tar -xzf "$MAGE_RL_RUNTIME_TARBALL" -C "$runtime_extract_base"
+  extracted_dir="$(find "$runtime_extract_base" -mindepth 1 -maxdepth 1 -type d | head -n 1)"
+  if [[ -z "$extracted_dir" ]]; then
+    echo "FATAL: tarball extraction produced no directory in $runtime_extract_base" >&2
+    exit 1
+  fi
+  export MAGE_RL_RUNTIME_DIR="$extracted_dir"
+  echo "MAGE_RL_RUNTIME_DIR=$MAGE_RL_RUNTIME_DIR"
+elif [[ -n "${MAGE_RL_RUNTIME_DIR:-}" ]]; then
+  echo "MAGE_RL_RUNTIME_DIR=$MAGE_RL_RUNTIME_DIR"
+fi
 
 preflight_cmd=(
   "$python_bin" scripts/mtgrl/preflight_online_terminal_mining.py

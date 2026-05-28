@@ -254,6 +254,18 @@ def check_maven_compile(results: List[Dict[str, object]], enabled: bool, online:
         add_result(results, f"maven_{mode}_compile", False, repr(exc))
 
 
+def check_runtime_bundle(results: List[Dict[str, object]]) -> None:
+    raw = os.environ.get("MAGE_RL_RUNTIME_DIR", "").strip()
+    if not raw:
+        return
+    runtime_dir = repo_path(raw)
+    add_result(results, "runtime_dir", runtime_dir.is_dir(), str(runtime_dir))
+    app_jars = sorted((runtime_dir / "app").glob("*.jar")) if runtime_dir.is_dir() else []
+    lib_jars = sorted((runtime_dir / "lib").glob("*.jar")) if runtime_dir.is_dir() else []
+    add_result(results, "runtime_app_jars", bool(app_jars), f"count={len(app_jars)}")
+    add_result(results, "runtime_lib_jars", bool(lib_jars), f"count={len(lib_jars)}")
+
+
 def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--registry", required=True)
@@ -289,6 +301,7 @@ def main(argv: Sequence[str]) -> int:
     if registry.is_file():
         check_registry(results, registry, args.profiles, args.opponents)
     check_executables(results, args.require_maven, args.check_gpu)
+    check_runtime_bundle(results)
     check_maven_reactor_modules(results, args.check_reactor_modules or args.check_maven_compile)
     check_maven_compile(results, args.check_maven_compile, args.maven_online, args.maven_compile_timeout_sec)
     ok = all(bool(result["ok"]) for result in results)
