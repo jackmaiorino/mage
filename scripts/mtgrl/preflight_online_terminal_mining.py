@@ -266,6 +266,21 @@ def check_runtime_bundle(results: List[Dict[str, object]]) -> None:
     add_result(results, "runtime_lib_jars", bool(lib_jars), f"count={len(lib_jars)}")
 
 
+def check_eval_database(results: List[Dict[str, object]]) -> None:
+    override = os.environ.get("CP7_EVAL_DB_SOURCE", "").strip()
+    candidates: List[Path] = []
+    if override:
+        path = repo_path(override)
+        candidates.append(path / "cards.h2.mv.db" if path.is_dir() else path)
+    candidates.extend([
+        REPO / "db_eval" / "cards.h2.mv.db",
+        REPO / "db" / "cards.h2.mv.db",
+    ])
+    existing = [path for path in candidates if path.is_file()]
+    detail = str(existing[0]) if existing else "checked=" + ",".join(str(path) for path in candidates)
+    add_result(results, "cards_db", bool(existing), detail)
+
+
 def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--registry", required=True)
@@ -302,6 +317,7 @@ def main(argv: Sequence[str]) -> int:
         check_registry(results, registry, args.profiles, args.opponents)
     check_executables(results, args.require_maven, args.check_gpu)
     check_runtime_bundle(results)
+    check_eval_database(results)
     check_maven_reactor_modules(results, args.check_reactor_modules or args.check_maven_compile)
     check_maven_compile(results, args.check_maven_compile, args.maven_online, args.maven_compile_timeout_sec)
     ok = all(bool(result["ok"]) for result in results)
