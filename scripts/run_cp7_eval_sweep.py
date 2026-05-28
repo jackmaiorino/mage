@@ -683,6 +683,19 @@ def aggregate_by_matchup(rows: Iterable[dict]) -> List[dict]:
     return out
 
 
+def failed_eval_rows(rows: Iterable[dict], allow_incomplete: bool) -> List[dict]:
+    failed: List[dict] = []
+    for row in rows:
+        returncode = int(row.get("returncode", 0) or 0)
+        timed_out = bool(row.get("timed_out", False))
+        games_requested = int(row.get("games_requested", 0) or 0)
+        total = int(row.get("total", 0) or 0)
+        incomplete = games_requested > 0 and total < games_requested
+        if returncode != 0 or timed_out or (incomplete and not allow_incomplete):
+            failed.append(row)
+    return failed
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--registry", default=DEFAULT_REGISTRY)
@@ -809,6 +822,15 @@ def main() -> int:
             "Keep deterministic eval env settings but honor --parallel/--ai-threads. "
             "Use for throughput-oriented online/mining evals where exact single-channel "
             "request ordering is less important than CPU utilization."
+        ),
+    )
+    parser.add_argument(
+        "--allow-incomplete-results",
+        action="store_true",
+        help=(
+            "Write partial eval outputs without failing the sweep when a job "
+            "completes fewer games than requested. Nonzero exits and timeouts "
+            "still fail the sweep."
         ),
     )
     args = parser.parse_args()
@@ -1091,9 +1113,32 @@ def main() -> int:
         write_csv(run_dir / "matchups.csv", rows, fields)
         write_csv(run_dir / "matchup_summary.csv", aggregate_by_matchup(rows), matchup_fields)
         write_csv(run_dir / "profile_summary.csv", summary, ["profile", "wins", "total", "losses", "winrate"])
+        failed_rows = failed_eval_rows(rows, args.allow_incomplete_results)
         manifest["ended_utc"] = utc_now()
         manifest["completed_matchups"] = len(rows)
+        manifest["failed_matchups"] = len(failed_rows)
+        manifest["failed_matchup_logs"] = [
+            {
+                "profile": row.get("profile", ""),
+                "agent_deck": row.get("agent_deck", ""),
+                "opponent_deck": row.get("opponent_deck", ""),
+                "returncode": row.get("returncode", ""),
+                "timed_out": row.get("timed_out", ""),
+                "games_requested": row.get("games_requested", ""),
+                "total": row.get("total", ""),
+                "log_file": row.get("log_file", ""),
+            }
+            for row in failed_rows[:20]
+        ]
         (run_dir / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        if failed_rows:
+            print(
+                f"FAILED: {len(failed_rows)} eval job(s) failed, timed out, or returned incomplete results. "
+                f"First log: {failed_rows[0].get('log_file', '')}",
+                file=sys.stderr,
+                flush=True,
+            )
+            return 3
         print(f"Done. Results: {run_dir}", flush=True)
         return 0
     finally:

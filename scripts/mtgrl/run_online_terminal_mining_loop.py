@@ -80,6 +80,18 @@ def count_rows(path: Path) -> int:
     return max(0, lines - 1)
 
 
+def count_files(path: Path, limit: int = 100000) -> int:
+    if not path.exists():
+        return 0
+    count = 0
+    for candidate in path.rglob("*"):
+        if candidate.is_file():
+            count += 1
+            if count >= limit:
+                return count
+    return count
+
+
 def build_eval_command(args: argparse.Namespace, cycle: int, eval_run_id: str, eval_root: Path) -> List[str]:
     cmd = [
         sys.executable,
@@ -460,6 +472,21 @@ def main(argv: Sequence[str]) -> int:
             write_json(run_dir / "manifest.json", manifest)
             write_readme(run_dir, manifest)
             return eval_rc
+
+        checkpoint_file_count = count_files(checkpoint_root)
+        cycle_summary["checkpoint_root_exists"] = checkpoint_root.exists()
+        cycle_summary["checkpoint_file_count"] = checkpoint_file_count
+        if checkpoint_file_count == 0:
+            cycle_summary["blocker"] = (
+                "no_live_checkpoints_captured"
+                if checkpoint_root.exists()
+                else "live_checkpoint_root_missing"
+            )
+            cycle_summary["ended_utc"] = utc_now()
+            manifest["cycle_summaries"].append(cycle_summary)  # type: ignore[index]
+            write_json(run_dir / "manifest.json", manifest)
+            write_readme(run_dir, manifest)
+            return 4
 
         mine_rc = run_command(
             build_mine_command(args, cycle, checkpoint_root, mine_dir),

@@ -122,6 +122,14 @@ if [[ -z "$python_bin" ]]; then
 fi
 echo "Python executable: $python_bin"
 
+if [[ -z "${SLURM_JOB_GPUS:-}" && "${ONLINE_FORCE_CPU_INFERENCE:-auto}" != "0" && "${ONLINE_FORCE_CPU_INFERENCE:-auto}" != "false" ]]; then
+  export INFER_CUDA_DEVICE="${INFER_CUDA_DEVICE:-cpu}"
+  export TRAIN_CUDA_DEVICE="${TRAIN_CUDA_DEVICE:-cpu}"
+  export MULLIGAN_DEVICE="${MULLIGAN_DEVICE:-cpu}"
+  export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-}"
+  echo "No Slurm GPU allocation detected; using CPU inference bridge (INFER_CUDA_DEVICE=$INFER_CUDA_DEVICE)"
+fi
+
 run_id="${ONLINE_RUN_ID:-hpc_${SLURM_JOB_ID:-manual}_online_terminal_mining}"
 output_root="${ONLINE_OUTPUT_ROOT:-local-training/local_pbt/online_terminal_mining_hpc}"
 
