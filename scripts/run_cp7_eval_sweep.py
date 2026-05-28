@@ -387,6 +387,7 @@ def job_env(
     live_checkpoints: bool,
     live_checkpoint_max_per_game: int,
     live_checkpoint_action_types: str,
+    use_gpu_service: bool,
     env_overrides: Optional[Dict[str, str]] = None,
 ) -> Dict[str, str]:
     env = base_env.copy()
@@ -420,10 +421,6 @@ def job_env(
             "EVAL_LIVE_CHECKPOINT_MAX_PER_GAME": str(live_checkpoint_max_per_game),
             "EVAL_LIVE_CHECKPOINT_ACTION_TYPES": live_checkpoint_action_types,
             "METRICS_PORT": "0",
-            "PY_SERVICE_MODE": "shared_gpu",
-            "GPU_SERVICE_ENDPOINT": f"localhost:{gpu_port}",
-            "GPU_SERVICE_NUM_GPUS": "1",
-            "GPU_SERVICE_NUM_CHANNELS": "4",
             "MAGE_DB_DIR": str(db_dir),
             "MAGE_DB_AUTO_SERVER": "false",
             "AI_MAX_THREADS_FOR_SIMULATIONS": str(ai_threads),
@@ -436,6 +433,15 @@ def job_env(
             "PYTHONUNBUFFERED": "1",
         }
     )
+    if use_gpu_service:
+        env.update(
+            {
+                "PY_SERVICE_MODE": "shared_gpu",
+                "GPU_SERVICE_ENDPOINT": f"localhost:{gpu_port}",
+                "GPU_SERVICE_NUM_GPUS": "1",
+                "GPU_SERVICE_NUM_CHANNELS": "4",
+            }
+        )
     if mcts_enabled:
         env.update(mcts_env)
     if env_overrides:
@@ -776,6 +782,7 @@ def main() -> int:
         help="Run Maven compile and exec:java with -o using the local repository cache.",
     )
     parser.add_argument("--reuse-gpu-service", action="store_true")
+    parser.add_argument("--no-gpu-service", dest="use_gpu_service", action="store_false", default=True)
     parser.add_argument(
         "--serial-warmup-jobs",
         type=int,
@@ -839,7 +846,10 @@ def main() -> int:
     db_root = run_dir / "db"
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    if not args.skip_compile:
+    runtime_dir = runtime_dir_from_env(os.environ)
+    if runtime_dir is not None:
+        print(f"using runtime bundle at {runtime_dir}; skipping Maven compile", flush=True)
+    elif not args.skip_compile:
         subprocess.run(
             maven_command(args.maven_offline) + ["-q", "-pl", MODULE, "-am", "-DskipTests", "compile"],
             cwd=str(REPO),
@@ -887,6 +897,7 @@ def main() -> int:
         "live_checkpoint_max_per_game": args.live_checkpoint_max_per_game,
         "live_checkpoint_action_types": args.live_checkpoint_action_types,
         "compile_exec": bool(args.compile_exec),
+        "use_gpu_service": bool(args.use_gpu_service),
         "snapshot_root": str(snapshot_root),
         "gpu_service_train_env": gpu_service_train_env,
         "profiles": manifest_models,
@@ -895,7 +906,7 @@ def main() -> int:
     (run_dir / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
     gpu_proc: Optional[subprocess.Popen] = None
-    if not args.reuse_gpu_service:
+    if args.use_gpu_service and not args.reuse_gpu_service:
         gpu_proc = start_gpu_service(
             args.gpu_port,
             args.gpu_metrics_port,
@@ -1028,6 +1039,7 @@ def main() -> int:
                                     args.live_checkpoints,
                                     args.live_checkpoint_max_per_game,
                                     args.live_checkpoint_action_types,
+                                    args.use_gpu_service,
                                     deterministic_env,
                                 ),
                             }

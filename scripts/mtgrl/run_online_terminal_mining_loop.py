@@ -130,6 +130,8 @@ def build_eval_command(args: argparse.Namespace, cycle: int, eval_run_id: str, e
     if args.eval_game_logging:
         cmd.append("--eval-game-logging")
         cmd.extend(["--game-log-format", args.game_log_format])
+    if not args.eval_gpu_service:
+        cmd.append("--no-gpu-service")
     if args.compile_exec:
         cmd.append("--compile-exec")
     if not args.online_maven:
@@ -187,6 +189,8 @@ def build_mine_command(args: argparse.Namespace, cycle: int, checkpoint_root: Pa
         "false",
         "--model-continuation-backend",
         args.model_continuation_backend,
+        "--shared-gpu-service",
+        args.mine_shared_gpu_service,
         "--gpu-port",
         str(args.mine_gpu_port + cycle * args.port_stride),
         "--gpu-metrics-port",
@@ -372,6 +376,9 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--no-stop-on-win", dest="no_stop_on_win", action="store_true", default=True)
     parser.add_argument("--stop-on-win", dest="no_stop_on_win", action="store_false")
     parser.add_argument("--model-continuation-backend", choices=("single", "inherit"), default="single")
+    parser.add_argument("--eval-gpu-service", dest="eval_gpu_service", action="store_true", default=True)
+    parser.add_argument("--no-eval-gpu-service", dest="eval_gpu_service", action="store_false")
+    parser.add_argument("--mine-shared-gpu-service", choices=("auto", "on", "off"), default="auto")
     parser.add_argument("--min-value-delta", type=float, default=0.1)
     parser.add_argument("--min-common-samples", type=int, default=2)
     parser.add_argument("--min-attempts-per-action", type=int, default=2)

@@ -240,6 +240,12 @@ fi
 if [[ "${ONLINE_ALLOW_STALE_MINER_CLASSPATH:-0}" == "1" || "${ONLINE_ALLOW_STALE_MINER_CLASSPATH:-}" == "true" ]]; then
   cmd+=(--allow-stale-miner-classpath)
 fi
+if [[ "${ONLINE_NO_EVAL_GPU_SERVICE:-0}" == "1" || "${ONLINE_NO_EVAL_GPU_SERVICE:-}" == "true" ]]; then
+  cmd+=(--no-eval-gpu-service)
+fi
+if [[ -n "${ONLINE_MINE_SHARED_GPU_SERVICE:-}" ]]; then
+  cmd+=(--mine-shared-gpu-service "$ONLINE_MINE_SHARED_GPU_SERVICE")
+fi
 
 printf 'Command:'
 printf ' %q' "${cmd[@]}"
