@@ -1462,7 +1462,11 @@ public class StateSequenceBuilder {
             this.actionType = actionType;
             this.stepReward = stepReward;
             this.beliefArchetypeLabel = -1;  // unknown until populated
-            this.mctsVisitTargets = new float[MAX_CANDIDATES];  // all zeros = no MCTS target
+            this.mctsVisitTargets = new float[MAX_CANDIDATES];
+            // -2 sentinel = no target; signed candidate-Q targets live in [-1,1] and the Python
+            // mask (>= -1.0) excludes the sentinel. A zero fill would train Q toward 0 on every
+            // non-search step under CANDIDATE_Q_MCTS_SIGNED_TARGETS=1.
+            java.util.Arrays.fill(this.mctsVisitTargets, -2.0f);
             this.cardBeliefLabels = null;
             this.worldModelSnapshot = null;
             this.worldModelLabels = null;

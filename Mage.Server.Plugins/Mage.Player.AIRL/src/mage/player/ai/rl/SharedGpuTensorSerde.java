@@ -129,6 +129,9 @@ final class SharedGpuTensorSerde {
         int[] headIdx = new int[batchSize];
         int[] beliefArchetypeLabels = new int[batchSize];
         float[] mctsVisitTargets = new float[batchSize * maxCandidates];
+        // -2 sentinel = no candidate-Q target (signed targets live in [-1,1]); a zero fill
+        // would be inside the signed-target mask and train Q toward 0 on untargeted rows.
+        java.util.Arrays.fill(mctsVisitTargets, -2.0f);
         int cardBeliefDim = StateSequenceBuilder.cardBeliefDim();
         float[] cardBeliefLabels = new float[batchSize * cardBeliefDim];
         if (cardBeliefDim > 0) {

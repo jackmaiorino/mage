@@ -901,7 +901,14 @@ class SharedGpuHost:
                 for _ in range(task.batch_size):
                     self._infer_latency_ms.append(latency_ms)
         max_candidates = int(headers.get("max_candidates", "0"))
-        stride = (max_candidates + 1) * 4
+        # Derive the per-row stride from the actual payload: modern score rows are
+        # (probs + value + candidate_q) = (2*max_candidates + 1) floats, legacy rows
+        # (max_candidates + 1). Hardcoding the legacy width misaligned every task
+        # after the first in a merged multi-channel flush (garbage policy logits).
+        if logical_batch_size > 0 and len(result_bytes) % logical_batch_size == 0:
+            stride = len(result_bytes) // logical_batch_size
+        else:
+            stride = (max_candidates + 1) * 4
         result_offset = 0
         for idx, task in enumerate(tasks):
             task_stride = task.batch_size * stride

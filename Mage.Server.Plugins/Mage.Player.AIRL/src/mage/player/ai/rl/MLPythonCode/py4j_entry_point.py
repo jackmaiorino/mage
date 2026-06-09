@@ -3705,10 +3705,15 @@ class PythonEntryPoint:
                         if candidate_q_from_mcts_targets and mcts_visits_t is not None:
                             _mcts_q_c = mcts_visits_t[_c_start:_c_end].float()
                             if candidate_q_mcts_signed_targets:
+                                # Magnitude guard: older Java serializers zero-fill untargeted
+                                # rows (current sentinel is -2.0); without it those zeros train
+                                # Q toward 0 on every non-search step. Cost: drops the rare
+                                # legitimate wr==0.5 target (exactly 0) -- uninformative anyway.
                                 _target_mask_c = (
                                     torch.isfinite(_mcts_q_c)
                                     & (_mcts_q_c >= -1.0)
                                     & (_mcts_q_c <= 1.0)
+                                    & (_mcts_q_c.abs() > 1e-6)
                                     & cand_mask_t[_c_start:_c_end].bool()
                                 )
                             else:

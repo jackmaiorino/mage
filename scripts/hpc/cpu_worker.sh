@@ -104,7 +104,7 @@ export MODE=trainAll
 export TRAIN_PROFILES_LIST="$PROFILES"
 export MULLIGAN_DEVICE=cpu
 export GAME_LOG_FREQUENCY="${GAME_LOG_FREQUENCY:-0}"
-export OPPONENT_SAMPLER="${OPPONENT_SAMPLER:-self}"
+export OPPONENT_SAMPLER="${OPPONENT_SAMPLER:-league}"
 export RL_ARTIFACTS_ROOT
 export LEAGUE_REGISTRY_PATH="${LEAGUE_REGISTRY_PATH:-$REPO_ROOT/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json}"
 export ORCHESTRATED_RUN=1
