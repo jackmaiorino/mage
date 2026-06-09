@@ -551,7 +551,8 @@ class NativeOrchestrator:
         try:
             result = subprocess.run(
                 ["scontrol", "show", "hostnames", nodelist],
-                capture_output=True, text=True, timeout=10,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                universal_newlines=True, timeout=10,
             )
             if result.returncode == 0 and result.stdout.strip():
                 return result.stdout.strip().splitlines()
@@ -632,8 +633,9 @@ class NativeOrchestrator:
                         cwd=str(self.source_repo_root),
                         env=env,
                         timeout=600,
-                        capture_output=True,
-                        text=True,
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        universal_newlines=True,
                     )
                     if os.path.isfile(eval_results_file):
                         with open(eval_results_file) as f:
@@ -729,6 +731,24 @@ class NativeOrchestrator:
                 log(f"WARNING: Profile {entry.get('profile','')} has missing deck_path; skipping for meta opponent list")
                 continue
             text = str(resolved)
+            if resolved.suffix == ".txt":
+                # deck_path is a pool/decklist file (lists .dek filenames); expand
+                # to full .dek paths so the meta decklist holds real decks, not the
+                # pool file itself (which the card-list loader can't parse).
+                try:
+                    for line in resolved.read_text(encoding="utf-8").splitlines():
+                        line = line.strip()
+                        if not line or line.startswith("#"):
+                            continue
+                        cand = Path(line)
+                        full = cand if cand.is_absolute() else (resolved.parent / line)
+                        fs = str(full)
+                        if fs not in seen:
+                            seen.add(fs)
+                            deck_paths.append(fs)
+                except Exception as exc:
+                    log(f"WARNING: could not expand pool decklist {resolved}: {exc}")
+                continue
             if text in seen:
                 continue
             seen.add(text)
@@ -876,6 +896,8 @@ class NativeOrchestrator:
             raise RuntimeError(f"shared GPU hosts not ready before timeout: slots={sorted(pending)}")
         if env_bool("WRITE_SATELLITE_ENV", False):
             self._write_satellite_env()
+        if env_bool("ONNX_PUBLISH_ENABLE", False):
+            self._launch_onnx_publisher()
         auto_sats = env_int("AUTO_SATELLITES", 0)
         if auto_sats > 0:
             self._submit_satellites(auto_sats)
@@ -902,6 +924,30 @@ class NativeOrchestrator:
         atomic_write_text(compat_sat_path, text)
         log(f"Wrote satellite.env: {sat_path} (endpoint={endpoint})")
 
+    def _launch_onnx_publisher(self) -> None:
+        """Launch the ONNX weight-publisher sidecar (for self-serve CPU satellites)."""
+        script = self.source_repo_root / "scripts" / "hpc" / "onnx_publisher.py"
+        if not script.exists():
+            log(f"ONNX_PUBLISH: script not found at {script}")
+            return
+        python_bin = self.resolve_python_executable()
+        profile_names = [str(e.get("profile", "")).strip() for e in self.selected_profiles
+                         if str(e.get("profile", "")).strip()]
+        env = dict(os.environ)
+        env["RL_ARTIFACTS_ROOT"] = str(self.rl_artifacts_root)
+        env["ONNX_PUBLISH_PROFILES"] = ",".join(profile_names)
+        env["ONNX_PUBLISH_INTERVAL_S"] = os.getenv("ONNX_PUBLISH_INTERVAL_S", "20")
+        log_path = self.rl_artifacts_root / "onnx_publisher.log"
+        try:
+            self._onnx_publisher_proc = subprocess.Popen(
+                [python_bin, str(script)], env=env,
+                stdout=open(log_path, "w"), stderr=subprocess.STDOUT,
+                cwd=str(self.source_repo_root))
+            log(f"ONNX_PUBLISH: launched pid={self._onnx_publisher_proc.pid} "
+                f"profiles={profile_names} -> {log_path}")
+        except Exception as exc:
+            log(f"ONNX_PUBLISH: failed to launch: {exc}")
+
     def _submit_satellites(self, count: int) -> None:
         script = self.source_repo_root / "scripts" / "hpc" / "add_satellites.sh"
         if not script.exists():
@@ -920,8 +966,9 @@ class NativeOrchestrator:
         cmd = ["bash", str(script), job_id, str(count)]
         log(f"AUTO_SATELLITES: submitting {count} satellites via {' '.join(cmd)}")
         try:
-            result = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=60,
-                                   cwd=str(self.source_repo_root))
+            result = subprocess.run(cmd, env=env, stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE, universal_newlines=True,
+                                   timeout=60, cwd=str(self.source_repo_root))
             if result.stdout:
                 for line in result.stdout.strip().splitlines():
                     log(f"AUTO_SATELLITES: {line}")

@@ -311,6 +311,8 @@ public class RLTrainer {
     private static final String LEAGUE_BASELINE_DECKLIST_FILE = EnvConfig.str("LEAGUE_BASELINE_DECKLIST_FILE", DECK_LIST_FILE);
     private static final int LEAGUE_BASELINE_BOT_SKILL = EnvConfig.i32("LEAGUE_BASELINE_BOT_SKILL", 1);
     private static final double LEAGUE_PROMOTE_WR = EnvConfig.f64("LEAGUE_PROMOTE_WR", 0.55);
+    private static final boolean LEAGUE_DEBUG = EnvConfig.bool("LEAGUE_DEBUG", false);
+    private static final java.util.concurrent.atomic.AtomicInteger LEAGUE_DBG_PICKS = new java.util.concurrent.atomic.AtomicInteger();
     private static final double LEAGUE_POOL_FLOOR_WR = EnvConfig.f64("LEAGUE_POOL_FLOOR_WR", 0.50);
     private static final double LEAGUE_CHAMPION_PROMOTE_WR = EnvConfig.f64("LEAGUE_CHAMPION_PROMOTE_WR", 0.55);
     private static final int LEAGUE_POOL_MAX = EnvConfig.i32("LEAGUE_POOL_MAX", 30);
@@ -1057,12 +1059,22 @@ public class RLTrainer {
                 return out;
             }
             String s = new String(Files.readAllBytes(p), StandardCharsets.UTF_8);
-            java.util.regex.Matcher m = java.util.regex.Pattern.compile("\\{[^\\{\\}]*\\}").matcher(s);
-            while (m.find()) {
-                String obj = m.group();
-                String profile = jsonStringField(obj, "profile", "").trim();
-                String deckPath = jsonStringField(obj, "deck_path", "").trim();
-                boolean active = jsonBool(obj, "active", true);
+            // Parse with Gson: registry entries contain nested objects (train_env), which the
+            // old flat-object regex "\{[^{}]*\}" mismatched -- it grabbed the inner train_env
+            // block (no profile/deck_path) and skipped every entry, silently emptying the league
+            // opponent pool and forcing CP7/self-play fallback.
+            com.google.gson.JsonArray arr = com.google.gson.JsonParser.parseString(s).getAsJsonArray();
+            for (com.google.gson.JsonElement el : arr) {
+                if (el == null || !el.isJsonObject()) {
+                    continue;
+                }
+                com.google.gson.JsonObject obj = el.getAsJsonObject();
+                String profile = obj.has("profile") && !obj.get("profile").isJsonNull()
+                        ? obj.get("profile").getAsString().trim() : "";
+                String deckPath = obj.has("deck_path") && !obj.get("deck_path").isJsonNull()
+                        ? obj.get("deck_path").getAsString().trim() : "";
+                boolean active = !obj.has("active") || obj.get("active").isJsonNull()
+                        || obj.get("active").getAsBoolean();
                 if (profile.isEmpty() || deckPath.isEmpty()) {
                     continue;
                 }
@@ -1070,7 +1082,8 @@ public class RLTrainer {
                 e.profile = profile;
                 e.deckPath = deckPath;
                 e.active = active;
-                e.notes = jsonStringField(obj, "notes", "");
+                e.notes = obj.has("notes") && !obj.get("notes").isJsonNull()
+                        ? obj.get("notes").getAsString() : "";
                 out.add(e);
             }
         } catch (Exception e) {
@@ -1180,6 +1193,8 @@ public class RLTrainer {
 
                 Path deckPath = resolveDeckPath(e.deckPath, baseDir);
                 if (deckPath == null || !Files.isRegularFile(deckPath)) {
+                    if (LEAGUE_DEBUG) System.out.println("[LEAGUE_DBG] meta-skip " + profile
+                            + " deck-unresolved raw=" + e.deckPath + " baseDir=" + baseDir + " resolved=" + deckPath);
                     continue;
                 }
 
@@ -1215,6 +1230,14 @@ public class RLTrainer {
                 ));
             }
             loaded.sort((a, b) -> a.profile.compareToIgnoreCase(b.profile));
+            if (LEAGUE_DEBUG) {
+                System.out.println("[LEAGUE_DBG] meta-candidates=" + loaded.size()
+                        + " profile=" + MODEL_PROFILE_NAME + " cwd=" + System.getProperty("user.dir"));
+                for (LeagueMetaOpponentCandidate c : loaded) {
+                    System.out.println("[LEAGUE_DBG]   cand " + c.profile + " qualified=" + c.qualified
+                            + " snap=" + c.snapshotPath + " deck=" + c.deckPath);
+                }
+            }
             LEAGUE_META_CACHE = java.util.Collections.unmodifiableList(loaded);
             LEAGUE_META_CACHE_AT_MS = now;
             return LEAGUE_META_CACHE;
@@ -2046,6 +2069,11 @@ public class RLTrainer {
     // instead of the static fields.  Null means legacy single-profile mode.
     private final ProfileContext profileContext;
 
+    // Reverse-curriculum scheduler. Null unless RC_ENABLE=1 with a valid corpus;
+    // shared read-only across worker threads. When null the training path is
+    // completely unchanged.
+    private final ReverseCurriculumScheduler rcScheduler = ReverseCurriculumScheduler.fromEnv();
+
     public RLTrainer() {
         this.profileContext = null;
     }
@@ -2338,6 +2366,16 @@ public class RLTrainer {
                         int epNumber = episodeCounter().incrementAndGet();
                         if (epNumber > NUM_EPISODES) {
                             break; // Another thread reached the target
+                        }
+                        // Reverse curriculum: maybe start this episode from a captured
+                        // mid-game checkpoint instead of a fresh deal. No-op for the
+                        // normal path when RC is disabled (rcScheduler == null).
+                        if (rcScheduler != null) {
+                            String rcSnap = rcScheduler.chooseStartSnapshot(epNumber);
+                            if (rcSnap != null) {
+                                runReverseCurriculumEpisode(rcSnap, epNumber);
+                                continue;
+                            }
                         }
                         metrics.recordEpisodeStarted();
                         long episodeStartNanos = System.nanoTime();
@@ -4715,6 +4753,89 @@ public class RLTrainer {
         }
     }
 
+    /**
+     * Reverse-curriculum episode: resume a captured checkpoint as a real (non-simulation)
+     * trainable game, play both sides normally to terminal, and credit terminal reward via
+     * the same recordGameOutcome + updateModelBasedOnOutcome path as fresh episodes. Start
+     * states are chosen by {@link ReverseCurriculumScheduler} using outcome+distance only.
+     */
+    private void runReverseCurriculumEpisode(String snapshotPath, int epNumber) {
+        metrics.recordEpisodeStarted();
+        activeEps().incrementAndGet();
+        metrics.setActiveEpisodes(activeEps().get());
+        boolean multiProfile = profileContext != null;
+        boolean enableGameLogging = (epNumber <= 20)
+                || (GAME_LOG_FREQUENCY > 0 && epNumber % GAME_LOG_FREQUENCY == 0);
+        if (multiProfile && enableGameLogging) {
+            System.setProperty("GAME_LOG_DIR_OVERRIDE", profileContext.paths.trainingGameLogsDir);
+        }
+        GameLogger gameLogger = enableGameLogging && multiProfile
+                ? GameLogger.createInProfileDir(profileContext.paths.trainingGameLogsDir, 20)
+                : GameLogger.create(enableGameLogging);
+        threadLocalGameLogger.set(gameLogger);
+        Game game = null;
+        try {
+            LiveCheckpointBranchMiner.ResumedGame rg =
+                    LiveCheckpointBranchMiner.resumeTrainableGame(snapshotPath, true);
+            if (rg == null || rg.game == null || rg.rlPlayer == null) {
+                logger.warn("RC: failed to resume checkpoint, skipping episode " + epNumber + ": " + snapshotPath);
+                return;
+            }
+            game = rg.game;
+            ComputerPlayerRL rlPlayer = rg.rlPlayer;
+            Player opponentPlayer = rg.opponent;
+            rlPlayer.setCurrentEpisode(epNumber);
+            rlPlayer.setAttachedGameLogger(gameLogger);
+            if (opponentPlayer instanceof ComputerPlayerRL) {
+                ((ComputerPlayerRL) opponentPlayer).setCurrentEpisode(epNumber);
+            }
+            GameHealthMonitor healthMonitor = GameHealthMonitor.createAndStart(game);
+            long deadlineNanos = System.nanoTime()
+                    + Math.max(1L, (long) EnvConfig.i32("RC_EPISODE_TIMEOUT_SEC", 300)) * 1_000_000_000L;
+            while (!game.hasEnded()) {
+                game.resume();
+                if (!game.hasEnded() && System.nanoTime() >= deadlineNanos) {
+                    break;
+                }
+            }
+            healthMonitor.stop();
+            if (!game.hasEnded()) {
+                logger.warn("RC episode " + epNumber + " did not reach terminal (timeout/killed); skipping update.");
+                return;
+            }
+            boolean rlPlayerWon = !healthMonitor.wasKilled()
+                    && game.getWinner() != null
+                    && game.getWinner().contains(rlPlayer.getName());
+            recordGameOutcome(rlPlayerWon);
+            if (gameLogger.isEnabled()) {
+                String oppName = opponentPlayer != null ? opponentPlayer.getName() : "opponent";
+                String winner = rlPlayerWon ? rlPlayer.getName() : oppName;
+                String loser = rlPlayerWon ? oppName : rlPlayer.getName();
+                gameLogger.logOutcome(winner, loser, game.getTurnNum(), "RC episode " + epNumber);
+                gameLogger.close();
+            }
+            updateModelBasedOnOutcome(game, rlPlayer, opponentPlayer);
+        } catch (Throwable t) {
+            logger.warn("RC episode " + epNumber + " failed: " + t);
+        } finally {
+            if (game != null) {
+                try {
+                    game.end();
+                } catch (Throwable ignored) {
+                    // ignore cleanup failures
+                }
+                try {
+                    game.cleanUp();
+                } catch (Throwable ignored) {
+                    // ignore cleanup failures
+                }
+            }
+            activeEps().decrementAndGet();
+            metrics.setActiveEpisodes(activeEps().get());
+            threadLocalGameLogger.remove();
+        }
+    }
+
     private RewardDiag updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, Player opponentPlayer) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
         ProfileContext mainTrainingContext = profileContext;
@@ -4760,6 +4881,13 @@ public class RLTrainer {
             attachAwrSelectedActionTargets(rlPlayerTrainingData, rlPlayerRewards);
             attachAwrSelectedActionTargets(opponentTrainingData, opponentRewards);
         }
+        // Self-supervised world-model targets: each decision's label is the
+        // agent's OWN future zone-counts at fixed horizons. Runs on the capped
+        // per-episode lists, so horizons never cross an episode boundary.
+        if (StateSequenceBuilder.worldModelDim() > 0) {
+            attachWorldModelTargets(rlPlayerTrainingData);
+            attachWorldModelTargets(opponentTrainingData);
+        }
 
         // Update the model with all states and immediate rewards (Python will apply GAE)
         if (!rlPlayerTrainingData.isEmpty()) {
@@ -4798,6 +4926,58 @@ public class RLTrainer {
             return trajectory == null ? new ArrayList<>() : trajectory;
         }
         return new ArrayList<>(trajectory.subList(trajectory.size() - maxSteps, trajectory.size()));
+    }
+
+    /**
+     * Back-fill self-supervised world-model labels. For decision i the label is
+     * the agent's OWN future zone-count snapshots at WORLD_MODEL_HORIZONS,
+     * concatenated. A row is labeled only when every horizon lands inside the
+     * episode (so labeled rows are all >= max-horizon decisions from terminal --
+     * exactly the far-horizon regime where the value head is myopic). Rows whose
+     * farthest horizon runs past the end keep null labels (serialized as -1,
+     * skipped by Python).
+     */
+    private static void attachWorldModelTargets(
+            List<StateSequenceBuilder.TrainingData> trajectory
+    ) {
+        int dim = StateSequenceBuilder.worldModelDim();
+        if (dim <= 0 || trajectory == null || trajectory.isEmpty()) {
+            return;
+        }
+        int feat = StateSequenceBuilder.WORLD_MODEL_FEATURES;
+        int[] horizons = StateSequenceBuilder.WORLD_MODEL_HORIZONS;
+        int n = trajectory.size();
+        int nullSnap = 0;
+        int labeled = 0;
+        for (int i = 0; i < n; i++) {
+            StateSequenceBuilder.TrainingData td = trajectory.get(i);
+            if (td == null) {
+                continue;
+            }
+            if (td.worldModelSnapshot == null) {
+                nullSnap++;
+            }
+            float[] label = new float[dim];
+            boolean complete = true;
+            for (int h = 0; h < horizons.length; h++) {
+                int j = i + horizons[h];
+                float[] future = (j < n && trajectory.get(j) != null)
+                        ? trajectory.get(j).worldModelSnapshot : null;
+                if (future == null || future.length != feat) {
+                    complete = false;
+                    break;
+                }
+                System.arraycopy(future, 0, label, h * feat, feat);
+            }
+            if (complete) {
+                td.setWorldModelLabels(label);
+                labeled++;
+            }
+        }
+        if ("1".equals(System.getenv().getOrDefault("WORLD_MODEL_DIAG", "0"))) {
+            System.err.println("[WM_ATTACH_DIAG] n=" + n + " nullSnapshots=" + nullSnap
+                    + " labeled=" + labeled + " dim=" + dim + " feat=" + feat);
+        }
     }
 
     private static void attachAwrSelectedActionTargets(
@@ -5192,6 +5372,16 @@ public class RLTrainer {
     }
 
     private Player createTrainingOpponent(int episodeNum, Random rand) {
+        Player opp = createTrainingOpponentInner(episodeNum, rand);
+        if (LEAGUE_DEBUG) {
+            int n = LEAGUE_DBG_PICKS.incrementAndGet();
+            if (n <= 80) System.out.println("[LEAGUE_DBG] pick#" + n + " mode=" + OPPONENT_SAMPLER
+                    + " lastOpponentType=" + lastOpponentType);
+        }
+        return opp;
+    }
+
+    private Player createTrainingOpponentInner(int episodeNum, Random rand) {
         String mode = OPPONENT_SAMPLER == null ? "league" : OPPONENT_SAMPLER.trim().toLowerCase();
         switch (mode) {
             case "self":

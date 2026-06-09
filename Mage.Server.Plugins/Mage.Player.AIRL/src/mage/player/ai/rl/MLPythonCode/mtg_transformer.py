@@ -197,6 +197,27 @@ class MTGTransformerModel(nn.Module):
                 nn.ReLU(),
                 nn.Linear(d_model // 2, self.card_belief_dim),
             )
+        # Self-supervised world-model head: predicts the agent's OWN future zone-counts
+        # (library/graveyard/etc at horizons) to force the shared CLS to model the
+        # combo-assembly trajectory -> de-myopia the value head. Thesis-clean (future
+        # STATE, no value/combo labels). WORLD_MODEL_HEAD_HIDDEN=0 -> narrow bottleneck
+        # (single Linear) to force predictive signal into CLS for transfer.
+        self.world_model_dim = max(0, int(os.getenv('WORLD_MODEL_DIM', '0')))
+        self.world_model_head = None
+        if self.world_model_dim > 0:
+            _wm_hidden = int(os.getenv('WORLD_MODEL_HEAD_HIDDEN', str(d_model // 2)))
+            if _wm_hidden > 0:
+                self.world_model_head = nn.Sequential(
+                    nn.LayerNorm(d_model),
+                    nn.Linear(d_model, _wm_hidden),
+                    nn.ReLU(),
+                    nn.Linear(_wm_hidden, self.world_model_dim),
+                )
+            else:
+                self.world_model_head = nn.Sequential(
+                    nn.LayerNorm(d_model),
+                    nn.Linear(d_model, self.world_model_dim),
+                )
 
         # Learnable scaling factors
         self.value_scale = nn.Parameter(torch.tensor(1.0))
@@ -532,6 +553,12 @@ class MTGTransformerModel(nn.Module):
             return cls.new_zeros((cls.shape[0], 0))
         return self.card_belief_head(cls)
 
+    def world_model_logits_from_cls(self, cls: torch.Tensor) -> torch.Tensor:
+        """Future zone-count logits from shared-encoder CLS (self-supervised world model)."""
+        if self.world_model_head is None:
+            return cls.new_zeros((cls.shape[0], 0))
+        return self.world_model_head(cls)
+
     def predict_batch(self,
                       sequences: np.ndarray,
                       masks: np.ndarray,
@@ -746,7 +773,7 @@ class MTGTransformerModel(nn.Module):
         return dict(input_dim=self.input_dim, d_model=self.d_model, nhead=self.transformer_layers[0].self_attn.num_heads,
                     num_layers=len(self.transformer_layers), dim_feedforward=self.transformer_layers[0].linear1.out_features,
                     dropout=self.transformer_layers[0].dropout.p, num_actions=self.num_actions,
-                    card_belief_dim=self.card_belief_dim)
+                    card_belief_dim=self.card_belief_dim, world_model_dim=self.world_model_dim)
 
 
 class SingleHeadScorer(nn.Module):

@@ -103,6 +103,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // When true, skip model inference and return uniform random scores.
     // Use to benchmark pure game-engine throughput without GPU dependency.
     private static final boolean RANDOM_DECISIONS = EnvConfig.bool("RL_RANDOM_DECISIONS", false);
+    // DIAGNOSTIC counterfactual: when set, only allow casting Balustrade Spy if the combo
+    // finish is ready (>=3 creatures in play + landless library). Measures combo-timing headroom.
+    private static final boolean SPY_FINISH_GATE = EnvConfig.bool("SPY_FINISH_GATE", false);
 
     // Profiling counters (shared across all instances)
     private static final java.util.concurrent.atomic.AtomicLong inferNanosTotal = new java.util.concurrent.atomic.AtomicLong();
@@ -238,6 +241,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private transient String cachedPlayableStateKey;
     private transient List<ActivatedAbility> cachedPlayableOptions = null;
     private transient int onlinePrefixSearchActivations = 0;
+    private transient int searchOpActivations = 0;
     private transient Deque<String> onlinePrefixAutopilot = new ArrayDeque<>();
     private transient UUID onlinePrefixAutopilotGameId = null;
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
@@ -790,6 +794,43 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     private List<ActivatedAbility> getPlayableForCurrentState(Game game) {
+        List<ActivatedAbility> playable = getPlayableForCurrentStateRaw(game);
+        if (!SPY_FINISH_GATE || playable == null || playable.isEmpty()) {
+            return playable;
+        }
+        // Only allow the all-in Balustrade Spy when the combo finish is ready: >=3
+        // creatures in play (to Flashback Dread Return) AND a landless library (so Spy
+        // mills the whole deck). Otherwise remove the Spy cast from the candidate set.
+        int creatures = 0;
+        for (Permanent p : game.getBattlefield().getAllActivePermanents()) {
+            if (p.isControlledBy(this.getId()) && p.isCreature(game)) {
+                creatures++;
+            }
+        }
+        int landsInLib = 0;
+        if (getLibrary() != null) {
+            for (Card c : getLibrary().getCards(game)) {
+                if (c != null && c.isLand(game)) {
+                    landsInLib++;
+                }
+            }
+        }
+        if (creatures >= 3 && landsInLib == 0) {
+            return playable;
+        }
+        List<ActivatedAbility> filtered = new ArrayList<>(playable.size());
+        for (ActivatedAbility ab : playable) {
+            MageObject src = (ab == null) ? null : game.getObject(ab.getSourceId());
+            String nm = (src == null) ? null : src.getName();
+            if (nm != null && nm.equalsIgnoreCase("Balustrade Spy")) {
+                continue;
+            }
+            filtered.add(ab);
+        }
+        return filtered;
+    }
+
+    private List<ActivatedAbility> getPlayableForCurrentStateRaw(Game game) {
         long lookupStartNanos = System.nanoTime();
         List<ActivatedAbility> playable;
         if (!PLAYABLE_CACHE_ENABLED) {
@@ -3092,6 +3133,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.lastMulliganDecisionShouldMulligan = player.lastMulliganDecisionShouldMulligan;
         this.replayDecisionOrdinal = player.replayDecisionOrdinal;
         this.onlinePrefixSearchActivations = player.onlinePrefixSearchActivations;
+        this.searchOpActivations = player.searchOpActivations;
         this.greedyMode = player.greedyMode;
         this.policyKey = player.policyKey;
         this.trainingEnabled = player.trainingEnabled;
@@ -3121,6 +3163,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.cachedPlayableStateKey = null;
         this.cachedPlayableOptions = null;
         this.onlinePrefixSearchActivations = 0;
+        this.searchOpActivations = 0;
         this.onlinePrefixAutopilot = new ArrayDeque<>();
         this.onlinePrefixAutopilotGameId = null;
         this.attachedGameLogger = null;
@@ -3527,7 +3570,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // One-shot diagnostic: print what flags the JVM actually sees on entry
         // to this method. Helps us confirm the MCTS gate is being reached with
         // the right values.
-        if (GENERIC_CHOOSE_DIAG_COUNT.incrementAndGet() <= 5) {
+        if (GENERIC_CHOOSE_DIAG_COUNT.incrementAndGet() <= 8) {
             System.out.println("[GENERIC_CHOOSE_DIAG] actionType=" + actionType
                     + " candidateCount=" + candidateCount
                     + " trainingEnabled=" + trainingEnabled
@@ -3535,6 +3578,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     + " MCTS_TRAINING_ENABLE=" + MCTS_TRAINING_ENABLE
                     + " mctsEvalOverride=" + mctsEvalOverride
                     + " mctsTrainingMode=" + mctsTrainingMode
+                    + " SEARCH_OP_ENABLE=" + SEARCH_OP_ENABLE
+                    + " SEARCH_OP_SKIP_TOP_PROB=" + SEARCH_OP_SKIP_TOP_PROB
                     + " sampler=" + (DETERMINIZATION_SAMPLER != null ? "non-null" : "null"));
         }
         float[] mctsVisitTargets = null;
@@ -3849,6 +3894,184 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     gl.log(msg);
                 } else {
                     System.out.println(msg);
+                }
+            }
+        }
+
+        // Terminal-win-rate search operator (scope_B): at gated high-leverage
+        // ACTIVATE decisions, branch the top-K candidates, play each to a REAL
+        // terminal, act on the highest win-rate, and distill the policy toward the
+        // per-candidate terminal win-rate (signed [-1,1] target through
+        // mctsVisitTargets, consumed by the branch_return_policy / candidate_q loss).
+        // Thesis-clean: terminal win/lose only. Mutually exclusive with MCTS /
+        // online-prefix targets via the mctsVisitTargets == null guard.
+        if (SEARCH_OP_ENABLE
+                && (trainingEnabled || !SEARCH_OP_ARBITER_CAST_FILTER.isEmpty())
+                && !forcedApplied
+                && mctsVisitTargets == null
+                && game != null
+                && !game.isSimulation()
+                && model != null
+                && actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                && candidateCount >= 2
+                && maxTargets == 1
+                && minTargets <= 1
+                && selectedIndices != null
+                && selectedIndices.size() == 1
+                && (SEARCH_OP_MAX_ACTIVATIONS <= 0
+                        || searchOpActivations < SEARCH_OP_MAX_ACTIVATIONS)) {
+            float maxProb = 0f;
+            int maskedCount = 0;
+            for (int i = 0; i < candidateCount; i++) {
+                if (actionProbs[i] > maxProb) maxProb = actionProbs[i];
+                if (candidateMask[i] == 1) maskedCount++;
+            }
+            boolean ambiguous = !(maskedCount >= 2 && maxProb >= SEARCH_OP_SKIP_TOP_PROB);
+            boolean sampledIn = SEARCH_OP_SAMPLE_PROB >= 1.0f
+                    || stochasticRng.nextFloat() < SEARCH_OP_SAMPLE_PROB;
+            SEARCH_OP_GATE_TOTAL.incrementAndGet();
+            if (maskedCount < 2) SEARCH_OP_GATE_FEWCAND.incrementAndGet();
+            if (!ambiguous) SEARCH_OP_GATE_CONFIDENT.incrementAndGet();
+            if (!sampledIn) SEARCH_OP_GATE_SAMPLED_OUT.incrementAndGet();
+            if (SEARCH_OP_GATE_TOTAL.get() <= 10) {
+                System.out.println("[SEARCH_OP_GATE] maskedCount=" + maskedCount + " maxProb=" + maxProb
+                        + " ambiguous=" + ambiguous + " sampledIn=" + sampledIn
+                        + " activations=" + searchOpActivations);
+            }
+            boolean arbPass = true;
+            java.util.List<String> arbTexts = null;
+            if (maskedCount >= 2 && ambiguous && sampledIn && !SEARCH_OP_ARBITER_CAST_FILTER.isEmpty()) {
+                arbTexts = branchCandidateTexts(actionType, candidates, candidateCount, game);
+                arbPass = false;
+                if (arbTexts != null) {
+                    for (String t : arbTexts) {
+                        if (t != null && t.contains(SEARCH_OP_ARBITER_CAST_FILTER)) { arbPass = true; break; }
+                    }
+                }
+            }
+            if (maskedCount >= 2 && ambiguous && sampledIn && arbPass) {
+                int originalIndex = selectedIndices.get(0);
+                searchOpActivations++;
+                SEARCH_OP_CALLS.incrementAndGet();
+                try {
+                    mage.player.ai.rl.TerminalPrefixSearch.WinRateConfig wcfg =
+                            new mage.player.ai.rl.TerminalPrefixSearch.WinRateConfig();
+                    wcfg.topK = SEARCH_OP_TOP_K;
+                    wcfg.playoutsPerCandidate = SEARCH_OP_PLAYOUTS;
+                    wcfg.perPlayoutTimeoutMs = SEARCH_OP_PLAYOUT_TIMEOUT_MS;
+                    wcfg.totalTimeoutMs = SEARCH_OP_TOTAL_TIMEOUT_MS;
+                    wcfg.maxGameTurns = SEARCH_OP_MAX_GAME_TURNS;
+                    wcfg.genericBranchOrder = SEARCH_OP_GENERIC_BRANCH_ORDER;
+                    wcfg.modelGuidedFallback = SEARCH_OP_MODEL_GUIDED;
+                    wcfg.log = SEARCH_OP_LOG;
+                    wcfg.baseSeed = (((long) System.identityHashCode(game)) << 21)
+                            ^ (((long) searchOpActivations) * 0x100000001B3L)
+                            ^ (long) System.identityHashCode(this);
+                    mage.player.ai.rl.TerminalPrefixSearch.WinRateResult wr =
+                            mage.player.ai.rl.TerminalPrefixSearch.estimateCandidateWinRates(
+                                    game, getId(), candidates, actionType, policyMaskedProbs, model, wcfg);
+                    SEARCH_OP_PLAYOUTS_TOTAL.addAndGet(wr.totalPlayouts);
+                    SEARCH_OP_TERMINALS_TOTAL.addAndGet(wr.totalTerminals);
+                    SEARCH_OP_WALL_MS.addAndGet(wr.wallMs);
+                    if (wr.observedCount >= 2 && wr.bestIndex >= 0 && wr.bestIndex < candidateCount) {
+                        float[] target = new float[maxCandidates];
+                        Arrays.fill(target, SEARCH_OP_UNOBSERVED);
+                        for (int i = 0; i < Math.min(wr.winRate.length, maxCandidates); i++) {
+                            if (!Float.isNaN(wr.winRate[i])) {
+                                target[i] = 2.0f * wr.winRate[i] - 1.0f;
+                            }
+                        }
+                        mctsVisitTargets = target;
+                        selectedIndices = Collections.singletonList(wr.bestIndex);
+                        oldLogpTotal = 0.0f;
+                        SEARCH_OP_OBSERVED.incrementAndGet();
+                        if (wr.bestIndex != originalIndex) {
+                            SEARCH_OP_OVERRIDES.incrementAndGet();
+                        }
+                    } else {
+                        SEARCH_OP_DEGENERATE.incrementAndGet();
+                    }
+                    if (SEARCH_OP_LOG) {
+                        GameLogger gl = resolveGameLogger();
+                        String msg = String.format(Locale.US,
+                                "[SEARCH_OP] act=%d observed=%d best=%d orig=%d playouts=%d terminals=%d wallMs=%d wr=%s",
+                                searchOpActivations, wr.observedCount, wr.bestIndex, originalIndex,
+                                wr.totalPlayouts, wr.totalTerminals, wr.wallMs,
+                                java.util.Arrays.toString(wr.winRate));
+                        if (gl != null && gl.isEnabled()) {
+                            gl.log(msg);
+                        } else {
+                            System.out.println(msg);
+                        }
+                        try {
+                            if (arbTexts == null) {
+                                arbTexts = branchCandidateTexts(actionType, candidates, candidateCount, game);
+                            }
+                            int cre = 0;
+                            for (mage.game.permanent.Permanent perm : game.getBattlefield().getAllActivePermanents(getId())) {
+                                if (perm.isCreature(game)) cre++;
+                            }
+                            mage.players.Player me = game.getPlayer(getId());
+                            StringBuilder asb = new StringBuilder();
+                            asb.append("[SEARCH_OP_ARB] creatures=").append(cre)
+                               .append(" gy=").append(me != null ? me.getGraveyard().size() : -1)
+                               .append(" lib=").append(me != null ? me.getLibrary().size() : -1)
+                               .append(" override=").append(wr.bestIndex != originalIndex ? 1 : 0)
+                               .append(" | ");
+                            for (int i = 0; i < Math.min(wr.winRate.length, candidateCount); i++) {
+                                if (!Float.isNaN(wr.winRate[i]) && wr.winRate[i] >= -1.0f) {
+                                    String t = (arbTexts != null && i < arbTexts.size() && arbTexts.get(i) != null) ? arbTexts.get(i) : ("#" + i);
+                                    if (t.length() > 32) t = t.substring(0, 32);
+                                    asb.append(t).append("=").append(String.format(Locale.US, "%.2f", wr.winRate[i])).append(" ; ");
+                                }
+                            }
+                            String amsg = asb.toString();
+                            if (gl != null && gl.isEnabled()) gl.log(amsg); else System.out.println(amsg);
+                            if (!SEARCH_OP_CAPTURE_FILE.isEmpty() && arbTexts != null) {
+                                int spyIdx = -1;
+                                for (int i = 0; i < arbTexts.size(); i++) {
+                                    if (arbTexts.get(i) != null && arbTexts.get(i).contains(SEARCH_OP_ARBITER_CAST_FILTER)) { spyIdx = i; break; }
+                                }
+                                java.util.Base64.Encoder b64 = java.util.Base64.getEncoder();
+                                java.nio.ByteOrder LE = java.nio.ByteOrder.LITTLE_ENDIAN;
+                                float[][] seq = baseState.getSequence();
+                                int seqLen = seq.length; int dim = seqLen > 0 ? seq[0].length : 0;
+                                java.nio.ByteBuffer bSeq = java.nio.ByteBuffer.allocate(seqLen * dim * 4).order(LE);
+                                for (float[] row : seq) for (float v : row) bSeq.putFloat(v);
+                                int[] m = baseState.getMask();
+                                java.nio.ByteBuffer bMask = java.nio.ByteBuffer.allocate(m.length * 4).order(LE);
+                                for (int v : m) bMask.putInt(v);
+                                int[] tk = baseState.getTokenIds();
+                                java.nio.ByteBuffer bTok = java.nio.ByteBuffer.allocate(tk.length * 4).order(LE);
+                                for (int v : tk) bTok.putInt(v);
+                                java.nio.ByteBuffer bCF = java.nio.ByteBuffer.allocate(candidateFeatures.length * candFeatDim * 4).order(LE);
+                                for (float[] row : candidateFeatures) for (int j = 0; j < candFeatDim; j++) bCF.putFloat(j < row.length ? row[j] : 0f);
+                                java.nio.ByteBuffer bCI = java.nio.ByteBuffer.allocate(candidateActionIds.length * 4).order(LE);
+                                for (int v : candidateActionIds) bCI.putInt(v);
+                                java.nio.ByteBuffer bCM = java.nio.ByteBuffer.allocate(candidateMask.length * 4).order(LE);
+                                for (int v : candidateMask) bCM.putInt(v);
+                                StringBuilder cb = new StringBuilder();
+                                cb.append(cre).append('|').append(spyIdx).append('|').append(seqLen).append('|').append(dim)
+                                  .append('|').append(candidateMask.length).append('|').append(candFeatDim)
+                                  .append('|').append(b64.encodeToString(bSeq.array()))
+                                  .append('|').append(b64.encodeToString(bMask.array()))
+                                  .append('|').append(b64.encodeToString(bTok.array()))
+                                  .append('|').append(b64.encodeToString(bCF.array()))
+                                  .append('|').append(b64.encodeToString(bCI.array()))
+                                  .append('|').append(b64.encodeToString(bCM.array()));
+                                synchronized (SEARCH_OP_CAPTURE_LOCK) {
+                                    try (java.io.FileWriter fw = new java.io.FileWriter(SEARCH_OP_CAPTURE_FILE, true)) {
+                                        fw.write(cb.toString()); fw.write('\n');
+                                    } catch (Throwable ignoreCap) { }
+                                }
+                            }
+                        } catch (Throwable ignoreArb) { }
+                    }
+                } catch (Throwable t) {
+                    SEARCH_OP_ERRORS.incrementAndGet();
+                    if (SEARCH_OP_LOG) {
+                        System.out.println("[SEARCH_OP] error: " + t);
+                    }
                 }
             }
         }
@@ -9763,6 +9986,44 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_AUTOPILOT_DURING_TRAINING", false);
     private static final boolean ONLINE_PREFIX_AUTOPILOT_TARGETS =
             mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_AUTOPILOT_TARGETS", false);
+    // --- Terminal-win-rate search operator (scope_B): gated in-loop terminal playout
+    //     that distills the policy toward per-candidate terminal win-rate. ---
+    private static final boolean SEARCH_OP_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("SEARCH_OP_ENABLE", false);
+    private static final int SEARCH_OP_TOP_K =
+            mage.player.ai.rl.EnvConfig.i32("SEARCH_OP_TOP_K", 3);
+    private static final int SEARCH_OP_PLAYOUTS =
+            mage.player.ai.rl.EnvConfig.i32("SEARCH_OP_PLAYOUTS", 2);
+    private static final int SEARCH_OP_MAX_ACTIVATIONS =
+            mage.player.ai.rl.EnvConfig.i32("SEARCH_OP_MAX_ACTIVATIONS", 6);
+    private static final long SEARCH_OP_PLAYOUT_TIMEOUT_MS =
+            mage.player.ai.rl.EnvConfig.i64("SEARCH_OP_PLAYOUT_TIMEOUT_MS", 1500L);
+    private static final long SEARCH_OP_TOTAL_TIMEOUT_MS =
+            mage.player.ai.rl.EnvConfig.i64("SEARCH_OP_TOTAL_TIMEOUT_MS", 8000L);
+    private static final int SEARCH_OP_MAX_GAME_TURNS =
+            mage.player.ai.rl.EnvConfig.i32("SEARCH_OP_MAX_GAME_TURNS", 0);
+    private static final float SEARCH_OP_SKIP_TOP_PROB =
+            (float) mage.player.ai.rl.EnvConfig.f64("SEARCH_OP_SKIP_TOP_PROB", 0.85);
+    private static final float SEARCH_OP_SAMPLE_PROB = Math.max(0.0f, Math.min(1.0f,
+            (float) mage.player.ai.rl.EnvConfig.f64("SEARCH_OP_SAMPLE_PROB", 1.0)));
+    private static final boolean SEARCH_OP_GENERIC_BRANCH_ORDER =
+            mage.player.ai.rl.EnvConfig.bool("SEARCH_OP_GENERIC_BRANCH_ORDER", true);
+    private static final boolean SEARCH_OP_MODEL_GUIDED =
+            mage.player.ai.rl.EnvConfig.bool("SEARCH_OP_MODEL_GUIDED", false);
+    private static final boolean SEARCH_OP_LOG =
+            mage.player.ai.rl.EnvConfig.bool("SEARCH_OP_LOG", false);
+    private static final float SEARCH_OP_UNOBSERVED = -2.0f;
+    // ARBITER (diagnostic only): if non-empty, the search operator fires ONLY at
+    // decisions whose candidate set contains this substring -- lets us measure
+    // search win-rate estimates at a specific decisive decision cheaply instead
+    // of firing on every decision (infeasible). Measurement, not deployed policy.
+    private static final String SEARCH_OP_ARBITER_CAST_FILTER =
+            mage.player.ai.rl.EnvConfig.str("SEARCH_OP_ARBITER_CAST_FILTER", "");
+    // MC-dropout capture (diagnostic): if non-empty, dump the model-input
+    // segments at each arbiter-gated Spy-cast to this file for offline ensemble.
+    private static final String SEARCH_OP_CAPTURE_FILE =
+            mage.player.ai.rl.EnvConfig.str("SEARCH_OP_CAPTURE_FILE", "");
+    private static final Object SEARCH_OP_CAPTURE_LOCK = new Object();
     private static final boolean MULLIGAN_HARD_OVERRIDES_ENABLE =
             mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_OVERRIDES_ENABLE", false);
     private static final boolean MULLIGAN_HARD_APPLY_DURING_TRAINING =
@@ -9783,6 +10044,21 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_FORCE_KEEP_GOOD", false);
     private static final boolean MULLIGAN_HARD_LOG =
             mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_LOG", true);
+    /** Freeze the keep/mull + London-bottom policy during training: the agent
+     *  still DECIDES mulligans with its current policy, but those decisions are
+     *  NOT recorded as training data, so PPO never directly optimizes them.
+     *  Used to keep a good (baseline) mulligan while an auxiliary loss reshapes
+     *  the rest of the model -- prevents the aux from perturbing keep/mull. */
+    private static final boolean MULLIGAN_FREEZE_TRAINING =
+            mage.player.ai.rl.EnvConfig.bool("MULLIGAN_FREEZE_TRAINING", false);
+    /** Window-gated self-imitation: mark decisions in the combo FINISHER window
+     *  (graveyard already large = Spy has milled) as SIL-eligible, so the Python
+     *  SIL loss only reinforces the short post-mill finish (fire Flashback Dread
+     *  Return -> return Lotleth Giant) in won games, not the whole trajectory. */
+    private static final boolean SIL_WINDOW_GATED =
+            mage.player.ai.rl.EnvConfig.bool("SIL_WINDOW_GATED", false);
+    private static final int SIL_WINDOW_GRAVEYARD_MIN =
+            mage.player.ai.rl.EnvConfig.i32("SIL_WINDOW_GRAVEYARD_MIN", 20);
     private static final List<String> MULLIGAN_HARD_PSEUDO_LAND_NAMES =
             parseMctsSelectiveKeywords(mage.player.ai.rl.EnvConfig.str(
                     "MULLIGAN_HARD_PSEUDO_LANDS",
@@ -9826,6 +10102,26 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 ONLINE_PREFIX_SEARCH_OVERRIDES.get(), ONLINE_PREFIX_SEARCH_TIMEOUTS.get(),
                 ONLINE_PREFIX_AUTOPILOT_STARTED.get(), ONLINE_PREFIX_AUTOPILOT_APPLIED.get(),
                 ONLINE_PREFIX_AUTOPILOT_MISSES.get());
+    }
+    private static final java.util.concurrent.atomic.AtomicInteger SEARCH_OP_GATE_TOTAL = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger SEARCH_OP_GATE_FEWCAND = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger SEARCH_OP_GATE_CONFIDENT = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger SEARCH_OP_GATE_SAMPLED_OUT = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger SEARCH_OP_CALLS = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger SEARCH_OP_OBSERVED = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger SEARCH_OP_OVERRIDES = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger SEARCH_OP_DEGENERATE = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger SEARCH_OP_ERRORS = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicLong SEARCH_OP_PLAYOUTS_TOTAL = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong SEARCH_OP_TERMINALS_TOTAL = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong SEARCH_OP_WALL_MS = new java.util.concurrent.atomic.AtomicLong();
+    public static String getSearchOpStats() {
+        return String.format("enable=%s gate_total=%d fewcand=%d confident=%d sampled_out=%d calls=%d observed=%d overrides=%d degenerate=%d errors=%d playouts=%d terminals=%d wallMs=%d",
+                SEARCH_OP_ENABLE, SEARCH_OP_GATE_TOTAL.get(), SEARCH_OP_GATE_FEWCAND.get(),
+                SEARCH_OP_GATE_CONFIDENT.get(), SEARCH_OP_GATE_SAMPLED_OUT.get(), SEARCH_OP_CALLS.get(),
+                SEARCH_OP_OBSERVED.get(), SEARCH_OP_OVERRIDES.get(), SEARCH_OP_DEGENERATE.get(),
+                SEARCH_OP_ERRORS.get(), SEARCH_OP_PLAYOUTS_TOTAL.get(), SEARCH_OP_TERMINALS_TOTAL.get(),
+                SEARCH_OP_WALL_MS.get());
     }
     private static List<String> parseMctsSelectiveKeywords(String raw) {
         if (raw == null || raw.trim().isEmpty()) {
@@ -9970,6 +10266,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         if (!shouldRecordTrainingData(td, game)) {
             return;
         }
+        // Freeze the mulligan policy: still decided live, but never trained on.
+        if (MULLIGAN_FREEZE_TRAINING && td != null
+                && (td.actionType == StateSequenceBuilder.ActionType.MULLIGAN
+                    || td.actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN)) {
+            return;
+        }
         try {
             int label = StateSequenceBuilder.computeArchetypeLabel(game, this.getId());
             td.setBeliefArchetypeLabel(label);
@@ -9980,6 +10282,24 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             td.setCardBeliefLabels(StateSequenceBuilder.computeCardBeliefLabels(game, this.getId()));
         } catch (Throwable t) {
             // Card-belief labels are best-effort; absent rows are skipped by Python.
+        }
+        try {
+            if (StateSequenceBuilder.worldModelDim() > 0) {
+                td.worldModelSnapshot = StateSequenceBuilder.worldModelSnapshot(
+                        game.getPlayer(this.getId()), game);
+            }
+        } catch (Throwable t) {
+            // World-model snapshot is best-effort; RLTrainer skips rows it can't fill.
+        }
+        try {
+            if (SIL_WINDOW_GATED) {
+                mage.players.Player _silP = game.getPlayer(this.getId());
+                if (_silP != null && _silP.getGraveyard().size() >= SIL_WINDOW_GRAVEYARD_MIN) {
+                    td.silEligible = true;
+                }
+            }
+        } catch (Throwable t) {
+            // SIL window flag is best-effort; absent -> row not SIL-reinforced.
         }
         this.trainingBuffer.add(td);
     }

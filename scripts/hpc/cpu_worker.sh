@@ -54,10 +54,47 @@ mkdir -p "$RTDIR"
 tar xzf "$MAGE_RL_RUNTIME_TARBALL" -C "$RTDIR"
 RDIR=$(ls -1d "$RTDIR"/rl-runtime-* | head -1)
 CP=$(echo "$RDIR"/app/*.jar "$RDIR"/lib/*.jar | tr ' ' ':')
+# Shadow the bundle's OnnxInferenceModel with the patched class (intra-op thread
+# cap) when present, avoiding a full bundle rebuild for the self-serve path.
+PATCH_DIR="${REPO_ROOT}/local-training/patch"
+if [[ "${SELF_SERVE_ONNX:-0}" == "1" && -d "$PATCH_DIR" ]]; then CP="$PATCH_DIR:$CP"; echo "Patched classpath: $PATCH_DIR prepended"; fi
 echo "Runtime extracted: $RDIR"
 
 # Common env vars for JVMs
-export PY_SERVICE_MODE=shared_gpu
+# Self-serve ONNX-CPU inference (SELF_SERVE_ONNX=1): each runner does its own ~3ms
+# ORT-CPU inference locally (no per-decision round-trip to the GPU head), while
+# training is still delegated to the remote head via SharedGpuPythonModel (hybrid
+# mode). This removes the shared-GPU-service inference ceiling -> hundreds of cores
+# scale linearly. The head publishes ONNX to the shared RL_ARTIFACTS_ROOT via
+# onnx_publisher.py; OnnxInferenceModel reloads on mtime. Needs the intra-op
+# thread-cap fix in OnnxInferenceModel (bundled, or via the patch dir below).
+if [[ "${SELF_SERVE_ONNX:-0}" == "1" ]]; then
+    export PY_SERVICE_MODE=hybrid
+    export ONNX_FORCE_CPU=1
+    export ONNX_INTRA_OP_THREADS="${ONNX_INTRA_OP_THREADS:-1}"
+    # No batching on CPU: each runner's request is its own inference on its own thread
+    # (one inference thread per runner) -> N parallel ~14-30ms inferences instead of
+    # one serial big-batch. Batching is a GPU optimization that becomes a CPU straw.
+    export ONNX_BATCH_MAX_SIZE="${ONNX_BATCH_MAX_SIZE:-1}"
+    export ONNX_BATCH_TIMEOUT_MS="${ONNX_BATCH_TIMEOUT_MS:-1}"
+    export ONNX_BATCH_TIMEOUT_MAX_MS="${ONNX_BATCH_TIMEOUT_MAX_MS:-2}"
+    export ONNX_INFER_THREADS="${ONNX_INFER_THREADS:-$RUNNERS_PER_JVM}"
+    export MODEL_PROFILE="${MODEL_PROFILE:-${PROFILES%%,*}}"
+    echo "SELF-SERVE ONNX-CPU: hybrid inference (ORT-CPU intra=${ONNX_INTRA_OP_THREADS}), training -> ${GPU_SERVICE_ENDPOINT}, profile=${MODEL_PROFILE}"
+    # Cold-start bootstrap for a FRESH model: TerminalPrefixSearch gated to the combo
+    # cast decision (real engine playouts -> terminal win/lose, distilled via candidate_q).
+    # Thesis-clean (no labels/shaping). Default OFF; only the fresh-meta run sets it.
+    if [[ "${SEARCH_BOOTSTRAP:-0}" == "1" ]]; then
+        export SEARCH_OP_ENABLE=1
+        export SEARCH_OP_ARBITER_CAST_FILTER="${SEARCH_OP_ARBITER_CAST_FILTER:-Balustrade Spy}"
+        export SEARCH_OP_TOTAL_TIMEOUT_MS="${SEARCH_OP_TOTAL_TIMEOUT_MS:-2500}"
+        export SEARCH_OP_PLAYOUTS="${SEARCH_OP_PLAYOUTS:-1}"
+        export SEARCH_OP_MAX_ACTIVATIONS="${SEARCH_OP_MAX_ACTIVATIONS:-3}"
+        echo "SEARCH BOOTSTRAP on: TerminalPrefixSearch gated to '${SEARCH_OP_ARBITER_CAST_FILTER}'"
+    fi
+else
+    export PY_SERVICE_MODE=shared_gpu
+fi
 export GPU_SERVICE_ENDPOINT
 export GAME_STATS_WRITER=0
 export GPU_SERVICE_NUM_CHANNELS="${GPU_SERVICE_NUM_CHANNELS:-4}"
@@ -91,7 +128,7 @@ for i in $(seq 0 $((JVMS_PER_NODE - 1))); do
 
     NUM_GAME_RUNNERS=$RUNNERS_PER_JVM \
     METRICS_PORT=$METRICS_PORT \
-    MAGE_DB_DIR="$LOGDIR/db" \
+    MAGE_DB_DIR="${SLURM_TMPDIR:-/tmp/$USER}/mtgrl-sat-${SLURM_JOB_ID:-$$}/jvm_$i/db" \
     MAGE_DB_AUTO_SERVER=false \
     java -Xms512m -Xmx${HEAP_XMX} -cp "$CP" \
         mage.player.ai.rl.RLTrainer trainAll ${PROFILES//,/ } \

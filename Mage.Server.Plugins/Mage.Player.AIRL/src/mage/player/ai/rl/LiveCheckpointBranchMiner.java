@@ -98,6 +98,10 @@ public final class LiveCheckpointBranchMiner {
         Files.createDirectories(cfg.outDir);
         Selection selection = selectSnapshots(cfg);
         writeSelectionManifest(cfg, selection.selected);
+        if (cfg.resumeProbe) {
+            runResumeProbeMode(cfg, selection);
+            return;
+        }
         if (cfg.terminalLineSearch) {
             runTerminalLineSearchMode(cfg, selection);
             return;
@@ -132,6 +136,249 @@ public final class LiveCheckpointBranchMiner {
                 selection.loadErrorCount, selection.loadErrorExamples, counts);
         System.out.println("live checkpoint branch miner wrote " + processed + " row(s) to " + csvPath);
         System.out.println("classification counts: " + counts.values);
+    }
+
+    /**
+     * Reverse-curriculum mechanism probe: resume each selected checkpoint WITHOUT a
+     * branch controller (both players play their normal policy from the captured
+     * decision), with simulation cleared so the native training-data path is live,
+     * and run to terminal. Validates: clean resume + model serving + terminal
+     * outcome, and (with --resume-force-training) that TrainingData is captured.
+     * Distance/outcome bucketing is joined offline against the corpus index.
+     */
+    private static void runResumeProbeMode(Config cfg, Selection selection) throws Exception {
+        Path csvPath = cfg.outDir.resolve("resume_probe.csv");
+        String header = "snapshot_path,ordinal,decision_number,replay,terminal_reached,won,"
+                + "training_enabled,training_buffer_size,error\n";
+        Files.write(csvPath, header.getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        int processed = 0, terminalCount = 0, wins = 0, withTraining = 0, rows = 0;
+        for (SnapshotCandidate candidate : selection.selected) {
+            if (cfg.maxSnapshots > 0 && processed >= cfg.maxSnapshots) {
+                break;
+            }
+            if (candidate.loadError != null && !candidate.loadError.isEmpty()) {
+                appendResumeRow(csvPath, candidate.path, -1, -1, 0, false, false, false, 0, candidate.loadError);
+                rows++;
+                processed++;
+                continue;
+            }
+            int ordinal = candidate.snapshot == null ? -1 : candidate.snapshot.ordinal;
+            int decisionNumber = candidate.snapshot == null ? -1 : candidate.snapshot.decisionNumber;
+            for (int replay = 0; replay < cfg.resumeReplays; replay++) {
+                ResumeOutcome ro = resumeNatural(candidate.snapshot, cfg);
+                appendResumeRow(csvPath, candidate.path, ordinal, decisionNumber, replay,
+                        ro.terminal, ro.won, ro.trainingEnabled, ro.trainingBufferSize, ro.error);
+                System.out.println("[RESUME_DIAG] ord=" + ordinal + " terminal=" + ro.terminal
+                        + " won=" + ro.won + " trainEnabled=" + ro.trainingEnabled
+                        + " recordedDecisions=" + ro.recordedDecisions
+                        + " bufferSize=" + ro.trainingBufferSize + " simSkippedDelta=" + ro.simSkippedDelta
+                        + " simAtEnd=" + ro.simulationAtEnd + " err=" + ro.error);
+                rows++;
+                if (ro.terminal) terminalCount++;
+                if (ro.won) wins++;
+                if (ro.trainingBufferSize > 0) withTraining++;
+            }
+            processed++;
+        }
+        System.out.println("resume probe wrote " + rows + " row(s) for " + processed
+                + " snapshot(s) to " + csvPath);
+        System.out.println("terminal_reached=" + terminalCount + " wins=" + wins
+                + " rows_with_training_data=" + withTraining);
+    }
+
+    private static final class ResumeOutcome {
+        boolean terminal;
+        boolean won;
+        boolean trainingEnabled;
+        int trainingBufferSize;
+        int recordedDecisions;
+        int simSkippedDelta;
+        boolean simulationAtEnd;
+        String error = "";
+    }
+
+    private static int readSimSkipCounter() {
+        try {
+            java.lang.reflect.Field f = ComputerPlayerRL.class.getDeclaredField("SIMULATION_TRAINING_SKIPPED");
+            f.setAccessible(true);
+            Object v = f.get(null);
+            if (v instanceof java.util.concurrent.atomic.AtomicInteger) {
+                return ((java.util.concurrent.atomic.AtomicInteger) v).get();
+            }
+        } catch (Throwable ignored) {
+        }
+        return -1;
+    }
+
+    private static ResumeOutcome resumeNatural(LiveCheckpointRecorder.Snapshot snapshot, Config cfg) {
+        ResumeOutcome out = new ResumeOutcome();
+        if (snapshot == null) {
+            out.error = "null_snapshot";
+            return out;
+        }
+        RandomUtil.State previousRandom = RandomUtil.captureState();
+        int simSkipBefore = readSimSkipCounter();
+        Game game = null;
+        try {
+            RandomUtil.restoreState(snapshot.randomState);
+            game = snapshot.gameSnapshot.createSimulationForAI();
+            // Load-bearing for reverse curriculum: createSimulationForAI() sets
+            // simulation=true, which suppresses the native trainingBuffer path.
+            // Clearing it makes the resumed game record/train like a real game.
+            game.setSimulation(false);
+            Player player = game.getPlayer(snapshot.playerId);
+            if (!(player instanceof ComputerPlayerRL)) {
+                out.error = "player_type_mismatch:" + (player == null ? "null" : player.getClass().getName());
+                return out;
+            }
+            if (cfg.resumeForceTraining) {
+                for (Player p : game.getPlayers().values()) {
+                    if (p instanceof ComputerPlayerRL) {
+                        forceTrainingEnabled((ComputerPlayerRL) p);
+                    }
+                }
+            }
+            ComputerPlayerRL rl = (ComputerPlayerRL) player;
+            out.trainingEnabled = rl.isTrainingEnabled();
+            // No branch controller: players make normal model-based decisions.
+            resumeGameInGameThread(game, cfg.timeoutSec, "resume_probe");
+            out.terminal = game.hasEnded();
+            out.simulationAtEnd = game.isSimulation();
+            String winner = out.terminal ? game.getWinner() : null;
+            out.won = winner != null && snapshot.playerName != null && winner.contains(snapshot.playerName);
+            try {
+                java.util.Map<StateSequenceBuilder.ActionType, Integer> heads = rl.getDecisionCountsByHead();
+                int sum = 0;
+                if (heads != null) {
+                    for (Integer c : heads.values()) {
+                        sum += (c == null ? 0 : c);
+                    }
+                }
+                out.recordedDecisions = sum;
+            } catch (Throwable ignored) {
+                out.recordedDecisions = -1;
+            }
+            // NOTE: getTrainingBuffer() is destructive (clears on read) -- call once.
+            java.util.List<StateSequenceBuilder.TrainingData> buf = rl.getTrainingBuffer();
+            out.trainingBufferSize = buf == null ? 0 : buf.size();
+            int simSkipAfter = readSimSkipCounter();
+            out.simSkippedDelta = (simSkipBefore >= 0 && simSkipAfter >= 0) ? (simSkipAfter - simSkipBefore) : -1;
+            return out;
+        } catch (EngineDecisionBranchController.BranchTerminated bt) {
+            out.error = "branch_terminated:" + bt.getReason();
+            return out;
+        } catch (Throwable t) {
+            out.error = errorSummary(t);
+            return out;
+        } finally {
+            if (game != null) {
+                try {
+                    game.end();
+                } catch (Throwable ignored) {
+                    // ignore cleanup failures
+                }
+                try {
+                    game.cleanUp();
+                } catch (Throwable ignored) {
+                    // ignore cleanup failures
+                }
+            }
+            RandomUtil.restoreState(previousRandom);
+        }
+    }
+
+    /** Best-effort: flip the final trainingEnabled field for the smoke so the
+     *  resumed eval-captured player records training data. No-op if the JDK
+     *  blocks final-field mutation; resume + terminal validation still hold. */
+    /** Resumed game + resolved players for reverse-curriculum training starts. */
+    public static final class ResumedGame {
+        public final Game game;
+        public final ComputerPlayerRL rlPlayer;
+        public final Player opponent;
+        public final String playerName;
+        public ResumedGame(Game game, ComputerPlayerRL rlPlayer, Player opponent, String playerName) {
+            this.game = game;
+            this.rlPlayer = rlPlayer;
+            this.opponent = opponent;
+            this.playerName = playerName;
+        }
+    }
+
+    /**
+     * Reverse-curriculum entry point: deserialize a live checkpoint, turn it into a
+     * REAL (non-simulation) playable game, and return the resolved agent + opponent
+     * so the trainer can resume it to terminal and credit terminal reward. The
+     * caller drives {@code game.resume()} and is responsible for cleanup. Restores
+     * the snapshot's RNG so the continuation begins from the captured state.
+     *
+     * <p>NOTE: mutates global RandomUtil state; for multi-worker training the first
+     * RC runs should use a single game runner (or accept benign RNG interleaving).
+     */
+    public static ResumedGame resumeTrainableGame(String snapshotPath, boolean forceTraining) {
+        try {
+            LiveCheckpointRecorder.Snapshot snapshot = loadSnapshot(Paths.get(snapshotPath));
+            if (snapshot == null || snapshot.gameSnapshot == null || snapshot.playerId == null) {
+                return null;
+            }
+            // Intentionally do NOT restore the snapshot's RNG state: the captured GAME
+            // state (library order, hands, board) is what reverse curriculum needs, and
+            // future randomness should use the live shared RNG exactly like normal
+            // multi-runner training. Restoring the global RNG here would clobber other
+            // concurrent game runners. Stochastic continuations are also desirable for
+            // exploration. (The single-threaded resume PROBE still restores for determinism.)
+            Game game = snapshot.gameSnapshot.createSimulationForAI();
+            game.setSimulation(false); // enable the native training-data path
+            Player p = game.getPlayer(snapshot.playerId);
+            if (!(p instanceof ComputerPlayerRL)) {
+                return null;
+            }
+            Player opponent = null;
+            if (game.getPlayers() != null) {
+                for (Player x : game.getPlayers().values()) {
+                    if (forceTraining && x instanceof ComputerPlayerRL) {
+                        forceTrainingEnabled((ComputerPlayerRL) x);
+                    }
+                    if (x != null && !x.getId().equals(snapshot.playerId)) {
+                        opponent = x;
+                    }
+                }
+            }
+            return new ResumedGame(game, (ComputerPlayerRL) p, opponent, snapshot.playerName);
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    private static void forceTrainingEnabled(ComputerPlayerRL p) {
+        // Modern JDKs (12+) block the modifiers-field hack; use Unsafe to write
+        // the final boolean directly. Smoke-only.
+        try {
+            java.lang.reflect.Field uf = sun.misc.Unsafe.class.getDeclaredField("theUnsafe");
+            uf.setAccessible(true);
+            sun.misc.Unsafe unsafe = (sun.misc.Unsafe) uf.get(null);
+            java.lang.reflect.Field tf = ComputerPlayerRL.class.getDeclaredField("trainingEnabled");
+            long off = unsafe.objectFieldOffset(tf);
+            unsafe.putBoolean(p, off, true);
+        } catch (Throwable ignored) {
+            // best-effort only; resume + terminal validation still hold
+        }
+    }
+
+    private static void appendResumeRow(Path csvPath, Path snapshotPath, int ordinal, int decisionNumber,
+            int replay, boolean terminal, boolean won, boolean trainingEnabled,
+            int trainingBufferSize, String error) throws IOException {
+        String line = csv(snapshotPath == null ? "" : snapshotPath.toString())
+                + "," + ordinal
+                + "," + decisionNumber
+                + "," + replay
+                + "," + terminal
+                + "," + won
+                + "," + trainingEnabled
+                + "," + trainingBufferSize
+                + "," + csv(error == null ? "" : error)
+                + "\n";
+        Files.write(csvPath, line.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
     }
 
     private static void runValueTreeMode(Config cfg, Selection selection) throws Exception {
@@ -3678,6 +3925,9 @@ public final class LiveCheckpointBranchMiner {
         private int treeSequenceDepth = 2;
         private int treeSequenceBeam = 4;
         private int treeSequenceRollouts = 1;
+        private boolean resumeProbe = false;
+        private int resumeReplays = 1;
+        private boolean resumeForceTraining = false;
 
         private static Config parse(String[] args) {
             Config cfg = new Config();
@@ -3799,6 +4049,15 @@ public final class LiveCheckpointBranchMiner {
             if (values.containsKey("line-training-max-records-per-branch")) {
                 cfg.lineTrainingMaxRecordsPerBranch = Math.max(0,
                         Integer.parseInt(values.get("line-training-max-records-per-branch")));
+            }
+            if (values.containsKey("resume-probe")) {
+                cfg.resumeProbe = Boolean.parseBoolean(values.get("resume-probe"));
+            }
+            if (values.containsKey("resume-replays")) {
+                cfg.resumeReplays = Math.max(1, Integer.parseInt(values.get("resume-replays")));
+            }
+            if (values.containsKey("resume-force-training")) {
+                cfg.resumeForceTraining = Boolean.parseBoolean(values.get("resume-force-training"));
             }
             if (values.containsKey("sequence-tree")) {
                 cfg.sequenceTree = Boolean.parseBoolean(values.get("sequence-tree"));

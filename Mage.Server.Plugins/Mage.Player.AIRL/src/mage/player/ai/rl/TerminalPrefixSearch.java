@@ -198,6 +198,208 @@ public final class TerminalPrefixSearch {
                 anyTimedOut || System.nanoTime() >= totalDeadline, reason, "");
     }
 
+    /** Config for the in-loop per-candidate terminal win-rate estimator. */
+    public static final class WinRateConfig {
+        public int topK = 3;
+        public int playoutsPerCandidate = 2;
+        public long perPlayoutTimeoutMs = 1500L;
+        public long totalTimeoutMs = 8000L;
+        public int maxGameTurns = 0;
+        public boolean genericBranchOrder = true;
+        public boolean modelGuidedFallback = false;
+        public long baseSeed = 0L;
+        public boolean log = false;
+    }
+
+    /** Per-candidate terminal win-rate result. winRate[i] is NaN for un-branched slots. */
+    public static final class WinRateResult {
+        public final float[] winRate;
+        public final int[] terminals;
+        public final int[] wins;
+        public final int bestIndex;
+        public final int observedCount;
+        public final long wallMs;
+        public final int totalPlayouts;
+        public final int totalTerminals;
+
+        WinRateResult(float[] winRate, int[] terminals, int[] wins, int bestIndex,
+                      int observedCount, long wallMs, int totalPlayouts, int totalTerminals) {
+            this.winRate = winRate;
+            this.terminals = terminals;
+            this.wins = wins;
+            this.bestIndex = bestIndex;
+            this.observedCount = observedCount;
+            this.wallMs = wallMs;
+            this.totalPlayouts = totalPlayouts;
+            this.totalTerminals = totalTerminals;
+        }
+    }
+
+    /**
+     * In-loop terminal-win-rate estimator for the policy-distillation operator
+     * (scope_B). Branches the top-K root candidates using thesis-clean generic
+     * ordering, plays each forward to a REAL terminal under per-thread RNG
+     * isolation, and returns the per-candidate terminal win-rate. Pure terminal
+     * win/lose signal -- no value-leaf substitution, no card-name preferences.
+     * Every playout is a simulation copy, so no training data is recorded inside.
+     */
+    public static <T> WinRateResult estimateCandidateWinRates(
+            Game liveGame,
+            UUID selfId,
+            List<T> rootCandidates,
+            StateSequenceBuilder.ActionType rootActionType,
+            float[] rootPolicyProbs,
+            PythonModel model,
+            WinRateConfig wcfg
+    ) {
+        long start = System.nanoTime();
+        int maxC = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
+        float[] winRate = new float[maxC];
+        Arrays.fill(winRate, Float.NaN);
+        int[] terminals = new int[maxC];
+        int[] wins = new int[maxC];
+        WinRateConfig cfgw = wcfg == null ? new WinRateConfig() : wcfg;
+        if (liveGame == null || selfId == null || rootCandidates == null || rootCandidates.size() < 2
+                || rootActionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) {
+            return new WinRateResult(winRate, terminals, wins, -1, 0, 0L, 0, 0);
+        }
+        Player self = liveGame.getPlayer(selfId);
+        if (self == null) {
+            return new WinRateResult(winRate, terminals, wins, -1, 0, 0L, 0, 0);
+        }
+        int candidateCount = Math.min(rootCandidates.size(), maxC);
+        List<String> rootTexts = describeCandidates(rootCandidates, liveGame, candidateCount);
+        StateSnapshot snapshot = StateSnapshot.capture(liveGame, self);
+        Config cfg = new Config();
+        cfg.genericBranchOrder = cfgw.genericBranchOrder;
+        cfg.modelGuidedFallback = cfgw.modelGuidedFallback;
+        cfg.maxGameTurns = cfgw.maxGameTurns;
+        cfg.log = cfgw.log;
+        List<Integer> order = branchCandidates(
+                rootActionType, rootTexts, rootPolicyProbs, -1, snapshot,
+                Math.max(1, cfgw.topK), cfgw.genericBranchOrder);
+        long totalDeadline = start + TimeUnit.MILLISECONDS.toNanos(Math.max(1L, cfgw.totalTimeoutMs));
+        int totalPlayouts = 0;
+        int totalTerminals = 0;
+        for (Integer idx : order) {
+            if (idx == null || idx < 0 || idx >= candidateCount) {
+                continue;
+            }
+            if (System.nanoTime() >= totalDeadline) {
+                break;
+            }
+            List<String> prefix = Collections.singletonList(rootTexts.get(idx));
+            int t = 0;
+            int w = 0;
+            for (int p = 0; p < Math.max(1, cfgw.playoutsPerCandidate); p++) {
+                if (System.nanoTime() >= totalDeadline) {
+                    break;
+                }
+                long playoutDeadline = Math.min(totalDeadline,
+                        System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(Math.max(1L, cfgw.perPlayoutTimeoutMs)));
+                long seed = cfgw.baseSeed ^ (0x9E3779B97F4A7C15L * (idx * 131L + p + 1L));
+                Outcome o;
+                try (mage.util.RandomUtil.RandomIsolation ignored =
+                             mage.util.RandomUtil.isolateThreadLocalRandom(seed)) {
+                    o = runWinRatePlayout(liveGame, selfId, model, prefix, cfg, playoutDeadline);
+                }
+                if (!o.prefixApplied) {
+                    continue;
+                }
+                totalPlayouts++;
+                if (o.terminal) {
+                    t++;
+                    totalTerminals++;
+                    if (o.won) {
+                        w++;
+                    }
+                }
+            }
+            if (t > 0) {
+                winRate[idx] = (float) w / (float) t;
+                terminals[idx] = t;
+                wins[idx] = w;
+            }
+        }
+        int best = -1;
+        float bestWr = Float.NEGATIVE_INFINITY;
+        int observed = 0;
+        for (int i = 0; i < candidateCount; i++) {
+            if (!Float.isNaN(winRate[i])) {
+                observed++;
+                if (winRate[i] > bestWr) {
+                    bestWr = winRate[i];
+                    best = i;
+                }
+            }
+        }
+        long wallMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);
+        return new WinRateResult(winRate, terminals, wins, best, observed, wallMs, totalPlayouts, totalTerminals);
+    }
+
+    private static final class Outcome {
+        final boolean prefixApplied;
+        final boolean terminal;
+        final boolean won;
+        final boolean timedOut;
+
+        Outcome(boolean prefixApplied, boolean terminal, boolean won, boolean timedOut) {
+            this.prefixApplied = prefixApplied;
+            this.terminal = terminal;
+            this.won = won;
+            this.timedOut = timedOut;
+        }
+
+        static Outcome failed() {
+            return new Outcome(false, false, false, false);
+        }
+    }
+
+    /** One playout: fork the live game, force the prefix, resume to terminal, read outcome.
+     *  Mirrors {@link #runPrefixBranch} but reports terminal-reached so a win-rate
+     *  denominator can exclude deadline-truncated (non-terminal) playouts. */
+    private static Outcome runWinRatePlayout(
+            Game liveGame,
+            UUID selfId,
+            PythonModel model,
+            List<String> prefixTexts,
+            Config cfg,
+            long deadlineNanos
+    ) {
+        Game sim;
+        try {
+            sim = liveGame.createSimulationForAI();
+        } catch (Throwable t) {
+            return Outcome.failed();
+        }
+        SearchPlayer player = replaceSelf(sim, selfId, model, prefixTexts, cfg, deadlineNanos);
+        if (player == null) {
+            return Outcome.failed();
+        }
+        boolean timedOut = false;
+        try {
+            sim.resume();
+        } catch (SearchTerminated t) {
+            timedOut = "deadline".equals(String.valueOf(t.getMessage()));
+        } catch (Throwable ignored) {
+            // playout failed mid-resolution; treat as non-terminal
+        }
+        if (System.nanoTime() >= deadlineNanos) {
+            timedOut = true;
+        }
+        boolean prefixApplied = false;
+        boolean terminal = false;
+        boolean won = false;
+        try {
+            prefixApplied = player.prefixAppliedCount() >= prefixTexts.size();
+            terminal = sim.hasEnded();
+            won = terminal && sim.getWinner() != null && sim.getWinner().contains(player.getName());
+        } catch (Throwable ignored) {
+            // leave defaults on read failure
+        }
+        return new Outcome(prefixApplied, terminal, won, timedOut);
+    }
+
     public static boolean isControllableActionType(StateSequenceBuilder.ActionType actionType) {
         return actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
                 || actionType == StateSequenceBuilder.ActionType.SELECT_TARGETS

@@ -32,6 +32,22 @@ import java.util.Map;
  */
 public final class SharedGpuProtocol {
 
+    /** Max bytes for a single framed body. Must match gpu_service_host.py FRAME_MAX_BYTES.
+     *  Overridable via GPU_FRAME_MAX_BYTES (set the SAME value on the Python host). */
+    public static final int MAX_FRAME_BYTES = parseFrameCap();
+
+    private static int parseFrameCap() {
+        try {
+            String v = System.getenv("GPU_FRAME_MAX_BYTES");
+            if (v != null && !v.trim().isEmpty()) {
+                return Math.max(4096, Integer.parseInt(v.trim()));
+            }
+        } catch (RuntimeException ignored) {
+            // fall through to default
+        }
+        return 512 * 1024 * 1024;
+    }
+
     public static final int OP_REGISTER_PROFILE = 1;
     public static final int OP_SCORE = 2;
     public static final int OP_ENQUEUE_TRAIN = 3;
@@ -143,7 +159,7 @@ public final class SharedGpuProtocol {
         } catch (EOFException eof) {
             throw eof;
         }
-        if (frameLength < 0 || frameLength > (256 * 1024 * 1024)) {
+        if (frameLength < 0 || frameLength > MAX_FRAME_BYTES) {
             throw new IOException("Invalid shared GPU frame length: " + frameLength);
         }
         byte[] body = new byte[frameLength];

@@ -14,7 +14,7 @@ from typing import Deque, Dict, List, Optional, Tuple
 from gpu_service_core import ProfileContext, feature_array_from_bytes, merge_segments
 
 
-FRAME_MAX_BYTES = 256 * 1024 * 1024
+FRAME_MAX_BYTES = int(os.getenv("GPU_FRAME_MAX_BYTES", str(512 * 1024 * 1024)))
 RECENT_METRIC_HISTORY = 1000
 
 
@@ -933,8 +933,11 @@ class SharedGpuHost:
             archetype_labels = merged[14] if len(merged) > 14 else None
             mcts_visits = merged[15] if len(merged) > 15 else None
             card_belief_labels = merged[16] if len(merged) > 16 else None
+            world_model_labels = merged[17] if len(merged) > 17 else None
+            sil_eligible = merged[18] if len(merged) > 18 else None
             num_archetypes = int(first.headers.get("num_archetypes", "0"))
             card_belief_dim = int(first.headers.get("card_belief_dim", "0"))
+            world_model_dim = int(first.headers.get("world_model_dim", "0"))
             state.learner_context.train_batch(
                 merged[0],
                 merged[1],
@@ -960,6 +963,9 @@ class SharedGpuHost:
                 mcts_visits,
                 card_belief_labels,
                 card_belief_dim,
+                world_model_labels,
+                world_model_dim,
+                sil_eligible,
             )
         finally:
             # Release cached GPU memory after every training batch so ONNX

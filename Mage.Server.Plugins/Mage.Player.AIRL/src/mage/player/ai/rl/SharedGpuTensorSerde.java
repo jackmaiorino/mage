@@ -134,6 +134,12 @@ final class SharedGpuTensorSerde {
         if (cardBeliefDim > 0) {
             java.util.Arrays.fill(cardBeliefLabels, -1.0f);
         }
+        int worldModelDim = StateSequenceBuilder.worldModelDim();
+        float[] worldModelLabels = new float[batchSize * worldModelDim];
+        if (worldModelDim > 0) {
+            java.util.Arrays.fill(worldModelLabels, -1.0f);
+        }
+        int[] silEligible = new int[batchSize];
 
         int seqOffset = 0;
         int maskOffset = 0;
@@ -172,6 +178,13 @@ final class SharedGpuTensorSerde {
                 System.arraycopy(item.cardBeliefLabels, 0, cardBeliefLabels,
                         i * cardBeliefDim, cardBeliefDim);
             }
+            if (worldModelDim > 0
+                    && item.worldModelLabels != null
+                    && item.worldModelLabels.length == worldModelDim) {
+                System.arraycopy(item.worldModelLabels, 0, worldModelLabels,
+                        i * worldModelDim, worldModelDim);
+            }
+            silEligible[i] = item.silEligible ? 1 : 0;
 
             rewardValues[i] = rewards != null && i < rewards.size() && rewards.get(i) != null
                     ? rewards.get(i).floatValue()
@@ -201,7 +214,9 @@ final class SharedGpuTensorSerde {
                 intsToBytes(headIdx),
                 intsToBytes(beliefArchetypeLabels),
                 floatsToBytes(mctsVisitTargets),
-                floatsToBytes(cardBeliefLabels)
+                floatsToBytes(cardBeliefLabels),
+                floatsToBytes(worldModelLabels),
+                intsToBytes(silEligible)
         );
     }
 

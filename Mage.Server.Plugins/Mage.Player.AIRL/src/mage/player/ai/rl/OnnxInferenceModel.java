@@ -33,6 +33,11 @@ public final class OnnxInferenceModel implements PythonModel {
     private static final int CAND_DIM = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
 
     private final Map<String, OrtSession> sessions = new ConcurrentHashMap<>();
+    // Guards session lifecycle vs use: inference takes the read lock (concurrent),
+    // reload/arena-reset take the write lock so they never close() a session while
+    // another thread is mid-session.run() (that race -> SIGSEGV in libonnxruntime).
+    private final java.util.concurrent.locks.ReentrantReadWriteLock onnxLock =
+            new java.util.concurrent.locks.ReentrantReadWriteLock();
     private final Path onnxDir;
     private volatile Path activeOnnxDir;
     private final String modelsDir;
@@ -162,6 +167,17 @@ public final class OnnxInferenceModel implements PythonModel {
     private OrtSession.SessionOptions createSessionOptions() throws OrtException {
         OrtSession.SessionOptions opts = new OrtSession.SessionOptions();
         opts.setOptimizationLevel(OrtSession.SessionOptions.OptLevel.ALL_OPT);
+        boolean cpuMode = forceCpu || EnvConfig.bool("ONNX_FORCE_CPU", false);
+        // Cap the ORT intra-op thread pool. In CPU self-serve mode each game runner
+        // owns its own session, so a per-session pool sized to all node cores causes
+        // a thread explosion + pthread_setaffinity_np failures on a Slurm cpuset.
+        // intra=1 per session is correct: parallelism comes from the many runners.
+        // 0 = leave ORT default (GPU mode unaffected). Env override: ONNX_INTRA_OP_THREADS.
+        int intraThreads = EnvConfig.i32("ONNX_INTRA_OP_THREADS", cpuMode ? 1 : 0);
+        if (intraThreads > 0) {
+            opts.setIntraOpNumThreads(intraThreads);
+            opts.setInterOpNumThreads(1);
+        }
         if (!forceCpu && !EnvConfig.bool("ONNX_FORCE_CPU", false)) {
             try {
                 int cudaDeviceId = EnvConfig.i32("ONNX_CUDA_DEVICE_ID", inferCudaDeviceIdDefault());
@@ -318,6 +334,8 @@ public final class OnnxInferenceModel implements PythonModel {
      * should invoke sparingly (e.g., once per turn).
      */
     public float[] predictArchetype(StateSequenceBuilder.SequenceOutput state) {
+        onnxLock.readLock().lock();
+        try {
         OrtSession session = sessions.get("belief");
         if (session == null || state == null) return null;
         float[][] tokens = state.getSequence();
@@ -363,6 +381,9 @@ public final class OnnxInferenceModel implements PythonModel {
         } catch (Exception e) {
             logger.error("Belief inference failed: " + e.getMessage());
             return null;
+        }
+        } finally {
+            onnxLock.readLock().unlock();
         }
     }
 
@@ -482,12 +503,17 @@ public final class OnnxInferenceModel implements PythonModel {
             if (!currentIdentity.isEmpty() && !currentIdentity.equals(lastOnnxIdentity)) {
                 System.out.println("[ONNX] Detected updated ONNX export, reloading at flush #" + batchNum
                         + " dir=" + resolvedDir.getFileName());
-                for (OrtSession s : sessions.values()) {
-                    try { s.close(); } catch (OrtException ignored) {}
+                onnxLock.writeLock().lock();
+                try {
+                    for (OrtSession s : sessions.values()) {
+                        try { s.close(); } catch (OrtException ignored) {}
+                    }
+                    sessions.clear();
+                    activeOnnxDir = resolvedDir;
+                    loadSessions();
+                } finally {
+                    onnxLock.writeLock().unlock();
                 }
-                sessions.clear();
-                activeOnnxDir = resolvedDir;
-                loadSessions();
                 // Reset adaptive timeout after reload
                 lastBatchSizeEma = BATCH_MAX_SIZE * 100L;
                 adaptiveBatchTimeoutMs = BATCH_TIMEOUT_MS;
@@ -497,19 +523,24 @@ public final class OnnxInferenceModel implements PythonModel {
         long arenaResetInterval = Long.parseLong(System.getenv().getOrDefault("ONNX_ARENA_RESET_INTERVAL", "100000"));
         if (arenaResetInterval > 0 && batchNum > 0 && batchNum % arenaResetInterval == 0) {
             System.out.println("[ONNX] Full CUDA arena reset at flush #" + batchNum);
-            for (OrtSession s : sessions.values()) {
-                try { s.close(); } catch (OrtException ignored) {}
-            }
-            sessions.clear();
-            if (!sharedSessionOpts && sessionOpts != null) {
-                try { sessionOpts.close(); } catch (Exception ignored) {}
-                try {
-                    sessionOpts = createSessionOptions();
-                } catch (OrtException e) {
-                    System.out.println("[ONNX] Failed to recreate session options: " + e.getMessage());
+            onnxLock.writeLock().lock();
+            try {
+                for (OrtSession s : sessions.values()) {
+                    try { s.close(); } catch (OrtException ignored) {}
                 }
+                sessions.clear();
+                if (!sharedSessionOpts && sessionOpts != null) {
+                    try { sessionOpts.close(); } catch (Exception ignored) {}
+                    try {
+                        sessionOpts = createSessionOptions();
+                    } catch (OrtException e) {
+                        System.out.println("[ONNX] Failed to recreate session options: " + e.getMessage());
+                    }
+                }
+                loadSessions();
+            } finally {
+                onnxLock.writeLock().unlock();
             }
-            loadSessions();
             lastBatchSizeEma = BATCH_MAX_SIZE * 100L;
             adaptiveBatchTimeoutMs = BATCH_TIMEOUT_MS;
         }
@@ -565,6 +596,8 @@ public final class OnnxInferenceModel implements PythonModel {
     }
 
     private void runBatchedInference(BatchKey key, List<ScoreRequest> requests) {
+        onnxLock.readLock().lock();
+        try {
         OrtSession session = sessions.get(key.headId);
         long runBatchId = totalFlushes.get();
         if (session == null) {
@@ -699,6 +732,9 @@ public final class OnnxInferenceModel implements PythonModel {
             for (ScoreRequest r : requests) {
                 r.future.complete(uniformResult(r.candidateMask, "onnx_exception", e.getClass().getSimpleName()));
             }
+        }
+        } finally {
+            onnxLock.readLock().unlock();
         }
     }
 

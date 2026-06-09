@@ -162,6 +162,14 @@ public class StateSequenceBuilder {
     private static final boolean CARD_BELIEF_LABELS_ENABLED =
             "1".equals(System.getenv().getOrDefault("RL_CARD_BELIEF_LABELS_ENABLE", "0"))
                     || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_CARD_BELIEF_LABELS_ENABLE", "0"));
+    // Self-supervised world-model labels: predict the agent's OWN future
+    // zone-counts at fixed decision horizons. Thesis-clean (future-state, not
+    // a value/good-bad belief). Opt-in; old models trained with slots absent.
+    private static final boolean WORLD_MODEL_LABELS_ENABLED =
+            "1".equals(System.getenv().getOrDefault("RL_WORLD_MODEL_LABELS_ENABLE", "0"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_WORLD_MODEL_LABELS_ENABLE", "0"));
+    public static final int WORLD_MODEL_FEATURES = 6;
+    public static final int[] WORLD_MODEL_HORIZONS = {8, 24, 64};
     private static final int CARD_BELIEF_MAX_CARDS =
             Math.max(0, parseEnvInt("RL_CARD_BELIEF_MAX_CARDS", 256));
     private static final CardBeliefVocab CARD_BELIEF_VOCAB =
@@ -1416,6 +1424,21 @@ public class StateSequenceBuilder {
         // serializes absent rows as -1 so Python skips them.
         public float[] cardBeliefLabels;
 
+        // Self-supervised world-model: present-state snapshot of the agent's
+        // OWN zone-counts (WORLD_MODEL_FEATURES) captured at this decision.
+        // Transient -- RLTrainer reads future snapshots to fill worldModelLabels.
+        public float[] worldModelSnapshot;
+        // Back-filled target: future snapshots at WORLD_MODEL_HORIZONS flattened
+        // (features x horizons). Null/-1 means horizon ran past the episode end;
+        // the bridge serializes absent rows as -1 so Python skips them.
+        public float[] worldModelLabels;
+
+        // Window-gated self-imitation eligibility: true if this decision is in
+        // the combo finisher window (set by the agent from game state, e.g. a
+        // large graveyard = post-Spy-mill). Restricts SIL to the short finisher
+        // horizon so it doesn't over-fit whole winning trajectories (SIL v1).
+        public boolean silEligible;
+
         public TrainingData(SequenceOutput state,
                 int candidateCount,
                 int[] candidateActionIds,
@@ -1441,6 +1464,9 @@ public class StateSequenceBuilder {
             this.beliefArchetypeLabel = -1;  // unknown until populated
             this.mctsVisitTargets = new float[MAX_CANDIDATES];  // all zeros = no MCTS target
             this.cardBeliefLabels = null;
+            this.worldModelSnapshot = null;
+            this.worldModelLabels = null;
+            this.silEligible = false;
         }
 
         public void setBeliefArchetypeLabel(int label) {
@@ -1457,6 +1483,13 @@ public class StateSequenceBuilder {
             int dim = StateSequenceBuilder.cardBeliefDim();
             if (labels != null && dim > 0 && labels.length == dim) {
                 this.cardBeliefLabels = labels;
+            }
+        }
+
+        public void setWorldModelLabels(float[] labels) {
+            int dim = StateSequenceBuilder.worldModelDim();
+            if (labels != null && dim > 0 && labels.length == dim) {
+                this.worldModelLabels = labels;
             }
         }
     }
@@ -1479,6 +1512,44 @@ public class StateSequenceBuilder {
 
     public static int cardBeliefDim() {
         return CARD_BELIEF_VOCAB.cardNames.length;
+    }
+
+    /** World-model label dimension = features x horizons (0 when disabled). */
+    public static int worldModelDim() {
+        return WORLD_MODEL_LABELS_ENABLED
+                ? WORLD_MODEL_FEATURES * WORLD_MODEL_HORIZONS.length
+                : 0;
+    }
+
+    /**
+     * Present-state snapshot of the agent's OWN observable zone-counts, in the
+     * exact order the world-model head predicts. Normalized to roughly [0,1].
+     * Captured per decision; RLTrainer back-fills future snapshots as labels.
+     */
+    public static float[] worldModelSnapshot(Player p, Game g) {
+        float[] s = new float[WORLD_MODEL_FEATURES];
+        if (p == null || g == null) {
+            return s;
+        }
+        int gyCreatures = 0;
+        for (Card c : p.getGraveyard().getCards(g)) {
+            if (c.isCreature(g)) {
+                gyCreatures++;
+            }
+        }
+        int boardCreatures = 0;
+        for (Permanent perm : g.getBattlefield().getAllActivePermanents(p.getId())) {
+            if (perm.isCreature(g)) {
+                boardCreatures++;
+            }
+        }
+        s[0] = p.getLibrary().size() / 60.0f;
+        s[1] = p.getGraveyard().size() / 30.0f;
+        s[2] = gyCreatures / 30.0f;
+        s[3] = p.getHand().size() / 7.0f;
+        s[4] = (float) p.getLife() / Math.max(1, g.getStartingLife());
+        s[5] = boardCreatures / 10.0f;
+        return s;
     }
 
     public static List<String> cardBeliefVocab() {

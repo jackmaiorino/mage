@@ -352,6 +352,7 @@ class PythonEntryPoint:
         self.value_pair_rank_critic_only = bool(int(os.getenv('VALUE_PAIR_RANK_CRITIC_ONLY', '0')))
         self.belief_head_only = bool(int(os.getenv('BELIEF_HEAD_ONLY', '0')))
         self.card_belief_head_only = bool(int(os.getenv('CARD_BELIEF_HEAD_ONLY', '0')))
+        self.world_model_head_only = bool(int(os.getenv('WORLD_MODEL_HEAD_ONLY', '0')))
 
         # Loss coefficients
         self.policy_loss_coef_warmup = float(
@@ -369,6 +370,10 @@ class PythonEntryPoint:
         self.belief_loss_coef = float(os.getenv('BELIEF_LOSS_COEF', '0.3'))
         # Generic hidden-card belief auxiliary loss coefficient. 0 disables.
         self.card_belief_loss_coef = float(os.getenv('CARD_BELIEF_LOSS_COEF', '0.0'))
+        # Self-supervised world-model auxiliary loss coefficient. Predicts the
+        # agent's OWN future zone-counts from the shared CLS to de-myopia the
+        # value head (thesis-clean: future-state, not value/good-bad). 0 disables.
+        self.world_model_loss_coef = float(os.getenv('WORLD_MODEL_LOSS_COEF', '0.0'))
         # AlphaZero policy distillation loss: cross-entropy between the model's
         # policy and the MCTS visit distribution at steps where MCTS was run.
         # 0 disables the loss (use when MCTS-generated targets aren't present).
@@ -1190,6 +1195,13 @@ class PythonEntryPoint:
         for name, p in self.model.named_parameters():
             p.requires_grad = name.startswith('card_belief_head.')
 
+    def _set_world_model_head_only_requires_grad(self):
+        """Train only the world-model regressor (encoder frozen) for warmup."""
+        if self.model is None:
+            return
+        for name, p in self.model.named_parameters():
+            p.requires_grad = name.startswith('world_model_head.')
+
     def _ensure_main_model_initialized(self):
         if self.model is not None:
             return
@@ -1222,6 +1234,8 @@ class PythonEntryPoint:
                 self._set_belief_head_only_requires_grad()
             elif self.card_belief_head_only:
                 self._set_card_belief_head_only_requires_grad()
+            elif self.world_model_head_only:
+                self._set_world_model_head_only_requires_grad()
 
             # Separate LR groups: actor head, critic head, everything else
             actor_param_names = [
@@ -2533,6 +2547,55 @@ class PythonEntryPoint:
                 except Exception:
                     pass
 
+    def replayCandidateQBatch(self, npz_path):
+        """DECOUPLE replay: load one dumped candidate_q shard (state + signed
+        terminal targets) and run a single candidate_q-only training step
+        (encoder UNFROZEN, KL-anchored) through the production training path
+        with cq_replay_mode=True. Non-candidate_q fields are neutral fillers
+        because their losses are skipped in replay mode. Requires
+        CANDIDATE_Q_FROM_MCTS_TARGETS=1 / CANDIDATE_Q_MCTS_SIGNED_TARGETS=1 /
+        CANDIDATE_Q_LOSS_COEF>0 in env. Returns rows trained, or 0 on failure."""
+        try:
+            with np.load(npz_path) as d:
+                seq = np.ascontiguousarray(d["seq"], dtype='<f4')
+                mask = np.ascontiguousarray(d["mask"], dtype='<i4')
+                tok = np.ascontiguousarray(d["tok_ids"], dtype='<i4')
+                cf = np.ascontiguousarray(d["cand_feat"], dtype='<f4')
+                cid = np.ascontiguousarray(d["cand_ids"], dtype='<i4')
+                cm = np.ascontiguousarray(d["cand_mask"], dtype='<i4')
+                mv = np.ascontiguousarray(d["mcts_visits"], dtype='<f4')
+                hid = np.ascontiguousarray(d["head_ids"], dtype='<i4')
+                meta = d["meta"]
+            seq_len = int(meta[0]); d_model = int(meta[1])
+            max_candidates = int(meta[2]); cand_feat_dim = int(meta[3])
+            B = int(seq.shape[0])
+            if B <= 0:
+                return 0
+            z_f = np.zeros((B,), dtype='<f4').tobytes()
+            z_i = np.zeros((B,), dtype='<i4').tobytes()
+            z_ci = np.zeros((B, max_candidates), dtype='<i4').tobytes()
+            ones_f = np.ones((B,), dtype='<f4').tobytes()
+            ones_i = np.ones((B,), dtype='<i4').tobytes()
+            self.trainCandidatesMultiFlat(
+                seq.tobytes(), mask.tobytes(), tok.tobytes(),
+                cf.tobytes(), cid.tobytes(), cm.tobytes(),
+                z_f,            # rewards (unused: PPO/value skipped in replay)
+                z_ci,           # chosen_indices
+                z_i,            # chosen_count
+                z_f,            # old_logp_total
+                z_f,            # old_value
+                ones_f,         # sample_weights
+                ones_i,         # dones
+                hid.tobytes(),  # head_ids
+                B, seq_len, d_model, max_candidates, cand_feat_dim,
+                mcts_visits_bytes=mv.tobytes(),   # candidate_q signed targets
+                cq_replay_mode=True,
+            )
+            return B
+        except Exception as e:
+            print("[CQ_REPLAY] failed %s: %s" % (npz_path, e), flush=True)
+            return 0
+
     def trainCandidatesMultiFlat(self,
                                  sequences_bytes,
                                  masks_bytes,
@@ -2557,7 +2620,11 @@ class PythonEntryPoint:
                                  num_archetypes=0,
                                  mcts_visits_bytes=None,
                                  card_belief_labels_bytes=None,
-                                 card_belief_dim=0):
+                                 card_belief_dim=0,
+                                 world_model_labels_bytes=None,
+                                 world_model_dim=0,
+                                 sil_eligible_bytes=None,
+                                 cq_replay_mode=False):
         """
         Train on a batch that concatenates multiple episodes.
         dones marks episode ends (1=end-of-episode), so GAE/returns do not leak across boundaries.
@@ -2639,6 +2706,68 @@ class PythonEntryPoint:
                 except Exception:
                     card_belief_labels_np = None
 
+            # Self-supervised world-model labels (agent's own future zone-counts
+            # at fixed horizons). Rows filled with -1 are absent / not-yet-known
+            # (episode end clipped the horizon) and skipped by the loss.
+            world_model_labels_np = None
+            _world_model_dim = int(world_model_dim or 0)
+            if _world_model_dim > 0 and world_model_labels_bytes:
+                try:
+                    world_model_labels_np = np.frombuffer(
+                        world_model_labels_bytes, dtype='<f4').reshape(
+                        batch_size, _world_model_dim)[start:end]
+                except Exception:
+                    world_model_labels_np = None
+
+            # Window-gated self-imitation eligibility (1 = finisher-window row).
+            sil_eligible_np = None
+            if sil_eligible_bytes:
+                try:
+                    sil_eligible_np = np.frombuffer(
+                        sil_eligible_bytes, dtype='<i4').reshape(batch_size)[start:end]
+                except Exception:
+                    sil_eligible_np = None
+
+            # DECOUPLE dump: persist candidate_q examples (state + signed terminal
+            # targets) to disk so de-myopia can be replayed at full PPO throughput
+            # later. In-loop SEARCH_OP rollouts are the throughput bottleneck; once
+            # dumped, the candidate_q gradient is "free". Env-gated: no-op unless
+            # CANDIDATE_Q_DUMP_DIR is set. Only rows carrying >=1 valid signed
+            # target are written, so the dataset stays compact.
+            _cq_dump_dir = os.getenv("CANDIDATE_Q_DUMP_DIR", "").strip()
+            if _cq_dump_dir and mcts_visits_np is not None:
+                try:
+                    # A genuine SEARCH_OP firing sets target = 2*winRate-1 only for
+                    # candidates that reached a terminal; non-fired steps carry an
+                    # all-zero target row. Require >=1 NONZERO valid target so we
+                    # dump only real terminal-grounded firings, not 0-filler rows
+                    # (replaying those would collapse the value head toward 0).
+                    _valid = (np.isfinite(mcts_visits_np)
+                              & (np.abs(mcts_visits_np) <= 1.0)
+                              & (cand_mask > 0))
+                    _signal = _valid & (np.abs(mcts_visits_np) > 1e-6)
+                    _rows = np.nonzero(_signal.sum(axis=1) >= 1)[0]
+                    if _rows.size > 0:
+                        os.makedirs(_cq_dump_dir, exist_ok=True)
+                        self._cq_dump_ctr = getattr(self, "_cq_dump_ctr", 0) + 1
+                        _fn = os.path.join(
+                            _cq_dump_dir,
+                            "cq_%d_%d.npz" % (os.getpid(), self._cq_dump_ctr))
+                        np.savez_compressed(
+                            _fn,
+                            seq=seq[_rows].astype('<f4'),
+                            mask=mask[_rows].astype('<i4'),
+                            tok_ids=tok_ids[_rows].astype('<i4'),
+                            cand_feat=cand_feat[_rows].astype('<f4'),
+                            cand_ids=cand_ids[_rows].astype('<i4'),
+                            cand_mask=cand_mask[_rows].astype('<i4'),
+                            mcts_visits=mcts_visits_np[_rows].astype('<f4'),
+                            head_ids=head_ids[_rows].astype('<i4'),
+                            meta=np.array([seq_len, d_model, max_candidates,
+                                           cand_feat_dim], dtype='<i4'))
+                except Exception:
+                    pass
+
             _nb = str(device).startswith("cuda")
             seq_t = torch.tensor(seq, dtype=torch.float32).to(device, non_blocking=_nb)
             mask_t = torch.tensor(mask, dtype=torch.bool).to(device, non_blocking=_nb)
@@ -2670,6 +2799,16 @@ class PythonEntryPoint:
                 card_belief_labels_t = torch.tensor(
                     card_belief_labels_np, dtype=torch.float32).to(device, non_blocking=_nb)
 
+            world_model_labels_t = None
+            if world_model_labels_np is not None:
+                world_model_labels_t = torch.tensor(
+                    world_model_labels_np, dtype=torch.float32).to(device, non_blocking=_nb)
+
+            sil_eligible_t = None
+            if sil_eligible_np is not None:
+                sil_eligible_t = torch.tensor(
+                    sil_eligible_np, dtype=torch.float32).to(device, non_blocking=_nb)
+
             if _nb:
                 torch.cuda.synchronize(device)
 
@@ -2677,6 +2816,8 @@ class PythonEntryPoint:
             del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value, sample_weights, dones, head_ids
             archetype_labels_np = None
             card_belief_labels_np = None
+            world_model_labels_np = None
+            sil_eligible_np = None
 
             local_batch_size = int(end - start)
             mcts_signed_targets = bool(int(os.getenv(
@@ -3195,6 +3336,18 @@ class PythonEntryPoint:
                 adv_clip_max = float(os.getenv('ADV_CLIP_MAX', '5.0'))
                 advantages_normalized = advantages_normalized.clamp(-adv_clip_max, adv_clip_max)
 
+                # Advantage-magnitude prioritization (thesis-clean: |advantage| is
+                # return - value, no labels). Up-weights rare high-error decisions
+                # (e.g. a strictly-dominated action the value head mis-rated) so
+                # the policy + value learn them despite being drowned by the many
+                # average decisions. ADV_PRIORITY_BETA=0 disables (default).
+                adv_priority_beta = float(os.getenv("ADV_PRIORITY_BETA", "0.0"))
+                if adv_priority_beta > 0.0:
+                    _prio = advantages_normalized.detach().abs().clamp_min(1e-3) ** adv_priority_beta
+                    norm_w_t = norm_w_t * _prio
+                    norm_w_t = norm_w_t * (
+                        float(max(1, local_batch_size)) / norm_w_t.sum().clamp_min(1e-8))
+
                 # Compute loss coefficients once (shared by all chunks).
                 if self.loss_schedule_enable and next_step <= self.critic_warmup_steps:
                     policy_loss_coef = float(self.policy_loss_coef_warmup)
@@ -3222,6 +3375,7 @@ class PythonEntryPoint:
                 total_loss_value = 0.0
                 total_loss_belief = 0.0
                 total_loss_card_belief = 0.0
+                total_loss_world_model = 0.0
                 total_loss_candidate_q = 0.0
                 total_loss_branch_return_policy = 0.0
                 total_loss_reference_policy = 0.0
@@ -3250,6 +3404,15 @@ class PythonEntryPoint:
                     0.0, float(os.getenv("BRANCH_RETURN_POLICY_MIN_GAP", "0.25")))
                 branch_return_policy_target_mix = max(
                     0.0, min(1.0, float(os.getenv("BRANCH_RETURN_POLICY_TARGET_MIX", "1.0"))))
+                # Self-imitation: reinforce actions whose realized return exceeded the
+                # value baseline. Pure terminal signal (return = discounted terminal
+                # reward), thesis-clean. SIL_LOSS_COEF=0 disables it (default).
+                sil_loss_coef = float(os.getenv("SIL_LOSS_COEF", "0.0"))
+                sil_advantage_clip = max(1e-3, float(os.getenv("SIL_ADVANTAGE_CLIP", "2.0")))
+                # Window-gated SIL: restrict the self-imitation to finisher-window
+                # rows (sil_eligible=1) so it reinforces only the short post-mill
+                # combo finish, not whole winning trajectories (SIL v1 over-fit).
+                sil_window_gated = os.getenv("SIL_WINDOW_GATED", "0") == "1"
                 return_contrastive_coef = float(os.getenv("RETURN_CONTRASTIVE_POLICY_LOSS_COEF", "0.0"))
                 return_contrastive_eps = float(os.getenv("RETURN_CONTRASTIVE_RETURN_EPS", "0.05"))
                 return_contrastive_neg_prob_floor = float(os.getenv("RETURN_CONTRASTIVE_NEG_PROB_FLOOR", "0.20"))
@@ -3383,6 +3546,40 @@ class PythonEntryPoint:
                     _log_probs_c = torch.log(_probs_safe_c)
                     _entropy_per_step_c = -(_probs_safe_c * _log_probs_c).sum(dim=-1)
                     _loss_entropy_c = -entropy_coef * _entropy_per_step_c.sum() / float(max(local_batch_size, 1))
+
+                    # Self-imitation loss: -log pi(chosen) weighted by relu(R - V)+.
+                    # Directly credits the long-horizon winning-combo setup actions
+                    # that PPO's clipped surrogate + myopic value baseline + GAE/gamma
+                    # decay under-credit. relu(return - value) is positive exactly on
+                    # actions that did better than the baseline predicted (the rare
+                    # winning sequences). Unclipped, so it survives the PPO ratio clamp.
+                    _loss_sil_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    if sil_loss_coef > 0.0:
+                        _sil_adv_c = (_value_targets_c - _value_c_sq).detach().clamp(min=0.0, max=sil_advantage_clip)
+                        _sil_denom = total_norm_w_sum
+                        if sil_window_gated:
+                            if sil_eligible_t is not None:
+                                _sil_mask_c = sil_eligible_t[_c_start:_c_end]
+                                _sil_adv_c = _sil_adv_c * _sil_mask_c
+                                # normalize by eligible-row weight so the sparse
+                                # finisher signal keeps proper magnitude
+                                _sil_denom = (_sil_mask_c * _norm_w_c).sum().clamp_min(1e-8)
+                            else:
+                                _sil_adv_c = _sil_adv_c * 0.0  # gated on but no mask -> no SIL signal
+                        _loss_sil_c = sil_loss_coef * (
+                            (_sil_adv_c * (-_new_logp_c) * _norm_w_c).sum() / _sil_denom
+                        )
+                        self._sil_calls = getattr(self, "_sil_calls", 0) + 1
+                        _sil_pos = int((_sil_adv_c > 0).sum().item())
+                        self._sil_pos_total = getattr(self, "_sil_pos_total", 0) + _sil_pos
+                        if self._sil_calls <= 25 or self._sil_calls % 100 == 0:
+                            try:
+                                _mp = float(_sil_adv_c[_sil_adv_c > 0].mean().item()) if _sil_pos else 0.0
+                                print(f"[SIL_DIAG] calls={self._sil_calls} coef={sil_loss_coef} "
+                                      f"pos_adv_rows={_sil_pos}/{int(_sil_adv_c.numel())} cum_pos={self._sil_pos_total} "
+                                      f"mean_pos_adv={_mp:.3f} sil_loss={float(_loss_sil_c.item()):.5f}", flush=True)
+                            except Exception:
+                                pass
 
                     # Decision-local policy ranking for paired branch records.
                     # Adjacent records are generic terminal branch alternatives:
@@ -3594,6 +3791,34 @@ class PythonEntryPoint:
                             _loss_card_belief_c = self.card_belief_loss_coef * torch.nn.functional.mse_loss(
                                 _card_pred_c, _card_target_c, reduction='mean')
 
+                    # Self-supervised world-model auxiliary loss: regress the
+                    # agent's OWN future zone-counts (normalized to [0,1]) at
+                    # fixed horizons from the shared CLS. Forces the encoder to
+                    # represent the combo-assembly trajectory (lib-down / gy-up
+                    # self-mill discontinuity) -> de-myopia the value head.
+                    # Rows with -1 sentinels (horizon past episode end) skipped.
+                    _loss_world_model_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
+                    _model_wm_dim = int(getattr(self.model, "world_model_dim", 0) or 0)
+                    if (world_model_labels_t is not None
+                            and _world_model_dim > 0
+                            and _model_wm_dim == _world_model_dim
+                            and self.world_model_loss_coef > 0.0):
+                        _wm_labels_c = world_model_labels_t[_c_start:_c_end]
+                        _wm_valid_c = torch.isfinite(_wm_labels_c).all(dim=-1) & (_wm_labels_c >= 0.0).all(dim=-1)
+                        _wm_n_valid = int(_wm_valid_c.sum().item())
+                        if _wm_valid_c.any():
+                            with autocast_ctx:
+                                _wm_logits_c = self.model.world_model_logits_from_cls(_cls_c)
+                            _wm_pred_c = torch.sigmoid(_wm_logits_c[_wm_valid_c].float())
+                            _wm_target_c = _wm_labels_c[_wm_valid_c].float().clamp(0.0, 1.0)
+                            _loss_world_model_c = self.world_model_loss_coef * torch.nn.functional.smooth_l1_loss(
+                                _wm_pred_c, _wm_target_c, reduction='mean')
+                        if os.getenv("WORLD_MODEL_DIAG", "0") == "1":
+                            _wm_rows = int(_wm_labels_c.shape[0])
+                            print(f"[WORLD_MODEL_DIAG] valid={_wm_n_valid}/{_wm_rows} "
+                                  f"dim={_world_model_dim} coef={self.world_model_loss_coef} "
+                                  f"loss={float(_loss_world_model_c.item()):.5f}", flush=True)
+
                     # AlphaZero policy distillation loss: KL(policy || MCTS_visits)
                     # for steps where MCTS was run (non-zero visit distribution).
                     _loss_mcts_kl_c = torch.zeros((), device=device, dtype=_loss_policy_c.dtype)
@@ -3700,6 +3925,18 @@ class PythonEntryPoint:
                         _worst_ret_c = _branch_c.masked_fill(~_obs_c, 1e9).min(dim=-1).values
                         _gap_c = _best_ret_c - _worst_ret_c
                         _valid_branch_rows_c = (_obs_count_c >= 2) & (_gap_c >= branch_return_policy_min_gap)
+                        if os.getenv("SEARCH_OP_DIAG", "0") == "1":
+                            try:
+                                self._search_op_calls = getattr(self, "_search_op_calls", 0) + 1
+                                self._search_op_rows = getattr(self, "_search_op_rows", 0) + int((_obs_count_c >= 2).sum().item())
+                                self._search_op_valid = getattr(self, "_search_op_valid", 0) + int(_valid_branch_rows_c.sum().item())
+                                if self._search_op_calls <= 3 or self._search_op_calls % 20 == 0:
+                                    print(f"[SEARCH_OP_DIAG] calls={self._search_op_calls} "
+                                          f"cum_rows_obs>=2={self._search_op_rows} "
+                                          f"cum_valid(gap>=min)={self._search_op_valid} "
+                                          f"coef={branch_return_policy_coef} min_gap={branch_return_policy_min_gap}", flush=True)
+                            except Exception:
+                                pass
                         if _valid_branch_rows_c.any():
                             _scores_c = (_branch_c / branch_return_policy_temp).masked_fill(~_obs_c, -1e9)
                             _target_c = torch.softmax(_scores_c.float(), dim=-1)
@@ -3788,6 +4025,7 @@ class PythonEntryPoint:
                         + _loss_entropy_c
                         + _loss_belief_c
                         + _loss_card_belief_c
+                        + _loss_world_model_c
                         + _loss_mcts_kl_c
                         + _loss_policy_pair_rank_c
                         + _loss_trajectory_pair_rank_c
@@ -3795,7 +4033,17 @@ class PythonEntryPoint:
                         + _loss_branch_return_policy_c
                         + _loss_reference_policy_c
                         + _loss_return_contrastive_c
+                        + _loss_sil_c
                     )
+
+                    # DECOUPLE replay: a replayed candidate_q batch has no valid
+                    # live-PPO context (rewards/old_logp/advantages are absent /
+                    # reconstructed), so keep ONLY the candidate_q term plus the
+                    # frozen-policy KL anchor. This de-myopia's the shared encoder
+                    # at full throughput while live PPO (separate batches) drives
+                    # the policy. No-op for normal Java-sent batches.
+                    if cq_replay_mode:
+                        _chunk_loss = _loss_candidate_q_c + _loss_reference_policy_c
 
                     if torch.isnan(_chunk_loss) or torch.isinf(_chunk_loss):
                         logger.warning(LogCategory.MODEL_TRAIN,
@@ -3821,6 +4069,10 @@ class PythonEntryPoint:
                         pass
                     try:
                         total_loss_card_belief += float(_loss_card_belief_c.item())
+                    except Exception:
+                        pass
+                    try:
+                        total_loss_world_model += float(_loss_world_model_c.item())
                     except Exception:
                         pass
                     try:
@@ -3927,8 +4179,8 @@ class PythonEntryPoint:
                     clip_frac = ((ratio_raw < 1.0 - self.ppo_epsilon) |
                                  (ratio_raw > 1.0 + self.ppo_epsilon)).float().mean()
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f ent=%.4f belief=%.4f cardBelief=%.4f refPolicy=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
-                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_reference_policy,
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f ent=%.4f belief=%.4f cardBelief=%.4f worldModel=%.4f refPolicy=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
+                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_world_model, total_loss_reference_policy,
                             entropy_coef, clip_frac.item() * 100, approx_kl.item())
                 # Record loss components for metrics export
                 self.metrics.record_train_losses(
@@ -3946,8 +4198,8 @@ class PythonEntryPoint:
                 self._write_training_losses_csv(episodes_in_batch=ep_count)
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f ent=%.4f belief=%.4f cardBelief=%.4f refPolicy=%.4f (coeff: %.4f)",
-                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_reference_policy, float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f ent=%.4f belief=%.4f cardBelief=%.4f worldModel=%.4f refPolicy=%.4f (coeff: %.4f)",
+                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_world_model, total_loss_reference_policy, float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
                 # Record loss components for metrics export
                 self.metrics.record_train_losses(
                     total_loss=loss.item(),

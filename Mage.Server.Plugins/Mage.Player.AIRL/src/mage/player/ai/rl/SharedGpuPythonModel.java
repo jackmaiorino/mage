@@ -1045,8 +1045,27 @@ public final class SharedGpuPythonModel implements PythonModel {
         headers.put("cand_feat_dim", Integer.toString(key.candFeatDim));
         headers.put("num_archetypes", Integer.toString(StateSequenceBuilder.TrainingData.NUM_ARCHETYPES));
         headers.put("card_belief_dim", Integer.toString(StateSequenceBuilder.cardBeliefDim()));
+        headers.put("world_model_dim", Integer.toString(StateSequenceBuilder.worldModelDim()));
         headers.put("local_flush_reason", dueToFull ? "full" : "timeout");
         byte[] payload = SharedGpuTensorSerde.buildTrainPayload(mergedTrainingData, mergedRewards);
+        // Frame-size guard: a single very long episode (e.g. a runaway/durdle game with
+        // thousands of decisions) can build a payload exceeding the protocol frame cap.
+        // Sending it desyncs the socket; the OLD code then requeued the unsendable batch,
+        // poison-pilling the train queue forever. Instead: split a multi-episode batch
+        // into per-episode frames, and DROP a single episode that is still too large
+        // (never requeue an unsendable frame).
+        if (payload.length > SharedGpuProtocol.MAX_FRAME_BYTES) {
+            if (batch.size() > 1) {
+                for (TrainRequest single : batch) {
+                    flushTrainBatch(new ArrayList<>(java.util.Collections.singletonList(single)), dueToFull);
+                }
+                return;
+            }
+            logger.warning("Dropping oversized single-episode train batch: " + payload.length
+                    + " bytes, " + mergedTrainingData.size() + " steps (> frame cap "
+                    + SharedGpuProtocol.MAX_FRAME_BYTES + "). Episode too long to frame; not requeued.");
+            return;
+        }
         try {
             SharedGpuProtocol.ResponseFrame response = invoke(SharedGpuProtocol.OP_ENQUEUE_TRAIN, headers, payload, CONTROL_TIMEOUT_MS);
             trainQueueDepth = parseIntHeader(response.headers, "queue_depth", trainQueueDepth);

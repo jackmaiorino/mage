@@ -120,6 +120,12 @@ def connect_transport(credential_file: Path, port: int, timeout_seconds: int, kn
     server_key = transport.get_remote_server_key()
     verify_host_key(paramiko, hostname, port, server_key, known_hosts_path)
 
+    # Give the user a comfortable window to approve the Duo push (default is short).
+    try:
+        transport.auth_timeout = max(int(timeout_seconds), 60)
+    except Exception:
+        pass
+
     try:
         transport.auth_interactive(
             username=username,

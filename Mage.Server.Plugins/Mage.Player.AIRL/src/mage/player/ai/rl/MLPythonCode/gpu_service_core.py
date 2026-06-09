@@ -346,10 +346,13 @@ class ProfileContext:
         mcts_visits: Optional[bytes] = None,
         card_belief_labels: Optional[bytes] = None,
         card_belief_dim: int = 0,
+        world_model_labels: Optional[bytes] = None,
+        world_model_dim: int = 0,
+        sil_eligible: Optional[bytes] = None,
     ) -> bool:
         self._ensure_model_initialized()
         with self.lock:
-            return bool(
+            _ok = bool(
                 self.entry.trainCandidatesMultiFlat(
                     sequences,
                     masks,
@@ -375,8 +378,45 @@ class ProfileContext:
                     mcts_visits,
                     card_belief_labels,
                     card_belief_dim,
+                    world_model_labels,
+                    world_model_dim,
+                    sil_eligible,
                 )
             )
+            self._maybe_replay_candidate_q()
+            return _ok
+
+    def _maybe_replay_candidate_q(self):
+        """DECOUPLE mixed-mode: periodically replay dumped candidate_q targets
+        from disk so the shared encoder stays de-myopia'd while live PPO runs
+        with SEARCH_OP off (full throughput). Runs under the train lock held by
+        train_batch, so it is serialized with live updates. No-op unless
+        CANDIDATE_Q_REPLAY_DIR is set."""
+        rd = os.getenv("CANDIDATE_Q_REPLAY_DIR", "").strip()
+        if not rd:
+            return
+        try:
+            if getattr(self, "_cq_replay_files", None) is None:
+                import glob
+                self._cq_replay_files = sorted(glob.glob(os.path.join(rd, "cq_*.npz")))
+                self._cq_replay_pos = 0
+                self._cq_replay_ctr = 0
+                self._cq_replay_every = max(1, int(os.getenv("CANDIDATE_Q_REPLAY_EVERY", "1")))
+                self._cq_replay_steps = max(1, int(os.getenv("CANDIDATE_Q_REPLAY_STEPS", "1")))
+                print("[CQ_REPLAY] %d shards from %s every=%d steps=%d" % (
+                    len(self._cq_replay_files), rd, self._cq_replay_every,
+                    self._cq_replay_steps), flush=True)
+            if not self._cq_replay_files:
+                return
+            self._cq_replay_ctr += 1
+            if self._cq_replay_ctr % self._cq_replay_every != 0:
+                return
+            for _ in range(self._cq_replay_steps):
+                f = self._cq_replay_files[self._cq_replay_pos % len(self._cq_replay_files)]
+                self._cq_replay_pos += 1
+                self.entry.replayCandidateQBatch(f)
+        except Exception as e:
+            print("[CQ_REPLAY] error: %s" % e, flush=True)
 
     def predict_mulligan(self, features) -> float:
         with self.lock:
