@@ -35,19 +35,23 @@ class BeliefHeadScorer(nn.Module):
     @staticmethod
     def _unfused_encoder_layer(layer, x, src_key_padding_mask):
         """Mirror SingleHeadScorer._unfused_encoder_layer so ONNX export avoids
-        PyTorch's fused multi-head attention op (which the exporter can't handle)."""
-        x2, _ = layer.self_attn(x, x, x, key_padding_mask=src_key_padding_mask)
-        x = layer.norm1(x + layer.dropout1(x2))
-        x2 = layer.linear2(layer.dropout(F.relu(layer.linear1(x))))
-        x = layer.norm2(x + layer.dropout2(x2))
+        PyTorch's fused multi-head attention op (which the exporter can't handle).
+        Pre-norm (norm_first=True), matching the live model layers."""
+        n1 = layer.norm1(x)
+        x2, _ = layer.self_attn(n1, n1, n1, key_padding_mask=src_key_padding_mask)
+        x = x + layer.dropout1(x2)
+        x2 = layer.linear2(layer.dropout(F.relu(layer.linear1(layer.norm2(x)))))
+        x = x + layer.dropout2(x2)
         return x
 
     def forward(self, sequences, masks, token_ids):
         m = self.model
-        x = m.input_proj(sequences) * m.input_scale
+        # Mirror encode_state_full exactly: proj -> +token_emb -> norm -> *scale.
+        x = m.input_proj(sequences)
         safe_ids = token_ids.clamp(min=0, max=m.token_id_emb.num_embeddings - 1)
         x = x + m.token_id_emb(safe_ids)
         x = m.input_norm(x)
+        x = x * m.input_scale
         cls_expanded = m.cls_token.expand(sequences.size(0), -1, -1)
         x = torch.cat((cls_expanded, x), dim=1)
         pad_mask = masks.bool()
@@ -286,6 +290,20 @@ def export_all_heads(model_path: str, output_dir: str,
             ok = _dp <= 0.02 and 0.9 <= _ratio <= 1.1
             tag = "OK" if ok else "PARITY FAILURE -- do not train on this export"
             print(f"  parity {head_id}: max|dp|={_dp:.4f} peak t/o={_pk_t:.3f}/{_pk_o:.3f} ratio={_ratio:.2f} [{tag}]")
+            if not ok:
+                # Blocking gate: a miscalibrated export poisons PPO ratios for
+                # every action sampled from it. Remove the artifact and fail the
+                # export so the caller never activates this version dir.
+                del _sess
+                try:
+                    os.remove(out_path)
+                except OSError:
+                    pass
+                raise RuntimeError(
+                    f"ONNX parity failure for head '{head_id}': max|dp|={_dp:.4f} "
+                    f"peak-ratio={_ratio:.2f}. Export aborted; file removed.")
+        except RuntimeError:
+            raise
         except Exception as _e:
             print(f"  parity {head_id}: check failed to run: {_e}")
 

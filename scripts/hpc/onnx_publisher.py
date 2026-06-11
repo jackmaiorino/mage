@@ -65,7 +65,9 @@ def export_profile(profile: str, artifacts_root: Path) -> bool:
             and action.stat().st_mtime >= model_path.stat().st_mtime and cur_ver == ONNX_EXPORT_VERSION:
         return False  # up to date
     os.environ["MODEL_PROFILE"] = profile
-    os.environ.setdefault("ONNX_EXPORT_FP16", "1")
+    # fp32 exports: fp16 conversion flattens probs ~2x and poisons PPO ratios
+    # on self-serve satellites (2026-06-10 root cause). Do not re-default to 1.
+    os.environ.setdefault("ONNX_EXPORT_FP16", "0")
     stamp = datetime.now(timezone.utc).strftime("v%Y%m%dT%H%M%S_%f")
     stage = onnx_dir / (stamp + "_staging")
     final = onnx_dir / stamp

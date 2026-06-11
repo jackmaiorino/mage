@@ -104,6 +104,17 @@ final class SharedGpuTensorSerde {
     }
 
     static byte[] buildTrainPayload(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> rewards) {
+        return buildTrainPayload(trainingData, rewards, null);
+    }
+
+    /**
+     * @param episodeEnds per-position terminal flags for merged multi-episode
+     *        batches. Without them, only the final position gets done=1, and
+     *        GAE / Monte-Carlo returns bleed across every concatenated episode
+     *        (terminal credit of episode N contaminates episode N-1).
+     */
+    static byte[] buildTrainPayload(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> rewards,
+                                    boolean[] episodeEnds) {
         if (trainingData == null || trainingData.isEmpty()) {
             return packSegments();
         }
@@ -196,7 +207,8 @@ final class SharedGpuTensorSerde {
             oldLogpTotal[i] = item.oldLogpTotal;
             oldValue[i] = item.oldValue;
             sampleWeights[i] = (float) actionTypeSampleWeight(item.actionType);
-            dones[i] = (i == batchSize - 1) ? 1 : 0;
+            dones[i] = (i == batchSize - 1 || (episodeEnds != null && i < episodeEnds.length && episodeEnds[i]))
+                    ? 1 : 0;
             headIdx[i] = actionTypeToHeadIdx(item.actionType);
         }
 

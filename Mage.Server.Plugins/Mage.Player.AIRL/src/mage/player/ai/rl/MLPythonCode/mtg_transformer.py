@@ -1,5 +1,11 @@
 import torch
 import torch.nn as nn
+
+# Detach the candidate-Q head from the shared encoder (no encoder gradient from the
+# Q loss). Diagnostic mode: the head learns as a probe without dragging the policy
+# path (the WM01 lesson: shared-encoder aux losses collaterally degrade castable-Spy).
+import os as _os
+CANDIDATE_Q_DETACH_ENCODER = bool(int(_os.getenv('CANDIDATE_Q_DETACH_ENCODER', '0')))
 import torch.nn.functional as F
 import numpy as np
 from transformers import AutoModel, AutoTokenizer
@@ -424,7 +430,8 @@ class MTGTransformerModel(nn.Module):
             scorer = self.policy_scorer
         
         scores = scorer(combined).squeeze(-1)  # [B, N]
-        candidate_q = torch.tanh(self.candidate_q_scorer(combined).squeeze(-1))  # [B, N], terminal-return scale
+        _cq_in = combined.detach() if CANDIDATE_Q_DETACH_ENCODER else combined
+        candidate_q = torch.tanh(self.candidate_q_scorer(_cq_in).squeeze(-1))  # [B, N], terminal-return scale
         valid = candidate_mask.bool()
         # Numeric safety: if any score is NaN/Inf, treat it as invalid
         scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
@@ -806,23 +813,32 @@ class SingleHeadScorer(nn.Module):
 
     @staticmethod
     def _unfused_encoder_layer(layer, x, src_key_padding_mask):
-        """Run TransformerEncoderLayer without the fused C++ op (for ONNX export)."""
-        # Self-attention
-        x2, _ = layer.self_attn(x, x, x, key_padding_mask=src_key_padding_mask)
-        x = layer.norm1(x + layer.dropout1(x2))
-        # Feed-forward
-        x2 = layer.linear2(layer.dropout(F.relu(layer.linear1(x))))
-        x = layer.norm2(x + layer.dropout2(x2))
+        """Run TransformerEncoderLayer without the fused C++ op (for ONNX export).
+
+        The layers are built with norm_first=True (pre-norm); this must mirror
+        that exactly or exported probs diverge from the torch forward, which
+        biases every PPO importance ratio computed against recorded behavior.
+        """
+        # Pre-norm self-attention: x = x + attn(norm1(x))
+        n1 = layer.norm1(x)
+        x2, _ = layer.self_attn(n1, n1, n1, key_padding_mask=src_key_padding_mask)
+        x = x + layer.dropout1(x2)
+        # Pre-norm feed-forward: x = x + ff(norm2(x))
+        x2 = layer.linear2(layer.dropout(F.relu(layer.linear1(layer.norm2(x)))))
+        x = x + layer.dropout2(x2)
         return x
 
     def _encode_state_unfused(self, sequences, masks, token_ids):
         """encode_state_full but with unfused transformer layers for ONNX export."""
         m = self.model
-        x = m.input_proj(sequences) * m.input_scale
+        # Mirror encode_state_full exactly: proj -> +token_emb -> norm -> *scale.
+        # (input_dropout is identity in eval mode.)
+        x = m.input_proj(sequences)
         if token_ids is not None:
             safe_ids = token_ids.clamp(min=0, max=m.token_id_emb.num_embeddings - 1)
             x = x + m.token_id_emb(safe_ids)
         x = m.input_norm(x)
+        x = x * m.input_scale
         cls_expanded = m.cls_token.expand(sequences.size(0), -1, -1)
         x = torch.cat((cls_expanded, x), dim=1)
         pad_mask = masks.bool()
@@ -894,7 +910,8 @@ class SingleHeadScorer(nn.Module):
         cls_expanded = cls.unsqueeze(1).expand(-1, attended.size(1), -1)
         combined = torch.cat([cls_expanded, attended], dim=-1)
         scores = self.scorer(combined).squeeze(-1)
-        candidate_q = torch.tanh(m.candidate_q_scorer(combined).squeeze(-1))
+        _cq_in2 = combined.detach() if CANDIDATE_Q_DETACH_ENCODER else combined
+        candidate_q = torch.tanh(m.candidate_q_scorer(_cq_in2).squeeze(-1))
 
         # Mask + softmax (no data-dependent if-checks)
         valid = cand_mask.bool()

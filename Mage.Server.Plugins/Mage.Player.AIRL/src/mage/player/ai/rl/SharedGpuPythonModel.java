@@ -1031,9 +1031,17 @@ public final class SharedGpuPythonModel implements PythonModel {
         String profileId = normalizeProfileId(batch.get(0).profileId);
         List<StateSequenceBuilder.TrainingData> mergedTrainingData = new ArrayList<>();
         List<Double> mergedRewards = new ArrayList<>();
+        List<Integer> episodeEndIdx = new ArrayList<>();
         for (TrainRequest request : batch) {
             mergedTrainingData.addAll(request.trainingData);
             mergedRewards.addAll(request.rewards);
+            if (!mergedTrainingData.isEmpty()) {
+                episodeEndIdx.add(mergedTrainingData.size() - 1);
+            }
+        }
+        boolean[] episodeEnds = new boolean[mergedTrainingData.size()];
+        for (Integer idx : episodeEndIdx) {
+            episodeEnds[idx] = true;
         }
 
         Map<String, String> headers = new LinkedHashMap<>();
@@ -1047,7 +1055,7 @@ public final class SharedGpuPythonModel implements PythonModel {
         headers.put("card_belief_dim", Integer.toString(StateSequenceBuilder.cardBeliefDim()));
         headers.put("world_model_dim", Integer.toString(StateSequenceBuilder.worldModelDim()));
         headers.put("local_flush_reason", dueToFull ? "full" : "timeout");
-        byte[] payload = SharedGpuTensorSerde.buildTrainPayload(mergedTrainingData, mergedRewards);
+        byte[] payload = SharedGpuTensorSerde.buildTrainPayload(mergedTrainingData, mergedRewards, episodeEnds);
         // Frame-size guard: a single very long episode (e.g. a runaway/durdle game with
         // thousands of decisions) can build a payload exceeding the protocol frame cap.
         // Sending it desyncs the socket; the OLD code then requeued the unsendable batch,

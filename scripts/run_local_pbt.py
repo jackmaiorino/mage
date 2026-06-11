@@ -402,7 +402,13 @@ class LocalPBT:
 
     def export_onnx_models(self) -> None:
         """Pre-export ONNX models for all profiles (must run before GPU service starts)."""
-        if os.getenv("USE_TRT_INFERENCE", "1") != "1":
+        # ONNX_EXPORT_ENABLE decouples export from USE_TRT_INFERENCE: hybrid
+        # training REQUIRES periodic re-exports (a frozen behavior policy +
+        # PPO clip asymmetry collapses confident lines within one chunk,
+        # observed 2026-06-10 Control H), but our runners set
+        # USE_TRT_INFERENCE=0 which used to silently disable all exports.
+        export_enable = os.getenv("ONNX_EXPORT_ENABLE", os.getenv("USE_TRT_INFERENCE", "1"))
+        if export_enable != "1":
             return
         # fp32 exports: fp16 conversion flattens probs ~2x and poisons PPO
         # ratios (root cause of the 2026-06 training collapses).

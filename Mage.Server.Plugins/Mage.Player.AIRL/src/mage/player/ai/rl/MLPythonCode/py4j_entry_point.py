@@ -2282,6 +2282,12 @@ class PythonEntryPoint:
                         ret_mean, ret_std,
                         ratio_mean, ratio_std
                     )
+                    # logger defaults to WARNING (MTG_AI_LOG_LEVEL unset) which
+                    # silently drops INFO -- the blindness that hid the fp16
+                    # calibration bug. Print to stdout (-> gpu_service.log).
+                    print(f"PPOStats step={int(next_step)} adv(mean={adv_mean:.4f} std={adv_std:.4f}) "
+                          f"ret(mean={ret_mean:.4f} std={ret_std:.4f}) "
+                          f"ratio(mean={ratio_mean:.4f} std={ratio_std:.4f})", flush=True)
             else:
                 # REINFORCE: Simple policy gradient with normalized advantages
                 loss_policy = -(new_logp * advantages_normalized).mean()
@@ -4141,6 +4147,11 @@ class PythonEntryPoint:
                             ret_mean, ret_std,
                             ratio_mean, ratio_std
                         )
+                        # logger defaults to WARNING and drops INFO silently --
+                        # the blindness that hid the fp16 calibration bug.
+                        print(f"PPOStats step={int(next_step)} adv(mean={adv_mean:.4f} std={adv_std:.4f}) "
+                              f"ret(mean={ret_mean:.4f} std={ret_std:.4f}) "
+                              f"ratio(mean={ratio_mean:.4f} std={ratio_std:.4f})", flush=True)
 
                 # Wrap aggregates as 0-d tensors so downstream `.item()` /
                 # torch.isnan() calls continue to work unchanged.
