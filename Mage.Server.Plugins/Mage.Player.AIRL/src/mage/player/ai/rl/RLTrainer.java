@@ -2404,6 +2404,25 @@ public class RLTrainer {
                         THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.remove();
                         Player opponentPlayer = createTrainingOpponent(epNumber, threadRand);
                         Path opponentDeckPath = THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.get();
+                        if (opponentDeckPath != null) {
+                            // Registry deck_path may be a decklist POOL file (e.g.
+                            // decklist.active_profile_pool.txt). loadDeckFresh on a pool
+                            // file fails -> silent fallback to the AGENT's deck pool,
+                            // which turned every META opponent into a Spy-deck mirror
+                            // (the lethal all-loss diet behind the chunk-1 collapses).
+                            String ofn = opponentDeckPath.getFileName().toString().toLowerCase();
+                            if (!ofn.endsWith(".dek") && !ofn.endsWith(".dck")) {
+                                try {
+                                    List<Path> overridePool = loadDeckPoolWithOverride(opponentDeckPath.toString());
+                                    if (!overridePool.isEmpty()) {
+                                        opponentDeckPath = overridePool.get(threadRand.nextInt(overridePool.size()));
+                                    }
+                                } catch (IOException e) {
+                                    logger.warn("Train: failed to expand override opponent deck pool "
+                                            + opponentDeckPath + ": " + e.getMessage());
+                                }
+                            }
+                        }
                         if (opponentDeckPath == null) {
                             opponentDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
                         }
@@ -2933,6 +2952,21 @@ public class RLTrainer {
         System.out.println(mctsTiming);
     }
 
+    /** Extract the profile name from a snapshot path like .../profiles/<NAME>/models/snapshots/... */
+    private static String profileFromSnapshotPath(String snapshotPath) {
+        if (snapshotPath == null) {
+            return "";
+        }
+        String norm = snapshotPath.replace('\\', '/');
+        int idx = norm.indexOf("/profiles/");
+        if (idx < 0) {
+            return "";
+        }
+        int start = idx + "/profiles/".length();
+        int end = norm.indexOf('/', start);
+        return end > start ? norm.substring(start, end) : "";
+    }
+
     private String formatOpponentTag(Player opponentPlayer) {
         if (opponentPlayer instanceof ComputerPlayerRL) {
             String name = opponentPlayer.getName();
@@ -2943,6 +2977,19 @@ public class RLTrainer {
                     return "MIRROR";
                 }
                 return "META(" + oppProfile + ")";
+            }
+            // League opponents carry their identity in policyKey, not the name.
+            String pk = ((ComputerPlayerRL) opponentPlayer).getPolicyKey();
+            if (pk != null && pk.startsWith("snap:")) {
+                String oppProfile = profileFromSnapshotPath(pk.substring(5));
+                String self = profileName();
+                if (!oppProfile.isEmpty() && oppProfile.equals(self)) {
+                    return "MIRROR-SNAP";
+                }
+                return oppProfile.isEmpty() ? "META-RL-SNAP" : "META-RL(" + oppProfile + ")";
+            }
+            if (pk != null && pk.startsWith("profile:")) {
+                return "META-RL-LIVE(" + pk.substring(8) + ")";
             }
             return "SELFPLAY";
         }

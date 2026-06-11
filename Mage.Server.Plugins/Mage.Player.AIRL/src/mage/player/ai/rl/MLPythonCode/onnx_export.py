@@ -192,7 +192,11 @@ def export_all_heads(model_path: str, output_dir: str,
         dim_feedforward=dim_ff, cand_feat_dim=cand_feat_dim,
     )
     model.load(model_path)
-    use_fp16 = bool(int(os.getenv("ONNX_EXPORT_FP16", "1")))
+    # FP16 conversion flattens output probabilities ~2x (measured 2026-06-10:
+    # peak prob 0.40 -> 0.20, max|dp| 0.21 on real states). Eval argmax barely
+    # moves, but PPO importance ratios computed against torch log-probs are
+    # systematically ~2x off, which collapses training. Keep exports fp32.
+    use_fp16 = bool(int(os.getenv("ONNX_EXPORT_FP16", "0")))
     model.cpu().eval()
 
     if fixed_shapes:
@@ -250,6 +254,40 @@ def export_all_heads(model_path: str, output_dir: str,
             onnx.save(fp16_model, out_path)
         sz = os.path.getsize(out_path)
         print(f"Exported {head_id} -> {out_path} ({sz / 1024:.0f} KB)")
+        # Parity gate: the exported graph must reproduce the wrapper's output
+        # probabilities. Training samples actions (and records behavior
+        # log-probs) from this file; calibration drift here biases every PPO
+        # importance ratio even when eval argmax looks fine.
+        try:
+            import onnxruntime as _ort
+            _sess = _ort.InferenceSession(out_path, providers=["CPUExecutionProvider"])
+            # Amplified probe inputs: random-but-loud features produce confident
+            # (peaked) distributions, where calibration drift (e.g. fp16
+            # flattening) is actually visible. Uniform-ish outputs would hide it.
+            _g = torch.Generator().manual_seed(7)
+            _probe = (
+                torch.randn(dummy[0].shape, generator=_g) * 4.0,
+                dummy[1], dummy[2],
+                torch.randn(dummy[3].shape, generator=_g) * 4.0,
+                dummy[4], dummy[5],
+            )
+            _feed = {
+                "sequences": _probe[0].numpy(), "masks": _probe[1].numpy(),
+                "token_ids": _probe[2].numpy(), "cand_features": _probe[3].numpy(),
+                "cand_ids": _probe[4].numpy(), "cand_mask": _probe[5].numpy(),
+            }
+            _p_onnx = _sess.run(None, _feed)[0]
+            with torch.no_grad():
+                _p_torch = wrapper(*_probe)[0].numpy()
+            _dp = float(abs(_p_torch - _p_onnx).max())
+            _pk_t = float(_p_torch.max(axis=-1).mean())
+            _pk_o = float(_p_onnx.max(axis=-1).mean())
+            _ratio = _pk_t / max(1e-9, _pk_o)
+            ok = _dp <= 0.02 and 0.9 <= _ratio <= 1.1
+            tag = "OK" if ok else "PARITY FAILURE -- do not train on this export"
+            print(f"  parity {head_id}: max|dp|={_dp:.4f} peak t/o={_pk_t:.3f}/{_pk_o:.3f} ratio={_ratio:.2f} [{tag}]")
+        except Exception as _e:
+            print(f"  parity {head_id}: check failed to run: {_e}")
 
     # Phase 2 belief head: takes only (sequences, masks, token_ids) since
     # archetype prediction is independent of candidate set.

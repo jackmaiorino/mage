@@ -404,7 +404,9 @@ class LocalPBT:
         """Pre-export ONNX models for all profiles (must run before GPU service starts)."""
         if os.getenv("USE_TRT_INFERENCE", "1") != "1":
             return
-        os.environ.setdefault("ONNX_EXPORT_FP16", "1")
+        # fp32 exports: fp16 conversion flattens probs ~2x and poisons PPO
+        # ratios (root cause of the 2026-06 training collapses).
+        os.environ.setdefault("ONNX_EXPORT_FP16", "0")
         sys.path.insert(0, str(MLCODE))
         try:
             from onnx_export import export_all_heads
