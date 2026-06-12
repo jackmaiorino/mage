@@ -33,6 +33,8 @@ nvidia-smi --query-gpu=name,memory.total --format=csv,noheader || {
 
 echo "=== [3/5] python venv (torch cu121 wheels: works on 4090/A100) ==="
 bash scripts/hpc/build_venv.sh --venv-path .mtgrl_venv --python python3
+# onnx: required by per-chunk exports; onnxruntime: required by the parity gate
+.mtgrl_venv/bin/pip install -q onnx onnxruntime
 
 echo "=== [4/5] models ==="
 if [[ -n "$MODELS_TARBALL" && -f "$MODELS_TARBALL" ]]; then
@@ -43,7 +45,15 @@ else
 fi
 
 echo "=== [5/5] java build ==="
-mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile
+# install (not just compile): the eval harness spawns child mvn invocations
+# that resolve org.mage:* from the local repo (~/.m2)
+mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests install
+
+echo "=== card database check ==="
+if [[ ! -f db/cards.h2.mv.db ]]; then
+  echo "WARNING: db/cards.h2.mv.db missing -- eval harness requires it."
+  echo "It ships in the models tarball (db/) or copy from a working checkout."
+fi
 
 echo "=== smoke test: 8-game eval (verifies engine + GPU + eval harness) ==="
 PYBIN=".mtgrl_venv/bin/python"

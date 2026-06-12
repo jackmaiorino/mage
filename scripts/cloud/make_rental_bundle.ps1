@@ -40,6 +40,9 @@ foreach ($p in 'Pauper-Wildfire-Value','Pauper-Rally-Anchor-Value','Pauper-Affin
   Copy-Item "local-training\backups\meta_pins_pristine\$p.model_latest.pt" "$stage\local-training\backups\meta_pins_cloud\$p.model_latest.pt"
 }
 "cloud" | Out-File "$stage\local-training\backups\meta_pins_LATEST.txt" -Encoding ascii -NoNewline
+# Card database: required by the eval harness (cards.h2.mv.db lookup)
+New-Item -ItemType Directory -Force "$stage\db" | Out-Null
+Copy-Item "Mage.Tests\db\cards.h2.mv.db" "$stage\db\cards.h2.mv.db"
 
 tar -czf "local-training/cloud/mage-models.tar.gz" -C $stage .
 Remove-Item $stage -Recurse -Force
