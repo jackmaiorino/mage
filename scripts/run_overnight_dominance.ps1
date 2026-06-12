@@ -12,7 +12,7 @@ $tlog = "local-training/overnight_train.log"; $telog = "local-training/overnight
 $reg  = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json"
 $md   = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"
 $bak  = "local-training\backups\spy_value_baseline_20260531"
-$ckdir= "local-training\backups\overnight_20260610"
+$ckdir= $env:CKPT_DIR; if (-not $ckdir) { $ckdir = "local-training\backups\overnight_20260610" }
 $GL   = "local-training/local_pbt/cp7_eval_sweeps"
 $chunkMin = [int]($env:CHUNK_MIN); if ($chunkMin -le 0) { $chunkMin = 45 }
 $nChunks  = [int]($env:NUM_CHUNKS); if ($nChunks  -le 0) { $nChunks  = 12 }
@@ -66,7 +66,13 @@ function Get-Wr($rid) {
 
 "=== OVERNIGHT DOMINANCE RUN started $(Get-Date) ; ${nChunks}x${chunkMin}min ; mode=$mode ; diet=CP7-skill-1 ===" | Out-File $out
 Kill-Train; Start-Sleep -Seconds 5
-Copy-Item "$bak\model.pt" "$md\model.pt" -Force; Copy-Item "$bak\model_latest.pt" "$md\model_latest.pt" -Force
+$startModel = $env:START_MODEL
+if ($startModel -and (Test-Path $startModel)) {
+  Copy-Item $startModel "$md\model.pt" -Force; Copy-Item $startModel "$md\model_latest.pt" -Force
+  "starting model: $startModel" | Out-File $out -Append
+} else {
+  Copy-Item "$bak\model.pt" "$md\model.pt" -Force; Copy-Item "$bak\model_latest.pt" "$md\model_latest.pt" -Force
+}
 if (Test-Path "$md\onnx") { Remove-Item "$md\onnx" -Recurse -Force }; Copy-Item "$bak\onnx" "$md\onnx" -Recurse -Force
 $pinTs = (Get-Content "local-training\backups\meta_pins_LATEST.txt" -ErrorAction SilentlyContinue | Select-Object -First 1)
 $prof = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles"
@@ -86,9 +92,11 @@ $trainEnv = {
   foreach($k in 'CANDIDATE_Q_LOSS_COEF','CANDIDATE_Q_FROM_MCTS_TARGETS','CANDIDATE_Q_MCTS_SIGNED_TARGETS','CANDIDATE_Q_BLEND','CANDIDATE_Q_DUMP_DIR','CANDIDATE_Q_DETACH_ENCODER','SEARCH_OP_APPLY_OVERRIDE','SEARCH_OP_ARBITER_CAST_FILTER','WORLD_MODEL_LOSS_COEF','REFERENCE_POLICY_KL_COEF'){ Remove-Item "Env:\$k" -ErrorAction SilentlyContinue }
   $env:CANDIDATE_Q_ONLY="0"
   $env:OPPONENT_SAMPLER="ladder"; $env:LADDER_SKILLS="1"; $env:LADDER_MIX_LOWER_P="0.0"; $env:LEAGUE_MODE=""
-  $env:ENTROPY_START="0.25"; $env:ENTROPY_END="0.03"; $env:ENTROPY_DECAY_STEPS="100000"
+  $entEnd = $env:RUN_ENTROPY_END; if (-not $entEnd) { $entEnd = "0.03" }
+  $env:ENTROPY_START="0.25"; $env:ENTROPY_END=$entEnd; $env:ENTROPY_DECAY_STEPS="100000"
   $env:ONNX_BATCH_TIMEOUT_MS="25"; $env:ONNX_BATCH_TIMEOUT_MAX_MS="50"
   $env:INFER_CUDA_DEVICE="cuda:1"; $env:TRAIN_CUDA_DEVICE="cuda:0"
+  $env:ONNX_EXPORT_ENABLE="1"   # in-chunk re-exports: hybrid behavior must track the learner
   $env:TRAIN_PROFILES="1"; $env:NUM_GAME_RUNNERS="64"; $env:TOTAL_EPISODES="99999999"
   if ($mode -eq "torch") { $env:PY_SERVICE_MODE="shared_gpu" } else { Remove-Item Env:\PY_SERVICE_MODE -ErrorAction SilentlyContinue }
 }

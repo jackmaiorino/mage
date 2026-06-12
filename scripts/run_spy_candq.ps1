@@ -80,7 +80,9 @@ $trainEnv = {
   $env:SEARCH_OP_PLAYOUT_TIMEOUT_MS="10000"; $env:SEARCH_OP_TOTAL_TIMEOUT_MS="30000"
   $env:CANDIDATE_Q_DUMP_DIR="C:/Users/Jack/IdeaProjects/mage/local-training/candq_dumps"
   $env:CANDIDATE_Q_FROM_MCTS_TARGETS="1"; $env:CANDIDATE_Q_LOSS_COEF="0.1"
-  $env:CANDIDATE_Q_MCTS_SIGNED_TARGETS="1"   # Java sends signed 2*wr-1; unsigned branch double-transforms + drops losers
+  $env:CANDIDATE_Q_MCTS_SIGNED_TARGETS="1"
+  $env:SEARCH_OP_APPLY_OVERRIDE="0"      # targets-only: no behavior override, no oldLogp clobber
+  $env:CANDIDATE_Q_DETACH_ENCODER="1"   # Q-head probe: no encoder gradient (WM01 collateral lesson)   # Java sends signed 2*wr-1; unsigned branch double-transforms + drops losers
   $env:CANDIDATE_Q_BLEND="0.0"   # diagnostic: train Q-head only; blend only after value-AUC validates
   $env:ENTROPY_START="0.25"; $env:ENTROPY_END="0.03"; $env:ENTROPY_DECAY_STEPS="100000"
   $env:ONNX_BATCH_TIMEOUT_MS="25"; $env:ONNX_BATCH_TIMEOUT_MAX_MS="50"

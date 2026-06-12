@@ -1,19 +1,18 @@
-# SUSTAINED faithful-diet training: can the model LEARN the orchestration (develop 3 creatures
-# THEN self-mill) and break 0.52? Continue from baseline under the fixed faithful league diet
-# (Gson-fixed parser holds 0.52, no diet-decay). Track the NO_BOARD rate (the dominant misplay:
-# self-mill with no 3-creature board to flashback Dread Return -> deck out) as the LEADING
-# metric -- if it falls, the model is learning even before winrate moves. PURE faithful diet
-# (no candidate_q) to isolate whether training ALONE teaches the orchestration.
+﻿# CONTROL H: exact fs_* environment (held 0.52 x 8 chunks on Jun 8 code) on CURRENT code.
+# No search, no candidate_q. Isolates whether the audit-fix commits (score stride,
+# -2.0 sentinel fills, SIGNED branch) alone regressed training, vs the search/Q config.
+# If ctrlH2 holds ~0.52 -> code clean, collapse is search-linked -> run Control B.
+# If ctrlH2 collapses -> code regression in 16b153d906 -> bisect stride/sentinels.
 Set-Location "C:\Users\Jack\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
-$out  = "local-training/league_train_RESULT.log"
-$tlog = "local-training/league_train.log"; $telog = "local-training/league_train.err"
+$out  = "local-training/ctrlH2_RESULT.log"
+$tlog = "local-training/ctrlH2_train.log"; $telog = "local-training/ctrlH2_train.err"
 $reg  = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json"
 $md   = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"
 $bak  = "local-training\backups\spy_value_baseline_20260531"
 $GL   = "local-training/local_pbt/cp7_eval_sweeps"
-$chunkMin = [int]($env:CHUNK_MIN); if ($chunkMin -le 0) { $chunkMin = 40 }
-$nChunks  = [int]($env:NUM_CHUNKS); if ($nChunks  -le 0) { $nChunks  = 10 }
+$chunkMin = [int]($env:CHUNK_MIN); if ($chunkMin -le 0) { $chunkMin = 45 }
+$nChunks  = [int]($env:NUM_CHUNKS); if ($nChunks  -le 0) { $nChunks  = 2 }
 $env:INFER_CUDA_DEVICE="cuda:1"; $env:TRAIN_CUDA_DEVICE="cuda:0"
 
 function Kill-Train {
@@ -34,12 +33,10 @@ function Metric($rid) {
   ">>> $m" | Out-File $out -Append
 }
 
-"=== SUSTAINED faithful-diet TRAIN started $(Get-Date) ; ${nChunks}x${chunkMin}min ; metric=NO_BOARD ===" | Out-File $out
+"=== CONTROL H2 (hybrid FULLY repaired: exact-parity exports + in-run re-exports + dones fix) started $(Get-Date) ; ${nChunks}x${chunkMin}min ===" | Out-File $out
 Kill-Train; Start-Sleep -Seconds 3
 Copy-Item "$bak\model.pt" "$md\model.pt" -Force; Copy-Item "$bak\model_latest.pt" "$md\model_latest.pt" -Force
 if (Test-Path "$md\onnx") { Remove-Item "$md\onnx" -Recurse -Force }; Copy-Item "$bak\onnx" "$md\onnx" -Recurse -Force
-# PIN: restore meta-opponent models from the latest pin set (they are a shared mutable
-# resource -- trained-over across runs; rot caused the 0.53->0.29 collapse on 06-09)
 $pinTs = (Get-Content "local-training\backups\meta_pins_LATEST.txt" -ErrorAction SilentlyContinue | Select-Object -First 1)
 $prof = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles"
 if ($pinTs) {
@@ -52,7 +49,6 @@ if ($pinTs) {
   }
   "meta-opponents restored from pin set $pinTs" | Out-File $out -Append
 } else { "WARNING: no meta pin set found -- opponents may be drifted" | Out-File $out -Append }
-# re-promote all 4 profiles + seed Spy league_state so the faithful diet (META-RL + MIRROR + CP7) engages
 py -3.12 -c "
 import json,glob,os
 base='Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles'
@@ -66,18 +62,17 @@ st={'promoted':True,'lastTickEpisode':464900,'championPolicyKey':(keys[-1] if ke
 json.dump(st,open(sp+'/logs/league/league_state.json','w'),indent=2)
 print('promoted 4 profiles + seeded league_state')
 " 2>&1 | Out-File $out -Append
-Eval-Now "lt_c0" 5151; Metric "lt_c0"
+# c0 skipped: baseline anchor established across 5 prior runs (0.49-0.58, mean ~0.53)
 
 $trainEnv = {
   $env:SEARCH_OP_ENABLE="0"; $env:MCTS_TRAINING_ENABLE="0"; $env:MULTI_PLY_MCTS="0"
-  Remove-Item Env:\CANDIDATE_Q_LOSS_COEF -ErrorAction SilentlyContinue
-  Remove-Item Env:\WORLD_MODEL_LOSS_COEF -ErrorAction SilentlyContinue
+  foreach($k in 'CANDIDATE_Q_LOSS_COEF','CANDIDATE_Q_FROM_MCTS_TARGETS','CANDIDATE_Q_MCTS_SIGNED_TARGETS','CANDIDATE_Q_BLEND','CANDIDATE_Q_DUMP_DIR','CANDIDATE_Q_DETACH_ENCODER','SEARCH_OP_APPLY_OVERRIDE','SEARCH_OP_ARBITER_CAST_FILTER','WORLD_MODEL_LOSS_COEF','REFERENCE_POLICY_KL_COEF'){ Remove-Item "Env:\$k" -ErrorAction SilentlyContinue }
   $env:CANDIDATE_Q_ONLY="0"
-  $env:OPPONENT_SAMPLER="league"; $env:LEAGUE_PROMOTE_WR="0.40"; $env:LEAGUE_POST_HEURISTIC_SKILL="3"; $env:LEAGUE_MODE=""
-  $env:ENTROPY_START="0.25"; $env:ENTROPY_END="0.03"; $env:ENTROPY_DECAY_STEPS="180000"
+  $env:OPPONENT_SAMPLER="ladder"; $env:LADDER_SKILLS="1"; $env:LADDER_MIX_LOWER_P="0.0"; $env:LEAGUE_MODE=""
+  $env:ENTROPY_START="0.25"; $env:ENTROPY_END="0.03"; $env:ENTROPY_DECAY_STEPS="100000"
   $env:ONNX_BATCH_TIMEOUT_MS="25"; $env:ONNX_BATCH_TIMEOUT_MAX_MS="50"
   $env:INFER_CUDA_DEVICE="cuda:1"; $env:TRAIN_CUDA_DEVICE="cuda:0"
-  $env:TRAIN_PROFILES="4"; $env:NUM_GAME_RUNNERS="64"; $env:TOTAL_EPISODES="99999999"
+  $env:ONNX_EXPORT_ENABLE="1"; $env:TRAIN_PROFILES="1"; $env:NUM_GAME_RUNNERS="64"; $env:TOTAL_EPISODES="99999999"
 }
 for ($c = 1; $c -le $nChunks; $c++) {
   & $trainEnv
@@ -85,17 +80,11 @@ for ($c = 1; $c -le $nChunks; $c++) {
   Start-Process -FilePath "py" -ArgumentList "-3.12","scripts/run_local_pbt.py" -RedirectStandardOutput $tlog -RedirectStandardError $telog -WindowStyle Hidden
   Start-Sleep -Seconds ($chunkMin * 60)
   Kill-Train; Start-Sleep -Seconds 8
-  Eval-Now "lt_c$c" 5151; Metric "lt_c$c"
-  # ABORT GATE: wr < 0.46 = collapse (diet rot or instability) -- stop, do not waste the night
-  $csv = "$GL/lt_c$c/matchups.csv"
-  if (Test-Path $csv) {
-    $row = Import-Csv $csv | Select-Object -First 1
-    $wr = [double]$row.wins / [double]$row.total
-    if ($wr -lt 0.46) {
-      "=== ABORT at chunk ${c}: wr=$wr < 0.46 (collapse gate). Restoring baseline + pinned meta. ===" | Out-File $out -Append
-      Copy-Item "$bak\model_latest.pt" "$md\model_latest.pt" -Force; Copy-Item "$bak\model.pt" "$md\model.pt" -Force
-      break
-    }
-  }
+  Eval-Now "ctrlH2_c$c" 5151; Metric "ctrlH2_c$c"
 }
-"=== SUSTAINED TRAIN DONE $(Get-Date) ===" | Out-File $out -Append
+Copy-Item "$bak\model_latest.pt" "$md\model_latest.pt" -Force; Copy-Item "$bak\model.pt" "$md\model.pt" -Force
+"=== restored Spy baseline after run ===" | Out-File $out -Append
+"=== CONTROL H DONE $(Get-Date) ===" | Out-File $out -Append
+
+
+

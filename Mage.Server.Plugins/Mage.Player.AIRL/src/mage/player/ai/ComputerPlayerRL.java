@@ -3982,8 +3982,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                             }
                         }
                         mctsVisitTargets = target;
-                        selectedIndices = Collections.singletonList(wr.bestIndex);
-                        oldLogpTotal = 0.0f;
+                        if (SEARCH_OP_APPLY_OVERRIDE) {
+                            // Replaces the sampled action with the search-best AND clobbers the
+                            // behavioral log-prob (IS-ratio denominator) -- distorts PPO for the
+                            // overridden step. Off = targets-only mode (pure Q-head diagnostic).
+                            selectedIndices = Collections.singletonList(wr.bestIndex);
+                            oldLogpTotal = 0.0f;
+                        }
                         SEARCH_OP_OBSERVED.incrementAndGet();
                         if (wr.bestIndex != originalIndex) {
                             SEARCH_OP_OVERRIDES.incrementAndGet();
@@ -10013,6 +10018,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final boolean SEARCH_OP_LOG =
             mage.player.ai.rl.EnvConfig.bool("SEARCH_OP_LOG", false);
     private static final float SEARCH_OP_UNOBSERVED = -2.0f;
+    private static final boolean SEARCH_OP_APPLY_OVERRIDE =
+            mage.player.ai.rl.EnvConfig.bool("SEARCH_OP_APPLY_OVERRIDE", true);
     // ARBITER (diagnostic only): if non-empty, the search operator fires ONLY at
     // decisions whose candidate set contains this substring -- lets us measure
     // search win-rate estimates at a specific decisive decision cheaply instead

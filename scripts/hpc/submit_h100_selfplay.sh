@@ -11,7 +11,7 @@ sbatch \
   --cpus-per-task=24 \
   --mem=64G \
   --time=04:00:00 \
-  --account=msml603-gpu \
+  --account=msml603-class \
   --output=local-training/hpc/bundles/spy-h100-selfplay-25x_%j.out \
   --error=local-training/hpc/bundles/spy-h100-selfplay-25x_%j.err \
   --export=ALL,HPC_NATIVE_ORCH=1,MAGE_RL_RUNTIME_TARBALL=$BUNDLE,RUNNER_OVERSUBSCRIPTION_FACTOR=25,TRAIN_PROFILES=1,TOTAL_EPISODES=100000,OPPONENT_SAMPLER=fixed,FIXED_WEAK_UNTIL=0,FIXED_MEDIUM_UNTIL=0,FIXED_STRONG_UNTIL=0,BOT_FLOOR=0,RL_SKIP_SIM_VALIDATION=1,DECK_LIST_FILE=Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.spy_combo.txt,PY_SERVICE_MODE=shared,GAME_LOG_FREQUENCY=500 \

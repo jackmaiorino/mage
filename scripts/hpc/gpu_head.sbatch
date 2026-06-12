@@ -6,7 +6,7 @@
 #SBATCH --error=local-training/hpc/bundles/gpu-head_%j.err
 #
 # GPU head node: runs the orchestrator + shared GPU inference service.
-# No het-groups — submit CPU satellites separately via add_satellites.sh.
+# No het-groups Ã¢â‚¬â€ submit CPU satellites separately via add_satellites.sh.
 #
 # Default: 1x H100, minimal CPUs (satellites do game simulation).
 # Override partition/gres at submission time:
@@ -42,7 +42,7 @@ export WINRATE_WINDOW="${WINRATE_WINDOW:-200}"
 # With 1 GPU, no split roles needed. Enable if using 2+ GPUs.
 export GPU_SERVICE_SPLIT_ROLES="${GPU_SERVICE_SPLIT_ROLES:-0}"
 
-# GPU head runs minimal local runners — satellites provide the bulk.
+# GPU head runs minimal local runners Ã¢â‚¬â€ satellites provide the bulk.
 export PRIMARY_RUNNER_CAP="${PRIMARY_RUNNER_CAP:-50}"
 export RUNNER_OVERSUBSCRIPTION_FACTOR="${RUNNER_OVERSUBSCRIPTION_FACTOR:-1}"
 

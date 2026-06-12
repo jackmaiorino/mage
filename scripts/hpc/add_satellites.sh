@@ -1,5 +1,5 @@
 #!/bin/bash
-# add_satellites.sh — Submit CPU satellite workers to feed a running GPU head job.
+# add_satellites.sh Ã¢â‚¬â€ Submit CPU satellite workers to feed a running GPU head job.
 #
 # Usage:
 #   bash scripts/hpc/add_satellites.sh <GPU_JOB_ID> [NUM_SATELLITES] [OPTIONS]
