@@ -263,6 +263,24 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private transient Deque<GenericActionHistoryEntry> genericActionHistory = new ArrayDeque<>();
     private transient UUID genericActionHistoryGameId = null;
 
+    // --- Temporal/event-history falsifier (Step 1) corpus dump ---
+    private static final boolean CORPUS_DUMP = EnvConfig.bool("RL_CORPUS_DUMP", false);
+    private static final String CORPUS_FILE = EnvConfig.str("RL_CORPUS_FILE", "").trim();
+    private static final String CORPUS_MATCHUP = EnvConfig.str("RL_CORPUS_MATCHUP", "unknown").trim();
+    private static final int CORPUS_EVENT_WINDOW =
+            Math.max(0, Math.min(96, EnvConfig.i32("RL_CORPUS_EVENT_WINDOW", 96)));
+    private static final Object CORPUS_LOCK = new Object();
+    // Per-JVM shard suffix so concurrent processes never append to the same file.
+    private static final String CORPUS_JVM_TOKEN =
+            Integer.toHexString(System.identityHashCode(CORPUS_LOCK)) + Long.toHexString(System.nanoTime());
+    private transient java.util.List<String> corpusRowBuffer = new java.util.ArrayList<>();
+    private transient int corpusSeq = 0;
+    private transient UUID corpusGameId = null;
+    // Per-decision SEARCH_OP rollout labels (action-quality / policy-regret capture).
+    private transient float[] corpusSearchWr = null;
+    private transient int corpusSearchBest = -1;
+    private transient int corpusSearchPolicyIdx = -1;
+
     // Track early-game land drops for mulligan reward shaping
     private boolean rlPlayerHasHadATurn = false;
     private int lastTrackedGameTurn = 0;
@@ -687,6 +705,29 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             float[] probs,
             float[][] candidateFeatures
     ) {
+        if (GOEXPLORE_TRACE && game != null && !game.isSimulation()
+                && candidates != null && selectedIndex >= 0 && selectedIndex < candidateCount) {
+            try {
+                String txt = mage.player.ai.rl.TerminalPrefixSearch.describeOne(candidates.get(selectedIndex), game);
+                Player gp = game.getPlayer(playerId);
+                int libSize = gp == null ? -1 : gp.getLibrary().size();
+                int gy = gp == null ? -1 : gp.getGraveyard().size();
+                boolean ctrl = mage.player.ai.rl.TerminalPrefixSearch.isControllableActionType(actionType);
+                boolean spyCastable = false;
+                if (actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                        || actionType == StateSequenceBuilder.ActionType.CAST_SPELL) {
+                    for (int ci = 0; ci < candidateCount; ci++) {
+                        String ct = mage.player.ai.rl.TerminalPrefixSearch.describeOne(candidates.get(ci), game);
+                        if (ct != null && ct.contains("Balustrade Spy")) { spyCastable = true; break; }
+                    }
+                }
+                GOEXPLORE_TRACE_Q.add(new GoExploreDecision(
+                        String.valueOf(game.getId()), txt, String.valueOf(actionType), ctrl, candidateCount,
+                        game.getTurnNum(), libSize, countLibraryTrueLands(game), gy, countOwnCreatures(game),
+                        spyCastable, graveyardContains(game, "Dread Return"), graveyardContains(game, "Lotleth Giant")));
+            } catch (Exception ignored) {
+            }
+        }
         if (!GENERIC_ACTION_HISTORY_FEATURES_ENABLED || game == null
                 || candidates == null || selectedIndex < 0 || selectedIndex >= candidateCount) {
             return;
@@ -731,6 +772,195 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         ));
         while (genericActionHistory.size() > GENERIC_ACTION_HISTORY_WINDOW) {
             genericActionHistory.removeFirst();
+        }
+    }
+
+    /**
+     * Temporal-history falsifier (Step 1): buffer one decision row. Snapshot arm =
+     * rich scalar state-facts + card-identity tokenIds; history arm = last-K public
+     * events from PublicEventHistoryWatcher. Outcome stamped at game end via
+     * {@link #flushCorpusRows(boolean)}. No-op unless RL_CORPUS_DUMP=1.
+     */
+    private void maybeDumpCorpusRow(Game game, StateSequenceBuilder.ActionType actionType,
+            java.util.List<?> candidates, int candidateCount, int chosenIdx,
+            float valueScore, StateSequenceBuilder.SequenceOutput baseState) {
+        if (!CORPUS_DUMP || CORPUS_FILE.isEmpty() || game == null || game.isSimulation()) {
+            return;
+        }
+        try {
+            if (!Objects.equals(corpusGameId, game.getId())) {
+                corpusGameId = game.getId();
+                corpusSeq = 0;
+                if (corpusRowBuffer == null) corpusRowBuffer = new java.util.ArrayList<>();
+            }
+            Player me = game.getPlayer(playerId);
+            if (me == null) return;
+            UUID oppId = null;
+            for (UUID id : game.getOpponents(playerId)) { oppId = id; break; }
+            Player opp = oppId == null ? null : game.getPlayer(oppId);
+
+            StringBuilder sb = new StringBuilder(1024);
+            sb.append('{');
+            appendJsonString(sb, "game", String.valueOf(game.getId())); sb.append(',');
+            appendJsonNumber(sb, "seq", corpusSeq++); sb.append(',');
+            appendJsonString(sb, "matchup", CORPUS_MATCHUP); sb.append(',');
+            appendJsonNumber(sb, "turn", game.getTurnNum()); sb.append(',');
+            String phase = "";
+            try { phase = game.getPhase() != null && game.getPhase().getType() != null ? game.getPhase().getType().name() : ""; } catch (Exception ignored) {}
+            appendJsonString(sb, "phase", phase); sb.append(',');
+            appendJsonBoolean(sb, "my_turn", playerId != null && playerId.equals(game.getActivePlayerId())); sb.append(',');
+            appendJsonString(sb, "dtype", actionType == null ? "" : actionType.name()); sb.append(',');
+            appendJsonNumber(sb, "n_cand", candidateCount); sb.append(',');
+            appendJsonNumber(sb, "chosen", chosenIdx); sb.append(',');
+            appendJsonNumber(sb, "value", valueScore); sb.append(',');
+            String chosenDesc = "";
+            try {
+                if (chosenIdx >= 0 && chosenIdx < candidates.size()) {
+                    chosenDesc = mage.player.ai.rl.TerminalPrefixSearch.describeOne(candidates.get(chosenIdx), game);
+                }
+            } catch (Exception ignored) {}
+            appendJsonString(sb, "chosen_desc", chosenDesc == null ? "" : chosenDesc); sb.append(',');
+
+            // --- action-quality: SEARCH_OP rollout labels (policy-regret capture) ---
+            appendJsonNumber(sb, "search_best", corpusSearchBest); sb.append(',');
+            appendJsonNumber(sb, "search_policy", corpusSearchPolicyIdx); sb.append(',');
+            sb.append("\"search_wr\":[");
+            if (corpusSearchWr != null && corpusSearchBest >= 0) {
+                int lim = Math.min(corpusSearchWr.length, candidateCount);
+                for (int i = 0; i < lim; i++) {
+                    if (i > 0) sb.append(',');
+                    float v = corpusSearchWr[i];
+                    sb.append(Float.isNaN(v) ? "null" : String.format(Locale.US, "%.4f", v));
+                }
+            }
+            sb.append("],");
+            // consume: clear so the next (e.g. combat) dump doesn't read a stale label
+            corpusSearchWr = null; corpusSearchBest = -1; corpusSearchPolicyIdx = -1;
+
+            // --- snapshot arm: rich scalar state-facts (public) ---
+            appendJsonNumber(sb, "my_life", me.getLife()); sb.append(',');
+            appendJsonNumber(sb, "opp_life", opp == null ? 0 : opp.getLife()); sb.append(',');
+            appendJsonNumber(sb, "my_hand", me.getHand().size()); sb.append(',');
+            appendJsonNumber(sb, "opp_hand", opp == null ? 0 : opp.getHand().size()); sb.append(',');
+            appendJsonNumber(sb, "my_lib", me.getLibrary().size()); sb.append(',');
+            appendJsonNumber(sb, "my_gy", me.getGraveyard().size()); sb.append(',');
+            appendJsonNumber(sb, "opp_gy", opp == null ? 0 : opp.getGraveyard().size()); sb.append(',');
+            appendJsonNumber(sb, "stack", game.getStack().size()); sb.append(',');
+            int[] myB = boardFacts(game, playerId);
+            int[] opB = oppId == null ? new int[6] : boardFacts(game, oppId);
+            appendJsonNumber(sb, "my_cre", myB[0]); sb.append(',');
+            appendJsonNumber(sb, "my_pow", myB[1]); sb.append(',');
+            appendJsonNumber(sb, "my_land", myB[2]); sb.append(',');
+            appendJsonNumber(sb, "my_untap_land", myB[3]); sb.append(',');
+            appendJsonNumber(sb, "my_art", myB[4]); sb.append(',');
+            appendJsonNumber(sb, "my_tap_cre", myB[5]); sb.append(',');
+            appendJsonNumber(sb, "opp_cre", opB[0]); sb.append(',');
+            appendJsonNumber(sb, "opp_pow", opB[1]); sb.append(',');
+            appendJsonNumber(sb, "opp_land", opB[2]); sb.append(',');
+            appendJsonNumber(sb, "opp_untap_land", opB[3]); sb.append(',');
+            appendJsonNumber(sb, "opp_art", opB[4]); sb.append(',');
+            appendJsonNumber(sb, "opp_tap_cre", opB[5]); sb.append(',');
+            appendJsonNumber(sb, "opp_lib", opp == null ? 0 : opp.getLibrary().size()); sb.append(',');
+
+            // BELIEF-PROBE DIAGNOSTIC LABEL: opponent's TRUE hidden hand (never fed to the
+            // agent; used only to test whether the public event history predicts hidden info).
+            sb.append("\"opp_hand_cards\":[");
+            if (opp != null) {
+                boolean first = true;
+                try {
+                    for (Card c : opp.getHand().getCards(game)) {
+                        if (c == null || c.getName() == null) continue;
+                        if (!first) sb.append(','); first = false;
+                        sb.append('"').append(jsonEscape(c.getName())).append('"');
+                    }
+                } catch (Exception ignored) {}
+            }
+            sb.append("],");
+
+            // card-identity tokenIds (+ mask) from the actual encoder snapshot
+            sb.append("\"tok\":[");
+            if (baseState != null && baseState.tokenIds != null) {
+                int lim = Math.min(baseState.tokenIds.length, 80);
+                for (int i = 0; i < lim; i++) { if (i > 0) sb.append(','); sb.append(baseState.tokenIds[i]); }
+            }
+            sb.append("],");
+            sb.append("\"tokmask\":[");
+            if (baseState != null && baseState.mask != null) {
+                int lim = Math.min(baseState.mask.length, 80);
+                for (int i = 0; i < lim; i++) { if (i > 0) sb.append(','); sb.append(baseState.mask[i]); }
+            }
+            sb.append("],");
+
+            // --- history arm: last-K public events ---
+            sb.append("\"events\":[");
+            if (CORPUS_EVENT_WINDOW > 0) {
+                mage.player.ai.rl.PublicEventHistoryWatcher w =
+                        game.getState().getWatcher(mage.player.ai.rl.PublicEventHistoryWatcher.class);
+                if (w != null) {
+                    java.util.List<mage.player.ai.rl.PublicEventHistoryWatcher.EventRecord> recent = w.getRecent();
+                    int from = Math.max(0, recent.size() - CORPUS_EVENT_WINDOW);
+                    boolean first = true;
+                    String myName = me.getName();
+                    for (int i = from; i < recent.size(); i++) {
+                        mage.player.ai.rl.PublicEventHistoryWatcher.EventRecord er = recent.get(i);
+                        if (!first) sb.append(','); first = false;
+                        sb.append('{');
+                        appendJsonNumber(sb, "t", er.turn); sb.append(',');
+                        appendJsonNumber(sb, "a", er.actor.equals(myName) ? 0 : 1); sb.append(',');
+                        appendJsonString(sb, "ty", er.type); sb.append(',');
+                        appendJsonString(sb, "c", er.card); sb.append(',');
+                        appendJsonString(sb, "x", er.extra); sb.append(',');
+                        appendJsonNumber(sb, "n", er.amount);
+                        sb.append('}');
+                    }
+                }
+            }
+            sb.append(']');
+            // NOTE: intentionally NOT closing the object; flushCorpusRows appends ,"won":X}
+            corpusRowBuffer.add(sb.toString());
+        } catch (Exception ignored) {
+            // corpus dump must never affect game correctness
+        }
+    }
+
+    /** counts: [creatures, totalPower, lands, untappedLands, artifacts, tappedCreatures]. */
+    private static int[] boardFacts(Game game, UUID pid) {
+        int[] f = new int[6];
+        try {
+            for (mage.game.permanent.Permanent p : game.getBattlefield().getAllActivePermanents(pid)) {
+                boolean land = p.isLand(game);
+                boolean cre = p.isCreature(game);
+                boolean art = p.isArtifact(game);
+                boolean tapped = p.isTapped();
+                if (cre) { f[0]++; f[1] += p.getPower().getValue(); if (tapped) f[5]++; }
+                if (land) { f[2]++; if (!tapped) f[3]++; }
+                if (art) { f[4]++; }
+            }
+        } catch (Exception ignored) {}
+        return f;
+    }
+
+    /** Write all buffered corpus rows for this game with the terminal outcome stamped. */
+    public void flushCorpusRows(boolean won) {
+        if (!CORPUS_DUMP || CORPUS_FILE.isEmpty() || corpusRowBuffer == null || corpusRowBuffer.isEmpty()) {
+            if (corpusRowBuffer != null) corpusRowBuffer.clear();
+            return;
+        }
+        try {
+            StringBuilder out = new StringBuilder(corpusRowBuffer.size() * 512);
+            for (String row : corpusRowBuffer) {
+                out.append(row).append(",\"won\":").append(won ? 1 : 0).append("}\n");
+            }
+            String shard = CORPUS_FILE + "." + CORPUS_JVM_TOKEN + ".jsonl";
+            synchronized (CORPUS_LOCK) {
+                try (java.io.FileWriter fw = new java.io.FileWriter(shard, true)) {
+                    fw.write(out.toString());
+                }
+            }
+        } catch (Exception e) {
+            RLTrainer.threadLocalLogger.get().warn("corpus flush failed: " + e.getMessage());
+        } finally {
+            corpusRowBuffer.clear();
         }
     }
 
@@ -3136,6 +3366,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.searchOpActivations = player.searchOpActivations;
         this.greedyMode = player.greedyMode;
         this.policyKey = player.policyKey;
+        this.routerCommittedSpecialist = player.routerCommittedSpecialist;
         this.trainingEnabled = player.trainingEnabled;
         this.attachedGameLogger = player.attachedGameLogger;
         this.branchController = null;
@@ -3198,6 +3429,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
      * Return 0 to force KEEP, 1 to force MULLIGAN, or null for normal policy.
      */
     protected Integer forcedMulliganChoiceIndex(Game game, int handSize, int landCount) {
+        // M0 audit: force ONLY the first keep/mull decision (independent of the hard-override feature).
+        if (MULLIGAN_M0_FORCE != 0 && mulligansTaken == 0) {
+            return MULLIGAN_M0_FORCE == 1 ? 0 : 1; // 1->force KEEP(idx0), 2->force MULL(idx1)
+        }
         if (!MULLIGAN_HARD_OVERRIDES_ENABLE
                 || (trainingEnabled && !MULLIGAN_HARD_APPLY_DURING_TRAINING)) {
             return null;
@@ -3493,6 +3728,48 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         trackEarlyLands(game);
         resetOnlinePrefixAutopilotGame(game);
         resetGenericActionHistoryGame(game);
+        // Go-Explore-lite: seed the forced-prefix into the autopilot once per game (first decision).
+        if (goExplorePrefix != null && game != null && !game.isSimulation()
+                && !Objects.equals(goExplorePrefixSeededGameId, game.getId())) {
+            goExplorePrefixSeededGameId = game.getId();
+            startOnlinePrefixAutopilot(game, goExplorePrefix);
+        }
+        // Go-Explore return-variation: once the forced prefix is fully consumed (deque emptied), we are
+        // at the cell. Record fidelity to the target cell, then re-seed the exploration RNG so the
+        // post-return suffix diverges per visit. (Codex #22: reseed only the agent RNG, only at the cell.)
+        if (goExploreExploreSeed != null && !goExploreReseeded && game != null && !game.isSimulation()
+                && Objects.equals(goExplorePrefixSeededGameId, game.getId())
+                && onlinePrefixAutopilot.isEmpty()) {
+            Player gxp = game.getPlayer(playerId);
+            int gxLib = gxp == null ? -1 : gxp.getLibrary().size();
+            int gxGy = gxp == null ? -1 : gxp.getGraveyard().size();
+            int gxHand = gxp == null ? 0 : gxp.getHand().size();
+            String cell = goExploreCellKey(gxLib, gxGy, countOwnCreatures(game), gxHand, game.getTurnNum());
+            goExploreReachedTargetCell = (goExploreTargetCell == null || goExploreTargetCell.equals(cell));
+            stochasticRng.setSeed(goExploreExploreSeed);
+            goExploreReseeded = true;
+        }
+        if (ONLINE_PREFIX_DIAG && game != null && !game.isSimulation()) {
+            int opdTotal = OPDIAG_TOTAL.incrementAndGet();
+            int opdLibLands = countLibraryTrueLands(game);
+            int opdCre = countOwnCreatures(game);
+            int opdCand = candidates == null ? 0 : candidates.size();
+            if (opdLibLands == 0) OPDIAG_NOLAND.incrementAndGet();
+            if (opdLibLands <= 1) OPDIAG_NOLAND1.incrementAndGet();
+            if (opdCre >= 2) OPDIAG_BOARD2.incrementAndGet();
+            if (opdLibLands == 0 && opdCre >= 2) OPDIAG_BOTH.incrementAndGet();
+            try { Player opdp = game.getPlayer(playerId); if (opdp != null && opdp.getLibrary().size() == 0) OPDIAG_LIBEMPTY.incrementAndGet(); } catch (Exception ignored) {}
+            if (opdLibLands == 0 && opdCre >= 2 && ONLINE_PREFIX_DIAG_PRINTS.getAndIncrement() < 60) {
+                System.out.println(String.format(Locale.US,
+                        "[OPDIAG] combo-ready: type=%s cand=%d creatures=%d", actionType, opdCand, opdCre));
+            }
+            if (opdTotal % 100 == 0) {
+                System.out.println(String.format(Locale.US,
+                        "[OPDIAG-FUNNEL] total=%d libLands0=%d libLands<=1=%d libEmpty=%d board>=2=%d both=%d",
+                        opdTotal, OPDIAG_NOLAND.get(), OPDIAG_NOLAND1.get(), OPDIAG_LIBEMPTY.get(),
+                        OPDIAG_BOARD2.get(), OPDIAG_BOTH.get()));
+            }
+        }
         // Candidate-based policy: score up to MAX_CANDIDATES candidates per decision.
         final int maxCandidates = StateSequenceBuilder.TrainingData.MAX_CANDIDATES;
         final int candFeatDim = StateSequenceBuilder.TrainingData.CAND_FEAT_DIM;
@@ -3814,7 +4091,15 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
         }
 
-        if (ONLINE_PREFIX_SEARCH_ENABLE
+        if (actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                && ONLINE_PREFIX_DIAG_ONCE.compareAndSet(false, true)) {
+            System.out.println(String.format(Locale.US,
+                    "[OPDIAG-ONCE] enable=%s gate=%s genericOrder=%s autopilot=%s maxDepth=%d maxNodes=%d topK=%d minCreatures=%d",
+                    ONLINE_PREFIX_SEARCH_ENABLE, ONLINE_PREFIX_COMBO_READY_GATE, ONLINE_PREFIX_GENERIC_BRANCH_ORDER,
+                    ONLINE_PREFIX_AUTOPILOT_ENABLE, ONLINE_PREFIX_SEARCH_MAX_DEPTH, ONLINE_PREFIX_SEARCH_MAX_NODES,
+                    ONLINE_PREFIX_SEARCH_TOP_K, ONLINE_PREFIX_COMBO_READY_MIN_CREATURES));
+        }
+        if ((goExploreSearchOverride != null ? goExploreSearchOverride : ONLINE_PREFIX_SEARCH_ENABLE)
                 && !forcedApplied
                 && (!trainingEnabled || ONLINE_PREFIX_SEARCH_DURING_TRAINING)
                 && game != null
@@ -3828,7 +4113,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 && selectedIndices.size() == 1
                 && (!ONLINE_PREFIX_AUTOPILOT_ENABLE || onlinePrefixAutopilot.isEmpty())
                 && (ONLINE_PREFIX_SEARCH_MAX_ACTIVATIONS <= 0
-                || onlinePrefixSearchActivations < ONLINE_PREFIX_SEARCH_MAX_ACTIVATIONS)) {
+                || onlinePrefixSearchActivations < ONLINE_PREFIX_SEARCH_MAX_ACTIVATIONS)
+                && (!ONLINE_PREFIX_COMBO_READY_GATE
+                || (countLibraryTrueLands(game) == 0
+                    && countOwnCreatures(game) >= ONLINE_PREFIX_COMBO_READY_MIN_CREATURES))) {
             int originalIndex = selectedIndices.get(0);
             mage.player.ai.rl.TerminalPrefixSearch.Config cfg =
                     new mage.player.ai.rl.TerminalPrefixSearch.Config();
@@ -3906,7 +4194,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // Thesis-clean: terminal win/lose only. Mutually exclusive with MCTS /
         // online-prefix targets via the mctsVisitTargets == null guard.
         if (SEARCH_OP_ENABLE
-                && (trainingEnabled || !SEARCH_OP_ARBITER_CAST_FILTER.isEmpty())
+                && (trainingEnabled || SEARCH_OP_EVAL_ENABLE || !SEARCH_OP_ARBITER_CAST_FILTER.isEmpty())
                 && !forcedApplied
                 && mctsVisitTargets == null
                 && game != null
@@ -3918,6 +4206,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 && minTargets <= 1
                 && selectedIndices != null
                 && selectedIndices.size() == 1
+                && (SEARCH_OP_MIN_TURN <= 0 || game.getTurnNum() >= SEARCH_OP_MIN_TURN)
                 && (SEARCH_OP_MAX_ACTIVATIONS <= 0
                         || searchOpActivations < SEARCH_OP_MAX_ACTIVATIONS)) {
             float maxProb = 0f;
@@ -3982,6 +4271,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                             }
                         }
                         mctsVisitTargets = target;
+                        // Stash per-candidate rollout win-rates for the corpus (policy-regret capture).
+                        corpusSearchWr = wr.winRate;
+                        corpusSearchBest = wr.bestIndex;
+                        corpusSearchPolicyIdx = originalIndex;
                         if (SEARCH_OP_APPLY_OVERRIDE) {
                             // Replaces the sampled action with the search-best AND clobbers the
                             // behavioral log-prob (IS-ratio denominator) -- distorts PPO for the
@@ -4100,6 +4393,35 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
         }
 
+        // Win-positivity fork: at the first Spy-castable decision, force combo (cast Spy) or beatdown (best non-Spy).
+        if ((goExploreForceSpyOnce || goExploreBanSpyOnce) && !selectedIndices.isEmpty()
+                && (actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                    || actionType == StateSequenceBuilder.ActionType.CAST_SPELL)) {
+            int spyIdx = -1;
+            for (int ci = 0; ci < candidateCount; ci++) {
+                String ct = mage.player.ai.rl.TerminalPrefixSearch.describeOne(candidates.get(ci), game);
+                if (ct != null && ct.contains("Balustrade Spy")) { spyIdx = ci; break; }
+            }
+            if (spyIdx >= 0) {
+                if (goExploreForceSpyOnce) {
+                    selectedIndices = Collections.singletonList(spyIdx);
+                } else { // banSpy: if greedy picked Spy, swap to best non-Spy; else leave (already non-Spy)
+                    if (!selectedIndices.isEmpty() && selectedIndices.get(0) == spyIdx) {
+                        int alt = -1; float best = -1f;
+                        for (int ci = 0; ci < candidateCount; ci++) {
+                            if (ci == spyIdx) continue;
+                            float p = (policyMaskedProbs != null && ci < policyMaskedProbs.length) ? policyMaskedProbs[ci] : 0f;
+                            if (p > best) { best = p; alt = ci; }
+                        }
+                        if (alt >= 0) selectedIndices = Collections.singletonList(alt);
+                    }
+                }
+                goExploreForkApplied = true;
+                goExploreForceSpyOnce = false;
+                goExploreBanSpyOnce = false;
+            }
+        }
+
         if (!selectedIndices.isEmpty() && shouldLogReplayDecision(actionType)) {
             logReplayDecision(
                     actionType,
@@ -4125,6 +4447,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     policyMaskedProbs,
                     candidateFeatures
             );
+            maybeDumpCorpusRow(game, actionType, candidates, candidateCount,
+                    selectedIndices.get(0), valueScore, baseState);
         }
 
         // Record or externally capture decision tensors (store full action + joint log-prob).
@@ -4924,12 +5248,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
         metrics.recordPythonBridgeCall();
         long inferStart = System.nanoTime();
+        String effectivePolicyKey = (ROUTER_ENABLE && routerCommittedSpecialist)
+                ? policyKey + ":specialist" : policyKey;
         mage.player.ai.rl.PythonMLBatchManager.PredictionResult result = model.scoreCandidates(
                 baseState,
                 candidateActionIds,
                 candidateFeatures,
                 candidateMask,
-                policyKey,
+                effectivePolicyKey,
                 headId,
                 pickIndex,
                 minTargets,
@@ -7872,6 +8198,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
             List<Integer> selectedIndices = attackPickResult.selectedIndices;
             float oldLogpTotal = attackPickResult.oldLogpTotal;
+            maybeDumpCorpusRow(game, StateSequenceBuilder.ActionType.DECLARE_ATTACKS, phase1Candidates,
+                    candidateCount, selectedIndices.isEmpty() ? -1 : selectedIndices.get(0), valueScore, baseState);
             List<Permanent> selectedAttackers = new ArrayList<>();
             for (int pickIdx : selectedIndices) {
                 if (pickIdx == doneIdx) {
@@ -8125,6 +8453,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 }
                 List<Integer> selectedIndices = blockPickResult.selectedIndices;
                 float oldLogpTotal = blockPickResult.oldLogpTotal;
+                maybeDumpCorpusRow(game, StateSequenceBuilder.ActionType.DECLARE_BLOCKS, blockCandidates,
+                        candidateCount, selectedIndices.isEmpty() ? -1 : selectedIndices.get(0), valueScore, baseState);
                 List<Permanent> selectedBlockers = new ArrayList<>();
                 for (int pickIdx : selectedIndices) {
                     if (pickIdx == doneIdx) {
@@ -9921,6 +10251,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // invoke the ONNX belief head once per turn (single-sample inference
     // is cheap but still worth throttling since priority() fires many times).
     private int lastBeliefLoggedTurn = -1;
+    // R0 inference router (Codex #43): once the belief head detects the target archetype
+    // (>= threshold), commit the ACTION model to the frozen specialist for the rest of the
+    // game by marking the policyKey "specialist" (Python _get_policy_model routes it). The
+    // mulligan uses a separate net so it stays on the generalist automatically. Detect-then-commit.
+    private boolean routerCommittedSpecialist = false;
+    private static final boolean ROUTER_ENABLE = EnvConfig.bool("ROUTER_ENABLE", false);
+    private static final int ROUTER_TARGET_ARCHETYPE = EnvConfig.i32("ROUTER_TARGET_ARCHETYPE", 1); // Rally
+    private static final double ROUTER_BELIEF_THRESHOLD = EnvConfig.f64("ROUTER_BELIEF_THRESHOLD", 0.80);
 
     private static final boolean ISMCTS_ENABLE = "1".equals(System.getenv("ISMCTS_ENABLE"));
     private static final boolean ISMCTS_RANDOM_ROLLOUT_ROOT =
@@ -9983,6 +10321,110 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_MODEL_GUIDED_FALLBACK", false);
     private static final boolean ONLINE_PREFIX_GENERIC_BRANCH_ORDER =
             mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_GENERIC_BRANCH_ORDER", false);
+    // Step-2 smoke: only fire prefix search at GENERIC combo-ready states (no card names):
+    // 0 true lands left in library AND >= N own creatures (Balustrade Spy becomes the 3rd
+    // sac for Dread Return). Gates the search so CALLS = combo-ready reach + FOUND = search
+    // can finish. Counters reported via ONLINE_PREFIX_SEARCH_CALLS/FOUND.
+    private static final boolean ONLINE_PREFIX_COMBO_READY_GATE =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_COMBO_READY_GATE", false);
+    private static final int ONLINE_PREFIX_COMBO_READY_MIN_CREATURES =
+            mage.player.ai.rl.EnvConfig.i32("RL_ONLINE_PREFIX_COMBO_READY_MIN_CREATURES", 2);
+    // Step-2 diagnostic: decompose why the online-prefix search does/doesn't fire.
+    private static final boolean ONLINE_PREFIX_DIAG =
+            mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_DIAG", false);
+    private static final java.util.concurrent.atomic.AtomicBoolean ONLINE_PREFIX_DIAG_ONCE =
+            new java.util.concurrent.atomic.AtomicBoolean(false);
+    private static final java.util.concurrent.atomic.AtomicInteger ONLINE_PREFIX_DIAG_PRINTS =
+            new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger OPDIAG_TOTAL = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger OPDIAG_NOLAND = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger OPDIAG_NOLAND1 = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger OPDIAG_BOARD2 = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger OPDIAG_BOTH = new java.util.concurrent.atomic.AtomicInteger();
+    private static final java.util.concurrent.atomic.AtomicInteger OPDIAG_LIBEMPTY = new java.util.concurrent.atomic.AtomicInteger();
+    // --- Go-Explore-lite: per-decision trace capture + forced-prefix replay (thesis-clean exploration) ---
+    private static final boolean GOEXPLORE_TRACE =
+            mage.player.ai.rl.EnvConfig.bool("RL_GOEXPLORE_TRACE", false);
+    public static final class GoExploreDecision {
+        public final String gameId;       // owning game (filter out leaked-thread pollution)
+        public final String actionText;   // canonical text (matches autopilot)
+        public final String actionType;
+        public final boolean controllable; // can the autopilot replay this decision type?
+        public final int candidateCount;
+        public final int turn;
+        public final int libSize;
+        public final int libLands;
+        public final int graveyard;
+        public final int boardCreatures;
+        // card-name-aware MEASUREMENT flags (diagnostic only -- never a model feature/reward/label)
+        public final boolean spyCastable;   // a Balustrade Spy cast is among the candidates
+        public final boolean dreadInGy;     // Dread Return in own graveyard (flashback available post-mill)
+        public final boolean lotlethInGy;   // Lotleth Giant in own graveyard (reanimation target)
+        public GoExploreDecision(String gameId, String actionText, String actionType, boolean controllable, int candidateCount,
+                                 int turn, int libSize, int libLands, int graveyard, int boardCreatures,
+                                 boolean spyCastable, boolean dreadInGy, boolean lotlethInGy) {
+            this.gameId = gameId;
+            this.actionText = actionText; this.actionType = actionType; this.controllable = controllable;
+            this.candidateCount = candidateCount; this.turn = turn; this.libSize = libSize;
+            this.libLands = libLands; this.graveyard = graveyard; this.boardCreatures = boardCreatures;
+            this.spyCastable = spyCastable; this.dreadInGy = dreadInGy; this.lotlethInGy = lotlethInGy;
+        }
+    }
+    private static final java.util.concurrent.ConcurrentLinkedQueue<GoExploreDecision> GOEXPLORE_TRACE_Q =
+            new java.util.concurrent.ConcurrentLinkedQueue<>();
+    public static void goExploreClearTrace() { GOEXPLORE_TRACE_Q.clear(); }
+    public static java.util.List<GoExploreDecision> goExploreDrainTrace() {
+        java.util.List<GoExploreDecision> out = new java.util.ArrayList<>(GOEXPLORE_TRACE_Q);
+        GOEXPLORE_TRACE_Q.clear();
+        return out;
+    }
+    /** Drain only this game's decisions (ignores leaked-thread pollution from a prior hung game). */
+    public static java.util.List<GoExploreDecision> goExploreDrainTrace(String gameId) {
+        java.util.List<GoExploreDecision> out = new java.util.ArrayList<>();
+        for (GoExploreDecision d : GOEXPLORE_TRACE_Q) {
+            if (gameId == null || gameId.equals(d.gameId)) out.add(d);
+        }
+        GOEXPLORE_TRACE_Q.clear();
+        return out;
+    }
+    // forced-prefix replay: set before a game; seeded into the autopilot at the first decision of the game
+    private transient java.util.List<String> goExplorePrefix = null;
+    private transient UUID goExplorePrefixSeededGameId = null;
+    public void setGoExplorePrefix(java.util.List<String> prefix) {
+        this.goExplorePrefix = (prefix == null || prefix.isEmpty()) ? null : new java.util.ArrayList<>(prefix);
+        this.goExplorePrefixSeededGameId = null;
+    }
+    // Per-agent override for the online-prefix finish-search enable (null = use env default).
+    // Lets the paired replayed-root test run baseline (false) vs search (true) arms in one JVM.
+    private transient Boolean goExploreSearchOverride = null;
+    public void setGoExploreSearchOverride(Boolean v) { this.goExploreSearchOverride = v; }
+    // Go-Explore return-variation: after the forced prefix reaches the cell (autopilot deque emptied),
+    // re-seed the agent exploration RNG so each return explores DIFFERENTLY (Codex #22: reseed only the
+    // agent RNG, only after the cell is reached). Fidelity to the target cell is recorded for verification.
+    private transient Long goExploreExploreSeed = null;
+    private transient String goExploreTargetCell = null;
+    private transient boolean goExploreReseeded = false;
+    private transient boolean goExploreReachedTargetCell = false;
+    public void setGoExploreExploreSeed(Long s) { this.goExploreExploreSeed = s; this.goExploreReseeded = false; }
+    public void setGoExploreTargetCell(String c) { this.goExploreTargetCell = c; this.goExploreReachedTargetCell = false; }
+    public boolean goExploreReachedTargetCell() { return goExploreReachedTargetCell; }
+    // Win-positivity paired branch fork (Codex #23): at the first Spy-castable decision, force-cast Spy
+    // (combo branch) or force best-non-Spy (beatdown branch), then release to greedy. One-shot.
+    private transient boolean goExploreForceSpyOnce = false;
+    private transient boolean goExploreBanSpyOnce = false;
+    private transient boolean goExploreForkApplied = false;
+    public void setGoExploreForceSpyOnce(boolean v) { this.goExploreForceSpyOnce = v; }
+    public void setGoExploreBanSpyOnce(boolean v) { this.goExploreBanSpyOnce = v; }
+    public boolean goExploreForkApplied() { return goExploreForkApplied; }
+    /** Coarse untyped zone-count cell key (Codex #22 buckets). NO card names. board = own creatures. */
+    public static String goExploreCellKey(int libSize, int gy, int board, int hand, int turn) {
+        String t = turn >= 5 ? "5+" : String.valueOf(turn);
+        String ls = libSize < 20 ? String.valueOf(libSize) : ("20+" + (libSize / 5));
+        String g = gy <= 0 ? "0" : gy <= 3 ? "1-3" : gy <= 7 ? "4-7" : gy <= 14 ? "8-14" : "15+";
+        String h = hand <= 0 ? "0" : hand <= 2 ? String.valueOf(hand) : hand <= 4 ? "3-4" : "5+";
+        String b = board >= 3 ? "3+" : String.valueOf(board);
+        return "t" + t + "|L" + ls + "|G" + g + "|H" + h + "|B" + b;
+    }
     private static final boolean ONLINE_PREFIX_AUTOPILOT_ENABLE =
             mage.player.ai.rl.EnvConfig.bool("RL_ONLINE_PREFIX_AUTOPILOT_ENABLE", false);
     private static final boolean ONLINE_PREFIX_SEARCH_DURING_TRAINING =
@@ -9995,6 +10437,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     //     that distills the policy toward per-candidate terminal win-rate. ---
     private static final boolean SEARCH_OP_ENABLE =
             mage.player.ai.rl.EnvConfig.bool("SEARCH_OP_ENABLE", false);
+    // Allow SEARCH_OP to fire during eval/greedy generation (trainingEnabled=false),
+    // for action-quality / policy-regret corpus labeling.
+    private static final boolean SEARCH_OP_EVAL_ENABLE =
+            mage.player.ai.rl.EnvConfig.bool("SEARCH_OP_EVAL_ENABLE", false);
     private static final int SEARCH_OP_TOP_K =
             mage.player.ai.rl.EnvConfig.i32("SEARCH_OP_TOP_K", 3);
     private static final int SEARCH_OP_PLAYOUTS =
@@ -10007,6 +10453,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             mage.player.ai.rl.EnvConfig.i64("SEARCH_OP_TOTAL_TIMEOUT_MS", 8000L);
     private static final int SEARCH_OP_MAX_GAME_TURNS =
             mage.player.ai.rl.EnvConfig.i32("SEARCH_OP_MAX_GAME_TURNS", 0);
+    // Only fire SEARCH_OP at/after this game turn. Late-game rollouts are SHORT (few
+    // turns to terminal = cheap + actually terminate) and are where the pivotal "throws"
+    // live. 0 = no gate (fire from turn 1, where rollouts are full-game and rarely finish).
+    private static final int SEARCH_OP_MIN_TURN =
+            mage.player.ai.rl.EnvConfig.i32("SEARCH_OP_MIN_TURN", 0);
     private static final float SEARCH_OP_SKIP_TOP_PROB =
             (float) mage.player.ai.rl.EnvConfig.f64("SEARCH_OP_SKIP_TOP_PROB", 0.85);
     private static final float SEARCH_OP_SAMPLE_PROB = Math.max(0.0f, Math.min(1.0f,
@@ -10045,6 +10496,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     mage.player.ai.rl.EnvConfig.i32("MULLIGAN_HARD_MAX_LANDS", 5));
     private static final int MULLIGAN_HARD_MAX_MULLIGANS =
             mage.player.ai.rl.EnvConfig.i32("MULLIGAN_HARD_MAX_MULLIGANS", 2);
+    // M0 forced-mulligan counterfactual audit (Codex #35): force the FIRST keep/mull
+    // decision to KEEP (1) or MULL (2); 0=off (policy). Run the gauntlet once each way
+    // on matched seeds -> compare terminal outcomes per opening hand to measure whether
+    // the policy's mulligan is leaving winrate on the table. Only the first decision is
+    // forced; subsequent mulligans use the policy.
+    private static final int MULLIGAN_M0_FORCE =
+            mage.player.ai.rl.EnvConfig.i32("MULLIGAN_M0_FORCE", 0);
     private static final boolean MULLIGAN_HARD_FORCE_KEEP_AFTER_MAX =
             mage.player.ai.rl.EnvConfig.bool("MULLIGAN_HARD_FORCE_KEEP_AFTER_MAX", true);
     private static final boolean MULLIGAN_HARD_FORCE_KEEP_GOOD =
@@ -10062,8 +10520,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
      *  (graveyard already large = Spy has milled) as SIL-eligible, so the Python
      *  SIL loss only reinforces the short post-mill finish (fire Flashback Dread
      *  Return -> return Lotleth Giant) in won games, not the whole trajectory. */
+    // NOTE: this graveyard gate is decoupled from Python's SIL_WINDOW_GATED (which
+    // masks the SIL loss to silEligible rows). It uses its own SIL_GRAVEYARD_GATED
+    // flag so win-replay SIL (terminal-win gated, set in RLTrainer) can enable Python
+    // masking without also turning on this Spy-specific graveyard gate.
     private static final boolean SIL_WINDOW_GATED =
-            mage.player.ai.rl.EnvConfig.bool("SIL_WINDOW_GATED", false);
+            mage.player.ai.rl.EnvConfig.bool("SIL_GRAVEYARD_GATED", false);
     private static final int SIL_WINDOW_GRAVEYARD_MIN =
             mage.player.ai.rl.EnvConfig.i32("SIL_WINDOW_GRAVEYARD_MIN", 20);
     private static final List<String> MULLIGAN_HARD_PSEUDO_LAND_NAMES =
@@ -10196,6 +10658,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             StateSequenceBuilder.SequenceOutput state = StateSequenceBuilder.buildBaseState(game, phase, StateSequenceBuilder.MAX_LEN);
             float[] probs = model.predictArchetype(state);
             if (probs == null || probs.length == 0) return;
+
+            // R0 router: detect-then-commit to the specialist once belief crosses threshold.
+            if (ROUTER_ENABLE && !routerCommittedSpecialist
+                    && ROUTER_TARGET_ARCHETYPE >= 0 && ROUTER_TARGET_ARCHETYPE < probs.length
+                    && probs[ROUTER_TARGET_ARCHETYPE] >= ROUTER_BELIEF_THRESHOLD) {
+                routerCommittedSpecialist = true;
+            }
 
             // Optional: run ISMCTS rollouts with belief-driven determinization
             // (off by default since rollouts are expensive -- ~seconds per game).

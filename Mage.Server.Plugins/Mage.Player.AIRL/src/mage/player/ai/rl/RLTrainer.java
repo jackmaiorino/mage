@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -109,6 +110,24 @@ public class RLTrainer {
     private static final int TRAIN_DIAG_EVERY = EnvConfig.i32("TRAIN_DIAG_EVERY", 50);
     private static final int TRAIN_MAX_TRAJECTORY_STEPS_PER_PLAYER =
             Math.max(0, EnvConfig.i32("TRAIN_MAX_TRAJECTORY_STEPS_PER_PLAYER", 0));
+    // --- Win-replay self-imitation (Codex #32): a persistent buffer of the agent's
+    // OWN winning trajectories, re-enqueued across later batches so rare hard-matchup
+    // wins are reinforced repeatedly instead of seen-once-and-washed-out by the 80%
+    // losses. Combats the sparse-reward bootstrap that stalls fast-aggro matchups.
+    // Terminal-win gated (silEligible -> Python SIL loss), thesis-clean (imitates the
+    // agent's own real-rules wins; no labels/shaping). Pair with REFERENCE_POLICY_KL
+    // anchor to base + SIL_LOSS_COEF + SIL_WINDOW_GATED=1 (Python masking). ---
+    private static final boolean WIN_REPLAY_ENABLE = EnvConfig.bool("WIN_REPLAY_ENABLE", false);
+    private static final int WIN_REPLAY_BUFFER_MAX = Math.max(1, EnvConfig.i32("WIN_REPLAY_BUFFER_MAX", 200));
+    private static final int WIN_REPLAY_PER_EPISODE = Math.max(0, EnvConfig.i32("WIN_REPLAY_PER_EPISODE", 1));
+    private static final int WIN_REPLAY_MAX_ROWS = Math.max(1, EnvConfig.i32("WIN_REPLAY_MAX_ROWS", 80));
+    private static final boolean WIN_REPLAY_DEDUP = EnvConfig.bool("WIN_REPLAY_DEDUP", true);
+    private static final WinReplayBuffer WIN_REPLAY =
+            new WinReplayBuffer(WIN_REPLAY_BUFFER_MAX, WIN_REPLAY_DEDUP);
+    private static final java.util.concurrent.atomic.AtomicLong WIN_REPLAY_STORED =
+            new java.util.concurrent.atomic.AtomicLong(0);
+    private static final java.util.concurrent.atomic.AtomicLong WIN_REPLAY_REPLAYED =
+            new java.util.concurrent.atomic.AtomicLong(0);
     private static final boolean AWR_SELECTED_ACTION_TARGETS_ENABLE =
             EnvConfig.bool("RL_AWR_SELECTED_ACTION_TARGETS_ENABLE", false);
     private static final double AWR_GAMMA =
@@ -1832,6 +1851,98 @@ public class RLTrainer {
             () -> GameLogger.create(false) // Default: disabled
     );
 
+    /**
+     * Thread-safe ring buffer of the agent's own winning trajectories for win-replay
+     * self-imitation. Stores the last WIN_REPLAY_MAX_ROWS rows (the decisive endgame)
+     * of each win, with optional dedup by chosen-action-line hash so one lucky line
+     * cannot dominate the buffer.
+     */
+    private static final class WinReplayBuffer {
+        static final class Entry {
+            final List<StateSequenceBuilder.TrainingData> traj;
+            final List<Double> rewards;
+            final long hash;
+            Entry(List<StateSequenceBuilder.TrainingData> traj, List<Double> rewards, long hash) {
+                this.traj = traj;
+                this.rewards = rewards;
+                this.hash = hash;
+            }
+        }
+
+        private final int maxEntries;
+        private final boolean dedup;
+        private final ArrayDeque<Entry> buf = new ArrayDeque<>();
+        private final java.util.HashMap<Long, Integer> hashCounts = new java.util.HashMap<>();
+
+        WinReplayBuffer(int maxEntries, boolean dedup) {
+            this.maxEntries = Math.max(1, maxEntries);
+            this.dedup = dedup;
+        }
+
+        synchronized boolean add(List<StateSequenceBuilder.TrainingData> traj, List<Double> rewards, long hash) {
+            if (traj == null || traj.isEmpty()) {
+                return false;
+            }
+            if (dedup && hashCounts.containsKey(hash)) {
+                return false; // identical winning line already buffered
+            }
+            buf.addLast(new Entry(traj, rewards, hash));
+            hashCounts.merge(hash, 1, Integer::sum);
+            while (buf.size() > maxEntries) {
+                Entry old = buf.pollFirst();
+                if (old != null) {
+                    Integer c = hashCounts.get(old.hash);
+                    if (c != null) {
+                        if (c <= 1) {
+                            hashCounts.remove(old.hash);
+                        } else {
+                            hashCounts.put(old.hash, c - 1);
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        synchronized List<Entry> sample(int k) {
+            if (buf.isEmpty() || k <= 0) {
+                return Collections.emptyList();
+            }
+            List<Entry> arr = new ArrayList<>(buf);
+            List<Entry> out = new ArrayList<>(k);
+            for (int i = 0; i < k; i++) {
+                out.add(arr.get(java.util.concurrent.ThreadLocalRandom.current().nextInt(arr.size())));
+            }
+            return out;
+        }
+
+        synchronized int size() {
+            return buf.size();
+        }
+    }
+
+    /** Hash a winning trajectory by its sequence of chosen action ids (for dedup). */
+    private static long winLineHash(List<StateSequenceBuilder.TrainingData> traj) {
+        long h = 1125899906842597L;
+        for (StateSequenceBuilder.TrainingData td : traj) {
+            int chosen = (td.chosenIndices != null && td.chosenIndices.length > 0) ? td.chosenIndices[0] : -1;
+            int actId = -1;
+            if (td.candidateActionIds != null && chosen >= 0 && chosen < td.candidateActionIds.length) {
+                actId = td.candidateActionIds[chosen];
+            }
+            h = 31 * h + actId;
+        }
+        return h;
+    }
+
+    /** Tail (last n rows) of a trajectory and the matching rewards suffix. */
+    private static <T> List<T> tail(List<T> list, int n) {
+        if (list == null || list.isEmpty() || n <= 0 || list.size() <= n) {
+            return list == null ? Collections.emptyList() : new ArrayList<>(list);
+        }
+        return new ArrayList<>(list.subList(list.size() - n, list.size()));
+    }
+
     private static final class ActorLearnerDispatcher {
 
         private enum TaskType {
@@ -2191,6 +2302,8 @@ public class RLTrainer {
                 new RLTrainer().runLeagueEvaluation();
             } else if ("league_bench".equalsIgnoreCase(mode)) {
                 new RLTrainer().runLeagueBench();
+            } else if ("goexplore".equalsIgnoreCase(mode)) {
+                new RLTrainer().runGoExplore();
             } else if ("trainAll".equalsIgnoreCase(mode)) {
                 // Multi-profile: single JVM, shared card DB
                 List<String> profiles = new ArrayList<>();
@@ -2500,8 +2613,15 @@ public class RLTrainer {
 
                         long startGameNanos = System.nanoTime();
                         metrics.recordEpisodeSetupMs((startGameNanos - episodeStartNanos) / 1_000_000L);
-                        // Restart game now that players are added
-                        game.start(rlPlayer.getId());
+                        // Restart game now that players are added.
+                        // The choosing player picks itself as starting player (ComputerPlayer
+                        // "Select a starting player" -> self), so game.start(rlPlayer) puts the
+                        // agent ON THE PLAY every game. EVAL_OPPONENT_ON_PLAY=1 hands the choice
+                        // to the opponent -> agent on the DRAW (for balanced play/draw eval,
+                        // esp. the mirror). Default keeps the agent on the play (unchanged).
+                        UUID choosingPlayerId = EnvConfig.bool("EVAL_OPPONENT_ON_PLAY", false)
+                                ? opponentPlayer.getId() : rlPlayer.getId();
+                        game.start(choosingPlayerId);
                         long endGameNanos = System.nanoTime();
                         metrics.recordEpisodeGameMs((endGameNanos - startGameNanos) / 1_000_000L);
 
@@ -4166,12 +4286,26 @@ public class RLTrainer {
 
                 // Evaluation must disable training so ISMCTS_ENABLE can trigger
                 // eval-time MCTS override instead of the training distillation path.
-                ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel,
-                        true, false, "train");
-                rlPlayer.setCurrentEpisode(-(i + 1));
-                rlPlayer.setAttachedGameLogger(gameLogger);
-                game.addPlayer(rlPlayer, agentDeck);
-                match.addPlayer(rlPlayer, agentDeck);
+                // RL_CP7_PILOT (Codex #71): put CP7-s7 in the agent seat to test whether
+                // the fixed list is pilot-capable by a strong heuristic (upstream-vs-midgame).
+                boolean cp7Pilot = EnvConfig.bool("RL_CP7_PILOT", false);
+                ComputerPlayerRL rlPlayer = null;
+                Player agentSeat;
+                if (cp7Pilot) {
+                    // RL_CP7_PILOT_SKILL: headroom test -- pilot may search deeper than the gauntlet opponent.
+                    int cp7PilotSkill = EnvConfig.i32("RL_CP7_PILOT_SKILL", EVAL_OPPONENT_SKILL);
+                    agentSeat = ReplayOpponentDecisionPlayer.create(
+                            "CP7Pilot-Skill" + cp7PilotSkill, RangeOfInfluence.ALL, cp7PilotSkill,
+                            10000 + i + 1, replaySeed, gameLogger);
+                } else {
+                    rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel,
+                            true, false, "train");
+                    rlPlayer.setCurrentEpisode(-(i + 1));
+                    rlPlayer.setAttachedGameLogger(gameLogger);
+                    agentSeat = rlPlayer;
+                }
+                game.addPlayer(agentSeat, agentDeck);
+                match.addPlayer(agentSeat, agentDeck);
 
                 ComputerPlayer7 opponent = ReplayOpponentDecisionPlayer.create(
                         "EvalBot-Skill" + EVAL_OPPONENT_SKILL, RangeOfInfluence.ALL, EVAL_OPPONENT_SKILL,
@@ -4179,10 +4313,13 @@ public class RLTrainer {
                 game.addPlayer(opponent, oppDeckCopy);
                 match.addPlayer(opponent, oppDeckCopy);
 
-                game.loadCards(agentDeck.getCards(), rlPlayer.getId());
+                game.loadCards(agentDeck.getCards(), agentSeat.getId());
                 game.loadCards(oppDeckCopy.getCards(), opponent.getId());
+                if (EnvConfig.bool("RL_CORPUS_DUMP", false) && rlPlayer != null) {
+                    game.getState().addWatcher(new mage.player.ai.rl.PublicEventHistoryWatcher());
+                }
                 if (EVAL_REPLAY_METADATA) {
-                    forceReplayLibraryOrder(rlPlayer, agentDeck, game);
+                    forceReplayLibraryOrder(agentSeat, agentDeck, game);
                     forceReplayLibraryOrder(opponent, oppDeckCopy, game);
                 }
                 GameOptions options = new GameOptions();
@@ -4194,17 +4331,20 @@ public class RLTrainer {
                 GameHealthMonitor healthMonitor = GameHealthMonitor.createAndStart(game);
                 int evalJoinTimeoutSec = Math.max(60,
                         EnvConfig.i32("EVAL_GAME_THREAD_TIMEOUT_SEC", EnvConfig.i32("GAME_TIMEOUT_SEC", 300))) + 30;
-                startGameInGameThread(game, rlPlayer.getId(), evalJoinTimeoutSec);
+                startGameInGameThread(game, agentSeat.getId(), evalJoinTimeoutSec);
                 healthMonitor.stop();
 
                 boolean won;
                 if (healthMonitor.wasKilled()) {
                     won = false;
                 } else {
-                    won = game.getWinner().contains(rlPlayer.getName());
+                    won = game.getWinner().contains(agentSeat.getName());
                 }
                 if (gameLogger.isEnabled()) {
                     gameLogger.log("RESULT: " + (won ? "WIN" : "LOSS"));
+                }
+                if (EnvConfig.bool("RL_CORPUS_DUMP", false) && rlPlayer != null) {
+                    rlPlayer.flushCorpusRows(won);
                 }
                 if (won) wins++;
                 total++;
@@ -4229,6 +4369,471 @@ public class RLTrainer {
                 logger.error("Failed to write eval results: " + e.getMessage());
             }
         }
+    }
+
+    // ============================ GO-EXPLORE-LITE ============================
+    // Thesis-clean hard-exploration attack on the land-strip combo setup wall.
+    // Phase "fidelity": de-risk the crux -- does deterministic action-replay (same seed +
+    //   autopilot-forced prefix) reproduce an exploration-generated trajectory? Codex gate: >=98%.
+    // Phase "archive": full Go-Explore loop (built after fidelity passes).
+    private static final class GoExploreGameResult {
+        final java.util.List<ComputerPlayerRL.GoExploreDecision> trace;
+        final boolean win;
+        final boolean censored;
+        boolean reachedTargetCell = false;
+        boolean forkApplied = false;
+        GoExploreGameResult(java.util.List<ComputerPlayerRL.GoExploreDecision> trace, boolean win) {
+            this(trace, win, false);
+        }
+        GoExploreGameResult(java.util.List<ComputerPlayerRL.GoExploreDecision> trace, boolean win, boolean censored) {
+            this.trace = trace; this.win = win; this.censored = censored;
+        }
+    }
+
+    /** Run one fully-deterministic goexplore game. If prefixTexts != null, the agent's autopilot
+     *  is force-fed those controllable action texts at the start, then explores. Returns the drained
+     *  per-decision trace + win. Determinism mirrors runLeagueBench's replay path (seeded RNG +
+     *  forced library order + skipInitShuffling). */
+    private GoExploreGameResult runOneGoExploreGame(Path agentDeckPath, Path oppDeckPath, int skill,
+            long replaySeed, int scenario, int episodeTag, java.util.List<String> prefixTexts,
+            int gameTimeoutSec, boolean logThisGame) {
+        return runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, replaySeed, scenario, episodeTag,
+                prefixTexts, gameTimeoutSec, logThisGame, null, null, null);
+    }
+
+    private GoExploreGameResult runOneGoExploreGame(Path agentDeckPath, Path oppDeckPath, int skill,
+            long replaySeed, int scenario, int episodeTag, java.util.List<String> prefixTexts,
+            int gameTimeoutSec, boolean logThisGame, Boolean searchOverride) {
+        return runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, replaySeed, scenario, episodeTag,
+                prefixTexts, gameTimeoutSec, logThisGame, searchOverride, null, null);
+    }
+
+    private GoExploreGameResult runOneGoExploreGame(Path agentDeckPath, Path oppDeckPath, int skill,
+            long replaySeed, int scenario, int episodeTag, java.util.List<String> prefixTexts,
+            int gameTimeoutSec, boolean logThisGame, Boolean searchOverride,
+            Long exploreSeed, String targetCell) {
+        return runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, replaySeed, scenario, episodeTag,
+                prefixTexts, gameTimeoutSec, logThisGame, searchOverride, exploreSeed, targetCell, false, false);
+    }
+
+    private GoExploreGameResult runOneGoExploreGame(Path agentDeckPath, Path oppDeckPath, int skill,
+            long replaySeed, int scenario, int episodeTag, java.util.List<String> prefixTexts,
+            int gameTimeoutSec, boolean logThisGame, Boolean searchOverride,
+            Long exploreSeed, String targetCell, boolean forceSpy, boolean banSpy) {
+        Deck agentDeck = loadDeck(agentDeckPath.toString());
+        Deck oppDeck = loadDeckFresh(oppDeckPath.toString());
+        if (agentDeck == null || oppDeck == null) {
+            return new GoExploreGameResult(new java.util.ArrayList<>(), false);
+        }
+        RandomUtil.setSeed(replayRandomUtilSeed(replaySeed));
+        setReplayTraceContext(scenario, replaySeed, "goexplore");
+        agentDeck = replayShuffledCopy(agentDeck, replaySeed ^ 0x5DEECE66DL);
+        oppDeck = replayShuffledCopy(oppDeck, replaySeed ^ 0xC0FFEE1234L);
+
+        GameLogger gameLogger = GameLogger.create(logThisGame);
+        threadLocalGameLogger.set(gameLogger);
+
+        TwoPlayerMatch match;
+        Game game;
+        try {
+            match = new TwoPlayerMatch(new MatchOptions("GoExplore", "GoExplore", false));
+            match.startGame();
+            game = match.getGames().get(0);
+        } catch (GameException e) {
+            logger.error("goexplore: error starting game", e);
+            return new GoExploreGameResult(new java.util.ArrayList<>(), false);
+        }
+
+        // episodeTag<0 -> TRUE greedy (argmax, no RNG sampling) = deterministic replay (~100% fidelity, for winpos forks).
+        // episodeTag>=0 -> exploration agent (samples; same tag => same stochasticRng).
+        boolean greedyAgent = episodeTag < 0;
+        ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel,
+                greedyAgent, true, "train");
+        rlPlayer.setCurrentEpisode(episodeTag);
+        rlPlayer.setAttachedGameLogger(gameLogger);
+        rlPlayer.setGoExplorePrefix(prefixTexts);
+        rlPlayer.setGoExploreSearchOverride(searchOverride);
+        rlPlayer.setGoExploreExploreSeed(exploreSeed);
+        rlPlayer.setGoExploreTargetCell(targetCell);
+        rlPlayer.setGoExploreForceSpyOnce(forceSpy);
+        rlPlayer.setGoExploreBanSpyOnce(banSpy);
+
+        ComputerPlayer7 opponent = ReplayOpponentDecisionPlayer.create(
+                "EvalBot-Skill" + skill, RangeOfInfluence.ALL, skill, scenario, replaySeed, gameLogger);
+
+        game.addPlayer(rlPlayer, agentDeck);
+        match.addPlayer(rlPlayer, agentDeck);
+        game.addPlayer(opponent, oppDeck);
+        match.addPlayer(opponent, oppDeck);
+        game.loadCards(agentDeck.getCards(), rlPlayer.getId());
+        game.loadCards(oppDeck.getCards(), opponent.getId());
+        forceReplayLibraryOrder(rlPlayer, agentDeck, game);
+        forceReplayLibraryOrder(opponent, oppDeck, game);
+        GameOptions options = new GameOptions();
+        options.skipInitShuffling = true;
+        game.setGameOptions(options);
+
+        ComputerPlayerRL.goExploreClearTrace();
+        String gid = String.valueOf(game.getId());
+        GameHealthMonitor healthMonitor = GameHealthMonitor.createAndStart(game, Math.max(1, gameTimeoutSec));
+        boolean win = false;
+        boolean censored = false;
+        try {
+            startGameInGameThread(game, rlPlayer.getId(), Math.max(1, gameTimeoutSec) + 30);
+            if (healthMonitor.wasKilled()) censored = true;
+            try { win = !censored && game.getWinner().contains(rlPlayer.getName()); } catch (Exception ignored) {}
+        } catch (Throwable t) {
+            // hung/censored game: GameHealthMonitor or the join-timeout force-end threw. Censor cleanly,
+            // don't let one bad game kill the harvest. (Codex #20: count censored games as failures.)
+            censored = true;
+            System.out.println("[GOEXPLORE] CENSORED game seed=" + replaySeed + " reason=" + t.getClass().getSimpleName()
+                    + ":" + String.valueOf(t.getMessage()));
+            win = false;
+        } finally {
+            try { healthMonitor.stop(); } catch (Exception ignored) {}
+        }
+        // gameId-filtered drain: ignore any appends from a leaked prior-game thread.
+        GoExploreGameResult res = new GoExploreGameResult(ComputerPlayerRL.goExploreDrainTrace(gid), win, censored);
+        try { res.reachedTargetCell = rlPlayer.goExploreReachedTargetCell(); } catch (Exception ignored) {}
+        try { res.forkApplied = rlPlayer.goExploreForkApplied(); } catch (Exception ignored) {}
+        return res;
+    }
+
+    private static double pct(int num, int den) { return den > 0 ? 100.0 * num / den : 0.0; }
+
+    private static java.util.List<String> controllablePrefix(
+            java.util.List<ComputerPlayerRL.GoExploreDecision> trace, int depth) {
+        java.util.List<String> out = new java.util.ArrayList<>();
+        for (ComputerPlayerRL.GoExploreDecision d : trace) {
+            if (d.controllable) {
+                out.add(d.actionText);
+                if (out.size() >= depth) break;
+            }
+        }
+        return out;
+    }
+
+    public void runGoExplore() {
+        String phase = EnvConfig.str("GOEXPLORE_PHASE", "fidelity");
+        Path agentDeckPath = Paths.get(EnvConfig.str("RL_AGENT_DECK_LIST", ""));
+        Path oppDeckPath = Paths.get(EnvConfig.str("EVAL_OPPONENT_DECK", ""));
+        int skill = EnvConfig.i32("EVAL_OPPONENT_SKILL", 1);
+        long seedBase = (long) EnvConfig.i32("GOEXPLORE_SEED_BASE", 7777);
+        int trials = EnvConfig.i32("GOEXPLORE_TRIALS", 12);
+        int prefixDepth = EnvConfig.i32("GOEXPLORE_PREFIX_DEPTH", 8);
+        int episodeTag = EnvConfig.i32("GOEXPLORE_EPISODE_TAG", 0);
+        int timeoutSec = EnvConfig.i32("GOEXPLORE_GAME_TIMEOUT_SEC", 120);
+        System.out.println("[GOEXPLORE] phase=" + phase + " agent=" + agentDeckPath.getFileName()
+                + " opp=" + oppDeckPath.getFileName() + " skill=" + skill
+                + " trials=" + trials + " prefixDepth=" + prefixDepth);
+
+        if ("probe".equalsIgnoreCase(phase)) {
+            // Decompose the bottleneck under exploration: reach combo-ready-actionable vs convert-to-win.
+            int gReachLib0 = 0, gComboReady = 0, gSpyRoot = 0, gBigMill = 0, gWin = 0;
+            int gWinGivenReady = 0, gReadyDenom = 0, gWinGivenBigMill = 0, gBigMillWin = 0;
+            int maxGyOverall = 0;
+            for (int t = 0; t < trials; t++) {
+                long seed = seedBase + 7919L * (long) (t + 1);
+                GoExploreGameResult r = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                        t + 1, episodeTag, null, timeoutSec, false);
+                boolean reachLib0 = false, comboReady = false, spyRoot = false; int maxGy = 0;
+                for (ComputerPlayerRL.GoExploreDecision d : r.trace) {
+                    if (d.libLands == 0) reachLib0 = true;
+                    if (d.libLands == 0 && d.boardCreatures >= 2 && d.candidateCount >= 2) comboReady = true;
+                    // STRICT root (Codex #19): landless + board + Balustrade Spy actually castable now
+                    if (d.libLands == 0 && d.boardCreatures >= 2 && d.spyCastable) spyRoot = true;
+                    if (d.graveyard > maxGy) maxGy = d.graveyard;
+                }
+                boolean bigMill = maxGy >= 25;
+                maxGyOverall = Math.max(maxGyOverall, maxGy);
+                if (reachLib0) gReachLib0++;
+                if (comboReady) { gComboReady++; gReadyDenom++; if (r.win) gWinGivenReady++; }
+                if (spyRoot) gSpyRoot++;
+                if (bigMill) { gBigMill++; if (r.win) { gWinGivenBigMill++; gBigMillWin++; } }
+                if (r.win) gWin++;
+                System.out.println(String.format(java.util.Locale.US,
+                        "[GOEXPLORE-PROBE] trial=%d seed=%d decisions=%d reachLib0=%s comboReady=%s spyRoot=%s maxGy=%d bigMill=%s win=%s",
+                        t, seed, r.trace.size(), reachLib0, comboReady, spyRoot, maxGy, bigMill, r.win));
+            }
+            System.out.println(String.format(java.util.Locale.US,
+                    "[GOEXPLORE-PROBE] SUMMARY trials=%d | reachLib0=%d(%.0f%%) comboReady=%d(%.0f%%) spyRoot=%d(%.0f%%) bigMill>=25=%d(%.0f%%) | win=%d(%.0f%%) | conv: win|comboReady=%d/%d win|bigMill=%d/%d | comboWin(bigMill&win)=%d(%.0f%%) maxGyOverall=%d",
+                    trials, gReachLib0, 100.0*gReachLib0/trials, gComboReady, 100.0*gComboReady/trials,
+                    gSpyRoot, 100.0*gSpyRoot/trials,
+                    gBigMill, 100.0*gBigMill/trials, gWin, 100.0*gWin/trials,
+                    gWinGivenReady, gReadyDenom, gWinGivenBigMill, gBigMill,
+                    gBigMillWin, 100.0*gBigMillWin/trials, maxGyOverall));
+            System.out.println("[GOEXPLORE-PROBE] search-stats " + ComputerPlayerRL.getOnlinePrefixSearchStats());
+            return;
+        }
+
+        if ("convert_paired".equalsIgnoreCase(phase)) {
+            // Codex #19 green-light test: harvest STRICT roots (libLands==0 & creatures>=2 & Spy castable)
+            // from exploration; the harvest run IS the no-search baseline. Replay the prefix-to-root under
+            // the SAME seed+episodeTag (fidelity-proven) and fire finish-search ONCE at the root.
+            // Compare bigMill/comboWin: baseline (harvest) vs search-replay, conditioned on reaching a root.
+            int harvestGames = EnvConfig.i32("GOEXPLORE_HARVEST_GAMES", 150);
+            int targetRoots = EnvConfig.i32("GOEXPLORE_TARGET_ROOTS", 60);
+            int rooted = 0, fidelityOk = 0, srchCensored = 0;
+            int baseBig = 0, baseWin = 0, baseComboWin = 0;
+            int srchBig = 0, srchWin = 0, srchComboWin = 0, srchFound = 0;
+            for (int t = 0; t < harvestGames && rooted < targetRoots; t++) {
+                long seed = seedBase + 7919L * (long) (t + 1);
+                int scenario = t + 1;
+                GoExploreGameResult cap = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                        scenario, episodeTag, null, timeoutSec, false, Boolean.FALSE);
+                // first STRICT controllable root + prefix of controllable texts strictly before it
+                java.util.List<String> prefix = new java.util.ArrayList<>();
+                boolean found = false; int rootDepth = -1;
+                for (ComputerPlayerRL.GoExploreDecision d : cap.trace) {
+                    if (d.controllable && d.libLands == 0 && d.boardCreatures >= 2 && d.spyCastable) {
+                        found = true; break;
+                    }
+                    if (d.controllable) prefix.add(d.actionText);
+                }
+                if (!found) continue;
+                rooted++;
+                rootDepth = prefix.size();
+                int capMaxGy = 0; for (ComputerPlayerRL.GoExploreDecision d : cap.trace) capMaxGy = Math.max(capMaxGy, d.graveyard);
+                boolean capBig = capMaxGy >= 25;
+                if (capBig) baseBig++;
+                if (cap.win) baseWin++;
+                if (capBig && cap.win) baseComboWin++;
+                // search-replay arm: same seed+episodeTag, force prefix, search ON at the root
+                GoExploreGameResult srch = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                        scenario, episodeTag, prefix, timeoutSec, false, Boolean.TRUE);
+                // fidelity: did the replay reach a strict root at ~rootDepth?
+                boolean repReachedRoot = false; int srchMaxGy = 0;
+                int repCtrl = 0;
+                for (ComputerPlayerRL.GoExploreDecision d : srch.trace) {
+                    srchMaxGy = Math.max(srchMaxGy, d.graveyard);
+                    if (d.controllable) repCtrl++;
+                    if (d.libLands == 0 && d.boardCreatures >= 2 && d.spyCastable) repReachedRoot = true;
+                }
+                if (repReachedRoot) fidelityOk++;
+                if (srch.censored) srchCensored++;
+                boolean srchBigMill = srchMaxGy >= 25;
+                if (srchBigMill) srchBig++;
+                if (srch.win) srchWin++;
+                if (srchBigMill && srch.win) srchComboWin++;
+                System.out.println(String.format(java.util.Locale.US,
+                        "[GOEXPLORE-PAIRED] root=%d game=%d seed=%d rootDepth=%d | base: maxGy=%d big=%s win=%s | search: maxGy=%d big=%s win=%s reachedRoot=%s censored=%s",
+                        rooted, t, seed, rootDepth, capMaxGy, capBig, cap.win, srchMaxGy, srchBigMill, srch.win, repReachedRoot, srch.censored));
+            }
+            int srchCompleted = rooted - srchCensored;
+            System.out.println(String.format(java.util.Locale.US,
+                    "[GOEXPLORE-PAIRED] SUMMARY roots=%d fidelityReachedRoot=%d/%d searchCensored=%d | BASE bigMill=%d(%.0f%%) win=%d comboWin=%d(%.0f%%) | SEARCH(conservative,censored=fail) bigMill=%d(%.0f%%) win=%d comboWin=%d(%.0f%%) | SEARCH(completed-only n=%d) bigMill=%.0f%% comboWin=%.0f%%",
+                    rooted, fidelityOk, rooted, srchCensored,
+                    baseBig, pct(baseBig, rooted), baseWin, baseComboWin, pct(baseComboWin, rooted),
+                    srchBig, pct(srchBig, rooted), srchWin, srchComboWin, pct(srchComboWin, rooted),
+                    srchCompleted, pct(srchBig, srchCompleted), pct(srchComboWin, srchCompleted)));
+            System.out.println("[GOEXPLORE-PAIRED] GATE (Codex #19): green-light distillation iff P(bigMill|root)>=30-40%, bigMill 8%->>=20-25%, AND comboWin materially up. search-stats " + ComputerPlayerRL.getOnlinePrefixSearchStats());
+            return;
+        }
+        if ("frontier_bench".equalsIgnoreCase(phase)) {
+            // Codex #22 milestone: do FRONTIER cells (near-but-not-strict-root) reached by return+vary
+            // hit strict-root / combo-win at a materially higher rate than equal-compute FRESH games?
+            // PASS: returned strict-root >= ~2x fresh (~35%+ vs ~17%), combo-win up, fidelity ~100%, no hangs.
+            int harvestGames = EnvConfig.i32("GOEXPLORE_HARVEST_GAMES", 80);
+            int targetFrontiers = EnvConfig.i32("GOEXPLORE_TARGET_ROOTS", 25);
+            int rolloutsPer = EnvConfig.i32("GOEXPLORE_ROLLOUTS_PER", 8);
+            java.util.List<Long> fSeed = new java.util.ArrayList<>();
+            java.util.List<Integer> fTag = new java.util.ArrayList<>();
+            java.util.List<java.util.List<String>> fPrefix = new java.util.ArrayList<>();
+            java.util.List<String> fCell = new java.util.ArrayList<>();
+            java.util.Set<String> seenCells = new java.util.HashSet<>();
+            // ---- HARVEST frontier prefixes ----
+            for (int t = 0; t < harvestGames && fSeed.size() < targetFrontiers; t++) {
+                long seed = seedBase + 7919L * (long) (t + 1);
+                GoExploreGameResult cap = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                        t + 1, t, null, timeoutSec, false, Boolean.FALSE);
+                java.util.List<String> pre = new java.util.ArrayList<>();
+                for (ComputerPlayerRL.GoExploreDecision d : cap.trace) {
+                    boolean strictRoot = d.libLands == 0 && d.boardCreatures >= 2 && d.spyCastable;
+                    boolean frontier = d.libLands <= 2 && d.boardCreatures >= 2 && d.turn >= 3 && d.libSize >= 3 && !strictRoot;
+                    if (frontier && d.controllable) {
+                        String cell = ComputerPlayerRL.goExploreCellKey(d.libSize, d.graveyard, d.boardCreatures, 3, d.turn);
+                        if (seenCells.add(cell)) {
+                            fSeed.add(seed); fTag.add(t); fPrefix.add(new java.util.ArrayList<>(pre)); fCell.add(cell);
+                            if (fSeed.size() >= targetFrontiers) break;
+                        }
+                    }
+                    if (d.controllable) pre.add(d.actionText);
+                }
+            }
+            System.out.println("[GOEXPLORE-FRONTIER] harvested " + fSeed.size() + " distinct frontier cells");
+            // ---- RETURN+VARY rollouts from each frontier ----
+            int rTot = 0, rFid = 0, rStrict = 0, rBig = 0, rWin = 0, rCensored = 0;
+            for (int i = 0; i < fSeed.size(); i++) {
+                for (int r = 0; r < rolloutsPer; r++) {
+                    long exploreSeed = 100003L * (long) (r + 1) + 17L * i;
+                    GoExploreGameResult rr = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill,
+                            fSeed.get(i), fTag.get(i) + 1, fTag.get(i), fPrefix.get(i), timeoutSec, false,
+                            Boolean.FALSE, exploreSeed, fCell.get(i));
+                    rTot++;
+                    if (rr.censored) { rCensored++; continue; }
+                    if (rr.reachedTargetCell) rFid++;
+                    boolean strict = false; int mg = 0;
+                    for (ComputerPlayerRL.GoExploreDecision d : rr.trace) {
+                        if (d.libLands == 0 && d.boardCreatures >= 2 && d.spyCastable) strict = true;
+                        mg = Math.max(mg, d.graveyard);
+                    }
+                    if (strict) rStrict++;
+                    if (mg >= 25) rBig++;
+                    if (rr.win) rWin++;
+                }
+            }
+            // ---- FRESH baseline (equal compute) ----
+            int frTot = 0, frStrict = 0, frBig = 0, frWin = 0, frCensored = 0;
+            int freshGames = rTot;
+            for (int g = 0; g < freshGames; g++) {
+                long seed = seedBase + 6101L * (long) (g + 1) + 13L;
+                GoExploreGameResult fr = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                        100000 + g, g, null, timeoutSec, false, Boolean.FALSE);
+                frTot++;
+                if (fr.censored) { frCensored++; continue; }
+                boolean strict = false; int mg = 0;
+                for (ComputerPlayerRL.GoExploreDecision d : fr.trace) {
+                    if (d.libLands == 0 && d.boardCreatures >= 2 && d.spyCastable) strict = true;
+                    mg = Math.max(mg, d.graveyard);
+                }
+                if (strict) frStrict++;
+                if (mg >= 25) frBig++;
+                if (fr.win) frWin++;
+            }
+            int rComp = rTot - rCensored, frComp = frTot - frCensored;
+            System.out.println(String.format(java.util.Locale.US,
+                    "[GOEXPLORE-FRONTIER] SUMMARY frontiers=%d rolloutsPer=%d | RETURN n=%d (censored=%d fidelity=%d/%d=%.0f%%) strictRoot=%d(%.0f%%) bigMill=%d(%.0f%%) win=%d(%.0f%%) | FRESH n=%d (censored=%d) strictRoot=%d(%.0f%%) bigMill=%d(%.0f%%) win=%d(%.0f%%)",
+                    fSeed.size(), rolloutsPer,
+                    rComp, rCensored, rFid, rComp, pct(rFid, rComp), rStrict, pct(rStrict, rComp), rBig, pct(rBig, rComp), rWin, pct(rWin, rComp),
+                    frComp, frCensored, frStrict, pct(frStrict, frComp), frBig, pct(frBig, frComp), frWin, pct(frWin, frComp)));
+            System.out.println("[GOEXPLORE-FRONTIER] GATE (Codex #22): build full archive iff return strictRoot >= ~2x fresh (~35%+) AND return combo-win up AND fidelity ~100%.");
+            return;
+        }
+        if ("winpos".equalsIgnoreCase(phase)) {
+            // Codex #23 causal win-positivity: at a Spy-castable decision, fork combo (force-cast Spy)
+            // vs beatdown (force best non-Spy), both released to GREEDY, compare terminal win. Greedy
+            // replay of greedy harvest = deterministic (~100% fidelity). PASS: combo beats beatdown +5-10pp.
+            int harvestGames = EnvConfig.i32("GOEXPLORE_HARVEST_GAMES", 150);
+            int targetForks = EnvConfig.i32("GOEXPLORE_TARGET_ROOTS", 40);
+            java.util.List<Long> kSeed = new java.util.ArrayList<>();
+            java.util.List<java.util.List<String>> kPrefix = new java.util.ArrayList<>();
+            for (int t = 0; t < harvestGames && kSeed.size() < targetForks; t++) {
+                long seed = seedBase + 7919L * (long) (t + 1);
+                GoExploreGameResult cap = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                        t + 1, -1, null, timeoutSec, false, Boolean.FALSE);   // episodeTag=-1 -> greedy harvest
+                java.util.List<String> pre = new java.util.ArrayList<>();
+                boolean found = false;
+                for (ComputerPlayerRL.GoExploreDecision d : cap.trace) {
+                    if (d.controllable && d.spyCastable) { found = true; break; }   // fork at this decision
+                    if (d.controllable) pre.add(d.actionText);
+                }
+                if (found) { kSeed.add(seed); kPrefix.add(pre); }
+            }
+            System.out.println("[GOEXPLORE-WINPOS] harvested " + kSeed.size() + " Spy-castable forks (greedy)");
+            int aWin = 0, bWin = 0, aFork = 0, bFork = 0, both = 0, aOnly = 0, bOnly = 0, neither = 0, usable = 0;
+            for (int i = 0; i < kSeed.size(); i++) {
+                GoExploreGameResult A = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, kSeed.get(i),
+                        i + 1, -1, kPrefix.get(i), timeoutSec, false, Boolean.FALSE, null, null, true, false);  // combo
+                GoExploreGameResult B = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, kSeed.get(i),
+                        i + 1, -1, kPrefix.get(i), timeoutSec, false, Boolean.FALSE, null, null, false, true);  // beatdown
+                if (A.forkApplied) aFork++;
+                if (B.forkApplied) bFork++;
+                if (A.censored || B.censored) continue;
+                usable++;
+                if (A.win) aWin++;
+                if (B.win) bWin++;
+                if (A.win && !B.win) aOnly++;
+                else if (B.win && !A.win) bOnly++;
+                else if (A.win && B.win) both++;
+                else neither++;
+                System.out.println(String.format(java.util.Locale.US,
+                        "[GOEXPLORE-WINPOS] fork=%d seed=%d preLen=%d | combo(forceSpy): forkApplied=%s win=%s | beatdown(banSpy): forkApplied=%s win=%s",
+                        i, kSeed.get(i), kPrefix.get(i).size(), A.forkApplied, A.win, B.forkApplied, B.win));
+            }
+            System.out.println(String.format(java.util.Locale.US,
+                    "[GOEXPLORE-WINPOS] SUMMARY forks=%d usable=%d forkApplied(combo=%d beatdown=%d) | COMBO win=%d(%.0f%%) BEATDOWN win=%d(%.0f%%) | paired: comboOnly=%d beatdownOnly=%d both=%d neither=%d | net=%+d",
+                    kSeed.size(), usable, aFork, bFork, aWin, pct(aWin, usable), bWin, pct(bWin, usable),
+                    aOnly, bOnly, both, neither, (aOnly - bOnly)));
+            System.out.println("[GOEXPLORE-WINPOS] GATE (Codex #23): combo win-POSITIVE iff combo beats beatdown by +5-10pp AND comboOnly > beatdownOnly. If neutral/negative -> stop chasing combo for winrate.");
+            return;
+        }
+        if ("oracle".equalsIgnoreCase(phase)) {
+            // Codex #24 gate-1 falsifier: in normal GREEDY games, auto-execute the full combo whenever the
+            // (combo-ready) lethal line is available (finish-search + autopilot, gated). If GLOBAL winrate
+            // barely moves vs baseline, combo execution is NOT the global bottleneck (loop closed).
+            int n = EnvConfig.i32("GOEXPLORE_TRIALS", 128);
+            int baseWin = 0, baseBig = 0, baseUse = 0, orcWin = 0, orcBig = 0, orcUse = 0;
+            for (int t = 0; t < n; t++) {
+                long seed = seedBase + 7919L * (long) (t + 1);
+                GoExploreGameResult b = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                        t + 1, -1, null, timeoutSec, false, Boolean.FALSE);  // greedy, search OFF
+                if (!b.censored) { baseUse++; if (b.win) baseWin++; int mg = 0; for (ComputerPlayerRL.GoExploreDecision d : b.trace) mg = Math.max(mg, d.graveyard); if (mg >= 25) baseBig++; }
+            }
+            for (int t = 0; t < n; t++) {
+                long seed = seedBase + 7919L * (long) (t + 1);
+                GoExploreGameResult o = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                        t + 1, -1, null, timeoutSec, false, Boolean.TRUE);   // greedy, search ON (combo-ready gated + autopilot)
+                if (!o.censored) { orcUse++; if (o.win) orcWin++; int mg = 0; for (ComputerPlayerRL.GoExploreDecision d : o.trace) mg = Math.max(mg, d.graveyard); if (mg >= 25) orcBig++; }
+            }
+            System.out.println(String.format(java.util.Locale.US,
+                    "[GOEXPLORE-ORACLE] SUMMARY n=%d | BASELINE(greedy,search off) win=%d/%d=%.1f%% bigMill=%d(%.0f%%) | ORACLE(greedy,combo auto-exec) win=%d/%d=%.1f%% bigMill=%d(%.0f%%) | global winrate lift=%+.1fpp",
+                    n, baseWin, baseUse, pct(baseWin, baseUse), baseBig, pct(baseBig, baseUse),
+                    orcWin, orcUse, pct(orcWin, orcUse), orcBig, pct(orcBig, orcUse),
+                    pct(orcWin, orcUse) - pct(baseWin, baseUse)));
+            System.out.println("[GOEXPLORE-ORACLE] search-stats " + ComputerPlayerRL.getOnlinePrefixSearchStats());
+            System.out.println("[GOEXPLORE-ORACLE] GATE (Codex #24): if global winrate barely moves -> combo EXECUTION is not the global bottleneck (reach-limited); loop closed.");
+            return;
+        }
+        if (!"fidelity".equalsIgnoreCase(phase)) {
+            System.out.println("[GOEXPLORE] phase '" + phase + "' not implemented yet (fidelity must pass first).");
+            return;
+        }
+
+        int totalCmp = 0, totalMatch = 0, perfectTrials = 0;
+        java.util.List<Integer> firstDivergence = new java.util.ArrayList<>();
+        for (int t = 0; t < trials; t++) {
+            long seed = seedBase + 7919L * (long) (t + 1);
+            int scenario = t + 1;
+            // 1) capture: explore from root, no forced prefix
+            GoExploreGameResult cap = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                    scenario, episodeTag, null, timeoutSec, false);
+            java.util.List<String> prefix = controllablePrefix(cap.trace, prefixDepth);
+            // capture's controllable decisions (for comparison)
+            java.util.List<ComputerPlayerRL.GoExploreDecision> capCtrl = new java.util.ArrayList<>();
+            for (ComputerPlayerRL.GoExploreDecision d : cap.trace) if (d.controllable) capCtrl.add(d);
+            if (prefix.isEmpty()) {
+                System.out.println("[GOEXPLORE-FIDELITY] trial=" + t + " EMPTY capture trace (no controllable decisions)");
+                continue;
+            }
+            // 2) replay: same seed, force the captured prefix, then explore
+            GoExploreGameResult rep = runOneGoExploreGame(agentDeckPath, oppDeckPath, skill, seed,
+                    scenario, episodeTag, prefix, timeoutSec, false);
+            java.util.List<ComputerPlayerRL.GoExploreDecision> repCtrl = new java.util.ArrayList<>();
+            for (ComputerPlayerRL.GoExploreDecision d : rep.trace) if (d.controllable) repCtrl.add(d);
+
+            int cmp = Math.min(prefix.size(), Math.min(capCtrl.size(), repCtrl.size()));
+            int match = 0; int firstDiv = -1;
+            for (int i = 0; i < cmp; i++) {
+                ComputerPlayerRL.GoExploreDecision a = capCtrl.get(i);
+                ComputerPlayerRL.GoExploreDecision b = repCtrl.get(i);
+                boolean ok = java.util.Objects.equals(a.actionText, b.actionText)
+                        && a.libLands == b.libLands && a.boardCreatures == b.boardCreatures
+                        && a.libSize == b.libSize;
+                if (ok) { match++; } else { firstDiv = i; break; }
+            }
+            totalCmp += cmp; totalMatch += match;
+            if (firstDiv < 0 && match == cmp && cmp > 0) perfectTrials++;
+            firstDivergence.add(firstDiv < 0 ? cmp : firstDiv);
+            int minLibLandsCap = 99; for (ComputerPlayerRL.GoExploreDecision d : cap.trace) minLibLandsCap = Math.min(minLibLandsCap, d.libLands);
+            System.out.println(String.format(java.util.Locale.US,
+                    "[GOEXPLORE-FIDELITY] trial=%d seed=%d capCtrl=%d repCtrl=%d cmp=%d match=%d firstDiv=%s minLibLands(cap)=%d capWin=%s",
+                    t, seed, capCtrl.size(), repCtrl.size(), cmp, match,
+                    (firstDiv < 0 ? "none" : String.valueOf(firstDiv)), minLibLandsCap, cap.win));
+        }
+        double fidelity = totalCmp > 0 ? (double) totalMatch / totalCmp : 0.0;
+        System.out.println(String.format(java.util.Locale.US,
+                "[GOEXPLORE-FIDELITY] SUMMARY trials=%d perfectTrials=%d decisionFidelity=%.4f (%d/%d) -> gate>=0.98 %s",
+                trials, perfectTrials, fidelity, totalMatch, totalCmp, (fidelity >= 0.98 ? "PASS" : "FAIL")));
     }
 
     private boolean runSingleLeagueBenchmarkGame(
@@ -4936,6 +5541,36 @@ public class RLTrainer {
             attachWorldModelTargets(opponentTrainingData);
         }
 
+        // --- Win-replay self-imitation (Codex #32) ---
+        // On a win: terminal-win gate the rows (silEligible -> Python SIL loss
+        // reinforces them) and store the decisive endgame in the persistent buffer.
+        // Every episode: re-enqueue sampled past wins so rare hard-matchup wins keep
+        // getting reinforced across batches (combats sparse-reward bootstrap).
+        if (WIN_REPLAY_ENABLE) {
+            if (rlPlayerWon && !rlPlayerTrainingData.isEmpty()) {
+                for (StateSequenceBuilder.TrainingData td : rlPlayerTrainingData) {
+                    td.silEligible = true;
+                }
+                List<StateSequenceBuilder.TrainingData> storeTraj = tail(rlPlayerTrainingData, WIN_REPLAY_MAX_ROWS);
+                List<Double> storeRew = tail(rlPlayerRewards, WIN_REPLAY_MAX_ROWS);
+                if (WIN_REPLAY.add(storeTraj, storeRew, winLineHash(storeTraj))) {
+                    WIN_REPLAY_STORED.incrementAndGet();
+                }
+            }
+            for (WinReplayBuffer.Entry e : WIN_REPLAY.sample(WIN_REPLAY_PER_EPISODE)) {
+                if (e != null && !e.traj.isEmpty()) {
+                    ACTOR_LEARNER.enqueueTraining(mainTrainingContext, e.traj, e.rewards, "winreplay");
+                    WIN_REPLAY_REPLAYED.incrementAndGet();
+                }
+            }
+            long stored = WIN_REPLAY_STORED.get();
+            if (stored > 0 && (stored <= 5 || stored % 200 == 0)) {
+                // println (not logger.info) so it survives log4j's WARN-level filter.
+                System.out.println("[WIN_REPLAY] buffer=" + WIN_REPLAY.size() + " stored=" + stored
+                        + " replayed=" + WIN_REPLAY_REPLAYED.get());
+            }
+        }
+
         // Update the model with all states and immediate rewards (Python will apply GAE)
         if (!rlPlayerTrainingData.isEmpty()) {
             ACTOR_LEARNER.enqueueTraining(mainTrainingContext, rlPlayerTrainingData, rlPlayerRewards, "main");
@@ -5557,6 +6192,37 @@ public class RLTrainer {
         // - Otherwise play heuristic CP7 on that profile's deck.
         java.util.List<LeagueMetaOpponentCandidate> allMeta = getLeagueMetaOpponentCandidates();
         if (!allMeta.isEmpty()) {
+            // Restore the proven original diet composition. The modern cross-only
+            // path (added after the original 0.05->0.52 climb) silently dropped the
+            // MIRROR component -- local self-snapshots/self-play that provide the
+            // dense ~50%-winnable signal a fresh net needs to bootstrap. Post-
+            // promotion, roll the legacy 20/40/40 CP7 / local-mirror / cross mix
+            // (env: LEAGUE_POST_HEURISTIC_P / LOCAL_P / CROSS_P). Only the cross
+            // 40% goes through the meta-candidate pick below.
+            if (st.promoted) {
+                double pH = clamp01(LEAGUE_POST_HEURISTIC_P);
+                double pL = clamp01(LEAGUE_POST_LOCAL_P);
+                double pX = clamp01(LEAGUE_POST_CROSS_P);
+                double sum = pH + pL + pX;
+                if (sum <= 0) { pH = 0.20; pL = 0.40; pX = 0.40; sum = 1.0; }
+                pH /= sum; pL /= sum;
+                double r = rand.nextDouble();
+                if (r < pH) {
+                    int skill = Math.max(1, LEAGUE_POST_HEURISTIC_SKILL);
+                    lastOpponentType = "H-CP7(skill=" + skill + ")";
+                    return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
+                } else if (r < pH + pL) {
+                    String snapKey = pickLeagueSnapshotPolicyKey(st, rand);
+                    boolean useSnapshot = snapKey != null && rand.nextBoolean();
+                    if (useSnapshot) {
+                        lastOpponentType = "LOCAL-SNAP(" + snapKey + ")";
+                        return new ComputerPlayerRL("LocalSnapshotOpp", RangeOfInfluence.ALL, sharedModel, false, false, snapKey);
+                    }
+                    lastOpponentType = "LOCAL-SELFPLAY";
+                    return new ComputerPlayerRL("SelfPlayLocal", RangeOfInfluence.ALL, sharedModel, false, false, "train");
+                }
+                // else fall through to the cross-profile meta pick (the 40% cross share)
+            }
             java.util.ArrayList<LeagueMetaOpponentCandidate> meta = new java.util.ArrayList<>(allMeta);
             if (!profileName().isEmpty() && meta.size() > 1) {
                 final String pn = profileName();

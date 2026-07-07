@@ -141,9 +141,29 @@ public class StateSequenceBuilder {
     private static final boolean LIBRARY_COUNT_FEATURES_ENABLED =
             "1".equals(System.getenv().getOrDefault("RL_LIBRARY_COUNT_FEATURES_ENABLE", "0"))
                     || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_LIBRARY_COUNT_FEATURES_ENABLE", "0"));
+    // One-shot engagement check: prove the zone-count scalars are actually nonzero at runtime
+    // (RL_ZONE_COUNT_DIAG=1). Guards against silently-zero features when flags don't propagate.
+    private static final boolean ZONE_COUNT_DIAG =
+            "1".equals(System.getenv().getOrDefault("RL_ZONE_COUNT_DIAG", "0"));
+    private static final java.util.concurrent.atomic.AtomicInteger ZONE_COUNT_DIAG_N =
+            new java.util.concurrent.atomic.AtomicInteger(0);
     private static final boolean PUBLIC_BOARD_FEATURES_ENABLED =
             "1".equals(System.getenv().getOrDefault("RL_PUBLIC_BOARD_FEATURES_ENABLE", "0"))
                     || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_PUBLIC_BOARD_FEATURES_ENABLE", "0"));
+    // Designation-state features (initiative/Undercity + monarch): public symmetric game
+    // state the engine tracks but the encoder was blind to. Required for decks whose win
+    // path runs through the initiative (e.g. Avenging Hunter). Opt-in: old models were
+    // trained with these slots at zero. Slots v[23-26] on the player-stats token.
+    private static final boolean INITIATIVE_FEATURES_ENABLED =
+            "1".equals(System.getenv().getOrDefault("RL_INITIATIVE_FEATURES_ENABLE", "0"))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_INITIATIVE_FEATURES_ENABLE", "0"));
+    private static final int INITIATIVE_SLOT_START = 23;
+    // One-shot engagement check (RL_INITIATIVE_DIAG=1): prints the first few nonzero
+    // designation-feature vectors to prove the slots engage at runtime.
+    private static final boolean INITIATIVE_DIAG =
+            "1".equals(System.getenv().getOrDefault("RL_INITIATIVE_DIAG", "0"));
+    private static final java.util.concurrent.atomic.AtomicInteger INITIATIVE_DIAG_N =
+            new java.util.concurrent.atomic.AtomicInteger(0);
     private static final int PUBLIC_BOARD_SLOT_START = 56;
     private static final int PUBLIC_BOARD_SLOT_COUNT = 12;
     private static final boolean EXTENDED_EFFECT_FLAGS_ENABLED =
@@ -517,6 +537,36 @@ public class StateSequenceBuilder {
                 v[21] = graveyardLands / 20.0f;
                 v[22] = graveyardCreatures / 30.0f;
             }
+            if (ZONE_COUNT_DIAG && ZONE_COUNT_DIAG_N.getAndIncrement() < 6) {
+                System.err.println("[ZONE_COUNT_DIAG] libLands(v19)=" + v[19] + " libCreat(v20)=" + v[20]
+                        + " gyCreat(v22)=" + v[22] + " libSize=" + p.getLibrary().size());
+            }
+        }
+        if (INITIATIVE_FEATURES_ENABLED) {
+            // v[23]: this player holds the initiative; v[24]: has ventured (dungeon in
+            // progress); v[25]: current room is terminal (payoff room reached);
+            // v[26]: this player is the monarch. All public, symmetric for both players.
+            try {
+                v[INITIATIVE_SLOT_START] = p.getId().equals(g.getInitiativeId()) ? 1.0f : 0.0f;
+                mage.game.command.Dungeon dungeon = g.getPlayerDungeon(p.getId());
+                if (dungeon != null) {
+                    v[INITIATIVE_SLOT_START + 1] = 1.0f;
+                    mage.game.command.DungeonRoom room = dungeon.getCurrentRoom();
+                    v[INITIATIVE_SLOT_START + 2] = (room != null && !room.hasNextRoom()) ? 1.0f : 0.0f;
+                }
+                v[INITIATIVE_SLOT_START + 3] = p.getId().equals(g.getMonarchId()) ? 1.0f : 0.0f;
+                if (INITIATIVE_DIAG
+                        && (v[INITIATIVE_SLOT_START] > 0 || v[INITIATIVE_SLOT_START + 1] > 0
+                            || v[INITIATIVE_SLOT_START + 3] > 0)
+                        && INITIATIVE_DIAG_N.getAndIncrement() < 6) {
+                    System.err.println("[INITIATIVE_DIAG] hasInitiative(v23)=" + v[23]
+                            + " ventured(v24)=" + v[24] + " terminalRoom(v25)=" + v[25]
+                            + " monarch(v26)=" + v[26] + " turn=" + g.getTurnNum());
+                }
+            } catch (Throwable ignored) {
+                // Designation features are optional observation inputs; never let a
+                // transient game-state issue disrupt gameplay.
+            }
         }
         if (ARCHETYPE_BELIEF_FEATURES_ENABLED && ARCHETYPE_BELIEF_SAMPLER != null) {
             try {
@@ -534,7 +584,7 @@ public class StateSequenceBuilder {
         }
 
         // Validate normalized values
-        int validateLimit = 23;
+        int validateLimit = INITIATIVE_FEATURES_ENABLED ? 27 : 23;
         if (PUBLIC_BOARD_FEATURES_ENABLED) {
             validateLimit = Math.max(validateLimit,
                     Math.min(v.length, PUBLIC_BOARD_SLOT_START + PUBLIC_BOARD_SLOT_COUNT));

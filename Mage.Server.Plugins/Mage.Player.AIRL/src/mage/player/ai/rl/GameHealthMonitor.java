@@ -29,7 +29,11 @@ public class GameHealthMonitor {
     private static final Logger logger = Logger.getLogger(GameHealthMonitor.class);
 
     // Config from environment
-    private static final int GAME_TIMEOUT_SEC = EnvConfig.i32("GAME_TIMEOUT_SEC", 300); // 5 min default
+    // Under AI_DETERMINISTIC_SEARCH the wall-clock kill is a nondeterminism source (a
+    // close game can be force-lost on one run and finish on another under load), so the
+    // timeout is stretched 4x -- mirrors ComputerPlayer6's deterministic think-time bump.
+    private static final int GAME_TIMEOUT_SEC = EnvConfig.i32("GAME_TIMEOUT_SEC", 300)
+            * (EnvConfig.bool("AI_DETERMINISTIC_SEARCH", false) ? 4 : 1);
     private static final int REPEAT_THRESHOLD = EnvConfig.i32("HEALTH_REPEAT_THRESHOLD", 50); // Same message 50x = stuck
     private static final int REPEAT_WINDOW_MS = EnvConfig.i32("HEALTH_REPEAT_WINDOW_MS", 5000); // Within 5 seconds
     private static final boolean ENABLED = EnvConfig.bool("GAME_HEALTH_MONITOR", true);

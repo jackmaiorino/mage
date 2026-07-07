@@ -605,6 +605,13 @@ public final class TerminalPrefixSearch {
         return out;
     }
 
+    /** Public accessor: canonical action text for a single candidate, matching the
+     *  exact string the autopilot matches against (describeCandidate + cleanCandidateText).
+     *  Used by Go-Explore trace capture / prefix replay. */
+    public static String describeOne(Object candidate, Game game) {
+        return cleanCandidateText(describeCandidate(candidate, game));
+    }
+
     private static <T> List<String> describeCandidates(List<T> candidates, Game game, int limit) {
         List<String> out = new ArrayList<>();
         int count = Math.min(limit, candidates == null ? 0 : candidates.size());

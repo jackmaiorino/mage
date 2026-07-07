@@ -20,6 +20,12 @@ public class MulliganLogger {
 
     private static final String DEFAULT_LOG_PATH = RLLogPaths.MULLIGAN_STATS_PATH;
     private static final ReentrantLock fileLock = new ReentrantLock();
+    // Per-decision mulligan logging opens/closes a FileWriter under a global lock on every
+    // mulligan across all runner threads; a single hung close() (disk flush / AV scan) blocks
+    // every runner and stalls training. It is pure diagnostics -> allow disabling it.
+    private static final boolean LOG_ENABLED
+            = !"0".equals(System.getenv().getOrDefault("MULLIGAN_DECISION_LOG", "1"))
+            && !"false".equalsIgnoreCase(System.getenv().getOrDefault("MULLIGAN_DECISION_LOG", "1"));
 
     private final String logPath;
     private boolean headerWritten = false;
@@ -108,6 +114,9 @@ public class MulliganLogger {
             String cardsKept,
             String cardsBottomed) {
 
+        if (!LOG_ENABLED) {
+            return;
+        }
         fileLock.lock();
         try {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(logPath, true))) {
