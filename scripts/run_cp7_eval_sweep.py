@@ -66,6 +66,11 @@ DETERMINISTIC_EVAL_ENV = {
     "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
     "CUDA_LAUNCH_BLOCKING": "1",
     "TORCH_DETERMINISTIC_EVAL": "1",
+    # Fused flash/mem-efficient SDPA kernels are not bit-reproducible run-to-run and are
+    # NOT covered by cudnn.deterministic/CUBLAS_WORKSPACE_CONFIG. This was the root cause
+    # of the jul1 determinism-proof failure (identical seeds -> different game outcomes):
+    # non-bit-exact logits flip near-tied greedy decisions. Force the math path.
+    "USE_FUSED_SDPA": "0",
     "AI_DETERMINISTIC_TIEBREAKS": "1",
     "AI_DETERMINISTIC_SEARCH": "1",
     "AI_DETERMINISTIC_MAX_NODES": "5000",
@@ -575,7 +580,10 @@ def run_job(job: dict) -> dict:
                 log.write(stderr)
             log.write(f"\nTIMEOUT after {job['timeout_sec']} seconds\n")
     wins, total, winrate, mcts_activations = parse_eval_result(stdout + "\n" + stderr, job["result_file"])
-    if job["env"].get("CP7_EVAL_CLEAN_DB_AFTER_JOB", "0") == "1":
+    # Default ON since jul7: accumulated per-job card-DB copies (54MB x hundreds of
+    # chunks across runs) filled C: to 0 bytes and killed a sweep mid-run. Set
+    # CP7_EVAL_CLEAN_DB_AFTER_JOB=0 to keep copies for debugging.
+    if job["env"].get("CP7_EVAL_CLEAN_DB_AFTER_JOB", "1") == "1":
         run_db_root = (job["run_dir"] / "db").resolve()
         resolved_db_dir = db_dir.resolve()
         if str(resolved_db_dir).startswith(str(run_db_root)):
@@ -837,6 +845,11 @@ def main() -> int:
     selected_chunk_indices = parse_chunk_indices(args.chunk_indices)
     deterministic_env = dict(DETERMINISTIC_EVAL_ENV) if args.deterministic_eval else {}
     if args.deterministic_eval:
+        # ALL game-level RNG pinning (RandomUtil.setSeed, skipInitShuffling/library
+        # order, ReplayOpponentDecisionPlayer) is gated on EVAL_REPLAY_METADATA in
+        # RLTrainer.runLeagueBench. Without this, game setup uses wall-clock RNG and
+        # --replay-seed-base is cosmetic (jul1 determinism-proof residual root cause).
+        args.replay_metadata = True
         if args.deterministic_root_trace:
             deterministic_env["AI_DETERMINISTIC_ROOT_TRACE"] = "1"
         # Maven exec can otherwise run against stale reactor dependency classes
