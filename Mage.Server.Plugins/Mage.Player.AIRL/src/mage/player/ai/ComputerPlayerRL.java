@@ -280,6 +280,92 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private transient float[] corpusSearchWr = null;
     private transient int corpusSearchBest = -1;
     private transient int corpusSearchPolicyIdx = -1;
+    // Shadow-CP7 teacher labels (DAgger-style: CP7's counterfactual choice at AGENT states).
+    // Stash mirrors the SEARCH_OP fields: written in maybeCaptureShadowCp7 immediately
+    // before the dump, serialized + cleared in maybeDumpCorpusRow.
+    private static final boolean SHADOW_CP7_ENABLE = EnvConfig.bool("RL_SHADOW_CP7", false);
+    private static final int SHADOW_CP7_SKILL = EnvConfig.i32("RL_SHADOW_CP7_SKILL", 7);
+    private static final int SHADOW_CP7_MAX_THINK_SECS = EnvConfig.i32("RL_SHADOW_CP7_MAX_THINK_SECS", 0);
+    private static final int SHADOW_CP7_SAMPLE_PCT =
+            Math.max(0, Math.min(100, EnvConfig.i32("RL_SHADOW_CP7_SAMPLE_PCT", 100)));
+    // Phase-1 CP7 distillation: shadow label becomes a one-hot policy target consumed by
+    // the existing MCTS_KL distill CE (python). Implies shadow capture even without corpus dump.
+    private static final boolean SHADOW_CP7_DISTILL = EnvConfig.bool("RL_SHADOW_CP7_DISTILL", false);
+    // Matchup-selective distillation (Codex #76): comma-separated lowercase substrings of
+    // opponent deck filenames. Empty = every episode eligible. The trainer flags each
+    // episode via setShadowDistillEpisode; breadth episodes then get NO teacher queries
+    // (anchor-only), preserving matchups where the agent already beats CP7.
+    private static final java.util.List<String> SHADOW_CP7_TARGET_DECKS;
+    static {
+        java.util.List<String> toks = new java.util.ArrayList<>();
+        for (String t : EnvConfig.str("RL_SHADOW_CP7_TARGET_DECKS", "").split(",")) {
+            String s = t.trim().toLowerCase(Locale.ROOT);
+            if (!s.isEmpty()) toks.add(s);
+        }
+        SHADOW_CP7_TARGET_DECKS = java.util.Collections.unmodifiableList(toks);
+    }
+    private transient boolean shadowDistillEpisode = true;
+    // Distill CE row weights via target row-sum (Codex #77): pass 0.2 / action 1.0 /
+    // action-disagreement 2.0, consumed by python MCTS_TARGET_ROW_SUM_WEIGHT_ENABLE=1.
+    private static final float SHADOW_W_PASS = (float) Math.max(0.0, EnvConfig.f64("RL_SHADOW_W_PASS", 0.2));
+    private static final float SHADOW_W_ACTION = (float) Math.max(0.01, EnvConfig.f64("RL_SHADOW_W_ACTION", 1.0));
+    private static final float SHADOW_W_DISAGREE = (float) Math.max(0.01, EnvConfig.f64("RL_SHADOW_W_DISAGREE", 2.0));
+
+    public void setShadowDistillEpisode(boolean eligible) {
+        this.shadowDistillEpisode = eligible;
+    }
+
+    /** True if the opponent deck name marks this episode as a distill target. Empty list = all. */
+    public static boolean isShadowTargetDeck(String opponentDeckName) {
+        if (SHADOW_CP7_TARGET_DECKS.isEmpty()) return true;
+        String n = opponentDeckName == null ? "" : opponentDeckName.toLowerCase(Locale.ROOT);
+        for (String t : SHADOW_CP7_TARGET_DECKS) {
+            if (n.contains(t)) return true;
+        }
+        return false;
+    }
+    private transient int corpusShadowIdx = -2;      // -2 = not queried, -1 = unmatched
+    private transient String corpusShadowText = null;
+    private transient String corpusShadowStatus = null;
+    private transient int corpusShadowMs = 0;
+    // Shadow-query outcome counters (audit: the run had zero observability). Logged
+    // every SHADOW_STATS_EVERY queries via j.u.l so grep 'SHADOW_CP7_STATS' works.
+    private static final java.util.concurrent.atomic.AtomicLong SHADOW_QUERIES = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong SHADOW_MATCHED = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong SHADOW_PASS = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong SHADOW_TIMEOUT = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong SHADOW_AMBIG = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong SHADOW_UNMATCHED_OR_ERROR = new java.util.concurrent.atomic.AtomicLong();
+    private static final java.util.concurrent.atomic.AtomicLong SHADOW_MS_TOTAL = new java.util.concurrent.atomic.AtomicLong();
+    private static final int SHADOW_STATS_EVERY = Math.max(1, EnvConfig.i32("RL_SHADOW_CP7_STATS_EVERY", 200));
+
+    private static void shadowRecordOutcome(String status, int ms) {
+        long n = SHADOW_QUERIES.incrementAndGet();
+        SHADOW_MS_TOTAL.addAndGet(Math.max(0, ms));
+        if (status == null) {
+            SHADOW_UNMATCHED_OR_ERROR.incrementAndGet();
+        } else if (status.equals("source_id") || status.equals("text") || status.equals("text_disambig")) {
+            SHADOW_MATCHED.incrementAndGet();
+        } else if (status.equals("plan_pass") || status.equals("step_pass")) {
+            SHADOW_PASS.incrementAndGet();
+        } else if (status.equals("timeout_pass")) {
+            SHADOW_TIMEOUT.incrementAndGet();
+        } else if (status.equals("source_ambig")) {
+            SHADOW_AMBIG.incrementAndGet();
+        } else {
+            SHADOW_UNMATCHED_OR_ERROR.incrementAndGet();
+        }
+        if (n % SHADOW_STATS_EVERY == 0) {
+            java.util.logging.Logger.getLogger(ComputerPlayerRL.class.getName()).info(
+                    "SHADOW_CP7_STATS queries=" + n
+                    + " matched=" + SHADOW_MATCHED.get()
+                    + " pass=" + SHADOW_PASS.get()
+                    + " timeout=" + SHADOW_TIMEOUT.get()
+                    + " ambig=" + SHADOW_AMBIG.get()
+                    + " unmatched_err=" + SHADOW_UNMATCHED_OR_ERROR.get()
+                    + " avg_ms=" + (SHADOW_MS_TOTAL.get() / n));
+        }
+    }
 
     // Track early-game land drops for mulligan reward shaping
     private boolean rlPlayerHasHadATurn = false;
@@ -776,6 +862,126 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     /**
+     * Shadow-CP7 teacher label (DAgger-style): one-shot query "what would CP7 pick
+     * from this exact state" at the agent's own decision points, matched back onto
+     * the agent's candidate list. Stashes cp7_idx/status/text/ms for the immediately
+     * following maybeDumpCorpusRow call (same guarded block, so no stale-leak risk).
+     *
+     * Label semantics: CP7 structurally passes priority outside its four planning
+     * steps (pre/post main, declare attackers/blockers), so non-planning steps get a
+     * free PASS label (index 0 = PassAbility) without running the search. Matching
+     * is by sourceId first (UUIDs are stable across game copies), then canonical
+     * text (TerminalPrefixSearch.describeOne), then ambiguous-source fallback.
+     * Never affects the live game: search runs on CP7's internal sim copy.
+     */
+    private void maybeCaptureShadowCp7(Game game, StateSequenceBuilder.ActionType actionType,
+            java.util.List<?> candidates, int candidateCount) {
+        // Distill mode requires trainingEnabled: in-process eval/winrate-monitor games must
+        // not pay multi-second teacher searches (audit: ungated shadow fired in eval games).
+        // Corpus mode (eval harness, trainingEnabled=false) stays keyed on the corpus flags.
+        boolean corpusMode = SHADOW_CP7_ENABLE && CORPUS_DUMP;
+        boolean distillMode = SHADOW_CP7_DISTILL && trainingEnabled && shadowDistillEpisode;
+        if (!corpusMode && !distillMode) return;
+        if (game == null || game.isSimulation()) return;
+        if (actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) return;
+        if (candidateCount < 2 || candidates == null) return;
+        if (SHADOW_CP7_SAMPLE_PCT < 100
+                && java.util.concurrent.ThreadLocalRandom.current().nextInt(100) >= SHADOW_CP7_SAMPLE_PCT) {
+            return;
+        }
+        long t0 = System.nanoTime();
+        try {
+            mage.constants.PhaseStep step = game.getTurnStepType();
+            boolean planningStep = step == mage.constants.PhaseStep.PRECOMBAT_MAIN
+                    || step == mage.constants.PhaseStep.POSTCOMBAT_MAIN
+                    || step == mage.constants.PhaseStep.DECLARE_ATTACKERS
+                    || step == mage.constants.PhaseStep.DECLARE_BLOCKERS;
+            if (!planningStep) {
+                corpusShadowIdx = 0;
+                corpusShadowText = "PASS";
+                corpusShadowStatus = "step_pass";
+                return;
+            }
+            ShadowCp7 shadow = new ShadowCp7(playerId, SHADOW_CP7_SKILL);
+            if (SHADOW_CP7_MAX_THINK_SECS > 0) {
+                shadow.setMaxThinkTimeSecs(SHADOW_CP7_MAX_THINK_SECS);
+            }
+            java.util.List<Ability> plan = shadow.planOnce(game);
+            if (plan.isEmpty()) {
+                // A search that hits the think-time cap is cancelled and yields an empty
+                // plan -- indistinguishable from a genuine pass except by elapsed time.
+                // Mark it so offline training can exclude these unreliable PASS labels.
+                int capSecs = SHADOW_CP7_MAX_THINK_SECS > 0 ? SHADOW_CP7_MAX_THINK_SECS : SHADOW_CP7_SKILL * 2;
+                long elapsedMs = (System.nanoTime() - t0) / 1_000_000L;
+                if (elapsedMs >= capSecs * 1000L - 750L) {
+                    corpusShadowIdx = -1;
+                    corpusShadowText = null;
+                    corpusShadowStatus = "timeout_pass";
+                } else {
+                    corpusShadowIdx = 0;
+                    corpusShadowText = "PASS";
+                    corpusShadowStatus = "plan_pass";
+                }
+                return;
+            }
+            Ability first = plan.get(0);
+            if (first instanceof PassAbility) {
+                corpusShadowIdx = 0;
+                corpusShadowText = "PASS";
+                corpusShadowStatus = "plan_pass";
+                return;
+            }
+            corpusShadowText = mage.player.ai.rl.TerminalPrefixSearch.describeOne(first, game);
+            UUID srcId = first.getSourceId();
+            int sourceHits = 0;
+            int sourceIdx = -1;
+            for (int i = 1; i < candidateCount; i++) { // index 0 is always PassAbility
+                Object cand = candidates.get(i);
+                if (cand instanceof Ability && srcId != null
+                        && srcId.equals(((Ability) cand).getSourceId())) {
+                    sourceHits++;
+                    sourceIdx = i;
+                }
+            }
+            int match = -1;
+            if (sourceHits == 1) {
+                match = sourceIdx;
+                corpusShadowStatus = "source_id";
+            } else {
+                String want = shadowNorm(corpusShadowText);
+                for (int i = 0; i < candidateCount; i++) {
+                    if (want.equals(shadowNorm(mage.player.ai.rl.TerminalPrefixSearch.describeOne(candidates.get(i), game)))) {
+                        match = i;
+                        break;
+                    }
+                }
+                if (match >= 0) {
+                    corpusShadowStatus = sourceHits > 1 ? "text_disambig" : "text";
+                } else if (sourceHits >= 1) {
+                    // same source, multiple abilities (modes/alt-costs), text differs:
+                    // take a source hit but flag it so offline filtering can drop these.
+                    match = sourceIdx;
+                    corpusShadowStatus = "source_ambig";
+                } else {
+                    corpusShadowStatus = "unmatched";
+                }
+            }
+            corpusShadowIdx = match;
+        } catch (Throwable t) {
+            corpusShadowIdx = -1;
+            corpusShadowText = null;
+            corpusShadowStatus = "error:" + t.getClass().getSimpleName();
+        } finally {
+            corpusShadowMs = (int) ((System.nanoTime() - t0) / 1_000_000L);
+            shadowRecordOutcome(corpusShadowStatus, corpusShadowMs);
+        }
+    }
+
+    private static String shadowNorm(String s) {
+        return s == null ? "" : s.toLowerCase(Locale.ROOT).replace('\r', ' ').replace('\n', ' ').trim();
+    }
+
+    /**
      * Temporal-history falsifier (Step 1): buffer one decision row. Snapshot arm =
      * rich scalar state-facts + card-identity tokenIds; history arm = last-K public
      * events from PublicEventHistoryWatcher. Outcome stamped at game end via
@@ -784,6 +990,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private void maybeDumpCorpusRow(Game game, StateSequenceBuilder.ActionType actionType,
             java.util.List<?> candidates, int candidateCount, int chosenIdx,
             float valueScore, StateSequenceBuilder.SequenceOutput baseState) {
+        maybeDumpCorpusRow(game, actionType, candidates, candidateCount, chosenIdx,
+                valueScore, baseState, null, null);
+    }
+
+    private void maybeDumpCorpusRow(Game game, StateSequenceBuilder.ActionType actionType,
+            java.util.List<?> candidates, int candidateCount, int chosenIdx,
+            float valueScore, StateSequenceBuilder.SequenceOutput baseState,
+            float[] policyProbs, float[][] candFeats) {
         if (!CORPUS_DUMP || CORPUS_FILE.isEmpty() || game == null || game.isSimulation()) {
             return;
         }
@@ -821,6 +1035,45 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             } catch (Exception ignored) {}
             appendJsonString(sb, "chosen_desc", chosenDesc == null ? "" : chosenDesc); sb.append(',');
 
+            // --- candidate-conditioned BC support: full candidate set + agent policy dist
+            // + per-candidate encoder features (Phase-0/1 offline distill probes) ---
+            sb.append("\"cands\":[");
+            for (int i = 0; i < candidateCount && i < candidates.size(); i++) {
+                if (i > 0) sb.append(',');
+                String ct = "";
+                try { ct = mage.player.ai.rl.TerminalPrefixSearch.describeOne(candidates.get(i), game); } catch (Exception ignored) {}
+                sb.append('"').append(jsonEscape(ct == null ? "" : ct)).append('"');
+            }
+            sb.append("],");
+            sb.append("\"probs\":[");
+            if (policyProbs != null) {
+                int lim = Math.min(policyProbs.length, candidateCount);
+                for (int i = 0; i < lim; i++) {
+                    if (i > 0) sb.append(',');
+                    float p = policyProbs[i];
+                    sb.append(Float.isNaN(p) ? "null" : String.format(Locale.US, "%.5f", p));
+                }
+            }
+            sb.append("],");
+            sb.append("\"cand_feats\":[");
+            if (candFeats != null) {
+                int lim = Math.min(candFeats.length, candidateCount);
+                for (int i = 0; i < lim; i++) {
+                    if (i > 0) sb.append(',');
+                    sb.append('[');
+                    float[] f = candFeats[i];
+                    if (f != null) {
+                        for (int j = 0; j < f.length; j++) {
+                            if (j > 0) sb.append(',');
+                            float v = f[j];
+                            sb.append(Float.isNaN(v) ? "0" : String.format(Locale.US, "%.4f", v));
+                        }
+                    }
+                    sb.append(']');
+                }
+            }
+            sb.append("],");
+
             // --- action-quality: SEARCH_OP rollout labels (policy-regret capture) ---
             appendJsonNumber(sb, "search_best", corpusSearchBest); sb.append(',');
             appendJsonNumber(sb, "search_policy", corpusSearchPolicyIdx); sb.append(',');
@@ -836,6 +1089,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             sb.append("],");
             // consume: clear so the next (e.g. combat) dump doesn't read a stale label
             corpusSearchWr = null; corpusSearchBest = -1; corpusSearchPolicyIdx = -1;
+
+            // --- shadow-CP7 teacher label (DAgger-style; stash mirrors SEARCH_OP) ---
+            appendJsonNumber(sb, "cp7_idx", corpusShadowIdx); sb.append(',');
+            appendJsonString(sb, "cp7_status", corpusShadowStatus == null ? "" : corpusShadowStatus); sb.append(',');
+            appendJsonString(sb, "cp7_text", corpusShadowText == null ? "" : corpusShadowText); sb.append(',');
+            appendJsonNumber(sb, "cp7_ms", corpusShadowMs); sb.append(',');
+            corpusShadowIdx = -2; corpusShadowText = null; corpusShadowStatus = null; corpusShadowMs = 0;
 
             // --- snapshot arm: rich scalar state-facts (public) ---
             appendJsonNumber(sb, "my_life", me.getLife()); sb.append(',');
@@ -4447,8 +4707,52 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     policyMaskedProbs,
                     candidateFeatures
             );
+            maybeCaptureShadowCp7(game, actionType, candidates, candidateCount);
+            // Phase-1 CP7 distillation: teacher label -> one-hot policy target for the
+            // existing MCTS_KL distill CE. Same mctsVisitTargets==null convention as the
+            // other target producers. Skip PASS labels in all-mana (mid-payment) contexts:
+            // CP7 plans mana taps as part of casting, so "pass" there is an abstraction
+            // mismatch, not a teaching signal.
+            if (SHADOW_CP7_DISTILL && corpusShadowIdx >= 0 && corpusShadowIdx < maxCandidates
+                    && actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL
+                    && mctsVisitTargets == null
+                    // Audit [critical]: only confident label statuses become training targets.
+                    // source_ambig (same source, multiple abilities, text mismatch) is a guess;
+                    // it stays in the corpus row for diagnostics but never supervises.
+                    && corpusShadowStatus != null
+                    && (corpusShadowStatus.equals("source_id")
+                        || corpusShadowStatus.equals("text")
+                        || corpusShadowStatus.equals("text_disambig")
+                        || corpusShadowStatus.equals("plan_pass")
+                        || corpusShadowStatus.equals("step_pass"))) {
+                boolean allManaContext = true;
+                for (int ci = 1; ci < candidateCount && ci < candidates.size(); ci++) {
+                    if (!(candidates.get(ci) instanceof ManaAbility)) { allManaContext = false; break; }
+                }
+                if (!(corpusShadowIdx == 0 && allManaContext)) {
+                    // Codex #77 gradient composition: target row-sum encodes the CE row weight
+                    // (python MCTS_TARGET_ROW_SUM_WEIGHT_ENABLE=1). Pass labels 0.2x (the 2k
+                    // smoke showed full-weight pass labels dominate the gradient and clone
+                    // pass hygiene, not action choice); non-pass 1.0x; non-pass where the
+                    // agent disagreed with CP7 2.0x (the winrate-bearing rows). Disagreement
+                    // boost NEVER applies to pass labels (would recreate pass collapse).
+                    // Harmless when row-sum weighting is off: python renormalizes targets.
+                    float w;
+                    if (corpusShadowIdx == 0) {
+                        w = SHADOW_W_PASS;
+                    } else if (corpusShadowIdx != selectedIndices.get(0)) {
+                        w = SHADOW_W_DISAGREE;
+                    } else {
+                        w = SHADOW_W_ACTION;
+                    }
+                    float[] vt = new float[maxCandidates];
+                    vt[corpusShadowIdx] = w;
+                    mctsVisitTargets = vt;
+                }
+            }
             maybeDumpCorpusRow(game, actionType, candidates, candidateCount,
-                    selectedIndices.get(0), valueScore, baseState);
+                    selectedIndices.get(0), valueScore, baseState,
+                    policyMaskedProbs, candidateFeatures);
         }
 
         // Record or externally capture decision tensors (store full action + joint log-prob).

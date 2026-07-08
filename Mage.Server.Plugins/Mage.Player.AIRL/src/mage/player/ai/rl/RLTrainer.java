@@ -2577,6 +2577,10 @@ public class RLTrainer {
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
                         rlPlayer.setCurrentEpisode(epNumber); // Set main model episode for logging
                         rlPlayer.setAttachedGameLogger(gameLogger);
+                        // Matchup-selective CP7 distillation (Codex #76): teacher queries only on
+                        // target-matchup episodes; breadth episodes are anchor-only.
+                        rlPlayer.setShadowDistillEpisode(ComputerPlayerRL.isShadowTargetDeck(
+                                opponentDeckPath == null ? "" : opponentDeckPath.getFileName().toString()));
                         if (opponentPlayer instanceof ComputerPlayerRL) {
                             ((ComputerPlayerRL) opponentPlayer).setCurrentEpisode(epNumber);
                         }
