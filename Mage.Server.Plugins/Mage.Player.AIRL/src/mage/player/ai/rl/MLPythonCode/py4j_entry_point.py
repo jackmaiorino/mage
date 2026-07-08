@@ -81,8 +81,14 @@ def _maybe_configure_deterministic_eval():
         return
     try:
         if hasattr(torch, "use_deterministic_algorithms"):
+            # warn_only=False: a deterministic-eval harness must FAIL on any op that
+            # lacks a deterministic implementation, not silently produce flaky results
+            # (warn_only=True let non-bit-exact fused SDPA slip through -> jul1 proof
+            # failure). Override with TORCH_DETERMINISTIC_WARN_ONLY=1 if a needed op
+            # genuinely has no deterministic path.
+            _warn_only = _env_truthy("TORCH_DETERMINISTIC_WARN_ONLY")
             try:
-                torch.use_deterministic_algorithms(True, warn_only=True)
+                torch.use_deterministic_algorithms(True, warn_only=_warn_only)
             except TypeError:
                 torch.use_deterministic_algorithms(True)
         try:
@@ -93,6 +99,15 @@ def _maybe_configure_deterministic_eval():
             pass
         try:
             torch.backends.cuda.matmul.allow_tf32 = False
+        except Exception:
+            pass
+        # Pin scaled-dot-product attention to the math backend. The flash/mem-efficient
+        # kernels are not bit-reproducible, and nn.MultiheadAttention's fast path uses
+        # them regardless of our USE_FUSED_SDPA gate in ScaledMultiheadAttention.
+        try:
+            torch.backends.cuda.enable_flash_sdp(False)
+            torch.backends.cuda.enable_mem_efficient_sdp(False)
+            torch.backends.cuda.enable_math_sdp(True)
         except Exception:
             pass
         logger.info(LogCategory.SYSTEM_INIT,
@@ -384,6 +399,24 @@ class PythonEntryPoint:
         self.reference_policy_kl_coef = float(os.getenv('REFERENCE_POLICY_KL_COEF', '0.0'))
         self.mcts_reference_model_path = os.getenv('MCTS_REFERENCE_MODEL_PATH', '').strip()
         self.mcts_reference_model = None
+        # Opponent-conditional distillation (thesis-clean: uses only the opponent
+        # ARCHETYPE int already plumbed for the belief head, no card/deck names).
+        # mcts_reference_model = SPECIALIST teacher, distilled ONLY on rows whose
+        # opponent archetype is in reference_aggro_archetypes (e.g. Rally=1).
+        # reference_anchor_model = GENERALIST anchor, KL on all OTHER rows -> preserves
+        # breadth. Both pull the current policy toward a frozen checkpoint.
+        self.reference_anchor_model_path = os.getenv('REFERENCE_ANCHOR_MODEL_PATH', '').strip()
+        self.reference_anchor_kl_coef = float(os.getenv('REFERENCE_ANCHOR_KL_COEF',
+                                                        str(self.reference_policy_kl_coef)))
+        self.reference_anchor_model = None
+        _aggro_env = os.getenv('REFERENCE_AGGRO_ARCHETYPES', '1').strip()
+        self.reference_aggro_archetypes = set(
+            int(x) for x in _aggro_env.split(',') if x.strip() != '') if _aggro_env else set()
+        # R0 inference router: a frozen SPECIALIST model selected at score time when the
+        # caller's policy_key marks "specialist" (the agent commits to it once its belief
+        # head detects the target archetype). Pure inference, no training. See _get_policy_model.
+        self.router_specialist_model_path = os.getenv('ROUTER_SPECIALIST_MODEL_PATH', '').strip()
+        self.router_specialist_model = None
         self.policy_ensemble_model_paths = self._parse_env_paths(
             os.getenv('POLICY_ENSEMBLE_MODEL_PATHS', ''))
         self.policy_ensemble_weight_spec = os.getenv(
@@ -1237,6 +1270,17 @@ class PythonEntryPoint:
             elif self.world_model_head_only:
                 self._set_world_model_head_only_requires_grad()
 
+            # L2 stability (Codex #49): freeze the learnable attention scale params so they
+            # cannot collapse to 0 (the scale-collapse pathology that destroyed the warm-started
+            # 256 transplant). The forward already floors them at SCALED_MHA_MIN_SCALE.
+            if os.getenv('FREEZE_ATTN_SCALE', '0') == '1':
+                _frozen = 0
+                for _name, _p in self.model.named_parameters():
+                    if _name.endswith('self_attn.scale'):
+                        _p.requires_grad = False
+                        _frozen += 1
+                print(f"[L2] FREEZE_ATTN_SCALE: froze {_frozen} self_attn.scale params", flush=True)
+
             # Separate LR groups: actor head, critic head, everything else
             actor_param_names = [
                 'actor_proj1', 'actor_proj2', 'actor_norm', 'actor_norm1'
@@ -1305,6 +1349,8 @@ class PythonEntryPoint:
             self._did_initial_load = True
 
         self._ensure_mcts_reference_model()
+        self._ensure_reference_anchor_model()
+        self._ensure_router_specialist_model()
         self._ensure_policy_ensemble_models()
 
     @staticmethod
@@ -1377,6 +1423,66 @@ class PythonEntryPoint:
                            path, str(e))
             self.mcts_reference_model = None
 
+    def _ensure_reference_anchor_model(self):
+        """Load the optional frozen GENERALIST anchor for conditional distillation."""
+        if self.reference_anchor_model is not None:
+            return
+        path = self.reference_anchor_model_path
+        if not path:
+            return
+        if not os.path.exists(path):
+            print(f"[REF_POLICY] anchor model missing: {path}", flush=True)
+            return
+        try:
+            ref = MTGTransformerModel(
+                d_model=int(os.getenv('MODEL_D_MODEL', '128')),
+                nhead=int(os.getenv('MODEL_NHEAD', '4')),
+                num_layers=int(os.getenv('MODEL_NUM_LAYERS', '2')),
+                dim_feedforward=int(os.getenv('MODEL_DIM_FEEDFORWARD', '512')),
+                cand_feat_dim=48,
+            ).to(self.device)
+            ref.load(path)
+            ref.eval()
+            for p in ref.parameters():
+                p.requires_grad = False
+            self.reference_anchor_model = ref
+            print(
+                f"[REF_POLICY] loaded ANCHOR model path={path} "
+                f"anchor_coef={self.reference_anchor_kl_coef:.4f} "
+                f"aggro_archetypes={sorted(self.reference_aggro_archetypes)}",
+                flush=True)
+        except Exception as e:
+            print(f"[REF_POLICY] failed to load anchor model {path}: {e}", flush=True)
+            self.reference_anchor_model = None
+
+    def _ensure_router_specialist_model(self):
+        """Load the optional frozen SPECIALIST model for the R0 inference router."""
+        if self.router_specialist_model is not None:
+            return
+        path = self.router_specialist_model_path
+        if not path:
+            return
+        if not os.path.exists(path):
+            print(f"[ROUTER] specialist model missing: {path}", flush=True)
+            return
+        try:
+            ref = MTGTransformerModel(
+                d_model=int(os.getenv('MODEL_D_MODEL', '128')),
+                nhead=int(os.getenv('MODEL_NHEAD', '4')),
+                num_layers=int(os.getenv('MODEL_NUM_LAYERS', '2')),
+                dim_feedforward=int(os.getenv('MODEL_DIM_FEEDFORWARD', '512')),
+                cand_feat_dim=48,
+            ).to(self.device)
+            ref.load(path)
+            ref.eval()
+            for p in ref.parameters():
+                p.requires_grad = False
+            self.router_specialist_model = ref
+            print(f"[ROUTER] loaded SPECIALIST model path={path}", flush=True)
+        except Exception as e:
+            print(f"[ROUTER] failed to load specialist model {path}: {e}", flush=True)
+            self.router_specialist_model = None
+
     def _ensure_policy_ensemble_models(self):
         """Load optional frozen companion policies for eval-time ensemble diagnostics."""
         if self._policy_ensemble_loaded:
@@ -1446,9 +1552,13 @@ class PythonEntryPoint:
 
     def _score_reference_policy_chunk(self, seq, mask, token_ids, candidate_features,
                                       candidate_ids, candidate_mask, head_idx,
-                                      max_candidates, autocast_ctx):
-        """Score a chunk with the frozen reference model, matching per-head routing."""
-        ref = self.mcts_reference_model
+                                      max_candidates, autocast_ctx, ref_model=None):
+        """Score a chunk with a frozen reference model, matching per-head routing.
+
+        ref_model lets the caller pick a specific teacher (specialist vs generalist
+        anchor) for opponent-conditional distillation; defaults to the primary ref.
+        """
+        ref = ref_model if ref_model is not None else self.mcts_reference_model
         if ref is None:
             return None
         chunk_n = seq.shape[0]
@@ -1497,6 +1607,10 @@ class PythonEntryPoint:
         return self.snapshot_mgr.get_snapshot_model(snap_id)
 
     def _get_policy_model(self, policy_key: str):
+        # R0 router: caller marks the policy_key with "specialist" once its belief head
+        # commits to the target archetype -> score with the frozen specialist instead.
+        if self.router_specialist_model is not None and policy_key and "specialist" in str(policy_key):
+            return self.router_specialist_model
         # Single-backend: guarantee only one GPU model instance (no snapshot models).
         if self.backend_mode == "single":
             return self.model
@@ -2815,6 +2929,12 @@ class PythonEntryPoint:
                 sil_eligible_t = torch.tensor(
                     sil_eligible_np, dtype=torch.float32).to(device, non_blocking=_nb)
 
+            # Opponent archetype int per row (for conditional distillation masking).
+            archetype_labels_t = None
+            if archetype_labels_np is not None:
+                archetype_labels_t = torch.tensor(
+                    archetype_labels_np, dtype=torch.int64).to(device, non_blocking=_nb)
+
             if _nb:
                 torch.cuda.synchronize(device)
 
@@ -3390,6 +3510,8 @@ class PythonEntryPoint:
                 total_loss_policy_pair_rank = 0.0
                 total_loss_trajectory_pair_rank = 0.0
                 total_loss_action_pair_rank = 0.0
+                # audit fix: the MCTS/teacher distill CE was invisible in logs
+                total_loss_mcts_kl = 0.0
                 total_entropy_sum = 0.0
                 new_logp_chunks = []
                 ratio_raw_chunks = []
@@ -3419,10 +3541,23 @@ class PythonEntryPoint:
                 # rows (sil_eligible=1) so it reinforces only the short post-mill
                 # combo finish, not whole winning trajectories (SIL v1 over-fit).
                 sil_window_gated = os.getenv("SIL_WINDOW_GATED", "0") == "1"
+                # Weight floor: with terminal-only reward the relu(return-V) weight is
+                # strong near the kill but decays (gamma^(T-t)) on EARLY decisions --
+                # exactly where fast-aggro tempo skill lives. A floor (>0) gives every
+                # eligible won-game row at least this weight so early racing/mulligan
+                # plays are imitated too, while conversion rows keep up to the clip.
+                sil_weight_floor = max(0.0, float(os.getenv("SIL_WEIGHT_FLOOR", "0.0")))
                 return_contrastive_coef = float(os.getenv("RETURN_CONTRASTIVE_POLICY_LOSS_COEF", "0.0"))
                 return_contrastive_eps = float(os.getenv("RETURN_CONTRASTIVE_RETURN_EPS", "0.05"))
                 return_contrastive_neg_prob_floor = float(os.getenv("RETURN_CONTRASTIVE_NEG_PROB_FLOOR", "0.20"))
                 return_contrastive_critical_only = bool(int(os.getenv("RETURN_CONTRASTIVE_CRITICAL_ONLY", "1")))
+
+                # Lever G: per-head policy-loss reweighting. Up-weight the rare attack(head 3)/
+                # block(head 4) rows in the POLICY loss so those scorers get a full-strength
+                # gradient instead of ~10% of the batch budget. Default 1.0 = exact no-op.
+                # Value loss + entropy keep the original _norm_w_c (policy:value balance ~fixed
+                # apart from the ~1.3x policy-scale bump that the amplified AB rows add).
+                _ab_policy_coef = float(os.getenv("ATTACK_BLOCK_POLICY_LOSS_COEF", "1.0"))
 
                 for _c_start in chunk_starts:
                     _c_end = min(_c_start + effective_chunk, local_batch_size)
@@ -3436,6 +3571,16 @@ class PythonEntryPoint:
                     _chosen_idx_c = chosen_indices_t[_c_start:_c_end]
                     _chosen_cnt_c = chosen_count_t[_c_start:_c_end]
                     _norm_w_c = norm_w_t[_c_start:_c_end]
+                    # Lever G: policy-only reweight of attack(3)/block(4) rows. _norm_w_c_hw is
+                    # used ONLY by the policy loss; value/entropy keep the original _norm_w_c.
+                    if _ab_policy_coef != 1.0:
+                        _ab_mask_c = (_head_idx_c == 3) | (_head_idx_c == 4)
+                        _norm_w_c_hw = _norm_w_c * torch.where(
+                            _ab_mask_c,
+                            torch.full_like(_norm_w_c, _ab_policy_coef),
+                            torch.ones_like(_norm_w_c))
+                    else:
+                        _norm_w_c_hw = _norm_w_c
                     _adv_c = advantages_normalized[_c_start:_c_end]
                     _old_logp_c = old_logp_t[_c_start:_c_end]
                     _old_value_c = old_value_t[_c_start:_c_end]
@@ -3494,7 +3639,7 @@ class PythonEntryPoint:
                             _ratio_raw_c, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
                         _policy_obj_c = torch.min(
                             _ratio_raw_c * _adv_c, _clipped_ratio_c * _adv_c)
-                        _loss_policy_c = -(_policy_obj_c * _norm_w_c).sum() / total_norm_w_sum
+                        _loss_policy_c = -(_policy_obj_c * _norm_w_c_hw).sum() / total_norm_w_sum
 
                         # Extra safety: if policy loss exploded despite the clamp
                         # (e.g., many samples hit the ratio cap simultaneously),
@@ -3509,7 +3654,7 @@ class PythonEntryPoint:
                             self.optimizer.zero_grad(set_to_none=True)
                             return
                     else:
-                        _loss_policy_c = -((_new_logp_c * _adv_c) * _norm_w_c).sum() / total_norm_w_sum
+                        _loss_policy_c = -((_new_logp_c * _adv_c) * _norm_w_c_hw).sum() / total_norm_w_sum
 
                     _value_c_sq = _value_c.squeeze(1)
                     if self.use_ppo and vf_clip > 0.0:
@@ -3566,6 +3711,11 @@ class PythonEntryPoint:
                         if sil_window_gated:
                             if sil_eligible_t is not None:
                                 _sil_mask_c = sil_eligible_t[_c_start:_c_end]
+                                if sil_weight_floor > 0.0:
+                                    # floor BEFORE masking: eligible rows get >= floor
+                                    # (early tempo plays imitated too); non-eligible
+                                    # rows are still zeroed by the mask multiply below.
+                                    _sil_adv_c = _sil_adv_c.clamp(min=sil_weight_floor)
                                 _sil_adv_c = _sil_adv_c * _sil_mask_c
                                 # normalize by eligible-row weight so the sparse
                                 # finisher signal keeps proper magnitude
@@ -3581,9 +3731,16 @@ class PythonEntryPoint:
                         if self._sil_calls <= 25 or self._sil_calls % 100 == 0:
                             try:
                                 _mp = float(_sil_adv_c[_sil_adv_c > 0].mean().item()) if _sil_pos else 0.0
-                                print(f"[SIL_DIAG] calls={self._sil_calls} coef={sil_loss_coef} "
+                                _sil_msg = (f"[SIL_DIAG] calls={self._sil_calls} coef={sil_loss_coef} "
                                       f"pos_adv_rows={_sil_pos}/{int(_sil_adv_c.numel())} cum_pos={self._sil_pos_total} "
-                                      f"mean_pos_adv={_mp:.3f} sil_loss={float(_loss_sil_c.item()):.5f}", flush=True)
+                                      f"mean_pos_adv={_mp:.3f} sil_loss={float(_loss_sil_c.item()):.5f}")
+                                print(_sil_msg, flush=True)
+                                # Python stdout is not captured in local py4j mode -> also
+                                # write to a file so the smoke gate can verify SIL fired.
+                                _sil_diag_file = os.getenv("SIL_DIAG_FILE", "")
+                                if _sil_diag_file:
+                                    with open(_sil_diag_file, "a") as _f:
+                                        _f.write(_sil_msg + "\n")
                             except Exception:
                                 pass
 
@@ -3817,9 +3974,18 @@ class PythonEntryPoint:
                         _wm_labels_c = world_model_labels_t[_c_start:_c_end]
                         _wm_valid_c = torch.isfinite(_wm_labels_c).all(dim=-1) & (_wm_labels_c >= 0.0).all(dim=-1)
                         _wm_n_valid = int(_wm_valid_c.sum().item())
+                        _wm_on_critic = bool(getattr(self.model, "value_use_separate_critic", False))
                         if _wm_valid_c.any():
                             with autocast_ctx:
-                                _wm_logits_c = self.model.world_model_logits_from_cls(_cls_c)
+                                # When the critic encoder is isolated, attach the WM aux to
+                                # the CRITIC CLS so de-myopia gradients shape the value path
+                                # (not the policy encoder). Conversion then flows to the actor
+                                # only through terminal-reward PPO advantages -- no shared drift.
+                                if _wm_on_critic:
+                                    _wm_cls_in = self.model.encode_state_critic(_seq_c, _mask_c, _tok_c)
+                                else:
+                                    _wm_cls_in = _cls_c
+                                _wm_logits_c = self.model.world_model_logits_from_cls(_wm_cls_in)
                             _wm_pred_c = torch.sigmoid(_wm_logits_c[_wm_valid_c].float())
                             _wm_target_c = _wm_labels_c[_wm_valid_c].float().clamp(0.0, 1.0)
                             _loss_world_model_c = self.world_model_loss_coef * torch.nn.functional.smooth_l1_loss(
@@ -3828,7 +3994,8 @@ class PythonEntryPoint:
                             _wm_rows = int(_wm_labels_c.shape[0])
                             print(f"[WORLD_MODEL_DIAG] valid={_wm_n_valid}/{_wm_rows} "
                                   f"dim={_world_model_dim} coef={self.world_model_loss_coef} "
-                                  f"loss={float(_loss_world_model_c.item()):.5f}", flush=True)
+                                  f"loss={float(_loss_world_model_c.item()):.5f} "
+                                  f"cls={'critic' if _wm_on_critic else 'policy'}", flush=True)
 
                     # AlphaZero policy distillation loss: KL(policy || MCTS_visits)
                     # for steps where MCTS was run (non-zero visit distribution).
@@ -3979,15 +4146,44 @@ class PythonEntryPoint:
                             _head_idx_c, max_candidates, autocast_ctx)
                         if ref_probs_c is not None:
                             _legal_c = (_cm_c > 0.5).float()
-                            _ref_target_c = (ref_probs_c.float() * _legal_c).clamp(min=0.0)
-                            _ref_target_c = _ref_target_c / _ref_target_c.sum(
-                                dim=-1, keepdim=True).clamp(min=1e-8)
                             _cur_probs_ref_c = (_probs_safe_c * _legal_c).clamp(min=1e-8)
                             _cur_probs_ref_c = _cur_probs_ref_c / _cur_probs_ref_c.sum(
                                 dim=-1, keepdim=True).clamp(min=1e-8)
-                            _ref_ce_c = -(_ref_target_c.detach() * torch.log(
-                                _cur_probs_ref_c.clamp(min=1e-8))).sum(dim=-1)
-                            _loss_reference_policy_c = self.reference_policy_kl_coef * _ref_ce_c.mean()
+                            _log_cur_ref_c = torch.log(_cur_probs_ref_c.clamp(min=1e-8))
+
+                            def _ref_ce(_rp):
+                                _t = (_rp.float() * _legal_c).clamp(min=0.0)
+                                _t = _t / _t.sum(dim=-1, keepdim=True).clamp(min=1e-8)
+                                return -(_t.detach() * _log_cur_ref_c).sum(dim=-1)
+
+                            _spec_ce_c = _ref_ce(ref_probs_c)
+                            # Opponent-conditional distillation: pull toward the SPECIALIST
+                            # on aggro-archetype rows and toward the GENERALIST anchor on all
+                            # other rows. mask.mean() over the full chunk keeps the combined
+                            # magnitude comparable to the single-teacher .mean() it replaces.
+                            _cond = (self.reference_anchor_model is not None
+                                     and len(self.reference_aggro_archetypes) > 0
+                                     and archetype_labels_t is not None)
+                            if _cond:
+                                _arch_c = archetype_labels_t[_c_start:_c_end]
+                                _aggro_mask_c = torch.zeros_like(_spec_ce_c)
+                                for _a in self.reference_aggro_archetypes:
+                                    _aggro_mask_c = _aggro_mask_c + (_arch_c == int(_a)).float()
+                                _aggro_mask_c = _aggro_mask_c.clamp(max=1.0)
+                                _loss_reference_policy_c = (
+                                    self.reference_policy_kl_coef
+                                    * (_aggro_mask_c * _spec_ce_c).mean())
+                                anchor_probs_c = self._score_reference_policy_chunk(
+                                    _seq_c, _mask_c, _tok_c, _cf_c, _ci_c, _cm_c,
+                                    _head_idx_c, max_candidates, autocast_ctx,
+                                    ref_model=self.reference_anchor_model)
+                                if anchor_probs_c is not None:
+                                    _anchor_ce_c = _ref_ce(anchor_probs_c)
+                                    _loss_reference_policy_c = _loss_reference_policy_c + (
+                                        self.reference_anchor_kl_coef
+                                        * ((1.0 - _aggro_mask_c) * _anchor_ce_c).mean())
+                            else:
+                                _loss_reference_policy_c = self.reference_policy_kl_coef * _spec_ce_c.mean()
 
                     # Terminal-only critical-action contrastive loss. Won
                     # trajectories imitate selected critical actions; lost
@@ -4074,6 +4270,10 @@ class PythonEntryPoint:
                     total_loss += _chunk_loss.item()
                     total_loss_policy += _loss_policy_c.item()
                     total_loss_value += _loss_value_c.item()
+                    try:
+                        total_loss_mcts_kl += float(_loss_mcts_kl_c.item())
+                    except Exception:
+                        pass
                     try:
                         total_loss_belief += float(_loss_belief_c.item())
                     except Exception:
@@ -4178,8 +4378,40 @@ class PythonEntryPoint:
                         scaler.unscale_(self.optimizer)
                     except Exception:
                         pass
-                torch.nn.utils.clip_grad_norm_(
+                _total_gn = torch.nn.utils.clip_grad_norm_(
                     self.model.parameters(), self.model.max_grad_norm)
+                # Lever G diagnostics: confirm the reweighting actually shifts the per-head
+                # gradient budget. Gated by HEAD_GRAD_DIAG_EVERY (0=off). Reads clipped grads
+                # (still populated; optimizer.step has not run yet).
+                _hgd_every = int(os.getenv("HEAD_GRAD_DIAG_EVERY", "0"))
+                if _hgd_every > 0 and (int(next_step) % _hgd_every == 0):
+                    try:
+                        with torch.no_grad():
+                            _scorer_pfx = {
+                                "action": "policy_scorer.", "target": "policy_scorer_target.",
+                                "card_select": "policy_scorer_card_select.", "attack": "policy_scorer_attack.",
+                                "block": "policy_scorer_block.", "mulligan": "policy_scorer_mulligan.",
+                            }
+                            _enc_gn = 0.0
+                            _head_gn = {h: 0.0 for h in _scorer_pfx}
+                            for _n, _p in self.model.named_parameters():
+                                if _p.grad is None:
+                                    continue
+                                _g = float(_p.grad.detach().norm(2).item())
+                                if "transformer_layers" in _n:
+                                    _enc_gn += _g
+                                for _h, _pfx in _scorer_pfx.items():
+                                    if _n.startswith(_pfx):
+                                        _head_gn[_h] += _g
+                            _ph_rows = [int((head_idx_t == _i).sum().item()) for _i in range(len(_HEAD_NAMES))]
+                            _msg = (f"[HEAD_GRAD_DIAG] step={int(next_step)} abCoef={_ab_policy_coef:.1f} "
+                                    f"totalGN={float(_total_gn):.5f} encGN={_enc_gn:.5f} "
+                                    + " ".join(f"{_h}:gn={_head_gn[_h]:.5f},rows={_ph_rows[_i]}"
+                                               for _i, _h in enumerate(_HEAD_NAMES)))
+                            print(_msg, flush=True)
+                            logger.info(LogCategory.MODEL_TRAIN, "%s", _msg)
+                    except Exception as _e:
+                        logger.warning(LogCategory.MODEL_TRAIN, "HEAD_GRAD_DIAG failed: %s", str(_e))
                 if scaler is not None:
                     scaler.step(self.optimizer)
                     scaler.update()
@@ -4195,8 +4427,8 @@ class PythonEntryPoint:
                     clip_frac = ((ratio_raw < 1.0 - self.ppo_epsilon) |
                                  (ratio_raw > 1.0 + self.ppo_epsilon)).float().mean()
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f ent=%.4f belief=%.4f cardBelief=%.4f worldModel=%.4f refPolicy=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
-                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_world_model, total_loss_reference_policy,
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f mctsKL=%.4f ent=%.4f belief=%.4f cardBelief=%.4f worldModel=%.4f refPolicy=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
+                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, total_loss_mcts_kl, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_world_model, total_loss_reference_policy,
                             entropy_coef, clip_frac.item() * 100, approx_kl.item())
                 # Record loss components for metrics export
                 self.metrics.record_train_losses(
@@ -4214,8 +4446,8 @@ class PythonEntryPoint:
                 self._write_training_losses_csv(episodes_in_batch=ep_count)
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f ent=%.4f belief=%.4f cardBelief=%.4f worldModel=%.4f refPolicy=%.4f (coeff: %.4f)",
-                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_world_model, total_loss_reference_policy, float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f valueRank=%.4f policyPair=%.4f trajPair=%.4f actionPair=%.4f candQ=%.4f branchRetPolicy=%.4f mctsKL=%.4f ent=%.4f belief=%.4f cardBelief=%.4f worldModel=%.4f refPolicy=%.4f (coeff: %.4f)",
+                            loss.item(), loss_policy.item(), loss_value.item(), total_loss_value_pair_rank, total_loss_policy_pair_rank, total_loss_trajectory_pair_rank, total_loss_action_pair_rank, total_loss_candidate_q, total_loss_branch_return_policy, total_loss_mcts_kl, entropy.item(), total_loss_belief, total_loss_card_belief, total_loss_world_model, total_loss_reference_policy, float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
                 # Record loss components for metrics export
                 self.metrics.record_train_losses(
                     total_loss=loss.item(),

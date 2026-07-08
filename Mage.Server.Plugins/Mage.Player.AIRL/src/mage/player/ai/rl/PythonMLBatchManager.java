@@ -571,6 +571,20 @@ public class PythonMLBatchManager {
                             .collect(Collectors.toList()))
                     : new byte[0];
 
+            // World-model aux targets + SIL eligibility flags (were previously dropped
+            // on the local py4j path -> SIL silently no-oped under sil_window_gated).
+            int worldModelDim = StateSequenceBuilder.worldModelDim();
+            byte[] worldModelLabelsBytes = worldModelDim > 0
+                    ? convertFloatArraysToBytes(trainingData.stream()
+                            .map(d -> d.worldModelSnapshot != null && d.worldModelSnapshot.length == worldModelDim
+                                    ? d.worldModelSnapshot
+                                    : new float[worldModelDim])
+                            .collect(Collectors.toList()))
+                    : new byte[0];
+            byte[] silEligibleBytes = convertIntegersToBytes(trainingData.stream()
+                    .map(d -> d.silEligible ? 1 : 0)
+                    .collect(Collectors.toList()));
+
             int batchSize = trainingData.size();
             int seqLen = trainingData.get(0).state.getSequence().length;
             int dModel = trainingData.get(0).state.getSequence()[0].length;
@@ -601,7 +615,10 @@ public class PythonMLBatchManager {
                         StateSequenceBuilder.TrainingData.NUM_ARCHETYPES,
                         mctsVisitsBytes,
                         cardBeliefLabelsBytes,
-                        cardBeliefDim);
+                        cardBeliefDim,
+                        worldModelLabelsBytes,
+                        worldModelDim,
+                        silEligibleBytes);
             }
 
             future.complete(true);

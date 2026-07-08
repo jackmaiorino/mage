@@ -57,11 +57,32 @@ class SnapshotManager:
             self.snapshot_models[key] = m
             return m
 
-        # Load new snapshot (with retry for transient failures)
+        # Load new snapshot (with retry for transient failures).
+        # Auto-detect the snapshot's OWN architecture from its state_dict so a
+        # main net of a different size (e.g. d_model=256) can still serve a
+        # smaller opponent snapshot (e.g. 128) -- heterogeneous-dim league play.
+        # Without this, MTGTransformerModel(**self.model_kwargs) uses the global
+        # MODEL_D_MODEL and shape-mismatches on m.load(path).
+        kwargs = dict(self.model_kwargs)
+        try:
+            _sd = torch.load(path, map_location='cpu', weights_only=False)
+            _sd = _sd.get('state_dict', _sd) if isinstance(_sd, dict) else _sd
+            if 'cls_token' in _sd:
+                kwargs['d_model'] = int(_sd['cls_token'].shape[-1])
+            _nl = len({k.split('.')[1] for k in _sd if k.startswith('transformer_layers.')})
+            if _nl > 0:
+                kwargs['num_layers'] = _nl
+            if 'transformer_layers.0.linear1.weight' in _sd:
+                kwargs['dim_feedforward'] = int(_sd['transformer_layers.0.linear1.weight'].shape[0])
+            # nhead must divide d_model; fall back to 8 for 256, else 4
+            if kwargs['d_model'] % kwargs.get('nhead', 4) != 0:
+                kwargs['nhead'] = 8 if kwargs['d_model'] % 8 == 0 else 4
+        except Exception:
+            kwargs = dict(self.model_kwargs)
         import time
         for attempt in range(2):
             try:
-                m = MTGTransformerModel(**self.model_kwargs).to('cpu')
+                m = MTGTransformerModel(**kwargs).to('cpu')
                 m.load(path)
                 m = m.to(self.device)
                 m.eval()

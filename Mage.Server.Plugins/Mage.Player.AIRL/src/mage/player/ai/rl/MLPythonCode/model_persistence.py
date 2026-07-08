@@ -18,11 +18,30 @@ class ModelPersistence:
         self._did_initial_load = False
 
     def save_model(self, model, path, extra_state=None):
-        """Save model state and optional training state (optimizer, counters)."""
+        """Save model state and optional training state (optimizer, counters).
+
+        Writes atomically (tmp -> os.replace) so a crash/force-kill mid-save cannot
+        leave a truncated, unreadable checkpoint (the 'failed finding central directory'
+        corruption). The previous direct write of model.pt was the non-atomic vector.
+        """
         try:
             if model is None:
                 raise RuntimeError("Model not initialized")
-            model.save(path, extra_state=extra_state)
+            tmp = "%s.tmp.%s.%s" % (path, os.getpid(), int(time.time() * 1000000000))
+            model.save(tmp, extra_state=extra_state)
+            # Windows can fail replace() if another process is reading the target.
+            for i in range(20):
+                try:
+                    os.replace(tmp, path)
+                    break
+                except PermissionError:
+                    time.sleep(0.05 * (i + 1))
+            else:
+                try:
+                    os.remove(tmp)
+                except OSError:
+                    pass
+                raise RuntimeError("atomic replace failed for %s" % path)
             logger.info(LogCategory.GPU_MEMORY, "Model saved to %s", path)
         except Exception as e:
             logger.error(LogCategory.GPU_MEMORY, "Error saving model: %s", str(e))

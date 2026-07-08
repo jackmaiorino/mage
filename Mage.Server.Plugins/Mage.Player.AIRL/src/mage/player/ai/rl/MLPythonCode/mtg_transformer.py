@@ -160,19 +160,25 @@ class MTGTransformerModel(nn.Module):
         # Shares self.token_id_emb (card identity is objective, not policy-dependent)
         self.critic_cls_token = nn.Parameter(torch.zeros(1, 1, d_model))
         nn.init.normal_(self.critic_cls_token, std=0.01)
-        critic_layer = nn.TransformerEncoderLayer(
-            d_model=d_model,
-            nhead=nhead,
-            dim_feedforward=dim_feedforward,
-            dropout=dropout,
-            batch_first=True,
-            norm_first=True
-        )
-        critic_layer.self_attn = ScaledMultiheadAttention(
-            embed_dim=d_model, num_heads=nhead,
-            dropout=dropout, batch_first=True
-        )
-        self.critic_transformer = nn.ModuleList([critic_layer])
+        # Depth matches the policy encoder by default (CRITIC_NUM_LAYERS to override)
+        # so an isolated-critic run can reproduce the de-myopia a 2-layer shared
+        # encoder achieved -- a 1-layer critic would confound capacity with isolation.
+        _critic_layers = max(1, int(os.getenv("CRITIC_NUM_LAYERS", str(num_layers))))
+        self.critic_transformer = nn.ModuleList([
+            nn.TransformerEncoderLayer(
+                d_model=d_model,
+                nhead=nhead,
+                dim_feedforward=dim_feedforward,
+                dropout=dropout,
+                batch_first=True,
+                norm_first=True
+            ) for _ in range(_critic_layers)
+        ])
+        for _cl in self.critic_transformer:
+            _cl.self_attn = ScaledMultiheadAttention(
+                embed_dim=d_model, num_heads=nhead,
+                dropout=dropout, batch_first=True
+            )
 
         # Critic MLP head (on top of critic encoder's CLS)
         self.critic_norm = nn.LayerNorm(d_model)
@@ -194,6 +200,18 @@ class MTGTransformerModel(nn.Module):
             nn.ReLU(),
             nn.Linear(d_model // 2, self.num_archetypes),
         )
+        # L1 belief-conditioned policy: project the model's OWN belief prediction (softmax
+        # over archetypes, derived from the CLS the encoder already produces) into a
+        # conditioning vector added to the scorer CLS. Gives the policy an explicit, smooth
+        # archetype axis to reason over -- one coherent net plays archetype-conditionally,
+        # no mid-game model switch (avoids the interference + plan-incoherence that killed
+        # distill + routing). Zero-init -> a warm-started checkpoint is unchanged until trained.
+        self.belief_condition_policy = os.getenv('BELIEF_CONDITION_POLICY', '0') == '1'
+        if self.belief_condition_policy:
+            print("[L1] belief_condition_policy=ON", flush=True)
+        self.belief_proj = nn.Linear(self.num_archetypes, d_model)
+        nn.init.zeros_(self.belief_proj.weight)
+        nn.init.zeros_(self.belief_proj.bias)
         self.card_belief_dim = max(0, int(os.getenv('CARD_BELIEF_DIM', '0')))
         self.card_belief_head = None
         if self.card_belief_dim > 0:
@@ -233,6 +251,11 @@ class MTGTransformerModel(nn.Module):
 
         # Initialize weights
         self._init_weights()
+        # L1: zero-init belief_proj AFTER _init_weights (which re-inits all Linears) so a
+        # warm-started checkpoint starts as an exact identity (cond_vec=0) and learns the
+        # conditioning from the terminal-reward gradient.
+        nn.init.zeros_(self.belief_proj.weight)
+        nn.init.zeros_(self.belief_proj.bias)
 
         # Gradient clipping value (configurable via env var)
         self.max_grad_norm = float(os.getenv('MAX_GRAD_NORM', '1.0'))
@@ -379,6 +402,14 @@ class MTGTransformerModel(nn.Module):
         # Encode full state sequence for cross-attention and candidate policy.
         state_seq, state_pad_mask = self.encode_state_full(sequences, masks, token_ids)
         cls = state_seq[:, 0]                     # [B, d_model]
+        # L1: conditioning vector from the model's own belief (detached -> policy grad trains
+        # belief_proj only, belief accuracy stays governed by its own CE loss). Applied to the
+        # SCORER cls only; value cls stays unconditioned.
+        if self.belief_condition_policy:
+            _belief_soft = torch.softmax(self.belief_head(cls.detach()).float(), dim=-1)
+            policy_cls = cls + self.belief_proj(_belief_soft).to(cls.dtype)
+        else:
+            policy_cls = cls
         if self.value_use_separate_critic:
             value_cls = self.encode_state_critic(sequences, masks, token_ids)
         else:
@@ -411,7 +442,7 @@ class MTGTransformerModel(nn.Module):
         attended = self.cand_self_attn_norm(attended + attended_pre)  # residual + norm
 
         # MLP scoring: concat(CLS, attended_candidate) → scalar score
-        cls_expanded = cls.unsqueeze(1).expand(-1, attended.size(1), -1)  # [B, N, d_model]
+        cls_expanded = policy_cls.unsqueeze(1).expand(-1, attended.size(1), -1)  # [B, N, d_model]
         combined = torch.cat([cls_expanded, attended], dim=-1)             # [B, N, d_model*2]
         
         # Route head selection (ignore pick_index/min/max for now; plumbed for future conditioning)
@@ -871,6 +902,12 @@ class SingleHeadScorer(nn.Module):
         # Encode policy state (unfused for ONNX export).
         state_seq, state_pad_mask = self._encode_state_unfused(sequences, masks, token_ids)
         cls = state_seq[:, 0]
+        # L1: mirror the belief-conditioned scorer cls for ONNX export.
+        if getattr(m, 'belief_condition_policy', False):
+            _belief_soft = torch.softmax(m.belief_head(cls).float(), dim=-1)
+            policy_cls = cls + m.belief_proj(_belief_soft).to(cls.dtype)
+        else:
+            policy_cls = cls
 
         if m.value_use_separate_critic:
             value_cls = self._encode_state_critic_unfused(sequences, masks, token_ids)
@@ -907,7 +944,7 @@ class SingleHeadScorer(nn.Module):
         attended = m.cand_self_attn_norm(attended + attended_pre)
 
         # Score with frozen head
-        cls_expanded = cls.unsqueeze(1).expand(-1, attended.size(1), -1)
+        cls_expanded = policy_cls.unsqueeze(1).expand(-1, attended.size(1), -1)
         combined = torch.cat([cls_expanded, attended], dim=-1)
         scores = self.scorer(combined).squeeze(-1)
         _cq_in2 = combined.detach() if CANDIDATE_Q_DETACH_ENCODER else combined

@@ -23,9 +23,13 @@ class MetricsCollector:
         self.mulligan_time_ms_ema = None
         self.timing_alpha = 0.1
 
-        # Entropy schedule configuration
-        self.entropy_start = float(os.getenv('ENTROPY_START', '0.20'))
-        self.entropy_end = float(os.getenv('ENTROPY_END', '0.03'))
+        # Entropy schedule configuration.
+        # DEFAULT: CONSTANT 0.10 (start==end) per "Reevaluating Policy Gradient Methods for
+        # Imperfect-Information Games" (ICLR 2026 / arXiv 2502.08938): imperfect-info games
+        # benefit from HIGHER, CONSTANT entropy (MMD regime) vs the low/annealed single-agent
+        # schedule -- prevents policy collapse / self-play cycling. Override per-experiment via env.
+        self.entropy_start = float(os.getenv('ENTROPY_START', '0.10'))
+        self.entropy_end = float(os.getenv('ENTROPY_END', '0.10'))
         self.entropy_decay_steps = int(
             os.getenv('ENTROPY_DECAY_STEPS', '50000'))
 

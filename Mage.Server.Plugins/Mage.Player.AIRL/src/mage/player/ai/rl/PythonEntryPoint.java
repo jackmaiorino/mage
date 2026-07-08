@@ -157,7 +157,10 @@ public interface PythonEntryPoint {
             int numArchetypes,
             byte[] mctsVisitsBytes,
             byte[] cardBeliefLabelsBytes,
-            int cardBeliefDim
+            int cardBeliefDim,
+            byte[] worldModelLabelsBytes,
+            int worldModelDim,
+            byte[] silEligibleBytes
     );
 
     /**
