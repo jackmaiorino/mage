@@ -159,6 +159,24 @@ public class ComputerPlayer6 extends ComputerPlayer {
         this.actionCache = new LinkedHashSet<>();
     }
 
+    /**
+     * Seat-bound driver ctor: binds this instance to an existing player's id so
+     * calculateActions plans for that seat (shadow one-shot queries). The instance
+     * is NOT a fully-initialized seated player -- do not add it to a game or call
+     * act()/pass() on it.
+     */
+    protected ComputerPlayer6(UUID seatId, int skill) {
+        super(seatId);
+        if (skill < 4) {
+            maxDepth = 4;
+        } else {
+            maxDepth = skill;
+        }
+        maxThinkTimeSecs = skill * 2;
+        maxNodes = DETERMINISTIC_SEARCH ? DETERMINISTIC_MAX_SIMULATED_NODES : MAX_SIMULATED_NODES_PER_CALC;
+        this.actionCache = new LinkedHashSet<>();
+    }
+
     public ComputerPlayer6(final ComputerPlayer6 player) {
         super(player);
         this.maxDepth = player.maxDepth;

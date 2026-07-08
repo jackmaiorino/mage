@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.UUID;
 
 /**
  * AI: server side bot with game simulations (mad bot, the latest version)
@@ -26,6 +27,15 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     public ComputerPlayer7(String name, RangeOfInfluence range, int skill) {
         super(name, range, skill);
+    }
+
+    /**
+     * Seat-bound driver: plans for an EXISTING player's seat (id) without being a
+     * seated player itself. Used for one-shot "what would CP7 do here" shadow queries
+     * (calculateActions only; never call act() on such an instance).
+     */
+    public ComputerPlayer7(UUID seatId, int skill) {
+        super(seatId, skill);
     }
 
     public ComputerPlayer7(final ComputerPlayer7 player) {
