@@ -112,3 +112,13 @@ onnxruntime_profile__*.json
 # Claude Code local state
 .claude/*.lock
 .claude/worktrees/
+
+# --- RL fork hygiene (jul8) ---
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/venv/
+Mage.Server.Plugins/Mage.Player.AIRL/Mage.Server.Plugins/
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/
+Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/logs/
+.claude/settings.local.json
+.mtgrl_venv/
+local-training/
+*.pt.tmp.*
