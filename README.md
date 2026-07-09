@@ -1,14 +1,14 @@
 # XMage RL Player
 
-A reinforcement-learning agent that teaches itself to play Magic: The Gathering.
+A reinforcement-learning agent for Magic: The Gathering.
 
 This is a fork of [XMage](https://github.com/magefree/mage), the open-source MTG engine. Everything RL lives in a new Maven module, [`Mage.Server.Plugins/Mage.Player.AIRL`](Mage.Server.Plugins/Mage.Player.AIRL), plus supporting training infrastructure (`scripts/`, `k8s/`, `monitoring/`). Changes outside that module are game-engine improvements needed to legally mask the action space for the model. For XMage itself (the game client/server), see the [upstream README](https://github.com/magefree/mage#readme).
 
 ## What it does
 
-The agent plays full games of Magic through the real XMage engine. No simplified environment. A transformer policy/value network scores legal actions from an encoded game state, trained with PPO through self-play and an adaptive curriculum. Population-based training (PBT) scales it out, locally and on UMD's Zaratan HPC cluster.
+The agent plays full games of Magic through the actual XMage rules engine rather than a simplified environment. A transformer policy/value network scores legal actions from an encoded game state, trained with PPO through self-play and an adaptive curriculum. Population-based training (PBT) scales it out, locally and on UMD's Zaratan HPC cluster.
 
-**Current focus:** PBT across a pool of Pauper decks (Spy Combo, Wildfire, Rally, Affinity), with teacher-distillation experiments on top of the PPO base to push past plateaus ([experiment logs](docs/mtgrl)). The long-standing benchmark problem is the Spy Combo line: Balustrade Spy targets its own controller (the deck runs zero lands) to mill the entire library, then Flashback Dread Return reanimates Lotleth Giant for lethal damage. A long forced sequence with sparse reward — a hard credit-assignment problem.
+**Current focus:** PBT across a pool of Pauper decks (Spy Combo, Wildfire, Rally, Affinity), with teacher-distillation experiments on top of the PPO base to push past plateaus ([experiment logs](docs/mtgrl)). The long-standing benchmark problem is the Spy Combo line: Balustrade Spy targets its own controller (the deck runs zero lands) to mill the entire library, then Flashback Dread Return reanimates Lotleth Giant for lethal damage. It is a long forced sequence with sparse reward, which makes it a hard credit-assignment problem.
 
 ## Architecture
 
@@ -33,7 +33,7 @@ Full details: [project timeline](docs/PROJECT_TIMELINE.md), [module docs](Mage.S
 | Jun 2025 | v1: first end-to-end training runs; ~29% winrate vs XMage's heuristic AI |
 | Jul 2025 | v1.2: heuristic targeting + retrain; ~44% winrate |
 | Jan – Feb 2026 | v2: full refactor; hashed card-ID embeddings replace text embeddings; ~50% winrate after 50k episodes (1-2 days local training) |
-| Feb 2026 | v3: RL takes over spell/ability targeting, the decisions the heuristics were getting wrong |
+| Feb 2026 | v3: spell/ability targeting moves from heuristics to RL |
 | Mar 2026 | Multi-node HPC pipeline on Zaratan (Slurm): GPU head + CPU satellites, 5.7 eps/sec measured; in-process Java ONNX inference (6.5x over Python) |
 | Apr 2026 | Multi-deck Pauper PBT (Wildfire, Rally, Affinity, Elves alongside Spy); dual-sided training doubles effective throughput; mulligan model merged into main model |
 | May – Jul 2026 | Teacher-distillation experiments (tree-search and heuristic-AI teachers), cloud GPU rental tooling |
@@ -61,6 +61,6 @@ HPC (Slurm): build a runtime bundle with `scripts/hpc/build_rl_runtime_bundle.ps
 
 ## Background
 
-This started as a way to turn a Magic habit into an ML education: first open-source project, first AI project, first Java at this scale. Magic is a brutal environment to learn in. The [comprehensive rules](https://media.wizards.com/2025/downloads/MagicCompRules%2020250207.pdf) run to hundreds of pages, the action space is enormous and mostly illegal at any given moment, and rewards are sparse. That is also what makes it interesting.
+This is a learning project: my first open-source work, first ML system, and first Java codebase at this scale. Magic is a difficult RL environment. The [comprehensive rules](https://media.wizards.com/2025/downloads/MagicCompRules%2020250207.pdf) run to hundreds of pages, the action space is large and mostly illegal at any given moment, and rewards are sparse.
 
 Issues and pointers welcome.
