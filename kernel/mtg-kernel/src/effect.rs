@@ -40,12 +40,22 @@ pub enum PlayerRef {
 pub enum TargetRef {
     ThisSource,
     Target(u8),
+    /// The controller's one opponent. The kernel only ever simulates 1v1
+    /// games (see `lib.rs`), so "deal N damage to each opponent"
+    /// (Guttersnipe, Voldaren Epicure, Grab the Prize) never needs a
+    /// chosen target -- it's always exactly `ctx.controller.opponent()`.
+    Opponent,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum EffectCond {
     Always,
     Never,
+    /// True iff this cast's mandatory additional cost discarded a
+    /// non-land card (Grab the Prize). Reads `ExecCtx::discarded`, which
+    /// `engine::finalize_cast` populates from the additional-cost payment
+    /// before pushing the spell onto the stack.
+    DiscardedNonLandForCost,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -80,6 +90,20 @@ pub enum EffectOp {
         player: PlayerRef,
         count: u32,
     },
+    /// Discard `count` cards from `player`'s hand, chosen by that player.
+    /// Unlike every other leaf, this one doesn't necessarily mutate state
+    /// synchronously: `execute` stages `EngineState::pending_discard` and
+    /// returns, and `engine::advance_until_decision` asks
+    /// `Decision::Discard`. Because of that, **this must be the last leaf
+    /// in any `Sequence` it appears in** (see `engine.rs`'s
+    /// `pending_discard` doc for why: nothing after it in the same
+    /// resolution would run before the decision is answered). The only
+    /// user this increment, Faithless Looting ("draw two, then discard
+    /// two"), satisfies this by construction.
+    DiscardCards {
+        player: PlayerRef,
+        count: u32,
+    },
     MoveObject {
         object: ObjectRef,
         to_zone: Zone,
@@ -91,6 +115,15 @@ pub enum EffectOp {
         player: PlayerRef,
         colors: Vec<ManaColor>,
     },
+    /// Creates a fresh token permanent (e.g. Blood) directly on the
+    /// battlefield under `controller`'s control. `token_def` indexes
+    /// `card_def::CARD_DEFS` same as any other object -- tokens are real
+    /// `GameObject`s, not a separate representation (see
+    /// `event::ProposedEvent::create_token`).
+    CreateToken {
+        token_def: u16,
+        controller: PlayerRef,
+    },
 }
 
 /// Everything an effect program needs to resolve symbolic refs against a
@@ -100,11 +133,15 @@ pub struct ExecCtx {
     pub source: ObjectId,
     pub controller: PlayerId,
     pub targets: Vec<Target>,
+    /// Cards discarded to pay this cast's mandatory additional cost (Grab
+    /// the Prize), if any. Empty for everything else. Read by
+    /// `EffectCond::DiscardedNonLandForCost`.
+    pub discarded: Vec<ObjectId>,
 }
 
 impl ExecCtx {
     pub fn no_targets(source: ObjectId, controller: PlayerId) -> ExecCtx {
-        ExecCtx { source, controller, targets: Vec::new() }
+        ExecCtx { source, controller, targets: Vec::new(), discarded: Vec::new() }
     }
 
     fn resolve_object(&self, r: ObjectRef) -> ObjectId {
@@ -121,6 +158,7 @@ impl ExecCtx {
         match r {
             TargetRef::ThisSource => Target::Object(self.source),
             TargetRef::Target(i) => self.targets[i as usize],
+            TargetRef::Opponent => Target::Player(self.controller.opponent()),
         }
     }
 
@@ -144,10 +182,7 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
             }
         }
         EffectOp::Conditional { cond, then, else_ } => {
-            let taken = match cond {
-                EffectCond::Always => true,
-                EffectCond::Never => false,
-            };
+            let taken = eval_cond(cond, ctx, state);
             execute(if taken { then } else { else_ }, ctx, state);
         }
         EffectOp::Choice { options, .. } => {
@@ -185,6 +220,29 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
             let player = ctx.resolve_player(*player, state);
             event::propose_and_commit(state, event::ProposedEvent::mana_add(player, colors.clone()));
         }
+        EffectOp::DiscardCards { player, count } => {
+            let player = ctx.resolve_player(*player, state);
+            state.engine.pending_discard = Some(crate::engine::PendingDiscard {
+                player,
+                count: *count,
+                resume: crate::engine::DiscardResume::None,
+            });
+        }
+        EffectOp::CreateToken { token_def, controller } => {
+            let controller = ctx.resolve_player(*controller, state);
+            event::propose_and_commit(state, event::ProposedEvent::create_token(*token_def, controller));
+        }
+    }
+}
+
+fn eval_cond(cond: &EffectCond, ctx: &ExecCtx, state: &GameState) -> bool {
+    match cond {
+        EffectCond::Always => true,
+        EffectCond::Never => false,
+        EffectCond::DiscardedNonLandForCost => ctx.discarded.iter().any(|&id| {
+            let def_idx = state.objects.get(id).card_def;
+            !crate::card_def::CARD_DEFS[def_idx as usize].is_land
+        }),
     }
 }
 
@@ -240,6 +298,7 @@ mod tests {
             source: ObjectId(0),
             controller: PlayerId::P0,
             targets: vec![Target::Player(PlayerId::P1)],
+            discarded: Vec::new(),
         };
         execute(&EffectOp::DealDamage { target: TargetRef::Target(0), amount: 3 }, &ctx, &mut state);
         assert_eq!(state.players[1].life, 17);
@@ -254,6 +313,7 @@ mod tests {
             source: ObjectId(0),
             controller: PlayerId::P0,
             targets: vec![Target::Object(creature)],
+            discarded: Vec::new(),
         };
         execute(&EffectOp::DealDamage { target: TargetRef::Target(0), amount: 4 }, &ctx, &mut state);
         assert_eq!(state.objects.get(creature).damage, 4);

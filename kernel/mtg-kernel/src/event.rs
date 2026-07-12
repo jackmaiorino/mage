@@ -82,6 +82,13 @@ pub struct ManaAddProposed {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CreateTokenProposed {
+    pub token_def: u16,
+    pub controller: PlayerId,
+    pub touched_by: Vec<ReplacementId>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ProposedEvent {
     Damage(DamageProposed),
     ZoneChange(ZoneChangeProposed),
@@ -90,6 +97,7 @@ pub enum ProposedEvent {
     Draw(DrawProposed),
     Tap(TapProposed),
     ManaAdd(ManaAddProposed),
+    CreateToken(CreateTokenProposed),
 }
 
 impl ProposedEvent {
@@ -114,6 +122,9 @@ impl ProposedEvent {
     pub fn mana_add(player: PlayerId, colors: Vec<ManaColor>) -> ProposedEvent {
         ProposedEvent::ManaAdd(ManaAddProposed { player, colors, touched_by: Vec::new() })
     }
+    pub fn create_token(token_def: u16, controller: PlayerId) -> ProposedEvent {
+        ProposedEvent::CreateToken(CreateTokenProposed { token_def, controller, touched_by: Vec::new() })
+    }
 
     fn touched_by(&self) -> &[ReplacementId] {
         match self {
@@ -124,6 +135,7 @@ impl ProposedEvent {
             ProposedEvent::Draw(e) => &e.touched_by,
             ProposedEvent::Tap(e) => &e.touched_by,
             ProposedEvent::ManaAdd(e) => &e.touched_by,
+            ProposedEvent::CreateToken(e) => &e.touched_by,
         }
     }
 
@@ -136,6 +148,7 @@ impl ProposedEvent {
             ProposedEvent::Draw(e) => &mut e.touched_by,
             ProposedEvent::Tap(e) => &mut e.touched_by,
             ProposedEvent::ManaAdd(e) => &mut e.touched_by,
+            ProposedEvent::CreateToken(e) => &mut e.touched_by,
         };
         v.push(id);
     }
@@ -154,6 +167,17 @@ pub enum CommittedEvent {
     Draw { player: PlayerId, object: Option<ObjectId> },
     Tap { object: ObjectId },
     ManaAdded { player: PlayerId, colors: Vec<ManaColor> },
+    CreateToken { object: ObjectId, token_def: u16, controller: PlayerId },
+    /// Logged by `engine::finalize_cast` the moment a spell is placed on
+    /// the stack (not routed through `propose_and_commit`: casting a spell
+    /// is an engine action with no replaceable "cast" event in this
+    /// increment's scope, same rationale as the Hand->Stack zone move
+    /// itself -- see `commit_zone_change`'s doc). Exists purely so
+    /// `trigger::TriggerCondition::CastInstantOrSorcery` (Guttersnipe) has
+    /// something to match against; it is still appended to both
+    /// `event_log` (drained by `trigger::collect_and_process`) and
+    /// `event_history` for consistency with every other committed event.
+    SpellCast { spell: ObjectId, controller: PlayerId },
 }
 
 /// Runs the replace/prevent pass to a fixed point: repeatedly finds an
@@ -269,6 +293,9 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
             if empty_before {
                 state.players[d.player.index()].drew_from_empty = true;
             }
+            if drawn.is_some() {
+                state.players[d.player.index()].draws_this_turn += 1;
+            }
             CommittedEvent::Draw { player: d.player, object: drawn }
         }
         ProposedEvent::Tap(t) => {
@@ -281,7 +308,52 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
             }
             CommittedEvent::ManaAdded { player: m.player, colors: m.colors }
         }
+        ProposedEvent::CreateToken(t) => {
+            let name = crate::card_def::CARD_DEFS[t.token_def as usize].name.to_string();
+            let object = state.objects.push(crate::state::GameObject {
+                card_def: t.token_def,
+                name,
+                owner: t.controller,
+                controller: t.controller,
+                zone: Zone::Battlefield,
+                tapped: false,
+                summoning_sick: false,
+                damage: 0,
+                counters: Default::default(),
+                attachments: Vec::new(),
+            });
+            state.players[t.controller.index()].battlefield.push(object);
+            CommittedEvent::CreateToken { object, token_def: t.token_def, controller: t.controller }
+        }
     };
+    state.engine.event_log.push(committed.clone());
+    state.engine.event_history.push(committed);
+}
+
+/// Runs the replace/prevent pass independently on every event in `events`
+/// (each is evaluated against the currently-active replacements as if it
+/// were the only proposal in flight -- true simultaneity: none of them can
+/// see or react to one another), then commits every survivor back-to-back
+/// with no SBA/trigger check interleaved. Used for combat damage (510.2:
+/// all of it happens at once); the caller is responsible for running SBAs
+/// / trigger collection exactly once after the whole batch (see
+/// `engine::deal_combat_damage`), not per event.
+pub fn propose_and_commit_batch(state: &mut GameState, events: Vec<ProposedEvent>) {
+    let survivors: Vec<ProposedEvent> = events.into_iter().filter_map(|e| apply_replacements(state, e)).collect();
+    for e in survivors {
+        commit(state, e);
+    }
+}
+
+/// Logs a `SpellCast` marker with no accompanying state mutation (casting
+/// itself -- moving hand to stack -- is handled by
+/// `engine::move_hand_to_stack`; this is purely a trigger-matching hook).
+/// Not named `commit_*` and not routed through `propose_and_commit`
+/// because there is no proposed/replaceable form of "a spell was cast" in
+/// this increment's scope (countering a spell removes it from the stack
+/// later, it doesn't replace the cast event itself).
+pub fn log_spell_cast(state: &mut GameState, spell: ObjectId, controller: PlayerId) {
+    let committed = CommittedEvent::SpellCast { spell, controller };
     state.engine.event_log.push(committed.clone());
     state.engine.event_history.push(committed);
 }

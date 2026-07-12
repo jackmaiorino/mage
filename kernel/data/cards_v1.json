@@ -3952,6 +3952,35 @@
         "add_counters"
       ],
       "java_file": "Mage.Sets/src/mage/cards/w/WrithingChrysalis.java"
+    },
+    {
+      "name": "Blood Token",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [
+        "Blood"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [],
+      "is_token": true,
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "activated_ability",
+        "discard",
+        "sacrifice_cost",
+        "draw_card",
+        "loot"
+      ],
+      "java_file": "Mage/src/main/java/mage/game/permanent/token/BloodToken.java"
     }
   ],
   "unresolved": []

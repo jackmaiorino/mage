@@ -36,6 +36,13 @@ struct CardJson {
     #[serde(default)]
     produces_mana: Vec<String>,
     decks: Vec<String>,
+    /// A permanent token (e.g. Blood), not itself a deck card: exempt from
+    /// the empty-deck-coverage check (see `main`'s validation loop) and
+    /// never castable (its `Special` falls through to `Special::None`,
+    /// giving it `no_effect`/`no_effect`/`TargetSpec::None` -- correct,
+    /// since tokens are never cast, only created by another card's effect).
+    #[serde(default)]
+    is_token: bool,
 }
 
 #[derive(Debug, Deserialize)]
@@ -68,7 +75,7 @@ fn main() {
         if !seen_names.insert(c.name.clone()) {
             panic!("cards_v1.json: duplicate card name {:?}", c.name);
         }
-        if c.decks.is_empty() {
+        if c.decks.is_empty() && !c.is_token {
             panic!("cards_v1.json: card {:?} has empty deck coverage", c.name);
         }
     }
@@ -80,22 +87,46 @@ fn main() {
     fs::write(&dest, out).unwrap_or_else(|e| panic!("failed to write {}: {e}", dest.display()));
 }
 
-/// The handful of Mono-Red Burn cards that get a real effect program this
-/// increment. See the module doc in `src/card_def.rs` for why the other 7
-/// Mono-Red Burn cards (Faithless Looting, Grab the Prize, Highway
-/// Robbery, Pyroblast, Red Elemental Blast, Relic of Progenitus, Searing
-/// Blaze) are NOT here.
+/// The Mono-Red Burn cards that get a real effect program this increment.
+/// Still deferred -- present in `CARD_DEFS` with correct metadata, not
+/// castable; see the module doc in `src/card_def.rs` and the increment-3
+/// report for exactly why each one is deferred:
+///
+/// - Highway Robbery: optional discard-or-sacrifice-land cost + Plot
+///   alternate casting, neither modeled.
+/// - Pyroblast / Red Elemental Blast: modal cast-time mode choice, plus
+///   spell-on-stack targeting, countering, and card-color tracking, none
+///   of which exist yet.
+/// - Relic of Progenitus: graveyard-card targeting; sideboard-only so
+///   lower priority.
+/// - Searing Blaze: 2-related-targets shape + landfall watcher;
+///   sideboard-only.
 enum Special {
     None,
     Mountain,
     /// Deals `amount` damage to any target (Lightning Bolt, Fiery Temper,
-    /// Fireblast, Lava Dart -- alternate/additional costs ignored, all
-    /// hard-cast for their normal mana cost this increment).
+    /// Fireblast, Lava Dart). Fiery Temper's madness alternate cost is
+    /// NOT modeled this increment (see `card_def.rs` module doc) -- it's
+    /// always hard-cast for `{1}{R}{R}`. Fireblast's/Lava Dart's real alt
+    /// cost / flashback ARE modeled, via the separate `alt_cost_for`/
+    /// `flashback_for` tables below (independent of `Special`, since a
+    /// card's targeting/damage shape and its cost shape are orthogonal).
     BurnAnyTarget(i32),
-    /// Resolves straight onto the battlefield with no keyword/triggered
-    /// abilities (Guttersnipe, Masked Meower, Voldaren Epicure, Sneaky
-    /// Snacker).
+    /// Resolves straight onto the battlefield; any keyword/triggered
+    /// ability is layered on separately (`keywords_for` for
+    /// static keywords, `src/trigger.rs`'s hand-written `triggers_for`
+    /// table for triggered abilities -- see that module for Guttersnipe/
+    /// Voldaren Epicure/Sneaky Snacker's real texts).
     VanillaCreature,
+    /// "Draw `draw` cards, then discard `discard` cards" (Faithless
+    /// Looting: 2 and 2). The discard is a resolution effect (not a cost),
+    /// so it's `EffectOp::DiscardCards`, staged via
+    /// `engine::EngineState::pending_discard` same as cleanup.
+    DrawThenDiscard { draw: i32, discard: i32 },
+    /// Grab the Prize: draw two cards, then (if the card discarded to pay
+    /// the mandatory additional cost -- see `additional_cost_for` --
+    /// wasn't a land) deal 2 damage to the opponent.
+    GrabThePrize,
 }
 
 fn special_for(name: &str) -> Special {
@@ -106,7 +137,84 @@ fn special_for(name: &str) -> Special {
         "Fireblast" => Special::BurnAnyTarget(4),
         "Lava Dart" => Special::BurnAnyTarget(1),
         "Guttersnipe" | "Masked Meower" | "Voldaren Epicure" | "Sneaky Snacker" => Special::VanillaCreature,
+        "Faithless Looting" => Special::DrawThenDiscard { draw: 2, discard: 2 },
+        "Grab the Prize" => Special::GrabThePrize,
         _ => Special::None,
+    }
+}
+
+/// Static combat/summoning-sickness keywords, verified against each card's
+/// Java source (see the increment-3 report for the exact files read).
+/// Only Masked Meower (haste) and Sneaky Snacker (flying) carry one in
+/// this pool.
+fn keywords_for(name: &str) -> &'static str {
+    match name {
+        "Masked Meower" => "Keywords::HASTE",
+        "Sneaky Snacker" => "Keywords::FLYING",
+        _ => "Keywords::NONE",
+    }
+}
+
+/// `Some` alternative cost source text (`CardDef::alt_cost`), verified
+/// against Java. Only Fireblast has one this increment ("You may
+/// sacrifice two Mountains rather than pay Fireblast's mana cost.").
+fn alt_cost_for(name: &str) -> &'static str {
+    match name {
+        "Fireblast" => "Some(&[CostComponent::SacrificeLands(2)])",
+        _ => "None",
+    }
+}
+
+/// `Some` mandatory additional cost text (`CardDef::additional_cost`).
+/// Only Grab the Prize has one this increment ("As an additional cost to
+/// cast this spell, discard a card.").
+fn additional_cost_for(name: &str) -> &'static str {
+    match name {
+        "Grab the Prize" => "Some(&[CostComponent::DiscardCards(1)])",
+        _ => "None",
+    }
+}
+
+/// `Some` flashback definition, verified against Java. Faithless Looting
+/// ("Flashback {2}{R}") pays mana; Lava Dart ("Flashback -- Sacrifice a
+/// Mountain.") sacrifices a land instead.
+fn flashback_for(name: &str) -> String {
+    match name {
+        "Faithless Looting" => {
+            let (pips, generic, x_count) = parse_cost("{2}{R}");
+            format!(
+                "Some(FlashbackDef {{ cost: FlashbackCost::Mana(Cost {{ pips: &[{}], generic: {generic}, x_count: {x_count} }}) }})",
+                pips.join(", ")
+            )
+        }
+        "Lava Dart" => "Some(FlashbackDef { cost: FlashbackCost::SacrificeLands(1) })".to_string(),
+        _ => "None".to_string(),
+    }
+}
+
+/// Non-mana activated abilities, verified against Java. Masked Meower
+/// ("Discard a card, Sacrifice this creature: Draw a card.") and the Blood
+/// token ("{1}, {T}, Discard a card, Sacrifice this artifact: Draw a
+/// card.") both reduce to "discard/sacrifice/[cost]: draw a card", so both
+/// share `ability_effect_draw_one`.
+fn activated_abilities_for(name: &str) -> &'static str {
+    match name {
+        "Masked Meower" => {
+            "&[ActivatedAbilityDef { \
+                cost: &[CostComponent::DiscardCards(1), CostComponent::SacrificeSelf], \
+                target_spec: TargetSpec::None, \
+                effect: ability_effect_draw_one, \
+            }]"
+        }
+        "Blood Token" => {
+            "&[ActivatedAbilityDef { \
+                cost: &[CostComponent::Mana(Cost { pips: &[], generic: 1, x_count: 0 }), CostComponent::Tap, \
+                        CostComponent::DiscardCards(1), CostComponent::SacrificeSelf], \
+                target_spec: TargetSpec::None, \
+                effect: ability_effect_draw_one, \
+            }]"
+        }
+        _ => "&[]",
     }
 }
 
@@ -132,6 +240,44 @@ fn codegen(cards: &[CardJson]) -> String {
     writeln!(out, "    Some(EffectOp::MoveObject {{ object: ObjectRef::ThisSource, to_zone: Zone::Battlefield }})").unwrap();
     writeln!(out, "}}").unwrap();
     writeln!(out).unwrap();
+
+    // Masked Meower's / Blood's activated ability both resolve to "draw a
+    // card" once their (differing) costs are paid.
+    writeln!(out, "fn ability_effect_draw_one() -> EffectOp {{").unwrap();
+    writeln!(out, "    EffectOp::DrawCards {{ player: PlayerRef::Controller, count: 1 }}").unwrap();
+    writeln!(out, "}}").unwrap();
+    writeln!(out).unwrap();
+
+    let draw_then_discard_shapes: Vec<(i32, i32)> = cards
+        .iter()
+        .filter_map(|c| match special_for(&c.name) {
+            Special::DrawThenDiscard { draw, discard } => Some((draw, discard)),
+            _ => None,
+        })
+        .collect();
+    for (draw, discard) in draw_then_discard_shapes {
+        writeln!(out, "fn spell_effect_draw_then_discard_{draw}_{discard}() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Sequence(vec![").unwrap();
+        writeln!(out, "        EffectOp::DrawCards {{ player: PlayerRef::Controller, count: {draw} }},").unwrap();
+        writeln!(out, "        EffectOp::DiscardCards {{ player: PlayerRef::Controller, count: {discard} }},").unwrap();
+        writeln!(out, "    ]))").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::GrabThePrize)) {
+        writeln!(out, "fn spell_effect_grab_the_prize() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Sequence(vec![").unwrap();
+        writeln!(out, "        EffectOp::DrawCards {{ player: PlayerRef::Controller, count: 2 }},").unwrap();
+        writeln!(out, "        EffectOp::Conditional {{").unwrap();
+        writeln!(out, "            cond: EffectCond::DiscardedNonLandForCost,").unwrap();
+        writeln!(out, "            then: Box::new(EffectOp::DealDamage {{ target: TargetRef::Opponent, amount: 2 }}),").unwrap();
+        writeln!(out, "            else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
+        writeln!(out, "        }},").unwrap();
+        writeln!(out, "    ]))").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
 
     let burn_amounts: BTreeSetLike = cards
         .iter()
@@ -185,6 +331,10 @@ fn codegen(cards: &[CardJson]) -> String {
             Special::VanillaCreature => {
                 ("TargetSpec::None", "spell_effect_vanilla_creature".to_string(), "no_effect".to_string())
             }
+            Special::DrawThenDiscard { draw, discard } => {
+                ("TargetSpec::None", format!("spell_effect_draw_then_discard_{draw}_{discard}"), "no_effect".to_string())
+            }
+            Special::GrabThePrize => ("TargetSpec::None", "spell_effect_grab_the_prize".to_string(), "no_effect".to_string()),
         };
 
         writeln!(out, "    CardDef {{").unwrap();
@@ -201,8 +351,13 @@ fn codegen(cards: &[CardJson]) -> String {
         writeln!(out, "        is_land: {},", c.is_land).unwrap();
         writeln!(out, "        produces_mana: &[{produces_src}],").unwrap();
         writeln!(out, "        target_spec: {target_spec_src},").unwrap();
+        writeln!(out, "        keywords: {},", keywords_for(&c.name)).unwrap();
         writeln!(out, "        spell_effect: {spell_effect_src},").unwrap();
         writeln!(out, "        mana_ability: {mana_ability_src},").unwrap();
+        writeln!(out, "        alt_cost: {},", alt_cost_for(&c.name)).unwrap();
+        writeln!(out, "        additional_cost: {},", additional_cost_for(&c.name)).unwrap();
+        writeln!(out, "        flashback: {},", flashback_for(&c.name)).unwrap();
+        writeln!(out, "        activated_abilities: {},", activated_abilities_for(&c.name)).unwrap();
         writeln!(out, "    }},").unwrap();
     }
     writeln!(out, "];").unwrap();

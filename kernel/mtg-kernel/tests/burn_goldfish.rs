@@ -56,6 +56,13 @@ fn kind_of(d: &Decision) -> Kind {
         Decision::ChooseTargets { player, .. } => Kind::ChooseTargets(*player),
         Decision::OrderTriggers { player, .. } => Kind::OrderTriggers(*player),
         Decision::GameOver { .. } => Kind::GameOver,
+        // Nothing in this goldfish's scripted library (Mountain + Lightning
+        // Bolt only) can produce these -- no alt-cost/additional-cost card,
+        // no discard obligation (hand never exceeds 7), no creature ever
+        // cast so no combat. See `tests/burn_combat.rs` for these.
+        Decision::ChooseCastMode { .. } | Decision::Discard { .. } | Decision::DeclareAttackers { .. } | Decision::DeclareBlockers { .. } => {
+            unreachable!("the burn goldfish's library has no card that can produce this decision")
+        }
     }
 }
 
@@ -117,6 +124,9 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
             }
             Decision::OrderTriggers { .. } => {
                 unreachable!("no card in this increment's pool has an implemented trigger")
+            }
+            Decision::ChooseCastMode { .. } | Decision::Discard { .. } | Decision::DeclareAttackers { .. } | Decision::DeclareBlockers { .. } => {
+                unreachable!("the burn goldfish's library has no card that can produce this decision")
             }
             Decision::ChooseTargets { player, spell: _, remaining, legal_targets } => {
                 assert_eq!(player, PlayerId::P0);

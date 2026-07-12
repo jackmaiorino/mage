@@ -83,6 +83,13 @@ pub struct PlayerState {
     /// library. Checked (and turned into `has_lost`) by
     /// `trigger::sba_fixed_point` (rule 704.5c).
     pub drew_from_empty: bool,
+    /// Cards successfully drawn since the current turn began (both
+    /// players' counters reset together at every `Step::Untap`, matching
+    /// the reference engine's `DrawNthCardWatcher`, which is a
+    /// whole-game-scoped watcher whose backing map is cleared once per
+    /// turn boundary). Used by `trigger::TriggerCondition::DrawNth`
+    /// (Sneaky Snacker: "whenever you draw your third card in a turn").
+    pub draws_this_turn: u32,
 }
 
 impl PlayerState {
@@ -97,6 +104,7 @@ impl PlayerState {
             has_lost: false,
             lands_played_this_turn: 0,
             drew_from_empty: false,
+            draws_this_turn: 0,
         }
     }
 }
@@ -134,12 +142,21 @@ pub struct StackItem {
     pub source: ObjectId,
     pub controller: PlayerId,
     pub targets: Vec<Target>,
-    /// `Some` for a triggered ability (its effect program, resolved off
-    /// `trigger::PendingTrigger` at the time it was placed on the stack).
-    /// `None` for a spell, whose program is looked up from
-    /// `card_def::CARD_DEFS[objects[source].card_def].spell_effect` at
-    /// resolution time instead.
-    pub trigger_effect: Option<crate::effect::EffectOp>,
+    /// `Some` for a triggered ability or a non-mana activated ability
+    /// (Masked Meower's, the Blood token's -- see `card_def::
+    /// ActivatedAbilityDef`): an inline effect program that isn't looked
+    /// up from a `CARD_DEFS` entry at resolution time. `None` for a spell,
+    /// whose program is looked up from
+    /// `card_def::CARD_DEFS[objects[source].card_def].spell_effect`
+    /// instead.
+    pub inline_effect: Option<crate::effect::EffectOp>,
+    /// Cards discarded to pay this cast's mandatory additional cost (Grab
+    /// the Prize), threaded through to `effect::ExecCtx::discarded` at
+    /// resolution time. Empty for everything else.
+    pub discarded: Vec<ObjectId>,
+    /// True iff this spell was cast via flashback: on resolution, an
+    /// instant/sorcery goes to exile instead of the graveyard (702.10e).
+    pub is_flashback: bool,
 }
 
 /// Counter-based, seedable, serializable PRNG (SplitMix64). Deterministic:

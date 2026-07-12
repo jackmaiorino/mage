@@ -8,31 +8,86 @@
 //! 2+ share a controller, to ask that controller to order via
 //! `engine::Decision::OrderTriggers`).
 
-use crate::effect::EffectOp;
+use crate::effect::{EffectOp, PlayerRef, TargetRef};
 use crate::event::CommittedEvent;
 use crate::ids::{ObjectId, PlayerId};
 use crate::state::{GameState, Zone};
 use serde::{Deserialize, Serialize};
 
-/// Trigger conditions this increment's kernel can match. Mono-Red Burn's
-/// pool has zero implemented triggers this increment (Guttersnipe and
-/// Voldaren Epicure are vanilla bodies -- see `card_def.rs`), so
-/// `triggers_for` always returns `&[]` today. The shape exists so a future
-/// increment can wire real triggered abilities into `CARD_DEFS` without
-/// touching the collection loop.
+/// Trigger conditions this increment's kernel can match.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TriggerCondition {
+    /// The permanent itself enters the battlefield (Voldaren Epicure).
     Etb,
+    /// The permanent itself deals damage. Unused by any Burn 16 card this
+    /// increment (kept from increment 2's shape -- see `trigger_matches`).
     DealsDamage,
+    /// The controller casts an instant or sorcery spell -- any such
+    /// spell, not just ones this permanent's controller controls the
+    /// *source* of (Guttersnipe: "whenever you cast an instant or sorcery
+    /// spell"). Matched against `CommittedEvent::SpellCast`, logged by
+    /// `engine::finalize_cast`.
+    CastInstantOrSorcery,
+    /// The controller draws their `n`th card since the current turn began
+    /// (Sneaky Snacker: "whenever you draw your third card in a turn").
+    /// This ability functions from the graveyard (`home_zone: Graveyard`
+    /// on its `TriggeredAbilityDef`), so unlike every other condition
+    /// here it's checked with the source in the graveyard, not the
+    /// battlefield.
+    DrawNth(u32),
 }
 
 pub struct TriggeredAbilityDef {
     pub condition: TriggerCondition,
+    /// Which zone the source must be in for this ability to function.
+    /// Every keyworded/triggered ability in MTG works from the
+    /// battlefield unless its reminder text says otherwise (like Sneaky
+    /// Snacker's "from your graveyard").
+    pub home_zone: Zone,
     pub effect: fn() -> EffectOp,
 }
 
-pub fn triggers_for(_card_def: u16) -> &'static [TriggeredAbilityDef] {
-    &[]
+fn guttersnipe_effect() -> EffectOp {
+    // Guttersnipe deals 2 damage to each opponent.
+    EffectOp::DealDamage { target: TargetRef::Opponent, amount: 2 }
+}
+
+fn voldaren_epicure_effect() -> EffectOp {
+    // It deals 1 damage to each opponent. Create a Blood token.
+    let blood_token = crate::card_def::card_id_by_name("Blood Token").expect("Blood Token in CARD_DEFS");
+    EffectOp::Sequence(vec![
+        EffectOp::DealDamage { target: TargetRef::Opponent, amount: 1 },
+        EffectOp::CreateToken { token_def: blood_token, controller: PlayerRef::Controller },
+    ])
+}
+
+fn sneaky_snacker_effect() -> EffectOp {
+    // Return Sneaky Snacker from your graveyard to the battlefield tapped.
+    EffectOp::Sequence(vec![
+        EffectOp::MoveObject { object: crate::effect::ObjectRef::ThisSource, to_zone: Zone::Battlefield },
+        EffectOp::TapObject { object: crate::effect::ObjectRef::ThisSource },
+    ])
+}
+
+const GUTTERSNIPE_TRIGGERS: [TriggeredAbilityDef; 1] =
+    [TriggeredAbilityDef { condition: TriggerCondition::CastInstantOrSorcery, home_zone: Zone::Battlefield, effect: guttersnipe_effect }];
+const VOLDAREN_EPICURE_TRIGGERS: [TriggeredAbilityDef; 1] =
+    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, effect: voldaren_epicure_effect }];
+const SNEAKY_SNACKER_TRIGGERS: [TriggeredAbilityDef; 1] =
+    [TriggeredAbilityDef { condition: TriggerCondition::DrawNth(3), home_zone: Zone::Graveyard, effect: sneaky_snacker_effect }];
+
+/// The Burn 16's real triggered abilities, matched by card name (ids are
+/// codegen-assigned from `cards_v1.json`'s array order and not worth
+/// duplicating as constants here -- see `build.rs`'s module doc on id
+/// stability). Every other card in the 132-card pool has no triggered
+/// ability implemented this increment and falls through to `&[]`.
+pub fn triggers_for(card_def: u16) -> &'static [TriggeredAbilityDef] {
+    match crate::card_def::CARD_DEFS[card_def as usize].name {
+        "Guttersnipe" => &GUTTERSNIPE_TRIGGERS,
+        "Voldaren Epicure" => &VOLDAREN_EPICURE_TRIGGERS,
+        "Sneaky Snacker" => &SNEAKY_SNACKER_TRIGGERS,
+        _ => &[],
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -94,12 +149,12 @@ pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
 
     let mut new_triggers = Vec::new();
     for (id, obj) in state.objects.iter() {
-        if obj.zone != Zone::Battlefield {
-            continue;
-        }
         for def in triggers_for(obj.card_def) {
+            if obj.zone != def.home_zone {
+                continue;
+            }
             for ev in &events {
-                if trigger_matches(def.condition, ev, id) {
+                if trigger_matches(def.condition, ev, id, obj.controller, state) {
                     new_triggers.push(PendingTrigger { controller: obj.controller, source: id, effect: (def.effect)() });
                 }
             }
@@ -111,10 +166,19 @@ pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
     order_apnap(new_triggers, state.active_player)
 }
 
-fn trigger_matches(cond: TriggerCondition, ev: &CommittedEvent, source: ObjectId) -> bool {
+fn trigger_matches(cond: TriggerCondition, ev: &CommittedEvent, source: ObjectId, controller: PlayerId, state: &GameState) -> bool {
     match (cond, ev) {
         (TriggerCondition::Etb, CommittedEvent::ZoneChange { object, to: Zone::Battlefield, .. }) => *object == source,
         (TriggerCondition::DealsDamage, CommittedEvent::Damage { source: s, .. }) => *s == source,
+        (TriggerCondition::CastInstantOrSorcery, CommittedEvent::SpellCast { spell, controller: caster }) => {
+            *caster == controller && {
+                let def = &crate::card_def::CARD_DEFS[state.objects.get(*spell).card_def as usize];
+                def.has_type(crate::card_def::CardType::Instant) || def.has_type(crate::card_def::CardType::Sorcery)
+            }
+        }
+        (TriggerCondition::DrawNth(n), CommittedEvent::Draw { player, object: Some(_) }) => {
+            *player == controller && state.players[player.index()].draws_this_turn == n
+        }
         _ => false,
     }
 }
