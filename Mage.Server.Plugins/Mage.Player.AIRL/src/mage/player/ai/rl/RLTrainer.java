@@ -6214,7 +6214,8 @@ public class RLTrainer {
         }
         lastOpponentType = "POP-CP7-S" + skill;
         THREAD_LOCAL_POP_KEY.set("cp7:s" + skill);
-        return new ComputerPlayer7("PopAnchor-s" + skill, RangeOfInfluence.ALL, skill);
+        // Name must contain "skill<N>" so formatOpponentTag records the real skill
+        return new ComputerPlayer7("PopAnchor-Skill" + skill, RangeOfInfluence.ALL, skill);
     }
 
     private Player popFrozenOpponent(Random rand) {
