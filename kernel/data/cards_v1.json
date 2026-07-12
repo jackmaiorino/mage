@@ -1,0 +1,3958 @@
+{
+  "version": 1,
+  "generated": "2026-07-12",
+  "pool_decks": [
+    "Deck - Grixis Affinity.dek",
+    "Deck - Mono-Red Burn.dek",
+    "Deck - Mono Red Rally.dek",
+    "Deck - Mono-Blue Faeries.dek",
+    "Deck - Mono-Blue Terror.dek",
+    "Deck - Jund Wildfire.dek",
+    "Deck - Caw-Gates.dek",
+    "Deck - Elves.dek"
+  ],
+  "cards": [
+    {
+      "name": "Annul",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek",
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "counter_target",
+        "artifact_hate"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/a/Annul.java"
+    },
+    {
+      "name": "Avenging Hunter",
+      "mana_cost": "{4}{G}",
+      "mana_value": 5,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Dragon",
+        "Ranger"
+      ],
+      "supertypes": [],
+      "power": 5,
+      "toughness": 4,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "etb_trigger",
+        "initiative"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/a/AvengingHunter.java"
+    },
+    {
+      "name": "Azorius Guildgate",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Gate"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "W",
+        "U"
+      ],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "enters_tapped",
+        "gate_land",
+        "mana_ability",
+        "dual_land"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/a/AzoriusGuildgate.java"
+    },
+    {
+      "name": "Basilisk Gate",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Gate"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "C"
+      ],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "mana_ability",
+        "gate_land",
+        "static_pump",
+        "activated_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/b/BasiliskGate.java"
+    },
+    {
+      "name": "Bind the Monster",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Enchantment"
+      ],
+      "subtypes": [
+        "Aura"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "aura",
+        "etb_trigger",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/b/BindTheMonster.java"
+    },
+    {
+      "name": "Black Mage's Rod",
+      "mana_cost": "{1}{B}",
+      "mana_value": 2,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [
+        "Equipment"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "complex",
+      "mechanics": [
+        "equipment",
+        "static_pump",
+        "type_change",
+        "keyword_grant",
+        "burn",
+        "job_select"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/b/BlackMagesRod.java"
+    },
+    {
+      "name": "Blood Fountain",
+      "mana_cost": "{B}",
+      "mana_value": 1,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "etb_trigger",
+        "token_creation",
+        "activated_ability",
+        "sacrifice_cost",
+        "tap_ability",
+        "graveyard_recursion"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/b/BloodFountain.java"
+    },
+    {
+      "name": "Blue Elemental Blast",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Blue Faeries.dek",
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "counter_target",
+        "destroy_target",
+        "modal",
+        "color_hoser"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/b/BlueElementalBlast.java"
+    },
+    {
+      "name": "Brainstorm",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "draw_card",
+        "card_selection"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/b/Brainstorm.java"
+    },
+    {
+      "name": "Breath Weapon",
+      "mana_cost": "{2}{R}",
+      "mana_value": 3,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "burn",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/b/BreathWeapon.java"
+    },
+    {
+      "name": "Burning-Tree Emissary",
+      "mana_cost": "{R/G}{R/G}",
+      "mana_value": 2,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Human",
+        "Shaman"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 2,
+      "is_land": false,
+      "produces_mana": [
+        "R",
+        "G"
+      ],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "etb_trigger",
+        "mana_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/b/BurningTreeEmissary.java"
+    },
+    {
+      "name": "Cast Down",
+      "mana_cost": "{1}{B}",
+      "mana_value": 2,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "destroy_target",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/c/CastDown.java"
+    },
+    {
+      "name": "Cast into the Fire",
+      "mana_cost": "{1}{R}",
+      "mana_value": 2,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "modal",
+        "burn",
+        "exile_target",
+        "artifact_hate"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/c/CastIntoTheFire.java"
+    },
+    {
+      "name": "Chain Lightning",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "complex",
+      "mechanics": [
+        "burn",
+        "removal",
+        "spell_copy"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/c/ChainLightning.java"
+    },
+    {
+      "name": "Citadel Gate",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Gate"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "enters_tapped",
+        "gate_land",
+        "mana_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/c/CitadelGate.java"
+    },
+    {
+      "name": "Cleansing Wildfire",
+      "mana_cost": "{1}{R}",
+      "mana_value": 2,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "destroy_target",
+        "removal",
+        "fetch_effect",
+        "enters_tapped",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/c/CleansingWildfire.java"
+    },
+    {
+      "name": "Clockwork Percussionist",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "subtypes": [
+        "Monkey",
+        "Toy"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "haste",
+        "death_trigger",
+        "impulse_draw"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/c/ClockworkPercussionist.java"
+    },
+    {
+      "name": "Counterspell",
+      "mana_cost": "{U}{U}",
+      "mana_value": 2,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek",
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "counter_target"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/c/Counterspell.java"
+    },
+    {
+      "name": "Cryogen Relic",
+      "mana_cost": "{1}{U}",
+      "mana_value": 2,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "etb_trigger",
+        "draw_card",
+        "sacrifice_cost",
+        "activated_ability",
+        "stun_counter"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/c/CryogenRelic.java"
+    },
+    {
+      "name": "Cryptic Serpent",
+      "mana_cost": "{5}{U}{U}",
+      "mana_value": 7,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "SERPENT"
+      ],
+      "supertypes": [],
+      "power": 6,
+      "toughness": 5,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "cost_reduction"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/c/CrypticSerpent.java"
+    },
+    {
+      "name": "Deem Inferior",
+      "mana_cost": "{3}{U}",
+      "mana_value": 4,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "cost_reduction",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/d/DeemInferior.java"
+    },
+    {
+      "name": "Deep Analysis",
+      "mana_cost": "{3}{U}",
+      "mana_value": 4,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "draw_card",
+        "flashback",
+        "flashback_cost"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/d/DeepAnalysis.java"
+    },
+    {
+      "name": "Dispel",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek",
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "counter_target"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/d/Dispel.java"
+    },
+    {
+      "name": "Drossforge Bridge",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "B",
+        "R"
+      ],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "dual_land",
+        "enters_tapped",
+        "indestructible",
+        "mana_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/d/DrossforgeBridge.java"
+    },
+    {
+      "name": "Duress",
+      "mana_cost": "{B}",
+      "mana_value": 1,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "discard",
+        "discard_hand_disruption"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/d/Duress.java"
+    },
+    {
+      "name": "Dust to Dust",
+      "mana_cost": "{1}{W}{W}",
+      "mana_value": 3,
+      "colors": [
+        "W"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "exile_target",
+        "artifact_hate"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/d/DustToDust.java"
+    },
+    {
+      "name": "Elvish Mystic",
+      "mana_cost": "{G}",
+      "mana_value": 1,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Elf",
+        "Druid"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [
+        "G"
+      ],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "mana_ability",
+        "mana_dork",
+        "ramp",
+        "tap_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/e/ElvishMystic.java"
+    },
+    {
+      "name": "End the Festivities",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "burn",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/e/EndTheFestivities.java"
+    },
+    {
+      "name": "Envelop",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "counter_spell"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/e/Envelop.java"
+    },
+    {
+      "name": "Eviscerator's Insight",
+      "mana_cost": "{1}{B}",
+      "mana_value": 2,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "sacrifice_cost",
+        "draw_card",
+        "flashback"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/e/EvisceratorsInsight.java"
+    },
+    {
+      "name": "Experimental Synthesizer",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "etb_trigger",
+        "impulse_draw",
+        "activated_ability",
+        "sacrifice_cost",
+        "token_creation"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/e/ExperimentalSynthesizer.java"
+    },
+    {
+      "name": "Extract a Confession",
+      "mana_cost": "{1}{B}",
+      "mana_value": 2,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "collect_evidence",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/e/ExtractAConfession.java"
+    },
+    {
+      "name": "Faerie Miscreant",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "FAERIE",
+        "ROGUE"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "flying",
+        "etb_trigger",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/f/FaerieMiscreant.java"
+    },
+    {
+      "name": "Faerie Seer",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Faerie",
+        "Wizard"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "flying",
+        "etb_trigger",
+        "card_selection"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/f/FaerieSeer.java"
+    },
+    {
+      "name": "Faithless Looting",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "draw_card",
+        "discard",
+        "flashback",
+        "looter"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/f/FaithlessLooting.java"
+    },
+    {
+      "name": "Fanatical Offering",
+      "mana_cost": "{1}{B}",
+      "mana_value": 2,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "sacrifice_cost",
+        "draw_card",
+        "token_creation"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/f/FanaticalOffering.java"
+    },
+    {
+      "name": "Fiery Temper",
+      "mana_cost": "{1}{R}{R}",
+      "mana_value": 3,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "burn",
+        "removal",
+        "alt_cost"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/f/FieryTemper.java"
+    },
+    {
+      "name": "Fireblast",
+      "mana_cost": "{4}{R}{R}",
+      "mana_value": 6,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "alt_cost",
+        "sacrifice_cost",
+        "burn",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/f/Fireblast.java"
+    },
+    {
+      "name": "Force Spike",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "counter_target"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/f/ForceSpike.java"
+    },
+    {
+      "name": "Forest",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Forest"
+      ],
+      "supertypes": [
+        "Basic"
+      ],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "G"
+      ],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "mana_ability"
+      ],
+      "java_file": "Mage/src/main/java/mage/cards/basiclands/Forest.java"
+    },
+    {
+      "name": "Fyndhorn Elves",
+      "mana_cost": "{G}",
+      "mana_value": 1,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Elf",
+        "Druid"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [
+        "G"
+      ],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "mana_ability",
+        "mana_dork",
+        "ramp",
+        "tap_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/f/FyndhornElves.java"
+    },
+    {
+      "name": "Galvanic Blast",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "burn",
+        "removal",
+        "metalcraft"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GalvanicBlast.java"
+    },
+    {
+      "name": "Generous Ent",
+      "mana_cost": "{5}{G}",
+      "mana_value": 6,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Treefolk"
+      ],
+      "supertypes": [],
+      "power": 5,
+      "toughness": 7,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "etb_trigger",
+        "token_creation",
+        "cycling"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GenerousEnt.java"
+    },
+    {
+      "name": "Gingerbread Cabin",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Forest"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "G"
+      ],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "mana_ability",
+        "enters_tapped",
+        "token_creation",
+        "etb_trigger"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GingerbreadCabin.java"
+    },
+    {
+      "name": "Goblin Bushwhacker",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Goblin",
+        "Warrior"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "kicker",
+        "alt_cost",
+        "etb_trigger",
+        "haste"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GoblinBushwhacker.java"
+    },
+    {
+      "name": "Goblin Tomb Raider",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Goblin",
+        "Pirate"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 2,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "static_pump",
+        "haste"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GoblinTombRaider.java"
+    },
+    {
+      "name": "Gorilla Shaman",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Ape",
+        "Shaman"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "activated_ability",
+        "destroy_target",
+        "artifact_hate"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GorillaShaman.java"
+    },
+    {
+      "name": "Grab the Prize",
+      "mana_cost": "{1}{R}",
+      "mana_value": 2,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "discard",
+        "draw_card",
+        "burn",
+        "conditional_effect"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GrabThePrize.java"
+    },
+    {
+      "name": "Great Furnace",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "R"
+      ],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "mana_ability",
+        "affinity_land"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GreatFurnace.java"
+    },
+    {
+      "name": "Guardian of the Guildpact",
+      "mana_cost": "{3}{W}",
+      "mana_value": 4,
+      "colors": [
+        "W"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Spirit"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 3,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "protection"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GuardianOfTheGuildpact.java"
+    },
+    {
+      "name": "Gut Shot",
+      "mana_cost": "{R/P}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "burn",
+        "removal",
+        "phyrexian_mana"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/GutShot.java"
+    },
+    {
+      "name": "Guttersnipe",
+      "mana_cost": "{2}{R}",
+      "mana_value": 3,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Goblin",
+        "Shaman"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 2,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "burn",
+        "spell_cast_trigger"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/g/Guttersnipe.java"
+    },
+    {
+      "name": "Harrier Strix",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "BIRD"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "flying",
+        "etb_trigger",
+        "tap_ability",
+        "activated_ability",
+        "looter"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/h/HarrierStrix.java"
+    },
+    {
+      "name": "Heap Gate",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Gate"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "C",
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "mana_ability",
+        "gate_land",
+        "token_creation",
+        "tap_ability",
+        "activated_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/h/HeapGate.java"
+    },
+    {
+      "name": "Highway Robbery",
+      "mana_cost": "{1}{R}",
+      "mana_value": 2,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "modal",
+        "discard",
+        "sacrifice_cost",
+        "draw_card",
+        "alt_cost",
+        "plot"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/h/HighwayRobbery.java"
+    },
+    {
+      "name": "Humbling Elder",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "HUMAN",
+        "MONK"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 2,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "flash",
+        "etb_trigger",
+        "static_pump"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/h/HumblingElder.java"
+    },
+    {
+      "name": "Hunter's Blowgun",
+      "mana_cost": "{1}",
+      "mana_value": 1,
+      "colors": [],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [
+        "Equipment"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "equipment",
+        "static_pump",
+        "conditional_effect",
+        "keyword_grant"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/h/HuntersBlowgun.java"
+    },
+    {
+      "name": "Hydroblast",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Blue Faeries.dek",
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "counter_target",
+        "destroy_target",
+        "modal",
+        "color_hoser"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/h/Hydroblast.java"
+    },
+    {
+      "name": "Ichor Wellspring",
+      "mana_cost": "{2}",
+      "mana_value": 2,
+      "colors": [],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "etb_trigger",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/i/IchorWellspring.java"
+    },
+    {
+      "name": "Idyllic Beachfront",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Plains",
+        "Island"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "W",
+        "U"
+      ],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "dual_land",
+        "enters_tapped",
+        "mana_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/i/IdyllicBeachfront.java"
+    },
+    {
+      "name": "Island",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Island"
+      ],
+      "supertypes": [
+        "Basic"
+      ],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "U"
+      ],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek",
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "mana_ability"
+      ],
+      "java_file": "Mage/src/main/java/mage/cards/basiclands/Island.java"
+    },
+    {
+      "name": "Journey to Nowhere",
+      "mana_cost": "{1}{W}",
+      "mana_value": 2,
+      "colors": [
+        "W"
+      ],
+      "types": [
+        "Enchantment"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "complex",
+      "mechanics": [
+        "etb_trigger",
+        "leaves_battlefield_trigger",
+        "exile_target",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/j/JourneyToNowhere.java"
+    },
+    {
+      "name": "Krark-Clan Shaman",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Goblin",
+        "Shaman"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "activated_ability",
+        "sacrifice_cost",
+        "removal",
+        "burn"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/k/KrarkClanShaman.java"
+    },
+    {
+      "name": "Lava Dart",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "burn",
+        "removal",
+        "flashback",
+        "sacrifice_cost"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/l/LavaDart.java"
+    },
+    {
+      "name": "Lead the Stampede",
+      "mana_cost": "{2}{G}",
+      "mana_value": 3,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "card_selection"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/l/LeadTheStampede.java"
+    },
+    {
+      "name": "Lembas",
+      "mana_cost": "{2}",
+      "mana_value": 2,
+      "colors": [],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [
+        "Food"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "etb_trigger",
+        "card_selection",
+        "draw_card",
+        "sacrifice_cost",
+        "life_gain",
+        "graveyard_recursion"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/l/Lembas.java"
+    },
+    {
+      "name": "Lightning Bolt",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek",
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "burn",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/l/LightningBolt.java"
+    },
+    {
+      "name": "Llanowar Elves",
+      "mana_cost": "{G}",
+      "mana_value": 1,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Elf",
+        "Druid"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [
+        "G"
+      ],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "mana_ability",
+        "mana_dork",
+        "ramp",
+        "tap_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/l/LlanowarElves.java"
+    },
+    {
+      "name": "Lorien Revealed",
+      "mana_cost": "{3}{U}{U}",
+      "mana_value": 5,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "draw_card",
+        "cycling"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/l/LorienRevealed.java"
+    },
+    {
+      "name": "Makeshift Munitions",
+      "mana_cost": "{1}{R}",
+      "mana_value": 2,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Enchantment"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "activated_ability",
+        "sacrifice_cost",
+        "removal",
+        "burn"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/m/MakeshiftMunitions.java"
+    },
+    {
+      "name": "Masked Meower",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Spider",
+        "Cat",
+        "Hero"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "haste",
+        "discard",
+        "sacrifice_cost",
+        "draw_card",
+        "activated_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/m/MaskedMeower.java"
+    },
+    {
+      "name": "Masked Vandal",
+      "mana_cost": "{1}{G}",
+      "mana_value": 2,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Shapeshifter"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 3,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "etb_trigger",
+        "exile_target",
+        "removal",
+        "changeling"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/m/MaskedVandal.java"
+    },
+    {
+      "name": "Mental Note",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "self_mill",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/m/MentalNote.java"
+    },
+    {
+      "name": "Mistvault Bridge",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "U",
+        "B"
+      ],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "dual_land",
+        "enters_tapped",
+        "indestructible",
+        "mana_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/m/MistvaultBridge.java"
+    },
+    {
+      "name": "Monstrous Emergence",
+      "mana_cost": "{1}{G}",
+      "mana_value": 2,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "complex",
+      "mechanics": [
+        "removal",
+        "burn",
+        "power_based_damage"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/m/MonstrousEmergence.java"
+    },
+    {
+      "name": "Moon-Circuit Hacker",
+      "mana_cost": "{1}{U}",
+      "mana_value": 2,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "subtypes": [
+        "Human",
+        "Ninja"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "ninjutsu",
+        "draw_card",
+        "discard"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/m/MoonCircuitHacker.java"
+    },
+    {
+      "name": "Mountain",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Mountain"
+      ],
+      "supertypes": [
+        "Basic"
+      ],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "R"
+      ],
+      "decks": [
+        "Deck - Mono-Red Burn.dek",
+        "Deck - Mono Red Rally.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "mana_ability"
+      ],
+      "java_file": "Mage/src/main/java/mage/cards/basiclands/Mountain.java"
+    },
+    {
+      "name": "Murmuring Mystic",
+      "mana_cost": "{3}{U}",
+      "mana_value": 4,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "HUMAN",
+        "WIZARD"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 5,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "token_creation"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/m/MurmuringMystic.java"
+    },
+    {
+      "name": "Myr Enforcer",
+      "mana_cost": "{7}",
+      "mana_value": 7,
+      "colors": [],
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "subtypes": [
+        "Myr"
+      ],
+      "supertypes": [],
+      "power": 4,
+      "toughness": 4,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "affinity"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/m/MyrEnforcer.java"
+    },
+    {
+      "name": "Nihil Spellbomb",
+      "mana_cost": "{1}",
+      "mana_value": 1,
+      "colors": [],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "activated_ability",
+        "sacrifice_cost",
+        "tap_ability",
+        "exile_target",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/n/NihilSpellbomb.java"
+    },
+    {
+      "name": "Ninja of the Deep Hours",
+      "mana_cost": "{3}{U}",
+      "mana_value": 4,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Human",
+        "Ninja"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 2,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "ninjutsu",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/n/NinjaOfTheDeepHours.java"
+    },
+    {
+      "name": "Nyxborn Hydra",
+      "mana_cost": "{X}{G}",
+      "mana_value": 1,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "subtypes": [
+        "Hydra"
+      ],
+      "supertypes": [],
+      "power": 0,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "complex",
+      "mechanics": [
+        "bestow",
+        "alt_cost",
+        "reach",
+        "trample",
+        "add_counters",
+        "keyword_grant"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/n/NyxbornHydra.java"
+    },
+    {
+      "name": "Of One Mind",
+      "mana_cost": "{2}{U}",
+      "mana_value": 3,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "cost_reduction",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/o/OfOneMind.java"
+    },
+    {
+      "name": "Outlaw Medic",
+      "mana_cost": "{1}{W}",
+      "mana_value": 2,
+      "colors": [
+        "W"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Human",
+        "Rogue"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 3,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "lifelink",
+        "death_trigger",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/o/OutlawMedic.java"
+    },
+    {
+      "name": "Piracy Charm",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "modal",
+        "keyword_grant",
+        "static_pump",
+        "discard"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/p/PiracyCharm.java"
+    },
+    {
+      "name": "Ponder",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "card_selection",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/p/Ponder.java"
+    },
+    {
+      "name": "Preordain",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "card_selection",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/p/Preordain.java"
+    },
+    {
+      "name": "Priest of Titania",
+      "mana_cost": "{1}{G}",
+      "mana_value": 2,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Elf",
+        "Druid"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [
+        "G"
+      ],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "mana_ability",
+        "mana_dork",
+        "ramp",
+        "tribal_synergy",
+        "tap_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/p/PriestOfTitania.java"
+    },
+    {
+      "name": "Prismatic Strands",
+      "mana_cost": "{2}{W}",
+      "mana_value": 3,
+      "colors": [
+        "W"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "flashback",
+        "alt_cost",
+        "damage_prevention"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/p/PrismaticStrands.java"
+    },
+    {
+      "name": "Pulse of Murasa",
+      "mana_cost": "{2}{G}",
+      "mana_value": 3,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "graveyard_recursion",
+        "life_gain"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/p/PulseOfMurasa.java"
+    },
+    {
+      "name": "Pyroblast",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Red Burn.dek",
+        "Deck - Jund Wildfire.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "counter_target",
+        "destroy_target",
+        "modal",
+        "color_hoser"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/p/Pyroblast.java"
+    },
+    {
+      "name": "Quirion Ranger",
+      "mana_cost": "{G}",
+      "mana_value": 1,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Elf",
+        "Ranger"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "activated_ability",
+        "alt_cost"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/q/QuirionRanger.java"
+    },
+    {
+      "name": "Rally at the Hornburg",
+      "mana_cost": "{1}{R}",
+      "mana_value": 2,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "token_creation",
+        "haste"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/r/RallyAtTheHornburg.java"
+    },
+    {
+      "name": "Reckless Impulse",
+      "mana_cost": "{1}{R}",
+      "mana_value": 2,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "impulse_draw"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/r/RecklessImpulse.java"
+    },
+    {
+      "name": "Reckoner's Bargain",
+      "mana_cost": "{1}{B}",
+      "mana_value": 2,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "complex",
+      "mechanics": [
+        "sacrifice_cost",
+        "draw_card",
+        "life_gain"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/r/ReckonersBargain.java"
+    },
+    {
+      "name": "Red Elemental Blast",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Red Burn.dek",
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "counter_target",
+        "destroy_target",
+        "modal",
+        "color_hoser"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/r/RedElementalBlast.java"
+    },
+    {
+      "name": "Refurbished Familiar",
+      "mana_cost": "{3}{B}",
+      "mana_value": 4,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "subtypes": [
+        "Zombie",
+        "Rat"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "affinity",
+        "flying",
+        "etb_trigger",
+        "discard",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/r/RefurbishedFamiliar.java"
+    },
+    {
+      "name": "Relic of Progenitus",
+      "mana_cost": "{1}",
+      "mana_value": 1,
+      "colors": [],
+      "types": [
+        "Artifact"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek",
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "tap_ability",
+        "activated_ability",
+        "exile_target",
+        "draw_card",
+        "graveyard_hate"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/r/RelicOfProgenitus.java"
+    },
+    {
+      "name": "Sacred Cat",
+      "mana_cost": "{W}",
+      "mana_value": 1,
+      "colors": [
+        "W"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Cat"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "lifelink",
+        "embalm"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SacredCat.java"
+    },
+    {
+      "name": "Saiba Cryptomancer",
+      "mana_cost": "{1}{U}",
+      "mana_value": 2,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "MOONFOLK",
+        "NINJA"
+      ],
+      "supertypes": [],
+      "power": 0,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "complex",
+      "mechanics": [
+        "flash",
+        "backup"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SaibaCryptomancer.java"
+    },
+    {
+      "name": "Sea Gate",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Gate"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "enters_tapped",
+        "gate_land",
+        "mana_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SeaGate.java"
+    },
+    {
+      "name": "Searing Blaze",
+      "mana_cost": "{R}{R}",
+      "mana_value": 2,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek",
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "complex",
+      "mechanics": [
+        "landfall",
+        "burn",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SearingBlaze.java"
+    },
+    {
+      "name": "Seat of the Synod",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "U"
+      ],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "mana_ability",
+        "affinity_land"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SeatOfTheSynod.java"
+    },
+    {
+      "name": "Silverbluff Bridge",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "U",
+        "R"
+      ],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "dual_land",
+        "enters_tapped",
+        "indestructible",
+        "mana_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SilverbluffBridge.java"
+    },
+    {
+      "name": "Slagwoods Bridge",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "R",
+        "G"
+      ],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "dual_land",
+        "enters_tapped",
+        "indestructible",
+        "mana_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SlagwoodsBridge.java"
+    },
+    {
+      "name": "Sleep of the Dead",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "tap_ability",
+        "alt_cost",
+        "escape"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SleepOfTheDead.java"
+    },
+    {
+      "name": "Snap",
+      "mana_cost": "{1}{U}",
+      "mana_value": 2,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "bounce"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/Snap.java"
+    },
+    {
+      "name": "Sneaky Snacker",
+      "mana_cost": "{U}{B}",
+      "mana_value": 2,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Faerie",
+        "Rogue"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "complex",
+      "mechanics": [
+        "flying",
+        "graveyard_recursion",
+        "enters_tapped",
+        "draw_trigger"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SneakySnacker.java"
+    },
+    {
+      "name": "Snow-Covered Forest",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Forest"
+      ],
+      "supertypes": [
+        "Basic",
+        "Snow"
+      ],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "G"
+      ],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "mana_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SnowCoveredForest.java"
+    },
+    {
+      "name": "Spell Pierce",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "counter_target"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SpellPierce.java"
+    },
+    {
+      "name": "Spellstutter Sprite",
+      "mana_cost": "{1}{U}",
+      "mana_value": 2,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "FAERIE",
+        "WIZARD"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "flash",
+        "flying",
+        "etb_trigger",
+        "counter_target"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SpellstutterSprite.java"
+    },
+    {
+      "name": "Spinewoods Paladin",
+      "mana_cost": "{4}{G}",
+      "mana_value": 5,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Human",
+        "Knight"
+      ],
+      "supertypes": [],
+      "power": 5,
+      "toughness": 4,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "trample",
+        "etb_trigger",
+        "life_gain",
+        "alt_cost",
+        "plot"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SpinewoodsPaladin.java"
+    },
+    {
+      "name": "Squadron Hawk",
+      "mana_cost": "{1}{W}",
+      "mana_value": 2,
+      "colors": [
+        "W"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Bird"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "flying",
+        "etb_trigger",
+        "card_selection"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SquadronHawk.java"
+    },
+    {
+      "name": "Steel Sabotage",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "modal",
+        "counter_spell",
+        "artifact_hate"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/s/SteelSabotage.java"
+    },
+    {
+      "name": "Swamp",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [
+        "Swamp"
+      ],
+      "supertypes": [
+        "Basic"
+      ],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "B"
+      ],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "mana_ability"
+      ],
+      "java_file": "Mage/src/main/java/mage/cards/basiclands/Swamp.java"
+    },
+    {
+      "name": "The Modern Age",
+      "mana_cost": "{1}{U}",
+      "mana_value": 2,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Enchantment"
+      ],
+      "subtypes": [
+        "Saga"
+      ],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "complex",
+      "mechanics": [
+        "saga",
+        "draw_card",
+        "discard",
+        "transform",
+        "flying"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/t/TheModernAge.java"
+    },
+    {
+      "name": "Thought Scour",
+      "mana_cost": "{U}",
+      "mana_value": 1,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "mill",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/t/ThoughtScour.java"
+    },
+    {
+      "name": "Thoughtcast",
+      "mana_cost": "{4}{U}",
+      "mana_value": 5,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "affinity",
+        "draw_card"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/t/Thoughtcast.java"
+    },
+    {
+      "name": "Thraben Charm",
+      "mana_cost": "{1}{W}",
+      "mana_value": 2,
+      "colors": [
+        "W"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "modal",
+        "burn",
+        "destroy_target",
+        "exile_target",
+        "removal"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/t/ThrabenCharm.java"
+    },
+    {
+      "name": "Timberwatch Elf",
+      "mana_cost": "{2}{G}",
+      "mana_value": 3,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Elf"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 2,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "activated_ability",
+        "static_pump",
+        "tribal_synergy",
+        "tap_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/t/TimberwatchElf.java"
+    },
+    {
+      "name": "Tolarian Terror",
+      "mana_cost": "{6}{U}",
+      "mana_value": 7,
+      "colors": [
+        "U"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "SERPENT"
+      ],
+      "supertypes": [],
+      "power": 5,
+      "toughness": 5,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "cost_reduction",
+        "ward"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/t/TolarianTerror.java"
+    },
+    {
+      "name": "Toxin Analysis",
+      "mana_cost": "{B}",
+      "mana_value": 1,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "keyword_grant",
+        "token_creation",
+        "investigate"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/t/ToxinAnalysis.java"
+    },
+    {
+      "name": "Troublemaker Ouphe",
+      "mana_cost": "{1}{G}",
+      "mana_value": 2,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Ouphe"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 2,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "etb_trigger",
+        "exile_target",
+        "bargain",
+        "sacrifice_cost",
+        "artifact_hate",
+        "enchantment_hate"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/t/TroublemakerOuphe.java"
+    },
+    {
+      "name": "Twisted Landscape",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Land"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "C"
+      ],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "moderate",
+      "mechanics": [
+        "mana_ability",
+        "sacrifice_cost",
+        "tap_ability",
+        "fetch_effect",
+        "cycling"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/t/TwistedLandscape.java"
+    },
+    {
+      "name": "Unexpected Fangs",
+      "mana_cost": "{1}{B}",
+      "mana_value": 2,
+      "colors": [
+        "B"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "simple",
+      "mechanics": [
+        "add_counters"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/u/UnexpectedFangs.java"
+    },
+    {
+      "name": "Vault of Whispers",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": [],
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": true,
+      "produces_mana": [
+        "B"
+      ],
+      "decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "trivial",
+      "mechanics": [
+        "mana_ability",
+        "affinity_land"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/v/VaultOfWhispers.java"
+    },
+    {
+      "name": "Vitu-Ghazi Inspector",
+      "mana_cost": "{1}{G}",
+      "mana_value": 2,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Elf",
+        "Detective"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 3,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "collect_evidence",
+        "reach",
+        "etb_trigger",
+        "counter_placement",
+        "life_gain"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/v/VituGhaziInspector.java"
+    },
+    {
+      "name": "Voldaren Epicure",
+      "mana_cost": "{R}",
+      "mana_value": 1,
+      "colors": [
+        "R"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Vampire"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Mono-Red Burn.dek",
+        "Deck - Mono Red Rally.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "etb_trigger",
+        "burn",
+        "token_creation"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/v/VoldarenEpicure.java"
+    },
+    {
+      "name": "Weather the Storm",
+      "mana_cost": "{1}{G}",
+      "mana_value": 2,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Instant"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": true,
+      "complexity": "moderate",
+      "mechanics": [
+        "storm_like",
+        "life_gain"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/w/WeatherTheStorm.java"
+    },
+    {
+      "name": "Wellwisher",
+      "mana_cost": "{1}{G}",
+      "mana_value": 2,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Elf"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "tap_ability",
+        "activated_ability"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/w/Wellwisher.java"
+    },
+    {
+      "name": "Winding Way",
+      "mana_cost": "{1}{G}",
+      "mana_value": 2,
+      "colors": [
+        "G"
+      ],
+      "types": [
+        "Sorcery"
+      ],
+      "subtypes": [],
+      "supertypes": [],
+      "power": null,
+      "toughness": null,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Elves.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "modal",
+        "card_selection",
+        "mill"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/w/WindingWay.java"
+    },
+    {
+      "name": "Writhing Chrysalis",
+      "mana_cost": "{2}{R}{G}",
+      "mana_value": 4,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Eldrazi",
+        "Drone"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 3,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "sideboard_only": false,
+      "complexity": "complex",
+      "mechanics": [
+        "devoid",
+        "spell_cast_trigger",
+        "token_creation",
+        "reach",
+        "sacrifice_trigger",
+        "add_counters"
+      ],
+      "java_file": "Mage.Sets/src/mage/cards/w/WrithingChrysalis.java"
+    }
+  ],
+  "unresolved": []
+}
