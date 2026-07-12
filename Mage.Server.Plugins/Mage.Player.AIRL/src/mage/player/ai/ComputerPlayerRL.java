@@ -178,7 +178,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
     // Main policy exploration (actor) - epsilon mixture + correlated full-random turn.
     private static final double ACTION_EPS_START = EnvConfig.f64("RL_ACTION_EPS_START", 0.05);
-    private static final double ACTION_EPS_END = EnvConfig.f64("RL_ACTION_EPS_END", 0.01);
+    // END defaults clamp to START so zeroing START disables the schedule entirely
+    // (audit: zeroing only START made exploration RAMP UP toward the END default).
+    private static final double ACTION_EPS_END = EnvConfig.f64("RL_ACTION_EPS_END", Math.min(ACTION_EPS_START, 0.01));
     private static final int ACTION_EPS_DECAY_EPISODES = EnvConfig.i32("RL_ACTION_EPS_DECAY_EPISODES", 200000);
     private static final double MULLIGAN_ACTION_EPS_START =
             EnvConfig.f64("MULLIGAN_ACTION_EPS_START", ACTION_EPS_START);
@@ -187,7 +189,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final int MULLIGAN_ACTION_EPS_DECAY_EPISODES =
             EnvConfig.i32("MULLIGAN_ACTION_EPS_DECAY_EPISODES", ACTION_EPS_DECAY_EPISODES);
     private static final double TURN_RANDOM_EPS_START = EnvConfig.f64("RL_FULL_TURN_RANDOM_START", 0.03);
-    private static final double TURN_RANDOM_EPS_END = EnvConfig.f64("RL_FULL_TURN_RANDOM_END", 0.03);
+    private static final double TURN_RANDOM_EPS_END = EnvConfig.f64("RL_FULL_TURN_RANDOM_END", Math.min(TURN_RANDOM_EPS_START, 0.03));
     private static final int TURN_RANDOM_EPS_DECAY_EPISODES = EnvConfig.i32("RL_FULL_TURN_RANDOM_DECAY_EPISODES", 400000);
     private static final String TURN_UNIFORM_OLD_LOGP_SOURCE_RAW =
             EnvConfig.str("RL_TURN_UNIFORM_OLD_LOGP_SOURCE", "policy").trim().toLowerCase(Locale.ROOT);
@@ -310,6 +312,9 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final float SHADOW_W_PASS = (float) Math.max(0.0, EnvConfig.f64("RL_SHADOW_W_PASS", 0.2));
     private static final float SHADOW_W_ACTION = (float) Math.max(0.01, EnvConfig.f64("RL_SHADOW_W_ACTION", 1.0));
     private static final float SHADOW_W_DISAGREE = (float) Math.max(0.01, EnvConfig.f64("RL_SHADOW_W_DISAGREE", 2.0));
+    // Hybrid combat intervention (Sol #81 Test 1): delegate attack/block decisions to
+    // CP7's heuristics (super) while the RL policy plays everything else. Eval-only probe.
+    private static final boolean COMBAT_TAKEOVER = EnvConfig.bool("RL_COMBAT_TAKEOVER", false);
 
     public void setShadowDistillEpisode(boolean eligible) {
         this.shadowDistillEpisode = eligible;
@@ -8424,6 +8429,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         if (game.isSimulation()) {
             return;
         }
+        // Hybrid combat intervention (Sol #81 Test 1): the RL policy plays everything
+        // EXCEPT combat; CP7's heuristic declareAttackers/declareBlockers takes over.
+        // If this alone recovers a large share of the rally/terror pilot gap, combat
+        // knowledge is the missing channel and combat-label capture is justified.
+        if (COMBAT_TAKEOVER) {
+            super.selectAttackers(game, attackingPlayerId);
+            return;
+        }
         try {
             // Build possible attackers
             List<Permanent> possibleAttackers = new ArrayList<>();
@@ -8510,6 +8523,24 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     break; // DONE picked, stop
                 }
                 selectedAttackers.add(phase1Candidates.get(pickIdx).creature);
+            }
+
+            if (!selectedIndices.isEmpty() && shouldLogReplayDecision(StateSequenceBuilder.ActionType.DECLARE_ATTACKS)) {
+                List<String> replayAttackerNames = phase1Candidates.stream()
+                        .map(cc -> cc.isDone() ? "DONE" : cc.creature.getName())
+                        .collect(Collectors.toList());
+                logReplayDecision(
+                        StateSequenceBuilder.ActionType.DECLARE_ATTACKS,
+                        replayAttackerNames,
+                        selectedIndices,
+                        attackPickResult.behavior.behaviorProbs,
+                        candidateCount,
+                        valueScore,
+                        game,
+                        null,
+                        replayCandidateObjectIds(phase1Candidates, candidateCount, game),
+                        Collections.emptyList()
+                );
             }
 
             // Record Phase 1 TrainingData
@@ -8660,6 +8691,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     @Override
     public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         if (game.isSimulation()) {
+            return;
+        }
+        // Hybrid combat intervention (Sol #81 Test 1): CP7 heuristic handles blocks.
+        if (COMBAT_TAKEOVER) {
+            super.selectBlockers(source, game, defendingPlayerId);
             return;
         }
         try {
