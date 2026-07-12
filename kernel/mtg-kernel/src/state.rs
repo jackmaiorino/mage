@@ -79,6 +79,10 @@ pub struct PlayerState {
     pub mana_pool: [u8; 6],
     pub has_lost: bool,
     pub lands_played_this_turn: u8,
+    /// Set by `event::commit` when a `Draw` was attempted against an empty
+    /// library. Checked (and turned into `has_lost`) by
+    /// `trigger::sba_fixed_point` (rule 704.5c).
+    pub drew_from_empty: bool,
 }
 
 impl PlayerState {
@@ -92,6 +96,7 @@ impl PlayerState {
             mana_pool: [0; 6],
             has_lost: false,
             lands_played_this_turn: 0,
+            drew_from_empty: false,
         }
     }
 }
@@ -129,6 +134,12 @@ pub struct StackItem {
     pub source: ObjectId,
     pub controller: PlayerId,
     pub targets: Vec<Target>,
+    /// `Some` for a triggered ability (its effect program, resolved off
+    /// `trigger::PendingTrigger` at the time it was placed on the stack).
+    /// `None` for a spell, whose program is looked up from
+    /// `card_def::CARD_DEFS[objects[source].card_def].spell_effect` at
+    /// resolution time instead.
+    pub trigger_effect: Option<crate::effect::EffectOp>,
 }
 
 /// Counter-based, seedable, serializable PRNG (SplitMix64). Deterministic:
@@ -164,6 +175,10 @@ pub struct GameState {
     pub exile: Vec<ObjectId>,
     pub command: Vec<ObjectId>,
     pub rng: SplitMix64,
+    /// Priority/stack/turn-structure bookkeeping and the propose-commit
+    /// event log, all owned by the `engine`/`event`/`trigger` modules. See
+    /// `engine::EngineState`.
+    pub engine: crate::engine::EngineState,
 }
 
 impl GameState {
@@ -214,6 +229,7 @@ impl GameState {
             exile: Vec::new(),
             command: Vec::new(),
             rng: SplitMix64::seed(seed),
+            engine: crate::engine::EngineState::default(),
         }
     }
 

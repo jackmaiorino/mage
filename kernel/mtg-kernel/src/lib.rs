@@ -13,9 +13,15 @@
 //! - O(1) snapshot/branch via copy-on-write or reversible deltas.
 //! - Batched `reset/step/legal_actions/snapshot/restore` as the public API.
 
+pub mod card_def;
+pub mod effect;
+pub mod engine;
+pub mod event;
 pub mod ids;
+pub mod mana;
 pub mod snapshot;
 pub mod state;
 pub mod trace;
+pub mod trigger;
 
 pub const KERNEL_VERSION: &str = "0.0.1-spike";
