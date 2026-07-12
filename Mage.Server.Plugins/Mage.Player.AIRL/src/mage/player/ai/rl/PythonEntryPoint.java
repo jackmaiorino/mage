@@ -160,7 +160,8 @@ public interface PythonEntryPoint {
             int cardBeliefDim,
             byte[] worldModelLabelsBytes,
             int worldModelDim,
-            byte[] silEligibleBytes
+            byte[] silEligibleBytes,
+            byte[] entropyScaleBytes
     );
 
     /**

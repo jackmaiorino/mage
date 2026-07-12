@@ -372,6 +372,48 @@ public class RLTrainer {
     private static final double META_HYBRID_META_P = EnvConfig.f64("META_HYBRID_META_P", 0.75);
     private static final boolean SELFPLAY_OPPONENT_TRAINING = EnvConfig.bool("SELFPLAY_OPPONENT_TRAINING", true);
 
+    // ============================================================
+    // Population mode (league spec: CP7 anchors + frozen qualified
+    // snapshot pool + live self-play, PFSP-weighted pool sampling)
+    // ============================================================
+    private static final double POP_ANCHOR_P = EnvConfig.f64("POP_ANCHOR_P", 0.50);
+    private static final double POP_FROZEN_P = EnvConfig.f64("POP_FROZEN_P", 0.35);
+    private static final double POP_LIVE_P = EnvConfig.f64("POP_LIVE_P", 0.15);
+    // skill:weight pairs, normalized within the anchor branch
+    private static final String POP_ANCHOR_SKILLS = EnvConfig.str("POP_ANCHOR_SKILLS", "5:0.15,6:0.15,7:0.15,8:0.05");
+    private static final double POP_PFSP_P = EnvConfig.f64("POP_PFSP_P", 0.80);
+    private static final double POP_PFSP_FLOOR = EnvConfig.f64("POP_PFSP_FLOOR", 0.05);
+    private static final int POP_EMA_WINDOW = EnvConfig.i32("POP_EMA_WINDOW", 200);
+    // Below this many games an opponent gets a fixed exploration weight so new
+    // pool members are guaranteed exposure before PFSP can judge them.
+    private static final int POP_MIN_GAMES_FULL_WEIGHT = EnvConfig.i32("POP_MIN_GAMES_FULL_WEIGHT", 20);
+    private static final double POP_FRESH_WEIGHT = EnvConfig.f64("POP_FRESH_WEIGHT", 0.25);
+    private static final int POP_SNAPSHOT_EVERY_EPISODES = EnvConfig.i32("POP_SNAPSHOT_EVERY_EPISODES", 2500);
+    private static final double POP_QUAL_TOLERANCE = EnvConfig.f64("POP_QUAL_TOLERANCE", 0.02);
+    private static final int POP_DEVBAR_SKILL = EnvConfig.i32("POP_DEVBAR_SKILL", 5);
+    private static final int POP_DEVBAR_GPM = EnvConfig.i32("POP_DEVBAR_GPM", 6);
+    private static final int POP_POOL_MAX = EnvConfig.i32("POP_POOL_MAX", 16);
+    // Source-conditional entropy: multiplier on the scheduled entropy coef by
+    // episode opponent source. With a flat schedule at 0.02, anchor=1.0 and
+    // population=2.5 realize the 0.02-CP7 / 0.05-population league spec.
+    private static final double POP_ENTROPY_SCALE_ANCHOR = EnvConfig.f64("POP_ENTROPY_SCALE_ANCHOR", 1.0);
+    private static final double POP_ENTROPY_SCALE_POPULATION = EnvConfig.f64("POP_ENTROPY_SCALE_POPULATION", 2.5);
+
+    private static final class PopStats {
+        double ema = 0.5; // agent winrate vs this opponent
+        long games = 0;
+    }
+    private static final java.util.concurrent.ConcurrentHashMap<String, PopStats> POP_STATS = new java.util.concurrent.ConcurrentHashMap<>();
+    private static final java.util.concurrent.CopyOnWriteArrayList<String> POP_POOL = new java.util.concurrent.CopyOnWriteArrayList<>();
+    private static final ThreadLocal<String> THREAD_LOCAL_POP_KEY = new ThreadLocal<>();
+    private static final AtomicInteger POP_LAST_TICK_EP = new AtomicInteger(0);
+    private static final java.util.concurrent.atomic.AtomicBoolean POP_STATE_LOADED = new java.util.concurrent.atomic.AtomicBoolean(false);
+    private static volatile double POP_PARENT_DEVBAR_WR = -1.0;
+    private static volatile String POP_LAST_QUAL_CANDIDATE = "";
+    private static volatile int POP_CONSEC_REJECTS = 0;
+    private static volatile double[] POP_ANCHOR_SKILL_WEIGHTS = null;
+    private static volatile int[] POP_ANCHOR_SKILL_IDS = null;
+
     private static final Object LEAGUE_LOCK = new Object();
     private static LeagueState LEAGUE_STATE = null;
     private static final AtomicInteger LEAGUE_LAST_TICK_EP = new AtomicInteger(0);
@@ -2775,6 +2817,7 @@ public class RLTrainer {
                         try {
                             maybeRunLeagueTick(epNumber);
                             maybeRunLadderTick(epNumber);
+                            maybeRunPopulationTick(epNumber);
                         } catch (Exception e) {
                             logger.warn("League/Ladder tick failed at ep " + epNumber, e);
                         }
@@ -2816,6 +2859,13 @@ public class RLTrainer {
 
                             // Update per-deck rolling winrate for matchup-balanced sampling.
                             recordDeckTrainingOutcome(rlPlayerDeckPath.getFileName().toString(), rlPlayerWon);
+                        }
+
+                        // Population mode: update the per-opponent EMA that drives PFSP
+                        String popKey = THREAD_LOCAL_POP_KEY.get();
+                        if (popKey != null) {
+                            recordPopulationOutcome(popKey, rlPlayerWon);
+                            THREAD_LOCAL_POP_KEY.remove();
                         }
 
                         // Record opponent side stats for meta RL opponents
@@ -5545,6 +5595,23 @@ public class RLTrainer {
             attachWorldModelTargets(opponentTrainingData);
         }
 
+        // Population mode: source-conditional entropy (read-only; the outcome
+        // hook owns removal of the thread-local key)
+        String popEntropyKey = THREAD_LOCAL_POP_KEY.get();
+        if (popEntropyKey != null) {
+            float scale = popEntropyKey.startsWith("cp7:")
+                    ? (float) POP_ENTROPY_SCALE_ANCHOR
+                    : (float) POP_ENTROPY_SCALE_POPULATION;
+            if (scale != 1.0f) {
+                for (StateSequenceBuilder.TrainingData td : rlPlayerTrainingData) {
+                    td.entropyScale = scale;
+                }
+                for (StateSequenceBuilder.TrainingData td : opponentTrainingData) {
+                    td.entropyScale = scale;
+                }
+            }
+        }
+
         // --- Win-replay self-imitation (Codex #32) ---
         // On a win: terminal-win gate the rows (silEligible -> Python SIL loss
         // reinforces them) and store the decisive endgame in the persistent buffer.
@@ -6070,6 +6137,8 @@ public class RLTrainer {
     private Player createTrainingOpponentInner(int episodeNum, Random rand) {
         String mode = OPPONENT_SAMPLER == null ? "league" : OPPONENT_SAMPLER.trim().toLowerCase();
         switch (mode) {
+            case "population":
+                return createPopulationOpponent(episodeNum, rand);
             case "self":
                 return createSelfPlayOpponent();
             case "meta":
@@ -6105,6 +6174,350 @@ public class RLTrainer {
     private Player newSelfPlayOpponent(String name) {
         return new ComputerPlayerRL(name, RangeOfInfluence.ALL, sharedModel,
                 false, SELFPLAY_OPPONENT_TRAINING, "train");
+    }
+
+    // ============================================================
+    // Population sampler
+    // ============================================================
+
+    private Player createPopulationOpponent(int episodeNum, Random rand) {
+        ensurePopulationStateLoaded();
+        double anchorP = POP_ANCHOR_P;
+        double frozenP = POP_POOL.isEmpty() ? 0.0 : POP_FROZEN_P;
+        double liveP = POP_LIVE_P;
+        if (POP_POOL.isEmpty()) {
+            // No qualified snapshots yet: hand the frozen mass to the anchors.
+            anchorP += POP_FROZEN_P;
+        }
+        double total = anchorP + frozenP + liveP;
+        double u = rand.nextDouble() * (total > 0 ? total : 1.0);
+        if (u < anchorP) {
+            return popAnchorOpponent(rand);
+        }
+        if (u < anchorP + frozenP) {
+            return popFrozenOpponent(rand);
+        }
+        return popLiveOpponent();
+    }
+
+    private Player popAnchorOpponent(Random rand) {
+        parsePopAnchorSkills();
+        int[] skills = POP_ANCHOR_SKILL_IDS;
+        double[] weights = POP_ANCHOR_SKILL_WEIGHTS;
+        int skill = skills[skills.length - 1];
+        double tot = 0;
+        for (double w : weights) tot += w;
+        double u = rand.nextDouble() * tot;
+        for (int i = 0; i < skills.length; i++) {
+            u -= weights[i];
+            if (u <= 0) { skill = skills[i]; break; }
+        }
+        lastOpponentType = "POP-CP7-S" + skill;
+        THREAD_LOCAL_POP_KEY.set("cp7:s" + skill);
+        return new ComputerPlayer7("PopAnchor-s" + skill, RangeOfInfluence.ALL, skill);
+    }
+
+    private Player popFrozenOpponent(Random rand) {
+        List<String> pool = new ArrayList<>(POP_POOL);
+        if (pool.isEmpty()) {
+            return popLiveOpponent();
+        }
+        String key;
+        if (rand.nextDouble() < POP_PFSP_P) {
+            key = pfspPick(pool, rand);
+        } else {
+            key = pool.get(rand.nextInt(pool.size()));
+        }
+        lastOpponentType = "POP-FROZEN";
+        THREAD_LOCAL_POP_KEY.set(key);
+        setPopMirrorDeckOverride();
+        // trainingEnabled=false: frozen opponents generate no training data
+        return new ComputerPlayerRL("PopSnap", RangeOfInfluence.ALL, sharedModel, false, false, key);
+    }
+
+    private Player popLiveOpponent() {
+        lastOpponentType = "POP-LIVE";
+        THREAD_LOCAL_POP_KEY.set("live");
+        setPopMirrorDeckOverride();
+        return newSelfPlayOpponent("PopLive");
+    }
+
+    /**
+     * Frozen/live population opponents are same-profile policies: they must
+     * pilot the agent's own deck (mirror), not a random gauntlet deck.
+     */
+    private void setPopMirrorDeckOverride() {
+        String agentList = (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty())
+                ? RL_AGENT_DECK_LIST_FILE : DECK_LIST_FILE;
+        if (agentList != null && !agentList.trim().isEmpty()) {
+            THREAD_LOCAL_OPPONENT_DECK_OVERRIDE.set(Paths.get(agentList.trim()));
+        }
+    }
+
+    private static String pfspPick(List<String> pool, Random rand) {
+        double[] w = new double[pool.size()];
+        double tot = 0;
+        for (int i = 0; i < pool.size(); i++) {
+            PopStats s = POP_STATS.get(pool.get(i));
+            double weight;
+            if (s == null || s.games < POP_MIN_GAMES_FULL_WEIGHT) {
+                weight = POP_FRESH_WEIGHT;
+            } else {
+                weight = Math.max(POP_PFSP_FLOOR, s.ema * (1.0 - s.ema));
+            }
+            w[i] = weight;
+            tot += weight;
+        }
+        double u = rand.nextDouble() * tot;
+        for (int i = 0; i < w.length; i++) {
+            u -= w[i];
+            if (u <= 0) return pool.get(i);
+        }
+        return pool.get(pool.size() - 1);
+    }
+
+    static void recordPopulationOutcome(String key, boolean agentWon) {
+        POP_STATS.compute(key, (k, s) -> {
+            if (s == null) s = new PopStats();
+            s.games++;
+            double alpha = Math.max(2.0 / (POP_EMA_WINDOW + 1.0), 1.0 / s.games);
+            s.ema += alpha * ((agentWon ? 1.0 : 0.0) - s.ema);
+            return s;
+        });
+    }
+
+    private static void parsePopAnchorSkills() {
+        if (POP_ANCHOR_SKILL_IDS != null) {
+            return;
+        }
+        List<Integer> ids = new ArrayList<>();
+        List<Double> ws = new ArrayList<>();
+        for (String part : POP_ANCHOR_SKILLS.split(",")) {
+            String[] kv = part.trim().split(":");
+            if (kv.length != 2) continue;
+            try {
+                ids.add(Integer.parseInt(kv[0].trim()));
+                ws.add(Double.parseDouble(kv[1].trim()));
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        if (ids.isEmpty()) {
+            ids.add(7);
+            ws.add(1.0);
+        }
+        int[] idArr = new int[ids.size()];
+        double[] wArr = new double[ws.size()];
+        for (int i = 0; i < ids.size(); i++) {
+            idArr[i] = ids.get(i);
+            wArr[i] = ws.get(i);
+        }
+        POP_ANCHOR_SKILL_WEIGHTS = wArr;
+        POP_ANCHOR_SKILL_IDS = idArr;
+    }
+
+    /**
+     * Population tick: every POP_SNAPSHOT_EVERY_EPISODES, take the newest
+     * Python-saved snapshot_step_*.pt, benchmark it on the dev bar (vs CP7 at
+     * POP_DEVBAR_SKILL across the gauntlet), and admit it to the frozen pool
+     * iff it is within POP_QUAL_TOLERANCE of its parent (the last admitted
+     * snapshot). Rejections are counted; two consecutive rejections is the
+     * operator kill signal.
+     */
+    private void maybeRunPopulationTick(int episodeNum) {
+        if (POP_SNAPSHOT_EVERY_EPISODES <= 0) {
+            return;
+        }
+        if (episodeNum <= 0 || (episodeNum % POP_SNAPSHOT_EVERY_EPISODES) != 0) {
+            return;
+        }
+        String mode = OPPONENT_SAMPLER == null ? "league" : OPPONENT_SAMPLER.trim().toLowerCase();
+        if (!"population".equals(mode)) {
+            return;
+        }
+        int last = POP_LAST_TICK_EP.get();
+        if (episodeNum <= last || !POP_LAST_TICK_EP.compareAndSet(last, episodeNum)) {
+            return;
+        }
+        ensurePopulationStateLoaded();
+        try {
+            String profile = profileName();
+            Path snap = findLatestStepSnapshotForProfile(profile);
+            if (snap == null) {
+                logger.warn("[POP] tick ep=" + episodeNum + ": no snapshot_step_*.pt found yet");
+                return;
+            }
+            String key = "snap:" + snap.toAbsolutePath().normalize();
+            if (key.equals(POP_LAST_QUAL_CANDIDATE) || POP_POOL.contains(key)) {
+                logger.info("[POP] tick ep=" + episodeNum + ": no new snapshot since last tick");
+                return;
+            }
+            POP_LAST_QUAL_CANDIDATE = key;
+            String agentList = (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty())
+                    ? RL_AGENT_DECK_LIST_FILE : null;
+            logger.info("[POP] tick ep=" + episodeNum + ": qualifying " + snap.getFileName()
+                    + " vs CP7 s" + POP_DEVBAR_SKILL + " gpm=" + POP_DEVBAR_GPM);
+            long t0 = System.currentTimeMillis();
+            double wr = runLeagueBenchmarkPolicy(key, LeagueOpponentSpec.bot(POP_DEVBAR_SKILL),
+                    agentList, LEAGUE_BASELINE_DECKLIST_FILE, POP_DEVBAR_GPM, "pop-qual-ep" + episodeNum);
+            long secs = (System.currentTimeMillis() - t0) / 1000;
+            double parent = POP_PARENT_DEVBAR_WR;
+            boolean admit = parent < 0 || wr >= parent - POP_QUAL_TOLERANCE;
+            if (admit) {
+                POP_POOL.add(key);
+                while (POP_POOL.size() > POP_POOL_MAX) {
+                    POP_POOL.remove(0);
+                }
+                POP_PARENT_DEVBAR_WR = wr;
+                POP_CONSEC_REJECTS = 0;
+                logger.info(String.format("[POP] ADMIT ep=%d %s devbar=%.3f parent=%.3f pool=%d (%ds)",
+                        episodeNum, snap.getFileName(), wr, parent, POP_POOL.size(), secs));
+            } else {
+                POP_CONSEC_REJECTS++;
+                logger.warn(String.format("[POP] REJECT ep=%d %s devbar=%.3f parent=%.3f consecRejects=%d (%ds)%s",
+                        episodeNum, snap.getFileName(), wr, parent, POP_CONSEC_REJECTS, secs,
+                        POP_CONSEC_REJECTS >= 2 ? " *** KILL SIGNAL: 2 consecutive rejections ***" : ""));
+            }
+            savePopulationState(episodeNum);
+            writePopulationStatus(episodeNum);
+        } catch (Exception e) {
+            logger.warn("[POP] tick failed at ep " + episodeNum, e);
+        }
+    }
+
+    private static Path findLatestStepSnapshotForProfile(String profile) {
+        try {
+            Path dir = profileSnapshotsDir(profile);
+            if (!Files.isDirectory(dir)) {
+                return null;
+            }
+            Path best = null;
+            long bestStep = -1;
+            try (java.util.stream.Stream<Path> stream = Files.list(dir)) {
+                for (Path p : stream.filter(Files::isRegularFile).collect(Collectors.toList())) {
+                    String n = p.getFileName().toString();
+                    if (!n.startsWith("snapshot_step_") || !n.endsWith(".pt")) {
+                        continue;
+                    }
+                    long step;
+                    try {
+                        step = Long.parseLong(n.substring("snapshot_step_".length(), n.length() - 3));
+                    } catch (NumberFormatException e) {
+                        continue;
+                    }
+                    if (step > bestStep) {
+                        bestStep = step;
+                        best = p;
+                    }
+                }
+            }
+            return best == null ? null : best.toAbsolutePath().normalize();
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    private Path populationStatePath() {
+        return Paths.get(logsBaseDir(), "league", "population_state.json");
+    }
+
+    private void ensurePopulationStateLoaded() {
+        if (!POP_STATE_LOADED.compareAndSet(false, true)) {
+            return;
+        }
+        try {
+            Path p = populationStatePath();
+            if (!Files.isRegularFile(p)) {
+                return;
+            }
+            String json = new String(Files.readAllBytes(p), java.nio.charset.StandardCharsets.UTF_8);
+            com.google.gson.JsonObject obj = com.google.gson.JsonParser.parseString(json).getAsJsonObject();
+            if (obj.has("parent_devbar_wr")) {
+                POP_PARENT_DEVBAR_WR = obj.get("parent_devbar_wr").getAsDouble();
+            }
+            if (obj.has("consec_rejects")) {
+                POP_CONSEC_REJECTS = obj.get("consec_rejects").getAsInt();
+            }
+            if (obj.has("pool")) {
+                for (com.google.gson.JsonElement e : obj.getAsJsonArray("pool")) {
+                    String key = e.getAsString();
+                    // Drop pool entries whose snapshot file no longer exists
+                    String path = key.startsWith("snap:") ? key.substring(5) : key;
+                    if (Files.isRegularFile(Paths.get(path)) && !POP_POOL.contains(key)) {
+                        POP_POOL.add(key);
+                    }
+                }
+            }
+            if (obj.has("stats")) {
+                com.google.gson.JsonObject stats = obj.getAsJsonObject("stats");
+                for (String key : stats.keySet()) {
+                    com.google.gson.JsonObject s = stats.getAsJsonObject(key);
+                    PopStats ps = new PopStats();
+                    ps.ema = s.get("ema").getAsDouble();
+                    ps.games = s.get("games").getAsLong();
+                    POP_STATS.put(key, ps);
+                }
+            }
+            logger.info("[POP] restored state: pool=" + POP_POOL.size()
+                    + " parent=" + String.format("%.3f", POP_PARENT_DEVBAR_WR)
+                    + " trackedOpponents=" + POP_STATS.size());
+        } catch (Exception e) {
+            logger.warn("[POP] failed to load population state: " + e.getMessage());
+        }
+    }
+
+    private void savePopulationState(int episodeNum) {
+        try {
+            com.google.gson.JsonObject obj = new com.google.gson.JsonObject();
+            obj.addProperty("episode", episodeNum);
+            obj.addProperty("parent_devbar_wr", POP_PARENT_DEVBAR_WR);
+            obj.addProperty("consec_rejects", POP_CONSEC_REJECTS);
+            com.google.gson.JsonArray pool = new com.google.gson.JsonArray();
+            for (String key : POP_POOL) {
+                pool.add(key);
+            }
+            obj.add("pool", pool);
+            com.google.gson.JsonObject stats = new com.google.gson.JsonObject();
+            for (java.util.Map.Entry<String, PopStats> e : POP_STATS.entrySet()) {
+                com.google.gson.JsonObject s = new com.google.gson.JsonObject();
+                s.addProperty("ema", e.getValue().ema);
+                s.addProperty("games", e.getValue().games);
+                stats.add(e.getKey(), s);
+            }
+            obj.add("stats", stats);
+            Path p = populationStatePath();
+            Files.createDirectories(p.getParent());
+            Path tmp = p.resolveSibling(p.getFileName() + ".tmp");
+            Files.write(tmp, obj.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));
+            Files.move(tmp, p, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            logger.warn("[POP] failed to save population state: " + e.getMessage());
+        }
+    }
+
+    private void writePopulationStatus(int episodeNum) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("episode: ").append(episodeNum).append('\n');
+            sb.append("parent_devbar_wr: ").append(String.format("%.3f", POP_PARENT_DEVBAR_WR)).append('\n');
+            sb.append("consec_rejects: ").append(POP_CONSEC_REJECTS).append('\n');
+            sb.append("pool_size: ").append(POP_POOL.size()).append('\n');
+            sb.append("opponents:\n");
+            List<String> keys = new ArrayList<>(POP_STATS.keySet());
+            java.util.Collections.sort(keys);
+            for (String key : keys) {
+                PopStats s = POP_STATS.get(key);
+                if (s == null) continue;
+                double weight = s.games < POP_MIN_GAMES_FULL_WEIGHT
+                        ? POP_FRESH_WEIGHT
+                        : Math.max(POP_PFSP_FLOOR, s.ema * (1.0 - s.ema));
+                sb.append(String.format("  %-70s ema=%.3f games=%d pfsp_w=%.3f%n", key, s.ema, s.games, weight));
+            }
+            Path p = Paths.get(logsBaseDir(), "league", "population_status.txt");
+            Files.createDirectories(p.getParent());
+            Files.write(p, sb.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            logger.warn("[POP] failed to write population status: " + e.getMessage());
+        }
     }
 
     private Player createMetaOpponent(Random rand) {

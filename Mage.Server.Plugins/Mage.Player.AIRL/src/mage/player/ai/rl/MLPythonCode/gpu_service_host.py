@@ -942,6 +942,7 @@ class SharedGpuHost:
             card_belief_labels = merged[16] if len(merged) > 16 else None
             world_model_labels = merged[17] if len(merged) > 17 else None
             sil_eligible = merged[18] if len(merged) > 18 else None
+            entropy_scale = merged[19] if len(merged) > 19 else None
             num_archetypes = int(first.headers.get("num_archetypes", "0"))
             card_belief_dim = int(first.headers.get("card_belief_dim", "0"))
             world_model_dim = int(first.headers.get("world_model_dim", "0"))
@@ -973,6 +974,7 @@ class SharedGpuHost:
                 world_model_labels,
                 world_model_dim,
                 sil_eligible,
+                entropy_scale,
             )
         finally:
             # Release cached GPU memory after every training batch so ONNX

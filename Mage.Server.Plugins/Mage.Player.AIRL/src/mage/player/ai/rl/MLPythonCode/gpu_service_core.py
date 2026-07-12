@@ -349,6 +349,7 @@ class ProfileContext:
         world_model_labels: Optional[bytes] = None,
         world_model_dim: int = 0,
         sil_eligible: Optional[bytes] = None,
+        entropy_scale: Optional[bytes] = None,
     ) -> bool:
         self._ensure_model_initialized()
         with self.lock:
@@ -381,6 +382,7 @@ class ProfileContext:
                     world_model_labels,
                     world_model_dim,
                     sil_eligible,
+                    entropy_scale,
                 )
             )
             self._maybe_replay_candidate_q()

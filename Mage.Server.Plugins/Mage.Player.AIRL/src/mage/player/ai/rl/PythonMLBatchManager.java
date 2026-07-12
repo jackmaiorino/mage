@@ -584,6 +584,9 @@ public class PythonMLBatchManager {
             byte[] silEligibleBytes = convertIntegersToBytes(trainingData.stream()
                     .map(d -> d.silEligible ? 1 : 0)
                     .collect(Collectors.toList()));
+            byte[] entropyScaleBytes = convertFloatsToBytes(trainingData.stream()
+                    .map(d -> d.entropyScale)
+                    .collect(Collectors.toList()));
 
             int batchSize = trainingData.size();
             int seqLen = trainingData.get(0).state.getSequence().length;
@@ -618,7 +621,8 @@ public class PythonMLBatchManager {
                         cardBeliefDim,
                         worldModelLabelsBytes,
                         worldModelDim,
-                        silEligibleBytes);
+                        silEligibleBytes,
+                        entropyScaleBytes);
             }
 
             future.complete(true);

@@ -154,6 +154,7 @@ final class SharedGpuTensorSerde {
             java.util.Arrays.fill(worldModelLabels, -1.0f);
         }
         int[] silEligible = new int[batchSize];
+        float[] entropyScale = new float[batchSize];
 
         int seqOffset = 0;
         int maskOffset = 0;
@@ -199,6 +200,7 @@ final class SharedGpuTensorSerde {
                         i * worldModelDim, worldModelDim);
             }
             silEligible[i] = item.silEligible ? 1 : 0;
+            entropyScale[i] = item.entropyScale;
 
             rewardValues[i] = rewards != null && i < rewards.size() && rewards.get(i) != null
                     ? rewards.get(i).floatValue()
@@ -231,7 +233,8 @@ final class SharedGpuTensorSerde {
                 floatsToBytes(mctsVisitTargets),
                 floatsToBytes(cardBeliefLabels),
                 floatsToBytes(worldModelLabels),
-                intsToBytes(silEligible)
+                intsToBytes(silEligible),
+                floatsToBytes(entropyScale)
         );
     }
 

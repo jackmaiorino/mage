@@ -1489,6 +1489,11 @@ public class StateSequenceBuilder {
         // horizon so it doesn't over-fit whole winning trajectories (SIL v1).
         public boolean silEligible;
 
+        // Per-row multiplier on the scheduled entropy coefficient. Population
+        // league mode sets this per episode by opponent source (anchor vs
+        // population) for source-conditional exploration pressure.
+        public float entropyScale = 1.0f;
+
         public TrainingData(SequenceOutput state,
                 int candidateCount,
                 int[] candidateActionIds,

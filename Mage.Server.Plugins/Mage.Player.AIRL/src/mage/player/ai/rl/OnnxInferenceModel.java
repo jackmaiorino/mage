@@ -411,6 +411,15 @@ public final class OnnxInferenceModel implements PythonModel {
             int minTargets,
             int maxTargets) {
 
+        // Snapshot policies are NOT this ONNX export's weights. Route them to
+        // the GPU service, whose snapshot_manager loads the frozen checkpoint.
+        // Without this, frozen league opponents silently play the live policy.
+        if (policyKey != null && policyKey.startsWith("snap:") && trainingDelegate != null) {
+            return trainingDelegate.scoreCandidates(state, candidateActionIds,
+                    candidateFeatures, candidateMask, policyKey, headId,
+                    pickIndex, minTargets, maxTargets);
+        }
+
         // Resolve head -- fall back to "action" if specific head not loaded
         String resolvedHead = sessions.containsKey(headId) ? headId : "action";
         if (!sessions.containsKey(resolvedHead)) {

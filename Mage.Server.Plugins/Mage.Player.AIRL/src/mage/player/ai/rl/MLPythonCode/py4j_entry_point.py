@@ -382,7 +382,9 @@ class PythonEntryPoint:
         self.entropy_loss_mult_main = float(
             os.getenv('ENTROPY_LOSS_MULT', '1.0'))
         # Phase 1 belief auxiliary loss coefficient. 0 disables the loss.
-        self.belief_loss_coef = float(os.getenv('BELIEF_LOSS_COEF', '0.3'))
+        # Default OFF (was 0.3): experimental auxiliary losses must be opt-in. The
+        # implicit-on default nearly contaminated the jul8 pure-BC run (audit finding).
+        self.belief_loss_coef = float(os.getenv('BELIEF_LOSS_COEF', '0.0'))
         # Generic hidden-card belief auxiliary loss coefficient. 0 disables.
         self.card_belief_loss_coef = float(os.getenv('CARD_BELIEF_LOSS_COEF', '0.0'))
         # Self-supervised world-model auxiliary loss coefficient. Predicts the
@@ -2744,6 +2746,7 @@ class PythonEntryPoint:
                                  world_model_labels_bytes=None,
                                  world_model_dim=0,
                                  sil_eligible_bytes=None,
+                                 entropy_scale_bytes=None,
                                  cq_replay_mode=False):
         """
         Train on a batch that concatenates multiple episodes.
@@ -2840,6 +2843,13 @@ class PythonEntryPoint:
                     world_model_labels_np = None
 
             # Window-gated self-imitation eligibility (1 = finisher-window row).
+            entropy_scale_np = None
+            if entropy_scale_bytes:
+                try:
+                    entropy_scale_np = np.frombuffer(
+                        entropy_scale_bytes, dtype='<f4').reshape(batch_size)[start:end]
+                except Exception:
+                    entropy_scale_np = None
             sil_eligible_np = None
             if sil_eligible_bytes:
                 try:
@@ -2929,6 +2939,18 @@ class PythonEntryPoint:
                 sil_eligible_t = torch.tensor(
                     sil_eligible_np, dtype=torch.float32).to(device, non_blocking=_nb)
 
+            # Per-row entropy-coefficient multiplier (population league:
+            # source-conditional exploration). Neutral = ones. Raw multiplier,
+            # deliberately NOT sum-normalized like sample weights.
+            if entropy_scale_np is not None:
+                entropy_scale_t = torch.tensor(
+                    entropy_scale_np, dtype=torch.float32).to(device, non_blocking=_nb)
+                entropy_scale_t = torch.nan_to_num(
+                    entropy_scale_t, nan=1.0, posinf=1.0, neginf=1.0).clamp_min(0.0)
+            else:
+                entropy_scale_t = torch.ones(
+                    int(end - start), dtype=torch.float32, device=device)
+
             # Opponent archetype int per row (for conditional distillation masking).
             archetype_labels_t = None
             if archetype_labels_np is not None:
@@ -2944,6 +2966,7 @@ class PythonEntryPoint:
             card_belief_labels_np = None
             world_model_labels_np = None
             sil_eligible_np = None
+            entropy_scale_np = None
 
             local_batch_size = int(end - start)
             mcts_signed_targets = bool(int(os.getenv(
@@ -3571,6 +3594,7 @@ class PythonEntryPoint:
                     _chosen_idx_c = chosen_indices_t[_c_start:_c_end]
                     _chosen_cnt_c = chosen_count_t[_c_start:_c_end]
                     _norm_w_c = norm_w_t[_c_start:_c_end]
+                    _entropy_scale_c = entropy_scale_t[_c_start:_c_end]
                     # Lever G: policy-only reweight of attack(3)/block(4) rows. _norm_w_c_hw is
                     # used ONLY by the policy loss; value/entropy keep the original _norm_w_c.
                     if _ab_policy_coef != 1.0:
@@ -3696,7 +3720,7 @@ class PythonEntryPoint:
 
                     _log_probs_c = torch.log(_probs_safe_c)
                     _entropy_per_step_c = -(_probs_safe_c * _log_probs_c).sum(dim=-1)
-                    _loss_entropy_c = -entropy_coef * _entropy_per_step_c.sum() / float(max(local_batch_size, 1))
+                    _loss_entropy_c = -entropy_coef * (_entropy_per_step_c * _entropy_scale_c).sum() / float(max(local_batch_size, 1))
 
                     # Self-imitation loss: -log pi(chosen) weighted by relu(R - V)+.
                     # Directly credits the long-horizon winning-combo setup actions
