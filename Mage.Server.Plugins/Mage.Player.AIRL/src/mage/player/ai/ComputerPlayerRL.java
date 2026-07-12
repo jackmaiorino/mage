@@ -7024,8 +7024,29 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // Route to chooseTarget which uses the RL model
         // This handles discard effects (Faithless Looting), sacrifice effects, etc.
         trace("choose(Target) ENTRY: delegating to chooseTarget");
+        // Trace-only: cost discards and discard-to-hand-size were the only
+        // replay-invisible decisions left. Snapshot the candidate set BEFORE
+        // the pick: possibleTargets() may exclude already-selected cards once
+        // chooseTarget() has called addTarget().
+        List<Card> replayDiscardCandidates = null;
+        if (target instanceof mage.target.common.TargetCardInHand
+                || target instanceof mage.target.common.TargetDiscard) {
+            replayDiscardCandidates = new ArrayList<>();
+            try {
+                for (UUID cid : target.possibleTargets(getId(), source, game)) {
+                    Card c = game.getCard(cid);
+                    if (c != null) {
+                        replayDiscardCandidates.add(c);
+                    }
+                }
+            } catch (Throwable ignored) {
+            }
+        }
         boolean result = chooseTarget(outcome, target, source, game);
         trace("choose(Target) EXIT: result=" + result);
+        if (replayDiscardCandidates != null) {
+            logReplayCardSelection(replayDiscardCandidates, target, source, game);
+        }
         return result;
     }
 
@@ -7037,33 +7058,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         trace(String.format("choose(Cards,TargetCard) ENTRY: outcome=%s, cardsCount=%d, targetName=%s",
             outcome, cardsCount, targetName));
 
+        // Snapshot the visible set before the pick mutates anything
+        List<Card> replayCandidates = cards == null
+                ? Collections.emptyList()
+                : new ArrayList<>(cards.getCards(game));
         boolean result = super.choose(outcome, cards, target, source, game);
 
         trace("choose(Cards,TargetCard) EXIT: result=" + result);
-        logReplayCardSelection(cards == null ? Collections.emptyList() : new ArrayList<>(cards.getCards(game)),
-                target, source, game);
-        return result;
-    }
-
-    @Override
-    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
-        // Trace-only override: heuristic picks from visible sets (cost discards,
-        // discard-to-hand-size) were the only replay-invisible decisions left.
-        boolean result = super.choose(outcome, target, source, game);
-        if (target instanceof mage.target.common.TargetCardInHand
-                || target instanceof mage.target.common.TargetDiscard) {
-            List<Card> candidates = new ArrayList<>();
-            try {
-                for (UUID cid : target.possibleTargets(getId(), source, game)) {
-                    Card c = game.getCard(cid);
-                    if (c != null) {
-                        candidates.add(c);
-                    }
-                }
-            } catch (Exception ignored) {
-            }
-            logReplayCardSelection(candidates, target, source, game);
-        }
+        logReplayCardSelection(replayCandidates, target, source, game);
         return result;
     }
 
