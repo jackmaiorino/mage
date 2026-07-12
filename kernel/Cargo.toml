@@ -1,0 +1,10 @@
+[workspace]
+resolver = "2"
+members = ["mtg-kernel"]
+
+[workspace.package]
+edition = "2021"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
