@@ -34,7 +34,10 @@
 //! `continue`s -- same "don't ask when there's no real choice" pattern
 //! increment 2 established for `OrderTriggers` singleton groups). Once
 //! every stage is resolved, `finalize_cast`/`finalize_activation` pays the
-//! remaining (non-discard) costs and pushes the stack item.
+//! remaining (non-discard) costs and pushes the stack item -- except a
+//! cast's stack item: 601.2a puts a spell on the stack at *announcement*
+//! (`begin_cast`), before targets/modes/costs, so `finalize_cast` only
+//! fills in the placeholder `begin_cast` already pushed.
 
 use crate::card_def::{self, CardType, CostComponent, FlashbackCost, Keywords, TargetSpec};
 use crate::effect::{self, EffectOp, ExecCtx, ObjectRef};
@@ -50,8 +53,9 @@ pub struct EngineState {
     /// Whether [P0, P1] has passed priority since the last time priority
     /// was reset (new step, a cast/activation/land-drop, or a resolution).
     pub priority_passes: [bool; 2],
-    /// A spell that has begun casting but not yet finished being targeted,
-    /// mode-chosen, or cost-paid (and therefore not yet on the stack).
+    /// A spell that has been announced (601.2a: already moved to the stack
+    /// by `begin_cast`) but not yet finished being targeted, mode-chosen,
+    /// or cost-paid.
     pub pending_cast: Option<PendingCast>,
     /// A non-mana ability that has begun activating but isn't fully
     /// targeted/cost-paid yet (Masked Meower's, the Blood token's).
@@ -795,12 +799,16 @@ fn resolve_top_of_stack(state: &mut GameState) {
 }
 
 /// Moves `state.step`/`state.active_player`/`state.turn` to the next step,
-/// running that step's turn-based entry action (untap, draw, cleanup,
-/// combat damage) and resetting priority. Skips the declare-attackers/
-/// blockers/combat-damage steps when there's no possible attack (508.1/
-/// 508.7): entirely, if no eligible attacker exists at all; past declare-
-/// blockers/combat-damage, if attackers were declared but the set is
-/// empty.
+/// clearing both players' mana pools (500.4: unused mana empties at the end
+/// of every step and phase -- a turn-based action, unconditional on whether
+/// the step just ended ever granted priority, so this single choke point
+/// covers Untap/Cleanup's transitions too, not just the priority-bearing
+/// steps), running that step's turn-based entry action (untap, draw,
+/// cleanup, combat damage), and resetting priority. Skips the declare-
+/// attackers/blockers/combat-damage steps when there's no possible attack
+/// (508.1/508.7): entirely, if no eligible attacker exists at all; past
+/// declare-blockers/combat-damage, if attackers were declared but the set
+/// is empty.
 fn advance_step(state: &mut GameState) {
     let cur_idx = STEP_ORDER.iter().position(|&s| s == state.step).expect("state.step is always a STEP_ORDER member");
     let mut next_idx = cur_idx + 1;
@@ -822,6 +830,8 @@ fn advance_step(state: &mut GameState) {
     }
 
     state.step = next;
+    state.players[0].mana_pool = [0; 6];
+    state.players[1].mana_pool = [0; 6];
     run_step_entry_action(state, next);
     reset_priority(state);
 }
@@ -1198,21 +1208,39 @@ fn play_land(state: &mut GameState, player: PlayerId, id: ObjectId) {
     state.priority_player = player;
 }
 
-/// 601.2c-601.2h: targets are chosen before costs are paid. `begin_cast`
-/// records the pending cast (pre-resolving the cast-mode/additional-cost
-/// stages when there's no real choice to make -- see `PendingCast`'s
-/// field docs); `drain_pending_cast_or_decide` walks the remaining stages.
+/// 601.2a: announcing a cast moves the spell from hand (or graveyard, for a
+/// flashback cast) onto the stack immediately -- *before* modes/targets are
+/// chosen (601.2b/601.2c) or costs are paid (601.2f-h), which is why
+/// `PendingCast`'s later stages (see `drain_pending_cast_or_decide`) mutate
+/// the `StackItem` this pushes in place rather than building one from
+/// scratch at `finalize_cast`. Pre-resolves the cast-mode/additional-cost
+/// stages when there's no real choice to make -- see `PendingCast`'s field
+/// docs.
 fn begin_cast(state: &mut GameState, player: PlayerId, spell_id: ObjectId) {
     let is_flashback = state.objects.get(spell_id).zone == Zone::Graveyard;
     let def = &card_def::CARD_DEFS[state.objects.get(spell_id).card_def as usize];
+    let target_spec = def.target_spec;
+    let cast_mode = if is_flashback || def.alt_cost.is_none() { Some(CastMode::Normal) } else { None };
+    let additional_cost_discarded = if def.additional_cost.is_none() { Some(vec![]) } else { None };
+
+    move_to_stack(state, spell_id, is_flashback);
+    state.stack.push(StackItem {
+        source: spell_id,
+        controller: player,
+        targets: vec![],
+        inline_effect: None,
+        discarded: vec![],
+        is_flashback,
+    });
+
     state.engine.pending_cast = Some(PendingCast {
         spell: spell_id,
         controller: player,
-        target_spec: def.target_spec,
+        target_spec,
         targets_chosen: vec![],
         is_flashback,
-        cast_mode: if is_flashback || def.alt_cost.is_none() { Some(CastMode::Normal) } else { None },
-        additional_cost_discarded: if def.additional_cost.is_none() { Some(vec![]) } else { None },
+        cast_mode,
+        additional_cost_discarded,
     });
 }
 
@@ -1231,8 +1259,9 @@ fn begin_activation(state: &mut GameState, player: PlayerId, source: ObjectId, a
 
 /// Pays whichever cost this cast settled on (flashback cost; or the
 /// printed mana cost / alt cost, plus any mandatory additional cost) and
-/// moves the spell from hand-or-graveyard onto the stack. 117.3c: the
-/// caster retains priority afterward.
+/// fills in the targets/discards on the `StackItem` `begin_cast` already
+/// pushed (601.2a put the spell there before this ran). 117.3c: the caster
+/// retains priority afterward.
 fn finalize_cast(state: &mut GameState) {
     let pending = state.engine.pending_cast.take().expect("finalize_cast requires a pending cast");
     let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
@@ -1241,7 +1270,19 @@ fn finalize_cast(state: &mut GameState) {
         let fb = def.flashback.as_ref().expect("is_flashback implies CardDef::flashback is Some");
         match fb.cost {
             FlashbackCost::Mana(cost) => {
-                let plan = mana::can_pay(&cost, 0, pending.controller, state).expect("castable_spells already verified affordability");
+                // 601.2h: legality (including affordability) is fully
+                // pre-checked by `is_castable_now` before `Action::CastSpell`
+                // is even accepted, and nothing can interleave between
+                // `begin_cast`'s announcement and this payment (no priority
+                // window opens mid-cast), so `can_pay` returning `None` here
+                // is unreachable today. Handled via `abort_cast` (601.2a's
+                // "returns to its prior zone" case), not `.expect()`, so a
+                // future increment that adds cost-modifying replacement
+                // effects or interposed priority doesn't have to rediscover
+                // this shape.
+                let Some(plan) = mana::can_pay(&cost, 0, pending.controller, state) else {
+                    return abort_cast(state, pending);
+                };
                 pay_plan(state, pending.controller, &plan);
             }
             FlashbackCost::SacrificeLands(n) => sacrifice_lowest_id_lands(state, pending.controller, n),
@@ -1249,7 +1290,9 @@ fn finalize_cast(state: &mut GameState) {
     } else {
         match pending.cast_mode.expect("resolved by drain_pending_cast_or_decide before finalize_cast is reached") {
             CastMode::Normal => {
-                let plan = mana::can_pay(&def.cost, 0, pending.controller, state).expect("castable_spells already verified affordability before begin_cast");
+                let Some(plan) = mana::can_pay(&def.cost, 0, pending.controller, state) else {
+                    return abort_cast(state, pending);
+                };
                 pay_plan(state, pending.controller, &plan);
             }
             CastMode::Alternative => {
@@ -1263,24 +1306,36 @@ fn finalize_cast(state: &mut GameState) {
     }
 
     let discarded = pending.additional_cost_discarded.unwrap_or_default();
-    move_to_stack(state, pending.spell, pending.is_flashback);
+    let item = state.stack.last_mut().expect("begin_cast pushed this spell's StackItem and nothing can push another item while a cast is pending");
+    debug_assert_eq!(item.source, pending.spell, "the top of the stack must still be this cast's own placeholder");
+    item.targets = pending.targets_chosen;
+    item.discarded = discarded;
     event::log_spell_cast(state, pending.spell, pending.controller);
-    state.stack.push(StackItem {
-        source: pending.spell,
-        controller: pending.controller,
-        targets: pending.targets_chosen,
-        inline_effect: None,
-        discarded,
-        is_flashback: pending.is_flashback,
-    });
 
-    // 601.2i/603.3: casting is complete the instant the spell is on the
-    // stack, costs are paid, etc. -- triggered abilities that saw it
-    // happen (Guttersnipe) go on the stack *before* anyone gets priority
-    // again, same as `play_land`'s land-drop trigger check.
+    // 601.2i/603.3: casting is complete the instant costs are paid --
+    // triggered abilities that saw it happen (Guttersnipe) go on the stack
+    // *before* anyone gets priority again, same as `play_land`'s land-drop
+    // trigger check.
     collect_and_queue_triggers(state);
     state.engine.priority_passes = [false, false];
     state.priority_player = pending.controller;
+}
+
+/// 601.2a's flip side: if an announced cast turns out to be unpayable, the
+/// spell returns to whichever zone it was announced from. Unreachable in
+/// this increment (see `finalize_cast`'s doc) but kept in shape rather than
+/// papered over with a panic.
+fn abort_cast(state: &mut GameState, pending: PendingCast) {
+    let item = state.stack.pop();
+    debug_assert!(item.is_some_and(|i| i.source == pending.spell), "abort_cast expects its spell's placeholder to be the top of the stack");
+    let owner = state.objects.get(pending.spell).owner;
+    let to_zone = if pending.is_flashback { Zone::Graveyard } else { Zone::Hand };
+    match to_zone {
+        Zone::Hand => state.players[owner.index()].hand.push(pending.spell),
+        Zone::Graveyard => state.players[owner.index()].graveyard.push(pending.spell),
+        _ => unreachable!("to_zone is always Hand or Graveyard"),
+    }
+    state.objects.get_mut(pending.spell).zone = to_zone;
 }
 
 fn finalize_activation(state: &mut GameState) {

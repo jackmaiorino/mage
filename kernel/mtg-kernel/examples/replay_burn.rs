@@ -64,6 +64,11 @@ fn main() {
     let mut phantom_total = 0usize;
     let mut decisions_consumed_total = 0usize;
     let mut decisions_total_total = 0usize;
+    // (reason, source_path) per diverged trace, for `REPLAY_DEBUG`'s
+    // per-trace listing below -- lets a divergence be traced back to its
+    // exact file without re-running with `REPLAY_TRACE_FILTER` per
+    // candidate first.
+    let mut per_trace_divergence: Vec<(String, String)> = Vec::new();
 
     for t in &traces {
         attempted += 1;
@@ -80,7 +85,8 @@ fn main() {
         }
         if let Some(reason) = outcome.divergence {
             diverged += 1;
-            *histogram.entry(reason).or_default() += 1;
+            *histogram.entry(reason.clone()).or_default() += 1;
+            per_trace_divergence.push((reason, t.source_path.clone()));
         }
     }
 
@@ -104,6 +110,20 @@ fn main() {
     }
     for (reason, n) in &histogram {
         println!("  {n:>4}  {reason}");
+    }
+
+    // Per-trace detail, gated behind the same `REPLAY_DEBUG` flag
+    // `debug_verbose` uses: not part of the default scoreboard output (no
+    // script parses this example's stdout -- see the increment-5 report),
+    // but pinpoints exactly which file to hand to `REPLAY_TRACE_FILTER`
+    // for a given divergence reason.
+    if std::env::var("REPLAY_DEBUG").is_ok() {
+        println!("\nper-trace divergence (REPLAY_DEBUG):");
+        let mut sorted = per_trace_divergence.clone();
+        sorted.sort();
+        for (reason, path) in &sorted {
+            println!("  {reason:<45} {path}");
+        }
     }
 }
 
@@ -224,34 +244,25 @@ fn run(t: &GoldenTrace, outcome: &mut ReplayOutcome) -> Result<(), String> {
                             }
                             return Err(format!("decision-kind-mismatch:CastSpellOrPass-vs-{}", rec.action_type));
                         }
-                        check_state(&state, player, rec, 0, 0)?;
+                        check_state(&state, player, rec)?;
                         apply_cast_spell_or_pass(&mut state, rec, &castable_spells, &mana_abilities, &land_drops, &activatable_abilities, &ctx.id_map)?;
                         ctx.advance(player);
                         outcome.decisions_consumed += 1;
                     }
                 }
             }
-            Decision::ChooseTargets { player, spell, legal_targets, .. } => {
+            Decision::ChooseTargets { player, legal_targets, .. } => {
                 let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseTargets".to_string())?;
                 debug_verbose(t, &state, player, rec, "ChooseTargets");
                 if rec.action_type != "SELECT_TARGETS" {
                     return Err(format!("decision-kind-mismatch:ChooseTargets-vs-{}", rec.action_type));
                 }
-                // A spell being cast (from hand, or via flashback from the
-                // graveyard) is targeted *before* it moves to the stack in
-                // the kernel (`finalize_cast` -- see engine.rs's
-                // `PendingCast` doc), whereas the reference engine follows
-                // 601.2a and moves it to the stack before targeting. So
-                // during exactly this sub-decision, the kernel's hand (or,
-                // for a flashback cast, graveyard) legitimately has 1 more
-                // card -- the spell itself -- than the trace's snapshot: a
-                // known, understood bookkeeping difference, not a real
-                // divergence. Doesn't apply to an activated ability's
-                // targeting (the source never leaves the battlefield).
-                let ps = &state.players[player.index()];
-                let hand_delta = if ps.hand.contains(&spell) { 1 } else { 0 };
-                let graveyard_delta = if ps.graveyard.contains(&spell) { 1 } else { 0 };
-                check_state(&state, player, rec, hand_delta, graveyard_delta)?;
+                // 601.2a: the kernel now moves a cast spell (or, for
+                // flashback, the graveyard card) onto the stack at
+                // announcement, before targets are chosen -- matching the
+                // reference engine, so hand/graveyard sizes agree here with
+                // no fudge factor needed (see `engine::begin_cast`).
+                check_state(&state, player, rec)?;
                 apply_choose_targets(&mut state, rec, &legal_targets, &ctx.id_map, &ctx.seat_uuid)?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
@@ -262,7 +273,7 @@ fn run(t: &GoldenTrace, outcome: &mut ReplayOutcome) -> Result<(), String> {
                 if rec.action_type != "DECLARE_ATTACKS" {
                     return Err(format!("decision-kind-mismatch:DeclareAttackers-vs-{}", rec.action_type));
                 }
-                check_state(&state, player, rec, 0, 0)?;
+                check_state(&state, player, rec)?;
                 apply_declare_attackers(&mut state, rec, &eligible, &ctx.id_map)?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
@@ -273,7 +284,7 @@ fn run(t: &GoldenTrace, outcome: &mut ReplayOutcome) -> Result<(), String> {
                 if rec.action_type != "DECLARE_BLOCKS" {
                     return Err(format!("decision-kind-mismatch:DeclareBlockers-vs-{}", rec.action_type));
                 }
-                check_state(&state, player, rec, 0, 0)?;
+                check_state(&state, player, rec)?;
                 apply_declare_blockers(&mut state, rec, &legal_blockers, &ctx.id_map)?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
@@ -396,25 +407,15 @@ fn find_player_uuids(t: &GoldenTrace, p0_name: &str, p1_name: &str) -> [Option<S
 /// manufacturing false divergences; life totals are a documented
 /// stretch-goal gap (see the increment-4 report).
 ///
-/// KNOWN ROOT CAUSE for a large share of `turn-mismatch`/zone-size
-/// divergences: the kernel never empties a player's mana pool at a step/
-/// phase boundary (rule 500.4) -- `PlayerState::mana_pool` is only ever
-/// decremented when spent (see `engine.rs`'s `pay_plan`), never cleared
-/// by `advance_step`/`run_step_entry_action`. A Mountain tapped for {R}
-/// and not spent same-phase leaves that mana floating indefinitely,
-/// which can make a spell "castable" many priority windows (even many
-/// turns) later than the reference engine would ever offer it -- pulling
-/// this driver's per-seat cursor forward to consume a *later* trace
-/// record against an *earlier* kernel state. Confirmed by hand-tracing
-/// `game_20260712_183300_0003.txt`: PlayerRL1 taps a Mountain for {R} at
-/// decision_number=2, passes unspent at decision_number=3 (round 1), and
-/// the next real PlayerRL1 record the kernel accepts is decision_number=
-/// 16 (round 2, one turn later) instead of a same-round window the
-/// floating mana spuriously makes "castable" in between. This is a
-/// genuine kernel gap, not a replay-driver bug; see the increment-4
-/// report for the recommended fix (clear `mana_pool` for both players in
-/// `advance_step`, mirroring `Step::Untap`'s existing per-step reset).
-fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, hand_delta: i32, graveyard_delta: i32) -> Result<(), String> {
+/// No fudge factor for hand/graveyard size during `ChooseTargets` anymore:
+/// `engine::begin_cast` now follows 601.2a and moves the spell to the stack
+/// at announcement, before targets are chosen, so the kernel's hand/
+/// graveyard counts already agree with the trace's snapshot at every
+/// decision boundary, cast-in-progress or not (previously this function
+/// took a `+1`-while-mid-cast fudge from its callers to paper over the
+/// kernel deferring that move to `finalize_cast`; removed along with the
+/// bug it was working around).
+fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord) -> Result<(), String> {
     let ps = &state.players[player.index()];
     // See the module doc: `rec.turn` is XMage's global absolute turn
     // counter, not the kernel's round counter.
@@ -422,14 +423,10 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, hand_d
     if state.turn != expected_round {
         return Err("turn-mismatch".to_string());
     }
-    // `hand_delta` accounts for the one known, deliberate bookkeeping
-    // offset (see this function's doc): +1 while a hand-cast spell is
-    // mid-targeting, still nominally in hand per the kernel but already
-    // moved to the stack per the reference engine.
-    if ps.hand.len() as i32 - hand_delta != rec.hand.len() as i32 {
+    if ps.hand.len() != rec.hand.len() {
         if std::env::var("REPLAY_DEBUG").is_ok() {
             eprintln!(
-                "HAND MISMATCH decision_number={} player={} action={} rec_turn={} state_turn={} kernel_hand={} trace_hand={} hand_delta={} kernel_names={:?} trace_names={:?}",
+                "HAND MISMATCH decision_number={} player={} action={} rec_turn={} state_turn={} kernel_hand={} trace_hand={} kernel_names={:?} trace_names={:?}",
                 rec.decision_number,
                 rec.player,
                 rec.action_type,
@@ -437,7 +434,6 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, hand_d
                 state.turn,
                 ps.hand.len(),
                 rec.hand.len(),
-                hand_delta,
                 ps.hand.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
                 rec.hand
             );
@@ -447,18 +443,15 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, hand_d
     if ps.library.len() != rec.library.len() {
         return Err("zone-size-mismatch:library".to_string());
     }
-    // Same known bookkeeping offset as `hand_delta`, for a flashback cast
-    // (spell mid-targeting from the graveyard).
-    if ps.graveyard.len() as i32 - graveyard_delta != rec.graveyard.len() as i32 {
+    if ps.graveyard.len() != rec.graveyard.len() {
         if std::env::var("REPLAY_DEBUG").is_ok() {
             eprintln!(
-                "GRAVEYARD MISMATCH decision_number={} player={} action={} kernel_gy={} trace_gy={} graveyard_delta={} kernel_names={:?} trace_names={:?}",
+                "GRAVEYARD MISMATCH decision_number={} player={} action={} kernel_gy={} trace_gy={} kernel_names={:?} trace_names={:?}",
                 rec.decision_number,
                 rec.player,
                 rec.action_type,
                 ps.graveyard.len(),
                 rec.graveyard.len(),
-                graveyard_delta,
                 ps.graveyard.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
                 rec.graveyard
             );

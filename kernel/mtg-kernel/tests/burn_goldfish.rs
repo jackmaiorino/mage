@@ -148,9 +148,10 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
                     last_cast_turn = state.turn;
                     let stack_len_before = state.stack.len();
                     engine::step(state, Action::CastSpell(bolt)).unwrap();
-                    // CastSpell only *begins* the cast (targets aren't
-                    // chosen yet), so nothing should be on the stack yet.
-                    assert_eq!(state.stack.len(), stack_len_before);
+                    // 601.2a: CastSpell immediately *announces* the cast,
+                    // moving the spell onto the stack before targets are
+                    // chosen or costs are paid.
+                    assert_eq!(state.stack.len(), stack_len_before + 1);
                 } else {
                     engine::step(state, Action::Pass).unwrap();
                 }
