@@ -3259,6 +3259,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         if (!shouldLogReplayDecision(actionType)) {
             return;
         }
+        // Lookahead clones share this player's GameLogger by reference; their
+        // speculative probes must not leak into replay traces (13% of corpus
+        // records were phantom SELECT_TARGETS rows before this guard).
+        if (game != null && game.isSimulation()) {
+            return;
+        }
         try {
             int ordinal = replayDecisionOrdinal++;
             List<String> chosenTexts = chosenReplayTexts(candidateTexts, selectedIndices);
@@ -3419,6 +3425,25 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             appendJsonNumber(sb, "episode", currentEpisode);
             sb.append(',');
             appendJsonBoolean(sb, "training_enabled", trainingEnabled);
+            int replayMyLife = -1;
+            int replayOppLife = -1;
+            try {
+                replayMyLife = getLife();
+                if (game != null) {
+                    for (UUID oppId : game.getOpponents(getId())) {
+                        Player oppPlayer = game.getPlayer(oppId);
+                        if (oppPlayer != null) {
+                            replayOppLife = oppPlayer.getLife();
+                            break;
+                        }
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+            sb.append(',');
+            appendJsonNumber(sb, "life", replayMyLife);
+            sb.append(',');
+            appendJsonNumber(sb, "opp_life", replayOppLife);
             sb.append('}');
             LiveCheckpointRecorder.maybeCapture(
                     game,
@@ -7011,11 +7036,87 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         int cardsCount = cards != null ? cards.size() : 0;
         trace(String.format("choose(Cards,TargetCard) ENTRY: outcome=%s, cardsCount=%d, targetName=%s",
             outcome, cardsCount, targetName));
-        
+
         boolean result = super.choose(outcome, cards, target, source, game);
-        
+
         trace("choose(Cards,TargetCard) EXIT: result=" + result);
+        logReplayCardSelection(cards == null ? Collections.emptyList() : new ArrayList<>(cards.getCards(game)),
+                target, source, game);
         return result;
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
+        // Trace-only override: heuristic picks from visible sets (cost discards,
+        // discard-to-hand-size) were the only replay-invisible decisions left.
+        boolean result = super.choose(outcome, target, source, game);
+        if (target instanceof mage.target.common.TargetCardInHand
+                || target instanceof mage.target.common.TargetDiscard) {
+            List<Card> candidates = new ArrayList<>();
+            try {
+                for (UUID cid : target.possibleTargets(getId(), source, game)) {
+                    Card c = game.getCard(cid);
+                    if (c != null) {
+                        candidates.add(c);
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+            logReplayCardSelection(candidates, target, source, game);
+        }
+        return result;
+    }
+
+    /**
+     * Replay-log a card pick made by an engine-driven heuristic path (cost
+     * payment, discard to hand size). Emits SELECT_CARD with the full visible
+     * candidate list so the kernel comparator can reproduce the choice.
+     */
+    private void logReplayCardSelection(List<Card> candidates, Target target, Ability source, Game game) {
+        try {
+            if (target == null || game == null || candidates.isEmpty()
+                    || !shouldLogReplayDecision(StateSequenceBuilder.ActionType.SELECT_CARD)) {
+                return;
+            }
+            List<UUID> chosen = target.getTargets();
+            if (chosen == null || chosen.isEmpty()) {
+                return;
+            }
+            List<String> candidateTexts = new ArrayList<>();
+            List<String> candidateObjectIds = new ArrayList<>();
+            for (Card c : candidates) {
+                candidateTexts.add(c.getName());
+                candidateObjectIds.add(String.valueOf(c.getId()));
+            }
+            List<Integer> selectedIndices = new ArrayList<>();
+            List<String> chosenObjectIds = new ArrayList<>();
+            for (UUID id : chosen) {
+                for (int i = 0; i < candidates.size(); i++) {
+                    if (candidates.get(i).getId().equals(id) && !selectedIndices.contains(i)) {
+                        selectedIndices.add(i);
+                        chosenObjectIds.add(String.valueOf(id));
+                        break;
+                    }
+                }
+            }
+            if (selectedIndices.isEmpty()) {
+                return;
+            }
+            logReplayDecision(
+                    StateSequenceBuilder.ActionType.SELECT_CARD,
+                    candidateTexts,
+                    selectedIndices,
+                    null,
+                    candidateTexts.size(),
+                    0.0f,
+                    game,
+                    source,
+                    candidateObjectIds,
+                    chosenObjectIds
+            );
+        } catch (Throwable ignored) {
+            // Replay diagnostics must never change game behavior.
+        }
     }
 
     @Override
