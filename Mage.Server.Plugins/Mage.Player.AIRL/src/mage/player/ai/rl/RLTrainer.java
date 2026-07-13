@@ -6420,6 +6420,39 @@ public class RLTrainer {
      * desired_share x EWMA(duration). Sources with zero target share (e.g.
      * an empty frozen pool) are never selected. Pure/unit-testable: takes an
      * explicit state snapshot instead of reading static fields directly.
+     * <p>
+     * The denominator for "current share" is {@code inFlightTotal + 1}, not
+     * {@code inFlightTotal}: the runner asking for a pick right now is not
+     * yet counted in {@code inFlight} (it only increments after this call
+     * returns), so it must be added to the capacity being reasoned about.
+     * Omitting the "+1" was a real bug caught in the Sol #92 smoke test: with
+     * few runners (e.g. 4) and an extreme target (e.g. 99.8% anchor, 100x
+     * duration skew), {@code inFlight={3,0,0}} against a stale
+     * {@code inFlightTotal=3} denominator reads as anchor already AT 100%
+     * (exceeding its target) forever, since the other 3 anchor games are too
+     * slow to free up -- the picking runner got trapped re-selecting the
+     * fast source every single cycle. With the "+1" fix the same state reads
+     * as anchor at 3/4=75% (correctly still under its ~99.8% target), so the
+     * picking runner returns to anchor as intended.
+     * <p>
+     * <b>Known small-pool limitation (disclosed, not patched):</b> an
+     * earlier revision of this method also clipped the raw target fraction
+     * to a fixed ceiling (e.g. 0.90) to try to keep every source
+     * "representable" by a small runner pool. That was reverted: for an
+     * extreme duration skew, the mathematically correct concurrency target
+     * genuinely is close to 100% for the slow source (e.g. 99.67% anchor for
+     * a ~53x anchor:live duration ratio at the 85/15 spec) -- an artificial
+     * lower cap does not make that target more achievable, it just moves the
+     * resulting completion mix to a DIFFERENT, still-wrong ratio (measured:
+     * a 0.90 cap turned a 99.5%/0.5% anchor/live split into 31.6%/68.4%,
+     * i.e. worse). With only N discrete runners, the finest representable
+     * step is 1/N; when the true target exceeds (N-1)/N, rounding to N/N
+     * (100%) is the closest achievable discrete approximation, and that is
+     * what the uncapped argmax now does. This is a genuine small-runner-
+     * count + extreme-duration-ratio resource limit, not a logic bug --
+     * production HPC deployments (32-150+ runners per node) have far finer
+     * granularity and are not expected to hit it. The mix guard (always on)
+     * is the safety net for this regime: it flags the deviation either way.
      */
     static int pickCompletionAwareSourceFromState(double[] shares, double[] durationEma, int[] inFlight) {
         double[] weight = new double[POP_SRC_COUNT];
@@ -6432,6 +6465,7 @@ public class RLTrainer {
         for (int c : inFlight) {
             inFlightTotal += c;
         }
+        double capacity = inFlightTotal + 1.0; // +1: the slot being decided right now
         int best = -1;
         double bestDeficit = Double.NEGATIVE_INFINITY;
         for (int i = 0; i < POP_SRC_COUNT; i++) {
@@ -6439,7 +6473,7 @@ public class RLTrainer {
                 continue; // zero target share (e.g. empty frozen pool): never pick
             }
             double targetFrac = weight[i] / weightTotal;
-            double currentFrac = inFlightTotal > 0 ? inFlight[i] / (double) inFlightTotal : 0.0;
+            double currentFrac = inFlight[i] / capacity;
             double deficit = targetFrac - currentFrac;
             if (deficit > bestDeficit) {
                 bestDeficit = deficit;
@@ -6472,18 +6506,56 @@ public class RLTrainer {
     }
 
     /**
-     * Picks the source for a freed runner: completion-aware reservation when
-     * POP_COMPLETION_AWARE=1, else the legacy random draw. When completion-
-     * aware, the pick and the concurrency-slot reservation happen atomically
-     * under POP_SCHED_LOCK so concurrent runner threads never race on a
-     * stale in-flight snapshot.
+     * True once every desired source (shares[i] &gt; 0) has completed at
+     * least one episode. Pure/unit-testable.
+     * <p>
+     * Cold-start guard: durationEma starts at an equal, neutral 1.0 for all
+     * sources. If one source (typically the fast one) completes first, its
+     * EMA snaps to its true low duration while a still-unmeasured slow
+     * source is left at the stale 1.0 placeholder -- a live-vs-anchor
+     * comparison at that point (weight = share * duration) reads as if
+     * anchor were nearly as fast as live, so the deficit scheduler under-
+     * reserves anchor and starves it further, delaying its first sample
+     * indefinitely (measured: inverted an 85/15 spec to an observed
+     * 16/84 in the smoke test before this guard was added). Falling back to
+     * the plain random draw until every source has a real sample avoids
+     * ever comparing a measured duration against an unmeasured one.
      */
+    static boolean allPopSourcesWarm(double[] shares, long[] durationN) {
+        for (int i = 0; i < shares.length; i++) {
+            if (shares[i] > 0 && durationN[i] <= 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Picks the source for a freed runner: completion-aware reservation when
+     * POP_COMPLETION_AWARE=1 AND every desired source has already completed
+     * at least once (see allPopSourcesWarm), else the legacy random draw.
+     * When completion-aware, the pick and the concurrency-slot reservation
+     * happen atomically under POP_SCHED_LOCK so concurrent runner threads
+     * never race on a stale in-flight snapshot.
+     */
+    private static final boolean POP_SCHED_DEBUG = EnvConfig.bool("POP_SCHED_DEBUG", false);
+
     private static int pickPopulationSource(double[] shares, Random rand) {
         if (!POP_COMPLETION_AWARE) {
             return pickSourceByShare(shares, rand.nextDouble());
         }
         synchronized (POP_SCHED_LOCK) {
-            int src = pickCompletionAwareSourceFromState(shares, POP_SCHED_DURATION_EMA, POP_SCHED_INFLIGHT);
+            boolean warm = allPopSourcesWarm(shares, POP_SCHED_DURATION_N);
+            int src = warm
+                    ? pickCompletionAwareSourceFromState(shares, POP_SCHED_DURATION_EMA, POP_SCHED_INFLIGHT)
+                    : pickSourceByShare(shares, rand.nextDouble());
+            if (POP_SCHED_DEBUG) {
+                System.out.println("[POP_SCHED_DEBUG] warm=" + warm
+                        + " ema=" + java.util.Arrays.toString(POP_SCHED_DURATION_EMA)
+                        + " n=" + java.util.Arrays.toString(POP_SCHED_DURATION_N)
+                        + " inflight=" + java.util.Arrays.toString(POP_SCHED_INFLIGHT)
+                        + " picked=" + src);
+            }
             POP_SCHED_INFLIGHT[src]++;
             return src;
         }
