@@ -47,7 +47,7 @@ pub enum TargetRef {
     Opponent,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum EffectCond {
     Always,
     Never,
@@ -56,6 +56,28 @@ pub enum EffectCond {
     /// `engine::finalize_cast` populates from the additional-cost payment
     /// before pushing the spell onto the stack.
     DiscardedNonLandForCost,
+    /// True iff `ctx.controller` had a land enter the battlefield under
+    /// their control this turn (Searing Blaze's landfall clause). Reads
+    /// `PlayerState::lands_played_this_turn`, which only tracks land
+    /// *drops* -- an accurate proxy for this pool, since nothing in it puts
+    /// a land onto the battlefield any other way.
+    LandfallThisTurn,
+    /// True iff `ctx.targets[idx]` is `Target::Object(id)` and that
+    /// object is currently in `zone`. `false` for a `Target::Player` (no
+    /// card in this pool needs that combination) or an out-of-range index.
+    /// The general-purpose 608.2b "is this target still legal" fizzle
+    /// check: a creature that died, a spell that already left the stack, or
+    /// a permanent that's no longer on the battlefield all read `false`
+    /// here, and the guarded effect they'd otherwise feed is skipped
+    /// instead of misfiring against a stale `ObjectId`.
+    TargetInZone(u8, Zone),
+    /// True iff `ctx.targets[idx]` is a `Target::Object(id)` whose card
+    /// definition's `colors` includes `color` (105.1/202.2). `false` for a
+    /// `Target::Player`. Pyroblast's/Red Elemental Blast's "if it's
+    /// blue"/"blue spell"/"blue permanent" checks.
+    TargetIsColor(u8, crate::mana::ManaColor),
+    /// Both sub-conditions must hold.
+    And(Box<EffectCond>, Box<EffectCond>),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -123,6 +145,23 @@ pub enum EffectOp {
     CreateToken {
         token_def: u16,
         controller: PlayerRef,
+    },
+    /// The controller may pay ONE of {discard `discard` cards, sacrifice
+    /// `sacrifice_lands` lands} -- only whichever options are currently
+    /// legal are offered, and declining is always legal too (Highway
+    /// Robbery's `DoIfCostPaid(OrCost(DiscardCardCost, SacrificeTargetCost))`).
+    /// If they do, `then` runs. Like `DiscardCards`, this is deferred:
+    /// `execute` stages `EngineState::pending_optional_cost` and returns
+    /// without knowing the outcome yet (`engine::Decision::ChooseOptionalCost`
+    /// asks), so **this must be the last leaf in any `Sequence` it appears
+    /// in**, same constraint and same reason as `DiscardCards`. A future
+    /// card that needs both sub-costs simultaneously payable (not this
+    /// pool) is out of scope: `discard`/`sacrifice_lands` are mutually
+    /// exclusive choices, never both paid.
+    MayPayCostThen {
+        discard: u8,
+        sacrifice_lands: u8,
+        then: Box<EffectOp>,
     },
 }
 
@@ -232,6 +271,25 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
             let controller = ctx.resolve_player(*controller, state);
             event::propose_and_commit(state, event::ProposedEvent::create_token(*token_def, controller));
         }
+        EffectOp::MayPayCostThen { discard, sacrifice_lands, then } => {
+            let discard_payable = *discard > 0 && state.players[ctx.controller.index()].hand.len() >= *discard as usize;
+            let sacrifice_payable = *sacrifice_lands > 0 && crate::engine::count_controlled_lands(ctx.controller, state) >= *sacrifice_lands as u32;
+            if !discard_payable && !sacrifice_payable {
+                // Nothing payable: DoIfCostPaid's own `cost.canPay(...)`
+                // gate is false too, so the reference never even offers the
+                // "may pay?" prompt here -- matches, no-op.
+                return;
+            }
+            state.engine.pending_optional_cost = Some(crate::engine::PendingOptionalCost {
+                player: ctx.controller,
+                source: ctx.source,
+                discard: *discard,
+                sacrifice_lands: *sacrifice_lands,
+                discard_payable,
+                sacrifice_payable,
+                then: (**then).clone(),
+            });
+        }
     }
 }
 
@@ -243,6 +301,19 @@ fn eval_cond(cond: &EffectCond, ctx: &ExecCtx, state: &GameState) -> bool {
             let def_idx = state.objects.get(id).card_def;
             !crate::card_def::CARD_DEFS[def_idx as usize].is_land
         }),
+        EffectCond::LandfallThisTurn => state.players[ctx.controller.index()].lands_played_this_turn > 0,
+        EffectCond::TargetInZone(idx, zone) => match ctx.targets.get(*idx as usize) {
+            Some(Target::Object(id)) => state.objects.get(*id).zone == *zone,
+            _ => false,
+        },
+        EffectCond::TargetIsColor(idx, color) => match ctx.targets.get(*idx as usize) {
+            Some(Target::Object(id)) => {
+                let def_idx = state.objects.get(*id).card_def;
+                crate::card_def::CARD_DEFS[def_idx as usize].colors.contains(color)
+            }
+            _ => false,
+        },
+        EffectCond::And(a, b) => eval_cond(a, ctx, state) && eval_cond(b, ctx, state),
     }
 }
 

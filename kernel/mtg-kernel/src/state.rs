@@ -44,6 +44,14 @@ pub struct GameObject {
     pub damage: u16,
     pub counters: Counters,
     pub attachments: Vec<ObjectId>,
+    /// `Some(turn)` iff this card was Plotted (`PlotAbility`) on kernel
+    /// round `turn` -- set by `engine::plot_spell`, read by
+    /// `engine::is_plotted_castable_now` (castable from exile for free at
+    /// sorcery speed, but never the same turn it was plotted). `None` for
+    /// every card that has never been Plotted. Only Highway Robbery in this
+    /// pool has `CardDef::plot_cost`, so this is `None` for every other
+    /// card for the whole game.
+    pub plotted_turn: Option<u32>,
 }
 
 impl GameObject {
@@ -59,6 +67,7 @@ impl GameObject {
             damage: 0,
             counters: Counters::default(),
             attachments: Vec::new(),
+            plotted_turn: None,
         }
     }
 }
@@ -157,6 +166,11 @@ pub struct StackItem {
     /// True iff this spell was cast via flashback: on resolution, an
     /// instant/sorcery goes to exile instead of the graveyard (702.10e).
     pub is_flashback: bool,
+    /// Which mode this cast chose, for a modal spell (`card_def::CardDef::
+    /// mode2`): `0` = the card's primary `target_spec`/`spell_effect`, `1`
+    /// = `mode2`. Always `0` for a non-modal card (`mode2 == None`), which
+    /// is every card in this pool except Pyroblast/Red Elemental Blast.
+    pub mode_chosen: u8,
 }
 
 /// Counter-based, seedable, serializable PRNG (SplitMix64). Deterministic:

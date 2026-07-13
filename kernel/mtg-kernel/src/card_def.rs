@@ -4,21 +4,22 @@
 //! validation (duplicate names / empty deck coverage / schema-version
 //! mismatch all fail the build).
 //!
-//! Only Mono-Red Burn's 16 cards carry a real `spell_effect` /
-//! `mana_ability` program this increment: basic Mountain, the 4 "N damage
-//! to any target" burn spells (Lightning Bolt, Fiery Temper, Fireblast,
-//! Lava Dart -- alternate/additional costs like madness and the
-//! sacrifice-Mountains cost are ignored this increment, both are always
-//! hard-cast for their normal mana cost), and the 4 creatures as vanilla
-//! bodies (Guttersnipe, Masked Meower, Voldaren Epicure, Sneaky Snacker --
-//! keyword abilities/triggers ignored, they're just a castable body).
-//! Every other card (including the other 7 Mono-Red Burn cards whose
-//! effects don't fit the "any target" burn shape: Faithless Looting, Grab
-//! the Prize, Highway Robbery, Pyroblast, Red Elemental Blast, Relic of
-//! Progenitus, Searing Blaze) gets `no_effect` for both -- present in the
-//! table with correct name/cost/types (so ids are stable and the table is
-//! complete), but not castable, per the kernel's fail-closed invariant
-//! (see `lib.rs`).
+//! Mono-Red Burn's 21 cards all carry a real `spell_effect`/`mana_ability`
+//! program as of this increment: basic Mountain, the 4 "N damage to any
+//! target" burn spells (Lightning Bolt, Fiery Temper, Fireblast, Lava
+//! Dart), the 4 creatures as vanilla bodies (Guttersnipe, Masked Meower,
+//! Voldaren Epicure, Sneaky Snacker -- keyword abilities/triggers ignored,
+//! they're just a castable body), Faithless Looting, Grab the Prize,
+//! Highway Robbery (+ Plot), Fiery Temper's Madness, Searing Blaze
+//! (landfall + 2 related targets), and Pyroblast/Red Elemental Blast
+//! (modal, color-checked counter/destroy). Relic of Progenitus is the one
+//! remaining deferred card -- graveyard-card targeting doesn't fit any
+//! existing `TargetSpec` shape and is sideboard-only, so it's lower
+//! priority; see `still_deferred_burn_cards_are_out_of_scope_this_increment`.
+//! Every non-Burn card in the 132-card pool gets `no_effect` for both --
+//! present in the table with correct name/cost/types (so ids are stable and
+//! the table is complete), but not castable, per the kernel's fail-closed
+//! invariant (see `lib.rs`).
 
 use crate::effect::{EffectCond, EffectOp, ObjectRef, PlayerRef, TargetRef};
 use crate::mana::{Cost, ManaColor, Pip};
@@ -41,15 +42,31 @@ pub enum Supertype {
     Snow,
 }
 
-/// What a spell needs targeted at cast time. Only the shapes Mono-Red Burn
-/// needs this increment; modal/variable-count targeting is a future
-/// increment.
+/// What a spell/ability needs targeted at cast/activation time.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum TargetSpec {
     None,
     /// Exactly 1 target: any creature on either battlefield, or either
     /// player.
     AnyTarget,
+    /// Exactly 2 targets, in order, the second dependent on the first
+    /// (Searing Blaze): target any player, then target a creature *that
+    /// player controls*. `engine::legal_targets_for`'s second-pick pool is
+    /// computed from the first pick, not independently.
+    PlayerThenTheirCreature,
+    /// Exactly 1 target: any spell currently on the stack, regardless of
+    /// color (Pyroblast's counter mode -- color is checked at resolution,
+    /// not at targeting; see `EffectCond::TargetIsColor`).
+    AnySpellOnStack,
+    /// Exactly 1 target: a *blue* spell currently on the stack (Red
+    /// Elemental Blast's counter mode -- color is filtered at targeting).
+    BlueSpellOnStack,
+    /// Exactly 1 target: any permanent on either battlefield (Pyroblast's
+    /// destroy mode).
+    AnyPermanent,
+    /// Exactly 1 target: any *blue* permanent on either battlefield (Red
+    /// Elemental Blast's destroy mode).
+    BluePermanent,
 }
 
 /// Combat-relevant keyword abilities, as a bitset. Only `Flying`/`Reach`
@@ -135,6 +152,18 @@ pub struct ActivatedAbilityDef {
     pub effect: fn() -> EffectOp,
 }
 
+/// A spell's alternative mode (Pyroblast's/Red Elemental Blast's "Choose
+/// one --" destroy mode): its own target shape and its own resolution
+/// program, entirely independent of the card's primary
+/// `CardDef::target_spec`/`CardDef::spell_effect`. `engine::Decision::
+/// ChooseSpellMode` picks between the primary mode (index 0) and this one
+/// (index 1) before targeting begins, for any card with `CardDef::mode2 ==
+/// Some(_)`.
+pub struct ModeDef {
+    pub target_spec: TargetSpec,
+    pub effect: fn() -> EffectOp,
+}
+
 pub struct CardDef {
     pub name: &'static str,
     pub cost: Cost,
@@ -144,6 +173,12 @@ pub struct CardDef {
     pub toughness: Option<i16>,
     pub is_land: bool,
     pub produces_mana: &'static [ManaColor],
+    /// This card's color identity per 105.1/202.2 (the color of mana
+    /// symbols in its mana cost) -- empty for a colorless card. Only used
+    /// by Pyroblast/Red Elemental Blast's "if it's blue"/"blue spell"/"blue
+    /// permanent" checks this increment (`EffectCond::TargetIsColor`,
+    /// `engine::legal_targets_for`'s `BlueSpellOnStack`/`BluePermanent`).
+    pub colors: &'static [ManaColor],
     pub target_spec: TargetSpec,
     pub keywords: Keywords,
     /// Program run when the spell resolves off the stack. `None` = not
@@ -163,6 +198,20 @@ pub struct CardDef {
     /// flashback cost (Faithless Looting, Lava Dart).
     pub flashback: Option<FlashbackDef>,
     pub activated_abilities: &'static [ActivatedAbilityDef],
+    /// `Some` iff this card can be Plotted (`PlotAbility`): exiled from
+    /// hand for this cost at sorcery speed, then castable for free (any
+    /// later turn, still sorcery speed) -- `engine::plot_action_candidates`/
+    /// `engine::is_plotted_castable_now`. Only Highway Robbery in this pool.
+    pub plot_cost: Option<Cost>,
+    /// `Some` iff this card has Madness (`MadnessAbility`): whenever it
+    /// would be discarded, it's exiled instead, and its owner may cast it
+    /// for this cost rather than putting it into the graveyard --
+    /// `engine::PendingMadness`/`Decision::ChooseMadnessCast`. Only Fiery
+    /// Temper in this pool.
+    pub madness_cost: Option<Cost>,
+    /// `Some` iff this spell is modal with a second mode (Pyroblast's/Red
+    /// Elemental Blast's destroy mode) -- see `ModeDef`'s doc.
+    pub mode2: Option<ModeDef>,
 }
 
 impl CardDef {
@@ -270,18 +319,63 @@ mod tests {
 
     #[test]
     fn still_deferred_burn_cards_are_out_of_scope_this_increment() {
-        // Highway Robbery (optional discard-or-sacrifice-land cost + Plot),
-        // Pyroblast / Red Elemental Blast (modal cast-time choice +
-        // spell-on-stack targeting/countering + color tracking), Relic of
-        // Progenitus (graveyard-card targeting), and Searing Blaze
-        // (2-related-targets + landfall) all need engine machinery this
-        // increment doesn't build -- see the increment-3 report for the
-        // exact gap per card. Present in `CARD_DEFS` with correct
-        // metadata, not castable, per the kernel's fail-closed invariant.
-        for name in ["Highway Robbery", "Pyroblast", "Red Elemental Blast", "Relic of Progenitus", "Searing Blaze"] {
-            let id = card_id_by_name(name).unwrap_or_else(|| panic!("{name} in pool"));
-            assert!(!CARD_DEFS[id as usize].is_castable(), "{name}");
-        }
+        // Relic of Progenitus needs graveyard-card targeting, which doesn't
+        // fit any `TargetSpec` shape built so far, and it's sideboard-only
+        // -- present in `CARD_DEFS` with correct metadata, not castable,
+        // per the kernel's fail-closed invariant.
+        let name = "Relic of Progenitus";
+        let id = card_id_by_name(name).unwrap_or_else(|| panic!("{name} in pool"));
+        assert!(!CARD_DEFS[id as usize].is_castable(), "{name}");
+    }
+
+    #[test]
+    fn highway_robbery_is_castable_and_plottable() {
+        let id = card_id_by_name("Highway Robbery").expect("Highway Robbery in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert!(def.is_castable());
+        assert_eq!(def.target_spec, TargetSpec::None);
+        assert!(matches!((def.spell_effect)(), Some(EffectOp::MayPayCostThen { discard: 1, sacrifice_lands: 1, .. })));
+        let plot_cost = def.plot_cost.expect("Highway Robbery should have Plot {1}{R}");
+        assert_eq!(plot_cost.generic, 1);
+        assert_eq!(plot_cost.pips, &[Pip::Colored(ManaColor::R)]);
+    }
+
+    #[test]
+    fn fiery_temper_has_madness_r() {
+        let id = card_id_by_name("Fiery Temper").expect("Fiery Temper in pool");
+        let def = &CARD_DEFS[id as usize];
+        let madness_cost = def.madness_cost.expect("Fiery Temper should have Madness {R}");
+        assert_eq!(madness_cost.generic, 0);
+        assert_eq!(madness_cost.pips, &[Pip::Colored(ManaColor::R)]);
+    }
+
+    #[test]
+    fn searing_blaze_targets_player_then_their_creature() {
+        let id = card_id_by_name("Searing Blaze").expect("Searing Blaze in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert!(def.is_castable());
+        assert_eq!(def.target_spec, TargetSpec::PlayerThenTheirCreature);
+    }
+
+    #[test]
+    fn pyroblast_and_red_elemental_blast_are_modal_and_castable() {
+        let pyroblast = &CARD_DEFS[card_id_by_name("Pyroblast").unwrap() as usize];
+        assert!(pyroblast.is_castable());
+        assert_eq!(pyroblast.target_spec, TargetSpec::AnySpellOnStack);
+        assert_eq!(pyroblast.mode2.as_ref().map(|m| m.target_spec), Some(TargetSpec::AnyPermanent));
+
+        let reb = &CARD_DEFS[card_id_by_name("Red Elemental Blast").unwrap() as usize];
+        assert!(reb.is_castable());
+        assert_eq!(reb.target_spec, TargetSpec::BlueSpellOnStack);
+        assert_eq!(reb.mode2.as_ref().map(|m| m.target_spec), Some(TargetSpec::BluePermanent));
+    }
+
+    #[test]
+    fn card_colors_are_populated_from_the_json_pool() {
+        let bolt = &CARD_DEFS[card_id_by_name("Lightning Bolt").unwrap() as usize];
+        assert_eq!(bolt.colors, &[ManaColor::R]);
+        let relic = &CARD_DEFS[card_id_by_name("Relic of Progenitus").unwrap() as usize];
+        assert!(relic.colors.is_empty(), "Relic of Progenitus is colorless");
     }
 
     #[test]

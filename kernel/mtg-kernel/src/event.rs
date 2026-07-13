@@ -321,6 +321,7 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
                 damage: 0,
                 counters: Default::default(),
                 attachments: Vec::new(),
+                plotted_turn: None,
             });
             state.players[t.controller.index()].battlefield.push(object);
             CommittedEvent::CreateToken { object, token_def: t.token_def, controller: t.controller }

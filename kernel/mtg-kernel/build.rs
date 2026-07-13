@@ -35,6 +35,8 @@ struct CardJson {
     is_land: bool,
     #[serde(default)]
     produces_mana: Vec<String>,
+    #[serde(default)]
+    colors: Vec<String>,
     decks: Vec<String>,
     /// A permanent token (e.g. Blood), not itself a deck card: exempt from
     /// the empty-deck-coverage check (see `main`'s validation loop) and
@@ -87,30 +89,21 @@ fn main() {
     fs::write(&dest, out).unwrap_or_else(|e| panic!("failed to write {}: {e}", dest.display()));
 }
 
-/// The Mono-Red Burn cards that get a real effect program this increment.
-/// Still deferred -- present in `CARD_DEFS` with correct metadata, not
-/// castable; see the module doc in `src/card_def.rs` and the increment-3
-/// report for exactly why each one is deferred:
-///
-/// - Highway Robbery: optional discard-or-sacrifice-land cost + Plot
-///   alternate casting, neither modeled.
-/// - Pyroblast / Red Elemental Blast: modal cast-time mode choice, plus
-///   spell-on-stack targeting, countering, and card-color tracking, none
-///   of which exist yet.
-/// - Relic of Progenitus: graveyard-card targeting; sideboard-only so
-///   lower priority.
-/// - Searing Blaze: 2-related-targets shape + landfall watcher;
-///   sideboard-only.
+/// The Mono-Red Burn cards that get a real effect program. Relic of
+/// Progenitus is the sole remaining deferred card -- present in `CARD_DEFS`
+/// with correct metadata, not castable, per the kernel's fail-closed
+/// invariant -- graveyard-card targeting doesn't fit any `TargetSpec` shape
+/// built so far and it's sideboard-only, so it's lower priority than the 5
+/// cards this increment adds.
 enum Special {
     None,
     Mountain,
     /// Deals `amount` damage to any target (Lightning Bolt, Fiery Temper,
-    /// Fireblast, Lava Dart). Fiery Temper's madness alternate cost is
-    /// NOT modeled this increment (see `card_def.rs` module doc) -- it's
-    /// always hard-cast for `{1}{R}{R}`. Fireblast's/Lava Dart's real alt
-    /// cost / flashback ARE modeled, via the separate `alt_cost_for`/
-    /// `flashback_for` tables below (independent of `Special`, since a
-    /// card's targeting/damage shape and its cost shape are orthogonal).
+    /// Fireblast, Lava Dart). Fireblast's/Lava Dart's real alt cost /
+    /// flashback, and Fiery Temper's Madness, are modeled via the separate
+    /// `alt_cost_for`/`flashback_for`/`madness_cost_for` tables below
+    /// (independent of `Special`, since a card's targeting/damage shape and
+    /// its cost shape are orthogonal).
     BurnAnyTarget(i32),
     /// Resolves straight onto the battlefield; any keyword/triggered
     /// ability is layered on separately (`keywords_for` for
@@ -127,6 +120,22 @@ enum Special {
     /// the mandatory additional cost -- see `additional_cost_for` --
     /// wasn't a land) deal 2 damage to the opponent.
     GrabThePrize,
+    /// "You may discard a card or sacrifice a land. If you do, draw two
+    /// cards." (Highway Robbery's resolution effect; its Plot ability is
+    /// modeled separately via `plot_cost_for`, since Plot is a cast-time
+    /// alternative, not a resolution effect).
+    HighwayRobbery,
+    /// 1 damage to target player/planeswalker's controller and 1 damage to
+    /// a creature that player controls; 3/3 instead with landfall this
+    /// turn (Searing Blaze).
+    SearingBlaze,
+    /// "Choose one -- Counter target spell if it's blue; or destroy target
+    /// permanent if it's blue." (Pyroblast: unfiltered targeting, checked
+    /// at resolution).
+    Pyroblast,
+    /// "Choose one -- Counter target blue spell; or destroy target blue
+    /// permanent." (Red Elemental Blast: filtered targeting).
+    RedElementalBlast,
 }
 
 fn special_for(name: &str) -> Special {
@@ -139,6 +148,10 @@ fn special_for(name: &str) -> Special {
         "Guttersnipe" | "Masked Meower" | "Voldaren Epicure" | "Sneaky Snacker" => Special::VanillaCreature,
         "Faithless Looting" => Special::DrawThenDiscard { draw: 2, discard: 2 },
         "Grab the Prize" => Special::GrabThePrize,
+        "Highway Robbery" => Special::HighwayRobbery,
+        "Searing Blaze" => Special::SearingBlaze,
+        "Pyroblast" => Special::Pyroblast,
+        "Red Elemental Blast" => Special::RedElementalBlast,
         _ => Special::None,
     }
 }
@@ -218,6 +231,44 @@ fn activated_abilities_for(name: &str) -> &'static str {
     }
 }
 
+/// `Some` Plot cost source text (`CardDef::plot_cost`), verified against
+/// Java (`PlotAbility`). Only Highway Robbery has one this increment
+/// ("Plot {1}{R}").
+fn plot_cost_for(name: &str) -> String {
+    match name {
+        "Highway Robbery" => cost_src("{1}{R}"),
+        _ => "None".to_string(),
+    }
+}
+
+/// `Some` Madness cost source text (`CardDef::madness_cost`), verified
+/// against Java (`MadnessAbility`). Only Fiery Temper has one this
+/// increment ("Madness {R}").
+fn madness_cost_for(name: &str) -> String {
+    match name {
+        "Fiery Temper" => cost_src("{R}"),
+        _ => "None".to_string(),
+    }
+}
+
+/// `Some` second-mode source text (`CardDef::mode2`), verified against
+/// Java. Pyroblast's and Red Elemental Blast's destroy modes.
+fn mode2_for(name: &str) -> &'static str {
+    match name {
+        "Pyroblast" => "Some(ModeDef { target_spec: TargetSpec::AnyPermanent, effect: mode2_effect_pyroblast })",
+        "Red Elemental Blast" => "Some(ModeDef { target_spec: TargetSpec::BluePermanent, effect: mode2_effect_red_elemental_blast })",
+        _ => "None",
+    }
+}
+
+/// Renders a mana cost string straight to a `Cost { .. }` literal wrapped in
+/// `Some(..)`, for the one-off cost tables above (`plot_cost_for`/
+/// `madness_cost_for`) that aren't full `CardJson` records.
+fn cost_src(mana_cost: &str) -> String {
+    let (pips, generic, x_count) = parse_cost(mana_cost);
+    format!("Some(Cost {{ pips: &[{}], generic: {generic}, x_count: {x_count} }})", pips.join(", "))
+}
+
 fn codegen(cards: &[CardJson]) -> String {
     let mut out = String::new();
     writeln!(out, "// GENERATED by build.rs from kernel/data/cards_v1.json. Do not edit by hand.").unwrap();
@@ -279,6 +330,104 @@ fn codegen(cards: &[CardJson]) -> String {
         writeln!(out).unwrap();
     }
 
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::HighwayRobbery)) {
+        // "You may discard a card or sacrifice a land. If you do, draw two
+        // cards." -- DoIfCostPaid(OrCost(DiscardCardCost, SacrificeTargetCost)).
+        writeln!(out, "fn spell_effect_highway_robbery() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::MayPayCostThen {{").unwrap();
+        writeln!(out, "        discard: 1,").unwrap();
+        writeln!(out, "        sacrifice_lands: 1,").unwrap();
+        writeln!(out, "        then: Box::new(EffectOp::DrawCards {{ player: PlayerRef::Controller, count: 2 }}),").unwrap();
+        writeln!(out, "    }})").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::SearingBlaze)) {
+        // 1 damage to target player + 1 damage to target creature that
+        // player controls; landfall bumps both to 3. The creature-damage
+        // leaf is individually fizzle-guarded (608.2b: Searing Blaze still
+        // hits the player even if the creature target became illegal --
+        // the player target can't, so the whole spell can never fully
+        // fizzle in this pool).
+        writeln!(out, "fn spell_effect_searing_blaze() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Conditional {{").unwrap();
+        writeln!(out, "        cond: EffectCond::LandfallThisTurn,").unwrap();
+        writeln!(out, "        then: Box::new(EffectOp::Sequence(vec![").unwrap();
+        writeln!(out, "            EffectOp::DealDamage {{ target: TargetRef::Target(0), amount: 3 }},").unwrap();
+        writeln!(out, "            EffectOp::Conditional {{").unwrap();
+        writeln!(out, "                cond: EffectCond::TargetInZone(1, Zone::Battlefield),").unwrap();
+        writeln!(out, "                then: Box::new(EffectOp::DealDamage {{ target: TargetRef::Target(1), amount: 3 }}),").unwrap();
+        writeln!(out, "                else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
+        writeln!(out, "            }},").unwrap();
+        writeln!(out, "        ])),").unwrap();
+        writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![").unwrap();
+        writeln!(out, "            EffectOp::DealDamage {{ target: TargetRef::Target(0), amount: 1 }},").unwrap();
+        writeln!(out, "            EffectOp::Conditional {{").unwrap();
+        writeln!(out, "                cond: EffectCond::TargetInZone(1, Zone::Battlefield),").unwrap();
+        writeln!(out, "                then: Box::new(EffectOp::DealDamage {{ target: TargetRef::Target(1), amount: 1 }}),").unwrap();
+        writeln!(out, "                else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
+        writeln!(out, "            }},").unwrap();
+        writeln!(out, "        ])),").unwrap();
+        writeln!(out, "    }})").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::Pyroblast)) {
+        // Primary mode: counter target spell if it's blue (unfiltered
+        // targeting -- PyroblastCounterTargetEffect checks color at
+        // resolution, not TargetSpell's legality). Same guarded-move shape
+        // handles 608.2b fizzle (TargetInZone) and the color check
+        // (TargetIsColor) together via EffectCond::And.
+        writeln!(out, "fn spell_effect_pyroblast_mode1() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Conditional {{").unwrap();
+        writeln!(out, "        cond: EffectCond::And(").unwrap();
+        writeln!(out, "            Box::new(EffectCond::TargetInZone(0, Zone::Stack)),").unwrap();
+        writeln!(out, "            Box::new(EffectCond::TargetIsColor(0, ManaColor::U)),").unwrap();
+        writeln!(out, "        ),").unwrap();
+        writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
+        writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
+        writeln!(out, "    }})").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+        // Mode 2: destroy target permanent if it's blue (same shape, on the
+        // battlefield instead of the stack).
+        writeln!(out, "fn mode2_effect_pyroblast() -> EffectOp {{").unwrap();
+        writeln!(out, "    EffectOp::Conditional {{").unwrap();
+        writeln!(out, "        cond: EffectCond::And(").unwrap();
+        writeln!(out, "            Box::new(EffectCond::TargetInZone(0, Zone::Battlefield)),").unwrap();
+        writeln!(out, "            Box::new(EffectCond::TargetIsColor(0, ManaColor::U)),").unwrap();
+        writeln!(out, "        ),").unwrap();
+        writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
+        writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
+        writeln!(out, "    }}").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::RedElementalBlast)) {
+        // Primary mode: counter target blue spell (color pre-filtered by
+        // TargetSpec::BlueSpellOnStack at targeting time -- only the
+        // 608.2b fizzle re-check is needed at resolution).
+        writeln!(out, "fn spell_effect_red_elemental_blast_mode1() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Conditional {{").unwrap();
+        writeln!(out, "        cond: EffectCond::TargetInZone(0, Zone::Stack),").unwrap();
+        writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
+        writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
+        writeln!(out, "    }})").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+        writeln!(out, "fn mode2_effect_red_elemental_blast() -> EffectOp {{").unwrap();
+        writeln!(out, "    EffectOp::Conditional {{").unwrap();
+        writeln!(out, "        cond: EffectCond::TargetInZone(0, Zone::Battlefield),").unwrap();
+        writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
+        writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
+        writeln!(out, "    }}").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
     let burn_amounts: BTreeSetLike = cards
         .iter()
         .filter_map(|c| match special_for(&c.name) {
@@ -312,6 +461,7 @@ fn codegen(cards: &[CardJson]) -> String {
             .map(|m| format!("ManaColor::{}", color_variant(m)))
             .collect::<Vec<_>>()
             .join(", ");
+        let colors_src = c.colors.iter().map(|m| format!("ManaColor::{}", color_variant(m))).collect::<Vec<_>>().join(", ");
         let pips_src = pips.join(", ");
         let power_src = match c.power {
             Some(p) => format!("Some({p})"),
@@ -335,6 +485,14 @@ fn codegen(cards: &[CardJson]) -> String {
                 ("TargetSpec::None", format!("spell_effect_draw_then_discard_{draw}_{discard}"), "no_effect".to_string())
             }
             Special::GrabThePrize => ("TargetSpec::None", "spell_effect_grab_the_prize".to_string(), "no_effect".to_string()),
+            Special::HighwayRobbery => ("TargetSpec::None", "spell_effect_highway_robbery".to_string(), "no_effect".to_string()),
+            Special::SearingBlaze => {
+                ("TargetSpec::PlayerThenTheirCreature", "spell_effect_searing_blaze".to_string(), "no_effect".to_string())
+            }
+            Special::Pyroblast => ("TargetSpec::AnySpellOnStack", "spell_effect_pyroblast_mode1".to_string(), "no_effect".to_string()),
+            Special::RedElementalBlast => {
+                ("TargetSpec::BlueSpellOnStack", "spell_effect_red_elemental_blast_mode1".to_string(), "no_effect".to_string())
+            }
         };
 
         writeln!(out, "    CardDef {{").unwrap();
@@ -350,6 +508,7 @@ fn codegen(cards: &[CardJson]) -> String {
         writeln!(out, "        toughness: {toughness_src},").unwrap();
         writeln!(out, "        is_land: {},", c.is_land).unwrap();
         writeln!(out, "        produces_mana: &[{produces_src}],").unwrap();
+        writeln!(out, "        colors: &[{colors_src}],").unwrap();
         writeln!(out, "        target_spec: {target_spec_src},").unwrap();
         writeln!(out, "        keywords: {},", keywords_for(&c.name)).unwrap();
         writeln!(out, "        spell_effect: {spell_effect_src},").unwrap();
@@ -358,6 +517,9 @@ fn codegen(cards: &[CardJson]) -> String {
         writeln!(out, "        additional_cost: {},", additional_cost_for(&c.name)).unwrap();
         writeln!(out, "        flashback: {},", flashback_for(&c.name)).unwrap();
         writeln!(out, "        activated_abilities: {},", activated_abilities_for(&c.name)).unwrap();
+        writeln!(out, "        plot_cost: {},", plot_cost_for(&c.name)).unwrap();
+        writeln!(out, "        madness_cost: {},", madness_cost_for(&c.name)).unwrap();
+        writeln!(out, "        mode2: {},", mode2_for(&c.name)).unwrap();
         writeln!(out, "    }},").unwrap();
     }
     writeln!(out, "];").unwrap();

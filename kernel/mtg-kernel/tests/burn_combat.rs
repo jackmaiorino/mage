@@ -60,6 +60,12 @@ fn kind_of(d: &Decision) -> Kind {
         Decision::DeclareBlockers { player, .. } => Kind::DeclareBlockers(*player),
         Decision::OrderTriggers { player, .. } => Kind::OrderTriggers(*player),
         Decision::GameOver { .. } => Kind::GameOver,
+        // This script's card pool (Mountain, Guttersnipe, Lightning Bolt,
+        // Masked Meower) has no Plot/Madness/modal card, so none of these
+        // are ever reachable here.
+        Decision::ChooseSpellMode { .. } | Decision::ChooseOptionalCost { .. } | Decision::ChooseMadnessCast { .. } => {
+            unreachable!("no card in this script is Plotted, Madness, or modal")
+        }
     }
 }
 
@@ -213,6 +219,9 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
                 } else {
                     engine::step(state, Action::Pass).unwrap();
                 }
+            }
+            Decision::ChooseSpellMode { .. } | Decision::ChooseOptionalCost { .. } | Decision::ChooseMadnessCast { .. } => {
+                unreachable!("no card in this script is Plotted, Madness, or modal")
             }
         }
     }

@@ -43,7 +43,7 @@ use crate::card_def::{self, CardType, CostComponent, FlashbackCost, Keywords, Ta
 use crate::effect::{self, EffectOp, ExecCtx, ObjectRef};
 use crate::event::{self, ActiveReplacement, CommittedEvent, ProposedEvent};
 use crate::ids::{ObjectId, PlayerId};
-use crate::mana;
+use crate::mana::{self, Cost};
 use crate::state::{GameState, Step, StackItem, Target, Zone};
 use crate::trigger::{self, PendingTrigger};
 use serde::{Deserialize, Serialize};
@@ -67,6 +67,19 @@ pub struct EngineState {
     /// for why this needs its own pending-state slot instead of being
     /// solved synchronously like every other cost/effect leaf.
     pub pending_discard: Option<PendingDiscard>,
+    /// A resolution-time optional cost (Highway Robbery's "you may discard
+    /// a card or sacrifice a land") staged by `EffectOp::MayPayCostThen`,
+    /// waiting on `Decision::ChooseOptionalCost`/`Action::ChooseOptionalCost`.
+    pub pending_optional_cost: Option<PendingOptionalCost>,
+    /// Cards exiled by Madness (`card_def::CardDef::madness_cost`) since
+    /// their controlling discard, in discard order, each waiting on
+    /// `Decision::ChooseMadnessCast`/`Action::ChooseMadnessCast`. A `Vec`
+    /// (not a single `Option`) because a single `Decision::Discard` can
+    /// discard more than one Madness card at once in general, even though
+    /// no card pair in this pool can -- `drain_pending_madness_or_decide`
+    /// processes it front-to-back, one real decision (or silent
+    /// auto-resolve-to-graveyard, if unaffordable) at a time.
+    pub pending_madness: Vec<ObjectId>,
     /// Transient buffer for the *current* resolution: `event::commit`
     /// appends here, `trigger::collect_and_process` drains it after every
     /// resolution to match triggers. Empty between resolutions.
@@ -131,6 +144,30 @@ pub struct PendingCast {
     /// discarded to pay it (Grab the Prize), read by
     /// `EffectCond::DiscardedNonLandForCost` via `ExecCtx::discarded`.
     pub additional_cost_discarded: Option<Vec<ObjectId>>,
+    /// `Some(cost)` overrides the normal/alt-cost/flashback payment branch
+    /// in `finalize_cast` entirely, paying exactly `cost` instead: `Cost::
+    /// zero()` for casting a Plotted card for free (`begin_cast`, `zone ==
+    /// Exile`), or a card's `madness_cost` for a Madness cast
+    /// (`apply_choose_madness_cast`). `None` for every ordinary cast.
+    /// `#[serde(skip)]`: `mana::Cost` can't derive `Deserialize` (see its
+    /// doc) -- harmless since nothing serializes mid-cast engine state
+    /// today; a real cast is entirely synchronous within one `step` call.
+    #[serde(skip)]
+    pub cost_override: Option<Cost>,
+    /// `None` until resolved, only meaningful for a modal card
+    /// (`CardDef::mode2.is_some()`) -- pre-seeded to `Some(0)` at
+    /// `begin_cast` for every non-modal card, so the "which mode" decision
+    /// stage is skipped entirely unless the card is Pyroblast/Red Elemental
+    /// Blast. `0` = the card's primary `target_spec`/`spell_effect`, `1` =
+    /// `mode2`.
+    pub mode_chosen: Option<u8>,
+    /// Which zone this cast was announced from (Hand, Graveyard for
+    /// flashback, or Exile for Plot/Madness) -- `begin_cast` captures the
+    /// spell's zone *before* `move_to_stack` changes it, purely so
+    /// `abort_cast` (unreachable this increment, but kept in shape rather
+    /// than papered over) knows where to return the card if its cost turns
+    /// out to be unpayable.
+    pub origin_zone: Zone,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -144,7 +181,7 @@ pub struct PendingActivation {
     pub cost_discard_paid: Option<Vec<ObjectId>>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum DiscardResume {
     /// Nothing further to do once the discard lands (cleanup's
     /// discard-to-7).
@@ -167,6 +204,10 @@ pub enum DiscardResume {
     /// immediately, and `apply_discard` performs it once the discard is
     /// actually resolved.
     FinishSpellResolution { source: ObjectId, to_zone: Zone },
+    /// The discard sub-cost of a resolution-time optional cost (Highway
+    /// Robbery's `EffectOp::MayPayCostThen` -> `Action::ChooseOptionalCost
+    /// (OptionalCostChoice::Discard)`) just landed -- run `then` now.
+    FinishOptionalCost { source: ObjectId, controller: PlayerId, then: Box<EffectOp> },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -174,6 +215,33 @@ pub struct PendingDiscard {
     pub player: PlayerId,
     pub count: u32,
     pub resume: DiscardResume,
+}
+
+/// A resolution-time optional cost (`effect::EffectOp::MayPayCostThen`),
+/// waiting on `Decision::ChooseOptionalCost`. `discard_payable`/
+/// `sacrifice_payable` are snapshotted at stage time (by `execute`, which
+/// already checked at least one is true before staging this at all) so
+/// `Action::ChooseOptionalCost` can validate the chosen option without
+/// recomputing legality against however state has (not) changed since.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingOptionalCost {
+    pub player: PlayerId,
+    pub source: ObjectId,
+    pub discard: u8,
+    pub sacrifice_lands: u8,
+    pub discard_payable: bool,
+    pub sacrifice_payable: bool,
+    pub then: EffectOp,
+}
+
+/// The answer to a `Decision::ChooseOptionalCost`. Declining is always
+/// legal (matches `DoIfCostPaid`'s optional "may" framing); the other two
+/// are only legal when the matching `PendingOptionalCost` field is true.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum OptionalCostChoice {
+    Decline,
+    Discard,
+    SacrificeLand,
 }
 
 /// This turn's combat. Reset at every `Step::BeginCombat`. An attacker
@@ -195,9 +263,10 @@ pub struct CombatState {
 pub enum Decision {
     CastSpellOrPass {
         player: PlayerId,
-        /// Both hand-castable spells and graveyard flashback-castable
-        /// cards (see `CardDef::flashback`); `step()` tells them apart by
-        /// the object's current zone.
+        /// Hand-castable spells, graveyard flashback-castable cards
+        /// (`CardDef::flashback`), and exiled Plotted cards castable for
+        /// free (`CardDef::plot_cost`, cast on a later turn); `step()`
+        /// tells them apart by the object's current zone.
         castable_spells: Vec<ObjectId>,
         mana_abilities: Vec<ObjectId>,
         land_drops: Vec<ObjectId>,
@@ -205,6 +274,13 @@ pub enum Decision {
         /// ability currently affordable (Masked Meower's, the Blood
         /// token's).
         activatable_abilities: Vec<(ObjectId, u8)>,
+        /// Hand cards with `CardDef::plot_cost` currently affordable at
+        /// sorcery speed (Highway Robbery's `PlotAbility`, a `SpecialAction`
+        /// -- see `Action::PlotSpell`). Disjoint from `castable_spells`:
+        /// Plotting is a separate action from casting, offered alongside it
+        /// in the same priority window (the real trace's "Plot {1}{R}"
+        /// candidate, distinct from "Cast Highway Robbery").
+        plot_actions: Vec<ObjectId>,
     },
     ChooseTargets {
         player: PlayerId,
@@ -222,6 +298,39 @@ pub enum Decision {
         player: PlayerId,
         spell: ObjectId,
         options: Vec<CastMode>,
+    },
+    /// Pyroblast/Red Elemental Blast only, this increment: which of the
+    /// spell's 2 modes to resolve (`CardDef::mode2`). Asked before
+    /// targeting, since the two modes have different `TargetSpec`s. Unlike
+    /// `ChooseCastMode`, always asked when `mode2.is_some()` -- both modes
+    /// are always legal to *choose* regardless of what's currently on the
+    /// battlefield/stack (601.2b: mode is chosen before targets, so
+    /// there's no "only one is affordable" shortcut to take here).
+    ChooseSpellMode {
+        player: PlayerId,
+        spell: ObjectId,
+        mode_count: u8,
+    },
+    /// Highway Robbery only, this increment: a resolution-time optional
+    /// cost (`effect::EffectOp::MayPayCostThen`). Always a real choice with
+    /// at least 2 options (`Decline` plus whichever of `Discard`/
+    /// `SacrificeLand` `PendingOptionalCost` marked payable) -- declining
+    /// is always legal, so this is never auto-resolved for "no real
+    /// option" the way `CastSpellOrPass` is.
+    ChooseOptionalCost {
+        player: PlayerId,
+        discard_payable: bool,
+        sacrifice_payable: bool,
+    },
+    /// Fiery Temper only, this increment: whether to cast a just-discarded
+    /// Madness card for its madness cost (`CardDef::madness_cost`) instead
+    /// of letting it go to the graveyard. Only asked when the madness cost
+    /// is currently affordable -- see `drain_pending_madness_or_decide`
+    /// (same "don't ask when there's only one legal answer" shortcut
+    /// `ChooseCastMode` uses for Fireblast).
+    ChooseMadnessCast {
+        player: PlayerId,
+        card: ObjectId,
     },
     /// Choose exactly `count` cards from `choices` to discard. Backs
     /// cleanup's discard-to-7, Faithless Looting's "draw two, then
@@ -293,6 +402,16 @@ pub enum Action {
     /// the order they should be placed on the stack (last index resolves
     /// first -- stack is LIFO).
     OrderTriggers(Vec<usize>),
+    /// Plots a hand card (`PlotAbility`, a `SpecialAction`): pays
+    /// `CardDef::plot_cost`, exiles it, and marks it castable for free on a
+    /// later turn. Doesn't use the stack and doesn't pass priority (605.3b-
+    /// like: same shape as `PlayLand`).
+    PlotSpell(ObjectId),
+    ChooseSpellMode(u8),
+    ChooseOptionalCost(OptionalCostChoice),
+    /// `true` = cast the pending Madness card for its madness cost; `false`
+    /// = let it go to the graveyard.
+    ChooseMadnessCast(bool),
 }
 
 const STEP_ORDER: [Step; 12] = [
@@ -317,11 +436,29 @@ fn step_grants_priority(step: Step) -> bool {
 fn target_count(spec: TargetSpec) -> u8 {
     match spec {
         TargetSpec::None => 0,
-        TargetSpec::AnyTarget => 1,
+        TargetSpec::AnyTarget
+        | TargetSpec::AnySpellOnStack
+        | TargetSpec::BlueSpellOnStack
+        | TargetSpec::AnyPermanent
+        | TargetSpec::BluePermanent => 1,
+        TargetSpec::PlayerThenTheirCreature => 2,
     }
 }
 
-pub fn legal_targets_for(spec: TargetSpec, state: &GameState) -> Vec<Target> {
+fn is_blue(state: &GameState, id: ObjectId) -> bool {
+    let def_idx = state.objects.get(id).card_def;
+    card_def::CARD_DEFS[def_idx as usize].colors.contains(&mana::ManaColor::U)
+}
+
+fn battlefield_objects(state: &GameState) -> impl Iterator<Item = ObjectId> + '_ {
+    [PlayerId::P0, PlayerId::P1].into_iter().flat_map(|p| state.players[p.index()].battlefield.iter().copied())
+}
+
+/// `targets_chosen` is the *already-picked* prefix for this same targeting
+/// pass -- needed for `PlayerThenTheirCreature`'s second, dependent pick
+/// (any other spec's legal pool doesn't vary with what's already chosen, so
+/// they simply ignore it).
+pub fn legal_targets_for(spec: TargetSpec, targets_chosen: &[Target], state: &GameState) -> Vec<Target> {
     match spec {
         TargetSpec::None => Vec::new(),
         TargetSpec::AnyTarget => {
@@ -336,6 +473,25 @@ pub fn legal_targets_for(spec: TargetSpec, state: &GameState) -> Vec<Target> {
             }
             out
         }
+        TargetSpec::PlayerThenTheirCreature => {
+            if targets_chosen.is_empty() {
+                vec![Target::Player(PlayerId::P0), Target::Player(PlayerId::P1)]
+            } else if let Some(Target::Player(p)) = targets_chosen.first() {
+                state.players[p.index()]
+                    .battlefield
+                    .iter()
+                    .copied()
+                    .filter(|&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].has_type(CardType::Creature))
+                    .map(Target::Object)
+                    .collect()
+            } else {
+                Vec::new()
+            }
+        }
+        TargetSpec::AnySpellOnStack => state.stack.iter().map(|item| Target::Object(item.source)).collect(),
+        TargetSpec::BlueSpellOnStack => state.stack.iter().map(|item| item.source).filter(|&id| is_blue(state, id)).map(Target::Object).collect(),
+        TargetSpec::AnyPermanent => battlefield_objects(state).map(Target::Object).collect(),
+        TargetSpec::BluePermanent => battlefield_objects(state).filter(|&id| is_blue(state, id)).map(Target::Object).collect(),
     }
 }
 
@@ -354,7 +510,9 @@ fn discard_count_in(components: &[CostComponent]) -> Option<u8> {
     })
 }
 
-fn count_controlled_lands(player: PlayerId, state: &GameState) -> u32 {
+/// `pub(crate)`: also read by `effect::execute`'s `MayPayCostThen` handler
+/// to check whether the sacrifice-a-land sub-cost is currently payable.
+pub(crate) fn count_controlled_lands(player: PlayerId, state: &GameState) -> u32 {
     state.players[player.index()]
         .battlefield
         .iter()
@@ -438,7 +596,7 @@ fn is_castable_now(player: PlayerId, id: ObjectId, is_flashback: bool, state: &G
         return false;
     }
     let sorcery_speed_ok = if def.has_type(CardType::Sorcery) || def.has_type(CardType::Creature) {
-        player == state.active_player && state.stack.is_empty() && matches!(state.step, Step::Main1 | Step::Main2)
+        sorcery_speed_timing_ok(player, state)
     } else {
         true // instants: castable any time the caster has priority
     };
@@ -480,7 +638,52 @@ fn castable_spells(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
             out.push(id);
         }
     }
+    for &id in &state.exile {
+        if state.objects.get(id).owner == player && is_plotted_castable_now(player, id, state) {
+            out.push(id);
+        }
+    }
     out
+}
+
+/// Sorcery-speed timing (508.1a's "any time you could cast a sorcery"),
+/// shared by an ordinary sorcery-speed cast (`is_castable_now`), a Plotted
+/// card cast from exile, and Plotting itself (`plot_action_candidates`) --
+/// 702.163a/`PlotAbility.setTiming(TimingRule.SORCERY)` grant that timing
+/// regardless of the card's own type.
+fn sorcery_speed_timing_ok(player: PlayerId, state: &GameState) -> bool {
+    player == state.active_player && state.stack.is_empty() && matches!(state.step, Step::Main1 | Step::Main2)
+}
+
+/// Whether `id` (in `state.exile`, owned by `player`) was Plotted on an
+/// earlier turn and is therefore castable for free right now (702.163a: at
+/// sorcery speed, never the turn it was Plotted). `def.is_castable()` keeps
+/// this fail-closed if a future Plot-able card is added to the JSON pool
+/// before its `spell_effect` is implemented.
+fn is_plotted_castable_now(player: PlayerId, id: ObjectId, state: &GameState) -> bool {
+    let obj = state.objects.get(id);
+    let Some(plotted_turn) = obj.plotted_turn else { return false };
+    if plotted_turn == state.turn {
+        return false;
+    }
+    let def = &card_def::CARD_DEFS[obj.card_def as usize];
+    def.is_castable() && sorcery_speed_timing_ok(player, state)
+}
+
+/// Hand cards `player` can currently afford to Plot (`CardDef::plot_cost`).
+fn plot_action_candidates(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
+    if !sorcery_speed_timing_ok(player, state) {
+        return Vec::new();
+    }
+    state.players[player.index()]
+        .hand
+        .iter()
+        .copied()
+        .filter(|&id| {
+            let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
+            def.plot_cost.is_some_and(|cost| mana::can_pay(&cost, 0, player, state).is_some())
+        })
+        .collect()
 }
 
 fn available_mana_abilities(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
@@ -586,6 +789,15 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             return d;
         }
 
+        // A discard just processed above may have queued a Madness card
+        // (`apply_discard` exiles it instead of graveyarding it, on the way
+        // in) -- ask (or silently auto-resolve to graveyard, if
+        // unaffordable) before anything else gets a chance to offer a
+        // priority window.
+        if let Some(d) = drain_pending_madness_or_decide(state) {
+            return d;
+        }
+
         if let Some(d) = drain_pending_cast_or_decide(state) {
             return d;
         }
@@ -610,6 +822,18 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
         // (Masked Meower, the Blood token).
         if state.engine.pending_discard.is_some() {
             continue;
+        }
+
+        // Unlike `pending_discard`/`pending_cast`/`pending_activation`,
+        // `pending_optional_cost` never auto-resolves (declining is always
+        // legal, so there's always a real choice once staged) -- no
+        // `continue`-and-recheck dance needed here: if `Action::
+        // ChooseOptionalCost(Discard)` stages a fresh `pending_discard`,
+        // that's picked up at the very top of the *next* call to this
+        // function (the loop only reaches this far after already
+        // confirming `pending_discard` is `None`).
+        if let Some(d) = drain_pending_optional_cost_or_decide(state) {
+            return d;
         }
 
         if let Some(d) = drain_pending_triggers_or_decide(state) {
@@ -647,6 +871,7 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             mana_abilities: available_mana_abilities(state.priority_player, state),
             land_drops: land_drop_candidates(state.priority_player, state),
             activatable_abilities: available_activatable_abilities(state.priority_player, state),
+            plot_actions: plot_action_candidates(state.priority_player, state),
         };
     }
 }
@@ -679,7 +904,17 @@ fn drain_pending_discard_or_decide(state: &mut GameState) -> Option<Decision> {
 
 fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardResume) {
     for &id in &chosen {
-        event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Graveyard));
+        let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
+        if def.madness_cost.is_some() {
+            // 702.33a: a discarded Madness card is exiled instead of
+            // graveyarded, and its owner is later offered the chance to
+            // cast it for its madness cost -- see
+            // `drain_pending_madness_or_decide`.
+            event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Exile));
+            state.engine.pending_madness.push(id);
+        } else {
+            event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Graveyard));
+        }
     }
     match resume {
         DiscardResume::None => collect_and_queue_triggers(state),
@@ -701,7 +936,49 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
             event::propose_and_commit(state, ProposedEvent::zone_change(source, to_zone));
             collect_and_queue_triggers(state);
         }
+        DiscardResume::FinishOptionalCost { source, controller, then } => {
+            // See `EffectOp::MayPayCostThen`'s doc: the discard sub-cost
+            // just landed, so run the effect it unlocked (Highway Robbery:
+            // draw two cards).
+            let ctx = ExecCtx::no_targets(source, controller);
+            effect::execute(&then, &ctx, state);
+            collect_and_queue_triggers(state);
+        }
     }
+}
+
+/// If a Madness card is queued (`EngineState::pending_madness`, populated by
+/// `apply_discard`), either silently sends it to the graveyard (its madness
+/// cost isn't currently affordable -- no real choice, same "don't ask when
+/// there's only one legal answer" shortcut `drain_pending_cast_or_decide`
+/// uses for Fireblast's cast mode) or returns `Decision::ChooseMadnessCast`.
+/// Loops so a batch of several simultaneously-queued Madness cards (not
+/// reachable in this pool, but not assumed away either) doesn't strand the
+/// ones after an unaffordable one.
+fn drain_pending_madness_or_decide(state: &mut GameState) -> Option<Decision> {
+    loop {
+        let &card = state.engine.pending_madness.first()?;
+        let owner = state.objects.get(card).owner;
+        let def = &card_def::CARD_DEFS[state.objects.get(card).card_def as usize];
+        let cost = def.madness_cost.expect("only Madness cards are ever queued in pending_madness");
+        if mana::can_pay(&cost, 0, owner, state).is_none() {
+            state.engine.pending_madness.remove(0);
+            event::propose_and_commit(state, ProposedEvent::zone_change(card, Zone::Graveyard));
+            collect_and_queue_triggers(state);
+            continue;
+        }
+        return Some(Decision::ChooseMadnessCast { player: owner, card });
+    }
+}
+
+/// If a resolution-time optional cost is pending (`EngineState::
+/// pending_optional_cost`, staged by `EffectOp::MayPayCostThen`), returns
+/// `Decision::ChooseOptionalCost`. Always asked, never auto-resolved:
+/// declining is always a legal answer, so this is never a "no real choice"
+/// situation the way a forced discard or a single-affordable-cast-mode is.
+fn drain_pending_optional_cost_or_decide(state: &mut GameState) -> Option<Decision> {
+    let poc = state.engine.pending_optional_cost.as_ref()?;
+    Some(Decision::ChooseOptionalCost { player: poc.player, discard_payable: poc.discard_payable, sacrifice_payable: poc.sacrifice_payable })
 }
 
 /// Stages `PendingCast` through its targets -> cast-mode -> additional-
@@ -713,13 +990,26 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
     let pending = state.engine.pending_cast.clone()?;
     let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
 
-    let need = target_count(pending.target_spec);
+    // 601.2b: mode is chosen before targets (the two modes can have
+    // different target shapes) -- always asked when the card is modal,
+    // never auto-resolved (both modes are always legal to *choose*
+    // regardless of the battlefield/stack; see `Decision::ChooseSpellMode`'s
+    // doc).
+    if def.mode2.is_some() && pending.mode_chosen.is_none() {
+        return Some(Decision::ChooseSpellMode { player: pending.controller, spell: pending.spell, mode_count: 2 });
+    }
+    let active_target_spec = match pending.mode_chosen {
+        Some(1) => def.mode2.as_ref().expect("mode_chosen == 1 only when mode2 is Some").target_spec,
+        _ => def.target_spec,
+    };
+
+    let need = target_count(active_target_spec);
     if (pending.targets_chosen.len() as u8) < need {
         return Some(Decision::ChooseTargets {
             player: pending.controller,
             spell: pending.spell,
             remaining: need - pending.targets_chosen.len() as u8,
-            legal_targets: legal_targets_for(pending.target_spec, state),
+            legal_targets: legal_targets_for(active_target_spec, &pending.targets_chosen, state),
         });
     }
 
@@ -763,7 +1053,7 @@ fn drain_pending_activation_or_decide(state: &mut GameState) -> Option<Decision>
             player: pending.controller,
             spell: pending.source,
             remaining: need - pending.targets_chosen.len() as u8,
-            legal_targets: legal_targets_for(pending.target_spec, state),
+            legal_targets: legal_targets_for(pending.target_spec, &pending.targets_chosen, state),
         });
     }
 
@@ -807,6 +1097,7 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
         inline_effect: Some(t.effect),
         discarded: vec![],
         is_flashback: false,
+        mode_chosen: 0,
     });
     reset_priority(state);
 }
@@ -825,7 +1116,17 @@ fn resolve_top_of_stack(state: &mut GameState) {
 
     let card_def_idx = state.objects.get(item.source).card_def;
     let def = &card_def::CARD_DEFS[card_def_idx as usize];
-    if let Some(program) = (def.spell_effect)() {
+    // 601.2b: a modal spell resolves whichever mode was chosen at cast time
+    // (`PendingCast::mode_chosen`, threaded onto the `StackItem` by
+    // `finalize_cast`) -- `mode_chosen == 1` only for Pyroblast/Red
+    // Elemental Blast's destroy mode, everything else always resolves its
+    // primary `spell_effect`.
+    let program = if item.mode_chosen == 1 {
+        def.mode2.as_ref().map(|m| (m.effect)())
+    } else {
+        (def.spell_effect)()
+    };
+    if let Some(program) = program {
         effect::execute(&program, &ctx, state);
     }
 
@@ -1124,8 +1425,8 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
             Ok(())
         }
         Action::ChooseTarget(t) => {
-            let spec = pending_target_spec(state).ok_or("no spell or ability is currently being targeted")?;
-            if !legal_targets_for(spec, state).contains(&t) {
+            let (spec, chosen_so_far) = pending_target_spec_and_chosen(state).ok_or("no spell or ability is currently being targeted")?;
+            if !legal_targets_for(spec, &chosen_so_far, state).contains(&t) {
                 return Err(format!("{t:?} is not a legal target"));
             }
             if let Some(p) = state.engine.pending_cast.as_mut() {
@@ -1143,6 +1444,29 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
             pending.cast_mode = Some(mode);
             Ok(())
         }
+        Action::ChooseSpellMode(mode) => {
+            let p = state.priority_player;
+            let pending = state.engine.pending_cast.as_mut().ok_or("no spell is currently being cast")?;
+            if pending.mode_chosen.is_some() {
+                return Err("this cast's mode has already been chosen".to_string());
+            }
+            let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
+            if def.mode2.is_none() || mode > 1 {
+                return Err(format!("{mode} is not a legal spell mode for {p:?}'s cast"));
+            }
+            pending.mode_chosen = Some(mode);
+            Ok(())
+        }
+        Action::ChooseOptionalCost(choice) => apply_choose_optional_cost(state, choice),
+        Action::ChooseMadnessCast(cast_it) => apply_choose_madness_cast(state, cast_it),
+        Action::PlotSpell(id) => {
+            let p = state.priority_player;
+            if !plot_action_candidates(p, state).contains(&id) {
+                return Err(format!("{id} is not a legal Plot action for {p:?}"));
+            }
+            plot_spell(state, p, id);
+            Ok(())
+        }
         Action::Discard(chosen) => apply_discard_action(state, chosen),
         Action::DeclareAttackers(attackers) => apply_declare_attackers(state, attackers),
         Action::DeclareBlockers(blocks) => apply_declare_blockers(state, blocks),
@@ -1150,12 +1474,21 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
     }
 }
 
-fn pending_target_spec(state: &GameState) -> Option<TargetSpec> {
+/// The active `TargetSpec` for whatever is currently being targeted
+/// (mode-aware for a modal cast) and the targets already picked so far
+/// this same targeting pass -- see `legal_targets_for`'s doc for why the
+/// second pick of a dependent spec (`PlayerThenTheirCreature`) needs both.
+fn pending_target_spec_and_chosen(state: &GameState) -> Option<(TargetSpec, Vec<Target>)> {
     if let Some(p) = &state.engine.pending_cast {
-        return Some(p.target_spec);
+        let def = &card_def::CARD_DEFS[state.objects.get(p.spell).card_def as usize];
+        let spec = match p.mode_chosen {
+            Some(1) => def.mode2.as_ref().expect("mode_chosen == 1 only when mode2 is Some").target_spec,
+            _ => p.target_spec,
+        };
+        return Some((spec, p.targets_chosen.clone()));
     }
     if let Some(p) = &state.engine.pending_activation {
-        return Some(p.target_spec);
+        return Some((p.target_spec, p.targets_chosen.clone()));
     }
     None
 }
@@ -1178,6 +1511,51 @@ fn apply_discard_action(state: &mut GameState, chosen: Vec<ObjectId>) -> Result<
     }
     state.engine.pending_discard = None;
     apply_discard(state, chosen, pd.resume);
+    Ok(())
+}
+
+fn apply_choose_optional_cost(state: &mut GameState, choice: OptionalCostChoice) -> Result<(), String> {
+    let poc = state.engine.pending_optional_cost.take().ok_or("no optional cost is pending")?;
+    match choice {
+        OptionalCostChoice::Decline => Ok(()),
+        OptionalCostChoice::Discard => {
+            if !poc.discard_payable {
+                return Err("discard is not currently a payable option for this optional cost".to_string());
+            }
+            state.engine.pending_discard = Some(PendingDiscard {
+                player: poc.player,
+                count: poc.discard as u32,
+                resume: DiscardResume::FinishOptionalCost { source: poc.source, controller: poc.player, then: Box::new(poc.then) },
+            });
+            Ok(())
+        }
+        OptionalCostChoice::SacrificeLand => {
+            if !poc.sacrifice_payable {
+                return Err("sacrificing a land is not currently a payable option for this optional cost".to_string());
+            }
+            sacrifice_lowest_id_lands(state, poc.player, poc.sacrifice_lands);
+            let ctx = ExecCtx::no_targets(poc.source, poc.player);
+            effect::execute(&poc.then, &ctx, state);
+            Ok(())
+        }
+    }
+}
+
+fn apply_choose_madness_cast(state: &mut GameState, cast_it: bool) -> Result<(), String> {
+    let &card = state.engine.pending_madness.first().ok_or("no Madness decision is pending")?;
+    state.engine.pending_madness.remove(0);
+    let owner = state.objects.get(card).owner;
+    if !cast_it {
+        event::propose_and_commit(state, ProposedEvent::zone_change(card, Zone::Graveyard));
+        collect_and_queue_triggers(state);
+        return Ok(());
+    }
+    let def = &card_def::CARD_DEFS[state.objects.get(card).card_def as usize];
+    let cost = def.madness_cost.expect("checked affordable by drain_pending_madness_or_decide");
+    if mana::can_pay(&cost, 0, owner, state).is_none() {
+        return Err("madness cost is no longer payable".to_string());
+    }
+    begin_cast_ex(state, owner, card, Some(cost));
     Ok(())
 }
 
@@ -1275,22 +1653,54 @@ fn play_land(state: &mut GameState, player: PlayerId, id: ObjectId) {
     state.priority_player = player;
 }
 
+/// Plots a hand card (`PlotAbility`): pays `CardDef::plot_cost`, exiles it,
+/// and stamps `GameObject::plotted_turn` so `is_plotted_castable_now` can
+/// recognize it later. A `SpecialAction` (`usesStack = false` in the Java
+/// source): doesn't touch the stack and doesn't pass priority, same shape
+/// as `play_land`.
+fn plot_spell(state: &mut GameState, player: PlayerId, id: ObjectId) {
+    let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
+    let cost = def.plot_cost.expect("plot_action_candidates only offers cards with a plot_cost");
+    let plan = mana::can_pay(&cost, 0, player, state).expect("legality already checked by plot_action_candidates");
+    pay_plan(state, player, &plan);
+    event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Exile));
+    state.objects.get_mut(id).plotted_turn = Some(state.turn);
+    collect_and_queue_triggers(state);
+    state.engine.priority_passes = [false, false];
+    state.priority_player = player;
+}
+
 /// 601.2a: announcing a cast moves the spell from hand (or graveyard, for a
 /// flashback cast) onto the stack immediately -- *before* modes/targets are
 /// chosen (601.2b/601.2c) or costs are paid (601.2f-h), which is why
 /// `PendingCast`'s later stages (see `drain_pending_cast_or_decide`) mutate
 /// the `StackItem` this pushes in place rather than building one from
-/// scratch at `finalize_cast`. Pre-resolves the cast-mode/additional-cost
-/// stages when there's no real choice to make -- see `PendingCast`'s field
-/// docs.
+/// scratch at `finalize_cast`. Pre-resolves the cast-mode/additional-cost/
+/// spell-mode stages when there's no real choice to make -- see
+/// `PendingCast`'s field docs.
 fn begin_cast(state: &mut GameState, player: PlayerId, spell_id: ObjectId) {
-    let is_flashback = state.objects.get(spell_id).zone == Zone::Graveyard;
+    begin_cast_ex(state, player, spell_id, None);
+}
+
+/// `forced_cost_override`, when `Some`, is a Madness cast (`Action::
+/// ChooseMadnessCast(true)`): the card is already sitting in `state.exile`
+/// (moved there by `apply_discard`'s Madness interception), and is cast for
+/// exactly this cost rather than any zone-inferred cost. `None` covers every
+/// ordinary `Action::CastSpell`, where the cost (if overridden at all) is
+/// inferred from the spell's zone instead (`Cost::zero()` for a Plotted
+/// card cast from exile).
+fn begin_cast_ex(state: &mut GameState, player: PlayerId, spell_id: ObjectId, forced_cost_override: Option<Cost>) {
+    let origin_zone = state.objects.get(spell_id).zone;
+    let is_flashback = forced_cost_override.is_none() && origin_zone == Zone::Graveyard;
+    let is_plotted = forced_cost_override.is_none() && origin_zone == Zone::Exile;
     let def = &card_def::CARD_DEFS[state.objects.get(spell_id).card_def as usize];
     let target_spec = def.target_spec;
-    let cast_mode = if is_flashback || def.alt_cost.is_none() { Some(CastMode::Normal) } else { None };
+    let cost_override = forced_cost_override.or(if is_plotted { Some(Cost::zero()) } else { None });
+    let cast_mode = if is_flashback || cost_override.is_some() || def.alt_cost.is_none() { Some(CastMode::Normal) } else { None };
     let additional_cost_discarded = if def.additional_cost.is_none() { Some(vec![]) } else { None };
+    let mode_chosen = if def.mode2.is_none() { Some(0) } else { None };
 
-    move_to_stack(state, spell_id, is_flashback);
+    move_to_stack(state, spell_id, origin_zone);
     state.stack.push(StackItem {
         source: spell_id,
         controller: player,
@@ -1298,6 +1708,7 @@ fn begin_cast(state: &mut GameState, player: PlayerId, spell_id: ObjectId) {
         inline_effect: None,
         discarded: vec![],
         is_flashback,
+        mode_chosen: 0,
     });
 
     state.engine.pending_cast = Some(PendingCast {
@@ -1308,6 +1719,9 @@ fn begin_cast(state: &mut GameState, player: PlayerId, spell_id: ObjectId) {
         is_flashback,
         cast_mode,
         additional_cost_discarded,
+        cost_override,
+        mode_chosen,
+        origin_zone,
     });
 }
 
@@ -1333,7 +1747,18 @@ fn finalize_cast(state: &mut GameState) {
     let pending = state.engine.pending_cast.take().expect("finalize_cast requires a pending cast");
     let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
 
-    if pending.is_flashback {
+    if let Some(cost) = pending.cost_override {
+        // Plot (free) or Madness (its own alternative cost) -- see
+        // `PendingCast::cost_override`'s doc. Same unreachable-`abort_cast`
+        // shape as every other cost branch here: `Cost::zero()` always
+        // trivially pays, and a Madness cast's affordability is re-checked
+        // immediately before `begin_cast_ex` is even called
+        // (`apply_choose_madness_cast`).
+        let Some(plan) = mana::can_pay(&cost, 0, pending.controller, state) else {
+            return abort_cast(state, pending);
+        };
+        pay_plan(state, pending.controller, &plan);
+    } else if pending.is_flashback {
         let fb = def.flashback.as_ref().expect("is_flashback implies CardDef::flashback is Some");
         match fb.cost {
             FlashbackCost::Mana(cost) => {
@@ -1377,6 +1802,7 @@ fn finalize_cast(state: &mut GameState) {
     debug_assert_eq!(item.source, pending.spell, "the top of the stack must still be this cast's own placeholder");
     item.targets = pending.targets_chosen;
     item.discarded = discarded;
+    item.mode_chosen = pending.mode_chosen.unwrap_or(0);
     event::log_spell_cast(state, pending.spell, pending.controller);
 
     // 601.2i/603.3: casting is complete the instant costs are paid --
@@ -1396,11 +1822,12 @@ fn abort_cast(state: &mut GameState, pending: PendingCast) {
     let item = state.stack.pop();
     debug_assert!(item.is_some_and(|i| i.source == pending.spell), "abort_cast expects its spell's placeholder to be the top of the stack");
     let owner = state.objects.get(pending.spell).owner;
-    let to_zone = if pending.is_flashback { Zone::Graveyard } else { Zone::Hand };
+    let to_zone = pending.origin_zone;
     match to_zone {
         Zone::Hand => state.players[owner.index()].hand.push(pending.spell),
         Zone::Graveyard => state.players[owner.index()].graveyard.push(pending.spell),
-        _ => unreachable!("to_zone is always Hand or Graveyard"),
+        Zone::Exile => state.exile.push(pending.spell),
+        _ => unreachable!("origin_zone is always Hand, Graveyard, or Exile"),
     }
     state.objects.get_mut(pending.spell).zone = to_zone;
 }
@@ -1419,6 +1846,7 @@ fn finalize_activation(state: &mut GameState) {
         inline_effect: Some(effect),
         discarded: pending.cost_discard_paid.unwrap_or_default(),
         is_flashback: false,
+        mode_chosen: 0,
     });
 
     // No ability in this increment's pool triggers off another ability
@@ -1433,12 +1861,12 @@ fn finalize_activation(state: &mut GameState) {
 /// `event::commit` (which explicitly panics on a Stack destination):
 /// casting is an engine action, not a `MoveObject` effect leaf any card
 /// program emits.
-fn move_to_stack(state: &mut GameState, id: ObjectId, from_graveyard: bool) {
+fn move_to_stack(state: &mut GameState, id: ObjectId, from_zone: Zone) {
     let owner = state.objects.get(id).owner;
-    if from_graveyard {
-        state.players[owner.index()].graveyard.retain(|&x| x != id);
-    } else {
-        state.players[owner.index()].hand.retain(|&x| x != id);
+    match from_zone {
+        Zone::Graveyard => state.players[owner.index()].graveyard.retain(|&x| x != id),
+        Zone::Exile => state.exile.retain(|&x| x != id),
+        _ => state.players[owner.index()].hand.retain(|&x| x != id),
     }
     state.objects.get_mut(id).zone = Zone::Stack;
 }
@@ -1483,6 +1911,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            plotted_turn: None,
         });
         state.players[player.index()].battlefield.push(obj_id);
         obj_id
@@ -1501,6 +1930,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            plotted_turn: None,
         });
         state.players[player.index()].hand.push(obj_id);
         obj_id
@@ -1675,5 +2105,378 @@ mod tests {
         state.objects.get_mut(attacker).controller = PlayerId::P0;
         let legal = legal_blockers_for(&state, attacker);
         assert!(legal.is_empty(), "a non-flying, non-reach creature should not be able to block a flyer");
+    }
+
+    // ================================================================
+    // Increment 7: Highway Robbery (+ Plot), Fiery Temper (Madness),
+    // Searing Blaze, Pyroblast / Red Elemental Blast.
+    // ================================================================
+
+    fn put_on_stack(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
+        let card_id = card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let obj_id = state.objects.push(crate::state::GameObject {
+            card_def: card_id,
+            name: card_name.to_string(),
+            owner: player,
+            controller: player,
+            zone: Zone::Stack,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.stack.push(StackItem { source: obj_id, controller: player, targets: vec![], inline_effect: None, discarded: vec![], is_flashback: false, mode_chosen: 0 });
+        obj_id
+    }
+
+    /// Both players passing priority (117.3c: the caster keeps priority
+    /// after finishing a cast, so this always starts with them) is what
+    /// actually triggers `resolve_top_of_stack` -- finishing targeting
+    /// alone only finalizes the cast and hands priority back. Repeatedly
+    /// passes a `CastSpellOrPass` window as long as the stack is still
+    /// non-empty, then returns whatever decision comes next -- which may
+    /// itself be a resolution-triggered `Decision` (`ChooseOptionalCost`,
+    /// `ChooseMadnessCast`) rather than another `CastSpellOrPass`, since a
+    /// resolving spell's own effect can stage one synchronously.
+    fn pass_until_stack_resolves(state: &mut GameState) -> Decision {
+        loop {
+            let decision = advance_until_decision(state);
+            match &decision {
+                Decision::CastSpellOrPass { .. } if !state.stack.is_empty() => step(state, Action::Pass).unwrap(),
+                _ => return decision,
+            }
+        }
+    }
+
+    /// Same idea, but stops as soon as the stack has shrunk by at least one
+    /// item, instead of draining it completely -- for tests that put a
+    /// second, synthetic (targetless) item under the one actually being
+    /// exercised, which would panic if it were ever resolved for real.
+    fn pass_until_one_stack_item_resolves(state: &mut GameState) {
+        let starting_len = state.stack.len();
+        loop {
+            match advance_until_decision(state) {
+                Decision::CastSpellOrPass { .. } => step(state, Action::Pass).unwrap(),
+                other => panic!("unexpected decision while resolving one stack item: {other:?}"),
+            }
+            if state.stack.len() < starting_len {
+                return;
+            }
+        }
+    }
+
+    fn ready_game_in_main1(p0_mountains: u32) -> GameState {
+        let mut state = empty_game();
+        for _ in 0..p0_mountains {
+            put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        }
+        state.active_player = PlayerId::P0;
+        state.priority_player = PlayerId::P0;
+        state.step = Step::Main1;
+        state
+    }
+
+    #[test]
+    fn highway_robbery_decline_draws_nothing() {
+        let mut state = ready_game_in_main1(2);
+        let robbery = put_in_hand(&mut state, PlayerId::P0, "Highway Robbery");
+        step(&mut state, Action::CastSpell(robbery)).unwrap();
+        assert_eq!(state.players[0].hand.len(), 0, "Highway Robbery itself already left the hand once announced");
+
+        match pass_until_stack_resolves(&mut state) {
+            Decision::ChooseOptionalCost { player, discard_payable, sacrifice_payable } => {
+                assert_eq!(player, PlayerId::P0);
+                assert!(!discard_payable, "hand is empty (only Highway Robbery was in it)");
+                assert!(sacrifice_payable, "2 Mountains are in play to sacrifice");
+            }
+            other => panic!("expected ChooseOptionalCost, got {other:?}"),
+        }
+        step(&mut state, Action::ChooseOptionalCost(OptionalCostChoice::Decline)).unwrap();
+        assert_eq!(state.players[0].hand.len(), 0, "declining pays nothing and draws nothing");
+        assert_eq!(state.players[0].battlefield.len(), 2, "declining doesn't sacrifice a land either");
+    }
+
+    #[test]
+    fn highway_robbery_discard_draws_two() {
+        let mut state = ready_game_in_main1(2);
+        let robbery = put_in_hand(&mut state, PlayerId::P0, "Highway Robbery");
+        // 2 discardable cards left in hand (not just 1) so the discard is a
+        // real choice -- `Decision::Discard` -- rather than silently
+        // auto-resolving the same way a genuinely-forced 1-candidate
+        // discard would (see `drain_pending_discard_or_decide`'s doc).
+        let lava_dart = put_in_hand(&mut state, PlayerId::P0, "Lava Dart");
+        let _lightning_bolt = put_in_hand(&mut state, PlayerId::P0, "Lightning Bolt");
+        step(&mut state, Action::CastSpell(robbery)).unwrap();
+        let decision = pass_until_stack_resolves(&mut state);
+        assert!(matches!(decision, Decision::ChooseOptionalCost { discard_payable: true, .. }));
+        step(&mut state, Action::ChooseOptionalCost(OptionalCostChoice::Discard)).unwrap();
+
+        match advance_until_decision(&mut state) {
+            Decision::Discard { player, count, choices } => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(count, 1);
+                assert_eq!(choices.len(), 2);
+                assert!(choices.contains(&lava_dart));
+                step(&mut state, Action::Discard(vec![lava_dart])).unwrap();
+            }
+            other => panic!("expected Discard, got {other:?}"),
+        }
+        assert_eq!(state.players[0].graveyard, vec![robbery, lava_dart], "Highway Robbery then the discarded card, in that order");
+        assert_eq!(state.players[0].hand.len(), 1, "the undiscarded Lightning Bolt is still in hand; the 2 drawn cards came from an empty library");
+    }
+
+    #[test]
+    fn highway_robbery_sacrifice_land_draws_two() {
+        let mut state = ready_game_in_main1(2);
+        let robbery = put_in_hand(&mut state, PlayerId::P0, "Highway Robbery");
+        for i in 0..2 {
+            state.draw_card(PlayerId::P0); // nothing to draw (empty library) -- just proves the count via hand growth below
+            let _ = i;
+        }
+        state.players[0].hand.clear(); // isolate: only Highway Robbery matters for this test
+        state.players[0].hand.push(robbery);
+
+        step(&mut state, Action::CastSpell(robbery)).unwrap();
+        let decision = pass_until_stack_resolves(&mut state);
+        assert!(matches!(decision, Decision::ChooseOptionalCost { sacrifice_payable: true, .. }));
+        step(&mut state, Action::ChooseOptionalCost(OptionalCostChoice::SacrificeLand)).unwrap();
+        assert_eq!(state.players[0].battlefield.len(), 1, "exactly 1 of the 2 Mountains should have been sacrificed");
+        assert_eq!(state.players[0].graveyard.len(), 2, "Highway Robbery + the sacrificed Mountain");
+    }
+
+    #[test]
+    fn plot_then_free_cast_on_a_later_turn() {
+        let mut state = ready_game_in_main1(2);
+        let robbery = put_in_hand(&mut state, PlayerId::P0, "Highway Robbery");
+
+        assert_eq!(plot_action_candidates(PlayerId::P0, &state), vec![robbery]);
+        step(&mut state, Action::PlotSpell(robbery)).unwrap();
+        assert_eq!(state.objects.get(robbery).zone, Zone::Exile);
+        assert_eq!(state.objects.get(robbery).plotted_turn, Some(state.turn));
+        assert_eq!(state.players[0].battlefield.iter().filter(|&&id| !state.objects.get(id).tapped).count(), 0, "Plot pays real mana");
+
+        // Same turn: not castable yet (702.163a).
+        assert!(!castable_spells(PlayerId::P0, &state).contains(&robbery));
+
+        // A later turn, still Main1: castable for free.
+        state.turn += 1;
+        state.players[0].mana_pool = [0; 6];
+        assert!(castable_spells(PlayerId::P0, &state).contains(&robbery), "Plotted card should be castable for free on a later turn");
+        step(&mut state, Action::CastSpell(robbery)).unwrap();
+        assert_eq!(state.stack.len(), 1);
+        assert_eq!(state.stack[0].source, robbery);
+        // Free: no Mountain should have been tapped for this cast (both were
+        // already tapped paying the Plot cost and stay that way).
+        assert_eq!(state.players[0].battlefield.iter().filter(|&&id| state.objects.get(id).tapped).count(), 2);
+    }
+
+    #[test]
+    fn fiery_temper_discard_offers_madness_cast_for_r() {
+        let mut state = ready_game_in_main1(1);
+        let temper = put_in_hand(&mut state, PlayerId::P0, "Fiery Temper");
+        state.engine.pending_discard = Some(PendingDiscard { player: PlayerId::P0, count: 1, resume: DiscardResume::None });
+        step(&mut state, Action::Discard(vec![temper])).unwrap();
+        assert_eq!(state.objects.get(temper).zone, Zone::Exile, "Madness exiles instead of graveyarding");
+        assert!(state.players[0].graveyard.is_empty());
+
+        match advance_until_decision(&mut state) {
+            Decision::ChooseMadnessCast { player, card } => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(card, temper);
+            }
+            other => panic!("expected ChooseMadnessCast, got {other:?}"),
+        }
+        step(&mut state, Action::ChooseMadnessCast(true)).unwrap();
+        assert_eq!(state.stack.len(), 1, "the cast is announced (601.2a) before its cost is paid or its target chosen");
+        assert!(!state.players[0].battlefield.iter().any(|&id| state.objects.get(id).tapped), "cost isn't paid until targeting finishes");
+
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets { legal_targets, .. } => {
+                let target = Target::Player(PlayerId::P1);
+                assert!(legal_targets.contains(&target));
+                step(&mut state, Action::ChooseTarget(target)).unwrap();
+            }
+            other => panic!("expected ChooseTargets, got {other:?}"),
+        }
+        // `finalize_cast` (and hence cost payment) only actually runs on
+        // the *next* pass through `advance_until_decision`'s loop, not
+        // synchronously inside `step(ChooseTarget(..))` itself.
+        pass_until_stack_resolves(&mut state);
+        assert!(state.players[0].battlefield.iter().all(|&id| state.objects.get(id).tapped), "madness cost {{R}} should have tapped the only Mountain");
+        assert_eq!(state.players[1].life, 17, "Fiery Temper still deals its normal 3 damage when cast via madness");
+        assert_eq!(state.objects.get(temper).zone, Zone::Graveyard, "resolves to the graveyard as normal (madness doesn't change that)");
+    }
+
+    #[test]
+    fn fiery_temper_discard_auto_resolves_to_graveyard_when_madness_cost_unaffordable() {
+        let mut state = empty_game(); // no Mountains: {R} is never payable
+        let temper = put_in_hand(&mut state, PlayerId::P0, "Fiery Temper");
+        state.engine.pending_discard = Some(PendingDiscard { player: PlayerId::P0, count: 1, resume: DiscardResume::None });
+        step(&mut state, Action::Discard(vec![temper])).unwrap();
+        // No ChooseMadnessCast decision: silently auto-resolved to the
+        // graveyard, same "don't ask when there's no real choice" shortcut
+        // as Fireblast's cast mode.
+        let decision = advance_until_decision(&mut state);
+        assert!(!matches!(decision, Decision::ChooseMadnessCast { .. }));
+        assert_eq!(state.objects.get(temper).zone, Zone::Graveyard);
+    }
+
+    #[test]
+    fn searing_blaze_landfall_triples_damage_to_player_and_creature() {
+        let mut state = ready_game_in_main1(2);
+        let blaze = put_in_hand(&mut state, PlayerId::P0, "Searing Blaze");
+        let victim = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure"); // 2/1
+        state.players[0].lands_played_this_turn = 1; // landfall satisfied
+
+        step(&mut state, Action::CastSpell(blaze)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets { legal_targets, .. } => {
+                assert_eq!(legal_targets, vec![Target::Object(victim)], "only P1's own creature is legal for the second target");
+                step(&mut state, Action::ChooseTarget(Target::Object(victim))).unwrap();
+            }
+            other => panic!("expected ChooseTargets, got {other:?}"),
+        }
+        pass_until_stack_resolves(&mut state);
+        assert_eq!(state.players[1].life, 17, "landfall: 3 damage to the player");
+        assert_eq!(state.objects.get(victim).damage, 3, "landfall: 3 damage to the creature");
+    }
+
+    #[test]
+    fn searing_blaze_deals_only_1_without_landfall() {
+        let mut state = ready_game_in_main1(2);
+        let blaze = put_in_hand(&mut state, PlayerId::P0, "Searing Blaze");
+        let victim = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
+
+        step(&mut state, Action::CastSpell(blaze)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Object(victim))).unwrap();
+        pass_until_stack_resolves(&mut state);
+        assert_eq!(state.players[1].life, 19);
+        assert_eq!(state.objects.get(victim).damage, 1);
+    }
+
+    #[test]
+    fn searing_blaze_still_hits_the_player_when_the_creature_target_dies_first() {
+        // 608.2b partial fizzle: the player target is always legal, so
+        // Searing Blaze never fully fizzles in this pool -- only the
+        // creature-damage leaf should be skipped once its target is gone.
+        let mut state = ready_game_in_main1(2);
+        let blaze = put_in_hand(&mut state, PlayerId::P0, "Searing Blaze");
+        let victim = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
+
+        step(&mut state, Action::CastSpell(blaze)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Object(victim))).unwrap();
+        // The creature leaves the battlefield before Searing Blaze resolves
+        // (simulating e.g. an in-response removal spell).
+        event::propose_and_commit(&mut state, ProposedEvent::zone_change(victim, Zone::Graveyard));
+        pass_until_stack_resolves(&mut state);
+        assert_eq!(state.players[1].life, 19, "the player is still hit for the full amount");
+    }
+
+    #[test]
+    fn pyroblast_counters_a_blue_spell_on_the_stack() {
+        let mut state = ready_game_in_main1(1);
+        let pyroblast = put_in_hand(&mut state, PlayerId::P0, "Pyroblast");
+        let counterspell = put_on_stack(&mut state, PlayerId::P1, "Counterspell"); // blue instant
+
+        step(&mut state, Action::CastSpell(pyroblast)).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseSpellMode { mode_count, .. } => {
+                assert_eq!(mode_count, 2);
+                step(&mut state, Action::ChooseSpellMode(0)).unwrap(); // counter mode
+            }
+            other => panic!("expected ChooseSpellMode, got {other:?}"),
+        }
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets { legal_targets, .. } => {
+                assert!(legal_targets.contains(&Target::Object(counterspell)));
+                step(&mut state, Action::ChooseTarget(Target::Object(counterspell))).unwrap();
+            }
+            other => panic!("expected ChooseTargets, got {other:?}"),
+        }
+        pass_until_stack_resolves(&mut state);
+        assert_eq!(state.objects.get(counterspell).zone, Zone::Graveyard, "a blue spell should be countered (moved to its owner's graveyard)");
+        assert_eq!(state.objects.get(pyroblast).zone, Zone::Graveyard, "Pyroblast itself resolves to the graveyard as normal");
+    }
+
+    #[test]
+    fn pyroblast_does_not_counter_a_non_blue_spell() {
+        let mut state = ready_game_in_main1(1);
+        let pyroblast = put_in_hand(&mut state, PlayerId::P0, "Pyroblast");
+        let bolt = put_on_stack(&mut state, PlayerId::P1, "Lightning Bolt"); // red, not blue
+
+        step(&mut state, Action::CastSpell(pyroblast)).unwrap();
+        step(&mut state, Action::ChooseSpellMode(0)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Object(bolt))).unwrap();
+        // Only resolve Pyroblast itself (the top of the stack) -- `bolt` was
+        // planted directly via `put_on_stack` with no real targets of its
+        // own, so actually letting it resolve too would panic on an empty
+        // `ctx.targets`, unrelated to what this test is checking.
+        pass_until_one_stack_item_resolves(&mut state);
+        assert_eq!(state.objects.get(bolt).zone, Zone::Stack, "Pyroblast's counter-mode targets any spell but only actually counters a blue one");
+        assert_eq!(state.objects.get(pyroblast).zone, Zone::Graveyard, "Pyroblast itself still resolves normally even when its effect no-ops");
+    }
+
+    #[test]
+    fn pyroblast_mode2_destroys_a_blue_permanent() {
+        let mut state = ready_game_in_main1(1);
+        let pyroblast = put_in_hand(&mut state, PlayerId::P0, "Pyroblast");
+        let serpent = put_on_battlefield(&mut state, PlayerId::P1, "Cryptic Serpent"); // blue creature
+
+        step(&mut state, Action::CastSpell(pyroblast)).unwrap();
+        step(&mut state, Action::ChooseSpellMode(1)).unwrap(); // destroy mode
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets { legal_targets, .. } => {
+                assert!(legal_targets.contains(&Target::Object(serpent)));
+                step(&mut state, Action::ChooseTarget(Target::Object(serpent))).unwrap();
+            }
+            other => panic!("expected ChooseTargets, got {other:?}"),
+        }
+        pass_until_stack_resolves(&mut state);
+        assert_eq!(state.objects.get(serpent).zone, Zone::Graveyard);
+    }
+
+    #[test]
+    fn red_elemental_blast_targeting_is_prefiltered_to_blue_only() {
+        let mut state = ready_game_in_main1(1);
+        let reb = put_in_hand(&mut state, PlayerId::P0, "Red Elemental Blast");
+        let bolt = put_on_stack(&mut state, PlayerId::P1, "Lightning Bolt"); // red: illegal target
+        let counterspell = put_on_stack(&mut state, PlayerId::P1, "Counterspell"); // blue: legal target
+
+        step(&mut state, Action::CastSpell(reb)).unwrap();
+        step(&mut state, Action::ChooseSpellMode(0)).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets { legal_targets, .. } => {
+                assert!(!legal_targets.contains(&Target::Object(bolt)), "REB's counter mode should never even offer a non-blue spell as a target");
+                assert!(legal_targets.contains(&Target::Object(counterspell)));
+            }
+            other => panic!("expected ChooseTargets, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn fizzle_when_the_targeted_spell_already_left_the_stack() {
+        let mut state = ready_game_in_main1(1);
+        let pyroblast = put_in_hand(&mut state, PlayerId::P0, "Pyroblast");
+        let counterspell = put_on_stack(&mut state, PlayerId::P1, "Counterspell");
+
+        step(&mut state, Action::CastSpell(pyroblast)).unwrap();
+        step(&mut state, Action::ChooseSpellMode(0)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Object(counterspell))).unwrap();
+        // The target resolves and leaves the stack before Pyroblast does
+        // (simulated directly here; the kernel's real priority/stack
+        // ordering can't actually reach this shape with this pool's cards,
+        // but the guard should hold regardless of how it's reached).
+        state.stack.retain(|item| item.source != counterspell);
+        state.objects.get_mut(counterspell).zone = Zone::Graveyard;
+        pass_until_stack_resolves(&mut state);
+        // No crash, no double-move: Pyroblast itself still resolves to the
+        // graveyard normally, and the fizzle guard is exercised via
+        // EffectCond::TargetInZone, not a panic on a stale ObjectId.
+        assert_eq!(state.objects.get(pyroblast).zone, Zone::Graveyard);
     }
 }

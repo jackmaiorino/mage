@@ -70,7 +70,12 @@ fn kind_of(d: &Decision) -> Kind {
         // never reached: it's skipped whenever Declare Attackers just
         // declared zero attackers, which is always true here). See
         // `tests/burn_combat.rs` for these.
-        Decision::ChooseCastMode { .. } | Decision::Discard { .. } | Decision::DeclareBlockers { .. } => {
+        Decision::ChooseCastMode { .. }
+        | Decision::Discard { .. }
+        | Decision::DeclareBlockers { .. }
+        | Decision::ChooseSpellMode { .. }
+        | Decision::ChooseOptionalCost { .. }
+        | Decision::ChooseMadnessCast { .. } => {
             unreachable!("the burn goldfish's library has no card that can produce this decision")
         }
     }
@@ -135,7 +140,12 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
             Decision::OrderTriggers { .. } => {
                 unreachable!("no card in this increment's pool has an implemented trigger")
             }
-            Decision::ChooseCastMode { .. } | Decision::Discard { .. } | Decision::DeclareBlockers { .. } => {
+            Decision::ChooseCastMode { .. }
+            | Decision::Discard { .. }
+            | Decision::DeclareBlockers { .. }
+            | Decision::ChooseSpellMode { .. }
+            | Decision::ChooseOptionalCost { .. }
+            | Decision::ChooseMadnessCast { .. } => {
                 unreachable!("the burn goldfish's library has no card that can produce this decision")
             }
             Decision::DeclareAttackers { eligible, .. } => {
