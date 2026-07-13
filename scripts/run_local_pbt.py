@@ -698,11 +698,15 @@ class LocalPBT:
         env["GAME_LOG_FREQUENCY"] = os.getenv("GAME_LOG_FREQUENCY", "500")
         env["LEAGUE_REGISTRY_PATH"] = str(self.registry_path)
         env["ORCHESTRATED_RUN"] = "1"
-        # applyEffects dirty-flag skip-gate — ~45% of applyEffects calls skipped
-        # on Pauper workloads. Regresses 5 complex cards (morph/Yixlid/Shadowbane)
-        # but none appear in our 4 RL decks. Verified 2026-04-23 via full
-        # Mage.Tests suite parity + grep across all Pauper .dek files.
-        env.setdefault("MAGE_DIRTY_APPLY", "1")
+        # applyEffects dirty-flag skip-gate DISABLED (Sol #91, 2026-07-13).
+        # The RL playability cache keys on applyEffectsCounter, which the
+        # skip-gate can leave stale at self-flagged missed instrumentation
+        # sites (GameState.getDirtyFalseSkipCount) - candidate-list staleness
+        # in live training. The apr-23 card-parity check did not cover this
+        # cache interaction. Re-enable requires the Sol #91 equivalence gate:
+        # flag-on/off det paired replay, exact candidate multisets + state
+        # hashes, 32 then 256 games/matchup, zero divergence.
+        env.setdefault("MAGE_DIRTY_APPLY", "0")
         if deck_paths:
             env["DECK_LIST_FILE"] = deck_paths[0]
         # Apply per-profile train_env from registry
