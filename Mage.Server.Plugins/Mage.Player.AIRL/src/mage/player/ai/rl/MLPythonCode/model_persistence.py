@@ -104,7 +104,16 @@ class ModelPersistence:
             return False
         if mtime <= float(self._latest_loaded_mtime):
             return False
-        self.load_model(model, p)
+        try:
+            self.load_model(model, p)
+        except (PermissionError, OSError) as e:
+            # Windows save/load race: the learner's atomic os.replace briefly
+            # locks the file. Keep serving the current weights and retry on
+            # the next cycle (mtime deliberately NOT updated). Must not
+            # propagate: an unhandled reload error kills the whole scoring
+            # batch it piggybacks on (-> forced passes -> corrupted episodes).
+            print(f"[MODEL_RELOAD] transient load failure, retrying next cycle: {e}", flush=True)
+            return False
         self._latest_loaded_mtime = mtime
         
         # Aggressively clear CUDA cache after model reload to prevent memory accumulation
