@@ -2390,6 +2390,14 @@ public class RLTrainer {
     }
 
     public void train() {
+        // Deterministic trace generation: pin the global engine RNG (shuffles,
+        // coin flips). Opt-in only - normal training keeps wall-clock seeding.
+        // Cross-run identity additionally requires NUM_GAME_RUNNERS=1.
+        if (EnvConfig.bool("RL_SEED_RANDOM_UTIL", false)) {
+            long seed = EnvConfig.i32("RL_BASE_SEED", 5151);
+            mage.util.RandomUtil.setSeed(seed);
+            System.out.println("DEBUG: RandomUtil seeded (RL_SEED_RANDOM_UTIL=1, seed=" + seed + ")");
+        }
         System.out.println("DEBUG: Starting train() method");
         System.out.println("DEBUG: DECKS_DIRECTORY = " + DECKS_DIRECTORY);
         System.out.println("DEBUG: Working directory = " + System.getProperty("user.dir"));

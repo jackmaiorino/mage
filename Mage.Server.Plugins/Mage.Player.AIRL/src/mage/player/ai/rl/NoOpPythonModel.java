@@ -14,6 +14,13 @@ final class NoOpPythonModel implements PythonModel {
 
     private static final NoOpPythonModel INSTANCE = new NoOpPythonModel();
 
+    // Deterministic trace generation (RL_SEED_RANDOM_UTIL=1): one seeded
+    // stream instead of ThreadLocalRandom. Only valid with a single game
+    // runner; parallel interleaving would break cross-run identity anyway.
+    private static final boolean SEEDED = EnvConfig.bool("RL_SEED_RANDOM_UTIL", false);
+    private final java.util.Random seededRng =
+            new java.util.Random(EnvConfig.i32("RL_BASE_SEED", 5151) * 0x9E3779B9L);
+
     static NoOpPythonModel getInstance() {
         return INSTANCE;
     }
@@ -33,10 +40,18 @@ final class NoOpPythonModel implements PythonModel {
             int minTargets,
             int maxTargets
     ) {
-        ThreadLocalRandom rng = ThreadLocalRandom.current();
         float[] policy = new float[candidateActionIds.length];
-        for (int i = 0; i < policy.length; i++) {
-            policy[i] = rng.nextFloat();
+        if (SEEDED) {
+            synchronized (seededRng) {
+                for (int i = 0; i < policy.length; i++) {
+                    policy[i] = seededRng.nextFloat();
+                }
+            }
+        } else {
+            ThreadLocalRandom rng = ThreadLocalRandom.current();
+            for (int i = 0; i < policy.length; i++) {
+                policy[i] = rng.nextFloat();
+            }
         }
         return new PythonMLBatchManager.PredictionResult(
                 policy,
