@@ -392,6 +392,9 @@ public class RLTrainer {
     private static final double POP_QUAL_TOLERANCE = EnvConfig.f64("POP_QUAL_TOLERANCE", 0.02);
     private static final int POP_DEVBAR_SKILL = EnvConfig.i32("POP_DEVBAR_SKILL", 5);
     private static final int POP_DEVBAR_GPM = EnvConfig.i32("POP_DEVBAR_GPM", 6);
+    // Sol #90 interim: below-tolerance qualification results become HOLDs
+    // (no parent update, no kill strike) until the paired gate is built.
+    private static final boolean POP_GATE_HOLD_FALLBACK = EnvConfig.bool("POP_GATE_HOLD_FALLBACK", false);
     private static final int POP_POOL_MAX = EnvConfig.i32("POP_POOL_MAX", 16);
     // Source-conditional entropy: multiplier on the scheduled entropy coef by
     // episode opponent source. With a flat schedule at 0.02, anchor=1.0 and
@@ -6380,6 +6383,14 @@ public class RLTrainer {
                 POP_CONSEC_REJECTS = 0;
                 logger.info(String.format("[POP] ADMIT ep=%d %s devbar=%.3f parent=%.3f pool=%d (%ds)",
                         episodeNum, snap.getFileName(), wr, parent, POP_POOL.size(), secs));
+            } else if (POP_GATE_HOLD_FALLBACK) {
+                // Sol #90 interim gate: the n=48 devbar's noise plus a
+                // last-admitted-scalar parent forms a ratchet with ~25%
+                // false-kill risk. Until the paired parent/candidate gate
+                // lands, below-tolerance results are HOLDs: parent unchanged,
+                // no strike, snapshot not pooled.
+                logger.warn(String.format("[POP] HOLD ep=%d %s devbar=%.3f parent=%.3f (Sol #90 fallback, no strike) (%ds)",
+                        episodeNum, snap.getFileName(), wr, parent, secs));
             } else {
                 POP_CONSEC_REJECTS++;
                 logger.warn(String.format("[POP] REJECT ep=%d %s devbar=%.3f parent=%.3f consecRejects=%d (%ds)%s",
