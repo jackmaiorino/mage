@@ -53,6 +53,24 @@ pub struct EngineState {
     /// Whether [P0, P1] has passed priority since the last time priority
     /// was reset (new step, a cast/activation/land-drop, or a resolution).
     pub priority_passes: [bool; 2],
+    /// Bumped by `reset_priority` alone -- i.e. only on the two rules-level
+    /// "everyone's pass streak clears and the active player is asked
+    /// first" boundaries (a new step via `advance_step`, or a stack
+    /// resolution) and the declare-attackers/declare-blockers transition
+    /// into that step's own priority phase (`apply_declare_attackers`/
+    /// `apply_declare_blockers`, which route through the same helper).
+    /// Deliberately *not* bumped by the other four `priority_passes =
+    /// [false, false]` sites (`finalize_cast`, `finalize_activation`,
+    /// `play_land`, `plot_spell`, `push_trigger_onto_stack`): those hand
+    /// priority back to the *same* player who just acted (601.2i/117.3b),
+    /// which is a real fresh priority window under the comprehensive rules
+    /// but not a new "round" in the sense this counter tracks. Exists
+    /// purely so `mtg_kernel::surface::HarnessSurfaceV1` can detect the
+    /// DeclareAttackers/DeclareBlockers one-action-per-round throttle
+    /// (`ComputerPlayerRL.priorityPlay`'s hard-coded `act(); pass();` for
+    /// those two steps) without re-deriving round boundaries from stack
+    /// length or step identity, both of which are ambiguous across turns.
+    pub priority_round: u64,
     /// A spell that has been announced (601.2a: already moved to the stack
     /// by `begin_cast`) but not yet finished being targeted, mode-chosen,
     /// or cost-paid.
@@ -574,6 +592,28 @@ fn pay_cost_components(state: &mut GameState, player: PlayerId, source: ObjectId
 /// specific lands are picked is not a real decision in this pool (every
 /// land is a Mountain, fully interchangeable) -- same "auto-solve, don't
 /// ask" treatment `mana::solve` gives ordinary tap sources.
+/// Picks `n` lands to sacrifice (Fireblast's alternative cost; a
+/// flashback's `FlashbackCost::SacrificeLands`, e.g. Faithless Looting).
+/// *Which* land is picked isn't a real decision in this pool by card
+/// identity (every land is a fungible Mountain -- same "auto-solve, don't
+/// ask" treatment `mana::solve` gives ordinary tap sources), but it is a
+/// real decision by *tapped status*: sacrificing an already-tapped Mountain
+/// is free (it was going to sit unusable until the next untap step
+/// regardless), while sacrificing an untapped one strands mana the rest of
+/// this turn could have spent. So this prefers tapped lands first (lowest
+/// `ObjectId` among those, for determinism), only reaching into untapped
+/// ones if there aren't enough tapped ones to cover `n`.
+///
+/// Root-caused against the real v3 corpus (`game_20260712_194623_0023.txt`,
+/// PlayerRL1 turn 17): the naive lowest-`ObjectId`-first version could pick
+/// an *untapped* Mountain to sacrifice while a *tapped* one sat
+/// available, leaving one extra untapped mana source floating relative to
+/// the trace's own game -- invisible to `check_state` (hand/library/
+/// graveyard sizes all still matched, tapped status isn't a zone) until it
+/// surfaced many decisions later as a spuriously-affordable spell
+/// (`castable_spells` non-empty where the reference's own window was
+/// `Pass`-only and silently unlogged) and a stuck-on-stack sorcery no
+/// resolution ever cleared by then.
 fn sacrifice_lowest_id_lands(state: &mut GameState, player: PlayerId, n: u8) {
     let mut lands: Vec<ObjectId> = state.players[player.index()]
         .battlefield
@@ -581,7 +621,7 @@ fn sacrifice_lowest_id_lands(state: &mut GameState, player: PlayerId, n: u8) {
         .copied()
         .filter(|&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land)
         .collect();
-    lands.sort_unstable();
+    lands.sort_unstable_by_key(|&id| (!state.objects.get(id).tapped, id));
     for &id in lands.iter().take(n as usize) {
         event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Graveyard));
     }
@@ -879,6 +919,7 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
 fn reset_priority(state: &mut GameState) {
     state.engine.priority_passes = [false, false];
     state.priority_player = state.active_player;
+    state.engine.priority_round += 1;
 }
 
 fn collect_and_queue_triggers(state: &mut GameState) {
@@ -1099,7 +1140,16 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
         is_flashback: false,
         mode_chosen: 0,
     });
-    reset_priority(state);
+    // Same `priority_passes`/`priority_player` reset as `reset_priority`
+    // (117.5: priority passes to the active player once a triggered
+    // ability is put on the stack), but deliberately inlined instead of
+    // calling that shared helper: a trigger firing mid-cascade off another
+    // action (e.g. Guttersnipe off a cast) is not a rules-level "everyone's
+    // pass streak clears" boundary in the same sense `advance_step`/a
+    // resolution/declare-attackers-or-blockers are, so it must not bump
+    // `EngineState::priority_round` -- see that field's doc.
+    state.engine.priority_passes = [false, false];
+    state.priority_player = state.active_player;
 }
 
 /// 704.5g/h creature death, 704.5a life-loss, 704.5c empty-draw-loss all

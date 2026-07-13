@@ -520,6 +520,7 @@ fn codegen(cards: &[CardJson]) -> String {
         writeln!(out, "        plot_cost: {},", plot_cost_for(&c.name)).unwrap();
         writeln!(out, "        madness_cost: {},", madness_cost_for(&c.name)).unwrap();
         writeln!(out, "        mode2: {},", mode2_for(&c.name)).unwrap();
+        writeln!(out, "        is_token: {},", c.is_token).unwrap();
         writeln!(out, "    }},").unwrap();
     }
     writeln!(out, "];").unwrap();

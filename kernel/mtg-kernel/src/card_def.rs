@@ -212,6 +212,12 @@ pub struct CardDef {
     /// `Some` iff this spell is modal with a second mode (Pyroblast's/Red
     /// Elemental Blast's destroy mode) -- see `ModeDef`'s doc.
     pub mode2: Option<ModeDef>,
+    /// A permanent token (`cards_v1.json`'s own `is_token`, e.g. Blood),
+    /// never itself a deck card -- read by `trigger::sba_fixed_point` for
+    /// 111.8/704.5d ("if a token is in a zone other than the battlefield,
+    /// it ceases to exist -- this is a state-based action"). Only `Blood
+    /// Token` this increment.
+    pub is_token: bool,
 }
 
 impl CardDef {

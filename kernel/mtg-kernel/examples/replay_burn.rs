@@ -126,6 +126,15 @@ use std::path::PathBuf;
 const DONE: &str = "sentinel:DONE";
 
 fn main() {
+    // `replay_trace` catches per-trace engine panics (see its doc) so one
+    // buggy trace can't take down the whole corpus scoreboard -- silence the
+    // default hook's own stderr dump so a caught panic doesn't look like an
+    // uncaught crash in this example's output; `REPLAY_DEBUG=1` restores it
+    // (the default hook, plus this driver's own richer per-decision dumps)
+    // for whoever's actually chasing the panic down.
+    if std::env::var("REPLAY_DEBUG").is_err() {
+        std::panic::set_hook(Box::new(|_| {}));
+    }
     let root = std::env::args().nth(1).map(PathBuf::from).expect("usage: replay_burn <corpus dir>");
     let (traces, errors) = trace::load_corpus(&root);
     println!("traces parsed: {}   parse errors: {}", traces.len(), errors.len());
@@ -141,7 +150,9 @@ fn main() {
     let mut silent_window_step_gated_total = 0usize;
     let mut silent_window_no_eligible_attacker_total = 0usize;
     let mut declare_blocks_no_eligible_blockers_total = 0usize;
+    let mut combat_priority_action_spent_total = 0usize;
     let mut forced_discard_records_skipped_total = 0usize;
+    let mut java_target_shortcut_applied_total = 0usize;
     let mut histogram: BTreeMap<String, usize> = BTreeMap::new();
     let mut phantom_total = 0usize;
     let mut decisions_consumed_total = 0usize;
@@ -151,6 +162,11 @@ fn main() {
     // exact file without re-running with `REPLAY_TRACE_FILTER` per
     // candidate first.
     let mut per_trace_divergence: Vec<(String, String)> = Vec::new();
+    // Increment-8 triage: (decisions_consumed, decisions_total, reason,
+    // source_path) per trace, gated behind `TRIAGE` -- picks out the single
+    // most-tractable trace (deepest first divergence) to drill first. See
+    // the increment-8 report for the selection this produced.
+    let mut triage: Vec<(usize, usize, String, String)> = Vec::new();
 
     for t in &traces {
         attempted += 1;
@@ -160,7 +176,9 @@ fn main() {
         silent_window_step_gated_total += outcome.silent_window_step_gated;
         silent_window_no_eligible_attacker_total += outcome.silent_window_no_eligible_attacker;
         declare_blocks_no_eligible_blockers_total += outcome.declare_blocks_no_eligible_blockers;
+        combat_priority_action_spent_total += outcome.combat_priority_action_spent;
         forced_discard_records_skipped_total += outcome.forced_discard_records_skipped;
+        java_target_shortcut_applied_total += outcome.java_target_shortcut_applied;
         decisions_consumed_total += outcome.decisions_consumed;
         decisions_total_total += outcome.decisions_total;
         if outcome.reached_game_over {
@@ -169,10 +187,25 @@ fn main() {
                 winner_matched += 1;
             }
         }
+        let reason_for_triage = if outcome.reached_game_over {
+            if outcome.winner_matched { "COMPLETE:winner-matched".to_string() } else { "COMPLETE:winner-mismatch".to_string() }
+        } else {
+            outcome.divergence.clone().unwrap_or_else(|| "no-divergence-no-game-over(?)".to_string())
+        };
+        triage.push((outcome.decisions_consumed, outcome.decisions_total, reason_for_triage, t.source_path.clone()));
         if let Some(reason) = outcome.divergence {
             diverged += 1;
             *histogram.entry(reason.clone()).or_default() += 1;
             per_trace_divergence.push((reason, t.source_path.clone()));
+        }
+    }
+
+    if std::env::var("TRIAGE").is_ok() {
+        triage.sort_by(|a, b| b.0.cmp(&a.0));
+        println!("\n--- triage (sorted by decisions_consumed desc) ---");
+        for (consumed, total, reason, path) in &triage {
+            let pct = if *total > 0 { 100.0 * *consumed as f64 / *total as f64 } else { 0.0 };
+            println!("  {consumed:>4}/{total:<4} ({pct:>5.1}%)  {reason:<50} {path}");
         }
     }
 
@@ -194,6 +227,12 @@ fn main() {
     );
     println!(
         "stale forced-discard trace records skipped (kernel already auto-applied, informational): {forced_discard_records_skipped_total}"
+    );
+    println!(
+        "ChooseTargets windows auto-resolved via the Java allSameName-dedup bug (informational): {java_target_shortcut_applied_total}"
+    );
+    println!(
+        "silent-window auto-resolutions, DeclareAttackers/DeclareBlockers one-action-per-round already spent (informational): {combat_priority_action_spent_total}"
     );
     // A softer signal than the binary reached/diverged split: how much of
     // each trace's real decision stream validated cleanly before either
@@ -249,6 +288,10 @@ struct ReplayOutcome {
     /// per-attacker loop `continue`s with no log there) --
     /// `SuppressionReason::NoEligibleBlockersForAttacker`.
     declare_blocks_no_eligible_blockers: usize,
+    /// DeclareAttackers/DeclareBlockers priority windows force-passed
+    /// because this player already spent their one action this round --
+    /// `SuppressionReason::CombatPriorityActionSpent` (predicate point 3).
+    combat_priority_action_spent: usize,
     /// `SELECT_CARD` trace records skipped because the kernel already
     /// silently auto-applied that exact forced discard before any
     /// `Decision::Discard` was ever offered -- see
@@ -257,6 +300,11 @@ struct ReplayOutcome {
     /// all, so there's nothing for the surface to suppress -- this is a
     /// stale trace record being reconciled, not a hidden decision.
     forced_discard_records_skipped: usize,
+    /// `ChooseTargets` windows silently auto-resolved via
+    /// `java_reference_target_shortcut` -- see that function's doc.
+    /// Comparator-specific for the same reason `forced_discard_records_skipped`
+    /// is: the tie-break needs this trace's own player display-name strings.
+    java_target_shortcut_applied: usize,
     divergence: Option<String>,
     /// Real (non-mulligan) trace decisions successfully gate-checked and
     /// applied before either reaching `GameOver` or hitting the first
@@ -272,8 +320,23 @@ struct ReplayOutcome {
 fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
     let mut outcome = ReplayOutcome::default();
     let mut surface = HarnessSurfaceV1::new();
-    if let Err(reason) = run(t, &mut surface, &mut outcome) {
-        outcome.divergence = Some(reason);
+    // A genuine engine bug on one trace (a `.expect`/`panic!` inside
+    // `mtg_kernel::engine`, not a driver-level `Result::Err`) must not take
+    // down the whole corpus scoreboard -- every other trace's result is
+    // still useful triage signal. `outcome`'s own progress fields (decisions
+    // consumed so far, suppressions recorded so far) are lost on unwind
+    // (they live on the stack inside `run`'s locals, not `outcome` itself,
+    // until it returns) -- acceptable: a panic is already the loudest,
+    // least-ambiguous signal a trace can produce, and `REPLAY_DEBUG` plus
+    // `REPLAY_TRACE_FILTER` narrows it down same as any other divergence.
+    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| run(t, &mut surface, &mut outcome)));
+    match result {
+        Ok(Err(reason)) => outcome.divergence = Some(reason),
+        Ok(Ok(())) => {}
+        Err(payload) => {
+            let msg = payload.downcast_ref::<String>().cloned().or_else(|| payload.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or_else(|| "<non-string panic payload>".to_string());
+            outcome.divergence = Some(format!("engine-panic:{msg}"));
+        }
     }
     // Tally every auto-resolution the surface performed, regardless of
     // whether `run` ultimately succeeded or diverged -- these counters are
@@ -285,6 +348,7 @@ fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
             SuppressionReason::NoRealOption => outcome.trace_exhausted_passes += 1,
             SuppressionReason::NoEligibleAttacker => outcome.silent_window_no_eligible_attacker += 1,
             SuppressionReason::NoEligibleBlockersForAttacker => outcome.declare_blocks_no_eligible_blockers += 1,
+            SuppressionReason::CombatPriorityActionSpent => outcome.combat_priority_action_spent += 1,
         }
     }
     outcome
@@ -292,9 +356,21 @@ fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
 
 /// Per-trace replay context: everything derived once at setup time and
 /// held immutably for the rest of the replay (id/player maps, per-seat
-/// decision queues).
+/// decision queues), plus `id_map`'s one exception -- see `learn_token_ids`.
 struct ReplayCtx<'a> {
+    /// Pregame card UUIDs at setup, *extended in place* as tokens are
+    /// discovered mid-game (`learn_token_ids`) -- every other field here
+    /// really is setup-only/immutable, but folding token bindings into this
+    /// same map (rather than a parallel one) means every existing
+    /// UUID-translation call site in this file keeps reading a plain
+    /// `&HashMap<String, ObjectId>`, unchanged.
     id_map: HashMap<String, ObjectId>,
+    /// The first `ObjectId` the kernel could ever assign to a *token*:
+    /// every id below this was handed out by `GameState::new_from_libraries`
+    /// to a real pregame card (already covered by `id_map`); every id at or
+    /// above it can only be a token, since no card in this pool copies or
+    /// otherwise mints a non-token object -- see `learn_token_ids`.
+    pregame_object_count: u32,
     seat_uuid: [Option<String>; 2],
     queues: [Vec<&'a DecisionRecord>; 2],
     cursors: [usize; 2],
@@ -330,12 +406,13 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
     }
 
     let id_map = build_id_map(&opening0, &opening1, lib0.len() as u32);
+    let pregame_object_count = (lib0.len() + lib1.len()) as u32;
     let seat_uuid = find_player_uuids(t, &p0_name, &p1_name);
 
     let queue_for = |name: &str| -> Vec<&DecisionRecord> {
         t.decisions.iter().filter(|d| d.player == name && d.action_type != "MULLIGAN" && d.action_type != "LONDON_MULLIGAN").collect()
     };
-    let mut ctx = ReplayCtx { id_map, seat_uuid, queues: [queue_for(&p0_name), queue_for(&p1_name)], cursors: [0, 0] };
+    let mut ctx = ReplayCtx { id_map, pregame_object_count, seat_uuid, queues: [queue_for(&p0_name), queue_for(&p1_name)], cursors: [0, 0] };
     outcome.decisions_total = ctx.queues[0].len() + ctx.queues[1].len();
 
     loop {
@@ -365,6 +442,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
                             return Err(format!("decision-kind-mismatch:CastSpellOrPass-vs-{}", rec.action_type));
                         }
                         check_state(&state, player, rec)?;
+                        learn_token_ids(&mut ctx, &state, rec);
                         apply_cast_spell_or_pass(surface, &mut state, rec, &castable_spells, &mana_abilities, &land_drops, &activatable_abilities, &plot_actions, &ctx.id_map)?;
                         ctx.advance(player);
                         outcome.decisions_consumed += 1;
@@ -372,9 +450,26 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
                 }
             }
             SurfaceDecision::Decision(Decision::ChooseTargets { player, legal_targets, .. }) => {
+                if let Some(winner) = java_reference_target_shortcut(&state, &legal_targets, &p0_name, &p1_name) {
+                    surface
+                        .apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(winner)))
+                        .map_err(|e| format!("engine-step-error:ChooseTargets-java-target-shortcut:{e}"))?;
+                    outcome.java_target_shortcut_applied += 1;
+                    continue;
+                }
                 let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseTargets".to_string())?;
                 debug_verbose(t, &state, player, rec, "ChooseTargets");
                 if rec.action_type != "SELECT_TARGETS" {
+                    if std::env::var("REPLAY_DEBUG").is_ok() {
+                        eprintln!(
+                            "CHOOSETARGETS KIND MISMATCH decision_number={} player={} expected=ChooseTargets got={} legal_targets={:?} names={:?}",
+                            rec.decision_number,
+                            rec.player,
+                            rec.action_type,
+                            legal_targets,
+                            legal_targets.iter().map(|tg| match tg { Target::Player(p) => format!("P{}", p.index()), Target::Object(id) => state.objects.get(*id).name.clone() }).collect::<Vec<_>>()
+                        );
+                    }
                     return Err(format!("decision-kind-mismatch:ChooseTargets-vs-{}", rec.action_type));
                 }
                 // 601.2a: the kernel now moves a cast spell (or, for
@@ -383,6 +478,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
                 // reference engine, so hand/graveyard sizes agree here with
                 // no fudge factor needed (see `engine::begin_cast`).
                 check_state(&state, player, rec)?;
+                learn_token_ids(&mut ctx, &state, rec);
                 apply_choose_targets(surface, &mut state, rec, &legal_targets, &ctx.id_map, &ctx.seat_uuid)?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
@@ -394,6 +490,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
                     return Err(format!("decision-kind-mismatch:DeclareAttackers-vs-{}", rec.action_type));
                 }
                 check_state(&state, player, rec)?;
+                learn_token_ids(&mut ctx, &state, rec);
                 apply_declare_attackers(surface, &mut state, rec, &eligible, &ctx.id_map)?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
@@ -413,12 +510,36 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
                 // invisibility argument: `MadnessCastEffect.apply()` calls
                 // `owner.cast(...)` directly, with no `logReplayDecision`
                 // counterpart, so this decision itself consumes no trace
-                // record either way. Default: cast whenever affordable (a
+                // record either way -- there is no ground truth to read off
+                // the trace here, only a default that must not desync the
+                // replay. Default: cast whenever affordable (a
                 // strictly-cheaper-cost burn spell is essentially always
                 // correct value) -- the resulting cast's own targeting
                 // decision (ChooseTargets) is picked up generically by the
-                // next loop iteration, exactly like any other cast.
-                surface.apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(true))).map_err(|e| format!("engine-step-error:ChooseMadnessCast:{e}"))?;
+                // next loop iteration, exactly like any other cast --
+                // *unless* a cast or ability activation is already mid-cost-
+                // payment (`pending_cast`/`pending_activation`, e.g. this
+                // Madness discard was itself part of paying for something
+                // else's `DiscardCards` cost): casting right now would
+                // spend mana/resources the in-flight action's own
+                // not-yet-paid cost may still need, which the real game's
+                // hidden choice evidently avoided (root-caused against
+                // `game_20260712_194617_0017.txt` decision #47-50: floats
+                // {R} to activate the Blood Token, discards Fiery Temper --
+                // a Madness card -- to pay its cost, and the trace's own
+                // post-hoc graveyard snapshot at decision #69 shows Fiery
+                // Temper sitting in the graveyard, never cast; greedily
+                // casting it here instead panics `mtg_kernel::engine`'s
+                // `pay_cost_components` when the Blood Token's own `{1}`
+                // then finds the pool empty). Declining is always legal
+                // (`Action::ChooseMadnessCast(false)` just lets the card
+                // fall through to the graveyard, same as a non-Madness
+                // discard), so this is a safe, conservative default, not a
+                // guess that can desync anything further.
+                let mid_cost_payment = state.engine.pending_cast.is_some() || state.engine.pending_activation.is_some();
+                surface
+                    .apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(!mid_cost_payment)))
+                    .map_err(|e| format!("engine-step-error:ChooseMadnessCast:{e}"))?;
             }
             // Not observed anywhere in this corpus (verified by grep
             // across all 40 files); no sensible trace counterpart exists
@@ -568,6 +689,50 @@ fn build_id_map(opening0: &trace::OpeningHand, opening1: &trace::OpeningHand, p0
     id_map
 }
 
+/// Learns token UUID<->`ObjectId` bindings the moment a trace record first
+/// references one, extending `ctx.id_map` in place -- root-causing the
+/// increment-8 "Blood Token candidates untranslatable" family (tokens
+/// created mid-game have trace UUIDs absent from the pregame `id_map`,
+/// which is built once, at setup, off both decklists).
+///
+/// Binding discipline: **positional match by creation order.** Any
+/// `candidate_object_ids`/`chosen_object_ids` entry not already resolvable
+/// via `ctx.id_map` can only be a token -- this card pool's only source of
+/// new objects after setup (no copy/create-a-copy effect exists here), so
+/// every non-token UUID is guaranteed present in the pregame map already.
+/// Bind it to the *oldest still-unbound* kernel-side token: `Arena::push`
+/// hands out `ObjectId`s in creation order (`ids.rs`'s
+/// `ids_assigned_in_push_order` test), and every id at or above
+/// `ctx.pregame_object_count` can only belong to a token (see that field's
+/// doc) -- so the first such id with no existing entry in `ctx.id_map`'s
+/// *values* is exactly the next token the kernel minted that the trace
+/// hasn't referenced yet. This is safe (not just a heuristic) because both
+/// engines are replaying the *same* decision sequence: they mint tokens in
+/// the same causal order, and a token cannot be referenced by a trace
+/// record before the event that creates it, so the two discovery orders --
+/// "next kernel token by id" and "next trace UUID a record asks about" --
+/// must line up one-to-one.
+///
+/// Split on `->` first for `DECLARE_BLOCKS`-shaped `blocker->attacker`
+/// pair candidates (harmless for every other decision kind's plain UUIDs,
+/// which never contain that substring) -- no card in this pool creates a
+/// token that can attack or block, but this keeps the scan correct instead
+/// of quietly relying on that.
+fn learn_token_ids(ctx: &mut ReplayCtx, state: &GameState, rec: &DecisionRecord) {
+    for raw in rec.candidate_object_ids.iter().chain(rec.chosen_object_ids.iter()) {
+        for uuid in raw.split("->") {
+            if uuid.is_empty() || uuid == DONE || ctx.id_map.contains_key(uuid) {
+                continue;
+            }
+            let bound: std::collections::HashSet<ObjectId> = ctx.id_map.values().copied().collect();
+            let Some(next) = state.objects.iter().map(|(id, _)| id).find(|id| id.0 >= ctx.pregame_object_count && !bound.contains(id)) else {
+                continue; // kernel hasn't minted this many tokens (yet) -- leave untranslatable, a real divergence surfaces downstream.
+            };
+            ctx.id_map.insert(uuid.to_string(), next);
+        }
+    }
+}
+
 /// Captures each seat's persistent player-object UUID (a distinct
 /// namespace from card UUIDs) from the first `SELECT_TARGETS` record
 /// whose `candidate_texts` mention a player's display name -- e.g.
@@ -625,7 +790,7 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord) -> Res
     if ps.hand.len() != rec.hand.len() {
         if std::env::var("REPLAY_DEBUG").is_ok() {
             eprintln!(
-                "HAND MISMATCH decision_number={} player={} action={} rec_turn={} state_turn={} kernel_hand={} trace_hand={} kernel_names={:?} trace_names={:?}",
+                "HAND MISMATCH decision_number={} player={} action={} rec_turn={} state_turn={} kernel_hand={} trace_hand={} kernel_names={:?} trace_names={:?} stack_len={} stack_sources={:?}",
                 rec.decision_number,
                 rec.player,
                 rec.action_type,
@@ -634,7 +799,9 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord) -> Res
                 ps.hand.len(),
                 rec.hand.len(),
                 ps.hand.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
-                rec.hand
+                rec.hand,
+                state.stack.len(),
+                state.stack.iter().map(|item| state.objects.get(item.source).name.clone()).collect::<Vec<_>>()
             );
         }
         return Err("zone-size-mismatch:hand".to_string());
@@ -645,14 +812,16 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord) -> Res
     if ps.graveyard.len() != rec.graveyard.len() {
         if std::env::var("REPLAY_DEBUG").is_ok() {
             eprintln!(
-                "GRAVEYARD MISMATCH decision_number={} player={} action={} kernel_gy={} trace_gy={} kernel_names={:?} trace_names={:?}",
+                "GRAVEYARD MISMATCH decision_number={} player={} action={} kernel_gy={} trace_gy={} kernel_names={:?} trace_names={:?} stack_len={} stack_sources={:?}",
                 rec.decision_number,
                 rec.player,
                 rec.action_type,
                 ps.graveyard.len(),
                 rec.graveyard.len(),
                 ps.graveyard.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
-                rec.graveyard
+                rec.graveyard,
+                state.stack.len(),
+                state.stack.iter().map(|item| state.objects.get(item.source).name.clone()).collect::<Vec<_>>()
             );
         }
         return Err("zone-size-mismatch:graveyard".to_string());
@@ -899,6 +1068,86 @@ fn target_key(t: &Target) -> String {
     }
 }
 
+/// Root cause for the `decision-kind-mismatch:ChooseTargets-vs-*` family
+/// (uncharacterized at increment-7): `ComputerPlayerRL.chooseTarget`'s
+/// "all candidates share a name" dedup shortcut (ComputerPlayerRL.java:
+/// 6682-6706, `allSameName`) has a latent bug for this pool's only real
+/// target shape, `AnyTarget` (both players + any creatures). The shortcut
+/// names candidates via `MageObject obj = game.getObject(id); String name =
+/// obj != null ? obj.getName() : null;` -- but `GameImpl.getObject`
+/// (GameImpl.java:465-509) only ever searches battlefield/entering
+/// permanents, the stack, the command zone, and cards; it never resolves a
+/// *player* UUID, so both players yield `name == null`. The loop's own
+/// bookkeeping (`if (firstName == null) { firstName = name; } else if
+/// (!Objects.equals(firstName, name)) { allSameName = false; }`) only ever
+/// *compares* when `firstName` is already non-null -- a null-named entry
+/// silently resets the comparison state instead of ever being compared
+/// against. Since `sortTargetsForStableChoice` (ComputerPlayerRL.java:
+/// 6990-6997) always sorts both players before any creature (`"0|" + name`
+/// vs `"1|" + name`), the two players are always first in `possible` and
+/// their null names never trip `allSameName` false -- only two *creatures*
+/// with different names, both past the players, ever do. So: the shortcut
+/// silently fires (`picked = possible.get(0)`, the alphabetically-first
+/// player by display name -- the RL model is never called, and nothing is
+/// ever logged) for *every* `AnyTarget` window unless 2+ differently-named
+/// creatures are among the legal targets.
+///
+/// Confirmed empirically against `game_20260712_194623_0023.txt` decision
+/// #139-143: SelfPlay casts Fireblast (`AnyTarget`) with only itself,
+/// PlayerRL1, and a single Voldaren Epicure as legal targets (no second
+/// distinctly-named creature) -- no `SELECT_TARGETS` record appears
+/// anywhere between the cast and the next real decision (`DECLARE_ATTACKS`).
+///
+/// This is a reference-harness *bug* (not a comprehensive-rules behavior,
+/// and not even really a training/inference concern -- a plain Java `null`
+/// mishandling), so `mtg_kernel::engine` correctly does not reproduce it.
+/// It's also not implemented in `mtg_kernel::surface::HarnessSurfaceV1`
+/// despite being reference-*visibility* behavior in the same spirit as
+/// that module's own predicate: the tie-break needs the two players'
+/// *display-name strings* ("PlayerRL1" vs "SelfPlay") to replicate
+/// `stableTargetSortName`'s ordering, and `GameState`/`PlayerId` carry no
+/// such thing -- only this trace-parsing comparator does (`p0_name`/
+/// `p1_name`, threaded in below). A future model-serving path driving a
+/// real `Player` with a real name could implement this in its own
+/// surface-equivalent; this kernel increment doesn't need to.
+///
+/// Returns the target this shortcut would silently pick, or `None` if a
+/// real (loggable) decision is expected instead -- i.e. `legal_targets`
+/// isn't this pool's `AnyTarget` shape (both players present) at all, or
+/// the creature subset doesn't collapse to exactly one distinct name.
+///
+/// That second condition is deliberately *not* "<= 1": with **zero**
+/// creatures present (candidates are just the two players, both null-named
+/// per this function's own doc), Java's `firstName` never leaves `null`
+/// either (the loop's `if (firstName == null) { firstName = name; }` branch
+/// just keeps reassigning it `null`) -- so `if (allSameName && firstName !=
+/// null)` is *false* and the shortcut does *not* fire, falling through to
+/// the real, loggable RL-model branch instead. Only once at least one
+/// creature is present does `firstName` ever pick up a real (non-null)
+/// value, satisfying that guard. Getting this edge case wrong (treating 0
+/// creatures the same as 1) was caught empirically: it silently ate real
+/// `SELECT_TARGETS` records for early-game direct-damage-to-a-player casts
+/// (no creatures on board yet), desyncing the trace cursor and spiking
+/// `decision-kind-mismatch:CastSpellOrPass-vs-SELECT_TARGETS` corpus-wide.
+fn java_reference_target_shortcut(state: &GameState, legal_targets: &[Target], p0_name: &str, p1_name: &str) -> Option<Target> {
+    if !legal_targets.contains(&Target::Player(PlayerId::P0)) || !legal_targets.contains(&Target::Player(PlayerId::P1)) {
+        return None; // not this pool's AnyTarget shape
+    }
+    let mut creature_names: Vec<&str> = legal_targets
+        .iter()
+        .filter_map(|t| match t {
+            Target::Object(id) => Some(state.objects.get(*id).name.as_str()),
+            Target::Player(_) => None,
+        })
+        .collect();
+    creature_names.sort_unstable();
+    creature_names.dedup();
+    if creature_names.len() != 1 {
+        return None; // 0 creatures (firstName stays null) or 2+ distinct names (allSameName trips false) -- both are real decisions
+    }
+    Some(if p0_name < p1_name { Target::Player(PlayerId::P0) } else { Target::Player(PlayerId::P1) })
+}
+
 fn apply_declare_attackers(
     surface: &mut HarnessSurfaceV1,
     state: &mut GameState,
@@ -988,6 +1237,7 @@ fn apply_declare_blockers_for_attacker(
         return Err(format!("decision-kind-mismatch:DeclareBlockers-vs-{}", rec.action_type));
     }
     check_state(state, player, rec)?;
+    learn_token_ids(ctx, state, rec);
 
     // Blocker-major (blocker, attacker) to match the trace's
     // "blockerUuid->attackerUuid" text convention, scoped to just this one

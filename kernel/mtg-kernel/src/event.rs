@@ -390,15 +390,55 @@ fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
     }
 }
 
-fn remove_from_zone(state: &mut GameState, owner: PlayerId, id: ObjectId, zone: Zone) {
+/// 111.8/704.5d: "If a token is in a zone other than the battlefield, it
+/// ceases to exist. This is a state-based action." Removes `id` from
+/// whichever zone list it's currently tracked in (its owner's hand/library/
+/// graveyard, `state.exile`/`command`, or the stack) without adding it
+/// anywhere -- unlike every other zone transition, a token leaving the
+/// battlefield doesn't go *to* another real zone, it just stops being
+/// tracked. Called only by `trigger::sba_fixed_point`, and only for objects
+/// `CardDef::is_token` marks as a token -- see that field's doc.
+///
+/// Returns whether `id` was actually still present (an already-ceased token
+/// is a legal, idempotent no-op call) -- `sba_fixed_point`'s fixed-point
+/// loop needs this to know whether the sweep made progress; unconditionally
+/// reporting "changed" here would loop forever re-"removing" the same
+/// already-gone token every pass.
+///
+/// Deliberately does *not* touch `GameObject::zone` (left as whatever
+/// non-battlefield zone the token most recently moved to, e.g.
+/// `Zone::Graveyard` for a sacrificed Blood Token): every other read of an
+/// object's zone reaches it by first scanning a zone's own list (`ps.hand`,
+/// `ps.graveyard`, `state.exile`, ...), which this function already empties
+/// the token out of, so a stale `.zone` on an unreachable `ObjectId` the
+/// arena still holds (ids are never freed -- see `ids.rs`'s module doc) is
+/// inert, not a live correctness gap.
+pub fn cease_to_exist(state: &mut GameState, id: ObjectId) -> bool {
+    let owner = state.objects.get(id).owner;
+    let zone = state.objects.get(id).zone;
+    remove_from_zone(state, owner, id, zone)
+}
+
+/// Returns whether `id` was actually present in `zone`'s list before being
+/// removed -- see `cease_to_exist`'s doc for why that matters to callers.
+fn remove_from_zone(state: &mut GameState, owner: PlayerId, id: ObjectId, zone: Zone) -> bool {
+    fn drop_from(v: &mut Vec<ObjectId>, id: ObjectId) -> bool {
+        let before = v.len();
+        v.retain(|&x| x != id);
+        before != v.len()
+    }
     match zone {
-        Zone::Library => state.players[owner.index()].library.retain(|&x| x != id),
-        Zone::Hand => state.players[owner.index()].hand.retain(|&x| x != id),
-        Zone::Battlefield => state.players[owner.index()].battlefield.retain(|&x| x != id),
-        Zone::Graveyard => state.players[owner.index()].graveyard.retain(|&x| x != id),
-        Zone::Exile => state.exile.retain(|&x| x != id),
-        Zone::Command => state.command.retain(|&x| x != id),
-        Zone::Stack => state.stack.retain(|item| item.source != id),
+        Zone::Library => drop_from(&mut state.players[owner.index()].library, id),
+        Zone::Hand => drop_from(&mut state.players[owner.index()].hand, id),
+        Zone::Battlefield => drop_from(&mut state.players[owner.index()].battlefield, id),
+        Zone::Graveyard => drop_from(&mut state.players[owner.index()].graveyard, id),
+        Zone::Exile => drop_from(&mut state.exile, id),
+        Zone::Command => drop_from(&mut state.command, id),
+        Zone::Stack => {
+            let before = state.stack.len();
+            state.stack.retain(|item| item.source != id);
+            before != state.stack.len()
+        }
     }
 }
 

@@ -135,6 +135,25 @@ pub fn sba_fixed_point(state: &mut GameState) {
             }
         }
 
+        // 111.8/704.5d: a token in any zone other than the battlefield
+        // ceases to exist -- most commonly a sacrificed/died Blood Token
+        // ending up back in the graveyard's card-count for the rest of the
+        // game, which it never does in a real game (root-caused against
+        // the real v3 corpus: `kernel_gy` carrying a stray "Blood Token"
+        // entry the trace's own graveyard snapshot never has, many turns
+        // after the token was created and then activated/sacrificed).
+        let leaving: Vec<ObjectId> = state
+            .objects
+            .iter()
+            .filter(|(_, obj)| obj.zone != Zone::Battlefield && crate::card_def::CARD_DEFS[obj.card_def as usize].is_token)
+            .map(|(id, _)| id)
+            .collect();
+        for id in leaving {
+            if crate::event::cease_to_exist(state, id) {
+                changed = true;
+            }
+        }
+
         if !changed {
             break;
         }

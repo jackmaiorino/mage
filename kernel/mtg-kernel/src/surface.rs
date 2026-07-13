@@ -83,6 +83,40 @@
 //! attacker's picks as a single `Action::DeclareBlockers` once every
 //! sub-decision is resolved.
 //!
+//! **3. `DeclareAttackers`/`DeclareBlockers`'s one-action-per-round
+//! throttle.** `priorityPlay`'s `DECLARE_ATTACKERS`/`DECLARE_BLOCKERS` cases
+//! (ComputerPlayerRL.java:9623-9638) are shaped differently from every other
+//! case in the switch: `currentAbility = calculateRLAction(game); act(game,
+//! ...); pass(game); return true;` -- an *unconditional* `pass(game)` right
+//! after acting, with no surrounding loop. `PRECOMBAT_MAIN`/`POSTCOMBAT_MAIN`
+//! have no such call; `GameImpl.playPriority`'s own `while
+//! (!player.isPassed() && player.canRespond() ...)` loop (GameImpl.java:1768)
+//! keeps re-invoking `player.priority(this)` -- hence `calculateRLAction`
+//! again -- for the *same* player there until they truly choose Pass. So on
+//! these two steps only, a player gets exactly one priority action (real or
+//! auto-suppressed) per "round" -- even a cast/activation/land-drop/Plot that
+//! reopens priority back to the *same* player under 601.2i/117.3b (the
+//! kernel is rules-faithful here; the reference harness just doesn't ask
+//! again) is immediately followed by a forced Pass, deferring any further
+//! action from that player to the next round. A round ends -- both players'
+//! throttle clears -- only at a genuine `GameImpl`-level `resetPassed()`
+//! boundary: the step's own start (after the attack/block declaration) or a
+//! stack resolution; *not* at the four `priority_passes = [false, false]`
+//! sites that hand priority back to the same actor
+//! (`finalize_cast`/`finalize_activation`/`play_land`/`plot_spell`) or at a
+//! mid-cascade triggered ability going on the stack
+//! (`push_trigger_onto_stack`) -- see `engine::EngineState::priority_round`'s
+//! doc, which this surface reads to tell the two apart without re-deriving
+//! round boundaries from stack length or step identity (both ambiguous
+//! across turns). Empirically root-caused against the real v3 corpus
+//! (`game_20260712_194602_0003.txt`, decision #76-79: SelfPlay casts
+//! Lightning Bolt and targets it during `DeclareAttackers`'s priority phase;
+//! the immediate post-cast re-priority-to-caster window that 601.2i would
+//! grant is never logged -- not even as a silent single-candidate
+//! auto-resolution, since a second untapped land was still available -- and
+//! decision #79, the *next* logged window for that player, already shows the
+//! spell resolved (graveyard +1, life -3)).
+//!
 //! Anything trace-specific (turn/hand/library/graveyard cross-checks,
 //! candidate-multiset translation against trace UUIDs, the stale-forced-
 //! discard trace-record skip) is *not* part of this surface: it has no
@@ -125,6 +159,15 @@ pub enum SuppressionReason {
     /// eligible blockers -- `selectBlockers`'s per-attacker loop `continue`s
     /// without logging for that specific attacker (predicate point 2).
     NoEligibleBlockersForAttacker,
+    /// This player already spent their one `DeclareAttackers`/
+    /// `DeclareBlockers` priority action this round (predicate point 3) --
+    /// `priorityPlay`'s `DECLARE_ATTACKERS`/`DECLARE_BLOCKERS` cases call
+    /// `calculateRLAction` *once* then unconditionally `pass(game)`, even
+    /// when the action just taken (a cast/activation/land/Plot) reopened
+    /// priority back to the same player under 117.3b/601.2i -- unlike
+    /// `PRECOMBAT_MAIN`/`POSTCOMBAT_MAIN`, which loop `calculateRLAction`
+    /// for the same player until they actually choose Pass.
+    CombatPriorityActionSpent,
 }
 
 /// One auto-resolution the surface performed instead of asking. `auto_action`
@@ -196,6 +239,15 @@ struct BlockersReshape {
 pub struct HarnessSurfaceV1 {
     suppressions: Vec<Suppression>,
     blockers: Option<BlockersReshape>,
+    /// [P0, P1] -- has this player already spent their one `DeclareAttackers`/
+    /// `DeclareBlockers` priority action this round? See predicate point 3.
+    combat_priority_spent: [bool; 2],
+    /// `engine::EngineState::priority_round` as of the last time
+    /// `combat_priority_spent` was synced -- a change means a genuine new
+    /// round started (step entry or a stack resolution), so both flags
+    /// clear. `None` before the first DeclareAttackers/DeclareBlockers
+    /// priority window this surface has ever seen.
+    combat_priority_round_seen: Option<u64>,
 }
 
 impl HarnessSurfaceV1 {
@@ -226,7 +278,23 @@ impl HarnessSurfaceV1 {
             let decision = engine::advance_until_decision(state);
 
             match &decision {
-                Decision::CastSpellOrPass { castable_spells, mana_abilities, land_drops, activatable_abilities, .. } => {
+                Decision::CastSpellOrPass { player, castable_spells, mana_abilities, land_drops, activatable_abilities, .. } => {
+                    if matches!(state.step, Step::DeclareAttackers | Step::DeclareBlockers) {
+                        if self.combat_priority_round_seen != Some(state.engine.priority_round) {
+                            self.combat_priority_spent = [false, false];
+                            self.combat_priority_round_seen = Some(state.engine.priority_round);
+                        }
+                        if self.combat_priority_spent[player.index()] {
+                            engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
+                            self.record(SuppressionReason::CombatPriorityActionSpent, "Pass (forced: one action per round already taken)", before, state);
+                            continue;
+                        }
+                        // Whatever happens next (real ask or NoRealOption
+                        // auto-suppression below) is this player's one
+                        // allotted call to `calculateRLAction` this round --
+                        // see the module doc's predicate point 3.
+                        self.combat_priority_spent[player.index()] = true;
+                    }
                     let no_real_option = castable_spells.is_empty() && mana_abilities.is_empty() && land_drops.is_empty() && activatable_abilities.is_empty();
                     let step_gated = harness_never_offers_priority(state.step);
                     if step_gated || no_real_option {
