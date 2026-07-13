@@ -38,6 +38,12 @@ pub struct DecisionRecord {
     pub chosen_indices: Vec<u32>,
     #[serde(default)]
     pub chosen_texts: Vec<String>,
+    /// Object UUIDs of the chosen candidates, in `chosen_indices` order.
+    /// Populated for `SELECT_CARD` (`logReplayCardSelection`) so
+    /// `skip_stale_forced_discards` (`examples/replay_burn.rs`) can check
+    /// whether a discard the trace describes has already been applied.
+    #[serde(default)]
+    pub chosen_object_ids: Vec<String>,
     #[serde(default)]
     pub selected_index: i64,
     #[serde(default)]
@@ -125,10 +131,10 @@ impl GoldenTrace {
     }
 
     /// `player`'s true, final opening hand and remaining library: `hand`/
-    /// `library` off their *last* `MULLIGAN`-kind decision record (the
+    /// `library` off their *last* mulligan-phase decision record (the
     /// mulligan loop is `MULLIGAN -> [LONDON_MULLIGAN -> MULLIGAN ->]*`,
-    /// always terminating on a `MULLIGAN` record where "KEEP" was chosen,
-    /// so the last one is always that terminal, fully-resolved-hand
+    /// usually terminating on a `MULLIGAN` record where "KEEP" was chosen,
+    /// so the last one is usually that terminal, fully-resolved-hand
     /// snapshot -- taken strictly before any turn-based draw has
     /// happened).
     ///
@@ -144,16 +150,74 @@ impl GoldenTrace {
     /// (verified empirically against the real corpus: 6 of the first 10
     /// player-openings checked have a smaller last-MULLIGAN hand than
     /// first-non-mulligan hand, by exactly the elapsed-turn draw count).
+    ///
+    /// ## The "ends on LONDON_MULLIGAN, no trailing MULLIGAN(KEEP)" case
+    ///
+    /// `LondonMulligan.mulligan()` (`Mage/src/main/java/mage/game/mulligan/
+    /// LondonMulligan.java`) bottoms exactly *one* card per
+    /// `chooseLondonMulliganCards` call (routed through `genericChoose`,
+    /// which is where the `LONDON_MULLIGAN` record gets logged -- see the
+    /// replay comparator's visibility-predicate doc), looping
+    /// `while (hand.size() > newHandSize)` where `newHandSize =
+    /// startingHandSize - mulligansTaken`. Each call's candidate pool is
+    /// the *current* remaining hand, so `candidate_count` strictly
+    /// decreases by 1 every call in the same mulligan attempt. The one call
+    /// that skips logging entirely is the terminal one whose candidate pool
+    /// has already shrunk to exactly 1 card (`genericChoose`'s bare
+    /// single-legal-candidate shortcut returns before scoring/logging --
+    /// same shortcut documented for `ACTIVATE_ABILITY_OR_SPELL`/
+    /// `SELECT_TARGETS`). That can only happen when `mulligansTaken` equals
+    /// the starting hand size (candidate_count sequence
+    /// startingHandSize, startingHandSize-1, ..., 1): the player has
+    /// mulliganed all the way down to an empty hand. At that point
+    /// `Mulligan.canTakeMulligan` (`Mage/src/main/java/mage/game/mulligan/
+    /// Mulligan.java`) returns `false` (`!player.getHand().isEmpty()` fails,
+    /// and `LondonMulligan.canTakeMulligan` also requires
+    /// `openingHandSizes > 0`), so `Mulligan.executeMulliganPhase`'s
+    /// `while(true)` loop `break`s *without ever calling
+    /// `player.chooseMulligan(game)`* -- the player is silently forced to
+    /// keep a 0-card hand, and no `MULLIGAN` record (terminal or otherwise)
+    /// is ever logged for that keep.
+    ///
+    /// So: whenever the last mulligan-phase record for a player is a
+    /// `LONDON_MULLIGAN` (not a terminal `MULLIGAN`), the true final hand is
+    /// empty and every card that record's own `hand` snapshot still shows
+    /// (the 1-2 cards left before that final silent single-candidate pick)
+    /// ends up on the bottom of the library along with everything already
+    /// in `library`. Confirmed against the real v3 corpus: exactly one
+    /// player-chain (`game_20260712_194635_0036.txt`, `PlayerRL1`,
+    /// `mulligans_taken=7` reaching a 7-card starting hand) has this shape;
+    /// its last logged record has `candidate_count=2`,
+    /// `hand=["Mountain","Fiery Temper"]`, `library_size=58`
+    /// (`58 + 2 == 60`, the full deck) -- i.e. `hand_size + library_size`
+    /// is already deck-complete, so appending the 2 leftover `hand` cards
+    /// onto `library` (in either order -- both are headed to the bottom
+    /// regardless) reconstructs the correct post-keep state.
     pub fn opening_hand_for(&self, player: &str) -> Option<OpeningHand> {
-        self.decisions
+        let rec = self
+            .decisions
             .iter()
-            .rfind(|d| d.player == player && d.action_type == "MULLIGAN")
-            .map(|d| OpeningHand {
-                hand: d.hand.clone(),
-                hand_object_ids: d.hand_object_ids.clone(),
-                library: d.library.clone(),
-                library_object_ids: d.library_object_ids.clone(),
-            })
+            .rev()
+            .find(|d| d.player == player && (d.action_type == "MULLIGAN" || d.action_type == "LONDON_MULLIGAN"))?;
+
+        if rec.action_type == "MULLIGAN" {
+            return Some(OpeningHand {
+                hand: rec.hand.clone(),
+                hand_object_ids: rec.hand_object_ids.clone(),
+                library: rec.library.clone(),
+                library_object_ids: rec.library_object_ids.clone(),
+            });
+        }
+
+        // `rec.action_type == "LONDON_MULLIGAN"`: the silent-forced-empty-
+        // keep shape documented above. Every remaining `hand` card is bound
+        // for the bottom of the library; see the doc comment for why this
+        // is always a full keep-to-empty, never a partial reconstruction.
+        let mut library = rec.library.clone();
+        library.extend(rec.hand.iter().cloned());
+        let mut library_object_ids = rec.library_object_ids.clone();
+        library_object_ids.extend(rec.hand_object_ids.iter().cloned());
+        Some(OpeningHand { hand: Vec::new(), hand_object_ids: Vec::new(), library, library_object_ids })
     }
 }
 
@@ -255,6 +319,19 @@ pub fn load_corpus(root: &Path) -> (Vec<GoldenTrace>, Vec<String>) {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Same shape as `decision_line`, but also carries a `library` snapshot
+    /// -- needed for the silent-forced-keep mulligan test, which reads
+    /// `opening_hand_for`'s reconstructed `library`, not just `hand`.
+    fn decision_line_with_library(player: &str, action_type: &str, hand: &[&str], library: &[&str]) -> String {
+        let hand_json = hand.iter().map(|c| format!("\"{c}\"")).collect::<Vec<_>>().join(",");
+        let library_json = library.iter().map(|c| format!("\"{c}\"")).collect::<Vec<_>>().join(",");
+        format!(
+            "REPLAY_DECISION_JSON: {{\"ordinal\":0,\"player\":\"{player}\",\"action_type\":\"{action_type}\",\
+             \"candidate_count\":1,\"candidate_texts\":[\"Pass\"],\"chosen_indices\":[0],\
+             \"hand\":[{hand_json}],\"library\":[{library_json}],\"episode\":0}}"
+        )
+    }
 
     /// Minimal `REPLAY_DECISION_JSON` line: only the fields that matter for
     /// the assertion at hand are varied, everything else defaults exactly
@@ -366,5 +443,33 @@ mod tests {
         assert_eq!(other.hand, vec!["Mountain", "Mountain", "Mountain", "Mountain", "Mountain", "Grab the Prize", "Lava Dart"]);
 
         assert!(trace.opening_hand_for("Nobody").is_none());
+    }
+
+    #[test]
+    fn opening_hand_for_reconstructs_an_empty_hand_when_the_chain_ends_on_a_silent_forced_keep() {
+        // Real-corpus shape (game_20260712_194635_0036.txt, PlayerRL1,
+        // mulligans_taken=7 against a 7-card starting hand): the terminal
+        // single-card bottom pick is silently auto-resolved (genericChoose's
+        // bare single-candidate shortcut skips logging), so there's no
+        // trailing MULLIGAN(KEEP) record at all -- the last logged record
+        // for this player is this LONDON_MULLIGAN one, candidate_count=2,
+        // hand=["Mountain","Fiery Temper"], library_size=58 (58+2==60, the
+        // full deck already, confirming the silent final pick just moves
+        // both remaining hand cards to the bottom).
+        let text = decision_line_with_library(
+            "PlayerRL1",
+            "LONDON_MULLIGAN",
+            &["Mountain", "Fiery Temper"],
+            &["Grab the Prize", "Highway Robbery", "Mountain"], // stand-in for the real 58-card library
+        );
+
+        let trace = parse_text(&text, "fixture".to_string()).unwrap();
+        let opening = trace.opening_hand_for("PlayerRL1").expect("PlayerRL1 has a mulligan-phase record");
+
+        assert_eq!(opening.hand, Vec::<String>::new(), "mulliganing all the way to 0 cards forces a silent keep with an empty hand");
+        // Both leftover `hand` cards from the last logged pick are headed to
+        // the bottom of the library either way, appended after the record's
+        // own `library` snapshot.
+        assert_eq!(opening.library, vec!["Grab the Prize", "Highway Robbery", "Mountain", "Mountain", "Fiery Temper"]);
     }
 }

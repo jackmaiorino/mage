@@ -98,12 +98,25 @@ fn card_in_hand(state: &GameState, player: PlayerId, def_id: u16) -> Option<Obje
 /// - every other decision (discard, trigger ordering) is answered
 ///   minimally/deterministically; anything the script's card pool cannot
 ///   produce is `unreachable!()`.
-fn run_combat_game(state: &mut GameState) -> Vec<Kind> {
+///
+/// Returns the decision-kind log plus the count of `DeclareAttackers(P0)`
+/// decisions that actually declared a non-empty attacking set. Since
+/// increment 6's step-lag fix (508.1: Declare Attackers is a turn-based
+/// action that always happens, never skipped just because nothing's
+/// eligible -- see `engine::advance_step`'s doc), P0 gets a
+/// `DeclareAttackers` decision *every* one of its own turns, including the
+/// turns before Guttersnipe exists or while it's summoning sick -- so raw
+/// `Kind::DeclareAttackers(P0)` occurrences in the log are no longer the
+/// same thing as "P0 actually attacked", and callers that need the latter
+/// (the `DeclareBlockers(P1)` cross-check, the Guttersnipe-trigger damage
+/// arithmetic) need this separate count instead.
+fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
     let guttersnipe_def = card_id_by_name("Guttersnipe").unwrap();
     let bolt_def = card_id_by_name("Lightning Bolt").unwrap();
     let meower_def = card_id_by_name("Masked Meower").unwrap();
 
     let mut log = Vec::new();
+    let mut real_p0_attacks = 0u32;
     let mut last_bolt_turn = 0u32;
     let mut iterations = 0u32;
 
@@ -145,7 +158,7 @@ fn run_combat_game(state: &mut GameState) -> Vec<Kind> {
                 engine::step(state, Action::ChooseTarget(target)).unwrap();
             }
             Decision::DeclareAttackers { player, eligible } => {
-                let attackers = if player == PlayerId::P0 {
+                let attackers: Vec<ObjectId> = if player == PlayerId::P0 {
                     // Attack with Guttersnipe whenever it's eligible.
                     eligible.iter().copied().filter(|&id| state.objects.get(id).card_def == guttersnipe_def).collect()
                 } else {
@@ -154,6 +167,9 @@ fn run_combat_game(state: &mut GameState) -> Vec<Kind> {
                     // never attacks with it -- it's a dedicated blocker.
                     Vec::new()
                 };
+                if player == PlayerId::P0 && !attackers.is_empty() {
+                    real_p0_attacks += 1;
+                }
                 engine::step(state, Action::DeclareAttackers(attackers)).unwrap();
             }
             Decision::DeclareBlockers { player, attackers, legal_blockers } => {
@@ -201,7 +217,7 @@ fn run_combat_game(state: &mut GameState) -> Vec<Kind> {
         }
     }
 
-    log
+    (log, real_p0_attacks)
 }
 
 #[test]
@@ -210,7 +226,7 @@ fn combat_and_burn_together_end_the_game() {
     let guttersnipe_def = card_id_by_name("Guttersnipe").unwrap();
     let meower_def = card_id_by_name("Masked Meower").unwrap();
 
-    let log = run_combat_game(&mut state);
+    let (log, real_p0_attacks) = run_combat_game(&mut state);
 
     // ---- terminal state -------------------------------------------------
     assert!(state.players[1].has_lost);
@@ -225,22 +241,31 @@ fn combat_and_burn_together_end_the_game() {
     assert!(!state.players[1].battlefield.iter().any(|&id| state.objects.get(id).card_def == meower_def));
 
     // ---- decision-kind sequence: real DeclareAttackers/DeclareBlockers
-    // windows happened on both sides, no shortcuts taken. P1's Masked
-    // Meower has haste, so P1 gets a DeclareAttackers decision every one
-    // of its own turns from the turn it's cast until it dies (turns 1-3);
-    // P0 gets one every turn Guttersnipe is untapped and not summoning
-    // sick (turns 4 onward, until the game ends). P1 only ever gets
-    // DeclareBlockers when P0 actually declared an attacker.
+    // windows happened on both sides, no shortcuts taken. Declare Attackers
+    // is a turn-based action that's *never* skipped (508.1 -- see
+    // `run_combat_game`'s doc): P0 gets one every one of its own turns, even
+    // before Guttersnipe exists, so raw `DeclareAttackers(P0)` count is
+    // strictly greater than `real_p0_attacks` (the turns it actually had
+    // something to attack with). P1's Masked Meower has haste, so P1 gets a
+    // DeclareAttackers decision every one of its own turns too (turns 1-3,
+    // whether or not it declares -- it never does). DeclareBlockers, by
+    // contrast, *is* skipped when the just-completed DeclareAttackers
+    // declared nothing (509.4-ish), so P1 only gets a DeclareBlockers
+    // decision on the subset of P0's turns that were `real_p0_attacks`.
     let count = |k: Kind| log.iter().filter(|&&d| d == k).count();
     assert_eq!(count(Kind::GameOver), 1);
     assert_eq!(count(Kind::OrderTriggers(PlayerId::P0)), 0);
     assert_eq!(count(Kind::ChooseCastMode(PlayerId::P0)), 0);
-    assert!(count(Kind::DeclareAttackers(PlayerId::P0)) >= 1, "P0 must have attacked at least once");
+    assert!(real_p0_attacks >= 1, "P0 must have attacked at least once");
+    assert!(
+        count(Kind::DeclareAttackers(PlayerId::P0)) > real_p0_attacks as usize,
+        "P0 should also get DeclareAttackers decisions on turns before Guttersnipe exists (508.1: the step is never skipped, even with nothing eligible)"
+    );
     assert!(count(Kind::DeclareAttackers(PlayerId::P1)) >= 1, "P1's hasty Masked Meower should have produced attack decisions even though it never attacks");
     assert_eq!(
         count(Kind::DeclareBlockers(PlayerId::P1)),
-        count(Kind::DeclareAttackers(PlayerId::P0)),
-        "P1 should be asked to declare blockers exactly once per P0 attack declaration (508.1/509.1, even when the legal set ends up empty)"
+        real_p0_attacks as usize,
+        "P1 should be asked to declare blockers exactly once per turn P0 actually declared a non-empty attack (509.4-ish: skipped when zero attackers were declared)"
     );
     assert_eq!(count(Kind::DeclareBlockers(PlayerId::P0)), 0, "P0 is never the defending player (P1 never attacks)");
     assert!(count(Kind::ChooseTargets(PlayerId::P0)) >= 1, "at least one Lightning Bolt should have been cast");
@@ -306,9 +331,11 @@ fn combat_and_burn_together_end_the_game() {
         .filter(|e| matches!(e, CommittedEvent::Damage { target: Target::Player(PlayerId::P1), amount: 2, source, .. } if *source == guttersnipe_id))
         .count();
     // One 2-damage hit to P1 per Guttersnipe cast-trigger firing, plus one
-    // per unblocked combat attack (every DeclareAttackers(P0) after the
-    // single blocked one).
-    let unblocked_attacks = count(Kind::DeclareAttackers(PlayerId::P0)) - 1;
+    // per unblocked combat attack (every *real* P0 attack after the single
+    // blocked one -- see `real_p0_attacks`'s doc, not raw
+    // `DeclareAttackers(P0)` count, which now also includes the
+    // nothing-eligible turns before Guttersnipe exists).
+    let unblocked_attacks = real_p0_attacks as usize - 1;
     assert_eq!(two_damage_events_to_p1, bolts_cast + unblocked_attacks, "Guttersnipe's trigger should have fired exactly once per instant/sorcery P0 cast while it was alive");
 
     // ---- no shortcuts: P1 got a real priority window somewhere between

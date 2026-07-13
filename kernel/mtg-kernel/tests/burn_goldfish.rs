@@ -47,6 +47,12 @@ enum Kind {
     CastOrPass(PlayerId),
     ChooseTargets(PlayerId),
     OrderTriggers(PlayerId),
+    // Neither player ever has a creature in this goldfish's library, but
+    // 508.1 makes Declare Attackers a turn-based action that always
+    // happens regardless -- see `engine::advance_step`'s doc -- so the
+    // active player still gets asked (with an always-empty `eligible`)
+    // every single one of its own combats.
+    DeclareAttackers(PlayerId),
     GameOver,
 }
 
@@ -55,12 +61,16 @@ fn kind_of(d: &Decision) -> Kind {
         Decision::CastSpellOrPass { player, .. } => Kind::CastOrPass(*player),
         Decision::ChooseTargets { player, .. } => Kind::ChooseTargets(*player),
         Decision::OrderTriggers { player, .. } => Kind::OrderTriggers(*player),
+        Decision::DeclareAttackers { player, .. } => Kind::DeclareAttackers(*player),
         Decision::GameOver { .. } => Kind::GameOver,
         // Nothing in this goldfish's scripted library (Mountain + Lightning
         // Bolt only) can produce these -- no alt-cost/additional-cost card,
         // no discard obligation (hand never exceeds 7), no creature ever
-        // cast so no combat. See `tests/burn_combat.rs` for these.
-        Decision::ChooseCastMode { .. } | Decision::Discard { .. } | Decision::DeclareAttackers { .. } | Decision::DeclareBlockers { .. } => {
+        // cast so no real block/attack declaration (DeclareBlockers is
+        // never reached: it's skipped whenever Declare Attackers just
+        // declared zero attackers, which is always true here). See
+        // `tests/burn_combat.rs` for these.
+        Decision::ChooseCastMode { .. } | Decision::Discard { .. } | Decision::DeclareBlockers { .. } => {
             unreachable!("the burn goldfish's library has no card that can produce this decision")
         }
     }
@@ -125,8 +135,12 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
             Decision::OrderTriggers { .. } => {
                 unreachable!("no card in this increment's pool has an implemented trigger")
             }
-            Decision::ChooseCastMode { .. } | Decision::Discard { .. } | Decision::DeclareAttackers { .. } | Decision::DeclareBlockers { .. } => {
+            Decision::ChooseCastMode { .. } | Decision::Discard { .. } | Decision::DeclareBlockers { .. } => {
                 unreachable!("the burn goldfish's library has no card that can produce this decision")
+            }
+            Decision::DeclareAttackers { eligible, .. } => {
+                assert!(eligible.is_empty(), "neither player's library has a creature in it");
+                engine::step(state, Action::DeclareAttackers(Vec::new())).unwrap();
             }
             Decision::ChooseTargets { player, spell: _, remaining, legal_targets } => {
                 assert_eq!(player, PlayerId::P0);
@@ -164,13 +178,20 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
 
 /// Turn 1 (P0 plays Mountain + passes, both steps of priority; P1 gets a
 /// real response window at every step even though it never has a legal
-/// response) through the start of P1's turn 1 (P1's Upkeep/Draw, then its
-/// own Mountain + pass in Main1, with P0's empty response window right
-/// after). Hand-verified step by step against the turn structure in
-/// `engine.rs`'s `STEP_ORDER` + APNAP priority rules; see the derivation
-/// in the PR/commit description for the full walk.
-const NARRATED_PREFIX: [Kind; 22] = {
-    use Kind::CastOrPass;
+/// response) through the start of P1's turn 1 (P1's Upkeep/Draw, its own
+/// Mountain + pass in Main1, Begin Combat, and its own empty Declare
+/// Attackers decision, with P0's response window right after). Hand-derived
+/// step by step against the turn structure in `engine.rs`'s `STEP_ORDER` +
+/// APNAP priority rules and cross-checked against the real log.
+///
+/// 508.1: Declare Attackers is a turn-based action that always happens, so
+/// every combat gets a `DeclareAttackers(<active player>)` decision (always
+/// declaring nobody -- this goldfish's library has no creature in it)
+/// followed by its own priority round, even though nothing was declared --
+/// see `engine::advance_step`'s doc. Declare Blockers/Combat Damage *are*
+/// still skipped afterward (zero attackers were actually declared).
+const NARRATED_PREFIX: [Kind; 30] = {
+    use Kind::{CastOrPass, DeclareAttackers};
     const P0: PlayerId = PlayerId::P0;
     const P1: PlayerId = PlayerId::P1;
     [
@@ -179,8 +200,10 @@ const NARRATED_PREFIX: [Kind; 22] = {
         CastOrPass(P0), CastOrPass(P0), // Main1: P0 plays Mountain, then passes
         CastOrPass(P1),                 // Main1: P1's response window, passes
         CastOrPass(P0), CastOrPass(P1), // Begin Combat
-        CastOrPass(P0), CastOrPass(P1), // End Combat (no attackers possible: declare
-                                         // attackers/blockers/damage steps are skipped)
+        DeclareAttackers(P0),           // Declare Attackers: P0 (active) declares nobody
+        CastOrPass(P0), CastOrPass(P1), // Declare Attackers step's own priority round
+        CastOrPass(P0), CastOrPass(P1), // End Combat (Declare Blockers/Combat Damage
+                                         // skipped: zero attackers were declared)
         CastOrPass(P0), CastOrPass(P1), // Main2
         CastOrPass(P0), CastOrPass(P1), // End step
         // Cleanup + Untap grant no priority (no decisions), turn passes to P1.
@@ -188,6 +211,9 @@ const NARRATED_PREFIX: [Kind; 22] = {
         CastOrPass(P1), CastOrPass(P0), // P1's Draw (P1 does NOT skip its own first draw)
         CastOrPass(P1), CastOrPass(P1), // Main1: P1 plays Mountain, then passes
         CastOrPass(P0),                 // Main1: P0's response window, passes
+        CastOrPass(P1), CastOrPass(P0), // P1's Begin Combat
+        DeclareAttackers(P1),           // P1's Declare Attackers: declares nobody
+        CastOrPass(P1), CastOrPass(P0), // P1's Declare Attackers step's priority round
     ]
 };
 
@@ -195,7 +221,7 @@ const NARRATED_PREFIX: [Kind; 22] = {
 fn narrated_prefix_matches_turn_1_and_start_of_p1_turn_1_exactly() {
     let mut state = setup();
     let (log, _life_history) = run_goldfish(&mut state);
-    assert_eq!(&log[..22], &NARRATED_PREFIX[..]);
+    assert_eq!(&log[..30], &NARRATED_PREFIX[..]);
 }
 
 #[test]
@@ -217,13 +243,20 @@ fn burn_goldfish_kills_p1_via_repeated_lightning_bolt_through_faithful_priority(
     // every other decision is a real CastSpellOrPass priority window,
     // split close to evenly between the two players (P1 gets slightly
     // fewer because P0 sometimes acts twice in a window: play a land,
-    // *then* get asked again before passing).
-    assert_eq!(log.len(), 235);
+    // *then* get asked again before passing) -- plus one
+    // `DeclareAttackers(<active player>)` per combat, always declaring
+    // nobody (508.1: never skipped -- see `engine::advance_step`'s doc and
+    // `NARRATED_PREFIX`'s). The game ends mid-round (P0's 7th Bolt kills
+    // P1 before P1 gets an 8th turn), so both players get exactly 7 of
+    // their own combats.
     let count = |k: Kind| log.iter().filter(|&&d| d == k).count();
-    assert_eq!(count(Kind::CastOrPass(PlayerId::P0)), 115);
-    assert_eq!(count(Kind::CastOrPass(PlayerId::P1)), 112);
+    assert_eq!(count(Kind::DeclareAttackers(PlayerId::P0)), 7);
+    assert_eq!(count(Kind::DeclareAttackers(PlayerId::P1)), 7);
+    assert_eq!(count(Kind::CastOrPass(PlayerId::P0)), 129);
+    assert_eq!(count(Kind::CastOrPass(PlayerId::P1)), 126);
     assert_eq!(count(Kind::ChooseTargets(PlayerId::P0)), 7);
     assert_eq!(count(Kind::GameOver), 1);
+    assert_eq!(log.len(), 277);
     assert_eq!(log.iter().filter(|d| matches!(d, Kind::ChooseTargets(PlayerId::P1))).count(), 0);
     assert_eq!(log.iter().filter(|d| matches!(d, Kind::OrderTriggers(_))).count(), 0);
 

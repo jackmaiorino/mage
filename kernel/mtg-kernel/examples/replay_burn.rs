@@ -35,11 +35,145 @@
 //!    `DECLARE_ATTACKS`/`DECLARE_BLOCKS`/`SELECT_TARGETS` do NOT dedupe
 //!    (two same-named creatures keep distinct candidates there, since
 //!    which specific one attacks/blocks/gets targeted is a real choice).
+//!
+//! ## Decision-visibility predicate (increment 6)
+//!
+//! The kernel offers a rules-faithful priority window at every step that
+//! grants one (508.1/509.1/117 etc). The Java reference
+//! (`ComputerPlayerRL`, `Mage.Server.Plugins/Mage.Player.AIRL/src/mage/
+//! player/ai/ComputerPlayerRL.java`) does not: it only calls
+//! `logReplayDecision` -- and hence only produces a trace record -- for a
+//! strict subset of those windows. Replaying the kernel's full decision
+//! stream 1:1 against the trace therefore silently desyncs unless this
+//! driver reproduces the reference's own visibility rules and auto-resolves
+//! (without consuming a trace record) exactly the windows the reference
+//! itself never asked about. This section is that predicate, reverse
+//! engineered from the Java source (every citation is `file:line` as of
+//! this increment) and cross-checked against the real v3 corpus
+//! (`local-training/kernel_oracle/burn_mirror_v3/`, 40 games / 4382
+//! decision records).
+//!
+//! **1. Priority windows (`ACTIVATE_ABILITY_OR_SPELL`, kernel
+//! `Decision::CastSpellOrPass`).** `ComputerPlayerRL.priorityPlay`
+//! (ComputerPlayerRL.java:9604-9657) is a hard `switch` on
+//! `game.getTurnStepType()`. Only `PRECOMBAT_MAIN`, `POSTCOMBAT_MAIN`,
+//! `DECLARE_ATTACKERS`, `DECLARE_BLOCKERS` call `calculateRLAction` (which
+//! can reach `genericChoose`'s log call at line 4716); every other step
+//! calls `pass(game)` unconditionally and returns, *without ever computing
+//! candidates* -- so the reference silently passes there regardless of
+//! whether the kernel would legitimately offer a real option (e.g. an
+//! instant castable during upkeep). Mapped onto the kernel's `state::Step`:
+//!   - `Untap`, `Cleanup`: the kernel itself never grants priority here
+//!     (`step_grants_priority`), so there's nothing to reconcile.
+//!   - `Upkeep`, `Draw`, `BeginCombat`, `CombatDamage` (covers XMage's
+//!     `FIRST_COMBAT_DAMAGE`+`COMBAT_DAMAGE`), `EndCombat`, `End` (XMage's
+//!     `END_TURN`): the reference *always* silently passes, unconditionally
+//!     -- this driver must too, even when `castable_spells`/
+//!     `mana_abilities`/etc are non-empty. See `harness_never_offers_priority`.
+//!     Cross-checked: the v3 corpus's 2832 `ACTIVATE_ABILITY_OR_SPELL`
+//!     records carry only `phase in {"Precombat Main", "Postcombat Main",
+//!     "Combat"}` (XMage's `phase` field is coarser than `step` -- it
+//!     groups `BeginCombat`/`DeclareAttackers`/`DeclareBlockers`/
+//!     `CombatDamage`/`EndCombat` all under "Combat" -- and the 396
+//!     "Combat"-phase records are exactly the post-declaration priority
+//!     rounds of `DeclareAttackers`/`DeclareBlockers`, matching the
+//!     `priorityPlay` switch precisely: zero records have any other phase).
+//!   - `Main1`, `Main2`, `DeclareAttackers`/`DeclareBlockers` (after the
+//!     attack/block declaration decision itself, once
+//!     `attackers_declared`/`blockers_declared`): `calculateRLAction` runs.
+//!     `RL_FILTER_PRIORITY_MANA_ACTIONS` (default `false` when unset --
+//!     confirmed the v3 corpus's generation runs left it unset --
+//!     `EnvConfig.bool("RL_FILTER_PRIORITY_MANA_ACTIONS", false)`,
+//!     ComputerPlayerRL.java:10722) means mana abilities are *not* filtered
+//!     out, so a mana-only window (no castable spell/land/other ability)
+//!     still surfaces as a real >=2-option choice (Pass + the mana
+//!     ability(ies)) and still gets logged -- this driver's existing
+//!     `no_real_option` check (every kernel bucket empty) already matches
+//!     that. The only additional shortcut is
+//!     `calculateRLActionPrepared`'s "Pass is the only option" case
+//!     (`flattenedOptions.size()==1`, ComputerPlayerRL.java:10566-10609),
+//!     which is exactly `no_real_option`. `DeclareAttackers`/
+//!     `DeclareBlockers` always call `pass(game)` right after acting
+//!     (ComputerPlayerRL.java:9623-9638, no retained-priority loop for that
+//!     step) -- irrelevant to this driver, which already asks/resolves one
+//!     player at a time regardless of step.
+//!
+//! **2. `SELECT_TARGETS` (kernel `Decision::ChooseTargets`).** This pool's
+//! only `TargetSpec` is `AnyTarget` (both players + creatures), so
+//! `legal_targets` always has >= 2 entries (both players, always present,
+//! always distinctly named) -- `chooseTarget`'s single-legal-target and
+//! same-name-dedup shortcuts (ComputerPlayerRL.java:6706 onward) can never
+//! fire for this card pool. No silent-window handling needed here; every
+//! kernel `ChooseTargets` has a trace counterpart.
+//!
+//! **3. `DECLARE_ATTACKS`/`DECLARE_BLOCKS`.** `selectAttackers`
+//! (ComputerPlayerRL.java:8531-8794) logs whenever `possibleAttackers` is
+//! non-empty -- exactly the kernel's own skip condition
+//! (`advance_step` routes straight to `EndCombat` when
+//! `!has_eligible_attacker`), so no extra handling needed there either.
+//! `selectBlockers` (ComputerPlayerRL.java:8795-8983) is structurally
+//! different: it logs *once per attacker that has >= 1 eligible blocker*
+//! (`for (Permanent attacker : attackers) { if (eligibleBlockers.isEmpty())
+//! continue; ... }`), not once for the whole step -- confirmed empirically,
+//! 0 of the v3 corpus's 37 `DECLARE_BLOCKS` records reference more than one
+//! attacker UUID. The kernel's `Decision::DeclareBlockers` bundles every
+//! attacker into one `legal_blockers` list; this driver decomposes it into
+//! one sub-decision per attacker with a non-empty blocker list (consuming
+//! its own trace record each), silently skipping attackers with zero
+//! eligible blockers (no trace record for those, matching the Java
+//! `continue`), then applies every attacker's picks as a single
+//! `Action::DeclareBlockers` once all sub-decisions are resolved -- see
+//! `apply_declare_blockers`.
+//!
+//! **4. `SELECT_CARD` (kernel `Decision::Discard`).** `logReplayCardSelection`
+//! (ComputerPlayerRL.java:7077-7122) logs the *entire* chosen discard set as
+//! one record (not one record per card), matching the kernel's own
+//! `Decision::Discard`/`Action::Discard(Vec<ObjectId>)` shape 1:1 -- see
+//! `apply_discard`. Crucially, `logReplayCardSelection` logs *even when the
+//! choice is forced* (its own candidate pool has exactly 1 legal card):
+//! unlike `genericChoose`, it doesn't gate on candidate-pool size, only on
+//! `target.getTargets()` being non-empty (ComputerPlayerRL.java:7079-7086)
+//! -- 9 of the v3 corpus's 324 `SELECT_CARD` records have
+//! `candidate_count==1`. The kernel's `drain_pending_discard_or_decide`, by
+//! contrast, auto-resolves a forced discard silently (`choices.len() <=
+//! count`) with no `Decision::Discard` at all -- so a genuinely-forced
+//! discard produces a trace record the kernel never asks about. This driver
+//! detects and skips exactly that shape (`skip_stale_forced_discards`):
+//! whenever the front of a player's queue is a `SELECT_CARD` record whose
+//! every chosen card is already sitting in that player's graveyard (proof
+//! the kernel already applied it), it's consumed without a matching
+//! `Decision::Discard`. This can't misfire on a genuine not-yet-applied
+//! discard: its chosen cards are still in hand at that point, so the
+//! graveyard check simply doesn't trigger.
+//!
+//! A second, easy-to-miss wrinkle discovered empirically (not obvious from
+//! the Java source alone): every real discard is *also* preceded by one
+//! `SELECT_TARGETS` record per card, from `choose(Outcome, Target, Ability,
+//! Game)`'s own internal call to `chooseTarget` (ComputerPlayerRL.java:
+//! 7023-7051, "This handles discard effects... etc") -- `chooseTarget`'s
+//! per-pick loop is the *same* model-scoring machinery `SELECT_TARGETS`
+//! itself uses, so it independently logs its own record for each card
+//! before `logReplayCardSelection` logs the aggregate `SELECT_CARD`
+//! (confirmed against the v3 corpus: Faithless Looting's 2-card discard
+//! produces exactly 2 `SELECT_TARGETS` records with
+//! `source_name="Faithless Looting"`, chosen one card each, immediately
+//! followed by one `SELECT_CARD` covering both -- same shape for Masked
+//! Meower/Blood Token's single-card cost discards). These `SELECT_TARGETS`
+//! records have no kernel decision of their own (the kernel's discard model
+//! is `Decision::Discard`/`Action::Discard`, never `ChooseTargets`), so
+//! `apply_discard` consumes and discards any such prefix before the
+//! terminal `SELECT_CARD` record, cross-checking their chosen-name sequence
+//! against it as an integrity check.
+//!
+//! **5. Mulligan/`LONDON_MULLIGAN`.** Excluded from this driver's replay
+//! queues entirely (`queue_for` filters both out) -- only
+//! `GoldenTrace::opening_hand_for` (`trace.rs`) consumes them, to seed the
+//! opening hand/library.
 
 use mtg_kernel::card_def::{self, CARD_DEFS};
 use mtg_kernel::engine::{self, Action, Decision};
 use mtg_kernel::ids::{ObjectId, PlayerId};
-use mtg_kernel::state::{GameState, Target, Zone};
+use mtg_kernel::state::{GameState, Step, Target, Zone};
 use mtg_kernel::trace::{self, DecisionRecord, GoldenTrace};
 
 use std::collections::{BTreeMap, HashMap};
@@ -60,6 +194,10 @@ fn main() {
     let mut winner_matched = 0usize;
     let mut diverged = 0usize;
     let mut trace_exhausted_pass_total = 0usize;
+    let mut silent_window_step_gated_total = 0usize;
+    let mut silent_window_no_eligible_attacker_total = 0usize;
+    let mut declare_blocks_no_eligible_blockers_total = 0usize;
+    let mut forced_discard_records_skipped_total = 0usize;
     let mut histogram: BTreeMap<String, usize> = BTreeMap::new();
     let mut phantom_total = 0usize;
     let mut decisions_consumed_total = 0usize;
@@ -75,6 +213,10 @@ fn main() {
         phantom_total += t.phantom_decisions_skipped;
         let outcome = replay_trace(t);
         trace_exhausted_pass_total += outcome.trace_exhausted_passes;
+        silent_window_step_gated_total += outcome.silent_window_step_gated;
+        silent_window_no_eligible_attacker_total += outcome.silent_window_no_eligible_attacker;
+        declare_blocks_no_eligible_blockers_total += outcome.declare_blocks_no_eligible_blockers;
+        forced_discard_records_skipped_total += outcome.forced_discard_records_skipped;
         decisions_consumed_total += outcome.decisions_consumed;
         decisions_total_total += outcome.decisions_total;
         if outcome.reached_game_over {
@@ -97,6 +239,18 @@ fn main() {
     println!("winner matched:                   {winner_matched}");
     println!("diverged:                         {diverged}");
     println!("trace-exhausted-pass occurrences (informational, not a failure): {trace_exhausted_pass_total}");
+    println!(
+        "silent-window auto-resolutions, step-gated (reference never asks this step, informational): {silent_window_step_gated_total}"
+    );
+    println!(
+        "silent-window auto-resolutions, DeclareAttackers with 0 eligible (declare nobody, informational): {silent_window_no_eligible_attacker_total}"
+    );
+    println!(
+        "silent-window auto-resolutions, DECLARE_BLOCKS attacker had zero eligible blockers (informational): {declare_blocks_no_eligible_blockers_total}"
+    );
+    println!(
+        "stale forced-discard trace records skipped (kernel already auto-applied, informational): {forced_discard_records_skipped_total}"
+    );
     // A softer signal than the binary reached/diverged split: how much of
     // each trace's real decision stream validated cleanly before either
     // GameOver or the first divergence.
@@ -132,6 +286,31 @@ struct ReplayOutcome {
     reached_game_over: bool,
     winner_matched: bool,
     trace_exhausted_passes: usize,
+    /// Priority windows auto-passed because the *step itself* is one the
+    /// reference harness never asks about (`priorityPlay`'s hard-coded
+    /// pass-only steps), regardless of whether the kernel had a real
+    /// option -- see the module doc's visibility predicate, point 1. A
+    /// different category from `trace_exhausted_passes` (which fires
+    /// inside an allowed step when every kernel candidate bucket happens
+    /// to be empty).
+    silent_window_step_gated: usize,
+    /// `Decision::DeclareAttackers` auto-resolved (declare nobody) because
+    /// `eligible` was empty -- the kernel's own `Step::DeclareAttackers` is
+    /// never skipped (increment 6's step-lag fix, 508.1), but the Java
+    /// reference's `selectAttackers` still doesn't log when
+    /// `possibleAttackers.isEmpty()` -- see the module doc's visibility
+    /// predicate, point 3.
+    silent_window_no_eligible_attacker: usize,
+    /// `DECLARE_BLOCKS` sub-decisions silently skipped because that
+    /// specific attacker has zero eligible blockers (the Java reference's
+    /// per-attacker loop `continue`s with no log there) -- see the module
+    /// doc's visibility predicate, point 3.
+    declare_blocks_no_eligible_blockers: usize,
+    /// `SELECT_CARD` trace records skipped because the kernel already
+    /// silently auto-applied that exact forced discard before any
+    /// `Decision::Discard` was ever offered -- see
+    /// `skip_stale_forced_discards` and the module doc's point 4.
+    forced_discard_records_skipped: usize,
     divergence: Option<String>,
     /// Real (non-mulligan) trace decisions successfully gate-checked and
     /// applied before either reaching `GameOver` or hitting the first
@@ -142,6 +321,19 @@ struct ReplayOutcome {
     /// Total real (non-mulligan) decisions in the trace, for computing
     /// `decisions_consumed`'s share.
     decisions_total: usize,
+}
+
+/// Steps where `ComputerPlayerRL.priorityPlay`'s hard-coded `switch` always
+/// calls `pass(game)` and returns *without ever computing candidates*
+/// (ComputerPlayerRL.java:9604-9657) -- see the module doc's visibility
+/// predicate, point 1. The reference silently passes here unconditionally,
+/// even when the kernel would legitimately offer a real option (e.g. an
+/// instant castable during upkeep), so this driver must too. `Untap` and
+/// `Cleanup` are deliberately omitted: the kernel itself never grants
+/// priority there (`engine::step_grants_priority`), so a `CastSpellOrPass`
+/// decision for either is unreachable and there's nothing to gate.
+fn harness_never_offers_priority(step: Step) -> bool {
+    matches!(step, Step::Upkeep | Step::Draw | Step::BeginCombat | Step::CombatDamage | Step::EndCombat | Step::End)
 }
 
 fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
@@ -202,6 +394,9 @@ fn run(t: &GoldenTrace, outcome: &mut ReplayOutcome) -> Result<(), String> {
 
     loop {
         let decision = engine::advance_until_decision(&mut state);
+        if let Some(player) = decision_player(&decision) {
+            skip_stale_forced_discards(&state, &mut ctx, player, outcome);
+        }
         match decision {
             Decision::GameOver { winner } => {
                 outcome.reached_game_over = true;
@@ -210,25 +405,28 @@ fn run(t: &GoldenTrace, outcome: &mut ReplayOutcome) -> Result<(), String> {
                 return Ok(());
             }
             Decision::CastSpellOrPass { player, castable_spells, mana_abilities, land_drops, activatable_abilities } => {
-                // The Java reference itself only logs an
-                // ACTIVATE_ABILITY_OR_SPELL decision when there's a real
-                // alternative to Pass -- confirmed empirically: across
-                // the whole corpus, zero decision records carry phase
-                // Untap/Upkeep/Draw/Cleanup (the priority windows where
-                // nothing is ever castable this early), and every logged
-                // record has >= 2 candidates. So a kernel CastSpellOrPass
-                // with no real option (Pass-only) is expected to have no
-                // trace counterpart at all -- unlogged on the reference
-                // side, not just missing from our cursor -- and gets
-                // auto-passed without consuming the trace queue. This is
-                // the faithful generalization of the design brief's
-                // "trace-exhausted" carve-out (it undershot: the gap
-                // isn't only at the tail of a seat's queue, it's every
-                // Pass-only window throughout the game).
+                // See the module doc's visibility predicate, point 1: the
+                // reference silently, unconditionally passes every priority
+                // window in a `harness_never_offers_priority` step,
+                // regardless of what the kernel would otherwise offer.
+                // Within an allowed step, the reference also only logs a
+                // decision when there's a real alternative to Pass (every
+                // logged ACTIVATE_ABILITY_OR_SPELL record has >= 2
+                // candidates) -- so a kernel CastSpellOrPass with no real
+                // option (Pass-only) is expected to have no trace
+                // counterpart there either, unlogged on the reference side,
+                // not just missing from our cursor. Both cases auto-pass
+                // without consuming the trace queue; only the reason
+                // (and hence which counter) differs.
                 let no_real_option = castable_spells.is_empty() && mana_abilities.is_empty() && land_drops.is_empty() && activatable_abilities.is_empty();
-                if no_real_option {
+                let step_gated = harness_never_offers_priority(state.step);
+                if step_gated || no_real_option {
                     engine::step(&mut state, Action::Pass).map_err(|e| format!("engine-step-error:CastSpellOrPass:{e}"))?;
-                    outcome.trace_exhausted_passes += 1;
+                    if step_gated {
+                        outcome.silent_window_step_gated += 1;
+                    } else {
+                        outcome.trace_exhausted_passes += 1;
+                    }
                     continue;
                 }
                 match ctx.next(player) {
@@ -268,6 +466,21 @@ fn run(t: &GoldenTrace, outcome: &mut ReplayOutcome) -> Result<(), String> {
                 outcome.decisions_consumed += 1;
             }
             Decision::DeclareAttackers { player, eligible } => {
+                // See the module doc's visibility predicate, point 3:
+                // `selectAttackers` returns without logging whenever
+                // `possibleAttackers.isEmpty()`. Since increment 6's
+                // step-lag fix, the kernel's own `Decision::DeclareAttackers`
+                // fires unconditionally every time `Step::DeclareAttackers`
+                // is reached (508.1: never skipped, even with nothing
+                // eligible -- see `engine::advance_step`'s doc), so an empty
+                // `eligible` here is a silent window: auto-declare nobody
+                // without consuming a trace record.
+                if eligible.is_empty() {
+                    engine::step(&mut state, Action::DeclareAttackers(Vec::new()))
+                        .map_err(|e| format!("engine-step-error:DeclareAttackers:{e}"))?;
+                    outcome.silent_window_no_eligible_attacker += 1;
+                    continue;
+                }
                 let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:DeclareAttackers".to_string())?;
                 debug_verbose(t, &state, player, rec, "DeclareAttackers");
                 if rec.action_type != "DECLARE_ATTACKS" {
@@ -279,24 +492,67 @@ fn run(t: &GoldenTrace, outcome: &mut ReplayOutcome) -> Result<(), String> {
                 outcome.decisions_consumed += 1;
             }
             Decision::DeclareBlockers { player, legal_blockers, .. } => {
-                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:DeclareBlockers".to_string())?;
-                debug_verbose(t, &state, player, rec, "DeclareBlockers");
-                if rec.action_type != "DECLARE_BLOCKS" {
-                    return Err(format!("decision-kind-mismatch:DeclareBlockers-vs-{}", rec.action_type));
-                }
-                check_state(&state, player, rec)?;
-                apply_declare_blockers(&mut state, rec, &legal_blockers, &ctx.id_map)?;
-                ctx.advance(player);
-                outcome.decisions_consumed += 1;
+                apply_declare_blockers(&mut state, t, &mut ctx, outcome, player, &legal_blockers)?;
+            }
+            Decision::Discard { player, count, choices } => {
+                apply_discard(&mut state, t, &mut ctx, outcome, player, count, &choices)?;
             }
             // Not observed anywhere in this corpus (verified by grep
             // across all 40 files); no sensible trace counterpart exists
             // to translate against, so this is a clean, named divergence
             // rather than a guess or a crash.
             Decision::ChooseCastMode { .. } => return Err("unhandled-decision:ChooseCastMode".to_string()),
-            Decision::Discard { .. } => return Err("unhandled-decision:Discard".to_string()),
             Decision::OrderTriggers { .. } => return Err("unhandled-decision:OrderTriggers".to_string()),
         }
+    }
+}
+
+/// The acting player for every `Decision` kind that has a trace
+/// counterpart to consume (`GameOver` has none). Used to run
+/// `skip_stale_forced_discards` uniformly ahead of every real decision,
+/// regardless of kind -- see that function's doc.
+fn decision_player(d: &Decision) -> Option<PlayerId> {
+    match *d {
+        Decision::CastSpellOrPass { player, .. }
+        | Decision::ChooseTargets { player, .. }
+        | Decision::DeclareAttackers { player, .. }
+        | Decision::DeclareBlockers { player, .. }
+        | Decision::Discard { player, .. } => Some(player),
+        Decision::GameOver { .. } | Decision::ChooseCastMode { .. } | Decision::OrderTriggers { .. } => None,
+    }
+}
+
+/// See the module doc's visibility predicate, point 4: `logReplayCardSelection`
+/// logs a `SELECT_CARD` record even when the discard is forced (its own
+/// candidate pool has exactly 1 legal card), but the kernel's
+/// `drain_pending_discard_or_decide` auto-applies a forced discard
+/// (`choices.len() <= count`) silently, with no `Decision::Discard` at all.
+/// That leaves a trace record the kernel will never ask about sitting at
+/// the front of the player's queue, which would otherwise wrongly
+/// kind-mismatch against whatever real decision comes next.
+///
+/// Detects and skips exactly that shape: whenever the front of `player`'s
+/// queue is a `SELECT_CARD` record whose every `chosen_object_ids` entry is
+/// both translatable and already sitting in `player`'s graveyard, the
+/// discard it describes must already have happened (a not-yet-applied
+/// discard's chosen cards are still in hand at this point, so this can't
+/// misfire on a genuine pending decision) -- consume it without a matching
+/// engine action, since the kernel already applied it internally.
+fn skip_stale_forced_discards(state: &GameState, ctx: &mut ReplayCtx, player: PlayerId, outcome: &mut ReplayOutcome) {
+    loop {
+        let Some(&rec) = ctx.next(player) else { return };
+        if rec.action_type != "SELECT_CARD" || rec.chosen_object_ids.is_empty() {
+            return;
+        }
+        let already_applied = rec.chosen_object_ids.iter().all(|uuid| match ctx.id_map.get(uuid) {
+            Some(&id) => state.objects.get(id).zone == Zone::Graveyard,
+            None => false,
+        });
+        if !already_applied {
+            return;
+        }
+        ctx.advance(player);
+        outcome.forced_discard_records_skipped += 1;
     }
 }
 
@@ -697,42 +953,160 @@ fn translate_attacker_candidates(rec: &DecisionRecord, id_map: &HashMap<String, 
     Ok(out)
 }
 
+/// Unlike every other multi-candidate decision in this file, the reference
+/// doesn't log `DeclareBlockers` as one record for the whole step: it logs
+/// one `DECLARE_BLOCKS` record *per attacker that has >= 1 eligible
+/// blocker* (`selectBlockers`'s `for (Permanent attacker : attackers) { if
+/// (eligibleBlockers.isEmpty()) continue; ... }` -- see the module doc's
+/// visibility predicate, point 3). So this consumes zero or more trace
+/// records (one per non-trivially-blockable attacker, silently skipping
+/// the rest) before issuing a single combined `Action::DeclareBlockers`.
 fn apply_declare_blockers(
     state: &mut GameState,
-    rec: &DecisionRecord,
+    t: &GoldenTrace,
+    ctx: &mut ReplayCtx,
+    outcome: &mut ReplayOutcome,
+    player: PlayerId,
     legal_blockers: &[(ObjectId, Vec<ObjectId>)],
-    id_map: &HashMap<String, ObjectId>,
 ) -> Result<(), String> {
-    // Kernel's `legal_blockers` is attacker-major: (attacker, [blockers]).
-    // Normalize to blocker-major (blocker, attacker) to match the trace's
-    // "blockerUuid->attackerUuid" text convention -- don't compare the two
-    // conventions without normalizing first.
-    let mut kernel_keys: Vec<String> = Vec::new();
+    let mut all_blocks: Vec<(ObjectId, ObjectId)> = Vec::new();
+
     for (attacker, blockers) in legal_blockers {
-        for blocker in blockers {
-            kernel_keys.push(format!("{}->{}", blocker.0, attacker.0));
+        if blockers.is_empty() {
+            outcome.declare_blocks_no_eligible_blockers += 1;
+            continue;
         }
-    }
-    kernel_keys.push("DONE".to_string());
-    kernel_keys.sort();
 
-    let trace_candidates = translate_blocker_candidates(rec, id_map)?;
-    let mut trace_keys: Vec<String> = trace_candidates
+        let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:DeclareBlockers".to_string())?;
+        debug_verbose(t, state, player, rec, "DeclareBlockers");
+        if rec.action_type != "DECLARE_BLOCKS" {
+            return Err(format!("decision-kind-mismatch:DeclareBlockers-vs-{}", rec.action_type));
+        }
+        check_state(state, player, rec)?;
+
+        // Blocker-major (blocker, attacker) to match the trace's
+        // "blockerUuid->attackerUuid" text convention, scoped to just this
+        // one attacker (the kernel's `legal_blockers` is attacker-major).
+        let mut kernel_keys: Vec<String> = blockers.iter().map(|b| format!("{}->{}", b.0, attacker.0)).collect();
+        kernel_keys.push("DONE".to_string());
+        kernel_keys.sort();
+
+        let trace_candidates = translate_blocker_candidates(rec, &ctx.id_map)?;
+        // Every non-DONE candidate in a real DECLARE_BLOCKS record names
+        // exactly one attacker (0 of the v3 corpus's 37 records mix
+        // attackers -- see the module doc). A record naming a different
+        // attacker than the one the kernel expects next means this record
+        // doesn't belong here.
+        if trace_candidates.iter().any(|c| matches!(c, Some((_, a)) if a != attacker)) {
+            return Err("declare-blocks-attacker-mismatch".to_string());
+        }
+        let mut trace_keys: Vec<String> = trace_candidates
+            .iter()
+            .map(|c| match c {
+                Some((blocker, a)) => format!("{}->{}", blocker.0, a.0),
+                None => "DONE".to_string(),
+            })
+            .collect();
+        trace_keys.sort();
+
+        if kernel_keys != trace_keys {
+            return Err("candidate-multiset-mismatch:DeclareBlockers".to_string());
+        }
+
+        // Same prefix-before-DONE rule as DeclareAttackers.
+        let picks = apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareBlockers")?;
+        all_blocks.extend(picks);
+        ctx.advance(player);
+        outcome.decisions_consumed += 1;
+    }
+
+    engine::step(state, Action::DeclareBlockers(all_blocks)).map_err(|e| format!("engine-step-error:DeclareBlockers:{e}"))
+}
+
+/// `SELECT_CARD` candidates are matched by *name* multiset (not object id,
+/// unlike every other decision kind in this file) -- see the module doc's
+/// visibility predicate, point 4. `rec.candidate_texts`/`choices` must
+/// agree as a name multiset; each `chosen_indices` entry names a card via
+/// `candidate_texts[idx]`, resolved against the *remaining* kernel pool one
+/// name at a time so duplicate names (two Guttersnipes) split correctly
+/// across distinct objects without needing a UUID lookup.
+///
+/// Before the aggregate `SELECT_CARD` record, `chooseTarget`'s own per-card
+/// model-scoring loop (the *same* mechanism backing `SELECT_TARGETS`)
+/// independently logs one `SELECT_TARGETS` record per card chosen for this
+/// exact discard -- confirmed empirically (e.g. Faithless Looting's 2-card
+/// discard: two `SELECT_TARGETS` records with `source_name="Faithless
+/// Looting"`, chosen one card each, immediately followed by one
+/// `SELECT_CARD` record covering both). Those `SELECT_TARGETS` records have
+/// no kernel decision of their own -- the kernel's discard model is
+/// `Decision::Discard`/`Action::Discard`, never `ChooseTargets` -- so this
+/// consumes and discards any such prefix here first, cross-checking their
+/// chosen-name sequence against the terminal `SELECT_CARD` record's own
+/// sequence as an integrity check (not just a blind skip). The prefix can
+/// be shorter than `count` (or absent): `chooseTarget`'s per-pick loop has
+/// its own single-legal-candidate shortcut that skips logging a pick once
+/// the remaining pool narrows to 1, same as everywhere else in the
+/// reference -- so this loop adapts to however many actually appear rather
+/// than assuming exactly `count`.
+fn apply_discard(
+    state: &mut GameState,
+    t: &GoldenTrace,
+    ctx: &mut ReplayCtx,
+    outcome: &mut ReplayOutcome,
+    player: PlayerId,
+    count: u32,
+    choices: &[ObjectId],
+) -> Result<(), String> {
+    let mut names_from_targets_prefix: Vec<String> = Vec::new();
+    while let Some(&rec) = ctx.next(player) {
+        if rec.action_type != "SELECT_TARGETS" {
+            break;
+        }
+        debug_verbose(t, state, player, rec, "Discard(SELECT_TARGETS-prefix)");
+        let &idx = rec.chosen_indices.first().ok_or("unexpected-chosen-count:Discard-SELECT_TARGETS-prefix")?;
+        let name = rec.candidate_texts.get(idx as usize).ok_or("chosen-index-out-of-range:Discard-SELECT_TARGETS-prefix")?;
+        names_from_targets_prefix.push(name.clone());
+        ctx.advance(player);
+        outcome.decisions_consumed += 1;
+    }
+
+    let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:Discard".to_string())?;
+    debug_verbose(t, state, player, rec, "Discard");
+    if rec.action_type != "SELECT_CARD" {
+        return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
+    }
+    if rec.chosen_indices.len() != count as usize {
+        return Err("unexpected-chosen-count:Discard".to_string());
+    }
+    check_state(state, player, rec)?;
+
+    let chosen_names: Vec<String> = rec
+        .chosen_indices
         .iter()
-        .map(|c| match c {
-            Some((blocker, attacker)) => format!("{}->{}", blocker.0, attacker.0),
-            None => "DONE".to_string(),
-        })
-        .collect();
-    trace_keys.sort();
-
-    if kernel_keys != trace_keys {
-        return Err("candidate-multiset-mismatch:DeclareBlockers".to_string());
+        .map(|&idx| rec.candidate_texts.get(idx as usize).cloned().ok_or_else(|| "chosen-index-out-of-range:Discard".to_string()))
+        .collect::<Result<_, _>>()?;
+    if !names_from_targets_prefix.is_empty() && names_from_targets_prefix != chosen_names {
+        return Err("discard-select-targets-prefix-mismatch".to_string());
     }
 
-    // Same prefix-before-DONE rule as DeclareAttackers.
-    let blocks = apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareBlockers")?;
-    engine::step(state, Action::DeclareBlockers(blocks)).map_err(|e| format!("engine-step-error:DeclareBlockers:{e}"))
+    let mut kernel_names: Vec<&str> = choices.iter().map(|&id| state.objects.get(id).name.as_str()).collect();
+    kernel_names.sort_unstable();
+    let mut trace_names: Vec<&str> = rec.candidate_texts.iter().map(String::as_str).collect();
+    trace_names.sort_unstable();
+    if kernel_names != trace_names {
+        return Err("candidate-multiset-mismatch:Discard".to_string());
+    }
+
+    let mut pool: Vec<ObjectId> = choices.to_vec();
+    let mut chosen: Vec<ObjectId> = Vec::with_capacity(chosen_names.len());
+    for name in &chosen_names {
+        let pos = pool.iter().position(|&id| state.objects.get(id).name == *name).ok_or_else(|| format!("chosen-name-not-in-pool:Discard:{name}"))?;
+        chosen.push(pool.remove(pos));
+    }
+
+    ctx.advance(player);
+    outcome.decisions_consumed += 1;
+    engine::step(state, Action::Discard(chosen)).map_err(|e| format!("engine-step-error:Discard:{e}"))
 }
 
 fn translate_blocker_candidates(rec: &DecisionRecord, id_map: &HashMap<String, ObjectId>) -> Result<Vec<Option<(ObjectId, ObjectId)>>, String> {

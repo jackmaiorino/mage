@@ -146,8 +146,8 @@ pub struct PendingActivation {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum DiscardResume {
-    /// Nothing further to do once the discard lands (Faithless Looting's
-    /// resolution-effect discard; cleanup's discard-to-7).
+    /// Nothing further to do once the discard lands (cleanup's
+    /// discard-to-7).
     None,
     /// Write the discarded cards back into `EngineState::pending_cast`'s
     /// `additional_cost_discarded` and let the cast staging continue.
@@ -155,6 +155,18 @@ pub enum DiscardResume {
     /// Same, but for `EngineState::pending_activation`'s
     /// `cost_discard_paid`.
     FinishActivation,
+    /// A resolving instant/sorcery's own effect discarded as part of its
+    /// resolution (Faithless Looting: "draw two, then discard two").
+    /// `EffectOp::DiscardCards` stages `pending_discard` and returns
+    /// *synchronously*, before the discard is actually answered (see that
+    /// leaf's doc) -- so by the time `execute` returns to
+    /// `resolve_top_of_stack`, the discard hasn't happened yet. 608.2m: the
+    /// spell can only move to its post-resolution zone as the *last* part
+    /// of its resolution, which isn't done until this discard lands -- so
+    /// `resolve_top_of_stack` defers that move here instead of doing it
+    /// immediately, and `apply_discard` performs it once the discard is
+    /// actually resolved.
+    FinishSpellResolution { source: ObjectId, to_zone: Zone },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -223,8 +235,15 @@ pub enum Decision {
         choices: Vec<ObjectId>,
     },
     /// 508.1: choose a (possibly empty) subset of `eligible` to attack
-    /// with. Always asked whenever `eligible` is non-empty, even if the
-    /// only sane answer is the empty set -- no auto-pass.
+    /// with. Always asked whenever `Step::DeclareAttackers` is reached --
+    /// `eligible` itself can be empty (no creature able to attack), and
+    /// this is still asked rather than auto-passed: 508.1 makes Declare
+    /// Attackers a turn-based action that always happens, even to declare
+    /// zero attackers (see `advance_step`'s doc). Callers that mirror a
+    /// reference implementation which *does* skip logging an empty-eligible
+    /// window (as the Java harness does) need their own silent-auto-resolve
+    /// handling for that case -- this decision itself makes no such
+    /// distinction.
     DeclareAttackers {
         player: PlayerId,
         eligible: Vec<ObjectId>,
@@ -511,10 +530,6 @@ fn can_attack(state: &GameState, id: ObjectId) -> bool {
     def.has_type(CardType::Creature) && !obj.tapped && (!obj.summoning_sick || def.keywords.has(Keywords::HASTE))
 }
 
-fn has_eligible_attacker(state: &GameState) -> bool {
-    state.players[state.active_player.index()].battlefield.iter().any(|&id| can_attack(state, id))
-}
-
 fn eligible_attackers(state: &GameState) -> Vec<ObjectId> {
     state.players[state.active_player.index()].battlefield.iter().copied().filter(|&id| can_attack(state, id)).collect()
 }
@@ -574,9 +589,27 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
         if let Some(d) = drain_pending_cast_or_decide(state) {
             return d;
         }
+        // A cast's additional-cost discard (Grab the Prize) may have just
+        // been staged here (`pending_discard = Some(...); return None`,
+        // per that branch's doc) -- restart from the top so
+        // `drain_pending_discard_or_decide` picks it up *before* anything
+        // below gets a chance to fall through to a priority offer. Without
+        // this, the loop would fall straight through the declare-attackers/
+        // blockers checks and the priority-window return at the bottom of
+        // this same pass, wrongly offering a `CastSpellOrPass` decision
+        // (including the very ability/cast that's still mid-cost-payment)
+        // before the discard the player owes has ever been asked for.
+        if state.engine.pending_discard.is_some() {
+            continue;
+        }
 
         if let Some(d) = drain_pending_activation_or_decide(state) {
             return d;
+        }
+        // Same reasoning as above, for an activated ability's discard cost
+        // (Masked Meower, the Blood token).
+        if state.engine.pending_discard.is_some() {
+            continue;
         }
 
         if let Some(d) = drain_pending_triggers_or_decide(state) {
@@ -659,6 +692,14 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
             if let Some(p) = state.engine.pending_activation.as_mut() {
                 p.cost_discard_paid = Some(chosen);
             }
+        }
+        DiscardResume::FinishSpellResolution { source, to_zone } => {
+            // See `DiscardResume::FinishSpellResolution`'s doc: this is the
+            // "move to post-resolution zone" step `resolve_top_of_stack`
+            // deferred until the resolution-effect discard it triggered
+            // (Faithless Looting) actually landed.
+            event::propose_and_commit(state, ProposedEvent::zone_change(source, to_zone));
+            collect_and_queue_triggers(state);
         }
     }
 }
@@ -794,7 +835,19 @@ fn resolve_top_of_stack(state: &mut GameState) {
     // battlefield themselves, via their own MoveObject effect.
     if def.has_type(CardType::Instant) || def.has_type(CardType::Sorcery) {
         let to_zone = if item.is_flashback { Zone::Exile } else { Zone::Graveyard };
-        event::propose_and_commit(state, ProposedEvent::zone_change(item.source, to_zone));
+        if let Some(pd) = state.engine.pending_discard.as_mut() {
+            // The effect just resolved into `EffectOp::DiscardCards`
+            // (Faithless Looting: "draw two, then discard two"), which
+            // stages `pending_discard` and returns *before* the discard is
+            // actually answered -- see that leaf's doc and
+            // `DiscardResume::FinishSpellResolution`'s. The spell can't
+            // reach its post-resolution zone until that discard (part of
+            // its own resolution) is done, so defer the move instead of
+            // doing it here.
+            pd.resume = DiscardResume::FinishSpellResolution { source: item.source, to_zone };
+        } else {
+            event::propose_and_commit(state, ProposedEvent::zone_change(item.source, to_zone));
+        }
     }
 }
 
@@ -804,11 +857,28 @@ fn resolve_top_of_stack(state: &mut GameState) {
 /// the step just ended ever granted priority, so this single choke point
 /// covers Untap/Cleanup's transitions too, not just the priority-bearing
 /// steps), running that step's turn-based entry action (untap, draw,
-/// cleanup, combat damage), and resetting priority. Skips the declare-
-/// attackers/blockers/combat-damage steps when there's no possible attack
-/// (508.1/508.7): entirely, if no eligible attacker exists at all; past
-/// declare-blockers/combat-damage, if attackers were declared but the set
-/// is empty.
+/// cleanup, combat damage), and resetting priority. Only skips
+/// declare-blockers/combat-damage, and only when the active player declared
+/// zero attackers (509.4/510.4-ish -- no card in this pool changes that
+/// "zero attackers" trigger, so this increment doesn't need the exact rule
+/// number to get it right). Declare Attackers itself is *never* skipped,
+/// even when no creature could possibly attack: 508.1 makes it a
+/// turn-based action that always happens (it's how "the active player
+/// declares no attackers" gets decided in the first place), still followed
+/// by its own priority round -- confirmed against the real corpus: e.g.
+/// `game_20260712_194609_0010.txt` decision #4 is a real, 2-candidate
+/// `ACTIVATE_ABILITY_OR_SPELL` record with `phase="Combat"` on turn 1,
+/// before either player has a creature on the battlefield (so `eligible`
+/// is empty both sides -- yet the reference still asks). An earlier version
+/// of this function skipped the whole step whenever `eligible` was empty,
+/// which silently ate that priority window entirely -- the resulting
+/// "missing decision" left the *next* real trace record unconsumed until
+/// some later, unrelated kernel decision, at which point the kernel's
+/// `state.step` (already advanced past combat) no longer matched what that
+/// stale record was captured against, manifesting downstream as spurious
+/// extra/missing `ACTIVATE_ABILITY_OR_SPELL` candidates rather than as an
+/// obviously-combat-shaped divergence. See `Decision::DeclareAttackers`'s
+/// doc and the replay comparator's handling of an empty `eligible`.
 fn advance_step(state: &mut GameState) {
     let cur_idx = STEP_ORDER.iter().position(|&s| s == state.step).expect("state.step is always a STEP_ORDER member");
     let mut next_idx = cur_idx + 1;
@@ -822,9 +892,6 @@ fn advance_step(state: &mut GameState) {
     }
 
     let mut next = STEP_ORDER[next_idx];
-    if next == Step::DeclareAttackers && !has_eligible_attacker(state) {
-        next = Step::EndCombat;
-    }
     if next == Step::DeclareBlockers && state.engine.combat.attackers.is_empty() {
         next = Step::EndCombat;
     }
