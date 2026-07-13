@@ -125,6 +125,44 @@ pub struct EngineState {
     /// replacement pipeline -- see
     /// `tests::until_end_of_turn_effects_are_cleared_at_cleanup`.
     pub until_end_of_turn: Vec<UntilEndOfTurnEffect>,
+    /// Bumped every time `Action::ActivateManaAbility` runs. 605.3b: a mana
+    /// ability never touches `GameState::stack`, so `HarnessSurfaceV2`'s
+    /// `DeclareAttackers`/`DeclareBlockers` one-action-per-round throttle
+    /// (`combat_priority_stack_len_seen`, `surface_v2.rs`) -- which re-arms
+    /// both players' throttle flags by watching `state.stack.len()` change
+    /// -- can't see a mana ability activation at all, even though Java's
+    /// `PlayerImpl.activateAbility` calls `game.getPlayers().resetPassed()`
+    /// unconditionally for *every* successful action, `ACTIVATED_MANA`
+    /// included (see `Action::ActivateManaAbility`'s own comment). This
+    /// counter is that missing signal: `HarnessSurfaceV2` compares it
+    /// against its own last-seen value the same way it already compares
+    /// `state.stack.len()`, and re-arms on either changing. Root-caused
+    /// (increment 13) against `game_20260713_002148_0003.txt` decision 34
+    /// and `game_20260713_002202_0024.txt` decision 179: in both, one
+    /// player activates a mana ability mid-`DeclareAttackers`/
+    /// `DeclareBlockers` round after *both* players had already spent this
+    /// round's one action, and the reference genuinely re-asks the other
+    /// player right afterward (matching `resetPassed()`) -- but the surface,
+    /// seeing no stack-length change, kept both throttle flags stale-true
+    /// and silently force-passed everyone straight through the rest of
+    /// combat, reaching `Main2` a full combat phase early.
+    pub mana_ability_activations: u64,
+    /// Which player performed the most recent `Action::ActivateManaAbility`
+    /// (paired with `mana_ability_activations` as its "version" counter).
+    /// `HarnessSurfaceV2` needs this alongside the counter, not just the
+    /// counter alone: unlike a stack-growing cast/activation (where
+    /// `state.stack.last().controller` durably answers "is the thing that
+    /// reopened this round still mine" for as long as that item sits
+    /// unresolved), a mana ability leaves nothing behind on `state.stack` to
+    /// re-inspect later -- so re-arming *both* players' throttle flags
+    /// blindly on every count change (mirroring the stack-length re-arm)
+    /// would also un-suppress the *activator's own* immediate reprompt,
+    /// which must stay suppressed (they already had their one action this
+    /// round). This field lets the surface tell "was I the one who just
+    /// reopened this" apart from "did the *other* player just reopen this
+    /// for me", the same distinction `stack_top_is_fresh_own_item` draws
+    /// structurally for the stack case.
+    pub last_mana_ability_activator: Option<PlayerId>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -993,7 +1031,28 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             return Decision::DeclareAttackers { player: state.active_player, eligible: eligible_attackers(state) };
         }
         if state.step == Step::DeclareBlockers && !state.engine.combat.blockers_declared {
-            let attackers = state.engine.combat.attackers.clone();
+            // `ComputerPlayerRL.selectBlockers` explicitly sorts attackers by
+            // power descending ("so biggest threats are handled first")
+            // before asking about blockers one attacker at a time --
+            // *not* declaration order (`Combat.attackers` is itself a Java
+            // `HashSet<UUID>`, so "declaration order" was never a real
+            // signal on the reference side to begin with). Root-caused
+            // against `game_20260713_002212_0038.txt` decisions 115-116:
+            // two identically-named attackers (both Voldaren Epicure, same
+            // power) get their blocker windows asked in the *opposite*
+            // order from how they were declared (`DECLARE_ATTACKS`'s own
+            // `chosen_indices`), which only a power-based (not
+            // declaration-based) ordering explains once a third, lower/
+            // higher-power attacker (Sneaky Snacker, evasive and therefore
+            // silently skipped -- zero eligible blockers) is filtered out of
+            // the picture. Ties between equal-power attackers aren't
+            // reproduced bit-for-bit here (the reference's own tie-break is
+            // Java `HashSet<UUID>` iteration order, an implementation
+            // artifact of `UUID.hashCode()`/bucket layout with no rules
+            // meaning -- not worth porting), but the dominant, rules-visible
+            // signal (power) now matches.
+            let mut attackers = state.engine.combat.attackers.clone();
+            attackers.sort_by_key(|&id| std::cmp::Reverse(effective_power(state, id)));
             let legal_blockers = attackers.iter().map(|&a| (a, legal_blockers_for(state, a))).collect();
             return Decision::DeclareBlockers { player: state.active_player.opponent(), attackers, legal_blockers };
         }
@@ -1517,7 +1576,28 @@ fn advance_step(state: &mut GameState) {
     }
 
     let mut next = STEP_ORDER[next_idx];
-    if next == Step::DeclareBlockers && state.engine.combat.attackers.is_empty() {
+    // 508.4/509.1: `DeclareBlockers` (and everything after it this combat)
+    // is skipped not just when *no attackers were ever declared*, but
+    // whenever *none of them are still around to be blocked* -- confirmed
+    // against the real reference: `DeclareBlockersStep`/`CombatDamageStep`
+    // both override `skipStep()` to check `Combat.noAttackers()`, which
+    // recomputes live from the mutable attacker set on every call (so a
+    // declared attacker that died in the interim drops out), and
+    // `Phase.play()` re-checks `skipStep()` immediately before *each* step,
+    // not just once at Declare Attackers. `is_still_in_combat` already
+    // exists for the exact same "declared, but no longer on the
+    // battlefield" check (`combat_damage_wave`'s doc) -- reused here rather
+    // than re-deriving it. `.all(..)` over an empty `attackers` list is
+    // vacuously true, so this subsumes the original "nothing was ever
+    // declared" case too. Root-caused against
+    // `game_20260713_002153_0010.txt`: SelfPlay declares a single attacker
+    // (Voldaren Epicure) then kills it themselves with Lava Dart still
+    // inside the Declare Attackers priority window; the reference logs
+    // nothing further for either player until Postcombat Main, but the
+    // kernel -- still holding the now-dead attacker's `ObjectId` in
+    // `combat.attackers` -- entered `DeclareBlockers` for real and asked a
+    // phantom post-block priority question.
+    if next == Step::DeclareBlockers && state.engine.combat.attackers.iter().all(|&id| !is_still_in_combat(state, id)) {
         next = Step::EndCombat;
     }
 
@@ -1749,8 +1829,36 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
                 .expect("checked available_mana_abilities above");
             let ctx = ExecCtx::no_targets(id, p);
             effect::execute(&program, &ctx, state);
-            // 605.3b: mana abilities don't use the stack and don't cause a
-            // new priority round.
+            // 605.3b: mana abilities don't use the stack, so nothing goes on
+            // it and no new *stack item* appears -- but this is not the same
+            // claim as "doesn't reset the priority-passing count": Java's
+            // `PlayerImpl.activateAbility` ends with an unconditional
+            // `game.getPlayers().resetPassed()` for *any* successful action,
+            // `ACTIVATED_MANA` included (same method, same shared tail as
+            // the `SPELL`/other-ability branches; see `play_land`'s own
+            // identical reset, for the same reason, on the land-drop side of
+            // that method). Without this, a stale `priority_passes[other]
+            // == true` left over from *before* this activation can combine
+            // with the *activating* player's own next real pass to
+            // spuriously satisfy `[true, true]` and advance the step/phase,
+            // skipping the other player's now-legitimately-fresh priority
+            // window entirely. Root-caused (increment 13) against
+            // `game_20260713_002203_0026.txt` decision 64: PlayerRL1 taps a
+            // Mountain in Postcombat Main after SelfPlay had already passed
+            // once this round; the reference still lets SelfPlay act again
+            // (two more Lava Dart casts, both self-targeted, -2 life) before
+            // the turn ends, but the kernel -- never re-arming SelfPlay's
+            // stale pass -- skipped straight to the next turn once
+            // PlayerRL1 next had nothing left to do, silently losing both
+            // points of self-damage.
+            state.engine.priority_passes = [false, false];
+            // See `EngineState::mana_ability_activations`'s doc: the
+            // `DeclareAttackers`/`DeclareBlockers` combat throttle
+            // (`HarnessSurfaceV2::combat_priority_stack_len_seen`) needs its
+            // own re-arm signal for this action, since it never touches the
+            // stack the way a cast/non-mana-activation does.
+            state.engine.mana_ability_activations += 1;
+            state.engine.last_mana_ability_activator = Some(p);
             Ok(())
         }
         Action::ActivateAbility(source, index) => {
@@ -2680,6 +2788,45 @@ mod tests {
         assert!(state.engine.until_end_of_turn.is_empty());
     }
 
+    /// Regression test for the increment-13 fix (root-caused against
+    /// `game_20260713_002153_0010.txt`, see `advance_step`'s doc): a
+    /// declared attacker that dies before Declare Blockers must still let
+    /// the kernel skip straight to `EndCombat`, same as if it had never
+    /// been declared at all -- not just when `combat.attackers` was empty
+    /// from the start.
+    #[test]
+    fn declare_blockers_is_skipped_once_the_sole_attacker_has_died() {
+        let mut state = empty_game();
+        let attacker = put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
+        state.active_player = PlayerId::P0;
+        state.step = Step::DeclareAttackers;
+        state.engine.combat.attackers = vec![attacker];
+        state.engine.combat.attackers_declared = true;
+
+        // The attacker dies mid-Declare-Attackers (e.g. to a burn spell),
+        // same as `is_still_in_combat`'s own "declared, but not on the
+        // battlefield by damage time" shape.
+        state.objects.get_mut(attacker).zone = Zone::Graveyard;
+
+        advance_step(&mut state);
+        assert_eq!(state.step, Step::EndCombat, "a dead sole attacker must not keep DeclareBlockers alive");
+    }
+
+    /// Same fix, opposite polarity: a *surviving* declared attacker must
+    /// still route through `DeclareBlockers` normally.
+    #[test]
+    fn declare_blockers_is_not_skipped_while_the_attacker_is_still_alive() {
+        let mut state = empty_game();
+        let attacker = put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
+        state.active_player = PlayerId::P0;
+        state.step = Step::DeclareAttackers;
+        state.engine.combat.attackers = vec![attacker];
+        state.engine.combat.attackers_declared = true;
+
+        advance_step(&mut state);
+        assert_eq!(state.step, Step::DeclareBlockers);
+    }
+
     #[test]
     fn haste_creature_can_attack_the_turn_it_enters() {
         let mut state = empty_game();
@@ -2706,6 +2853,34 @@ mod tests {
         state.objects.get_mut(attacker).controller = PlayerId::P0;
         let legal = legal_blockers_for(&state, attacker);
         assert!(legal.is_empty(), "a non-flying, non-reach creature should not be able to block a flyer");
+    }
+
+    /// Regression test for the increment-13 fix (root-caused against
+    /// `game_20260713_002212_0038.txt` decisions 115-116, see the
+    /// `Decision::DeclareBlockers` construction's own comment):
+    /// `ComputerPlayerRL.selectBlockers` sorts attackers by power
+    /// descending before asking about blockers one at a time, not by
+    /// declaration order. Declares the *lower*-power attacker first, so a
+    /// declaration-order bug would put it first in the returned decision
+    /// too -- the fix must reorder it after the higher-power one.
+    #[test]
+    fn declare_blockers_orders_attackers_by_power_descending() {
+        let mut state = empty_game();
+        let weak = put_on_battlefield(&mut state, PlayerId::P0, "Masked Meower"); // 1/1
+        let strong = put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe"); // 2/2
+        let _blocker = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
+        state.active_player = PlayerId::P0;
+        state.step = Step::DeclareBlockers;
+        state.engine.combat.attackers_declared = true;
+        // Declared weak-then-strong -- the opposite of the expected order.
+        state.engine.combat.attackers = vec![weak, strong];
+
+        match advance_until_decision(&mut state) {
+            Decision::DeclareBlockers { attackers, .. } => {
+                assert_eq!(attackers, vec![strong, weak], "higher-power attacker (Guttersnipe) must be ordered first");
+            }
+            other => panic!("expected DeclareBlockers, got {other:?}"),
+        }
     }
 
     // ================================================================
@@ -3147,5 +3322,33 @@ mod tests {
         // graveyard normally, and the fizzle guard is exercised via
         // EffectCond::TargetInZone, not a panic on a stale ObjectId.
         assert_eq!(state.objects.get(pyroblast).zone, Zone::Graveyard);
+    }
+
+    /// `Action::ActivateManaAbility` must reset `priority_passes` (already
+    /// covered by the increment-13 fix root-caused against
+    /// `game_20260713_002203_0026.txt`) *and* bump `mana_ability_
+    /// activations`/stamp `last_mana_ability_activator`, the two fields
+    /// `HarnessSurfaceV2`'s `DeclareAttackers`/`DeclareBlockers` combat
+    /// throttle needs to detect a mid-round mana ability at all, since it
+    /// never touches `state.stack` the way a cast/non-mana-activation does
+    /// -- see `EngineState::mana_ability_activations`'s doc for the full
+    /// root-cause (`game_20260713_002148_0003.txt` decision 34,
+    /// `game_20260713_002202_0024.txt` decision 179).
+    #[test]
+    fn activate_mana_ability_resets_priority_and_stamps_the_activator() {
+        let mut state = empty_game();
+        let mountain = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        state.step = Step::Main1;
+        state.priority_player = PlayerId::P0;
+        state.engine.priority_passes = [true, false];
+
+        assert_eq!(state.engine.mana_ability_activations, 0);
+        assert_eq!(state.engine.last_mana_ability_activator, None);
+
+        step(&mut state, Action::ActivateManaAbility(mountain)).unwrap();
+
+        assert_eq!(state.engine.priority_passes, [false, false]);
+        assert_eq!(state.engine.mana_ability_activations, 1);
+        assert_eq!(state.engine.last_mana_ability_activator, Some(PlayerId::P0));
     }
 }

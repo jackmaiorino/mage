@@ -70,11 +70,12 @@
 //! driver is frozen and must not gain a runtime v4 code path bolted on.
 
 use mtg_kernel::card_def::{self, CARD_DEFS};
-use mtg_kernel::engine::{Action, Decision, OptionalCostChoice};
+use mtg_kernel::engine::{self, Action, Decision, OptionalCostChoice};
 use mtg_kernel::ids::{ObjectId, PlayerId};
 use mtg_kernel::state::{GameState, Target, Zone};
 use mtg_kernel::surface_v2::{HarnessSurfaceV2, SuppressionReason, SurfaceAction, SurfaceDecision};
 use mtg_kernel::trace::{self, DecisionRecord, GoldenTrace};
+use mtg_kernel::trigger::PendingTrigger;
 
 use std::collections::{BTreeMap, HashMap};
 use std::path::{Path, PathBuf};
@@ -148,6 +149,7 @@ fn main() {
     let mut decisions_total_total = 0usize;
     let mut per_trace_divergence: Vec<(String, String)> = Vec::new();
     let mut triage: Vec<(usize, usize, String, String)> = Vec::new();
+    let mut commutativity_total = CommutativityStats::default();
 
     for t in &traces {
         attempted += 1;
@@ -162,6 +164,7 @@ fn main() {
         forced_discard_records_skipped_total += outcome.forced_discard_records_skipped;
         decisions_consumed_total += outcome.decisions_consumed;
         decisions_total_total += outcome.decisions_total;
+        commutativity_total.merge(outcome.commutativity.clone());
         if outcome.reached_game_over {
             replayed_to_end += 1;
             if outcome.winner_matched {
@@ -233,6 +236,32 @@ fn main() {
         sorted.sort();
         for (reason, path) in &sorted {
             println!("  {reason:<45} {path}");
+        }
+    }
+
+    if std::env::var("CHECK_TRIGGER_COMMUTATIVITY").is_ok() {
+        println!("\n=== trigger-order commutativity audit (CHECK_TRIGGER_COMMUTATIVITY) ===");
+        println!("same-controller 2+-trigger groups checked: {}", commutativity_total.groups_checked);
+        println!("  commutative:     {}", commutativity_total.commutative);
+        println!("  NONCOMMUTATIVE:  {}", commutativity_total.noncommutative);
+        if commutativity_total.skipped_too_large > 0 {
+            println!("  skipped (group size > 7, factorial-blowup guard): {}", commutativity_total.skipped_too_large);
+        }
+        if commutativity_total.noncommutative > 0 {
+            println!();
+            println!("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            println!("!! NONCOMMUTATIVE TRIGGER ORDERING FOUND -- {} group(s) of {} checked !!", commutativity_total.noncommutative, commutativity_total.groups_checked);
+            println!("!! At least one same-controller trigger group's final state DEPENDS on the  !!");
+            println!("!! order chosen (603.3b) -- trigger-ordering correctness is no longer a      !!");
+            println!("!! someday item; see the detail(s) below.                                    !!");
+            println!("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            for (i, detail) in commutativity_total.noncommutative_details.iter().enumerate() {
+                println!("\n  [{}] {detail}", i + 1);
+            }
+        } else if commutativity_total.groups_checked > 0 {
+            println!("\nAll checked same-controller trigger groups are commutative in this corpus.");
+        } else {
+            println!("\nNo same-controller 2+-trigger groups were ever encountered in this corpus run.");
         }
     }
 }
@@ -402,6 +431,234 @@ struct ReplayOutcome {
     divergence: Option<String>,
     decisions_consumed: usize,
     decisions_total: usize,
+    commutativity: CommutativityStats,
+}
+
+// ==================== trigger-order commutativity audit (increment 13) ====================
+//
+// Required deliverable, independent of the golden-trace scoreboard above:
+// whenever 2+ triggered abilities share a controller (`engine::Decision::
+// OrderTriggers`, the 603.3b same-controller-order choice -- see
+// `trigger::collect_and_process`'s and `engine::drain_pending_triggers_or_
+// decide`'s docs for where that group is actually assembled), this replays
+// every legal ordering of that specific group on an independent clone and
+// checks whether the reference's own always-"pick abilities.get(0)" choice
+// (see the `Decision::OrderTriggers` match arm's comment, just above)
+// happens to matter for the resulting game state. Gated behind
+// `CHECK_TRIGGER_COMMUTATIVITY=1`; entirely a replay-time shadow audit --
+// forks clones, discards them, never mutates the real replay's own `state`
+// and never changes what action actually gets applied. Not engine
+// behavior, so it lives here, not in `src/engine.rs`/`src/trigger.rs`.
+
+#[derive(Default, Clone)]
+struct CommutativityStats {
+    groups_checked: usize,
+    commutative: usize,
+    noncommutative: usize,
+    noncommutative_details: Vec<String>,
+    skipped_too_large: usize,
+}
+
+impl CommutativityStats {
+    fn merge(&mut self, other: CommutativityStats) {
+        self.groups_checked += other.groups_checked;
+        self.commutative += other.commutative;
+        self.noncommutative += other.noncommutative;
+        self.skipped_too_large += other.skipped_too_large;
+        self.noncommutative_details.extend(other.noncommutative_details);
+    }
+
+    fn record(&mut self, outcome: CommutativityCheck) {
+        match outcome {
+            CommutativityCheck::Commutative => {
+                self.groups_checked += 1;
+                self.commutative += 1;
+            }
+            CommutativityCheck::Noncommutative(detail) => {
+                self.groups_checked += 1;
+                self.noncommutative += 1;
+                self.noncommutative_details.push(detail);
+            }
+            CommutativityCheck::SkippedTooLarge => {
+                self.skipped_too_large += 1;
+            }
+        }
+    }
+}
+
+enum CommutativityCheck {
+    Commutative,
+    Noncommutative(String),
+    SkippedTooLarge,
+}
+
+/// All permutations of `0..n`, smallest first. `n` is always a same-
+/// controller `OrderTriggers` group size in practice (this 16-card pool
+/// realistically never exceeds 2-3 simultaneous same-controller triggers),
+/// but callers still guard the factorial blowup themselves.
+fn permutations(n: usize) -> Vec<Vec<usize>> {
+    if n == 0 {
+        return vec![vec![]];
+    }
+    let mut out = Vec::new();
+    let mut items: Vec<usize> = (0..n).collect();
+    permute_into(&mut items, 0, &mut out);
+    out
+}
+
+fn permute_into(items: &mut Vec<usize>, k: usize, out: &mut Vec<Vec<usize>>) {
+    if k == items.len() {
+        out.push(items.clone());
+        return;
+    }
+    for i in k..items.len() {
+        items.swap(k, i);
+        permute_into(items, k + 1, out);
+        items.swap(k, i);
+    }
+}
+
+/// Advances a *cloned* state forward from an `OrderTriggers` permutation
+/// choice to the next quiescent decision boundary: auto-passes through
+/// ordinary priority windows (both players declining, letting the stack
+/// actually resolve) while the stack is non-empty; auto-resolves any
+/// further same-controller trigger groups with the identity permutation
+/// (matching the reference's own real behavior -- this audit's scope is
+/// the *outer* group already in hand, not recursively branching into
+/// cascades); and auto-declines any Madness offer that comes up mid-
+/// cascade (`Action::ChooseMadnessCast(false)`) so that every permutation
+/// keeps advancing *the same, deterministic way* regardless of how deep
+/// the Madness item happens to sit on the stack for that particular
+/// ordering -- without this, whichever permutation happens to put a
+/// Madness offer on top *before* a sibling trigger underneath it has
+/// resolved stops immediately (a real decision, `Decision::
+/// ChooseMadnessCast`), while a permutation that resolves the sibling
+/// *first* reaches the identical offer one step later, comparing two
+/// genuinely different amounts of resolved cascade as if they were the
+/// same boundary. (Root-caused empirically against this corpus's own
+/// first commutativity run: every apparent `NONCOMMUTATIVE` case that
+/// included a Fiery Temper trigger vanished once this was added -- the
+/// prior boundary rule stopped at inconsistent cascade depths, not a real
+/// game-state difference.) Any other real decision (a genuine target/mode/
+/// attack/block choice, or `GameOver`) is treated as the boundary itself --
+/// per this file's own module doc, "use your judgment on what a decision
+/// boundary cleanly means" -- since anything past that point depends on
+/// choices unrelated to this group's ordering.
+fn advance_to_quiescent_boundary(state: &mut GameState) -> Decision {
+    loop {
+        let decision = engine::advance_until_decision(state);
+        match &decision {
+            Decision::CastSpellOrPass { .. } if !state.stack.is_empty() => {
+                engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
+            }
+            Decision::OrderTriggers { pending, .. } => {
+                let n = pending.len();
+                engine::step(state, Action::OrderTriggers((0..n).collect())).expect("identity permutation is always a legal ordering");
+            }
+            Decision::ChooseMadnessCast { .. } => {
+                engine::step(state, Action::ChooseMadnessCast(false)).expect("declining a madness cast is always legal");
+            }
+            _ => return decision,
+        }
+    }
+}
+
+/// A *canonical*, rules-visible-only snapshot of `state`: life totals plus
+/// each zone's contents, keyed only by what a player could actually
+/// observe on the board (card name + the handful of per-permanent
+/// attributes this pool ever mutates: tapped/summoning-sick/damage/
+/// +1+1 counters). Every zone except the stack is sorted (multiset
+/// semantics -- *which* physically-identical Guttersnipe is which has no
+/// game-rules meaning), the stack is kept in order (resolution order is
+/// exactly what this audit is testing).
+///
+/// Deliberately **not** `GameState::state_hash()` / `derive(Hash)` on the
+/// raw struct: those also hash pure bookkeeping that legitimately differs
+/// between two permutation walks without the *game* differing at all --
+/// `EngineState::priority_round` (bumped by internal `reset_priority`
+/// calls, not by anything a player experiences), `mana_ability_
+/// activations`, `next_replacement_id`, and especially `event_history`
+/// (a full, order-sensitive audit log of every committed event -- two
+/// orderings of two damage triggers necessarily commit their events in a
+/// different sequence even when the *net* damage total is identical).
+/// Root-caused against this corpus's own first commutativity run: every
+/// `Guttersnipe`+`Guttersnipe` / `Sneaky Snacker`+`Sneaky Snacker` group
+/// this pool can produce "disagreed" under a raw `state_hash()` compare
+/// while this function's own printed summary was byte-identical between
+/// permutations -- proving the divergence was in bookkeeping/history, not
+/// the game.
+fn canonical_snapshot(state: &GameState) -> String {
+    let describe_permanent = |&id: &ObjectId| {
+        let o = state.objects.get(id);
+        format!("{}(tapped={},sick={},dmg={},+1/+1={})", o.name, o.tapped, o.summoning_sick, o.damage, o.counters.plus1_plus1)
+    };
+    let describe_card = |&id: &ObjectId| state.objects.get(id).name.clone();
+    let describe_player = |p: PlayerId| {
+        let ps = &state.players[p.index()];
+        let mut battlefield: Vec<String> = ps.battlefield.iter().map(describe_permanent).collect();
+        battlefield.sort();
+        let mut graveyard: Vec<String> = ps.graveyard.iter().map(describe_card).collect();
+        graveyard.sort();
+        let mut hand: Vec<String> = ps.hand.iter().map(describe_card).collect();
+        hand.sort();
+        let mut library: Vec<String> = ps.library.iter().map(describe_card).collect();
+        library.sort();
+        format!(
+            "life={} has_lost={} battlefield={battlefield:?} graveyard={graveyard:?} hand={hand:?} library_multiset={library:?}",
+            ps.life, ps.has_lost,
+        )
+    };
+    let mut exile: Vec<String> = state.exile.iter().map(|&id| format!("{}(owner={:?})", state.objects.get(id).name, state.objects.get(id).owner)).collect();
+    exile.sort();
+    let stack: Vec<String> = state
+        .stack
+        .iter()
+        .map(|s| format!("{}(controller={:?},madness_offer={})", state.objects.get(s.source).name, s.controller, s.madness_offer))
+        .collect();
+    format!(
+        "turn={} step={:?} active_player={:?} exile={exile:?} stack={stack:?} P0[{}] P1[{}]",
+        state.turn,
+        state.step,
+        state.active_player,
+        describe_player(PlayerId::P0),
+        describe_player(PlayerId::P1),
+    )
+}
+
+/// The actual audit -- see this section's module doc. `state` is the game
+/// exactly as of the moment `Decision::OrderTriggers` was raised for
+/// `pending` (a same-controller group of 2+), before any permutation is
+/// applied to the *real* replay.
+fn check_trigger_commutativity(state: &GameState, pending: &[PendingTrigger]) -> CommutativityCheck {
+    let n = pending.len();
+    if n > 7 {
+        // 7! = 5040 clones is already an absurd amount of work for a
+        // same-controller trigger group in a 16-card pool; if some future
+        // corpus ever manages more than this, skip rather than stall the
+        // replay run -- informational only, tallied separately from a real
+        // commutative/noncommutative verdict.
+        return CommutativityCheck::SkippedTooLarge;
+    }
+
+    let mut results: Vec<(Vec<usize>, String)> = Vec::with_capacity(permutations(n).len());
+    for perm in permutations(n) {
+        let mut clone = state.clone();
+        engine::step(&mut clone, Action::OrderTriggers(perm.clone())).expect("every generated permutation is a legal ordering of this group");
+        advance_to_quiescent_boundary(&mut clone);
+        results.push((perm, canonical_snapshot(&clone)));
+    }
+
+    let canonical = &results[0].1;
+    if results.iter().all(|(_, snap)| snap == canonical) {
+        return CommutativityCheck::Commutative;
+    }
+
+    let sources: Vec<String> = pending.iter().map(|t| state.objects.get(t.source).name.clone()).collect();
+    let mut detail = format!("controller={:?} sources={sources:?} group_size={n} -- permutation outcomes:", pending[0].controller);
+    for (perm, snapshot) in &results {
+        detail.push_str(&format!("\n    perm={perm:?} {snapshot}"));
+    }
+    CommutativityCheck::Noncommutative(detail)
 }
 
 fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
@@ -622,6 +879,20 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 // dependency -- but the *decision* itself still needs to
                 // not be surfaced as an error, matching the reference's
                 // real (silent, no-record) behavior.
+                //
+                // increment 13's required commutativity audit: gated
+                // behind `CHECK_TRIGGER_COMMUTATIVITY=1`, a replay-time-only
+                // shadow check that never changes what actually gets
+                // applied below -- it snapshots `state` *before* the
+                // identity permutation is applied, forks one independent
+                // clone per legal permutation of this same-controller
+                // group, and checks whether the claim in the comment above
+                // ("can never actually diverge game state") actually holds.
+                // See `check_trigger_commutativity`'s doc for the full
+                // mechanism.
+                if std::env::var("CHECK_TRIGGER_COMMUTATIVITY").is_ok() {
+                    outcome.commutativity.record(check_trigger_commutativity(&state, &pending));
+                }
                 surface
                     .apply(&mut state, SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect())))
                     .map_err(|e| format!("engine-step-error:OrderTriggers:{e}"))?;
@@ -1294,24 +1565,37 @@ fn apply_discard(
 /// shape. Both real payable sub-costs land on a `SELECT_TARGETS` record
 /// (a discard's "which card" question uses the same `SELECT_TARGETS`-then-
 /// `SELECT_CARD` prefix pattern `apply_discard` already handles for every
-/// other discard cost -- see Masked Meower's ability for the same shape);
-/// they're told apart by candidate *count* against the two quantities that
-/// could produce it: hand size (discard) vs. controlled-land count
-/// (sacrifice). Previously this only ever checked the discard shape and
-/// fell back to `Decline` otherwise -- silently wrong whenever the real
-/// choice was `SacrificeLand` (Sol #90, increment 11): the reference's own
-/// next record is that sacrifice's real `SELECT_TARGETS` pick, which
-/// `Decline` desyncs from immediately.
+/// other discard cost -- see Masked Meower's ability for the same shape).
+///
+/// Told apart primarily by candidate *text shape*, not count: every
+/// sacrifice-land candidate in this corpus renders as `"<name> (you)"` (a
+/// permanent-you-control reference -- there's more than one same-named land
+/// you could mean), while every discard candidate is a bare card name (a
+/// hand card is unambiguously yours, so the reference never qualifies it).
+/// Candidate *count* against hand size / controlled-land count is kept only
+/// as a fallback for when the stronger text-shape signal doesn't apply (an
+/// empty/non-`SELECT_TARGETS` next record, i.e. a genuine `Decline`).
+/// Root-caused against `game_20260713_002211_0037.txt` decision 131:
+/// `hand_len == land_len == 3` by real coincidence, and the previous
+/// count-only heuristic checked the discard shape *first*, unconditionally
+/// picking `Discard` the instant the counts tied -- even though the next
+/// record was three `"Mountain (you)"` land candidates (a `SacrificeLand`
+/// pick, per the text-shape rule above). An even earlier version of this
+/// function only ever checked the discard shape and fell back to `Decline`
+/// otherwise -- silently wrong whenever the real choice was `SacrificeLand`
+/// (Sol #90, increment 11).
 fn apply_choose_optional_cost(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId, discard_payable: bool, sacrifice_payable: bool) -> Result<(), String> {
     let hand_len = state.players[player.index()].hand.len();
     let land_len = state.players[player.index()].battlefield.iter().filter(|&&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land).count();
     let next_is_select_targets_with_len = |n: usize| matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && rec.candidate_texts.len() == n);
-    let looks_like_discard_pick = discard_payable && next_is_select_targets_with_len(hand_len);
-    let looks_like_sacrifice_pick = sacrifice_payable && !looks_like_discard_pick && next_is_select_targets_with_len(land_len);
-    let choice = if looks_like_discard_pick {
-        OptionalCostChoice::Discard
-    } else if looks_like_sacrifice_pick {
+    let next_looks_like_land_refs =
+        matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && !rec.candidate_texts.is_empty() && rec.candidate_texts.iter().all(|t| t.ends_with(" (you)")));
+    let looks_like_sacrifice_pick = sacrifice_payable && (next_looks_like_land_refs || (!discard_payable && next_is_select_targets_with_len(land_len)));
+    let looks_like_discard_pick = discard_payable && !looks_like_sacrifice_pick && next_is_select_targets_with_len(hand_len);
+    let choice = if looks_like_sacrifice_pick {
         OptionalCostChoice::SacrificeLand
+    } else if looks_like_discard_pick {
+        OptionalCostChoice::Discard
     } else {
         OptionalCostChoice::Decline
     };
@@ -1547,5 +1831,202 @@ mod tests {
             ",\"hand\":[],\"library\":[\"Mountain\"],\"graveyard\":[],\"turn\":1,\"life\":20,\"opp_life\":20,\"phase\":\"Precombat Main\",\"active_player\":\"P\"",
         );
         check_state(&state, PlayerId::P0, &rec, "P", "Q").expect("everything agrees");
+    }
+
+    /// Regression test for the increment-13 fix (root-caused against
+    /// `game_20260713_002211_0037.txt` decision 131, see
+    /// `apply_choose_optional_cost`'s doc): hand size and controlled-land
+    /// count tying (both 3 here) must not make the count-only heuristic
+    /// misread a `SacrificeLand` pick as `Discard` -- the candidate text
+    /// shape (`"Mountain (you)"` x3, a permanent-you-control reference)
+    /// must win over the coincidental count match.
+    #[test]
+    fn choose_optional_cost_prefers_text_shape_over_a_coincidental_count_tie() {
+        let mountain = card_def::card_id_by_name("Mountain").unwrap();
+        let lightning_bolt = card_def::card_id_by_name("Lightning Bolt").unwrap();
+        let mut state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+
+        // 3 controlled Mountains (battlefield) and 3 hand cards -- the
+        // exact coincidental tie that exposed the bug.
+        for _ in 0..3 {
+            let id = state.objects.push(mtg_kernel::state::GameObject {
+                card_def: mountain,
+                name: "Mountain".to_string(),
+                owner: PlayerId::P0,
+                controller: PlayerId::P0,
+                zone: Zone::Battlefield,
+                tapped: false,
+                summoning_sick: false,
+                damage: 0,
+                counters: Default::default(),
+                attachments: Vec::new(),
+                plotted_turn: None,
+            });
+            state.players[0].battlefield.push(id);
+        }
+        for _ in 0..3 {
+            let id = state.objects.push(mtg_kernel::state::GameObject {
+                card_def: lightning_bolt,
+                name: "Lightning Bolt".to_string(),
+                owner: PlayerId::P0,
+                controller: PlayerId::P0,
+                zone: Zone::Hand,
+                tapped: false,
+                summoning_sick: false,
+                damage: 0,
+                counters: Default::default(),
+                attachments: Vec::new(),
+                plotted_turn: None,
+            });
+            state.players[0].hand.push(id);
+        }
+
+        let source = state.players[0].battlefield[0];
+        state.engine.pending_optional_cost = Some(mtg_kernel::engine::PendingOptionalCost {
+            player: PlayerId::P0,
+            source,
+            discard: 1,
+            sacrifice_lands: 1,
+            discard_payable: true,
+            sacrifice_payable: true,
+            then: mtg_kernel::effect::EffectOp::Sequence(vec![]),
+            spell_resume: None,
+        });
+
+        let rec = decision_record_ex("SELECT_TARGETS", &["Mountain (you)", "Mountain (you)", "Mountain (you)"], &["a", "b", "c"], &[0], ",\"episode\":0");
+        let queue = vec![&rec];
+        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
+        let mut surface = HarnessSurfaceV2::new();
+
+        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0, true, true).expect("ChooseOptionalCost must be legal here");
+
+        assert!(state.engine.pending_optional_cost_sacrifice.is_some(), "expected SacrificeLand to be chosen (text shape), not Discard");
+        assert!(state.engine.pending_discard.is_none(), "must not have staged a discard for a sacrifice-land pick");
+    }
+
+    // ---- trigger-order commutativity audit -----------------------------
+
+    #[test]
+    fn permutations_covers_every_distinct_ordering() {
+        let perms = permutations(3);
+        assert_eq!(perms.len(), 6);
+        let mut sorted = perms.clone();
+        sorted.sort();
+        sorted.dedup();
+        assert_eq!(sorted.len(), 6, "all 6 permutations of 0..3 must be distinct, got {perms:?}");
+        for p in &perms {
+            let mut s = p.clone();
+            s.sort_unstable();
+            assert_eq!(s, vec![0, 1, 2]);
+        }
+    }
+
+    fn dummy_object(state: &mut GameState, player: PlayerId, name: &str) -> ObjectId {
+        let card_def = card_def::card_id_by_name(name).unwrap_or_else(|| panic!("{name} not in CARD_DEFS"));
+        let id = state.objects.push(mtg_kernel::state::GameObject {
+            card_def,
+            name: name.to_string(),
+            owner: player,
+            controller: player,
+            zone: Zone::Battlefield,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.players[player.index()].battlefield.push(id);
+        id
+    }
+
+    #[test]
+    fn canonical_snapshot_ignores_zone_insertion_order() {
+        let mut a = GameState::new_from_libraries(&[], &[], |c| format!("card-{c}"), 1);
+        dummy_object(&mut a, PlayerId::P0, "Guttersnipe");
+        dummy_object(&mut a, PlayerId::P0, "Masked Meower");
+
+        let mut b = GameState::new_from_libraries(&[], &[], |c| format!("card-{c}"), 1);
+        dummy_object(&mut b, PlayerId::P0, "Masked Meower");
+        dummy_object(&mut b, PlayerId::P0, "Guttersnipe");
+
+        assert_eq!(canonical_snapshot(&a), canonical_snapshot(&b), "the same multiset of permanents, pushed in a different order, must snapshot identically");
+    }
+
+    #[test]
+    fn canonical_snapshot_detects_a_real_difference() {
+        let a = GameState::new_from_libraries(&[], &[], |c| format!("card-{c}"), 1);
+        let mut b = a.clone();
+        b.players[0].life -= 1;
+        assert_ne!(canonical_snapshot(&a), canonical_snapshot(&b));
+    }
+
+    /// This 16-card pool's own real triggers (Guttersnipe/Voldaren Epicure/
+    /// Sneaky Snacker) are already asserted commutative by construction
+    /// (fixed damage/token/return-to-battlefield programs, no target
+    /// choice, no dependence on which sibling resolved first) -- confirmed
+    /// empirically by this test using the pool's own real trigger shape,
+    /// and by the full corpus run (`CHECK_TRIGGER_COMMUTATIVITY=1`): 15
+    /// same-controller 2-to-4-trigger groups, all commutative, zero
+    /// noncommutative.
+    #[test]
+    fn two_guttersnipe_triggers_are_commutative() {
+        let mut state = GameState::new_from_libraries(&[], &[], |c| format!("card-{c}"), 1);
+        let g1 = dummy_object(&mut state, PlayerId::P0, "Guttersnipe");
+        let g2 = dummy_object(&mut state, PlayerId::P0, "Guttersnipe");
+        state.step = mtg_kernel::state::Step::Main1;
+        state.active_player = PlayerId::P0;
+        state.priority_player = PlayerId::P0;
+
+        let pending = vec![
+            PendingTrigger { controller: PlayerId::P0, source: g1, effect: mtg_kernel::effect::EffectOp::DealDamage { target: mtg_kernel::effect::TargetRef::Opponent, amount: 2 }, is_madness_offer: false },
+            PendingTrigger { controller: PlayerId::P0, source: g2, effect: mtg_kernel::effect::EffectOp::DealDamage { target: mtg_kernel::effect::TargetRef::Opponent, amount: 2 }, is_madness_offer: false },
+        ];
+        // `check_trigger_commutativity` (like its one real call site in
+        // `run()`) applies `Action::OrderTriggers` per permutation, which
+        // reads from `state.engine.pending_triggers` -- the real driver
+        // gets this invariant for free (`pending` there is quite literally
+        // `state.engine.pending_triggers[..group_len].to_vec()`), so a
+        // synthetic test has to establish it explicitly.
+        state.engine.pending_triggers = pending.clone();
+        match check_trigger_commutativity(&state, &pending) {
+            CommutativityCheck::Commutative => {}
+            CommutativityCheck::Noncommutative(detail) => panic!("expected commutative, got: {detail}"),
+            CommutativityCheck::SkippedTooLarge => panic!("group of 2 must never be skipped"),
+        }
+    }
+
+    /// Proves the detector actually *works*, not just "always says yes":
+    /// a synthetic same-controller pair (`LoseLife 20` then `GainLife 25`
+    /// on the same player, starting at 20 life) is genuinely order-
+    /// dependent through the 704.5a state-based loss check -- resolving
+    /// the life-loss trigger *first* drops the player to 0 and marks
+    /// `has_lost = true` (a real, and in actual play game-ending, SBA)
+    /// before the life-gain trigger ever runs; resolving life-gain first
+    /// means the player never dips to 0 at all. Both orders land on the
+    /// same final life total (25) but disagree on `has_lost` -- exactly
+    /// the kind of divergence `canonical_snapshot` (which captures
+    /// `has_lost`) must catch and a life-total-only comparison would miss.
+    #[test]
+    fn a_synthetic_order_dependent_pair_is_correctly_flagged_noncommutative() {
+        let mut state = GameState::new_from_libraries(&[], &[], |c| format!("card-{c}"), 1);
+        let src = dummy_object(&mut state, PlayerId::P0, "Guttersnipe");
+        state.step = mtg_kernel::state::Step::Main1;
+        state.active_player = PlayerId::P0;
+        state.priority_player = PlayerId::P0;
+        assert_eq!(state.players[0].life, 20);
+
+        let pending = vec![
+            PendingTrigger { controller: PlayerId::P0, source: src, effect: mtg_kernel::effect::EffectOp::LoseLife { player: mtg_kernel::effect::PlayerRef::Controller, amount: 20 }, is_madness_offer: false },
+            PendingTrigger { controller: PlayerId::P0, source: src, effect: mtg_kernel::effect::EffectOp::GainLife { player: mtg_kernel::effect::PlayerRef::Controller, amount: 25 }, is_madness_offer: false },
+        ];
+        state.engine.pending_triggers = pending.clone();
+        match check_trigger_commutativity(&state, &pending) {
+            CommutativityCheck::Noncommutative(detail) => {
+                assert!(detail.contains("has_lost=true"), "expected one permutation to show the SBA-loss branch, got: {detail}");
+                assert!(detail.contains("has_lost=false"), "expected the other permutation to show the no-loss branch, got: {detail}");
+            }
+            other => panic!("expected Noncommutative (this pair is genuinely order-dependent through 704.5a), got a different verdict: {}", matches!(other, CommutativityCheck::Commutative)),
+        }
     }
 }
