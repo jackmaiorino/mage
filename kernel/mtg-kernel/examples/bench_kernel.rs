@@ -198,7 +198,8 @@ fn random_action_for_decision(decision: &Decision, rng: &mut SplitMix64) -> Acti
                     continue;
                 }
                 let avail: Vec<ObjectId> = blockers.iter().copied().filter(|b| !used.contains(b)).collect();
-                if let Some(&b) = avail.get(rng_below(rng, avail.len().max(1))).filter(|_| !avail.is_empty()) {
+                if !avail.is_empty() {
+                    let b = avail[rng_below(rng, avail.len())];
                     used.insert(b);
                     pairs.push((b, *attacker));
                 }
