@@ -22,6 +22,7 @@ pub mod mana;
 pub mod snapshot;
 pub mod state;
 pub mod surface;
+pub mod surface_v2;
 pub mod trace;
 pub mod trigger;
 

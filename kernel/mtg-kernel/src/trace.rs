@@ -62,6 +62,29 @@ pub struct DecisionRecord {
     pub turn: u32,
     #[serde(default)]
     pub phase: String,
+    /// The acting (`player`) seat's own life total at the moment of this
+    /// decision. Added for `HarnessSurfaceV2`'s strengthened state gate
+    /// (`examples/replay_burn_v2.rs`'s `check_state`) -- H1's `check_state`
+    /// (`examples/replay_burn.rs`) never read this field. `#[serde(default)]`
+    /// so older/H1-era fixtures without it still parse.
+    #[serde(default)]
+    pub life: i32,
+    /// The non-acting player's life total at the moment of this decision --
+    /// see `life`'s doc. Together `(life, opp_life)` are always a reciprocal
+    /// pair against the *other* seat's own record at the same instant
+    /// (confirmed empirically against the v4 corpus).
+    #[serde(default)]
+    pub opp_life: i32,
+    /// Display name of the spell/ability this decision is being asked on
+    /// behalf of (e.g. `"Faithless Looting"`), when the reference logs one --
+    /// empty for decision kinds that don't have a single source (`MULLIGAN`,
+    /// bare `ACTIVATE_ABILITY_OR_SPELL` priority windows). Used by the H2
+    /// corpus invariant validator (`examples/replay_burn_v2.rs`) to group a
+    /// multi-slot target sequence (e.g. Faithless Looting's 2-card discard
+    /// cost, logged as 2 `SELECT_TARGETS` records) into one semantic
+    /// target-choice episode.
+    #[serde(default)]
+    pub source_name: String,
     #[serde(default)]
     pub random_util_count: u64,
     /// The training episode this decision was actually applied under.
