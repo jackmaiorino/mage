@@ -66,6 +66,9 @@ fn kind_of(d: &Decision) -> Kind {
         Decision::ChooseSpellMode { .. } | Decision::ChooseOptionalCost { .. } | Decision::ChooseMadnessCast { .. } => {
             unreachable!("no card in this script is Plotted, Madness, or modal")
         }
+        // Neither Fireblast nor Lava Dart is in this script's card pool, so
+        // no cast ever needs a sacrifice-cost-target pick.
+        Decision::ChooseCostTargets { .. } => unreachable!("no card in this script has a SacrificeLands cost"),
     }
 }
 
@@ -143,6 +146,9 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
             }
             Decision::ChooseCastMode { .. } => {
                 unreachable!("no card in this script has an alt_cost (Fireblast isn't in either library)")
+            }
+            Decision::ChooseCostTargets { .. } => {
+                unreachable!("no card in this script has a SacrificeLands cost (Fireblast/Lava Dart aren't in either library)")
             }
             Decision::Discard { player, count, choices } => {
                 // Defensive, not scripted: discard the lowest-id `count`

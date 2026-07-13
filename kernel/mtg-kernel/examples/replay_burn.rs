@@ -576,6 +576,18 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
             // rather than a guess or a crash.
             SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => return Err("unhandled-decision:ChooseCastMode".to_string()),
             SurfaceDecision::Decision(Decision::OrderTriggers { .. }) => return Err("unhandled-decision:OrderTriggers".to_string()),
+            // `engine::Decision::ChooseCostTargets` is new as of increment
+            // 11 (H2/v4 work, Sol #90 -- see that variant's doc), added to
+            // the shared `engine.rs` so the sacrifice-cost-target picks
+            // Fireblast/Lava Dart require are real, player-visible
+            // decisions instead of a silent auto-solve. H1/v3 is frozen and
+            // this driver is not being extended to handle it (no v3-side
+            // characterization of this window was done this increment) --
+            // this arm exists only so the match stays exhaustive against
+            // `engine::Decision`'s new shape; same clean-named-divergence
+            // treatment as `ChooseCastMode`/`OrderTriggers` above, not a
+            // change to H1's comparison logic.
+            SurfaceDecision::Decision(Decision::ChooseCostTargets { .. }) => return Err("unhandled-decision:ChooseCostTargets".to_string()),
             // Pyroblast/Red Elemental Blast are both sideboard-only for
             // this pool's maindeck -- unobserved in this corpus (same
             // reasoning as ChooseCastMode/OrderTriggers above).
@@ -611,6 +623,7 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         SurfaceDecision::DeclareBlockersForAttacker { .. } => Some(state.active_player.opponent()),
         SurfaceDecision::Decision(Decision::GameOver { .. })
         | SurfaceDecision::Decision(Decision::ChooseCastMode { .. })
+        | SurfaceDecision::Decision(Decision::ChooseCostTargets { .. })
         | SurfaceDecision::Decision(Decision::OrderTriggers { .. }) => None,
     }
 }

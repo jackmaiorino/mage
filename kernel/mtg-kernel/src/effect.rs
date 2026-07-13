@@ -288,6 +288,10 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
                 discard_payable,
                 sacrifice_payable,
                 then: (**then).clone(),
+                // `resolve_top_of_stack` fills this in right after this
+                // call returns, if it's resolving this same spell -- see
+                // `PendingOptionalCost::spell_resume`'s doc.
+                spell_resume: None,
             });
         }
     }

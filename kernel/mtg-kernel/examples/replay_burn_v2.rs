@@ -529,6 +529,24 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
             }
+            SurfaceDecision::Decision(Decision::ChooseCostTargets { player, candidates, .. }) => {
+                // Same shape as ChooseTargets above (a real, logged
+                // SELECT_TARGETS record, one per pick) -- see
+                // `mtg_kernel::engine::Decision::ChooseCostTargets`'s doc:
+                // the reference's sacrifice-cost-target picks (Fireblast's
+                // alt cost, Lava Dart's flashback cost) are real decisions,
+                // not silently auto-solved.
+                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseCostTargets".to_string())?;
+                debug_verbose(t, &state, player, rec, "ChooseCostTargets");
+                if rec.action_type != "SELECT_TARGETS" {
+                    return Err(format!("decision-kind-mismatch:ChooseCostTargets-vs-{}", rec.action_type));
+                }
+                check_state(&state, player, rec, &p0_name, &p1_name)?;
+                learn_token_ids(&mut ctx, &state, rec);
+                apply_choose_cost_targets(surface, &mut state, rec, &candidates, &ctx.id_map)?;
+                ctx.advance(player);
+                outcome.decisions_consumed += 1;
+            }
             SurfaceDecision::Decision(Decision::DeclareAttackers { player, eligible }) => {
                 let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:DeclareAttackers".to_string())?;
                 debug_verbose(t, &state, player, rec, "DeclareAttackers");
@@ -552,9 +570,40 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 apply_choose_optional_cost(surface, &mut state, &mut ctx, player, discard_payable, sacrifice_payable)?;
             }
             SurfaceDecision::Decision(Decision::ChooseMadnessCast { .. }) => {
-                let mid_cost_payment = state.engine.pending_cast.is_some() || state.engine.pending_activation.is_some();
+                // Always attempt the cast -- unlike the H1/v3 driver's
+                // `mid_cost_payment` guard (`examples/replay_burn.rs`,
+                // frozen, not touched here), which declines whenever
+                // another cast/activation is still pending, purely to
+                // dodge a real *panic* an older engine version had if a
+                // madness cast stole mana an in-flight cost still needed.
+                // That panic is gone: `engine::Decision::ChooseCostTargets`'s
+                // sibling fix this increment (Sol #90) makes an
+                // unaffordable madness attempt fail *gracefully* --
+                // `abort_cast` reverts the card to the graveyard instead of
+                // erroring (see `engine::drain_pending_madness_or_decide`'s
+                // doc) -- so there's nothing left to protect against here.
+                // `pending_activation.is_some()` was also never a reliable
+                // signal in the first place for *this* purpose: a card's
+                // whole non-mana cost (discard, sacrifice) is paid
+                // synchronously at activation time, well before its
+                // triggered Madness offer can even fire, so "an activation
+                // is still pending" here means only "not yet finalized to
+                // the stack," never "still needs mana" -- see the
+                // `Masked Meower` case root-caused in
+                // `game_20260713_002156_0014.txt` (decision 45): its own
+                // activation is genuinely still `pending_activation`
+                // (cost already fully paid, StackItem not yet pushed) at
+                // the exact moment the Madness decision for the card it
+                // just discarded fires, which made the old guard decline
+                // every single one of these -- a real, false divergence,
+                // not a real protection. `ChooseMadnessCast` itself
+                // consumes no trace record either way (H1's own doc), so
+                // there's no ground truth to check this default against;
+                // "always attempt" matches every golden-trace case audited
+                // this increment (the RL policy's own `CHOOSE_USE` score
+                // was `>0.5` -- i.e. "Yes" -- in each one).
                 surface
-                    .apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(!mid_cost_payment)))
+                    .apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(true)))
                     .map_err(|e| format!("engine-step-error:ChooseMadnessCast:{e}"))?;
             }
             SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => return Err("unhandled-decision:ChooseCastMode".to_string()),
@@ -571,6 +620,7 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
     match d {
         SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseTargets { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseCostTargets { player, .. })
         | SurfaceDecision::Decision(Decision::DeclareAttackers { player, .. })
         | SurfaceDecision::Decision(Decision::DeclareBlockers { player, .. })
         | SurfaceDecision::Decision(Decision::Discard { player, .. })
@@ -652,10 +702,30 @@ fn build_id_map(opening0: &trace::OpeningHand, opening1: &trace::OpeningHand, p0
     id_map
 }
 
+/// Learns a fresh (token) object's uuid the first time it's seen in any
+/// candidate/chosen list, binding it to the lowest-`ObjectId` currently-
+/// unbound post-pregame object -- see this function's original doc for the
+/// mechanism.
+///
+/// Root-caused (Sol #90, increment 11) against
+/// `game_20260713_002147_0002.txt` decision 159: a player's own seat uuid
+/// (`ctx.seat_uuid`, e.g. the uuid `SELECT_TARGETS` candidate lists use for
+/// "PlayerRL1"/"SelfPlay" themselves as `AnyTarget` picks) is *also* a uuid
+/// this function had never seen before the first time it appeared -- and
+/// this function used to have no way to tell "a player identity" apart
+/// from "an object", so it happily "learned" the seat uuid too, binding it
+/// to whatever Blood Token object was next in line. That silently
+/// stole one token's object slot for a player uuid that was never a token
+/// at all, permanently starving the *real* next token of anywhere to
+/// bind -- `untranslatable-object-id` many decisions later, far from this
+/// root cause. `ctx.seat_uuid` (populated once, up front, by
+/// `find_player_uuids`) is the authoritative "is this uuid actually a
+/// player, not an object" check; skip here, same as the sentinel `DONE`
+/// and empty-string cases already were.
 fn learn_token_ids(ctx: &mut ReplayCtx, state: &GameState, rec: &DecisionRecord) {
     for raw in rec.candidate_object_ids.iter().chain(rec.chosen_object_ids.iter()) {
         for uuid in raw.split("->") {
-            if uuid.is_empty() || uuid == DONE || ctx.id_map.contains_key(uuid) {
+            if uuid.is_empty() || uuid == DONE || ctx.id_map.contains_key(uuid) || ctx.seat_uuid.iter().any(|s| s.as_deref() == Some(uuid)) {
                 continue;
             }
             let bound: std::collections::HashSet<ObjectId> = ctx.id_map.values().copied().collect();
@@ -740,6 +810,12 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_nam
         return Err("zone-size-mismatch:library".to_string());
     }
     if ps.graveyard.len() != rec.graveyard.len() {
+        if std::env::var("REPLAY_DEBUG").is_ok() {
+            eprintln!(
+                "GRAVEYARD MISMATCH decision_number={} player={} action={} kernel_gy={:?} trace_gy={:?}",
+                rec.decision_number, rec.player, rec.action_type, ps.graveyard.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(), rec.graveyard,
+            );
+        }
         return Err("zone-size-mismatch:graveyard".to_string());
     }
 
@@ -990,6 +1066,37 @@ fn target_key(t: &Target) -> String {
     }
 }
 
+/// Answers a `Decision::ChooseCostTargets` window (Fireblast's alt cost,
+/// Lava Dart's flashback cost -- see that decision's doc). Same
+/// candidate-multiset-then-chosen-index shape as `apply_choose_targets`,
+/// simplified: every candidate is always a permanent (`ObjectId`), never a
+/// player, so there's no `Target`/`seat_uuid` translation to do.
+fn apply_choose_cost_targets(surface: &mut HarnessSurfaceV2, state: &mut GameState, rec: &DecisionRecord, candidates: &[ObjectId], id_map: &HashMap<String, ObjectId>) -> Result<(), String> {
+    let mut kernel_keys: Vec<String> = candidates.iter().map(|id| format!("O{}", id.0)).collect();
+    kernel_keys.sort();
+
+    let trace_ids = translate_object_candidates(rec, id_map, "ChooseCostTargets")?;
+    let mut trace_keys: Vec<String> = Vec::with_capacity(trace_ids.len());
+    for id in &trace_ids {
+        let oid = id.ok_or("choose-cost-targets-candidate-is-pass")?;
+        trace_keys.push(format!("O{}", oid.0));
+    }
+    let mut sorted_trace_keys = trace_keys.clone();
+    sorted_trace_keys.sort();
+
+    if kernel_keys != sorted_trace_keys {
+        return Err("candidate-multiset-mismatch:ChooseCostTargets".to_string());
+    }
+
+    if rec.chosen_indices.len() != 1 {
+        return Err("unexpected-chosen-count:ChooseCostTargets".to_string());
+    }
+    let idx = rec.chosen_indices[0] as usize;
+    let chosen = trace_ids.get(idx).copied().flatten().ok_or("chosen-index-out-of-range:ChooseCostTargets")?;
+
+    surface.apply(state, SurfaceAction::Action(Action::ChooseCostTarget(chosen))).map_err(|e| format!("engine-step-error:ChooseCostTargets:{e}"))
+}
+
 fn apply_declare_attackers(surface: &mut HarnessSurfaceV2, state: &mut GameState, rec: &DecisionRecord, eligible: &[ObjectId], id_map: &HashMap<String, ObjectId>) -> Result<(), String> {
     let mut kernel_keys: Vec<String> = eligible.iter().map(|id| format!("O{}", id.0)).collect();
     kernel_keys.push("DONE".to_string());
@@ -1110,6 +1217,7 @@ fn apply_discard(
         return Err("unexpected-chosen-count:Discard".to_string());
     }
     check_state(state, player, rec, p0_name, p1_name)?;
+    learn_token_ids(ctx, state, rec);
 
     let chosen_names: Vec<String> = rec.chosen_indices.iter().map(|&idx| rec.candidate_texts.get(idx as usize).cloned().ok_or_else(|| "chosen-index-out-of-range:Discard".to_string())).collect::<Result<_, _>>()?;
     if !names_from_targets_prefix.is_empty() && names_from_targets_prefix != chosen_names {
@@ -1124,11 +1232,25 @@ fn apply_discard(
         return Err("candidate-multiset-mismatch:Discard".to_string());
     }
 
-    let mut pool: Vec<ObjectId> = choices.to_vec();
-    let mut chosen: Vec<ObjectId> = Vec::with_capacity(chosen_names.len());
-    for name in &chosen_names {
-        let pos = pool.iter().position(|&id| state.objects.get(id).name == *name).ok_or_else(|| format!("chosen-name-not-in-pool:Discard:{name}"))?;
-        chosen.push(pool.remove(pos));
+    // Identity: translate the trace's own `chosen_object_ids` via `id_map`
+    // -- same as every other decision kind (target-port hazard checklist:
+    // "selected tuple mapped directly from candidate_object_ids/chosen
+    // indices, never recovered from text"). A name-only pool search (the
+    // prior version of this function) can silently pick the wrong
+    // interchangeable-by-name copy -- e.g. the wrong specific Mountain --
+    // whenever more than one candidate shares a name, desyncing *which*
+    // object survives in hand without tripping the (name-only, still-true)
+    // multiset check above. Root-caused against
+    // `game_20260713_002147_0002.txt`: `chosen_object_ids` is fully
+    // populated on `SELECT_CARD` records (confirmed empirically), so
+    // there's no need to guess by name at all.
+    let chosen: Vec<ObjectId> = rec
+        .chosen_object_ids
+        .iter()
+        .map(|uuid| ctx.id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:Discard:{uuid}")))
+        .collect::<Result<_, _>>()?;
+    if chosen.len() != count as usize || !chosen.iter().all(|id| choices.contains(id)) {
+        return Err("chosen-not-in-kernel-candidates:Discard".to_string());
     }
 
     ctx.advance(player);
@@ -1136,10 +1258,34 @@ fn apply_discard(
     surface.apply(state, SurfaceAction::Action(Action::Discard(chosen))).map_err(|e| format!("engine-step-error:Discard:{e}"))
 }
 
-fn apply_choose_optional_cost(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId, discard_payable: bool, _sacrifice_payable: bool) -> Result<(), String> {
+/// Guesses which `OptionalCostChoice` the reference's own policy made --
+/// `Decision::ChooseOptionalCost` itself consumes no trace record (same
+/// "no ground truth for the offer itself, only for what follows" shape as
+/// `ChooseMadnessCast`), so this can only look ahead at the *next* record's
+/// shape. Both real payable sub-costs land on a `SELECT_TARGETS` record
+/// (a discard's "which card" question uses the same `SELECT_TARGETS`-then-
+/// `SELECT_CARD` prefix pattern `apply_discard` already handles for every
+/// other discard cost -- see Masked Meower's ability for the same shape);
+/// they're told apart by candidate *count* against the two quantities that
+/// could produce it: hand size (discard) vs. controlled-land count
+/// (sacrifice). Previously this only ever checked the discard shape and
+/// fell back to `Decline` otherwise -- silently wrong whenever the real
+/// choice was `SacrificeLand` (Sol #90, increment 11): the reference's own
+/// next record is that sacrifice's real `SELECT_TARGETS` pick, which
+/// `Decline` desyncs from immediately.
+fn apply_choose_optional_cost(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId, discard_payable: bool, sacrifice_payable: bool) -> Result<(), String> {
     let hand_len = state.players[player.index()].hand.len();
-    let looks_like_discard_pick = discard_payable && matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && rec.candidate_texts.len() == hand_len);
-    let choice = if looks_like_discard_pick { OptionalCostChoice::Discard } else { OptionalCostChoice::Decline };
+    let land_len = state.players[player.index()].battlefield.iter().filter(|&&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land).count();
+    let next_is_select_targets_with_len = |n: usize| matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && rec.candidate_texts.len() == n);
+    let looks_like_discard_pick = discard_payable && next_is_select_targets_with_len(hand_len);
+    let looks_like_sacrifice_pick = sacrifice_payable && !looks_like_discard_pick && next_is_select_targets_with_len(land_len);
+    let choice = if looks_like_discard_pick {
+        OptionalCostChoice::Discard
+    } else if looks_like_sacrifice_pick {
+        OptionalCostChoice::SacrificeLand
+    } else {
+        OptionalCostChoice::Decline
+    };
     surface.apply(state, SurfaceAction::Action(Action::ChooseOptionalCost(choice))).map_err(|e| format!("engine-step-error:ChooseOptionalCost:{e}"))
 }
 

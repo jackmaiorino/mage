@@ -71,6 +71,7 @@ fn kind_of(d: &Decision) -> Kind {
         // declared zero attackers, which is always true here). See
         // `tests/burn_combat.rs` for these.
         Decision::ChooseCastMode { .. }
+        | Decision::ChooseCostTargets { .. }
         | Decision::Discard { .. }
         | Decision::DeclareBlockers { .. }
         | Decision::ChooseSpellMode { .. }
@@ -141,6 +142,7 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
                 unreachable!("no card in this increment's pool has an implemented trigger")
             }
             Decision::ChooseCastMode { .. }
+            | Decision::ChooseCostTargets { .. }
             | Decision::Discard { .. }
             | Decision::DeclareBlockers { .. }
             | Decision::ChooseSpellMode { .. }

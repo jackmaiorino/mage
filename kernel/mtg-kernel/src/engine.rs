@@ -89,6 +89,16 @@ pub struct EngineState {
     /// a card or sacrifice a land") staged by `EffectOp::MayPayCostThen`,
     /// waiting on `Decision::ChooseOptionalCost`/`Action::ChooseOptionalCost`.
     pub pending_optional_cost: Option<PendingOptionalCost>,
+    /// Once `Action::ChooseOptionalCost(SacrificeLand)` is chosen, *which*
+    /// land(s) to sacrifice -- a real decision when more than one is legal,
+    /// same `Decision::ChooseCostTargets`/`ChooseCastMode`-mode-Alternative
+    /// shape as Fireblast's alt cost and Lava Dart's flashback cost (see
+    /// `sacrifice_lands_needed`'s doc and `drain_pending_optional_cost_
+    /// sacrifice_or_decide`). Previously auto-solved silently by
+    /// `sacrifice_lowest_id_lands` with no `Decision` at all -- same bug
+    /// class as the other two, root-caused the same way (Sol #90,
+    /// increment 11).
+    pub pending_optional_cost_sacrifice: Option<PendingOptionalCostSacrifice>,
     /// Cards exiled by Madness (`card_def::CardDef::madness_cost`) since
     /// their controlling discard, in discard order, each waiting on
     /// `Decision::ChooseMadnessCast`/`Action::ChooseMadnessCast`. A `Vec`
@@ -140,6 +150,16 @@ pub enum CastMode {
     Alternative,
 }
 
+/// Which cost `Decision::ChooseCostTargets` is picking permanents for.
+/// One variant today (this pool's only "choose which permanents" cost
+/// shape); kept as its own type rather than inlined so a future cost kind
+/// (e.g. a generic sacrifice-a-creature cost) doesn't have to overload
+/// this one's meaning.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum CostKind {
+    SacrificeLands,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct PendingCast {
     pub spell: ObjectId,
@@ -186,6 +206,15 @@ pub struct PendingCast {
     /// than papered over) knows where to return the card if its cost turns
     /// out to be unpayable.
     pub origin_zone: Zone,
+    /// Which lands have been chosen so far to pay a `SacrificeLands`
+    /// sub-cost of this cast (Fireblast's alt cost, once `cast_mode`
+    /// resolves to `Alternative`; Lava Dart's flashback cost,
+    /// unconditionally) -- see `sacrifice_lands_needed`/
+    /// `Decision::ChooseCostTargets`. Always empty for a cast that doesn't
+    /// need one (`sacrifice_lands_needed` returns 0), same "just stays at
+    /// its zero value, never consulted" shape `additional_cost_discarded`
+    /// has for a card with no additional cost.
+    pub sacrifice_chosen: Vec<ObjectId>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -225,7 +254,10 @@ pub enum DiscardResume {
     /// The discard sub-cost of a resolution-time optional cost (Highway
     /// Robbery's `EffectOp::MayPayCostThen` -> `Action::ChooseOptionalCost
     /// (OptionalCostChoice::Discard)`) just landed -- run `then` now.
-    FinishOptionalCost { source: ObjectId, controller: PlayerId, then: Box<EffectOp> },
+    /// `spell_resume`, if `Some`, is `PendingOptionalCost::spell_resume`
+    /// carried over -- the deferred move to apply once `then` runs (see
+    /// that field's doc).
+    FinishOptionalCost { source: ObjectId, controller: PlayerId, then: Box<EffectOp>, spell_resume: Option<(ObjectId, Zone)> },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -250,6 +282,37 @@ pub struct PendingOptionalCost {
     pub discard_payable: bool,
     pub sacrifice_payable: bool,
     pub then: EffectOp,
+    /// `Some((source, to_zone))` iff this optional cost is itself part of
+    /// `source`'s own spell resolution (Highway Robbery's "you may... if
+    /// you do, draw two cards" -- `EffectOp::MayPayCostThen` staged this
+    /// synchronously, from inside `resolve_top_of_stack`'s own `execute`
+    /// call) and that spell hasn't moved to `to_zone` (its post-resolution
+    /// zone) yet. See `resolve_top_of_stack`'s doc for why this can't just
+    /// move there immediately the way it does for every other instant/
+    /// sorcery -- same 608.2m "moves to its zone only as the very last
+    /// part of resolution" deferral `DiscardResume::FinishSpellResolution`
+    /// already handles for `EffectOp::DiscardCards`, just at the optional-
+    /// cost layer instead. `None` for the normal case: an optional cost
+    /// staged by something *other* than a spell's own top-level resolution
+    /// has nothing waiting on it (no card in this pool triggers
+    /// `MayPayCostThen` from anywhere but a spell resolving, but this
+    /// isn't assumed -- `resolve_top_of_stack` is the only place that ever
+    /// sets it `Some`).
+    pub spell_resume: Option<(ObjectId, Zone)>,
+}
+
+/// Staged once `Action::ChooseOptionalCost(SacrificeLand)` is chosen --
+/// see `EngineState::pending_optional_cost_sacrifice`'s doc.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingOptionalCostSacrifice {
+    pub player: PlayerId,
+    pub source: ObjectId,
+    pub remaining: u8,
+    pub chosen: Vec<ObjectId>,
+    pub then: EffectOp,
+    /// Carried over from `PendingOptionalCost::spell_resume` -- see that
+    /// field's doc.
+    pub spell_resume: Option<(ObjectId, Zone)>,
 }
 
 /// The answer to a `Decision::ChooseOptionalCost`. Declining is always
@@ -307,6 +370,30 @@ pub enum Decision {
         spell: ObjectId,
         remaining: u8,
         legal_targets: Vec<Target>,
+    },
+    /// A cost component whose payment requires choosing WHICH permanents
+    /// pay it, not merely how many -- Fireblast's alt cost (sacrifice 2
+    /// Mountains, `CostComponent::SacrificeLands`) and Lava Dart's
+    /// flashback cost (sacrifice 1 Mountain, `FlashbackCost::
+    /// SacrificeLands`), this increment. Previously auto-solved silently
+    /// by `sacrifice_lowest_id_lands`'s tapped-status heuristic with no
+    /// `Decision` at all; the reference logs a real `SELECT_TARGETS`
+    /// record for this pick (increment 11 characterization), so it's a
+    /// real decision here too. Asked one permanent at a time (`remaining`
+    /// counts down, `candidates` excludes whatever was already picked for
+    /// this same cost) -- same shape as `ChooseTargets`'s `remaining`/
+    /// `legal_targets`. Auto-resolved (no `Decision` returned, every
+    /// remaining candidate silently sacrificed) whenever `candidates.len()
+    /// <= remaining` -- no real choice left -- matching every other "don't
+    /// ask when there's one legal answer" shortcut in this module
+    /// (`ChooseCastMode`, `Discard`).
+    ChooseCostTargets {
+        player: PlayerId,
+        /// The spell (cast or flashback-cast) this cost belongs to.
+        source: ObjectId,
+        cost_kind: CostKind,
+        remaining: u8,
+        candidates: Vec<ObjectId>,
     },
     /// Fireblast only, this increment: whether to pay its printed mana
     /// cost or sacrifice 2 Mountains instead. Only asked when *both* are
@@ -410,6 +497,9 @@ pub enum Action {
     ActivateAbility(ObjectId, u8),
     Pass,
     ChooseTarget(Target),
+    /// Answers one `Decision::ChooseCostTargets` pick (one permanent at a
+    /// time -- see that decision's doc).
+    ChooseCostTarget(ObjectId),
     ChooseCastMode(CastMode),
     Discard(Vec<ObjectId>),
     DeclareAttackers(Vec<ObjectId>),
@@ -571,14 +661,25 @@ fn can_pay_components(components: &[CostComponent], player: PlayerId, source: Ob
 
 /// Pays every component of `components` except `DiscardCards` (already
 /// paid via the `pending_discard` staging by the time this runs -- see
-/// `EngineState::pending_discard`'s doc).
-fn pay_cost_components(state: &mut GameState, player: PlayerId, source: ObjectId, components: &[CostComponent]) {
+/// `EngineState::pending_discard`'s doc). `sacrifice_chosen` is the
+/// already-decided answer to any `CostComponent::SacrificeLands(n)` in
+/// `components` (`PendingCast::sacrifice_chosen`, staged by
+/// `Decision::ChooseCostTargets` before this ever runs -- see
+/// `sacrifice_lands_needed`'s doc); pass `&[]` for a `components` list
+/// that's statically known never to contain `SacrificeLands` (every
+/// activated-ability cost and every `additional_cost` in this pool), where
+/// the `debug_assert_eq!` below is the fail-loud guard against that
+/// assumption silently going stale.
+fn pay_cost_components(state: &mut GameState, player: PlayerId, source: ObjectId, components: &[CostComponent], sacrifice_chosen: &[ObjectId]) {
     for c in components {
         match c {
             CostComponent::Tap => event::propose_and_commit(state, ProposedEvent::tap(source)),
             CostComponent::SacrificeSelf => event::propose_and_commit(state, ProposedEvent::zone_change(source, Zone::Graveyard)),
             CostComponent::ExileSelf => event::propose_and_commit(state, ProposedEvent::zone_change(source, Zone::Exile)),
-            CostComponent::SacrificeLands(n) => sacrifice_lowest_id_lands(state, player, *n),
+            CostComponent::SacrificeLands(n) => {
+                debug_assert_eq!(sacrifice_chosen.len(), *n as usize, "sacrifice_chosen must be exactly this component's already-decided picks");
+                commit_sacrifice(state, sacrifice_chosen);
+            }
             CostComponent::Mana(cost) => {
                 let plan = mana::can_pay(cost, 0, player, state).expect("legality already checked by can_pay_components");
                 pay_plan(state, player, &plan);
@@ -588,43 +689,53 @@ fn pay_cost_components(state: &mut GameState, player: PlayerId, source: ObjectId
     }
 }
 
-/// Sacrifices the `n` lowest-`ObjectId` lands `player` controls. Which
-/// specific lands are picked is not a real decision in this pool (every
-/// land is a Mountain, fully interchangeable) -- same "auto-solve, don't
-/// ask" treatment `mana::solve` gives ordinary tap sources.
-/// Picks `n` lands to sacrifice (Fireblast's alternative cost; a
-/// flashback's `FlashbackCost::SacrificeLands`, e.g. Faithless Looting).
-/// *Which* land is picked isn't a real decision in this pool by card
-/// identity (every land is a fungible Mountain -- same "auto-solve, don't
-/// ask" treatment `mana::solve` gives ordinary tap sources), but it is a
-/// real decision by *tapped status*: sacrificing an already-tapped Mountain
-/// is free (it was going to sit unusable until the next untap step
-/// regardless), while sacrificing an untapped one strands mana the rest of
-/// this turn could have spent. So this prefers tapped lands first (lowest
-/// `ObjectId` among those, for determinism), only reaching into untapped
-/// ones if there aren't enough tapped ones to cover `n`.
-///
-/// Root-caused against the real v3 corpus (`game_20260712_194623_0023.txt`,
-/// PlayerRL1 turn 17): the naive lowest-`ObjectId`-first version could pick
-/// an *untapped* Mountain to sacrifice while a *tapped* one sat
-/// available, leaving one extra untapped mana source floating relative to
-/// the trace's own game -- invisible to `check_state` (hand/library/
-/// graveyard sizes all still matched, tapped status isn't a zone) until it
-/// surfaced many decisions later as a spuriously-affordable spell
-/// (`castable_spells` non-empty where the reference's own window was
-/// `Pass`-only and silently unlogged) and a stuck-on-stack sorcery no
-/// resolution ever cleared by then.
-fn sacrifice_lowest_id_lands(state: &mut GameState, player: PlayerId, n: u8) {
-    let mut lands: Vec<ObjectId> = state.players[player.index()]
+/// Zone-changes exactly `chosen` to the graveyard -- the actual payment
+/// half of a `SacrificeLands` sub-cost, once `Decision::ChooseCostTargets`
+/// has already decided *which* permanents (`PendingCast::sacrifice_chosen`).
+fn commit_sacrifice(state: &mut GameState, chosen: &[ObjectId]) {
+    for &id in chosen {
+        event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Graveyard));
+    }
+}
+
+/// How many lands (0 if none) the cast currently staged in `pending`
+/// still needs sacrificed to pay its cost: Fireblast's alt cost, once
+/// `cast_mode` has resolved to `Alternative`; Lava Dart's flashback cost,
+/// unconditionally (a flashback cast has no alternative payment path to
+/// resolve first). A bare `u8` rather than `Option<u8>` -- no card in
+/// this pool has `SacrificeLands(0)`, so "not applicable" and "applicable
+/// but zero" are not a real ambiguity here -- mirrors `target_count`'s own
+/// shape.
+fn sacrifice_lands_needed(pending: &PendingCast, def: &card_def::CardDef) -> u8 {
+    if pending.is_flashback {
+        return match def.flashback.as_ref().map(|fb| fb.cost) {
+            Some(FlashbackCost::SacrificeLands(n)) => n,
+            _ => 0,
+        };
+    }
+    if pending.cast_mode == Some(CastMode::Alternative) {
+        if let Some(alt) = def.alt_cost {
+            for c in alt {
+                if let CostComponent::SacrificeLands(n) = c {
+                    return *n;
+                }
+            }
+        }
+    }
+    0
+}
+
+/// `player`'s currently-controlled lands, minus whichever have already
+/// been picked this same `Decision::ChooseCostTargets` sequence -- the
+/// candidate pool for the next pick (see that decision's doc for why a
+/// picked land disappears from the next ask's candidates).
+fn sacrificeable_lands(player: PlayerId, state: &GameState, already_chosen: &[ObjectId]) -> Vec<ObjectId> {
+    state.players[player.index()]
         .battlefield
         .iter()
         .copied()
-        .filter(|&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land)
-        .collect();
-    lands.sort_unstable_by_key(|&id| (!state.objects.get(id).tapped, id));
-    for &id in lands.iter().take(n as usize) {
-        event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Graveyard));
-    }
+        .filter(|&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land && !already_chosen.contains(&id))
+        .collect()
 }
 
 /// Whether `id` (from hand or graveyard) is castable right now, given
@@ -876,6 +987,17 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             return d;
         }
 
+        if let Some(d) = drain_pending_optional_cost_sacrifice_or_decide(state) {
+            return d;
+        }
+        // Same reasoning as the two `pending_discard` re-checks above:
+        // once every land is chosen, this runs `poc.then` (Highway
+        // Robbery's own "draw two cards"), which could in principle stage
+        // a fresh `pending_discard` of its own.
+        if state.engine.pending_discard.is_some() {
+            continue;
+        }
+
         if let Some(d) = drain_pending_triggers_or_decide(state) {
             return d;
         }
@@ -965,6 +1087,45 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
             }
         }
         DiscardResume::FinishActivation => {
+            // 602.2b-h: every component of an activation's cost is paid
+            // together, as one atomic action, the instant the interactive
+            // part (which card(s) to discard) is determined -- not
+            // deferred to `finalize_activation` (pushing the ability's
+            // `StackItem`), which can run arbitrarily later (after a
+            // Madness trigger this same discard caused has already been
+            // fully offered and attempted, in particular). Root-caused
+            // against `game_20260713_002156_0014.txt` decision 45: Masked
+            // Meower's `[DiscardCards(1), SacrificeSelf]` ability discards
+            // a Fiery Temper, and the reference's own graveyard snapshot
+            // already has Masked Meower in it *before* Fiery Temper's
+            // madness-cast target pick is even offered -- i.e. the
+            // sacrifice happens right here, alongside the discard,
+            // not after the triggered Madness attempt resolves. The Blood
+            // Token's ability has the same `[..., DiscardCards(1),
+            // SacrificeSelf]` shape and would hit the identical ordering
+            // bug were it ever exercised this way.
+            if let Some(p) = state.engine.pending_activation.clone() {
+                let def = &card_def::CARD_DEFS[state.objects.get(p.source).card_def as usize];
+                let ability = &def.activated_abilities[p.ability_index as usize];
+                pay_cost_components(state, p.controller, p.source, ability.cost, &[]);
+                // 111.8/704.5d: paying `SacrificeSelf` here (a token's own
+                // ability, e.g. the Blood Token's) can put a token into the
+                // graveyard well before `finalize_activation` ever runs
+                // (pending_madness -- see `drain_pending_madness_or_decide`
+                // -- is checked *before* `pending_activation` in
+                // `advance_until_decision`'s loop, so a Madness sub-flow
+                // this same discard triggers can fully play out first).
+                // `sba_fixed_point` normally only runs inside
+                // `collect_and_queue_triggers`, which `finalize_activation`
+                // doesn't call until this activation is fully resolved --
+                // too late to make the token cease to exist before the
+                // comparator's `check_state` observes an intervening
+                // decision's graveyard size. Run it right here instead,
+                // same "don't leave a token sitting somewhere it can never
+                // really be" fix `sba_fixed_point`'s own 111.8/704.5d rule
+                // already applies everywhere else.
+                trigger::sba_fixed_point(state);
+            }
             if let Some(p) = state.engine.pending_activation.as_mut() {
                 p.cost_discard_paid = Some(chosen);
             }
@@ -977,39 +1138,54 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
             event::propose_and_commit(state, ProposedEvent::zone_change(source, to_zone));
             collect_and_queue_triggers(state);
         }
-        DiscardResume::FinishOptionalCost { source, controller, then } => {
+        DiscardResume::FinishOptionalCost { source, controller, then, spell_resume } => {
             // See `EffectOp::MayPayCostThen`'s doc: the discard sub-cost
             // just landed, so run the effect it unlocked (Highway Robbery:
             // draw two cards).
             let ctx = ExecCtx::no_targets(source, controller);
             effect::execute(&then, &ctx, state);
+            // See `PendingOptionalCost::spell_resume`'s doc: only now is
+            // the spell this optional cost belongs to *actually* fully
+            // resolved -- perform the move `resolve_top_of_stack` deferred.
+            if let Some((spell, to_zone)) = spell_resume {
+                event::propose_and_commit(state, ProposedEvent::zone_change(spell, to_zone));
+            }
             collect_and_queue_triggers(state);
         }
     }
 }
 
 /// If a Madness card is queued (`EngineState::pending_madness`, populated by
-/// `apply_discard`), either silently sends it to the graveyard (its madness
-/// cost isn't currently affordable -- no real choice, same "don't ask when
-/// there's only one legal answer" shortcut `drain_pending_cast_or_decide`
-/// uses for Fireblast's cast mode) or returns `Decision::ChooseMadnessCast`.
-/// Loops so a batch of several simultaneously-queued Madness cards (not
-/// reachable in this pool, but not assumed away either) doesn't strand the
-/// ones after an unaffordable one.
+/// `apply_discard`), returns `Decision::ChooseMadnessCast` -- unconditionally,
+/// with **no affordability pre-check**.
+///
+/// An earlier version of this function pre-filtered on `mana::can_pay`,
+/// silently sending an unaffordable card to the graveyard with no `Decision`
+/// at all (the same "don't ask when there's only one legal answer" shortcut
+/// `drain_pending_cast_or_decide` uses for Fireblast's cast mode). That was
+/// root-caused as wrong (Sol #90, increment 11) against the real Java
+/// reference: `MadnessTriggeredAbility.resolve()` (`MadnessAbility.java`)
+/// is a plain *optional* triggered ability -- it always calls
+/// `player.chooseUse(...)` first, with no discrete `canPay()` gate anywhere
+/// in that path. "Affordable" in the reference means nothing more than "the
+/// real `cast()` call happened to succeed"; an unaffordable attempt still
+/// gets offered, still begins a real cast (its own target-selection decision
+/// genuinely logged), and only fails -- reverting the card to the graveyard
+/// -- at the cost-payment step. Confirmed against two golden-trace games
+/// (`game_20260713_002149_0004.txt` decision 26, `game_20260713_002156_0014.txt`
+/// decision 45): both show a real `SELECT_TARGETS` record for the Madness
+/// card's own target at a moment when the discarding player has zero
+/// available mana (every battlefield permanent already tapped this same
+/// turn paying for earlier, unrelated spells) -- and in the second game, the
+/// very next trace record for that player shows the card sitting in the
+/// graveyard, never on the stack/battlefield again, proving the attempt was
+/// offered, attempted, and reverted, not silently declined upfront. See
+/// `apply_choose_madness_cast`'s `cast_it == true` branch and `abort_cast`'s
+/// Madness-specific graveyard redirect for the other half of this fix.
 fn drain_pending_madness_or_decide(state: &mut GameState) -> Option<Decision> {
-    loop {
-        let &card = state.engine.pending_madness.first()?;
-        let owner = state.objects.get(card).owner;
-        let def = &card_def::CARD_DEFS[state.objects.get(card).card_def as usize];
-        let cost = def.madness_cost.expect("only Madness cards are ever queued in pending_madness");
-        if mana::can_pay(&cost, 0, owner, state).is_none() {
-            state.engine.pending_madness.remove(0);
-            event::propose_and_commit(state, ProposedEvent::zone_change(card, Zone::Graveyard));
-            collect_and_queue_triggers(state);
-            continue;
-        }
-        return Some(Decision::ChooseMadnessCast { player: owner, card });
-    }
+    let &card = state.engine.pending_madness.first()?;
+    let owner = state.objects.get(card).owner;
+    Some(Decision::ChooseMadnessCast { player: owner, card })
 }
 
 /// If a resolution-time optional cost is pending (`EngineState::
@@ -1020,6 +1196,36 @@ fn drain_pending_madness_or_decide(state: &mut GameState) -> Option<Decision> {
 fn drain_pending_optional_cost_or_decide(state: &mut GameState) -> Option<Decision> {
     let poc = state.engine.pending_optional_cost.as_ref()?;
     Some(Decision::ChooseOptionalCost { player: poc.player, discard_payable: poc.discard_payable, sacrifice_payable: poc.sacrifice_payable })
+}
+
+/// If `Action::ChooseOptionalCost(SacrificeLand)` was just chosen, stages
+/// *which* land(s) through the same per-pick `Decision::ChooseCostTargets`
+/// flow `drain_pending_cast_or_decide` uses for Fireblast/Lava Dart (see
+/// `sacrifice_lands_needed`'s doc for the per-pick auto-resolve rule this
+/// mirrors: ask unless this single pick's own candidate pool is `<= 1`).
+/// Once fully chosen, commits the sacrifice and runs `then` (Highway
+/// Robbery's "draw two cards").
+fn drain_pending_optional_cost_sacrifice_or_decide(state: &mut GameState) -> Option<Decision> {
+    let pending = state.engine.pending_optional_cost_sacrifice.clone()?;
+    if (pending.chosen.len() as u8) < pending.remaining {
+        let candidates = sacrificeable_lands(pending.player, state, &pending.chosen);
+        let remaining = pending.remaining - pending.chosen.len() as u8;
+        if candidates.len() <= 1 {
+            state.engine.pending_optional_cost_sacrifice.as_mut().unwrap().chosen.extend(candidates);
+            return drain_pending_optional_cost_sacrifice_or_decide(state);
+        }
+        return Some(Decision::ChooseCostTargets { player: pending.player, source: pending.source, cost_kind: CostKind::SacrificeLands, remaining, candidates });
+    }
+    let pending = state.engine.pending_optional_cost_sacrifice.take().expect("checked Some above");
+    commit_sacrifice(state, &pending.chosen);
+    let ctx = ExecCtx::no_targets(pending.source, pending.player);
+    effect::execute(&pending.then, &ctx, state);
+    // See `PendingOptionalCost::spell_resume`'s doc: only now is the spell
+    // this optional cost belongs to actually fully resolved.
+    if let Some((spell, to_zone)) = pending.spell_resume {
+        event::propose_and_commit(state, ProposedEvent::zone_change(spell, to_zone));
+    }
+    None
 }
 
 /// Stages `PendingCast` through its targets -> cast-mode -> additional-
@@ -1063,6 +1269,40 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
         }
         state.engine.pending_cast.as_mut().unwrap().cast_mode = Some(if normal_ok { CastMode::Normal } else { CastMode::Alternative });
         return drain_pending_cast_or_decide(state);
+    }
+
+    let sacrifice_needed = sacrifice_lands_needed(&pending, def);
+    if (pending.sacrifice_chosen.len() as u8) < sacrifice_needed {
+        let candidates = sacrificeable_lands(pending.controller, state, &pending.sacrifice_chosen);
+        let remaining = sacrifice_needed - pending.sacrifice_chosen.len() as u8;
+        if candidates.len() <= 1 {
+            // No real choice for *this single pick* (0 or 1 legal
+            // candidate) -- auto-resolve just this one and let the next
+            // loop pass re-derive whether the *following* pick (if any)
+            // is still real. Deliberately per-pick, not "auto-resolve the
+            // whole remaining batch whenever candidates.len() <=
+            // remaining": empirically, the reference always logs a real
+            // decision for every pick whose own candidate pool has 2+
+            // legal choices, even when the *aggregate* choice is forced
+            // (e.g. exactly 2 Mountains for Fireblast's 2-land cost still
+            // logs one real 2-candidate pick before the final,
+            // now-1-candidate pick goes silent) -- root-caused against the
+            // v4 corpus's own `(candidate_count...)` sequence per Fireblast/
+            // Lava Dart episode (e.g. Fireblast's dominant shape is exactly
+            // 2 post-target records, `(target=N, sac1=2)`, never a 3rd
+            // `sac2=1` record; Lava Dart with exactly 1 controlled Mountain
+            // logs *zero* post-target records at all -- both match "ask
+            // until this pick's own pool is <= 1", not "ask until the
+            // aggregate is forced"). A first version of this auto-resolve
+            // used the aggregate `candidates.len() <= remaining` test and
+            // silently over-suppressed exactly this shape (verified against
+            // `game_20260713_002152_0008.txt` decision 42: kernel skipped
+            // straight past a real 2-candidate Fireblast sacrifice pick the
+            // trace logs).
+            state.engine.pending_cast.as_mut().unwrap().sacrifice_chosen.extend(candidates);
+            return drain_pending_cast_or_decide(state);
+        }
+        return Some(Decision::ChooseCostTargets { player: pending.controller, source: pending.spell, cost_kind: CostKind::SacrificeLands, remaining, candidates });
     }
 
     if pending.additional_cost_discarded.is_none() {
@@ -1196,6 +1436,22 @@ fn resolve_top_of_stack(state: &mut GameState) {
             // its own resolution) is done, so defer the move instead of
             // doing it here.
             pd.resume = DiscardResume::FinishSpellResolution { source: item.source, to_zone };
+        } else if let Some(poc) = state.engine.pending_optional_cost.as_mut() {
+            // Same 608.2m deferral, one layer further out: the effect
+            // resolved into `EffectOp::MayPayCostThen` (Highway Robbery:
+            // "you may... if you do, draw two cards"), which stages
+            // `pending_optional_cost` and returns before the "may pay?"
+            // question is even answered, let alone `then` run. Root-caused
+            // (Sol #90, increment 11) against several golden-trace games
+            // (e.g. `game_20260713_002147_0002.txt` decision 115): moving
+            // Highway Robbery to the graveyard *here* put it there several
+            // decisions before the reference's own graveyard snapshot ever
+            // shows it -- the reference doesn't finish resolving Highway
+            // Robbery until its own optional-cost choice (and whichever
+            // sub-cost it leads to) is fully paid. See
+            // `PendingOptionalCost::spell_resume`'s doc for where the
+            // deferred move actually happens once that's all done.
+            poc.spell_resume = Some((item.source, to_zone));
         } else {
             event::propose_and_commit(state, ProposedEvent::zone_change(item.source, to_zone));
         }
@@ -1486,6 +1742,7 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
             }
             Ok(())
         }
+        Action::ChooseCostTarget(id) => apply_choose_cost_target(state, id),
         Action::ChooseCastMode(mode) => {
             let pending = state.engine.pending_cast.as_mut().ok_or("no spell is currently being cast")?;
             if pending.cast_mode.is_some() {
@@ -1543,6 +1800,36 @@ fn pending_target_spec_and_chosen(state: &GameState) -> Option<(TargetSpec, Vec<
     None
 }
 
+/// Answers one `Decision::ChooseCostTargets` pick -- see that decision's
+/// doc. Two pending shapes stage this: `PendingCast` (Fireblast's alt cost,
+/// Lava Dart's flashback cost) and `PendingOptionalCostSacrifice` (Highway
+/// Robbery's `SacrificeLand` optional cost); no activated ability in this
+/// pool has a `SacrificeLands` cost component, unlike `ChooseTarget` which
+/// also answers `PendingActivation`'s targeting.
+fn apply_choose_cost_target(state: &mut GameState, id: ObjectId) -> Result<(), String> {
+    if let Some(pending) = state.engine.pending_cast.as_ref() {
+        let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
+        let needed = sacrifice_lands_needed(pending, def);
+        if (pending.sacrifice_chosen.len() as u8) < needed {
+            if !sacrificeable_lands(pending.controller, state, &pending.sacrifice_chosen).contains(&id) {
+                return Err(format!("{id} is not a legal cost-sacrifice candidate"));
+            }
+            state.engine.pending_cast.as_mut().unwrap().sacrifice_chosen.push(id);
+            return Ok(());
+        }
+    }
+    if let Some(pending) = state.engine.pending_optional_cost_sacrifice.as_ref() {
+        if (pending.chosen.len() as u8) < pending.remaining {
+            if !sacrificeable_lands(pending.player, state, &pending.chosen).contains(&id) {
+                return Err(format!("{id} is not a legal cost-sacrifice candidate"));
+            }
+            state.engine.pending_optional_cost_sacrifice.as_mut().unwrap().chosen.push(id);
+            return Ok(());
+        }
+    }
+    Err("no sacrifice-cost-target decision is pending".to_string())
+}
+
 fn apply_discard_action(state: &mut GameState, chosen: Vec<ObjectId>) -> Result<(), String> {
     let pd = state.engine.pending_discard.clone().ok_or("no discard is pending")?;
     if chosen.len() as u32 != pd.count {
@@ -1567,7 +1854,16 @@ fn apply_discard_action(state: &mut GameState, chosen: Vec<ObjectId>) -> Result<
 fn apply_choose_optional_cost(state: &mut GameState, choice: OptionalCostChoice) -> Result<(), String> {
     let poc = state.engine.pending_optional_cost.take().ok_or("no optional cost is pending")?;
     match choice {
-        OptionalCostChoice::Decline => Ok(()),
+        OptionalCostChoice::Decline => {
+            // See `PendingOptionalCost::spell_resume`'s doc: declining
+            // still means the spell this cost belongs to is now fully
+            // resolved (there's no `then` to run either way), so its
+            // deferred move happens right here.
+            if let Some((spell, to_zone)) = poc.spell_resume {
+                event::propose_and_commit(state, ProposedEvent::zone_change(spell, to_zone));
+            }
+            Ok(())
+        }
         OptionalCostChoice::Discard => {
             if !poc.discard_payable {
                 return Err("discard is not currently a payable option for this optional cost".to_string());
@@ -1575,7 +1871,7 @@ fn apply_choose_optional_cost(state: &mut GameState, choice: OptionalCostChoice)
             state.engine.pending_discard = Some(PendingDiscard {
                 player: poc.player,
                 count: poc.discard as u32,
-                resume: DiscardResume::FinishOptionalCost { source: poc.source, controller: poc.player, then: Box::new(poc.then) },
+                resume: DiscardResume::FinishOptionalCost { source: poc.source, controller: poc.player, then: Box::new(poc.then), spell_resume: poc.spell_resume },
             });
             Ok(())
         }
@@ -1583,14 +1879,28 @@ fn apply_choose_optional_cost(state: &mut GameState, choice: OptionalCostChoice)
             if !poc.sacrifice_payable {
                 return Err("sacrificing a land is not currently a payable option for this optional cost".to_string());
             }
-            sacrifice_lowest_id_lands(state, poc.player, poc.sacrifice_lands);
-            let ctx = ExecCtx::no_targets(poc.source, poc.player);
-            effect::execute(&poc.then, &ctx, state);
+            state.engine.pending_optional_cost_sacrifice = Some(PendingOptionalCostSacrifice {
+                player: poc.player,
+                source: poc.source,
+                remaining: poc.sacrifice_lands,
+                chosen: vec![],
+                then: poc.then,
+                spell_resume: poc.spell_resume,
+            });
             Ok(())
         }
     }
 }
 
+/// `cast_it == true` no longer pre-verifies affordability (see
+/// `drain_pending_madness_or_decide`'s doc) -- it unconditionally stages a
+/// real cast via `begin_cast_ex`, exactly as if the card were being cast
+/// normally. If the madness cost genuinely can't be paid, that surfaces
+/// naturally at `finalize_cast`'s existing `cost_override` affordability
+/// check, which now (see `abort_cast`'s doc) reverts a failed Madness
+/// attempt to the graveyard instead of erroring -- matching the reference's
+/// observed "offer it, attempt it, let it fizzle to the graveyard" behavior
+/// rather than a hard failure this function used to return.
 fn apply_choose_madness_cast(state: &mut GameState, cast_it: bool) -> Result<(), String> {
     let &card = state.engine.pending_madness.first().ok_or("no Madness decision is pending")?;
     state.engine.pending_madness.remove(0);
@@ -1601,10 +1911,7 @@ fn apply_choose_madness_cast(state: &mut GameState, cast_it: bool) -> Result<(),
         return Ok(());
     }
     let def = &card_def::CARD_DEFS[state.objects.get(card).card_def as usize];
-    let cost = def.madness_cost.expect("checked affordable by drain_pending_madness_or_decide");
-    if mana::can_pay(&cost, 0, owner, state).is_none() {
-        return Err("madness cost is no longer payable".to_string());
-    }
+    let cost = def.madness_cost.expect("only Madness cards are ever queued in pending_madness");
     begin_cast_ex(state, owner, card, Some(cost));
     Ok(())
 }
@@ -1772,9 +2079,14 @@ fn begin_cast_ex(state: &mut GameState, player: PlayerId, spell_id: ObjectId, fo
         cost_override,
         mode_chosen,
         origin_zone,
+        sacrifice_chosen: vec![],
     });
 }
 
+/// Stages a `PendingActivation`. The cost itself isn't paid here -- see
+/// `apply_discard`'s `DiscardResume::FinishActivation` arm (the discard
+/// case) and `finalize_activation` (the no-discard case) for exactly when
+/// each component pays, and why that split exists.
 fn begin_activation(state: &mut GameState, player: PlayerId, source: ObjectId, ability_index: u8) {
     let def = &card_def::CARD_DEFS[state.objects.get(source).card_def as usize];
     let ability = &def.activated_abilities[ability_index as usize];
@@ -1827,7 +2139,10 @@ fn finalize_cast(state: &mut GameState) {
                 };
                 pay_plan(state, pending.controller, &plan);
             }
-            FlashbackCost::SacrificeLands(n) => sacrifice_lowest_id_lands(state, pending.controller, n),
+            FlashbackCost::SacrificeLands(n) => {
+                debug_assert_eq!(pending.sacrifice_chosen.len(), n as usize, "Decision::ChooseCostTargets must have fully resolved this flashback's sacrifice cost by now");
+                commit_sacrifice(state, &pending.sacrifice_chosen);
+            }
         }
     } else {
         match pending.cast_mode.expect("resolved by drain_pending_cast_or_decide before finalize_cast is reached") {
@@ -1839,12 +2154,12 @@ fn finalize_cast(state: &mut GameState) {
             }
             CastMode::Alternative => {
                 let alt = def.alt_cost.expect("Alternative mode only chosen when alt_cost is Some");
-                pay_cost_components(state, pending.controller, pending.spell, alt);
+                pay_cost_components(state, pending.controller, pending.spell, alt, &pending.sacrifice_chosen);
             }
         }
     }
     if let Some(add) = def.additional_cost {
-        pay_cost_components(state, pending.controller, pending.spell, add);
+        pay_cost_components(state, pending.controller, pending.spell, add, &[]);
     }
 
     let discarded = pending.additional_cost_discarded.unwrap_or_default();
@@ -1865,14 +2180,31 @@ fn finalize_cast(state: &mut GameState) {
 }
 
 /// 601.2a's flip side: if an announced cast turns out to be unpayable, the
-/// spell returns to whichever zone it was announced from. Unreachable in
-/// this increment (see `finalize_cast`'s doc) but kept in shape rather than
-/// papered over with a panic.
+/// spell returns to whichever zone it was announced from -- *except* a
+/// Madness-cost cast (`PendingCast::cost_override` set from
+/// `CardDef::madness_cost`, `apply_choose_madness_cast`'s `cast_it == true`
+/// branch), which goes to the graveyard instead of back to exile.
+///
+/// Root-caused against two golden-trace games (Sol #90, increment 11 --
+/// see `drain_pending_madness_or_decide`'s doc for the full citation): the
+/// reference lets a player attempt an unaffordable Madness cast (a real,
+/// logged target-selection decision happens) and the card ends up in the
+/// graveyard once the attempt fails, not back in exile still waiting to be
+/// offered again. 702.33a's own wording ("cast it... If you don't, it goes
+/// to your graveyard") already frames the *whole* Madness window as
+/// resolving to "graveyard" on any non-cast outcome; the reference
+/// evidently applies that same ultimate destination to a cast that was
+/// *attempted* but couldn't complete, rather than rules-textually
+/// re-offering the exiled card later. A Plotted cast's `cost_override`
+/// (`Cost::zero()`) can never actually fail this check (paying nothing is
+/// always affordable), so this branch is unreachable for Plot -- the
+/// madness-cost check is the only real discriminator needed here.
 fn abort_cast(state: &mut GameState, pending: PendingCast) {
     let item = state.stack.pop();
     debug_assert!(item.is_some_and(|i| i.source == pending.spell), "abort_cast expects its spell's placeholder to be the top of the stack");
     let owner = state.objects.get(pending.spell).owner;
-    let to_zone = pending.origin_zone;
+    let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
+    let to_zone = if pending.origin_zone == Zone::Exile && def.madness_cost.is_some() { Zone::Graveyard } else { pending.origin_zone };
     match to_zone {
         Zone::Hand => state.players[owner.index()].hand.push(pending.spell),
         Zone::Graveyard => state.players[owner.index()].graveyard.push(pending.spell),
@@ -1882,11 +2214,21 @@ fn abort_cast(state: &mut GameState, pending: PendingCast) {
     state.objects.get_mut(pending.spell).zone = to_zone;
 }
 
+/// Pushes the ability's `StackItem`. If this ability's cost has a
+/// `DiscardCards` component, the *entire* cost (including this component)
+/// was already paid atomically back when that discard resolved
+/// (`apply_discard`'s `DiscardResume::FinishActivation` arm -- see its doc
+/// for why paying it there, not here, matters) -- paying again here would
+/// double-tap/double-sacrifice. Only an ability with no discard component
+/// at all (none in this pool, but not assumed away) still needs its cost
+/// paid at this point, same as always.
 fn finalize_activation(state: &mut GameState) {
     let pending = state.engine.pending_activation.take().expect("finalize_activation requires a pending activation");
     let def = &card_def::CARD_DEFS[state.objects.get(pending.source).card_def as usize];
     let ability = &def.activated_abilities[pending.ability_index as usize];
-    pay_cost_components(state, pending.controller, pending.source, ability.cost);
+    if discard_count_in(ability.cost).is_none() {
+        pay_cost_components(state, pending.controller, pending.source, ability.cost, &[]);
+    }
 
     let effect = (ability.effect)();
     state.stack.push(StackItem {
@@ -1986,9 +2328,31 @@ mod tests {
         obj_id
     }
 
+    fn put_in_graveyard(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
+        let card_id = card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let obj_id = state.objects.push(crate::state::GameObject {
+            card_def: card_id,
+            name: card_name.to_string(),
+            owner: player,
+            controller: player,
+            zone: Zone::Graveyard,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.players[player.index()].graveyard.push(obj_id);
+        obj_id
+    }
+
     /// Fireblast's alternative cost (Sol #85: alt costs are payment
     /// *choices*) surfaces a real `Decision::ChooseCastMode` when both the
-    /// printed mana cost and sacrificing 2 Mountains are legal.
+    /// printed mana cost and sacrificing 2 Mountains are legal, and (Sol
+    /// #90, increment 11) a real `Decision::ChooseCostTargets` for *which*
+    /// 2 of the 6 Mountains, asked one at a time with the already-picked
+    /// one excluded from the second ask's candidates.
     #[test]
     fn fireblast_asks_to_choose_between_mana_cost_and_sacrificing_mountains() {
         let mut state = empty_game();
@@ -2013,26 +2377,60 @@ mod tests {
         }
 
         step(&mut state, Action::ChooseCastMode(CastMode::Alternative)).unwrap();
+
+        let first_pick = match advance_until_decision(&mut state) {
+            Decision::ChooseCostTargets { player, source, cost_kind, remaining, candidates } => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(source, fireblast);
+                assert_eq!(cost_kind, CostKind::SacrificeLands);
+                assert_eq!(remaining, 2);
+                assert_eq!(candidates.len(), 6, "all 6 Mountains are candidates before any pick");
+                candidates[0]
+            }
+            other => panic!("expected ChooseCostTargets, got {other:?}"),
+        };
+        step(&mut state, Action::ChooseCostTarget(first_pick)).unwrap();
+
+        let second_pick = match advance_until_decision(&mut state) {
+            Decision::ChooseCostTargets { remaining, candidates, .. } => {
+                assert_eq!(remaining, 1);
+                assert_eq!(candidates.len(), 5, "the first pick is excluded from the second ask");
+                assert!(!candidates.contains(&first_pick));
+                candidates[0]
+            }
+            other => panic!("expected second ChooseCostTargets, got {other:?}"),
+        };
+        step(&mut state, Action::ChooseCostTarget(second_pick)).unwrap();
+
         advance_until_decision(&mut state); // drives the remaining cast stages (cost payment, stack push)
-        // Alternative mode: 2 Mountains sacrificed, no mana tapped, and
-        // (since none were tapped) all 6 Mountains minus the 2 sacrificed
-        // remain untapped.
+        // Alternative mode: exactly the 2 chosen Mountains sacrificed, no
+        // mana tapped, and (since none were tapped) all 6 Mountains minus
+        // the 2 sacrificed remain untapped.
         assert_eq!(state.players[0].graveyard.len(), 2, "should have sacrificed exactly 2 Mountains");
+        assert!(state.players[0].graveyard.contains(&first_pick));
+        assert!(state.players[0].graveyard.contains(&second_pick));
         assert_eq!(state.players[0].battlefield.len(), 4);
         assert!(state.players[0].battlefield.iter().all(|&id| !state.objects.get(id).tapped), "alt cost shouldn't tap any Mountain");
         assert_eq!(state.stack.len(), 1);
     }
 
     /// When only one of Fireblast's two cost paths is actually payable,
-    /// there's no real choice -- same "don't ask when there's only one
-    /// legal answer" treatment `OrderTriggers` gets for a singleton group.
+    /// there's no real choice of *mode* -- same "don't ask when there's
+    /// only one legal answer" treatment `OrderTriggers` gets for a
+    /// singleton group. But *which* Mountain still asks once: the
+    /// reference logs a real decision for the first sacrifice pick even
+    /// when the aggregate choice is forced (2 candidates for 2 needed),
+    /// only going silent on the final pick once exactly 1 candidate
+    /// remains (`sacrifice_lands_needed`'s doc / `drain_pending_cast_or_
+    /// decide`'s per-pick auto-resolve comment -- root-caused against the
+    /// v4 corpus's own candidate-count sequences).
     #[test]
-    fn fireblast_auto_resolves_to_the_only_affordable_mode() {
+    fn fireblast_auto_resolves_cast_mode_but_still_asks_the_first_sacrifice_pick() {
         let mut state = empty_game();
         // Only 2 Mountains: nowhere near {4}{R}{R}, but exactly enough to
         // sacrifice for the alt cost.
-        put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
-        put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        let m1 = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        let m2 = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
         let fireblast = put_in_hand(&mut state, PlayerId::P0, "Fireblast");
         state.priority_player = PlayerId::P0;
         state.step = Step::Main1;
@@ -2040,11 +2438,88 @@ mod tests {
         step(&mut state, Action::CastSpell(fireblast)).unwrap();
         step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
 
-        // No ChooseCastMode decision: straight through to the spell
-        // landing on the stack, paid via the alt cost.
+        // No ChooseCastMode decision (only the alt cost is affordable),
+        // but a real ChooseCostTargets for the first of the 2 Mountains --
+        // both are legal candidates even though both will end up
+        // sacrificed either way.
+        let first_pick = match advance_until_decision(&mut state) {
+            Decision::ChooseCastMode { .. } => panic!("only the alt cost is affordable, so there's nothing to choose"),
+            Decision::ChooseCostTargets { remaining, candidates, .. } => {
+                assert_eq!(remaining, 2);
+                let mut sorted = candidates.clone();
+                sorted.sort_unstable();
+                let mut expected = vec![m1, m2];
+                expected.sort_unstable();
+                assert_eq!(sorted, expected);
+                candidates[0]
+            }
+            other => panic!("expected ChooseCostTargets, got {other:?}"),
+        };
+        step(&mut state, Action::ChooseCostTarget(first_pick)).unwrap();
+
+        // The second (and final) pick is now forced to the one remaining
+        // Mountain -- silently auto-resolved, no second ChooseCostTargets.
         let decision = advance_until_decision(&mut state);
-        assert!(!matches!(decision, Decision::ChooseCastMode { .. }), "only the alt cost is affordable, so there's nothing to choose");
+        assert!(!matches!(decision, Decision::ChooseCostTargets { .. }), "exactly 1 Mountain left for the last pick is no real choice");
         assert_eq!(state.players[0].graveyard.len(), 2);
+        assert_eq!(state.stack.len(), 1);
+    }
+
+    /// Lava Dart's flashback cost (`FlashbackCost::SacrificeLands(1)`) is
+    /// unconditional (no mana alternative to choose between first, unlike
+    /// Fireblast) but still asks a real `Decision::ChooseCostTargets` for
+    /// *which* Mountain when more than 1 is controlled.
+    #[test]
+    fn lava_dart_flashback_asks_which_mountain_to_sacrifice() {
+        let mut state = empty_game();
+        for _ in 0..3 {
+            put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        }
+        let lava_dart = put_in_graveyard(&mut state, PlayerId::P0, "Lava Dart");
+        state.priority_player = PlayerId::P0;
+        state.step = Step::Main1;
+
+        step(&mut state, Action::CastSpell(lava_dart)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+
+        let pick = match advance_until_decision(&mut state) {
+            Decision::ChooseCostTargets { player, source, cost_kind, remaining, candidates } => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(source, lava_dart);
+                assert_eq!(cost_kind, CostKind::SacrificeLands);
+                assert_eq!(remaining, 1);
+                assert_eq!(candidates.len(), 3);
+                candidates[1]
+            }
+            other => panic!("expected ChooseCostTargets, got {other:?}"),
+        };
+        step(&mut state, Action::ChooseCostTarget(pick)).unwrap();
+
+        advance_until_decision(&mut state); // drives the remaining cast stages (cost payment, stack push, exile-on-resolve)
+        assert_eq!(state.players[0].graveyard.len(), 1, "the sacrificed Mountain, not Lava Dart itself (flashback exiles on resolution)");
+        assert!(state.players[0].graveyard.contains(&pick));
+        assert_eq!(state.players[0].battlefield.len(), 2);
+        assert_eq!(state.stack.len(), 1);
+    }
+
+    /// Exactly 1 controlled Mountain for a 1-Mountain flashback cost is no
+    /// real choice -- same auto-resolve shortcut as
+    /// `fireblast_auto_resolves_to_the_only_affordable_mode`.
+    #[test]
+    fn lava_dart_flashback_auto_resolves_with_exactly_one_mountain() {
+        let mut state = empty_game();
+        put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        let lava_dart = put_in_graveyard(&mut state, PlayerId::P0, "Lava Dart");
+        state.priority_player = PlayerId::P0;
+        state.step = Step::Main1;
+
+        step(&mut state, Action::CastSpell(lava_dart)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+
+        let decision = advance_until_decision(&mut state);
+        assert!(!matches!(decision, Decision::ChooseCostTargets { .. }), "exactly 1 Mountain for a 1-Mountain cost is no real choice");
+        assert_eq!(state.players[0].graveyard.len(), 1);
+        assert_eq!(state.players[0].battlefield.len(), 0);
         assert_eq!(state.stack.len(), 1);
     }
 
@@ -2273,7 +2748,12 @@ mod tests {
             }
             other => panic!("expected Discard, got {other:?}"),
         }
-        assert_eq!(state.players[0].graveyard, vec![robbery, lava_dart], "Highway Robbery then the discarded card, in that order");
+        // 608.2m: Highway Robbery moves to the graveyard only as the very
+        // *last* part of its own resolution -- after the discard its own
+        // "you may... if you do" text triggered -- so the discarded card
+        // lands in the graveyard first, Highway Robbery itself second (see
+        // `PendingOptionalCost::spell_resume`'s doc).
+        assert_eq!(state.players[0].graveyard, vec![lava_dart, robbery], "the discarded card, then Highway Robbery itself, in that order");
         assert_eq!(state.players[0].hand.len(), 1, "the undiscarded Lightning Bolt is still in hand; the 2 drawn cards came from an empty library");
     }
 
@@ -2292,7 +2772,26 @@ mod tests {
         let decision = pass_until_stack_resolves(&mut state);
         assert!(matches!(decision, Decision::ChooseOptionalCost { sacrifice_payable: true, .. }));
         step(&mut state, Action::ChooseOptionalCost(OptionalCostChoice::SacrificeLand)).unwrap();
+
+        // 2 Mountains for a 1-Mountain cost is a real choice (candidates >
+        // 1) -- see `sacrifice_lands_needed`'s doc for the per-pick
+        // auto-resolve rule this is *not* hitting.
+        let picked = match advance_until_decision(&mut state) {
+            Decision::ChooseCostTargets { player, source, cost_kind, remaining, candidates } => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(source, robbery);
+                assert_eq!(cost_kind, CostKind::SacrificeLands);
+                assert_eq!(remaining, 1);
+                assert_eq!(candidates.len(), 2);
+                candidates[0]
+            }
+            other => panic!("expected ChooseCostTargets, got {other:?}"),
+        };
+        step(&mut state, Action::ChooseCostTarget(picked)).unwrap();
+        advance_until_decision(&mut state); // drives the sacrifice + "draw two" resolution
+
         assert_eq!(state.players[0].battlefield.len(), 1, "exactly 1 of the 2 Mountains should have been sacrificed");
+        assert!(state.players[0].graveyard.contains(&picked));
         assert_eq!(state.players[0].graveyard.len(), 2, "Highway Robbery + the sacrificed Mountain");
     }
 
@@ -2359,18 +2858,53 @@ mod tests {
         assert_eq!(state.objects.get(temper).zone, Zone::Graveyard, "resolves to the graveyard as normal (madness doesn't change that)");
     }
 
+    /// Root-caused against `game_20260713_002149_0004.txt` (decision 26) and
+    /// `game_20260713_002156_0014.txt` (decision 45): the reference offers
+    /// `ChooseMadnessCast` unconditionally -- no affordability pre-check --
+    /// then lets the attempt begin a real cast (a genuine, trace-logged
+    /// target pick) that only fails at cost payment, reverting the card to
+    /// the graveyard. See `drain_pending_madness_or_decide`'s doc for the
+    /// full citation; this replaces a prior (wrong) version of this test
+    /// that asserted the opposite -- a silent, no-decision auto-resolve.
     #[test]
-    fn fiery_temper_discard_auto_resolves_to_graveyard_when_madness_cost_unaffordable() {
+    fn fiery_temper_madness_attempt_fizzles_to_the_graveyard_when_unaffordable() {
         let mut state = empty_game(); // no Mountains: {R} is never payable
         let temper = put_in_hand(&mut state, PlayerId::P0, "Fiery Temper");
         state.engine.pending_discard = Some(PendingDiscard { player: PlayerId::P0, count: 1, resume: DiscardResume::None });
         step(&mut state, Action::Discard(vec![temper])).unwrap();
-        // No ChooseMadnessCast decision: silently auto-resolved to the
-        // graveyard, same "don't ask when there's no real choice" shortcut
-        // as Fireblast's cast mode.
-        let decision = advance_until_decision(&mut state);
-        assert!(!matches!(decision, Decision::ChooseMadnessCast { .. }));
-        assert_eq!(state.objects.get(temper).zone, Zone::Graveyard);
+        assert_eq!(state.objects.get(temper).zone, Zone::Exile, "Madness exiles instead of graveyarding, same as the affordable case");
+
+        match advance_until_decision(&mut state) {
+            Decision::ChooseMadnessCast { player, card } => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(card, temper);
+            }
+            other => panic!("expected ChooseMadnessCast (always offered, even when unaffordable), got {other:?}"),
+        }
+        step(&mut state, Action::ChooseMadnessCast(true)).unwrap();
+
+        // The attempt proceeds through a real target pick, exactly like any
+        // other cast -- this is the decision the reference's own
+        // SELECT_TARGETS record captures for an ultimately-unpayable
+        // attempt.
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets { player, spell, legal_targets, .. } => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(spell, temper);
+                let target = Target::Player(PlayerId::P1);
+                assert!(legal_targets.contains(&target));
+                step(&mut state, Action::ChooseTarget(target)).unwrap();
+            }
+            other => panic!("expected ChooseTargets, got {other:?}"),
+        }
+
+        // Only now, at cost payment (no Mountain exists to tap), does the
+        // attempt fail -- reverting to the graveyard (not back to exile,
+        // and never landing on the stack/resolving).
+        advance_until_decision(&mut state);
+        assert_eq!(state.objects.get(temper).zone, Zone::Graveyard, "a failed madness attempt goes to the graveyard, not back to exile");
+        assert!(state.stack.is_empty(), "the failed cast must not leave a stack item behind");
+        assert_eq!(state.players[1].life, 20, "no damage: the cast never actually resolved");
     }
 
     #[test]
