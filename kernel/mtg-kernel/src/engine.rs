@@ -2437,6 +2437,40 @@ fn finalize_cast(state: &mut GameState) {
 /// (`Cost::zero()`) can never actually fail this check (paying nothing is
 /// always affordable), so this branch is unreachable for Plot -- the
 /// madness-cost check is the only real discriminator needed here.
+///
+/// Root-caused (increment 15) against `game_20260713_002201_0023.txt`
+/// decision 127: the only reachable caller of this function today is
+/// `finalize_cast`'s `cost_override` branch, itself only reachable from
+/// `apply_choose_madness_cast`'s `cast_it == true` arm -- i.e. this always
+/// runs as the tail end of *resolving* a Madness-offer triggered ability
+/// (`advance_until_decision`'s `top.madness_offer` interception), exactly
+/// the same "this stack item's resolution just concluded" moment
+/// `apply_choose_madness_cast`'s own `cast_it == false` (decline) branch
+/// already models with its `collect_and_queue_triggers`/`reset_priority`
+/// pair -- see that branch's comment ("this is no longer a side-channel
+/// decision that skips the stack, so it owes the same priority reset").
+/// This function was missing that same pair: an *attempted-but-unpayable*
+/// Madness cast popped the spell off the stack (same net stack-length
+/// change as a genuine resolution) but left `priority_passes` at whatever
+/// stale value they held from the "both players already passed, then
+/// intercepted a madness offer" moment that led here -- typically
+/// `[true, true]`, since that is the only way `Decision::ChooseMadnessCast`
+/// is ever reached. With the stack now empty and `priority_passes` still
+/// `[true, true]`, `advance_until_decision`'s very next loop iteration
+/// treated that as "both players passed with an empty stack" and called
+/// `advance_step` immediately -- skipping the fresh priority window 601.2a
+/// grants the active player once a cast attempt (successful or reversed)
+/// concludes. In the 0023 trace: PlayerRL1 discards Fiery Temper (Madness)
+/// via Faithless Looting's Flashback-paid draw-2-discard-2, having just
+/// spent every untapped Mountain on that Flashback cost; the Madness offer
+/// is accepted (decision 126 chooses its target) but `{R}` can no longer be
+/// paid, so the attempt fizzles to the graveyard right here -- and the
+/// reference's own next record for PlayerRL1 (decision 127) is a genuine,
+/// still-`Precombat Main` `Play Mountain`, not the kernel's skip straight
+/// past combat into `Main2`. Fixed by giving this function the same
+/// `collect_and_queue_triggers`/`reset_priority` pair `apply_choose_
+/// madness_cast`'s decline branch already has, rather than leaving
+/// `priority_passes` untouched.
 fn abort_cast(state: &mut GameState, pending: PendingCast) {
     let item = state.stack.pop();
     debug_assert!(item.is_some_and(|i| i.source == pending.spell), "abort_cast expects its spell's placeholder to be the top of the stack");
@@ -2450,6 +2484,8 @@ fn abort_cast(state: &mut GameState, pending: PendingCast) {
         _ => unreachable!("origin_zone is always Hand, Graveyard, or Exile"),
     }
     state.objects.get_mut(pending.spell).zone = to_zone;
+    collect_and_queue_triggers(state);
+    reset_priority(state);
 }
 
 /// Pushes the ability's `StackItem`. If this ability's cost has a
@@ -3249,6 +3285,11 @@ mod tests {
     #[test]
     fn fiery_temper_madness_attempt_fizzles_to_the_graveyard_when_unaffordable() {
         let mut state = empty_game(); // no Mountains: {R} is never payable
+        // Pinned to Main1 (matching the real corpus scenario this test's
+        // increment-15 addendum root-causes against) rather than whatever
+        // step `empty_game()` defaults to -- see that addendum below.
+        state.step = Step::Main1;
+        state.active_player = PlayerId::P0;
         let temper = put_in_hand(&mut state, PlayerId::P0, "Fiery Temper");
         state.engine.pending_discard = Some(PendingDiscard { player: PlayerId::P0, count: 1, resume: DiscardResume::None });
         step(&mut state, Action::Discard(vec![temper])).unwrap();
@@ -3284,10 +3325,36 @@ mod tests {
         // Only now, at cost payment (no Mountain exists to tap), does the
         // attempt fail -- reverting to the graveyard (not back to exile,
         // and never landing on the stack/resolving).
-        advance_until_decision(&mut state);
+        let after_abort = advance_until_decision(&mut state);
         assert_eq!(state.objects.get(temper).zone, Zone::Graveyard, "a failed madness attempt goes to the graveyard, not back to exile");
         assert!(state.stack.is_empty(), "the failed cast must not leave a stack item behind");
         assert_eq!(state.players[1].life, 20, "no damage: the cast never actually resolved");
+
+        // Regression test (increment 15) for `abort_cast`'s own missing
+        // priority reset -- root-caused against `game_20260713_002201_
+        // 0023.txt` decision 127. Before that fix, `abort_cast` popped the
+        // spell off the stack but never touched `priority_passes`/bumped
+        // `priority_round` the way every other "a stack item just stopped
+        // being on the stack" transition does (`finalize_cast`'s success
+        // path, `apply_choose_madness_cast`'s decline branch, an ordinary
+        // `resolve_top_of_stack`). Since a Madness offer is only ever
+        // reached via `advance_until_decision`'s `priority_passes ==
+        // [true, true]` branch, `priority_passes` is still `[true, true]`
+        // stale from that same branch here -- with the stack now empty and
+        // untouched-since passes still both `true`, the *same*
+        // `advance_until_decision` call fell straight through to
+        // `advance_step`, silently skipping the active player's genuine
+        // fresh priority window (117.5/601.2a: casting is reversed as
+        // though it never began, priority is not thereby lost) instead of
+        // ever offering it. The fix must make this same single call return
+        // a real `CastSpellOrPass` for the active player, still in
+        // `Step::Main1`, not whatever step `advance_step` would have
+        // fast-forwarded to.
+        assert_eq!(state.step, Step::Main1, "the failed cast must not advance the step -- the active player still owes a genuine priority window here");
+        match after_abort {
+            Decision::CastSpellOrPass { player, .. } => assert_eq!(player, PlayerId::P0, "the active player, not whoever advance_step would have picked next, must be re-offered priority"),
+            other => panic!("expected a fresh CastSpellOrPass reprompt right after the aborted cast, got {other:?}"),
+        }
     }
 
     #[test]

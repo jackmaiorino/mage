@@ -357,24 +357,53 @@ impl HarnessSurfaceV2 {
                         self.stack_len_round_seen = Some(state.engine.priority_round);
                     }
                     // `resetPassed()` gap (see `mana_count_at_last_stack_
-                    // change`'s doc): the *opponent* activating a mana
-                    // ability since `player`'s own item last landed on the
-                    // stack is a real, fresh reason for `player` to be asked
-                    // again for real, even though that item is still
-                    // sitting unresolved -- only suppress the "my own item,
+                    // change`'s doc): activating a mana ability since
+                    // `player`'s own item last landed on the stack is a
+                    // real, fresh reason for `player` to be asked again for
+                    // real, even though that item is still sitting
+                    // unresolved -- only suppress the "my own item,
                     // nothing's happened since it landed" case when the
                     // mana-ability count hasn't moved since the stack was
-                    // last this size, or moved only because `player`
-                    // themselves activated one.
+                    // last this size.
+                    //
+                    // Root-caused (increment 15) against
+                    // `game_20260713_002207_0031.txt` decision 197: this
+                    // used to also require `last_mana_ability_activator !=
+                    // Some(*player)` -- i.e. only the *opponent's* mana tap
+                    // counted, not `player`'s own -- which is too narrow.
+                    // `ComputerPlayerRL.act`'s `if (ability.isUsesStack())
+                    // pass(game)` (predicate point 4, `surface.rs`'s module
+                    // doc) is a one-shot tied to the exact act() call that
+                    // completed the stack-using cast/activation; it does
+                    // not re-fire on any *later*, unrelated act() call by
+                    // that same player, mana ability included (a mana
+                    // ability is never itself stack-using, so its own
+                    // act() call never appends the extra pass). In 0031,
+                    // SelfPlay activates the Blood Token (fresh stack item,
+                    // correctly suppressed once), then -- still holding
+                    // priority after PlayerRL1's own intervening mana taps
+                    // reset both `priority_passes` flags -- activates a
+                    // mana ability *themselves* (decision 196); the
+                    // reference's very next SelfPlay record (197) is a
+                    // real, fully-logged `Pass` alongside a genuine
+                    // `{T}: Add {R}.` option, not a silent re-suppression.
+                    // Requiring the activator to be the *opponent* left
+                    // this exact window silently force-passed instead,
+                    // permanently desyncing SelfPlay's trace cursor by one
+                    // real record -- the Blood Token's own `Draw a card`
+                    // then resolved (via the ordinary two-consecutive-
+                    // passes path) one priority window earlier than the
+                    // reference, applying the draw before `check_state`
+                    // for what the driver mistook for decision 197 (really
+                    // the reference's decision 201) expected it.
                     if self.last_seen_stack_len != Some(state.stack.len()) {
                         self.last_seen_stack_len = Some(state.stack.len());
                         self.mana_count_at_last_stack_change = state.engine.mana_ability_activations;
                     }
-                    let opponent_mana_activity_since_stack_change = state.engine.mana_ability_activations != self.mana_count_at_last_stack_change
-                        && state.engine.last_mana_ability_activator != Some(*player);
+                    let mana_activity_since_stack_change = state.engine.mana_ability_activations != self.mana_count_at_last_stack_change;
                     let stack_top_is_fresh_own_item = state.stack.len() > self.round_opening_stack_len
                         && state.stack.last().is_some_and(|item| item.controller == *player)
-                        && !opponent_mana_activity_since_stack_change;
+                        && !mana_activity_since_stack_change;
                     // One-shot madness-cast exemption -- see
                     // `madness_cast_reprompt_exemption`'s doc. Consumed
                     // (cleared) the moment we reach *any* `CastSpellOrPass`
@@ -534,6 +563,65 @@ impl HarnessSurfaceV2 {
                     // (the `cast_it == true` branch) unconditionally calls
                     // `begin_cast_ex`, which always sets it.
                     self.madness_cast_reprompt_exemption = state.engine.pending_cast.as_ref().map(|p| p.spell);
+                }
+                result
+            }
+            SurfaceAction::Action(Action::OrderTriggers(perm)) => {
+                // Snapshot *before* applying: was the stack top, right now,
+                // the exact card `madness_cast_reprompt_exemption` is still
+                // armed for? Only that specific case (a same-round Madness
+                // cast's own resulting triggers) gets the bump below --
+                // see the doc block right after this match arm for why an
+                // unconditional bump (every `OrderTriggers`, regardless of
+                // what it followed) regresses ordinary act()-driven casts.
+                let madness_exempt_card_still_on_top =
+                    self.madness_cast_reprompt_exemption.is_some_and(|card| state.stack.last().is_some_and(|item| item.source == card));
+                let result = engine::step(state, Action::OrderTriggers(perm));
+                // A triggered ability landing on the stack (`engine::
+                // apply_order_triggers` -> `push_trigger_onto_stack`) never
+                // goes through `ComputerPlayerRL.act()` on its own -- the
+                // reference's `GameImpl.checkTriggered` places it there
+                // automatically, with no `pass(game)`-appending player
+                // action anywhere in that path (`chooseTriggeredAbility`'s
+                // order pick is itself silent -- see `Decision::
+                // OrderTriggers`'s own handling in the driver, no trace
+                // record consumed). But that alone does *not* mean every
+                // `OrderTriggers` application should bump `round_opening_
+                // stack_len` past what it just pushed: for an *ordinary*,
+                // act()-driven cast/activation (`finalize_cast`/`finalize_
+                // activation`, not a Madness cast), `ComputerPlayerRL.act`'s
+                // `pass(game)` already fired for that action itself, and
+                // the correct behavior is for that one-shot suppression to
+                // cover the very next ask *regardless* of whatever triggers
+                // happened to piggyback on the same stack-growth event --
+                // root-caused (increment 15) against `game_20260713_
+                // 002158_0018.txt` decision 302 (a plain, non-Madness cast
+                // whose own 2 same-controller triggers land right after):
+                // an earlier, unconditional version of this bump wrongly
+                // let PlayerRL1's own immediate reprompt through as a real
+                // ask there, when the reference silently force-passes it
+                // and resolves both triggers first (`opp_life` already
+                // reflecting both by the reference's own next real ask).
+                //
+                // The one case that *does* need the bump -- root-caused
+                // against `game_20260713_002212_0039.txt` decision 151 --
+                // is a *Madness* cast's own triggers: `apply_choose_
+                // madness_cast`'s `cast_it == true` branch never goes
+                // through `act()` either (`MadnessCastEffect.apply()` casts
+                // from *inside* a triggered ability's own resolution --
+                // see `madness_cast_reprompt_exemption`'s doc), so nothing
+                // about that cast *or* its own resulting triggers (here,
+                // Guttersnipe's "whenever you cast an instant or sorcery"
+                // firing twice off SelfPlay's own Madness-cast Fiery
+                // Temper) should ever engage predicate point 4's one-shot
+                // at all. `madness_exempt_card_still_on_top` (snapshotted
+                // above, *before* this application, since the exemption's
+                // own card is what OrderTriggers pushes on top of) tells
+                // the two cases apart: only bump when the triggers being
+                // ordered right now are landing directly on top of the
+                // still-armed Madness-cast card itself.
+                if result.is_ok() && madness_exempt_card_still_on_top {
+                    self.round_opening_stack_len = state.stack.len();
                 }
                 result
             }
@@ -949,6 +1037,114 @@ mod tests {
         assert_eq!(stack_top_is_casters_own_count, 1, "P0 must be suppressed exactly once (their immediate reprompt), not re-suppressed after P1's mana ability, got {suppressions:?}");
     }
 
+    /// Regression test (increment 15) for `mana_activity_since_stack_
+    /// change`'s own `!= Some(*player)` activator restriction, removed this
+    /// increment -- root-caused against `game_20260713_002207_0031.txt`
+    /// decision 197. Continues the exact scenario `main_phase_reprompt_is_
+    /// un_suppressed_after_opponent_mana_activity_since_the_cast` (above)
+    /// already proves un-suppresses P0 (P1's mana ability, an *opponent*
+    /// activity, correctly un-suppresses P0's next ask even with Lightning
+    /// Bolt still unresolved) one step further: once P0 is legitimately
+    /// asked for real, if P0 *themselves* also taps a mana ability (not a
+    /// stack-using action -- `Action::ActivateManaAbility` never re-arms
+    /// `StackTopIsCastersOwn`, matching `ComputerPlayerRL.act`'s `if
+    /// (ability.isUsesStack())` gate never firing for one), P0's *next* ask
+    /// must still be genuine too. The removed restriction required `last_
+    /// mana_ability_activator != Some(*player)` -- i.e. only credited
+    /// *someone else's* mana tap as "activity since the cast" -- so the
+    /// instant the *most recent* tap happened to be P0's own, the un-
+    /// suppression this test's setup already earned was wrongly withdrawn,
+    /// re-arming `StackTopIsCastersOwn` for this exact ask even though
+    /// nothing about *whose* mana ability it is changes Java's real
+    /// mechanics here (605.3b: no mana ability, anyone's, ever re-engages
+    /// predicate point 4's one-shot). In the 0031 trace this permanently
+    /// desynced SelfPlay's cursor by one record, letting the kernel resolve
+    /// the Blood Token's `Draw a card` a full priority window early.
+    #[test]
+    fn main_phase_reprompt_is_still_un_suppressed_after_the_casters_own_mana_activity_follows_the_opponents() {
+        let mut state = empty_game();
+        let bolt = card_def::card_id_by_name("Lightning Bolt").unwrap();
+        let bolt_id = state.objects.push(crate::state::GameObject {
+            card_def: bolt,
+            name: "Lightning Bolt".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Hand,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.players[0].hand.push(bolt_id);
+        // P0: one Mountain pays for the bolt, a second and third stay
+        // untapped -- one to be P0's *own* mana activity under test, one
+        // left over so P0's final ask is a genuine option, not a trivial
+        // `NoRealOption` Pass that would prove nothing about
+        // `StackTopIsCastersOwn` specifically.
+        for _ in 0..3 {
+            let m = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+            state.objects.get_mut(m).tapped = false;
+        }
+        let p1_mountain = put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
+        state.objects.get_mut(p1_mountain).tapped = false;
+
+        state.step = Step::Main1;
+        state.active_player = PlayerId::P0;
+        state.priority_player = PlayerId::P0;
+
+        let mut surface = HarnessSurfaceV2::new();
+
+        // Establish the pre-cast baseline (`round_opening_stack_len` etc.)
+        // via a real `next_decision` call *before* casting -- same
+        // requirement as `main_phase_reprompt_is_un_suppressed_after_
+        // opponent_mana_activity_since_the_cast`'s own `d0`: skipping this
+        // means the first resync happens only once `next_decision` is next
+        // called (after the cast already grew the stack), wrongly
+        // capturing the *post*-growth length as the baseline.
+        let d0 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) = &d0 else { panic!("expected CastSpellOrPass, got {d0:?}") };
+        assert_eq!(*player, PlayerId::P0);
+        assert!(castable_spells.contains(&bolt_id));
+        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+        let d1 = surface.next_decision(&mut state);
+        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P0), "got {d1:?}");
+        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+
+        // P0's own immediate reprompt: suppressed. P1 asked next.
+        let d2 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        assert_eq!(*player, PlayerId::P1);
+        assert!(mana_abilities.contains(&p1_mountain));
+        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain))).unwrap();
+
+        // P1's mana ability (opponent activity) legitimately un-suppresses
+        // P0 -- already covered by the test above, re-established here as
+        // this test's own starting point.
+        let d3 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d3 else { panic!("expected a genuine ask for P0 after P1's mana activity, got {d3:?}") };
+        assert_eq!(*player, PlayerId::P0);
+        assert_eq!(mana_abilities.len(), 2, "both of P0's remaining Mountains should be offered");
+        let p0_mountain_to_tap = mana_abilities[0];
+        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p0_mountain_to_tap))).unwrap();
+
+        // The critical assertion: P0's *own* mana tap must not withdraw the
+        // un-suppression P1's earlier activity already earned -- P0's next
+        // ask must still be genuine, with Lightning Bolt still unresolved.
+        let d4 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d4 else {
+            panic!("expected a genuine ask for P0 after their own mana tap, got {d4:?} -- StackTopIsCastersOwn must not re-arm merely because the most recent tap was P0's own")
+        };
+        assert_eq!(*player, PlayerId::P0);
+        assert_eq!(mana_abilities.len(), 1, "P0's one remaining Mountain should still be offered");
+        assert_eq!(state.stack.len(), 1, "Lightning Bolt must still be unresolved throughout");
+
+        let suppressions = surface.suppressions();
+        let stack_top_is_casters_own_count = suppressions.iter().filter(|s| s.reason == SuppressionReason::StackTopIsCastersOwn).count();
+        assert_eq!(stack_top_is_casters_own_count, 1, "P0 must be suppressed exactly once total (their immediate reprompt), got {suppressions:?}");
+    }
+
     /// Regression test for the increment-14 fix's own false-positive trap
     /// (root-caused against `game_20260713_002202_0024.txt`: an intermediate
     /// version of the fix above keyed its "did the opponent do something"
@@ -1360,5 +1556,236 @@ mod tests {
             surface.suppressions()
         );
         assert_eq!(state.stack.len(), 1, "Fiery Temper must still be unresolved on the stack at the reprompt");
+    }
+
+    /// Regression test (increment 15) for the `Action::OrderTriggers`
+    /// `round_opening_stack_len` bump in `apply` -- root-caused against
+    /// `game_20260713_002212_0039.txt` decision 151. Same shape as
+    /// `madness_cast_reprompt_is_not_silently_suppressed` (above), but with
+    /// *two* Guttersnipes on P0's own battlefield: casting Fiery Temper (an
+    /// instant/sorcery) via Madness fires both "whenever you cast an
+    /// instant or sorcery" triggers, a same-controller 2+ group that goes
+    /// through `Decision::OrderTriggers`/`Action::OrderTriggers` -- unlike
+    /// a single such trigger, which `engine::drain_pending_triggers_or_
+    /// decide` auto-pushes with no surfaced decision at all (see `apply`'s
+    /// `OrderTriggers` doc for that gap). Both triggers land on the stack
+    /// immediately on top of the still-armed `madness_cast_reprompt_
+    /// exemption`'s own card; without the bump, they were `round_opening_
+    /// stack_len`-fresh and P0-controlled, so the reprompt right after
+    /// ordering them was wrongly re-suppressed by `StackTopIsCastersOwn`
+    /// (the exemption itself, keyed to the *exact* stack top matching the
+    /// Madness-cast card, no longer matched once a trigger sat on top of
+    /// it) -- letting the kernel resolve the first trigger (2 damage to
+    /// the opponent) a full priority window before the reference does.
+    #[test]
+    fn madness_cast_reprompt_is_not_silently_suppressed_by_its_own_resulting_triggers() {
+        let mut state = empty_game();
+        let temper_def = card_def::card_id_by_name("Fiery Temper").unwrap();
+        let temper = state.objects.push(crate::state::GameObject {
+            card_def: temper_def,
+            name: "Fiery Temper".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Exile,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+
+        let lava_dart_def = card_def::card_id_by_name("Lava Dart").unwrap();
+        let lava_dart = state.objects.push(crate::state::GameObject {
+            card_def: lava_dart_def,
+            name: "Lava Dart".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Hand,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.players[0].hand.push(lava_dart);
+
+        put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
+        put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
+
+        state.stack.push(crate::state::StackItem {
+            source: temper,
+            controller: PlayerId::P0,
+            targets: vec![],
+            inline_effect: None,
+            discarded: Vec::new(),
+            is_flashback: false,
+            mode_chosen: 0,
+            madness_offer: true,
+        });
+        state.engine.priority_passes = [true, true];
+        state.step = Step::Main1;
+        state.active_player = PlayerId::P0;
+        state.priority_player = PlayerId::P0;
+        let opponent_life_before = state.players[1].life;
+
+        let mut surface = HarnessSurfaceV2::new();
+        match surface.next_decision(&mut state) {
+            SurfaceDecision::Decision(Decision::ChooseMadnessCast { player, card }) => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(card, temper);
+            }
+            other => panic!("expected ChooseMadnessCast, got {other:?}"),
+        }
+        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(true))).unwrap();
+
+        match surface.next_decision(&mut state) {
+            SurfaceDecision::Decision(Decision::ChooseTargets { player, legal_targets, .. }) => {
+                assert_eq!(player, PlayerId::P0);
+                assert!(legal_targets.contains(&Target::Player(PlayerId::P1)));
+                surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+            }
+            other => panic!("expected ChooseTargets, got {other:?}"),
+        }
+
+        // Both Guttersnipe triggers, same controller -> a real
+        // `OrderTriggers` decision (unlike a lone trigger, silently
+        // auto-pushed with no decision at all).
+        match surface.next_decision(&mut state) {
+            SurfaceDecision::Decision(Decision::OrderTriggers { player, pending }) => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(pending.len(), 2, "both Guttersnipes' triggers must be in the same same-controller group");
+                surface.apply(&mut state, SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect()))).unwrap();
+            }
+            other => panic!("expected OrderTriggers for both Guttersnipe triggers, got {other:?}"),
+        }
+
+        // The critical assertion: P0's reprompt right after ordering their
+        // own triggers must still be genuine, and neither trigger may have
+        // resolved yet (both still sit on the stack, above Fiery Temper).
+        let reprompt = surface.next_decision(&mut state);
+        match &reprompt {
+            SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) => {
+                assert_eq!(*player, PlayerId::P0);
+                assert!(castable_spells.contains(&lava_dart), "expected Lava Dart still offered, got {reprompt:?}");
+            }
+            other => panic!("expected a real CastSpellOrPass reprompt for P0, got {other:?}"),
+        }
+        assert!(
+            !surface.suppressions().iter().any(|s| s.reason == SuppressionReason::StackTopIsCastersOwn),
+            "P0's reprompt must not be silently suppressed by their own just-ordered triggers, got {:?}",
+            surface.suppressions()
+        );
+        assert_eq!(state.stack.len(), 3, "Fiery Temper plus both unresolved Guttersnipe triggers must still be on the stack");
+        assert_eq!(state.players[1].life, opponent_life_before, "neither Guttersnipe trigger may have resolved yet");
+    }
+
+    /// Companion regression guard for the fix above -- root-caused against
+    /// `game_20260713_002158_0018.txt` decision 302, where an earlier,
+    /// *unconditional* version of the `OrderTriggers` bump (applied to
+    /// every `Action::OrderTriggers`, not just ones landing on a still-
+    /// armed Madness-cast card) wrongly let PlayerRL1's own immediate
+    /// reprompt through as a real ask right after an *ordinary* (non-
+    /// Madness) cast whose own same-controller trigger pair fires --
+    /// exactly the mechanism family this increment's own full-corpus diff
+    /// exists to catch. `ComputerPlayerRL.act`'s `pass(game)` really does
+    /// fire once for a plain stack-using cast (predicate point 4,
+    /// unaffected by whatever the cast happens to also trigger), so the
+    /// reference silently force-passes PlayerRL1 here and resolves both
+    /// triggers before ever asking again -- the bump must stay scoped to
+    /// the Madness-cast case the fix above targets, not fire for this one.
+    #[test]
+    fn ordinary_cast_reprompt_stays_suppressed_by_its_own_resulting_triggers() {
+        let mut state = empty_game();
+        let bolt = card_def::card_id_by_name("Lightning Bolt").unwrap();
+        let bolt_id = state.objects.push(crate::state::GameObject {
+            card_def: bolt,
+            name: "Lightning Bolt".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Hand,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.players[0].hand.push(bolt_id);
+        put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        let p0_second_mountain = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        state.objects.get_mut(p0_second_mountain).tapped = false;
+        put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
+        put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
+        // P1 needs a real option too -- otherwise their own post-cast ask
+        // auto-passes via `NoRealOption` (transparent, not interceptable),
+        // both players end up passed, and *one* Guttersnipe trigger
+        // resolves before `next_decision` ever returns control here --
+        // which then opens a genuinely fresh round and un-suppresses P0
+        // for an unrelated reason (correct reference behavior, but not
+        // what this test means to isolate: whether P0's *immediate*
+        // reprompt, right after the triggers are ordered, stays
+        // suppressed).
+        let p1_mountain = put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
+        state.objects.get_mut(p1_mountain).tapped = false;
+
+        state.step = Step::Main1;
+        state.active_player = PlayerId::P0;
+        state.priority_player = PlayerId::P0;
+
+        let mut surface = HarnessSurfaceV2::new();
+        // Establish the pre-cast baseline via a real `next_decision` call
+        // first -- see the companion fix's own test, above, for why
+        // skipping this wrongly captures the *post*-cast stack length as
+        // the "round opened this tall" baseline.
+        match surface.next_decision(&mut state) {
+            SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) => {
+                assert_eq!(player, PlayerId::P0);
+                assert!(castable_spells.contains(&bolt_id));
+            }
+            other => panic!("expected CastSpellOrPass, got {other:?}"),
+        }
+        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+        match surface.next_decision(&mut state) {
+            SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) => {
+                assert_eq!(player, PlayerId::P0);
+                surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+            }
+            other => panic!("expected ChooseTargets, got {other:?}"),
+        }
+
+        match surface.next_decision(&mut state) {
+            SurfaceDecision::Decision(Decision::OrderTriggers { player, pending }) => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(pending.len(), 2);
+                surface.apply(&mut state, SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect()))).unwrap();
+            }
+            other => panic!("expected OrderTriggers for both Guttersnipe triggers, got {other:?}"),
+        }
+
+        // Unlike the Madness case above: this is a plain act()-driven cast,
+        // so the one-shot suppression still applies here, regardless of
+        // the triggers riding along on the same stack-growth event -- P1
+        // must be asked next (with a genuine option, so the ask stops
+        // right here rather than cascading past an unrelated auto-pass),
+        // not P0 again.
+        let reprompt = surface.next_decision(&mut state);
+        match &reprompt {
+            SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) => {
+                assert_eq!(*player, PlayerId::P1, "P0's reprompt must stay suppressed; P1 should be asked next");
+                assert!(mana_abilities.contains(&p1_mountain));
+            }
+            other => panic!("expected a CastSpellOrPass ask for P1, got {other:?}"),
+        }
+        assert_eq!(state.stack.len(), 3, "Lightning Bolt plus both unresolved Guttersnipe triggers must still be on the stack when P1 is asked");
+        assert_eq!(
+            surface.suppressions().iter().filter(|s| s.reason == SuppressionReason::StackTopIsCastersOwn).count(),
+            1,
+            "P0's immediate reprompt must still be suppressed exactly once, got {:?}",
+            surface.suppressions()
+        );
     }
 }
