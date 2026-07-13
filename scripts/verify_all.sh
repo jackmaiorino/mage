@@ -7,8 +7,12 @@ set -euo pipefail
 REPO="/c/Users/Jack/IdeaProjects/mage"
 cd "$REPO"
 
-echo "[1/4] Maven compile (AIRL module)..."
-mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -DskipTests compile
+echo "[1/4] Maven install (AIRL + dependency modules; keeps local-repo jars fresh)..."
+# install, not compile: bare exec:java invocations resolve dependency modules
+# from installed jars. A stale jar (June 9) silently masked a month of Mage-core
+# fixes until corpus identity checks caught it. Installing here guarantees the
+# local repo always matches HEAD.
+mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests install
 
 echo "[2/4] Python syntax (ML service files)..."
 py -3.12 -m py_compile \

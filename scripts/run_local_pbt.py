@@ -725,6 +725,11 @@ class LocalPBT:
             "-pl", "Mage.Server.Plugins/Mage.Player.AIRL",
             "-am",
             "-DskipTests",
+            # compile MUST share the invocation with exec:java: a bare exec:java
+            # resolves dependency modules (Mage core) from the local repo's
+            # installed jars, which can be arbitrarily stale (June-9 jar served
+            # a month of runs; caught by corpus v4 identity checks jul13).
+            "compile",
             "exec:java",
             "-Dexec.mainClass=mage.player.ai.rl.RLTrainer",
             "-Dexec.args=" + args_str,
@@ -915,7 +920,7 @@ class LocalPBT:
 
                     cmd = (
                         f'mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL '
-                        f'-am -DskipTests exec:java '
+                        f'-am -DskipTests compile exec:java '
                         f'-Dexec.mainClass=mage.player.ai.rl.RLTrainer '
                         f'"-Dexec.args=league_bench"'
                     )
