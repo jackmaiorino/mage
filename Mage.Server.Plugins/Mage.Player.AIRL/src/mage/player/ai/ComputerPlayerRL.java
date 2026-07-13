@@ -10034,8 +10034,55 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
             //TODO: Implement holding priority for abilities that don't use the stack
             if (ability.isUsesStack()) {
+                maybeLogForcePassOpportunity(ability, game);
                 pass(game);
             }
+        }
+    }
+
+    private static final boolean FORCEPASS_TELEMETRY = EnvConfig.bool("RL_FORCEPASS_TELEMETRY", false);
+
+    /**
+     * Sol #88 telemetry: the force-pass above forecloses responding to our own
+     * stack-using casts (no hold-priority). Before minting the H3 harness that
+     * grants this capability, measure how often a real alternative existed.
+     * Logging only; gated off by default (costs one getPlayable per cast).
+     */
+    private void maybeLogForcePassOpportunity(Ability justActivated, Game game) {
+        if (!FORCEPASS_TELEMETRY || game == null || game.isSimulation()) {
+            return;
+        }
+        try {
+            List<ActivatedAbility> playable = getPlayable(game, true);
+            int nonManaOptions = 0;
+            StringBuilder types = new StringBuilder();
+            for (ActivatedAbility a : playable) {
+                if (a instanceof ManaAbility) {
+                    continue;
+                }
+                nonManaOptions++;
+                if (types.length() < 200) {
+                    if (types.length() > 0) {
+                        types.append(';');
+                    }
+                    types.append(a.getClass().getSimpleName());
+                }
+            }
+            String sourceName = "";
+            try {
+                MageObject src = game.getObject(justActivated.getSourceId());
+                sourceName = src == null ? justActivated.getRule() : src.getName();
+            } catch (Exception ignored) {
+            }
+            gameLogger.log(String.format(
+                    "FORCEPASS_OPPORTUNITY: after=%s turn=%d phase=%s non_pass_options=%d types=%s",
+                    sourceName,
+                    game.getTurnNum(),
+                    game.getPhase() != null ? String.valueOf(game.getPhase().getType()) : "",
+                    nonManaOptions,
+                    types));
+        } catch (Throwable ignored) {
+            // Telemetry must never affect gameplay.
         }
     }
 
