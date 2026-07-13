@@ -6991,15 +6991,50 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             MageObject object = game == null ? null : game.getObject(targetId);
             if (object != null) {
                 String controllerName = "";
+                String posKey = "";
                 if (object instanceof Permanent) {
                     Player controller = game.getPlayer(((Permanent) object).getControllerId());
                     controllerName = controller == null ? "" : controller.getName();
+                    // Same-name tie-break must be run-stable: UUID strings are
+                    // random across JVM runs. Battlefield creation order is not.
+                    posKey = String.format("%09d", ((Permanent) object).getCreateOrder());
+                } else if (object instanceof Card) {
+                    posKey = stableZonePositionKey((Card) object, game);
                 }
-                return "1|" + object.getName() + "|" + controllerName;
+                return "1|" + object.getName() + "|" + controllerName + "|" + posKey;
             }
         } catch (Exception ignored) {
         }
         return "9|" + targetId;
+    }
+
+    /**
+     * Run-stable position of a card within its owner's ordered zones (hand,
+     * then graveyard - both insertion-ordered LinkedHashSets). Same-named
+     * cards otherwise tie-break on random UUIDs, which differ across JVM runs.
+     */
+    private String stableZonePositionKey(Card card, Game game) {
+        try {
+            Player owner = game == null ? null : game.getPlayer(card.getOwnerId());
+            if (owner != null) {
+                int i = 0;
+                for (UUID id : owner.getHand()) {
+                    if (id.equals(card.getId())) {
+                        return "H" + String.format("%04d", i);
+                    }
+                    i++;
+                }
+                i = 0;
+                for (UUID id : owner.getGraveyard()) {
+                    if (id.equals(card.getId())) {
+                        return "G" + String.format("%04d", i);
+                    }
+                    i++;
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return "";
     }
 
     @Override

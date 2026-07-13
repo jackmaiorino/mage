@@ -62,7 +62,7 @@ public class TargetCard extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
+        Set<UUID> possibleTargets = new LinkedHashSet<>(); // deterministic candidate order (see TargetCardInHand)
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
@@ -97,7 +97,7 @@ public class TargetCard extends TargetObject {
      * set of all matching target in a player's hand
      */
     protected static Set<UUID> getAllPossibleTargetInHand(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
-        Set<UUID> possibleTargets = new HashSet<>();
+        Set<UUID> possibleTargets = new LinkedHashSet<>(); // deterministic candidate order (see TargetCardInHand)
         for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
             possibleTargets.add(card.getId());
         }
@@ -108,7 +108,7 @@ public class TargetCard extends TargetObject {
      * set of all matching target in a player's hand
      */
     protected static Set<UUID> getAllPossibleTargetInGraveyard(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
-        Set<UUID> possibleTargets = new HashSet<>();
+        Set<UUID> possibleTargets = new LinkedHashSet<>(); // deterministic candidate order (see TargetCardInHand)
         for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
             possibleTargets.add(card.getId());
         }
@@ -119,7 +119,7 @@ public class TargetCard extends TargetObject {
      * set of all matching target in a player's hand
      */
     protected static Set<UUID> getAllPossibleTargetInLibrary(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
-        Set<UUID> possibleTargets = new HashSet<>();
+        Set<UUID> possibleTargets = new LinkedHashSet<>(); // deterministic candidate order (see TargetCardInHand)
         for (Card card : player.getLibrary().getUniqueCards(game)) {
             if (filter.match(card, sourceControllerId, source, game)) {
                 possibleTargets.add(card.getId());
@@ -132,7 +132,7 @@ public class TargetCard extends TargetObject {
      * set of all matching target for a player in exile
      */
     protected static Set<UUID> getAllPossibleTargetInExile(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
-        Set<UUID> possibleTargets = new HashSet<>();
+        Set<UUID> possibleTargets = new LinkedHashSet<>(); // deterministic candidate order (see TargetCardInHand)
         UUID sourceId = source != null ? source.getSourceId() : null;
         for (Card card : game.getExile().getCardsInRange(game, sourceControllerId)) {
             if (filter.match(card, sourceControllerId, source, game)) {
@@ -146,7 +146,7 @@ public class TargetCard extends TargetObject {
      * set of all matching target in a player's command zone
      */
     protected static Set<UUID> getAllPossibleTargetInCommandZone(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
-        Set<UUID> possibleTargets = new HashSet<>();
+        Set<UUID> possibleTargets = new LinkedHashSet<>(); // deterministic candidate order (see TargetCardInHand)
         UUID sourceId = source != null ? source.getSourceId() : null;
         List<Card> possibleCards = game.getCommandersIds(player, CommanderCardType.ANY, false).stream()
                 .map(game::getCard)
@@ -166,7 +166,7 @@ public class TargetCard extends TargetObject {
      * set of all matching target in ANY zone
      */
     protected static Set<UUID> getAllPossibleTargetInAnyZone(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
-        Set<UUID> possibleTargets = new HashSet<>();
+        Set<UUID> possibleTargets = new LinkedHashSet<>(); // deterministic candidate order (see TargetCardInHand)
         for (Card card : game.getCards()) {
             if (filter.match(card, sourceControllerId, source, game)) {
                 possibleTargets.add(card.getId());
