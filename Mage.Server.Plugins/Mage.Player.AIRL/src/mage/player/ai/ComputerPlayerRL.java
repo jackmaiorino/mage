@@ -10074,6 +10074,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 sourceName = src == null ? justActivated.getRule() : src.getName();
             } catch (Exception ignored) {
             }
+            GameLogger gameLogger = resolveGameLogger();
+            if (gameLogger == null || !gameLogger.isEnabled()) {
+                return;
+            }
             gameLogger.log(String.format(
                     "FORCEPASS_OPPORTUNITY: after=%s turn=%d phase=%s non_pass_options=%d types=%s",
                     sourceName,
