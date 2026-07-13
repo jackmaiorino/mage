@@ -6679,32 +6679,15 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 String pickName = picked == null ? "STOP" : (game.getObject(picked) != null ? game.getObject(picked).getName() : "unknown");
                 trace("chooseTarget: single option, picked=" + pickName);
             } else {
-                // Check if all non-null candidates have the same name (trivial decision)
-                boolean allSameName = true;
-                String firstName = null;
-                for (UUID id : possible) {
-                    if (id == null) continue; // skip STOP sentinel
-                    MageObject obj = game.getObject(id);
-                    String name = obj != null ? obj.getName() : null;
-                    if (firstName == null) {
-                        firstName = name;
-                    } else if (!java.util.Objects.equals(firstName, name)) {
-                        allSameName = false;
-                        break;
-                    }
-                }
-
-                if (allSameName && firstName != null) {
-                    // All candidates are the same card - pick first non-null
-                    trace("chooseTarget: all same name (" + firstName + "), picking first");
-                    for (UUID id : possible) {
-                        if (id != null) {
-                            picked = id;
-                            break;
-                        }
-                    }
-                } else {
-                    // Non-trivial decision - use model inference
+                // Multi-candidate: ALWAYS the model's decision (Sol #87).
+                // The removed all-same-name shortcut was blind to player UUIDs
+                // (game.getObject returns null for players, and players sort
+                // before objects), so any-target windows with a single creature
+                // name on board silently auto-targeted the alphabetically-first
+                // PLAYER without consulting the model or logging a decision.
+                // Same-named permanents also differ in tapped/damage/counters/
+                // controller: the only safe shortcut is exactly one candidate.
+                {
                     trace("chooseTarget: calling RL model for target selection");
                     try {
                     StateSequenceBuilder.SequenceOutput baseState = getOrBuildBaseState(game);
