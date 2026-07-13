@@ -395,6 +395,17 @@ public class RLTrainer {
     // Sol #90 interim: below-tolerance qualification results become HOLDs
     // (no parent update, no kill strike) until the paired gate is built.
     private static final boolean POP_GATE_HOLD_FALLBACK = EnvConfig.bool("POP_GATE_HOLD_FALLBACK", false);
+    // Sol #90 paired gate: benchmark the candidate AND the current parent
+    // snapshot in the same tick and verdict on the *delta* (candidate minus
+    // parent) with a two-proportion 90% upper confidence bound, instead of
+    // comparing the candidate to a stale stored scalar. Supersedes
+    // POP_GATE_HOLD_FALLBACK's ADMIT/HOLD split with a three-state
+    // ADMIT/HOLD/REJECT verdict when enabled. Both flags default OFF so a
+    // running process (env baked in at JVM start) is unaffected until an
+    // operator restarts with the new env; see maybeRunPopulationTick.
+    private static final boolean POP_GATE_PAIRED = EnvConfig.bool("POP_GATE_PAIRED", false);
+    // One-sided 90% normal critical value, used for the paired delta UCB.
+    private static final double POP_PAIRED_Z90 = 1.2816;
     private static final int POP_POOL_MAX = EnvConfig.i32("POP_POOL_MAX", 16);
     // Source-conditional entropy: multiplier on the scheduled entropy coef by
     // episode opponent source. With a flat schedule at 0.02, anchor=1.0 and
@@ -414,6 +425,21 @@ public class RLTrainer {
     private static volatile double POP_PARENT_DEVBAR_WR = -1.0;
     private static volatile String POP_LAST_QUAL_CANDIDATE = "";
     private static volatile int POP_CONSEC_REJECTS = 0;
+    // Paired gate (POP_GATE_PAIRED): parent identity = last-admitted
+    // snapshot's absolute file path (the checkpoint the candidate is
+    // measured against). Null until the first paired admit; resolved from
+    // the pool as a fallback so upgrading a running population mid-flight
+    // (or reloading an old state file) still recovers the right parent.
+    private static volatile String POP_PARENT_SNAPSHOT_PATH = null;
+    // Most recent measured winrate of whichever snapshot is currently the
+    // parent identity. Reporting/diagnostics ONLY -- the paired gate always
+    // re-benchmarks both snapshots live each tick rather than trusting this
+    // stored number, because a single scalar is exactly the noisy signal
+    // the paired design replaces.
+    private static volatile double POP_LAST_PARENT_REMEASURED_WR = -1.0;
+    private static final int POP_VERDICT_HISTORY_MAX = 20;
+    private static final java.util.concurrent.CopyOnWriteArrayList<com.google.gson.JsonObject> POP_VERDICT_HISTORY =
+            new java.util.concurrent.CopyOnWriteArrayList<>();
     private static volatile double[] POP_ANCHOR_SKILL_WEIGHTS = null;
     private static volatile int[] POP_ANCHOR_SKILL_IDS = null;
 
@@ -4084,7 +4110,35 @@ public class RLTrainer {
      * @param oppDeckListFile   deck list the opponent uses
      * @param logContext        short label written to league events for per-matchup rows
      */
+    /** Winrate + sample-size pair, needed by the paired gate's confidence bound. */
+    private static final class BenchResult {
+        final double wr;
+        final long n;
+        BenchResult(double wr, long n) {
+            this.wr = wr;
+            this.n = n;
+        }
+    }
+
     private double runLeagueBenchmarkPolicy(
+            String rlPolicyKey,
+            LeagueOpponentSpec opponent,
+            String agentDeckListFile,
+            String oppDeckListFile,
+            int gamesPerMatchup,
+            String logContext
+    ) {
+        return runLeagueBenchmarkPolicyCounted(rlPolicyKey, opponent, agentDeckListFile,
+                oppDeckListFile, gamesPerMatchup, logContext).wr;
+    }
+
+    /**
+     * Same benchmark as {@link #runLeagueBenchmarkPolicy}, but also returns the
+     * actual number of completed games (winrate denominator can be less than
+     * pairs*gamesPerMatchup if individual game tasks throw). Needed by the
+     * paired-gate UCB, which requires both proportions' sample sizes.
+     */
+    private BenchResult runLeagueBenchmarkPolicyCounted(
             String rlPolicyKey,
             LeagueOpponentSpec opponent,
             String agentDeckListFile,
@@ -4102,15 +4156,15 @@ public class RLTrainer {
 
             if (oppDecks.isEmpty()) {
                 logger.warn("League benchmark: opponent deck pool is empty");
-                return 0.0;
+                return new BenchResult(0.0, 0);
             }
             if (agentDecks.isEmpty()) {
                 logger.warn("League benchmark: agent deck pool is empty");
-                return 0.0;
+                return new BenchResult(0.0, 0);
             }
             if (samePool && oppDecks.size() < 2) {
                 logger.warn("League benchmark requires at least 2 decks in shared pool; found " + oppDecks.size());
-                return 0.0;
+                return new BenchResult(0.0, 0);
             }
 
             final int benchThreads = LEAGUE_BENCHMARK_THREADS;
@@ -4130,7 +4184,7 @@ public class RLTrainer {
             }
             if (pairs.isEmpty()) {
                 logger.warn("League benchmark: no valid deck pairs");
-                return 0.0;
+                return new BenchResult(0.0, 0);
             }
 
             final int totalPlannedGames = pairs.size() * Math.max(1, gamesPerMatchup);
@@ -4260,10 +4314,10 @@ public class RLTrainer {
                         logContext, mk, mwr, mw, mg));
             }
 
-            return overall;
+            return new BenchResult(overall, totalGames);
         } catch (Exception e) {
             logger.error("League benchmark failed", e);
-            return 0.0;
+            return new BenchResult(0.0, 0);
         }
     }
 
@@ -6329,11 +6383,18 @@ public class RLTrainer {
 
     /**
      * Population tick: every POP_SNAPSHOT_EVERY_EPISODES, take the newest
-     * Python-saved snapshot_step_*.pt, benchmark it on the dev bar (vs CP7 at
-     * POP_DEVBAR_SKILL across the gauntlet), and admit it to the frozen pool
-     * iff it is within POP_QUAL_TOLERANCE of its parent (the last admitted
-     * snapshot). Rejections are counted; two consecutive rejections is the
-     * operator kill signal.
+     * Python-saved snapshot_step_*.pt and qualify it against its parent (the
+     * last admitted snapshot). Two gate implementations exist, selected by
+     * env (both default OFF -- a running process's env is fixed at JVM
+     * start, so this only takes effect on the next restart):
+     * <ul>
+     *   <li>legacy / POP_GATE_HOLD_FALLBACK: compares the candidate's single
+     *       dev-bar benchmark to a stored scalar parent winrate.</li>
+     *   <li>POP_GATE_PAIRED (Sol #90 design): benchmarks BOTH the candidate
+     *       and the current parent snapshot in the same tick and verdicts on
+     *       the delta with a 90% confidence bound, see
+     *       {@link #runPairedPopulationQualification}.</li>
+     * </ul>
      */
     private void maybeRunPopulationTick(int episodeNum) {
         if (POP_SNAPSHOT_EVERY_EPISODES <= 0) {
@@ -6366,41 +6427,262 @@ public class RLTrainer {
             POP_LAST_QUAL_CANDIDATE = key;
             String agentList = (RL_AGENT_DECK_LIST_FILE != null && !RL_AGENT_DECK_LIST_FILE.trim().isEmpty())
                     ? RL_AGENT_DECK_LIST_FILE : null;
-            logger.info("[POP] tick ep=" + episodeNum + ": qualifying " + snap.getFileName()
-                    + " vs CP7 s" + POP_DEVBAR_SKILL + " gpm=" + POP_DEVBAR_GPM);
-            long t0 = System.currentTimeMillis();
-            double wr = runLeagueBenchmarkPolicy(key, LeagueOpponentSpec.bot(POP_DEVBAR_SKILL),
-                    agentList, LEAGUE_BASELINE_DECKLIST_FILE, POP_DEVBAR_GPM, "pop-qual-ep" + episodeNum);
-            long secs = (System.currentTimeMillis() - t0) / 1000;
-            double parent = POP_PARENT_DEVBAR_WR;
-            boolean admit = parent < 0 || wr >= parent - POP_QUAL_TOLERANCE;
-            if (admit) {
-                POP_POOL.add(key);
-                while (POP_POOL.size() > POP_POOL_MAX) {
-                    POP_POOL.remove(0);
-                }
-                POP_PARENT_DEVBAR_WR = wr;
-                POP_CONSEC_REJECTS = 0;
-                logger.info(String.format("[POP] ADMIT ep=%d %s devbar=%.3f parent=%.3f pool=%d (%ds)",
-                        episodeNum, snap.getFileName(), wr, parent, POP_POOL.size(), secs));
-            } else if (POP_GATE_HOLD_FALLBACK) {
-                // Sol #90 interim gate: the n=48 devbar's noise plus a
-                // last-admitted-scalar parent forms a ratchet with ~25%
-                // false-kill risk. Until the paired parent/candidate gate
-                // lands, below-tolerance results are HOLDs: parent unchanged,
-                // no strike, snapshot not pooled.
-                logger.warn(String.format("[POP] HOLD ep=%d %s devbar=%.3f parent=%.3f (Sol #90 fallback, no strike) (%ds)",
-                        episodeNum, snap.getFileName(), wr, parent, secs));
+            if (POP_GATE_PAIRED) {
+                runPairedPopulationQualification(episodeNum, snap, key, agentList);
             } else {
-                POP_CONSEC_REJECTS++;
-                logger.warn(String.format("[POP] REJECT ep=%d %s devbar=%.3f parent=%.3f consecRejects=%d (%ds)%s",
-                        episodeNum, snap.getFileName(), wr, parent, POP_CONSEC_REJECTS, secs,
-                        POP_CONSEC_REJECTS >= 2 ? " *** KILL SIGNAL: 2 consecutive rejections ***" : ""));
+                runLegacyPopulationQualification(episodeNum, snap, key, agentList);
             }
-            savePopulationState(episodeNum);
-            writePopulationStatus(episodeNum);
         } catch (Exception e) {
             logger.warn("[POP] tick failed at ep " + episodeNum, e);
+        }
+    }
+
+    /** Pre-Sol#90-paired-gate qualification: candidate vs stored scalar parent. */
+    private void runLegacyPopulationQualification(int episodeNum, Path snap, String key, String agentList) {
+        logger.info("[POP] tick ep=" + episodeNum + ": qualifying " + snap.getFileName()
+                + " vs CP7 s" + POP_DEVBAR_SKILL + " gpm=" + POP_DEVBAR_GPM);
+        long t0 = System.currentTimeMillis();
+        double wr = runLeagueBenchmarkPolicy(key, LeagueOpponentSpec.bot(POP_DEVBAR_SKILL),
+                agentList, LEAGUE_BASELINE_DECKLIST_FILE, POP_DEVBAR_GPM, "pop-qual-ep" + episodeNum);
+        long secs = (System.currentTimeMillis() - t0) / 1000;
+        double parent = POP_PARENT_DEVBAR_WR;
+        boolean admit = parent < 0 || wr >= parent - POP_QUAL_TOLERANCE;
+        if (admit) {
+            POP_POOL.add(key);
+            while (POP_POOL.size() > POP_POOL_MAX) {
+                POP_POOL.remove(0);
+            }
+            POP_PARENT_DEVBAR_WR = wr;
+            POP_CONSEC_REJECTS = 0;
+            logger.info(String.format("[POP] ADMIT ep=%d %s devbar=%.3f parent=%.3f pool=%d (%ds)",
+                    episodeNum, snap.getFileName(), wr, parent, POP_POOL.size(), secs));
+        } else if (POP_GATE_HOLD_FALLBACK) {
+            // Sol #90 interim gate: the n=48 devbar's noise plus a
+            // last-admitted-scalar parent forms a ratchet with ~25%
+            // false-kill risk. Until the paired parent/candidate gate
+            // lands, below-tolerance results are HOLDs: parent unchanged,
+            // no strike, snapshot not pooled.
+            logger.warn(String.format("[POP] HOLD ep=%d %s devbar=%.3f parent=%.3f (Sol #90 fallback, no strike) (%ds)",
+                    episodeNum, snap.getFileName(), wr, parent, secs));
+        } else {
+            POP_CONSEC_REJECTS++;
+            logger.warn(String.format("[POP] REJECT ep=%d %s devbar=%.3f parent=%.3f consecRejects=%d (%ds)%s",
+                    episodeNum, snap.getFileName(), wr, parent, POP_CONSEC_REJECTS, secs,
+                    POP_CONSEC_REJECTS >= 2 ? " *** KILL SIGNAL: 2 consecutive rejections ***" : ""));
+        }
+        savePopulationState(episodeNum);
+        writePopulationStatus(episodeNum);
+    }
+
+    /**
+     * Sol #90 paired gate (POP_GATE_PAIRED=1): benchmarks BOTH the candidate
+     * and the current parent snapshot in the SAME tick and verdicts on the
+     * delta (candidate minus parent) rather than a stored scalar, which is
+     * what made the legacy gate ~25% false-kill-prone on a noisy n=48-per-
+     * matchup devbar.
+     * <p>
+     * DEVIATION FROM THE REVIEWER'S IDEAL DESIGN (flag for next review): the
+     * ideal is a shared rotating game-seed block so the candidate and parent
+     * see the *same* opponent-deck/RNG sequence (a true blocked/paired
+     * design, minimizing variance on the delta). runLeagueBenchmarkPolicy /
+     * runSingleLeagueBenchmarkGame do NOT pin any per-game seed -- verified
+     * by reading runSingleLeagueBenchmarkGame: no RandomUtil.setSeed and no
+     * seed parameter anywhere on this path (unlike the separate
+     * EVAL_REPLAY_METADATA golden-trace path used by runLeagueBench(), which
+     * does seed via replayRandomUtilSeed()). Wiring true seed-sharing through
+     * the benchmark thread pool is out of scope here. This implementation's
+     * approximation is instead to run both benchmarks back-to-back in the
+     * SAME tick/session (same wall-clock window, same code, same env),
+     * which removes the "different session, different time" confound the
+     * old scalar-parent had, but NOT game-to-game seed variance.
+     */
+    private void runPairedPopulationQualification(int episodeNum, Path snap, String key, String agentList) {
+        String parentPath = resolveParentSnapshotPath();
+        if (parentPath == null) {
+            // Bootstrap / legacy-fallback: no parent snapshot exists to pair
+            // against (pool empty and no stored parent path -- e.g. very
+            // first tick, or an old state file whose pool entries were all
+            // pruned because their files were deleted). Per the Sol #90
+            // design, degrade to the legacy scalar-vs-candidate comparison
+            // "as today" rather than skip qualification.
+            runPairedBootstrapFallback(episodeNum, snap, key, agentList);
+            return;
+        }
+
+        logger.info("[POP] tick ep=" + episodeNum + ": paired-qualifying " + snap.getFileName()
+                + " vs parent=" + Paths.get(parentPath).getFileName()
+                + " (CP7 s" + POP_DEVBAR_SKILL + " gpm=" + POP_DEVBAR_GPM + ", tick cost ~2x)");
+
+        long tc0 = System.currentTimeMillis();
+        BenchResult cand = runLeagueBenchmarkPolicyCounted(key, LeagueOpponentSpec.bot(POP_DEVBAR_SKILL),
+                agentList, LEAGUE_BASELINE_DECKLIST_FILE, POP_DEVBAR_GPM, "pop-qual-cand-ep" + episodeNum);
+        long candSecs = (System.currentTimeMillis() - tc0) / 1000;
+
+        String parentKey = "snap:" + parentPath;
+        long tp0 = System.currentTimeMillis();
+        BenchResult parent = runLeagueBenchmarkPolicyCounted(parentKey, LeagueOpponentSpec.bot(POP_DEVBAR_SKILL),
+                agentList, LEAGUE_BASELINE_DECKLIST_FILE, POP_DEVBAR_GPM, "pop-qual-parent-ep" + episodeNum);
+        long parentSecs = (System.currentTimeMillis() - tp0) / 1000;
+
+        if (cand.n <= 0 || parent.n <= 0) {
+            // One or both benchmarks produced zero completed games (deck
+            // pool / scan failure). Can't form a valid delta or CI -- treat
+            // as an inconclusive HOLD rather than risk a false verdict.
+            logger.warn(String.format(
+                    "[POP] HOLD ep=%d %s inconclusive: cand_n=%d parent_n=%d (benchmark produced no completed games) (cand %ds, parent %ds)",
+                    episodeNum, snap.getFileName(), cand.n, parent.n, candSecs, parentSecs));
+            recordVerdict(episodeNum, "HOLD_INCONCLUSIVE", key, parentPath,
+                    cand.wr, cand.n, parent.wr, parent.n, Double.NaN, Double.NaN, candSecs, parentSecs);
+            savePopulationState(episodeNum);
+            writePopulationStatus(episodeNum);
+            return;
+        }
+
+        double delta = cand.wr - parent.wr;
+        double ucb90 = delta + POP_PAIRED_Z90 * Math.sqrt(
+                (cand.wr * (1.0 - cand.wr)) / cand.n + (parent.wr * (1.0 - parent.wr)) / parent.n);
+
+        String verdict;
+        if (delta >= -POP_QUAL_TOLERANCE) {
+            verdict = "ADMIT";
+        } else if (ucb90 >= -POP_QUAL_TOLERANCE) {
+            verdict = "HOLD";
+        } else {
+            verdict = "REJECT";
+        }
+
+        if ("ADMIT".equals(verdict)) {
+            POP_POOL.add(key);
+            while (POP_POOL.size() > POP_POOL_MAX) {
+                POP_POOL.remove(0);
+            }
+            POP_PARENT_SNAPSHOT_PATH = snap.toAbsolutePath().normalize().toString();
+            POP_PARENT_DEVBAR_WR = cand.wr; // legacy scalar kept in sync (fallback / status display)
+            POP_LAST_PARENT_REMEASURED_WR = cand.wr; // non-authoritative reporting only
+            POP_CONSEC_REJECTS = 0;
+            logger.info(String.format(
+                    "[POP] ADMIT (paired) ep=%d %s cand=%.3f(n=%d) parent=%.3f(n=%d) delta=%+.3f ucb90=%+.3f pool=%d (cand %ds, parent %ds)",
+                    episodeNum, snap.getFileName(), cand.wr, cand.n, parent.wr, parent.n,
+                    delta, ucb90, POP_POOL.size(), candSecs, parentSecs));
+        } else if ("HOLD".equals(verdict)) {
+            POP_LAST_PARENT_REMEASURED_WR = parent.wr; // refresh w/ this tick's actual parent remeasurement
+            logger.warn(String.format(
+                    "[POP] HOLD (paired) ep=%d %s cand=%.3f(n=%d) parent=%.3f(n=%d) delta=%+.3f ucb90=%+.3f no strike, not pooled (cand %ds, parent %ds)",
+                    episodeNum, snap.getFileName(), cand.wr, cand.n, parent.wr, parent.n,
+                    delta, ucb90, candSecs, parentSecs));
+        } else {
+            POP_LAST_PARENT_REMEASURED_WR = parent.wr;
+            POP_CONSEC_REJECTS++;
+            logger.warn(String.format(
+                    "[POP] REJECT (paired) ep=%d %s cand=%.3f(n=%d) parent=%.3f(n=%d) delta=%+.3f ucb90=%+.3f consecRejects=%d (cand %ds, parent %ds)",
+                    episodeNum, snap.getFileName(), cand.wr, cand.n, parent.wr, parent.n,
+                    delta, ucb90, POP_CONSEC_REJECTS, candSecs, parentSecs));
+            if (POP_CONSEC_REJECTS >= 2) {
+                logger.warn(String.format(
+                        "[POP] ADJUDICATE ep=%d %s *** TWO CONSECUTIVE PAIRED REJECTS: request an n=256 external adjudication before any kill decision "
+                                + "(operator/coordinator runs the expanded eval; do NOT auto-kill) ***",
+                        episodeNum, snap.getFileName()));
+            }
+        }
+
+        recordVerdict(episodeNum, verdict, key, parentPath,
+                cand.wr, cand.n, parent.wr, parent.n, delta, ucb90, candSecs, parentSecs);
+        savePopulationState(episodeNum);
+        writePopulationStatus(episodeNum);
+    }
+
+    /**
+     * Degraded path for POP_GATE_PAIRED when no parent snapshot can be
+     * resolved yet (nothing admitted). Mirrors the legacy gate exactly ("if
+     * pool empty use the stored scalar path as today" per the Sol #90 spec)
+     * so the first snapshot still seeds the pool and the parent path.
+     */
+    private void runPairedBootstrapFallback(int episodeNum, Path snap, String key, String agentList) {
+        logger.info("[POP] tick ep=" + episodeNum + ": paired gate bootstrap (no parent snapshot resolvable yet), qualifying "
+                + snap.getFileName() + " vs CP7 s" + POP_DEVBAR_SKILL + " gpm=" + POP_DEVBAR_GPM);
+        long t0 = System.currentTimeMillis();
+        double wr = runLeagueBenchmarkPolicy(key, LeagueOpponentSpec.bot(POP_DEVBAR_SKILL),
+                agentList, LEAGUE_BASELINE_DECKLIST_FILE, POP_DEVBAR_GPM, "pop-qual-ep" + episodeNum);
+        long secs = (System.currentTimeMillis() - t0) / 1000;
+        double parentScalar = POP_PARENT_DEVBAR_WR;
+        boolean admit = parentScalar < 0 || wr >= parentScalar - POP_QUAL_TOLERANCE;
+        String verdict;
+        if (admit) {
+            POP_POOL.add(key);
+            while (POP_POOL.size() > POP_POOL_MAX) {
+                POP_POOL.remove(0);
+            }
+            POP_PARENT_SNAPSHOT_PATH = snap.toAbsolutePath().normalize().toString();
+            POP_PARENT_DEVBAR_WR = wr;
+            POP_LAST_PARENT_REMEASURED_WR = wr;
+            POP_CONSEC_REJECTS = 0;
+            verdict = "ADMIT_LEGACY_FALLBACK";
+            logger.info(String.format("[POP] ADMIT (legacy fallback) ep=%d %s devbar=%.3f parent=%.3f pool=%d (%ds)",
+                    episodeNum, snap.getFileName(), wr, parentScalar, POP_POOL.size(), secs));
+        } else if (POP_GATE_HOLD_FALLBACK) {
+            verdict = "HOLD_LEGACY_FALLBACK";
+            logger.warn(String.format("[POP] HOLD (legacy fallback) ep=%d %s devbar=%.3f parent=%.3f no strike (%ds)",
+                    episodeNum, snap.getFileName(), wr, parentScalar, secs));
+        } else {
+            POP_CONSEC_REJECTS++;
+            verdict = "REJECT_LEGACY_FALLBACK";
+            logger.warn(String.format("[POP] REJECT (legacy fallback) ep=%d %s devbar=%.3f parent=%.3f consecRejects=%d (%ds)%s",
+                    episodeNum, snap.getFileName(), wr, parentScalar, POP_CONSEC_REJECTS, secs,
+                    POP_CONSEC_REJECTS >= 2 ? " *** KILL SIGNAL: 2 consecutive rejections ***" : ""));
+        }
+        recordVerdict(episodeNum, verdict, key, null, wr, -1, parentScalar, -1, Double.NaN, Double.NaN, secs, 0);
+        savePopulationState(episodeNum);
+        writePopulationStatus(episodeNum);
+    }
+
+    /**
+     * Resolves the paired gate's parent identity: the explicit stored path if
+     * its file still exists, else the newest (most recently admitted) pool
+     * entry whose file still exists, else null (no parent resolvable --
+     * caller falls back to the legacy scalar gate).
+     */
+    private static String resolveParentSnapshotPath() {
+        if (POP_PARENT_SNAPSHOT_PATH != null && !POP_PARENT_SNAPSHOT_PATH.isEmpty()
+                && Files.isRegularFile(Paths.get(POP_PARENT_SNAPSHOT_PATH))) {
+            return POP_PARENT_SNAPSHOT_PATH;
+        }
+        // POP_POOL only ever appends at the tail and prunes from the head
+        // (see POP_POOL_MAX eviction above), so the last element is the
+        // most recently admitted snapshot.
+        for (int i = POP_POOL.size() - 1; i >= 0; i--) {
+            String k = POP_POOL.get(i);
+            String path = k.startsWith("snap:") ? k.substring(5) : k;
+            if (Files.isRegularFile(Paths.get(path))) {
+                return path;
+            }
+        }
+        return null;
+    }
+
+    private static void recordVerdict(int episodeNum, String verdict, String candidateKey, String parentPath,
+            double candidateWr, long candidateN, double parentWr, long parentN,
+            double delta, double ucb90, long candidateSecs, long parentSecs) {
+        com.google.gson.JsonObject o = new com.google.gson.JsonObject();
+        o.addProperty("episode", episodeNum);
+        o.addProperty("verdict", verdict);
+        o.addProperty("candidate_key", candidateKey);
+        if (parentPath != null) {
+            o.addProperty("parent_path", parentPath);
+        } else {
+            o.add("parent_path", com.google.gson.JsonNull.INSTANCE);
+        }
+        o.addProperty("candidate_wr", candidateWr);
+        o.addProperty("candidate_n", candidateN);
+        o.addProperty("parent_wr", parentWr);
+        o.addProperty("parent_n", parentN);
+        o.addProperty("delta", delta);
+        o.addProperty("ucb90", ucb90);
+        o.addProperty("candidate_secs", candidateSecs);
+        o.addProperty("parent_secs", parentSecs);
+        o.addProperty("ts_ms", System.currentTimeMillis());
+        POP_VERDICT_HISTORY.add(o);
+        while (POP_VERDICT_HISTORY.size() > POP_VERDICT_HISTORY_MAX) {
+            POP_VERDICT_HISTORY.remove(0);
         }
     }
 
@@ -6477,8 +6759,28 @@ public class RLTrainer {
                     POP_STATS.put(key, ps);
                 }
             }
+            // Paired-gate fields (Sol #90). Absent in older state files --
+            // fields keep their declared defaults (null / -1.0) which the
+            // paired gate's resolveParentSnapshotPath() / bootstrap fallback
+            // handle correctly (falls back to newest pool entry, then to the
+            // legacy parent_devbar_wr scalar above).
+            if (obj.has("parent_snapshot_path") && !obj.get("parent_snapshot_path").isJsonNull()) {
+                POP_PARENT_SNAPSHOT_PATH = obj.get("parent_snapshot_path").getAsString();
+            }
+            if (obj.has("last_parent_remeasured_wr")) {
+                POP_LAST_PARENT_REMEASURED_WR = obj.get("last_parent_remeasured_wr").getAsDouble();
+            }
+            if (obj.has("verdict_history")) {
+                for (com.google.gson.JsonElement e : obj.getAsJsonArray("verdict_history")) {
+                    POP_VERDICT_HISTORY.add(e.getAsJsonObject());
+                }
+                while (POP_VERDICT_HISTORY.size() > POP_VERDICT_HISTORY_MAX) {
+                    POP_VERDICT_HISTORY.remove(0);
+                }
+            }
             logger.info("[POP] restored state: pool=" + POP_POOL.size()
                     + " parent=" + String.format("%.3f", POP_PARENT_DEVBAR_WR)
+                    + " parentSnapshotPath=" + (POP_PARENT_SNAPSHOT_PATH == null ? "n/a" : POP_PARENT_SNAPSHOT_PATH)
                     + " trackedOpponents=" + POP_STATS.size());
         } catch (Exception e) {
             logger.warn("[POP] failed to load population state: " + e.getMessage());
@@ -6504,6 +6806,19 @@ public class RLTrainer {
                 stats.add(e.getKey(), s);
             }
             obj.add("stats", stats);
+            // Paired-gate fields (Sol #90 design). parent_devbar_wr above
+            // remains the legacy fallback scalar for pre-paired-gate compat.
+            if (POP_PARENT_SNAPSHOT_PATH != null) {
+                obj.addProperty("parent_snapshot_path", POP_PARENT_SNAPSHOT_PATH);
+            } else {
+                obj.add("parent_snapshot_path", com.google.gson.JsonNull.INSTANCE);
+            }
+            obj.addProperty("last_parent_remeasured_wr", POP_LAST_PARENT_REMEASURED_WR);
+            com.google.gson.JsonArray verdictHistory = new com.google.gson.JsonArray();
+            for (com.google.gson.JsonObject v : POP_VERDICT_HISTORY) {
+                verdictHistory.add(v);
+            }
+            obj.add("verdict_history", verdictHistory);
             Path p = populationStatePath();
             Files.createDirectories(p.getParent());
             Path tmp = p.resolveSibling(p.getFileName() + ".tmp");
@@ -6518,7 +6833,10 @@ public class RLTrainer {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append("episode: ").append(episodeNum).append('\n');
-            sb.append("parent_devbar_wr: ").append(String.format("%.3f", POP_PARENT_DEVBAR_WR)).append('\n');
+            sb.append("gate_mode: ").append(POP_GATE_PAIRED ? "paired" : (POP_GATE_HOLD_FALLBACK ? "hold_fallback" : "legacy")).append('\n');
+            sb.append("parent_devbar_wr (legacy scalar): ").append(String.format("%.3f", POP_PARENT_DEVBAR_WR)).append('\n');
+            sb.append("parent_snapshot_path: ").append(POP_PARENT_SNAPSHOT_PATH == null ? "n/a" : POP_PARENT_SNAPSHOT_PATH).append('\n');
+            sb.append("last_parent_remeasured_wr (non-authoritative): ").append(String.format("%.3f", POP_LAST_PARENT_REMEASURED_WR)).append('\n');
             sb.append("consec_rejects: ").append(POP_CONSEC_REJECTS).append('\n');
             sb.append("pool_size: ").append(POP_POOL.size()).append('\n');
             sb.append("opponents:\n");
