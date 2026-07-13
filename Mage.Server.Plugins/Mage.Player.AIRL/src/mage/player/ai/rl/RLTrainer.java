@@ -443,6 +443,74 @@ public class RLTrainer {
     private static volatile double[] POP_ANCHOR_SKILL_WEIGHTS = null;
     private static volatile int[] POP_ANCHOR_SKILL_IDS = null;
 
+    // ------------------------------------------------------------------
+    // Sol #92: completion-aware population scheduler.
+    //
+    // PROBLEM: createPopulationOpponent draws the opponent SOURCE at game
+    // CREATION time using the fixed POP_ANCHOR_P/POP_FROZEN_P/POP_LIVE_P
+    // shares. If one source's games run much slower than the others (e.g.
+    // CP7 anchors under MAGE_DIRTY_APPLY=0), that source under-completes
+    // relative to its draw share even though draws themselves are unbiased
+    // -- training consumes COMPLETED episodes, so the trained diet quietly
+    // breaks (measured: 50/35/15 launch collapsed to 4%/69%/27% completed).
+    //
+    // FIX (env-gated, POP_COMPLETION_AWARE=1; default off, legacy random
+    // draw unchanged): reserve runner concurrency per source proportional
+    // to desired_share x EWMA(episode duration) instead of drawing by share
+    // alone. A freed runner is routed to whichever source is furthest below
+    // its concurrency reservation (pickCompletionAwareSourceFromState).
+    // Reserving concurrency this way makes the long-run COMPLETION rate of
+    // source i proportional to share_i regardless of duration_i (the
+    // share_i*d_i reservation and the 1/d_i per-slot throughput cancel) --
+    // exactly what a naive random-share draw fails to do once durations
+    // differ by orders of magnitude within any bounded observation window.
+    //
+    // MIX GUARD (mandatory, independent of POP_COMPLETION_AWARE): tracks the
+    // rolling POP_MIX_GUARD_WINDOW completed-episode source mix and warns
+    // (or halts the trainer with POP_MIX_GUARD_ABORT=1) if any source
+    // deviates from the CURRENT spec (computePopShares(), which already
+    // folds frozen mass into anchor when the snapshot pool is empty) by
+    // more than POP_MIX_GUARD_TOLERANCE_PP percentage points.
+    //
+    // All state below is static/in-memory only (no persistence) -- restarts
+    // re-converge, matching the rest of the POP_* machinery.
+    // ------------------------------------------------------------------
+    private static final boolean POP_COMPLETION_AWARE = EnvConfig.bool("POP_COMPLETION_AWARE", false);
+    private static final int POP_DURATION_EMA_WINDOW = EnvConfig.i32("POP_DURATION_EMA_WINDOW", 30);
+    private static final int POP_MIX_GUARD_WINDOW = EnvConfig.i32("POP_MIX_GUARD_WINDOW", 500);
+    private static final int POP_MIX_GUARD_MIN_SAMPLES = EnvConfig.i32("POP_MIX_GUARD_MIN_SAMPLES", 50);
+    private static final double POP_MIX_GUARD_TOLERANCE_PP = EnvConfig.f64("POP_MIX_GUARD_TOLERANCE_PP", 5.0);
+    private static final boolean POP_MIX_GUARD_ABORT = EnvConfig.bool("POP_MIX_GUARD_ABORT", false);
+    // Test-only hook for smoke verification: artificially slows CP7 anchor
+    // games so the correction mechanism can be proven against an asymmetric
+    // duration without waiting on a real engine slowdown. No-op when 0.
+    private static final int POP_TEST_SLOW_ANCHORS_MS = EnvConfig.i32("POP_TEST_SLOW_ANCHORS_MS", 0);
+
+    static final int POP_SRC_ANCHOR = 0;
+    static final int POP_SRC_FROZEN = 1;
+    static final int POP_SRC_LIVE = 2;
+    private static final int POP_SRC_COUNT = 3;
+    private static final String[] POP_SRC_NAMES = {"anchor", "frozen", "live"};
+
+    // Guarded by POP_SCHED_LOCK: in-flight per-source runner counts (the
+    // concurrency reservation state) and per-source EWMA episode duration
+    // (seconds). Duration EMAs are tracked unconditionally (cheap, useful
+    // diagnostics) but only consulted for scheduling when
+    // POP_COMPLETION_AWARE is on.
+    private static final Object POP_SCHED_LOCK = new Object();
+    private static final int[] POP_SCHED_INFLIGHT = new int[POP_SRC_COUNT];
+    private static final double[] POP_SCHED_DURATION_EMA = {1.0, 1.0, 1.0};
+    private static final long[] POP_SCHED_DURATION_N = new long[POP_SRC_COUNT];
+
+    // Mix guard rolling window (guarded by POP_MIX_LOCK).
+    private static final Object POP_MIX_LOCK = new Object();
+    private static final java.util.ArrayDeque<Integer> POP_MIX_WINDOW = new java.util.ArrayDeque<>();
+    private static final int[] POP_MIX_COUNTS = new int[POP_SRC_COUNT];
+    private static final java.util.concurrent.atomic.AtomicInteger POP_MIX_GUARD_WARN_COUNT =
+            new java.util.concurrent.atomic.AtomicInteger(0);
+    private static final java.util.concurrent.atomic.AtomicBoolean POP_MIX_GUARD_ABORTED =
+            new java.util.concurrent.atomic.AtomicBoolean(false);
+
     private static final Object LEAGUE_LOCK = new Object();
     private static LeagueState LEAGUE_STATE = null;
     private static final AtomicInteger LEAGUE_LAST_TICK_EP = new AtomicInteger(0);
@@ -2552,7 +2620,7 @@ public class RLTrainer {
                     Thread.currentThread().setName("GAME");
                     Random threadRand = newSeededRandom(1_000L + runnerIndex);
 
-                    while (episodeCounter().get() < NUM_EPISODES) {
+                    while (episodeCounter().get() < NUM_EPISODES && !POP_MIX_GUARD_ABORTED.get()) {
                       try {
                         StateSequenceBuilder.clearThreadLocalKnownArchetypeLabels();
                         int epNumber = episodeCounter().incrementAndGet();
@@ -2631,6 +2699,15 @@ public class RLTrainer {
                             logger.warn("Train: failed to load deck(s) for game, skipping.");
                             activeEps().decrementAndGet();
                             metrics.setActiveEpisodes(activeEps().get());
+                            // Sol #92: this episode is being abandoned after a population
+                            // source was already drawn (and, if POP_COMPLETION_AWARE, a
+                            // concurrency slot reserved) -- release it or the scheduler
+                            // permanently thinks a runner is busy with a game that never ran.
+                            String abandonedPopKey = THREAD_LOCAL_POP_KEY.get();
+                            if (abandonedPopKey != null) {
+                                releasePopulationReservation(abandonedPopKey);
+                                THREAD_LOCAL_POP_KEY.remove();
+                            }
                             continue;
                         }
 
@@ -2670,6 +2747,13 @@ public class RLTrainer {
                         game.addPlayer(opponentPlayer, opponentDeckThread);
                         match.addPlayer(opponentPlayer, opponentDeckThread);
 
+                        // Branch differential oracle (Sol #89/#91): env-gated, test-only,
+                        // no-op unless RL_BRANCH_ORACLE=1 and this is the single targeted
+                        // episode. See BranchOracle.java.
+                        if (BranchOracle.ENABLED && epNumber == BranchOracle.TARGET_EPISODE) {
+                            BranchOracle.maybeInstall(rlPlayer, opponentPlayer);
+                        }
+
                         java.util.Map<UUID, Integer> knownArchetypeLabels = new java.util.HashMap<>();
                         knownArchetypeLabels.put(rlPlayer.getId(),
                                 StateSequenceBuilder.computeArchetypeLabelFromDeckName(rlPlayerDeckPath == null ? "" : rlPlayerDeckPath.toString()));
@@ -2704,7 +2788,31 @@ public class RLTrainer {
                         // esp. the mirror). Default keeps the agent on the play (unchanged).
                         UUID choosingPlayerId = EnvConfig.bool("EVAL_OPPONENT_ON_PLAY", false)
                                 ? opponentPlayer.getId() : rlPlayer.getId();
-                        game.start(choosingPlayerId);
+                        try {
+                            try {
+                                game.start(choosingPlayerId);
+                            } catch (EngineDecisionBranchController.BranchTerminated branchTerminated) {
+                                // Branch differential oracle (Sol #89/#91): a controller signaled
+                                // "capture complete, stop here" (see BranchOracle.java). Expected
+                                // and benign only when RL_BRANCH_ORACLE=1; log and fall through so
+                                // this single-episode run exits cleanly instead of crashing. This
+                                // catch is deliberately scoped to exactly this sentinel type --
+                                // never widen it, or a real game error would silently look like a
+                                // clean branch-capture completion.
+                                logger.info("Episode ended via BranchTerminated: " + branchTerminated.getReason());
+                            }
+                        } finally {
+                            // Sol #89/#91 amendment: uninstall even on an exception path (any
+                            // exception other than BranchTerminated propagates through this
+                            // finally block before leaving this scope). rlPlayer/opponentPlayer
+                            // are not guaranteed to be fresh per-episode in every code path
+                            // (opponent instances can be pooled), so a controller left attached
+                            // after a failed episode could silently intercept and force
+                            // decisions in a later, unrelated one.
+                            if (BranchOracle.ENABLED && epNumber == BranchOracle.TARGET_EPISODE) {
+                                BranchOracle.uninstall(rlPlayer, opponentPlayer);
+                            }
+                        }
                         long endGameNanos = System.nanoTime();
                         metrics.recordEpisodeGameMs((endGameNanos - startGameNanos) / 1_000_000L);
 
@@ -2898,10 +3006,13 @@ public class RLTrainer {
                             recordDeckTrainingOutcome(rlPlayerDeckPath.getFileName().toString(), rlPlayerWon);
                         }
 
-                        // Population mode: update the per-opponent EMA that drives PFSP
+                        // Population mode: update the per-opponent EMA that drives PFSP,
+                        // and (Sol #92) release the completion-aware scheduler's
+                        // concurrency reservation / feed the mix guard.
                         String popKey = THREAD_LOCAL_POP_KEY.get();
                         if (popKey != null) {
                             recordPopulationOutcome(popKey, rlPlayerWon);
+                            recordPopulationCompletion(popKey, episodeSeconds);
                             THREAD_LOCAL_POP_KEY.remove();
                         }
 
@@ -2972,6 +3083,14 @@ public class RLTrainer {
                         logger.error("Game runner exception (continuing): " + e.getMessage());
                         activeEps().decrementAndGet();
                         metrics.setActiveEpisodes(activeEps().get());
+                        // Sol #92: release any population scheduler reservation this
+                        // episode was holding -- an exception here means it never
+                        // reached the normal completion hook that would release it.
+                        String abandonedPopKey = THREAD_LOCAL_POP_KEY.get();
+                        if (abandonedPopKey != null) {
+                            releasePopulationReservation(abandonedPopKey);
+                            THREAD_LOCAL_POP_KEY.remove();
+                        }
                         StateSequenceBuilder.clearThreadLocalKnownArchetypeLabels();
                       }
                     }
@@ -6247,6 +6366,28 @@ public class RLTrainer {
 
     private Player createPopulationOpponent(int episodeNum, Random rand) {
         ensurePopulationStateLoaded();
+        double[] shares = computePopShares();
+        int srcIdx = pickPopulationSource(shares, rand);
+        switch (srcIdx) {
+            case POP_SRC_FROZEN:
+                return popFrozenOpponent(rand);
+            case POP_SRC_LIVE:
+                return popLiveOpponent();
+            case POP_SRC_ANCHOR:
+            default:
+                return popAnchorOpponent(rand);
+        }
+    }
+
+    /**
+     * Normalized (anchor, frozen, live) draw shares for this instant, folding
+     * frozen mass into anchor when the snapshot pool is empty (existing
+     * league-spec behavior, unchanged by completion-aware scheduling). Also
+     * doubles as the mix guard's target spec, so pool-empty runs correctly
+     * check against the folded spec (e.g. 85/0/15) rather than the raw
+     * configured 50/35/15.
+     */
+    private static double[] computePopShares() {
         double anchorP = POP_ANCHOR_P;
         double frozenP = POP_POOL.isEmpty() ? 0.0 : POP_FROZEN_P;
         double liveP = POP_LIVE_P;
@@ -6255,17 +6396,211 @@ public class RLTrainer {
             anchorP += POP_FROZEN_P;
         }
         double total = anchorP + frozenP + liveP;
-        double u = rand.nextDouble() * (total > 0 ? total : 1.0);
-        if (u < anchorP) {
-            return popAnchorOpponent(rand);
+        if (total <= 0) {
+            return new double[]{0.0, 0.0, 1.0}; // matches legacy fallthrough-to-live
         }
-        if (u < anchorP + frozenP) {
-            return popFrozenOpponent(rand);
+        return new double[]{anchorP / total, frozenP / total, liveP / total};
+    }
+
+    /** Legacy weighted random draw by share alone. Pure/unit-testable. */
+    static int pickSourceByShare(double[] shares, double u01) {
+        if (u01 < shares[POP_SRC_ANCHOR]) {
+            return POP_SRC_ANCHOR;
         }
-        return popLiveOpponent();
+        if (u01 < shares[POP_SRC_ANCHOR] + shares[POP_SRC_FROZEN]) {
+            return POP_SRC_FROZEN;
+        }
+        return POP_SRC_LIVE;
+    }
+
+    /**
+     * Deficit-based concurrency reservation (Sol #92): choose the source
+     * whose in-flight (currently-playing) runner share is furthest BELOW its
+     * target reservation, where the target reservation is proportional to
+     * desired_share x EWMA(duration). Sources with zero target share (e.g.
+     * an empty frozen pool) are never selected. Pure/unit-testable: takes an
+     * explicit state snapshot instead of reading static fields directly.
+     */
+    static int pickCompletionAwareSourceFromState(double[] shares, double[] durationEma, int[] inFlight) {
+        double[] weight = new double[POP_SRC_COUNT];
+        double weightTotal = 0.0;
+        for (int i = 0; i < POP_SRC_COUNT; i++) {
+            weight[i] = Math.max(0.0, shares[i]) * Math.max(1e-6, durationEma[i]);
+            weightTotal += weight[i];
+        }
+        int inFlightTotal = 0;
+        for (int c : inFlight) {
+            inFlightTotal += c;
+        }
+        int best = -1;
+        double bestDeficit = Double.NEGATIVE_INFINITY;
+        for (int i = 0; i < POP_SRC_COUNT; i++) {
+            if (weightTotal <= 0 || weight[i] <= 0) {
+                continue; // zero target share (e.g. empty frozen pool): never pick
+            }
+            double targetFrac = weight[i] / weightTotal;
+            double currentFrac = inFlightTotal > 0 ? inFlight[i] / (double) inFlightTotal : 0.0;
+            double deficit = targetFrac - currentFrac;
+            if (deficit > bestDeficit) {
+                bestDeficit = deficit;
+                best = i;
+            }
+        }
+        if (best < 0) {
+            // All target shares are zero (pathological config) -- fall back to
+            // whichever raw share is largest so the scheduler never wedges.
+            best = POP_SRC_LIVE;
+            for (int i = 0; i < POP_SRC_COUNT; i++) {
+                if (shares[i] > shares[best]) best = i;
+            }
+        }
+        return best;
+    }
+
+    /** Maps a THREAD_LOCAL_POP_KEY value to its scheduling source index. */
+    static int popSourceIndexForKey(String key) {
+        if (key == null) {
+            return -1;
+        }
+        if (key.startsWith("cp7:")) {
+            return POP_SRC_ANCHOR;
+        }
+        if ("live".equals(key)) {
+            return POP_SRC_LIVE;
+        }
+        return POP_SRC_FROZEN;
+    }
+
+    /**
+     * Picks the source for a freed runner: completion-aware reservation when
+     * POP_COMPLETION_AWARE=1, else the legacy random draw. When completion-
+     * aware, the pick and the concurrency-slot reservation happen atomically
+     * under POP_SCHED_LOCK so concurrent runner threads never race on a
+     * stale in-flight snapshot.
+     */
+    private static int pickPopulationSource(double[] shares, Random rand) {
+        if (!POP_COMPLETION_AWARE) {
+            return pickSourceByShare(shares, rand.nextDouble());
+        }
+        synchronized (POP_SCHED_LOCK) {
+            int src = pickCompletionAwareSourceFromState(shares, POP_SCHED_DURATION_EMA, POP_SCHED_INFLIGHT);
+            POP_SCHED_INFLIGHT[src]++;
+            return src;
+        }
+    }
+
+    /** Releases a concurrency reservation without touching duration EMA or
+     *  the mix guard window -- used when an episode is abandoned before it
+     *  actually plays out (deck load failure, mid-episode exception), so the
+     *  scheduler doesn't permanently believe a runner is busy with a game
+     *  that never ran. */
+    private static void releasePopulationReservation(String popKey) {
+        int src = popSourceIndexForKey(popKey);
+        if (src < 0) {
+            return;
+        }
+        synchronized (POP_SCHED_LOCK) {
+            if (POP_SCHED_INFLIGHT[src] > 0) {
+                POP_SCHED_INFLIGHT[src]--;
+            }
+        }
+    }
+
+    /**
+     * Sol #92 completion bookkeeping for the population sampler: releases the
+     * concurrency reservation, updates the per-source duration EWMA, and
+     * feeds the mix guard. Runs whenever a population-mode episode completes
+     * regardless of POP_COMPLETION_AWARE, so the guard can observe the real
+     * consumed mix even with the correction mechanism off (e.g. to
+     * demonstrate the problem, or A/B the fix).
+     */
+    private static void recordPopulationCompletion(String popKey, double episodeSeconds) {
+        int src = popSourceIndexForKey(popKey);
+        if (src < 0) {
+            return;
+        }
+        synchronized (POP_SCHED_LOCK) {
+            if (POP_SCHED_INFLIGHT[src] > 0) {
+                POP_SCHED_INFLIGHT[src]--;
+            }
+            long n = ++POP_SCHED_DURATION_N[src];
+            double alpha = Math.max(2.0 / (POP_DURATION_EMA_WINDOW + 1.0), 1.0 / n);
+            POP_SCHED_DURATION_EMA[src] += alpha * (episodeSeconds - POP_SCHED_DURATION_EMA[src]);
+        }
+        recordPopMixGuardSample(src);
+    }
+
+    /**
+     * Mandatory mix guard: tracks the rolling POP_MIX_GUARD_WINDOW completed-
+     * episode source mix and warns -- or, with POP_MIX_GUARD_ABORT=1, halts
+     * the trainer -- when any source's realized share deviates from the
+     * current spec (computePopShares()) by more than
+     * POP_MIX_GUARD_TOLERANCE_PP percentage points.
+     */
+    private static void recordPopMixGuardSample(int src) {
+        int[] counts = new int[POP_SRC_COUNT];
+        int total;
+        synchronized (POP_MIX_LOCK) {
+            POP_MIX_WINDOW.addLast(src);
+            POP_MIX_COUNTS[src]++;
+            while (POP_MIX_WINDOW.size() > POP_MIX_GUARD_WINDOW) {
+                int evicted = POP_MIX_WINDOW.pollFirst();
+                POP_MIX_COUNTS[evicted]--;
+            }
+            System.arraycopy(POP_MIX_COUNTS, 0, counts, 0, POP_SRC_COUNT);
+            total = POP_MIX_WINDOW.size();
+        }
+        if (total < POP_MIX_GUARD_MIN_SAMPLES) {
+            return;
+        }
+        double[] spec = computePopShares();
+        int worstSrc = -1;
+        double worstDeviationPp = 0.0;
+        StringBuilder detail = new StringBuilder();
+        for (int i = 0; i < POP_SRC_COUNT; i++) {
+            double actual = counts[i] / (double) total;
+            double deviationPp = Math.abs(actual - spec[i]) * 100.0;
+            if (i > 0) {
+                detail.append(' ');
+            }
+            detail.append(POP_SRC_NAMES[i])
+                    .append("=actual:").append(String.format("%.1f%%", actual * 100.0))
+                    .append("/spec:").append(String.format("%.1f%%", spec[i] * 100.0));
+            if (deviationPp > worstDeviationPp) {
+                worstDeviationPp = deviationPp;
+                worstSrc = i;
+            }
+        }
+        if (worstSrc < 0 || worstDeviationPp <= POP_MIX_GUARD_TOLERANCE_PP) {
+            return;
+        }
+        String msg = String.format(
+                "[POP] MIX-GUARD deviation %.1fpp on '%s' exceeds tolerance %.1fpp (window=%d completed): %s",
+                worstDeviationPp, POP_SRC_NAMES[worstSrc], POP_MIX_GUARD_TOLERANCE_PP, total, detail.toString());
+        if (POP_MIX_GUARD_ABORT) {
+            if (POP_MIX_GUARD_ABORTED.compareAndSet(false, true)) {
+                logger.error("[POP] MIX-GUARD ABORT -- halting trainer: " + msg);
+                System.out.println("[POP] MIX-GUARD ABORT -- halting trainer: " + msg);
+            }
+            return;
+        }
+        int warnN = POP_MIX_GUARD_WARN_COUNT.incrementAndGet();
+        if (warnN <= 20 || warnN % 50 == 0) {
+            logger.warn(msg);
+            System.out.println(msg);
+        }
     }
 
     private Player popAnchorOpponent(Random rand) {
+        // Sol #92 smoke-test hook: simulate an asymmetrically slow source
+        // without needing a real engine slowdown. No-op when 0 (default).
+        if (POP_TEST_SLOW_ANCHORS_MS > 0) {
+            try {
+                Thread.sleep(POP_TEST_SLOW_ANCHORS_MS);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+        }
         parsePopAnchorSkills();
         int[] skills = POP_ANCHOR_SKILL_IDS;
         double[] weights = POP_ANCHOR_SKILL_WEIGHTS;

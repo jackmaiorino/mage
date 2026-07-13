@@ -317,7 +317,17 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
                 controller: t.controller,
                 zone: Zone::Battlefield,
                 tapped: false,
-                summoning_sick: false,
+                // A token entering the battlefield is exactly as summoning-
+                // sick as any other permanent that just entered (see
+                // `commit_zone_change`'s identical `= true` a few lines
+                // down for the ordinary cast/move path) -- this was
+                // hardcoded `false` and never flipped, the one "enters
+                // battlefield" path that skipped setting it. Found via the
+                // branch-differential pilot (Sol #89/#91): a Blood Token's
+                // controlled-since-turn-start flag disagreed with the
+                // reference engine's `wasControlledFromStartOfControllerTurn()`
+                // immediately after Voldaren Epicure's ETB created it.
+                summoning_sick: true,
                 damage: 0,
                 counters: Default::default(),
                 attachments: Vec::new(),
