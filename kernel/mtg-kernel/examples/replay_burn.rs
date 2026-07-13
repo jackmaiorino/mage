@@ -5,6 +5,24 @@
 //!
 //! Run: cargo run --release --example replay_burn -- <corpus dir>
 //!
+//! ## FROZEN (H1/v3, increment 9 -- per Sol #87)
+//!
+//! This is the final H1 increment against corpus v3
+//! (`local-training/kernel_oracle/burn_mirror_v3/`). Acceptance was met:
+//! this comparator reaches `GameOver` with a matched winner on 2/40 traces
+//! (`game_20260712_194558_0001.txt` 73/73 decisions,
+//! `game_20260712_194609_0009.txt` 63/63 decisions), and real-decision
+//! consumption across the corpus rose from 29.3% to 31.9%
+//! (1289/4046) -- see `mtg_kernel::surface`'s predicate point 4 for the fix
+//! (a `HarnessSurfaceV1` gap: the reference hands priority to the *other*
+//! player right after a cast/activation completes instead of re-asking the
+//! same caster, `ComputerPlayerRL.java:10035-10038`). This driver and its
+//! comparator-local wrinkles below are frozen as of this increment against
+//! v3: do not extend them further or point them at a different corpus.
+//! Further replay work is a new driver against `HarnessSurfaceV2`/corpus
+//! v4, scoped to H2. The remaining 38/40 traces' divergences (see the
+//! scoreboard's histogram) are open H2 material, not H1 debt.
+//!
 //! ## Two non-obvious trace-format facts this driver depends on
 //!
 //! 1. `DECLARE_ATTACKS`/`DECLARE_BLOCKS` log `chosen_indices` as a full
@@ -151,6 +169,7 @@ fn main() {
     let mut silent_window_no_eligible_attacker_total = 0usize;
     let mut declare_blocks_no_eligible_blockers_total = 0usize;
     let mut combat_priority_action_spent_total = 0usize;
+    let mut stack_top_is_casters_own_total = 0usize;
     let mut forced_discard_records_skipped_total = 0usize;
     let mut java_target_shortcut_applied_total = 0usize;
     let mut histogram: BTreeMap<String, usize> = BTreeMap::new();
@@ -177,6 +196,7 @@ fn main() {
         silent_window_no_eligible_attacker_total += outcome.silent_window_no_eligible_attacker;
         declare_blocks_no_eligible_blockers_total += outcome.declare_blocks_no_eligible_blockers;
         combat_priority_action_spent_total += outcome.combat_priority_action_spent;
+        stack_top_is_casters_own_total += outcome.stack_top_is_casters_own;
         forced_discard_records_skipped_total += outcome.forced_discard_records_skipped;
         java_target_shortcut_applied_total += outcome.java_target_shortcut_applied;
         decisions_consumed_total += outcome.decisions_consumed;
@@ -233,6 +253,9 @@ fn main() {
     );
     println!(
         "silent-window auto-resolutions, DeclareAttackers/DeclareBlockers one-action-per-round already spent (informational): {combat_priority_action_spent_total}"
+    );
+    println!(
+        "silent-window auto-resolutions, same-caster reprompt after their own cast/activation this round (informational): {stack_top_is_casters_own_total}"
     );
     // A softer signal than the binary reached/diverged split: how much of
     // each trace's real decision stream validated cleanly before either
@@ -292,6 +315,11 @@ struct ReplayOutcome {
     /// because this player already spent their one action this round --
     /// `SuppressionReason::CombatPriorityActionSpent` (predicate point 3).
     combat_priority_action_spent: usize,
+    /// `CastSpellOrPass` windows force-passed because the same caster's own
+    /// cast/activation just left an unresolved item on top of the stack
+    /// this round -- `SuppressionReason::StackTopIsCastersOwn` (predicate
+    /// point 4).
+    stack_top_is_casters_own: usize,
     /// `SELECT_CARD` trace records skipped because the kernel already
     /// silently auto-applied that exact forced discard before any
     /// `Decision::Discard` was ever offered -- see
@@ -349,6 +377,7 @@ fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
             SuppressionReason::NoEligibleAttacker => outcome.silent_window_no_eligible_attacker += 1,
             SuppressionReason::NoEligibleBlockersForAttacker => outcome.declare_blocks_no_eligible_blockers += 1,
             SuppressionReason::CombatPriorityActionSpent => outcome.combat_priority_action_spent += 1,
+            SuppressionReason::StackTopIsCastersOwn => outcome.stack_top_is_casters_own += 1,
         }
     }
     outcome
