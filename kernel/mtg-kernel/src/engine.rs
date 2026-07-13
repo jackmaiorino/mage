@@ -1051,6 +1051,48 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             // artifact of `UUID.hashCode()`/bucket layout with no rules
             // meaning -- not worth porting), but the dominant, rules-visible
             // signal (power) now matches.
+            //
+            // BLOCKED(b) -- proven oracle ambiguity, increment 14. Read
+            // (not modified) `Mage/src/main/java/mage/game/combat/
+            // Combat.java:131-137`: `getAttackers()` builds a *fresh*
+            // `new HashSet<UUID>()` by flattening every `CombatGroup`'s
+            // (order-preserving `ArrayList<UUID>`, `CombatGroup.java:31`)
+            // attackers into it -- any real ordering signal is thrown away
+            // at that exact call, before either AI ever sees the list.
+            // `ComputerPlayerRL.getAttackers` (`ComputerPlayerRL.java:9025-
+            // 9037`, active by default since `RL_COMBAT_TAKEOVER` defaults
+            // false) and `ComputerPlayer6.getAttackers`
+            // (`ComputerPlayer6.java:1478-1490`, the alternate path) both
+            // do a plain `for (UUID id : attackersUUID)` over that
+            // `HashSet`, so the pre-sort list order literally *is*
+            // `UUID.hashCode()` bucket order. Both subsequent sorts compare
+            // power only -- `ComputerPlayerRL.java`'s inline
+            // `attackers.sort((a, b) -> Integer.compare(b.getPower()...,
+            // a.getPower()...))` and `CombatUtil.sortByPower`
+            // (`CombatUtil.java:89-94`) -- neither ever consults toughness,
+            // name, controller, or any creation-order/timestamp field
+            // (`MageObject`/`PermanentImpl` expose no such field at all;
+            // the closest, `zoneChangeCounter`, is a per-object
+            // zone-change count that defaults to the same value, `1`, for
+            // two same-turn creatures that never changed zones since
+            // entering, so it can't disambiguate this tie even if
+            // consulted). Since `List.sort` is stable, the tie survives
+            // pre-sort order intact for `ComputerPlayerRL`'s direct
+            // descending-comparator sort (this corpus's active path) --
+            // i.e. hash-bucket order, full stop. There is no rules-visible,
+            // kernel-computable key left to try: name, power, toughness,
+            // controller are confirmed identical between the two Voldaren
+            // Epicures in this trace, and the observed order (attacker
+            // `be9f571a...` asked before `b01635f5...`) matches neither
+            // declaration order nor its reverse nor any other stable
+            // creature-attribute sort -- only `UUID.hashCode()` bucket
+            // placement explains it, and reproducing that would mean
+            // teaching the kernel to replicate Java's String/UUID hash
+            // function over UUIDs that don't exist outside this replay
+            // harness (a real self-play game mints no Java UUIDs at all),
+            // which is architecturally backwards for a kernel meant to run
+            // standalone. Left unresolved by design; see the increment-14
+            // report for the corpus-wide classification this backs.
             let mut attackers = state.engine.combat.attackers.clone();
             attackers.sort_by_key(|&id| std::cmp::Reverse(effective_power(state, id)));
             let legal_blockers = attackers.iter().map(|&a| (a, legal_blockers_for(state, a))).collect();
@@ -1296,6 +1338,21 @@ fn drain_pending_optional_cost_sacrifice_or_decide(state: &mut GameState) -> Opt
     if let Some((spell, to_zone)) = pending.spell_resume {
         event::propose_and_commit(state, ProposedEvent::zone_change(spell, to_zone));
     }
+    // `DiscardResume::FinishOptionalCost` (the discard-branch sibling of
+    // this function, same "run `then`, then finish the spell's move"
+    // shape) calls this; this branch didn't, an asymmetry bug -- so any
+    // trigger condition on `pending.then`'s own effects (Sneaky Snacker's
+    // `DrawNth(3)`, home zone Graveyard) never got matched at all when the
+    // *sacrifice* sub-cost was the one paid, only ever when the *discard*
+    // sub-cost was. Root-caused against `game_20260713_002158_0017.txt`
+    // decision 225: Highway Robbery's sacrifice-a-Mountain branch draws the
+    // controller's 3rd card of the turn, which should return their own
+    // Sneaky Snacker from the graveyard to the battlefield (tapped) and
+    // leave it sitting on the stack, unresolved, blocking a land drop until
+    // it resolves -- the reference's very next record still withholds
+    // `Play Mountain`, but the kernel, having never even queued the
+    // trigger, offers it immediately.
+    collect_and_queue_triggers(state);
     None
 }
 
@@ -3044,6 +3101,72 @@ mod tests {
         assert_eq!(state.players[0].battlefield.len(), 1, "exactly 1 of the 2 Mountains should have been sacrificed");
         assert!(state.players[0].graveyard.contains(&picked));
         assert_eq!(state.players[0].graveyard.len(), 2, "Highway Robbery + the sacrificed Mountain");
+    }
+
+    /// Regression test for the increment-14 fix (root-caused against
+    /// `game_20260713_002158_0017.txt` decision 225): `drain_pending_
+    /// optional_cost_sacrifice_or_decide` (this test's own sacrifice-land
+    /// branch, exercised just above) is the *only* one of the two Highway
+    /// Robbery optional-cost branches that didn't call `collect_and_queue_
+    /// triggers` after running `then` -- its discard-branch sibling,
+    /// `DiscardResume::FinishOptionalCost`, always has. That asymmetry
+    /// silently dropped any trigger condition on the "draw two cards"
+    /// effect itself whenever the *sacrifice* sub-cost (not discard) was
+    /// the one paid -- Sneaky Snacker's `DrawNth(3)` (`home_zone: Graveyard`)
+    /// chief among them, since Highway Robbery is this pool's only source
+    /// of a same-turn multi-card draw.
+    #[test]
+    fn highway_robbery_sacrifice_land_still_fires_a_draw_triggered_ability() {
+        let mut state = ready_game_in_main1(2);
+        let robbery = put_in_hand(&mut state, PlayerId::P0, "Highway Robbery");
+        let snacker = put_in_graveyard(&mut state, PlayerId::P0, "Sneaky Snacker");
+        // Real (non-empty-library) draws, so Highway Robbery's "draw two
+        // cards" genuinely fires `CommittedEvent::Draw` twice.
+        let mountain = card_def::card_id_by_name("Mountain").unwrap();
+        for _ in 0..2 {
+            let id = state.objects.push(crate::state::GameObject {
+                card_def: mountain,
+                name: "Mountain".to_string(),
+                owner: PlayerId::P0,
+                controller: PlayerId::P0,
+                zone: Zone::Library,
+                tapped: false,
+                summoning_sick: false,
+                damage: 0,
+                counters: Default::default(),
+                attachments: Vec::new(),
+                plotted_turn: None,
+            });
+            state.players[0].library.push(id);
+        }
+        // Already drew 1 card of their own this turn -- Highway Robbery's 2
+        // draws bring the running count 1 -> 2 -> 3, crossing Sneaky
+        // Snacker's `DrawNth(3)` threshold on the *second* draw.
+        state.players[0].draws_this_turn = 1;
+
+        step(&mut state, Action::CastSpell(robbery)).unwrap();
+        let decision = pass_until_stack_resolves(&mut state);
+        assert!(matches!(decision, Decision::ChooseOptionalCost { sacrifice_payable: true, .. }));
+        step(&mut state, Action::ChooseOptionalCost(OptionalCostChoice::SacrificeLand)).unwrap();
+
+        let picked = match advance_until_decision(&mut state) {
+            Decision::ChooseCostTargets { candidates, .. } => candidates[0],
+            other => panic!("expected ChooseCostTargets, got {other:?}"),
+        };
+        step(&mut state, Action::ChooseCostTarget(picked)).unwrap();
+
+        // Driving the sacrifice + "draw two" resolution must also queue
+        // Sneaky Snacker's own trigger -- observable as a fresh, unresolved
+        // stack item before anyone's had a chance to respond to it (the
+        // pre-fix bug silently dropped it: nothing would be here at all).
+        let after_resolution = advance_until_decision(&mut state);
+        assert!(matches!(after_resolution, Decision::CastSpellOrPass { .. }), "got {after_resolution:?}");
+        assert_eq!(state.stack.len(), 1, "Sneaky Snacker's own return-from-graveyard trigger must be sitting on the stack, unresolved");
+        assert_eq!(state.stack.last().unwrap().source, snacker);
+
+        pass_until_stack_resolves(&mut state);
+        assert!(state.players[0].battlefield.contains(&snacker), "Sneaky Snacker must have returned to the battlefield");
+        assert!(state.objects.get(snacker).tapped, "\"return... to the battlefield tapped\"");
     }
 
     #[test]

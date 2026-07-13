@@ -70,7 +70,7 @@
 //! driver is frozen and must not gain a runtime v4 code path bolted on.
 
 use mtg_kernel::card_def::{self, CARD_DEFS};
-use mtg_kernel::engine::{self, Action, Decision, OptionalCostChoice};
+use mtg_kernel::engine::{self, Action, CastMode, Decision, OptionalCostChoice};
 use mtg_kernel::ids::{ObjectId, PlayerId};
 use mtg_kernel::state::{GameState, Target, Zone};
 use mtg_kernel::surface_v2::{HarnessSurfaceV2, SuppressionReason, SurfaceAction, SurfaceDecision};
@@ -852,7 +852,9 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                     .apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(attempt)))
                     .map_err(|e| format!("engine-step-error:ChooseMadnessCast:{e}"))?;
             }
-            SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => return Err("unhandled-decision:ChooseCastMode".to_string()),
+            SurfaceDecision::Decision(Decision::ChooseCastMode { player, options, .. }) => {
+                apply_choose_cast_mode(surface, &mut state, &mut ctx, player, &options)?;
+            }
             SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => {
                 // Ground truth, not a guess -- this is a genuinely *silent*
                 // default on the reference side, not merely an unlogged
@@ -928,9 +930,15 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         // discard) was left stale at the front of the queue precisely
         // because this decision kind skipped the stale-record check,
         // permanently desyncing the cursor by one real record.
-        | SurfaceDecision::Decision(Decision::OrderTriggers { player, .. }) => Some(*player),
+        | SurfaceDecision::Decision(Decision::OrderTriggers { player, .. })
+        // `ChooseCastMode` consumes no trace record either (`apply_choose_
+        // cast_mode`'s doc) -- same latent stale-forced-discard hazard the
+        // `OrderTriggers` comment above already root-caused once; grouped
+        // here preemptively rather than waiting for a corpus trace to prove
+        // it, since the shape (and the fix) are identical.
+        | SurfaceDecision::Decision(Decision::ChooseCastMode { player, .. }) => Some(*player),
         SurfaceDecision::DeclareBlockersForAttacker { .. } => Some(state.active_player.opponent()),
-        SurfaceDecision::Decision(Decision::GameOver { .. }) | SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => None,
+        SurfaceDecision::Decision(Decision::GameOver { .. }) => None,
     }
 }
 
@@ -940,8 +948,24 @@ fn skip_stale_forced_discards(state: &GameState, ctx: &mut ReplayCtx, player: Pl
         if rec.action_type != "SELECT_CARD" || rec.chosen_object_ids.is_empty() {
             return;
         }
+        // A discarded Madness card (`CardDef::madness_cost.is_some()`, this
+        // pool's only one being Fiery Temper) lands in `Zone::Exile`, not
+        // `Zone::Graveyard` -- `engine::apply_discard`'s own 702.83b branch
+        // -- so a forced single-candidate discard the kernel auto-resolved
+        // (`drain_pending_discard_or_decide`'s `choices.len() <= count`
+        // shortcut) is *still* stale-but-unrecognized here if the discarded
+        // card happened to have Madness, checking only `Graveyard`. Root-
+        // caused against `game_20260713_002212_0039.txt` decision 148/149:
+        // Blood Token's activation discards the controller's only card
+        // (Fiery Temper) as its cost, the kernel auto-applies it (hand_len
+        // == count == 1) and exiles it, but this check's `Graveyard`-only
+        // zone test called it *not* already-applied -- leaving the stale
+        // `SELECT_CARD` record at the front of the queue, where the
+        // *following* real decision (`Decision::ChooseMadnessCast`, Fiery
+        // Temper's own Madness offer this exile triggers) then peeked it
+        // instead of the real `CHOOSE_USE` record synced right behind it.
         let already_applied = rec.chosen_object_ids.iter().all(|uuid| match ctx.id_map.get(uuid) {
-            Some(&id) => state.objects.get(id).zone == Zone::Graveyard,
+            Some(&id) => matches!(state.objects.get(id).zone, Zone::Graveyard | Zone::Exile),
             None => false,
         });
         if !already_applied {
@@ -974,7 +998,7 @@ fn debug_verbose(t: &GoldenTrace, state: &GameState, player: PlayerId, rec: &Dec
     }
     let ps = &state.players[player.index()];
     eprintln!(
-        "  [{kind}] decision_number={} player={} action={} rec_turn={} state_turn={} kernel_hand={} trace_hand={} kernel_lib={} trace_lib={}",
+        "  [{kind}] decision_number={} player={} action={} rec_turn={} state_turn={} kernel_hand={} trace_hand={} kernel_lib={} trace_lib={} step={:?} phase={:?} priority_round={}",
         rec.decision_number,
         rec.player,
         rec.action_type,
@@ -984,6 +1008,9 @@ fn debug_verbose(t: &GoldenTrace, state: &GameState, player: PlayerId, rec: &Dec
         rec.hand.len(),
         ps.library.len(),
         rec.library.len(),
+        state.step,
+        rec.phase,
+        state.engine.priority_round,
     );
 }
 
@@ -1141,6 +1168,15 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_nam
     // mapping is unambiguous (see `expected_phase_strings`'s doc).
     let expected_phases = expected_phase_strings(state.step);
     if !expected_phases.is_empty() && !rec.phase.is_empty() && !expected_phases.contains(&rec.phase.as_str()) {
+        if std::env::var("REPLAY_TRACE_FILTER").is_ok() {
+            eprintln!(
+                "PHASE-MISMATCH-DEBUG decision_number={} player={player:?} lands_played_this_turn={} battlefield={:?} hand={:?}",
+                rec.decision_number,
+                ps.lands_played_this_turn,
+                ps.battlefield.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
+                ps.hand.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
+            );
+        }
         return Err(format!("phase-mismatch:kernel_step={:?}:trace_phase={}", state.step, rec.phase));
     }
 
@@ -1558,14 +1594,39 @@ fn apply_discard(
     surface.apply(state, SurfaceAction::Action(Action::Discard(chosen))).map_err(|e| format!("engine-step-error:Discard:{e}"))
 }
 
+/// Guesses which `CastMode` the reference's own policy chose -- same
+/// "no ground truth for the offer itself, only for what follows" shape as
+/// `ChooseOptionalCost`/`ChooseMadnessCast` (`Decision::ChooseCastMode`
+/// itself consumes no trace record), so this can only look ahead at the
+/// *next* record's shape. Only ever reached when *both* `CastMode::Normal`
+/// and `CastMode::Alternative` are legally payable (`engine.rs`'s own
+/// `ChooseCastMode` doc: with only one affordable, the engine never asks at
+/// all) -- rare enough that this was the corpus's first real occurrence
+/// (`game_20260713_002146_0001.txt`, a Fireblast cast with both its mana
+/// cost and its "sacrifice two Mountains" alternative cost affordable).
+/// Fireblast's alternative cost lands on the exact same bare
+/// `"<name> (you)"`-shaped `SELECT_TARGETS` record `apply_choose_optional_
+/// cost`'s sacrifice-land branch already recognizes for the same reason
+/// (a land-sacrifice cost payment, picking *which* permanents); `Normal`
+/// leaves no such extra interactive record before the spell's own targets
+/// (if any) are asked.
+fn apply_choose_cast_mode(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId, options: &[CastMode]) -> Result<(), String> {
+    let looks_like_alternative_cost_pick =
+        matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && !rec.candidate_texts.is_empty() && rec.candidate_texts.iter().all(|t| t.ends_with(" (you)")));
+    let mode = if looks_like_alternative_cost_pick && options.contains(&CastMode::Alternative) { CastMode::Alternative } else { CastMode::Normal };
+    surface.apply(state, SurfaceAction::Action(Action::ChooseCastMode(mode))).map_err(|e| format!("engine-step-error:ChooseCastMode:{e}"))
+}
+
 /// Guesses which `OptionalCostChoice` the reference's own policy made --
 /// `Decision::ChooseOptionalCost` itself consumes no trace record (same
 /// "no ground truth for the offer itself, only for what follows" shape as
 /// `ChooseMadnessCast`), so this can only look ahead at the *next* record's
-/// shape. Both real payable sub-costs land on a `SELECT_TARGETS` record
-/// (a discard's "which card" question uses the same `SELECT_TARGETS`-then-
-/// `SELECT_CARD` prefix pattern `apply_discard` already handles for every
-/// other discard cost -- see Masked Meower's ability for the same shape).
+/// shape. Both real payable sub-costs *usually* land on a `SELECT_TARGETS`
+/// record (a discard's "which card" question uses the same
+/// `SELECT_TARGETS`-then-`SELECT_CARD` prefix pattern `apply_discard`
+/// already handles for every other discard cost -- see Masked Meower's
+/// ability for the same shape) -- except the one-legal-candidate collapse
+/// documented below.
 ///
 /// Told apart primarily by candidate *text shape*, not count: every
 /// sacrifice-land candidate in this corpus renders as `"<name> (you)"` (a
@@ -1584,14 +1645,39 @@ fn apply_discard(
 /// function only ever checked the discard shape and fell back to `Decline`
 /// otherwise -- silently wrong whenever the real choice was `SacrificeLand`
 /// (Sol #90, increment 11).
+///
+/// **One-legal-candidate collapse** (increment 14): when only one card in
+/// hand is a legal discard, the reference's own `TargetCardInHand` chooser
+/// auto-selects it with no interactive prompt at all -- no `SELECT_TARGETS`
+/// record is logged, just a lone `SELECT_CARD` naming that card directly.
+/// Corpus-wide census of every Highway-Robbery-shaped discard pick (the
+/// only card in this pool with a payable discard-or-sacrifice optional
+/// cost): 13 occurrences with `hand_len >= 2` all log the
+/// `SELECT_TARGETS`-then-`SELECT_CARD` pair this function already handled;
+/// the corpus's *only* `hand_len == 1` occurrence
+/// (`game_20260713_002153_0009.txt` decision 142, hand `["Guttersnipe"]`)
+/// instead logs a bare one-candidate `SELECT_CARD` with no
+/// `SELECT_TARGETS` at all -- which the `action_type == "SELECT_TARGETS"`-
+/// only check above can never match, so this real `Discard` pick was
+/// silently misread as `Decline`, desyncing every subsequent decision in
+/// that trace. Same text-shape discriminator as the `SELECT_TARGETS` path
+/// (bare name = discard, `"... (you)"` = sacrifice-land) applies here too,
+/// so a symmetric single-legal-land collapse (no corpus example yet, but
+/// the same reference chooser would behave identically) is handled the
+/// same way rather than left as a latent gap.
 fn apply_choose_optional_cost(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId, discard_payable: bool, sacrifice_payable: bool) -> Result<(), String> {
     let hand_len = state.players[player.index()].hand.len();
     let land_len = state.players[player.index()].battlefield.iter().filter(|&&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land).count();
     let next_is_select_targets_with_len = |n: usize| matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && rec.candidate_texts.len() == n);
     let next_looks_like_land_refs =
         matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && !rec.candidate_texts.is_empty() && rec.candidate_texts.iter().all(|t| t.ends_with(" (you)")));
-    let looks_like_sacrifice_pick = sacrifice_payable && (next_looks_like_land_refs || (!discard_payable && next_is_select_targets_with_len(land_len)));
-    let looks_like_discard_pick = discard_payable && !looks_like_sacrifice_pick && next_is_select_targets_with_len(hand_len);
+    let next_is_lone_select_card_shaped = |want_land: bool| {
+        matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_CARD" && rec.candidate_texts.len() == 1 && rec.candidate_texts[0].ends_with(" (you)") == want_land)
+    };
+    let looks_like_sacrifice_pick =
+        sacrifice_payable && (next_looks_like_land_refs || (!discard_payable && next_is_select_targets_with_len(land_len)) || (land_len == 1 && next_is_lone_select_card_shaped(true)));
+    let looks_like_discard_pick =
+        discard_payable && !looks_like_sacrifice_pick && (next_is_select_targets_with_len(hand_len) || (hand_len == 1 && next_is_lone_select_card_shaped(false)));
     let choice = if looks_like_sacrifice_pick {
         OptionalCostChoice::SacrificeLand
     } else if looks_like_discard_pick {
@@ -1902,6 +1988,158 @@ mod tests {
 
         assert!(state.engine.pending_optional_cost_sacrifice.is_some(), "expected SacrificeLand to be chosen (text shape), not Discard");
         assert!(state.engine.pending_discard.is_none(), "must not have staged a discard for a sacrifice-land pick");
+    }
+
+    /// Root-caused against `game_20260713_002153_0009.txt` decision 142:
+    /// with exactly one card in hand, the reference's own `TargetCardInHand`
+    /// chooser auto-selects it -- no `SELECT_TARGETS` record is logged at
+    /// all, just a lone one-candidate `SELECT_CARD` naming that card. The
+    /// pre-increment-14 heuristic only ever recognized `SELECT_TARGETS` as
+    /// the "real pick" shape, so this real `Discard` was silently misread
+    /// as `Decline`.
+    #[test]
+    fn choose_optional_cost_recognizes_the_lone_candidate_select_card_collapse() {
+        let mountain = card_def::card_id_by_name("Mountain").unwrap();
+        let guttersnipe = card_def::card_id_by_name("Guttersnipe").unwrap();
+        let mut state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+
+        let hand_card = state.objects.push(mtg_kernel::state::GameObject {
+            card_def: guttersnipe,
+            name: "Guttersnipe".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Hand,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.players[0].hand.push(hand_card);
+
+        let source = state.objects.push(mtg_kernel::state::GameObject {
+            card_def: mountain,
+            name: "Highway Robbery".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Stack,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.engine.pending_optional_cost = Some(mtg_kernel::engine::PendingOptionalCost {
+            player: PlayerId::P0,
+            source,
+            discard: 1,
+            sacrifice_lands: 1,
+            discard_payable: true,
+            sacrifice_payable: false, // no lands controlled in this reduced repro, same as the real trace at that point
+            then: mtg_kernel::effect::EffectOp::Sequence(vec![]),
+            spell_resume: None,
+        });
+
+        let rec = decision_record_ex("SELECT_CARD", &["Guttersnipe"], &["a"], &[0], ",\"episode\":0");
+        let queue = vec![&rec];
+        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
+        let mut surface = HarnessSurfaceV2::new();
+
+        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0, true, false).expect("ChooseOptionalCost must be legal here");
+
+        assert!(state.engine.pending_discard.is_some(), "expected Discard to be chosen (lone-candidate SELECT_CARD collapse), not Decline");
+    }
+
+    /// Regression test for the increment-14 fix (root-caused against
+    /// `game_20260713_002146_0001.txt`: a Fireblast cast with *both*
+    /// `CastMode::Normal` and `CastMode::Alternative` legally payable --
+    /// the corpus's first real `Decision::ChooseCastMode`, previously
+    /// entirely unhandled by this driver). Same peek-ahead shape as
+    /// `apply_choose_optional_cost`'s sacrifice-land branch: the next
+    /// record being a bare `"<name> (you)"`-shaped `SELECT_TARGETS` (which
+    /// Card in the deck), a land-sacrifice payment pick) means `Alternative`
+    /// was chosen.
+    #[test]
+    fn choose_cast_mode_picks_alternative_when_the_next_record_is_a_land_reference_pick() {
+        let mountain = card_def::card_id_by_name("Mountain").unwrap();
+        let fireblast = card_def::card_id_by_name("Fireblast").unwrap();
+        let mut state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let spell = state.objects.push(mtg_kernel::state::GameObject {
+            card_def: fireblast,
+            name: "Fireblast".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Stack,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.engine.pending_cast = Some(mtg_kernel::engine::PendingCast {
+            spell,
+            controller: PlayerId::P0,
+            target_spec: mtg_kernel::card_def::TargetSpec::None,
+            targets_chosen: Vec::new(),
+            is_flashback: false,
+            cast_mode: None,
+            additional_cost_discarded: None,
+            cost_override: None,
+            mode_chosen: None,
+            origin_zone: Zone::Hand,
+            sacrifice_chosen: Vec::new(),
+        });
+
+        let rec = decision_record_ex("SELECT_TARGETS", &["Mountain (you)", "Mountain (you)"], &["a", "b"], &[0], ",\"episode\":0");
+        let queue = vec![&rec];
+        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
+        let mut surface = HarnessSurfaceV2::new();
+
+        apply_choose_cast_mode(&mut surface, &mut state, &mut ctx, PlayerId::P0, &[CastMode::Normal, CastMode::Alternative]).expect("ChooseCastMode must be legal here");
+
+        assert_eq!(state.engine.pending_cast.as_ref().and_then(|p| p.cast_mode), Some(CastMode::Alternative), "expected Alternative, not Normal");
+    }
+
+    /// Regression test for the increment-14 fix (root-caused against
+    /// `game_20260713_002212_0039.txt` decisions 148/149): a stale
+    /// `SELECT_CARD` for a forced discard the kernel already auto-applied
+    /// (`drain_pending_discard_or_decide`'s `choices.len() <= count`
+    /// shortcut) must still be recognized when the discarded card has
+    /// Madness and therefore landed in `Zone::Exile`, not `Zone::Graveyard`
+    /// -- the zone-check this function used before only ever recognized
+    /// the graveyard destination.
+    #[test]
+    fn skip_stale_forced_discards_recognizes_an_exiled_madness_card_as_already_applied() {
+        let mut state = GameState::new_from_libraries(&[], &[], |id| format!("card-{id}"), 1);
+        let fiery_temper = card_def::card_id_by_name("Fiery Temper").unwrap();
+        let obj = state.objects.push(mtg_kernel::state::GameObject {
+            card_def: fiery_temper,
+            name: "Fiery Temper".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Exile, // already auto-discarded via Madness by the kernel
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        let mut id_map = HashMap::new();
+        id_map.insert("uuid-fiery-temper".to_string(), obj);
+
+        let rec = decision_record_ex("SELECT_CARD", &["Fiery Temper"], &["uuid-fiery-temper"], &[0], ",\"episode\":0,\"chosen_object_ids\":[\"uuid-fiery-temper\"]");
+        let queue = vec![&rec];
+        let mut ctx = ReplayCtx { id_map, pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
+        let mut outcome = ReplayOutcome::default();
+
+        skip_stale_forced_discards(&state, &mut ctx, PlayerId::P0, &mut outcome);
+
+        assert_eq!(ctx.cursors[0], 1, "the stale SELECT_CARD record for the already-exiled Madness discard must be skipped");
+        assert_eq!(outcome.forced_discard_records_skipped, 1);
     }
 
     // ---- trigger-order commutativity audit -----------------------------

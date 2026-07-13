@@ -227,6 +227,68 @@ pub struct HarnessSurfaceV2 {
     combat_round_opening_mana_count: u64,
     round_opening_stack_len: usize,
     stack_len_round_seen: Option<u64>,
+    /// `state.stack.len()` as of the last time the plain (non-combat)
+    /// `stack_top_is_fresh_own_item` suppression was evaluated -- deliberately
+    /// keyed off the stack's own length changing, *not* off
+    /// `priority_round` the way `round_opening_stack_len` itself is (see
+    /// that field's doc for why a fresh cast mid-round doesn't bump
+    /// `priority_round`): a `priority_round`-keyed baseline stays fixed for
+    /// the *entire* round, so it can't tell "the opponent responded before
+    /// my item was even cast, earlier this same round" apart from "the
+    /// opponent responded after my item was cast" -- and only the second
+    /// case is a real reason to un-suppress. Paired with
+    /// `mana_count_at_last_stack_change`, below.
+    last_seen_stack_len: Option<usize>,
+    /// `state.engine.mana_ability_activations` as of the moment
+    /// `last_seen_stack_len` was last (re-)captured, i.e. as of the last
+    /// time `state.stack.len()` actually changed -- closes the same
+    /// `resetPassed()` gap `combat_priority_mana_count_seen`'s doc
+    /// describes, but for the plain Main1/Main2 `stack_top_is_fresh_own_
+    /// item` suppression rather than the combat one-action-per-round
+    /// throttle. Root-caused against `game_20260713_002146_0001.txt`
+    /// decision 221: SelfPlay casts Highway Robbery (Main1), gets silently
+    /// re-suppressed by `stack_top_is_fresh_own_item` every time it's their
+    /// priority again -- correct for the *immediate* follow-up, but this
+    /// check has no expiry, so it stays true for as long as Highway
+    /// Robbery sits unresolved, including *after* PlayerRL1 responds with
+    /// two mana-ability activations in between (each of which calls Java's
+    /// `PlayerImpl.activateAbility` -> unconditional `resetPassed()` on
+    /// *every* player, the same signal `combat_priority_mana_count_seen`
+    /// already exists to catch for combat). The reference's very next
+    /// SelfPlay record after those is a real, fully-logged `Pass` with a
+    /// genuine `{T}: Add {R}.` option alongside it -- not silently
+    /// suppressed -- so the kernel's version instead resolves Highway
+    /// Robbery a full ask early, silently declining its optional cost
+    /// (guessed from a stale peek at that same not-yet-consumed record)
+    /// where the reference actually pays it, one-graveyard-card off from
+    /// that point on.
+    ///
+    /// A first attempt keyed this baseline the same way as
+    /// `round_opening_stack_len` (reset once per `priority_round`) --
+    /// caught by the mandatory full-corpus diff: it regressed
+    /// `game_20260713_002202_0024.txt` (21/40 -> still passing count-wise,
+    /// but this trace flipped from complete to `decision-kind-mismatch`).
+    /// There, SelfPlay taps a mana ability *before* PlayerRL1 casts
+    /// Faithless Looting; a `priority_round`-keyed baseline had already
+    /// captured that stale tap as "activity", so PlayerRL1's own post-cast
+    /// reprompt was wrongly un-suppressed even though *nothing* happened
+    /// between the cast and its discard-resolution in the real trace --
+    /// the reference keeps PlayerRL1 silently suppressed there, same as
+    /// this suppression's original (pre-fix) behavior. Re-keying the
+    /// baseline to "since the stack length itself last changed" (this
+    /// field) instead of "since this `priority_round` opened" fixes both
+    /// traces at once: the baseline only resets when a *new* item lands on
+    /// the stack (or one resolves off it), which is exactly the "since
+    /// this specific stack-top became fresh" scope `stack_top_is_fresh_own_
+    /// item` is supposed to have.
+    ///
+    /// See `combat_round_opening_mana_count`'s doc for why the
+    /// activator-identity check (below) is required and not optional --
+    /// the earlier over-broad combat fix attempt (Sol #90-era) that reset
+    /// unconditionally on any mana-ability activity regressed 21/40 to
+    /// 6/40 by also un-suppressing the activator's *own* immediate
+    /// reprompt.
+    mana_count_at_last_stack_change: u64,
     /// Set to `Some(card)` the instant `Action::ChooseMadnessCast(true)` is
     /// applied (see `apply`) -- `card` is `state.engine.pending_cast`'s
     /// spell right after that step, i.e. the card now being cast for its
@@ -294,8 +356,25 @@ impl HarnessSurfaceV2 {
                         self.round_opening_stack_len = state.stack.len();
                         self.stack_len_round_seen = Some(state.engine.priority_round);
                     }
+                    // `resetPassed()` gap (see `mana_count_at_last_stack_
+                    // change`'s doc): the *opponent* activating a mana
+                    // ability since `player`'s own item last landed on the
+                    // stack is a real, fresh reason for `player` to be asked
+                    // again for real, even though that item is still
+                    // sitting unresolved -- only suppress the "my own item,
+                    // nothing's happened since it landed" case when the
+                    // mana-ability count hasn't moved since the stack was
+                    // last this size, or moved only because `player`
+                    // themselves activated one.
+                    if self.last_seen_stack_len != Some(state.stack.len()) {
+                        self.last_seen_stack_len = Some(state.stack.len());
+                        self.mana_count_at_last_stack_change = state.engine.mana_ability_activations;
+                    }
+                    let opponent_mana_activity_since_stack_change = state.engine.mana_ability_activations != self.mana_count_at_last_stack_change
+                        && state.engine.last_mana_ability_activator != Some(*player);
                     let stack_top_is_fresh_own_item = state.stack.len() > self.round_opening_stack_len
-                        && state.stack.last().is_some_and(|item| item.controller == *player);
+                        && state.stack.last().is_some_and(|item| item.controller == *player)
+                        && !opponent_mana_activity_since_stack_change;
                     // One-shot madness-cast exemption -- see
                     // `madness_cast_reprompt_exemption`'s doc. Consumed
                     // (cleared) the moment we reach *any* `CastSpellOrPass`
@@ -323,8 +402,35 @@ impl HarnessSurfaceV2 {
                         // `state.stack`, so it needs its own durable "was the
                         // thing that reopened this round mine" signal --
                         // see `combat_round_opening_mana_count`'s doc.
+                        //
+                        // The `state.stack.len() == self.combat_priority_
+                        // stack_len_seen` clause guards a gap in that signal:
+                        // it only remembers *whether my own mana tap was the
+                        // last reopening event*, never checking if a *later,
+                        // stack-based* reopening (someone activating a real
+                        // ability) has since superseded it. Root-caused
+                        // against `game_20260713_002148_0003.txt` decisions
+                        // 34-38: SelfPlay taps mana (their own reopen),
+                        // *then* PlayerRL1 activates Masked Meower's ability
+                        // (a real, stack-landing activation -- not a mana
+                        // ability, so `last_mana_ability_activator` still
+                        // stales-points at SelfPlay). `combat_priority_stack_
+                        // len_seen` hasn't caught up to the new stack length
+                        // yet either (its own re-arm runs *after* this check,
+                        // and never at all for a self-suppressed player --
+                        // see the `continue` a few lines down), so without
+                        // this clause `mana_ability_is_fresh_own_action`
+                        // stays wrongly true off SelfPlay's now-stale mana
+                        // tap, self-suppressing them right through the
+                        // window where the reference lets them respond to
+                        // Masked Meower's ability with a real `Cast Lava
+                        // Dart` -- permanently, since a self-suppressed
+                        // player's `continue` also skips the stack-length
+                        // re-arm block that would otherwise have corrected
+                        // `combat_priority_stack_len_seen` for them.
                         let mana_ability_is_fresh_own_action = state.engine.mana_ability_activations > self.combat_round_opening_mana_count
-                            && state.engine.last_mana_ability_activator == Some(*player);
+                            && state.engine.last_mana_ability_activator == Some(*player)
+                            && state.stack.len() == self.combat_priority_stack_len_seen;
                         // The acting player's own reopened window from a
                         // cast/activation that just landed on the stack this
                         // round is *always* silently suppressed here, same as
@@ -762,6 +868,176 @@ mod tests {
         assert!(suppressions[0].auto_action.starts_with("Pass"));
     }
 
+    /// Regression test for the increment-14 fix (root-caused against
+    /// `game_20260713_002146_0001.txt` decision 221, see `mana_count_at_
+    /// last_stack_change`'s doc): outside combat, once the *opponent*
+    /// activates a mana ability while the caster's own item still sits
+    /// unresolved on the stack, the caster's next ask must be a genuine
+    /// `CastSpellOrPass` -- not silently re-suppressed by
+    /// `StackTopIsCastersOwn` forever, the way `same_caster_reprompt_after_
+    /// own_cast_is_suppressed` (just above) correctly suppresses only the
+    /// *immediate* first reprompt.
+    #[test]
+    fn main_phase_reprompt_is_un_suppressed_after_opponent_mana_activity_since_the_cast() {
+        let mut state = empty_game();
+        // P0: Lightning Bolt plus *two* Mountains -- one pays for the bolt,
+        // the other keeps P0 with a genuine option afterward (so their
+        // reprompt is a real ask to inspect, not masked by `NoRealOption`).
+        let bolt = card_def::card_id_by_name("Lightning Bolt").unwrap();
+        let bolt_id = state.objects.push(crate::state::GameObject {
+            card_def: bolt,
+            name: "Lightning Bolt".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Hand,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.players[0].hand.push(bolt_id);
+        put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+        let p0_second_mountain = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        state.objects.get_mut(p0_second_mountain).tapped = false;
+        let p1_mountain = put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
+        state.objects.get_mut(p1_mountain).tapped = false;
+
+        state.step = Step::Main1;
+        state.active_player = PlayerId::P0;
+        state.priority_player = PlayerId::P0;
+
+        let mut surface = HarnessSurfaceV2::new();
+
+        let d0 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) = &d0 else { panic!("expected CastSpellOrPass, got {d0:?}") };
+        assert_eq!(*player, PlayerId::P0);
+        assert!(castable_spells.contains(&bolt_id));
+        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+
+        let d1 = surface.next_decision(&mut state);
+        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P0), "got {d1:?}");
+        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+
+        // P0's own immediate follow-up is silently suppressed (their own
+        // fresh item); priority lands on P1 for a genuine ask.
+        let d2 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        assert_eq!(*player, PlayerId::P1);
+        assert!(mana_abilities.contains(&p1_mountain));
+        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain))).unwrap();
+
+        // P1's mana ability resets *everyone's* passed flag (605.3b +
+        // Java's unconditional `resetPassed()`), so P0 must now get a real,
+        // un-suppressed ask -- even though Lightning Bolt is still their
+        // own unresolved item on top of the stack.
+        let d3 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d3 else { panic!("P0 must get a genuine fresh ask after P1's mana ability, got {d3:?}") };
+        assert_eq!(*player, PlayerId::P0);
+        assert!(mana_abilities.contains(&p0_second_mountain));
+        assert_eq!(state.stack.len(), 1, "Lightning Bolt must still be unresolved when P0 is asked");
+
+        // P0's *immediate* first reprompt is suppressed exactly once
+        // (`StackTopIsCastersOwn`) -- P1's own subsequent auto-pass
+        // (`NoRealOption`, once they've spent their only mana source) is
+        // expected and irrelevant to what this test proves; the point is
+        // that `StackTopIsCastersOwn` does not fire a *second* time for P0.
+        let suppressions = surface.suppressions();
+        let stack_top_is_casters_own_count = suppressions.iter().filter(|s| s.reason == SuppressionReason::StackTopIsCastersOwn).count();
+        assert_eq!(stack_top_is_casters_own_count, 1, "P0 must be suppressed exactly once (their immediate reprompt), not re-suppressed after P1's mana ability, got {suppressions:?}");
+    }
+
+    /// Regression test for the increment-14 fix's own false-positive trap
+    /// (root-caused against `game_20260713_002202_0024.txt`: an intermediate
+    /// version of the fix above keyed its "did the opponent do something"
+    /// baseline off `priority_round` rather than off the stack's own length
+    /// changing, so an opponent mana ability *before* the cast -- still
+    /// earlier in the same `priority_round` -- was wrongly read as "activity
+    /// since the cast," un-suppressing a reprompt the reference actually
+    /// keeps silent). Mana activity that happened *before* `player`'s item
+    /// even landed on the stack must not count -- only activity *since*.
+    #[test]
+    fn main_phase_reprompt_stays_suppressed_when_the_opponent_mana_activity_predates_the_cast() {
+        let mut state = empty_game();
+        let p1_mountain = put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
+        state.objects.get_mut(p1_mountain).tapped = false;
+        // A second Mountain for P1 -- tapping the first one (before P0's
+        // cast) must not leave P1 with zero options later, or P1's own
+        // later reprompt would itself get silently `NoRealOption`-passed
+        // straight into full resolution (and, with both test libraries
+        // empty, on into an unrelated empty-library loss) instead of
+        // surfacing the real ask this test means to inspect.
+        let p1_second_mountain = put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
+        state.objects.get_mut(p1_second_mountain).tapped = false;
+        let bolt = card_def::card_id_by_name("Lightning Bolt").unwrap();
+        let bolt_id = state.objects.push(crate::state::GameObject {
+            card_def: bolt,
+            name: "Lightning Bolt".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Hand,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.players[0].hand.push(bolt_id);
+        put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+
+        state.step = Step::Main1;
+        state.active_player = PlayerId::P0;
+        state.priority_player = PlayerId::P1;
+
+        let mut surface = HarnessSurfaceV2::new();
+
+        // P1 taps one Mountain for mana *before* P0 casts anything -- still
+        // the same `priority_round` (nothing has bumped it yet) -- then
+        // explicitly passes (a mana ability doesn't hand away priority by
+        // itself; the second Mountain is only there so this Pass is a real
+        // choice, not a `NoRealOption` auto-pass indistinguishable from it).
+        let d1 = surface.next_decision(&mut state);
+        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P1), "got {d1:?}");
+        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain))).unwrap();
+
+        let d1b = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d1b else { panic!("got {d1b:?}") };
+        assert_eq!(*player, PlayerId::P1);
+        assert_eq!(mana_abilities, &[p1_second_mountain], "the tapped Mountain must no longer be offered");
+        surface.apply(&mut state, SurfaceAction::Action(Action::Pass)).unwrap();
+
+        // Priority returns to P0, who casts Lightning Bolt at P1.
+        let d2 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        assert_eq!(*player, PlayerId::P0);
+        assert!(castable_spells.contains(&bolt_id));
+        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+
+        let d3 = surface.next_decision(&mut state);
+        assert!(matches!(&d3, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P0), "got {d3:?}");
+        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+
+        // Nothing has happened *since* Lightning Bolt landed on the stack --
+        // P1's only mana activity was earlier, before the cast -- so P0's
+        // own immediate reprompt must stay silently suppressed, exactly as
+        // `same_caster_reprompt_after_own_cast_is_suppressed` establishes
+        // for the no-intervening-activity case.
+        let d4 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d4 else {
+            panic!("priority must skip straight past P0's own reprompt to P1, got {d4:?}")
+        };
+        assert_eq!(*player, PlayerId::P1);
+        assert!(mana_abilities.contains(&p1_second_mountain));
+        assert_eq!(state.stack.len(), 1, "Lightning Bolt must still be unresolved when P1 is asked");
+        let suppressions = surface.suppressions();
+        let last = suppressions.last().expect("P0's own reprompt must have been suppressed");
+        assert_eq!(last.reason, SuppressionReason::StackTopIsCastersOwn, "got {suppressions:?}");
+    }
+
     /// Regression test for the increment-13 fix (root-caused against
     /// `game_20260713_002152_0007.txt` decision 24, see `HarnessSurfaceV2`'s
     /// `combat_priority_stack_len_seen` doc): once *both* players have spent
@@ -896,6 +1172,90 @@ mod tests {
         let suppressions = surface.suppressions();
         let last = suppressions.last().expect("P1's own reprompt after their mana ability must have been suppressed");
         assert_eq!(last.reason, SuppressionReason::StackTopIsCastersOwn, "got {suppressions:?}");
+        assert!(!suppressions.iter().any(|s| s.reason == SuppressionReason::CombatPriorityActionSpent), "got {suppressions:?}");
+    }
+
+    /// Regression test for the increment-14 fix (root-caused against
+    /// `game_20260713_002148_0003.txt` decisions 34-38, see
+    /// `mana_ability_is_fresh_own_action`'s doc): once a player's own mana
+    /// tap has been superseded by a *later* stack-landing action (someone's
+    /// real cast/activation, not another mana ability), that mana tap must
+    /// no longer count as "the last thing that happened was mine" --
+    /// `mana_ability_is_fresh_own_action` tracked only "was my mana ability
+    /// the most recent one," never checking whether a later, non-mana
+    /// reopening event had since superseded it, so this player stayed
+    /// wrongly self-suppressed straight through the window where the
+    /// reference lets them respond for real.
+    #[test]
+    fn combat_throttle_stale_own_mana_tap_is_superseded_by_a_later_cast() {
+        let mut state = empty_game();
+        let p0_mountain = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        state.objects.get_mut(p0_mountain).tapped = false;
+        // A second Mountain for P0 -- tapping the first one for their round-
+        // opening action must not leave them with zero options later, or
+        // their later reprompt would itself get silently `NoRealOption`-
+        // passed straight into full resolution (and, with both test
+        // libraries empty, on into an unrelated empty-library loss) instead
+        // of surfacing the real ask this test means to inspect.
+        let p0_second_mountain = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        state.objects.get_mut(p0_second_mountain).tapped = false;
+
+        let bolt = card_def::card_id_by_name("Lightning Bolt").unwrap();
+        let bolt_id = state.objects.push(crate::state::GameObject {
+            card_def: bolt,
+            name: "Lightning Bolt".to_string(),
+            owner: PlayerId::P1,
+            controller: PlayerId::P1,
+            zone: Zone::Hand,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+        });
+        state.players[1].hand.push(bolt_id);
+        put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
+        state.objects.get_mut(state.players[1].battlefield[0]).tapped = false;
+
+        state.step = Step::DeclareAttackers;
+        state.engine.combat.attackers_declared = true;
+        state.active_player = PlayerId::P0;
+        state.priority_player = PlayerId::P0;
+
+        let mut surface = HarnessSurfaceV2::new();
+
+        // Round 1: P0 spends their one action by tapping mana (not
+        // casting/passing) -- this is what stales `last_mana_ability_
+        // activator` to P0.
+        let d1 = surface.next_decision(&mut state);
+        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P0), "got {d1:?}");
+        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p0_mountain))).unwrap();
+
+        // ...then P1 spends theirs by casting Lightning Bolt at P0 -- a
+        // real, stack-landing action, *not* a mana ability.
+        let d2 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        assert_eq!(*player, PlayerId::P1);
+        assert!(castable_spells.contains(&bolt_id));
+        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+
+        let d3 = surface.next_decision(&mut state);
+        assert!(matches!(&d3, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P1), "got {d3:?}");
+        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P0)))).unwrap();
+
+        // P1's cast is a real, later reopening event -- P0's stale mana tap
+        // must not keep them self-suppressed through this window; they must
+        // get a genuine fresh ask, with Lightning Bolt still unresolved.
+        let d4 = surface.next_decision(&mut state);
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d4 else {
+            panic!("P0 must get a genuine fresh ask after P1's cast, not stay suppressed off their own stale mana tap, got {d4:?}")
+        };
+        assert_eq!(*player, PlayerId::P0);
+        assert!(mana_abilities.contains(&p0_second_mountain));
+        assert_eq!(state.stack.len(), 1, "Lightning Bolt must still be unresolved when P0 is asked");
+
+        let suppressions = surface.suppressions();
         assert!(!suppressions.iter().any(|s| s.reason == SuppressionReason::CombatPriorityActionSpent), "got {suppressions:?}");
     }
 
