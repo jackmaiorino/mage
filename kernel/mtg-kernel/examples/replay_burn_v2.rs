@@ -569,45 +569,63 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
             SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, discard_payable, sacrifice_payable }) => {
                 apply_choose_optional_cost(surface, &mut state, &mut ctx, player, discard_payable, sacrifice_payable)?;
             }
-            SurfaceDecision::Decision(Decision::ChooseMadnessCast { .. }) => {
-                // Always attempt the cast -- unlike the H1/v3 driver's
-                // `mid_cost_payment` guard (`examples/replay_burn.rs`,
-                // frozen, not touched here), which declines whenever
-                // another cast/activation is still pending, purely to
-                // dodge a real *panic* an older engine version had if a
-                // madness cast stole mana an in-flight cost still needed.
-                // That panic is gone: `engine::Decision::ChooseCostTargets`'s
-                // sibling fix this increment (Sol #90) makes an
-                // unaffordable madness attempt fail *gracefully* --
-                // `abort_cast` reverts the card to the graveyard instead of
-                // erroring (see `engine::drain_pending_madness_or_decide`'s
-                // doc) -- so there's nothing left to protect against here.
-                // `pending_activation.is_some()` was also never a reliable
-                // signal in the first place for *this* purpose: a card's
-                // whole non-mana cost (discard, sacrifice) is paid
-                // synchronously at activation time, well before its
-                // triggered Madness offer can even fire, so "an activation
-                // is still pending" here means only "not yet finalized to
-                // the stack," never "still needs mana" -- see the
-                // `Masked Meower` case root-caused in
-                // `game_20260713_002156_0014.txt` (decision 45): its own
-                // activation is genuinely still `pending_activation`
-                // (cost already fully paid, StackItem not yet pushed) at
-                // the exact moment the Madness decision for the card it
-                // just discarded fires, which made the old guard decline
-                // every single one of these -- a real, false divergence,
-                // not a real protection. `ChooseMadnessCast` itself
-                // consumes no trace record either way (H1's own doc), so
-                // there's no ground truth to check this default against;
-                // "always attempt" matches every golden-trace case audited
-                // this increment (the RL policy's own `CHOOSE_USE` score
-                // was `>0.5` -- i.e. "Yes" -- in each one).
+            SurfaceDecision::Decision(Decision::ChooseMadnessCast { player, .. }) => {
+                // Ground truth, not a guess: `trace::parse_text` now
+                // surfaces the reference's Madness `CHOOSE_USE` prompt
+                // ("...instead of putting it into your graveyard") as a
+                // real `action_type="CHOOSE_USE"` record in this player's
+                // queue (see `MADNESS_CHOOSE_USE_MARKER`'s doc), so this
+                // is a real, consumed trace record like any other decision
+                // now -- not the blind "always attempt" default increment
+                // 11 shipped (root-caused wrong this increment against
+                // `game_20260713_002156_0015.txt` decision 322: the
+                // reference actually said `NO` there, disproving "always
+                // attempt matches every golden-trace case audited" -- that
+                // claim was only ever checked against 2 games, both
+                // incidentally `YES`; the corpus-wide split is close to
+                // even, 25 `YES` / 25 `NO`).
+                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseMadnessCast".to_string())?;
+                if rec.action_type != "CHOOSE_USE" {
+                    return Err(format!("decision-kind-mismatch:ChooseMadnessCast-vs-{}", rec.action_type));
+                }
+                let attempt = rec.chosen_indices.first() == Some(&0); // 0=Yes, 1=No -- see MADNESS_CHOOSE_USE_MARKER's doc
+                ctx.advance(player);
+                outcome.decisions_consumed += 1;
                 surface
-                    .apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(true)))
+                    .apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(attempt)))
                     .map_err(|e| format!("engine-step-error:ChooseMadnessCast:{e}"))?;
             }
             SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => return Err("unhandled-decision:ChooseCastMode".to_string()),
-            SurfaceDecision::Decision(Decision::OrderTriggers { .. }) => return Err("unhandled-decision:OrderTriggers".to_string()),
+            SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => {
+                // Ground truth, not a guess -- this is a genuinely *silent*
+                // default on the reference side, not merely an unlogged
+                // one: `ComputerPlayer.chooseTriggeredAbility` (the method
+                // every AI in this lineage inherits -- `ComputerPlayerRL`
+                // never overrides it; a real override exists in
+                // `ComputerPlayerRL.java` but is dead, commented-out code)
+                // is `return abilities.get(0);` -- literally "select first
+                // trigger all the time", no RL policy call, no scoring, no
+                // `logReplayDecision` anywhere on that path (confirmed:
+                // `GameImpl.checkTriggered` repeatedly removes whichever
+                // ability this always picks and stacks it, so the net
+                // effect is simply "place them in original list order,
+                // each one on top of the last" -- i.e. the identity
+                // permutation into `Action::OrderTriggers`, exactly what
+                // this applies). Every trigger this pool's cards can ever
+                // put in the same `OrderTriggers` group this increment
+                // (2+ Guttersnipes off one cast, 2+ Sneaky Snackers off
+                // the same draw) has a fully symmetric, order-independent
+                // effect anyway (a fixed damage/return-to-battlefield
+                // program with no target choice), so which physical
+                // permutation is chosen can never actually diverge game
+                // state even if this pool ever grows a genuine tie-break
+                // dependency -- but the *decision* itself still needs to
+                // not be surfaced as an error, matching the reference's
+                // real (silent, no-record) behavior.
+                surface
+                    .apply(&mut state, SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect())))
+                    .map_err(|e| format!("engine-step-error:OrderTriggers:{e}"))?;
+            }
             SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => return Err("unhandled-decision:ChooseSpellMode".to_string()),
             SurfaceDecision::Decision(Decision::DeclareBlockers { .. }) => {
                 return Err("unreachable-decision:DeclareBlockers-should-have-been-reshaped-by-the-surface".to_string());
@@ -626,11 +644,22 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         | SurfaceDecision::Decision(Decision::Discard { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseSpellMode { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, .. })
-        | SurfaceDecision::Decision(Decision::ChooseMadnessCast { player, .. }) => Some(*player),
+        | SurfaceDecision::Decision(Decision::ChooseMadnessCast { player, .. })
+        // `OrderTriggers` itself consumes no trace record either (see that
+        // arm's doc), same shape as `ChooseMadnessCast`/`ChooseOptionalCost`
+        // -- but unlike those two, it was previously grouped under `None`
+        // here, which meant `skip_stale_forced_discards` (called only
+        // `if let Some(player) = decision_player(...)`) never ran ahead of
+        // it. Root-caused against `game_20260713_002205_0028.txt` decision
+        // 285: a `SELECT_CARD` trace record for a discard the *kernel*
+        // already auto-resolved (`drain_pending_discard_or_decide`'s
+        // `choices.len() <= count` shortcut, same as any other forced
+        // discard) was left stale at the front of the queue precisely
+        // because this decision kind skipped the stale-record check,
+        // permanently desyncing the cursor by one real record.
+        | SurfaceDecision::Decision(Decision::OrderTriggers { player, .. }) => Some(*player),
         SurfaceDecision::DeclareBlockersForAttacker { .. } => Some(state.active_player.opponent()),
-        SurfaceDecision::Decision(Decision::GameOver { .. })
-        | SurfaceDecision::Decision(Decision::ChooseCastMode { .. })
-        | SurfaceDecision::Decision(Decision::OrderTriggers { .. }) => None,
+        SurfaceDecision::Decision(Decision::GameOver { .. }) | SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => None,
     }
 }
 

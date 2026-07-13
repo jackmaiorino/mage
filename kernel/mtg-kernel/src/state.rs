@@ -171,6 +171,20 @@ pub struct StackItem {
     /// = `mode2`. Always `0` for a non-modal card (`mode2 == None`), which
     /// is every card in this pool except Pyroblast/Red Elemental Blast.
     pub mode_chosen: u8,
+    /// True iff this item is a Madness triggered-ability offer (`card_def::
+    /// CardDef::madness_cost`), not a normal spell/ability -- pushed by
+    /// `engine::push_trigger_onto_stack` from a `trigger::PendingTrigger`
+    /// whose own `is_madness_offer` is set (see that field's doc). Resolving
+    /// this item (both players pass priority with it on top, same as any
+    /// other stack object -- 117.5) is a real player decision
+    /// (`engine::Decision::ChooseMadnessCast`: cast `source` for its madness
+    /// cost, or let it go to the graveyard), not a fixed `EffectOp` program,
+    /// so `inline_effect` is always `None` here and `engine::
+    /// advance_until_decision`'s stack-resolution check special-cases this
+    /// flag before ever calling `resolve_top_of_stack`. `false` for every
+    /// other stack item (a spell, a normal triggered ability, or a non-mana
+    /// activated ability).
+    pub madness_offer: bool,
 }
 
 /// Counter-based, seedable, serializable PRNG (SplitMix64). Deterministic:

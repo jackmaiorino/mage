@@ -693,6 +693,7 @@ mod tests {
             discarded: Vec::new(),
             is_flashback: false,
             mode_chosen: 0,
+            madness_offer: false,
         });
 
         // The very next suppression recorded must be P0's forced Pass --

@@ -99,15 +99,6 @@ pub struct EngineState {
     /// class as the other two, root-caused the same way (Sol #90,
     /// increment 11).
     pub pending_optional_cost_sacrifice: Option<PendingOptionalCostSacrifice>,
-    /// Cards exiled by Madness (`card_def::CardDef::madness_cost`) since
-    /// their controlling discard, in discard order, each waiting on
-    /// `Decision::ChooseMadnessCast`/`Action::ChooseMadnessCast`. A `Vec`
-    /// (not a single `Option`) because a single `Decision::Discard` can
-    /// discard more than one Madness card at once in general, even though
-    /// no card pair in this pool can -- `drain_pending_madness_or_decide`
-    /// processes it front-to-back, one real decision (or silent
-    /// auto-resolve-to-graveyard, if unaffordable) at a time.
-    pub pending_madness: Vec<ObjectId>,
     /// Transient buffer for the *current* resolution: `event::commit`
     /// appends here, `trigger::collect_and_process` drains it after every
     /// resolution to match triggers. Empty between resolutions.
@@ -429,10 +420,15 @@ pub enum Decision {
     },
     /// Fiery Temper only, this increment: whether to cast a just-discarded
     /// Madness card for its madness cost (`CardDef::madness_cost`) instead
-    /// of letting it go to the graveyard. Only asked when the madness cost
-    /// is currently affordable -- see `drain_pending_madness_or_decide`
-    /// (same "don't ask when there's only one legal answer" shortcut
-    /// `ChooseCastMode` uses for Fireblast).
+    /// of letting it go to the graveyard. Unconditionally asked, with no
+    /// affordability pre-check -- see `apply_choose_madness_cast`'s doc.
+    /// Asked at *resolution* time (both players have passed priority with
+    /// this card's Madness offer on top of the stack -- `advance_until_
+    /// decision`'s `top.madness_offer` check), not at discard time: the
+    /// offer is a real triggered ability (`state::StackItem::
+    /// madness_offer`) that sits through normal priority like anything
+    /// else on the stack, so other decisions (an opponent's instant, this
+    /// same player's own mana ability) can genuinely happen first.
     ChooseMadnessCast {
         player: PlayerId,
         card: ObjectId,
@@ -940,15 +936,6 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             return d;
         }
 
-        // A discard just processed above may have queued a Madness card
-        // (`apply_discard` exiles it instead of graveyarding it, on the way
-        // in) -- ask (or silently auto-resolve to graveyard, if
-        // unaffordable) before anything else gets a chance to offer a
-        // priority window.
-        if let Some(d) = drain_pending_madness_or_decide(state) {
-            return d;
-        }
-
         if let Some(d) = drain_pending_cast_or_decide(state) {
             return d;
         }
@@ -1011,13 +998,62 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             return Decision::DeclareBlockers { player: state.active_player.opponent(), attackers, legal_blockers };
         }
 
-        if !step_grants_priority(state.step) {
+        // 500.4/514.3: the game never advances past a step/phase boundary
+        // while the stack is non-empty, even a step that otherwise never
+        // grants priority on its own (`step_grants_priority`'s Untap/
+        // Cleanup case) -- 514.3 in particular carves out exactly this
+        // exception for cleanup: "if any state-based actions would be
+        // performed... or if any triggered abilities are waiting to be put
+        // onto the stack... those actions are taken, then... players
+        // receive priority." Untap can never actually hit this (no card in
+        // this pool has an untap-triggered ability), but Cleanup can --
+        // discarding to hand size, or a cleanup-timed forced discard, can
+        // discard a Madness card, which is a real triggered ability
+        // (`state::StackItem::madness_offer`) needing to sit through
+        // normal priority before it resolves, same as anywhere else on the
+        // stack. Root-caused (this increment) against
+        // `game_20260713_002200_0021.txt`: without this guard,
+        // `advance_step` blindly flips `active_player`/`turn` and resets
+        // Untap/Draw state for the *next* turn while the Madness offer
+        // from *this* turn's cleanup discard is still sitting, unresolved,
+        // on the stack underneath -- a genuine active-player/turn
+        // desync, not merely a missed decision.
+        if !step_grants_priority(state.step) && state.stack.is_empty() {
             advance_step(state);
             continue;
         }
 
         if state.engine.priority_passes == [true, true] {
-            if !state.stack.is_empty() {
+            if let Some(top) = state.stack.last() {
+                // A Madness offer (see `push_trigger_onto_stack`'s
+                // `is_madness_offer` doc) is a real stack item like any
+                // other triggered ability -- it sits through normal
+                // priority (both players may respond, e.g. `Guttersnipe`
+                // off an instant, before it resolves) -- but *resolving*
+                // it is a real decision (`Decision::ChooseMadnessCast`),
+                // not a fixed `EffectOp` program, so it's intercepted
+                // here, exactly where `resolve_top_of_stack` would
+                // otherwise run, instead of being popped by it. Root-
+                // caused (this increment) against two golden-trace games
+                // (`game_20260713_002154_0011.txt`,
+                // `game_20260713_002156_0015.txt`): the prior model asked
+                // `Decision::ChooseMadnessCast` immediately at discard
+                // time (`EngineState::pending_madness`, now removed),
+                // which is wrong two ways at once -- it can preempt real
+                // intervening priority windows the reference actually
+                // offers first (0011: a mana ability activated while the
+                // Madness trigger is still unresolved on the stack), and
+                // after a *decline*, it let whatever else was already on
+                // the stack underneath (there, the same discard's own
+                // Blood Token activation) resolve too eagerly, without
+                // waiting for the normal priority round the reference
+                // actually grants first (0015: the reference casts
+                // Fireblast in response to its own still-pending Blood
+                // Token draw, which this model's silent immediate-resolve
+                // never gave a chance to happen).
+                if top.madness_offer {
+                    return Decision::ChooseMadnessCast { player: top.controller, card: top.source };
+                }
                 resolve_top_of_stack(state);
                 collect_and_queue_triggers(state);
                 reset_priority(state);
@@ -1069,12 +1105,25 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
     for &id in &chosen {
         let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
         if def.madness_cost.is_some() {
-            // 702.33a: a discarded Madness card is exiled instead of
-            // graveyarded, and its owner is later offered the chance to
-            // cast it for its madness cost -- see
-            // `drain_pending_madness_or_decide`.
+            // 702.83b: a discarded Madness card is exiled instead of
+            // graveyarded, and "as that card is exiled this way" a real
+            // triggered ability fires offering its owner the chance to
+            // cast it for its madness cost -- queued into
+            // `pending_triggers` exactly like any other triggered ability
+            // (`trigger::collect_and_process`'s Guttersnipe/Voldaren
+            // Epicure triggers), not a special-cased side channel: it
+            // goes through the same APNAP grouping/`Decision::
+            // OrderTriggers` machinery if it happens to coincide with
+            // another simultaneous trigger, and (`push_trigger_onto_stack`)
+            // becomes a real `StackItem` that sits through normal priority
+            // like anything else on the stack -- see that function's
+            // `is_madness_offer` doc, and `advance_until_decision`'s
+            // `top.madness_offer` check for where the actual `Decision::
+            // ChooseMadnessCast` gets asked (at *resolution* time, not
+            // discard time).
             event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Exile));
-            state.engine.pending_madness.push(id);
+            let owner = state.objects.get(id).owner;
+            state.engine.pending_triggers.push(PendingTrigger { controller: owner, source: id, effect: EffectOp::Sequence(vec![]), is_madness_offer: true });
         } else {
             event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Graveyard));
         }
@@ -1091,30 +1140,26 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
             // together, as one atomic action, the instant the interactive
             // part (which card(s) to discard) is determined -- not
             // deferred to `finalize_activation` (pushing the ability's
-            // `StackItem`), which can run arbitrarily later (after a
-            // Madness trigger this same discard caused has already been
-            // fully offered and attempted, in particular). Root-caused
-            // against `game_20260713_002156_0014.txt` decision 45: Masked
-            // Meower's `[DiscardCards(1), SacrificeSelf]` ability discards
-            // a Fiery Temper, and the reference's own graveyard snapshot
-            // already has Masked Meower in it *before* Fiery Temper's
-            // madness-cast target pick is even offered -- i.e. the
-            // sacrifice happens right here, alongside the discard,
-            // not after the triggered Madness attempt resolves. The Blood
-            // Token's ability has the same `[..., DiscardCards(1),
-            // SacrificeSelf]` shape and would hit the identical ordering
-            // bug were it ever exercised this way.
+            // `StackItem`), which guards against re-paying by only paying
+            // costs itself when there was no discard component at all
+            // (`discard_count_in(ability.cost).is_none()`) and otherwise
+            // trusts this branch already did it. Root-caused against
+            // `game_20260713_002156_0014.txt` decision 45: Masked Meower's
+            // `[DiscardCards(1), SacrificeSelf]` ability discards a Fiery
+            // Temper, and the reference's own graveyard snapshot already
+            // has Masked Meower in it *before* Fiery Temper's madness-cast
+            // target pick is even offered -- i.e. the sacrifice happens
+            // right here, alongside the discard. The Blood Token's ability
+            // has the same `[..., DiscardCards(1), SacrificeSelf]` shape
+            // and would hit the identical ordering bug were it ever
+            // exercised this way.
             if let Some(p) = state.engine.pending_activation.clone() {
                 let def = &card_def::CARD_DEFS[state.objects.get(p.source).card_def as usize];
                 let ability = &def.activated_abilities[p.ability_index as usize];
                 pay_cost_components(state, p.controller, p.source, ability.cost, &[]);
                 // 111.8/704.5d: paying `SacrificeSelf` here (a token's own
                 // ability, e.g. the Blood Token's) can put a token into the
-                // graveyard well before `finalize_activation` ever runs
-                // (pending_madness -- see `drain_pending_madness_or_decide`
-                // -- is checked *before* `pending_activation` in
-                // `advance_until_decision`'s loop, so a Madness sub-flow
-                // this same discard triggers can fully play out first).
+                // graveyard well before `finalize_activation` ever runs.
                 // `sba_fixed_point` normally only runs inside
                 // `collect_and_queue_triggers`, which `finalize_activation`
                 // doesn't call until this activation is fully resolved --
@@ -1153,39 +1198,6 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
             collect_and_queue_triggers(state);
         }
     }
-}
-
-/// If a Madness card is queued (`EngineState::pending_madness`, populated by
-/// `apply_discard`), returns `Decision::ChooseMadnessCast` -- unconditionally,
-/// with **no affordability pre-check**.
-///
-/// An earlier version of this function pre-filtered on `mana::can_pay`,
-/// silently sending an unaffordable card to the graveyard with no `Decision`
-/// at all (the same "don't ask when there's only one legal answer" shortcut
-/// `drain_pending_cast_or_decide` uses for Fireblast's cast mode). That was
-/// root-caused as wrong (Sol #90, increment 11) against the real Java
-/// reference: `MadnessTriggeredAbility.resolve()` (`MadnessAbility.java`)
-/// is a plain *optional* triggered ability -- it always calls
-/// `player.chooseUse(...)` first, with no discrete `canPay()` gate anywhere
-/// in that path. "Affordable" in the reference means nothing more than "the
-/// real `cast()` call happened to succeed"; an unaffordable attempt still
-/// gets offered, still begins a real cast (its own target-selection decision
-/// genuinely logged), and only fails -- reverting the card to the graveyard
-/// -- at the cost-payment step. Confirmed against two golden-trace games
-/// (`game_20260713_002149_0004.txt` decision 26, `game_20260713_002156_0014.txt`
-/// decision 45): both show a real `SELECT_TARGETS` record for the Madness
-/// card's own target at a moment when the discarding player has zero
-/// available mana (every battlefield permanent already tapped this same
-/// turn paying for earlier, unrelated spells) -- and in the second game, the
-/// very next trace record for that player shows the card sitting in the
-/// graveyard, never on the stack/battlefield again, proving the attempt was
-/// offered, attempted, and reverted, not silently declined upfront. See
-/// `apply_choose_madness_cast`'s `cast_it == true` branch and `abort_cast`'s
-/// Madness-specific graveyard redirect for the other half of this fix.
-fn drain_pending_madness_or_decide(state: &mut GameState) -> Option<Decision> {
-    let &card = state.engine.pending_madness.first()?;
-    let owner = state.objects.get(card).owner;
-    Some(Decision::ChooseMadnessCast { player: owner, card })
 }
 
 /// If a resolution-time optional cost is pending (`EngineState::
@@ -1375,10 +1387,16 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
         source: t.source,
         controller: t.controller,
         targets: vec![],
-        inline_effect: Some(t.effect),
+        // A Madness offer (`is_madness_offer`, set by `apply_discard`) has
+        // no fixed `EffectOp` program to run at resolution -- resolving it
+        // means asking `Decision::ChooseMadnessCast`
+        // (`advance_until_decision`'s `top.madness_offer` check), not
+        // executing an effect, so it carries no `inline_effect` at all.
+        inline_effect: if t.is_madness_offer { None } else { Some(t.effect) },
         discarded: vec![],
         is_flashback: false,
         mode_chosen: 0,
+        madness_offer: t.is_madness_offer,
     });
     // Same `priority_passes`/`priority_player` reset as `reset_priority`
     // (117.5: priority passes to the active player once a triggered
@@ -1608,13 +1626,34 @@ fn deal_combat_damage(state: &mut GameState) {
     }
 }
 
+/// 510.1c: "an attacking creature that's been removed from combat... doesn't
+/// assign combat damage." A creature is removed from combat the instant it
+/// leaves the battlefield (undefined-but-implied by 506.4, made explicit by
+/// 510.1c's own wording) -- most commonly here, a creature killed by a
+/// burn spell (Lava Dart, Lightning Bolt, ...) cast during the priority
+/// window `apply_declare_blockers`/`finalize_activation`/etc already
+/// grants before the actual `Step::CombatDamage` entry action runs
+/// (`deal_combat_damage`). Root-caused against
+/// `game_20260713_002204_0027.txt` decision 304: the attacking player
+/// Lava-Darted their own just-declared (unblocked) attacker dead in
+/// response, well before combat damage -- the reference correctly deals
+/// zero combat damage from it (it's simply not there anymore by the time
+/// the damage step runs), but this function used to compute `effective_
+/// power`/assign damage purely from `EngineState::combat`'s *snapshot* of
+/// who was attacking/blocking when blocks were declared, never rechecking
+/// whether each participant was still actually on the battlefield by
+/// damage time.
+fn is_still_in_combat(state: &GameState, id: ObjectId) -> bool {
+    state.objects.get(id).zone == Zone::Battlefield
+}
+
 fn combat_damage_wave(state: &mut GameState, first_strike_wave: bool) {
     let attackers = state.engine.combat.attackers.clone();
     let blocked_by = state.engine.combat.blocked_by.clone();
     let mut events = Vec::new();
 
     for &attacker in &attackers {
-        if !participates_in_wave(state, attacker, first_strike_wave) {
+        if !is_still_in_combat(state, attacker) || !participates_in_wave(state, attacker, first_strike_wave) {
             continue;
         }
         let power = effective_power(state, attacker);
@@ -1630,7 +1669,7 @@ fn combat_damage_wave(state: &mut GameState, first_strike_wave: bool) {
     }
     for (attacker, blockers) in &blocked_by {
         for &blocker in blockers {
-            if !participates_in_wave(state, blocker, first_strike_wave) {
+            if !is_still_in_combat(state, blocker) || !participates_in_wave(state, blocker, first_strike_wave) {
                 continue;
             }
             let power = effective_power(state, blocker);
@@ -1892,26 +1931,59 @@ fn apply_choose_optional_cost(state: &mut GameState, choice: OptionalCostChoice)
     }
 }
 
-/// `cast_it == true` no longer pre-verifies affordability (see
-/// `drain_pending_madness_or_decide`'s doc) -- it unconditionally stages a
-/// real cast via `begin_cast_ex`, exactly as if the card were being cast
-/// normally. If the madness cost genuinely can't be paid, that surfaces
-/// naturally at `finalize_cast`'s existing `cost_override` affordability
-/// check, which now (see `abort_cast`'s doc) reverts a failed Madness
-/// attempt to the graveyard instead of erroring -- matching the reference's
-/// observed "offer it, attempt it, let it fizzle to the graveyard" behavior
-/// rather than a hard failure this function used to return.
+/// `cast_it == true` no longer pre-verifies affordability -- it
+/// unconditionally stages a real cast via `begin_cast_ex`, exactly as if
+/// the card were being cast normally.
+///
+/// An earlier version of this decision (`drain_pending_madness_or_decide`,
+/// removed this increment -- see `advance_until_decision`'s `top.
+/// madness_offer` check, which replaced it) pre-filtered on `mana::can_pay`,
+/// silently sending an unaffordable card to the graveyard with no `Decision`
+/// at all (the same "don't ask when there's only one legal answer" shortcut
+/// `drain_pending_cast_or_decide` uses for Fireblast's cast mode). That was
+/// root-caused as wrong (Sol #90, increment 11) against the real Java
+/// reference: `MadnessTriggeredAbility.resolve()` (`MadnessAbility.java`)
+/// is a plain *optional* triggered ability -- it always calls
+/// `player.chooseUse(...)` first, with no discrete `canPay()` gate anywhere
+/// in that path. "Affordable" in the reference means nothing more than "the
+/// real `cast()` call happened to succeed"; an unaffordable attempt still
+/// gets offered, still begins a real cast (its own target-selection decision
+/// genuinely logged), and only fails -- reverting the card to the graveyard
+/// -- at the cost-payment step. Confirmed against two golden-trace games
+/// (`game_20260713_002149_0004.txt` decision 26, `game_20260713_002156_0014.txt`
+/// decision 45): both show a real `SELECT_TARGETS` record for the Madness
+/// card's own target at a moment when the discarding player has zero
+/// available mana (every battlefield permanent already tapped this same
+/// turn paying for earlier, unrelated spells) -- and in the second game, the
+/// very next trace record for that player shows the card sitting in the
+/// graveyard, never on the stack/battlefield again, proving the attempt was
+/// offered, attempted, and reverted, not silently declined upfront. If the
+/// madness cost genuinely can't be paid, that surfaces naturally at
+/// `finalize_cast`'s existing `cost_override` affordability check, which
+/// (see `abort_cast`'s doc) reverts a failed Madness attempt to the
+/// graveyard instead of erroring -- matching the reference's observed
+/// "offer it, attempt it, let it fizzle to the graveyard" behavior rather
+/// than a hard failure this function used to return.
 fn apply_choose_madness_cast(state: &mut GameState, cast_it: bool) -> Result<(), String> {
-    let &card = state.engine.pending_madness.first().ok_or("no Madness decision is pending")?;
-    state.engine.pending_madness.remove(0);
-    let owner = state.objects.get(card).owner;
+    let top = state.stack.last().ok_or("no Madness decision is pending")?;
+    if !top.madness_offer {
+        return Err("no Madness decision is pending".to_string());
+    }
+    let item = state.stack.pop().expect("just confirmed the top of stack is a madness offer");
+    let card = item.source;
+    let owner = item.controller;
     if !cast_it {
         event::propose_and_commit(state, ProposedEvent::zone_change(card, Zone::Graveyard));
+        // Same "a stack item just resolved" bookkeeping `resolve_top_of_
+        // stack`'s own caller does (`advance_until_decision`) -- this is
+        // no longer a side-channel decision that skips the stack, so it
+        // owes the same priority reset.
         collect_and_queue_triggers(state);
+        reset_priority(state);
         return Ok(());
     }
     let def = &card_def::CARD_DEFS[state.objects.get(card).card_def as usize];
-    let cost = def.madness_cost.expect("only Madness cards are ever queued in pending_madness");
+    let cost = def.madness_cost.expect("only a Madness card's own offer is ever pushed as a madness_offer StackItem");
     begin_cast_ex(state, owner, card, Some(cost));
     Ok(())
 }
@@ -2066,6 +2138,7 @@ fn begin_cast_ex(state: &mut GameState, player: PlayerId, spell_id: ObjectId, fo
         discarded: vec![],
         is_flashback,
         mode_chosen: 0,
+        madness_offer: false,
     });
 
     state.engine.pending_cast = Some(PendingCast {
@@ -2186,7 +2259,7 @@ fn finalize_cast(state: &mut GameState) {
 /// branch), which goes to the graveyard instead of back to exile.
 ///
 /// Root-caused against two golden-trace games (Sol #90, increment 11 --
-/// see `drain_pending_madness_or_decide`'s doc for the full citation): the
+/// see `apply_choose_madness_cast`'s doc for the full citation): the
 /// reference lets a player attempt an unaffordable Madness cast (a real,
 /// logged target-selection decision happens) and the card ends up in the
 /// graveyard once the attempt fails, not back in exile still waiting to be
@@ -2239,6 +2312,7 @@ fn finalize_activation(state: &mut GameState) {
         discarded: pending.cost_discard_paid.unwrap_or_default(),
         is_flashback: false,
         mode_chosen: 0,
+        madness_offer: false,
     });
 
     // No ability in this increment's pool triggers off another ability
@@ -2538,11 +2612,13 @@ mod tests {
             controller: PlayerId::P0,
             source: ObjectId(0),
             effect: EffectOp::GainLife { player: PlayerRef::Controller, amount: 1 },
+            is_madness_offer: false,
         });
         state.engine.pending_triggers.push(PendingTrigger {
             controller: PlayerId::P0,
             source: ObjectId(1),
             effect: EffectOp::GainLife { player: PlayerRef::Controller, amount: 2 },
+            is_madness_offer: false,
         });
 
         let decision = advance_until_decision(&mut state);
@@ -2568,8 +2644,8 @@ mod tests {
     #[test]
     fn order_triggers_rejects_a_non_permutation() {
         let mut state = empty_game();
-        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(0), effect: EffectOp::Sequence(vec![]) });
-        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(1), effect: EffectOp::Sequence(vec![]) });
+        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(0), effect: EffectOp::Sequence(vec![]), is_madness_offer: false });
+        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(1), effect: EffectOp::Sequence(vec![]), is_madness_offer: false });
         let err = step(&mut state, Action::OrderTriggers(vec![0, 0])).unwrap_err();
         assert!(err.contains("permutation"));
     }
@@ -2652,7 +2728,7 @@ mod tests {
             attachments: Vec::new(),
             plotted_turn: None,
         });
-        state.stack.push(StackItem { source: obj_id, controller: player, targets: vec![], inline_effect: None, discarded: vec![], is_flashback: false, mode_chosen: 0 });
+        state.stack.push(StackItem { source: obj_id, controller: player, targets: vec![], inline_effect: None, discarded: vec![], is_flashback: false, mode_chosen: 0, madness_offer: false });
         obj_id
     }
 
@@ -2830,7 +2906,13 @@ mod tests {
         assert_eq!(state.objects.get(temper).zone, Zone::Exile, "Madness exiles instead of graveyarding");
         assert!(state.players[0].graveyard.is_empty());
 
-        match advance_until_decision(&mut state) {
+        // The Madness offer is a real triggered ability, sitting on the
+        // stack through normal priority (117.5/603.3b) like anything else
+        // there -- `pass_until_stack_resolves` passes both players'
+        // trivial `CastSpellOrPass` windows (neither has anything else to
+        // do here) until it's actually resolved, same as any other stack
+        // item -- see `state::StackItem::madness_offer`'s doc.
+        match pass_until_stack_resolves(&mut state) {
             Decision::ChooseMadnessCast { player, card } => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(card, temper);
@@ -2863,9 +2945,9 @@ mod tests {
     /// `ChooseMadnessCast` unconditionally -- no affordability pre-check --
     /// then lets the attempt begin a real cast (a genuine, trace-logged
     /// target pick) that only fails at cost payment, reverting the card to
-    /// the graveyard. See `drain_pending_madness_or_decide`'s doc for the
-    /// full citation; this replaces a prior (wrong) version of this test
-    /// that asserted the opposite -- a silent, no-decision auto-resolve.
+    /// the graveyard. See `apply_choose_madness_cast`'s doc for the full
+    /// citation; this replaces a prior (wrong) version of this test that
+    /// asserted the opposite -- a silent, no-decision auto-resolve.
     #[test]
     fn fiery_temper_madness_attempt_fizzles_to_the_graveyard_when_unaffordable() {
         let mut state = empty_game(); // no Mountains: {R} is never payable
@@ -2874,7 +2956,10 @@ mod tests {
         step(&mut state, Action::Discard(vec![temper])).unwrap();
         assert_eq!(state.objects.get(temper).zone, Zone::Exile, "Madness exiles instead of graveyarding, same as the affordable case");
 
-        match advance_until_decision(&mut state) {
+        // See `fiery_temper_discard_offers_madness_cast_for_r`'s comment:
+        // the Madness offer is a real stack item, resolved only after both
+        // players' (here, entirely trivial) priority windows pass.
+        match pass_until_stack_resolves(&mut state) {
             Decision::ChooseMadnessCast { player, card } => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(card, temper);

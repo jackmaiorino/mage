@@ -20,7 +20,7 @@ use serde::Deserialize;
 use std::fs;
 use std::path::Path;
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Default, Deserialize)]
 pub struct DecisionRecord {
     pub ordinal: u32,
     #[serde(default)]
@@ -244,6 +244,60 @@ impl GoldenTrace {
     }
 }
 
+/// Parses a human-readable decision header line of the shape `DECISION #322
+/// - Turn 16 (PlayerRL1 turn), Postcombat Main (CHOOSE_USE) - PlayerRL1`,
+/// returning `(decision_number, turn, phase, player)`. Manual token
+/// parsing (no regex dependency anywhere in this crate) rather than a
+/// regex, matching this module's existing style for `REPLAY:`/
+/// `REPLAY_RANDOM:`'s own hand-rolled tokenizing.
+fn parse_choose_use_header(line: &str) -> Option<(u32, u32, String, String)> {
+    let rest = line.strip_prefix("DECISION #")?;
+    let (num_str, rest) = rest.split_once(" - Turn ")?;
+    let decision_number: u32 = num_str.parse().ok()?;
+    let (turn_str, rest) = rest.split_once(' ')?;
+    let turn: u32 = turn_str.parse().ok()?;
+    let rest = rest.split_once("), ")?.1;
+    let (phase, player) = rest.split_once(" (CHOOSE_USE) - ")?;
+    Some((decision_number, turn, phase.to_string(), player.trim().to_string()))
+}
+
+/// Parses the data line that always follows a `(CHOOSE_USE)` header a few
+/// lines later (confirmed empirically: every corpus file has exactly as
+/// many `CHOOSE_USE: msg=...` lines as `(CHOOSE_USE)` headers, no
+/// duplicates or phantoms by `decision_number`) -- `CHOOSE_USE: msg="..."
+/// outcome=... decision=YES|NO scores=[...]`. Returns `(msg, decision_is_yes)`.
+fn parse_choose_use_line(line: &str) -> Option<(String, bool)> {
+    let rest = line.strip_prefix("CHOOSE_USE: msg=\"")?;
+    let (msg, rest) = rest.split_once("\" outcome=")?;
+    let rest = rest.split_once(" decision=")?.1;
+    match rest.split_whitespace().next()? {
+        "YES" => Some((msg.to_string(), true)),
+        "NO" => Some((msg.to_string(), false)),
+        _ => None,
+    }
+}
+
+/// The one substring of `CHOOSE_USE`'s `msg` this parser recognizes as a
+/// real, ground-truth-bearing decision to surface into `decisions` --
+/// Fiery Temper's Madness offer (`MadnessTriggeredAbility.resolve()`'s
+/// `chooseUse` prompt, the only card with Madness in this pool -- see
+/// `card_def.rs`'s `fiery_temper_has_madness_r` test). Root-caused (this
+/// increment) against `game_20260713_002156_0015.txt` decision 322:
+/// `examples/replay_burn_v2.rs`'s prior "always attempt the Madness cast"
+/// default was silently wrong here (the reference actually said `NO`) --
+/// this text is the *only* place that real yes/no answer is ever logged
+/// (Madness offers get no `REPLAY_DECISION_JSON` record at all). The other
+/// two `CHOOSE_USE` message shapes in this corpus (Highway Robbery's
+/// resolution-time discard-or-sacrifice offer, `engine::Decision::
+/// ChooseOptionalCost`) are deliberately *not* matched here and never reach
+/// `decisions`: that decision already has its own working (shape-sniffing)
+/// inference in `examples/replay_burn_v2.rs::apply_choose_optional_cost`,
+/// and surfacing its `CHOOSE_USE` lines too would insert new records into
+/// the per-player queue that function doesn't expect, at a real risk of
+/// desyncing every trace that uses Highway Robbery -- out of scope for the
+/// Madness fix this increment.
+const MADNESS_CHOOSE_USE_MARKER: &str = "instead of putting it into your graveyard";
+
 /// Parses one trace's full text (already read off disk, or an in-memory
 /// fixture in tests). `source_path` is only used to build error messages.
 fn parse_text(text: &str, source_path: String) -> Result<GoldenTrace, String> {
@@ -251,9 +305,30 @@ fn parse_text(text: &str, source_path: String) -> Result<GoldenTrace, String> {
         source_path: source_path.clone(),
         ..Default::default()
     };
+    let mut pending_choose_use: Option<(u32, u32, String, String)> = None;
     for line in text.lines() {
         let line = line.trim_start();
-        if let Some(rest) = line.strip_prefix("REPLAY_DECISION_JSON: ") {
+        if let Some(header) = parse_choose_use_header(line) {
+            pending_choose_use = Some(header);
+        } else if let Some((msg, is_yes)) = parse_choose_use_line(line) {
+            if let Some((decision_number, turn, phase, player)) = pending_choose_use.take() {
+                if msg.contains(MADNESS_CHOOSE_USE_MARKER) {
+                    trace.decisions.push(DecisionRecord {
+                        decision_number,
+                        player,
+                        action_type: "CHOOSE_USE".to_string(),
+                        candidate_count: 2,
+                        candidate_texts: vec!["Yes".to_string(), "No".to_string()],
+                        chosen_indices: vec![if is_yes { 0 } else { 1 }],
+                        chosen_texts: vec![(if is_yes { "Yes" } else { "No" }).to_string()],
+                        turn,
+                        phase,
+                        source_name: msg,
+                        ..Default::default()
+                    });
+                }
+            }
+        } else if let Some(rest) = line.strip_prefix("REPLAY_DECISION_JSON: ") {
             match serde_json::from_str::<DecisionRecord>(rest) {
                 // `episode < 0` marks a phantom record from one of
                 // ComputerPlayerRL's internal lookahead clones -- it

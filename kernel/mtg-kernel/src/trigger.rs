@@ -95,6 +95,17 @@ pub struct PendingTrigger {
     pub controller: PlayerId,
     pub source: ObjectId,
     pub effect: EffectOp,
+    /// True iff this is a Madness triggered-ability offer (`engine::
+    /// apply_discard`'s Madness branch), not one of this module's
+    /// card-def-matched triggers (`triggers_for`). Threaded through the
+    /// same APNAP grouping/`Decision::OrderTriggers` machinery as any other
+    /// trigger (603.3b makes no distinction), but `effect` is a meaningless
+    /// placeholder (`EffectOp::Sequence(vec![])`) for one of these --
+    /// `engine::push_trigger_onto_stack` reads this flag to leave the
+    /// resulting `StackItem`'s `inline_effect` as `None` and set its own
+    /// `madness_offer` instead (see that field's doc). Always `false` for a
+    /// real `triggers_for`-matched trigger.
+    pub is_madness_offer: bool,
 }
 
 /// Runs state-based actions to a fixed point: repeat the full SBA sweep
@@ -165,6 +176,7 @@ pub fn sba_fixed_point(state: &mut GameState) {
 /// player's triggers first).
 pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
     let events: Vec<CommittedEvent> = state.engine.event_log.drain(..).collect();
+    let draws_this_turn_at = draws_this_turn_snapshot(&events, state);
 
     let mut new_triggers = Vec::new();
     for (id, obj) in state.objects.iter() {
@@ -172,9 +184,9 @@ pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
             if obj.zone != def.home_zone {
                 continue;
             }
-            for ev in &events {
-                if trigger_matches(def.condition, ev, id, obj.controller, state) {
-                    new_triggers.push(PendingTrigger { controller: obj.controller, source: id, effect: (def.effect)() });
+            for (i, ev) in events.iter().enumerate() {
+                if trigger_matches(def.condition, ev, id, obj.controller, state, draws_this_turn_at[i]) {
+                    new_triggers.push(PendingTrigger { controller: obj.controller, source: id, effect: (def.effect)(), is_madness_offer: false });
                 }
             }
         }
@@ -185,7 +197,51 @@ pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
     order_apnap(new_triggers, state.active_player)
 }
 
-fn trigger_matches(cond: TriggerCondition, ev: &CommittedEvent, source: ObjectId, controller: PlayerId, state: &GameState) -> bool {
+/// For each event in `events` (already committed, in commit order), the
+/// value `draws_this_turn` genuinely held *at the moment that specific
+/// event was committed* -- not `state`'s current (post-batch) value.
+///
+/// Root-caused against `game_20260713_002147_0002.txt`: `EffectOp::
+/// DrawCards`'s loop (Faithless Looting's "draw two cards") commits both
+/// draws into `event_log` before `collect_and_process` ever runs (both
+/// resolve as one atomic ability, 608.2h -- correctly so; a trigger check
+/// belongs *after* the whole ability resolves, not spliced mid-resolution,
+/// 603.3/704.3), so by the time this function inspects `state`, `draws_
+/// this_turn` already reflects *both* draws. Checking every event in the
+/// batch against that single final value made `TriggerCondition::
+/// DrawNth(3)` (Sneaky Snacker) miss entirely whenever a 2-draw batch
+/// jumped straight over 3 (2 -> 4): neither event's *own* moment (3, then
+/// 4) was ever actually tested, only the batch's final value (4) tested
+/// twice. 608.2h itself settles that each drawn card is still a distinct,
+/// sequential event ("the player draws that many cards, in that order"),
+/// so a "your Nth draw this turn" condition must see each one's own true
+/// historical count -- reconstructed here (not threaded through
+/// `CommittedEvent::Draw` itself, which stays a plain, serializable
+/// snapshot-free record) by walking `events` forward per player: the
+/// count immediately *before* this batch is `state`'s current value minus
+/// however many of this player's own `Draw` events are in this same
+/// batch, then each of that player's `Draw` events in commit order adds
+/// exactly 1.
+fn draws_this_turn_snapshot(events: &[CommittedEvent], state: &GameState) -> Vec<u32> {
+    let batch_draws = |p: PlayerId| events.iter().filter(|e| matches!(e, CommittedEvent::Draw { player, object: Some(_) } if *player == p)).count() as u32;
+    let mut running = [state.players[0].draws_this_turn - batch_draws(PlayerId::P0), state.players[1].draws_this_turn - batch_draws(PlayerId::P1)];
+    events
+        .iter()
+        .map(|ev| match ev {
+            CommittedEvent::Draw { player, object: Some(_) } => {
+                running[player.index()] += 1;
+                running[player.index()]
+            }
+            _ => 0, // unused by any non-DrawNth trigger_matches arm
+        })
+        .collect()
+}
+
+/// `draws_this_turn_at_event`: only meaningful for a `CommittedEvent::Draw`
+/// (see `draws_this_turn_snapshot`'s doc for why this can't just read
+/// `state` live) -- unused, and irrelevant, for every other event/condition
+/// pairing.
+fn trigger_matches(cond: TriggerCondition, ev: &CommittedEvent, source: ObjectId, controller: PlayerId, state: &GameState, draws_this_turn_at_event: u32) -> bool {
     match (cond, ev) {
         (TriggerCondition::Etb, CommittedEvent::ZoneChange { object, to: Zone::Battlefield, .. }) => *object == source,
         (TriggerCondition::DealsDamage, CommittedEvent::Damage { source: s, .. }) => *s == source,
@@ -195,9 +251,7 @@ fn trigger_matches(cond: TriggerCondition, ev: &CommittedEvent, source: ObjectId
                 def.has_type(crate::card_def::CardType::Instant) || def.has_type(crate::card_def::CardType::Sorcery)
             }
         }
-        (TriggerCondition::DrawNth(n), CommittedEvent::Draw { player, object: Some(_) }) => {
-            *player == controller && state.players[player.index()].draws_this_turn == n
-        }
+        (TriggerCondition::DrawNth(n), CommittedEvent::Draw { player, object: Some(_) }) => *player == controller && draws_this_turn_at_event == n,
         _ => false,
     }
 }
@@ -241,8 +295,8 @@ mod tests {
 
     #[test]
     fn apnap_orders_active_player_triggers_first() {
-        let a = PendingTrigger { controller: PlayerId::P1, source: ObjectId(1), effect: EffectOp::Sequence(vec![]) };
-        let b = PendingTrigger { controller: PlayerId::P0, source: ObjectId(2), effect: EffectOp::Sequence(vec![]) };
+        let a = PendingTrigger { controller: PlayerId::P1, source: ObjectId(1), effect: EffectOp::Sequence(vec![]), is_madness_offer: false };
+        let b = PendingTrigger { controller: PlayerId::P0, source: ObjectId(2), effect: EffectOp::Sequence(vec![]), is_madness_offer: false };
         let ordered = order_apnap(vec![a.clone(), b.clone()], PlayerId::P0);
         assert_eq!(ordered, vec![b, a]);
     }

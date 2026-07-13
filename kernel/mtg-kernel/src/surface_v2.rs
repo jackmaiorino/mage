@@ -476,6 +476,7 @@ mod tests {
             discarded: Vec::new(),
             is_flashback: false,
             mode_chosen: 0,
+            madness_offer: false,
         });
 
         let _second = surface.next_decision(&mut state);
