@@ -40,19 +40,21 @@
 //!    driver's own canonical per-decision text (`decision_texts`), built to
 //!    mirror Java's real `candidateTexts` shape as closely as the evidence
 //!    gathered this session allows -- see `decision_texts`'s doc for the
-//!    per-decision-kind confirmed-vs-best-effort accounting. **Divergence
-//!    from Java, flagged for the Java-side agent:** `sharedSemanticPolicyIndices`
-//!    is hard-coded to return at most ONE index
-//!    (`Collections.singletonList`), but this pool has one decision kind
-//!    that structurally requires more than one pick in a single answer
-//!    (`engine::Decision::Discard` with `count > 1` -- Faithless Looting's
-//!    2-card discard, cleanup's discard-to-7). `shared_semantic_policy_top_n`
-//!    is this driver's own, UNVERIFIED generalization of the same rule
-//!    (sort by `(text, index)`, take the first `count`) rather than a
-//!    confirmed mirror of real Java behavior for that case -- if the real
-//!    `PreprobeController` does something else there (error out, truncate,
-//!    apply the single index some other way), the two engines will
-//!    genuinely diverge at that specific step and this is where to look.
+//!    per-decision-kind confirmed-vs-best-effort accounting. This is now
+//!    the *only* sub-choice policy this driver needs, applied uniformly to
+//!    every decision kind: `sharedSemanticPolicyIndices` is hard-coded to
+//!    return at most ONE index (`Collections.singletonList`), and every
+//!    decision this driver can meet -- including `engine::Decision::Discard`
+//!    -- is now genuinely single-pick too. Before the cross-engine campaign
+//!    round-1 fix (Pattern A), `Decision::Discard` could carry `count > 1`
+//!    in one batched answer (Faithless Looting's 2-card discard, cleanup's
+//!    discard-to-7), which this driver used to answer with its own
+//!    UNVERIFIED multi-index generalization (`shared_semantic_policy_top_n`,
+//!    removed this round) rather than a confirmed mirror of real Java
+//!    behavior for that shape; `HarnessSurfaceV2`'s `DiscardReshape` now
+//!    decomposes that batch into `count` sequential single-pick decisions
+//!    before it ever reaches here, closing the gap instead of working
+//!    around it.
 //!
 //! 3. **Instrumented walk mode**: `(game, record_id)` addressing --
 //!    `WalkSpec::record_id` is the v5-schema join key
@@ -549,14 +551,19 @@ fn prefix_before_done<T: Copy>(chosen_indices: &[u32], candidates: &[Option<T>])
 
 fn apply_silent_window(surface: &mut HarnessSurfaceV2, state: &mut GameState, decision: &SurfaceDecision, ctx: &mut ReplayCtx) -> Result<(), String> {
     match decision {
-        SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, discard_payable, sacrifice_payable }) => {
+        SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, .. }) => {
+            // Real payable flags, not this decision's own -- the H2 surface
+            // reshape re-presents `ChooseOptionalCost` with a presentation-
+            // only sentinel at its `Use` stage (see `HarnessSurfaceV2::
+            // pending_optional_cost_payable`'s doc).
+            let (discard_payable, sacrifice_payable) = HarnessSurfaceV2::pending_optional_cost_payable(state).ok_or("no ChooseOptionalCost decision is pending")?;
             let hand_len = state.players[player.index()].hand.len();
             let land_len = state.players[player.index()].battlefield.iter().filter(|&&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land).count();
             let next_is_select_targets_with_len = |n: usize| matches!(ctx.next(*player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && rec.candidate_texts.len() == n);
             let next_looks_like_land_refs = matches!(ctx.next(*player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && !rec.candidate_texts.is_empty() && rec.candidate_texts.iter().all(|t| t.ends_with(" (you)")));
             let next_is_lone_select_card_shaped = |want_land: bool| matches!(ctx.next(*player), Some(&rec) if rec.action_type == "SELECT_CARD" && rec.candidate_texts.len() == 1 && rec.candidate_texts[0].ends_with(" (you)") == want_land);
-            let looks_like_sacrifice_pick = *sacrifice_payable && (next_looks_like_land_refs || (!*discard_payable && next_is_select_targets_with_len(land_len)) || (land_len == 1 && next_is_lone_select_card_shaped(true)));
-            let looks_like_discard_pick = *discard_payable && !looks_like_sacrifice_pick && (next_is_select_targets_with_len(hand_len) || (hand_len == 1 && next_is_lone_select_card_shaped(false)));
+            let looks_like_sacrifice_pick = sacrifice_payable && (next_looks_like_land_refs || (!discard_payable && next_is_select_targets_with_len(land_len)) || (land_len == 1 && next_is_lone_select_card_shaped(true)));
+            let looks_like_discard_pick = discard_payable && !looks_like_sacrifice_pick && (next_is_select_targets_with_len(hand_len) || (hand_len == 1 && next_is_lone_select_card_shaped(false)));
             let choice = if looks_like_sacrifice_pick {
                 OptionalCostChoice::SacrificeLand
             } else if looks_like_discard_pick {
@@ -718,35 +725,66 @@ fn apply_from_trace(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: 
             ctx.advance(player);
             surface.apply(state, SurfaceAction::Action(Action::ChooseCostTarget(chosen))).map_err(|e| format!("engine-step-error:ChooseCostTargets:{e}"))
         }
-        SurfaceDecision::Decision(Decision::Discard { count, choices, .. }) => {
-            let mut names_from_targets_prefix: Vec<String> = Vec::new();
-            while let Some(&preview) = ctx.next(player) {
-                if preview.action_type != "SELECT_TARGETS" {
-                    break;
+        SurfaceDecision::Decision(Decision::Discard { choices, .. }) => {
+            // H2's discard reshape (`surface_v2.rs::DiscardReshape`)
+            // presents one real, single-card `SELECT_TARGETS`-shaped pick
+            // at a time -- the reference's genuine shape for every discard.
+            // This corpus (recorded before that reshape existed) carries
+            // that same real per-card `SELECT_TARGETS` sequence already;
+            // apply each pick in turn, same pattern as
+            // `replay_burn_v2.rs::apply_discard` (see that function's doc
+            // for the full citation, including the corpus's redundant
+            // zero-probability terminal `SELECT_CARD` summary consumed but
+            // not re-applied below). Looped exactly `count` times (from
+            // `state.engine.pending_discard`, stable for this whole
+            // obligation's duration -- see `pending_discard_total`'s doc),
+            // *not* "while `next_decision` still says Discard": a second,
+            // unrelated single-card discard can immediately follow this one
+            // and is just as `Decision::Discard`-shaped, indistinguishable
+            // from "one more pick of this same batch" by decision kind
+            // alone (root-caused this session).
+            let count = HarnessSurfaceV2::pending_discard_total(state).ok_or("no Discard decision is pending")?;
+            let mut choices = choices.clone();
+            let mut chosen_names: Vec<String> = Vec::new();
+            for _ in 0..count {
+                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:Discard".to_string())?;
+                if rec.action_type != "SELECT_TARGETS" {
+                    return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
                 }
-                let &idx = preview.chosen_indices.first().ok_or("unexpected-chosen-count:Discard-SELECT_TARGETS-prefix")?;
-                let name = preview.candidate_texts.get(idx as usize).ok_or("chosen-index-out-of-range:Discard-SELECT_TARGETS-prefix")?;
-                names_from_targets_prefix.push(name.clone());
+                learn_token_ids(ctx, state, rec);
+                let mut kernel_names: Vec<&str> = choices.iter().map(|&id| state.objects.get(id).name.as_str()).collect();
+                kernel_names.sort_unstable();
+                let mut trace_names: Vec<&str> = rec.candidate_texts.iter().map(String::as_str).collect();
+                trace_names.sort_unstable();
+                if kernel_names != trace_names {
+                    return Err("candidate-multiset-mismatch:Discard".to_string());
+                }
+                let &idx = rec.chosen_indices.first().ok_or("unexpected-chosen-count:Discard")?;
+                let name = rec.candidate_texts.get(idx as usize).cloned().ok_or("chosen-index-out-of-range:Discard")?;
+                let uuid = rec.chosen_object_ids.first().ok_or("missing-chosen-object-id:Discard")?;
+                let chosen_id = ctx.id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:Discard:{uuid}"))?;
+                if !choices.contains(&chosen_id) {
+                    return Err("chosen-not-in-kernel-candidates:Discard".to_string());
+                }
                 ctx.advance(player);
+                chosen_names.push(name);
+                surface.apply(state, SurfaceAction::Action(Action::Discard(vec![chosen_id]))).map_err(|e| format!("engine-step-error:Discard:{e}"))?;
+                choices.retain(|&id| id != chosen_id);
             }
-            let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:Discard".to_string())?;
-            if rec.action_type != "SELECT_CARD" {
-                return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
+            if let Some(&rec) = ctx.next(player) {
+                if rec.action_type == "SELECT_CARD" {
+                    let terminal_names: Vec<String> = rec
+                        .chosen_indices
+                        .iter()
+                        .map(|&idx| rec.candidate_texts.get(idx as usize).cloned().ok_or_else(|| "chosen-index-out-of-range:Discard-terminal-summary".to_string()))
+                        .collect::<Result<_, _>>()?;
+                    if terminal_names != chosen_names {
+                        return Err("discard-terminal-summary-mismatch".to_string());
+                    }
+                    ctx.advance(player);
+                }
             }
-            learn_token_ids(ctx, state, rec);
-            if rec.chosen_indices.len() != *count as usize {
-                return Err("unexpected-chosen-count:Discard".to_string());
-            }
-            let chosen_names: Vec<String> = rec.chosen_indices.iter().map(|&idx| rec.candidate_texts.get(idx as usize).cloned().ok_or_else(|| "chosen-index-out-of-range:Discard".to_string())).collect::<Result<_, _>>()?;
-            if !names_from_targets_prefix.is_empty() && names_from_targets_prefix != chosen_names {
-                return Err("discard-select-targets-prefix-mismatch".to_string());
-            }
-            let chosen: Vec<ObjectId> = rec.chosen_object_ids.iter().map(|uuid| ctx.id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:Discard:{uuid}"))).collect::<Result<_, _>>()?;
-            if chosen.len() != *count as usize || !chosen.iter().all(|id| choices.contains(id)) {
-                return Err("chosen-not-in-kernel-candidates:Discard".to_string());
-            }
-            ctx.advance(player);
-            surface.apply(state, SurfaceAction::Action(Action::Discard(chosen))).map_err(|e| format!("engine-step-error:Discard:{e}"))
+            Ok(())
         }
         SurfaceDecision::Decision(Decision::DeclareAttackers { eligible, .. }) => {
             if rec.action_type != "DECLARE_ATTACKS" {
@@ -1009,22 +1047,6 @@ fn shared_semantic_policy_index(texts: &[String]) -> Option<usize> {
     best.map(|(i, _)| i)
 }
 
-/// Kernel-side generalization beyond Java's confirmed (singleton-only)
-/// `sharedSemanticPolicyIndices` -- see this module's top doc, point 2, for
-/// why this exists (only `Decision::Discard` with `count > 1` needs it in
-/// this pool) and the explicit UNVERIFIED flag for the Java-side agent.
-/// Same rule, generalized: sort candidates by `(text, original_index)`,
-/// take the first `n`, then re-sort that selection back into ascending
-/// original-index order (a deterministic, order-independent choice of
-/// *which* n indices, with a stable/reproducible application order).
-fn shared_semantic_policy_top_n(texts: &[String], n: usize) -> Vec<usize> {
-    let mut idx: Vec<usize> = (0..texts.len()).collect();
-    idx.sort_by(|&a, &b| texts[a].cmp(&texts[b]).then(a.cmp(&b)));
-    idx.truncate(n);
-    idx.sort_unstable();
-    idx
-}
-
 // ==================== uniform decision -> canonical text (item 3) ====================
 
 /// Native (unsorted) candidate texts for a `CastSpellOrPass` window,
@@ -1096,7 +1118,7 @@ fn cast_spell_or_pass_native(
         push(&mut out, &mut seen, "{T}: Add {R}.".to_string(), KernelChoice::ActivateMana(id));
     }
     for &(id, idx) in activatable_abilities {
-        push(&mut out, &mut seen, format!("activate:{}:{idx}", state.objects.get(id).name), KernelChoice::ActivateAbility(id, idx));
+        push(&mut out, &mut seen, render_activated_ability_text(state, id, idx), KernelChoice::ActivateAbility(id, idx));
     }
     for &id in plot_actions {
         let cd = &CARD_DEFS[state.objects.get(id).card_def as usize];
@@ -1104,6 +1126,65 @@ fn cast_spell_or_pass_native(
         push(&mut out, &mut seen, format!("Plot {}", render_cost(&cost)), KernelChoice::PlotSpell(id));
     }
     out
+}
+
+/// Real rules text for a non-mana activated ability (Masked Meower's,
+/// Blood Token's -- the only two in this pool, `card_def::ActivatedAbilityDef`
+/// has no text field of its own, per `build.rs`'s own codegen doc). Verified
+/// against Java: `MaskedMeower.java` ("Discard a card, Sacrifice this
+/// creature: Draw a card.") and `Mage/.../token/BloodToken.java` ("{1},
+/// {T}, Discard a card, Sacrifice this artifact: Draw a card.") -- both
+/// confirmed reachable verbatim in the live cross-engine oracle's own
+/// `legal_multiset` output (Blood Token's ability renders correctly at the
+/// walk's forced ROOT step, which reads its text straight from the trace
+/// record rather than computing it -- see `walk_and_diff`'s doc). Rendered
+/// here from `ActivatedAbilityDef::cost` (`CostComponent` already carries
+/// everything a cost-side render needs) joined by `", "`, plus a hardcoded
+/// `": Draw a card."` suffix: both abilities in this pool resolve to the
+/// same effect (`card_def::ability_effect_draw_one`, per `build.rs`'s
+/// `activated_abilities_for` doc: "both reduce to ... so both share
+/// ability_effect_draw_one"), and `ActivatedAbilityDef::effect` is a bare
+/// function pointer with no text of its own to derive a suffix from
+/// generically -- a real gap if this pool ever grows a second activated-
+/// ability effect, flagged here rather than silently assumed to generalize.
+///
+/// Previously this fell back to a kernel-native `"activate:<name>:<idx>"`
+/// placeholder (cross-engine campaign round 1, Pattern C): every window
+/// where Masked Meower's own ability competed against other real-text
+/// candidates had its lexicographic shared-semantic-policy pick
+/// (`shared_semantic_policy_index`'s doc) flipped by that placeholder's
+/// wrong sort position relative to Java's real text.
+fn render_activated_ability_text(state: &GameState, id: ObjectId, ability_idx: u8) -> String {
+    let name = state.objects.get(id).name.as_str();
+    let def = &CARD_DEFS[state.objects.get(id).card_def as usize];
+    let cost = def.activated_abilities[ability_idx as usize].cost;
+    let parts: Vec<String> = cost
+        .iter()
+        .map(|c| match c {
+            card_def::CostComponent::Mana(cost) => render_cost(cost),
+            card_def::CostComponent::Tap => "{T}".to_string(),
+            // `mage.abilities.costs.common.SacrificeSourceCost`'s own
+            // constructor sets a literal, UNRESOLVED default text --
+            // `"sacrifice {this}"` (verified in Mage core: the `{this}`
+            // template placeholder is never substituted unless the card
+            // calls `.setText(...)` itself). Masked Meower's ability
+            // (`MaskedMeower.java`) never does; Blood Token's does
+            // (`BloodToken.java`: `.setText("Sacrifice this artifact")`).
+            // Root-caused against the live cross-engine oracle this round:
+            // an earlier, "nicer"-English version of this branch
+            // (`has_type(Creature)` -> "Sacrifice this creature") was
+            // plausible but wrong -- Java's own real text for Masked
+            // Meower is the literal, un-templated `"Sacrifice {this}"`.
+            card_def::CostComponent::SacrificeSelf if name == "Blood Token" => "Sacrifice this artifact".to_string(),
+            card_def::CostComponent::SacrificeSelf => "Sacrifice {this}".to_string(),
+            card_def::CostComponent::ExileSelf => "Exile this".to_string(),
+            card_def::CostComponent::DiscardCards(1) => "Discard a card".to_string(),
+            card_def::CostComponent::DiscardCards(n) => format!("Discard {n} cards"),
+            card_def::CostComponent::SacrificeLands(1) => "Sacrifice a land".to_string(),
+            card_def::CostComponent::SacrificeLands(n) => format!("Sacrifice {n} lands"),
+        })
+        .collect();
+    format!("{}: Draw a card.", parts.join(", "))
 }
 
 /// Uniform decision -> `(action_type, native-order candidate texts)`,
@@ -1123,7 +1204,15 @@ fn cast_spell_or_pass_native(
 /// - `ChooseTargets`/`ChooseCostTargets`: CONFIRMED (`target_name`, plain
 ///   card/player names -- Java's `SELECT_TARGETS` `candidateTexts` are
 ///   always names too, per `trace.rs`'s own module doc).
-/// - `Discard`: CONFIRMED (plain card names, Java's `SELECT_CARD` shape).
+/// - `Discard`: CONFIRMED as `SELECT_TARGETS` (plain card names), NOT
+///   `SELECT_CARD` -- corrected this round (cross-engine campaign round 1,
+///   Pattern A): every real discard pick, cost or effect, even a lone
+///   1-card pick, surfaces as a `SELECT_TARGETS` window against the live
+///   oracle; a multi-card discard is that many sequential `SELECT_TARGETS`
+///   windows, never one batched `SELECT_CARD` pick (see `HarnessSurfaceV2`'s
+///   `DiscardReshape`, which now decomposes the engine's still-batched
+///   `Decision::Discard` into exactly this shape before it ever reaches
+///   here -- `count` is always `1` by the time this function sees it).
 /// - `DeclareAttackers`/`DeclareBlockersForAttacker`: CONFIRMED (`"DONE"`
 ///   sentinel text verified verbatim in `ComputerPlayerRL.java` at the
 ///   `CombatCandidate.toString()`/`isDone()` sites read this session,
@@ -1131,13 +1220,21 @@ fn cast_spell_or_pass_native(
 /// - `ChooseMadnessCast`: CONFIRMED (`"Yes"`/`"No"`, hardcoded in
 ///   `trace.rs`'s own `CHOOSE_USE` synthetic-record construction, sourced
 ///   from the real `CHOOSE_USE: msg=... decision=YES|NO` log line shape).
-/// - `ChooseOptionalCost`, `ChooseCastMode`, `ChooseSpellMode`,
-///   `OrderTriggers`: UNVERIFIED best-effort placeholder text (see each
-///   arm below) -- flagged explicitly for the Java-side agent; these are
-///   the decisions `branch_diff.rs`'s own shape-sniffing heuristics
-///   already treat as structurally uncertain (see `apply_silent_window`'s
-///   doc, ported unchanged above), so this is a pre-existing, not newly-
-///   introduced, gap.
+/// - `ChooseOptionalCost`: CONFIRMED as a two-stage `CHOOSE_USE` sequence,
+///   not one 3-way pick -- corrected this round (Pattern B), against
+///   `DoIfCostPaid.apply`'s own `chooseUse` gate and `OrCost.pay`'s
+///   `usable.size() == 2` gate (both read in full this session). See
+///   `HarnessSurfaceV2`'s `OptionalCostReshape`: the `(discard_payable,
+///   sacrifice_payable)` sentinel this function reads below (`(false,
+///   false)` = the `Use` gate, `(true, true)` = `Which`) is that reshape's
+///   own presentation contract, not a real engine state combination.
+/// - `ChooseCastMode`, `ChooseSpellMode`, `OrderTriggers`: UNVERIFIED
+///   best-effort placeholder text (see each arm below) -- flagged
+///   explicitly for the Java-side agent; these are the decisions
+///   `branch_diff.rs`'s own shape-sniffing heuristics already treat as
+///   structurally uncertain (see `apply_silent_window`'s doc, ported
+///   unchanged above), so this is a pre-existing, not newly-introduced,
+///   gap.
 fn decision_texts(state: &GameState, decision: &SurfaceDecision, p0_name: &str, p1_name: &str) -> Option<(&'static str, Vec<String>)> {
     match decision {
         SurfaceDecision::Decision(Decision::CastSpellOrPass { land_drops, castable_spells, mana_abilities, activatable_abilities, plot_actions, .. }) => Some((
@@ -1153,7 +1250,7 @@ fn decision_texts(state: &GameState, decision: &SurfaceDecision, p0_name: &str, 
         SurfaceDecision::Decision(Decision::ChooseCostTargets { candidates, .. }) => {
             Some(("SELECT_TARGETS", candidates.iter().map(|&id| state.objects.get(id).name.clone()).collect()))
         }
-        SurfaceDecision::Decision(Decision::Discard { choices, .. }) => Some(("SELECT_CARD", choices.iter().map(|&id| state.objects.get(id).name.clone()).collect())),
+        SurfaceDecision::Decision(Decision::Discard { choices, .. }) => Some(("SELECT_TARGETS", choices.iter().map(|&id| state.objects.get(id).name.clone()).collect())),
         SurfaceDecision::Decision(Decision::DeclareAttackers { eligible, .. }) => {
             let mut v: Vec<String> = eligible.iter().map(|&id| state.objects.get(id).name.clone()).collect();
             v.push("DONE".to_string());
@@ -1166,15 +1263,18 @@ fn decision_texts(state: &GameState, decision: &SurfaceDecision, p0_name: &str, 
         }
         SurfaceDecision::Decision(Decision::ChooseMadnessCast { .. }) => Some(("CHOOSE_USE", vec!["Yes".to_string(), "No".to_string()])),
         SurfaceDecision::Decision(Decision::ChooseOptionalCost { discard_payable, sacrifice_payable, .. }) => {
-            // UNVERIFIED placeholder text -- see this function's doc.
-            let mut v = vec!["Decline".to_string()];
-            if *discard_payable {
-                v.push("Discard a card".to_string());
+            // See this function's doc: `(false, false)` is `HarnessSurfaceV2`'s
+            // `OptionalCostReshape` `Use`-stage sentinel (Yes/No: pay this
+            // cost at all?); any other combination only ever reaches here
+            // as `(true, true)`, the `Which`-stage sentinel (pick between
+            // the two payable sub-costs) -- see `OptionalCostReshape`'s doc
+            // for why the engine itself never emits a real `Decision::
+            // ChooseOptionalCost` with `(false, false)`.
+            if !*discard_payable && !*sacrifice_payable {
+                Some(("CHOOSE_USE", vec!["Yes".to_string(), "No".to_string()]))
+            } else {
+                Some(("CHOOSE_USE", vec!["Discard a card".to_string(), "Sacrifice a land".to_string()]))
             }
-            if *sacrifice_payable {
-                v.push("Sacrifice a land".to_string());
-            }
-            Some(("CHOOSE_USE", v))
         }
         SurfaceDecision::Decision(Decision::ChooseCastMode { options, .. }) => Some((
             "CHOOSE_MODE",
@@ -1193,10 +1293,13 @@ fn decision_texts(state: &GameState, decision: &SurfaceDecision, p0_name: &str, 
     }
 }
 
-/// Applies the shared-semantic-policy's chosen index/indices (native order,
-/// same as `decision_texts`) to `decision`. Only `Discard` ever receives
-/// more than one index (see `shared_semantic_policy_top_n`'s doc); every
-/// other arm uses `indices[0]`.
+/// Applies the shared-semantic-policy's chosen index (native order, same as
+/// `decision_texts`) to `decision`. Every arm answers a single pick
+/// (`indices[0]`/`i0`) -- including `Discard`, whose `count` is always `1`
+/// by the time a decision reaches here (see `DiscardReshape`'s doc); the
+/// `Discard` arm below still generically applies however many indices it's
+/// handed (`picks.len() != *count`), so it stays correct even though `count`
+/// is now fixed at 1, without singling that case out from every other arm.
 fn apply_by_indices(surface: &mut HarnessSurfaceV2, state: &mut GameState, decision: &SurfaceDecision, indices: &[usize]) -> Result<(), String> {
     let i0 = *indices.first().ok_or("apply_by_indices:no-chosen-indices")?;
     match decision {
@@ -1231,16 +1334,13 @@ fn apply_by_indices(surface: &mut HarnessSurfaceV2, state: &mut GameState, decis
         SurfaceDecision::Decision(Decision::ChooseMadnessCast { .. }) => {
             surface.apply(state, SurfaceAction::Action(Action::ChooseMadnessCast(i0 == 0))).map_err(|e| format!("engine-step-error:walk:ChooseMadnessCast:{e}"))
         }
-        SurfaceDecision::Decision(Decision::ChooseOptionalCost { discard_payable, sacrifice_payable, .. }) => {
-            let mut opts = vec![OptionalCostChoice::Decline];
-            if *discard_payable {
-                opts.push(OptionalCostChoice::Discard);
-            }
-            if *sacrifice_payable {
-                opts.push(OptionalCostChoice::SacrificeLand);
-            }
-            let choice = *opts.get(i0).ok_or("apply_by_indices:index-out-of-range:ChooseOptionalCost")?;
-            surface.apply(state, SurfaceAction::Action(Action::ChooseOptionalCost(choice))).map_err(|e| format!("engine-step-error:walk:ChooseOptionalCost:{e}"))
+        SurfaceDecision::Decision(Decision::ChooseOptionalCost { .. }) => {
+            // Answers whichever stage `decision_texts` just rendered
+            // (`["Yes","No"]` at `Use`, `["Discard a card","Sacrifice a
+            // land"]` at `Which`) -- index 0 is always "yes"/"the first
+            // option" in both shapes, so `i0 == 0` is the right generic
+            // answer regardless of stage. See `OptionalCostReshape`'s doc.
+            surface.apply(state, SurfaceAction::Action(Action::ChooseOptionalCostStage(i0 == 0))).map_err(|e| format!("engine-step-error:walk:ChooseOptionalCost:{e}"))
         }
         SurfaceDecision::Decision(Decision::ChooseCastMode { options, .. }) => {
             let m = *options.get(i0).ok_or("apply_by_indices:index-out-of-range:ChooseCastMode")?;
@@ -1328,14 +1428,15 @@ fn walk_and_diff(t: &GoldenTrace, spec: &WalkSpec) -> WalkDiffResult {
             continue;
         }
 
-        if let SurfaceDecision::Decision(Decision::Discard { .. }) = &decision {
-            while let Some(&preview) = ctx.next(player) {
-                if preview.action_type != "SELECT_TARGETS" {
-                    break;
-                }
-                ctx.advance(player);
-            }
-        }
+        // No more "skip SELECT_TARGETS previews before the real target"
+        // step needed here (removed this round): `HarnessSurfaceV2`'s
+        // `DiscardReshape` (Pattern A) makes every `Decision::Discard`
+        // single-pick, so it now maps 1:1 onto exactly the one trace record
+        // at `target_forced_call_index` -- there is no longer a batch of
+        // several trace records sharing one kernel decision to skip ahead
+        // through. Keeping that skip would wrongly consume the real target
+        // record itself (also `SELECT_TARGETS`-shaped) before this cursor
+        // check below ever saw it.
         let Some(&rec) = ctx.next(player) else {
             return mk_err(spec, "trace_exhausted_before_root", "no trace record at target cursor".to_string(), target_player_name);
         };
@@ -1345,8 +1446,7 @@ fn walk_and_diff(t: &GoldenTrace, spec: &WalkSpec) -> WalkDiffResult {
         if !spec.target_action_type.is_empty() {
             let expected_kind = match &decision {
                 SurfaceDecision::Decision(Decision::CastSpellOrPass { .. }) => "ACTIVATE_ABILITY_OR_SPELL",
-                SurfaceDecision::Decision(Decision::ChooseTargets { .. }) | SurfaceDecision::Decision(Decision::ChooseCostTargets { .. }) => "SELECT_TARGETS",
-                SurfaceDecision::Decision(Decision::Discard { .. }) => "SELECT_CARD",
+                SurfaceDecision::Decision(Decision::ChooseTargets { .. }) | SurfaceDecision::Decision(Decision::ChooseCostTargets { .. }) | SurfaceDecision::Decision(Decision::Discard { .. }) => "SELECT_TARGETS",
                 SurfaceDecision::Decision(Decision::DeclareAttackers { .. }) => "DECLARE_ATTACKS",
                 SurfaceDecision::DeclareBlockersForAttacker { .. } => "DECLARE_BLOCKS",
                 _ => "OTHER",
@@ -1443,13 +1543,17 @@ fn walk_and_diff(t: &GoldenTrace, spec: &WalkSpec) -> WalkDiffResult {
         let mut sorted_multiset = texts.clone();
         sorted_multiset.sort();
 
-        let chosen_indices: Vec<usize> = if let SurfaceDecision::Decision(Decision::Discard { count, .. }) = &decision {
-            shared_semantic_policy_top_n(&texts, *count as usize)
-        } else {
-            match shared_semantic_policy_index(&texts) {
-                Some(i) => vec![i],
-                None => vec![],
-            }
+        // `Decision::Discard` no longer needs `shared_semantic_policy_top_n`
+        // (the multi-index generalization this module's top doc, point 2,
+        // flagged as UNVERIFIED): `HarnessSurfaceV2`'s `DiscardReshape`
+        // (cross-engine campaign round 1, Pattern A) now decomposes every
+        // multi-card discard into that many sequential single-pick
+        // decisions, so `count` is always `1` here, same as every other
+        // decision kind -- the plain, Java-confirmed single-index policy
+        // applies uniformly.
+        let chosen_indices: Vec<usize> = match shared_semantic_policy_index(&texts) {
+            Some(i) => vec![i],
+            None => vec![],
         };
         if chosen_indices.is_empty() {
             return finish(spec, "walk_blocked", "shared_semantic_policy_produced_no_choice".to_string(), target_player_name, steps);

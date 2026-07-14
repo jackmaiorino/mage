@@ -554,6 +554,22 @@ pub enum Action {
     /// `true` = cast the pending Madness card for its madness cost; `false`
     /// = let it go to the graveyard.
     ChooseMadnessCast(bool),
+    /// Answers one stage of `HarnessSurfaceV2`'s `ChooseOptionalCost`
+    /// reshape (see that module's `OptionalCostReshape`): the H2 surface
+    /// splits the engine's one-shot, 3-way `Decision::ChooseOptionalCost`
+    /// into a binary "use the cost at all?" gate, then (only when *both*
+    /// sub-costs are payable) a second binary "which one?" pick -- matching
+    /// Java's real two-`chooseUse`-calls shape (`DoIfCostPaid.apply`'s own
+    /// gate, then `OrCost.pay`'s `usable.size() == 2` gate). `true`/`false`
+    /// means "yes"/"no" at the gate stage, or "the first/second payable
+    /// option" at the which stage. Presentation-only: never reaches this
+    /// module's own `step` dispatch under normal use --
+    /// `HarnessSurfaceV2::apply` always intercepts and resolves it into the
+    /// real, single `Action::ChooseOptionalCost` once the reshape completes
+    /// (see `surface_v2.rs`'s module for the full contract). The stub arm in
+    /// `step` below exists only to fail loudly if that interception is ever
+    /// bypassed, not as a supported direct-to-engine call.
+    ChooseOptionalCostStage(bool),
 }
 
 const STEP_ORDER: [Step; 12] = [
@@ -1970,6 +1986,9 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
         }
         Action::ChooseOptionalCost(choice) => apply_choose_optional_cost(state, choice),
         Action::ChooseMadnessCast(cast_it) => apply_choose_madness_cast(state, cast_it),
+        Action::ChooseOptionalCostStage(_) => {
+            Err("ChooseOptionalCostStage is presentation-only (HarnessSurfaceV2's reshape); it must never reach step() directly".to_string())
+        }
         Action::PlotSpell(id) => {
             let p = state.priority_player;
             if !plot_action_candidates(p, state).contains(&id) {

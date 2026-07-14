@@ -71,8 +71,8 @@
 //!    behavior (the target shortcut above being the one such rescue that
 //!    existed in the v3 comparator).
 
-use crate::engine::{self, Action, Decision};
-use crate::ids::ObjectId;
+use crate::engine::{self, Action, Decision, OptionalCostChoice};
+use crate::ids::{ObjectId, PlayerId};
 use crate::state::{GameState, Step};
 pub use crate::surface::{harness_never_offers_priority, Suppression, SuppressionReason, SurfaceAction, SurfaceDecision};
 
@@ -146,6 +146,77 @@ struct BlockersReshape {
     remaining: std::collections::VecDeque<(ObjectId, Vec<ObjectId>)>,
     accumulated: Vec<(ObjectId, ObjectId)>,
     current_attacker: Option<ObjectId>,
+}
+
+/// H2's decomposition of the engine's one-shot `Decision::Discard { count,
+/// choices }` (pick `count` cards from `choices` in a single answer) into
+/// `count` sequential single-card picks -- Java's real shape for *every*
+/// discard (a cost's, an effect's, cleanup's), confirmed against the live
+/// cross-engine oracle: even a 1-card discard surfaces as a real
+/// `SELECT_TARGETS` window there, and a 2-card discard (Faithless Looting)
+/// is two, with the second's candidate pool missing exactly the first's
+/// pick -- never one `SELECT_CARD`-shaped batch. `next_decision` re-presents
+/// the *same* `Decision::Discard` variant for each pick (so the shape stays
+/// a plain, engine-native type -- no new `Decision` variant needed), just
+/// with `count` pinned to `1` and `choices` narrowed to whatever's left;
+/// `apply` accumulates real answers here and only calls the engine's own
+/// (still-batched) `Action::Discard` once every card is chosen. The
+/// engine's own aggregate "no real choice left" pre-check
+/// (`drain_pending_discard_or_decide`'s `choices.len() <= count`) still runs
+/// before a `Decision::Discard` is ever raised at all, which guarantees
+/// `remaining_choices.len() > remaining_needed` at every step below (the
+/// slack between them is invariant, since each pick removes exactly one
+/// from both) -- so, unlike the sibling `ChooseCostTargets`/`SacrificeLands`
+/// reshape, no per-pick "down to 1 candidate, auto-finish" shortcut is ever
+/// reachable here and none is implemented.
+struct DiscardReshape {
+    player: PlayerId,
+    remaining_choices: Vec<ObjectId>,
+    chosen: Vec<ObjectId>,
+    remaining_needed: u32,
+}
+
+/// H2's decomposition of the engine's one-shot, 3-way `Decision::
+/// ChooseOptionalCost` (Decline / Discard / SacrificeLand, all in a single
+/// answer) into Java's real two-stage shape (Highway Robbery's own
+/// `DoIfCostPaid`+`OrCost`, read in full this session):
+///
+/// 1. **`Use`**: a binary "pay this cost at all?" gate
+///    (`DoIfCostPaid.apply`'s own `player.chooseUse(...)` -- plain `Yes`/
+///    `No`, confirmed against the live oracle: every Highway-Robbery-shaped
+///    window it captured this round starts with exactly this gate).
+/// 2. **`Which`**: only reached when *both* `discard_payable` and
+///    `sacrifice_payable` are true (`OrCost.pay`'s own `usable.size() == 2`
+///    branch) -- a second binary pick between the two payable sub-costs'
+///    own texts (`"Discard a card"` / `"Sacrifice a land"`). When only one
+///    sub-cost is payable, `OrCost.pay`'s `usable.size() == 1` branch
+///    auto-selects it with **no** decision at all -- matched here by
+///    resolving straight through without ever presenting `Which`.
+///
+/// Represented by re-presenting the same `Decision::ChooseOptionalCost`
+/// variant (no new `Decision` needed) with a sentinel field combination
+/// `next_decision` never sees from the engine itself (which always sets at
+/// least one of `discard_payable`/`sacrifice_payable`, per that decision's
+/// own doc): `(false, false)` for the `Use` gate, `(true, true)` for
+/// `Which`. `apply` still accepts the engine's original one-shot
+/// `Action::ChooseOptionalCost(OptionalCostChoice)` too, as a direct
+/// "resolve the whole reshape right now" bypass -- every pre-existing H2
+/// caller (`bench_kernel.rs`'s random policy, `branch_diff.rs`'s fixed
+/// continuation/force helpers, `replay_burn_v2.rs`'s own best-effort
+/// look-ahead guess, none of which have real per-stage ground truth to
+/// begin with) keeps constructing that single answer unchanged.
+#[derive(Clone, Copy)]
+struct OptionalCostReshape {
+    player: crate::ids::PlayerId,
+    discard_payable: bool,
+    sacrifice_payable: bool,
+    stage: OptionalCostStage,
+}
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum OptionalCostStage {
+    Use,
+    Which,
 }
 
 /// See the module doc. Structurally identical to `HarnessSurfaceV1` (same
@@ -323,6 +394,10 @@ pub struct HarnessSurfaceV2 {
     /// exemption is a single-use flag, not a standing carve-out for the
     /// player or the card.
     madness_cast_reprompt_exemption: Option<ObjectId>,
+    /// See `DiscardReshape`'s doc.
+    discard: Option<DiscardReshape>,
+    /// See `OptionalCostReshape`'s doc.
+    optional_cost: Option<OptionalCostReshape>,
 }
 
 impl HarnessSurfaceV2 {
@@ -335,6 +410,48 @@ impl HarnessSurfaceV2 {
         &self.suppressions
     }
 
+    /// `(discard_payable, sacrifice_payable)` for a genuinely pending
+    /// `ChooseOptionalCost` (`state.engine.pending_optional_cost` -- `None`
+    /// if none is pending; untouched by this surface's own reshape, which
+    /// only ever mutates it via the real, terminal `Action::
+    /// ChooseOptionalCost` once the reshape fully resolves, so this stays
+    /// accurate for the reshape's *entire* duration, both stages). The
+    /// presented `Decision::ChooseOptionalCost` itself carries a *sentinel*
+    /// field combination at the `Use` stage (`(false, false)`, chosen so
+    /// `decision_texts`-style renderers can tell the two stages apart from
+    /// the decision value alone -- see `OptionalCostReshape`'s doc), which
+    /// is exactly wrong for a caller that wants the *real* payable flags to
+    /// build a one-shot `Action::ChooseOptionalCost` bypass answer
+    /// (`bench_kernel.rs`'s random policy, `branch_diff.rs`'s fixed
+    /// continuation/force helpers, `replay_burn_v2.rs`'s own look-ahead
+    /// guess) regardless of which stage happens to be presented. This
+    /// accessor is that real signal -- a pure read of engine state, not
+    /// this surface's own bookkeeping, so it needs no `&self` at all.
+    pub fn pending_optional_cost_payable(state: &GameState) -> Option<(bool, bool)> {
+        state.engine.pending_optional_cost.as_ref().map(|p| (p.discard_payable, p.sacrifice_payable))
+    }
+
+    /// The *total* number of cards a genuinely pending `Decision::Discard`
+    /// obligation needs (`state.engine.pending_discard`'s own `count` --
+    /// `None` if none is pending). The presented `Decision::Discard` itself
+    /// always shows `count: 1` (one real card per surfaced pick -- see
+    /// `DiscardReshape`'s doc), which tells a caller "how many cards does
+    /// *this* pick need" but not "how many *total* picks does this whole
+    /// obligation need" -- exactly the distinction a driver walking the
+    /// reference's own per-card record sequence needs to loop the *right*
+    /// number of times, rather than naively continuing for as long as
+    /// `next_decision` keeps returning `Decision::Discard` (ambiguous: nothing
+    /// distinguishes "one more pick of this same batch" from "an unrelated,
+    /// later single-card discard that happens to immediately follow" --
+    /// see `replay_burn_v2.rs::apply_discard`'s doc for the root-caused
+    /// regression this fixes). Stable for the reshape's entire duration:
+    /// this surface's own bookkeeping never mutates `state.engine.
+    /// pending_discard` except via the real, terminal `Action::Discard`
+    /// once every card is chosen.
+    pub fn pending_discard_total(state: &GameState) -> Option<u32> {
+        state.engine.pending_discard.as_ref().map(|pd| pd.count)
+    }
+
     fn record(&mut self, reason: SuppressionReason, auto_action: impl Into<String>, before: u64, state: &GameState) {
         self.suppressions.push(Suppression { reason, auto_action: auto_action.into(), state_hash_before: before, state_hash_after: state.state_hash() });
     }
@@ -344,6 +461,12 @@ impl HarnessSurfaceV2 {
     pub fn next_decision(&mut self, state: &mut GameState) -> SurfaceDecision {
         loop {
             if let Some(sd) = self.next_blockers_subdecision(state) {
+                return sd;
+            }
+            if let Some(sd) = self.next_discard_subdecision() {
+                return sd;
+            }
+            if let Some(sd) = self.next_optional_cost_subdecision() {
                 return sd;
             }
 
@@ -544,6 +667,20 @@ impl HarnessSurfaceV2 {
                     }
                     continue;
                 }
+                Decision::Discard { player, count, choices } => {
+                    // See `DiscardReshape`'s doc: begin the per-card
+                    // sequence; the loop's top-of-iteration check re-presents
+                    // it (one card at a time) on the next pass.
+                    self.discard = Some(DiscardReshape { player: *player, remaining_choices: choices.clone(), chosen: Vec::new(), remaining_needed: *count });
+                    continue;
+                }
+                Decision::ChooseOptionalCost { player, discard_payable, sacrifice_payable } => {
+                    // See `OptionalCostReshape`'s doc: begin the two-stage
+                    // sequence at the `Use` gate.
+                    self.optional_cost =
+                        Some(OptionalCostReshape { player: *player, discard_payable: *discard_payable, sacrifice_payable: *sacrifice_payable, stage: OptionalCostStage::Use });
+                    continue;
+                }
                 _ => {}
             }
 
@@ -624,6 +761,76 @@ impl HarnessSurfaceV2 {
                     self.round_opening_stack_len = state.stack.len();
                 }
                 result
+            }
+            SurfaceAction::Action(Action::Discard(picked)) => {
+                // See `DiscardReshape`'s doc: accept either a single-card
+                // answer to the currently-presented pick (the per-card
+                // sequence a driver walks alongside the reference's own
+                // per-card `SELECT_TARGETS` records), or the whole
+                // remaining batch at once (every pre-existing H2 caller
+                // that predates this reshape and still constructs the
+                // engine's original, un-decomposed answer).
+                let reshape = self.discard.as_ref().ok_or("no Discard decision is pending")?;
+                if !picked.iter().all(|id| reshape.remaining_choices.contains(id)) {
+                    return Err("discarded card is not among the legal candidates".to_string());
+                }
+                let remaining_needed = reshape.remaining_needed;
+                if picked.len() as u32 == remaining_needed {
+                    let reshape = self.discard.take().expect("checked Some above");
+                    let mut chosen = reshape.chosen;
+                    chosen.extend(picked);
+                    engine::step(state, Action::Discard(chosen))
+                } else if picked.len() == 1 {
+                    let reshape = self.discard.as_mut().expect("checked Some above");
+                    let id = picked[0];
+                    reshape.remaining_choices.retain(|&c| c != id);
+                    reshape.chosen.push(id);
+                    reshape.remaining_needed -= 1;
+                    Ok(())
+                } else {
+                    Err(format!(
+                        "Action::Discard must supply either exactly 1 card (answer the current pick) or exactly the {remaining_needed} still needed (resolve the whole reshape at once), got {}",
+                        picked.len()
+                    ))
+                }
+            }
+            SurfaceAction::Action(Action::ChooseOptionalCost(choice)) => {
+                // One-shot bypass: resolve the whole reshape (whichever
+                // stage it's currently presenting, if any) immediately --
+                // see `OptionalCostReshape`'s doc.
+                self.optional_cost = None;
+                engine::step(state, Action::ChooseOptionalCost(choice))
+            }
+            SurfaceAction::Action(Action::ChooseOptionalCostStage(use_it)) => {
+                let reshape = self.optional_cost.ok_or("no ChooseOptionalCost decision is pending")?;
+                match reshape.stage {
+                    OptionalCostStage::Use => {
+                        if !use_it {
+                            self.optional_cost = None;
+                            return engine::step(state, Action::ChooseOptionalCost(OptionalCostChoice::Decline));
+                        }
+                        match (reshape.discard_payable, reshape.sacrifice_payable) {
+                            (true, true) => {
+                                self.optional_cost.as_mut().expect("checked Some above").stage = OptionalCostStage::Which;
+                                Ok(())
+                            }
+                            (true, false) => {
+                                self.optional_cost = None;
+                                engine::step(state, Action::ChooseOptionalCost(OptionalCostChoice::Discard))
+                            }
+                            (false, true) => {
+                                self.optional_cost = None;
+                                engine::step(state, Action::ChooseOptionalCost(OptionalCostChoice::SacrificeLand))
+                            }
+                            (false, false) => Err("ChooseOptionalCostStage(Use) answered yes but neither discard nor sacrifice is payable".to_string()),
+                        }
+                    }
+                    OptionalCostStage::Which => {
+                        let choice = if use_it { OptionalCostChoice::Discard } else { OptionalCostChoice::SacrificeLand };
+                        self.optional_cost = None;
+                        engine::step(state, Action::ChooseOptionalCost(choice))
+                    }
+                }
             }
             SurfaceAction::Action(a) => engine::step(state, a),
             SurfaceAction::DeclareBlockersForAttacker(blockers) => {
@@ -708,6 +915,27 @@ impl HarnessSurfaceV2 {
         let reshape = self.blockers.take().expect("finish_blockers_reshape requires an in-progress reshape");
         debug_assert!(reshape.remaining.is_empty(), "finish_blockers_reshape called before every attacker was asked");
         engine::step(state, Action::DeclareBlockers(reshape.accumulated)).expect("accumulated blocks were already checked legal one attacker at a time");
+    }
+
+    /// See `DiscardReshape`'s doc. Re-presents the in-progress reshape's
+    /// *current* pick as a plain, single-card `Decision::Discard` (`count:
+    /// 1`); `None` when no discard reshape is in progress, letting
+    /// `next_decision`'s loop fall through to the engine as usual.
+    fn next_discard_subdecision(&self) -> Option<SurfaceDecision> {
+        let reshape = self.discard.as_ref()?;
+        Some(SurfaceDecision::Decision(Decision::Discard { player: reshape.player, count: 1, choices: reshape.remaining_choices.clone() }))
+    }
+
+    /// See `OptionalCostReshape`'s doc. Re-presents the in-progress
+    /// reshape's current stage as a `Decision::ChooseOptionalCost` with the
+    /// stage's own sentinel field combination.
+    fn next_optional_cost_subdecision(&self) -> Option<SurfaceDecision> {
+        let reshape = self.optional_cost?;
+        let (discard_payable, sacrifice_payable) = match reshape.stage {
+            OptionalCostStage::Use => (false, false),
+            OptionalCostStage::Which => (true, true),
+        };
+        Some(SurfaceDecision::Decision(Decision::ChooseOptionalCost { player: reshape.player, discard_payable, sacrifice_payable }))
     }
 }
 

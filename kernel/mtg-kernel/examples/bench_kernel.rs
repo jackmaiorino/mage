@@ -141,7 +141,7 @@ fn rng_chance(rng: &mut SplitMix64, num: u64, den: u64) -> bool {
 /// offers (Pass included as one of the candidates for `CastSpellOrPass`).
 /// Never called on `Decision::GameOver` (the driver loops break before
 /// reaching here for that variant).
-fn random_action_for_decision(decision: &Decision, rng: &mut SplitMix64) -> Action {
+fn random_action_for_decision(decision: &Decision, state: &GameState, rng: &mut SplitMix64) -> Action {
     match decision {
         Decision::CastSpellOrPass { castable_spells, mana_abilities, land_drops, activatable_abilities, plot_actions, .. } => {
             let mut candidates: Vec<Action> = Vec::with_capacity(
@@ -163,12 +163,20 @@ fn random_action_for_decision(decision: &Decision, rng: &mut SplitMix64) -> Acti
         Decision::ChooseCostTargets { candidates, .. } => Action::ChooseCostTarget(candidates[rng_below(rng, candidates.len())]),
         Decision::ChooseCastMode { options, .. } => Action::ChooseCastMode(options[rng_below(rng, options.len())]),
         Decision::ChooseSpellMode { mode_count, .. } => Action::ChooseSpellMode(rng_below(rng, *mode_count as usize) as u8),
-        Decision::ChooseOptionalCost { discard_payable, sacrifice_payable, .. } => {
+        Decision::ChooseOptionalCost { .. } => {
+            // Real payable flags, not this decision's own -- the H2 surface
+            // reshape re-presents `ChooseOptionalCost` with a presentation-
+            // only sentinel at its `Use` stage (see `HarnessSurfaceV2::
+            // pending_optional_cost_payable`'s doc); reading `state.engine.
+            // pending_optional_cost` directly is accurate for the raw-engine
+            // path too (`play_one_game_raw`/`hunt_max_legal_actions`, which
+            // never goes through the reshape at all).
+            let (discard_payable, sacrifice_payable) = HarnessSurfaceV2::pending_optional_cost_payable(state).unwrap_or((false, false));
             let mut options = vec![OptionalCostChoice::Decline];
-            if *discard_payable {
+            if discard_payable {
                 options.push(OptionalCostChoice::Discard);
             }
-            if *sacrifice_payable {
+            if sacrifice_payable {
                 options.push(OptionalCostChoice::SacrificeLand);
             }
             Action::ChooseOptionalCost(options[rng_below(rng, options.len())])
@@ -238,7 +246,7 @@ fn play_one_game_raw(seed: u64) -> u64 {
         if matches!(decision, Decision::GameOver { .. }) {
             break;
         }
-        let action = random_action_for_decision(&decision, &mut rng);
+        let action = random_action_for_decision(&decision, &state, &mut rng);
         engine::step(&mut state, action).expect("random policy only picks actions the decision itself listed as legal");
         if decisions >= DECISION_SAFETY_CAP {
             warn_safety_cap_once();
@@ -261,7 +269,7 @@ fn play_one_game_surface(seed: u64) -> u64 {
         match &sd {
             SurfaceDecision::Decision(Decision::GameOver { .. }) => break,
             SurfaceDecision::Decision(d) => {
-                let action = random_action_for_decision(d, &mut rng);
+                let action = random_action_for_decision(d, &state, &mut rng);
                 surface.apply(&mut state, SurfaceAction::Action(action)).expect("random policy only picks legal actions");
             }
             SurfaceDecision::DeclareBlockersForAttacker { legal_blockers, .. } => {
@@ -568,7 +576,7 @@ fn capture_rich_cast_window(seed: u64, max_decisions: u64) -> GameState {
         if matches!(decision, Decision::GameOver { .. }) {
             break;
         }
-        let action = random_action_for_decision(&decision, &mut rng);
+        let action = random_action_for_decision(&decision, &state, &mut rng);
         if engine::step(&mut state, action).is_err() {
             break;
         }

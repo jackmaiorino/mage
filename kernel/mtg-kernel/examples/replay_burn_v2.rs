@@ -820,11 +820,18 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 let player = state.active_player.opponent();
                 apply_declare_blockers_for_attacker(surface, &mut state, t, &mut ctx, outcome, player, attacker, &legal_blockers, &p0_name, &p1_name)?;
             }
-            SurfaceDecision::Decision(Decision::Discard { player, count, choices }) => {
-                apply_discard(surface, &mut state, t, &mut ctx, outcome, player, count, &choices, &p0_name, &p1_name)?;
+            SurfaceDecision::Decision(Decision::Discard { player, choices, .. }) => {
+                // The presented `count` is always 1 (one real pick at a
+                // time -- see `DiscardReshape`'s doc); the *total* this
+                // whole obligation needs comes from `state.engine.
+                // pending_discard` directly (see `pending_discard_total`'s
+                // doc for why that, not "keep going while `next_decision`
+                // still says Discard", is the only correct loop bound).
+                let count = HarnessSurfaceV2::pending_discard_total(&state).ok_or("no Discard decision is pending")?;
+                apply_discard(surface, &mut state, t, &mut ctx, outcome, player, count, choices, &p0_name, &p1_name)?;
             }
-            SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, discard_payable, sacrifice_payable }) => {
-                apply_choose_optional_cost(surface, &mut state, &mut ctx, player, discard_payable, sacrifice_payable)?;
+            SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, .. }) => {
+                apply_choose_optional_cost(surface, &mut state, &mut ctx, player)?;
             }
             SurfaceDecision::Decision(Decision::ChooseMadnessCast { player, .. }) => {
                 // Ground truth, not a guess: `trace::parse_text` now
@@ -1518,6 +1525,29 @@ fn apply_declare_blockers_for_attacker(
     surface.apply(state, SurfaceAction::DeclareBlockersForAttacker(blockers_only)).map_err(|e| format!("engine-step-error:DeclareBlockers:{e}"))
 }
 
+/// Drives `HarnessSurfaceV2`'s discard reshape (`DiscardReshape`'s doc) one
+/// real, single-card pick at a time -- the reference's genuine shape for
+/// *every* discard (a cost's, an effect's), confirmed against the live
+/// cross-engine oracle this round: even a 1-card discard is one real
+/// `SELECT_TARGETS` window; a 2-card discard (Faithless Looting) is two, in
+/// sequence, the second's candidate pool missing exactly the first's pick.
+/// This corpus (v4, recorded before the H2 surface decomposed the shape)
+/// still carries that same real per-card `SELECT_TARGETS` sequence -- what
+/// this function used to treat as an optional, purely-informational
+/// "preview" prefix ahead of one batched terminal pick is, per this
+/// increment's fix, the actual ground truth being replayed here.
+///
+/// The corpus also logs one further, *redundant* record right after: a
+/// terminal `SELECT_CARD` summary of the whole batch, with empty
+/// `candidate_probs` (not itself a decision -- `ComputerPlayerRL.
+/// choose(Cards,TargetCard,...)`'s own post-hoc log of the `target` its
+/// caller had already fully resolved via the real per-card picks above,
+/// confirmed against `game_20260713_002147_0002.txt` decisions 169-171:
+/// two real, model-scored `SELECT_TARGETS` records followed by one
+/// zero-probability `SELECT_CARD` record naming the same two cards). This
+/// function still consumes it (the cursor must land past it for the next
+/// real decision) but no longer applies it as an action -- the real
+/// `Discard` already fully landed via the per-card loop.
 #[allow(clippy::too_many_arguments)]
 fn apply_discard(
     surface: &mut HarnessSurfaceV2,
@@ -1527,71 +1557,76 @@ fn apply_discard(
     outcome: &mut ReplayOutcome,
     player: PlayerId,
     count: u32,
-    choices: &[ObjectId],
+    mut choices: Vec<ObjectId>,
     p0_name: &str,
     p1_name: &str,
 ) -> Result<(), String> {
-    let mut names_from_targets_prefix: Vec<String> = Vec::new();
-    while let Some(&rec) = ctx.next(player) {
+    // Loop exactly `count` times, tracked locally -- NOT "keep going for as
+    // long as `next_decision` still returns `Decision::Discard`": a second,
+    // wholly unrelated single-card discard (a later turn's own cleanup, a
+    // later cost) can immediately follow this one and is *also*
+    // `Decision::Discard`-shaped, indistinguishable from "one more pick of
+    // this same batch" by decision kind alone. Root-caused this session
+    // against `game_20260713_002150_0005.txt` decisions 142-143: a correct
+    // 1-card cleanup discard (hand 8 -> 7) was followed, many silent
+    // decisions later, by a second, unrelated cleanup discard the very next
+    // *logged* Cleanup step happened to also be exactly 8-cards-large --
+    // continuing this loop off that peek re-presented its first real pick
+    // as if it were this batch's (already-complete) second pick, expecting
+    // another `SELECT_TARGETS` where the trace correctly had this batch's
+    // own terminal `SELECT_CARD` summary instead.
+    let mut chosen_names: Vec<String> = Vec::new();
+    for _ in 0..count {
+        let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:Discard".to_string())?;
+        debug_verbose(t, state, player, rec, "Discard");
         if rec.action_type != "SELECT_TARGETS" {
-            break;
+            return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
         }
-        debug_verbose(t, state, player, rec, "Discard(SELECT_TARGETS-prefix)");
-        let &idx = rec.chosen_indices.first().ok_or("unexpected-chosen-count:Discard-SELECT_TARGETS-prefix")?;
-        let name = rec.candidate_texts.get(idx as usize).ok_or("chosen-index-out-of-range:Discard-SELECT_TARGETS-prefix")?;
-        names_from_targets_prefix.push(name.clone());
+        check_state(state, player, rec, p0_name, p1_name)?;
+        learn_token_ids(ctx, state, rec);
+
+        let mut kernel_names: Vec<&str> = choices.iter().map(|&id| state.objects.get(id).name.as_str()).collect();
+        kernel_names.sort_unstable();
+        let mut trace_names: Vec<&str> = rec.candidate_texts.iter().map(String::as_str).collect();
+        trace_names.sort_unstable();
+        if kernel_names != trace_names {
+            return Err("candidate-multiset-mismatch:Discard".to_string());
+        }
+
+        let &idx = rec.chosen_indices.first().ok_or("unexpected-chosen-count:Discard")?;
+        let name = rec.candidate_texts.get(idx as usize).cloned().ok_or("chosen-index-out-of-range:Discard")?;
+        // Identity: translate the trace's own `chosen_object_ids` via
+        // `id_map` -- same as every other decision kind (target-port hazard
+        // checklist: "selected tuple mapped directly from
+        // candidate_object_ids/chosen indices, never recovered from text").
+        let uuid = rec.chosen_object_ids.first().ok_or("missing-chosen-object-id:Discard")?;
+        let chosen_id = ctx.id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:Discard:{uuid}"))?;
+        if !choices.contains(&chosen_id) {
+            return Err("chosen-not-in-kernel-candidates:Discard".to_string());
+        }
+
         ctx.advance(player);
         outcome.decisions_consumed += 1;
+        chosen_names.push(name);
+        surface.apply(state, SurfaceAction::Action(Action::Discard(vec![chosen_id]))).map_err(|e| format!("engine-step-error:Discard:{e}"))?;
+        choices.retain(|&id| id != chosen_id);
     }
 
-    let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:Discard".to_string())?;
-    debug_verbose(t, state, player, rec, "Discard");
-    if rec.action_type != "SELECT_CARD" {
-        return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
+    if let Some(&rec) = ctx.next(player) {
+        if rec.action_type == "SELECT_CARD" {
+            let terminal_names: Vec<String> = rec
+                .chosen_indices
+                .iter()
+                .map(|&idx| rec.candidate_texts.get(idx as usize).cloned().ok_or_else(|| "chosen-index-out-of-range:Discard-terminal-summary".to_string()))
+                .collect::<Result<_, _>>()?;
+            if terminal_names != chosen_names {
+                return Err("discard-terminal-summary-mismatch".to_string());
+            }
+            ctx.advance(player);
+            outcome.decisions_consumed += 1;
+        }
     }
-    if rec.chosen_indices.len() != count as usize {
-        return Err("unexpected-chosen-count:Discard".to_string());
-    }
-    check_state(state, player, rec, p0_name, p1_name)?;
-    learn_token_ids(ctx, state, rec);
-
-    let chosen_names: Vec<String> = rec.chosen_indices.iter().map(|&idx| rec.candidate_texts.get(idx as usize).cloned().ok_or_else(|| "chosen-index-out-of-range:Discard".to_string())).collect::<Result<_, _>>()?;
-    if !names_from_targets_prefix.is_empty() && names_from_targets_prefix != chosen_names {
-        return Err("discard-select-targets-prefix-mismatch".to_string());
-    }
-
-    let mut kernel_names: Vec<&str> = choices.iter().map(|&id| state.objects.get(id).name.as_str()).collect();
-    kernel_names.sort_unstable();
-    let mut trace_names: Vec<&str> = rec.candidate_texts.iter().map(String::as_str).collect();
-    trace_names.sort_unstable();
-    if kernel_names != trace_names {
-        return Err("candidate-multiset-mismatch:Discard".to_string());
-    }
-
-    // Identity: translate the trace's own `chosen_object_ids` via `id_map`
-    // -- same as every other decision kind (target-port hazard checklist:
-    // "selected tuple mapped directly from candidate_object_ids/chosen
-    // indices, never recovered from text"). A name-only pool search (the
-    // prior version of this function) can silently pick the wrong
-    // interchangeable-by-name copy -- e.g. the wrong specific Mountain --
-    // whenever more than one candidate shares a name, desyncing *which*
-    // object survives in hand without tripping the (name-only, still-true)
-    // multiset check above. Root-caused against
-    // `game_20260713_002147_0002.txt`: `chosen_object_ids` is fully
-    // populated on `SELECT_CARD` records (confirmed empirically), so
-    // there's no need to guess by name at all.
-    let chosen: Vec<ObjectId> = rec
-        .chosen_object_ids
-        .iter()
-        .map(|uuid| ctx.id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:Discard:{uuid}")))
-        .collect::<Result<_, _>>()?;
-    if chosen.len() != count as usize || !chosen.iter().all(|id| choices.contains(id)) {
-        return Err("chosen-not-in-kernel-candidates:Discard".to_string());
-    }
-
-    ctx.advance(player);
-    outcome.decisions_consumed += 1;
-    surface.apply(state, SurfaceAction::Action(Action::Discard(chosen))).map_err(|e| format!("engine-step-error:Discard:{e}"))
+    Ok(())
 }
 
 /// Guesses which `CastMode` the reference's own policy chose -- same
@@ -1665,7 +1700,11 @@ fn apply_choose_cast_mode(surface: &mut HarnessSurfaceV2, state: &mut GameState,
 /// so a symmetric single-legal-land collapse (no corpus example yet, but
 /// the same reference chooser would behave identically) is handled the
 /// same way rather than left as a latent gap.
-fn apply_choose_optional_cost(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId, discard_payable: bool, sacrifice_payable: bool) -> Result<(), String> {
+fn apply_choose_optional_cost(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId) -> Result<(), String> {
+    // Real payable flags, not the H2 reshape's presentation-only sentinel
+    // (`(false, false)` at the `Use` stage the caller just observed) -- see
+    // `HarnessSurfaceV2::pending_optional_cost_payable`'s doc.
+    let (discard_payable, sacrifice_payable) = HarnessSurfaceV2::pending_optional_cost_payable(state).ok_or("no ChooseOptionalCost decision is pending")?;
     let hand_len = state.players[player.index()].hand.len();
     let land_len = state.players[player.index()].battlefield.iter().filter(|&&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land).count();
     let next_is_select_targets_with_len = |n: usize| matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && rec.candidate_texts.len() == n);
@@ -1984,7 +2023,7 @@ mod tests {
         let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
         let mut surface = HarnessSurfaceV2::new();
 
-        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0, true, true).expect("ChooseOptionalCost must be legal here");
+        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0).expect("ChooseOptionalCost must be legal here");
 
         assert!(state.engine.pending_optional_cost_sacrifice.is_some(), "expected SacrificeLand to be chosen (text shape), not Discard");
         assert!(state.engine.pending_discard.is_none(), "must not have staged a discard for a sacrifice-land pick");
@@ -2047,7 +2086,7 @@ mod tests {
         let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
         let mut surface = HarnessSurfaceV2::new();
 
-        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0, true, false).expect("ChooseOptionalCost must be legal here");
+        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0).expect("ChooseOptionalCost must be legal here");
 
         assert!(state.engine.pending_discard.is_some(), "expected Discard to be chosen (lone-candidate SELECT_CARD collapse), not Decline");
     }
