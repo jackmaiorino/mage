@@ -318,6 +318,18 @@ public final class ZonesHandler {
             }
         });
 
+        // ReferenceRules v2 (Sol #106): fail-fast check, right at the zone-change
+        // commit point, that the physical container mutation done by the toZone
+        // switch above and the zone-map stamp we just wrote actually agree.
+        ZoneInvariants.checkCard(game, event.getTargetId(), "ZonesHandler.placeInDestinationZone");
+        cardsToUpdate.values().forEach(cards -> {
+            for (Card card : cards.getCards(game)) {
+                if (!card.getId().equals(event.getTargetId())) {
+                    ZoneInvariants.checkCard(game, card.getId(), "ZonesHandler.placeInDestinationZone");
+                }
+            }
+        });
+
         // reset meld status
         if (targetCard instanceof MeldCard) {
             if (event.getToZone() != Zone.BATTLEFIELD) {

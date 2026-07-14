@@ -222,6 +222,14 @@ public class Library implements Serializable {
         return size() > 0;
     }
 
+    /**
+     * ReferenceRules v2 (Sol #106): cheap physical-container membership check, used by
+     * ZoneInvariants to verify a card's recorded zone agrees with where it actually is.
+     */
+    public boolean contains(UUID cardId) {
+        return cardId != null && library.contains(cardId);
+    }
+
     public void reset() {
         this.emptyDraw = false;
     }

@@ -1270,6 +1270,33 @@ public abstract class GameImpl implements Game {
     }
 
     protected void init(UUID choosingPlayerId) {
+        // ReferenceRules v2 (Sol #106 zone-duplication fix).
+        // GameState.addCard zones every loaded card OUTSIDE (see its own comment: "all
+        // new cards and tokens must enter from outside") - correct and deliberate for
+        // sideboard cards, which never enter any real zone before/during the game. But
+        // callers populate a player's actual Library (PlayerImpl.useDeck ->
+        // Library.addAll, which does correctly zone LIBRARY) and load every card's state
+        // via Game.loadCards (which unconditionally re-zones OUTSIDE) in whichever order
+        // they please - e.g. GameImpl.addPlayer() before Game.loadCards() zones a card
+        // LIBRARY then immediately clobbers it back to OUTSIDE. A library card stuck at
+        // OUTSIDE is invisible to normal draws (Library.drawFromTop bypasses the zone
+        // tracker entirely) but silently defeats CardImpl.removeFromZone's LIBRARY branch
+        // the instant a generic zone-change effect targets it (mill, impulse-draw exile,
+        // surveil, search): ZonesHandler dispatches on the stale OUTSIDE snapshot, hits
+        // the OUTSIDE case, and reports "removed" without touching the physical Library
+        // container - the card ends up duplicated (still in the library AND in the
+        // destination zone). Fix at the source, not the OUTSIDE branch: by this point
+        // every player's Library already holds its real starting contents (init() only
+        // runs from start(), which requires players - and therefore useDeck()/loadCards()
+        // - to already have run), so reconcile every physically-present library card's
+        // recorded zone to LIBRARY once, before first untap/hand-dealing, regardless of
+        // what order the caller invoked loadCards()/addPlayer() in.
+        for (Player player : state.getPlayers().values()) {
+            for (UUID cardId : player.getLibrary().getCardList()) {
+                state.setZone(cardId, Zone.LIBRARY);
+            }
+        }
+
         for (Player player : state.getPlayers().values()) {
             player.beginTurn(this);
             // init only if match is with timer (>0) and time left was not set yet (== MAX_VALUE).
