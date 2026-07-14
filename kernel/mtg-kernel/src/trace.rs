@@ -291,7 +291,7 @@ fn parse_choose_use_line(line: &str) -> Option<(String, bool)> {
     }
 }
 
-/// The one substring of `CHOOSE_USE`'s `msg` this parser recognizes as a
+/// The substrings of `CHOOSE_USE`'s `msg` this parser recognizes as a
 /// real, ground-truth-bearing decision to surface into `decisions` --
 /// Fiery Temper's Madness offer (`MadnessTriggeredAbility.resolve()`'s
 /// `chooseUse` prompt, the only card with Madness in this pool -- see
@@ -301,7 +301,7 @@ fn parse_choose_use_line(line: &str) -> Option<(String, bool)> {
 /// default was silently wrong here (the reference actually said `NO`) --
 /// this text is the *only* place that real yes/no answer is ever logged
 /// (Madness offers get no `REPLAY_DECISION_JSON` record at all). The other
-/// two `CHOOSE_USE` message shapes in this corpus (Highway Robbery's
+/// `CHOOSE_USE` message shapes in this corpus (Highway Robbery's
 /// resolution-time discard-or-sacrifice offer, `engine::Decision::
 /// ChooseOptionalCost`) are deliberately *not* matched here and never reach
 /// `decisions`: that decision already has its own working (shape-sniffing)
@@ -311,6 +311,19 @@ fn parse_choose_use_line(line: &str) -> Option<(String, bool)> {
 /// desyncing every trace that uses Highway Robbery -- out of scope for the
 /// Madness fix this increment.
 const MADNESS_CHOOSE_USE_MARKER: &str = "instead of putting it into your graveyard";
+
+/// Goblin Bushwhacker's Kicker offer (`KickerAbility.addOptionalAdditionalCosts`'s
+/// `chooseUse` prompt: `"Pay " + times + kickerCost.getText(false) + " ?"`,
+/// empirically `"Pay Kicker {R} ?"` in the Rally corpus). Same "no other
+/// record carries this yes/no answer" shape as Madness above -- needed as a
+/// real ground-truth record because `engine::Decision::ChooseKicker`
+/// (Rally-only) is a first-class, non-mandatory choice (unlike
+/// `ChooseCastMode`/`ChooseOptionalCost`/`ChooseMadnessCast`, which the
+/// replay driver can get away with inferring from the *next* record's
+/// shape): guessing wrong here silently changes whether Goblin Bushwhacker's
+/// team-wide pump/haste actually resolves, which is exactly the kind of
+/// state divergence a shape-guess could hide rather than catch.
+const KICKER_CHOOSE_USE_MARKER: &str = "Pay Kicker ";
 
 /// Parses one trace's full text (already read off disk, or an in-memory
 /// fixture in tests). `source_path` is only used to build error messages.
@@ -326,7 +339,7 @@ fn parse_text(text: &str, source_path: String) -> Result<GoldenTrace, String> {
             pending_choose_use = Some(header);
         } else if let Some((msg, is_yes)) = parse_choose_use_line(line) {
             if let Some((decision_number, turn, phase, player)) = pending_choose_use.take() {
-                if msg.contains(MADNESS_CHOOSE_USE_MARKER) {
+                if msg.contains(MADNESS_CHOOSE_USE_MARKER) || msg.starts_with(KICKER_CHOOSE_USE_MARKER) {
                     trace.decisions.push(DecisionRecord {
                         decision_number,
                         player,

@@ -1022,11 +1022,21 @@ fn is_castable_now(player: PlayerId, id: ObjectId, is_flashback: bool, state: &G
     if !is_flashback && !def.is_castable() {
         return false;
     }
-    let sorcery_speed_ok = if def.has_type(CardType::Sorcery) || def.has_type(CardType::Creature) {
-        sorcery_speed_timing_ok(player, state)
-    } else {
-        true // instants: castable any time the caster has priority
-    };
+    // 601.3a/117.1a: sorcery-speed timing applies to every permanent-or-
+    // sorcery spell (only Instant -- and Flash, not modeled by any card in
+    // this pool -- may be cast anytime the caster has priority). Previously
+    // enumerated positively as "Sorcery or Creature only", which silently
+    // let every OTHER non-Instant type (Artifact, Enchantment) bypass
+    // sorcery-speed timing entirely -- inert for Burn (its one Artifact,
+    // Relic of Progenitus, is fail-closed and never reaches `is_castable()`)
+    // but a real bug for Rally: Experimental Synthesizer (a plain Artifact,
+    // no Flash) was offered as castable mid-combat. Root-caused against
+    // rally_mirror_v1 game_20260714_144616_0005.txt decision 50 (Combat
+    // step, right after DeclareAttackers) and the "phase-mismatch:
+    // kernel_step=Main1" divergence class -- both were this same gap, not a
+    // step-tracking bug (state.step really was Combat; the timing check
+    // just didn't consult it for this card's type).
+    let sorcery_speed_ok = if def.has_type(CardType::Instant) { true } else { sorcery_speed_timing_ok(player, state) };
     if !sorcery_speed_ok {
         return false;
     }

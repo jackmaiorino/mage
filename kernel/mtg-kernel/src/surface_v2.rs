@@ -110,7 +110,56 @@ pub const H2_PREDICATE_VERSION: u32 = 2;
 /// remains accurate. `verify_corpus_provenance` still checks the *corpus's*
 /// claimed commit against this pin, not live `HEAD` -- see that function's
 /// doc for why.
-pub const H2_JAVA_ORACLE_COMMIT: &str = "6de2528fada1c740ceb5fdda0f273bdb9ee28b79";
+///
+/// **Re-verified and re-pinned for the Rally promotion increment** (corpora
+/// `rally_mirror_v1`/`rally_vs_burn_v1`,
+/// `local-training/kernel_oracle/rally_mirror_v1/manifest.json`'s
+/// `java_oracle_commit`: `9e92e240193170626ea4530ab048873889911b68`).
+/// `git log --oneline 6de2528fada1..9e92e240193 -- .../ComputerPlayerRL.java`
+/// shows 6 commits (the one above, `5f5305503ae`, plus 5 more); every one
+/// audited individually and confirmed inert for this predicate's citations:
+/// - `3e966e3c4f5` ("fix telemetry compile"): null-guards the same
+///   `RL_FORCEPASS_TELEMETRY`-gated diagnostic line `5f5305503ae` added,
+///   before formatting it. No behavior change, nothing new touched.
+/// - `e3e29e92a48` ("determinism closure batch, Sol #97"): two fixes, both
+///   *determinism-improving, not decision-changing*: an isolation-seed hash
+///   switches from `ability.getSourceId().hashCode()` (a per-run-random
+///   UUID) to `ability.getRule().hashCode()` (content-stable), and
+///   `SEARCH_OP`'s rollout seed switches from `System.identityHashCode(...)`
+///   to `RL_BASE_SEED`-derived *only when `RL_BASE_SEED` is set* (this
+///   increment's own corpora set it, `=5151`) -- neither touches
+///   `chooseTarget`/`genericChoose`/`priorityPlay`/`selectAttackers`/
+///   `selectBlockers`, or what candidates are legal/offered, only what a
+///   downstream *rollout* RNG (unrelated to the 4 predicate points, which
+///   are all pure priority/combat-window suppressions) is seeded with.
+/// - `05845190d9e` ("canonical stack-position ids, Sol #96"): changes how a
+///   stack-object candidate/target *id is stringified* for logging
+///   (`UUID.toString()` -> `canonicalStackObjectId`, a reproducible
+///   "stack#N" form) -- a representation change for reproducibility, not a
+///   legality or choice-content change; no card in either Rally corpus ever
+///   targets the stack (no `TargetSpell`/counterspell-shaped card in the
+///   18-card pool), so this path is not even exercised by these corpora.
+/// - `d25a540e917` ("per-game record_id, v5 schema"): adds a new,
+///   purely-additive `record_id` field to `REPLAY_DECISION_JSON`/
+///   checkpoint-manifest rows (this is the commit that *committed* what
+///   `burn_mirror_v5`'s own manifest had documented as an uncommitted
+///   prerequisite diff) -- an identity/join key for tooling, consumed by
+///   this increment's `identity_check_v6.py` actor/player invariant, not
+///   read by this driver or the H1/H2 predicate at all.
+/// - `88a77c625ab` ("official 24-pt gate hardening"): adds
+///   `REAL_INFERENCE_CALLS`, a pure `AtomicLong` counter incremented at the
+///   one real model-inference call site, for an unrelated Stage-C
+///   checkpoint-reentry invariant. Read by no code this predicate or driver
+///   depends on.
+///
+/// This session's own uncommitted prerequisite diff on top of
+/// `9e92e240193` (see `rally_mirror_v1/manifest.json`'s `working_tree_diff`:
+/// `ComputerPlayerRL.stableBattlefieldPosition`, a same-createOrder-batch
+/// tie-break fix in `sortTargetsForStableChoice`) is the same "determinism-
+/// improving, not decision-content-changing" category as `e3e29e92a48`
+/// above: it changes *which specific same-name candidate a tied index maps
+/// to* in a run-stable way, never what candidates are offered or how many.
+pub const H2_JAVA_ORACLE_COMMIT: &str = "9e92e240193170626ea4530ab048873889911b68";
 
 /// Checks a corpus's own `manifest.json`-recorded `java_oracle_commit`
 /// against `H2_JAVA_ORACLE_COMMIT`, "failing loudly" (a descriptive `Err`,

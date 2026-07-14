@@ -136,6 +136,8 @@ fn main() {
     let mut replayed_to_end = 0usize;
     let mut winner_matched = 0usize;
     let mut diverged = 0usize;
+    let mut halted_total = 0usize;
+    let mut halted_histogram: BTreeMap<String, usize> = BTreeMap::new();
     let mut trace_exhausted_pass_total = 0usize;
     let mut silent_window_step_gated_total = 0usize;
     let mut silent_window_no_eligible_attacker_total = 0usize;
@@ -173,11 +175,19 @@ fn main() {
         }
         let reason_for_triage = if outcome.reached_game_over {
             if outcome.winner_matched { "COMPLETE:winner-matched".to_string() } else { "COMPLETE:winner-mismatch".to_string() }
+        } else if let Some(reason) = &outcome.halted {
+            format!("HALTED:{reason}")
         } else {
             outcome.divergence.clone().unwrap_or_else(|| "no-divergence-no-game-over(?)".to_string())
         };
         triage.push((outcome.decisions_consumed, outcome.decisions_total, reason_for_triage, t.source_path.clone()));
-        if let Some(reason) = outcome.divergence {
+        if let Some(reason) = outcome.halted {
+            // Classified, not a divergence -- see ReplayOutcome::halted's
+            // doc. Quarantined into its own bucket, not the parity
+            // denominator (diverged/replayed_to_end).
+            halted_total += 1;
+            *halted_histogram.entry(reason).or_default() += 1;
+        } else if let Some(reason) = outcome.divergence {
             diverged += 1;
             *histogram.entry(reason.clone()).or_default() += 1;
             per_trace_divergence.push((reason, t.source_path.clone()));
@@ -199,6 +209,7 @@ fn main() {
     println!("replayed to end (GameOver seen):  {replayed_to_end}");
     println!("winner matched:                   {winner_matched}");
     println!("diverged:                         {diverged}");
+    println!("halted (classified, NOT diverged): {halted_total}");
     println!("trace-exhausted-pass occurrences (informational, not a failure): {trace_exhausted_pass_total}");
     println!(
         "silent-window auto-resolutions, step-gated (reference never asks this step, informational): {silent_window_step_gated_total}"
@@ -227,6 +238,14 @@ fn main() {
         println!("  (none)");
     }
     for (reason, n) in &histogram {
+        println!("  {n:>4}  {reason}");
+    }
+
+    println!("\nhalted-reason histogram (classified, not divergences):");
+    if halted_histogram.is_empty() {
+        println!("  (none)");
+    }
+    for (reason, n) in &halted_histogram {
         println!("  {n:>4}  {reason}");
     }
 
@@ -429,6 +448,16 @@ struct ReplayOutcome {
     stack_top_is_casters_own: usize,
     forced_discard_records_skipped: usize,
     divergence: Option<String>,
+    /// Set instead of `divergence` when the walk hit `Decision::Halted` --
+    /// a *classified*, not-a-divergence terminal (see that decision's doc
+    /// and this file's `Decision::Halted` match arm): the kernel has
+    /// deliberately given up on a resolution it cannot simulate (Chain
+    /// Lightning's "may pay {R}{R} to copy" becoming a live choice), rather
+    /// than silently guessing. Burn-grade bar treats this the same way as
+    /// `ORACLE_UNSTABLE` elsewhere in this campaign's tooling: a proven,
+    /// named limitation, quarantined out of the parity denominator instead
+    /// of counted as a mismatch.
+    halted: Option<String>,
     decisions_consumed: usize,
     decisions_total: usize,
     commutativity: CommutativityStats,
@@ -692,6 +721,25 @@ struct ReplayCtx<'a> {
     seat_uuid: [Option<String>; 2],
     queues: [Vec<&'a DecisionRecord>; 2],
     cursors: [usize; 2],
+    /// Every `(ObjectId, owner)` ever seen in `state.exile`, across the
+    /// whole replay so far, EXCLUDING flashback cards -- a monotonically-
+    /// growing set (`check_state`'s own doc explains why: `rec.library`/
+    /// `rec.library_size` never shrinks back down once an impulse-draw card
+    /// is later actually *played* out of exile, so "currently in
+    /// `state.exile`" alone under-compensates once that happens). Never
+    /// removes an entry once inserted, even after the object leaves
+    /// `state.exile` for real (played, or its permission window lapses) --
+    /// that permanence is the entire point. Populated from raw `state.exile`
+    /// membership rather than `state.engine.exile_play_permissions`
+    /// specifically because a permission can be granted *and* expire
+    /// between two `check_state` polls with no decision for this player in
+    /// between, silently under-counting (root-caused: switching this to
+    /// permission-sourced tracking regressed rally_mirror_v1 from 2 to 10
+    /// library mismatches). Flashback cards (Lava Dart, Burn-side) are
+    /// filtered out at the population site: they take the ordinary
+    /// graveyard -> stack -> exile path, never impulse-draw's library ->
+    /// exile path, and were never "library debt" to begin with.
+    exiled_ever: std::collections::HashSet<(ObjectId, PlayerId)>,
 }
 
 impl<'a> ReplayCtx<'a> {
@@ -730,7 +778,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
     let queue_for = |name: &str| -> Vec<&DecisionRecord> {
         t.decisions.iter().filter(|d| d.player == name && d.action_type != "MULLIGAN" && d.action_type != "LONDON_MULLIGAN").collect()
     };
-    let mut ctx = ReplayCtx { id_map, pregame_object_count, seat_uuid, queues: [queue_for(&p0_name), queue_for(&p1_name)], cursors: [0, 0] };
+    let mut ctx = ReplayCtx { id_map, pregame_object_count, seat_uuid, queues: [queue_for(&p0_name), queue_for(&p1_name)], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
     outcome.decisions_total = ctx.queues[0].len() + ctx.queues[1].len();
 
     loop {
@@ -763,7 +811,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                             }
                             return Err(format!("decision-kind-mismatch:CastSpellOrPass-vs-{}", rec.action_type));
                         }
-                        check_state(&state, player, rec, &p0_name, &p1_name)?;
+                        check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
                         learn_token_ids(&mut ctx, &state, rec);
                         apply_cast_spell_or_pass(surface, &mut state, rec, &castable_spells, &mana_abilities, &land_drops, &activatable_abilities, &plot_actions, &ctx.id_map)?;
                         ctx.advance(player);
@@ -780,7 +828,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 if rec.action_type != "SELECT_TARGETS" {
                     return Err(format!("decision-kind-mismatch:ChooseTargets-vs-{}", rec.action_type));
                 }
-                check_state(&state, player, rec, &p0_name, &p1_name)?;
+                check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
                 learn_token_ids(&mut ctx, &state, rec);
                 apply_choose_targets(surface, &mut state, rec, &legal_targets, &ctx.id_map, &ctx.seat_uuid)?;
                 ctx.advance(player);
@@ -798,7 +846,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 if rec.action_type != "SELECT_TARGETS" {
                     return Err(format!("decision-kind-mismatch:ChooseCostTargets-vs-{}", rec.action_type));
                 }
-                check_state(&state, player, rec, &p0_name, &p1_name)?;
+                check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
                 learn_token_ids(&mut ctx, &state, rec);
                 apply_choose_cost_targets(surface, &mut state, rec, &candidates, &ctx.id_map)?;
                 ctx.advance(player);
@@ -810,7 +858,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 if rec.action_type != "DECLARE_ATTACKS" {
                     return Err(format!("decision-kind-mismatch:DeclareAttackers-vs-{}", rec.action_type));
                 }
-                check_state(&state, player, rec, &p0_name, &p1_name)?;
+                check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
                 learn_token_ids(&mut ctx, &state, rec);
                 apply_declare_attackers(surface, &mut state, rec, &eligible, &ctx.id_map)?;
                 ctx.advance(player);
@@ -907,8 +955,41 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                     .map_err(|e| format!("engine-step-error:OrderTriggers:{e}"))?;
             }
             SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => return Err("unhandled-decision:ChooseSpellMode".to_string()),
-            SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => return Err("unhandled-decision:ChooseKicker".to_string()),
-            SurfaceDecision::Decision(Decision::Halted { .. }) => return Err("unhandled-decision:Halted".to_string()),
+            SurfaceDecision::Decision(Decision::ChooseKicker { player, .. }) => {
+                // Ground truth, not a guess (unlike ChooseCastMode/
+                // ChooseOptionalCost/ChooseMadnessCast): Goblin Bushwhacker's
+                // Kicker offer gets a real logged yes/no answer via
+                // trace.rs's KICKER_CHOOSE_USE_MARKER parsing (see that
+                // const's doc) -- "Pay Kicker {R} ?" is a genuine CHOOSE_USE
+                // record like Fiery Temper's Madness offer, just for a
+                // Rally-only card.
+                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseKicker".to_string())?;
+                debug_verbose(t, &state, player, rec, "ChooseKicker");
+                if rec.action_type != "CHOOSE_USE" {
+                    return Err(format!("decision-kind-mismatch:ChooseKicker-vs-{}", rec.action_type));
+                }
+                let kicked = rec.chosen_indices.first() == Some(&0); // 0=Yes, 1=No -- see KICKER_CHOOSE_USE_MARKER's doc
+                ctx.advance(player);
+                outcome.decisions_consumed += 1;
+                surface
+                    .apply(&mut state, SurfaceAction::Action(Action::ChooseKicker(kicked)))
+                    .map_err(|e| format!("engine-step-error:ChooseKicker:{e}"))?;
+            }
+            SurfaceDecision::Decision(Decision::Halted { mechanic, source }) => {
+                // Terminal, same class as GameOver -- not a divergence (see
+                // ReplayOutcome::halted's doc and engine::Decision::Halted's
+                // own doc). The kernel has already proven, at this exact
+                // board state, that the unmodeled branch (Chain Lightning's
+                // spell-copy continuation) is live rather than vacuous, and
+                // stopped rather than guess. Reference-side ground truth for
+                // "was this really live" is cross-checkable against the
+                // corpus's own "Pay {R}{R} to copy the spell?" CHOOSE_USE
+                // lines (deliberately not parsed into a trace record --
+                // Halted consumes none -- but real, and greppable for audit).
+                let source_name = state.objects.get(source).name.clone();
+                outcome.halted = Some(format!("{mechanic:?}:{source_name}"));
+                return Ok(());
+            }
             SurfaceDecision::Decision(Decision::DeclareBlockers { .. }) => {
                 return Err("unreachable-decision:DeclareBlockers-should-have-been-reshaped-by-the-surface".to_string());
             }
@@ -1129,7 +1210,42 @@ fn expected_phase_strings(step: mtg_kernel::state::Step) -> &'static [&'static s
 /// `check_state` (`examples/replay_burn.rs`) -- see this file's module doc,
 /// point 3, for exactly what's new and exactly what the trace format does
 /// not expose (stack size, pending-trigger count).
-fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_name: &str, p1_name: &str) -> Result<(), String> {
+fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_name: &str, p1_name: &str, ctx: &mut ReplayCtx) -> Result<(), String> {
+    // Track by raw `state.exile` membership (monotonic once filtered --
+    // see `ReplayCtx::exiled_ever`'s doc), not `state.engine.
+    // exile_play_permissions`: a permission can be granted *and* expire
+    // entirely within a run of *silent, auto-resolved* windows (step-gated
+    // passes, forced-empty auto-resolutions -- see this file's module doc,
+    // point 1) with no real, `check_state`-gated decision for this player
+    // anywhere in between, which would silently under-count. `state.exile`
+    // itself never removes an object once added, so it doesn't have that
+    // gap -- but it needs a correspondingly complete EXCLUDE list, since it
+    // now also has to be told apart from every *other* way this shared
+    // (Burn+Rally) card pool ever puts something in exile: flashback
+    // (`def.flashback.is_some()`, Lava Dart, Burn-side -- a normal
+    // graveyard -> stack -> exile path) and Madness discards
+    // (`def.madness_cost.is_some()`, Fiery Temper, Burn-side -- 702.83b's
+    // "exile instead of graveyard, then maybe cast it" detour, which lands
+    // back in the graveyard, not exile, the instant Madness is declined).
+    // Root-caused against a Burn-corpus regression check (burn_mirror_v4_
+    // run1 dropped from 39/40 clean replays to 9/40 the first time this
+    // filter only excluded flashback): every game with at least one Fiery
+    // Temper discard picked up a permanent phantom +1 the moment that card
+    // transiently touched `state.exile`, even on games where Madness was
+    // declined and it moved straight back to the graveyard a moment later.
+    for &id in &state.exile {
+        let obj = state.objects.get(id);
+        let owner = obj.owner;
+        let def = &card_def::CARD_DEFS[obj.card_def as usize];
+        // Plot (Highway Robbery, Burn-side): exiles face-down, cast free on
+        // a later turn -- a normal, expected exile visit with nothing to do
+        // with impulse-draw. `plotted_turn.is_some()` is set exactly when
+        // `Action::PlotSpell` put it there (`is_plotted_castable_now`'s own
+        // doc); same false-positive class as flashback/madness above.
+        if def.flashback.is_none() && def.madness_cost.is_none() && obj.plotted_turn.is_none() {
+            ctx.exiled_ever.insert((id, owner));
+        }
+    }
     let ps = &state.players[player.index()];
     let expected_round = rec.turn.div_ceil(2);
     if state.turn != expected_round {
@@ -1148,7 +1264,40 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_nam
         }
         return Err("zone-size-mismatch:hand".to_string());
     }
-    if ps.library.len() != rec.library.len() {
+    // Rally-only wrinkle: `rec.library`/`rec.library_size` does not shrink
+    // when an impulse-draw effect (Reckless Impulse, Experimental
+    // Synthesizer, Clockwork Percussionist) exiles cards off the top of the
+    // library, even though `ExileTopXMayPlayUntilEffect.apply` (the real
+    // Java effect these cards use) genuinely calls `moveCardsToExile` --
+    // confirmed empirically against rally_mirror_v1 game_20260714_144529_
+    // 0001.txt record_id 31/32 (a real "Cast Reckless Impulse", hand
+    // correctly drops 4->3 the very next record, but library stays 50->50
+    // across the same turn boundary, well past when the sorcery must have
+    // resolved). Not a kernel bug: this is a real, reproducible limit of
+    // what this specific trace field reports for this mechanic -- same
+    // "documented gap in the trace format" class as the module doc's
+    // stack-size/pending-trigger note. Compensated via `ctx.exiled_ever`
+    // (monotonic exile-zone membership, minus flashback cards -- see that
+    // field's population site and doc for why raw `state.exile` membership,
+    // not `state.engine.exile_play_permissions`, is the right monotonic
+    // source: a permission can be granted *and* expire between two
+    // `check_state` polls with no decision for this player in between,
+    // silently under-counting).
+    let player_exiled_ever = ctx.exiled_ever.iter().filter(|&&(_, owner)| owner == player).count();
+    if ps.library.len() + player_exiled_ever != rec.library.len() {
+        if std::env::var("REPLAY_DEBUG").is_ok() {
+            eprintln!(
+                "LIBRARY MISMATCH decision_number={} player={} action={} kernel_lib={} kernel_exiled_ever_by_player={} trace_lib={} kernel_exile_now={:?} trace_hand={:?}",
+                rec.decision_number,
+                rec.player,
+                rec.action_type,
+                ps.library.len(),
+                player_exiled_ever,
+                rec.library.len(),
+                state.exile.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
+                rec.hand,
+            );
+        }
         return Err("zone-size-mismatch:library".to_string());
     }
     if ps.graveyard.len() != rec.graveyard.len() {
@@ -1238,6 +1387,27 @@ fn cast_zone_tag(state: &GameState, id: ObjectId) -> &'static str {
     }
 }
 
+/// Mana-ability candidates are an equivalence class by *what mana they add*,
+/// not by permanent name: `ComputerPlayerRL`'s own candidate-building
+/// (`chooseTarget`'s "genericChoose"-fed option list) collapses multiple
+/// untapped sources of the identical mana into one displayed
+/// `"{T}: Add {R}."`-shaped option -- confirmed against Burn's own corpus,
+/// where this was invisible only because Burn's mana base is Mountain-only
+/// (name-keying and mana-keying coincide with exactly one land name).
+/// Rally's Great Furnace (an artifact land, same "{T}: Add {R}." ability as
+/// Mountain) is the first pool with two *differently-named* sources of the
+/// identical mana -- keying by name alone (the prior behavior here) created
+/// two kernel-side buckets ("mana:Mountain", "mana:Great Furnace") where the
+/// reference only ever offers one, a real, reproducible
+/// `candidate-multiset-mismatch:CastSpellOrPass` on every decision where
+/// both are untapped. Keyed by `CardDef::produces_mana` (what the ability
+/// actually adds), not by name -- so Mountain and Great Furnace, adding the
+/// identical `[R]`, collapse into the same bucket.
+fn mana_ability_key(state: &GameState, id: ObjectId) -> String {
+    let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
+    format!("mana:{:?}", def.produces_mana)
+}
+
 #[allow(clippy::too_many_arguments)]
 fn candidate_key(
     state: &GameState,
@@ -1260,7 +1430,7 @@ fn candidate_key(
         return Some(format!("cast:{name}:{}", cast_zone_tag(state, id)));
     }
     if mana_abilities.contains(&id) {
-        return Some(format!("mana:{name}"));
+        return Some(mana_ability_key(state, id));
     }
     if let Some(&(_, idx)) = activatable_abilities.iter().find(|&&(oid, _)| oid == id) {
         return Some(format!("activate:{name}:{idx}"));
@@ -1292,7 +1462,7 @@ fn apply_cast_spell_or_pass(
         by_key.entry(format!("cast:{}:{}", state.objects.get(id).name, cast_zone_tag(state, id))).or_insert(KernelChoice::CastSpell(id));
     }
     for &id in mana_abilities {
-        by_key.entry(format!("mana:{}", state.objects.get(id).name)).or_insert(KernelChoice::ActivateMana(id));
+        by_key.entry(mana_ability_key(state, id)).or_insert(KernelChoice::ActivateMana(id));
     }
     for &(id, idx) in activatable_abilities {
         by_key.entry(format!("activate:{}:{idx}", state.objects.get(id).name)).or_insert(KernelChoice::ActivateAbility(id, idx));
@@ -1507,7 +1677,7 @@ fn apply_declare_blockers_for_attacker(
     if rec.action_type != "DECLARE_BLOCKS" {
         return Err(format!("decision-kind-mismatch:DeclareBlockers-vs-{}", rec.action_type));
     }
-    check_state(state, player, rec, p0_name, p1_name)?;
+    check_state(state, player, rec, p0_name, p1_name, ctx)?;
     learn_token_ids(ctx, state, rec);
 
     let mut kernel_keys: Vec<String> = legal_blockers.iter().map(|b| format!("{}->{}", b.0, attacker.0)).collect();
@@ -1590,7 +1760,7 @@ fn apply_discard(
         if rec.action_type != "SELECT_TARGETS" {
             return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
         }
-        check_state(state, player, rec, p0_name, p1_name)?;
+        check_state(state, player, rec, p0_name, p1_name, ctx)?;
         learn_token_ids(ctx, state, rec);
 
         let mut kernel_names: Vec<&str> = choices.iter().map(|&id| state.objects.get(id).name.as_str()).collect();
@@ -1837,6 +2007,17 @@ mod tests {
         assert!(report.violations.is_empty());
     }
 
+    fn empty_ctx<'a>() -> ReplayCtx<'a> {
+        ReplayCtx {
+            id_map: HashMap::new(),
+            pregame_object_count: 0,
+            seat_uuid: [None, None],
+            queues: [Vec::new(), Vec::new()],
+            cursors: [0, 0],
+            exiled_ever: std::collections::HashSet::new(),
+        }
+    }
+
     fn parse_fixture(text: &str) -> GoldenTrace {
         // Reuses `trace::parse_text` indirectly via a temp file, since that
         // function is private to `trace.rs`; `GoldenTrace::parse_file`
@@ -1914,7 +2095,7 @@ mod tests {
             &[0],
             ",\"hand\":[],\"library\":[\"Mountain\"],\"graveyard\":[],\"turn\":1,\"life\":19,\"opp_life\":20",
         );
-        let err = check_state(&state, PlayerId::P0, &rec, "P", "Q").unwrap_err();
+        let err = check_state(&state, PlayerId::P0, &rec, "P", "Q", &mut empty_ctx()).unwrap_err();
         assert_eq!(err, "life-mismatch:own");
     }
 
@@ -1930,7 +2111,7 @@ mod tests {
             &[0],
             ",\"hand\":[],\"library\":[\"Mountain\"],\"graveyard\":[],\"turn\":1,\"life\":20,\"opp_life\":20,\"phase\":\"Postcombat Main\"",
         );
-        let err = check_state(&state, PlayerId::P0, &rec, "P", "Q").unwrap_err();
+        let err = check_state(&state, PlayerId::P0, &rec, "P", "Q", &mut empty_ctx()).unwrap_err();
         assert!(err.starts_with("phase-mismatch"), "got {err}");
     }
 
@@ -1946,7 +2127,7 @@ mod tests {
             &[0],
             ",\"hand\":[],\"library\":[\"Mountain\"],\"graveyard\":[],\"turn\":1,\"life\":20,\"opp_life\":20,\"active_player\":\"Q\"",
         );
-        let err = check_state(&state, PlayerId::P0, &rec, "P", "Q").unwrap_err();
+        let err = check_state(&state, PlayerId::P0, &rec, "P", "Q", &mut empty_ctx()).unwrap_err();
         assert_eq!(err, "active-player-mismatch");
     }
 
@@ -1963,7 +2144,7 @@ mod tests {
             &[0],
             ",\"hand\":[],\"library\":[\"Mountain\"],\"graveyard\":[],\"turn\":1,\"life\":20,\"opp_life\":20,\"phase\":\"Precombat Main\",\"active_player\":\"P\"",
         );
-        check_state(&state, PlayerId::P0, &rec, "P", "Q").expect("everything agrees");
+        check_state(&state, PlayerId::P0, &rec, "P", "Q", &mut empty_ctx()).expect("everything agrees");
     }
 
     /// Regression test for the increment-13 fix (root-caused against
@@ -2030,7 +2211,7 @@ mod tests {
 
         let rec = decision_record_ex("SELECT_TARGETS", &["Mountain (you)", "Mountain (you)", "Mountain (you)"], &["a", "b", "c"], &[0], ",\"episode\":0");
         let queue = vec![&rec];
-        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
+        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
         let mut surface = HarnessSurfaceV2::new();
 
         apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0).expect("ChooseOptionalCost must be legal here");
@@ -2095,7 +2276,7 @@ mod tests {
 
         let rec = decision_record_ex("SELECT_CARD", &["Guttersnipe"], &["a"], &[0], ",\"episode\":0");
         let queue = vec![&rec];
-        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
+        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
         let mut surface = HarnessSurfaceV2::new();
 
         apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0).expect("ChooseOptionalCost must be legal here");
@@ -2148,7 +2329,7 @@ mod tests {
 
         let rec = decision_record_ex("SELECT_TARGETS", &["Mountain (you)", "Mountain (you)"], &["a", "b"], &[0], ",\"episode\":0");
         let queue = vec![&rec];
-        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
+        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
         let mut surface = HarnessSurfaceV2::new();
 
         apply_choose_cast_mode(&mut surface, &mut state, &mut ctx, PlayerId::P0, &[CastMode::Normal, CastMode::Alternative]).expect("ChooseCastMode must be legal here");
@@ -2187,7 +2368,7 @@ mod tests {
 
         let rec = decision_record_ex("SELECT_CARD", &["Fiery Temper"], &["uuid-fiery-temper"], &[0], ",\"episode\":0,\"chosen_object_ids\":[\"uuid-fiery-temper\"]");
         let queue = vec![&rec];
-        let mut ctx = ReplayCtx { id_map, pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0] };
+        let mut ctx = ReplayCtx { id_map, pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
         let mut outcome = ReplayOutcome::default();
 
         skip_stale_forced_discards(&state, &mut ctx, PlayerId::P0, &mut outcome);

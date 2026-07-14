@@ -7041,11 +7041,35 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 String controllerName = "";
                 String posKey = "";
                 if (object instanceof Permanent) {
-                    Player controller = game.getPlayer(((Permanent) object).getControllerId());
+                    Permanent permanent = (Permanent) object;
+                    Player controller = game.getPlayer(permanent.getControllerId());
                     controllerName = controller == null ? "" : controller.getName();
                     // Same-name tie-break must be run-stable: UUID strings are
-                    // random across JVM runs. Battlefield creation order is not.
-                    posKey = String.format("%09d", ((Permanent) object).getCreateOrder());
+                    // random across JVM runs. Battlefield creation order is not
+                    // -- but permanents made in the SAME batch (e.g. "create
+                    // three 1/1 tokens") all share one createOrder value
+                    // (TokenImpl#putOntoBattlefieldHelper fetches
+                    // getNextPermanentOrderNumber() once, outside the per-token
+                    // loop), which degrades createOrder alone back to a tie,
+                    // falling through to the random-UUID final tie-break below
+                    // -- the exact nondeterminism this comparator exists to
+                    // avoid. Root-caused against Rally at the Hornburg's
+                    // simultaneous Human Soldier Token creation: two identical
+                    // tokens sharing one createOrder meant an "any target" burn
+                    // spell's exploration-driven pick mapped to a different
+                    // physical token across independent same-seed JVM runs,
+                    // changing which token survived to deal combat damage and
+                    // desyncing life totals by exactly one attacker's power
+                    // (rally_mirror_v1 gen1 vs gen2/gen3, game 0015). Append
+                    // each permanent's position in the battlefield's own
+                    // insertion-ordered map (Battlefield.field is a
+                    // LinkedHashMap; add order is deterministic given
+                    // identical prior decisions) as a finer-grained run-stable
+                    // second key -- same-batch tokens are added to the
+                    // battlefield in a plain sequential loop, so they always
+                    // get distinct positions even when their createOrder ties.
+                    posKey = String.format("%09d|%09d", permanent.getCreateOrder(),
+                            stableBattlefieldPosition(permanent, game));
                 } else if (object instanceof Card) {
                     posKey = stableZonePositionKey((Card) object, game);
                 }
@@ -7054,6 +7078,29 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         } catch (Exception ignored) {
         }
         return "9|" + targetId;
+    }
+
+    /**
+     * Run-stable position of a permanent within the battlefield's own
+     * insertion-ordered map -- see stableTargetSortName's Permanent branch for
+     * why createOrder alone is not always a total order. Returns -1 (sorts
+     * first, deterministically) if the permanent can't be found.
+     */
+    private int stableBattlefieldPosition(Permanent permanent, Game game) {
+        if (permanent == null || game == null) {
+            return -1;
+        }
+        try {
+            int i = 0;
+            for (Permanent p : game.getBattlefield().getAllPermanents()) {
+                if (p.getId().equals(permanent.getId())) {
+                    return i;
+                }
+                i++;
+            }
+        } catch (Exception ignored) {
+        }
+        return -1;
     }
 
     /**
