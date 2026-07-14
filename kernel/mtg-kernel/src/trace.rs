@@ -25,6 +25,20 @@ pub struct DecisionRecord {
     pub ordinal: u32,
     #[serde(default)]
     pub decision_number: u32,
+    /// v5 corpus schema (`local-training/kernel_oracle/
+    /// v5_capture_schema_addendum.md`, Sol #95/#96/#98): a per-game,
+    /// cross-player, genuinely-incrementing join key -- unlike
+    /// `decision_number` (which only *peeks* at a counter and can collide
+    /// across action types/players, confirmed in the addendum's own
+    /// worked example), `record_id` is unique 1..N across every
+    /// `logReplayDecision` call for both seats sharing one `GameLogger`.
+    /// This is the field the branch-differential campaign addresses a
+    /// walk's root decision by (`(game, record_id)`, not `decision_number`
+    /// or a positional "Nth call" index). `#[serde(default)]` so v3/v4-era
+    /// fixtures and any pre-record_id corpus still parse (defaulting to 0,
+    /// which is never a real record_id -- Java's counter starts at 1).
+    #[serde(default)]
+    pub record_id: u32,
     pub player: String,
     #[serde(default)]
     pub actor: String,
