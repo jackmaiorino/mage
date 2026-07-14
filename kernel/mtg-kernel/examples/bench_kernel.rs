@@ -162,6 +162,7 @@ fn random_action_for_decision(decision: &Decision, state: &GameState, rng: &mut 
         }
         Decision::ChooseCostTargets { candidates, .. } => Action::ChooseCostTarget(candidates[rng_below(rng, candidates.len())]),
         Decision::ChooseCastMode { options, .. } => Action::ChooseCastMode(options[rng_below(rng, options.len())]),
+        Decision::ChooseKicker { .. } => Action::ChooseKicker(rng_chance(rng, 1, 2)),
         Decision::ChooseSpellMode { mode_count, .. } => Action::ChooseSpellMode(rng_below(rng, *mode_count as usize) as u8),
         Decision::ChooseOptionalCost { .. } => {
             // Real payable flags, not this decision's own -- the H2 surface
@@ -223,6 +224,7 @@ fn random_action_for_decision(decision: &Decision, state: &GameState, rng: &mut 
             Action::OrderTriggers(idx)
         }
         Decision::GameOver { .. } => unreachable!("caller must check for GameOver before requesting an action"),
+        Decision::Halted { .. } => unreachable!("caller must check for Halted before requesting an action"),
     }
 }
 
@@ -367,6 +369,7 @@ fn synthetic_state_of_size(total_objects: u32, seed: u64) -> GameState {
                 counters: Counters::default(),
                 attachments: Vec::new(),
                 plotted_turn: None,
+                zone_change_count: 0,
             });
             state.players[player.index()].battlefield.push(id);
         }

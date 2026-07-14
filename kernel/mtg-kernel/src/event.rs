@@ -332,6 +332,7 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
                 counters: Default::default(),
                 attachments: Vec::new(),
                 plotted_turn: None,
+                zone_change_count: 0,
             });
             state.players[t.controller.index()].battlefield.push(object);
             CommittedEvent::CreateToken { object, token_def: t.token_def, controller: t.controller }
@@ -391,6 +392,12 @@ fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
 
     let obj = state.objects.get_mut(id);
     obj.zone = to_zone;
+    // CR 400.7's zone-change identity: bumped on *every* zone change,
+    // regardless of which zones, so `engine::PlayPermission::
+    // zone_change_generation` can tell "still sitting where it was granted"
+    // apart from "moved since, for any reason" without needing a
+    // zone-specific special case.
+    obj.zone_change_count += 1;
     if to_zone == Zone::Battlefield {
         obj.tapped = false;
         obj.summoning_sick = true;

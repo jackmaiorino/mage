@@ -16,12 +16,31 @@
 //! remaining deferred card -- graveyard-card targeting doesn't fit any
 //! existing `TargetSpec` shape and is sideboard-only, so it's lower
 //! priority; see `still_deferred_burn_cards_are_out_of_scope_this_increment`.
-//! Every non-Burn card in the 132-card pool gets `no_effect` for both --
-//! present in the table with correct name/cost/types (so ids are stable and
-//! the table is complete), but not castable, per the kernel's fail-closed
-//! invariant (see `lib.rs`).
+//! Every non-Burn card in the pool gets `no_effect` for both -- present in
+//! the table with correct name/cost/types (so ids are stable and the table
+//! is complete), but not castable, per the kernel's fail-closed invariant
+//! (see `lib.rs`).
+//!
+//! Mono Red Rally's 18 cards (6 shared with Burn: Lightning Bolt, Mountain,
+//! Red Elemental Blast, Relic of Progenitus, Searing Blaze, Voldaren
+//! Epicure) are implemented as of the Rally increment: Burning-Tree
+//! Emissary (ETB mana), Chain Lightning (mandatory damage always resolves;
+//! its optional pay-to-copy clause conditionally halts the walk when
+//! actually affordable rather than being silently declined -- see
+//! `effect::EffectOp::HaltIfAffectedCanPayCopyCost`'s doc and `build.rs::
+//! special_for`'s `"Chain Lightning"` comment), Clockwork Percussionist
+//! (haste + dies-trigger impulse draw), End the
+//! Festivities (mass damage to the opponent + their creatures), Experimental
+//! Synthesizer (ETB/leaves impulse draw + sac-for-a-token ability), Galvanic
+//! Blast (Metalcraft), Goblin Bushwhacker (Kicker-gated team pump/haste),
+//! Goblin Tomb Raider (static self-boost), Great Furnace (a second Mountain),
+//! Rally at the Hornburg (tokens + Human haste), and Reckless Impulse
+//! (impulse draw). Cast into the Fire remains deferred (sideboard-only,
+//! modal with a 0-2 variable-count target mode this kernel's `TargetSpec`
+//! shape doesn't support) -- see `local-training/kernel_oracle/rally/
+//! coverage_ledger.md` for the full per-card ledger.
 
-use crate::effect::{EffectCond, EffectOp, ObjectRef, PlayerRef, TargetRef};
+use crate::effect::{CreatureFilter, EffectCond, EffectOp, ImpulseDuration, ObjectRef, PlayerRef, TargetRef};
 use crate::mana::{Cost, ManaColor, Pip};
 use crate::state::Zone;
 use serde::{Deserialize, Serialize};
@@ -40,6 +59,94 @@ pub enum CardType {
 pub enum Supertype {
     Basic,
     Snow,
+}
+
+/// 105.1's subtype line, typed (per external review: "subtype queries
+/// structured, typed access, not string contains"). A fully closed set --
+/// one named variant per distinct subtype string across the whole
+/// 135-card pool -- rather than a named-variants-plus-string-fallback
+/// design: `Subtype` is embedded in `effect::CreatureFilter` /
+/// `effect::EffectOp`, which need to derive `Deserialize`, and a
+/// `&'static str` payload (needed for a fallback variant to round-trip
+/// arbitrary text) can't implement that (same reason `mana::Cost` doesn't
+/// derive `Serialize`/`Deserialize` either -- see its own doc). A query
+/// against a named variant (`Subtype::Human`) is a typed enum comparison
+/// that can never silently match the wrong thing via a typo or a
+/// differently-cased duplicate -- this pool's own JSON data has real
+/// examples of the latter (`"Human"` and `"HUMAN"` on different cards,
+/// likely an ingestion artifact upstream of this codegen, not a meaningful
+/// distinction -- preserved as two distinct variants here rather than
+/// silently merged, so this table stays a faithful mirror of the source
+/// data). `build.rs::subtype_variant` panics on an unrecognized string,
+/// same as `card_type_variant`/`supertype_variant`/`color_variant`, since
+/// this is now a closed set the same way those are.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum Subtype {
+    Ape,
+    Aura,
+    /// "BIRD" verbatim -- see the module doc's note on case-duplicated
+    /// subtype strings.
+    BirdAllCaps,
+    Bird,
+    Blood,
+    Cat,
+    Detective,
+    Dragon,
+    Drone,
+    Druid,
+    Eldrazi,
+    Elf,
+    Equipment,
+    /// "FAERIE" verbatim -- see the module doc's note.
+    FaerieAllCaps,
+    Faerie,
+    Food,
+    Forest,
+    Gate,
+    Goblin,
+    /// "HUMAN" verbatim -- see the module doc's note.
+    HumanAllCaps,
+    Hero,
+    Human,
+    Hydra,
+    Island,
+    Knight,
+    /// "MONK" verbatim.
+    Monk,
+    /// "MOONFOLK" verbatim.
+    Moonfolk,
+    Monkey,
+    Mountain,
+    Myr,
+    /// "NINJA" verbatim -- see the module doc's note.
+    NinjaAllCaps,
+    Ninja,
+    Ouphe,
+    Pirate,
+    Plains,
+    /// "ROGUE" verbatim -- see the module doc's note.
+    RogueAllCaps,
+    Ranger,
+    Rat,
+    Rogue,
+    /// "SERPENT" verbatim.
+    Serpent,
+    Saga,
+    Samurai,
+    Shaman,
+    Shapeshifter,
+    Soldier,
+    Spider,
+    Spirit,
+    Swamp,
+    Toy,
+    Treefolk,
+    Vampire,
+    /// "WIZARD" verbatim -- see the module doc's note.
+    WizardAllCaps,
+    Warrior,
+    Wizard,
+    Zombie,
 }
 
 /// What a spell/ability needs targeted at cast/activation time.
@@ -150,6 +257,14 @@ pub struct ActivatedAbilityDef {
     pub cost: &'static [CostComponent],
     pub target_spec: TargetSpec,
     pub effect: fn() -> EffectOp,
+    /// True iff this ability may only be activated at sorcery speed
+    /// (`ActivateAsSorceryActivatedAbility` in Java -- Experimental
+    /// Synthesizer's "Activate only as a sorcery."). Checked by
+    /// `engine::available_activatable_abilities` via the same
+    /// `sorcery_speed_timing_ok` helper a sorcery-speed cast/Plot action
+    /// uses. `false` for Masked Meower's and the Blood token's abilities,
+    /// which have no such restriction in their Java source.
+    pub sorcery_speed_only: bool,
 }
 
 /// A spell's alternative mode (Pyroblast's/Red Elemental Blast's "Choose
@@ -168,6 +283,13 @@ pub struct CardDef {
     pub name: &'static str,
     pub cost: Cost,
     pub types: &'static [CardType],
+    /// This card's creature/land/artifact subtypes (105.1's subtype line),
+    /// e.g. `[Subtype::Human, Subtype::Shaman]` for Burning-Tree Emissary --
+    /// see `Subtype`'s own doc for why this is a fully-enumerated closed set.
+    /// Read where a card's *own* effect needs it (Rally at the Hornburg's
+    /// `CreatureFilter::ControlledWithSubtype(Subtype::Human)` -- see
+    /// `effect.rs`).
+    pub subtypes: &'static [Subtype],
     pub supertypes: &'static [Supertype],
     pub power: Option<i16>,
     pub toughness: Option<i16>,
@@ -191,6 +313,17 @@ pub struct CardDef {
     /// its mana cost (Fireblast). Choosing between them is a real decision
     /// (`engine::Decision::ChooseCastMode`) when both are legal.
     pub alt_cost: Option<&'static [CostComponent]>,
+    /// `Some` iff this card has Kicker (`KickerAbility`): an optional
+    /// additional cost you may pay as you cast it, stamped onto the spell's
+    /// own `state::StackItem::kicked` once paid (`engine::finalize_cast`)
+    /// and carried from there into its resolution/ETB context so a later
+    /// triggered ability can check `EffectCond::WasKicked`. Only Goblin
+    /// Bushwhacker's `Kicker {R}` this increment. Unlike
+    /// `additional_cost` (mandatory) or `alt_cost` (replaces the printed
+    /// cost), this is paid *in addition to* whichever of those two costs
+    /// this cast otherwise settles on -- see `engine::Decision::
+    /// ChooseKicker`/`mana::can_pay_combined`.
+    pub kicker_cost: Option<Cost>,
     /// `Some` iff this card has a mandatory additional cost paid on top of
     /// its mana cost (Grab the Prize's discard).
     pub additional_cost: Option<&'static [CostComponent]>,
@@ -244,9 +377,11 @@ mod tests {
 
     #[test]
     fn card_defs_len_matches_pool() {
-        // 132 real pool cards + 1 token (Blood, created by Voldaren
-        // Epicure's ETB trigger -- see `trigger.rs`).
-        assert_eq!(CARD_DEFS.len(), 133);
+        // 133 real pool cards + 2 tokens (Blood, created by Voldaren
+        // Epicure's ETB trigger; Human Soldier Token/Samurai Token, created
+        // by Rally at the Hornburg/Experimental Synthesizer -- see
+        // `trigger.rs`/`build.rs::activated_abilities_for`).
+        assert_eq!(CARD_DEFS.len(), 135);
     }
 
     #[test]
@@ -428,5 +563,157 @@ mod tests {
         let def = &CARD_DEFS[id as usize];
         assert!(!def.is_castable(), "tokens are never cast");
         assert_eq!(def.activated_abilities.len(), 1);
+    }
+
+    // ---- Rally at the Hornburg increment -----------------------------
+
+    #[test]
+    fn great_furnace_is_a_second_mountain_that_is_also_an_artifact() {
+        let id = card_id_by_name("Great Furnace").expect("Great Furnace in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert!(def.is_land);
+        assert!(def.has_type(CardType::Artifact));
+        assert_eq!(def.produces_mana, &[ManaColor::R]);
+        assert!(!def.is_castable());
+        assert!((def.mana_ability)().is_some());
+    }
+
+    #[test]
+    fn burning_tree_emissary_has_hybrid_cost_and_no_spell_effect_of_its_own() {
+        let id = card_id_by_name("Burning-Tree Emissary").expect("Burning-Tree Emissary in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert_eq!(def.cost.pips, &[Pip::Hybrid(ManaColor::R, ManaColor::G), Pip::Hybrid(ManaColor::R, ManaColor::G)]);
+        assert_eq!(def.subtypes, &[Subtype::Human, Subtype::Shaman]);
+        match (def.spell_effect)() {
+            Some(EffectOp::MoveObject { object: ObjectRef::ThisSource, to_zone: Zone::Battlefield }) => {}
+            other => panic!("expected MoveObject to Battlefield, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn chain_lightning_deals_3_damage_then_gates_on_the_copy_cost() {
+        let id = card_id_by_name("Chain Lightning").expect("Chain Lightning in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert_eq!(def.target_spec, TargetSpec::AnyTarget);
+        match (def.spell_effect)() {
+            Some(EffectOp::Sequence(ops)) => {
+                assert_eq!(ops.len(), 2);
+                assert_eq!(ops[0], EffectOp::DealDamage { target: TargetRef::Target(0), amount: 3 });
+                assert_eq!(ops[1], EffectOp::HaltIfAffectedCanPayCopyCost { affected: TargetRef::Target(0) });
+            }
+            other => panic!("expected a 2-op Sequence (damage, then the copy-cost gate), got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn cast_into_the_fire_remains_deferred_this_increment() {
+        // Sideboard-only, modal with a 0-2 variable-count target mode this
+        // kernel's `TargetSpec` shape doesn't support -- see the module doc.
+        let id = card_id_by_name("Cast into the Fire").expect("Cast into the Fire in pool");
+        assert!(!CARD_DEFS[id as usize].is_castable());
+    }
+
+    #[test]
+    fn goblin_bushwhacker_has_kicker_r_and_no_static_haste() {
+        let id = card_id_by_name("Goblin Bushwhacker").expect("Goblin Bushwhacker in pool");
+        let def = &CARD_DEFS[id as usize];
+        let kicker = def.kicker_cost.expect("Goblin Bushwhacker should have Kicker {R}");
+        assert_eq!(kicker.generic, 0);
+        assert_eq!(kicker.pips, &[Pip::Colored(ManaColor::R)]);
+        assert!(!def.keywords.has(Keywords::HASTE), "haste is conditional on Kicker, not a static keyword");
+    }
+
+    #[test]
+    fn goblin_tomb_raider_has_no_static_haste_either() {
+        // "As long as you control an artifact, gets +1/+0 and has haste" is
+        // a conditional static ability (`engine::static_self_boost_for`),
+        // not an unconditional `Keywords` bit.
+        let id = card_id_by_name("Goblin Tomb Raider").expect("Goblin Tomb Raider in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert!(!def.keywords.has(Keywords::HASTE));
+        assert_eq!(def.power, Some(1));
+        assert_eq!(def.toughness, Some(2));
+    }
+
+    #[test]
+    fn clockwork_percussionist_has_haste() {
+        let id = card_id_by_name("Clockwork Percussionist").expect("Clockwork Percussionist in pool");
+        assert!(CARD_DEFS[id as usize].keywords.has(Keywords::HASTE));
+    }
+
+    #[test]
+    fn experimental_synthesizer_has_a_sorcery_speed_only_sacrifice_ability() {
+        let id = card_id_by_name("Experimental Synthesizer").expect("Experimental Synthesizer in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert_eq!(def.activated_abilities.len(), 1);
+        let ability = &def.activated_abilities[0];
+        assert!(ability.sorcery_speed_only);
+        assert_eq!(
+            ability.cost,
+            [CostComponent::Mana(Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 2, x_count: 0 }), CostComponent::SacrificeSelf].as_slice()
+        );
+    }
+
+    #[test]
+    fn galvanic_blast_is_conditional_on_metalcraft() {
+        let id = card_id_by_name("Galvanic Blast").expect("Galvanic Blast in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert_eq!(def.target_spec, TargetSpec::AnyTarget);
+        assert!(matches!(
+            (def.spell_effect)(),
+            Some(EffectOp::Conditional { cond: EffectCond::ControlsArtifactCount(3), .. })
+        ));
+    }
+
+    #[test]
+    fn end_the_festivities_hits_the_opponent_and_their_creatures() {
+        let id = card_id_by_name("End the Festivities").expect("End the Festivities in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert_eq!(def.target_spec, TargetSpec::None);
+        assert_eq!((def.spell_effect)(), Some(EffectOp::DamageOpponentAndTheirCreatures { amount: 1 }));
+    }
+
+    #[test]
+    fn reckless_impulse_exiles_two_cards_until_owners_next_turn() {
+        let id = card_id_by_name("Reckless Impulse").expect("Reckless Impulse in pool");
+        let def = &CARD_DEFS[id as usize];
+        assert_eq!(
+            (def.spell_effect)(),
+            Some(EffectOp::ImpulseDraw { count: 2, duration: crate::effect::ImpulseDuration::UntilOwnersNextTurn })
+        );
+    }
+
+    #[test]
+    fn rally_at_the_hornburg_creates_two_tokens_and_pumps_humans() {
+        let id = card_id_by_name("Rally at the Hornburg").expect("Rally at the Hornburg in pool");
+        let def = &CARD_DEFS[id as usize];
+        match (def.spell_effect)() {
+            Some(EffectOp::Sequence(ops)) => {
+                assert_eq!(ops.len(), 3);
+                assert!(matches!(ops[0], EffectOp::CreateToken { .. }));
+                assert!(matches!(ops[1], EffectOp::CreateToken { .. }));
+                assert!(matches!(
+                    ops[2],
+                    EffectOp::PumpControlled { filter: crate::effect::CreatureFilter::ControlledWithSubtype(Subtype::Human), grant_haste: true, .. }
+                ));
+            }
+            other => panic!("expected a 3-op Sequence, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn human_soldier_and_samurai_tokens_exist() {
+        let hst = card_id_by_name("Human Soldier Token").expect("Human Soldier Token should be codegen'd as a token");
+        let def = &CARD_DEFS[hst as usize];
+        assert!(!def.is_castable());
+        assert_eq!(def.power, Some(1));
+        assert_eq!(def.toughness, Some(1));
+        assert_eq!(def.subtypes, &[Subtype::Human, Subtype::Soldier]);
+
+        let samurai = card_id_by_name("Samurai Token").expect("Samurai Token should be codegen'd as a token");
+        let sdef = &CARD_DEFS[samurai as usize];
+        assert_eq!(sdef.power, Some(2));
+        assert_eq!(sdef.toughness, Some(2));
+        assert!(sdef.keywords.has(Keywords::VIGILANCE));
     }
 }

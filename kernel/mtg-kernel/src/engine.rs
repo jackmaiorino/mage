@@ -147,6 +147,39 @@ pub struct EngineState {
     /// and silently force-passed everyone straight through the rest of
     /// combat, reaching `Main2` a full combat phase early.
     pub mana_ability_activations: u64,
+    /// Single-shot, cleared-every-time signal from a just-finished
+    /// resolution to the trigger-collection pass that always immediately
+    /// follows it: `Some(source)` iff the stack item that just resolved had
+    /// `StackItem::kicked == true`, naming *that item's own* source object.
+    /// `resolve_top_of_stack` sets this (to `Some` or explicitly `None`,
+    /// never leaving a stale value from 2+ resolutions ago) right before
+    /// running the resolution's effect; `trigger::collect_and_process`
+    /// `take()`s it immediately when matching an ETB trigger, stamping
+    /// `kicked` onto the resulting `PendingTrigger` only when its own
+    /// `source` matches. This is cast-time *metadata flowing through the
+    /// current resolution's context*, not a durable lookup table keyed by
+    /// stable object id (CR 400.7: zone changes create new objects, so a
+    /// persistent id-keyed marker could falsely survive a later, unkicked
+    /// cast of the same physical card) -- see `EffectCond::WasKicked`'s doc.
+    pub pending_kicked_source: Option<ObjectId>,
+    /// Exile-zone "you may play/cast this" grants from an impulse-draw
+    /// effect (Clockwork Percussionist, Experimental Synthesizer, Reckless
+    /// Impulse) -- see `PlayPermission`'s doc.
+    pub exile_play_permissions: Vec<PlayPermission>,
+    /// Monotonic counter for `UntilEndOfTurnEffect::ResolvedSetEffect::
+    /// timestamp` (613.7's timestamp ordering) -- bumped by
+    /// `next_timestamp`. Evaluation stays flat (unordered) this increment;
+    /// this exists so a future layer-aware evaluator has real creation-order
+    /// data to sort by without needing every effect re-created retroactively.
+    pub next_effect_timestamp: u64,
+    /// `Some((mechanic, source))` iff the game walk hit a resolution this
+    /// kernel cannot simulate faithfully (Chain Lightning's live "may pay
+    /// {R}{R} to copy" decision, when actually affordable -- see
+    /// `effect::EffectOp::HaltIfAffectedCanPayCopyCost`). Checked at the top
+    /// of `advance_until_decision`'s loop, same as `check_game_over`:
+    /// once set, the walk is over -- `Decision::Halted` is the only decision
+    /// this state will ever produce again.
+    pub halted: Option<(UnsupportedMechanic, ObjectId)>,
     /// Which player performed the most recent `Action::ActivateManaAbility`
     /// (paired with `mana_ability_activations` as its "version" counter).
     /// `HarnessSurfaceV2` needs this alongside the counter, not just the
@@ -165,10 +198,172 @@ pub struct EngineState {
     pub last_mana_ability_activator: Option<PlayerId>,
 }
 
+/// 613.1's continuous-effect layers this kernel's card pool actually
+/// grants, as a bitset (same pattern as `card_def::Keywords`): layer 6
+/// (ability adding/removing -- a granted Haste) and layer 7c (effects that
+/// modify power/toughness without setting it). A single `ResolvedSetEffect`
+/// can span both at once (Goblin Bushwhacker's kicked ETB grants +1/+0
+/// *and* Haste from one resolution) -- evaluation stays flat/unordered this
+/// increment (nothing in this pool has two effects at the *same* layer that
+/// would disagree on order), but the bits are recorded now so a future
+/// layer-aware evaluator can filter/sequence by them without every existing
+/// effect needing to be re-tagged retroactively.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Hash, Serialize, Deserialize)]
+pub struct Layers(pub u8);
+
+impl Layers {
+    pub const NONE: Layers = Layers(0);
+    /// 613.1, layer 6.
+    pub const ABILITY_ADDING: Layers = Layers(1 << 0);
+    /// 613.1, layer 7c.
+    pub const POWER_TOUGHNESS: Layers = Layers(1 << 1);
+
+    pub const fn has(self, other: Layers) -> bool {
+        self.0 & other.0 != 0
+    }
+}
+
+impl std::ops::BitOr for Layers {
+    type Output = Layers;
+    fn bitor(self, rhs: Layers) -> Layers {
+        Layers(self.0 | rhs.0)
+    }
+}
+
+/// How long a continuous effect lasts. One variant today (every effect this
+/// pool creates is "until end of turn"); kept as its own type rather than
+/// inlined so a longer-lived duration (Goblin Tomb Raider's static boost is
+/// modeled separately, via `static_self_boost_for`, precisely because it
+/// *isn't* a resolved, timed effect) doesn't force a reshape later.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum EffectDuration {
+    EndOfTurn,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum UntilEndOfTurnEffect {
     /// Synthetic placeholder -- see the `until_end_of_turn` field doc.
     SyntheticMarker(ObjectId),
+    /// A resolved, locked-in set of affected objects getting `power`/
+    /// `toughness` and (if `grant_haste`) Haste until end of turn
+    /// (`effect::EffectOp::PumpControlled` -- Goblin Bushwhacker's kicked
+    /// ETB, Rally at the Hornburg's token haste). `object_ids` is captured
+    /// *at resolution* (611.2c: a resolving "creatures you control get..."
+    /// fixes its own affected set right then; a creature that enters
+    /// *later* this same turn is never added, even though the effect is
+    /// still active) -- `effect::EffectOp::PumpControlled`'s own doc has
+    /// the sequencing argument for why Rally at the Hornburg's two freshly
+    /// -created tokens are still included (they exist *before* this leaf
+    /// runs) while Goblin Bushwhacker's pump still correctly reaches
+    /// Burning-Tree Emissary (already on the battlefield at resolution,
+    /// same reasoning, opposite direction). `layer`/`timestamp` are
+    /// recorded now (see `Layers`'s doc) even though `effective_power`/
+    /// `effective_toughness`/`has_effective_keyword` still apply every
+    /// entry unconditionally (flat evaluation).
+    ResolvedSetEffect {
+        object_ids: Vec<ObjectId>,
+        layer: Layers,
+        timestamp: u64,
+        duration: EffectDuration,
+        power: i32,
+        toughness: i32,
+        grant_haste: bool,
+    },
+}
+
+/// Whether an `effect::EffectOp::ImpulseDraw`-exiled card's `PlayPermission`
+/// authorizes casting it (a spell) or playing it (a land) -- see that
+/// struct's doc. Computed once, at grant time, from `card_def::CardDef::
+/// is_land`; kept as its own explicit field (rather than re-deriving it from
+/// the card def every time a permission is checked) so a future permission
+/// shape that grants "play" without the card being a land in the normal
+/// sense (not needed by this pool) doesn't have to be inferred implicitly.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum PlayOrCast {
+    Cast,
+    Play,
+}
+
+/// When a `PlayPermission` expires. `EndOfTurn` (Experimental Synthesizer)
+/// is cleared unconditionally at the very next `Step::Cleanup`, whoever's --
+/// only one cleanup can ever happen before the *current* turn ends,
+/// regardless of round numbering, so "the next one, unconditionally" is
+/// exactly "this turn". `UntilHoldersNextTurn` (Clockwork Percussionist,
+/// Reckless Impulse) can't be tracked as a plain turn-number comparison
+/// against `GameState::turn`: that counter is a *round* number shared by
+/// both players' own single turn within it (see `state::GameState`'s module
+/// doc / `run_step_entry_action`'s `Step::Draw` comment), so it can't by
+/// itself distinguish "the holder's own next turn" from "the opponent's
+/// turn happening to share the same round number". Tracked instead via the
+/// holder's own `Step::Untap` boundary, which is unambiguous regardless of
+/// round numbering: `holder_turn_started` flips `true` the first time the
+/// *holder* (not the opponent) untaps after this permission was granted, and
+/// the permission is removed at the holder's *next* `Step::Cleanup` after
+/// that -- i.e. it survives the rest of the current turn, the opponent's
+/// whole turn, and the holder's entire next turn, expiring exactly at that
+/// turn's cleanup (702.163-ish "until end of your next turn" wording).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum PlayPermissionExpiry {
+    EndOfTurn,
+    UntilHoldersNextTurn { holder_turn_started: bool },
+}
+
+/// Grants `holder` permission to play/cast `object` straight out of
+/// `Zone::Exile`, following *ordinary* timing/costs/land-quota (i.e. this is
+/// consulted by `castable_spells`/`land_drop_candidates` alongside their
+/// normal checks, not a parallel "impulse-castable" legality system) --
+/// Clockwork Percussionist's dies trigger, Experimental Synthesizer's
+/// enters-or-leaves trigger, Reckless Impulse. Replaces an earlier
+/// pseudo-hand-zone design per external review: this is a *permission*, not
+/// membership in a zone-like list.
+///
+/// - `holder`: who may act on this permission -- not necessarily `object`'s
+///   owner (this pool's own 3 cards always grant it to the caster/
+///   controller, who is also always the owner, but the shape doesn't bake
+///   that coincidence in, so a future "you may play target player's exiled
+///   card" doesn't need a redesign).
+/// - `zone_change_generation`: a snapshot of `GameObject::zone_change_count`
+///   taken the instant this permission is granted (*after* the exile move
+///   that creates it). `active_permission_for` re-checks this against the
+///   object's *current* count every time: CR 400.7 (zone changes create new
+///   objects) means this permission is void the moment `object` changes
+///   zones again for any reason, not just when it's played through this
+///   permission -- a stale entry can never silently "come back to life"
+///   after e.g. some other effect returns the same physical card to exile
+///   again later.
+/// - `play_or_cast`: which ordinary action (`Action::CastSpell` vs
+///   `Action::PlayLand`) this authorizes.
+/// - `expiry`: see `PlayPermissionExpiry`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PlayPermission {
+    pub object: ObjectId,
+    pub holder: PlayerId,
+    pub zone_change_generation: u32,
+    pub play_or_cast: PlayOrCast,
+    pub expiry: PlayPermissionExpiry,
+}
+
+/// A resolution this kernel cannot simulate faithfully because it would
+/// require a mechanic the kernel has no representation for at all. Distinct
+/// from "fail-closed" (an uncastable card, decided once at compile/data
+/// time): this is a *runtime* halt, discovered only when a specific board
+/// state makes an otherwise-modeled card's unmodeled branch a live,
+/// consequential choice (see `effect::EffectOp::HaltIfAffectedCanPayCopyCost`'s
+/// doc). `EngineState::halted`/`Decision::Halted` are how this surfaces.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum UnsupportedMechanic {
+    /// Chain Lightning's "may pay {R}{R} to copy this spell", when actually
+    /// affordable by the affected player/permanent-controller.
+    SpellCopy,
+}
+
+/// Issues the next 613.7 timestamp for a newly-created
+/// `UntilEndOfTurnEffect::ResolvedSetEffect`. `pub(crate)` since only
+/// `effect::execute` (`EffectOp::PumpControlled`) needs to call it.
+pub(crate) fn next_timestamp(state: &mut GameState) -> u64 {
+    let t = state.engine.next_effect_timestamp;
+    state.engine.next_effect_timestamp += 1;
+    t
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -244,6 +439,14 @@ pub struct PendingCast {
     /// its zero value, never consulted" shape `additional_cost_discarded`
     /// has for a card with no additional cost.
     pub sacrifice_chosen: Vec<ObjectId>,
+    /// `None` until resolved, only meaningful for a card with `CardDef::
+    /// kicker_cost` (Goblin Bushwhacker) -- pre-seeded to `Some(false)` at
+    /// `begin_cast_ex` for every card without one. `Some(true)` means the
+    /// kicker cost will be paid alongside the base cost in `finalize_cast`,
+    /// which also stamps `state::StackItem::kicked` on this cast's own
+    /// stack item -- see that field's doc for how it flows onward into the
+    /// resolution/ETB context from there.
+    pub kicked: Option<bool>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -433,6 +636,17 @@ pub enum Decision {
         spell: ObjectId,
         options: Vec<CastMode>,
     },
+    /// Goblin Bushwhacker only, this increment: whether to pay its Kicker
+    /// {R} on top of its printed cost (`card_def::CardDef::kicker_cost`).
+    /// Only asked when the *combined* cost is currently affordable
+    /// (`mana::can_pay_combined`) -- same "no real choice" shortcut as
+    /// `ChooseCastMode` when kicking isn't even payable, silently resolved
+    /// to unkicked instead. Unlike `ChooseCastMode`, kicking is never
+    /// mandatory just because it's affordable -- declining is always legal.
+    ChooseKicker {
+        player: PlayerId,
+        spell: ObjectId,
+    },
     /// Pyroblast/Red Elemental Blast only, this increment: which of the
     /// spell's 2 modes to resolve (`CardDef::mode2`). Asked before
     /// targeting, since the two modes have different `TargetSpec`s. Unlike
@@ -521,6 +735,15 @@ pub enum Decision {
     GameOver {
         winner: Option<PlayerId>,
     },
+    /// Terminal, same as `GameOver`: the walk hit a resolution requiring a
+    /// mechanic this kernel has no representation for (see
+    /// `EngineState::halted`'s doc). There is no `Action` that answers
+    /// this -- once returned, this is the only decision `advance_until_
+    /// decision` will ever produce again for this `GameState`.
+    Halted {
+        mechanic: UnsupportedMechanic,
+        source: ObjectId,
+    },
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -535,6 +758,9 @@ pub enum Action {
     /// time -- see that decision's doc).
     ChooseCostTarget(ObjectId),
     ChooseCastMode(CastMode),
+    /// Answers a `Decision::ChooseKicker`: `true` pays Kicker on top of the
+    /// base cost, `false` declines.
+    ChooseKicker(bool),
     Discard(Vec<ObjectId>),
     DeclareAttackers(Vec<ObjectId>),
     /// (blocker, attacker) pairs. A blocker may appear at most once; an
@@ -840,20 +1066,60 @@ fn castable_spells(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
         }
     }
     for &id in &state.exile {
-        if state.objects.get(id).owner == player && is_plotted_castable_now(player, id, state) {
+        if state.objects.get(id).owner != player {
+            continue;
+        }
+        if is_plotted_castable_now(player, id, state) {
             out.push(id);
+            continue;
+        }
+        // Exile play permission (impulse draw): a permission only ever
+        // authorizes *either* `Cast` or `Play` (never both -- decided once,
+        // at grant time, from `CardDef::is_land`); the `Cast` half is
+        // offered here through the *ordinary* `is_castable_now` check
+        // (same timing/cost logic any hand card gets, per external review
+        // -- no separate "impulse-castable" legality system), the `Play`
+        // half through `land_drop_candidates` instead.
+        if let Some(perm) = active_permission_for(player, id, state) {
+            if perm.play_or_cast == PlayOrCast::Cast && is_castable_now(player, id, false, state) {
+                out.push(id);
+            }
         }
     }
     out
+}
+
+/// The active `PlayPermission` (if any) letting `holder` play/cast `id`
+/// straight out of exile right now. Requires *both* `object`/`holder` to
+/// match *and* `zone_change_generation` to still equal the object's current
+/// `GameObject::zone_change_count` -- the latter is what makes a stale
+/// permission structurally unable to "come back to life" after `id` changes
+/// zones again for any reason (CR 400.7) rather than merely relying on this
+/// module remembering to remove it -- see `PlayPermission`'s doc.
+fn active_permission_for(holder: PlayerId, id: ObjectId, state: &GameState) -> Option<&PlayPermission> {
+    state
+        .engine
+        .exile_play_permissions
+        .iter()
+        .find(|p| p.object == id && p.holder == holder && p.zone_change_generation == state.objects.get(id).zone_change_count)
 }
 
 /// Sorcery-speed timing (508.1a's "any time you could cast a sorcery"),
 /// shared by an ordinary sorcery-speed cast (`is_castable_now`), a Plotted
 /// card cast from exile, and Plotting itself (`plot_action_candidates`) --
 /// 702.163a/`PlotAbility.setTiming(TimingRule.SORCERY)` grant that timing
-/// regardless of the card's own type.
+/// regardless of the card's own type. All four of 508.1a's real
+/// requirements are checked explicitly (active player, main phase, empty
+/// stack, and -- per external review -- actually holding priority right
+/// now): every current call site already only ever asks this for
+/// `state.priority_player`, so that fourth check is currently always true
+/// by construction, but it's asserted here directly rather than left as an
+/// unstated caller convention.
 fn sorcery_speed_timing_ok(player: PlayerId, state: &GameState) -> bool {
-    player == state.active_player && state.stack.is_empty() && matches!(state.step, Step::Main1 | Step::Main2)
+    player == state.priority_player
+        && player == state.active_player
+        && state.stack.is_empty()
+        && matches!(state.step, Step::Main1 | Step::Main2)
 }
 
 /// Whether `id` (in `state.exile`, owned by `player`) was Plotted on an
@@ -904,6 +1170,9 @@ fn available_activatable_abilities(player: PlayerId, state: &GameState) -> Vec<(
     for &id in &state.players[player.index()].battlefield {
         let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
         for (i, ability) in def.activated_abilities.iter().enumerate() {
+            if ability.sorcery_speed_only && !sorcery_speed_timing_ok(player, state) {
+                continue;
+            }
             if can_pay_components(ability.cost, player, id, state) {
                 out.push((id, i as u8));
             }
@@ -920,18 +1189,31 @@ fn land_drop_candidates(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
     {
         return Vec::new();
     }
-    state.players[player.index()]
+    let mut out: Vec<ObjectId> = state.players[player.index()]
         .hand
         .iter()
         .copied()
         .filter(|&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land)
-        .collect()
+        .collect();
+    // Impulse-drawn lands (Clockwork Percussionist/Experimental
+    // Synthesizer/Reckless Impulse can exile a land off the top of the
+    // library same as any other card) are still subject to the ordinary
+    // one-land-per-turn limit -- already enforced by the guard above, since
+    // none of these cards grant an additional land play.
+    for &id in &state.exile {
+        if let Some(perm) = active_permission_for(player, id, state) {
+            if perm.play_or_cast == PlayOrCast::Play {
+                out.push(id);
+            }
+        }
+    }
+    out
 }
 
 fn can_attack(state: &GameState, id: ObjectId) -> bool {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
-    def.has_type(CardType::Creature) && !obj.tapped && (!obj.summoning_sick || def.keywords.has(Keywords::HASTE))
+    def.has_type(CardType::Creature) && !obj.tapped && (!obj.summoning_sick || has_effective_keyword(state, id, Keywords::HASTE))
 }
 
 fn eligible_attackers(state: &GameState) -> Vec<ObjectId> {
@@ -984,6 +1266,9 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
     loop {
         if let Some(d) = check_game_over(state) {
             return d;
+        }
+        if let Some((mechanic, source)) = state.engine.halted {
+            return Decision::Halted { mechanic, source };
         }
 
         if let Some(d) = drain_pending_discard_or_decide(state) {
@@ -1240,7 +1525,7 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
             // discard time).
             event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Exile));
             let owner = state.objects.get(id).owner;
-            state.engine.pending_triggers.push(PendingTrigger { controller: owner, source: id, effect: EffectOp::Sequence(vec![]), is_madness_offer: true });
+            state.engine.pending_triggers.push(PendingTrigger { controller: owner, source: id, effect: EffectOp::Sequence(vec![]), is_madness_offer: true, kicked: false });
         } else {
             event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Graveyard));
         }
@@ -1380,6 +1665,22 @@ fn drain_pending_optional_cost_sacrifice_or_decide(state: &mut GameState) -> Opt
 fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
     let pending = state.engine.pending_cast.clone()?;
     let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
+
+    // Kicker (Goblin Bushwhacker) is decided before targets/modes, same as
+    // any other cast-time cost choice -- only asked when paying the base
+    // cost *and* the kicker cost together is currently affordable; every
+    // card in this pool with `kicker_cost` has no `alt_cost`, so checking
+    // against `def.cost` (never `def.alt_cost`) is exhaustive here.
+    if let Some(kicker_cost) = def.kicker_cost {
+        if pending.kicked.is_none() {
+            let payable = mana::can_pay_combined(&[&def.cost, &kicker_cost], 0, pending.controller, state).is_some();
+            if payable {
+                return Some(Decision::ChooseKicker { player: pending.controller, spell: pending.spell });
+            }
+            state.engine.pending_cast.as_mut().unwrap().kicked = Some(false);
+            return drain_pending_cast_or_decide(state);
+        }
+    }
 
     // 601.2b: mode is chosen before targets (the two modes can have
     // different target shapes) -- always asked when the card is modal,
@@ -1529,6 +1830,10 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
         is_flashback: false,
         mode_chosen: 0,
         madness_offer: t.is_madness_offer,
+        // Propagates a kicked cast's own flag onward into this trigger's
+        // own resolution context -- see `StackItem::kicked`'s doc for the
+        // full chain.
+        kicked: t.kicked,
     });
     // Same `priority_passes`/`priority_player` reset as `reset_priority`
     // (117.5: priority passes to the active player once a triggered
@@ -1547,7 +1852,13 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
 /// call; this just pops and executes.
 fn resolve_top_of_stack(state: &mut GameState) {
     let item = state.stack.pop().expect("resolve_top_of_stack called with an empty stack");
-    let ctx = ExecCtx { source: item.source, controller: item.controller, targets: item.targets, discarded: item.discarded };
+    // Single-shot signal to the trigger-collection pass that always
+    // immediately follows this resolution (`collect_and_queue_triggers`,
+    // called right after by every caller of `resolve_top_of_stack`) --
+    // explicitly set every time (`Some` or `None`), never left stale from a
+    // previous resolution. See `EngineState::pending_kicked_source`'s doc.
+    state.engine.pending_kicked_source = if item.kicked { Some(item.source) } else { None };
+    let ctx = ExecCtx { source: item.source, controller: item.controller, targets: item.targets, discarded: item.discarded, kicked: item.kicked };
 
     if let Some(effect) = item.inline_effect {
         effect::execute(&effect, &ctx, state);
@@ -1693,6 +2004,19 @@ fn run_step_entry_action(state: &mut GameState, step: Step) {
             }
             state.players[0].draws_this_turn = 0;
             state.players[1].draws_this_turn = 0;
+            // See `PlayPermissionExpiry`'s doc: the *holder's* own Untap
+            // marks the start of their "next turn" for an "until end of
+            // your next turn" impulse-draw permission (Clockwork
+            // Percussionist, Reckless Impulse) -- only flips once (the
+            // first such Untap after the permission was granted), not
+            // re-armed on a later one.
+            for perm in state.engine.exile_play_permissions.iter_mut() {
+                if perm.holder == p {
+                    if let PlayPermissionExpiry::UntilHoldersNextTurn { holder_turn_started } = &mut perm.expiry {
+                        *holder_turn_started = true;
+                    }
+                }
+            }
         }
         Step::Draw => {
             let p = state.active_player;
@@ -1724,6 +2048,15 @@ fn run_step_entry_action(state: &mut GameState, step: Step) {
             state.engine.until_end_of_turn.clear();
             let p = state.active_player;
             state.players[p.index()].lands_played_this_turn = 0;
+            // `EndOfTurn` permissions expire at the very next Cleanup,
+            // whoever's; `UntilHoldersNextTurn` only once it's the
+            // *holder's* own Cleanup, and only after their own Untap has
+            // already opened this "next turn" -- see
+            // `PlayPermissionExpiry`'s doc.
+            state.engine.exile_play_permissions.retain(|perm| match perm.expiry {
+                PlayPermissionExpiry::EndOfTurn => false,
+                PlayPermissionExpiry::UntilHoldersNextTurn { holder_turn_started } => !(perm.holder == p && holder_turn_started),
+            });
             let hand_size = state.players[p.index()].hand.len();
             if hand_size > 7 {
                 state.engine.pending_discard = Some(PendingDiscard { player: p, count: (hand_size - 7) as u32, resume: DiscardResume::None });
@@ -1735,10 +2068,112 @@ fn run_step_entry_action(state: &mut GameState, step: Step) {
 
 // --------------------------------------------------------------- combat
 
-fn effective_power(state: &GameState, id: ObjectId) -> i32 {
+/// A permanent's own-name-keyed conditional static self-boost -- "As long as
+/// you control an artifact, {this} gets +1/+0 and has haste" (Goblin Tomb
+/// Raider). Always-on continuous effects gated on live board state, not a
+/// resolution-time `EffectOp` (there's no cast/trigger moment to run one
+/// at): re-evaluated fresh every time `effective_power`/`effective_toughness`/
+/// `has_effective_keyword` reads it, same "recompute, don't persist" shape
+/// `EffectCond::LandfallThisTurn`/`ControlsArtifactCount` already use. A
+/// per-name table (matching `trigger::triggers_for`'s own style) rather
+/// than a generic layered-continuous-effects system: only one card needs
+/// this shape in this pool.
+pub struct StaticSelfBoostDef {
+    pub condition: fn(PlayerId, &GameState) -> bool,
+    pub power: i32,
+    pub toughness: i32,
+    pub grant_haste: bool,
+}
+
+fn controls_an_artifact(controller: PlayerId, state: &GameState) -> bool {
+    state.players[controller.index()].battlefield.iter().any(|&id| {
+        let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
+        def.has_type(CardType::Artifact)
+    })
+}
+
+pub(crate) fn static_self_boost_for(name: &str) -> Option<StaticSelfBoostDef> {
+    match name {
+        "Goblin Tomb Raider" => Some(StaticSelfBoostDef { condition: controls_an_artifact, power: 1, toughness: 0, grant_haste: true }),
+        _ => None,
+    }
+}
+
+pub(crate) fn effective_power(state: &GameState, id: ObjectId) -> i32 {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
-    def.power.unwrap_or(0) as i32 + obj.counters.plus1_plus1 as i32
+    let mut power = def.power.unwrap_or(0) as i32 + obj.counters.plus1_plus1 as i32;
+    if let Some(boost) = static_self_boost_for(def.name) {
+        if (boost.condition)(obj.controller, state) {
+            power += boost.power;
+        }
+    }
+    for eff in &state.engine.until_end_of_turn {
+        if let UntilEndOfTurnEffect::ResolvedSetEffect { object_ids, power: p, .. } = eff {
+            if object_ids.contains(&id) {
+                power += p;
+            }
+        }
+    }
+    power
+}
+
+/// `effective_power`'s toughness twin -- see that function's doc. No card in
+/// this pool's static/team boosts actually carries a nonzero toughness
+/// delta (Goblin Tomb Raider/Goblin Bushwhacker are both "+1/+0"), but this
+/// stays a real, symmetric code path rather than a power-only shortcut so
+/// the next card that pumps toughness doesn't have to rediscover this
+/// shape.
+pub(crate) fn effective_toughness(state: &GameState, id: ObjectId) -> i32 {
+    let obj = state.objects.get(id);
+    let def = &card_def::CARD_DEFS[obj.card_def as usize];
+    let mut toughness = def.toughness.unwrap_or(0) as i32 + obj.counters.plus1_plus1 as i32;
+    if let Some(boost) = static_self_boost_for(def.name) {
+        if (boost.condition)(obj.controller, state) {
+            toughness += boost.toughness;
+        }
+    }
+    for eff in &state.engine.until_end_of_turn {
+        if let UntilEndOfTurnEffect::ResolvedSetEffect { object_ids, toughness: t, .. } = eff {
+            if object_ids.contains(&id) {
+                toughness += t;
+            }
+        }
+    }
+    toughness
+}
+
+/// Whether `id` currently has `kw`, folding in every source this kernel
+/// models: the card's own static `Keywords`, `static_self_boost_for`'s
+/// conditional self-grant (Goblin Tomb Raider's haste), and any active
+/// `UntilEndOfTurnEffect::ResolvedSetEffect` naming it (Goblin Bushwhacker's/
+/// Rally at the Hornburg's granted haste). Only `Keywords::HASTE` has a
+/// granted source to fold in this pool -- `Flying`/`Reach`/etc. still just
+/// read the card's own static bit, same as before this function existed.
+/// Both boost sources route through this same query path (per external
+/// review: not a parallel mechanism) -- there is no combat- or SBA-specific
+/// shortcut anywhere else that reads power/toughness/keywords directly.
+pub(crate) fn has_effective_keyword(state: &GameState, id: ObjectId, kw: Keywords) -> bool {
+    let obj = state.objects.get(id);
+    let def = &card_def::CARD_DEFS[obj.card_def as usize];
+    if def.keywords.has(kw) {
+        return true;
+    }
+    if kw.has(Keywords::HASTE) {
+        if let Some(boost) = static_self_boost_for(def.name) {
+            if boost.grant_haste && (boost.condition)(obj.controller, state) {
+                return true;
+            }
+        }
+        for eff in &state.engine.until_end_of_turn {
+            if let UntilEndOfTurnEffect::ResolvedSetEffect { object_ids, grant_haste, .. } = eff {
+                if *grant_haste && object_ids.contains(&id) {
+                    return true;
+                }
+            }
+        }
+    }
+    false
 }
 
 fn participates_in_wave(state: &GameState, id: ObjectId, first_strike_wave: bool) -> bool {
@@ -1859,8 +2294,7 @@ fn assign_attacker_damage_to_blockers(state: &GameState, attacker: ObjectId, pow
         let assign = if is_last {
             remaining
         } else {
-            let bdef = &card_def::CARD_DEFS[state.objects.get(blocker).card_def as usize];
-            let toughness = bdef.toughness.unwrap_or(0) as i32 + state.objects.get(blocker).counters.plus1_plus1 as i32;
+            let toughness = effective_toughness(state, blocker);
             let already = state.objects.get(blocker).damage as i32;
             let lethal_needed = (toughness - already).max(0);
             remaining.min(lethal_needed)
@@ -1969,6 +2403,14 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
                 return Err("this cast's mode has already been chosen".to_string());
             }
             pending.cast_mode = Some(mode);
+            Ok(())
+        }
+        Action::ChooseKicker(kicked) => {
+            let pending = state.engine.pending_cast.as_mut().ok_or("no spell is currently being cast")?;
+            if pending.kicked.is_some() {
+                return Err("this cast's kicker has already been chosen".to_string());
+            }
+            pending.kicked = Some(kicked);
             Ok(())
         }
         Action::ChooseSpellMode(mode) => {
@@ -2305,13 +2747,22 @@ fn begin_cast(state: &mut GameState, player: PlayerId, spell_id: ObjectId) {
 fn begin_cast_ex(state: &mut GameState, player: PlayerId, spell_id: ObjectId, forced_cost_override: Option<Cost>) {
     let origin_zone = state.objects.get(spell_id).zone;
     let is_flashback = forced_cost_override.is_none() && origin_zone == Zone::Graveyard;
-    let is_plotted = forced_cost_override.is_none() && origin_zone == Zone::Exile;
+    // A card sitting in Exile isn't necessarily Plotted any more: an
+    // impulse-draw effect (`effect::EffectOp::ImpulseDraw`) also exiles
+    // cards that must still be cast for their *real* mana cost, not for
+    // free -- only `GameObject::plotted_turn.is_some()` (stamped exclusively
+    // by `plot_spell`) means "this was actually Plotted". Root-caused while
+    // adding Reckless Impulse/Clockwork Percussionist/Experimental
+    // Synthesizer: before this check, any impulse-exiled spell would have
+    // been cast for `Cost::zero()`, same as a genuinely Plotted card.
+    let is_plotted = forced_cost_override.is_none() && origin_zone == Zone::Exile && state.objects.get(spell_id).plotted_turn.is_some();
     let def = &card_def::CARD_DEFS[state.objects.get(spell_id).card_def as usize];
     let target_spec = def.target_spec;
     let cost_override = forced_cost_override.or(if is_plotted { Some(Cost::zero()) } else { None });
     let cast_mode = if is_flashback || cost_override.is_some() || def.alt_cost.is_none() { Some(CastMode::Normal) } else { None };
     let additional_cost_discarded = if def.additional_cost.is_none() { Some(vec![]) } else { None };
     let mode_chosen = if def.mode2.is_none() { Some(0) } else { None };
+    let kicked = if def.kicker_cost.is_none() { Some(false) } else { None };
 
     move_to_stack(state, spell_id, origin_zone);
     state.stack.push(StackItem {
@@ -2323,6 +2774,9 @@ fn begin_cast_ex(state: &mut GameState, player: PlayerId, spell_id: ObjectId, fo
         is_flashback,
         mode_chosen: 0,
         madness_offer: false,
+        // `finalize_cast` fills this in once `PendingCast::kicked` resolves
+        // -- see `StackItem::kicked`'s doc.
+        kicked: false,
     });
 
     state.engine.pending_cast = Some(PendingCast {
@@ -2337,6 +2791,7 @@ fn begin_cast_ex(state: &mut GameState, player: PlayerId, spell_id: ObjectId, fo
         mode_chosen,
         origin_zone,
         sacrifice_chosen: vec![],
+        kicked,
     });
 }
 
@@ -2365,6 +2820,7 @@ fn begin_activation(state: &mut GameState, player: PlayerId, source: ObjectId, a
 fn finalize_cast(state: &mut GameState) {
     let pending = state.engine.pending_cast.take().expect("finalize_cast requires a pending cast");
     let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
+    let mut was_kicked = false;
 
     if let Some(cost) = pending.cost_override {
         // Plot (free) or Madness (its own alternative cost) -- see
@@ -2404,10 +2860,18 @@ fn finalize_cast(state: &mut GameState) {
     } else {
         match pending.cast_mode.expect("resolved by drain_pending_cast_or_decide before finalize_cast is reached") {
             CastMode::Normal => {
-                let Some(plan) = mana::can_pay(&def.cost, 0, pending.controller, state) else {
+                let kicked = pending.kicked == Some(true);
+                let plan = if kicked {
+                    let kicker_cost = def.kicker_cost.expect("kicked is only true when begin_cast_ex/drain_pending_cast_or_decide saw a kicker_cost");
+                    mana::can_pay_combined(&[&def.cost, &kicker_cost], 0, pending.controller, state)
+                } else {
+                    mana::can_pay(&def.cost, 0, pending.controller, state)
+                };
+                let Some(plan) = plan else {
                     return abort_cast(state, pending);
                 };
                 pay_plan(state, pending.controller, &plan);
+                was_kicked = kicked;
             }
             CastMode::Alternative => {
                 let alt = def.alt_cost.expect("Alternative mode only chosen when alt_cost is Some");
@@ -2425,6 +2889,7 @@ fn finalize_cast(state: &mut GameState) {
     item.targets = pending.targets_chosen;
     item.discarded = discarded;
     item.mode_chosen = pending.mode_chosen.unwrap_or(0);
+    item.kicked = was_kicked;
     event::log_spell_cast(state, pending.spell, pending.controller);
 
     // 601.2i/603.3: casting is complete the instant costs are paid --
@@ -2533,6 +2998,7 @@ fn finalize_activation(state: &mut GameState) {
         is_flashback: false,
         mode_chosen: 0,
         madness_offer: false,
+        kicked: false, // no activated ability in this pool has Kicker
     });
 
     // No ability in this increment's pool triggers off another ability
@@ -2598,6 +3064,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[player.index()].battlefield.push(obj_id);
         obj_id
@@ -2617,6 +3084,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[player.index()].hand.push(obj_id);
         obj_id
@@ -2636,6 +3104,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[player.index()].graveyard.push(obj_id);
         obj_id
@@ -2833,12 +3302,14 @@ mod tests {
             source: ObjectId(0),
             effect: EffectOp::GainLife { player: PlayerRef::Controller, amount: 1 },
             is_madness_offer: false,
+            kicked: false,
         });
         state.engine.pending_triggers.push(PendingTrigger {
             controller: PlayerId::P0,
             source: ObjectId(1),
             effect: EffectOp::GainLife { player: PlayerRef::Controller, amount: 2 },
             is_madness_offer: false,
+            kicked: false,
         });
 
         let decision = advance_until_decision(&mut state);
@@ -2864,8 +3335,8 @@ mod tests {
     #[test]
     fn order_triggers_rejects_a_non_permutation() {
         let mut state = empty_game();
-        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(0), effect: EffectOp::Sequence(vec![]), is_madness_offer: false });
-        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(1), effect: EffectOp::Sequence(vec![]), is_madness_offer: false });
+        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(0), effect: EffectOp::Sequence(vec![]), is_madness_offer: false, kicked: false });
+        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(1), effect: EffectOp::Sequence(vec![]), is_madness_offer: false, kicked: false });
         let err = step(&mut state, Action::OrderTriggers(vec![0, 0])).unwrap_err();
         assert!(err.contains("permutation"));
     }
@@ -3014,8 +3485,9 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
-        state.stack.push(StackItem { source: obj_id, controller: player, targets: vec![], inline_effect: None, discarded: vec![], is_flashback: false, mode_chosen: 0, madness_offer: false });
+        state.stack.push(StackItem { source: obj_id, controller: player, targets: vec![], inline_effect: None, discarded: vec![], is_flashback: false, mode_chosen: 0, madness_offer: false, kicked: false });
         obj_id
     }
 
@@ -3191,6 +3663,7 @@ mod tests {
                 counters: Default::default(),
                 attachments: Vec::new(),
                 plotted_turn: None,
+                zone_change_count: 0,
             });
             state.players[0].library.push(id);
         }
@@ -3559,5 +4032,372 @@ mod tests {
         assert_eq!(state.engine.priority_passes, [false, false]);
         assert_eq!(state.engine.mana_ability_activations, 1);
         assert_eq!(state.engine.last_mana_ability_activator, Some(PlayerId::P0));
+    }
+
+    // ================== Rally at the Hornburg increment ==================
+
+    #[test]
+    fn goblin_bushwhacker_kicked_pumps_the_team_and_grants_haste() {
+        let mut state = ready_game_in_main1(2);
+        let voldaren = put_on_battlefield(&mut state, PlayerId::P0, "Voldaren Epicure");
+        let bushwhacker = put_in_hand(&mut state, PlayerId::P0, "Goblin Bushwhacker");
+
+        step(&mut state, Action::CastSpell(bushwhacker)).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseKicker { player, spell } => {
+                assert_eq!(player, PlayerId::P0);
+                assert_eq!(spell, bushwhacker);
+                step(&mut state, Action::ChooseKicker(true)).unwrap();
+            }
+            other => panic!("expected ChooseKicker, got {other:?}"),
+        }
+        pass_until_stack_resolves(&mut state);
+
+        assert_eq!(effective_power(&state, bushwhacker), 2, "1/1 base +1/+0 from its own kicked ETB");
+        assert_eq!(effective_power(&state, voldaren), 2, "Voldaren Epicure is also a creature P0 controls");
+        assert!(can_attack(&state, bushwhacker), "kicked haste should let it attack despite just entering");
+        assert!(can_attack(&state, voldaren), "Voldaren Epicure should keep its own pre-existing ability to attack");
+    }
+
+    #[test]
+    fn goblin_bushwhacker_unaffordable_kicker_auto_resolves_unkicked() {
+        let mut state = ready_game_in_main1(1);
+        let bushwhacker = put_in_hand(&mut state, PlayerId::P0, "Goblin Bushwhacker");
+        step(&mut state, Action::CastSpell(bushwhacker)).unwrap();
+        // Only 1 Mountain in play: the combined {R}{R} kicked cost isn't
+        // payable, so `Decision::ChooseKicker` is never even offered --
+        // same "no real choice" shortcut as `ChooseCastMode`.
+        pass_until_stack_resolves(&mut state);
+        assert_eq!(effective_power(&state, bushwhacker), 1);
+        assert!(!can_attack(&state, bushwhacker), "unkicked: no haste, and it just entered summoning sick");
+    }
+
+    #[test]
+    fn goblin_bushwhacker_declined_kicker_gets_no_pump_even_though_affordable() {
+        let mut state = ready_game_in_main1(2);
+        let bushwhacker = put_in_hand(&mut state, PlayerId::P0, "Goblin Bushwhacker");
+        step(&mut state, Action::CastSpell(bushwhacker)).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseKicker { .. } => step(&mut state, Action::ChooseKicker(false)).unwrap(),
+            other => panic!("expected ChooseKicker, got {other:?}"),
+        }
+        pass_until_stack_resolves(&mut state);
+        assert_eq!(effective_power(&state, bushwhacker), 1);
+        let tapped_lands = state.players[0].battlefield.iter().filter(|&&id| state.objects.get(id).tapped).count();
+        assert_eq!(tapped_lands, 1, "only the base {{R}} cost should have been paid, not the declined kicker too");
+    }
+
+    #[test]
+    fn rally_at_the_hornburg_creates_two_hasty_human_tokens_and_pumps_existing_humans_only() {
+        let mut state = ready_game_in_main1(2);
+        let human = put_on_battlefield(&mut state, PlayerId::P0, "Burning-Tree Emissary"); // Human Shaman
+        let non_human = put_on_battlefield(&mut state, PlayerId::P0, "Goblin Tomb Raider"); // Goblin Pirate, no artifact in play
+        let rally = put_in_hand(&mut state, PlayerId::P0, "Rally at the Hornburg");
+
+        step(&mut state, Action::CastSpell(rally)).unwrap();
+        pass_until_stack_resolves(&mut state);
+
+        let token_def = card_id_by_name("Human Soldier Token").unwrap();
+        let tokens: Vec<ObjectId> = state.players[0].battlefield.iter().copied().filter(|&id| state.objects.get(id).card_def == token_def).collect();
+        assert_eq!(tokens.len(), 2, "should create exactly two Human Soldier tokens");
+
+        assert!(has_effective_keyword(&state, human, Keywords::HASTE), "Burning-Tree Emissary is Human, should gain haste");
+        for &t in &tokens {
+            assert!(has_effective_keyword(&state, t, Keywords::HASTE), "the tokens are Human Soldiers themselves");
+            assert!(can_attack(&state, t), "a hasty token should be able to attack the turn it's created");
+        }
+        assert!(!has_effective_keyword(&state, non_human, Keywords::HASTE), "Goblin Tomb Raider isn't Human and controls no artifact here");
+    }
+
+    #[test]
+    fn goblin_tomb_raider_gets_plus_one_and_haste_only_while_controlling_an_artifact() {
+        let mut state = empty_game();
+        let raider = put_on_battlefield(&mut state, PlayerId::P0, "Goblin Tomb Raider");
+        assert_eq!(effective_power(&state, raider), 1);
+        assert_eq!(effective_toughness(&state, raider), 2);
+        assert!(!has_effective_keyword(&state, raider, Keywords::HASTE));
+
+        put_on_battlefield(&mut state, PlayerId::P0, "Great Furnace");
+        assert_eq!(effective_power(&state, raider), 2, "+1/+0 while controlling an artifact");
+        assert_eq!(effective_toughness(&state, raider), 2, "the boost is +1/+0, toughness unaffected");
+        assert!(has_effective_keyword(&state, raider, Keywords::HASTE));
+    }
+
+    #[test]
+    fn galvanic_blast_deals_only_2_without_metalcraft() {
+        let mut state = ready_game_in_main1(1);
+        let blast = put_in_hand(&mut state, PlayerId::P0, "Galvanic Blast");
+        step(&mut state, Action::CastSpell(blast)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        pass_until_stack_resolves(&mut state);
+        assert_eq!(state.players[1].life, 18);
+    }
+
+    #[test]
+    fn galvanic_blast_deals_4_with_metalcraft() {
+        let mut state = ready_game_in_main1(1);
+        put_on_battlefield(&mut state, PlayerId::P0, "Great Furnace");
+        put_on_battlefield(&mut state, PlayerId::P0, "Clockwork Percussionist");
+        put_on_battlefield(&mut state, PlayerId::P0, "Experimental Synthesizer");
+        let blast = put_in_hand(&mut state, PlayerId::P0, "Galvanic Blast");
+        step(&mut state, Action::CastSpell(blast)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        pass_until_stack_resolves(&mut state);
+        assert_eq!(state.players[1].life, 16, "3+ artifacts controlled: Metalcraft deals 4 instead of 2");
+    }
+
+    #[test]
+    fn end_the_festivities_hits_the_opponent_and_every_creature_they_control_only() {
+        let mut state = ready_game_in_main1(1);
+        let etf = put_in_hand(&mut state, PlayerId::P0, "End the Festivities");
+        let p1_a = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
+        let p1_b = put_on_battlefield(&mut state, PlayerId::P1, "Goblin Tomb Raider");
+        let p0_creature = put_on_battlefield(&mut state, PlayerId::P0, "Voldaren Epicure");
+
+        step(&mut state, Action::CastSpell(etf)).unwrap();
+        pass_until_stack_resolves(&mut state);
+
+        assert_eq!(state.players[1].life, 19);
+        assert_eq!(state.objects.get(p1_a).damage, 1);
+        assert_eq!(state.objects.get(p1_b).damage, 1);
+        assert_eq!(state.objects.get(p0_creature).damage, 0, "only the opponent and their own creatures are hit");
+        assert_eq!(state.players[0].life, 20, "the caster themself isn't damaged");
+    }
+
+    #[test]
+    fn experimental_synthesizer_sac_ability_creates_a_samurai_token() {
+        let mut state = ready_game_in_main1(3);
+        let synth = put_on_battlefield(&mut state, PlayerId::P0, "Experimental Synthesizer");
+        match advance_until_decision(&mut state) {
+            Decision::CastSpellOrPass { activatable_abilities, .. } => {
+                assert!(activatable_abilities.contains(&(synth, 0)), "should be activatable at sorcery speed with an empty stack");
+            }
+            other => panic!("expected CastSpellOrPass, got {other:?}"),
+        }
+        step(&mut state, Action::ActivateAbility(synth, 0)).unwrap();
+        pass_until_stack_resolves(&mut state);
+
+        let samurai_def = card_id_by_name("Samurai Token").unwrap();
+        assert!(
+            state.players[0].battlefield.iter().any(|&id| state.objects.get(id).card_def == samurai_def),
+            "should have created a Samurai Token"
+        );
+        assert!(!state.players[0].battlefield.contains(&synth), "Experimental Synthesizer sacrificed itself to pay the cost");
+    }
+
+    #[test]
+    fn experimental_synthesizer_sac_ability_is_not_offered_with_a_nonempty_stack() {
+        let mut state = ready_game_in_main1(3);
+        let synth = put_on_battlefield(&mut state, PlayerId::P0, "Experimental Synthesizer");
+        put_on_stack(&mut state, PlayerId::P0, "Lightning Bolt");
+        match advance_until_decision(&mut state) {
+            Decision::CastSpellOrPass { activatable_abilities, .. } => {
+                assert!(!activatable_abilities.contains(&(synth, 0)), "sorcery-speed-only: illegal with something already on the stack");
+            }
+            other => panic!("expected CastSpellOrPass, got {other:?}"),
+        }
+    }
+
+    fn set_library_top(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
+        let card_id = card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let obj_id = state.objects.push(crate::state::GameObject {
+            card_def: card_id,
+            name: card_name.to_string(),
+            owner: player,
+            controller: player,
+            zone: Zone::Library,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+                zone_change_count: 0,
+        });
+        state.players[player.index()].library.insert(0, obj_id);
+        obj_id
+    }
+
+    #[test]
+    fn experimental_synthesizer_etb_impulse_draw_expires_at_end_of_turn() {
+        // 2 Mountains: one pays for Experimental Synthesizer itself, the
+        // second proves the exiled Lightning Bolt is *actually* affordable
+        // (not just legal-if-you-had-mana) when checking `castable_spells`.
+        let mut state = ready_game_in_main1(2);
+        let bolt_id = set_library_top(&mut state, PlayerId::P0, "Lightning Bolt");
+        let synth = put_in_hand(&mut state, PlayerId::P0, "Experimental Synthesizer");
+
+        step(&mut state, Action::CastSpell(synth)).unwrap();
+        pass_until_stack_resolves(&mut state);
+
+        assert_eq!(state.objects.get(bolt_id).zone, Zone::Exile, "the ETB trigger should have exiled the top card");
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some());
+        match advance_until_decision(&mut state) {
+            Decision::CastSpellOrPass { castable_spells, .. } => assert!(castable_spells.contains(&bolt_id), "should be playable this turn"),
+            other => panic!("expected CastSpellOrPass, got {other:?}"),
+        }
+
+        while state.step != Step::Cleanup {
+            advance_step(&mut state);
+        }
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_none(), "an 'until end of turn' window closes at this turn's own cleanup");
+    }
+
+    #[test]
+    fn clockwork_percussionist_dies_impulse_draw_survives_the_opponents_turn_and_expires_after_owners_next_turn() {
+        let mut state = ready_game_in_main1(0);
+        let bolt_id = set_library_top(&mut state, PlayerId::P0, "Lightning Bolt");
+        let percussionist = put_on_battlefield(&mut state, PlayerId::P0, "Clockwork Percussionist");
+
+        event::propose_and_commit(&mut state, ProposedEvent::zone_change(percussionist, Zone::Graveyard));
+        collect_and_queue_triggers(&mut state);
+        loop {
+            if state.engine.pending_triggers.is_empty() && state.stack.is_empty() {
+                break;
+            }
+            match advance_until_decision(&mut state) {
+                Decision::CastSpellOrPass { .. } => step(&mut state, Action::Pass).unwrap(),
+                other => panic!("unexpected decision resolving the dies trigger: {other:?}"),
+            }
+        }
+
+        assert_eq!(state.objects.get(bolt_id).zone, Zone::Exile, "the dies trigger should have exiled the top card");
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some());
+
+        // Rest of this same turn (P0's): survives its own cleanup.
+        while state.step != Step::Cleanup {
+            advance_step(&mut state);
+        }
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some(), "survives this turn's own cleanup (not the owner's next turn yet)");
+
+        // -> P1's Untap: the opponent's whole turn.
+        advance_step(&mut state);
+        assert_eq!(state.active_player, PlayerId::P1);
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some());
+        while state.step != Step::Cleanup {
+            advance_step(&mut state);
+        }
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some(), "survives the opponent's whole turn too");
+
+        // -> P0's Untap: the owner's own next turn begins.
+        advance_step(&mut state);
+        assert_eq!(state.active_player, PlayerId::P0);
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some(), "the owner's next turn has begun; still open");
+
+        // Through to that turn's own cleanup, where it finally expires.
+        while state.step != Step::Cleanup {
+            advance_step(&mut state);
+        }
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_none(), "expires at the owner's next turn's own cleanup");
+    }
+
+    // ================== external-review corrections ==================
+
+    #[test]
+    fn burning_tree_emissary_produces_its_etb_mana_exactly_once_and_is_never_a_mana_source() {
+        let mut state = ready_game_in_main1(2);
+        let bte = put_in_hand(&mut state, PlayerId::P0, "Burning-Tree Emissary");
+        step(&mut state, Action::CastSpell(bte)).unwrap();
+        pass_until_stack_resolves(&mut state);
+
+        // Exactly the ETB's {R}{G} floating (the 2 Mountains that paid the
+        // cost are spent, not left over -- `mana::pay_plan` nets them to
+        // zero before this trigger's own `AddMana` ever runs).
+        assert_eq!(state.players[0].mana_pool[crate::mana::ManaColor::R.pool_index()], 1);
+        assert_eq!(state.players[0].mana_pool[crate::mana::ManaColor::G.pool_index()], 1);
+
+        assert!(!state.objects.get(bte).tapped, "the mana came from its ETB trigger, not from tapping it");
+        assert!(available_mana_abilities(PlayerId::P0, &state).is_empty(), "Burning-Tree Emissary has no repeatable tap ability");
+        let sources = crate::mana::gather_sources(PlayerId::P0, &state);
+        assert!(!sources.iter().any(|s| s.id == bte), "the mana solver must never treat it as a tappable source (root-caused this increment)");
+    }
+
+    #[test]
+    fn chain_lightning_resolves_normally_when_copy_payment_is_impossible() {
+        let mut state = ready_game_in_main1(1);
+        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
+        step(&mut state, Action::CastSpell(bolt)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        pass_until_stack_resolves(&mut state);
+
+        assert_eq!(state.players[1].life, 17, "the mandatory 3 damage always happens");
+        assert!(state.engine.halted.is_none(), "declining is the only legal choice when {{R}}{{R}} is unaffordable, so the walk continues normally");
+    }
+
+    #[test]
+    fn chain_lightning_halts_the_walk_when_copy_payment_is_possible() {
+        let mut state = ready_game_in_main1(1);
+        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
+        // P1 (the affected player) controls 2 Red sources -- {R}{R} is
+        // genuinely payable, so this kernel cannot safely guess "declines".
+        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+
+        step(&mut state, Action::CastSpell(bolt)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        match pass_until_stack_resolves(&mut state) {
+            Decision::Halted { mechanic, source } => {
+                assert_eq!(mechanic, UnsupportedMechanic::SpellCopy);
+                assert_eq!(source, bolt);
+            }
+            other => panic!("expected Decision::Halted, got {other:?}"),
+        }
+        assert_eq!(state.players[1].life, 17, "the mandatory damage still happened before the halt");
+    }
+
+    #[test]
+    fn goblin_bushwhacker_kicked_pump_is_tagged_with_both_layers_and_a_timestamp() {
+        let mut state = ready_game_in_main1(2);
+        let bushwhacker = put_in_hand(&mut state, PlayerId::P0, "Goblin Bushwhacker");
+        step(&mut state, Action::CastSpell(bushwhacker)).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseKicker { .. } => step(&mut state, Action::ChooseKicker(true)).unwrap(),
+            other => panic!("expected ChooseKicker, got {other:?}"),
+        }
+        pass_until_stack_resolves(&mut state);
+
+        assert_eq!(state.engine.until_end_of_turn.len(), 1);
+        match &state.engine.until_end_of_turn[0] {
+            UntilEndOfTurnEffect::ResolvedSetEffect { layer, duration, object_ids, .. } => {
+                assert!(layer.has(Layers::POWER_TOUGHNESS), "grants +1/+0");
+                assert!(layer.has(Layers::ABILITY_ADDING), "grants Haste");
+                assert_eq!(*duration, EffectDuration::EndOfTurn);
+                assert!(object_ids.contains(&bushwhacker), "611.2c: the resolving effect's own locked-in set includes itself");
+            }
+            other => panic!("expected ResolvedSetEffect, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn play_permission_is_voided_by_any_further_zone_change_not_just_being_played() {
+        let mut state = ready_game_in_main1(0);
+        let bolt_id = set_library_top(&mut state, PlayerId::P0, "Lightning Bolt");
+        let percussionist = put_on_battlefield(&mut state, PlayerId::P0, "Clockwork Percussionist");
+        event::propose_and_commit(&mut state, ProposedEvent::zone_change(percussionist, Zone::Graveyard));
+        collect_and_queue_triggers(&mut state);
+        loop {
+            if state.engine.pending_triggers.is_empty() && state.stack.is_empty() {
+                break;
+            }
+            match advance_until_decision(&mut state) {
+                Decision::CastSpellOrPass { .. } => step(&mut state, Action::Pass).unwrap(),
+                other => panic!("unexpected decision resolving the dies trigger: {other:?}"),
+            }
+        }
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some());
+
+        // Something else moves the card out of exile entirely independent
+        // of the permission (e.g. a hypothetical graveyard-hate effect) --
+        // CR 400.7: this alone must void the permission, not just actually
+        // playing it.
+        event::propose_and_commit(&mut state, ProposedEvent::zone_change(bolt_id, Zone::Graveyard));
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_none(), "any further zone change voids the permission");
+
+        // Even if it later returns to exile by some other means, the
+        // *stale* `exile_play_permissions` entry (never explicitly removed)
+        // must not reactivate: the generation moved twice, never back to
+        // the exact snapshot the permission was granted at.
+        event::propose_and_commit(&mut state, ProposedEvent::zone_change(bolt_id, Zone::Exile));
+        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_none(), "a later re-arrival in exile must not resurrect a stale permission");
     }
 }

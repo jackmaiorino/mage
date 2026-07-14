@@ -964,6 +964,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[player.index()].battlefield.push(obj_id);
         obj_id
@@ -1118,6 +1119,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
@@ -1152,6 +1154,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
@@ -1176,6 +1179,7 @@ mod tests {
             is_flashback: false,
             mode_chosen: 0,
             madness_offer: false,
+            kicked: false,
         });
 
         let _second = surface.next_decision(&mut state);
@@ -1212,6 +1216,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
@@ -1304,6 +1309,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(bolt_id);
         // P0: one Mountain pays for the bolt, a second and third stay
@@ -1408,6 +1414,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
@@ -1493,6 +1500,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[1].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
@@ -1637,6 +1645,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[1].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
@@ -1709,6 +1718,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
 
         // A second real spell in hand, so the post-cast reprompt (if it
@@ -1727,6 +1737,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(lava_dart);
 
@@ -1742,6 +1753,7 @@ mod tests {
             is_flashback: false,
             mode_chosen: 0,
             madness_offer: true,
+            kicked: false,
         });
         state.engine.priority_passes = [true, true];
         state.step = Step::Main1;
@@ -1821,6 +1833,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
 
         let lava_dart_def = card_def::card_id_by_name("Lava Dart").unwrap();
@@ -1836,6 +1849,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(lava_dart);
 
@@ -1853,6 +1867,7 @@ mod tests {
             is_flashback: false,
             mode_chosen: 0,
             madness_offer: true,
+            kicked: false,
         });
         state.engine.priority_passes = [true, true];
         state.step = Step::Main1;
@@ -1941,6 +1956,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");

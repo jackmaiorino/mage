@@ -29,6 +29,8 @@ struct CardJson {
     #[serde(default)]
     types: Vec<String>,
     #[serde(default)]
+    subtypes: Vec<String>,
+    #[serde(default)]
     supertypes: Vec<String>,
     power: Option<i32>,
     toughness: Option<i32>,
@@ -105,6 +107,18 @@ enum Special {
     /// (independent of `Special`, since a card's targeting/damage shape and
     /// its cost shape are orthogonal).
     BurnAnyTarget(i32),
+    /// "Deals 3 damage to any target. Then that player or that permanent's
+    /// controller may pay {R}{R}. If the player does, they may copy this
+    /// spell and may choose a new target for that copy." (Chain Lightning,
+    /// Rally-only). The mandatory damage is byte-for-byte
+    /// `BurnAnyTarget(3)`'s shape; the optional-copy continuation is a
+    /// conditional fail-closed (`effect::EffectOp::HaltIfAffectedCanPayCopyCost`)
+    /// rather than either a silent "always decline" or an unconditional
+    /// defer -- see that leaf's doc, and the increment report for the
+    /// external-review citation (corpus non-occurrence doesn't justify
+    /// skipping the check; off-trace/search play can reach an affordable
+    /// board state even if no recorded game ever does).
+    ChainLightning,
     /// Resolves straight onto the battlefield; any keyword/triggered
     /// ability is layered on separately (`keywords_for` for
     /// static keywords, `src/trigger.rs`'s hand-written `triggers_for`
@@ -136,35 +150,88 @@ enum Special {
     /// "Choose one -- Counter target blue spell; or destroy target blue
     /// permanent." (Red Elemental Blast: filtered targeting).
     RedElementalBlast,
+    /// "Deals 1 damage to each opponent and each creature and planeswalker
+    /// they control." (End the Festivities, Rally-only). No planeswalker
+    /// card exists in this 132-card pool, so the planeswalker half of the
+    /// text is vacuously satisfied by construction, not modeled separately
+    /// -- see `EffectOp::DamageOpponentAndTheirCreatures`.
+    EndTheFestivities,
+    /// "Deals 2 damage to any target. Metalcraft -- 4 instead if you
+    /// control three or more artifacts." (Galvanic Blast, Rally-only).
+    GalvanicBlast,
+    /// "Create two 1/1 white Human Soldier creature tokens. Humans you
+    /// control gain haste until end of turn." (Rally at the Hornburg,
+    /// Rally-only -- the card the deck is named for).
+    RallyAtTheHornburg,
+    /// "Exile the top two cards of your library. Until the end of your next
+    /// turn, you may play those cards." (Reckless Impulse, Rally-only).
+    RecklessImpulse,
 }
 
 fn special_for(name: &str) -> Special {
     match name {
-        "Mountain" => Special::Mountain,
+        // Great Furnace is a second "tap for {R}" land, textually identical
+        // to Mountain (its only difference -- also being an Artifact, for
+        // Metalcraft/affinity synergy -- is carried by `CardJson::types`,
+        // not by this shape).
+        "Mountain" | "Great Furnace" => Special::Mountain,
         "Lightning Bolt" => Special::BurnAnyTarget(3),
         "Fiery Temper" => Special::BurnAnyTarget(3),
         "Fireblast" => Special::BurnAnyTarget(4),
         "Lava Dart" => Special::BurnAnyTarget(1),
-        "Guttersnipe" | "Masked Meower" | "Voldaren Epicure" | "Sneaky Snacker" => Special::VanillaCreature,
+        "Chain Lightning" => Special::ChainLightning,
+        // Every one of these resolves onto the battlefield with no other
+        // cast-time effect: Burning-Tree Emissary's ETB mana add, Clockwork
+        // Percussionist's dies-trigger impulse draw, Experimental
+        // Synthesizer's enters-or-leaves impulse draw + its own sac
+        // activated ability, Goblin Bushwhacker's Kicker/ETB pump, and
+        // Goblin Tomb Raider's static self-boost are all layered on
+        // separately (`keywords_for`, `kicker_cost_for`,
+        // `activated_abilities_for`, `src/trigger.rs`'s `triggers_for`
+        // table, and `engine::static_self_boost_for`) -- exactly the same
+        // "spell/ability shape and triggered/static shape are orthogonal"
+        // split `VanillaCreature`'s own doc already establishes for
+        // Guttersnipe/Voldaren Epicure/Sneaky Snacker.
+        "Guttersnipe" | "Masked Meower" | "Voldaren Epicure" | "Sneaky Snacker" | "Burning-Tree Emissary" | "Clockwork Percussionist"
+        | "Experimental Synthesizer" | "Goblin Bushwhacker" | "Goblin Tomb Raider" => Special::VanillaCreature,
         "Faithless Looting" => Special::DrawThenDiscard { draw: 2, discard: 2 },
         "Grab the Prize" => Special::GrabThePrize,
         "Highway Robbery" => Special::HighwayRobbery,
         "Searing Blaze" => Special::SearingBlaze,
         "Pyroblast" => Special::Pyroblast,
         "Red Elemental Blast" => Special::RedElementalBlast,
+        "End the Festivities" => Special::EndTheFestivities,
+        "Galvanic Blast" => Special::GalvanicBlast,
+        "Rally at the Hornburg" => Special::RallyAtTheHornburg,
+        "Reckless Impulse" => Special::RecklessImpulse,
         _ => Special::None,
     }
 }
 
 /// Static combat/summoning-sickness keywords, verified against each card's
 /// Java source (see the increment-3 report for the exact files read).
-/// Only Masked Meower (haste) and Sneaky Snacker (flying) carry one in
-/// this pool.
+/// Masked Meower/Sneaky Snacker (Burn) and Clockwork Percussionist/Samurai
+/// Token (Rally) carry an *unconditional* static keyword this way. Goblin
+/// Bushwhacker's/Goblin Tomb Raider's haste is conditional (Kicker-gated,
+/// or "as long as you control an artifact") and temporary/derived, so it is
+/// deliberately NOT here -- see `engine::static_self_boost_for` and
+/// `EffectOp::PumpControlled`'s `grant_haste` instead.
 fn keywords_for(name: &str) -> &'static str {
     match name {
-        "Masked Meower" => "Keywords::HASTE",
+        "Masked Meower" | "Clockwork Percussionist" => "Keywords::HASTE",
         "Sneaky Snacker" => "Keywords::FLYING",
+        "Samurai Token" => "Keywords::VIGILANCE",
         _ => "Keywords::NONE",
+    }
+}
+
+/// `Some` Kicker cost source text (`CardDef::kicker_cost`), verified against
+/// Java (`KickerAbility`). Only Goblin Bushwhacker has one this increment
+/// ("Kicker {R}").
+fn kicker_cost_for(name: &str) -> String {
+    match name {
+        "Goblin Bushwhacker" => cost_src("{R}"),
+        _ => "None".to_string(),
     }
 }
 
@@ -209,7 +276,11 @@ fn flashback_for(name: &str) -> String {
 /// ("Discard a card, Sacrifice this creature: Draw a card.") and the Blood
 /// token ("{1}, {T}, Discard a card, Sacrifice this artifact: Draw a
 /// card.") both reduce to "discard/sacrifice/[cost]: draw a card", so both
-/// share `ability_effect_draw_one`.
+/// share `ability_effect_draw_one`. Experimental Synthesizer's ("{2}{R},
+/// Sacrifice Experimental Synthesizer: Create a 2/2 white Samurai creature
+/// token with vigilance. Activate only as a sorcery.") is Rally's only
+/// activated ability and the only one so far with `sorcery_speed_only:
+/// true` -- see that field's doc in `card_def.rs`.
 fn activated_abilities_for(name: &str) -> &'static str {
     match name {
         "Masked Meower" => {
@@ -217,6 +288,7 @@ fn activated_abilities_for(name: &str) -> &'static str {
                 cost: &[CostComponent::DiscardCards(1), CostComponent::SacrificeSelf], \
                 target_spec: TargetSpec::None, \
                 effect: ability_effect_draw_one, \
+                sorcery_speed_only: false, \
             }]"
         }
         "Blood Token" => {
@@ -225,6 +297,15 @@ fn activated_abilities_for(name: &str) -> &'static str {
                         CostComponent::DiscardCards(1), CostComponent::SacrificeSelf], \
                 target_spec: TargetSpec::None, \
                 effect: ability_effect_draw_one, \
+                sorcery_speed_only: false, \
+            }]"
+        }
+        "Experimental Synthesizer" => {
+            "&[ActivatedAbilityDef { \
+                cost: &[CostComponent::Mana(Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 2, x_count: 0 }), CostComponent::SacrificeSelf], \
+                target_spec: TargetSpec::None, \
+                effect: ability_effect_create_samurai_token, \
+                sorcery_speed_only: true, \
             }]"
         }
         _ => "&[]",
@@ -298,6 +379,86 @@ fn codegen(cards: &[CardJson]) -> String {
     writeln!(out, "    EffectOp::DrawCards {{ player: PlayerRef::Controller, count: 1 }}").unwrap();
     writeln!(out, "}}").unwrap();
     writeln!(out).unwrap();
+
+    if cards.iter().any(|c| c.name == "Experimental Synthesizer") {
+        // Experimental Synthesizer's sac ability: "Create a 2/2 white
+        // Samurai creature token with vigilance."
+        writeln!(out, "fn ability_effect_create_samurai_token() -> EffectOp {{").unwrap();
+        writeln!(out, "    let samurai = crate::card_def::card_id_by_name(\"Samurai Token\").expect(\"Samurai Token in CARD_DEFS\");").unwrap();
+        writeln!(out, "    EffectOp::CreateToken {{ token_def: samurai, controller: PlayerRef::Controller }}").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::ChainLightning)) {
+        // "Deals 3 damage to any target. Then that player or that
+        // permanent's controller may pay {R}{R}. If the player does, they
+        // may copy this spell...": mandatory damage first (identical shape
+        // to `BurnAnyTarget(3)`), then the conditional halt-gate -- see
+        // `EffectOp::HaltIfAffectedCanPayCopyCost`'s doc.
+        writeln!(out, "fn spell_effect_chain_lightning() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Sequence(vec![").unwrap();
+        writeln!(out, "        EffectOp::DealDamage {{ target: TargetRef::Target(0), amount: 3 }},").unwrap();
+        writeln!(out, "        EffectOp::HaltIfAffectedCanPayCopyCost {{ affected: TargetRef::Target(0) }},").unwrap();
+        writeln!(out, "    ]))").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::EndTheFestivities)) {
+        // "Deals 1 damage to each opponent and each creature and
+        // planeswalker they control." No planeswalker exists in this pool,
+        // so `DamageOpponentAndTheirCreatures` (which only hits the
+        // opponent + their creatures) already covers 100% of the reachable
+        // text -- see `EffectOp::DamageOpponentAndTheirCreatures`'s doc.
+        writeln!(out, "fn spell_effect_end_the_festivities() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::DamageOpponentAndTheirCreatures {{ amount: 1 }})").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::GalvanicBlast)) {
+        // Metalcraft -- 4 damage instead of 2 if you control 3+ artifacts.
+        writeln!(out, "fn spell_effect_galvanic_blast() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Conditional {{").unwrap();
+        writeln!(out, "        cond: EffectCond::ControlsArtifactCount(3),").unwrap();
+        writeln!(out, "        then: Box::new(EffectOp::DealDamage {{ target: TargetRef::Target(0), amount: 4 }}),").unwrap();
+        writeln!(out, "        else_: Box::new(EffectOp::DealDamage {{ target: TargetRef::Target(0), amount: 2 }}),").unwrap();
+        writeln!(out, "    }})").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::RallyAtTheHornburg)) {
+        // "Create two 1/1 white Human Soldier creature tokens. Humans you
+        // control gain haste until end of turn." The two just-created
+        // tokens are themselves Human, so they're inside the "Humans you
+        // control" set the pump snapshots -- see `EffectOp::PumpControlled`'s
+        // doc for why sequencing (create both tokens, *then* pump) is what
+        // makes that true.
+        writeln!(out, "fn spell_effect_rally_at_the_hornburg() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    let human_soldier = crate::card_def::card_id_by_name(\"Human Soldier Token\").expect(\"Human Soldier Token in CARD_DEFS\");").unwrap();
+        writeln!(out, "    Some(EffectOp::Sequence(vec![").unwrap();
+        writeln!(out, "        EffectOp::CreateToken {{ token_def: human_soldier, controller: PlayerRef::Controller }},").unwrap();
+        writeln!(out, "        EffectOp::CreateToken {{ token_def: human_soldier, controller: PlayerRef::Controller }},").unwrap();
+        writeln!(
+            out,
+            "        EffectOp::PumpControlled {{ filter: CreatureFilter::ControlledWithSubtype(Subtype::Human), power: 0, toughness: 0, grant_haste: true }},"
+        )
+        .unwrap();
+        writeln!(out, "    ]))").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards.iter().any(|c| matches!(special_for(&c.name), Special::RecklessImpulse)) {
+        // "Exile the top two cards of your library. Until the end of your
+        // next turn, you may play those cards."
+        writeln!(out, "fn spell_effect_reckless_impulse() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::ImpulseDraw {{ count: 2, duration: ImpulseDuration::UntilOwnersNextTurn }})").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
 
     let draw_then_discard_shapes: Vec<(i32, i32)> = cards
         .iter()
@@ -449,6 +610,7 @@ fn codegen(cards: &[CardJson]) -> String {
         let special = special_for(&c.name);
 
         let types_src = c.types.iter().map(|t| format!("CardType::{}", card_type_variant(t))).collect::<Vec<_>>().join(", ");
+        let subtypes_src = c.subtypes.iter().map(|s| subtype_variant(s)).collect::<Vec<_>>().join(", ");
         let supertypes_src = c
             .supertypes
             .iter()
@@ -478,6 +640,7 @@ fn codegen(cards: &[CardJson]) -> String {
             Special::BurnAnyTarget(amount) => {
                 ("TargetSpec::AnyTarget", format!("spell_effect_burn_any_target_{amount}"), "no_effect".to_string())
             }
+            Special::ChainLightning => ("TargetSpec::AnyTarget", "spell_effect_chain_lightning".to_string(), "no_effect".to_string()),
             Special::VanillaCreature => {
                 ("TargetSpec::None", "spell_effect_vanilla_creature".to_string(), "no_effect".to_string())
             }
@@ -493,6 +656,12 @@ fn codegen(cards: &[CardJson]) -> String {
             Special::RedElementalBlast => {
                 ("TargetSpec::BlueSpellOnStack", "spell_effect_red_elemental_blast_mode1".to_string(), "no_effect".to_string())
             }
+            Special::EndTheFestivities => ("TargetSpec::None", "spell_effect_end_the_festivities".to_string(), "no_effect".to_string()),
+            Special::GalvanicBlast => ("TargetSpec::AnyTarget", "spell_effect_galvanic_blast".to_string(), "no_effect".to_string()),
+            Special::RallyAtTheHornburg => {
+                ("TargetSpec::None", "spell_effect_rally_at_the_hornburg".to_string(), "no_effect".to_string())
+            }
+            Special::RecklessImpulse => ("TargetSpec::None", "spell_effect_reckless_impulse".to_string(), "no_effect".to_string()),
         };
 
         writeln!(out, "    CardDef {{").unwrap();
@@ -503,6 +672,7 @@ fn codegen(cards: &[CardJson]) -> String {
         )
         .unwrap();
         writeln!(out, "        types: &[{types_src}],").unwrap();
+        writeln!(out, "        subtypes: &[{subtypes_src}],").unwrap();
         writeln!(out, "        supertypes: &[{supertypes_src}],").unwrap();
         writeln!(out, "        power: {power_src},").unwrap();
         writeln!(out, "        toughness: {toughness_src},").unwrap();
@@ -514,6 +684,7 @@ fn codegen(cards: &[CardJson]) -> String {
         writeln!(out, "        spell_effect: {spell_effect_src},").unwrap();
         writeln!(out, "        mana_ability: {mana_ability_src},").unwrap();
         writeln!(out, "        alt_cost: {},", alt_cost_for(&c.name)).unwrap();
+        writeln!(out, "        kicker_cost: {},", kicker_cost_for(&c.name)).unwrap();
         writeln!(out, "        additional_cost: {},", additional_cost_for(&c.name)).unwrap();
         writeln!(out, "        flashback: {},", flashback_for(&c.name)).unwrap();
         writeln!(out, "        activated_abilities: {},", activated_abilities_for(&c.name)).unwrap();
@@ -538,7 +709,7 @@ fn codegen(cards: &[CardJson]) -> String {
     writeln!(out).unwrap();
 
     // ---- content hash --------------------------------------------------
-    // Hashes gameplay-relevant fields only (name/cost/types/power/
+    // Hashes gameplay-relevant fields only (name/cost/types/subtypes/power/
     // toughness/is_land/produces_mana/decks), in array order, so
     // metadata-only regenerations of cards_v1.json (timestamps, java_file
     // paths, complexity tags) don't churn the constant.
@@ -549,6 +720,8 @@ fn codegen(cards: &[CardJson]) -> String {
         canon.push_str(&c.mana_cost);
         canon.push('|');
         canon.push_str(&c.types.join(","));
+        canon.push('|');
+        canon.push_str(&c.subtypes.join(","));
         canon.push('|');
         canon.push_str(&c.power.map(|p| p.to_string()).unwrap_or_default());
         canon.push('|');
@@ -601,6 +774,75 @@ fn supertype_variant(t: &str) -> &'static str {
         "Basic" => "Basic",
         "Snow" => "Snow",
         other => panic!("cards_v1.json: unknown supertype {other:?}"),
+    }
+}
+
+/// Maps a `cards_v1.json` subtype string to a `card_def::Subtype` variant --
+/// a fully closed set (one variant per distinct string across the whole
+/// 135-card pool this increment's data covers), so this panics on an
+/// unrecognized value same as `card_type_variant`/`supertype_variant`/
+/// `color_variant` -- see `Subtype`'s own doc for why it's closed rather
+/// than named-variants-plus-string-fallback (a `&'static str` payload can't
+/// derive `Deserialize`, and `Subtype` is embedded in `effect::EffectOp`,
+/// which needs to).
+fn subtype_variant(t: &str) -> &'static str {
+    match t {
+        "Ape" => "Subtype::Ape",
+        "Aura" => "Subtype::Aura",
+        "BIRD" => "Subtype::BirdAllCaps",
+        "Bird" => "Subtype::Bird",
+        "Blood" => "Subtype::Blood",
+        "Cat" => "Subtype::Cat",
+        "Detective" => "Subtype::Detective",
+        "Dragon" => "Subtype::Dragon",
+        "Drone" => "Subtype::Drone",
+        "Druid" => "Subtype::Druid",
+        "Eldrazi" => "Subtype::Eldrazi",
+        "Elf" => "Subtype::Elf",
+        "Equipment" => "Subtype::Equipment",
+        "FAERIE" => "Subtype::FaerieAllCaps",
+        "Faerie" => "Subtype::Faerie",
+        "Food" => "Subtype::Food",
+        "Forest" => "Subtype::Forest",
+        "Gate" => "Subtype::Gate",
+        "Goblin" => "Subtype::Goblin",
+        "HUMAN" => "Subtype::HumanAllCaps",
+        "Hero" => "Subtype::Hero",
+        "Human" => "Subtype::Human",
+        "Hydra" => "Subtype::Hydra",
+        "Island" => "Subtype::Island",
+        "Knight" => "Subtype::Knight",
+        "MONK" => "Subtype::Monk",
+        "MOONFOLK" => "Subtype::Moonfolk",
+        "Monkey" => "Subtype::Monkey",
+        "Mountain" => "Subtype::Mountain",
+        "Myr" => "Subtype::Myr",
+        "NINJA" => "Subtype::NinjaAllCaps",
+        "Ninja" => "Subtype::Ninja",
+        "Ouphe" => "Subtype::Ouphe",
+        "Pirate" => "Subtype::Pirate",
+        "Plains" => "Subtype::Plains",
+        "ROGUE" => "Subtype::RogueAllCaps",
+        "Ranger" => "Subtype::Ranger",
+        "Rat" => "Subtype::Rat",
+        "Rogue" => "Subtype::Rogue",
+        "SERPENT" => "Subtype::Serpent",
+        "Saga" => "Subtype::Saga",
+        "Samurai" => "Subtype::Samurai",
+        "Shaman" => "Subtype::Shaman",
+        "Shapeshifter" => "Subtype::Shapeshifter",
+        "Soldier" => "Subtype::Soldier",
+        "Spider" => "Subtype::Spider",
+        "Spirit" => "Subtype::Spirit",
+        "Swamp" => "Subtype::Swamp",
+        "Toy" => "Subtype::Toy",
+        "Treefolk" => "Subtype::Treefolk",
+        "Vampire" => "Subtype::Vampire",
+        "WIZARD" => "Subtype::WizardAllCaps",
+        "Warrior" => "Subtype::Warrior",
+        "Wizard" => "Subtype::Wizard",
+        "Zombie" => "Subtype::Zombie",
+        other => panic!("cards_v1.json: unknown subtype {other:?}"),
     }
 }
 

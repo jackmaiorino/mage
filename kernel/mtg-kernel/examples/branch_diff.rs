@@ -563,10 +563,12 @@ fn fixed_continuation_action(decision: &SurfaceDecision) -> Result<SurfaceAction
         SurfaceDecision::Decision(Decision::ChooseOptionalCost { .. }) => Ok(SurfaceAction::Action(Action::ChooseOptionalCost(OptionalCostChoice::Decline))),
         SurfaceDecision::Decision(Decision::ChooseMadnessCast { .. }) => Ok(SurfaceAction::Action(Action::ChooseMadnessCast(false))),
         SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => Ok(SurfaceAction::Action(Action::ChooseCastMode(CastMode::Normal))),
+        SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => Ok(SurfaceAction::Action(Action::ChooseKicker(false))),
         SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => Ok(SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect()))),
         SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => Err("continuation:unhandled-ChooseSpellMode".to_string()),
         SurfaceDecision::Decision(Decision::GameOver { .. }) => Err("continuation:game-already-over".to_string()),
         SurfaceDecision::Decision(Decision::DeclareBlockers { .. }) => Err("continuation:unreachable-DeclareBlockers".to_string()),
+        SurfaceDecision::Decision(Decision::Halted { .. }) => Err("continuation:halted".to_string()),
     }
 }
 

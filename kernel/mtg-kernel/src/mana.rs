@@ -121,6 +121,31 @@ pub fn can_pay(cost: &Cost, x_value: u8, player: PlayerId, state: &GameState) ->
     solve(cost, x_value, pool, &sources)
 }
 
+/// Like `can_pay`, but checks/solves 2+ costs *together* against the same
+/// pool of mana sources -- Goblin Bushwhacker's base cost + its optional
+/// Kicker cost, paid as one combined announcement (601.2b/f), never as two
+/// independent affordability checks that could double-count a source. All
+/// `pips` are concatenated (order doesn't matter to the solver) and
+/// `generic`/`x_count` are summed.
+pub fn can_pay_combined(costs: &[&Cost], x_value: u8, player: PlayerId, state: &GameState) -> Option<PaymentPlan> {
+    let sources = gather_sources(player, state);
+    let pool = state.players[player.index()].mana_pool;
+    let combined_pips: Vec<Pip> = costs.iter().flat_map(|c| c.pips.iter().copied()).collect();
+    let generic: u32 = costs.iter().map(|c| c.generic as u32).sum();
+    let extra_x: u32 = costs.iter().map(|c| c.x_count as u32).sum();
+
+    let mut plan = PaymentPlan::default();
+    let mut pool_remaining = pool;
+    let mut used = vec![false; sources.len()];
+    if !solve_pips(&combined_pips, 0, &sources, &mut used, &mut pool_remaining, &mut plan) {
+        return None;
+    }
+    if !pay_generic(generic + extra_x + x_value as u32, &sources, &mut used, &mut pool_remaining, &mut plan) {
+        return None;
+    }
+    Some(plan)
+}
+
 pub fn gather_sources(player: PlayerId, state: &GameState) -> Vec<ManaSource> {
     let mut sources = Vec::new();
     for &id in &state.players[player.index()].battlefield {
@@ -129,7 +154,21 @@ pub fn gather_sources(player: PlayerId, state: &GameState) -> Vec<ManaSource> {
             continue;
         }
         let def = &crate::card_def::CARD_DEFS[obj.card_def as usize];
-        if !def.produces_mana.is_empty() {
+        // `CardDef::produces_mana` (from `cards_v1.json`) describes every
+        // color a card's rules text can ever add to the pool, including a
+        // one-time triggered/ETB effect (Burning-Tree Emissary's "When this
+        // enters, add {R}{G}") -- it is *not* a promise that the permanent
+        // itself has a repeatable, tappable mana ability. Only
+        // `CardDef::mana_ability` being `Some` (Mountain, Great Furnace)
+        // means "tap this for mana" is actually legal; gathering by
+        // `produces_mana` alone let the solver silently tap (and mark
+        // summoning-sickness-irrelevant, haste-irrelevant) a *creature* as
+        // if it were a land. Root-caused adding Rally's Burning-Tree
+        // Emissary: with this bug, the mana solver could pick it to help
+        // pay a later cost, tapping it and making it illegally unable to
+        // attack afterward even though nothing in its own text lets anyone
+        // tap it for mana more than once, on ETB, automatically.
+        if (def.mana_ability)().is_some() {
             sources.push(ManaSource {
                 id,
                 choices: def.produces_mana.to_vec(),
@@ -343,5 +382,32 @@ mod tests {
         let sources = vec![src(0, &[ManaColor::R]), src(1, &[ManaColor::R])];
         assert!(solve(&cost, 2, [0; 6], &sources).is_some());
         assert!(solve(&cost, 3, [0; 6], &sources).is_none());
+    }
+
+    #[test]
+    fn can_pay_combined_needs_both_costs_paid_from_the_same_pool() {
+        // Goblin Bushwhacker's shape: base {R}, Kicker {R} -- exactly 2
+        // untapped Mountains covers both combined; 1 Mountain covers
+        // neither the combined check nor a double-count of the same source.
+        use crate::state::GameState;
+        let mountain = crate::card_def::card_id_by_name("Mountain").expect("Mountain in CARD_DEFS");
+        let base = Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 0, x_count: 0 };
+        let kicker = Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 0, x_count: 0 };
+
+        let mut one_mountain = GameState::new_from_libraries(&[mountain], &[mountain], |_| "Mountain".to_string(), 1);
+        let land = one_mountain.draw_card(PlayerId::P0).unwrap();
+        one_mountain.move_hand_to_battlefield(PlayerId::P0, land);
+        assert!(
+            can_pay_combined(&[&base, &kicker], 0, PlayerId::P0, &one_mountain).is_none(),
+            "1 Mountain can't pay 2 {{R}} pips at once"
+        );
+
+        let mut two_mountains = GameState::new_from_libraries(&[mountain, mountain], &[mountain], |_| "Mountain".to_string(), 1);
+        let l0 = two_mountains.draw_card(PlayerId::P0).unwrap();
+        let l1 = two_mountains.draw_card(PlayerId::P0).unwrap();
+        two_mountains.move_hand_to_battlefield(PlayerId::P0, l0);
+        two_mountains.move_hand_to_battlefield(PlayerId::P0, l1);
+        let plan = can_pay_combined(&[&base, &kicker], 0, PlayerId::P0, &two_mountains).expect("2 Mountains should pay both {R} pips");
+        assert_eq!(plan.taps.len(), 2);
     }
 }

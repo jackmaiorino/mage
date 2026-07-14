@@ -52,6 +52,18 @@ pub struct GameObject {
     /// pool has `CardDef::plot_cost`, so this is `None` for every other
     /// card for the whole game.
     pub plotted_turn: Option<u32>,
+    /// How many times this object has ever changed zones (CR 400.7's own
+    /// `zoneChangeCounter` concept, ported deliberately -- see `engine::
+    /// legal_blockers_for`'s sibling doc mentioning the reference engine's
+    /// version). Bumped once per `event::commit_zone_change` call for this
+    /// id, regardless of which zones. Read by `engine::PlayPermission::
+    /// zone_change_generation`: a permission snapshots this value the
+    /// instant it's granted, and is only ever honored while the object's
+    /// *current* count still matches -- any further zone change (playing
+    /// the card through the permission, or anything else) silently voids
+    /// it, structurally, without this module needing to remember to remove
+    /// the stale entry.
+    pub zone_change_count: u32,
 }
 
 impl GameObject {
@@ -68,6 +80,7 @@ impl GameObject {
             counters: Counters::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+            zone_change_count: 0,
         }
     }
 }
@@ -185,6 +198,20 @@ pub struct StackItem {
     /// other stack item (a spell, a normal triggered ability, or a non-mana
     /// activated ability).
     pub madness_offer: bool,
+    /// True iff this stack item's own cast paid `card_def::CardDef::
+    /// kicker_cost` (Goblin Bushwhacker). Cast-time metadata (CR 702.33/
+    /// 601.2f), not a durable fact stored anywhere keyed by stable object
+    /// id: `engine::finalize_cast` stamps it on the spell's own item;
+    /// `engine::resolve_top_of_stack` copies it into that resolution's
+    /// `effect::ExecCtx::kicked` and (via `EngineState::
+    /// pending_kicked_source`) into the ETB trigger's own `trigger::
+    /// PendingTrigger`, whose `engine::push_trigger_onto_stack` copies it
+    /// again onto *that* trigger's stack item -- so by the time the
+    /// trigger itself resolves, its own `ExecCtx::kicked` is correctly set,
+    /// with nothing left over anywhere once both items have resolved.
+    /// `false` for every other stack item (no other card in this pool has
+    /// Kicker).
+    pub kicked: bool,
 }
 
 /// Counter-based, seedable, serializable PRNG (SplitMix64). Deterministic:
@@ -303,6 +330,7 @@ impl GameState {
         let obj = self.objects.get_mut(id);
         obj.zone = Zone::Battlefield;
         obj.summoning_sick = true;
+        obj.zone_change_count += 1;
         true
     }
 

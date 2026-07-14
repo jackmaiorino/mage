@@ -575,6 +575,8 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
             // to translate against, so this is a clean, named divergence
             // rather than a guess or a crash.
             SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => return Err("unhandled-decision:ChooseCastMode".to_string()),
+            SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => return Err("unhandled-decision:ChooseKicker".to_string()),
+            SurfaceDecision::Decision(Decision::Halted { .. }) => return Err("unhandled-decision:Halted".to_string()),
             SurfaceDecision::Decision(Decision::OrderTriggers { .. }) => return Err("unhandled-decision:OrderTriggers".to_string()),
             // `engine::Decision::ChooseCostTargets` is new as of increment
             // 11 (H2/v4 work, Sol #90 -- see that variant's doc), added to
@@ -623,7 +625,9 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         SurfaceDecision::DeclareBlockersForAttacker { .. } => Some(state.active_player.opponent()),
         SurfaceDecision::Decision(Decision::GameOver { .. })
         | SurfaceDecision::Decision(Decision::ChooseCastMode { .. })
+        | SurfaceDecision::Decision(Decision::ChooseKicker { .. })
         | SurfaceDecision::Decision(Decision::ChooseCostTargets { .. })
+        | SurfaceDecision::Decision(Decision::Halted { .. })
         | SurfaceDecision::Decision(Decision::OrderTriggers { .. }) => None,
     }
 }

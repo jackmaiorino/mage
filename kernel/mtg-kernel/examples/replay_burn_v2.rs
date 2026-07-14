@@ -907,6 +907,8 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                     .map_err(|e| format!("engine-step-error:OrderTriggers:{e}"))?;
             }
             SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => return Err("unhandled-decision:ChooseSpellMode".to_string()),
+            SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => return Err("unhandled-decision:ChooseKicker".to_string()),
+            SurfaceDecision::Decision(Decision::Halted { .. }) => return Err("unhandled-decision:Halted".to_string()),
             SurfaceDecision::Decision(Decision::DeclareBlockers { .. }) => {
                 return Err("unreachable-decision:DeclareBlockers-should-have-been-reshaped-by-the-surface".to_string());
             }
@@ -943,9 +945,15 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         // `OrderTriggers` comment above already root-caused once; grouped
         // here preemptively rather than waiting for a corpus trace to prove
         // it, since the shape (and the fix) are identical.
-        | SurfaceDecision::Decision(Decision::ChooseCastMode { player, .. }) => Some(*player),
+        | SurfaceDecision::Decision(Decision::ChooseCastMode { player, .. })
+        // Not in this corpus (Goblin Bushwhacker/Kicker is Rally-only), but
+        // the same "consumes no trace record" shape as `ChooseCastMode`
+        // applies identically -- grouped here for the same reason.
+        | SurfaceDecision::Decision(Decision::ChooseKicker { player, .. }) => Some(*player),
         SurfaceDecision::DeclareBlockersForAttacker { .. } => Some(state.active_player.opponent()),
         SurfaceDecision::Decision(Decision::GameOver { .. }) => None,
+        // Not in this corpus (Chain Lightning is Rally-only).
+        SurfaceDecision::Decision(Decision::Halted { .. }) => None,
     }
 }
 
@@ -1986,6 +1994,7 @@ mod tests {
                 counters: Default::default(),
                 attachments: Vec::new(),
                 plotted_turn: None,
+                zone_change_count: 0,
             });
             state.players[0].battlefield.push(id);
         }
@@ -2002,6 +2011,7 @@ mod tests {
                 counters: Default::default(),
                 attachments: Vec::new(),
                 plotted_turn: None,
+                zone_change_count: 0,
             });
             state.players[0].hand.push(id);
         }
@@ -2054,6 +2064,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(hand_card);
 
@@ -2069,6 +2080,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.engine.pending_optional_cost = Some(mtg_kernel::engine::PendingOptionalCost {
             player: PlayerId::P0,
@@ -2117,6 +2129,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.engine.pending_cast = Some(mtg_kernel::engine::PendingCast {
             spell,
@@ -2130,6 +2143,7 @@ mod tests {
             mode_chosen: None,
             origin_zone: Zone::Hand,
             sacrifice_chosen: Vec::new(),
+            kicked: Some(false),
         });
 
         let rec = decision_record_ex("SELECT_TARGETS", &["Mountain (you)", "Mountain (you)"], &["a", "b"], &[0], ",\"episode\":0");
@@ -2166,6 +2180,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         let mut id_map = HashMap::new();
         id_map.insert("uuid-fiery-temper".to_string(), obj);
@@ -2212,6 +2227,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[player.index()].battlefield.push(id);
         id
@@ -2256,8 +2272,8 @@ mod tests {
         state.priority_player = PlayerId::P0;
 
         let pending = vec![
-            PendingTrigger { controller: PlayerId::P0, source: g1, effect: mtg_kernel::effect::EffectOp::DealDamage { target: mtg_kernel::effect::TargetRef::Opponent, amount: 2 }, is_madness_offer: false },
-            PendingTrigger { controller: PlayerId::P0, source: g2, effect: mtg_kernel::effect::EffectOp::DealDamage { target: mtg_kernel::effect::TargetRef::Opponent, amount: 2 }, is_madness_offer: false },
+            PendingTrigger { controller: PlayerId::P0, source: g1, effect: mtg_kernel::effect::EffectOp::DealDamage { target: mtg_kernel::effect::TargetRef::Opponent, amount: 2 }, is_madness_offer: false, kicked: false },
+            PendingTrigger { controller: PlayerId::P0, source: g2, effect: mtg_kernel::effect::EffectOp::DealDamage { target: mtg_kernel::effect::TargetRef::Opponent, amount: 2 }, is_madness_offer: false, kicked: false },
         ];
         // `check_trigger_commutativity` (like its one real call site in
         // `run()`) applies `Action::OrderTriggers` per permutation, which
@@ -2294,8 +2310,8 @@ mod tests {
         assert_eq!(state.players[0].life, 20);
 
         let pending = vec![
-            PendingTrigger { controller: PlayerId::P0, source: src, effect: mtg_kernel::effect::EffectOp::LoseLife { player: mtg_kernel::effect::PlayerRef::Controller, amount: 20 }, is_madness_offer: false },
-            PendingTrigger { controller: PlayerId::P0, source: src, effect: mtg_kernel::effect::EffectOp::GainLife { player: mtg_kernel::effect::PlayerRef::Controller, amount: 25 }, is_madness_offer: false },
+            PendingTrigger { controller: PlayerId::P0, source: src, effect: mtg_kernel::effect::EffectOp::LoseLife { player: mtg_kernel::effect::PlayerRef::Controller, amount: 20 }, is_madness_offer: false, kicked: false },
+            PendingTrigger { controller: PlayerId::P0, source: src, effect: mtg_kernel::effect::EffectOp::GainLife { player: mtg_kernel::effect::PlayerRef::Controller, amount: 25 }, is_madness_offer: false, kicked: false },
         ];
         state.engine.pending_triggers = pending.clone();
         match check_trigger_commutativity(&state, &pending) {

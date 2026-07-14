@@ -8,7 +8,7 @@
 //! 2+ share a controller, to ask that controller to order via
 //! `engine::Decision::OrderTriggers`).
 
-use crate::effect::{EffectOp, PlayerRef, TargetRef};
+use crate::effect::{EffectCond, EffectOp, PlayerRef, TargetRef};
 use crate::event::CommittedEvent;
 use crate::ids::{ObjectId, PlayerId};
 use crate::state::{GameState, Zone};
@@ -35,6 +35,18 @@ pub enum TriggerCondition {
     /// here it's checked with the source in the graveyard, not the
     /// battlefield.
     DrawNth(u32),
+    /// This permanent moves from the battlefield to its owner's graveyard
+    /// (700.4 "dies", generalized to any battlefield -> graveyard
+    /// transition regardless of card type -- Clockwork Percussionist's
+    /// death and Experimental Synthesizer's own sacrifice-cost ability both
+    /// have this exact event shape, and neither card's Java source
+    /// distinguishes "dies" from "put into a graveyard from the
+    /// battlefield" in a way this pool needs to model separately). Checked
+    /// with the source *currently in the graveyard* (`home_zone: Graveyard`
+    /// -- see `Etb`'s doc for why the outer gate uses the post-event zone,
+    /// not a "functions from" zone: by the time `collect_and_process` looks,
+    /// the object has already moved there).
+    LeftBattlefieldToGraveyard,
 }
 
 pub struct TriggeredAbilityDef {
@@ -76,16 +88,72 @@ const VOLDAREN_EPICURE_TRIGGERS: [TriggeredAbilityDef; 1] =
 const SNEAKY_SNACKER_TRIGGERS: [TriggeredAbilityDef; 1] =
     [TriggeredAbilityDef { condition: TriggerCondition::DrawNth(3), home_zone: Zone::Graveyard, effect: sneaky_snacker_effect }];
 
-/// The Burn 16's real triggered abilities, matched by card name (ids are
-/// codegen-assigned from `cards_v1.json`'s array order and not worth
-/// duplicating as constants here -- see `build.rs`'s module doc on id
-/// stability). Every other card in the 132-card pool has no triggered
-/// ability implemented this increment and falls through to `&[]`.
+fn burning_tree_emissary_effect() -> EffectOp {
+    // When Burning-Tree Emissary enters the battlefield, add {R}{G}.
+    EffectOp::AddMana { player: PlayerRef::Controller, colors: vec![crate::mana::ManaColor::R, crate::mana::ManaColor::G] }
+}
+
+fn clockwork_percussionist_dies_effect() -> EffectOp {
+    // When Clockwork Percussionist dies, exile the top card of your
+    // library. You may play it until the end of your next turn.
+    EffectOp::ImpulseDraw { count: 1, duration: crate::effect::ImpulseDuration::UntilOwnersNextTurn }
+}
+
+fn experimental_synthesizer_impulse_effect() -> EffectOp {
+    // When Experimental Synthesizer enters or leaves the battlefield, exile
+    // the top card of your library. Until end of turn, you may play that
+    // card. Both triggers share this one effect -- the card's text is
+    // identical either way.
+    EffectOp::ImpulseDraw { count: 1, duration: crate::effect::ImpulseDuration::EndOfTurn }
+}
+
+fn goblin_bushwhacker_effect() -> EffectOp {
+    // When this creature enters, if it was kicked, creatures you control
+    // get +1/+0 and gain haste until end of turn.
+    EffectOp::Conditional {
+        cond: EffectCond::WasKicked,
+        then: Box::new(EffectOp::PumpControlled {
+            filter: crate::effect::CreatureFilter::AnyControlled,
+            power: 1,
+            toughness: 0,
+            grant_haste: true,
+        }),
+        else_: Box::new(EffectOp::Sequence(vec![])),
+    }
+}
+
+const BURNING_TREE_EMISSARY_TRIGGERS: [TriggeredAbilityDef; 1] =
+    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, effect: burning_tree_emissary_effect }];
+const CLOCKWORK_PERCUSSIONIST_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbilityDef {
+    condition: TriggerCondition::LeftBattlefieldToGraveyard,
+    home_zone: Zone::Graveyard,
+    effect: clockwork_percussionist_dies_effect,
+}];
+const EXPERIMENTAL_SYNTHESIZER_TRIGGERS: [TriggeredAbilityDef; 2] = [
+    TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, effect: experimental_synthesizer_impulse_effect },
+    TriggeredAbilityDef {
+        condition: TriggerCondition::LeftBattlefieldToGraveyard,
+        home_zone: Zone::Graveyard,
+        effect: experimental_synthesizer_impulse_effect,
+    },
+];
+const GOBLIN_BUSHWHACKER_TRIGGERS: [TriggeredAbilityDef; 1] =
+    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, effect: goblin_bushwhacker_effect }];
+
+/// The Burn 16's and Mono Red Rally's real triggered abilities, matched by
+/// card name (ids are codegen-assigned from `cards_v1.json`'s array order
+/// and not worth duplicating as constants here -- see `build.rs`'s module
+/// doc on id stability). Every other card in the pool has no triggered
+/// ability implemented and falls through to `&[]`.
 pub fn triggers_for(card_def: u16) -> &'static [TriggeredAbilityDef] {
     match crate::card_def::CARD_DEFS[card_def as usize].name {
         "Guttersnipe" => &GUTTERSNIPE_TRIGGERS,
         "Voldaren Epicure" => &VOLDAREN_EPICURE_TRIGGERS,
         "Sneaky Snacker" => &SNEAKY_SNACKER_TRIGGERS,
+        "Burning-Tree Emissary" => &BURNING_TREE_EMISSARY_TRIGGERS,
+        "Clockwork Percussionist" => &CLOCKWORK_PERCUSSIONIST_TRIGGERS,
+        "Experimental Synthesizer" => &EXPERIMENTAL_SYNTHESIZER_TRIGGERS,
+        "Goblin Bushwhacker" => &GOBLIN_BUSHWHACKER_TRIGGERS,
         _ => &[],
     }
 }
@@ -106,6 +174,14 @@ pub struct PendingTrigger {
     /// `madness_offer` instead (see that field's doc). Always `false` for a
     /// real `triggers_for`-matched trigger.
     pub is_madness_offer: bool,
+    /// True iff this trigger's own `source` is the object that just
+    /// resolved from a kicked cast (`engine::EngineState::
+    /// pending_kicked_source`, consumed by `collect_and_process`) -- Goblin
+    /// Bushwhacker's ETB trigger reads this via `engine::
+    /// push_trigger_onto_stack` copying it onto the trigger's own
+    /// `state::StackItem::kicked`, then `effect::ExecCtx::kicked` at
+    /// resolution. `false` for every other trigger.
+    pub kicked: bool,
 }
 
 /// Runs state-based actions to a fixed point: repeat the full SBA sweep
@@ -126,7 +202,7 @@ pub fn sba_fixed_point(state: &mut GameState) {
             if !def.has_type(crate::card_def::CardType::Creature) {
                 continue;
             }
-            let toughness = def.toughness.unwrap_or(0) as i32 + obj.counters.plus1_plus1 as i32;
+            let toughness = crate::engine::effective_toughness(state, id);
             if toughness <= 0 || obj.damage as i32 >= toughness {
                 dying.push(id);
             }
@@ -177,6 +253,12 @@ pub fn sba_fixed_point(state: &mut GameState) {
 pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
     let events: Vec<CommittedEvent> = state.engine.event_log.drain(..).collect();
     let draws_this_turn_at = draws_this_turn_snapshot(&events, state);
+    // Single-shot: `engine::resolve_top_of_stack` set this immediately
+    // before the resolution whose events we're about to match, explicitly
+    // (`Some`/`None`) every single time -- taking it here means it can never
+    // carry over into a later, unrelated `collect_and_process` call (see
+    // `EngineState::pending_kicked_source`'s doc).
+    let kicked_source = state.engine.pending_kicked_source.take();
 
     let mut new_triggers = Vec::new();
     for (id, obj) in state.objects.iter() {
@@ -186,7 +268,13 @@ pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
             }
             for (i, ev) in events.iter().enumerate() {
                 if trigger_matches(def.condition, ev, id, obj.controller, state, draws_this_turn_at[i]) {
-                    new_triggers.push(PendingTrigger { controller: obj.controller, source: id, effect: (def.effect)(), is_madness_offer: false });
+                    new_triggers.push(PendingTrigger {
+                        controller: obj.controller,
+                        source: id,
+                        effect: (def.effect)(),
+                        is_madness_offer: false,
+                        kicked: Some(id) == kicked_source,
+                    });
                 }
             }
         }
@@ -252,6 +340,9 @@ fn trigger_matches(cond: TriggerCondition, ev: &CommittedEvent, source: ObjectId
             }
         }
         (TriggerCondition::DrawNth(n), CommittedEvent::Draw { player, object: Some(_) }) => *player == controller && draws_this_turn_at_event == n,
+        (TriggerCondition::LeftBattlefieldToGraveyard, CommittedEvent::ZoneChange { object, from: Zone::Battlefield, to: Zone::Graveyard }) => {
+            *object == source
+        }
         _ => false,
     }
 }
@@ -295,8 +386,8 @@ mod tests {
 
     #[test]
     fn apnap_orders_active_player_triggers_first() {
-        let a = PendingTrigger { controller: PlayerId::P1, source: ObjectId(1), effect: EffectOp::Sequence(vec![]), is_madness_offer: false };
-        let b = PendingTrigger { controller: PlayerId::P0, source: ObjectId(2), effect: EffectOp::Sequence(vec![]), is_madness_offer: false };
+        let a = PendingTrigger { controller: PlayerId::P1, source: ObjectId(1), effect: EffectOp::Sequence(vec![]), is_madness_offer: false, kicked: false };
+        let b = PendingTrigger { controller: PlayerId::P0, source: ObjectId(2), effect: EffectOp::Sequence(vec![]), is_madness_offer: false, kicked: false };
         let ordered = order_apnap(vec![a.clone(), b.clone()], PlayerId::P0);
         assert_eq!(ordered, vec![b, a]);
     }

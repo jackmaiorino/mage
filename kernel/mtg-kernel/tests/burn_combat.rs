@@ -69,6 +69,12 @@ fn kind_of(d: &Decision) -> Kind {
         // Neither Fireblast nor Lava Dart is in this script's card pool, so
         // no cast ever needs a sacrifice-cost-target pick.
         Decision::ChooseCostTargets { .. } => unreachable!("no card in this script has a SacrificeLands cost"),
+        // Goblin Bushwhacker (the only Kicker card) isn't in this script's
+        // card pool.
+        Decision::ChooseKicker { .. } => unreachable!("no card in this script has Kicker"),
+        // Chain Lightning (the only card that can produce this) isn't in
+        // this script's card pool.
+        Decision::Halted { .. } => unreachable!("no card in this script can halt the walk"),
     }
 }
 
@@ -229,6 +235,8 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
             Decision::ChooseSpellMode { .. } | Decision::ChooseOptionalCost { .. } | Decision::ChooseMadnessCast { .. } => {
                 unreachable!("no card in this script is Plotted, Madness, or modal")
             }
+            Decision::ChooseKicker { .. } => unreachable!("no card in this script has Kicker"),
+            Decision::Halted { .. } => unreachable!("no card in this script can halt the walk"),
         }
     }
 

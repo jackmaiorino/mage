@@ -513,6 +513,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[player.index()].battlefield.push(obj_id);
         obj_id
@@ -616,6 +617,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
@@ -657,6 +659,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
+                zone_change_count: 0,
         });
         state.players[0].hand.push(id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
@@ -694,6 +697,7 @@ mod tests {
             is_flashback: false,
             mode_chosen: 0,
             madness_offer: false,
+            kicked: false,
         });
 
         // The very next suppression recorded must be P0's forced Pass --

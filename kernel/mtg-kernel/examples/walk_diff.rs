@@ -1325,6 +1325,12 @@ fn decision_texts(state: &GameState, decision: &SurfaceDecision, p0_name: &str, 
         )),
         SurfaceDecision::Decision(Decision::ChooseSpellMode { mode_count, .. }) => Some(("CHOOSE_MODE", (0..*mode_count).map(|i| format!("mode#{i}")).collect())),
         SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => Some(("ORDER_TRIGGERS", vec![format!("identity_order({})", pending.len())])),
+        // Not in the Burn corpus this walker replays (Goblin Bushwhacker/
+        // Kicker is Rally-only) -- same binary "CHOOSE_USE" shape as Madness.
+        SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => Some(("CHOOSE_USE", vec!["Yes".to_string(), "No".to_string()])),
+        // Not in the Burn corpus this walker replays (Chain Lightning is
+        // Rally-only).
+        SurfaceDecision::Decision(Decision::Halted { .. }) => None,
         SurfaceDecision::Decision(Decision::GameOver { .. }) => None,
         SurfaceDecision::Decision(Decision::DeclareBlockers { .. }) => None,
     }
@@ -1389,7 +1395,12 @@ fn apply_by_indices(surface: &mut HarnessSurfaceV2, state: &mut GameState, decis
         SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => surface
             .apply(state, SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect())))
             .map_err(|e| format!("engine-step-error:walk:OrderTriggers:{e}")),
-        SurfaceDecision::Decision(Decision::GameOver { .. }) | SurfaceDecision::Decision(Decision::DeclareBlockers { .. }) => Err("apply_by_indices:unreachable-decision-kind".to_string()),
+        SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => {
+            surface.apply(state, SurfaceAction::Action(Action::ChooseKicker(i0 == 0))).map_err(|e| format!("engine-step-error:walk:ChooseKicker:{e}"))
+        }
+        SurfaceDecision::Decision(Decision::GameOver { .. })
+        | SurfaceDecision::Decision(Decision::DeclareBlockers { .. })
+        | SurfaceDecision::Decision(Decision::Halted { .. }) => Err("apply_by_indices:unreachable-decision-kind".to_string()),
     }
 }
 

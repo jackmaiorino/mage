@@ -3981,6 +3981,58 @@
         "loot"
       ],
       "java_file": "Mage/src/main/java/mage/game/permanent/token/BloodToken.java"
+    },
+    {
+      "name": "Human Soldier Token",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": ["W"],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Human",
+        "Soldier"
+      ],
+      "supertypes": [],
+      "power": 1,
+      "toughness": 1,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [],
+      "is_token": true,
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "token_creation"
+      ],
+      "java_file": "Mage/src/main/java/mage/game/permanent/token/HumanSoldierToken.java"
+    },
+    {
+      "name": "Samurai Token",
+      "mana_cost": "",
+      "mana_value": 0,
+      "colors": ["W"],
+      "types": [
+        "Creature"
+      ],
+      "subtypes": [
+        "Samurai"
+      ],
+      "supertypes": [],
+      "power": 2,
+      "toughness": 2,
+      "is_land": false,
+      "produces_mana": [],
+      "decks": [],
+      "is_token": true,
+      "sideboard_only": false,
+      "complexity": "simple",
+      "mechanics": [
+        "token_creation",
+        "vigilance"
+      ],
+      "java_file": "Mage/src/main/java/mage/game/permanent/token/SamuraiToken.java"
     }
   ],
   "unresolved": []
