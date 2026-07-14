@@ -110,6 +110,32 @@ def _maybe_configure_deterministic_eval():
             torch.backends.cuda.enable_math_sdp(True)
         except Exception:
             pass
+        # Pin CPU intra-op/inter-op thread pools. OMP_NUM_THREADS/MKL_NUM_THREADS env
+        # vars are necessary but NOT sufficient: multi-threaded GEMM/reduction kernels
+        # sum partial dot products in a thread-count-dependent order (float addition is
+        # non-associative), so two fresh processes that happen to resolve a different
+        # effective thread count (env var applied too late, ambient core/affinity
+        # detection differing run to run) get different ~1e-4-relative logits on
+        # identical input -- invisible on confident candidates, decision-flipping on
+        # near-tied ones. set_num_threads must be called before any parallel op runs;
+        # this call site (module import, before any model/tensor is created) is early
+        # enough. CPU-only: no effect on CUDA inference (GPU kernels are independent of
+        # the host intra-op pool, verified separately).
+        try:
+            torch.set_num_threads(1)
+        except Exception as e:
+            logger.warning(LogCategory.SYSTEM_INIT,
+                           "Failed to pin CPU intra-op threads for deterministic eval: %s", str(e))
+        try:
+            # Best-effort: interop threads (torch.jit.fork/join) are unrelated to the
+            # GEMM/reduction determinism this guards against, and PyTorch often has
+            # already lazily initialized this pool by the time we get here (e.g. via
+            # the `transformers` import in mtg_transformer.py), which makes this call
+            # raise. That's fine -- log at debug, not warning.
+            torch.set_num_interop_threads(1)
+        except Exception as e:
+            logger.debug(LogCategory.SYSTEM_INIT,
+                        "Could not pin CPU interop threads (likely already initialized): %s", str(e))
         logger.info(LogCategory.SYSTEM_INIT,
                     "Enabled deterministic eval torch settings")
     except Exception as e:
