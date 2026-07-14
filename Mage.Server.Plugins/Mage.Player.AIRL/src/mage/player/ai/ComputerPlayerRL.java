@@ -3325,8 +3325,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     : ordinal + 1;
             GameLogger gameLogger = resolveGameLogger();
             boolean logEnabled = gameLogger != null && gameLogger.isEnabled();
+            // v5 schema (local-training/kernel_oracle/v5_capture_schema_addendum.md,
+            // Sol #95/#96/#98): decision_number can collide across decision types
+            // (it only peeks at the shared GameLogger's counter); record_id is a
+            // genuinely-incrementing per-game counter, unique across ALL decision
+            // types, safe as a join/ordering key. Falls back to the per-player
+            // ordinal when no shared game logger is attached (not collision-free
+            // across players in that case, matching decisionNumber's own fallback).
+            int recordId = ordinal + 1;
             if (logEnabled) {
                 decisionNumber = gameLogger.getNextDecisionNumber();
+                recordId = gameLogger.nextRecordId();
             }
             String sourceId = source == null || source.getSourceId() == null ? "" : source.getSourceId().toString();
             String sourceName = replayTraceSourceName(source, game);
@@ -3354,6 +3363,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             appendJsonNumber(sb, "decision_number", decisionNumber);
             sb.append(',');
             appendJsonString(sb, "source_decision_number", decisionNumber > 0 ? ("D" + String.format(Locale.US, "%03d", decisionNumber)) : "");
+            sb.append(',');
+            appendJsonNumber(sb, "record_id", recordId);
             sb.append(',');
             appendJsonString(sb, "player", getName());
             sb.append(',');
@@ -3464,6 +3475,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     actionType,
                     ordinal,
                     decisionNumber,
+                    recordId,
                     candidateTexts,
                     safeCandidateObjectIds,
                     selectedIndices,

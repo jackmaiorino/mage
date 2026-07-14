@@ -51,6 +51,7 @@ public final class LiveCheckpointRecorder {
             StateSequenceBuilder.ActionType actionType,
             int ordinal,
             int decisionNumber,
+            int recordId,
             List<String> candidateTexts,
             List<String> candidateObjectIds,
             List<Integer> selectedIndices,
@@ -91,6 +92,7 @@ public final class LiveCheckpointRecorder {
                     player.getName(),
                     ordinal,
                     decisionNumber,
+                    recordId,
                     actionType.name(),
                     candidateTexts,
                     candidateObjectIds,
@@ -113,6 +115,7 @@ public final class LiveCheckpointRecorder {
                     player.getName(),
                     ordinal,
                     decisionNumber,
+                    recordId,
                     actionType.name(),
                     candidateTexts,
                     candidateObjectIds,
@@ -137,6 +140,7 @@ public final class LiveCheckpointRecorder {
         public final String playerName;
         public final int ordinal;
         public final int decisionNumber;
+        public final int recordId;
         public final String actionType;
         public final List<String> candidateTexts;
         public final List<String> candidateObjectIds;
@@ -157,6 +161,7 @@ public final class LiveCheckpointRecorder {
                 String playerName,
                 int ordinal,
                 int decisionNumber,
+                int recordId,
                 String actionType,
                 List<String> candidateTexts,
                 List<String> candidateObjectIds,
@@ -175,6 +180,7 @@ public final class LiveCheckpointRecorder {
             this.playerName = playerName == null ? "" : playerName;
             this.ordinal = ordinal;
             this.decisionNumber = decisionNumber;
+            this.recordId = recordId;
             this.actionType = actionType == null ? "" : actionType;
             this.candidateTexts = strings(candidateTexts);
             this.candidateObjectIds = strings(candidateObjectIds);
@@ -195,6 +201,7 @@ public final class LiveCheckpointRecorder {
                 String playerName,
                 int ordinal,
                 int decisionNumber,
+                int recordId,
                 String actionType,
                 List<String> candidateTexts,
                 List<String> candidateObjectIds,
@@ -206,7 +213,7 @@ public final class LiveCheckpointRecorder {
                 String compactState,
                 RandomUtil.State randomState
         ) {
-            return new Snapshot(null, playerId, playerName, ordinal, decisionNumber, actionType,
+            return new Snapshot(null, playerId, playerName, ordinal, decisionNumber, recordId, actionType,
                     candidateTexts, candidateObjectIds, selectedIndices, selectedTexts, selectedObjectIds,
                     selectedProb, valueScore, compactState, randomState);
         }
@@ -229,6 +236,7 @@ public final class LiveCheckpointRecorder {
             Files.createDirectories(root);
             Path manifest = root.resolve("manifest.csv");
             String header = "status,snapshot_path,schema_version,player_id,player_name,ordinal,decision_number,"
+                    + "record_id,"
                     + "action_type,candidate_count,selected_indices,selected_texts,selected_object_ids,"
                     + "selected_prob,value_score,candidate_hash,state_hash,rng_state_hash,error\n";
             String line = csv(status)
@@ -238,6 +246,7 @@ public final class LiveCheckpointRecorder {
                     + "," + csv(snapshot == null ? "" : snapshot.playerName)
                     + "," + (snapshot == null ? -1 : snapshot.ordinal)
                     + "," + (snapshot == null ? -1 : snapshot.decisionNumber)
+                    + "," + (snapshot == null ? -1 : snapshot.recordId)
                     + "," + csv(snapshot == null ? "" : snapshot.actionType)
                     + "," + (snapshot == null ? 0 : snapshot.candidateTexts.size())
                     + "," + csv(snapshot == null ? "" : joinInts(snapshot.selectedIndices))

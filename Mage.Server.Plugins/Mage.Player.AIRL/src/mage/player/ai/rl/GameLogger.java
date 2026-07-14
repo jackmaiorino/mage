@@ -35,6 +35,7 @@ public class GameLogger {
     private final String gameId;
     private final Path logFile;
     private int decisionNumber = 0;
+    private int recordIdCounter = 0;
     private final boolean enabled;
     private final LogFormat logFormat;
 
@@ -588,6 +589,24 @@ public class GameLogger {
 
     public int getNextDecisionNumber() {
         return decisionNumber + 1;
+    }
+
+    /**
+     * v5 schema (local-training/kernel_oracle/v5_capture_schema_addendum.md,
+     * Sol #95/#96/#98): a deterministic per-game record id, unique across ALL
+     * decision types, assigned once per ComputerPlayerRL#logReplayDecision call
+     * for BOTH players sharing this GameLogger instance. Unlike
+     * getNextDecisionNumber() (which only peeks at decisionNumber + 1 without
+     * consuming it, so two decisions landing between text-log increments can
+     * read the identical value -- confirmed colliding DECLARE_ATTACKS /
+     * ACTIVATE_ABILITY_OR_SPELL pairs in a 40-game corpus), this genuinely
+     * increments on every call and is safe to use as a join/ordering key
+     * across REPLAY_DECISION_JSON records and LiveCheckpointRecorder's
+     * manifest rows. decision_number remains available only as diagnostic
+     * metadata.
+     */
+    public int nextRecordId() {
+        return ++recordIdCounter;
     }
 
     public String getGameId() {
