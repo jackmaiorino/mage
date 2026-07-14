@@ -49,7 +49,8 @@ public final class LiveCheckpointBranchMiner {
                     + "alternate_attempt_count,alternate_terminal_count,alternate_win_count,alternate_outcomes,"
                     + "positive_confirmation_count,positive_confirmation_pass_count,positive_confirmation_outcomes,"
                     + "reentry_a_candidate_hash,reentry_b_candidate_hash,reentry_a_state_hash,reentry_b_state_hash,"
-                    + "reentry_a_reason,reentry_b_reason\n";
+                    + "reentry_a_reason,reentry_b_reason,source_post_prefix_action_type,alternate_post_prefix_action_type,"
+                    + "source_forced_confirmed,alternate_forced_confirmed,alternate_distinct,alternate_divergence_note\n";
     private static final String SELECTION_CSV_HEADER =
             "rank,snapshot_path,score,game_key,ordinal,decision_number,action_type,candidate_count,"
                     + "selected_indices,selected_texts,selected_prob,value_score,nonpass_candidate_count,"
@@ -96,6 +97,10 @@ public final class LiveCheckpointBranchMiner {
     public static void main(String[] args) throws Exception {
         Config cfg = Config.parse(args);
         Files.createDirectories(cfg.outDir);
+        if (cfg.suffixSpecPath != null) {
+            runHybridSuffixGateMode(cfg);
+            return;
+        }
         Selection selection = selectSnapshots(cfg);
         writeSelectionManifest(cfg, selection.selected);
         if (cfg.resumeProbe) {
@@ -707,11 +712,19 @@ public final class LiveCheckpointBranchMiner {
             return row;
         }
 
-        BranchOutcome reentryA = runProbe(snapshot, sourceIndices, true, true, "source_reentry_a", cfg.timeoutSec, false);
-        BranchOutcome reentryB = runProbe(snapshot, sourceIndices, true, true, "source_reentry_b", cfg.timeoutSec, false);
+        boolean strict = cfg.acceptanceGate;
+        BranchOutcome reentryA = runProbe(snapshot, sourceIndices, true, true, "source_reentry_a", cfg.timeoutSec, false,
+                ContinuationPolicy.STABLE, 0L, false, 0, strict);
+        BranchOutcome reentryB = runProbe(snapshot, sourceIndices, true, true, "source_reentry_b", cfg.timeoutSec, false,
+                ContinuationPolicy.STABLE, 0L, false, 0, strict);
         row.applyReentry(reentryA, reentryB);
         if (!reentryA.reentryMatched || !reentryB.reentryMatched) {
-            row.classification = "checkpoint_reentry_mismatch";
+            // Sol #93 amendment 1: name the empirically-confirmed failure signature
+            // (resumed decision surface is a different action type / candidate set
+            // than what was captured -- the nested-decision continuation is not
+            // reconstructed from the serialized snapshot) precisely, instead of the
+            // generic mismatch label, whenever the gate is running strict.
+            row.classification = strict ? classifyReentryMismatch(reentryA, reentryB) : "checkpoint_reentry_mismatch";
             return row;
         }
         if (cfg.reentryOnly) {
@@ -726,8 +739,24 @@ public final class LiveCheckpointBranchMiner {
                 true,
                 "source_terminal",
                 cfg.timeoutSec,
-                cfg.postBranchAutopilot);
+                cfg.postBranchAutopilot,
+                ContinuationPolicy.STABLE,
+                0L,
+                false,
+                0,
+                strict);
         row.applySource(source);
+
+        // Acceptance-gate mode (Sol #93 checkpoint-reentry gate): this is a
+        // branchability/determinism gate, not correction mining. It must force and
+        // check the first alternate regardless of whether the source action won,
+        // lost, or timed out, so it cannot reuse the correction-mining early returns
+        // below (those exist to avoid wasted alternate search once a row is already
+        // known to be inadmissible as training evidence).
+        if (cfg.acceptanceGate) {
+            return applyAcceptanceGate(row, snapshot, sourceIndices, source, cfg);
+        }
+
         if (!source.error.isEmpty()) {
             row.classification = "source_error";
             return row;
@@ -751,6 +780,750 @@ public final class LiveCheckpointBranchMiner {
             row.classification = "clean_positive_needs_isolated_reprobe";
         }
         return row;
+    }
+
+    /**
+     * Sol #93 amendment 1: precise, fail-closed classification for a reentry
+     * mismatch under the strict acceptance gate. action_type_mismatch and
+     * forced_text_mismatch are the two signatures empirically confirmed (against
+     * the source text trace, cross-checked on an untouched --reentry-only rerun)
+     * to mean "the resumed game fell back to a different, outer decision surface
+     * instead of the captured one" -- i.e. the nested decision's continuation
+     * (call-stack position mid-resolve) was not reconstructed from the serialized
+     * snapshot, not a generic/unexplained mismatch.
+     */
+    private static String classifyReentryMismatch(BranchOutcome a, BranchOutcome b) {
+        if (isContinuationNotSerializedReason(a) || isContinuationNotSerializedReason(b)) {
+            return "continuation_not_serialized";
+        }
+        return "checkpoint_reentry_mismatch";
+    }
+
+    private static boolean isContinuationNotSerializedReason(BranchOutcome outcome) {
+        if (outcome == null) {
+            return false;
+        }
+        String reason = outcome.reason.isEmpty() ? outcome.error : outcome.reason;
+        return reason != null && (reason.startsWith("action_type_mismatch") || reason.startsWith("forced_text_mismatch"));
+    }
+
+    /**
+     * Sol #93 checkpoint-reentry acceptance gate. Reentry (source_reentry_a/b) is
+     * already validated by the caller. This only needs to confirm that forcing the
+     * ORIGINAL action and, separately, the first ALTERNATE action each produce a
+     * legal continuing game -- terminal is sufficient but not required; one further
+     * legal decision from either player after the forced choice (captured as
+     * post-prefix action/candidate/state hash by the existing sequence-mode
+     * plumbing) is the bound the spec calls for.
+     *
+     * Amendment 2: legality alone is not enough evidence that the alternate was
+     * really exercised. sourceForcedConfirmed/alternateForcedConfirmed assert the
+     * branch controller actually intercepted and matched that decision (not just
+     * "no engine error"); alternateDistinct asserts the forced index set truly
+     * differs from the source's; divergence compares the post-force continuation
+     * (post-prefix hash, or final state hash if either branch ended the game
+     * immediately) between the source and alternate runs and records convergence
+     * explicitly rather than silently passing a no-op alternate.
+     */
+    private static BranchRow applyAcceptanceGate(
+            BranchRow row,
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<Integer> sourceIndices,
+            BranchOutcome source,
+            Config cfg
+    ) {
+        boolean sourceForcedConfirmed = source.firstDecisionSeen && source.reentryMatched;
+        boolean sourceLegal = sourceForcedConfirmed
+                && source.error.isEmpty()
+                && (source.terminal || !source.postPrefixActionType.isEmpty());
+        row.sourceForcedConfirmed = sourceForcedConfirmed;
+
+        List<List<Integer>> alternateChoices = alternateChoices(snapshot, sourceIndices, Math.max(1, cfg.maxAlternates));
+        if (alternateChoices.isEmpty()) {
+            row.classification = sourceLegal ? "gate_fail_alternate_unavailable" : "gate_fail_source_illegal_alternate_unavailable";
+            return row;
+        }
+
+        List<Integer> firstAlternate = alternateChoices.get(0);
+        boolean alternateDistinct = !firstAlternate.equals(sourceIndices);
+        row.alternateDistinct = alternateDistinct;
+        BranchOutcome alternate = runProbe(
+                snapshot,
+                firstAlternate,
+                false,
+                false,
+                "alternate_first",
+                cfg.alternateTimeoutSec,
+                cfg.postBranchAutopilot,
+                ContinuationPolicy.STABLE,
+                0L,
+                false,
+                0,
+                true);
+        row.alternateAttemptCount = 1;
+        row.alternateTerminalCount = alternate.terminal ? 1 : 0;
+        row.alternateWinCount = (alternate.terminal && alternate.won) ? 1 : 0;
+        row.alternateIndices = joinInts(firstAlternate);
+        row.alternateTexts = joinStrings(selectedTexts(snapshot.candidateTexts, firstAlternate));
+        row.alternateOutcomes = row.alternateIndices + ":" + row.alternateTexts + ":" + alternate.shortClassification();
+        row.applyAlternate(alternate);
+
+        boolean alternateForcedConfirmed = alternate.firstDecisionSeen && alternate.reentryMatched && alternateDistinct;
+        row.alternateForcedConfirmed = alternateForcedConfirmed;
+        boolean alternateLegal = alternateForcedConfirmed
+                && alternate.error.isEmpty()
+                && (alternate.terminal || !alternate.postPrefixActionType.isEmpty());
+
+        row.alternateDivergenceNote = classifyDivergence(source, alternate);
+
+        if (sourceLegal && alternateLegal) {
+            row.classification = "gate_pass";
+        } else if (!sourceLegal && !alternateLegal) {
+            row.classification = "gate_fail_both";
+        } else if (!sourceLegal) {
+            row.classification = "gate_fail_source";
+        } else {
+            row.classification = "gate_fail_alternate";
+        }
+        return row;
+    }
+
+    private static String classifyDivergence(BranchOutcome source, BranchOutcome alternate) {
+        boolean sourceHasNext = source != null && !source.postPrefixStateHash.isEmpty();
+        boolean alternateHasNext = alternate != null && !alternate.postPrefixStateHash.isEmpty();
+        if (sourceHasNext && alternateHasNext) {
+            boolean same = source.postPrefixActionType.equals(alternate.postPrefixActionType)
+                    && source.postPrefixStateHash.equals(alternate.postPrefixStateHash);
+            return same ? "post_prefix_converged" : "post_prefix_diverged";
+        }
+        if (source != null && alternate != null && source.terminal && alternate.terminal) {
+            boolean same = !source.finalStateHash.isEmpty() && source.finalStateHash.equals(alternate.finalStateHash);
+            return same ? "terminal_converged" : "terminal_diverged";
+        }
+        return "divergence_uncomparable";
+    }
+
+    private static final String HYBRID_CSV_HEADER =
+            "spec_path,ancestor_snapshot_path,target_snapshot_path,target_action_type,suffix_length,"
+                    + "ancestor_reentry_a_matched,ancestor_reentry_b_matched,bridge_verified,"
+                    + "bridge_a_reached_step,bridge_b_reached_step,bridge_a_failure_reason,bridge_b_failure_reason,"
+                    + "source_forced_confirmed,source_terminal,source_won,source_lost,source_error,"
+                    + "alternate_forced_confirmed,alternate_distinct,alternate_terminal,alternate_won,alternate_lost,alternate_error,"
+                    + "divergence_note,classification,error\n";
+
+    private enum HybridMode {
+        BRIDGE_VERIFY, FORCE_SOURCE, FORCE_ALTERNATE
+    }
+
+    /**
+     * Sol #93 hybrid ancestor+suffix acceptance gate (external-review ratified,
+     * replaces the rejected "restrict scale-up to ACTIVATE_ABILITY_OR_SPELL only"
+     * option). For a nested decision (SELECT_TARGETS/SELECT_CARD/DECLARE_ATTACKS)
+     * that cannot be directly resumed (continuation_not_serialized, confirmed
+     * 14/14 in the first gate run), this loads the nearest ANCESTOR top-level
+     * checkpoint, verifies it reenters cleanly on its own, then replays the short
+     * (<=3-decision) suffix from ancestor to the nested target using semantic
+     * action tuples -- action type, candidate-set hash, canonical state hash, and
+     * a live RNG fingerprint -- at every recorded boundary, NEVER ordinal or
+     * positional counting. Any boundary mismatch fails closed to UNSUPPORTED; it
+     * is reported, never patched or soft-continued.
+     */
+    private static void runHybridSuffixGateMode(Config cfg) throws Exception {
+        Path csvPath = cfg.outDir.resolve("hybrid_gate_probe.csv");
+        Files.write(csvPath, HYBRID_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        HybridGateRow row = new HybridGateRow();
+        row.specPath = cfg.suffixSpecPath.toString();
+        try {
+            List<HybridStep> steps = parseSuffixSpec(cfg.suffixSpecPath);
+            row.suffixLength = steps.size() - 1;
+            if (steps.size() < 2) {
+                row.classification = "gate_unsupported_spec_too_short";
+                appendHybridRow(csvPath, row);
+                return;
+            }
+            HybridStep ancestorStep = steps.get(0);
+            HybridStep targetStep = steps.get(steps.size() - 1);
+            row.ancestorSnapshotPath = ancestorStep.snapshotPath.toString();
+            row.targetSnapshotPath = targetStep.snapshotPath.toString();
+            row.targetActionType = targetStep.actionType;
+
+            LiveCheckpointRecorder.Snapshot ancestorSnapshot = loadSnapshot(ancestorStep.snapshotPath);
+            if (ancestorSnapshot == null || ancestorSnapshot.gameSnapshot == null) {
+                row.classification = "gate_unsupported_ancestor_load_error";
+                appendHybridRow(csvPath, row);
+                return;
+            }
+            List<Integer> ancestorIndices = sanitizeIndices(ancestorSnapshot.selectedIndices,
+                    ancestorSnapshot.candidateTexts == null ? 0 : ancestorSnapshot.candidateTexts.size());
+            if (ancestorIndices.isEmpty()) {
+                row.classification = "gate_unsupported_ancestor_missing_source_choice";
+                appendHybridRow(csvPath, row);
+                return;
+            }
+
+            // Discipline 1: the ancestor must pass repeated fresh-game-context
+            // reentry first, via the same strict direct mechanism the top-level
+            // gate already uses -- unchanged.
+            BranchOutcome ancestorReentryA = runProbe(ancestorSnapshot, ancestorIndices, true, true,
+                    "ancestor_reentry_a", cfg.timeoutSec, false, ContinuationPolicy.STABLE, 0L, false, 0, true);
+            BranchOutcome ancestorReentryB = runProbe(ancestorSnapshot, ancestorIndices, true, true,
+                    "ancestor_reentry_b", cfg.timeoutSec, false, ContinuationPolicy.STABLE, 0L, false, 0, true);
+            row.ancestorReentryAMatched = ancestorReentryA.reentryMatched;
+            row.ancestorReentryBMatched = ancestorReentryB.reentryMatched;
+            if (!ancestorReentryA.reentryMatched || !ancestorReentryB.reentryMatched) {
+                row.classification = "gate_unsupported_ancestor_unresumable";
+                appendHybridRow(csvPath, row);
+                return;
+            }
+
+            // Discipline 2: replay the suffix TWICE from independent fresh game
+            // contexts, verifying every boundary. Fail closed to UNSUPPORTED on any
+            // mismatch; never patched.
+            HybridWalkResult bridgeA = runHybridWalk(ancestorSnapshot, steps, HybridMode.BRIDGE_VERIFY,
+                    cfg.timeoutSec, cfg.postBranchAutopilot);
+            HybridWalkResult bridgeB = runHybridWalk(ancestorSnapshot, steps, HybridMode.BRIDGE_VERIFY,
+                    cfg.timeoutSec, cfg.postBranchAutopilot);
+            row.bridgeAReachedStep = bridgeA.reachedStepIndex;
+            row.bridgeBReachedStep = bridgeB.reachedStepIndex;
+            row.bridgeAFailureReason = bridgeA.failureReason;
+            row.bridgeBFailureReason = bridgeB.failureReason;
+            boolean bridgeOk = !bridgeA.failed && !bridgeB.failed
+                    && bridgeA.reachedStepIndex == steps.size() - 1
+                    && bridgeB.reachedStepIndex == steps.size() - 1;
+            row.bridgeVerified = bridgeOk;
+            if (!bridgeOk) {
+                row.classification = "gate_unsupported_suffix_boundary_mismatch";
+                appendHybridRow(csvPath, row);
+                return;
+            }
+
+            // Discipline 3: force the ORIGINAL action at the target; it must
+            // reproduce the trace exactly (already required by the boundary check
+            // above) and yield a legal continuation (terminal, or >=1 further legal
+            // decision).
+            HybridWalkResult sourceWalk = runHybridWalk(ancestorSnapshot, steps, HybridMode.FORCE_SOURCE,
+                    cfg.timeoutSec, cfg.postBranchAutopilot);
+            row.sourceForcedConfirmed = sourceWalk.targetForcedConfirmed;
+            row.sourceTerminal = sourceWalk.terminal;
+            row.sourceWon = sourceWalk.won;
+            row.sourceLost = sourceWalk.lost;
+            row.sourceError = sourceWalk.error;
+            boolean sourceLegal = sourceWalk.targetForcedConfirmed
+                    && sourceWalk.error.isEmpty()
+                    && (sourceWalk.terminal || !sourceWalk.postPrefixActionType.isEmpty());
+
+            // Discipline 4: force the first ALTERNATE, distinct from the original,
+            // and confirm it is legal too; assert it actually diverges from the
+            // source continuation, or record convergence explicitly rather than
+            // silently accepting a no-op alternate.
+            HybridWalkResult altWalk = runHybridWalk(ancestorSnapshot, steps, HybridMode.FORCE_ALTERNATE,
+                    cfg.alternateTimeoutSec, cfg.postBranchAutopilot);
+            row.alternateForcedConfirmed = altWalk.targetForcedConfirmed;
+            row.alternateDistinct = altWalk.targetForcedConfirmed
+                    && !altWalk.targetActualIndices.equals(joinInts(sanitizeIndices(targetStep.selectedIndices, targetStep.candidateCount)));
+            row.alternateTerminal = altWalk.terminal;
+            row.alternateWon = altWalk.won;
+            row.alternateLost = altWalk.lost;
+            row.alternateError = altWalk.error;
+            boolean alternateLegal = altWalk.targetForcedConfirmed
+                    && row.alternateDistinct
+                    && altWalk.error.isEmpty()
+                    && (altWalk.terminal || !altWalk.postPrefixActionType.isEmpty());
+
+            row.divergenceNote = classifyHybridDivergence(sourceWalk, altWalk);
+
+            if (sourceLegal && alternateLegal) {
+                row.classification = "gate_pass";
+            } else if (!sourceLegal && !alternateLegal) {
+                row.classification = "gate_fail_both";
+            } else if (!sourceLegal) {
+                row.classification = "gate_fail_source";
+            } else {
+                row.classification = "gate_fail_alternate";
+            }
+            appendHybridRow(csvPath, row);
+        } catch (Throwable t) {
+            row.classification = "gate_error";
+            row.error = errorSummary(t);
+            appendHybridRow(csvPath, row);
+        }
+        System.out.println("hybrid gate wrote 1 row to " + csvPath + " classification=" + row.classification);
+    }
+
+    private static HybridWalkResult runHybridWalk(
+            LiveCheckpointRecorder.Snapshot ancestorSnapshot,
+            List<HybridStep> steps,
+            HybridMode mode,
+            int timeoutSec,
+            boolean postBranchAutopilot
+    ) {
+        RandomUtil.State previousRandom = RandomUtil.captureState();
+        Game game = null;
+        HybridSuffixController controller = new HybridSuffixController(ancestorSnapshot, steps, mode, postBranchAutopilot);
+        HybridWalkResult result = new HybridWalkResult();
+        try {
+            RandomUtil.restoreState(ancestorSnapshot.randomState);
+            game = ancestorSnapshot.gameSnapshot.createSimulationForAI();
+            Player player = game.getPlayer(ancestorSnapshot.playerId);
+            if (!(player instanceof ComputerPlayerRL)) {
+                result.error = "checkpoint_player_copy_type_mismatch:"
+                        + (player == null ? "null" : player.getClass().getName());
+                return result;
+            }
+            installBranchControllers(game, (ComputerPlayerRL) player, controller, postBranchAutopilot);
+            try {
+                resumeGameInGameThread(game, timeoutSec, "hybrid_" + mode.name());
+            } catch (EngineDecisionBranchController.BranchTerminated ignored) {
+                // Expected: BRIDGE_VERIFY always self-terminates at the target step;
+                // FORCE_SOURCE/FORCE_ALTERNATE self-terminate only on a boundary
+                // mismatch (already captured as controller.failed/failureReason).
+            }
+            result.captureController(controller);
+            result.captureTerminal(game, ancestorSnapshot.playerName);
+            return result;
+        } catch (Throwable t) {
+            result.captureController(controller);
+            if (result.error.isEmpty()) {
+                result.error = errorSummary(t);
+            }
+            return result;
+        } finally {
+            if (game != null) {
+                try {
+                    game.end();
+                } catch (Throwable ignored) {
+                    // ignore cleanup failures
+                }
+                try {
+                    game.cleanUp();
+                } catch (Throwable ignored) {
+                    // ignore cleanup failures
+                }
+            }
+            RandomUtil.restoreState(previousRandom);
+        }
+    }
+
+    private static String classifyHybridDivergence(HybridWalkResult source, HybridWalkResult alternate) {
+        boolean sourceHasNext = source != null && !source.postPrefixStateHash.isEmpty();
+        boolean alternateHasNext = alternate != null && !alternate.postPrefixStateHash.isEmpty();
+        if (sourceHasNext && alternateHasNext) {
+            boolean same = source.postPrefixActionType.equals(alternate.postPrefixActionType)
+                    && source.postPrefixStateHash.equals(alternate.postPrefixStateHash);
+            return same ? "post_prefix_converged" : "post_prefix_diverged";
+        }
+        if (source != null && alternate != null && source.terminal && alternate.terminal) {
+            boolean same = !source.finalStateHash.isEmpty() && source.finalStateHash.equals(alternate.finalStateHash);
+            return same ? "terminal_converged" : "terminal_diverged";
+        }
+        return "divergence_uncomparable";
+    }
+
+    private static List<HybridStep> parseSuffixSpec(Path path) throws IOException {
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        List<HybridStep> steps = new ArrayList<>();
+        for (int i = 1; i < lines.size(); i++) {
+            String line = lines.get(i);
+            if (line.trim().isEmpty()) {
+                continue;
+            }
+            List<String> cells = parseCsvLine(line);
+            if (cells.size() < 13) {
+                continue;
+            }
+            int stepIndex = Integer.parseInt(cells.get(0).trim());
+            String role = cells.get(1);
+            Path snapshotPath = Paths.get(cells.get(3));
+            int decisionNumber = Integer.parseInt(cells.get(4).trim());
+            String actionType = cells.get(5);
+            int candidateCount = Integer.parseInt(cells.get(6).trim());
+            List<Integer> selectedIndices = parseIntList(cells.get(7));
+            String candidateHash = cells.get(10);
+            String stateHash = cells.get(11);
+            String rngStateHash = cells.get(12);
+            steps.add(new HybridStep(stepIndex, role, snapshotPath, decisionNumber, actionType,
+                    candidateCount, selectedIndices, candidateHash, stateHash, rngStateHash));
+        }
+        steps.sort(Comparator.comparingInt(s -> s.stepIndex));
+        return steps;
+    }
+
+    private static List<Integer> parseIntList(String value) {
+        List<Integer> out = new ArrayList<>();
+        if (value == null || value.trim().isEmpty()) {
+            return out;
+        }
+        for (String part : value.split("\\|")) {
+            String p = part.trim();
+            if (!p.isEmpty()) {
+                out.add(Integer.parseInt(p));
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Minimal RFC4180-ish CSV line parser (quoted fields, "" escaping). Needed
+     * because suffix_spec.csv carries raw MTG candidate/ability text through
+     * selected_texts, which can contain commas the manifest's own unconditional
+     * quoting already handles on write (Python csv module); this is the matching
+     * reader.
+     */
+    private static List<String> parseCsvLine(String line) {
+        List<String> out = new ArrayList<>();
+        if (line == null) {
+            return out;
+        }
+        int i = 0;
+        int n = line.length();
+        StringBuilder cur = new StringBuilder();
+        boolean inQuotes = false;
+        while (i < n) {
+            char c = line.charAt(i);
+            if (inQuotes) {
+                if (c == '"') {
+                    if (i + 1 < n && line.charAt(i + 1) == '"') {
+                        cur.append('"');
+                        i += 2;
+                        continue;
+                    }
+                    inQuotes = false;
+                    i++;
+                    continue;
+                }
+                cur.append(c);
+                i++;
+                continue;
+            }
+            if (c == '"') {
+                inQuotes = true;
+                i++;
+                continue;
+            }
+            if (c == ',') {
+                out.add(cur.toString());
+                cur.setLength(0);
+                i++;
+                continue;
+            }
+            cur.append(c);
+            i++;
+        }
+        out.add(cur.toString());
+        return out;
+    }
+
+    private static void appendHybridRow(Path csvPath, HybridGateRow row) throws IOException {
+        Files.write(csvPath, row.toCsvLine().getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+    }
+
+    private static final class HybridStep {
+        private final int stepIndex;
+        private final String role;
+        private final Path snapshotPath;
+        private final int decisionNumber;
+        private final String actionType;
+        private final int candidateCount;
+        private final List<Integer> selectedIndices;
+        private final String candidateHash;
+        private final String stateHash;
+        private final String rngStateHash;
+
+        private HybridStep(
+                int stepIndex,
+                String role,
+                Path snapshotPath,
+                int decisionNumber,
+                String actionType,
+                int candidateCount,
+                List<Integer> selectedIndices,
+                String candidateHash,
+                String stateHash,
+                String rngStateHash
+        ) {
+            this.stepIndex = stepIndex;
+            this.role = role;
+            this.snapshotPath = snapshotPath;
+            this.decisionNumber = decisionNumber;
+            this.actionType = actionType;
+            this.candidateCount = candidateCount;
+            this.selectedIndices = selectedIndices;
+            this.candidateHash = candidateHash;
+            this.stateHash = stateHash;
+            this.rngStateHash = rngStateHash;
+        }
+    }
+
+    /**
+     * Forces the exact recorded action tuple at every boundary from the ancestor
+     * to the nested target (semantic match: action type + candidate-set hash +
+     * canonical state hash + live RNG fingerprint -- never ordinal/positional
+     * counting), then at the target either stops (BRIDGE_VERIFY, doubled to prove
+     * the bridge itself is deterministic), forces the original recorded choice
+     * and continues (FORCE_SOURCE), or forces the first distinct legal alternate
+     * and continues (FORCE_ALTERNATE). Fails closed on the first mismatch.
+     */
+    private static final class HybridSuffixController implements EngineDecisionBranchController {
+        private final LiveCheckpointRecorder.Snapshot ancestorSnapshot;
+        private final List<HybridStep> steps;
+        private final HybridMode mode;
+        private final boolean postBranchAutopilot;
+
+        private int stepIndex = 0;
+        private boolean failed = false;
+        private String failureReason = "";
+        private int reachedStepIndex = -1;
+        private boolean targetForcedConfirmed = false;
+        private String targetActualIndices = "";
+        private boolean postPrefixCaptured = false;
+        private String postPrefixActionType = "";
+        private String postPrefixStateHash = "";
+
+        private HybridSuffixController(
+                LiveCheckpointRecorder.Snapshot ancestorSnapshot,
+                List<HybridStep> steps,
+                HybridMode mode,
+                boolean postBranchAutopilot
+        ) {
+            this.ancestorSnapshot = ancestorSnapshot;
+            this.steps = steps;
+            this.mode = mode;
+            this.postBranchAutopilot = postBranchAutopilot;
+        }
+
+        @Override
+        public boolean shouldEvaluateBeforeModel(StateSequenceBuilder.ActionType actionType) {
+            return true;
+        }
+
+        @Override
+        public boolean shouldBypassModelInference() {
+            return postBranchAutopilot;
+        }
+
+        @Override
+        public <T> Choice onDecision(DecisionContext<T> context) {
+            if (failed) {
+                return Choice.chooseAndTerminate(Collections.emptyList(), failureReason);
+            }
+            if (stepIndex == 0
+                    && (context == null || context.player == null
+                    || ancestorSnapshot == null || ancestorSnapshot.playerId == null
+                    || !ancestorSnapshot.playerId.equals(context.player.getId()))) {
+                return Choice.none();
+            }
+            if (stepIndex < steps.size()) {
+                return onBoundaryDecision(context);
+            }
+            return onPostTargetDecision(context);
+        }
+
+        private <T> Choice onBoundaryDecision(DecisionContext<T> context) {
+            HybridStep step = steps.get(stepIndex);
+            String actualActionType = context.actionType == null ? "" : context.actionType.name();
+            String liveRngHash = safeFingerprint();
+            boolean actionMatch = actualActionType.equals(step.actionType);
+            boolean countMatch = context.candidateCount == step.candidateCount;
+            boolean candidateMatch = step.candidateHash != null && step.candidateHash.equals(context.candidateHash);
+            boolean stateMatch = step.stateHash != null && step.stateHash.equals(context.stateHash);
+            boolean rngMatch = step.rngStateHash != null && step.rngStateHash.equals(liveRngHash);
+            if (!actionMatch || !countMatch || !candidateMatch || !stateMatch || !rngMatch) {
+                failed = true;
+                reachedStepIndex = stepIndex - 1;
+                failureReason = "suffix_boundary_" + stepIndex + "_mismatch"
+                        + ":action=" + actionMatch + ":count=" + countMatch
+                        + ":candidate=" + candidateMatch + ":state=" + stateMatch + ":rng=" + rngMatch;
+                return Choice.chooseAndTerminate(Collections.emptyList(), failureReason);
+            }
+            reachedStepIndex = stepIndex;
+            boolean isTarget = stepIndex == steps.size() - 1;
+            List<Integer> forceIndices;
+            if (isTarget && mode == HybridMode.FORCE_ALTERNATE) {
+                forceIndices = resolveAlternate(context, step);
+                if (forceIndices.isEmpty()) {
+                    failed = true;
+                    failureReason = "alternate_unavailable_at_target";
+                    return Choice.chooseAndTerminate(Collections.emptyList(), failureReason);
+                }
+                targetForcedConfirmed = true;
+            } else {
+                forceIndices = sanitizeIndices(step.selectedIndices, context.candidateCount);
+                if (forceIndices.isEmpty()) {
+                    failed = true;
+                    failureReason = "forced_indices_invalid_at_step_" + stepIndex;
+                    return Choice.chooseAndTerminate(Collections.emptyList(), failureReason);
+                }
+                if (isTarget) {
+                    targetForcedConfirmed = true;
+                }
+            }
+            if (isTarget) {
+                targetActualIndices = joinInts(forceIndices);
+            }
+            stepIndex++;
+            if (stepIndex >= steps.size() && mode == HybridMode.BRIDGE_VERIFY) {
+                return Choice.chooseAndTerminate(forceIndices, "bridge_verified_stop");
+            }
+            return Choice.choose(forceIndices);
+        }
+
+        private <T> List<Integer> resolveAlternate(DecisionContext<T> context, HybridStep targetStep) {
+            Set<Integer> source = new HashSet<>(sanitizeIndices(targetStep.selectedIndices, context.candidateCount));
+            for (int i = 0; i < context.candidateCount; i++) {
+                if (!source.contains(i)) {
+                    return Collections.singletonList(i);
+                }
+            }
+            return Collections.emptyList();
+        }
+
+        private <T> Choice onPostTargetDecision(DecisionContext<T> context) {
+            if (!postPrefixCaptured && context != null) {
+                postPrefixCaptured = true;
+                postPrefixActionType = context.actionType == null ? "" : context.actionType.name();
+                postPrefixStateHash = context.stateHash;
+            }
+            return postBranchAutopilotChoice(context);
+        }
+
+        private <T> Choice postBranchAutopilotChoice(DecisionContext<T> context) {
+            if (!postBranchAutopilot || context == null || context.candidateCount <= 0) {
+                return Choice.none();
+            }
+            List<Integer> indices = LiveCheckpointBranchMiner.deterministicAutopilotIndices(context);
+            if (indices.isEmpty()) {
+                return Choice.none();
+            }
+            return Choice.choose(indices);
+        }
+
+        private String safeFingerprint() {
+            try {
+                RandomUtil.State state = RandomUtil.captureState();
+                return state == null ? "" : state.fingerprint();
+            } catch (Throwable ignored) {
+                return "";
+            }
+        }
+    }
+
+    private static final class HybridWalkResult {
+        private boolean failed;
+        private String failureReason = "";
+        private int reachedStepIndex = -1;
+        private boolean targetForcedConfirmed;
+        private String targetActualIndices = "";
+        private boolean terminal;
+        private boolean won;
+        private boolean lost;
+        private String error = "";
+        private String postPrefixActionType = "";
+        private String postPrefixStateHash = "";
+        private String finalStateHash = "";
+
+        private void captureController(HybridSuffixController c) {
+            if (c == null) {
+                return;
+            }
+            failed = c.failed;
+            failureReason = c.failureReason;
+            reachedStepIndex = c.reachedStepIndex;
+            targetForcedConfirmed = c.targetForcedConfirmed;
+            targetActualIndices = c.targetActualIndices;
+            postPrefixActionType = c.postPrefixActionType;
+            postPrefixStateHash = c.postPrefixStateHash;
+            if (error.isEmpty() && c.failed) {
+                error = c.failureReason;
+            }
+        }
+
+        private void captureTerminal(Game game, String perspectiveName) {
+            try {
+                terminal = game != null && game.hasEnded();
+                String winner = game == null ? "" : game.getWinner();
+                String name = perspectiveName == null ? "" : perspectiveName;
+                won = terminal && winner != null && !winner.isEmpty() && !name.isEmpty() && winner.contains(name);
+                lost = terminal && winner != null && !winner.isEmpty() && !won;
+                Player perspective = null;
+                if (game != null && game.getPlayers() != null) {
+                    for (Player player : game.getPlayers().values()) {
+                        String playerName = player == null || player.getName() == null ? "" : player.getName();
+                        if (player != null && (name.isEmpty() || playerName.contains(name) || name.contains(playerName))) {
+                            perspective = player;
+                            break;
+                        }
+                    }
+                }
+                if (game != null) {
+                    finalStateHash = LiveCheckpointRecorder.sha256(LiveCheckpointRecorder.compactState(game, perspective));
+                }
+            } catch (Throwable t) {
+                if (error.isEmpty()) {
+                    error = errorSummary(t);
+                }
+            }
+        }
+    }
+
+    private static final class HybridGateRow {
+        private String specPath = "";
+        private String ancestorSnapshotPath = "";
+        private String targetSnapshotPath = "";
+        private String targetActionType = "";
+        private int suffixLength = -1;
+        private boolean ancestorReentryAMatched;
+        private boolean ancestorReentryBMatched;
+        private boolean bridgeVerified;
+        private int bridgeAReachedStep = -1;
+        private int bridgeBReachedStep = -1;
+        private String bridgeAFailureReason = "";
+        private String bridgeBFailureReason = "";
+        private boolean sourceForcedConfirmed;
+        private boolean sourceTerminal;
+        private boolean sourceWon;
+        private boolean sourceLost;
+        private String sourceError = "";
+        private boolean alternateForcedConfirmed;
+        private boolean alternateDistinct;
+        private boolean alternateTerminal;
+        private boolean alternateWon;
+        private boolean alternateLost;
+        private String alternateError = "";
+        private String divergenceNote = "";
+        private String classification = "";
+        private String error = "";
+
+        private String toCsvLine() {
+            List<String> cells = new ArrayList<>();
+            cells.add(csv(specPath));
+            cells.add(csv(ancestorSnapshotPath));
+            cells.add(csv(targetSnapshotPath));
+            cells.add(csv(targetActionType));
+            cells.add(String.valueOf(suffixLength));
+            cells.add(String.valueOf(ancestorReentryAMatched));
+            cells.add(String.valueOf(ancestorReentryBMatched));
+            cells.add(String.valueOf(bridgeVerified));
+            cells.add(String.valueOf(bridgeAReachedStep));
+            cells.add(String.valueOf(bridgeBReachedStep));
+            cells.add(csv(bridgeAFailureReason));
+            cells.add(csv(bridgeBFailureReason));
+            cells.add(String.valueOf(sourceForcedConfirmed));
+            cells.add(String.valueOf(sourceTerminal));
+            cells.add(String.valueOf(sourceWon));
+            cells.add(String.valueOf(sourceLost));
+            cells.add(csv(sourceError));
+            cells.add(String.valueOf(alternateForcedConfirmed));
+            cells.add(String.valueOf(alternateDistinct));
+            cells.add(String.valueOf(alternateTerminal));
+            cells.add(String.valueOf(alternateWon));
+            cells.add(String.valueOf(alternateLost));
+            cells.add(csv(alternateError));
+            cells.add(csv(divergenceNote));
+            cells.add(csv(classification));
+            cells.add(csv(error));
+            return String.join(",", cells) + "\n";
+        }
     }
 
     private static BranchOutcome runProbe(
@@ -778,9 +1551,16 @@ public final class LiveCheckpointBranchMiner {
             long rolloutSeed
     ) {
         return runProbe(snapshot, forcedIndices, stopAtReentry, requireSourceChoiceMatch,
-                label, timeoutSec, postBranchAutopilot, continuationPolicy, rolloutSeed, false, 0);
+                label, timeoutSec, postBranchAutopilot, continuationPolicy, rolloutSeed, false, 0, false);
     }
 
+    /**
+     * Sol #93 amendment 3: strictCandidateMatch=true disables the fuzzy
+     * anchored-candidate fallback in SnapshotBranchController#onDecision, so ANY
+     * source/candidate/action-type mismatch fails closed (reentryMatched=false)
+     * instead of soft-continuing on a best-effort text anchor. Used by the
+     * acceptance gate; correction-mining callers keep passing false (unchanged).
+     */
     private static BranchOutcome runProbe(
             LiveCheckpointRecorder.Snapshot snapshot,
             List<Integer> forcedIndices,
@@ -794,6 +1574,25 @@ public final class LiveCheckpointBranchMiner {
             boolean captureTrainingData,
             int maxTrainingRecords
     ) {
+        return runProbe(snapshot, forcedIndices, stopAtReentry, requireSourceChoiceMatch,
+                label, timeoutSec, postBranchAutopilot, continuationPolicy, rolloutSeed,
+                captureTrainingData, maxTrainingRecords, false);
+    }
+
+    private static BranchOutcome runProbe(
+            LiveCheckpointRecorder.Snapshot snapshot,
+            List<Integer> forcedIndices,
+            boolean stopAtReentry,
+            boolean requireSourceChoiceMatch,
+            String label,
+            int timeoutSec,
+            boolean postBranchAutopilot,
+            ContinuationPolicy continuationPolicy,
+            long rolloutSeed,
+            boolean captureTrainingData,
+            int maxTrainingRecords,
+            boolean strictCandidateMatch
+    ) {
         RandomUtil.State previousRandom = RandomUtil.captureState();
         Game game = null;
         SnapshotBranchController controller =
@@ -806,7 +1605,8 @@ public final class LiveCheckpointBranchMiner {
                         continuationPolicy,
                         rolloutSeed,
                         captureTrainingData,
-                        maxTrainingRecords);
+                        maxTrainingRecords,
+                        strictCandidateMatch);
         BranchOutcome outcome = new BranchOutcome(label);
         try {
             RandomUtil.restoreState(snapshot.randomState);
@@ -850,7 +1650,7 @@ public final class LiveCheckpointBranchMiner {
     private static void installBranchControllers(
             Game game,
             ComputerPlayerRL sourcePlayer,
-            SnapshotBranchController controller,
+            EngineDecisionBranchController controller,
             boolean postBranchAutopilot
     ) {
         if (!postBranchAutopilot || game == null || game.getPlayers() == null) {
@@ -2323,6 +3123,7 @@ public final class LiveCheckpointBranchMiner {
         private final Random rolloutRandom;
         private final boolean captureTrainingData;
         private final int maxTrainingRecords;
+        private final boolean strictCandidateMatch;
 
         private boolean seen;
         private boolean reentryMatched;
@@ -2354,7 +3155,7 @@ public final class LiveCheckpointBranchMiner {
                 long rolloutSeed
         ) {
             this(snapshot, forcedIndices, stopAtReentry, requireSourceChoiceMatch,
-                    postBranchAutopilot, continuationPolicy, rolloutSeed, false, 0);
+                    postBranchAutopilot, continuationPolicy, rolloutSeed, false, 0, false);
         }
 
         private SnapshotBranchController(
@@ -2366,7 +3167,8 @@ public final class LiveCheckpointBranchMiner {
                 ContinuationPolicy continuationPolicy,
                 long rolloutSeed,
                 boolean captureTrainingData,
-                int maxTrainingRecords
+                int maxTrainingRecords,
+                boolean strictCandidateMatch
         ) {
             this(
                     snapshot,
@@ -2381,7 +3183,8 @@ public final class LiveCheckpointBranchMiner {
                     continuationPolicy,
                     rolloutSeed,
                     captureTrainingData,
-                    maxTrainingRecords);
+                    maxTrainingRecords,
+                    strictCandidateMatch);
         }
 
         private SnapshotBranchController(
@@ -2395,7 +3198,7 @@ public final class LiveCheckpointBranchMiner {
                 long rolloutSeed
         ) {
             this(snapshot, forcedSteps, sequenceController, stopAtReentry, requireSourceChoiceMatch,
-                    postBranchAutopilot, continuationPolicy, rolloutSeed, false, 0);
+                    postBranchAutopilot, continuationPolicy, rolloutSeed, false, 0, false);
         }
 
         private SnapshotBranchController(
@@ -2408,7 +3211,8 @@ public final class LiveCheckpointBranchMiner {
                 ContinuationPolicy continuationPolicy,
                 long rolloutSeed,
                 boolean captureTrainingData,
-                int maxTrainingRecords
+                int maxTrainingRecords,
+                boolean strictCandidateMatch
         ) {
             this.snapshot = snapshot;
             this.forcedSteps = forcedSteps == null
@@ -2421,6 +3225,7 @@ public final class LiveCheckpointBranchMiner {
             this.rolloutRandom = new Random(rolloutSeed);
             this.captureTrainingData = captureTrainingData;
             this.maxTrainingRecords = Math.max(0, maxTrainingRecords);
+            this.strictCandidateMatch = strictCandidateMatch;
         }
 
         @Override
@@ -2477,7 +3282,13 @@ public final class LiveCheckpointBranchMiner {
             boolean selectedIndicesMatched = sanitized.equals(sanitizeIndices(snapshot.selectedIndices, context.candidateCount));
             boolean selectedTextsMatched = selectedTexts.equals(snapshot.selectedTexts);
             boolean forcedTextsMatched = forcedTextsMatch(snapshot, rootStep, sanitized, selectedTexts);
-            boolean anchoredCandidateMatch = snapshot.candidateTexts != null
+            // Sol #93 amendment 3: fail closed, no soft-continue. The fuzzy anchored
+            // fallback below (candidate count + forced-text anchor, ignoring a full
+            // candidate-list mismatch) exists for legacy correction-mining reentry
+            // only; the acceptance gate disables it via strictCandidateMatch so ANY
+            // candidate-set mismatch is a hard reentry failure, not a soft match.
+            boolean anchoredCandidateMatch = !strictCandidateMatch
+                    && snapshot.candidateTexts != null
                     && context.candidateTexts != null
                     && snapshot.candidateTexts.size() == context.candidateTexts.size()
                     && forcedTextsMatched;
@@ -3723,6 +4534,12 @@ public final class LiveCheckpointBranchMiner {
         private String reentryBStateHash = "";
         private String reentryAReason = "";
         private String reentryBReason = "";
+        private String sourcePostPrefixActionType = "";
+        private String alternatePostPrefixActionType = "";
+        private boolean sourceForcedConfirmed = false;
+        private boolean alternateForcedConfirmed = false;
+        private boolean alternateDistinct = false;
+        private String alternateDivergenceNote = "";
 
         private static BranchRow fromSnapshot(Path path, LiveCheckpointRecorder.Snapshot snapshot) {
             BranchRow row = new BranchRow();
@@ -3765,6 +4582,7 @@ public final class LiveCheckpointBranchMiner {
             sourceWon = source != null && source.won;
             sourceLost = source != null && source.lost;
             sourceError = source == null ? "" : source.error;
+            sourcePostPrefixActionType = source == null ? "" : source.postPrefixActionType;
         }
 
         private void applyAlternate(BranchOutcome alternate) {
@@ -3772,6 +4590,7 @@ public final class LiveCheckpointBranchMiner {
             alternateWon = alternate != null && alternate.won;
             alternateLost = alternate != null && alternate.lost;
             alternateError = alternate == null ? "" : alternate.error;
+            alternatePostPrefixActionType = alternate == null ? "" : alternate.postPrefixActionType;
         }
 
         private String toCsvLine() {
@@ -3812,6 +4631,12 @@ public final class LiveCheckpointBranchMiner {
             cells.add(csv(reentryBStateHash));
             cells.add(csv(reentryAReason));
             cells.add(csv(reentryBReason));
+            cells.add(csv(sourcePostPrefixActionType));
+            cells.add(csv(alternatePostPrefixActionType));
+            cells.add(String.valueOf(sourceForcedConfirmed));
+            cells.add(String.valueOf(alternateForcedConfirmed));
+            cells.add(String.valueOf(alternateDistinct));
+            cells.add(csv(alternateDivergenceNote));
             return String.join(",", cells) + "\n";
         }
     }
@@ -3928,6 +4753,8 @@ public final class LiveCheckpointBranchMiner {
         private boolean resumeProbe = false;
         private int resumeReplays = 1;
         private boolean resumeForceTraining = false;
+        private boolean acceptanceGate = false;
+        private Path suffixSpecPath;
 
         private static Config parse(String[] args) {
             Config cfg = new Config();
@@ -4070,6 +4897,12 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("tree-sequence-rollouts")) {
                 cfg.treeSequenceRollouts = Math.max(1, Integer.parseInt(values.get("tree-sequence-rollouts")));
+            }
+            if (values.containsKey("acceptance-gate")) {
+                cfg.acceptanceGate = Boolean.parseBoolean(values.get("acceptance-gate"));
+            }
+            if (values.containsKey("suffix-spec")) {
+                cfg.suffixSpecPath = Paths.get(values.get("suffix-spec"));
             }
             if (cfg.selectionShards < 1) {
                 throw new IllegalArgumentException("--selection-shards must be >= 1");
