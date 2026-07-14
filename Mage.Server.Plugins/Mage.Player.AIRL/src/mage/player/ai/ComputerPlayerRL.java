@@ -3090,7 +3090,13 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 return "sentinel:STOP";
             }
             if (candidate instanceof UUID) {
-                return ((UUID) candidate).toString();
+                // Sol #93/#95 canonicalization: a UUID candidate can be a stack
+                // object id (e.g. TargetSpell/TargetStackObject possible-targets,
+                // Pyroblast-style "target spell"), which is freshly minted via
+                // UUID.randomUUID() every activation/cast and not reproducible
+                // across independent JVM runs. Canonicalize to "stack#N" so
+                // recorded candidate/target ids compare correctly across resumes.
+                return LiveCheckpointRecorder.canonicalStackObjectId(game, (UUID) candidate);
             }
             if (candidate instanceof CombatCandidate) {
                 CombatCandidate cc = (CombatCandidate) candidate;
@@ -3142,7 +3148,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return Collections.singletonList(source.getSourceId().toString());
     }
 
-    private List<String> replayTargetObjectIds(Ability source) {
+    private List<String> replayTargetObjectIds(Ability source, Game game) {
         if (source == null || source.getAllSelectedTargets() == null) {
             return Collections.emptyList();
         }
@@ -3154,7 +3160,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 }
                 for (UUID id : target.getTargets()) {
                     if (id != null) {
-                        String value = id.toString();
+                        // Sol #93/#95 canonicalization: a target can point at a
+                        // stack object (Pyroblast-style "target spell"); canonicalize
+                        // its freshly-minted id to a reproducible stack position.
+                        String value = LiveCheckpointRecorder.canonicalStackObjectId(game, id);
                         if (!out.contains(value)) {
                             out.add(value);
                         }
@@ -3319,7 +3328,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             String sourceName = replayTraceSourceName(source, game);
             String sourceRule = replayTraceSourceRule(source);
             List<String> sourceObjectIds = replaySourceObjectIds(source);
-            List<String> targetObjectIds = replayTargetObjectIds(source);
+            List<String> targetObjectIds = replayTargetObjectIds(source, game);
             if (targetObjectIds.isEmpty()
                     && actionType == StateSequenceBuilder.ActionType.SELECT_TARGETS
                     && !safeChosenObjectIds.isEmpty()) {

@@ -50,7 +50,8 @@ public final class LiveCheckpointBranchMiner {
                     + "positive_confirmation_count,positive_confirmation_pass_count,positive_confirmation_outcomes,"
                     + "reentry_a_candidate_hash,reentry_b_candidate_hash,reentry_a_state_hash,reentry_b_state_hash,"
                     + "reentry_a_reason,reentry_b_reason,source_post_prefix_action_type,alternate_post_prefix_action_type,"
-                    + "source_forced_confirmed,alternate_forced_confirmed,alternate_distinct,alternate_divergence_note\n";
+                    + "source_forced_confirmed,alternate_forced_confirmed,alternate_distinct,alternate_divergence_note,"
+                    + "alternate_choice_count\n";
     private static final String SELECTION_CSV_HEADER =
             "rank,snapshot_path,score,game_key,ordinal,decision_number,action_type,candidate_count,"
                     + "selected_indices,selected_texts,selected_prob,value_score,nonpass_candidate_count,"
@@ -838,13 +839,20 @@ public final class LiveCheckpointBranchMiner {
                 && (source.terminal || !source.postPrefixActionType.isEmpty());
         row.sourceForcedConfirmed = sourceForcedConfirmed;
 
-        List<List<Integer>> alternateChoices = alternateChoices(snapshot, sourceIndices, Math.max(1, cfg.maxAlternates));
+        // maxAlternates=0 requests the FULL unchosen-candidate list (not truncated
+        // to 1) so --alternate-offset can select the Kth one -- the 256-point
+        // campaign's "force every unchosen alternate when <=4 candidates, else
+        // sample 3 (seeded)" rule is driven by the orchestrator calling this gate
+        // once per offset, not by this method searching for "the best" alternate.
+        List<List<Integer>> alternateChoices = alternateChoices(snapshot, sourceIndices, 0);
         if (alternateChoices.isEmpty()) {
             row.classification = sourceLegal ? "gate_fail_alternate_unavailable" : "gate_fail_source_illegal_alternate_unavailable";
             return row;
         }
+        row.alternateChoiceCount = alternateChoices.size();
 
-        List<Integer> firstAlternate = alternateChoices.get(0);
+        int offset = Math.max(0, Math.min(cfg.alternateOffset, alternateChoices.size() - 1));
+        List<Integer> firstAlternate = alternateChoices.get(offset);
         boolean alternateDistinct = !firstAlternate.equals(sourceIndices);
         row.alternateDistinct = alternateDistinct;
         BranchOutcome alternate = runProbe(
@@ -909,7 +917,7 @@ public final class LiveCheckpointBranchMiner {
                     + "bridge_a_reached_step,bridge_b_reached_step,bridge_a_failure_reason,bridge_b_failure_reason,"
                     + "source_forced_confirmed,source_terminal,source_won,source_lost,source_error,"
                     + "alternate_forced_confirmed,alternate_distinct,alternate_terminal,alternate_won,alternate_lost,alternate_error,"
-                    + "divergence_note,classification,error\n";
+                    + "divergence_note,classification,error,alternate_choice_count\n";
 
     private enum HybridMode {
         BRIDGE_VERIFY, FORCE_SOURCE, FORCE_ALTERNATE
@@ -947,6 +955,8 @@ public final class LiveCheckpointBranchMiner {
             row.ancestorSnapshotPath = ancestorStep.snapshotPath.toString();
             row.targetSnapshotPath = targetStep.snapshotPath.toString();
             row.targetActionType = targetStep.actionType;
+            row.alternateChoiceCount = Math.max(0,
+                    targetStep.candidateCount - sanitizeIndices(targetStep.selectedIndices, targetStep.candidateCount).size());
 
             LiveCheckpointRecorder.Snapshot ancestorSnapshot = loadSnapshot(ancestorStep.snapshotPath);
             if (ancestorSnapshot == null || ancestorSnapshot.gameSnapshot == null) {
@@ -1019,7 +1029,7 @@ public final class LiveCheckpointBranchMiner {
             // source continuation, or record convergence explicitly rather than
             // silently accepting a no-op alternate.
             HybridWalkResult altWalk = runHybridWalk(ancestorSnapshot, steps, HybridMode.FORCE_ALTERNATE,
-                    cfg.alternateTimeoutSec, cfg.postBranchAutopilot);
+                    cfg.alternateTimeoutSec, cfg.postBranchAutopilot, cfg.alternateOffset);
             row.alternateForcedConfirmed = altWalk.targetForcedConfirmed;
             row.alternateDistinct = altWalk.targetForcedConfirmed
                     && !altWalk.targetActualIndices.equals(joinInts(sanitizeIndices(targetStep.selectedIndices, targetStep.candidateCount)));
@@ -1091,9 +1101,20 @@ public final class LiveCheckpointBranchMiner {
             int timeoutSec,
             boolean postBranchAutopilot
     ) {
+        return runHybridWalk(ancestorSnapshot, steps, mode, timeoutSec, postBranchAutopilot, 0);
+    }
+
+    private static HybridWalkResult runHybridWalk(
+            LiveCheckpointRecorder.Snapshot ancestorSnapshot,
+            List<HybridStep> steps,
+            HybridMode mode,
+            int timeoutSec,
+            boolean postBranchAutopilot,
+            int alternateOffset
+    ) {
         RandomUtil.State previousRandom = RandomUtil.captureState();
         Game game = null;
-        HybridSuffixController controller = new HybridSuffixController(ancestorSnapshot, steps, mode, postBranchAutopilot);
+        HybridSuffixController controller = new HybridSuffixController(ancestorSnapshot, steps, mode, postBranchAutopilot, alternateOffset);
         HybridWalkResult result = new HybridWalkResult();
         try {
             RandomUtil.restoreState(ancestorSnapshot.randomState);
@@ -1317,6 +1338,7 @@ public final class LiveCheckpointBranchMiner {
         // it alongside the capture-time string for a field-by-field diff. Not used
         // for any pass/fail decision.
         private String mismatchActualCompactState = "";
+        private final int alternateOffset;
 
         private HybridSuffixController(
                 LiveCheckpointRecorder.Snapshot ancestorSnapshot,
@@ -1324,10 +1346,21 @@ public final class LiveCheckpointBranchMiner {
                 HybridMode mode,
                 boolean postBranchAutopilot
         ) {
+            this(ancestorSnapshot, steps, mode, postBranchAutopilot, 0);
+        }
+
+        private HybridSuffixController(
+                LiveCheckpointRecorder.Snapshot ancestorSnapshot,
+                List<HybridStep> steps,
+                HybridMode mode,
+                boolean postBranchAutopilot,
+                int alternateOffset
+        ) {
             this.ancestorSnapshot = ancestorSnapshot;
             this.steps = steps;
             this.mode = mode;
             this.postBranchAutopilot = postBranchAutopilot;
+            this.alternateOffset = Math.max(0, alternateOffset);
         }
 
         @Override
@@ -1409,12 +1442,17 @@ public final class LiveCheckpointBranchMiner {
 
         private <T> List<Integer> resolveAlternate(DecisionContext<T> context, HybridStep targetStep) {
             Set<Integer> source = new HashSet<>(sanitizeIndices(targetStep.selectedIndices, context.candidateCount));
+            List<Integer> unchosen = new ArrayList<>();
             for (int i = 0; i < context.candidateCount; i++) {
                 if (!source.contains(i)) {
-                    return Collections.singletonList(i);
+                    unchosen.add(i);
                 }
             }
-            return Collections.emptyList();
+            if (unchosen.isEmpty()) {
+                return Collections.emptyList();
+            }
+            int idx = Math.min(alternateOffset, unchosen.size() - 1);
+            return Collections.singletonList(unchosen.get(idx));
         }
 
         private <T> Choice onPostTargetDecision(DecisionContext<T> context) {
@@ -1534,6 +1572,7 @@ public final class LiveCheckpointBranchMiner {
         private String divergenceNote = "";
         private String classification = "";
         private String error = "";
+        private int alternateChoiceCount = 0;
 
         private String toCsvLine() {
             List<String> cells = new ArrayList<>();
@@ -1563,6 +1602,7 @@ public final class LiveCheckpointBranchMiner {
             cells.add(csv(divergenceNote));
             cells.add(csv(classification));
             cells.add(csv(error));
+            cells.add(String.valueOf(alternateChoiceCount));
             return String.join(",", cells) + "\n";
         }
     }
@@ -4581,6 +4621,7 @@ public final class LiveCheckpointBranchMiner {
         private boolean alternateForcedConfirmed = false;
         private boolean alternateDistinct = false;
         private String alternateDivergenceNote = "";
+        private int alternateChoiceCount = 0;
 
         private static BranchRow fromSnapshot(Path path, LiveCheckpointRecorder.Snapshot snapshot) {
             BranchRow row = new BranchRow();
@@ -4678,6 +4719,7 @@ public final class LiveCheckpointBranchMiner {
             cells.add(String.valueOf(alternateForcedConfirmed));
             cells.add(String.valueOf(alternateDistinct));
             cells.add(csv(alternateDivergenceNote));
+            cells.add(String.valueOf(alternateChoiceCount));
             return String.join(",", cells) + "\n";
         }
     }
@@ -4796,6 +4838,7 @@ public final class LiveCheckpointBranchMiner {
         private boolean resumeForceTraining = false;
         private boolean acceptanceGate = false;
         private Path suffixSpecPath;
+        private int alternateOffset = 0;
 
         private static Config parse(String[] args) {
             Config cfg = new Config();
@@ -4944,6 +4987,9 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("suffix-spec")) {
                 cfg.suffixSpecPath = Paths.get(values.get("suffix-spec"));
+            }
+            if (values.containsKey("alternate-offset")) {
+                cfg.alternateOffset = Math.max(0, Integer.parseInt(values.get("alternate-offset")));
             }
             if (cfg.selectionShards < 1) {
                 throw new IllegalArgumentException("--selection-shards must be >= 1");

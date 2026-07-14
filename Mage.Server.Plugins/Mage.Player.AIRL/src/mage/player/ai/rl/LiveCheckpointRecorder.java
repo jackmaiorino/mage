@@ -309,18 +309,136 @@ public final class LiveCheckpointRecorder {
                         .append("|");
             }
             sb.append(";stack=");
-            for (StackObject so : game.getStack()) {
-                if (so == null) {
-                    continue;
-                }
-                sb.append(so.getId()).append(":").append(so.getName())
-                        .append(":ctrl=").append(so.getControllerId())
-                        .append("|");
-            }
+            appendCanonicalStack(sb, game);
         } catch (Throwable t) {
             sb.append(";compact_state_error=").append(errorSummary(t));
         }
         return sb.toString();
+    }
+
+    /**
+     * Sol #93/#95 canonicalization. StackAbility/Spell ids are freshly minted via
+     * UUID.randomUUID() (AbilityImpl#newId/newOriginalId, non-seeded, not derived
+     * from RandomUtil) every time something is put on the stack -- confirmed via
+     * field-by-field diff as the SOLE differing field behind three
+     * checkpoint-reentry "state hash mismatch" gate failures whose action type,
+     * candidate set, and RNG fingerprint all matched exactly. Comparing raw stack
+     * object ids across independent JVM runs is meaningless; comparing STACK
+     * POSITION (bottom-up via descendingIterator -- SpellStack#push is
+     * ArrayDeque#addFirst, so descendingIterator visits tail-to-head, i.e.
+     * bottom-to-top), source id, controller, rule text, targets, and modes is the
+     * reproducible substitute. X value is not separately extracted: XMage's rule
+     * text already substitutes an announced X value into getRule()'s output, and
+     * there is no single stable X accessor on the Ability interface to read it
+     * from directly.
+     */
+    private static void appendCanonicalStack(StringBuilder sb, Game game) {
+        List<StackObject> bottomUp = new ArrayList<>();
+        java.util.Iterator<StackObject> it = game.getStack().descendingIterator();
+        while (it.hasNext()) {
+            bottomUp.add(it.next());
+        }
+        for (int i = 0; i < bottomUp.size(); i++) {
+            StackObject so = bottomUp.get(i);
+            if (so == null) {
+                continue;
+            }
+            sb.append("stack#").append(i)
+                    .append(":").append(so.getName())
+                    .append(":ctrl=").append(so.getControllerId())
+                    .append(":src=").append(so.getSourceId())
+                    .append(":rule=").append(stackObjectRule(so))
+                    .append(":targets=").append(stackObjectTargets(so, game))
+                    .append(":modes=").append(stackObjectModes(so))
+                    .append("|");
+        }
+    }
+
+    private static String stackObjectRule(StackObject so) {
+        try {
+            mage.abilities.Ability ability = so.getStackAbility();
+            return ability == null ? "" : String.valueOf(ability.getRule());
+        } catch (Throwable ignored) {
+            return "";
+        }
+    }
+
+    private static String stackObjectTargets(StackObject so, Game game) {
+        try {
+            mage.abilities.Ability ability = so.getStackAbility();
+            if (ability == null || ability.getTargets() == null) {
+                return "";
+            }
+            List<String> parts = new ArrayList<>();
+            for (mage.target.Target target : ability.getTargets()) {
+                if (target == null || target.getTargets() == null) {
+                    continue;
+                }
+                for (UUID id : target.getTargets()) {
+                    parts.add(canonicalStackObjectId(game, id));
+                }
+            }
+            Collections.sort(parts);
+            return String.join(",", parts);
+        } catch (Throwable ignored) {
+            return "";
+        }
+    }
+
+    private static String stackObjectModes(StackObject so) {
+        try {
+            mage.abilities.Ability ability = so.getStackAbility();
+            if (ability == null || ability.getModes() == null) {
+                return "";
+            }
+            List<UUID> selected = ability.getModes().getSelectedModes();
+            if (selected == null) {
+                return "";
+            }
+            // Canonicalize by ordinal position within the modes map (insertion
+            // ordered), not the raw mode id, in case mode ids are also freshly
+            // minted per activation rather than stable per card definition.
+            List<UUID> allModeIds = new ArrayList<>(ability.getModes().keySet());
+            List<String> positions = new ArrayList<>();
+            for (UUID sel : selected) {
+                int idx = allModeIds.indexOf(sel);
+                positions.add(idx >= 0 ? ("mode#" + idx) : "mode#?");
+            }
+            Collections.sort(positions);
+            return String.join(",", positions);
+        } catch (Throwable ignored) {
+            return "";
+        }
+    }
+
+    /**
+     * Sol #93/#95 canonicalization entry point, reused by ComputerPlayerRL's
+     * replay/candidate object-id builders so a decision whose legal
+     * candidates/targets include stack objects (e.g. Pyroblast targeting a
+     * spell) records a reproducible "stack#N" label instead of the raw,
+     * process-local UUID. Non-stack ids (permanents, cards, players) are stable
+     * within one continuous resumed game and are returned unchanged.
+     */
+    public static String canonicalStackObjectId(Game game, UUID rawId) {
+        if (rawId == null) {
+            return "";
+        }
+        if (game != null) {
+            try {
+                int idx = 0;
+                java.util.Iterator<StackObject> it = game.getStack().descendingIterator();
+                while (it.hasNext()) {
+                    StackObject so = it.next();
+                    if (so != null && rawId.equals(so.getId())) {
+                        return "stack#" + idx;
+                    }
+                    idx++;
+                }
+            } catch (Throwable ignored) {
+                // fall through to raw id
+            }
+        }
+        return rawId.toString();
     }
 
     private static String cardsText(Iterable<Card> cards, Game game, int limit) {
