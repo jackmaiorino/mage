@@ -801,6 +801,15 @@ public final class LiveCheckpointBranchMiner {
         if (isContinuationNotSerializedReason(a) || isContinuationNotSerializedReason(b)) {
             return "continuation_not_serialized";
         }
+        // Discipline-1 hardening: action type + candidates + selected choice all
+        // matched, but the canonical state string itself differs -- a genuinely
+        // different underlying game state behind an identical decision surface.
+        // Distinct from continuation_not_serialized (wrong decision surface
+        // entirely); most likely cause is a stale corpus captured against a
+        // different engine build than the one doing the reentry.
+        if (isStateDivergenceReason(a) || isStateDivergenceReason(b)) {
+            return "ancestor_state_divergence";
+        }
         return "checkpoint_reentry_mismatch";
     }
 
@@ -810,6 +819,14 @@ public final class LiveCheckpointBranchMiner {
         }
         String reason = outcome.reason.isEmpty() ? outcome.error : outcome.reason;
         return reason != null && (reason.startsWith("action_type_mismatch") || reason.startsWith("forced_text_mismatch"));
+    }
+
+    private static boolean isStateDivergenceReason(BranchOutcome outcome) {
+        if (outcome == null) {
+            return false;
+        }
+        String reason = outcome.reason.isEmpty() ? outcome.error : outcome.reason;
+        return reason != null && reason.startsWith("state_hash_mismatch");
     }
 
     /**
@@ -988,7 +1005,9 @@ public final class LiveCheckpointBranchMiner {
             row.ancestorReentryAMatched = ancestorReentryA.reentryMatched;
             row.ancestorReentryBMatched = ancestorReentryB.reentryMatched;
             if (!ancestorReentryA.reentryMatched || !ancestorReentryB.reentryMatched) {
-                row.classification = "gate_unsupported_ancestor_unresumable";
+                String reasonA = ancestorReentryA.reason.isEmpty() ? ancestorReentryA.error : ancestorReentryA.reason;
+                String reasonB = ancestorReentryB.reason.isEmpty() ? ancestorReentryB.error : ancestorReentryB.reason;
+                row.classification = "gate_unsupported_ancestor_unresumable:" + reasonA + "|" + reasonB;
                 appendHybridRow(csvPath, row);
                 return;
             }
@@ -1127,11 +1146,20 @@ public final class LiveCheckpointBranchMiner {
                     return;
                 }
                 installBranchControllers(game, (ComputerPlayerRL) player, controller, cfg.postBranchAutopilot);
+                long inferenceCallsBefore = ComputerPlayerRL.REAL_INFERENCE_CALLS.get();
                 try {
                     resumeGameInGameThread(game, cfg.timeoutSec, "harvest_trace_suffix");
                 } catch (EngineDecisionBranchController.BranchTerminated ignored) {
                     // Expected: harvest self-terminates once every step is recorded,
                     // or on the first mismatch (already captured as controller.failed).
+                }
+                long inferenceCallsAfter = ComputerPlayerRL.REAL_INFERENCE_CALLS.get();
+                if (inferenceCallsAfter != inferenceCallsBefore) {
+                    // Sol #99 hard invariant: fail closed, not just log, if any
+                    // decision reached real model consultation during harvest.
+                    row.classification = "harvest_failed_sol99_uncontrolled_nn_consultation_detected";
+                    appendHarvestRow(csvPath, row);
+                    return;
                 }
             } finally {
                 if (game != null) {
@@ -1390,6 +1418,7 @@ public final class LiveCheckpointBranchMiner {
                 return result;
             }
             installBranchControllers(game, (ComputerPlayerRL) player, controller, postBranchAutopilot);
+            long inferenceCallsBefore = ComputerPlayerRL.REAL_INFERENCE_CALLS.get();
             try {
                 resumeGameInGameThread(game, timeoutSec, "hybrid_" + mode.name());
             } catch (EngineDecisionBranchController.BranchTerminated ignored) {
@@ -1399,6 +1428,7 @@ public final class LiveCheckpointBranchMiner {
             }
             result.captureController(controller);
             result.captureTerminal(game, ancestorSnapshot.playerName);
+            assertNoRealInference(result, inferenceCallsBefore);
             return result;
         } catch (Throwable t) {
             result.captureController(controller);
@@ -1976,6 +2006,7 @@ public final class LiveCheckpointBranchMiner {
                 return outcome;
             }
             installBranchControllers(game, (ComputerPlayerRL) player, controller, postBranchAutopilot);
+            long inferenceCallsBefore = ComputerPlayerRL.REAL_INFERENCE_CALLS.get();
             try {
                 resumeGameInGameThread(game, timeoutSec, label);
             } catch (EngineDecisionBranchController.BranchTerminated terminated) {
@@ -1983,6 +2014,7 @@ public final class LiveCheckpointBranchMiner {
             }
             outcome.captureController(controller);
             outcome.captureTerminal(game, snapshot.playerName);
+            assertNoRealInference(outcome, inferenceCallsBefore);
             return outcome;
         } catch (Throwable t) {
             outcome.captureController(controller);
@@ -3257,6 +3289,7 @@ public final class LiveCheckpointBranchMiner {
                 return outcome;
             }
             installBranchControllers(game, (ComputerPlayerRL) player, controller, postBranchAutopilot);
+            long inferenceCallsBefore = ComputerPlayerRL.REAL_INFERENCE_CALLS.get();
             try {
                 resumeGameInGameThread(game, timeoutSec, label);
             } catch (EngineDecisionBranchController.BranchTerminated terminated) {
@@ -3264,6 +3297,7 @@ public final class LiveCheckpointBranchMiner {
             }
             outcome.captureController(controller);
             outcome.captureTerminal(game, snapshot.playerName);
+            assertNoRealInference(outcome, inferenceCallsBefore);
             return outcome;
         } catch (Throwable t) {
             outcome.captureController(controller);
@@ -3377,6 +3411,30 @@ public final class LiveCheckpointBranchMiner {
         }
         String message = t.getMessage();
         return t.getClass().getSimpleName() + (message == null || message.isEmpty() ? "" : ": " + message);
+    }
+
+    /**
+     * Sol #99 hard invariant: fail closed if ComputerPlayerRL.REAL_INFERENCE_CALLS
+     * moved during this walk, meaning some decision reached a real model/Python
+     * bridge consultation instead of being forced or handled by the deterministic
+     * autopilot. Structurally this should never happen (every controller in this
+     * file returns shouldBypassModelInference()=true), but this is the explicit
+     * proof, not just reliance on that code path.
+     */
+    private static void assertNoRealInference(BranchOutcome outcome, long inferenceCallsBefore) {
+        long after = ComputerPlayerRL.REAL_INFERENCE_CALLS.get();
+        if (after != inferenceCallsBefore && outcome.error.isEmpty()) {
+            outcome.error = "sol99_uncontrolled_nn_consultation_detected:before="
+                    + inferenceCallsBefore + ":after=" + after;
+        }
+    }
+
+    private static void assertNoRealInference(HybridWalkResult result, long inferenceCallsBefore) {
+        long after = ComputerPlayerRL.REAL_INFERENCE_CALLS.get();
+        if (after != inferenceCallsBefore && result.error.isEmpty()) {
+            result.error = "sol99_uncontrolled_nn_consultation_detected:before="
+                    + inferenceCallsBefore + ":after=" + after;
+        }
     }
 
     private static String candidateTextMismatchReason(List<String> expected, List<String> actual) {
@@ -3650,8 +3708,18 @@ public final class LiveCheckpointBranchMiner {
                     && context.candidateTexts != null
                     && snapshot.candidateTexts.size() == context.candidateTexts.size()
                     && forcedTextsMatched;
+            // Discipline-1 hardening (Sol #98/#99 official-run requirement): reentry
+            // previously only checked action-type + candidate text, never state_hash
+            // -- a diagnostic dump this session found real state divergence that was
+            // completely invisible to the old check (matching action/candidates/RNG
+            // but a genuinely different canonical game state). Gated on
+            // strictCandidateMatch, matching amendment 3's scope, so legacy
+            // correction-mining's softer anchored matching is unaffected.
+            boolean stateMatched = !strictCandidateMatch
+                    || (snapshot.stateHash != null && snapshot.stateHash.equals(actualStateHash));
             reentryMatched = actionMatched
                     && (candidatesMatched || anchoredCandidateMatch)
+                    && stateMatched
                     && (!requireSourceChoiceMatch || (selectedIndicesMatched && selectedTextsMatched))
                     && !sanitized.isEmpty();
             if (!actionMatched) {
@@ -3662,6 +3730,8 @@ public final class LiveCheckpointBranchMiner {
                 reason = "forced_text_mismatch";
             } else if (!candidatesMatched) {
                 reason = "candidate_anchor_matched:" + candidateTextMismatchReason(snapshot.candidateTexts, context.candidateTexts);
+            } else if (!stateMatched) {
+                reason = "state_hash_mismatch";
             } else if (requireSourceChoiceMatch && (!selectedIndicesMatched || !selectedTextsMatched)) {
                 reason = "source_choice_mismatch";
             } else if (!requireSourceChoiceMatch) {

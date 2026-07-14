@@ -123,6 +123,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final double BLOCK_REWARD = 0.0;
     private static final double TARGET_OPP_REWARD = 0.0;
     private static final double TARGET_SELF_PENALTY = 0.0;
+    // Sol #99 hard invariant counter: incremented exactly once per real
+    // model/Python-bridge inference call (see scoreCandidatesWithMetrics). The
+    // checkpoint-reentry gate harness uses this to assert zero uncontrolled NN
+    // selections happened during a branch-controlled walk.
+    public static final java.util.concurrent.atomic.AtomicLong REAL_INFERENCE_CALLS =
+            new java.util.concurrent.atomic.AtomicLong();
     private static final boolean ACTIVATION_DIAG = "1".equals(System.getenv().getOrDefault("RL_ACTIVATION_DIAG", "0"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_ACTIVATION_DIAG", "0"));
     private static final boolean USE_ENGINE_CHOICES = "1".equals(System.getenv().getOrDefault("RL_ENGINE_CHOICES", "1"))
@@ -5617,6 +5623,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             return new mage.player.ai.rl.PythonMLBatchManager.PredictionResult(randomPolicy, 0.0f);
         }
         metrics.recordPythonBridgeCall();
+        // Sol #99 hard invariant: this is the ONLY call site that reaches a real
+        // model (Python bridge / NN) consultation; every branch-controller path
+        // above returns early via shouldBypassModelInference() before reaching
+        // here. The checkpoint-gate harness reads this counter before/after each
+        // walk and fails the point closed if it ever moves during a branch probe.
+        REAL_INFERENCE_CALLS.incrementAndGet();
         long inferStart = System.nanoTime();
         String effectivePolicyKey = (ROUTER_ENABLE && routerCommittedSpecialist)
                 ? policyKey + ":specialist" : policyKey;
