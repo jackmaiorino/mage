@@ -609,6 +609,21 @@ public class GameLogger {
         return ++recordIdCounter;
     }
 
+    /**
+     * Read-only counterpart to {@link #nextRecordId()} (Sol #101, BranchOracle
+     * from-start combat protocol): returns the record_id the NEXT
+     * logReplayDecision call will assign, WITHOUT consuming it. Needed because
+     * EngineDecisionBranchController#onDecision fires before the corresponding
+     * logReplayDecision call for the same decision (forcedChoiceIndices() is
+     * invoked, then the caller logs the outcome) -- a branch controller that
+     * needs to recognize "this decision is the one I'm targeting" by record_id
+     * cannot call the mutating nextRecordId() itself without double-consuming
+     * the id and desynchronizing every later record_id in the trace.
+     */
+    public int peekNextRecordId() {
+        return recordIdCounter + 1;
+    }
+
     public String getGameId() {
         return gameId;
     }

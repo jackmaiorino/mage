@@ -15,10 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Branch differential oracle wrapper (external reviewer protocol, Sol #89/#91).
@@ -116,15 +113,33 @@ public final class BranchOracle {
 
     private static final class Config {
         final String targetPlayer = EnvConfig.str("RL_BRANCH_ORACLE_TARGET_PLAYER", "");
-        // 0-based count of prior EngineDecisionBranchController#onDecision calls
-        // for targetPlayer (mulligan/London-bottom decisions do not go through
-        // this hook and are excluded from this count -- see the branch-point
-        // selection script, which derives this value from the original trace).
-        final int targetForcedCallIndex = EnvConfig.i32("RL_BRANCH_ORACLE_TARGET_FORCED_CALL_INDEX", -1);
+        // Sol #101 upgrade: record_id (GameLogger's genuinely-monotonic
+        // per-game counter, unique across BOTH players and every decision
+        // type -- the same join key used throughout the Sol #100 checkpoint
+        // campaign) replaces the old per-player forced-call-index addressing.
+        // The prior scheme required the branch-point selector to reproduce
+        // this controller's exact call-counting rules (mulligan exclusion,
+        // isTraceVisible whitelist) by hand; record_id is read directly off
+        // the live GameLogger via peekNextRecordId(), so there is nothing to
+        // keep in sync -- the same trace-derived record_id used to select a
+        // combat point from burn_mirror_v5's REPLAY_DECISION_JSON records is
+        // used verbatim here, matching build_trace_suffix_specs.py's
+        // record_id-joined discipline applied from ordinal 0.
+        final int targetRecordId = EnvConfig.i32("RL_BRANCH_ORACLE_TARGET_RECORD_ID", -1);
         final String targetActionType = EnvConfig.str("RL_BRANCH_ORACLE_TARGET_ACTION_TYPE", "");
         final int targetCandidateCount = EnvConfig.i32("RL_BRANCH_ORACLE_TARGET_CANDIDATE_COUNT", -1);
         final int altIndex = EnvConfig.i32("RL_BRANCH_ORACLE_ALT_INDEX", -1);
         final int continueSteps = Math.max(0, EnvConfig.i32("RL_BRANCH_ORACLE_CONTINUE_STEPS", 0));
+        // Sol #101 item (b), the CONTROL check: force the branch point's
+        // OWN historically-recorded index (altIndex == the original chosen
+        // index, not a real alternate) and run every subsequent decision via
+        // the shared-semantic-policy continuation all the way to
+        // game.hasEnded(), instead of stopping after continueSteps -- proves
+        // the from-scratch replay + forced-choice + continuation machinery
+        // itself is faithful (reproduces the recorded winner) before trusting
+        // it to evaluate a real alternate.
+        final boolean runToTerminal = EnvConfig.bool("RL_BRANCH_ORACLE_RUN_TO_TERMINAL", false);
+        final int terminalStepCap = Math.max(1, EnvConfig.i32("RL_BRANCH_ORACLE_TERMINAL_STEP_CAP", 400));
         final String branchId = EnvConfig.str("RL_BRANCH_ORACLE_BRANCH_ID", "branch");
     }
 
@@ -134,9 +149,7 @@ public final class BranchOracle {
      */
     static final class Controller implements EngineDecisionBranchController {
         private final Config cfg = new Config();
-        private final Map<String, Integer> perPlayerCallCount = new ConcurrentHashMap<>();
-        private final AtomicInteger globalCallCount = new AtomicInteger(0);
-        private volatile int branchedAtGlobalCall = -1;
+        private volatile boolean branched = false;
         private volatile int stepsEmitted = 0;
         private volatile boolean done = false;
         // Provenance (Sol #89/#91 amendment): the state hash at the moment
@@ -208,16 +221,29 @@ public final class BranchOracle {
             if (!isTraceVisible(context)) {
                 return Choice.none();
             }
-            int global = globalCallCount.incrementAndGet();
             String playerName = context.player == null ? "" : context.player.getName();
 
-            if (branchedAtGlobalCall < 0) {
-                int mine = perPlayerCallCount.merge(playerName, 1, Integer::sum);
-                if (!playerName.equals(cfg.targetPlayer) || mine - 1 != cfg.targetForcedCallIndex) {
+            if (!branched) {
+                GameLogger logger = RLTrainer.threadLocalGameLogger.get();
+                // Fail-closed: without a live logger this controller cannot know
+                // which record_id the current decision is about to receive, so
+                // it must never guess by falling through to some other check.
+                if (logger == null) {
                     return Choice.none();
                 }
-                // Fail-closed alignment check: a silent miscount here would force
+                int nextRecordId = logger.peekNextRecordId();
+                if (nextRecordId != cfg.targetRecordId) {
+                    return Choice.none();
+                }
+                // Fail-closed alignment checks: a silent mismatch here would force
                 // the wrong decision and corrupt every downstream comparison.
+                if (!cfg.targetPlayer.isEmpty() && !cfg.targetPlayer.equals(playerName)) {
+                    String reason = "branch_oracle_alignment_error";
+                    logJson(record(context, "ALIGNMENT_ERROR",
+                            "player_mismatch:expected=" + cfg.targetPlayer + ":actual=" + playerName, reason));
+                    done = true;
+                    return Choice.chooseAndTerminate(Collections.emptyList(), reason);
+                }
                 String actual = context.actionType == null ? "" : context.actionType.name();
                 if (!cfg.targetActionType.isEmpty() && !cfg.targetActionType.equals(actual)) {
                     String reason = "branch_oracle_alignment_error";
@@ -242,9 +268,9 @@ public final class BranchOracle {
                     done = true;
                     return Choice.chooseAndTerminate(Collections.emptyList(), reason);
                 }
-                branchedAtGlobalCall = global;
+                branched = true;
                 preForceStateHash = LiveCheckpointRecorder.sha256(canonicalState(context.game));
-                logJson(record(context, "BRANCHED", "", ""));
+                logJson(record(context, "BRANCHED", "", "", Collections.singletonList(cfg.altIndex)));
                 return Choice.choose(Collections.singletonList(cfg.altIndex));
             }
 
@@ -254,30 +280,52 @@ public final class BranchOracle {
             if (postForceStateHash.isEmpty()) {
                 postForceStateHash = LiveCheckpointRecorder.sha256(canonicalState(context.game));
             }
-            if (stepsEmitted > cfg.continueSteps) {
-                String reason = "branch_oracle_capture_complete";
-                logJson(record(context, "POST_BRANCH_" + stepsEmitted, "", reason));
+            boolean gameOver = context.game != null && context.game.hasEnded();
+            boolean stepCapHit = cfg.runToTerminal
+                    ? stepsEmitted > cfg.terminalStepCap
+                    : stepsEmitted > cfg.continueSteps;
+            if (gameOver || stepCapHit) {
+                String reason = gameOver ? "branch_oracle_terminal_reached" : "branch_oracle_capture_complete";
+                logJson(record(context, "POST_BRANCH_" + stepsEmitted, gameOver ? terminalSummary(context.game) : "", reason));
                 done = true;
                 return Choice.chooseAndTerminate(Collections.emptyList(), reason);
             }
-            logJson(record(context, "POST_BRANCH_" + stepsEmitted, "", ""));
-            return Choice.choose(Collections.singletonList(fixedContinuationIndex(context)));
+            // Compute the continuation BEFORE logging, so this step's record
+            // carries the text it is actually about to force -- not a value
+            // derived after the fact, which would drift if the policy or the
+            // engine's own candidate order ever changed between the two calls.
+            List<Integer> continuation = sharedSemanticPolicyIndex(context);
+            if (continuation.isEmpty()) {
+                logJson(record(context, "POST_BRANCH_" + stepsEmitted, "no_legal_continuation", "branch_oracle_no_continuation"));
+                done = true;
+                return Choice.chooseAndTerminate(Collections.emptyList(), "branch_oracle_no_continuation");
+            }
+            logJson(record(context, "POST_BRANCH_" + stepsEmitted, "", "", continuation));
+            return Choice.choose(continuation);
         }
 
         /**
-         * Fixed, RNG-free continuation policy: unconditionally "Pass" at an
-         * ACTIVATE_ABILITY_OR_SPELL-shaped window (always legal, always
-         * present, semantically unambiguous on both engines -- the kernel
-         * side, branch_diff.rs's `fixed_continuation_action`, always applies
-         * `Action::Pass` at a `CastSpellOrPass` decision); index 0 for every
-         * other decision kind, where this engine's own native candidate
-         * order is the only thing available and cross-engine agreement is
-         * not guaranteed (documented limitation -- see branch_diff.rs's
-         * module doc). Documented deviation from a literal "seeded"
-         * continuation: a deterministic, index-based rule needs no shared
-         * cross-language PRNG to stay reproducible between the Java oracle
-         * and the kernel driver.
+         * Winner/loser summary for the CONTROL check (Sol #101 item b): must
+         * match the recorded corpus game's outcome exactly for the
+         * from-scratch replay + forced-choice + continuation path to be
+         * trusted for evaluating a real alternate at this same point.
          */
+        private String terminalSummary(Game game) {
+            if (game == null) {
+                return "";
+            }
+            StringBuilder sb = new StringBuilder(128);
+            sb.append("terminal:");
+            for (UUID id : game.getPlayerList()) {
+                Player p = game.getPlayer(id);
+                if (p != null) {
+                    sb.append(p.getName()).append("(hasLost=").append(p.hasLost())
+                            .append(",life=").append(p.getLife()).append(")");
+                }
+            }
+            return sb.toString();
+        }
+
         /**
          * True only for the decision kinds the burn_mirror_v4 corpus can
          * possibly contain a record for: the 5 real REPLAY_DECISION_JSON
@@ -306,18 +354,63 @@ public final class BranchOracle {
             }
         }
 
-        private <T> int fixedContinuationIndex(DecisionContext<T> context) {
-            List<String> texts = context.candidateTexts;
-            for (int i = 0; i < texts.size(); i++) {
-                if ("Pass".equals(texts.get(i))) {
-                    return i;
+        /**
+         * Sol #101 upgrade / Sol #102: shared semantic policy -- the
+         * lexicographically-first canonical candidate text, ties broken by
+         * index. Identical to LiveCheckpointBranchMiner's
+         * sharedSemanticPolicyIndices (Sol #100 checkpoint campaign) and to
+         * the kernel's own shared_semantic_policy_index (walk_diff.rs):
+         * deliberately engine-independent, not "first-legal by this
+         * engine's native candidate order" (an implementation detail that
+         * is not guaranteed comparable across two independent engines).
+         * Replaces the pilot's placeholder "always Pass / index 0" rule so
+         * the from-scratch combat-strata protocol uses the exact same
+         * continuation the rest of the Sol #100/#101 campaign already relies
+         * on for boundary-by-boundary comparison against the kernel.
+         */
+        private <T> List<Integer> sharedSemanticPolicyIndex(DecisionContext<T> context) {
+            if (context == null || context.candidateCount <= 0 || context.candidateTexts == null) {
+                return Collections.emptyList();
+            }
+            int best = -1;
+            String bestText = null;
+            for (int i = 0; i < context.candidateCount && i < context.candidateTexts.size(); i++) {
+                String text = context.candidateTexts.get(i);
+                if (text == null) {
+                    text = "";
+                }
+                if (bestText == null || text.compareTo(bestText) < 0) {
+                    bestText = text;
+                    best = i;
                 }
             }
-            return 0;
+            return best < 0 ? Collections.emptyList() : Collections.singletonList(best);
         }
 
         private <T> String record(DecisionContext<T> context, String marker, String detail, String terminationReason) {
+            return record(context, marker, detail, terminationReason, Collections.<Integer>emptyList());
+        }
+
+        /**
+         * chosenIndices: the index (or indices) THIS step is about to force
+         * (root: cfg.altIndex; continuation steps: the shared-semantic-policy
+         * pick). Recorded alongside candidate_texts so a comparator can
+         * reconstruct chosen_text without re-deriving the policy -- mirrors
+         * the exact fix applied earlier this campaign to
+         * LiveCheckpointBranchMiner's PreprobeController, where the root
+         * step's recorded text was originally taken from the policy's
+         * hypothetical pick instead of the actually-forced index.
+         */
+        private <T> String record(DecisionContext<T> context, String marker, String detail, String terminationReason,
+                                   List<Integer> chosenIndices) {
             String stateJson = context.game != null ? canonicalState(context.game) : "";
+            List<String> texts = context.candidateTexts;
+            List<String> chosenTexts = new ArrayList<>();
+            for (Integer i : chosenIndices) {
+                if (texts != null && i != null && i >= 0 && i < texts.size()) {
+                    chosenTexts.add(texts.get(i));
+                }
+            }
             StringBuilder sb = new StringBuilder(4096);
             sb.append("{\"schema_version\":\"branch-oracle-v1\"")
                     .append(",\"branch_oracle_version\":").append(BRANCH_ORACLE_VERSION)
@@ -332,7 +425,10 @@ public final class BranchOracle {
                     .append(",\"candidate_count\":").append(context.candidateCount)
                     .append(",\"candidate_texts\":").append(jsonStrList(context.candidateTexts))
                     .append(",\"candidate_object_ids\":").append(jsonStrList(context.candidateObjectIds))
+                    .append(",\"target_record_id\":").append(cfg.targetRecordId)
                     .append(",\"forced_alt_index\":").append("BRANCHED".equals(marker) ? cfg.altIndex : -1)
+                    .append(",\"chosen_indices\":").append(chosenIndices)
+                    .append(",\"chosen_texts\":").append(jsonStrList(chosenTexts))
                     .append(",\"state_hash\":").append(jsonStr(LiveCheckpointRecorder.sha256(stateJson)))
                     .append(",\"pre_force_state_hash\":").append(jsonStr(preForceStateHash))
                     .append(",\"post_force_state_hash\":").append(jsonStr(postForceStateHash));
