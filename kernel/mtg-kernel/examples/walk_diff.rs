@@ -266,14 +266,44 @@ fn build_id_map(opening0: &trace::OpeningHand, opening1: &trace::OpeningHand, p0
     id_map
 }
 
-fn learn_token_ids(ctx: &mut ReplayCtx, state: &GameState, rec: &DecisionRecord) {
+/// Learns kernel `ObjectId`s for trace uuids not yet in `ctx.id_map`
+/// (tokens minted mid-game, e.g. Voldaren Epicure's Blood token -- see
+/// `build_id_map`'s doc: only opening-hand/library objects are known
+/// up front). Heuristic: the first UNBOUND kernel object at or past
+/// `pregame_object_count`, since both engines mint/expose new objects
+/// while replaying the identical forced trace and should therefore
+/// reveal them in the same relative order.
+///
+/// `expected_controller`: root-caused this session
+/// (`trace-candidate-not-in-any-kernel-bucket:CastSpellOrPass`, the
+/// campaign's 3-point kernel coverage gap -- see `cast_spell_or_pass_candidates`'s
+/// doc). The plain id-order heuristic breaks when two same-named tokens
+/// controlled by DIFFERENT players exist unbound at once (e.g. both
+/// players' own Voldaren Epicure Blood tokens): a P0 decision's
+/// candidate list can expose P0's Blood Token uuid for the first time
+/// while P1's, unrelated, Blood Token object already sits unbound too
+/// (minted earlier in kernel's own timeline, not yet referenced by any
+/// trace decision) -- "first unbound id" then silently grabs whichever
+/// token happens to be numerically first, regardless of controller.
+/// Every `CastSpellOrPass`/`Discard`/`ChooseCostTargets` candidate is,
+/// by construction (`available_activatable_abilities`/hand-only costs),
+/// controlled by the deciding player -- passing `Some(player)` for
+/// those call sites restricts the search to that player's own objects,
+/// which fully disambiguates the case above. `None` (unchanged
+/// behavior) for decision kinds whose candidates can legitimately name
+/// either player's objects (e.g. `ChooseTargets`).
+fn learn_token_ids(ctx: &mut ReplayCtx, state: &GameState, rec: &DecisionRecord, expected_controller: Option<PlayerId>) {
     for raw in rec.candidate_object_ids.iter().chain(rec.chosen_object_ids.iter()) {
         for uuid in raw.split("->") {
             if uuid.is_empty() || uuid == DONE || ctx.id_map.contains_key(uuid) || ctx.seat_uuid.iter().any(|s| s.as_deref() == Some(uuid)) {
                 continue;
             }
             let bound: std::collections::HashSet<ObjectId> = ctx.id_map.values().copied().collect();
-            let Some(next) = state.objects.iter().map(|(id, _)| id).find(|id| id.0 >= ctx.pregame_object_count && !bound.contains(id)) else {
+            let Some(next) = state.objects.iter().map(|(id, _)| id).find(|id| {
+                id.0 >= ctx.pregame_object_count
+                    && !bound.contains(id)
+                    && expected_controller.is_none_or(|c| state.objects.get(*id).controller == c)
+            }) else {
                 continue;
             };
             ctx.id_map.insert(uuid.to_string(), next);
@@ -674,7 +704,14 @@ fn force_alternate(
 fn apply_from_trace(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId, decision: &SurfaceDecision) -> Result<(), String> {
     let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted".to_string())?;
     check_state(state, player, rec)?;
-    learn_token_ids(ctx, state, rec);
+    // Own-candidates-only decision kinds get the controller-restricted
+    // lookup (see `learn_token_ids`'s doc); `ChooseTargets` can legally
+    // name either player's objects, so it keeps the unrestricted search.
+    let owns_candidates = matches!(
+        decision,
+        SurfaceDecision::Decision(Decision::CastSpellOrPass { .. } | Decision::ChooseCostTargets { .. } | Decision::Discard { .. })
+    );
+    learn_token_ids(ctx, state, rec, owns_candidates.then_some(player));
     match decision {
         SurfaceDecision::Decision(Decision::CastSpellOrPass { castable_spells, mana_abilities, land_drops, activatable_abilities, plot_actions, .. }) => {
             if rec.action_type != "ACTIVATE_ABILITY_OR_SPELL" {
@@ -751,7 +788,7 @@ fn apply_from_trace(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: 
                 if rec.action_type != "SELECT_TARGETS" {
                     return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
                 }
-                learn_token_ids(ctx, state, rec);
+                learn_token_ids(ctx, state, rec, Some(player)); // own-hand-only, see learn_token_ids's doc
                 let mut kernel_names: Vec<&str> = choices.iter().map(|&id| state.objects.get(id).name.as_str()).collect();
                 kernel_names.sort_unstable();
                 let mut trace_names: Vec<&str> = rec.candidate_texts.iter().map(String::as_str).collect();
@@ -1462,7 +1499,11 @@ fn walk_and_diff(t: &GoldenTrace, spec: &WalkSpec) -> WalkDiffResult {
         if let Err(e) = check_state(&state, player, rec) {
             return mk_err(spec, "alignment_error", format!("pre_root_state_mismatch:{e}"), target_player_name);
         }
-        learn_token_ids(&mut ctx, &state, rec);
+        let root_owns_candidates = matches!(
+            decision,
+            SurfaceDecision::Decision(Decision::CastSpellOrPass { .. } | Decision::ChooseCostTargets { .. } | Decision::Discard { .. })
+        );
+        learn_token_ids(&mut ctx, &state, rec, root_owns_candidates.then_some(player));
 
         // ---- phase 2: canonical texts + force the alternate ----
         //
