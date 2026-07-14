@@ -98,6 +98,10 @@ public final class LiveCheckpointBranchMiner {
     public static void main(String[] args) throws Exception {
         Config cfg = Config.parse(args);
         Files.createDirectories(cfg.outDir);
+        if (cfg.harvestSpecPath != null) {
+            runHarvestSuffixHashesMode(cfg);
+            return;
+        }
         if (cfg.suffixSpecPath != null) {
             runHybridSuffixGateMode(cfg);
             return;
@@ -918,6 +922,8 @@ public final class LiveCheckpointBranchMiner {
                     + "source_forced_confirmed,source_terminal,source_won,source_lost,source_error,"
                     + "alternate_forced_confirmed,alternate_distinct,alternate_terminal,alternate_won,alternate_lost,alternate_error,"
                     + "divergence_note,classification,error,alternate_choice_count\n";
+    private static final String HARVEST_CSV_HEADER =
+            "raw_spec_path,harvested_spec_path,step_count,reached_step,classification,error\n";
 
     private enum HybridMode {
         BRIDGE_VERIFY, FORCE_SOURCE, FORCE_ALTERNATE
@@ -1063,6 +1069,264 @@ public final class LiveCheckpointBranchMiner {
     }
 
     /**
+     * Trace-derived suffix harvesting (signature-iii fix, Sol #98). The Python
+     * spec-generation side (build_trace_suffix_specs.py) can reconstruct the
+     * full ordered sequence of intervening decisions from the game-log trace
+     * (REPLAY_DECISION_JSON, exhaustive for every H2-visible decision) and can
+     * independently compute each step's candidate_hash (sha256 over the
+     * trace's own candidate_texts, identical formula to
+     * DecisionContext#candidateHash). It CANNOT compute state_hash or
+     * rng_state_hash off-line: those require the live canonical game state and
+     * live RandomUtil fingerprint, which are only ever recorded at capture time
+     * for the small manifest-sampled subset. This harvest mode supplies the
+     * missing values by resuming the ancestor exactly once, forcing every
+     * intervening step by its recorded selected_indices (semantic identity,
+     * not ordinal/positional), and recording the live candidate/state/RNG
+     * fingerprint at each boundary as it goes -- then writes out a spec CSV in
+     * the same SPEC_FIELDS shape the existing (UNCHANGED) hybrid gate
+     * (runHybridSuffixGateMode / HybridSuffixController) already knows how to
+     * parse and re-verify independently (bridge x2, force-source,
+     * force-alternate). Ancestor/target rows already carry real production
+     * hash values (they are manifest rows); the harvest walk cross-checks
+     * those too, so any drift between "replay from ancestor" and "recorded
+     * production trajectory" fails closed here rather than silently mis-primed
+     * downstream.
+     */
+    private static void runHarvestSuffixHashesMode(Config cfg) throws Exception {
+        Path csvPath = cfg.outDir.resolve("harvest_result.csv");
+        Files.write(csvPath, HARVEST_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        HarvestRow row = new HarvestRow();
+        row.rawSpecPath = cfg.harvestSpecPath.toString();
+        try {
+            List<HybridStep> steps = parseSuffixSpec(cfg.harvestSpecPath);
+            row.stepCount = steps.size();
+            if (steps.size() < 2) {
+                row.classification = "harvest_unsupported_spec_too_short";
+                appendHarvestRow(csvPath, row);
+                return;
+            }
+            HybridStep ancestorStep = steps.get(0);
+            LiveCheckpointRecorder.Snapshot ancestorSnapshot = loadSnapshot(ancestorStep.snapshotPath);
+            if (ancestorSnapshot == null || ancestorSnapshot.gameSnapshot == null) {
+                row.classification = "harvest_unsupported_ancestor_load_error";
+                appendHarvestRow(csvPath, row);
+                return;
+            }
+
+            TraceHarvestController controller = new TraceHarvestController(ancestorSnapshot, steps);
+            RandomUtil.State previousRandom = RandomUtil.captureState();
+            Game game = null;
+            try {
+                RandomUtil.restoreState(ancestorSnapshot.randomState);
+                game = ancestorSnapshot.gameSnapshot.createSimulationForAI();
+                Player player = game.getPlayer(ancestorSnapshot.playerId);
+                if (!(player instanceof ComputerPlayerRL)) {
+                    row.classification = "harvest_unsupported_player_copy_type_mismatch";
+                    appendHarvestRow(csvPath, row);
+                    return;
+                }
+                installBranchControllers(game, (ComputerPlayerRL) player, controller, cfg.postBranchAutopilot);
+                try {
+                    resumeGameInGameThread(game, cfg.timeoutSec, "harvest_trace_suffix");
+                } catch (EngineDecisionBranchController.BranchTerminated ignored) {
+                    // Expected: harvest self-terminates once every step is recorded,
+                    // or on the first mismatch (already captured as controller.failed).
+                }
+            } finally {
+                if (game != null) {
+                    try {
+                        game.end();
+                    } catch (Throwable ignored) {
+                        // ignore cleanup failures
+                    }
+                    try {
+                        game.cleanUp();
+                    } catch (Throwable ignored) {
+                        // ignore cleanup failures
+                    }
+                }
+                RandomUtil.restoreState(previousRandom);
+            }
+
+            row.reachedStep = controller.reachedStepIndex;
+            if (controller.failed || controller.reachedStepIndex != steps.size() - 1) {
+                row.classification = "harvest_failed_"
+                        + (controller.failureReason.isEmpty() ? "incomplete" : controller.failureReason);
+                appendHarvestRow(csvPath, row);
+                return;
+            }
+
+            Path harvestedSpecPath = cfg.outDir.resolve("suffix_spec.csv");
+            writeHarvestedSpec(harvestedSpecPath, steps, controller);
+            row.harvestedSpecPath = harvestedSpecPath.toString();
+            row.classification = "harvest_ok";
+            appendHarvestRow(csvPath, row);
+        } catch (Throwable t) {
+            row.classification = "harvest_error";
+            row.error = errorSummary(t);
+            appendHarvestRow(csvPath, row);
+        }
+        System.out.println("harvest wrote 1 row to " + csvPath + " classification=" + row.classification);
+    }
+
+    private static void appendHarvestRow(Path csvPath, HarvestRow row) throws IOException {
+        List<String> cells = new ArrayList<>();
+        cells.add(csv(row.rawSpecPath));
+        cells.add(csv(row.harvestedSpecPath));
+        cells.add(String.valueOf(row.stepCount));
+        cells.add(String.valueOf(row.reachedStep));
+        cells.add(csv(row.classification));
+        cells.add(csv(row.error));
+        Files.write(csvPath, (String.join(",", cells) + "\n").getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.APPEND);
+    }
+
+    private static void writeHarvestedSpec(Path path, List<HybridStep> steps, TraceHarvestController controller)
+            throws IOException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("step_index,role,game_key,snapshot_path,decision_number,action_type,candidate_count,")
+                .append("selected_indices,selected_texts,selected_object_ids,candidate_hash,state_hash,rng_state_hash\n");
+        for (int i = 0; i < steps.size(); i++) {
+            HybridStep s = steps.get(i);
+            sb.append(i).append(',')
+                    .append(csv(s.role)).append(',')
+                    .append(csv(s.gameKey)).append(',')
+                    .append(csv(s.snapshotPath == null ? "" : s.snapshotPath.toString().replace('\\', '/'))).append(',')
+                    .append(s.decisionNumber).append(',')
+                    .append(csv(s.actionType)).append(',')
+                    .append(s.candidateCount).append(',')
+                    .append(csv(joinInts(s.selectedIndices))).append(',')
+                    .append(csv(s.selectedTexts)).append(',')
+                    .append(csv(s.selectedObjectIds)).append(',')
+                    .append(csv(controller.harvestedCandidateHash[i])).append(',')
+                    .append(csv(controller.harvestedStateHash[i])).append(',')
+                    .append(csv(controller.harvestedRngHash[i])).append('\n');
+        }
+        Files.write(path, sb.toString().getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    private static final class HarvestRow {
+        private String rawSpecPath = "";
+        private String harvestedSpecPath = "";
+        private int stepCount = -1;
+        private int reachedStep = -1;
+        private String classification = "";
+        private String error = "";
+    }
+
+    /**
+     * Forces every intervening trace-derived step by its recorded
+     * selected_indices (semantic identity), recording the LIVE
+     * candidate/state/RNG fingerprint at each boundary rather than checking it
+     * against a pre-known value (which intervening steps do not have -- only
+     * ancestor/target rows, sourced from the manifest, carry real state/RNG
+     * hashes into the raw spec). Where a step DOES already carry a known hash
+     * (ancestor, target, or any intervening row that happens to coincide with
+     * a captured manifest row), that value is still cross-checked and any
+     * mismatch fails closed exactly like HybridSuffixController#onBoundaryDecision.
+     */
+    private static final class TraceHarvestController implements EngineDecisionBranchController {
+        private final LiveCheckpointRecorder.Snapshot ancestorSnapshot;
+        private final List<HybridStep> steps;
+        private final String[] harvestedCandidateHash;
+        private final String[] harvestedStateHash;
+        private final String[] harvestedRngHash;
+
+        private int stepIndex = 0;
+        private boolean failed = false;
+        private String failureReason = "";
+        private int reachedStepIndex = -1;
+
+        private TraceHarvestController(LiveCheckpointRecorder.Snapshot ancestorSnapshot, List<HybridStep> steps) {
+            this.ancestorSnapshot = ancestorSnapshot;
+            this.steps = steps;
+            this.harvestedCandidateHash = new String[steps.size()];
+            this.harvestedStateHash = new String[steps.size()];
+            this.harvestedRngHash = new String[steps.size()];
+        }
+
+        @Override
+        public boolean shouldEvaluateBeforeModel(StateSequenceBuilder.ActionType actionType) {
+            return true;
+        }
+
+        @Override
+        public boolean shouldBypassModelInference() {
+            return true;
+        }
+
+        @Override
+        public <T> Choice onDecision(DecisionContext<T> context) {
+            if (failed) {
+                return Choice.chooseAndTerminate(Collections.emptyList(), failureReason);
+            }
+            if (stepIndex == 0
+                    && (context == null || context.player == null
+                    || ancestorSnapshot == null || ancestorSnapshot.playerId == null
+                    || !ancestorSnapshot.playerId.equals(context.player.getId()))) {
+                return Choice.none();
+            }
+            if (stepIndex >= steps.size()) {
+                failed = true;
+                failureReason = "harvest_overrun_unexpected_decision";
+                return Choice.chooseAndTerminate(Collections.emptyList(), failureReason);
+            }
+            HybridStep step = steps.get(stepIndex);
+            String actualActionType = context.actionType == null ? "" : context.actionType.name();
+            String liveRng = safeFingerprint();
+            boolean actionMatch = actualActionType.equals(step.actionType);
+            boolean countMatch = context.candidateCount == step.candidateCount;
+            boolean candidateMatch = step.candidateHash == null || step.candidateHash.isEmpty()
+                    || step.candidateHash.equals(context.candidateHash);
+            boolean stateMatch = step.stateHash == null || step.stateHash.isEmpty()
+                    || step.stateHash.equals(context.stateHash);
+            boolean rngMatch = step.rngStateHash == null || step.rngStateHash.isEmpty()
+                    || step.rngStateHash.equals(liveRng);
+            if (!actionMatch || !countMatch || !candidateMatch || !stateMatch || !rngMatch) {
+                failed = true;
+                reachedStepIndex = stepIndex - 1;
+                failureReason = "harvest_boundary_" + stepIndex + "_mismatch"
+                        + ":action=" + actionMatch + ":count=" + countMatch
+                        + ":candidate=" + candidateMatch + ":state=" + stateMatch + ":rng=" + rngMatch;
+                System.out.println("[HARVEST_DIAG] expected action_type=" + step.actionType
+                        + " candidateCount=" + step.candidateCount
+                        + " player=" + (context.player == null ? "null" : context.player.getName())
+                        + " | actual action_type=" + actualActionType
+                        + " candidateCount=" + context.candidateCount
+                        + " candidateTexts=" + context.candidateTexts
+                        + " turn/phase context source=" + (context.source == null ? "null" : context.source.getRule()));
+                return Choice.chooseAndTerminate(Collections.emptyList(), failureReason);
+            }
+            harvestedCandidateHash[stepIndex] = context.candidateHash;
+            harvestedStateHash[stepIndex] = context.stateHash;
+            harvestedRngHash[stepIndex] = liveRng;
+            reachedStepIndex = stepIndex;
+            List<Integer> forceIndices = sanitizeIndices(step.selectedIndices, context.candidateCount);
+            if (forceIndices.isEmpty()) {
+                failed = true;
+                failureReason = "harvest_forced_indices_invalid_at_step_" + stepIndex;
+                return Choice.chooseAndTerminate(Collections.emptyList(), failureReason);
+            }
+            stepIndex++;
+            if (stepIndex >= steps.size()) {
+                return Choice.chooseAndTerminate(forceIndices, "harvest_complete");
+            }
+            return Choice.choose(forceIndices);
+        }
+
+        private String safeFingerprint() {
+            try {
+                RandomUtil.State state = RandomUtil.captureState();
+                return state == null ? "" : state.fingerprint();
+            } catch (Throwable ignored) {
+                return "";
+            }
+        }
+    }
+
+    /**
      * Sol #93 follow-up diagnostic only (signature-i investigation): dumps the
      * FULL canonical-state string on both sides of a suffix boundary mismatch --
      * the capture-time string (loaded fresh from the mismatching step's own
@@ -1188,16 +1452,20 @@ public final class LiveCheckpointBranchMiner {
             }
             int stepIndex = Integer.parseInt(cells.get(0).trim());
             String role = cells.get(1);
+            String gameKey = cells.get(2);
             Path snapshotPath = Paths.get(cells.get(3));
             int decisionNumber = Integer.parseInt(cells.get(4).trim());
             String actionType = cells.get(5);
             int candidateCount = Integer.parseInt(cells.get(6).trim());
             List<Integer> selectedIndices = parseIntList(cells.get(7));
+            String selectedTexts = cells.get(8);
+            String selectedObjectIds = cells.get(9);
             String candidateHash = cells.get(10);
             String stateHash = cells.get(11);
             String rngStateHash = cells.get(12);
-            steps.add(new HybridStep(stepIndex, role, snapshotPath, decisionNumber, actionType,
-                    candidateCount, selectedIndices, candidateHash, stateHash, rngStateHash));
+            steps.add(new HybridStep(stepIndex, role, gameKey, snapshotPath, decisionNumber, actionType,
+                    candidateCount, selectedIndices, selectedTexts, selectedObjectIds,
+                    candidateHash, stateHash, rngStateHash));
         }
         steps.sort(Comparator.comparingInt(s -> s.stepIndex));
         return steps;
@@ -1275,11 +1543,14 @@ public final class LiveCheckpointBranchMiner {
     private static final class HybridStep {
         private final int stepIndex;
         private final String role;
+        private final String gameKey;
         private final Path snapshotPath;
         private final int decisionNumber;
         private final String actionType;
         private final int candidateCount;
         private final List<Integer> selectedIndices;
+        private final String selectedTexts;
+        private final String selectedObjectIds;
         private final String candidateHash;
         private final String stateHash;
         private final String rngStateHash;
@@ -1287,22 +1558,28 @@ public final class LiveCheckpointBranchMiner {
         private HybridStep(
                 int stepIndex,
                 String role,
+                String gameKey,
                 Path snapshotPath,
                 int decisionNumber,
                 String actionType,
                 int candidateCount,
                 List<Integer> selectedIndices,
+                String selectedTexts,
+                String selectedObjectIds,
                 String candidateHash,
                 String stateHash,
                 String rngStateHash
         ) {
             this.stepIndex = stepIndex;
             this.role = role;
+            this.gameKey = gameKey == null ? "" : gameKey;
             this.snapshotPath = snapshotPath;
             this.decisionNumber = decisionNumber;
             this.actionType = actionType;
             this.candidateCount = candidateCount;
             this.selectedIndices = selectedIndices;
+            this.selectedTexts = selectedTexts == null ? "" : selectedTexts;
+            this.selectedObjectIds = selectedObjectIds == null ? "" : selectedObjectIds;
             this.candidateHash = candidateHash;
             this.stateHash = stateHash;
             this.rngStateHash = rngStateHash;
@@ -4838,6 +5115,7 @@ public final class LiveCheckpointBranchMiner {
         private boolean resumeForceTraining = false;
         private boolean acceptanceGate = false;
         private Path suffixSpecPath;
+        private Path harvestSpecPath;
         private int alternateOffset = 0;
 
         private static Config parse(String[] args) {
@@ -4987,6 +5265,9 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("suffix-spec")) {
                 cfg.suffixSpecPath = Paths.get(values.get("suffix-spec"));
+            }
+            if (values.containsKey("harvest-suffix-spec")) {
+                cfg.harvestSpecPath = Paths.get(values.get("harvest-suffix-spec"));
             }
             if (values.containsKey("alternate-offset")) {
                 cfg.alternateOffset = Math.max(0, Integer.parseInt(values.get("alternate-offset")));
