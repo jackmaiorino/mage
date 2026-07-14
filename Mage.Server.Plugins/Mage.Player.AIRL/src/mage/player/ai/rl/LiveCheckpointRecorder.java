@@ -16,12 +16,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
+import mage.counters.Counter;
+import mage.counters.Counters;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -300,23 +305,13 @@ public final class LiveCheckpointRecorder {
                         .append(":library=").append(p.getLibrary() == null ? -1 : p.getLibrary().size())
                         .append(":graveyard=").append(p.getGraveyard() == null ? -1 : p.getGraveyard().size())
                         .append(":mana=").append(p.getManaPool() == null ? "" : p.getManaPool().toString())
-                        .append(":hand_cards=").append(cardsText(p.getHand() == null ? Collections.emptyList() : p.getHand().getCards(game), game, 0))
-                        .append(":library_top=").append(cardsText(p.getLibrary() == null ? Collections.emptyList() : p.getLibrary().getCards(game), game, 12))
-                        .append(":graveyard_cards=").append(cardsText(p.getGraveyard() == null ? Collections.emptyList() : p.getGraveyard().getCards(game), game, 0));
+                        .append(":hand_cards=").append(cardsText(p.getHand() == null ? Collections.emptyList() : p.getHand().getCards(game), game, 0, "hand"))
+                        .append(":library_top=").append(cardsText(p.getLibrary() == null ? Collections.emptyList() : p.getLibrary().getCards(game), game, 12, "lib"))
+                        .append(":graveyard_cards=").append(cardsText(p.getGraveyard() == null ? Collections.emptyList() : p.getGraveyard().getCards(game), game, 0, "gy"));
             }
             List<Permanent> permanents = new ArrayList<>(game.getBattlefield().getAllActivePermanents());
-            permanents.sort(Comparator.comparing(p -> p == null || p.getId() == null ? "" : p.getId().toString()));
             sb.append(";battlefield=");
-            for (Permanent p : permanents) {
-                if (p == null) {
-                    continue;
-                }
-                sb.append(p.getId()).append(":").append(p.getName())
-                        .append(":ctrl=").append(p.getControllerId())
-                        .append(":tap=").append(p.isTapped())
-                        .append(":zcc=").append(p.getZoneChangeCounter(game))
-                        .append("|");
-            }
+            appendCanonicalBattlefield(sb, permanents, game);
             sb.append(";stack=");
             appendCanonicalStack(sb, game);
         } catch (Throwable t) {
@@ -361,6 +356,70 @@ public final class LiveCheckpointRecorder {
                     .append(":modes=").append(stackObjectModes(so))
                     .append("|");
         }
+    }
+
+    /**
+     * Sol #100 canonicalization. Permanent ids -- including token permanents,
+     * e.g. the Blood token from Voldaren Epicure's ETB -- are minted via
+     * CardImpl's {@code this.objectId = UUID.randomUUID()} (not
+     * RandomUtil-seeded), the identical non-seeded mechanism documented on
+     * {@link #appendCanonicalStack} for StackAbility/Spell ids. Confirmed via
+     * the 40-point targeting campaign as the sole differing content behind
+     * 3/40 state-hash-only mismatches (all Voldaren Epicure/Blood Token
+     * games; the mismatch lands on the walk step immediately after the ETB
+     * trigger resolves and the token enters the battlefield). Fix mirrors the
+     * stack scheme: render "bf#N", N = the permanent's position within ITS
+     * CONTROLLER's own battlefield insertion order -- never the raw id.
+     * <p>
+     * {@code Battlefield#field} is a {@code LinkedHashMap}, so
+     * {@code getAllActivePermanents()} already returns permanents in a real,
+     * action/RNG-derived insertion order that is reproducible across
+     * independent replays of identical history. The pre-existing
+     * {@code permanents.sort(...getId()...)} call this replaces was itself
+     * part of the bug: sorting by the permanent's own raw (sometimes fresh)
+     * id threw away that reproducible order and substituted an
+     * id-value-dependent one. A stable sort by controller id (Java's
+     * {@code List#sort} is stable) groups permanents per controller while
+     * preserving insertion order within each group, so numbering restarts at
+     * 0 per controller and depends only on controller identity (stable:
+     * player ids come from the deserialized ancestor snapshot, never
+     * re-minted mid-game) -- never on the permanent's own id.
+     * <p>
+     * Damage and counters are appended alongside tap/zcc because they are
+     * rules-relevant state that was previously omitted entirely (not a
+     * raw-id leak, but a gap found during this canonicalization sweep).
+     */
+    private static void appendCanonicalBattlefield(StringBuilder sb, List<Permanent> permanents, Game game) {
+        List<Permanent> ordered = new ArrayList<>(permanents);
+        ordered.sort(Comparator.comparing(p -> p == null || p.getControllerId() == null ? "" : p.getControllerId().toString()));
+        Map<String, Integer> perControllerIndex = new HashMap<>();
+        for (Permanent p : ordered) {
+            if (p == null) {
+                continue;
+            }
+            String ctrlKey = p.getControllerId() == null ? "" : p.getControllerId().toString();
+            int idx = perControllerIndex.merge(ctrlKey, 1, Integer::sum) - 1;
+            sb.append("bf#").append(idx)
+                    .append(":").append(p.getName())
+                    .append(":ctrl=").append(p.getControllerId())
+                    .append(":tap=").append(p.isTapped())
+                    .append(":zcc=").append(p.getZoneChangeCounter(game))
+                    .append(":dmg=").append(p.getDamage())
+                    .append(":counters=").append(canonicalCounters(p.getCounters(game)))
+                    .append("|");
+        }
+    }
+
+    private static String canonicalCounters(Counters counters) {
+        if (counters == null || counters.isEmpty()) {
+            return "";
+        }
+        List<String> parts = new ArrayList<>();
+        for (Counter counter : counters.values()) {
+            parts.add(counter.getName() + "=" + counter.getCount());
+        }
+        Collections.sort(parts);
+        return String.join(",", parts);
     }
 
     private static String stackObjectRule(StackObject so) {
@@ -450,14 +509,30 @@ public final class LiveCheckpointRecorder {
         return rawId.toString();
     }
 
-    private static String cardsText(Iterable<Card> cards, Game game, int limit) {
+    /**
+     * Sol #100 canonicalization sweep. Cards themselves can also carry a
+     * freshly-minted id (same {@code UUID.randomUUID()} mechanism as stack
+     * objects and battlefield permanents) if a token is ever transiently
+     * represented as a Card in one of these zones before state-based-action
+     * cleanup removes it. No sampled campaign mismatch has hit this path yet
+     * (the confirmed 3/40 failures were all battlefield-only), but the risk
+     * is identical in kind, so the same position-label scheme is applied
+     * pre-emptively: "{zoneLabel}#N", N = the card's index within THIS
+     * player's iteration of the zone. {@code CardsImpl} is a
+     * {@code LinkedHashSet<UUID>}, and {@code getCards(Game)} streams it in
+     * that same insertion order, so the position label is reproducible
+     * across independent replays regardless of the card's own raw id.
+     */
+    private static String cardsText(Iterable<Card> cards, Game game, int limit, String zoneLabel) {
         List<String> values = new ArrayList<>();
         if (cards != null) {
+            int idx = 0;
             for (Card card : cards) {
                 if (card == null) {
                     continue;
                 }
-                values.add(card.getId() + ":" + zoneName(card, game) + ":" + card.getName());
+                values.add(zoneLabel + "#" + idx + ":" + zoneName(card, game) + ":" + card.getName());
+                idx++;
                 if (limit > 0 && values.size() >= limit) {
                     break;
                 }
