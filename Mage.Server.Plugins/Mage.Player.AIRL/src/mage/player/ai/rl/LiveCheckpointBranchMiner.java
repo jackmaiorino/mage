@@ -994,6 +994,7 @@ public final class LiveCheckpointBranchMiner {
             row.bridgeVerified = bridgeOk;
             if (!bridgeOk) {
                 row.classification = "gate_unsupported_suffix_boundary_mismatch";
+                dumpBoundaryMismatchDiagnostic(cfg, steps, bridgeA);
                 appendHybridRow(csvPath, row);
                 return;
             }
@@ -1049,6 +1050,38 @@ public final class LiveCheckpointBranchMiner {
             appendHybridRow(csvPath, row);
         }
         System.out.println("hybrid gate wrote 1 row to " + csvPath + " classification=" + row.classification);
+    }
+
+    /**
+     * Sol #93 follow-up diagnostic only (signature-i investigation): dumps the
+     * FULL canonical-state string on both sides of a suffix boundary mismatch --
+     * the capture-time string (loaded fresh from the mismatching step's own
+     * original snapshot) and the replay-time string (captured live by the
+     * controller at the moment of mismatch) -- so the two can be diffed
+     * field-by-field offline. Never affects classification; best-effort only.
+     */
+    private static void dumpBoundaryMismatchDiagnostic(Config cfg, List<HybridStep> steps, HybridWalkResult bridge) {
+        try {
+            int mismatchStepIndex = bridge.reachedStepIndex + 1;
+            if (mismatchStepIndex < 0 || mismatchStepIndex >= steps.size()) {
+                return;
+            }
+            HybridStep mismatchStep = steps.get(mismatchStepIndex);
+            LiveCheckpointRecorder.Snapshot captureTimeSnapshot = loadSnapshot(mismatchStep.snapshotPath);
+            String captureTimeState = captureTimeSnapshot == null ? "" : captureTimeSnapshot.compactState;
+            String replayTimeState = bridge.mismatchActualCompactState;
+            StringBuilder sb = new StringBuilder();
+            sb.append("mismatch_step_index=").append(mismatchStepIndex).append('\n');
+            sb.append("mismatch_snapshot_path=").append(mismatchStep.snapshotPath).append('\n');
+            sb.append("failure_reason=").append(bridge.failureReason).append('\n');
+            sb.append("\n--- CAPTURE_TIME_STATE ---\n").append(captureTimeState).append('\n');
+            sb.append("\n--- REPLAY_TIME_STATE ---\n").append(replayTimeState).append('\n');
+            Files.write(cfg.outDir.resolve("boundary_mismatch_diagnostic.txt"),
+                    sb.toString().getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (Throwable ignored) {
+            // Diagnostic dump must never affect gate outcome or crash the probe.
+        }
     }
 
     private static HybridWalkResult runHybridWalk(
@@ -1279,6 +1312,11 @@ public final class LiveCheckpointBranchMiner {
         private boolean postPrefixCaptured = false;
         private String postPrefixActionType = "";
         private String postPrefixStateHash = "";
+        // Sol #93 follow-up diagnostic (signature-i investigation): the replay-time
+        // canonical state string at the mismatching boundary, so the caller can dump
+        // it alongside the capture-time string for a field-by-field diff. Not used
+        // for any pass/fail decision.
+        private String mismatchActualCompactState = "";
 
         private HybridSuffixController(
                 LiveCheckpointRecorder.Snapshot ancestorSnapshot,
@@ -1334,6 +1372,7 @@ public final class LiveCheckpointBranchMiner {
                 failureReason = "suffix_boundary_" + stepIndex + "_mismatch"
                         + ":action=" + actionMatch + ":count=" + countMatch
                         + ":candidate=" + candidateMatch + ":state=" + stateMatch + ":rng=" + rngMatch;
+                mismatchActualCompactState = context.compactState;
                 return Choice.chooseAndTerminate(Collections.emptyList(), failureReason);
             }
             reachedStepIndex = stepIndex;
@@ -1421,11 +1460,13 @@ public final class LiveCheckpointBranchMiner {
         private String postPrefixActionType = "";
         private String postPrefixStateHash = "";
         private String finalStateHash = "";
+        private String mismatchActualCompactState = "";
 
         private void captureController(HybridSuffixController c) {
             if (c == null) {
                 return;
             }
+            mismatchActualCompactState = c.mismatchActualCompactState;
             failed = c.failed;
             failureReason = c.failureReason;
             reachedStepIndex = c.reachedStepIndex;
