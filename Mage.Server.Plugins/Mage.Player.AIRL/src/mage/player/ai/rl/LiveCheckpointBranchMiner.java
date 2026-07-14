@@ -1154,13 +1154,25 @@ public final class LiveCheckpointBranchMiner {
             if (snapshot == null || snapshot.gameSnapshot == null) {
                 error = "preprobe_snapshot_load_error";
             } else {
-                List<Integer> sourceIndices = sanitizeIndices(snapshot.selectedIndices,
-                        snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size());
-                List<List<Integer>> alternateChoices = alternateChoices(snapshot, sourceIndices, 0);
-                if (alternateChoices.isEmpty()) {
+                int candidateCount = snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size();
+                List<Integer> sourceIndices = sanitizeIndices(snapshot.selectedIndices, candidateCount);
+                boolean haveAlternate;
+                if (cfg.rawAltIndex >= 0) {
+                    // Sol #100 cross-engine alignment: raw positional index into
+                    // candidateTexts[N] directly, matching walk_diff.rs exactly --
+                    // no source/pass filtering.
+                    haveAlternate = cfg.rawAltIndex < candidateCount;
+                    alternate = haveAlternate ? Collections.singletonList(cfg.rawAltIndex) : Collections.emptyList();
+                } else {
+                    List<List<Integer>> alternateChoices = alternateChoices(snapshot, sourceIndices, 0);
+                    haveAlternate = !alternateChoices.isEmpty();
+                    alternate = haveAlternate
+                            ? alternateChoices.get(Math.min(cfg.alternateOffset, alternateChoices.size() - 1))
+                            : Collections.emptyList();
+                }
+                if (!haveAlternate) {
                     error = "preprobe_no_alternate_available";
                 } else {
-                    alternate = alternateChoices.get(Math.min(cfg.alternateOffset, alternateChoices.size() - 1));
                     PreprobeController controller = new PreprobeController(alternate, cfg.preprobeMaxSteps, cfg.useSharedSemanticPolicy);
                     RandomUtil.State previousRandom = RandomUtil.captureState();
                     Game game = null;
@@ -1309,24 +1321,40 @@ public final class LiveCheckpointBranchMiner {
                 return Choice.none();
             }
             String rng = safeFingerprint();
-            List<Integer> indices = policyIndices(context);
             String legalMultiset = canonicalLegalActionMultiset(context);
-            String chosenText = joinStrings(selectedTexts(context.candidateTexts, indices));
-            trace.add(new PreprobeStep(
-                    context.actionType == null ? "" : context.actionType.name(),
-                    rng, context.stateHash, context.candidateHash, legalMultiset, chosenText));
             if (!rootSeen) {
                 rootSeen = true;
                 List<Integer> forced = sanitizeIndices(rootAlternate, context.candidateCount);
                 if (forced.isEmpty()) {
+                    // Record the failed root attempt for diagnosability before bailing.
+                    trace.add(new PreprobeStep(
+                            context.actionType == null ? "" : context.actionType.name(),
+                            rng, context.stateHash, context.candidateHash, legalMultiset, ""));
                     return Choice.chooseAndTerminate(Collections.emptyList(), "preprobe_root_alternate_invalid");
                 }
                 rootForced = true;
+                // Bug fix (Sol #100 cross-engine smoke): this step's chosen_text
+                // must be the ACTUALLY-FORCED root alternate, not the shared
+                // policy's hypothetical pick -- the two are unrelated at the root
+                // (the whole point of the root step is to force something OTHER
+                // than what the policy would pick). Using the policy's pick here
+                // was recording a false "chosen_text" mismatch against the kernel
+                // (which correctly reports the forced text) even though the
+                // actual forced Choice was correct all along.
+                String forcedText = joinStrings(selectedTexts(context.candidateTexts, forced));
+                trace.add(new PreprobeStep(
+                        context.actionType == null ? "" : context.actionType.name(),
+                        rng, context.stateHash, context.candidateHash, legalMultiset, forcedText));
                 if (trace.size() >= maxSteps) {
                     return Choice.chooseAndTerminate(forced, "preprobe_max_steps");
                 }
                 return Choice.choose(forced);
             }
+            List<Integer> indices = policyIndices(context);
+            String chosenText = joinStrings(selectedTexts(context.candidateTexts, indices));
+            trace.add(new PreprobeStep(
+                    context.actionType == null ? "" : context.actionType.name(),
+                    rng, context.stateHash, context.candidateHash, legalMultiset, chosenText));
             if (trace.size() >= maxSteps) {
                 return Choice.chooseAndTerminate(indices, "preprobe_max_steps");
             }
@@ -5473,6 +5501,18 @@ public final class LiveCheckpointBranchMiner {
         private boolean preprobeRngTrace = false;
         private int preprobeMaxSteps = 6;
         private boolean useSharedSemanticPolicy = false;
+        // Sol #100 cross-engine alignment fix: -1 = use the filtered
+        // alternateChoices()/--alternate-offset convention (unchanged default).
+        // >=0 = force RAW candidateTexts[N] directly, matching walk_diff.rs's
+        // own indexing exactly (rec.candidate_texts[spec.alt_index] -- an
+        // unfiltered positional index into the trace's own candidate list, NOT
+        // Java's "skip source, skip pass" filtered alternate list). The wt06
+        // kernel-vs-Java smoke mismatch (kernel chose "Plot {1}{R}" at raw index
+        // 4, Java's --alternate-offset 4 forced "Cast Grab the Prize" -- the
+        // 5th FILTERED alternate) is exactly this scheme mismatch, not an
+        // engine bug: confirmed by reading walk_diff.rs's force_alternate call
+        // site, which indexes the trace's raw candidate_texts unfiltered.
+        private int rawAltIndex = -1;
 
         private static Config parse(String[] args) {
             Config cfg = new Config();
@@ -5636,6 +5676,9 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("use-shared-semantic-policy")) {
                 cfg.useSharedSemanticPolicy = Boolean.parseBoolean(values.get("use-shared-semantic-policy"));
+            }
+            if (values.containsKey("raw-alt-index")) {
+                cfg.rawAltIndex = Integer.parseInt(values.get("raw-alt-index"));
             }
             if (cfg.selectionShards < 1) {
                 throw new IllegalArgumentException("--selection-shards must be >= 1");
