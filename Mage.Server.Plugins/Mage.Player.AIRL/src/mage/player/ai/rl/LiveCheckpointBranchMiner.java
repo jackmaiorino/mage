@@ -106,6 +106,10 @@ public final class LiveCheckpointBranchMiner {
             runHybridSuffixGateMode(cfg);
             return;
         }
+        if (cfg.preprobeRngTrace) {
+            runPreprobeRngTraceMode(cfg);
+            return;
+        }
         Selection selection = selectSnapshots(cfg);
         writeSelectionManifest(cfg, selection.selected);
         if (cfg.resumeProbe) {
@@ -1111,6 +1115,252 @@ public final class LiveCheckpointBranchMiner {
      * production trajectory" fails closed here rather than silently mis-primed
      * downstream.
      */
+    private static final String PREPROBE_CSV_HEADER =
+            "snapshot_path,alternate_indices,alternate_texts,step_count,error,"
+                    + "step_action_types,step_rng_hashes,step_state_hashes,step_candidate_hashes,"
+                    + "step_legal_multisets,step_chosen_texts\n";
+    // Separator between STEPS within the legal_multisets column, distinct from
+    // the "|" already used to join candidate texts WITHIN one step's multiset.
+    private static final String STEP_SEP = ";;";
+
+    /**
+     * Sol #98/#101 pre-probe (required BEFORE the 256-point campaign): forces a
+     * top-level ancestor's ALTERNATE (not its original recorded choice) and
+     * walks forward via the deterministic autopilot -- entirely within one
+     * continuous live game, never through nested resume/harvest -- recording
+     * the RNG fingerprint, canonical state hash, and candidate hash at every
+     * decision encountered, up to preprobeMaxSteps. The caller runs this twice
+     * per point (fresh JVM each) and diffs the two traces value-by-value: if
+     * they match exactly this proves RNG/state reproducibility holds on the
+     * "force alternate, play forward live" path, isolating whether an earlier
+     * RNG-only mismatch pattern (seen only through TraceHarvestController's
+     * nested-resume-adjacent path) is specific to that mechanism.
+     */
+    private static void runPreprobeRngTraceMode(Config cfg) throws Exception {
+        Path csvPath = cfg.outDir.resolve("preprobe_rng_trace.csv");
+        Files.write(csvPath, PREPROBE_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        StringBuilder actionTypes = new StringBuilder();
+        StringBuilder rngHashes = new StringBuilder();
+        StringBuilder stateHashes = new StringBuilder();
+        StringBuilder candidateHashes = new StringBuilder();
+        StringBuilder legalMultisets = new StringBuilder();
+        StringBuilder chosenTexts = new StringBuilder();
+        String error = "";
+        List<Integer> alternate = Collections.emptyList();
+        int stepCount = 0;
+        try {
+            LiveCheckpointRecorder.Snapshot snapshot = loadSnapshot(cfg.snapshotPath);
+            if (snapshot == null || snapshot.gameSnapshot == null) {
+                error = "preprobe_snapshot_load_error";
+            } else {
+                List<Integer> sourceIndices = sanitizeIndices(snapshot.selectedIndices,
+                        snapshot.candidateTexts == null ? 0 : snapshot.candidateTexts.size());
+                List<List<Integer>> alternateChoices = alternateChoices(snapshot, sourceIndices, 0);
+                if (alternateChoices.isEmpty()) {
+                    error = "preprobe_no_alternate_available";
+                } else {
+                    alternate = alternateChoices.get(Math.min(cfg.alternateOffset, alternateChoices.size() - 1));
+                    PreprobeController controller = new PreprobeController(alternate, cfg.preprobeMaxSteps, cfg.useSharedSemanticPolicy);
+                    RandomUtil.State previousRandom = RandomUtil.captureState();
+                    Game game = null;
+                    long inferenceCallsBefore = ComputerPlayerRL.REAL_INFERENCE_CALLS.get();
+                    try {
+                        RandomUtil.restoreState(snapshot.randomState);
+                        game = snapshot.gameSnapshot.createSimulationForAI();
+                        Player player = game.getPlayer(snapshot.playerId);
+                        if (!(player instanceof ComputerPlayerRL)) {
+                            error = "preprobe_player_copy_type_mismatch";
+                        } else {
+                            installBranchControllers(game, (ComputerPlayerRL) player, controller, true);
+                            try {
+                                resumeGameInGameThread(game, cfg.timeoutSec, "preprobe_rng_trace");
+                            } catch (EngineDecisionBranchController.BranchTerminated ignored) {
+                                // Expected: controller self-terminates after preprobeMaxSteps or on
+                                // a failure to force the alternate at the root.
+                            }
+                        }
+                    } finally {
+                        if (game != null) {
+                            try {
+                                game.end();
+                            } catch (Throwable ignored) {
+                                // ignore
+                            }
+                            try {
+                                game.cleanUp();
+                            } catch (Throwable ignored) {
+                                // ignore
+                            }
+                        }
+                        RandomUtil.restoreState(previousRandom);
+                    }
+                    long inferenceCallsAfter = ComputerPlayerRL.REAL_INFERENCE_CALLS.get();
+                    if (inferenceCallsAfter != inferenceCallsBefore) {
+                        error = "sol99_uncontrolled_nn_consultation_detected";
+                    } else if (!controller.rootForced) {
+                        error = "preprobe_alternate_not_forced_at_root";
+                    } else {
+                        for (int i = 0; i < controller.trace.size(); i++) {
+                            if (i > 0) {
+                                actionTypes.append('|');
+                                rngHashes.append('|');
+                                stateHashes.append('|');
+                                candidateHashes.append('|');
+                                legalMultisets.append(STEP_SEP);
+                                chosenTexts.append('|');
+                            }
+                            PreprobeStep s = controller.trace.get(i);
+                            actionTypes.append(s.actionType);
+                            rngHashes.append(s.rngHash);
+                            stateHashes.append(s.stateHash);
+                            candidateHashes.append(s.candidateHash);
+                            legalMultisets.append(s.legalActionMultiset);
+                            chosenTexts.append(s.chosenText);
+                        }
+                        stepCount = controller.trace.size();
+                    }
+                }
+            }
+        } catch (Throwable t) {
+            error = errorSummary(t);
+        }
+        List<String> cells = new ArrayList<>();
+        cells.add(csv(cfg.snapshotPath == null ? "" : cfg.snapshotPath.toString()));
+        cells.add(csv(joinInts(alternate)));
+        cells.add(csv(""));
+        cells.add(String.valueOf(stepCount));
+        cells.add(csv(error));
+        cells.add(csv(actionTypes.toString()));
+        cells.add(csv(rngHashes.toString()));
+        cells.add(csv(stateHashes.toString()));
+        cells.add(csv(candidateHashes.toString()));
+        cells.add(csv(legalMultisets.toString()));
+        cells.add(csv(chosenTexts.toString()));
+        Files.write(csvPath, (String.join(",", cells) + "\n").getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.APPEND);
+        System.out.println("preprobe wrote 1 row to " + csvPath + " steps=" + stepCount + " error=" + error);
+    }
+
+    private static final class PreprobeStep {
+        private final String actionType;
+        private final String rngHash;
+        private final String stateHash;
+        private final String candidateHash;
+        private final String legalActionMultiset;
+        private final String chosenText;
+
+        private PreprobeStep(String actionType, String rngHash, String stateHash, String candidateHash) {
+            this(actionType, rngHash, stateHash, candidateHash, "", "");
+        }
+
+        private PreprobeStep(String actionType, String rngHash, String stateHash, String candidateHash,
+                              String legalActionMultiset, String chosenText) {
+            this.actionType = actionType;
+            this.rngHash = rngHash;
+            this.stateHash = stateHash;
+            this.candidateHash = candidateHash;
+            this.legalActionMultiset = legalActionMultiset;
+            this.chosenText = chosenText;
+        }
+    }
+
+    /**
+     * Forces the given alternate at the very first (root) decision it sees,
+     * then for every subsequent decision (nested or top-level) up to
+     * maxSteps, records (actionType, live RNG fingerprint, canonical state
+     * hash, candidate hash, canonical legal-action multiset, chosen text) and
+     * answers either via the deterministic heuristic autopilot (pre-probe
+     * mode) or the Sol #102 shared semantic policy (campaign "amendment"
+     * mode: lexicographically-first canonical candidate text, engine-
+     * independent and mirror-ready) -- selected by useSharedSemanticPolicy.
+     */
+    private static final class PreprobeController implements EngineDecisionBranchController {
+        private final List<Integer> rootAlternate;
+        private final int maxSteps;
+        private final boolean useSharedSemanticPolicy;
+        private boolean rootSeen = false;
+        private boolean rootForced = false;
+        private final List<PreprobeStep> trace = new ArrayList<>();
+
+        private PreprobeController(List<Integer> rootAlternate, int maxSteps) {
+            this(rootAlternate, maxSteps, false);
+        }
+
+        private PreprobeController(List<Integer> rootAlternate, int maxSteps, boolean useSharedSemanticPolicy) {
+            this.rootAlternate = rootAlternate;
+            this.maxSteps = maxSteps;
+            this.useSharedSemanticPolicy = useSharedSemanticPolicy;
+        }
+
+        @Override
+        public boolean shouldEvaluateBeforeModel(StateSequenceBuilder.ActionType actionType) {
+            return true;
+        }
+
+        @Override
+        public boolean shouldBypassModelInference() {
+            return true;
+        }
+
+        @Override
+        public <T> Choice onDecision(DecisionContext<T> context) {
+            if (context == null) {
+                return Choice.none();
+            }
+            String rng = safeFingerprint();
+            List<Integer> indices = policyIndices(context);
+            String legalMultiset = canonicalLegalActionMultiset(context);
+            String chosenText = joinStrings(selectedTexts(context.candidateTexts, indices));
+            trace.add(new PreprobeStep(
+                    context.actionType == null ? "" : context.actionType.name(),
+                    rng, context.stateHash, context.candidateHash, legalMultiset, chosenText));
+            if (!rootSeen) {
+                rootSeen = true;
+                List<Integer> forced = sanitizeIndices(rootAlternate, context.candidateCount);
+                if (forced.isEmpty()) {
+                    return Choice.chooseAndTerminate(Collections.emptyList(), "preprobe_root_alternate_invalid");
+                }
+                rootForced = true;
+                if (trace.size() >= maxSteps) {
+                    return Choice.chooseAndTerminate(forced, "preprobe_max_steps");
+                }
+                return Choice.choose(forced);
+            }
+            if (trace.size() >= maxSteps) {
+                return Choice.chooseAndTerminate(indices, "preprobe_max_steps");
+            }
+            if (indices.isEmpty()) {
+                return Choice.none();
+            }
+            return Choice.choose(indices);
+        }
+
+        private <T> List<Integer> policyIndices(DecisionContext<T> context) {
+            return useSharedSemanticPolicy
+                    ? LiveCheckpointBranchMiner.sharedSemanticPolicyIndices(context)
+                    : LiveCheckpointBranchMiner.deterministicAutopilotIndices(context);
+        }
+
+        private <T> String canonicalLegalActionMultiset(DecisionContext<T> context) {
+            if (context == null || context.candidateTexts == null) {
+                return "";
+            }
+            List<String> sorted = new ArrayList<>(context.candidateTexts);
+            Collections.sort(sorted);
+            return String.join("|", sorted);
+        }
+
+        private String safeFingerprint() {
+            try {
+                RandomUtil.State state = RandomUtil.captureState();
+                return state == null ? "" : state.fingerprint();
+            } catch (Throwable ignored) {
+                return "";
+            }
+        }
+    }
+
     private static void runHarvestSuffixHashesMode(Config cfg) throws Exception {
         Path csvPath = cfg.outDir.resolve("harvest_result.csv");
         Files.write(csvPath, HARVEST_CSV_HEADER.getBytes(StandardCharsets.UTF_8),
@@ -3907,6 +4157,39 @@ public final class LiveCheckpointBranchMiner {
         return indices;
     }
 
+    /**
+     * Sol #102 shared semantic policy (the 256-point campaign "amendment"):
+     * a deterministic, engine-independent tiebreak over the CANONICAL action
+     * descriptor -- lexicographically-first candidate text, ties broken by
+     * candidate index -- defined once so it can be implemented identically on
+     * the kernel side (a plain string sort + first-element pick, no
+     * engine-internal candidate ordering or heuristic "reasonable play" bias
+     * like deterministicAutopilotIndices above). Deliberately NOT
+     * "first-legal by engine-native list position": that ordering is an
+     * implementation detail of each engine's candidate-generation code and is
+     * not guaranteed comparable across two independent implementations.
+     */
+    private static <T> List<Integer> sharedSemanticPolicyIndices(
+            EngineDecisionBranchController.DecisionContext<T> context
+    ) {
+        if (context == null || context.candidateCount <= 0 || context.candidateTexts == null) {
+            return Collections.emptyList();
+        }
+        int best = -1;
+        String bestText = null;
+        for (int i = 0; i < context.candidateCount && i < context.candidateTexts.size(); i++) {
+            String text = context.candidateTexts.get(i);
+            if (text == null) {
+                text = "";
+            }
+            if (bestText == null || text.compareTo(bestText) < 0) {
+                bestText = text;
+                best = i;
+            }
+        }
+        return best < 0 ? Collections.emptyList() : Collections.singletonList(best);
+    }
+
     private static <T> List<Integer> sampledAutopilotIndices(
             EngineDecisionBranchController.DecisionContext<T> context,
             Random random
@@ -5187,6 +5470,9 @@ public final class LiveCheckpointBranchMiner {
         private Path suffixSpecPath;
         private Path harvestSpecPath;
         private int alternateOffset = 0;
+        private boolean preprobeRngTrace = false;
+        private int preprobeMaxSteps = 6;
+        private boolean useSharedSemanticPolicy = false;
 
         private static Config parse(String[] args) {
             Config cfg = new Config();
@@ -5341,6 +5627,15 @@ public final class LiveCheckpointBranchMiner {
             }
             if (values.containsKey("alternate-offset")) {
                 cfg.alternateOffset = Math.max(0, Integer.parseInt(values.get("alternate-offset")));
+            }
+            if (values.containsKey("preprobe-rng-trace")) {
+                cfg.preprobeRngTrace = Boolean.parseBoolean(values.get("preprobe-rng-trace"));
+            }
+            if (values.containsKey("preprobe-max-steps")) {
+                cfg.preprobeMaxSteps = Math.max(1, Integer.parseInt(values.get("preprobe-max-steps")));
+            }
+            if (values.containsKey("use-shared-semantic-policy")) {
+                cfg.useSharedSemanticPolicy = Boolean.parseBoolean(values.get("use-shared-semantic-policy"));
             }
             if (cfg.selectionShards < 1) {
                 throw new IllegalArgumentException("--selection-shards must be >= 1");
